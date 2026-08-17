@@ -3,9 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Adam Games</title>
+
+<title>Adam Games • Login</title>
 
 <style>
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -13,951 +15,375 @@
 }
 
 body{
-  font-family:Arial,Helvetica,sans-serif;
   min-height:100vh;
-  color:#fff;
-  overflow-x:hidden;
+  font-family:Arial,Helvetica,sans-serif;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+
   background:
-    radial-gradient(circle at 20% 5%,#42aaff 0%,transparent 30%),
+    radial-gradient(circle at 20% 10%,#42aaff 0%,transparent 30%),
     linear-gradient(135deg,#087ee1,#061d43 75%);
 }
 
-body.october{
-  background:
-    radial-gradient(circle at 20% 5%,#ff8a21 0%,transparent 28%),
-    linear-gradient(135deg,#35104f,#090411 75%);
+.login-container{
+  width:100%;
+  max-width:430px;
 }
 
-body.november{
-  background:
-    radial-gradient(circle at 20% 5%,#c9853d 0%,transparent 28%),
-    linear-gradient(135deg,#30170d,#080606 75%);
+.logo{
+  text-align:center;
+  margin-bottom:25px;
 }
 
-body.december{
-  background:
-    radial-gradient(circle at 20% 5%,#e7434d 0%,transparent 28%),
-    linear-gradient(135deg,#075c48,#031c25 75%);
-}
-
-.page{
-  max-width:1100px;
+.logo-icon{
+  width:100px;
+  height:100px;
   margin:auto;
-  padding:16px;
-}
 
-/* TOPO */
+  border-radius:28px;
 
-.topbar{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:15px;
-}
-
-.brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:9px 17px 9px 9px;
-  border-radius:22px;
-  background:rgba(3,36,77,.78);
-  border:1px solid rgba(255,255,255,.12);
-  box-shadow:0 10px 30px rgba(0,0,0,.18);
-}
-
-.brand-icon{
-  width:62px;
-  height:62px;
-  border-radius:18px;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:35px;
-  background:linear-gradient(145deg,#218fff,#0754a7);
+
+  font-size:58px;
+
+  background:
+    linear-gradient(145deg,#218fff,#0754a7);
+
+  border:3px solid rgba(255,255,255,.15);
+
+  box-shadow:
+    0 20px 50px rgba(0,0,0,.3);
 }
 
-.brand h1{
-  font-size:22px;
-  line-height:.95;
+.logo h1{
+  margin-top:15px;
+  font-size:34px;
+  font-weight:900;
+  line-height:.9;
 }
 
-.brand h1 span{
+.logo h1 span{
   color:#ffd52b;
 }
 
-.top-buttons{
-  display:flex;
-  gap:9px;
-}
-
-.top-btn{
-  width:55px;
-  height:55px;
-  border:0;
-  border-radius:18px;
-  background:rgba(3,36,77,.9);
-  color:white;
-  font-size:24px;
-  position:relative;
-  cursor:pointer;
-}
-
-.notification{
-  position:absolute;
-  right:-3px;
-  top:-5px;
-  width:23px;
-  height:23px;
-  border-radius:50%;
-  background:#ff3347;
-  font-size:12px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-weight:bold;
-}
-
-/* PERFIL */
-
-.profile{
-  background:linear-gradient(
-    135deg,
-    rgba(4,55,110,.96),
-    rgba(2,25,56,.96)
-  );
-  border:1px solid rgba(255,255,255,.13);
-  border-radius:28px;
-  padding:18px;
-  display:flex;
-  align-items:center;
-  gap:18px;
-  box-shadow:0 20px 45px rgba(0,0,0,.25);
-  margin-bottom:22px;
-}
-
-.avatar-wrap{
-  position:relative;
-  flex-shrink:0;
-}
-
-.avatar{
-  width:100px;
-  height:100px;
-  border-radius:28px;
-  background:linear-gradient(145deg,#f7b52c,#ffdc65);
-  border:4px solid #ffd332;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:58px;
-  box-shadow:0 10px 30px rgba(255,185,0,.2);
-}
-
-.crown{
-  position:absolute;
-  right:-10px;
-  top:-18px;
-  font-size:34px;
-}
-
-.profile-info{
-  min-width:0;
-  flex:1;
-}
-
-.username-line{
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-
-.username{
-  font-size:24px;
-  font-weight:800;
-  word-break:break-word;
-}
-
-.verified{
-  width:25px;
-  height:25px;
-  border-radius:50%;
-  background:#168cff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:bold;
-  flex-shrink:0;
-}
-
-.email{
-  color:#b7d2ee;
-  margin-top:5px;
-  font-size:14px;
-  word-break:break-word;
-}
-
-.vip-badge{
-  display:inline-block;
-  margin-top:9px;
-  padding:7px 13px;
-  border-radius:13px;
-  background:linear-gradient(135deg,#8b6511,#f2c94c);
-  font-size:13px;
-  font-weight:bold;
-}
-
-.member-badge{
-  background:rgba(255,255,255,.12);
-}
-
-.user-id{
-  margin-top:8px;
-  color:#75c4ff;
-  font-size:12px;
-  font-weight:bold;
-  letter-spacing:1px;
-  word-break:break-all;
-}
-
-.user-presence{
-  margin-top:8px;
-  display:flex;
-  flex-wrap:wrap;
-  gap:6px 14px;
-  font-size:12px;
-  color:#b9d7f5;
-}
-
-.online{
-  color:#61ff9d;
-  font-weight:bold;
-}
-
-/* HERO */
-
-.hero{
-  padding:20px 10px;
-}
-
-.season{
-  display:inline-block;
-  padding:8px 14px;
-  border-radius:20px;
-  background:rgba(255,255,255,.12);
-  border:1px solid rgba(255,255,255,.14);
-  font-size:12px;
-  font-weight:bold;
-}
-
-.hero h2{
-  margin-top:18px;
-  font-size:clamp(43px,8vw,72px);
-  line-height:.95;
-  text-shadow:0 6px 2px rgba(0,0,0,.3);
-}
-
-.hero p{
+.logo p{
   margin-top:10px;
-  font-size:22px;
-  font-weight:bold;
-}
-
-/* CARDS */
-
-.main-cards{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
-}
-
-.main-card{
-  min-height:235px;
-  border-radius:27px;
-  padding:20px;
-  position:relative;
-  overflow:hidden;
-  border:1px solid rgba(255,255,255,.15);
-  box-shadow:0 15px 35px rgba(0,0,0,.25);
-  cursor:pointer;
-}
-
-.box-card{
-  background:linear-gradient(145deg,#8d21e7,#4710a0);
-}
-
-.adam-card{
-  background:linear-gradient(145deg,#087ddd,#064ca4);
-}
-
-.games-card{
-  background:linear-gradient(145deg,#15b95e,#087c42);
-}
-
-.card-icon{
-  font-size:75px;
-  text-align:center;
-  margin-bottom:10px;
-}
-
-.main-card h3{
-  font-size:22px;
-  margin-bottom:7px;
-}
-
-.main-card p{
-  color:rgba(255,255,255,.82);
-  line-height:1.4;
-}
-
-.arrow{
-  position:absolute;
-  right:16px;
-  bottom:15px;
-  width:45px;
-  height:45px;
-  border-radius:50%;
-  background:rgba(255,255,255,.15);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:24px;
-}
-
-/* VIP */
-
-.vip-panel{
-  margin-top:18px;
-  margin-bottom:22px;
-  padding:20px;
-  border-radius:27px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:20px;
-  background:
-    radial-gradient(circle at 90% 20%,rgba(255,209,67,.22),transparent 25%),
-    linear-gradient(135deg,#281b05,#100e08);
-  border:1px solid rgba(255,201,58,.6);
-}
-
-.vip-left{
-  display:flex;
-  align-items:center;
-  gap:15px;
-}
-
-.vip-big{
-  width:72px;
-  height:72px;
-  border-radius:20px;
-  border:2px solid #e8b52d;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:40px;
-}
-
-.vip-panel h3{
-  color:#ffd229;
-  font-size:25px;
-}
-
-.vip-panel p{
-  margin-top:4px;
-  color:#d8d0bc;
-}
-
-.vip-access{
-  border:0;
-  padding:15px 24px;
-  border-radius:15px;
-  background:linear-gradient(135deg,#ffcb27,#d78a05);
-  color:white;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-/* RECURSOS */
-
-.section-title{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin:12px 3px;
-}
-
-.resources{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:13px;
-}
-
-.resource{
-  padding:15px;
-  text-align:center;
-  border-radius:22px;
-  background:rgba(3,30,62,.82);
-  border:1px solid rgba(255,255,255,.1);
-}
-
-.resource-icon{
-  font-size:43px;
-}
-
-.resource h4{
-  font-size:13px;
-  margin-top:5px;
-}
-
-.resource-value{
-  margin-top:7px;
-  font-size:19px;
-  font-weight:900;
-  word-break:break-word;
-}
-
-/* DADOS */
-
-.info-panel{
-  margin-top:20px;
-  margin-bottom:110px;
-  padding:20px;
-  border-radius:25px;
-  background:rgba(2,25,52,.82);
-  border:1px solid rgba(255,255,255,.1);
-}
-
-.info-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
-}
-
-.info-item{
-  padding:12px;
-  border-radius:15px;
-  background:rgba(255,255,255,.055);
-}
-
-.info-label{
-  color:#7fb4dc;
-  font-size:11px;
-  text-transform:uppercase;
-  font-weight:bold;
-}
-
-.info-value{
-  margin-top:4px;
+  color:#c5def5;
   font-size:14px;
-  word-break:break-word;
 }
 
-/* ERRO */
+.login-card{
+  padding:28px;
 
-.error-panel{
-  display:none;
-  margin-bottom:20px;
-  padding:16px;
-  border-radius:18px;
-  background:rgba(150,20,30,.85);
-  border:1px solid rgba(255,100,100,.5);
+  border-radius:30px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(4,55,110,.97),
+      rgba(2,25,56,.97)
+    );
+
+  border:1px solid rgba(255,255,255,.14);
+
+  box-shadow:
+    0 25px 60px rgba(0,0,0,.35);
 }
 
-.error-panel strong{
+.login-card h2{
+  text-align:center;
+  font-size:26px;
+  margin-bottom:8px;
+}
+
+.subtitle{
+  text-align:center;
+  color:#a9c7e4;
+  font-size:14px;
+  margin-bottom:25px;
+}
+
+label{
   display:block;
-  margin-bottom:6px;
+  margin-bottom:7px;
+  font-size:13px;
+  font-weight:bold;
+  color:#cce3f8;
 }
 
-.error-panel small{
-  color:#ffdede;
-  word-break:break-word;
-}
+.input{
+  width:100%;
+  height:54px;
 
-/* MENU */
-
-.bottom-nav{
-  position:fixed;
-  z-index:50;
-  left:50%;
-  bottom:12px;
-  transform:translateX(-50%);
-  width:min(95%,900px);
-  padding:10px;
-  border-radius:28px;
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  background:rgba(4,25,52,.95);
-  backdrop-filter:blur(15px);
   border:1px solid rgba(255,255,255,.13);
-  box-shadow:0 15px 40px rgba(0,0,0,.4);
+  border-radius:15px;
+
+  background:rgba(0,0,0,.22);
+
+  color:white;
+
+  padding:0 16px;
+
+  font-size:16px;
+
+  outline:none;
+
+  margin-bottom:17px;
 }
 
-.nav-item{
+.input:focus{
+  border-color:#27a1ff;
+  box-shadow:0 0 0 3px rgba(39,161,255,.12);
+}
+
+.password-wrap{
+  position:relative;
+}
+
+.password-wrap .input{
+  padding-right:55px;
+}
+
+.show-password{
+  position:absolute;
+
+  right:10px;
+  top:0;
+
+  width:42px;
+  height:54px;
+
   border:0;
   background:transparent;
-  color:#7890a8;
-  padding:8px;
-  font-size:12px;
-  font-weight:bold;
-  cursor:pointer;
+
+  color:#9fc4e5;
+
+  font-size:21px;
 }
 
-.nav-item span{
+.login-button{
+  width:100%;
+  height:55px;
+
+  border:0;
+  border-radius:16px;
+
+  background:
+    linear-gradient(135deg,#22a2ff,#0069db);
+
+  color:white;
+
+  font-size:16px;
+  font-weight:900;
+
+  box-shadow:
+    0 10px 25px rgba(0,105,219,.3);
+}
+
+.login-button:disabled{
+  opacity:.6;
+}
+
+.forgot{
   display:block;
-  font-size:25px;
-  margin-bottom:3px;
+
+  text-align:center;
+
+  margin-top:18px;
+
+  color:#65bdff;
+
+  font-size:13px;
+
+  text-decoration:none;
 }
 
-.nav-item.active{
-  color:#20a2ff;
+.message{
+  display:none;
+
+  margin-bottom:18px;
+
+  padding:13px;
+
+  border-radius:13px;
+
+  text-align:center;
+
+  font-size:13px;
+
+  font-weight:bold;
 }
 
-.diamond{
-  width:66px;
-  height:66px;
-  margin:-25px auto 0;
-  border-radius:50%;
-  background:linear-gradient(145deg,#2a9dff,#0069db);
-  border:4px solid #0c315d;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:32px;
-  box-shadow:0 0 25px rgba(0,143,255,.45);
+.message.error{
+  display:block;
+
+  background:rgba(255,50,70,.15);
+
+  border:1px solid rgba(255,70,90,.35);
+
+  color:#ff9ba7;
 }
 
-/* MOBILE */
+.message.success{
+  display:block;
 
-@media(max-width:700px){
+  background:rgba(50,255,140,.12);
 
-  .page{
-    padding:12px;
-  }
+  border:1px solid rgba(50,255,140,.3);
 
-  .brand-icon{
-    width:55px;
-    height:55px;
-  }
-
-  .brand h1{
-    font-size:18px;
-  }
-
-  .top-btn{
-    width:50px;
-    height:50px;
-  }
-
-  .profile{
-    padding:14px;
-  }
-
-  .avatar{
-    width:82px;
-    height:82px;
-    font-size:45px;
-  }
-
-  .crown{
-    font-size:27px;
-  }
-
-  .username{
-    font-size:19px;
-  }
-
-  .main-cards{
-    gap:8px;
-  }
-
-  .main-card{
-    min-height:215px;
-    padding:12px;
-    border-radius:21px;
-  }
-
-  .card-icon{
-    font-size:54px;
-  }
-
-  .main-card h3{
-    font-size:16px;
-  }
-
-  .main-card p{
-    font-size:12px;
-  }
-
-  .arrow{
-    width:34px;
-    height:34px;
-    right:8px;
-    bottom:8px;
-  }
-
-  .resources{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .info-grid{
-    grid-template-columns:1fr;
-  }
-
-  .vip-panel{
-    padding:15px;
-  }
-
-  .vip-big{
-    width:58px;
-    height:58px;
-    font-size:30px;
-  }
-
-  .vip-panel h3{
-    font-size:19px;
-  }
-
-  .vip-panel p{
-    font-size:12px;
-  }
-
-  .vip-access{
-    padding:11px 13px;
-    font-size:12px;
-  }
-
-  .bottom-nav{
-    width:96%;
-  }
+  color:#72ffae;
 }
+
+.footer{
+  text-align:center;
+
+  margin-top:22px;
+
+  color:#9ab9d5;
+
+  font-size:12px;
+}
+
+.loading{
+  display:none;
+
+  text-align:center;
+
+  margin-top:15px;
+
+  color:#8fcaff;
+
+  font-size:13px;
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="page">
+<div class="login-container">
 
-<header class="topbar">
+  <div class="logo">
 
-  <div class="brand">
-    <div class="brand-icon">👑</div>
-
-    <h1>
-      ADAM<br>
-      <span>GAMES</span>
-    </h1>
-  </div>
-
-  <div class="top-buttons">
-
-    <button class="top-btn" id="notificationBtn">
-      🔔
-      <span class="notification">3</span>
-    </button>
-
-    <button class="top-btn" id="logout">
-      ↪️
-    </button>
-
-  </div>
-
-</header>
-
-
-<div class="error-panel" id="errorPanel">
-  <strong id="errorTitle">Erro</strong>
-  <small id="errorMessage"></small>
-</div>
-
-
-<section class="profile">
-
-  <div class="avatar-wrap">
-
-    <div class="avatar" id="avatar">
-      🙂
-    </div>
-
-    <div class="crown" id="crown">
+    <div class="logo-icon">
       👑
     </div>
 
+    <h1>
+      ADAM
+      <span>GAMES</span>
+    </h1>
+
+    <p>
+      Seu mundo começa aqui!
+    </p>
+
   </div>
 
-  <div class="profile-info">
 
-    <div class="username-line">
+  <div class="login-card">
 
-      <div class="username" id="nomeUsuario">
-        Carregando...
+    <h2>
+      Bem-vindo de volta 👋
+    </h2>
+
+    <div class="subtitle">
+      Entre na sua conta para continuar
+    </div>
+
+
+    <div
+      id="message"
+      class="message">
+    </div>
+
+
+    <form id="loginForm">
+
+      <label for="email">
+        E-mail
+      </label>
+
+      <input
+        id="email"
+        class="input"
+        type="email"
+        placeholder="seu@email.com"
+        autocomplete="email"
+        required
+      >
+
+
+      <label for="password">
+        Senha
+      </label>
+
+      <div class="password-wrap">
+
+        <input
+          id="password"
+          class="input"
+          type="password"
+          placeholder="Digite sua senha"
+          autocomplete="current-password"
+          required
+        >
+
+        <button
+          type="button"
+          class="show-password"
+          id="showPassword">
+          👁️
+        </button>
+
       </div>
 
-      <div class="verified">
-        ✓
-      </div>
 
-    </div>
+      <button
+        type="submit"
+        class="login-button"
+        id="loginButton">
 
-    <div class="email" id="emailUsuario">
-      —
-    </div>
+        ENTRAR
 
-    <div class="vip-badge" id="vipBadge">
-      👑 VIP Ativo
-    </div>
+      </button>
 
-    <div class="user-id" id="idUsuario">
-      ID: -------
-    </div>
-
-    <div class="user-presence">
-
-      <span class="online">
-        🟢 Online agora
-      </span>
-
-      <span id="hora">
-        🕐 --:--
-      </span>
-
-      <span id="local">
-        📍 Localizando...
-      </span>
-
-    </div>
-
-  </div>
-
-</section>
+    </form>
 
 
-<section class="hero">
+    <a
+      href="#"
+      class="forgot"
+      id="forgotPassword">
 
-  <div class="season" id="tema">
-    🇧🇷 AGOSTO • ADAM GAMES
-  </div>
+      Esqueci minha senha
 
-  <h2>BEM-VINDO 👋</h2>
-
-  <p>Seu mundo começa aqui!</p>
-
-</section>
+    </a>
 
 
-<section class="main-cards">
+    <div
+      class="loading"
+      id="loading">
 
-  <div class="main-card box-card" id="boxCard">
-
-    <div class="card-icon">🎁</div>
-
-    <h3>CAIXA BOX</h3>
-
-    <p>Sua caixa de prêmios</p>
-
-    <div class="arrow">→</div>
-
-  </div>
-
-
-  <div class="main-card adam-card" id="adamCard">
-
-    <div class="card-icon">🏡</div>
-
-    <h3>ADAM</h3>
-
-    <p>Acesse sua ilha e recursos</p>
-
-    <div class="arrow">→</div>
-
-  </div>
-
-
-  <div class="main-card games-card" id="gamesCard">
-
-    <div class="card-icon">🎮</div>
-
-    <h3>JOGOS</h3>
-
-    <p>Seus jogos cadastrados</p>
-
-    <div class="arrow">→</div>
-
-  </div>
-
-</section>
-
-
-<section class="vip-panel">
-
-  <div class="vip-left">
-
-    <div class="vip-big">👑</div>
-
-    <div>
-
-      <h3>ÁREA VIP</h3>
-
-      <p>Aproveite todos os benefícios exclusivos!</p>
+      🔄 Verificando sua conta...
 
     </div>
 
   </div>
 
-  <button class="vip-access" id="vipButton">
-    👑 ACESSAR
-  </button>
 
-</section>
+  <div class="footer">
 
+    © 2026 Adam Games
 
-<div class="section-title">
-
-  <h3>⭐ Seus recursos</h3>
-
-  <span>Ver todos ›</span>
+  </div>
 
 </div>
-
-
-<section class="resources">
-
-  <div class="resource">
-
-    <div class="resource-icon">💎</div>
-
-    <h4>CRÉDITOS</h4>
-
-    <div class="resource-value" id="creditos">
-      R$ 0,00
-    </div>
-
-  </div>
-
-
-  <div class="resource">
-
-    <div class="resource-icon">🪙</div>
-
-    <h4>MOEDAS</h4>
-
-    <div class="resource-value" id="moedas">
-      0
-    </div>
-
-  </div>
-
-
-  <div class="resource">
-
-    <div class="resource-icon">🗝️</div>
-
-    <h4>CHAVES</h4>
-
-    <div class="resource-value" id="chaves">
-      0
-    </div>
-
-  </div>
-
-
-  <div class="resource">
-
-    <div class="resource-icon">🎁</div>
-
-    <h4>CAIXA BOX</h4>
-
-    <div class="resource-value" id="boxStatus">
-      Disponível
-    </div>
-
-  </div>
-
-</section>
-
-
-<section class="info-panel">
-
-  <div class="section-title">
-    <h3>👤 Meus dados</h3>
-  </div>
-
-  <div class="info-grid">
-
-    <div class="info-item">
-      <div class="info-label">Nome</div>
-      <div class="info-value" id="dNome">—</div>
-    </div>
-
-    <div class="info-item">
-      <div class="info-label">Idade</div>
-      <div class="info-value" id="dIdade">—</div>
-    </div>
-
-    <div class="info-item">
-      <div class="info-label">Telefone</div>
-      <div class="info-value" id="dTelefone">—</div>
-    </div>
-
-    <div class="info-item">
-      <div class="info-label">ID Adam Games</div>
-      <div class="info-value" id="dId">—</div>
-    </div>
-
-    <div class="info-item">
-      <div class="info-label">Fuso horário</div>
-      <div class="info-value" id="dFuso">—</div>
-    </div>
-
-    <div class="info-item">
-      <div class="info-label">Localização</div>
-      <div class="info-value" id="dLocal">—</div>
-    </div>
-
-    <div class="info-item">
-      <div class="info-label">Último acesso</div>
-      <div class="info-value" id="dAcesso">Agora</div>
-    </div>
-
-    <div class="info-item">
-      <div class="info-label">Caixa Box</div>
-      <div class="info-value" id="dBox">—</div>
-    </div>
-
-  </div>
-
-</section>
-
-</div>
-
-
-<nav class="bottom-nav">
-
-  <button class="nav-item active" id="navInicio">
-    <span>🏠</span>
-    Início
-  </button>
-
-  <button class="nav-item" id="navVip">
-    <span>👑</span>
-    VIP
-  </button>
-
-  <button class="nav-item" id="navCreditos">
-    <div class="diamond">💎</div>
-  </button>
-
-  <button class="nav-item" id="navPremios">
-    <span>🎁</span>
-    Prêmios
-  </button>
-
-  <button class="nav-item" id="navJogos">
-    <span>🎮</span>
-    Jogos
-  </button>
-
-</nav>
 
 
 <script type="module">
@@ -969,650 +395,327 @@ import {
 import {
   getAuth,
   onAuthStateChanged,
-  signOut
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-
-import {
-  getFirestore,
-  doc,
-  getDoc,
-  updateDoc
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
 /* =====================================
-   CONFIGURAÇÃO FIREBASE
+   FIREBASE
 ===================================== */
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",
-  authDomain: "adam-games-21081.firebaseapp.com",
-  projectId: "adam-games-21081",
-  storageBucket: "adam-games-21081.firebasestorage.app",
-  messagingSenderId: "1055528418738",
-  appId: "1:1055528418738:web:5fafdf63424ba9744eb8ab",
-  measurementId: "G-KVFSF864GE"
+
+  apiKey:
+    "AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",
+
+  authDomain:
+    "adam-games-21081.firebaseapp.com",
+
+  projectId:
+    "adam-games-21081",
+
+  storageBucket:
+    "adam-games-21081.firebasestorage.app",
+
+  messagingSenderId:
+    "1055528418738",
+
+  appId:
+    "1:1055528418738:web:5fafdf63424ba9744eb8ab",
+
+  measurementId:
+    "G-KVFSF864GE"
+
 };
 
 
-const app = initializeApp(firebaseConfig);
+const app =
+  initializeApp(firebaseConfig);
 
-const auth = getAuth(app);
-
-const db = getFirestore(app);
+const auth =
+  getAuth(app);
 
 
 /* =====================================
    ELEMENTOS
 ===================================== */
 
-const $ = id => document.getElementById(id);
+const form =
+  document.getElementById("loginForm");
+
+const email =
+  document.getElementById("email");
+
+const password =
+  document.getElementById("password");
+
+const button =
+  document.getElementById("loginButton");
+
+const message =
+  document.getElementById("message");
+
+const loading =
+  document.getElementById("loading");
+
+const forgot =
+  document.getElementById("forgotPassword");
+
+const showPassword =
+  document.getElementById("showPassword");
 
 
 /* =====================================
-   MENSAGEM DE ERRO
+   MENSAGEM
 ===================================== */
 
-function mostrarErro(titulo, mensagem){
+function mostrarMensagem(
+  texto,
+  tipo = "error"
+){
 
-  $("errorPanel").style.display = "block";
+  message.textContent =
+    texto;
 
-  $("errorTitle").textContent = titulo;
-
-  $("errorMessage").textContent = mensagem;
+  message.className =
+    "message " + tipo;
 
 }
 
 
 /* =====================================
-   TEMPORADA
+   MOSTRAR SENHA
 ===================================== */
 
-function atualizarTemporada(){
+showPassword.addEventListener(
+  "click",
+  () => {
 
-  const mes = new Date().getMonth() + 1;
+    if(password.type === "password"){
 
-  document.body.classList.remove(
-    "october",
-    "november",
-    "december"
-  );
+      password.type =
+        "text";
 
-  if(mes === 9){
+      showPassword.textContent =
+        "🙈";
 
-    $("tema").textContent =
-      "🇧🇷 SETEMBRO • INDEPENDÊNCIA";
+    }else{
 
-  }
+      password.type =
+        "password";
 
-  else if(mes === 10){
+      showPassword.textContent =
+        "👁️";
 
-    document.body.classList.add("october");
-
-    $("tema").textContent =
-      "🎃 OUTUBRO • HALLOWEEN";
+    }
 
   }
-
-  else if(mes === 11){
-
-    document.body.classList.add("november");
-
-    $("tema").textContent =
-      "✊🏿 NOVEMBRO • CONSCIÊNCIA NEGRA";
-
-  }
-
-  else if(mes === 12){
-
-    document.body.classList.add("december");
-
-    $("tema").textContent =
-      "🎄 DEZEMBRO • NATAL";
-
-  }
-
-  else{
-
-    $("tema").textContent =
-      "👑 ADAM GAMES • SEU MUNDO COMEÇA AQUI";
-
-  }
-
-}
-
-atualizarTemporada();
-
-
-/* =====================================
-   HORA
-===================================== */
-
-function atualizarHora(){
-
-  const agora = new Date();
-
-  $("hora").textContent =
-    "🕐 " +
-    agora.toLocaleTimeString(
-      "pt-BR",
-      {
-        hour:"2-digit",
-        minute:"2-digit"
-      }
-    );
-
-  $("dFuso").textContent =
-    Intl.DateTimeFormat()
-      .resolvedOptions()
-      .timeZone;
-
-}
-
-atualizarHora();
-
-setInterval(
-  atualizarHora,
-  1000
 );
 
 
 /* =====================================
-   ID PÚBLICO
+   LOGIN
 ===================================== */
 
-function gerarID(){
+form.addEventListener(
+  "submit",
+  async event => {
 
-  const caracteres =
-    "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+    event.preventDefault();
 
-  let id = "";
 
-  for(let i = 0; i < 7; i++){
+    const emailValue =
+      email.value.trim();
 
-    id += caracteres[
-      Math.floor(
-        Math.random() * caracteres.length
-      )
-    ];
+    const passwordValue =
+      password.value;
 
-  }
 
-  return id;
+    if(!emailValue ||
+       !passwordValue){
 
-}
-
-
-/* =====================================
-   LOCALIZAÇÃO
-===================================== */
-
-function localizar(){
-
-  if(!navigator.geolocation){
-
-    $("local").textContent =
-      "📍 Indisponível";
-
-    $("dLocal").textContent =
-      "Indisponível";
-
-    return;
-
-  }
-
-  navigator.geolocation.getCurrentPosition(
-
-    async position => {
-
-      const latitude =
-        position.coords.latitude;
-
-      const longitude =
-        position.coords.longitude;
-
-      $("local").textContent =
-        "📍 Localização autorizada";
-
-      $("dLocal").textContent =
-        `${latitude.toFixed(4)}, ${longitude.toFixed(4)}`;
-
-      try{
-
-        const resposta =
-          await fetch(
-            "https://api.bigdatacloud.net/data/reverse-geocode-client" +
-            `?latitude=${latitude}` +
-            `&longitude=${longitude}` +
-            "&localityLanguage=pt"
-          );
-
-        if(!resposta.ok){
-          return;
-        }
-
-        const dados =
-          await resposta.json();
-
-        const cidade =
-          dados.city ||
-          dados.locality ||
-          dados.principalSubdivision ||
-          "";
-
-        const estado =
-          dados.principalSubdivision ||
-          "";
-
-        if(cidade){
-
-          $("local").textContent =
-            `📍 ${cidade}`;
-
-          $("dLocal").textContent =
-            estado && estado !== cidade
-              ? `${cidade}, ${estado}`
-              : cidade;
-
-        }
-
-      }catch(error){
-
-        console.log(
-          "Não foi possível identificar a cidade."
-        );
-
-      }
-
-    },
-
-    () => {
-
-      $("local").textContent =
-        "📍 Localização não autorizada";
-
-      $("dLocal").textContent =
-        "Não autorizada";
-
-    },
-
-    {
-      enableHighAccuracy:false,
-      timeout:10000,
-      maximumAge:300000
-    }
-
-  );
-
-}
-
-
-/* =====================================
-   CARREGAR USUÁRIO
-===================================== */
-
-async function carregarUsuario(usuario){
-
-  console.log(
-    "Firebase Auth UID:",
-    usuario.uid
-  );
-
-  console.log(
-    "Firebase Auth email:",
-    usuario.email
-  );
-
-
-  /*
-    IMPORTANTE:
-
-    O documento da coleção ADMINS
-    é acessado diretamente pelo UID
-    do usuário autenticado.
-
-    Isso evita a consulta anterior
-    que estava causando o erro.
-  */
-
-  const referencia =
-    doc(
-      db,
-      "admins",
-      usuario.uid
-    );
-
-
-  const resultado =
-    await getDoc(
-      referencia
-    );
-
-
-  if(!resultado.exists()){
-
-    mostrarErro(
-      "Cadastro não encontrado",
-      "O login funcionou, mas não existe um documento em admins com o UID deste usuário."
-    );
-
-    $("nomeUsuario").textContent =
-      usuario.email
-        ? usuario.email.split("@")[0]
-        : "Usuário";
-
-    $("emailUsuario").textContent =
-      usuario.email || "—";
-
-    $("vipBadge").textContent =
-      "⚠️ Cadastro não encontrado";
-
-    $("idUsuario").textContent =
-      "ID: " + usuario.uid.substring(0,7);
-
-    return;
-
-  }
-
-
-  const dados =
-    resultado.data();
-
-
-  console.log(
-    "Dados do usuário:",
-    dados
-  );
-
-
-  /* =================================
-     ID PÚBLICO
-  ================================= */
-
-  let publicId =
-    dados.publicId ||
-    dados.idAdam ||
-    dados.id ||
-    "";
-
-
-  if(!publicId){
-
-    publicId =
-      gerarID();
-
-    try{
-
-      await updateDoc(
-        referencia,
-        {
-          publicId: publicId
-        }
+      mostrarMensagem(
+        "Preencha seu e-mail e sua senha."
       );
-
-    }catch(error){
-
-      console.log(
-        "Não foi possível salvar publicId:",
-        error
-      );
-
-    }
-
-  }
-
-
-  /* =================================
-     NOME
-  ================================= */
-
-  const nome =
-    dados.nome ||
-    dados.name ||
-    usuario.displayName ||
-    (usuario.email
-      ? usuario.email.split("@")[0]
-      : "Usuário");
-
-
-  $("nomeUsuario").textContent =
-    nome;
-
-  $("dNome").textContent =
-    nome;
-
-
-  /* =================================
-     EMAIL
-  ================================= */
-
-  $("emailUsuario").textContent =
-    dados.email ||
-    usuario.email ||
-    "—";
-
-
-  /* =================================
-     ID
-  ================================= */
-
-  $("idUsuario").textContent =
-    "ID: " + publicId;
-
-  $("dId").textContent =
-    publicId;
-
-
-  /* =================================
-     IDADE
-  ================================= */
-
-  $("dIdade").textContent =
-    dados.idade ??
-    "Não informado";
-
-
-  /* =================================
-     TELEFONE
-  ================================= */
-
-  $("dTelefone").textContent =
-    dados.telefone ||
-    dados.phone ||
-    usuario.phoneNumber ||
-    "Não informado";
-
-
-  /* =================================
-     AVATAR
-  ================================= */
-
-  $("avatar").textContent =
-    dados.avatar ||
-    "🙂";
-
-
-  /* =================================
-     VIP
-  ================================= */
-
-  const vip =
-    dados.vip === true ||
-    dados.VIP === true ||
-    String(dados.tipo || "").toLowerCase() === "vip";
-
-
-  if(vip){
-
-    $("crown").style.display =
-      "block";
-
-    $("vipBadge").textContent =
-      "👑 VIP Ativo";
-
-    $("vipBadge").classList.remove(
-      "member-badge"
-    );
-
-  }else{
-
-    $("crown").style.display =
-      "none";
-
-    $("vipBadge").textContent =
-      "⭐ Membro";
-
-    $("vipBadge").classList.add(
-      "member-badge"
-    );
-
-  }
-
-
-  /* =================================
-     CRÉDITOS
-  ================================= */
-
-  const creditos =
-    Number(
-      dados.creditos ??
-      dados.credits ??
-      0
-    );
-
-
-  $("creditos").textContent =
-    creditos.toLocaleString(
-      "pt-BR",
-      {
-        style:"currency",
-        currency:"BRL"
-      }
-    );
-
-
-  /* =================================
-     MOEDAS
-  ================================= */
-
-  const moedas =
-    Number(
-      dados.moedas ??
-      dados.coins ??
-      0
-    );
-
-
-  $("moedas").textContent =
-    moedas.toLocaleString(
-      "pt-BR"
-    );
-
-
-  /* =================================
-     CHAVES
-  ================================= */
-
-  const chaves =
-    Number(
-      dados.chaves ??
-      dados.keys ??
-      0
-    );
-
-
-  $("chaves").textContent =
-    chaves.toLocaleString(
-      "pt-BR"
-    );
-
-
-  /* =================================
-     CAIXA BOX
-  ================================= */
-
-  const caixa =
-    dados.caixaBox === true;
-
-
-  $("boxStatus").textContent =
-    caixa
-      ? "Já resgatada"
-      : "Disponível";
-
-
-  $("dBox").textContent =
-    caixa
-      ? "Já resgatada"
-      : "Disponível";
-
-
-  /* =================================
-     ÚLTIMO ACESSO
-  ================================= */
-
-  $("dAcesso").textContent =
-    "Agora";
-
-
-  /* =================================
-     LOCALIZAÇÃO
-  ================================= */
-
-  localizar();
-
-}
-
-
-/* =====================================
-   AUTENTICAÇÃO
-===================================== */
-
-onAuthStateChanged(
-  auth,
-  async usuario => {
-
-    if(!usuario){
-
-      window.location.href =
-        "index.html";
 
       return;
-
     }
+
+
+    button.disabled =
+      true;
+
+    button.textContent =
+      "ENTRANDO...";
+
+    loading.style.display =
+      "block";
+
+    message.className =
+      "message";
 
 
     try{
 
-      await carregarUsuario(
-        usuario
+      await signInWithEmailAndPassword(
+        auth,
+        emailValue,
+        passwordValue
       );
+
+
+      mostrarMensagem(
+        "Login realizado! Entrando...",
+        "success"
+      );
+
+
+      setTimeout(
+        () => {
+
+          window.location.replace(
+            "painel.html"
+          );
+
+        },
+        500
+      );
+
 
     }catch(error){
 
       console.error(
-        "ERRO FIREBASE:",
+        "Erro de login:",
         error
       );
 
 
-      $("nomeUsuario").textContent =
-        "Erro ao carregar";
+      let texto =
+        "Não foi possível entrar.";
 
 
-      $("emailUsuario").textContent =
-        usuario.email || "—";
+      if(
+        error.code ===
+        "auth/invalid-credential"
+      ){
+
+        texto =
+          "E-mail ou senha incorretos.";
+
+      }
+
+      else if(
+        error.code ===
+        "auth/user-not-found"
+      ){
+
+        texto =
+          "Usuário não encontrado.";
+
+      }
+
+      else if(
+        error.code ===
+        "auth/wrong-password"
+      ){
+
+        texto =
+          "Senha incorreta.";
+
+      }
+
+      else if(
+        error.code ===
+        "auth/invalid-email"
+      ){
+
+        texto =
+          "Digite um e-mail válido.";
+
+      }
+
+      else if(
+        error.code ===
+        "auth/too-many-requests"
+      ){
+
+        texto =
+          "Muitas tentativas. Aguarde alguns minutos.";
+
+      }
 
 
-      let mensagem =
-        error && error.message
-          ? error.message
-          : String(error);
+      mostrarMensagem(
+        texto
+      );
 
 
-      mostrarErro(
-        "Erro ao carregar seus dados",
-        mensagem
+      button.disabled =
+        false;
+
+      button.textContent =
+        "ENTRAR";
+
+      loading.style.display =
+        "none";
+
+    }
+
+  }
+);
+
+
+/* =====================================
+   ESQUECI A SENHA
+===================================== */
+
+forgot.addEventListener(
+  "click",
+  async event => {
+
+    event.preventDefault();
+
+
+    const emailValue =
+      email.value.trim();
+
+
+    if(!emailValue){
+
+      mostrarMensagem(
+        "Digite seu e-mail primeiro."
+      );
+
+      email.focus();
+
+      return;
+    }
+
+
+    try{
+
+      await sendPasswordResetEmail(
+        auth,
+        emailValue
+      );
+
+
+      mostrarMensagem(
+        "E-mail de recuperação enviado!",
+        "success"
+      );
+
+
+    }catch(error){
+
+      console.error(
+        error
+      );
+
+
+      mostrarMensagem(
+        "Não foi possível enviar o e-mail de recuperação."
       );
 
     }
@@ -1622,153 +725,25 @@ onAuthStateChanged(
 
 
 /* =====================================
-   SAIR
+   VERIFICAR SESSÃO
 ===================================== */
 
-$("logout").addEventListener(
-  "click",
-  async () => {
+onAuthStateChanged(
+  auth,
+  usuario => {
 
-    try{
+    if(usuario){
 
-      await signOut(auth);
+      /*
+        Se já estiver logado,
+        entra automaticamente no painel.
+      */
 
-      window.location.href =
-        "index.html";
-
-    }catch(error){
-
-      console.error(error);
+      window.location.replace(
+        "painel.html"
+      );
 
     }
-
-  }
-);
-
-
-/* =====================================
-   BOTÕES
-===================================== */
-
-$("notificationBtn").addEventListener(
-  "click",
-  () => {
-
-    alert(
-      "🔔 Você tem 3 notificações."
-    );
-
-  }
-);
-
-
-$("boxCard").addEventListener(
-  "click",
-  () => {
-
-    alert(
-      "🎁 CAIXA BOX\n\nA área das caixas mensais será disponibilizada aqui."
-    );
-
-  }
-);
-
-
-$("adamCard").addEventListener(
-  "click",
-  () => {
-
-    alert(
-      "🏡 ADAM\n\nÁrea Adam Games."
-    );
-
-  }
-);
-
-
-$("gamesCard").addEventListener(
-  "click",
-  () => {
-
-    alert(
-      "🎮 JOGOS\n\nSeus jogos cadastrados aparecerão aqui."
-    );
-
-  }
-);
-
-
-$("vipButton").addEventListener(
-  "click",
-  () => {
-
-    alert(
-      "👑 ÁREA VIP\n\nSeus benefícios VIP aparecerão aqui."
-    );
-
-  }
-);
-
-
-$("navVip").addEventListener(
-  "click",
-  () => {
-
-    $("vipButton").scrollIntoView({
-      behavior:"smooth"
-    });
-
-  }
-);
-
-
-$("navCreditos").addEventListener(
-  "click",
-  () => {
-
-    $("creditos").scrollIntoView({
-      behavior:"smooth",
-      block:"center"
-    });
-
-  }
-);
-
-
-$("navPremios").addEventListener(
-  "click",
-  () => {
-
-    $("boxCard").scrollIntoView({
-      behavior:"smooth",
-      block:"center"
-    });
-
-  }
-);
-
-
-$("navJogos").addEventListener(
-  "click",
-  () => {
-
-    $("gamesCard").scrollIntoView({
-      behavior:"smooth",
-      block:"center"
-    });
-
-  }
-);
-
-
-$("navInicio").addEventListener(
-  "click",
-  () => {
-
-    window.scrollTo({
-      top:0,
-      behavior:"smooth"
-    });
 
   }
 );
