@@ -6,604 +6,543 @@
 <title>Adam Games</title>
 
 <style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+min-height:100vh;
+font-family:Arial,sans-serif;
+color:#fff;
+background:
+radial-gradient(circle at 50% 5%,#39c5ff 0%,transparent 28%),
+linear-gradient(180deg,#087dcc 0%,#07528e 45%,#03192f 100%);
 }
 
-body {
-  min-height: 100vh;
-  font-family: Arial, sans-serif;
-  color: #fff;
-  overflow-x: hidden;
-
-  background:
-    radial-gradient(circle at 50% 10%, #36bfff 0%, transparent 28%),
-    linear-gradient(180deg, #0879c9 0%, #07508c 42%, #03182e 100%);
+.page{
+min-height:100vh;
+padding:25px 18px 35px;
+display:flex;
+flex-direction:column;
+align-items:center;
+position:relative;
+overflow:hidden;
 }
 
-/* CENÁRIO */
-.scene {
-  position: fixed;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
+.language{
+position:absolute;
+top:20px;
+right:18px;
+padding:12px 16px;
+border-radius:20px;
+background:rgba(0,35,75,.75);
+border:1px solid rgba(255,255,255,.2);
+font-weight:bold;
 }
 
-.cloud {
-  position: absolute;
-  width: 180px;
-  height: 55px;
-  border-radius: 50px;
-  background: rgba(255,255,255,.22);
-  filter: blur(3px);
+.logo-area{
+text-align:center;
+margin-top:45px;
+margin-bottom:25px;
 }
 
-.cloud::before,
-.cloud::after {
-  content: "";
-  position: absolute;
-  background: inherit;
-  border-radius: 50%;
+.shield{
+width:105px;
+height:105px;
+margin:auto;
+display:flex;
+align-items:center;
+justify-content:center;
+background:linear-gradient(145deg,#168cff,#034b9d);
+border:5px solid #ffd029;
+border-radius:30px;
+font-size:55px;
+box-shadow:0 12px 30px rgba(0,0,0,.45);
 }
 
-.cloud::before {
-  width: 80px;
-  height: 80px;
-  left: 25px;
-  bottom: 10px;
+.logo{
+margin-top:10px;
+font-size:clamp(48px,13vw,72px);
+font-weight:1000;
+line-height:.82;
+letter-spacing:-5px;
+text-shadow:0 6px #17395f,0 12px 20px rgba(0,0,0,.5);
 }
 
-.cloud::after {
-  width: 100px;
-  height: 100px;
-  right: 25px;
-  bottom: 5px;
+.logo span{
+display:block;
+color:#ffd029;
+text-shadow:0 5px #9b6000,0 10px 18px rgba(0,0,0,.5);
 }
 
-.cloud1 {
-  top: 18%;
-  left: -50px;
-  animation: cloudMove 18s linear infinite;
+.tagline{
+display:inline-block;
+margin-top:16px;
+padding:10px 20px;
+border-radius:25px;
+background:rgba(0,65,125,.8);
+font-weight:bold;
 }
 
-.cloud2 {
-  top: 38%;
-  right: -100px;
-  transform: scale(.7);
-  animation: cloudMove2 24s linear infinite;
+.login-card{
+width:100%;
+max-width:470px;
+padding:30px 22px;
+border-radius:30px;
+background:linear-gradient(145deg,rgba(4,48,91,.97),rgba(2,19,39,.98));
+border:1px solid rgba(255,255,255,.16);
+box-shadow:0 25px 60px rgba(0,0,0,.55);
 }
 
-@keyframes cloudMove {
-  from { transform: translateX(-30px); }
-  to { transform: translateX(120px); }
+.welcome{
+text-align:center;
+margin-bottom:23px;
 }
 
-@keyframes cloudMove2 {
-  from { transform: translateX(80px); }
-  to { transform: translateX(-160px); }
+.welcome h1{
+font-size:30px;
+margin-bottom:8px;
 }
 
-/* MONTANHAS */
-.mountains {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 34%;
-  background:
-    linear-gradient(135deg, transparent 50%, #164c67 51%) 0 0/35% 100%,
-    linear-gradient(225deg, transparent 50%, #0d3d59 51%) 20% 0/40% 100%,
-    linear-gradient(135deg, transparent 50%, #14506a 51%) 55% 0/40% 100%;
-  opacity: .8;
+.welcome p{
+color:#bcd1e6;
 }
 
-/* CONTEÚDO */
-.page {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  min-height: 100vh;
-  padding: 30px 18px 35px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.field{
+margin-bottom:15px;
 }
 
-/* IDIOMA */
-.language {
-  position: absolute;
-  top: 20px;
-  right: 18px;
-
-  padding: 10px 14px;
-  border-radius: 18px;
-
-  background: rgba(0,35,75,.7);
-  border: 1px solid rgba(255,255,255,.2);
-  backdrop-filter: blur(10px);
-
-  font-size: 13px;
-  font-weight: bold;
+.field label{
+display:block;
+margin:0 0 7px 6px;
+font-size:14px;
+font-weight:bold;
 }
 
-/* LOGO */
-.logo-area {
-  text-align: center;
-  margin-top: 25px;
-  margin-bottom: 20px;
+.input{
+height:62px;
+display:flex;
+align-items:center;
+padding:0 14px;
+border-radius:18px;
+background:rgba(0,19,43,.9);
+border:1px solid rgba(87,166,255,.22);
 }
 
-.shield {
-  width: 90px;
-  height: 90px;
-  margin: auto;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background: linear-gradient(145deg,#168cff,#034b9d);
-  border: 4px solid #ffd029;
-  border-radius: 27px;
-
-  font-size: 48px;
-
-  box-shadow:
-    0 10px 30px rgba(0,0,0,.45),
-    inset 0 2px 8px rgba(255,255,255,.35);
+.icon{
+width:40px;
+height:40px;
+display:flex;
+align-items:center;
+justify-content:center;
+margin-right:11px;
+border-radius:12px;
+background:#086bd8;
+font-size:19px;
 }
 
-.logo {
-  margin-top: 8px;
-
-  font-size: clamp(42px,12vw,70px);
-  font-weight: 1000;
-  line-height: .85;
-  letter-spacing: -4px;
-
-  text-shadow:
-    0 5px #17395f,
-    0 10px 18px rgba(0,0,0,.5);
+.input input{
+flex:1;
+min-width:0;
+border:0;
+outline:0;
+background:transparent;
+color:white;
+font-size:16px;
 }
 
-.logo span {
-  display: block;
-  color: #ffd029;
-
-  text-shadow:
-    0 5px #9b6000,
-    0 10px 18px rgba(0,0,0,.5);
+.input input::placeholder{
+color:#7893ae;
 }
 
-.tagline {
-  display: inline-block;
-  margin-top: 14px;
-
-  padding: 9px 18px;
-
-  border-radius: 25px;
-  background: rgba(0,65,125,.75);
-
-  font-size: 15px;
-  font-weight: bold;
+.eye{
+cursor:pointer;
+font-size:20px;
 }
 
-/* LOGIN */
-.login-card {
-  width: 100%;
-  max-width: 470px;
-
-  padding: 27px 20px;
-
-  border-radius: 30px;
-
-  background: linear-gradient(
-    145deg,
-    rgba(4,48,91,.96),
-    rgba(2,19,39,.97)
-  );
-
-  border: 1px solid rgba(255,255,255,.16);
-
-  box-shadow:
-    0 25px 60px rgba(0,0,0,.55),
-    inset 0 1px rgba(255,255,255,.12);
-
-  backdrop-filter: blur(15px);
+.forgot{
+display:block;
+text-align:right;
+margin:5px 5px 18px;
+color:#35a5ff;
+font-weight:bold;
+cursor:pointer;
 }
 
-.welcome {
-  text-align: center;
-  margin-bottom: 22px;
+.btn{
+width:100%;
+height:61px;
+border:0;
+border-radius:19px;
+color:white;
+font-size:18px;
+font-weight:900;
+cursor:pointer;
 }
 
-.welcome h1 {
-  font-size: 29px;
-  margin-bottom: 7px;
+.btn-login{
+background:linear-gradient(180deg,#1592ff,#0562d8);
+box-shadow:0 6px #03499d;
 }
 
-.welcome p {
-  color: #bcd1e6;
-  font-size: 14px;
+.btn-register{
+margin-top:18px;
+background:rgba(6,39,72,.8);
+border:1px solid rgba(255,255,255,.13);
 }
 
-/* CAMPOS */
-.field {
-  margin-bottom: 14px;
+.or{
+display:flex;
+align-items:center;
+gap:12px;
+margin:23px 0;
+color:#7893ad;
+font-weight:bold;
 }
 
-.field label {
-  display: block;
-  margin: 0 0 7px 6px;
-
-  font-size: 13px;
-  font-weight: bold;
+.or:before,.or:after{
+content:"";
+flex:1;
+height:1px;
+background:rgba(255,255,255,.12);
 }
 
-.input {
-  height: 61px;
-
-  display: flex;
-  align-items: center;
-
-  padding: 0 14px;
-
-  border-radius: 18px;
-
-  background: rgba(0,19,43,.85);
-  border: 1px solid rgba(87,166,255,.2);
+.support{
+width:100%;
+max-width:470px;
+margin-top:17px;
+padding:15px;
+display:flex;
+align-items:center;
+gap:12px;
+border-radius:21px;
+background:rgba(2,38,65,.9);
+border:1px solid rgba(255,255,255,.13);
 }
 
-.input:focus-within {
-  border-color: #1593ff;
-  box-shadow: 0 0 0 3px rgba(21,147,255,.12);
+.whatsapp{
+width:46px;
+height:46px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:14px;
+background:#20c96b;
+font-size:25px;
 }
 
-.icon {
-  width: 38px;
-  height: 38px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  margin-right: 11px;
-
-  border-radius: 12px;
-  background: #086bd8;
-
-  font-size: 18px;
+.support-text{
+flex:1;
 }
 
-.input input {
-  flex: 1;
-
-  min-width: 0;
-
-  border: 0;
-  outline: 0;
-
-  background: transparent;
-
-  color: white;
-  font-size: 16px;
+.support-text strong{
+display:block;
+font-size:14px;
 }
 
-.input input::placeholder {
-  color: #7893ae;
+.support-text small{
+display:block;
+margin-top:4px;
+color:#91abc4;
+font-size:11px;
 }
 
-.eye {
-  cursor: pointer;
-  font-size: 20px;
+.support-btn{
+border:0;
+border-radius:12px;
+padding:11px 13px;
+background:#20c96b;
+color:white;
+font-weight:900;
 }
 
-/* ESQUECEU */
-.forgot {
-  display: block;
-
-  text-align: right;
-
-  margin: 5px 5px 18px;
-
-  color: #35a5ff;
-
-  font-size: 14px;
-  font-weight: bold;
-
-  cursor: pointer;
+.footer{
+margin-top:22px;
+text-align:center;
+color:#9bb2c8;
+font-size:12px;
+line-height:1.7;
 }
 
-/* BOTÃO */
-.btn {
-  width: 100%;
-  height: 61px;
-
-  border: 0;
-  border-radius: 19px;
-
-  color: white;
-
-  font-size: 18px;
-  font-weight: 900;
-
-  cursor: pointer;
-
-  transition: .15s;
-}
-
-.btn-login {
-  background: linear-gradient(180deg,#1592ff,#0562d8);
-
-  box-shadow:
-    0 6px #03499d,
-    0 15px 25px rgba(0,93,210,.3);
-}
-
-.btn-login:active {
-  transform: translateY(4px);
-  box-shadow: 0 2px #03499d;
-}
-
-.or {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-
-  margin: 23px 0;
-
-  color: #7893ad;
-  font-weight: bold;
-}
-
-.or::before,
-.or::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: rgba(255,255,255,.12);
-}
-
-.btn-register {
-  background: rgba(6,39,72,.8);
-  border: 1px solid rgba(255,255,255,.13);
-}
-
-/* SUPORTE */
-.support {
-  width: 100%;
-  max-width: 470px;
-
-  margin-top: 17px;
-  padding: 15px;
-
-  display: flex;
-  align-items: center;
-  gap: 12px;
-
-  border-radius: 21px;
-
-  background: rgba(2,38,65,.9);
-  border: 1px solid rgba(255,255,255,.13);
-}
-
-.whatsapp {
-  width: 46px;
-  height: 46px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  flex-shrink: 0;
-
-  border-radius: 14px;
-  background: #20c96b;
-
-  font-size: 25px;
-}
-
-.support-text {
-  flex: 1;
-}
-
-.support-text strong {
-  display: block;
-  font-size: 14px;
-}
-
-.support-text small {
-  display: block;
-  margin-top: 4px;
-  color: #91abc4;
-  font-size: 11px;
-}
-
-.support-btn {
-  border: 0;
-  border-radius: 12px;
-
-  padding: 11px 13px;
-
-  background: #20c96b;
-  color: white;
-
-  font-weight: 900;
-}
-
-/* RODAPÉ */
-.footer {
-  margin-top: 22px;
-
-  text-align: center;
-
-  color: #9bb2c8;
-  font-size: 12px;
-  line-height: 1.7;
-}
-
-.footer strong {
-  display: block;
-  color: #31a2ff;
-  font-size: 15px;
-}
-
-/* DESKTOP */
-@media (min-width: 700px) {
-  .page {
-    padding-top: 45px;
-  }
-
-  .login-card {
-    padding: 32px;
-  }
-
-  .shield {
-    width: 105px;
-    height: 105px;
-  }
+.footer strong{
+display:block;
+color:#31a2ff;
+font-size:15px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="scene">
-  <div class="cloud cloud1"></div>
-  <div class="cloud cloud2"></div>
-  <div class="mountains"></div>
-</div>
-
 <div class="page">
 
-  <div class="language">
-    🌎 PT-BR ▾
-  </div>
+<div class="language">🌎 PT-BR ▾</div>
 
-  <div class="logo-area">
+<div class="logo-area">
+<div class="shield">👑</div>
 
-    <div class="shield">👑</div>
+<div class="logo">
+ADAM
+<span>GAMES</span>
+</div>
 
-    <div class="logo">
-      ADAM
-      <span>GAMES</span>
-    </div>
+<div class="tagline">
+🌎 Seu mundo começa aqui!
+</div>
+</div>
 
-    <div class="tagline">
-      🌎 Seu mundo começa aqui!
-    </div>
+<main class="login-card">
 
-  </div>
+<div class="welcome">
+<h1 id="title">Bem-vindo! 👋</h1>
+<p id="subtitle">Entre na sua conta para continuar</p>
+</div>
 
-  <main class="login-card">
+<div class="field">
+<label>E-mail</label>
 
-    <div class="welcome">
-      <h1>Bem-vindo! 👋</h1>
-      <p>Entre na sua conta para continuar</p>
-    </div>
+<div class="input">
+<div class="icon">✉️</div>
+<input id="email" type="email" placeholder="Digite seu e-mail">
+</div>
+</div>
 
-    <div class="field">
-      <label>E-mail</label>
+<div class="field">
+<label>Senha</label>
 
-      <div class="input">
-        <div class="icon">✉️</div>
+<div class="input">
+<div class="icon">🔒</div>
 
-        <input
-          id="email"
-          type="email"
-          placeholder="Digite seu e-mail"
-        >
-      </div>
-    </div>
+<input id="password" type="password" placeholder="Digite sua senha">
 
-    <div class="field">
-      <label>Senha</label>
+<div class="eye" onclick="togglePassword()">👁️</div>
+</div>
+</div>
 
-      <div class="input">
-        <div class="icon">🔒</div>
+<div class="forgot" onclick="forgotPassword()">
+Esqueceu a senha?
+</div>
 
-        <input
-          id="password"
-          type="password"
-          placeholder="Digite sua senha"
-        >
+<button class="btn btn-login" onclick="login()">
+ENTRAR →
+</button>
 
-        <div class="eye" onclick="togglePassword()">👁️</div>
-      </div>
-    </div>
+<div class="or">OU</div>
 
-    <div class="forgot" onclick="forgotPassword()">
-      Esqueceu a senha?
-    </div>
+<button class="btn btn-register" onclick="register()">
+👤 Criar uma conta
+</button>
 
-    <button class="btn btn-login" onclick="login()">
-      ENTRAR&nbsp;&nbsp; →
-    </button>
+</main>
 
-    <div class="or">OU</div>
+<div class="support">
 
-    <button class="btn btn-register" onclick="register()">
-      👤 &nbsp; Criar uma conta &nbsp; ›
-    </button>
+<div class="whatsapp">💬</div>
 
-  </main>
+<div class="support-text">
+<strong>Precisa de ajuda?</strong>
+<small>Fale com nosso suporte via WhatsApp</small>
+</div>
 
-  <div class="support">
-
-    <div class="whatsapp">💬</div>
-
-    <div class="support-text">
-      <strong>Precisa de ajuda?</strong>
-      <small>Fale com nosso suporte via WhatsApp</small>
-    </div>
-
-    <button class="support-btn" onclick="support()">
-      Falar agora
-    </button>
-
-  </div>
-
-  <div class="footer">
-    <strong>♛ Adam Games</strong>
-    Diversão, aventuras e prêmios te esperam!
-  </div>
+<button class="support-btn" onclick="support()">
+Suporte
+</button>
 
 </div>
 
-<script>
-function togglePassword() {
-  const input = document.getElementById("password");
+<div class="footer">
+<strong>♛ Adam Games</strong>
+Diversão, aventuras e prêmios te esperam!
+</div>
 
-  input.type =
-    input.type === "password"
-      ? "text"
-      : "password";
+</div>
+
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
+
+import {
+getAuth,
+signInWithEmailAndPassword,
+createUserWithEmailAndPassword,
+sendPasswordResetEmail
+}
+from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
+
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",
+
+authDomain: "adam-games-21081.firebaseapp.com",
+
+projectId: "adam-games-21081",
+
+storageBucket: "adam-games-21081.firebasestorage.app",
+
+messagingSenderId: "1055528418738",
+
+appId: "1:1055528418738:web:5fafdf63424ba9744eb8ab",
+
+measurementId: "G-KVFSF864GE"
+
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+
+window.togglePassword = function(){
+
+const password = document.getElementById("password");
+
+password.type =
+password.type === "password"
+? "text"
+: "password";
+
+};
+
+
+window.login = async function(){
+
+const email =
+document.getElementById("email").value.trim();
+
+const password =
+document.getElementById("password").value;
+
+if(!email || !password){
+
+alert("Digite seu e-mail e sua senha.");
+
+return;
+
 }
 
-function login() {
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value;
+try{
 
-  if (!email || !password) {
-    alert("Preencha seu e-mail e sua senha.");
-    return;
-  }
+await signInWithEmailAndPassword(
+auth,
+email,
+password
+);
 
-  alert("Firebase será conectado nesta etapa.");
+alert("Login realizado com sucesso! 🎉");
+
+}catch(error){
+
+console.error(error);
+
+if(error.code === "auth/invalid-credential"){
+
+alert("E-mail ou senha incorretos.");
+
+}else{
+
+alert("Não foi possível realizar o login.");
+
 }
 
-function register() {
-  alert("A tela de cadastro será criada na próxima etapa.");
 }
 
-function forgotPassword() {
-  alert("A recuperação de senha será conectada ao Firebase.");
+};
+
+
+window.register = async function(){
+
+const email =
+document.getElementById("email").value.trim();
+
+const password =
+document.getElementById("password").value;
+
+if(!email || !password){
+
+alert("Digite um e-mail e uma senha para criar sua conta.");
+
+return;
+
 }
 
-function support() {
-  alert("Vamos configurar o WhatsApp do suporte depois.");
+if(password.length < 6){
+
+alert("A senha precisa ter pelo menos 6 caracteres.");
+
+return;
+
 }
+
+try{
+
+await createUserWithEmailAndPassword(
+auth,
+email,
+password
+);
+
+alert("Conta criada com sucesso! 🎉");
+
+}catch(error){
+
+console.error(error);
+
+if(error.code === "auth/email-already-in-use"){
+
+alert("Este e-mail já possui uma conta.");
+
+}else{
+
+alert("Não foi possível criar a conta.");
+
+}
+
+}
+
+};
+
+
+window.forgotPassword = async function(){
+
+const email =
+document.getElementById("email").value.trim();
+
+if(!email){
+
+alert("Digite seu e-mail primeiro.");
+
+return;
+
+}
+
+try{
+
+await sendPasswordResetEmail(
+auth,
+email
+);
+
+alert("Enviamos um e-mail para redefinir sua senha. 📧");
+
+}catch(error){
+
+console.error(error);
+
+alert("Não foi possível enviar o e-mail de recuperação.");
+
+}
+
+};
+
+
+window.support = function(){
+
+alert("O WhatsApp do suporte será configurado na próxima etapa.");
+
+};
+
 </script>
 
 </body>
