@@ -3,335 +3,1286 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Adam Games — Painel</title>
+<title>Adam Games</title>
 
 <style>
+
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
+:root{
+    --blue:#087ff0;
+    --blue-dark:#031d3c;
+    --green:#16a95c;
+    --purple:#7b2cff;
+    --gold:#ffc928;
+    --text:#ffffff;
+    --muted:#b5c7dc;
+}
+
+/* =====================================================
+   FUNDO
+   FUTURAMENTE PODEMOS TROCAR POR UMA IMAGEM:
+   background-image:url("assets/background.jpg");
+===================================================== */
+
 body{
-  min-height:100vh;
-  font-family:Arial,sans-serif;
-  color:white;
-  background:
-    radial-gradient(circle at 50% 0%,#28b9f5 0%,transparent 30%),
-    linear-gradient(180deg,#087dcc,#064f88 45%,#03182d);
+    min-height:100vh;
+    font-family:Arial,Helvetica,sans-serif;
+    color:white;
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            #148fe8 0%,
+            #075da8 28%,
+            transparent 55%
+        ),
+        linear-gradient(
+            180deg,
+            #075ba6 0%,
+            #032f5c 45%,
+            #011426 100%
+        );
+}
+
+/* decoração do fundo */
+
+body::before{
+    content:"";
+    position:fixed;
+    width:300px;
+    height:300px;
+    border-radius:50%;
+    background:rgba(51,177,255,.12);
+    top:150px;
+    left:-120px;
+    filter:blur(30px);
+    pointer-events:none;
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    width:350px;
+    height:350px;
+    border-radius:50%;
+    background:rgba(0,155,255,.12);
+    top:500px;
+    right:-150px;
+    filter:blur(40px);
+    pointer-events:none;
 }
 
 .page{
-  min-height:100vh;
-  padding:25px 18px 40px;
+    width:100%;
+    max-width:720px;
+    margin:auto;
+    min-height:100vh;
+    padding:18px 18px 125px;
 }
 
-.header{
-  max-width:900px;
-  margin:auto;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:15px;
+/* =====================================================
+   TOPO
+===================================================== */
+
+.top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
 }
 
 .brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
+    display:flex;
+    align-items:center;
+    gap:12px;
 }
 
-.crown{
-  width:55px;
-  height:55px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:17px;
-  background:#0877dc;
-  border:3px solid #ffd029;
-  font-size:28px;
+.brand-logo{
+    width:58px;
+    height:58px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #1594ff,
+            #0451a5
+        );
+
+    border:2px solid rgba(255,255,255,.15);
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.35),
+        inset 0 1px rgba(255,255,255,.2);
+
+    font-size:31px;
 }
 
 .brand h1{
-  font-size:23px;
+    font-size:20px;
+    line-height:.95;
+    letter-spacing:-.5px;
 }
 
 .brand span{
-  display:block;
-  color:#ffd029;
-  font-size:13px;
-  margin-top:3px;
+    display:block;
+    color:#ffd128;
+    font-size:13px;
+    font-weight:900;
+    margin-top:5px;
 }
 
-.logout{
-  border:0;
-  border-radius:15px;
-  padding:13px 18px;
-  background:#ff704d;
-  color:white;
-  font-weight:bold;
-  cursor:pointer;
+.top-buttons{
+    display:flex;
+    gap:8px;
 }
 
-.container{
-  max-width:900px;
-  margin:30px auto 0;
+.top-button{
+    width:55px;
+    height:55px;
+
+    border:0;
+    border-radius:17px;
+
+    background:rgba(1,35,70,.8);
+    color:white;
+
+    font-size:25px;
+
+    border:1px solid rgba(255,255,255,.1);
+
+    box-shadow:0 7px 18px rgba(0,0,0,.25);
+
+    cursor:pointer;
 }
 
-.welcome{
-  padding:28px;
-  border-radius:28px;
-  background:linear-gradient(
-    145deg,
-    rgba(4,52,96,.97),
-    rgba(2,20,40,.98)
-  );
-  border:1px solid rgba(255,255,255,.15);
-  box-shadow:0 20px 45px rgba(0,0,0,.35);
+.notification{
+    position:relative;
 }
 
-.welcome h2{
-  font-size:30px;
-  margin-bottom:10px;
+.notification span{
+    position:absolute;
+    top:-4px;
+    right:-3px;
+
+    min-width:22px;
+    height:22px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:#f33232;
+    color:white;
+
+    font-size:11px;
+    font-weight:bold;
 }
 
-.email{
-  color:#62bdff;
-  word-break:break-word;
+/* =====================================================
+   PERFIL
+===================================================== */
+
+.profile{
+    margin-top:12px;
+
+    display:flex;
+    align-items:center;
+
+    padding:13px;
+
+    border-radius:24px;
+
+    background:
+        linear-gradient(
+            100deg,
+            rgba(2,48,94,.95),
+            rgba(3,31,61,.9)
+        );
+
+    border:1px solid rgba(255,255,255,.12);
+
+    box-shadow:
+        0 12px 28px rgba(0,0,0,.25);
 }
 
-.grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:16px;
-  margin-top:18px;
+.avatar{
+    width:74px;
+    height:74px;
+
+    flex-shrink:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:22px;
+
+    background:
+        radial-gradient(
+            circle at 50% 25%,
+            #ffd84d,
+            #d97706 70%
+        );
+
+    border:3px solid #ffc928;
+
+    font-size:47px;
+
+    box-shadow:
+        0 5px 14px rgba(0,0,0,.3);
 }
 
-.card{
-  min-height:145px;
-  padding:24px 18px;
-  border-radius:25px;
-  background:rgba(3,38,70,.93);
-  border:1px solid rgba(255,255,255,.12);
-  box-shadow:0 12px 30px rgba(0,0,0,.25);
-  cursor:pointer;
-  transition:.2s;
+.profile-info{
+    padding-left:13px;
+    flex:1;
 }
 
-.card:active{
-  transform:scale(.97);
+.profile-name{
+    display:flex;
+    align-items:center;
+    gap:7px;
+
+    font-size:19px;
+    font-weight:900;
 }
 
-.card-icon{
-  font-size:38px;
-  margin-bottom:12px;
+.verified{
+    width:23px;
+    height:23px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:#168df4;
+
+    font-size:13px;
 }
 
-.card h3{
-  font-size:19px;
-  margin-bottom:7px;
+.profile-email{
+    margin-top:5px;
+
+    color:#b3c8dd;
+
+    font-size:12px;
+
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
 
-.card p{
-  color:#9eb7ce;
-  font-size:13px;
-  line-height:1.4;
+.vip-status{
+    display:inline-block;
+
+    margin-top:7px;
+
+    padding:5px 10px;
+
+    border-radius:12px;
+
+    background:rgba(255,195,0,.12);
+
+    color:#ffd33a;
+
+    font-size:12px;
+    font-weight:bold;
 }
 
-.vip{
-  background:
-    linear-gradient(
-      145deg,
-      rgba(86,52,5,.95),
-      rgba(40,25,4,.98)
-    );
-  border-color:rgba(255,208,41,.3);
+/* =====================================================
+   BEM VINDO
+===================================================== */
+
+.hero{
+    padding:27px 8px 20px;
 }
+
+.hero h2{
+    font-size:clamp(38px,10vw,58px);
+    line-height:.9;
+
+    font-weight:1000;
+
+    letter-spacing:-2px;
+
+    text-shadow:
+        0 4px #164d78,
+        0 7px 15px rgba(0,0,0,.35);
+}
+
+.hero p{
+    margin-top:10px;
+
+    font-size:20px;
+    font-weight:bold;
+
+    color:#e9f6ff;
+
+    text-shadow:0 3px 8px rgba(0,0,0,.3);
+}
+
+/* =====================================================
+   CARDS PRINCIPAIS
+===================================================== */
+
+.main-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:12px;
+}
+
+.main-card{
+    min-height:220px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:13px;
+
+    border-radius:25px;
+
+    border:1px solid rgba(255,255,255,.15);
+
+    box-shadow:
+        0 13px 30px rgba(0,0,0,.3);
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.main-card:active{
+    transform:scale(.96);
+}
+
+.main-card::after{
+    content:"";
+
+    position:absolute;
+
+    width:120px;
+    height:120px;
+
+    border-radius:50%;
+
+    right:-35px;
+    top:-35px;
+
+    background:rgba(255,255,255,.08);
+}
+
+.box-card{
+    background:
+        linear-gradient(
+            145deg,
+            #7b24e8,
+            #40117f
+        );
+}
+
+.adam-card{
+    background:
+        linear-gradient(
+            145deg,
+            #0a87e8,
+            #0750a2
+        );
+}
+
+.games-card{
+    background:
+        linear-gradient(
+            145deg,
+            #17b762,
+            #08753e
+        );
+}
+
+.card-image{
+    height:115px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:78px;
+
+    filter:
+        drop-shadow(
+            0 8px 8px rgba(0,0,0,.35)
+        );
+}
+
+.main-card h3{
+    font-size:18px;
+    margin-top:5px;
+}
+
+.main-card p{
+    margin-top:8px;
+
+    color:#d7e7f6;
+
+    font-size:12px;
+
+    line-height:1.4;
+}
+
+.arrow{
+    position:absolute;
+
+    right:10px;
+    bottom:10px;
+
+    width:32px;
+    height:32px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.14);
+
+    font-size:20px;
+}
+
+/* =====================================================
+   VIP
+===================================================== */
+
+.vip-banner{
+    margin-top:16px;
+
+    min-height:130px;
+
+    display:flex;
+    align-items:center;
+
+    padding:18px;
+
+    border-radius:25px;
+
+    background:
+        radial-gradient(
+            circle at 85% 50%,
+            rgba(255,204,35,.3),
+            transparent 35%
+        ),
+        linear-gradient(
+            110deg,
+            #17100a,
+            #382308,
+            #160e06
+        );
+
+    border:1px solid rgba(255,199,37,.45);
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,.35);
+
+    cursor:pointer;
+}
+
+.vip-icon{
+    width:78px;
+    height:78px;
+
+    flex-shrink:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #5c4107,
+            #171006
+        );
+
+    border:2px solid #dba91c;
+
+    font-size:48px;
+}
+
+.vip-content{
+    flex:1;
+    padding-left:15px;
+}
+
+.vip-content h3{
+    color:#ffd028;
+
+    font-size:24px;
+
+    margin-bottom:6px;
+}
+
+.vip-content p{
+    color:#d5c9b0;
+
+    font-size:12px;
+
+    line-height:1.4;
+}
+
+.vip-button{
+    padding:13px 16px;
+
+    border:0;
+
+    border-radius:15px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffc52d,
+            #d98200
+        );
+
+    color:white;
+
+    font-weight:1000;
+
+    box-shadow:
+        0 5px 0 #8c4f00;
+
+    cursor:pointer;
+}
+
+/* =====================================================
+   DESTAQUES
+===================================================== */
+
+.section-title{
+    margin-top:25px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.section-title h3{
+    font-size:19px;
+}
+
+.section-title a{
+    color:#c9d9eb;
+    font-size:12px;
+}
+
+.highlights{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:9px;
+
+    margin-top:13px;
+}
+
+.highlight{
+    min-width:0;
+
+    padding:10px;
+
+    border-radius:19px;
+
+    border:1px solid rgba(255,255,255,.12);
+
+    box-shadow:
+        0 9px 20px rgba(0,0,0,.25);
+}
+
+.highlight:nth-child(1){
+    background:
+        linear-gradient(
+            145deg,
+            #701ed0,
+            #301066
+        );
+}
+
+.highlight:nth-child(2){
+    background:
+        linear-gradient(
+            145deg,
+            #ef9917,
+            #8b4308
+        );
+}
+
+.highlight:nth-child(3){
+    background:
+        linear-gradient(
+            145deg,
+            #12a94d,
+            #075c2d
+        );
+}
+
+.highlight:nth-child(4){
+    background:
+        linear-gradient(
+            145deg,
+            #087ed5,
+            #064781
+        );
+}
+
+.highlight-icon{
+    height:80px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:50px;
+}
+
+.highlight h4{
+    font-size:12px;
+
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.highlight p{
+    margin-top:6px;
+
+    color:#d5e4f1;
+
+    font-size:10px;
+}
+
+.price{
+    margin-top:9px;
+
+    padding:7px 5px;
+
+    border-radius:10px;
+
+    text-align:center;
+
+    background:rgba(0,0,0,.28);
+
+    font-size:12px;
+    font-weight:1000;
+}
+
+/* =====================================================
+   SUPORTE
+===================================================== */
 
 .support{
-  margin-top:18px;
-  padding:20px;
-  border-radius:23px;
-  background:rgba(3,38,70,.95);
-  display:flex;
-  align-items:center;
-  gap:15px;
+    margin-top:17px;
+
+    padding:15px;
+
+    border-radius:21px;
+
+    background:
+        rgba(2,37,69,.9);
+
+    border:1px solid rgba(255,255,255,.1);
+
+    display:flex;
+    align-items:center;
+    gap:12px;
 }
 
 .whatsapp{
-  width:48px;
-  height:48px;
-  border-radius:15px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#20c96b;
-  font-size:25px;
+    width:48px;
+    height:48px;
+
+    flex-shrink:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:15px;
+
+    background:#20c96b;
+
+    font-size:25px;
 }
 
 .support-text{
-  flex:1;
+    flex:1;
 }
 
 .support-text strong{
-  display:block;
-  margin-bottom:4px;
+    display:block;
+
+    font-size:14px;
 }
 
 .support-text small{
-  color:#91abc4;
+    display:block;
+
+    margin-top:4px;
+
+    color:#8fa9c1;
+
+    font-size:11px;
 }
 
 .support button{
-  border:0;
-  padding:12px 15px;
-  border-radius:13px;
-  background:#20c96b;
-  color:white;
-  font-weight:bold;
+    border:0;
+
+    border-radius:13px;
+
+    padding:11px 14px;
+
+    background:#20c96b;
+
+    color:white;
+
+    font-weight:900;
 }
 
-.footer{
-  text-align:center;
-  margin-top:30px;
-  color:#8fa9c0;
-  font-size:12px;
+/* =====================================================
+   NAVEGAÇÃO
+===================================================== */
+
+.bottom-nav{
+    position:fixed;
+
+    z-index:50;
+
+    bottom:15px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:calc(100% - 30px);
+
+    max-width:680px;
+
+    height:82px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-around;
+
+    padding:8px;
+
+    border-radius:28px;
+
+    background:
+        rgba(4,28,54,.94);
+
+    backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.13);
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.5);
 }
 
-@media(max-width:500px){
+.nav-item{
+    width:75px;
 
-  .grid{
-    grid-template-columns:1fr 1fr;
-  }
+    height:65px;
 
-  .welcome{
-    padding:23px;
-  }
+    display:flex;
 
-  .welcome h2{
-    font-size:25px;
-  }
+    flex-direction:column;
 
-  .card{
-    min-height:135px;
-    padding:19px 15px;
-  }
+    align-items:center;
+    justify-content:center;
 
-  .support{
-    flex-wrap:wrap;
-  }
+    gap:4px;
 
-  .support button{
-    width:100%;
-  }
+    color:#74869b;
+
+    font-size:11px;
+    font-weight:bold;
+
+    cursor:pointer;
 }
+
+.nav-icon{
+    font-size:24px;
+}
+
+.nav-item.active{
+    color:#1694ff;
+}
+
+.nav-center{
+    width:70px;
+    height:70px;
+
+    margin-top:-32px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 25%,
+            #52baff,
+            #0874e5 60%,
+            #0351a4
+        );
+
+    border:5px solid #082f55;
+
+    box-shadow:
+        0 0 0 2px #168fff,
+        0 8px 22px rgba(0,0,0,.45);
+
+    font-size:31px;
+}
+
+/* =====================================================
+   RESPONSIVO
+===================================================== */
+
+@media(max-width:520px){
+
+    .page{
+        padding-left:15px;
+        padding-right:15px;
+    }
+
+    .main-card{
+        min-height:205px;
+    }
+
+    .card-image{
+        height:105px;
+        font-size:68px;
+    }
+
+    .main-card h3{
+        font-size:16px;
+    }
+
+    .highlights{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .highlight-icon{
+        height:100px;
+        font-size:62px;
+    }
+
+    .vip-banner{
+        padding:13px;
+    }
+
+    .vip-icon{
+        width:62px;
+        height:62px;
+        font-size:38px;
+    }
+
+    .vip-content h3{
+        font-size:19px;
+    }
+
+    .vip-button{
+        padding:10px;
+        font-size:11px;
+    }
+
+}
+
+@media(max-width:390px){
+
+    .main-grid{
+        gap:7px;
+    }
+
+    .main-card{
+        min-height:190px;
+        padding:10px;
+    }
+
+    .card-image{
+        height:95px;
+        font-size:58px;
+    }
+
+    .profile-name{
+        font-size:16px;
+    }
+
+    .brand h1{
+        font-size:17px;
+    }
+
+}
+
 </style>
 </head>
+
 
 <body>
 
 <div class="page">
 
-<header class="header">
+<!-- =================================================
+     TOPO
+================================================= -->
+
+<header class="top">
 
 <div class="brand">
 
-<div class="crown">👑</div>
+<div class="brand-logo">
+👑
+</div>
 
 <div>
-<h1>ADAM GAMES</h1>
-<span>Seu mundo começa aqui!</span>
+<h1>ADAM</h1>
+<span>GAMES</span>
 </div>
 
 </div>
 
-<button class="logout" onclick="logout()">
-Sair
+
+<div class="top-buttons">
+
+<button class="top-button notification">
+🔔
+<span>3</span>
 </button>
+
+<button
+class="top-button"
+onclick="logout()"
+>
+↪
+</button>
+
+</div>
 
 </header>
 
 
-<main class="container">
+<!-- =================================================
+     PERFIL
+================================================= -->
 
-<section class="welcome">
+<section class="profile">
 
-<h2>Bem-vindo! 👋</h2>
+<div class="avatar">
+🤴
+</div>
 
-<p>Você está conectado ao Adam Games.</p>
+<div class="profile-info">
 
-<br>
+<div class="profile-name">
 
-<p class="email" id="userEmail">
+<span id="userName">
+Jogador
+</span>
+
+<div class="verified">
+✓
+</div>
+
+</div>
+
+<div
+class="profile-email"
+id="userEmail"
+>
 Carregando...
-</p>
-
-</section>
-
-
-<section class="grid">
-
-<div class="card vip" onclick="vip()">
-
-<div class="card-icon">👑</div>
-
-<h3>Área VIP</h3>
-
-<p>
-Consulte seu status VIP,
-benefícios e vantagens.
-</p>
-
 </div>
 
-
-<div class="card" onclick="premios()">
-
-<div class="card-icon">🎁</div>
-
-<h3>Prêmios</h3>
-
-<p>
-Confira seus prêmios
-e benefícios disponíveis.
-</p>
-
+<div class="vip-status">
+👑 VIP Ativo
 </div>
-
-
-<div class="card" onclick="jogos()">
-
-<div class="card-icon">🎮</div>
-
-<h3>Seus jogos</h3>
-
-<p>
-Gerencie seus jogos
-cadastrados.
-</p>
-
-</div>
-
-
-<div class="card" onclick="caixa()">
-
-<div class="card-icon">📦</div>
-
-<h3>Caixa Box</h3>
-
-<p>
-Confira suas caixas,
-recompensas e novidades.
-</p>
 
 </div>
 
 </section>
 
 
-<div class="support">
+<!-- =================================================
+     HERO
+================================================= -->
+
+<section class="hero">
+
+<h2>
+BEM-VINDO 👋
+</h2>
+
+<p>
+Seu mundo começa aqui!
+</p>
+
+</section>
+
+
+<!-- =================================================
+     CARDS
+================================================= -->
+
+<section class="main-grid">
+
+
+<div
+class="main-card box-card"
+onclick="caixa()"
+>
+
+<div class="card-image">
+🎁
+</div>
+
+<h3>
+CAIXA BOX
+</h3>
+
+<p>
+Sua caixa de<br>
+prêmios
+</p>
+
+<div class="arrow">
+→
+</div>
+
+</div>
+
+
+<div
+class="main-card adam-card"
+onclick="adam()"
+>
+
+<div class="card-image">
+🏡
+</div>
+
+<h3>
+ADAM
+</h3>
+
+<p>
+Acesse sua ilha<br>
+e recursos
+</p>
+
+<div class="arrow">
+→
+</div>
+
+</div>
+
+
+<div
+class="main-card games-card"
+onclick="jogos()"
+>
+
+<div class="card-image">
+🎮
+</div>
+
+<h3>
+JOGOS
+</h3>
+
+<p>
+Seus jogos<br>
+cadastrados
+</p>
+
+<div class="arrow">
+→
+</div>
+
+</div>
+
+
+</section>
+
+
+<!-- =================================================
+     VIP
+================================================= -->
+
+<section
+class="vip-banner"
+onclick="vip()"
+>
+
+<div class="vip-icon">
+👑
+</div>
+
+<div class="vip-content">
+
+<h3>
+ÁREA VIP
+</h3>
+
+<p>
+Aproveite todos os benefícios
+exclusivos para você!
+</p>
+
+</div>
+
+<button
+class="vip-button"
+onclick="event.stopPropagation();vip()"
+>
+👑 ACESSAR
+</button>
+
+</section>
+
+
+<!-- =================================================
+     DESTAQUES
+================================================= -->
+
+<div class="section-title">
+
+<h3>
+⭐ Destaques
+</h3>
+
+<a onclick="verTodos()">
+Ver todos ❯
+</a>
+
+</div>
+
+
+<section class="highlights">
+
+
+<div class="highlight">
+
+<div class="highlight-icon">
+💎
+</div>
+
+<h4>
+Pacote Diamante
+</h4>
+
+<p>
+10.000 Rubis
+</p>
+
+<div class="price">
+R$ 29,90
+</div>
+
+</div>
+
+
+<div class="highlight">
+
+<div class="highlight-icon">
+⚡
+</div>
+
+<h4>
+Energia Total
+</h4>
+
+<p>
+50.000 Energias
+</p>
+
+<div class="price">
+R$ 19,90
+</div>
+
+</div>
+
+
+<div class="highlight">
+
+<div class="highlight-icon">
+🔑
+</div>
+
+<h4>
+Chaves de Ouro
+</h4>
+
+<p>
+1.000 Chaves
+</p>
+
+<div class="price">
+R$ 24,90
+</div>
+
+</div>
+
+
+<div class="highlight">
+
+<div class="highlight-icon">
+🔨
+</div>
+
+<h4>
+Kit Construtor
+</h4>
+
+<p>
+500 Ferramentas
+</p>
+
+<div class="price">
+R$ 14,90
+</div>
+
+</div>
+
+
+</section>
+
+
+<!-- =================================================
+     SUPORTE
+================================================= -->
+
+<section class="support">
 
 <div class="whatsapp">
 💬
@@ -339,10 +1290,12 @@ recompensas e novidades.
 
 <div class="support-text">
 
-<strong>Precisa de ajuda?</strong>
+<strong>
+Precisa de ajuda?
+</strong>
 
 <small>
-Fale com nosso suporte pelo WhatsApp.
+Fale com nosso suporte via WhatsApp.
 </small>
 
 </div>
@@ -351,16 +1304,84 @@ Fale com nosso suporte pelo WhatsApp.
 WhatsApp
 </button>
 
+</section>
+
+
 </div>
 
 
-<div class="footer">
-♛ Adam Games • Área do jogador
+<!-- =================================================
+     NAVEGAÇÃO
+================================================= -->
+
+<nav class="bottom-nav">
+
+
+<div
+class="nav-item active"
+onclick="inicio()"
+>
+
+<div class="nav-icon">
+🏠
 </div>
 
-</main>
+Início
 
 </div>
+
+
+<div
+class="nav-item"
+onclick="vip()"
+>
+
+<div class="nav-icon">
+👑
+</div>
+
+VIP
+
+</div>
+
+
+<div
+class="nav-center"
+onclick="destaques()"
+>
+💎
+</div>
+
+
+<div
+class="nav-item"
+onclick="premios()"
+>
+
+<div class="nav-icon">
+🎁
+</div>
+
+Prêmios
+
+</div>
+
+
+<div
+class="nav-item"
+onclick="jogos()"
+>
+
+<div class="nav-icon">
+🎮
+</div>
+
+Jogos
+
+</div>
+
+
+</nav>
 
 
 <script type="module">
@@ -369,80 +1390,184 @@ import { initializeApp }
 from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
 
 import {
-getAuth,
-onAuthStateChanged,
-signOut
+    getAuth,
+    onAuthStateChanged,
+    signOut
 }
 from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
 
 
+/* =====================================================
+   FIREBASE
+===================================================== */
+
 const firebaseConfig = {
 
-apiKey:"AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",
+    apiKey:
+    "AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",
 
-authDomain:"adam-games-21081.firebaseapp.com",
+    authDomain:
+    "adam-games-21081.firebaseapp.com",
 
-projectId:"adam-games-21081",
+    projectId:
+    "adam-games-21081",
 
-storageBucket:"adam-games-21081.firebasestorage.app",
+    storageBucket:
+    "adam-games-21081.firebasestorage.app",
 
-messagingSenderId:"1055528418738",
+    messagingSenderId:
+    "1055528418738",
 
-appId:"1:1055528418738:web:5fafdf63424ba9744eb8ab",
+    appId:
+    "1:1055528418738:web:5fafdf63424ba9744eb8ab",
 
-measurementId:"G-KVFSF864GE"
-
+    measurementId:
+    "G-KVFSF864GE"
 };
 
 
-const app = initializeApp(firebaseConfig);
+const app =
+initializeApp(firebaseConfig);
 
-const auth = getAuth(app);
+const auth =
+getAuth(app);
 
+
+/* =====================================================
+   VERIFICAR LOGIN
+===================================================== */
 
 onAuthStateChanged(auth,(user)=>{
 
-if(!user){
+    if(!user){
 
-window.location.href="index.html";
+        window.location.href =
+        "index.html";
 
-return;
+        return;
 
-}
+    }
 
-document.getElementById("userEmail").textContent =
-user.email;
+
+    document
+    .getElementById("userEmail")
+    .textContent =
+    user.email;
+
+
+    if(user.email){
+
+        const name =
+        user.email
+        .split("@")[0];
+
+        document
+        .getElementById("userName")
+        .textContent =
+        name;
+
+    }
 
 });
 
 
+/* =====================================================
+   SAIR
+===================================================== */
+
 window.logout = async function(){
 
-await signOut(auth);
+    await signOut(auth);
 
-window.location.href="index.html";
+    window.location.href =
+    "index.html";
+
+};
+
+
+/* =====================================================
+   BOTÕES
+===================================================== */
+
+window.caixa=function(){
+
+    alert(
+        "📦 Caixa Box\n\nVamos configurar suas caixas e prêmios aqui."
+    );
+
+};
+
+
+window.adam=function(){
+
+    alert(
+        "🏡 Adam\n\nA área da sua ilha será configurada aqui."
+    );
+
+};
+
+
+window.jogos=function(){
+
+    alert(
+        "🎮 Jogos\n\nVamos cadastrar seus jogos aqui."
+    );
 
 };
 
 
 window.vip=function(){
-alert("Área VIP — vamos configurar esta área na próxima etapa.");
+
+    alert(
+        "👑 Área VIP\n\nVamos configurar seu plano VIP aqui."
+    );
+
 };
+
 
 window.premios=function(){
-alert("Prêmios — vamos configurar esta área na próxima etapa.");
+
+    alert(
+        "🎁 Prêmios\n\nSeus prêmios aparecerão aqui."
+    );
+
 };
 
-window.jogos=function(){
-alert("Seus jogos — vamos configurar esta área na próxima etapa.");
+
+window.destaques=function(){
+
+    alert(
+        "💎 Destaques\n\nAqui ficarão suas ofertas e produtos."
+    );
+
 };
 
-window.caixa=function(){
-alert("Caixa Box — vamos configurar esta área na próxima etapa.");
+
+window.verTodos=function(){
+
+    alert(
+        "⭐ Todos os destaques serão exibidos aqui."
+    );
+
 };
+
 
 window.suporte=function(){
-alert("Suporte via WhatsApp — vamos configurar o número na próxima etapa.");
+
+    alert(
+        "💬 Suporte\n\nO WhatsApp será configurado na próxima etapa."
+    );
+
+};
+
+
+window.inicio=function(){
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
 };
 
 </script>
