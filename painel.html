@@ -2,20 +2,21 @@
 <html lang="pt-BR">
 
 <head>
+
 <meta charset="UTF-8">
 
 <meta
   name="viewport"
-  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+  content="width=device-width, initial-scale=1.0"
 >
 
 <title>Adam Games</title>
 
 <style>
 
-/* =========================================================
+/* ================================
    RESET
-========================================================= */
+================================ */
 
 *{
   box-sizing:border-box;
@@ -24,155 +25,131 @@
 }
 
 html{
-  scroll-behavior:smooth;
+  min-height:100%;
 }
 
 body{
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
 
   min-height:100vh;
 
   color:#fff;
 
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
   overflow-x:hidden;
 
   background:
     radial-gradient(
-      circle at 15% 5%,
-      rgba(74,177,255,.55),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at 90% 20%,
-      rgba(0,110,255,.25),
+      circle at 20% 5%,
+      #42aaff 0%,
       transparent 30%
     ),
     linear-gradient(
       135deg,
-      #087ee1 0%,
-      #0866bd 45%,
-      #061d43 100%
+      #087ee1,
+      #061d43 75%
     );
 
   transition:
-    background .5s ease;
+    background .4s ease;
 }
 
 
-/* =========================================================
-   TEMAS MENSAIS
-========================================================= */
-
-body.september{
-  background:
-    radial-gradient(
-      circle at 15% 5%,
-      rgba(255,255,255,.28),
-      transparent 28%
-    ),
-    radial-gradient(
-      circle at 85% 10%,
-      rgba(255,213,43,.20),
-      transparent 25%
-    ),
-    linear-gradient(
-      135deg,
-      #168be5,
-      #075ca9 50%,
-      #061d43
-    );
-}
+/* ================================
+   TEMAS
+================================ */
 
 body.october{
+
   background:
     radial-gradient(
-      circle at 15% 5%,
-      #ff8a21,
+      circle at 20% 5%,
+      #ff8a21 0%,
       transparent 28%
-    ),
-    radial-gradient(
-      circle at 85% 15%,
-      #8e2be8,
-      transparent 25%
     ),
     linear-gradient(
       135deg,
-      #39104e,
-      #13061d 55%,
-      #07030b
+      #35104f,
+      #090411 75%
     );
 }
+
 
 body.november{
+
   background:
     radial-gradient(
-      circle at 15% 5%,
-      #c9853d,
+      circle at 20% 5%,
+      #c9853d 0%,
       transparent 28%
-    ),
-    radial-gradient(
-      circle at 85% 15%,
-      #8c4d25,
-      transparent 25%
     ),
     linear-gradient(
       135deg,
-      #3a1a0d,
-      #160b08 55%,
-      #050505
+      #30170d,
+      #080606 75%
     );
 }
+
 
 body.december{
+
   background:
     radial-gradient(
-      circle at 15% 5%,
-      #e7434d,
+      circle at 20% 5%,
+      #e7434d 0%,
       transparent 28%
-    ),
-    radial-gradient(
-      circle at 85% 15%,
-      #2fcf76,
-      transparent 25%
     ),
     linear-gradient(
       135deg,
-      #087052,
-      #063d35 55%,
-      #031c25
+      #075c48,
+      #031c25 75%
     );
 }
 
 
-/* =========================================================
-   PÁGINA
-========================================================= */
+/* ================================
+   PAGE
+================================ */
 
 .page{
+
   width:100%;
+
   max-width:1100px;
+
   margin:auto;
+
   padding:16px;
+
 }
 
 
-/* =========================================================
+/* ================================
    TOPO
-========================================================= */
+================================ */
 
 .topbar{
+
   display:flex;
+
   justify-content:space-between;
+
   align-items:center;
+
   margin-bottom:15px;
+
 }
 
+
 .brand{
+
   display:flex;
+
   align-items:center;
+
   gap:12px;
 
   padding:
@@ -188,21 +165,27 @@ body.december{
 
   border:
     1px solid
-    rgba(255,255,255,.13);
+    rgba(255,255,255,.12);
 
   box-shadow:
     0 10px 30px
-    rgba(0,0,0,.20);
+    rgba(0,0,0,.18);
+
 }
 
+
 .brand-icon{
+
   width:62px;
+
   height:62px;
 
   border-radius:18px;
 
   display:flex;
+
   align-items:center;
+
   justify-content:center;
 
   font-size:35px;
@@ -214,34 +197,46 @@ body.december{
       #0754a7
     );
 
-  box-shadow:
-    inset 0 2px 5px
-    rgba(255,255,255,.25);
 }
+
 
 .brand h1{
+
   font-size:22px;
+
   line-height:.95;
+
 }
+
 
 .brand h1 span{
+
   color:#ffd52b;
+
 }
+
 
 .top-buttons{
+
   display:flex;
+
   gap:9px;
+
 }
 
+
 .top-btn{
+
   width:55px;
+
   height:55px;
 
   border:0;
+
   border-radius:18px;
 
   background:
-    rgba(3,36,77,.92);
+    rgba(3,36,77,.9);
 
   color:white;
 
@@ -249,24 +244,19 @@ body.december{
 
   position:relative;
 
-  cursor:pointer;
-
-  box-shadow:
-    0 8px 20px
-    rgba(0,0,0,.18);
 }
 
-.top-btn:active{
-  transform:scale(.95);
-}
 
 .notification{
+
   position:absolute;
 
   right:-3px;
+
   top:-5px;
 
   width:23px;
+
   height:23px;
 
   border-radius:50%;
@@ -278,15 +268,17 @@ body.december{
   display:flex;
 
   justify-content:center;
+
   align-items:center;
 
   font-weight:bold;
+
 }
 
 
-/* =========================================================
+/* ================================
    PERFIL
-========================================================= */
+================================ */
 
 .profile{
 
@@ -319,14 +311,20 @@ body.december{
 
 }
 
+
 .avatar-wrap{
+
   position:relative;
+
   flex-shrink:0;
+
 }
+
 
 .avatar{
 
   width:100px;
+
   height:100px;
 
   border-radius:28px;
@@ -345,37 +343,39 @@ body.december{
   display:flex;
 
   justify-content:center;
+
   align-items:center;
 
   font-size:58px;
 
   box-shadow:
     0 10px 30px
-    rgba(255,185,0,.20);
+    rgba(255,185,0,.2);
 
 }
+
 
 .crown{
 
   position:absolute;
 
   right:-10px;
+
   top:-18px;
 
   font-size:34px;
 
-  filter:
-    drop-shadow(
-      0 3px 4px
-      rgba(0,0,0,.4)
-    );
-
 }
+
 
 .profile-info{
+
   min-width:0;
+
   flex:1;
+
 }
+
 
 .username-line{
 
@@ -387,26 +387,21 @@ body.december{
 
 }
 
+
 .username{
 
   font-size:24px;
 
   font-weight:800;
 
-  white-space:nowrap;
-
-  overflow:hidden;
-
-  text-overflow:ellipsis;
-
 }
+
 
 .verified{
 
   width:25px;
-  height:25px;
 
-  flex-shrink:0;
+  height:25px;
 
   border-radius:50%;
 
@@ -422,6 +417,7 @@ body.december{
 
 }
 
+
 .email{
 
   color:#b7d2ee;
@@ -430,11 +426,8 @@ body.december{
 
   font-size:14px;
 
-  overflow:hidden;
-
-  text-overflow:ellipsis;
-
 }
+
 
 .vip-badge{
 
@@ -459,11 +452,14 @@ body.december{
 
 }
 
+
 .member-badge{
 
   background:
     rgba(255,255,255,.12);
+
 }
+
 
 .user-id{
 
@@ -478,6 +474,7 @@ body.december{
   letter-spacing:1px;
 
 }
+
 
 .user-presence{
 
@@ -495,6 +492,7 @@ body.december{
 
 }
 
+
 .online{
 
   color:#61ff9d;
@@ -504,24 +502,22 @@ body.december{
 }
 
 
-/* =========================================================
+/* ================================
    HERO
-========================================================= */
+================================ */
 
 .hero{
 
-  padding:
-    10px
-    10px
-    22px;
+  padding:20px 10px;
 
 }
+
 
 .season{
 
   display:inline-block;
 
-  padding:8px 15px;
+  padding:8px 14px;
 
   border-radius:20px;
 
@@ -530,17 +526,14 @@ body.december{
 
   border:
     1px solid
-    rgba(255,255,255,.16);
+    rgba(255,255,255,.14);
 
   font-size:12px;
 
   font-weight:bold;
 
-  box-shadow:
-    0 5px 15px
-    rgba(0,0,0,.08);
-
 }
+
 
 .hero h2{
 
@@ -557,9 +550,10 @@ body.december{
 
   text-shadow:
     0 6px 2px
-    rgba(0,0,0,.30);
+    rgba(0,0,0,.3);
 
 }
+
 
 .hero p{
 
@@ -569,14 +563,12 @@ body.december{
 
   font-weight:bold;
 
-  color:#f4f9ff;
-
 }
 
 
-/* =========================================================
-   CARDS PRINCIPAIS
-========================================================= */
+/* ================================
+   CARDS
+================================ */
 
 .main-cards{
 
@@ -588,6 +580,7 @@ body.december{
   gap:15px;
 
 }
+
 
 .main-card{
 
@@ -609,41 +602,20 @@ body.december{
     0 15px 35px
     rgba(0,0,0,.25);
 
-  cursor:pointer;
-
-  transition:
-    transform .2s ease,
-    filter .2s ease;
-
 }
 
-.main-card:hover{
-
-  transform:
-    translateY(-4px);
-
-  filter:
-    brightness(1.08);
-
-}
-
-.main-card:active{
-
-  transform:
-    scale(.98);
-
-}
 
 .box-card{
 
   background:
     linear-gradient(
       145deg,
-      #9227ed,
+      #8d21e7,
       #4710a0
     );
 
 }
+
 
 .adam-card{
 
@@ -656,6 +628,7 @@ body.december{
 
 }
 
+
 .games-card{
 
   background:
@@ -667,6 +640,7 @@ body.december{
 
 }
 
+
 .card-icon{
 
   font-size:75px;
@@ -675,13 +649,8 @@ body.december{
 
   margin-bottom:10px;
 
-  filter:
-    drop-shadow(
-      0 7px 6px
-      rgba(0,0,0,.22)
-    );
-
 }
+
 
 .main-card h3{
 
@@ -690,6 +659,7 @@ body.december{
   margin-bottom:7px;
 
 }
+
 
 .main-card p{
 
@@ -700,14 +670,17 @@ body.december{
 
 }
 
+
 .arrow{
 
   position:absolute;
 
   right:16px;
+
   bottom:15px;
 
   width:45px;
+
   height:45px;
 
   border-radius:50%;
@@ -718,6 +691,7 @@ body.december{
   display:flex;
 
   justify-content:center;
+
   align-items:center;
 
   font-size:24px;
@@ -725,9 +699,9 @@ body.december{
 }
 
 
-/* =========================================================
-   ÁREA VIP
-========================================================= */
+/* ================================
+   VIP
+================================ */
 
 .vip-panel{
 
@@ -748,13 +722,11 @@ body.december{
   gap:20px;
 
   background:
-
     radial-gradient(
       circle at 90% 20%,
       rgba(255,209,67,.22),
       transparent 25%
     ),
-
     linear-gradient(
       135deg,
       #281b05,
@@ -765,11 +737,8 @@ body.december{
     1px solid
     rgba(255,201,58,.6);
 
-  box-shadow:
-    0 15px 35px
-    rgba(0,0,0,.25);
-
 }
+
 
 .vip-left{
 
@@ -781,9 +750,11 @@ body.december{
 
 }
 
+
 .vip-big{
 
   width:72px;
+
   height:72px;
 
   border-radius:20px;
@@ -795,11 +766,13 @@ body.december{
   display:flex;
 
   align-items:center;
+
   justify-content:center;
 
   font-size:40px;
 
 }
+
 
 .vip-panel h3{
 
@@ -809,6 +782,7 @@ body.december{
 
 }
 
+
 .vip-panel p{
 
   margin-top:4px;
@@ -817,12 +791,12 @@ body.december{
 
 }
 
+
 .vip-access{
 
   border:0;
 
-  padding:
-    15px 24px;
+  padding:15px 24px;
 
   border-radius:15px;
 
@@ -837,14 +811,12 @@ body.december{
 
   font-weight:bold;
 
-  cursor:pointer;
-
 }
 
 
-/* =========================================================
+/* ================================
    RECURSOS
-========================================================= */
+================================ */
 
 .section-title{
 
@@ -854,10 +826,10 @@ body.december{
 
   align-items:center;
 
-  margin:
-    12px 3px;
+  margin:12px 3px;
 
 }
+
 
 .resources{
 
@@ -869,6 +841,7 @@ body.december{
   gap:13px;
 
 }
+
 
 .resource{
 
@@ -883,19 +856,17 @@ body.december{
 
   border:
     1px solid
-    rgba(255,255,255,.10);
-
-  box-shadow:
-    0 10px 25px
-    rgba(0,0,0,.15);
+    rgba(255,255,255,.1);
 
 }
+
 
 .resource-icon{
 
   font-size:43px;
 
 }
+
 
 .resource h4{
 
@@ -904,6 +875,7 @@ body.december{
   margin-top:5px;
 
 }
+
 
 .resource-value{
 
@@ -916,9 +888,9 @@ body.december{
 }
 
 
-/* =========================================================
+/* ================================
    DADOS
-========================================================= */
+================================ */
 
 .info-panel{
 
@@ -935,9 +907,10 @@ body.december{
 
   border:
     1px solid
-    rgba(255,255,255,.10);
+    rgba(255,255,255,.1);
 
 }
+
 
 .info-grid{
 
@@ -950,6 +923,7 @@ body.december{
 
 }
 
+
 .info-item{
 
   padding:12px;
@@ -960,6 +934,7 @@ body.december{
     rgba(255,255,255,.055);
 
 }
+
 
 .info-label{
 
@@ -973,6 +948,7 @@ body.december{
 
 }
 
+
 .info-value{
 
   margin-top:4px;
@@ -984,9 +960,9 @@ body.december{
 }
 
 
-/* =========================================================
-   MENU INFERIOR
-========================================================= */
+/* ================================
+   MENU
+================================ */
 
 .bottom-nav{
 
@@ -1001,8 +977,7 @@ body.december{
   transform:
     translateX(-50%);
 
-  width:
-    min(95%,900px);
+  width:min(95%,900px);
 
   padding:10px;
 
@@ -1029,6 +1004,7 @@ body.december{
 
 }
 
+
 .nav-item{
 
   border:0;
@@ -1043,9 +1019,8 @@ body.december{
 
   font-weight:bold;
 
-  cursor:pointer;
-
 }
+
 
 .nav-item span{
 
@@ -1057,11 +1032,13 @@ body.december{
 
 }
 
+
 .nav-item.active{
 
   color:#20a2ff;
 
 }
+
 
 .diamond{
 
@@ -1100,39 +1077,9 @@ body.december{
 }
 
 
-/* =========================================================
-   LOADING
-========================================================= */
-
-.loading{
-
-  opacity:.7;
-
-  animation:
-    pulse 1.2s infinite;
-
-}
-
-@keyframes pulse{
-
-  0%{
-    opacity:.5;
-  }
-
-  50%{
-    opacity:1;
-  }
-
-  100%{
-    opacity:.5;
-  }
-
-}
-
-
-/* =========================================================
+/* ================================
    MOBILE
-========================================================= */
+================================ */
 
 @media(max-width:700px){
 
@@ -1141,203 +1088,96 @@ body.december{
   }
 
   .brand-icon{
-
     width:55px;
     height:55px;
-
   }
 
   .brand h1{
-
     font-size:18px;
-
   }
 
   .top-btn{
-
     width:50px;
     height:50px;
-
   }
 
   .profile{
-
     padding:14px;
-
   }
 
   .avatar{
-
     width:82px;
     height:82px;
-
     font-size:45px;
-
   }
 
   .crown{
-
     font-size:27px;
-
   }
 
   .username{
-
     font-size:19px;
-
   }
 
   .main-cards{
-
     gap:8px;
-
   }
 
   .main-card{
-
     min-height:215px;
-
     padding:12px;
-
     border-radius:21px;
-
   }
 
   .card-icon{
-
     font-size:54px;
-
   }
 
   .main-card h3{
-
     font-size:16px;
-
   }
 
   .main-card p{
-
     font-size:12px;
-
   }
 
   .arrow{
-
     width:34px;
     height:34px;
-
     right:8px;
     bottom:8px;
-
   }
 
   .resources{
-
     grid-template-columns:
       repeat(2,1fr);
-
   }
 
   .info-grid{
-
     grid-template-columns:1fr;
-
   }
 
   .vip-panel{
-
     padding:15px;
-
   }
 
   .vip-big{
-
     width:58px;
     height:58px;
-
     font-size:30px;
-
   }
 
   .vip-panel h3{
-
     font-size:19px;
-
   }
 
   .vip-panel p{
-
     font-size:12px;
-
   }
 
   .vip-access{
-
-    padding:
-      11px 13px;
-
+    padding:11px 13px;
     font-size:12px;
-
-  }
-
-}
-
-
-/* =========================================================
-   MOBILE PEQUENO
-========================================================= */
-
-@media(max-width:430px){
-
-  .profile{
-
-    gap:12px;
-
-  }
-
-  .avatar{
-
-    width:72px;
-    height:72px;
-
-    font-size:39px;
-
-  }
-
-  .username{
-
-    font-size:16px;
-
-  }
-
-  .email{
-
-    font-size:11px;
-
-  }
-
-  .vip-badge{
-
-    font-size:11px;
-
-  }
-
-  .main-card{
-
-    min-height:205px;
-
-  }
-
-  .hero h2{
-
-    font-size:43px;
-
-  }
-
-  .hero p{
-
-    font-size:18px;
-
   }
 
 }
@@ -1349,13 +1189,12 @@ body.december{
 
 <body>
 
-
 <div class="page">
 
 
-<!-- ======================================================
+<!-- ================================
      TOPO
-======================================================= -->
+================================ -->
 
 <header class="topbar">
 
@@ -1377,7 +1216,7 @@ body.december{
 
     <button
       class="top-btn"
-      id="notificationBtn"
+      type="button"
     >
 
       🔔
@@ -1392,8 +1231,11 @@ body.december{
     <button
       class="top-btn"
       id="logout"
+      type="button"
     >
+
       ↪️
+
     </button>
 
   </div>
@@ -1401,9 +1243,10 @@ body.december{
 </header>
 
 
-<!-- ======================================================
+
+<!-- ================================
      PERFIL
-======================================================= -->
+================================ -->
 
 <section class="profile">
 
@@ -1431,7 +1274,7 @@ body.december{
     <div class="username-line">
 
       <div
-        class="username loading"
+        class="username"
         id="nomeUsuario"
       >
         Carregando...
@@ -1489,9 +1332,10 @@ body.december{
 </section>
 
 
-<!-- ======================================================
+
+<!-- ================================
      HERO
-======================================================= -->
+================================ -->
 
 <section class="hero">
 
@@ -1515,9 +1359,10 @@ body.december{
 </section>
 
 
-<!-- ======================================================
+
+<!-- ================================
      CARDS
-======================================================= -->
+================================ -->
 
 <section class="main-cards">
 
@@ -1546,10 +1391,8 @@ body.december{
   </div>
 
 
-  <div
-    class="main-card adam-card"
-    id="adamCard"
-  >
+
+  <div class="main-card adam-card">
 
     <div class="card-icon">
       🏡
@@ -1570,10 +1413,8 @@ body.december{
   </div>
 
 
-  <div
-    class="main-card games-card"
-    id="gamesCard"
-  >
+
+  <div class="main-card games-card">
 
     <div class="card-icon">
       🎮
@@ -1593,13 +1434,13 @@ body.december{
 
   </div>
 
-
 </section>
 
 
-<!-- ======================================================
+
+<!-- ================================
      VIP
-======================================================= -->
+================================ -->
 
 <section class="vip-panel">
 
@@ -1626,17 +1467,20 @@ body.december{
 
   <button
     class="vip-access"
-    id="vipAccess"
+    type="button"
   >
+
     👑 ACESSAR
+
   </button>
 
 </section>
 
 
-<!-- ======================================================
+
+<!-- ================================
      RECURSOS
-======================================================= -->
+================================ -->
 
 <div class="section-title">
 
@@ -1649,6 +1493,7 @@ body.december{
   </span>
 
 </div>
+
 
 
 <section class="resources">
@@ -1674,6 +1519,7 @@ body.december{
   </div>
 
 
+
   <div class="resource">
 
     <div class="resource-icon">
@@ -1692,6 +1538,7 @@ body.december{
     </div>
 
   </div>
+
 
 
   <div class="resource">
@@ -1714,6 +1561,7 @@ body.december{
   </div>
 
 
+
   <div class="resource">
 
     <div class="resource-icon">
@@ -1733,16 +1581,15 @@ body.december{
 
   </div>
 
-
 </section>
 
 
-<!-- ======================================================
-     DADOS DO USUÁRIO
-======================================================= -->
+
+<!-- ================================
+     DADOS
+================================ -->
 
 <section class="info-panel">
-
 
   <div class="section-title">
 
@@ -1772,6 +1619,7 @@ body.december{
     </div>
 
 
+
     <div class="info-item">
 
       <div class="info-label">
@@ -1786,6 +1634,7 @@ body.december{
       </div>
 
     </div>
+
 
 
     <div class="info-item">
@@ -1804,6 +1653,7 @@ body.december{
     </div>
 
 
+
     <div class="info-item">
 
       <div class="info-label">
@@ -1818,6 +1668,7 @@ body.december{
       </div>
 
     </div>
+
 
 
     <div class="info-item">
@@ -1836,6 +1687,7 @@ body.december{
     </div>
 
 
+
     <div class="info-item">
 
       <div class="info-label">
@@ -1852,6 +1704,7 @@ body.december{
     </div>
 
 
+
     <div class="info-item">
 
       <div class="info-label">
@@ -1862,10 +1715,11 @@ body.december{
         class="info-value"
         id="dAcesso"
       >
-        Agora
+        —
       </div>
 
     </div>
+
 
 
     <div class="info-item">
@@ -1883,25 +1737,23 @@ body.december{
 
     </div>
 
-
   </div>
 
 </section>
 
+
 </div>
 
 
-<!-- ======================================================
-     MENU INFERIOR
-======================================================= -->
+
+<!-- ================================
+     MENU
+================================ -->
 
 <nav class="bottom-nav">
 
 
-  <button
-    class="nav-item active"
-    id="navInicio"
-  >
+  <button class="nav-item active">
 
     <span>
       🏠
@@ -1912,10 +1764,8 @@ body.december{
   </button>
 
 
-  <button
-    class="nav-item"
-    id="navVip"
-  >
+
+  <button class="nav-item">
 
     <span>
       👑
@@ -1926,10 +1776,8 @@ body.december{
   </button>
 
 
-  <button
-    class="nav-item"
-    id="navDiamond"
-  >
+
+  <button class="nav-item">
 
     <div class="diamond">
       💎
@@ -1938,10 +1786,8 @@ body.december{
   </button>
 
 
-  <button
-    class="nav-item"
-    id="navPremios"
-  >
+
+  <button class="nav-item">
 
     <span>
       🎁
@@ -1952,10 +1798,8 @@ body.december{
   </button>
 
 
-  <button
-    class="nav-item"
-    id="navJogos"
-  >
+
+  <button class="nav-item">
 
     <span>
       🎮
@@ -1965,20 +1809,15 @@ body.december{
 
   </button>
 
-
 </nav>
 
 
-<!-- ======================================================
+
+<!-- ================================
      FIREBASE
-======================================================= -->
+================================ -->
 
 <script type="module">
-
-
-/* =========================================================
-   IMPORTS
-========================================================= */
 
 import {
   initializeApp
@@ -1998,18 +1837,17 @@ from
 
 import {
   getFirestore,
-  collection,
-  query,
-  where,
-  getDocs
+  doc,
+  getDoc
 }
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
-/* =========================================================
+
+/* =================================
    CONFIGURAÇÃO FIREBASE
-========================================================= */
+================================= */
 
 const firebaseConfig = {
 
@@ -2037,9 +1875,6 @@ const firebaseConfig = {
 };
 
 
-/* =========================================================
-   INICIALIZA FIREBASE
-========================================================= */
 
 const app =
   initializeApp(firebaseConfig);
@@ -2053,44 +1888,22 @@ const db =
   getFirestore(app);
 
 
-/* =========================================================
-   FUNÇÕES AUXILIARES
-========================================================= */
 
-function elemento(id){
-
-  return document.getElementById(id);
-
-}
-
-
-/* =========================================================
+/* =================================
    TEMPORADA
-========================================================= */
+================================= */
 
-function configurarTemporada(){
+function aplicarTemporada(){
 
   const mes =
-    new Date().getMonth() + 1;
-
-
-  document.body.classList.remove(
-    "september",
-    "october",
-    "november",
-    "december"
-  );
+    new Date().getMonth()+1;
 
 
   const tema =
-    elemento("tema");
+    document.getElementById("tema");
 
 
   if(mes === 9){
-
-    document.body.classList.add(
-      "september"
-    );
 
     tema.textContent =
       "🇧🇷 SETEMBRO • INDEPENDÊNCIA";
@@ -2133,27 +1946,16 @@ function configurarTemporada(){
 
   }
 
-
-  else{
-
-    document.body.classList.add(
-      "september"
-    );
-
-    tema.textContent =
-      "🌎 ADAM GAMES • SEU MUNDO";
-
-  }
-
 }
 
 
-configurarTemporada();
+aplicarTemporada();
 
 
-/* =========================================================
-   HORA E FUSO
-========================================================= */
+
+/* =================================
+   HORA
+================================= */
 
 function atualizarHora(){
 
@@ -2161,7 +1963,9 @@ function atualizarHora(){
     new Date();
 
 
-  elemento("hora").textContent =
+  document.getElementById(
+    "hora"
+  ).textContent =
     "🕐 " +
     agora.toLocaleTimeString(
       "pt-BR",
@@ -2172,7 +1976,9 @@ function atualizarHora(){
     );
 
 
-  elemento("dFuso").textContent =
+  document.getElementById(
+    "dFuso"
+  ).textContent =
     Intl.DateTimeFormat()
       .resolvedOptions()
       .timeZone;
@@ -2189,32 +1995,67 @@ setInterval(
 );
 
 
-/* =========================================================
-   ID LOCAL
-========================================================= */
 
-function gerarID(){
+/* =================================
+   ID ADAM GAMES
+================================= */
+
+function criarIdLocal(){
 
   const caracteres =
     "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
 
 
-  let id = "";
+  let resultado = "";
 
 
   for(
-    let i = 0;
-    i < 7;
+    let i=0;
+    i<7;
     i++
   ){
 
-    id +=
+    resultado +=
       caracteres[
         Math.floor(
-          Math.random() *
+          Math.random()
+          *
           caracteres.length
         )
       ];
+
+  }
+
+
+  return resultado;
+
+}
+
+
+/*
+  O ID fica salvo no navegador
+  até implementarmos a gravação
+  administrativa definitiva.
+*/
+
+function obterId(){
+
+  let id =
+    localStorage.getItem(
+      "adamGamesPublicId"
+    );
+
+
+  if(!id){
+
+    id =
+      criarIdLocal();
+
+
+    localStorage.setItem(
+      "adamGamesPublicId",
+      id
+    );
 
   }
 
@@ -2224,20 +2065,25 @@ function gerarID(){
 }
 
 
-/* =========================================================
-   LOCALIZAÇÃO
-========================================================= */
 
-function localizarUsuario(){
+/* =================================
+   LOCALIZAÇÃO
+================================= */
+
+function localizar(){
 
   if(
     !navigator.geolocation
   ){
 
-    elemento("local").textContent =
+    document.getElementById(
+      "local"
+    ).textContent =
       "📍 Indisponível";
 
-    elemento("dLocal").textContent =
+    document.getElementById(
+      "dLocal"
+    ).textContent =
       "Indisponível";
 
     return;
@@ -2247,7 +2093,7 @@ function localizarUsuario(){
 
   navigator.geolocation.getCurrentPosition(
 
-    async function(position){
+    async position => {
 
       const latitude =
         position.coords.latitude;
@@ -2257,39 +2103,27 @@ function localizarUsuario(){
         position.coords.longitude;
 
 
-      elemento("local").textContent =
+      document.getElementById(
+        "local"
+      ).textContent =
         "📍 Localização autorizada";
 
 
-      elemento("dLocal").textContent =
-        latitude.toFixed(4) +
-        ", " +
-        longitude.toFixed(4);
+      document.getElementById(
+        "dLocal"
+      ).textContent =
+        `${latitude.toFixed(4)}, ${longitude.toFixed(4)}`;
 
 
       try{
 
         const resposta =
           await fetch(
-
-            "https://api.bigdatacloud.net/data/" +
-            "reverse-geocode-client" +
-            "?latitude=" +
-            latitude +
-            "&longitude=" +
-            longitude +
+            "https://api.bigdatacloud.net/data/reverse-geocode-client" +
+            `?latitude=${latitude}` +
+            `&longitude=${longitude}` +
             "&localityLanguage=pt"
-
           );
-
-
-        if(!resposta.ok){
-
-          throw new Error(
-            "Falha no serviço de localização"
-          );
-
-        }
 
 
         const dados =
@@ -2299,7 +2133,6 @@ function localizarUsuario(){
         const cidade =
           dados.city ||
           dados.locality ||
-          dados.principalSubdivision ||
           "";
 
 
@@ -2310,18 +2143,16 @@ function localizarUsuario(){
 
         if(cidade){
 
-          elemento("local").textContent =
-            "📍 " + cidade;
+          document.getElementById(
+            "local"
+          ).textContent =
+            `📍 ${cidade}`;
 
 
-          elemento("dLocal").textContent =
-            cidade +
-            (
-              estado &&
-              estado !== cidade
-                ? ", " + estado
-                : ""
-            );
+          document.getElementById(
+            "dLocal"
+          ).textContent =
+            `${cidade}${estado ? ", " + estado : ""}`;
 
         }
 
@@ -2339,22 +2170,25 @@ function localizarUsuario(){
     },
 
 
-    function(){
+    error => {
 
-      elemento("local").textContent =
+      console.log(
+        "Geolocalização:",
+        error
+      );
+
+
+      document.getElementById(
+        "local"
+      ).textContent =
         "📍 Localização não autorizada";
 
 
-      elemento("dLocal").textContent =
+      document.getElementById(
+        "dLocal"
+      ).textContent =
         "Não autorizada";
 
-    },
-
-
-    {
-      enableHighAccuracy:false,
-      timeout:10000,
-      maximumAge:300000
     }
 
   );
@@ -2362,481 +2196,384 @@ function localizarUsuario(){
 }
 
 
-/* =========================================================
-   MOSTRAR DADOS PADRÃO
-========================================================= */
 
-function mostrarDadosBasicos(usuario){
+/* =================================
+   CARREGAR ADMIN
+================================= */
 
-  const email =
-    usuario.email || "";
+async function carregarUsuario(
+  usuario
+){
 
-
-  const nomePadrao =
-    email
-      ? email.split("@")[0]
-      : "Jogador";
-
-
-  elemento("nomeUsuario").classList.remove(
-    "loading"
+  console.log(
+    "UID autenticado:",
+    usuario.uid
   );
 
 
-  elemento("nomeUsuario").textContent =
-    nomePadrao;
-
-
-  elemento("emailUsuario").textContent =
-    email || "—";
-
-
-  elemento("dNome").textContent =
-    nomePadrao;
-
-
-  elemento("dIdade").textContent =
-    "Não informado";
-
-
-  elemento("dTelefone").textContent =
-    "Não informado";
-
-
-  elemento("dAcesso").textContent =
-    "Agora";
-
-
-  elemento("vipBadge").textContent =
-    "⭐ Membro";
-
-
-  elemento("vipBadge").classList.add(
-    "member-badge"
+  console.log(
+    "Email autenticado:",
+    usuario.email
   );
-
-
-  elemento("crown").style.display =
-    "none";
-
-
-  elemento("avatar").textContent =
-    "🙂";
 
 
   /*
-    ID temporário para não deixar
-    a tela quebrada enquanto o
-    cadastro não é encontrado.
+    IMPORTANTE:
+
+    Agora usamos diretamente:
+
+    admins/{UID}
+
+    em vez de consultar por email.
   */
 
-  const idTemporario =
-    gerarID();
-
-
-  elemento("idUsuario").textContent =
-    "ID: " + idTemporario;
-
-
-  elemento("dId").textContent =
-    idTemporario;
-
-
-  elemento("creditos").textContent =
-    "R$ 0,00";
-
-
-  elemento("moedas").textContent =
-    "0";
-
-
-  elemento("chaves").textContent =
-    "0";
-
-
-  elemento("boxStatus").textContent =
-    "Disponível";
-
-
-  elemento("dBox").textContent =
-    "Disponível";
-
-}
-
-
-/* =========================================================
-   CARREGAR USUÁRIO DO FIRESTORE
-========================================================= */
-
-async function carregarUsuario(usuario){
-
-  const emailLogin =
-    usuario.email;
-
-
-  /*
-    Primeiro mostramos os dados
-    básicos do Firebase Auth.
-
-    Isso impede que o painel fique
-    travado em "Erro ao carregar".
-  */
-
-  mostrarDadosBasicos(
-    usuario
-  );
-
-
-  if(!emailLogin){
-
-    console.log(
-      "Usuário autenticado sem e-mail."
+  const referencia =
+    doc(
+      db,
+      "admins",
+      usuario.uid
     );
 
-    localizarUsuario();
+
+  const documento =
+    await getDoc(
+      referencia
+    );
+
+
+  if(!documento.exists()){
+
+    console.error(
+      "Documento admins/" +
+      usuario.uid +
+      " não existe."
+    );
+
+
+    document.getElementById(
+      "nomeUsuario"
+    ).textContent =
+      "Cadastro não encontrado";
+
+
+    document.getElementById(
+      "emailUsuario"
+    ).textContent =
+      usuario.email || "—";
+
+
+    document.getElementById(
+      "vipBadge"
+    ).textContent =
+      "⚠️ Cadastro não encontrado";
+
 
     return;
 
   }
 
 
-  try{
-
-    const admins =
-      collection(
-        db,
-        "admins"
-      );
+  const dados =
+    documento.data();
 
 
-    const consulta =
-      query(
-
-        admins,
-
-        where(
-          "email",
-          "==",
-          emailLogin
-        )
-
-      );
+  console.log(
+    "Dados do Firestore:",
+    dados
+  );
 
 
-    const resultado =
-      await getDocs(
-        consulta
-      );
+
+  /* =============================
+     NOME
+  ============================= */
+
+  const nome =
+    dados.nome ||
+    dados.name ||
+    usuario.displayName ||
+    usuario.email
+      ?.split("@")[0] ||
+    "Usuário";
 
 
-    if(resultado.empty){
-
-      console.log(
-        "Nenhum cadastro encontrado na coleção admins."
-      );
-
-      localizarUsuario();
-
-      return;
-
-    }
+  document.getElementById(
+    "nomeUsuario"
+  ).textContent =
+    nome;
 
 
-    const documento =
-      resultado.docs[0];
+  document.getElementById(
+    "dNome"
+  ).textContent =
+    nome;
 
 
-    const dados =
-      documento.data();
+
+  /* =============================
+     EMAIL
+  ============================= */
+
+  document.getElementById(
+    "emailUsuario"
+  ).textContent =
+    dados.email ||
+    usuario.email ||
+    "—";
 
 
-    console.log(
-      "Dados Firestore:",
-      dados
+
+  /* =============================
+     ID
+  ============================= */
+
+  const publicId =
+    dados.publicId ||
+    obterId();
+
+
+  document.getElementById(
+    "idUsuario"
+  ).textContent =
+    "ID: " + publicId;
+
+
+  document.getElementById(
+    "dId"
+  ).textContent =
+    publicId;
+
+
+
+  /* =============================
+     IDADE
+  ============================= */
+
+  document.getElementById(
+    "dIdade"
+  ).textContent =
+    dados.idade ??
+    "Não informado";
+
+
+
+  /* =============================
+     TELEFONE
+  ============================= */
+
+  document.getElementById(
+    "dTelefone"
+  ).textContent =
+    dados.telefone ||
+    dados.phone ||
+    "Não informado";
+
+
+
+  /* =============================
+     AVATAR
+  ============================= */
+
+  document.getElementById(
+    "avatar"
+  ).textContent =
+    dados.avatar ||
+    "🙂";
+
+
+
+  /* =============================
+     VIP
+  ============================= */
+
+  const vip =
+    dados.vip === true ||
+    dados.VIP === true ||
+    dados.tipo === "vip";
+
+
+  const crown =
+    document.getElementById(
+      "crown"
     );
 
 
-    /* =====================================================
-       NOME
-    ===================================================== */
-
-    const nome =
-      dados.nome ||
-      dados.name ||
-      emailLogin.split("@")[0];
-
-
-    elemento("nomeUsuario").textContent =
-      nome;
-
-
-    elemento("dNome").textContent =
-      nome;
-
-
-    /* =====================================================
-       EMAIL
-    ===================================================== */
-
-    elemento("emailUsuario").textContent =
-      dados.email ||
-      emailLogin;
-
-
-    /* =====================================================
-       ID
-    ===================================================== */
-
-    let publicId =
-      dados.publicId ||
-      dados.idUsuario ||
-      dados.id;
-
-
-    if(!publicId){
-
-      /*
-        IMPORTANTE:
-        Não tentamos salvar no Firebase
-        automaticamente.
-
-        Como suas regras atuais estão
-        bloqueando escrita, isso geraria
-        outro erro.
-
-        Depois vamos criar o ID definitivo
-        pelo painel administrativo.
-      */
-
-      publicId =
-        gerarID();
-
-    }
-
-
-    elemento("idUsuario").textContent =
-      "ID: " + publicId;
-
-
-    elemento("dId").textContent =
-      publicId;
-
-
-    /* =====================================================
-       IDADE
-    ===================================================== */
-
-    elemento("dIdade").textContent =
-      dados.idade ??
-      "Não informado";
-
-
-    /* =====================================================
-       TELEFONE
-    ===================================================== */
-
-    elemento("dTelefone").textContent =
-      dados.telefone ||
-      dados.phone ||
-      "Não informado";
-
-
-    /* =====================================================
-       AVATAR
-    ===================================================== */
-
-    elemento("avatar").textContent =
-      dados.avatar ||
-      "🙂";
-
-
-    /* =====================================================
-       VIP
-    ===================================================== */
-
-    const vip =
-      dados.vip === true ||
-      dados.VIP === true ||
-      dados.tipo === "vip";
-
-
-    if(vip){
-
-      elemento("crown").style.display =
-        "block";
-
-
-      elemento("vipBadge").textContent =
-        "👑 VIP Ativo";
-
-
-      elemento("vipBadge").classList.remove(
-        "member-badge"
-      );
-
-    }
-
-    else{
-
-      elemento("crown").style.display =
-        "none";
-
-
-      elemento("vipBadge").textContent =
-        "⭐ Membro";
-
-
-      elemento("vipBadge").classList.add(
-        "member-badge"
-      );
-
-    }
-
-
-    /* =====================================================
-       CRÉDITOS
-    ===================================================== */
-
-    const creditos =
-      Number(
-        dados.creditos ??
-        dados.credits ??
-        0
-      );
-
-
-    elemento("creditos").textContent =
-      creditos.toLocaleString(
-        "pt-BR",
-        {
-          style:"currency",
-          currency:"BRL"
-        }
-      );
-
-
-    /* =====================================================
-       MOEDAS
-    ===================================================== */
-
-    const moedas =
-      Number(
-        dados.moedas ??
-        dados.coins ??
-        0
-      );
-
-
-    elemento("moedas").textContent =
-      moedas.toLocaleString(
-        "pt-BR"
-      );
-
-
-    /* =====================================================
-       CHAVES
-    ===================================================== */
-
-    const chaves =
-      Number(
-        dados.chaves ??
-        dados.keys ??
-        0
-      );
-
-
-    elemento("chaves").textContent =
-      chaves.toLocaleString(
-        "pt-BR"
-      );
-
-
-    /* =====================================================
-       CAIXA BOX
-    ===================================================== */
-
-    const caixa =
-      dados.caixaBox === true;
-
-
-    elemento("boxStatus").textContent =
-      caixa
-        ? "Já resgatada"
-        : "Disponível";
-
-
-    elemento("dBox").textContent =
-      caixa
-        ? "Já resgatada"
-        : "Disponível";
-
-
-    /* =====================================================
-       LOCALIZAÇÃO
-    ===================================================== */
-
-    localizarUsuario();
-
-  }
-
-  catch(error){
-
-    /*
-      AQUI ESTÁ A PRINCIPAL CORREÇÃO.
-
-      Se o Firestore estiver com:
-      allow read, write: if false;
-
-      a consulta será negada.
-
-      Mas o painel NÃO vai mais mostrar
-      "Erro ao carregar".
-
-      Ele continuará funcionando com
-      os dados básicos do login.
-    */
-
-    console.error(
-      "Firestore não permitiu leitura:",
-      error
+  const vipBadge =
+    document.getElementById(
+      "vipBadge"
     );
 
 
-    elemento("local").textContent =
-      "📍 Aguardando localização";
+  if(vip){
+
+    crown.style.display =
+      "block";
 
 
-    localizarUsuario();
+    vipBadge.textContent =
+      "👑 VIP Ativo";
+
+
+    vipBadge.classList.remove(
+      "member-badge"
+    );
 
   }
+
+  else{
+
+    crown.style.display =
+      "none";
+
+
+    vipBadge.textContent =
+      "⭐ Membro";
+
+
+    vipBadge.classList.add(
+      "member-badge"
+    );
+
+  }
+
+
+
+  /* =============================
+     CRÉDITOS
+  ============================= */
+
+  const creditos =
+    Number(
+      dados.creditos ??
+      dados.credits ??
+      0
+    );
+
+
+  document.getElementById(
+    "creditos"
+  ).textContent =
+    creditos.toLocaleString(
+      "pt-BR",
+      {
+        style:"currency",
+        currency:"BRL"
+      }
+    );
+
+
+
+  /* =============================
+     MOEDAS
+  ============================= */
+
+  const moedas =
+    Number(
+      dados.moedas ??
+      dados.coins ??
+      0
+    );
+
+
+  document.getElementById(
+    "moedas"
+  ).textContent =
+    moedas.toLocaleString(
+      "pt-BR"
+    );
+
+
+
+  /* =============================
+     CHAVES
+  ============================= */
+
+  const chaves =
+    Number(
+      dados.chaves ??
+      dados.keys ??
+      0
+    );
+
+
+  document.getElementById(
+    "chaves"
+  ).textContent =
+    chaves.toLocaleString(
+      "pt-BR"
+    );
+
+
+
+  /* =============================
+     CAIXA BOX
+  ============================= */
+
+  const caixa =
+    dados.caixaBox === true;
+
+
+  const statusBox =
+    caixa
+      ? "Já resgatada"
+      : "Disponível";
+
+
+  document.getElementById(
+    "boxStatus"
+  ).textContent =
+    statusBox;
+
+
+  document.getElementById(
+    "dBox"
+  ).textContent =
+    statusBox;
+
+
+
+  /* =============================
+     ACESSO
+  ============================= */
+
+  document.getElementById(
+    "dAcesso"
+  ).textContent =
+    "Agora";
+
+
+  /* =============================
+     LOCALIZAÇÃO
+  ============================= */
+
+  localizar();
 
 }
 
 
-/* =========================================================
+
+/* =================================
    AUTENTICAÇÃO
-========================================================= */
+================================= */
 
 onAuthStateChanged(
-
   auth,
-
-  async function(usuario){
+  async usuario => {
 
     if(!usuario){
+
+      console.log(
+        "Usuário não autenticado."
+      );
+
 
       window.location.href =
         "index.html";
 
+
       return;
 
     }
-
-
-    console.log(
-      "Usuário autenticado:",
-      usuario.email
-    );
 
 
     try{
@@ -2850,43 +2587,55 @@ onAuthStateChanged(
     catch(error){
 
       console.error(
-        "Erro geral:",
+        "ERRO REAL DO FIRESTORE:",
         error
       );
 
 
-      /*
-        Mesmo que algo inesperado
-        aconteça, não deixamos
-        a tela quebrada.
-      */
+      document.getElementById(
+        "nomeUsuario"
+      ).textContent =
+        "Erro ao carregar";
 
-      mostrarDadosBasicos(
-        usuario
-      );
+
+      document.getElementById(
+        "emailUsuario"
+      ).textContent =
+        usuario.email ||
+        "—";
+
+
+      document.getElementById(
+        "vipBadge"
+      ).textContent =
+        "⚠️ Erro no banco";
+
+
+      /*
+        Mostra no console o erro
+        verdadeiro para diagnóstico.
+      */
 
     }
 
   }
-
 );
 
 
-/* =========================================================
-   LOGOUT
-========================================================= */
 
-elemento("logout").addEventListener(
+/* =================================
+   SAIR
+================================= */
 
+document.getElementById(
+  "logout"
+).addEventListener(
   "click",
-
-  async function(){
+  async () => {
 
     try{
 
-      await signOut(
-        auth
-      );
+      await signOut(auth);
 
 
       window.location.href =
@@ -2897,221 +2646,32 @@ elemento("logout").addEventListener(
     catch(error){
 
       console.error(
-        "Erro ao sair:",
         error
-      );
-
-      alert(
-        "Não foi possível sair agora."
       );
 
     }
 
   }
-
 );
 
 
-/* =========================================================
-   NOTIFICAÇÕES
-========================================================= */
 
-elemento("notificationBtn").addEventListener(
-
-  "click",
-
-  function(){
-
-    alert(
-      "🔔 NOTIFICAÇÕES\n\n" +
-      "Você não possui novas notificações."
-    );
-
-  }
-
-);
-
-
-/* =========================================================
+/* =================================
    CAIXA BOX
-========================================================= */
+================================= */
 
-elemento("boxCard").addEventListener(
-
+document.getElementById(
+  "boxCard"
+).addEventListener(
   "click",
-
-  function(){
+  () => {
 
     alert(
-
       "🎁 CAIXA BOX\n\n" +
-
-      "Aqui ficará o sistema das caixas mensais.\n\n" +
-
-      "CAIXA ANTERIOR\n" +
-      "• Status\n\n" +
-
-      "CAIXA ATUAL\n" +
-      "• Status\n\n" +
-
-      "PRÓXIMA CAIXA\n" +
-      "• Em breve"
-
+      "Aqui ficará o sistema das caixas mensais."
     );
 
   }
-
-);
-
-
-/* =========================================================
-   ADAM
-========================================================= */
-
-elemento("adamCard").addEventListener(
-
-  "click",
-
-  function(){
-
-    alert(
-      "🏡 ADAM\n\n" +
-      "Área da sua ilha e recursos."
-    );
-
-  }
-
-);
-
-
-/* =========================================================
-   JOGOS
-========================================================= */
-
-elemento("gamesCard").addEventListener(
-
-  "click",
-
-  function(){
-
-    alert(
-      "🎮 JOGOS\n\n" +
-      "Aqui aparecerão seus jogos cadastrados."
-    );
-
-  }
-
-);
-
-
-/* =========================================================
-   VIP
-========================================================= */
-
-elemento("vipAccess").addEventListener(
-
-  "click",
-
-  function(){
-
-    alert(
-      "👑 ÁREA VIP\n\n" +
-      "Aqui ficará o painel completo do VIP."
-    );
-
-  }
-
-);
-
-
-/* =========================================================
-   MENU INFERIOR
-========================================================= */
-
-elemento("navInicio").addEventListener(
-
-  "click",
-
-  function(){
-
-    window.scrollTo({
-      top:0,
-      behavior:"smooth"
-    });
-
-  }
-
-);
-
-
-elemento("navVip").addEventListener(
-
-  "click",
-
-  function(){
-
-    elemento("vipAccess").scrollIntoView({
-      behavior:"smooth"
-    });
-
-  }
-
-);
-
-
-elemento("navDiamond").addEventListener(
-
-  "click",
-
-  function(){
-
-    document.querySelector(
-      ".resources"
-    ).scrollIntoView({
-      behavior:"smooth"
-    });
-
-  }
-
-);
-
-
-elemento("navPremios").addEventListener(
-
-  "click",
-
-  function(){
-
-    elemento("boxCard").scrollIntoView({
-      behavior:"smooth"
-    });
-
-  }
-
-);
-
-
-elemento("navJogos").addEventListener(
-
-  "click",
-
-  function(){
-
-    elemento("gamesCard").scrollIntoView({
-      behavior:"smooth"
-    });
-
-  }
-
-);
-
-
-/* =========================================================
-   FINAL
-========================================================= */
-
-console.log(
-  "Adam Games carregado com sucesso."
 );
 
 </script>
