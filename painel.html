@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Adam Games — Painel</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  min-height:100vh;
+  font-family:Arial,sans-serif;
+  color:white;
+  background:
+    radial-gradient(circle at 50% 0%,#28b9f5 0%,transparent 30%),
+    linear-gradient(180deg,#087dcc,#064f88 45%,#03182d);
+}
+
+.page{
+  min-height:100vh;
+  padding:25px 18px 40px;
+}
+
+.header{
+  max-width:900px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.crown{
+  width:55px;
+  height:55px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:17px;
+  background:#0877dc;
+  border:3px solid #ffd029;
+  font-size:28px;
+}
+
+.brand h1{
+  font-size:23px;
+}
+
+.brand span{
+  display:block;
+  color:#ffd029;
+  font-size:13px;
+  margin-top:3px;
+}
+
+.logout{
+  border:0;
+  border-radius:15px;
+  padding:13px 18px;
+  background:#ff704d;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.container{
+  max-width:900px;
+  margin:30px auto 0;
+}
+
+.welcome{
+  padding:28px;
+  border-radius:28px;
+  background:linear-gradient(
+    145deg,
+    rgba(4,52,96,.97),
+    rgba(2,20,40,.98)
+  );
+  border:1px solid rgba(255,255,255,.15);
+  box-shadow:0 20px 45px rgba(0,0,0,.35);
+}
+
+.welcome h2{
+  font-size:30px;
+  margin-bottom:10px;
+}
+
+.email{
+  color:#62bdff;
+  word-break:break-word;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
+  margin-top:18px;
+}
+
+.card{
+  min-height:145px;
+  padding:24px 18px;
+  border-radius:25px;
+  background:rgba(3,38,70,.93);
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 12px 30px rgba(0,0,0,.25);
+  cursor:pointer;
+  transition:.2s;
+}
+
+.card:active{
+  transform:scale(.97);
+}
+
+.card-icon{
+  font-size:38px;
+  margin-bottom:12px;
+}
+
+.card h3{
+  font-size:19px;
+  margin-bottom:7px;
+}
+
+.card p{
+  color:#9eb7ce;
+  font-size:13px;
+  line-height:1.4;
+}
+
+.vip{
+  background:
+    linear-gradient(
+      145deg,
+      rgba(86,52,5,.95),
+      rgba(40,25,4,.98)
+    );
+  border-color:rgba(255,208,41,.3);
+}
+
+.support{
+  margin-top:18px;
+  padding:20px;
+  border-radius:23px;
+  background:rgba(3,38,70,.95);
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.whatsapp{
+  width:48px;
+  height:48px;
+  border-radius:15px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#20c96b;
+  font-size:25px;
+}
+
+.support-text{
+  flex:1;
+}
+
+.support-text strong{
+  display:block;
+  margin-bottom:4px;
+}
+
+.support-text small{
+  color:#91abc4;
+}
+
+.support button{
+  border:0;
+  padding:12px 15px;
+  border-radius:13px;
+  background:#20c96b;
+  color:white;
+  font-weight:bold;
+}
+
+.footer{
+  text-align:center;
+  margin-top:30px;
+  color:#8fa9c0;
+  font-size:12px;
+}
+
+@media(max-width:500px){
+
+  .grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .welcome{
+    padding:23px;
+  }
+
+  .welcome h2{
+    font-size:25px;
+  }
+
+  .card{
+    min-height:135px;
+    padding:19px 15px;
+  }
+
+  .support{
+    flex-wrap:wrap;
+  }
+
+  .support button{
+    width:100%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+<header class="header">
+
+<div class="brand">
+
+<div class="crown">👑</div>
+
+<div>
+<h1>ADAM GAMES</h1>
+<span>Seu mundo começa aqui!</span>
+</div>
+
+</div>
+
+<button class="logout" onclick="logout()">
+Sair
+</button>
+
+</header>
+
+
+<main class="container">
+
+<section class="welcome">
+
+<h2>Bem-vindo! 👋</h2>
+
+<p>Você está conectado ao Adam Games.</p>
+
+<br>
+
+<p class="email" id="userEmail">
+Carregando...
+</p>
+
+</section>
+
+
+<section class="grid">
+
+<div class="card vip" onclick="vip()">
+
+<div class="card-icon">👑</div>
+
+<h3>Área VIP</h3>
+
+<p>
+Consulte seu status VIP,
+benefícios e vantagens.
+</p>
+
+</div>
+
+
+<div class="card" onclick="premios()">
+
+<div class="card-icon">🎁</div>
+
+<h3>Prêmios</h3>
+
+<p>
+Confira seus prêmios
+e benefícios disponíveis.
+</p>
+
+</div>
+
+
+<div class="card" onclick="jogos()">
+
+<div class="card-icon">🎮</div>
+
+<h3>Seus jogos</h3>
+
+<p>
+Gerencie seus jogos
+cadastrados.
+</p>
+
+</div>
+
+
+<div class="card" onclick="caixa()">
+
+<div class="card-icon">📦</div>
+
+<h3>Caixa Box</h3>
+
+<p>
+Confira suas caixas,
+recompensas e novidades.
+</p>
+
+</div>
+
+</section>
+
+
+<div class="support">
+
+<div class="whatsapp">
+💬
+</div>
+
+<div class="support-text">
+
+<strong>Precisa de ajuda?</strong>
+
+<small>
+Fale com nosso suporte pelo WhatsApp.
+</small>
+
+</div>
+
+<button onclick="suporte()">
+WhatsApp
+</button>
+
+</div>
+
+
+<div class="footer">
+♛ Adam Games • Área do jogador
+</div>
+
+</main>
+
+</div>
+
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
+
+import {
+getAuth,
+onAuthStateChanged,
+signOut
+}
+from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
+
+
+const firebaseConfig = {
+
+apiKey:"AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",
+
+authDomain:"adam-games-21081.firebaseapp.com",
+
+projectId:"adam-games-21081",
+
+storageBucket:"adam-games-21081.firebasestorage.app",
+
+messagingSenderId:"1055528418738",
+
+appId:"1:1055528418738:web:5fafdf63424ba9744eb8ab",
+
+measurementId:"G-KVFSF864GE"
+
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+
+onAuthStateChanged(auth,(user)=>{
+
+if(!user){
+
+window.location.href="index.html";
+
+return;
+
+}
+
+document.getElementById("userEmail").textContent =
+user.email;
+
+});
+
+
+window.logout = async function(){
+
+await signOut(auth);
+
+window.location.href="index.html";
+
+};
+
+
+window.vip=function(){
+alert("Área VIP — vamos configurar esta área na próxima etapa.");
+};
+
+window.premios=function(){
+alert("Prêmios — vamos configurar esta área na próxima etapa.");
+};
+
+window.jogos=function(){
+alert("Seus jogos — vamos configurar esta área na próxima etapa.");
+};
+
+window.caixa=function(){
+alert("Caixa Box — vamos configurar esta área na próxima etapa.");
+};
+
+window.suporte=function(){
+alert("Suporte via WhatsApp — vamos configurar o número na próxima etapa.");
+};
+
+</script>
+
+</body>
+</html>
