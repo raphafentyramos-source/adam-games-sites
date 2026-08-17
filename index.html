@@ -6,17 +6,6 @@
 <title>Adam Games</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap');
-
-:root{
-  --primary:#168cff;
-  --secondary:#ffd21c;
-  --accent:#25c875;
-  --dark:#03182e;
-  --card:rgba(3,27,52,.92);
-  --text:#fff;
-}
-
 *{
   box-sizing:border-box;
   margin:0;
@@ -24,538 +13,623 @@
 }
 
 body{
+  font-family:Arial,Helvetica,sans-serif;
   min-height:100vh;
-  font-family:'Nunito',sans-serif;
-  color:var(--text);
+  color:#fff;
   overflow-x:hidden;
-
   background:
-    linear-gradient(
-      rgba(2,20,42,.18),
-      rgba(2,20,42,.72)
-    ),
-    var(--season-background),
-    linear-gradient(180deg,#168fd8,#03182e);
-
-  background-size:cover;
-  background-position:center;
-  background-attachment:fixed;
-}
-
-/* =========================
-   FUNDO DA TEMPORADA
-========================= */
-
-body.september{
-  --season-background:
-  url("assets/backgrounds/setembro.jpg");
+    radial-gradient(circle at 20% 5%,#42aaff 0%,transparent 30%),
+    linear-gradient(135deg,#087ee1,#061d43 75%);
 }
 
 body.october{
-  --season-background:
-  url("assets/backgrounds/outubro.jpg");
+  background:
+    radial-gradient(circle at 20% 5%,#ff8a21 0%,transparent 28%),
+    linear-gradient(135deg,#35104f,#090411 75%);
 }
 
 body.november{
-  --season-background:
-  url("assets/backgrounds/novembro.jpg");
+  background:
+    radial-gradient(circle at 20% 5%,#c9853d 0%,transparent 28%),
+    linear-gradient(135deg,#30170d,#080606 75%);
 }
 
 body.december{
-  --season-background:
-  url("assets/backgrounds/dezembro.jpg");
+  background:
+    radial-gradient(circle at 20% 5%,#e7434d 0%,transparent 28%),
+    linear-gradient(135deg,#075c48,#031c25 75%);
 }
-
-/* =========================
-   CONTAINER
-========================= */
 
 .page{
-  min-height:100vh;
-  padding:18px 16px 35px;
+  max-width:1100px;
+  margin:auto;
+  padding:16px;
 }
 
-/* =========================
-   TOPO
-========================= */
+/* TOPO */
 
 .topbar{
-  width:100%;
-  max-width:520px;
-  margin:auto;
-
   display:flex;
   justify-content:space-between;
   align-items:center;
-}
-
-.language{
-  padding:10px 15px;
-
-  border-radius:18px;
-
-  background:rgba(1,27,57,.82);
-  border:1px solid rgba(255,255,255,.18);
-
-  font-weight:800;
-  font-size:13px;
-
-  backdrop-filter:blur(10px);
-}
-
-/* =========================
-   LOGO
-========================= */
-
-.logo-area{
-  max-width:520px;
-  margin:30px auto 25px;
-  text-align:center;
-}
-
-.logo-shield{
-  width:115px;
-  height:115px;
-
-  margin:auto;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  border-radius:32px;
-
-  background:
-    linear-gradient(145deg,#168cff,#034da4);
-
-  border:5px solid var(--secondary);
-
-  box-shadow:
-    0 15px 35px rgba(0,0,0,.5),
-    inset 0 0 20px rgba(255,255,255,.15);
-
-  font-size:58px;
-}
-
-.logo{
-  margin-top:15px;
-
-  font-family:'Baloo 2',sans-serif;
-
-  font-weight:900;
-  font-size:clamp(52px,15vw,76px);
-
-  line-height:.78;
-
-  letter-spacing:-4px;
-
-  text-shadow:
-    0 6px #073d73,
-    0 12px 20px rgba(0,0,0,.55);
-}
-
-.logo span{
-  display:block;
-  color:var(--secondary);
-
-  text-shadow:
-    0 5px #9b6200,
-    0 10px 20px rgba(0,0,0,.5);
-}
-
-.tagline{
-  display:inline-block;
-
-  margin-top:18px;
-  padding:10px 20px;
-
-  border-radius:25px;
-
-  background:rgba(0,67,128,.82);
-
-  font-weight:800;
-}
-
-/* =========================
-   LOGIN CARD
-========================= */
-
-.card{
-  width:100%;
-  max-width:520px;
-
-  margin:auto;
-
-  padding:30px 22px;
-
-  border-radius:30px;
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(4,42,78,.96),
-      rgba(1,17,34,.97)
-    );
-
-  border:1px solid rgba(255,255,255,.16);
-
-  box-shadow:
-    0 30px 70px rgba(0,0,0,.55);
-
-  backdrop-filter:blur(15px);
-}
-
-.welcome{
-  text-align:center;
-  margin-bottom:25px;
-}
-
-.welcome h1{
-  font-family:'Baloo 2',sans-serif;
-  font-size:31px;
-  font-weight:800;
-}
-
-.welcome p{
-  margin-top:3px;
-  color:#a9c4dc;
-}
-
-/* =========================
-   CAMPOS
-========================= */
-
-.field{
   margin-bottom:15px;
 }
 
-.field label{
-  display:block;
-  margin:0 0 7px 5px;
-
-  font-size:13px;
-  font-weight:900;
-}
-
-.input{
-  height:61px;
-
+.brand{
   display:flex;
   align-items:center;
+  gap:12px;
+  padding:9px 17px 9px 9px;
+  border-radius:22px;
+  background:rgba(3,36,77,.78);
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 10px 30px rgba(0,0,0,.18);
+}
 
-  padding:0 14px;
-
+.brand-icon{
+  width:62px;
+  height:62px;
   border-radius:18px;
-
-  background:rgba(0,17,37,.85);
-
-  border:1px solid rgba(79,158,255,.2);
-
-  transition:.2s;
-}
-
-.input:focus-within{
-  border-color:#168cff;
-  box-shadow:0 0 0 3px rgba(22,140,255,.12);
-}
-
-.icon{
-  width:39px;
-  height:39px;
-
   display:flex;
   align-items:center;
   justify-content:center;
-
-  margin-right:10px;
-
-  border-radius:12px;
-
-  background:#086bd8;
-
-  font-size:18px;
+  font-size:35px;
+  background:linear-gradient(145deg,#218fff,#0754a7);
 }
 
-.input input{
-  width:100%;
-
-  border:none;
-  outline:none;
-
-  background:transparent;
-
-  color:#fff;
-
-  font-family:'Nunito',sans-serif;
-
-  font-size:16px;
+.brand h1{
+  font-size:22px;
+  line-height:.95;
 }
 
-.input input::placeholder{
-  color:#728ba5;
+.brand h1 span{
+  color:#ffd52b;
 }
 
-/* =========================
-   BOTÕES
-========================= */
+.top-buttons{
+  display:flex;
+  gap:9px;
+}
 
-.btn{
-  width:100%;
-  height:61px;
-
-  border:none;
+.top-btn{
+  width:55px;
+  height:55px;
+  border:0;
   border-radius:18px;
-
-  color:#fff;
-
-  font-family:'Nunito',sans-serif;
-
-  font-size:17px;
-  font-weight:900;
-
-  cursor:pointer;
-
-  transition:.2s;
-}
-
-.btn:active{
-  transform:scale(.98);
-}
-
-.btn-login{
-  background:
-    linear-gradient(
-      180deg,
-      #1695ff,
-      #0561d6
-    );
-
-  box-shadow:
-    0 6px #03499d,
-    0 12px 25px rgba(0,102,255,.25);
-}
-
-.btn-register{
-  margin-top:16px;
-
-  background:rgba(7,43,78,.82);
-
-  border:1px solid rgba(255,255,255,.12);
-}
-
-.forgot{
-  text-align:right;
-
-  margin:5px 5px 19px;
-
-  color:#3ca5ff;
-
-  font-size:13px;
-  font-weight:800;
-
+  background:rgba(3,36,77,.9);
+  color:white;
+  font-size:24px;
+  position:relative;
   cursor:pointer;
 }
 
-.or{
+.notification{
+  position:absolute;
+  right:-3px;
+  top:-5px;
+  width:23px;
+  height:23px;
+  border-radius:50%;
+  background:#ff3347;
+  font-size:12px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-weight:bold;
+}
+
+/* PERFIL */
+
+.profile{
+  background:linear-gradient(
+    135deg,
+    rgba(4,55,110,.96),
+    rgba(2,25,56,.96)
+  );
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:28px;
+  padding:18px;
   display:flex;
   align-items:center;
-
-  gap:13px;
-
-  margin:23px 0;
-
-  color:#7189a1;
-
-  font-weight:900;
+  gap:18px;
+  box-shadow:0 20px 45px rgba(0,0,0,.25);
+  margin-bottom:22px;
 }
 
-.or::before,
-.or::after{
-  content:"";
+.avatar-wrap{
+  position:relative;
+  flex-shrink:0;
+}
 
+.avatar{
+  width:100px;
+  height:100px;
+  border-radius:28px;
+  background:linear-gradient(145deg,#f7b52c,#ffdc65);
+  border:4px solid #ffd332;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:58px;
+  box-shadow:0 10px 30px rgba(255,185,0,.2);
+}
+
+.crown{
+  position:absolute;
+  right:-10px;
+  top:-18px;
+  font-size:34px;
+}
+
+.profile-info{
+  min-width:0;
   flex:1;
+}
 
-  height:1px;
+.username-line{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
 
+.username{
+  font-size:24px;
+  font-weight:800;
+  word-break:break-word;
+}
+
+.verified{
+  width:25px;
+  height:25px;
+  border-radius:50%;
+  background:#168cff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+  flex-shrink:0;
+}
+
+.email{
+  color:#b7d2ee;
+  margin-top:5px;
+  font-size:14px;
+  word-break:break-word;
+}
+
+.vip-badge{
+  display:inline-block;
+  margin-top:9px;
+  padding:7px 13px;
+  border-radius:13px;
+  background:linear-gradient(135deg,#8b6511,#f2c94c);
+  font-size:13px;
+  font-weight:bold;
+}
+
+.member-badge{
   background:rgba(255,255,255,.12);
 }
 
-/* =========================
-   MENSAGENS
-========================= */
+.user-id{
+  margin-top:8px;
+  color:#75c4ff;
+  font-size:12px;
+  font-weight:bold;
+  letter-spacing:1px;
+  word-break:break-all;
+}
 
-.message{
-  display:none;
+.user-presence{
+  margin-top:8px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px 14px;
+  font-size:12px;
+  color:#b9d7f5;
+}
 
-  margin-top:15px;
-  padding:13px;
+.online{
+  color:#61ff9d;
+  font-weight:bold;
+}
 
-  border-radius:14px;
+/* HERO */
 
+.hero{
+  padding:20px 10px;
+}
+
+.season{
+  display:inline-block;
+  padding:8px 14px;
+  border-radius:20px;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.14);
+  font-size:12px;
+  font-weight:bold;
+}
+
+.hero h2{
+  margin-top:18px;
+  font-size:clamp(43px,8vw,72px);
+  line-height:.95;
+  text-shadow:0 6px 2px rgba(0,0,0,.3);
+}
+
+.hero p{
+  margin-top:10px;
+  font-size:22px;
+  font-weight:bold;
+}
+
+/* CARDS */
+
+.main-cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+
+.main-card{
+  min-height:235px;
+  border-radius:27px;
+  padding:20px;
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.15);
+  box-shadow:0 15px 35px rgba(0,0,0,.25);
+  cursor:pointer;
+}
+
+.box-card{
+  background:linear-gradient(145deg,#8d21e7,#4710a0);
+}
+
+.adam-card{
+  background:linear-gradient(145deg,#087ddd,#064ca4);
+}
+
+.games-card{
+  background:linear-gradient(145deg,#15b95e,#087c42);
+}
+
+.card-icon{
+  font-size:75px;
   text-align:center;
-
-  font-size:13px;
-  font-weight:700;
+  margin-bottom:10px;
 }
 
-.message.show{
-  display:block;
+.main-card h3{
+  font-size:22px;
+  margin-bottom:7px;
 }
 
-.message.success{
-  background:#0b4c30;
-  color:#7cffb7;
+.main-card p{
+  color:rgba(255,255,255,.82);
+  line-height:1.4;
 }
 
-.message.error{
-  background:#591e29;
-  color:#ffb0ba;
+.arrow{
+  position:absolute;
+  right:16px;
+  bottom:15px;
+  width:45px;
+  height:45px;
+  border-radius:50%;
+  background:rgba(255,255,255,.15);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:24px;
 }
 
-/* =========================
-   SUPORTE
-========================= */
+/* VIP */
 
-.support{
-  width:100%;
-  max-width:520px;
+.vip-panel{
+  margin-top:18px;
+  margin-bottom:22px;
+  padding:20px;
+  border-radius:27px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  background:
+    radial-gradient(circle at 90% 20%,rgba(255,209,67,.22),transparent 25%),
+    linear-gradient(135deg,#281b05,#100e08);
+  border:1px solid rgba(255,201,58,.6);
+}
 
-  margin:18px auto 0;
-
-  padding:15px;
-
+.vip-left{
   display:flex;
   align-items:center;
-
-  gap:12px;
-
-  border-radius:22px;
-
-  background:rgba(2,35,61,.9);
-
-  border:1px solid rgba(255,255,255,.13);
-
-  backdrop-filter:blur(12px);
+  gap:15px;
 }
 
-.whatsapp{
-  width:48px;
-  height:48px;
-
-  flex-shrink:0;
-
+.vip-big{
+  width:72px;
+  height:72px;
+  border-radius:20px;
+  border:2px solid #e8b52d;
   display:flex;
   align-items:center;
   justify-content:center;
+  font-size:40px;
+}
 
-  border-radius:15px;
-
-  background:#1fc96b;
-
+.vip-panel h3{
+  color:#ffd229;
   font-size:25px;
 }
 
-.support-text{
-  flex:1;
+.vip-panel p{
+  margin-top:4px;
+  color:#d8d0bc;
 }
 
-.support-text strong{
-  display:block;
-  font-size:14px;
+.vip-access{
+  border:0;
+  padding:15px 24px;
+  border-radius:15px;
+  background:linear-gradient(135deg,#ffcb27,#d78a05);
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
 }
 
-.support-text small{
-  display:block;
-  margin-top:3px;
-  color:#8ea8c0;
-  font-size:11px;
+/* RECURSOS */
+
+.section-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:12px 3px;
 }
 
-.support-btn{
-  border:none;
+.resources{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:13px;
+}
 
-  padding:12px 14px;
+.resource{
+  padding:15px;
+  text-align:center;
+  border-radius:22px;
+  background:rgba(3,30,62,.82);
+  border:1px solid rgba(255,255,255,.1);
+}
 
-  border-radius:13px;
+.resource-icon{
+  font-size:43px;
+}
 
-  background:#20c96b;
+.resource h4{
+  font-size:13px;
+  margin-top:5px;
+}
 
-  color:#fff;
-
+.resource-value{
+  margin-top:7px;
+  font-size:19px;
   font-weight:900;
+  word-break:break-word;
 }
 
-/* =========================
-   RODAPÉ
-========================= */
+/* DADOS */
 
-.footer{
-  max-width:520px;
-
-  margin:22px auto 0;
-
-  text-align:center;
-
-  color:#91a9bf;
-
-  font-size:12px;
+.info-panel{
+  margin-top:20px;
+  margin-bottom:110px;
+  padding:20px;
+  border-radius:25px;
+  background:rgba(2,25,52,.82);
+  border:1px solid rgba(255,255,255,.1);
 }
 
-.footer strong{
-  display:block;
-
-  margin-bottom:5px;
-
-  color:#2598ff;
-
-  font-size:16px;
+.info-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
 }
 
-/* =========================
-   CADASTRO
-========================= */
+.info-item{
+  padding:12px;
+  border-radius:15px;
+  background:rgba(255,255,255,.055);
+}
 
-#registerScreen{
+.info-label{
+  color:#7fb4dc;
+  font-size:11px;
+  text-transform:uppercase;
+  font-weight:bold;
+}
+
+.info-value{
+  margin-top:4px;
+  font-size:14px;
+  word-break:break-word;
+}
+
+/* ERRO */
+
+.error-panel{
   display:none;
+  margin-bottom:20px;
+  padding:16px;
+  border-radius:18px;
+  background:rgba(150,20,30,.85);
+  border:1px solid rgba(255,100,100,.5);
 }
 
-/* =========================
-   TEMPORADA
-========================= */
-
-.season-badge{
-  max-width:520px;
-
-  margin:0 auto 15px;
-
-  text-align:center;
-
-  font-family:'Baloo 2',sans-serif;
-
-  font-size:17px;
-  font-weight:800;
+.error-panel strong{
+  display:block;
+  margin-bottom:6px;
 }
 
-/* =========================
-   MOBILE
-========================= */
+.error-panel small{
+  color:#ffdede;
+  word-break:break-word;
+}
 
-@media(max-width:390px){
+/* MENU */
 
-  .card{
-    padding:25px 17px;
+.bottom-nav{
+  position:fixed;
+  z-index:50;
+  left:50%;
+  bottom:12px;
+  transform:translateX(-50%);
+  width:min(95%,900px);
+  padding:10px;
+  border-radius:28px;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  background:rgba(4,25,52,.95);
+  backdrop-filter:blur(15px);
+  border:1px solid rgba(255,255,255,.13);
+  box-shadow:0 15px 40px rgba(0,0,0,.4);
+}
+
+.nav-item{
+  border:0;
+  background:transparent;
+  color:#7890a8;
+  padding:8px;
+  font-size:12px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.nav-item span{
+  display:block;
+  font-size:25px;
+  margin-bottom:3px;
+}
+
+.nav-item.active{
+  color:#20a2ff;
+}
+
+.diamond{
+  width:66px;
+  height:66px;
+  margin:-25px auto 0;
+  border-radius:50%;
+  background:linear-gradient(145deg,#2a9dff,#0069db);
+  border:4px solid #0c315d;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:32px;
+  box-shadow:0 0 25px rgba(0,143,255,.45);
+}
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+  .page{
+    padding:12px;
   }
 
-  .logo{
-    font-size:53px;
+  .brand-icon{
+    width:55px;
+    height:55px;
   }
 
-  .logo-shield{
-    width:95px;
-    height:95px;
-    font-size:48px;
+  .brand h1{
+    font-size:18px;
   }
 
+  .top-btn{
+    width:50px;
+    height:50px;
+  }
+
+  .profile{
+    padding:14px;
+  }
+
+  .avatar{
+    width:82px;
+    height:82px;
+    font-size:45px;
+  }
+
+  .crown{
+    font-size:27px;
+  }
+
+  .username{
+    font-size:19px;
+  }
+
+  .main-cards{
+    gap:8px;
+  }
+
+  .main-card{
+    min-height:215px;
+    padding:12px;
+    border-radius:21px;
+  }
+
+  .card-icon{
+    font-size:54px;
+  }
+
+  .main-card h3{
+    font-size:16px;
+  }
+
+  .main-card p{
+    font-size:12px;
+  }
+
+  .arrow{
+    width:34px;
+    height:34px;
+    right:8px;
+    bottom:8px;
+  }
+
+  .resources{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .info-grid{
+    grid-template-columns:1fr;
+  }
+
+  .vip-panel{
+    padding:15px;
+  }
+
+  .vip-big{
+    width:58px;
+    height:58px;
+    font-size:30px;
+  }
+
+  .vip-panel h3{
+    font-size:19px;
+  }
+
+  .vip-panel p{
+    font-size:12px;
+  }
+
+  .vip-access{
+    padding:11px 13px;
+    font-size:12px;
+  }
+
+  .bottom-nav{
+    width:96%;
+  }
 }
 </style>
 </head>
@@ -564,638 +638,501 @@ body.december{
 
 <div class="page">
 
-  <div class="topbar">
-    <div></div>
+<header class="topbar">
 
-    <div class="language">
-      🌎 PT-BR ▾
-    </div>
-  </div>
+  <div class="brand">
+    <div class="brand-icon">👑</div>
 
-
-  <!-- LOGO -->
-
-  <div class="logo-area">
-
-    <div class="logo-shield">
-      👑
-    </div>
-
-    <div class="logo">
-      ADAM
+    <h1>
+      ADAM<br>
       <span>GAMES</span>
-    </div>
-
-    <div class="tagline">
-      🌎 Seu mundo começa aqui!
-    </div>
-
+    </h1>
   </div>
 
-
-  <!-- TEMPORADA -->
-
-  <div
-    class="season-badge"
-    id="seasonBadge"
-  >
-  </div>
-
-
-  <!-- LOGIN -->
-
-  <section id="loginScreen">
-
-    <div class="card">
-
-      <div class="welcome">
-
-        <h1>
-          Bem-vindo! 👋
-        </h1>
-
-        <p>
-          Entre na sua conta para continuar
-        </p>
-
-      </div>
-
-
-      <div class="field">
-
-        <label>
-          E-mail
-        </label>
-
-        <div class="input">
-
-          <div class="icon">
-            ✉️
-          </div>
-
-          <input
-            id="loginEmail"
-            type="email"
-            placeholder="Digite seu e-mail"
-          >
-
-        </div>
-
-      </div>
-
-
-      <div class="field">
-
-        <label>
-          Senha
-        </label>
-
-        <div class="input">
-
-          <div class="icon">
-            🔒
-          </div>
-
-          <input
-            id="loginPassword"
-            type="password"
-            placeholder="Digite sua senha"
-          >
-
-        </div>
-
-      </div>
-
-
-      <div
-        class="forgot"
-        onclick="recuperarSenha()"
-      >
-        Esqueceu a senha?
-      </div>
-
-
-      <button
-        class="btn btn-login"
-        onclick="login()"
-      >
-        ENTRAR →
-      </button>
-
-
-      <div class="or">
-        OU
-      </div>
-
-
-      <button
-        class="btn btn-register"
-        onclick="mostrarCadastro()"
-      >
-        👤 Criar uma conta
-        →
-      </button>
-
-
-      <div
-        id="loginMessage"
-        class="message"
-      ></div>
-
-    </div>
-
-  </section>
-
-
-  <!-- CADASTRO -->
-
-  <section id="registerScreen">
-
-    <div class="card">
-
-      <div class="welcome">
-
-        <h1>
-          Criar conta 👤
-        </h1>
-
-        <p>
-          Faça seu cadastro no Adam Games
-        </p>
-
-      </div>
-
-
-      <div class="field">
-
-        <label>
-          Nome
-        </label>
-
-        <div class="input">
-
-          <div class="icon">
-            👤
-          </div>
-
-          <input
-            id="registerName"
-            type="text"
-            placeholder="Seu nome"
-          >
-
-        </div>
-
-      </div>
-
-
-      <div class="field">
-
-        <label>
-          Idade
-        </label>
-
-        <div class="input">
-
-          <div class="icon">
-            🎂
-          </div>
-
-          <input
-            id="registerAge"
-            type="number"
-            min="1"
-            max="120"
-            placeholder="Sua idade"
-          >
-
-        </div>
-
-      </div>
-
-
-      <div class="field">
-
-        <label>
-          Telefone / WhatsApp
-        </label>
-
-        <div class="input">
-
-          <div class="icon">
-            📱
-          </div>
-
-          <input
-            id="registerPhone"
-            type="tel"
-            placeholder="(00) 00000-0000"
-          >
-
-        </div>
-
-      </div>
-
-
-      <div class="field">
-
-        <label>
-          E-mail
-        </label>
-
-        <div class="input">
-
-          <div class="icon">
-            ✉️
-          </div>
-
-          <input
-            id="registerEmail"
-            type="email"
-            placeholder="Seu e-mail"
-          >
-
-        </div>
-
-      </div>
-
-
-      <div class="field">
-
-        <label>
-          Senha
-        </label>
-
-        <div class="input">
-
-          <div class="icon">
-            🔒
-          </div>
-
-          <input
-            id="registerPassword"
-            type="password"
-            placeholder="Mínimo 6 caracteres"
-          >
-
-        </div>
-
-      </div>
-
-
-      <div class="field">
-
-        <label>
-          Confirmar senha
-        </label>
-
-        <div class="input">
-
-          <div class="icon">
-            🔐
-          </div>
-
-          <input
-            id="registerPassword2"
-            type="password"
-            placeholder="Digite novamente"
-          >
-
-        </div>
-
-      </div>
-
-
-      <button
-        class="btn btn-login"
-        onclick="registrar()"
-      >
-        CRIAR MINHA CONTA →
-      </button>
-
-
-      <div
-        class="forgot"
-        style="text-align:center;margin-top:20px"
-        onclick="mostrarLogin()"
-      >
-        ← Voltar para o login
-      </div>
-
-
-      <div
-        id="registerMessage"
-        class="message"
-      ></div>
-
-    </div>
-
-  </section>
-
-
-  <!-- SUPORTE -->
-
-  <div class="support">
-
-    <div class="whatsapp">
-      💬
-    </div>
-
-    <div class="support-text">
-
-      <strong>
-        Precisa de ajuda?
-      </strong>
-
-      <small>
-        Fale com nosso suporte via WhatsApp
-      </small>
-
-    </div>
-
-    <button
-      class="support-btn"
-      onclick="suporte()"
-    >
-      Falar agora
+  <div class="top-buttons">
+
+    <button class="top-btn" id="notificationBtn">
+      🔔
+      <span class="notification">3</span>
+    </button>
+
+    <button class="top-btn" id="logout">
+      ↪️
     </button>
 
   </div>
 
+</header>
 
-  <div class="footer">
 
-    <strong>
-      ♛ Adam Games
-    </strong>
+<div class="error-panel" id="errorPanel">
+  <strong id="errorTitle">Erro</strong>
+  <small id="errorMessage"></small>
+</div>
 
-    Diversão, aventuras e prêmios te esperam!
+
+<section class="profile">
+
+  <div class="avatar-wrap">
+
+    <div class="avatar" id="avatar">
+      🙂
+    </div>
+
+    <div class="crown" id="crown">
+      👑
+    </div>
 
   </div>
+
+  <div class="profile-info">
+
+    <div class="username-line">
+
+      <div class="username" id="nomeUsuario">
+        Carregando...
+      </div>
+
+      <div class="verified">
+        ✓
+      </div>
+
+    </div>
+
+    <div class="email" id="emailUsuario">
+      —
+    </div>
+
+    <div class="vip-badge" id="vipBadge">
+      👑 VIP Ativo
+    </div>
+
+    <div class="user-id" id="idUsuario">
+      ID: -------
+    </div>
+
+    <div class="user-presence">
+
+      <span class="online">
+        🟢 Online agora
+      </span>
+
+      <span id="hora">
+        🕐 --:--
+      </span>
+
+      <span id="local">
+        📍 Localizando...
+      </span>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="hero">
+
+  <div class="season" id="tema">
+    🇧🇷 AGOSTO • ADAM GAMES
+  </div>
+
+  <h2>BEM-VINDO 👋</h2>
+
+  <p>Seu mundo começa aqui!</p>
+
+</section>
+
+
+<section class="main-cards">
+
+  <div class="main-card box-card" id="boxCard">
+
+    <div class="card-icon">🎁</div>
+
+    <h3>CAIXA BOX</h3>
+
+    <p>Sua caixa de prêmios</p>
+
+    <div class="arrow">→</div>
+
+  </div>
+
+
+  <div class="main-card adam-card" id="adamCard">
+
+    <div class="card-icon">🏡</div>
+
+    <h3>ADAM</h3>
+
+    <p>Acesse sua ilha e recursos</p>
+
+    <div class="arrow">→</div>
+
+  </div>
+
+
+  <div class="main-card games-card" id="gamesCard">
+
+    <div class="card-icon">🎮</div>
+
+    <h3>JOGOS</h3>
+
+    <p>Seus jogos cadastrados</p>
+
+    <div class="arrow">→</div>
+
+  </div>
+
+</section>
+
+
+<section class="vip-panel">
+
+  <div class="vip-left">
+
+    <div class="vip-big">👑</div>
+
+    <div>
+
+      <h3>ÁREA VIP</h3>
+
+      <p>Aproveite todos os benefícios exclusivos!</p>
+
+    </div>
+
+  </div>
+
+  <button class="vip-access" id="vipButton">
+    👑 ACESSAR
+  </button>
+
+</section>
+
+
+<div class="section-title">
+
+  <h3>⭐ Seus recursos</h3>
+
+  <span>Ver todos ›</span>
 
 </div>
 
 
-<script type="module">
+<section class="resources">
 
-/* =====================================================
-   FIREBASE
-===================================================== */
+  <div class="resource">
+
+    <div class="resource-icon">💎</div>
+
+    <h4>CRÉDITOS</h4>
+
+    <div class="resource-value" id="creditos">
+      R$ 0,00
+    </div>
+
+  </div>
+
+
+  <div class="resource">
+
+    <div class="resource-icon">🪙</div>
+
+    <h4>MOEDAS</h4>
+
+    <div class="resource-value" id="moedas">
+      0
+    </div>
+
+  </div>
+
+
+  <div class="resource">
+
+    <div class="resource-icon">🗝️</div>
+
+    <h4>CHAVES</h4>
+
+    <div class="resource-value" id="chaves">
+      0
+    </div>
+
+  </div>
+
+
+  <div class="resource">
+
+    <div class="resource-icon">🎁</div>
+
+    <h4>CAIXA BOX</h4>
+
+    <div class="resource-value" id="boxStatus">
+      Disponível
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="info-panel">
+
+  <div class="section-title">
+    <h3>👤 Meus dados</h3>
+  </div>
+
+  <div class="info-grid">
+
+    <div class="info-item">
+      <div class="info-label">Nome</div>
+      <div class="info-value" id="dNome">—</div>
+    </div>
+
+    <div class="info-item">
+      <div class="info-label">Idade</div>
+      <div class="info-value" id="dIdade">—</div>
+    </div>
+
+    <div class="info-item">
+      <div class="info-label">Telefone</div>
+      <div class="info-value" id="dTelefone">—</div>
+    </div>
+
+    <div class="info-item">
+      <div class="info-label">ID Adam Games</div>
+      <div class="info-value" id="dId">—</div>
+    </div>
+
+    <div class="info-item">
+      <div class="info-label">Fuso horário</div>
+      <div class="info-value" id="dFuso">—</div>
+    </div>
+
+    <div class="info-item">
+      <div class="info-label">Localização</div>
+      <div class="info-value" id="dLocal">—</div>
+    </div>
+
+    <div class="info-item">
+      <div class="info-label">Último acesso</div>
+      <div class="info-value" id="dAcesso">Agora</div>
+    </div>
+
+    <div class="info-item">
+      <div class="info-label">Caixa Box</div>
+      <div class="info-value" id="dBox">—</div>
+    </div>
+
+  </div>
+
+</section>
+
+</div>
+
+
+<nav class="bottom-nav">
+
+  <button class="nav-item active" id="navInicio">
+    <span>🏠</span>
+    Início
+  </button>
+
+  <button class="nav-item" id="navVip">
+    <span>👑</span>
+    VIP
+  </button>
+
+  <button class="nav-item" id="navCreditos">
+    <div class="diamond">💎</div>
+  </button>
+
+  <button class="nav-item" id="navPremios">
+    <span>🎁</span>
+    Prêmios
+  </button>
+
+  <button class="nav-item" id="navJogos">
+    <span>🎮</span>
+    Jogos
+  </button>
+
+</nav>
+
+
+<script type="module">
 
 import {
   initializeApp
-} from
-"https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
 import {
   getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  sendPasswordResetEmail
-} from
-"https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 import {
   getFirestore,
   doc,
-  setDoc,
   getDoc,
-  serverTimestamp
-} from
-"https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+  updateDoc
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
+
+/* =====================================
+   CONFIGURAÇÃO FIREBASE
+===================================== */
 
 const firebaseConfig = {
-
-  apiKey:
-  "AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",
-
-  authDomain:
-  "adam-games-21081.firebaseapp.com",
-
-  projectId:
-  "adam-games-21081",
-
-  storageBucket:
-  "adam-games-21081.firebasestorage.app",
-
-  messagingSenderId:
-  "1055528418738",
-
-  appId:
-  "1:1055528418738:web:5fafdf63424ba9744eb8ab",
-
-  measurementId:
-  "G-KVFSF864GE"
-
+  apiKey: "AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",
+  authDomain: "adam-games-21081.firebaseapp.com",
+  projectId: "adam-games-21081",
+  storageBucket: "adam-games-21081.firebasestorage.app",
+  messagingSenderId: "1055528418738",
+  appId: "1:1055528418738:web:5fafdf63424ba9744eb8ab",
+  measurementId: "G-KVFSF864GE"
 };
 
 
-const app =
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
-const auth =
-getAuth(app);
+const auth = getAuth(app);
 
-const db =
-getFirestore(app);
+const db = getFirestore(app);
 
 
-/* =====================================================
-   TEMPORADAS
-===================================================== */
+/* =====================================
+   ELEMENTOS
+===================================== */
 
-const TEMAS = {
-
-  9: {
-
-    classe:"september",
-
-    nome:"🇧🇷 SETEMBRO • INDEPENDÊNCIA",
-
-    fundo:"assets/backgrounds/setembro.jpg",
-
-    box:"assets/boxes/setembro.webp",
-
-    icones:"assets/icons/setembro/",
-
-    fonte:"Adam Independence",
-
-    avatarTematico:[
-      "setembro-01.webp",
-      "setembro-02.webp",
-      "setembro-03.webp",
-      "setembro-04.webp",
-      "setembro-05.webp",
-      "setembro-06.webp"
-    ]
-
-  },
+const $ = id => document.getElementById(id);
 
 
-  10: {
+/* =====================================
+   MENSAGEM DE ERRO
+===================================== */
 
-    classe:"october",
+function mostrarErro(titulo, mensagem){
 
-    nome:"🎃 OUTUBRO • HALLOWEEN",
+  $("errorPanel").style.display = "block";
 
-    fundo:"assets/backgrounds/outubro.jpg",
+  $("errorTitle").textContent = titulo;
 
-    box:"assets/boxes/outubro.webp",
-
-    icones:"assets/icons/outubro/",
-
-    fonte:"Adam Halloween",
-
-    avatarTematico:[
-      "outubro-01.webp",
-      "outubro-02.webp",
-      "outubro-03.webp",
-      "outubro-04.webp",
-      "outubro-05.webp",
-      "outubro-06.webp"
-    ]
-
-  },
-
-
-  11: {
-
-    classe:"november",
-
-    nome:"✊🏿 NOVEMBRO • CONSCIÊNCIA NEGRA",
-
-    fundo:"assets/backgrounds/novembro.jpg",
-
-    box:"assets/boxes/novembro.webp",
-
-    icones:"assets/icons/novembro/",
-
-    fonte:"Adam Black",
-
-    avatarTematico:[
-      "novembro-01.webp",
-      "novembro-02.webp",
-      "novembro-03.webp",
-      "novembro-04.webp",
-      "novembro-05.webp",
-      "novembro-06.webp"
-    ]
-
-  },
-
-
-  12: {
-
-    classe:"december",
-
-    nome:"🎄 DEZEMBRO • NATAL",
-
-    fundo:"assets/backgrounds/dezembro.jpg",
-
-    box:"assets/boxes/dezembro.webp",
-
-    icones:"assets/icons/dezembro/",
-
-    fonte:"Adam Christmas",
-
-    avatarTematico:[
-      "dezembro-01.webp",
-      "dezembro-02.webp",
-      "dezembro-03.webp",
-      "dezembro-04.webp",
-      "dezembro-05.webp",
-      "dezembro-06.webp"
-    ]
-
-  }
-
-};
-
-
-/* =====================================================
-   20 AVATARES COMUNS
-===================================================== */
-
-const AVATARES_COMUNS = [];
-
-for(
-  let i = 1;
-  i <= 20;
-  i++
-){
-
-  AVATARES_COMUNS.push(
-    `common-${String(i).padStart(2,"0")}.webp`
-  );
+  $("errorMessage").textContent = mensagem;
 
 }
 
 
-/* =====================================================
-   DESCOBRIR TEMA ATUAL
-===================================================== */
+/* =====================================
+   TEMPORADA
+===================================== */
 
-function carregarTemporada(){
+function atualizarTemporada(){
 
-  const mes =
-  new Date().getMonth() + 1;
-
-  const tema =
-  TEMAS[mes] || TEMAS[9];
-
+  const mes = new Date().getMonth() + 1;
 
   document.body.classList.remove(
-    "september",
     "october",
     "november",
     "december"
   );
 
+  if(mes === 9){
 
-  document.body.classList.add(
-    tema.classe
-  );
+    $("tema").textContent =
+      "🇧🇷 SETEMBRO • INDEPENDÊNCIA";
 
+  }
 
-  document.getElementById(
-    "seasonBadge"
-  ).textContent =
-  tema.nome;
+  else if(mes === 10){
 
+    document.body.classList.add("october");
 
-  console.log(
-    "Temporada:",
-    tema.nome
-  );
+    $("tema").textContent =
+      "🎃 OUTUBRO • HALLOWEEN";
+
+  }
+
+  else if(mes === 11){
+
+    document.body.classList.add("november");
+
+    $("tema").textContent =
+      "✊🏿 NOVEMBRO • CONSCIÊNCIA NEGRA";
+
+  }
+
+  else if(mes === 12){
+
+    document.body.classList.add("december");
+
+    $("tema").textContent =
+      "🎄 DEZEMBRO • NATAL";
+
+  }
+
+  else{
+
+    $("tema").textContent =
+      "👑 ADAM GAMES • SEU MUNDO COMEÇA AQUI";
+
+  }
 
 }
 
+atualizarTemporada();
 
-carregarTemporada();
+
+/* =====================================
+   HORA
+===================================== */
+
+function atualizarHora(){
+
+  const agora = new Date();
+
+  $("hora").textContent =
+    "🕐 " +
+    agora.toLocaleTimeString(
+      "pt-BR",
+      {
+        hour:"2-digit",
+        minute:"2-digit"
+      }
+    );
+
+  $("dFuso").textContent =
+    Intl.DateTimeFormat()
+      .resolvedOptions()
+      .timeZone;
+
+}
+
+atualizarHora();
+
+setInterval(
+  atualizarHora,
+  1000
+);
 
 
-/* =====================================================
+/* =====================================
    ID PÚBLICO
-===================================================== */
+===================================== */
 
 function gerarID(){
 
   const caracteres =
-  "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+    "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
 
   let id = "";
 
-  for(
-    let i = 0;
-    i < 7;
-    i++
-  ){
+  for(let i = 0; i < 7; i++){
 
     id += caracteres[
       Math.floor(
-        Math.random() *
-        caracteres.length
+        Math.random() * caracteres.length
       )
     ];
 
@@ -1206,597 +1143,635 @@ function gerarID(){
 }
 
 
-async function gerarIDUnico(){
+/* =====================================
+   LOCALIZAÇÃO
+===================================== */
 
-  for(
-    let tentativa = 0;
-    tentativa < 30;
-    tentativa++
-  ){
+function localizar(){
 
-    const id =
-    gerarID();
+  if(!navigator.geolocation){
 
-    const referencia =
-    doc(
-      db,
-      "usuarios",
-      id
-    );
+    $("local").textContent =
+      "📍 Indisponível";
 
-    const resultado =
-    await getDoc(referencia);
+    $("dLocal").textContent =
+      "Indisponível";
 
-    if(
-      !resultado.exists()
-    ){
-
-      return id;
-
-    }
+    return;
 
   }
 
-  throw new Error(
-    "Não foi possível gerar o ID."
+  navigator.geolocation.getCurrentPosition(
+
+    async position => {
+
+      const latitude =
+        position.coords.latitude;
+
+      const longitude =
+        position.coords.longitude;
+
+      $("local").textContent =
+        "📍 Localização autorizada";
+
+      $("dLocal").textContent =
+        `${latitude.toFixed(4)}, ${longitude.toFixed(4)}`;
+
+      try{
+
+        const resposta =
+          await fetch(
+            "https://api.bigdatacloud.net/data/reverse-geocode-client" +
+            `?latitude=${latitude}` +
+            `&longitude=${longitude}` +
+            "&localityLanguage=pt"
+          );
+
+        if(!resposta.ok){
+          return;
+        }
+
+        const dados =
+          await resposta.json();
+
+        const cidade =
+          dados.city ||
+          dados.locality ||
+          dados.principalSubdivision ||
+          "";
+
+        const estado =
+          dados.principalSubdivision ||
+          "";
+
+        if(cidade){
+
+          $("local").textContent =
+            `📍 ${cidade}`;
+
+          $("dLocal").textContent =
+            estado && estado !== cidade
+              ? `${cidade}, ${estado}`
+              : cidade;
+
+        }
+
+      }catch(error){
+
+        console.log(
+          "Não foi possível identificar a cidade."
+        );
+
+      }
+
+    },
+
+    () => {
+
+      $("local").textContent =
+        "📍 Localização não autorizada";
+
+      $("dLocal").textContent =
+        "Não autorizada";
+
+    },
+
+    {
+      enableHighAccuracy:false,
+      timeout:10000,
+      maximumAge:300000
+    }
+
   );
 
 }
 
 
-/* =====================================================
-   TROCAR TELAS
-===================================================== */
+/* =====================================
+   CARREGAR USUÁRIO
+===================================== */
 
-window.mostrarCadastro =
-function(){
+async function carregarUsuario(usuario){
 
-  document.getElementById(
-    "loginScreen"
-  ).style.display =
-  "none";
+  console.log(
+    "Firebase Auth UID:",
+    usuario.uid
+  );
 
-
-  document.getElementById(
-    "registerScreen"
-  ).style.display =
-  "block";
-
-};
+  console.log(
+    "Firebase Auth email:",
+    usuario.email
+  );
 
 
-window.mostrarLogin =
-function(){
+  /*
+    IMPORTANTE:
 
-  document.getElementById(
-    "registerScreen"
-  ).style.display =
-  "none";
+    O documento da coleção ADMINS
+    é acessado diretamente pelo UID
+    do usuário autenticado.
+
+    Isso evita a consulta anterior
+    que estava causando o erro.
+  */
+
+  const referencia =
+    doc(
+      db,
+      "admins",
+      usuario.uid
+    );
 
 
-  document.getElementById(
-    "loginScreen"
-  ).style.display =
-  "block";
-
-};
+  const resultado =
+    await getDoc(
+      referencia
+    );
 
 
-/* =====================================================
-   CADASTRO
-===================================================== */
+  if(!resultado.exists()){
 
-window.registrar =
-async function(){
+    mostrarErro(
+      "Cadastro não encontrado",
+      "O login funcionou, mas não existe um documento em admins com o UID deste usuário."
+    );
+
+    $("nomeUsuario").textContent =
+      usuario.email
+        ? usuario.email.split("@")[0]
+        : "Usuário";
+
+    $("emailUsuario").textContent =
+      usuario.email || "—";
+
+    $("vipBadge").textContent =
+      "⚠️ Cadastro não encontrado";
+
+    $("idUsuario").textContent =
+      "ID: " + usuario.uid.substring(0,7);
+
+    return;
+
+  }
+
+
+  const dados =
+    resultado.data();
+
+
+  console.log(
+    "Dados do usuário:",
+    dados
+  );
+
+
+  /* =================================
+     ID PÚBLICO
+  ================================= */
+
+  let publicId =
+    dados.publicId ||
+    dados.idAdam ||
+    dados.id ||
+    "";
+
+
+  if(!publicId){
+
+    publicId =
+      gerarID();
+
+    try{
+
+      await updateDoc(
+        referencia,
+        {
+          publicId: publicId
+        }
+      );
+
+    }catch(error){
+
+      console.log(
+        "Não foi possível salvar publicId:",
+        error
+      );
+
+    }
+
+  }
+
+
+  /* =================================
+     NOME
+  ================================= */
 
   const nome =
-  document.getElementById(
-    "registerName"
-  ).value.trim();
+    dados.nome ||
+    dados.name ||
+    usuario.displayName ||
+    (usuario.email
+      ? usuario.email.split("@")[0]
+      : "Usuário");
 
 
-  const idade =
-  Number(
-    document.getElementById(
-      "registerAge"
-    ).value
-  );
+  $("nomeUsuario").textContent =
+    nome;
+
+  $("dNome").textContent =
+    nome;
 
 
-  const telefone =
-  document.getElementById(
-    "registerPhone"
-  ).value.trim();
+  /* =================================
+     EMAIL
+  ================================= */
+
+  $("emailUsuario").textContent =
+    dados.email ||
+    usuario.email ||
+    "—";
 
 
-  const email =
-  document.getElementById(
-    "registerEmail"
-  ).value.trim();
+  /* =================================
+     ID
+  ================================= */
+
+  $("idUsuario").textContent =
+    "ID: " + publicId;
+
+  $("dId").textContent =
+    publicId;
 
 
-  const senha =
-  document.getElementById(
-    "registerPassword"
-  ).value;
+  /* =================================
+     IDADE
+  ================================= */
+
+  $("dIdade").textContent =
+    dados.idade ??
+    "Não informado";
 
 
-  const senha2 =
-  document.getElementById(
-    "registerPassword2"
-  ).value;
+  /* =================================
+     TELEFONE
+  ================================= */
+
+  $("dTelefone").textContent =
+    dados.telefone ||
+    dados.phone ||
+    usuario.phoneNumber ||
+    "Não informado";
 
 
-  const mensagem =
-  document.getElementById(
-    "registerMessage"
-  );
+  /* =================================
+     AVATAR
+  ================================= */
+
+  $("avatar").textContent =
+    dados.avatar ||
+    "🙂";
 
 
-  if(
-    !nome ||
-    !idade ||
-    !telefone ||
-    !email ||
-    !senha ||
-    !senha2
-  ){
+  /* =================================
+     VIP
+  ================================= */
 
-    mostrarMensagem(
-      mensagem,
-      "Preencha todos os campos.",
-      "error"
+  const vip =
+    dados.vip === true ||
+    dados.VIP === true ||
+    String(dados.tipo || "").toLowerCase() === "vip";
+
+
+  if(vip){
+
+    $("crown").style.display =
+      "block";
+
+    $("vipBadge").textContent =
+      "👑 VIP Ativo";
+
+    $("vipBadge").classList.remove(
+      "member-badge"
     );
 
-    return;
+  }else{
+
+    $("crown").style.display =
+      "none";
+
+    $("vipBadge").textContent =
+      "⭐ Membro";
+
+    $("vipBadge").classList.add(
+      "member-badge"
+    );
 
   }
 
 
-  if(
-    idade < 1 ||
-    idade > 120
-  ){
+  /* =================================
+     CRÉDITOS
+  ================================= */
 
-    mostrarMensagem(
-      mensagem,
-      "Digite uma idade válida.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  if(
-    senha.length < 6
-  ){
-
-    mostrarMensagem(
-      mensagem,
-      "A senha precisa ter pelo menos 6 caracteres.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  if(
-    senha !== senha2
-  ){
-
-    mostrarMensagem(
-      mensagem,
-      "As senhas não são iguais.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  try{
-
-    mostrarMensagem(
-      mensagem,
-      "Criando sua conta...",
-      "success"
+  const creditos =
+    Number(
+      dados.creditos ??
+      dados.credits ??
+      0
     );
 
 
-    /* CRIA CONTA FIREBASE */
-
-    const resultado =
-    await createUserWithEmailAndPassword(
-      auth,
-      email,
-      senha
-    );
-
-
-    const usuario =
-    resultado.user;
-
-
-    /* GERA ID */
-
-    const idPublico =
-    await gerarIDUnico();
-
-
-    /* MÊS ATUAL */
-
-    const mesAtual =
-    new Date().getMonth() + 1;
-
-
-    const temaAtual =
-    TEMAS[mesAtual]
-    ? TEMAS[mesAtual].classe
-    : "september";
-
-
-    /* CRIA DOCUMENTO */
-
-    await setDoc(
-      doc(
-        db,
-        "usuarios",
-        idPublico
-      ),
+  $("creditos").textContent =
+    creditos.toLocaleString(
+      "pt-BR",
       {
-
-        idPublico:
-
-        idPublico,
-
-
-        uid:
-
-        usuario.uid,
-
-
-        nome:
-
-        nome,
-
-
-        idade:
-
-        idade,
-
-
-        email:
-
-        email,
-
-
-        telefone:
-
-        telefone,
-
-
-        /* VIP */
-
-        vip:
-
-        false,
-
-
-        planoVip:
-
-        null,
-
-
-        vipInicio:
-
-        null,
-
-
-        vipVencimento:
-
-        null,
-
-
-        /* AVATAR */
-
-        avatar:
-
-        "common-01",
-
-
-        coroaVip:
-
-        false,
-
-
-        /* TEMA */
-
-        tema:
-
-        temaAtual,
-
-
-        /* CARTEIRA */
-
-        creditos:
-
-        0,
-
-
-        moedas:
-
-        0,
-
-
-        chaves:
-
-        0,
-
-
-        /* BOX */
-
-        boxDisponivel:
-
-        false,
-
-
-        boxResgatada:
-
-        false,
-
-
-        boxResgatadaEm:
-
-        null,
-
-
-        /* CONTA */
-
-        status:
-
-        "ativo",
-
-
-        criadoEm:
-
-        serverTimestamp(),
-
-
-        ultimoAcesso:
-
-        serverTimestamp()
-
+        style:"currency",
+        currency:"BRL"
       }
     );
 
 
-    mostrarMensagem(
-      mensagem,
-      "Conta criada! Seu ID é " +
-      idPublico,
-      "success"
+  /* =================================
+     MOEDAS
+  ================================= */
+
+  const moedas =
+    Number(
+      dados.moedas ??
+      dados.coins ??
+      0
     );
 
 
-    setTimeout(
-      () => {
-
-        window.location.href =
-        "painel.html";
-
-      },
-      1500
+  $("moedas").textContent =
+    moedas.toLocaleString(
+      "pt-BR"
     );
 
 
-  }catch(erro){
+  /* =================================
+     CHAVES
+  ================================= */
 
-    console.error(erro);
-
-    let texto =
-    "Não foi possível criar a conta.";
-
-
-    if(
-      erro.code ===
-      "auth/email-already-in-use"
-    ){
-
-      texto =
-      "Este e-mail já possui uma conta.";
-
-    }
-
-
-    if(
-      erro.code ===
-      "auth/invalid-email"
-    ){
-
-      texto =
-      "Digite um e-mail válido.";
-
-    }
-
-
-    if(
-      erro.code ===
-      "auth/weak-password"
-    ){
-
-      texto =
-      "A senha precisa ter pelo menos 6 caracteres.";
-
-    }
-
-
-    mostrarMensagem(
-      mensagem,
-      texto,
-      "error"
-    );
-
-  }
-
-};
-
-
-/* =====================================================
-   LOGIN
-===================================================== */
-
-window.login =
-async function(){
-
-  const email =
-  document.getElementById(
-    "loginEmail"
-  ).value.trim();
-
-
-  const senha =
-  document.getElementById(
-    "loginPassword"
-  ).value;
-
-
-  const mensagem =
-  document.getElementById(
-    "loginMessage"
-  );
-
-
-  if(
-    !email ||
-    !senha
-  ){
-
-    mostrarMensagem(
-      mensagem,
-      "Digite seu e-mail e sua senha.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  try{
-
-    await signInWithEmailAndPassword(
-      auth,
-      email,
-      senha
+  const chaves =
+    Number(
+      dados.chaves ??
+      dados.keys ??
+      0
     );
 
 
-    window.location.href =
-    "painel.html";
-
-
-  }catch(erro){
-
-    console.error(erro);
-
-    mostrarMensagem(
-      mensagem,
-      "E-mail ou senha incorretos.",
-      "error"
-    );
-
-  }
-
-};
-
-
-/* =====================================================
-   RECUPERAR SENHA
-===================================================== */
-
-window.recuperarSenha =
-async function(){
-
-  const email =
-  document.getElementById(
-    "loginEmail"
-  ).value.trim();
-
-
-  if(!email){
-
-    alert(
-      "Digite seu e-mail primeiro."
-    );
-
-    return;
-
-  }
-
-
-  try{
-
-    await sendPasswordResetEmail(
-      auth,
-      email
+  $("chaves").textContent =
+    chaves.toLocaleString(
+      "pt-BR"
     );
 
 
-    alert(
-      "Enviamos o link de recuperação para seu e-mail. 📧"
-    );
+  /* =================================
+     CAIXA BOX
+  ================================= */
+
+  const caixa =
+    dados.caixaBox === true;
 
 
-  }catch(erro){
-
-    console.error(erro);
-
-    alert(
-      "Não foi possível enviar o e-mail."
-    );
-
-  }
-
-};
+  $("boxStatus").textContent =
+    caixa
+      ? "Já resgatada"
+      : "Disponível";
 
 
-/* =====================================================
-   MENSAGEM
-===================================================== */
+  $("dBox").textContent =
+    caixa
+      ? "Já resgatada"
+      : "Disponível";
 
-function mostrarMensagem(
-  elemento,
-  texto,
-  tipo
-){
 
-  elemento.textContent =
-  texto;
+  /* =================================
+     ÚLTIMO ACESSO
+  ================================= */
 
-  elemento.className =
-  "message show " +
-  tipo;
+  $("dAcesso").textContent =
+    "Agora";
+
+
+  /* =================================
+     LOCALIZAÇÃO
+  ================================= */
+
+  localizar();
 
 }
 
 
-/* =====================================================
-   SUPORTE
-===================================================== */
+/* =====================================
+   AUTENTICAÇÃO
+===================================== */
 
-window.suporte =
-function(){
+onAuthStateChanged(
+  auth,
+  async usuario => {
 
-  alert(
-    "O WhatsApp do suporte será configurado no painel."
-  );
+    if(!usuario){
 
-};
+      window.location.href =
+        "index.html";
+
+      return;
+
+    }
+
+
+    try{
+
+      await carregarUsuario(
+        usuario
+      );
+
+    }catch(error){
+
+      console.error(
+        "ERRO FIREBASE:",
+        error
+      );
+
+
+      $("nomeUsuario").textContent =
+        "Erro ao carregar";
+
+
+      $("emailUsuario").textContent =
+        usuario.email || "—";
+
+
+      let mensagem =
+        error && error.message
+          ? error.message
+          : String(error);
+
+
+      mostrarErro(
+        "Erro ao carregar seus dados",
+        mensagem
+      );
+
+    }
+
+  }
+);
+
+
+/* =====================================
+   SAIR
+===================================== */
+
+$("logout").addEventListener(
+  "click",
+  async () => {
+
+    try{
+
+      await signOut(auth);
+
+      window.location.href =
+        "index.html";
+
+    }catch(error){
+
+      console.error(error);
+
+    }
+
+  }
+);
+
+
+/* =====================================
+   BOTÕES
+===================================== */
+
+$("notificationBtn").addEventListener(
+  "click",
+  () => {
+
+    alert(
+      "🔔 Você tem 3 notificações."
+    );
+
+  }
+);
+
+
+$("boxCard").addEventListener(
+  "click",
+  () => {
+
+    alert(
+      "🎁 CAIXA BOX\n\nA área das caixas mensais será disponibilizada aqui."
+    );
+
+  }
+);
+
+
+$("adamCard").addEventListener(
+  "click",
+  () => {
+
+    alert(
+      "🏡 ADAM\n\nÁrea Adam Games."
+    );
+
+  }
+);
+
+
+$("gamesCard").addEventListener(
+  "click",
+  () => {
+
+    alert(
+      "🎮 JOGOS\n\nSeus jogos cadastrados aparecerão aqui."
+    );
+
+  }
+);
+
+
+$("vipButton").addEventListener(
+  "click",
+  () => {
+
+    alert(
+      "👑 ÁREA VIP\n\nSeus benefícios VIP aparecerão aqui."
+    );
+
+  }
+);
+
+
+$("navVip").addEventListener(
+  "click",
+  () => {
+
+    $("vipButton").scrollIntoView({
+      behavior:"smooth"
+    });
+
+  }
+);
+
+
+$("navCreditos").addEventListener(
+  "click",
+  () => {
+
+    $("creditos").scrollIntoView({
+      behavior:"smooth",
+      block:"center"
+    });
+
+  }
+);
+
+
+$("navPremios").addEventListener(
+  "click",
+  () => {
+
+    $("boxCard").scrollIntoView({
+      behavior:"smooth",
+      block:"center"
+    });
+
+  }
+);
+
+
+$("navJogos").addEventListener(
+  "click",
+  () => {
+
+    $("gamesCard").scrollIntoView({
+      behavior:"smooth",
+      block:"center"
+    });
+
+  }
+);
+
+
+$("navInicio").addEventListener(
+  "click",
+  () => {
+
+    window.scrollTo({
+      top:0,
+      behavior:"smooth"
+    });
+
+  }
+);
 
 </script>
 
