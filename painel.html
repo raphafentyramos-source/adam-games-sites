@@ -1,1033 +1,941 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Adam Games — Painel</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      min-height: 100vh;
-      color: #fff;
-      background:
-        linear-gradient(rgba(0,35,80,.25), rgba(0,8,25,.92)),
-        linear-gradient(135deg, #087ee1, #061d43 70%);
-      background-attachment: fixed;
-      overflow-x: hidden;
-    }
-
-    /* =========================
-       FUNDO / TEMPORADA
-    ========================== */
-
-    body.september {
-      background:
-        radial-gradient(circle at 20% 10%, #43a9ff 0%, transparent 30%),
-        linear-gradient(135deg, #087ee1, #061d43 70%);
-    }
-
-    body.october {
-      background:
-        radial-gradient(circle at 20% 10%, #ff8b22 0%, transparent 28%),
-        linear-gradient(135deg, #30104d, #090514 75%);
-    }
-
-    body.november {
-      background:
-        radial-gradient(circle at 20% 10%, #d89442 0%, transparent 28%),
-        linear-gradient(135deg, #29130b, #090707 75%);
-    }
-
-    body.december {
-      background:
-        radial-gradient(circle at 20% 10%, #e83e49 0%, transparent 28%),
-        linear-gradient(135deg, #075b48, #031c25 75%);
-    }
-
-    .page {
-      width: 100%;
-      max-width: 1100px;
-      margin: auto;
-      padding: 18px;
-    }
-
-    /* =========================
-       TOPO
-    ========================== */
-
-    .topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 15px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: rgba(3,36,77,.72);
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 22px;
-      padding: 10px 18px 10px 10px;
-      box-shadow: 0 10px 30px rgba(0,0,0,.2);
-    }
-
-    .brand-icon {
-      width: 62px;
-      height: 62px;
-      border-radius: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 35px;
-      background: linear-gradient(145deg,#208fff,#0754a7);
-      border: 2px solid rgba(255,255,255,.15);
-    }
-
-    .brand h1 {
-      font-size: 22px;
-      line-height: 1;
-    }
-
-    .brand h1 span {
-      color: #ffd52b;
-    }
-
-    .top-buttons {
-      display: flex;
-      gap: 9px;
-    }
-
-    .top-btn {
-      width: 55px;
-      height: 55px;
-      border: 0;
-      border-radius: 18px;
-      background: rgba(3,36,77,.85);
-      color: white;
-      font-size: 24px;
-      cursor: pointer;
-      position: relative;
-    }
-
-    .notification {
-      position: absolute;
-      right: -3px;
-      top: -4px;
-      background: #ff3347;
-      width: 23px;
-      height: 23px;
-      border-radius: 50%;
-      font-size: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-    }
-
-    /* =========================
-       PERFIL
-    ========================== */
-
-    .profile {
-      background: linear-gradient(
-        135deg,
-        rgba(4,55,110,.92),
-        rgba(2,25,56,.95)
-      );
-      border: 1px solid rgba(255,255,255,.13);
-      border-radius: 28px;
-      padding: 18px;
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      box-shadow: 0 20px 45px rgba(0,0,0,.25);
-      margin-bottom: 22px;
-    }
-
-    .avatar-wrap {
-      position: relative;
-      flex-shrink: 0;
-    }
-
-    .avatar {
-      width: 100px;
-      height: 100px;
-      border-radius: 28px;
-      background: linear-gradient(145deg,#f7b52c,#ffdc65);
-      border: 4px solid #ffd332;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 60px;
-      box-shadow: 0 10px 30px rgba(255,185,0,.25);
-    }
-
-    .crown {
-      position: absolute;
-      top: -17px;
-      right: -10px;
-      font-size: 35px;
-      filter: drop-shadow(0 4px 3px rgba(0,0,0,.35));
-    }
-
-    .profile-info {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .username-line {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .username {
-      font-size: 24px;
-      font-weight: 800;
-    }
-
-    .verified {
-      width: 25px;
-      height: 25px;
-      border-radius: 50%;
-      background: #168cff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-    }
-
-    .email {
-      margin-top: 5px;
-      color: #b7d2ee;
-      font-size: 14px;
-    }
-
-    .vip-badge {
-      display: inline-block;
-      margin-top: 9px;
-      background: linear-gradient(135deg,#8b6511,#f2c94c);
-      color: #fff;
-      padding: 7px 13px;
-      border-radius: 13px;
-      font-size: 13px;
-      font-weight: bold;
-    }
-
-    .normal-badge {
-      background: rgba(255,255,255,.12);
-    }
-
-    .user-id {
-      margin-top: 8px;
-      color: #75c4ff;
-      font-size: 12px;
-      font-weight: bold;
-      letter-spacing: 1px;
-    }
-
-    .user-presence {
-      margin-top: 8px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px 14px;
-      font-size: 12px;
-      color: #b9d7f5;
-    }
-
-    #statusOnline {
-      color: #61ff9d;
-      font-weight: bold;
-    }
-
-    #horaLocal {
-      color: #7ecaff;
-    }
-
-    /* =========================
-       HERO
-    ========================== */
-
-    .hero {
-      padding: 20px 10px;
-      margin-bottom: 15px;
-    }
-
-    .season {
-      display: inline-block;
-      padding: 7px 13px;
-      border-radius: 20px;
-      background: rgba(255,255,255,.12);
-      border: 1px solid rgba(255,255,255,.14);
-      font-size: 12px;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .hero h2 {
-      font-size: clamp(42px,8vw,72px);
-      line-height: .95;
-      text-shadow: 0 6px 2px rgba(0,0,0,.3);
-      letter-spacing: -2px;
-    }
-
-    .hero p {
-      margin-top: 10px;
-      font-size: 22px;
-      font-weight: 700;
-      color: #e9f5ff;
-    }
-
-    /* =========================
-       CARDS PRINCIPAIS
-    ========================== */
-
-    .main-cards {
-      display: grid;
-      grid-template-columns: repeat(3,1fr);
-      gap: 15px;
-      margin-bottom: 18px;
-    }
-
-    .main-card {
-      min-height: 230px;
-      border-radius: 27px;
-      padding: 20px;
-      position: relative;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,.15);
-      box-shadow: 0 15px 35px rgba(0,0,0,.25);
-      cursor: pointer;
-      transition: .2s;
-    }
-
-    .main-card:hover {
-      transform: translateY(-3px);
-    }
-
-    .box-card {
-      background: linear-gradient(145deg,#8d21e7,#4710a0);
-    }
-
-    .adam-card {
-      background: linear-gradient(145deg,#087ddd,#064ca4);
-    }
-
-    .games-card {
-      background: linear-gradient(145deg,#15b95e,#087c42);
-    }
-
-    .card-icon {
-      font-size: 76px;
-      text-align: center;
-      margin-bottom: 10px;
-      filter: drop-shadow(0 8px 5px rgba(0,0,0,.3));
-    }
-
-    .main-card h3 {
-      font-size: 22px;
-      margin-bottom: 7px;
-    }
-
-    .main-card p {
-      color: rgba(255,255,255,.8);
-      line-height: 1.4;
-      font-size: 14px;
-    }
-
-    .arrow {
-      position: absolute;
-      right: 16px;
-      bottom: 15px;
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.15);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 25px;
-    }
-
-    /* =========================
-       VIP
-    ========================== */
-
-    .vip-panel {
-      border-radius: 27px;
-      padding: 20px;
-      margin-bottom: 22px;
-      background:
-        radial-gradient(circle at 90% 20%,rgba(255,209,67,.22),transparent 25%),
-        linear-gradient(135deg,#281b05,#100e08);
-      border: 1px solid rgba(255,201,58,.6);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      box-shadow: 0 12px 35px rgba(0,0,0,.25);
-    }
-
-    .vip-left {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-
-    .vip-big {
-      width: 72px;
-      height: 72px;
-      border-radius: 20px;
-      border: 2px solid #e8b52d;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 40px;
-      background: rgba(255,190,0,.08);
-    }
-
-    .vip-panel h3 {
-      color: #ffd229;
-      font-size: 25px;
-    }
-
-    .vip-panel p {
-      margin-top: 4px;
-      color: #d8d0bc;
-    }
-
-    .vip-access {
-      border: 0;
-      background: linear-gradient(135deg,#ffcb27,#d78a05);
-      color: #fff;
-      font-size: 16px;
-      font-weight: bold;
-      padding: 15px 24px;
-      border-radius: 15px;
-      cursor: pointer;
-    }
-
-    /* =========================
-       RECURSOS
-    ========================== */
-
-    .section-title {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin: 12px 3px;
-    }
-
-    .section-title h3 {
-      font-size: 20px;
-    }
-
-    .resources {
-      display: grid;
-      grid-template-columns: repeat(4,1fr);
-      gap: 13px;
-      margin-bottom: 25px;
-    }
-
-    .resource {
-      border-radius: 22px;
-      padding: 15px;
-      background: rgba(3,30,62,.8);
-      border: 1px solid rgba(255,255,255,.1);
-      text-align: center;
-    }
-
-    .resource-icon {
-      font-size: 45px;
-      margin-bottom: 8px;
-    }
-
-    .resource h4 {
-      font-size: 14px;
-    }
-
-    .resource-value {
-      margin-top: 7px;
-      font-size: 20px;
-      font-weight: 900;
-      color: #fff;
-    }
-
-    /* =========================
-       INFORMAÇÕES
-    ========================== */
-
-    .info-panel {
-      background: rgba(2,25,52,.8);
-      border: 1px solid rgba(255,255,255,.1);
-      border-radius: 25px;
-      padding: 20px;
-      margin-bottom: 100px;
-    }
-
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(2,1fr);
-      gap: 10px;
-    }
-
-    .info-item {
-      background: rgba(255,255,255,.055);
-      border-radius: 15px;
-      padding: 12px;
-    }
-
-    .info-label {
-      color: #7fb4dc;
-      font-size: 11px;
-      text-transform: uppercase;
-      font-weight: bold;
-    }
-
-    .info-value {
-      margin-top: 4px;
-      font-size: 14px;
-      word-break: break-word;
-    }
-
-    /* =========================
-       MENU INFERIOR
-    ========================== */
-
-    .bottom-nav {
-      position: fixed;
-      z-index: 50;
-      left: 50%;
-      bottom: 12px;
-      transform: translateX(-50%);
-      width: min(95%,900px);
-      background: rgba(4,25,52,.94);
-      backdrop-filter: blur(15px);
-      border: 1px solid rgba(255,255,255,.13);
-      border-radius: 28px;
-      padding: 10px;
-      display: grid;
-      grid-template-columns: repeat(5,1fr);
-      box-shadow: 0 15px 40px rgba(0,0,0,.4);
-    }
-
-    .nav-item {
-      border: 0;
-      background: transparent;
-      color: #7890a8;
-      padding: 8px;
-      border-radius: 18px;
-      font-size: 12px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .nav-item span {
-      display: block;
-      font-size: 25px;
-      margin-bottom: 3px;
-    }
-
-    .nav-item.active {
-      color: #20a2ff;
-    }
-
-    .diamond {
-      width: 66px;
-      height: 66px;
-      margin: -25px auto 0;
-      border-radius: 50%;
-      background: linear-gradient(145deg,#2a9dff,#0069db);
-      border: 4px solid #0c315d;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 32px;
-      box-shadow: 0 0 25px rgba(0,143,255,.45);
-    }
-
-    /* =========================
-       RESPONSIVO
-    ========================== */
-
-    @media(max-width:700px) {
-
-      .page {
-        padding: 12px;
-      }
-
-      .brand {
-        padding-right: 12px;
-      }
-
-      .brand h1 {
-        font-size: 17px;
-      }
-
-      .brand-icon {
-        width: 52px;
-        height: 52px;
-        font-size: 28px;
-      }
-
-      .top-btn {
-        width: 48px;
-        height: 48px;
-      }
-
-      .profile {
-        padding: 14px;
-        border-radius: 23px;
-      }
-
-      .avatar {
-        width: 78px;
-        height: 78px;
-        font-size: 45px;
-        border-radius: 22px;
-      }
-
-      .crown {
-        font-size: 27px;
-      }
-
-      .username {
-        font-size: 19px;
-      }
-
-      .main-cards {
-        grid-template-columns: repeat(3,1fr);
-        gap: 8px;
-      }
-
-      .main-card {
-        min-height: 205px;
-        padding: 12px;
-        border-radius: 21px;
-      }
-
-      .card-icon {
-        font-size: 52px;
-      }
-
-      .main-card h3 {
-        font-size: 16px;
-      }
-
-      .main-card p {
-        font-size: 12px;
-      }
-
-      .arrow {
-        width: 34px;
-        height: 34px;
-        font-size: 18px;
-        right: 8px;
-        bottom: 8px;
-      }
-
-      .vip-panel {
-        padding: 15px;
-      }
-
-      .vip-big {
-        width: 58px;
-        height: 58px;
-        font-size: 30px;
-      }
-
-      .vip-panel h3 {
-        font-size: 19px;
-      }
-
-      .vip-panel p {
-        font-size: 12px;
-      }
-
-      .vip-access {
-        padding: 11px 13px;
-        font-size: 12px;
-      }
-
-      .resources {
-        grid-template-columns: repeat(2,1fr);
-      }
-
-      .hero h2 {
-        font-size: 46px;
-      }
-
-      .hero p {
-        font-size: 18px;
-      }
-
-      .info-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adam Games</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  min-height:100vh;
+  color:white;
+  overflow-x:hidden;
+  background:
+    radial-gradient(circle at 20% 5%,#40a9ff,transparent 30%),
+    linear-gradient(135deg,#087ee1,#061d43 75%);
+}
+
+body.october{
+  background:
+    radial-gradient(circle at 20% 5%,#ff8a21,transparent 28%),
+    linear-gradient(135deg,#35104f,#090411 75%);
+}
+
+body.november{
+  background:
+    radial-gradient(circle at 20% 5%,#c9853d,transparent 28%),
+    linear-gradient(135deg,#30170d,#080606 75%);
+}
+
+body.december{
+  background:
+    radial-gradient(circle at 20% 5%,#e7434d,transparent 28%),
+    linear-gradient(135deg,#075c48,#031c25 75%);
+}
+
+.page{
+  max-width:1100px;
+  margin:auto;
+  padding:16px;
+}
+
+/* TOPO */
+
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:15px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:9px 17px 9px 9px;
+  border-radius:22px;
+  background:rgba(3,36,77,.78);
+  border:1px solid rgba(255,255,255,.12);
+}
+
+.brand-icon{
+  width:62px;
+  height:62px;
+  border-radius:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:35px;
+  background:linear-gradient(145deg,#218fff,#0754a7);
+}
+
+.brand h1{
+  font-size:22px;
+  line-height:.95;
+}
+
+.brand h1 span{
+  color:#ffd52b;
+}
+
+.top-buttons{
+  display:flex;
+  gap:9px;
+}
+
+.top-btn{
+  width:55px;
+  height:55px;
+  border:0;
+  border-radius:18px;
+  background:rgba(3,36,77,.9);
+  color:white;
+  font-size:24px;
+  position:relative;
+}
+
+.notification{
+  position:absolute;
+  right:-3px;
+  top:-5px;
+  width:23px;
+  height:23px;
+  border-radius:50%;
+  background:#ff3347;
+  font-size:12px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-weight:bold;
+}
+
+/* PERFIL */
+
+.profile{
+  background:linear-gradient(
+    135deg,
+    rgba(4,55,110,.96),
+    rgba(2,25,56,.96)
+  );
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:28px;
+  padding:18px;
+  display:flex;
+  align-items:center;
+  gap:18px;
+  box-shadow:0 20px 45px rgba(0,0,0,.25);
+  margin-bottom:22px;
+}
+
+.avatar-wrap{
+  position:relative;
+  flex-shrink:0;
+}
+
+.avatar{
+  width:100px;
+  height:100px;
+  border-radius:28px;
+  background:linear-gradient(145deg,#f7b52c,#ffdc65);
+  border:4px solid #ffd332;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:58px;
+}
+
+.crown{
+  position:absolute;
+  right:-10px;
+  top:-18px;
+  font-size:34px;
+}
+
+.profile-info{
+  min-width:0;
+  flex:1;
+}
+
+.username-line{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.username{
+  font-size:24px;
+  font-weight:800;
+}
+
+.verified{
+  width:25px;
+  height:25px;
+  border-radius:50%;
+  background:#168cff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+}
+
+.email{
+  color:#b7d2ee;
+  margin-top:5px;
+  font-size:14px;
+}
+
+.vip-badge{
+  display:inline-block;
+  margin-top:9px;
+  padding:7px 13px;
+  border-radius:13px;
+  background:linear-gradient(135deg,#8b6511,#f2c94c);
+  font-size:13px;
+  font-weight:bold;
+}
+
+.member-badge{
+  background:rgba(255,255,255,.12);
+}
+
+.user-id{
+  margin-top:8px;
+  color:#75c4ff;
+  font-size:12px;
+  font-weight:bold;
+  letter-spacing:1px;
+}
+
+.user-presence{
+  margin-top:8px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px 14px;
+  font-size:12px;
+  color:#b9d7f5;
+}
+
+.online{
+  color:#61ff9d;
+  font-weight:bold;
+}
+
+/* HERO */
+
+.hero{
+  padding:20px 10px;
+}
+
+.season{
+  display:inline-block;
+  padding:8px 14px;
+  border-radius:20px;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.14);
+  font-size:12px;
+  font-weight:bold;
+}
+
+.hero h2{
+  margin-top:18px;
+  font-size:clamp(43px,8vw,72px);
+  line-height:.95;
+  text-shadow:0 6px 2px rgba(0,0,0,.3);
+}
+
+.hero p{
+  margin-top:10px;
+  font-size:22px;
+  font-weight:bold;
+}
+
+/* CARDS */
+
+.main-cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+
+.main-card{
+  min-height:235px;
+  border-radius:27px;
+  padding:20px;
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.15);
+  box-shadow:0 15px 35px rgba(0,0,0,.25);
+}
+
+.box-card{
+  background:linear-gradient(145deg,#8d21e7,#4710a0);
+}
+
+.adam-card{
+  background:linear-gradient(145deg,#087ddd,#064ca4);
+}
+
+.games-card{
+  background:linear-gradient(145deg,#15b95e,#087c42);
+}
+
+.card-icon{
+  font-size:75px;
+  text-align:center;
+  margin-bottom:10px;
+}
+
+.main-card h3{
+  font-size:22px;
+  margin-bottom:7px;
+}
+
+.main-card p{
+  color:rgba(255,255,255,.82);
+  line-height:1.4;
+}
+
+.arrow{
+  position:absolute;
+  right:16px;
+  bottom:15px;
+  width:45px;
+  height:45px;
+  border-radius:50%;
+  background:rgba(255,255,255,.15);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:24px;
+}
+
+/* VIP */
+
+.vip-panel{
+  margin-top:18px;
+  margin-bottom:22px;
+  padding:20px;
+  border-radius:27px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  background:
+    radial-gradient(circle at 90% 20%,rgba(255,209,67,.22),transparent 25%),
+    linear-gradient(135deg,#281b05,#100e08);
+  border:1px solid rgba(255,201,58,.6);
+}
+
+.vip-left{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.vip-big{
+  width:72px;
+  height:72px;
+  border-radius:20px;
+  border:2px solid #e8b52d;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:40px;
+}
+
+.vip-panel h3{
+  color:#ffd229;
+  font-size:25px;
+}
+
+.vip-panel p{
+  margin-top:4px;
+  color:#d8d0bc;
+}
+
+.vip-access{
+  border:0;
+  padding:15px 24px;
+  border-radius:15px;
+  background:linear-gradient(135deg,#ffcb27,#d78a05);
+  color:white;
+  font-weight:bold;
+}
+
+/* RECURSOS */
+
+.section-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:12px 3px;
+}
+
+.resources{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:13px;
+}
+
+.resource{
+  padding:15px;
+  text-align:center;
+  border-radius:22px;
+  background:rgba(3,30,62,.82);
+  border:1px solid rgba(255,255,255,.1);
+}
+
+.resource-icon{
+  font-size:43px;
+}
+
+.resource h4{
+  font-size:13px;
+  margin-top:5px;
+}
+
+.resource-value{
+  margin-top:7px;
+  font-size:19px;
+  font-weight:900;
+}
+
+/* DADOS */
+
+.info-panel{
+  margin-top:20px;
+  margin-bottom:110px;
+  padding:20px;
+  border-radius:25px;
+  background:rgba(2,25,52,.82);
+  border:1px solid rgba(255,255,255,.1);
+}
+
+.info-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+.info-item{
+  padding:12px;
+  border-radius:15px;
+  background:rgba(255,255,255,.055);
+}
+
+.info-label{
+  color:#7fb4dc;
+  font-size:11px;
+  text-transform:uppercase;
+  font-weight:bold;
+}
+
+.info-value{
+  margin-top:4px;
+  font-size:14px;
+  word-break:break-word;
+}
+
+/* MENU */
+
+.bottom-nav{
+  position:fixed;
+  z-index:50;
+  left:50%;
+  bottom:12px;
+  transform:translateX(-50%);
+  width:min(95%,900px);
+  padding:10px;
+  border-radius:28px;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  background:rgba(4,25,52,.95);
+  backdrop-filter:blur(15px);
+  border:1px solid rgba(255,255,255,.13);
+}
+
+.nav-item{
+  border:0;
+  background:transparent;
+  color:#7890a8;
+  padding:8px;
+  font-size:12px;
+  font-weight:bold;
+}
+
+.nav-item span{
+  display:block;
+  font-size:25px;
+  margin-bottom:3px;
+}
+
+.nav-item.active{
+  color:#20a2ff;
+}
+
+.diamond{
+  width:66px;
+  height:66px;
+  margin:-25px auto 0;
+  border-radius:50%;
+  background:linear-gradient(145deg,#2a9dff,#0069db);
+  border:4px solid #0c315d;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:32px;
+  box-shadow:0 0 25px rgba(0,143,255,.45);
+}
+
+/* CELULAR */
+
+@media(max-width:700px){
+
+  .page{
+    padding:12px;
+  }
+
+  .brand-icon{
+    width:55px;
+    height:55px;
+  }
+
+  .brand h1{
+    font-size:18px;
+  }
+
+  .top-btn{
+    width:50px;
+    height:50px;
+  }
+
+  .profile{
+    padding:14px;
+  }
+
+  .avatar{
+    width:82px;
+    height:82px;
+    font-size:45px;
+  }
+
+  .crown{
+    font-size:27px;
+  }
+
+  .username{
+    font-size:19px;
+  }
+
+  .main-cards{
+    gap:8px;
+  }
+
+  .main-card{
+    min-height:215px;
+    padding:12px;
+    border-radius:21px;
+  }
+
+  .card-icon{
+    font-size:54px;
+  }
+
+  .main-card h3{
+    font-size:16px;
+  }
+
+  .main-card p{
+    font-size:12px;
+  }
+
+  .arrow{
+    width:34px;
+    height:34px;
+    right:8px;
+    bottom:8px;
+  }
+
+  .resources{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .info-grid{
+    grid-template-columns:1fr;
+  }
+
+  .vip-panel{
+    padding:15px;
+  }
+
+  .vip-big{
+    width:58px;
+    height:58px;
+    font-size:30px;
+  }
+
+  .vip-panel h3{
+    font-size:19px;
+  }
+
+  .vip-panel p{
+    font-size:12px;
+  }
+
+  .vip-access{
+    padding:11px 13px;
+    font-size:12px;
+  }
+}
+</style>
 </head>
 
 <body>
 
 <div class="page">
 
-  <!-- TOPO -->
-  <header class="topbar">
+<header class="topbar">
 
-    <div class="brand">
-      <div class="brand-icon">👑</div>
+  <div class="brand">
+    <div class="brand-icon">👑</div>
 
-      <h1>
-        ADAM<br>
-        <span>GAMES</span>
-      </h1>
-    </div>
+    <h1>
+      ADAM<br>
+      <span>GAMES</span>
+    </h1>
+  </div>
 
-    <div class="top-buttons">
-      <button class="top-btn">
-        🔔
-        <span class="notification">3</span>
-      </button>
+  <div class="top-buttons">
 
-      <button class="top-btn" id="logoutBtn">
-        ↪️
-      </button>
-    </div>
-
-  </header>
-
-
-  <!-- PERFIL -->
-  <section class="profile">
-
-    <div class="avatar-wrap">
-
-      <div class="avatar" id="avatar">
-        👑
-      </div>
-
-      <div class="crown" id="crown">
-        👑
-      </div>
-
-    </div>
-
-    <div class="profile-info">
-
-      <div class="username-line">
-        <div class="username" id="userName">
-          Carregando...
-        </div>
-
-        <div class="verified">
-          ✓
-        </div>
-      </div>
-
-      <div class="email" id="userEmail">
-        carregando...
-      </div>
-
-      <div id="vipBadge" class="vip-badge">
-        👑 VIP Ativo
-      </div>
-
-      <div class="user-id" id="userId">
-        ID: --------
-      </div>
-
-      <div class="user-presence">
-
-        <span id="statusOnline">
-          🟢 Online agora
-        </span>
-
-        <span id="horaLocal">
-          🕐 --:--
-        </span>
-
-        <span id="localUsuario">
-          📍 Obtendo localização...
-        </span>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- HERO -->
-  <section class="hero">
-
-    <div class="season" id="season">
-      🇧🇷 SETEMBRO • INDEPENDÊNCIA
-    </div>
-
-    <h2>
-      BEM-VINDO 👋
-    </h2>
-
-    <p>
-      Seu mundo começa aqui!
-    </p>
-
-  </section>
-
-
-  <!-- CARDS -->
-  <section class="main-cards">
-
-    <div class="main-card box-card" id="boxCard">
-
-      <div class="card-icon">
-        🎁
-      </div>
-
-      <h3>
-        CAIXA BOX
-      </h3>
-
-      <p>
-        Sua caixa de prêmios
-      </p>
-
-      <div class="arrow">
-        →
-      </div>
-
-    </div>
-
-
-    <div class="main-card adam-card">
-
-      <div class="card-icon">
-        🏡
-      </div>
-
-      <h3>
-        ADAM
-      </h3>
-
-      <p>
-        Acesse sua ilha e recursos
-      </p>
-
-      <div class="arrow">
-        →
-      </div>
-
-    </div>
-
-
-    <div class="main-card games-card">
-
-      <div class="card-icon">
-        🎮
-      </div>
-
-      <h3>
-        JOGOS
-      </h3>
-
-      <p>
-        Seus jogos cadastrados
-      </p>
-
-      <div class="arrow">
-        →
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- VIP -->
-  <section class="vip-panel">
-
-    <div class="vip-left">
-
-      <div class="vip-big">
-        👑
-      </div>
-
-      <div>
-        <h3>
-          ÁREA VIP
-        </h3>
-
-        <p>
-          Aproveite todos os benefícios exclusivos!
-        </p>
-      </div>
-
-    </div>
-
-    <button class="vip-access">
-      👑 ACESSAR
+    <button class="top-btn">
+      🔔
+      <span class="notification">3</span>
     </button>
 
-  </section>
+    <button class="top-btn" id="logout">
+      ↪️
+    </button>
+
+  </div>
+
+</header>
 
 
-  <!-- RECURSOS -->
-  <div class="section-title">
+<section class="profile">
+
+  <div class="avatar-wrap">
+
+    <div class="avatar" id="avatar">
+      🙂
+    </div>
+
+    <div class="crown" id="crown">
+      👑
+    </div>
+
+  </div>
+
+  <div class="profile-info">
+
+    <div class="username-line">
+
+      <div class="username" id="nomeUsuario">
+        Carregando...
+      </div>
+
+      <div class="verified">
+        ✓
+      </div>
+
+    </div>
+
+    <div class="email" id="emailUsuario">
+      —
+    </div>
+
+    <div class="vip-badge" id="vipBadge">
+      👑 VIP Ativo
+    </div>
+
+    <div class="user-id" id="idUsuario">
+      ID: -------
+    </div>
+
+    <div class="user-presence">
+
+      <span class="online">
+        🟢 Online agora
+      </span>
+
+      <span id="hora">
+        🕐 --:--
+      </span>
+
+      <span id="local">
+        📍 Localizando...
+      </span>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="hero">
+
+  <div class="season" id="tema">
+    🇧🇷 SETEMBRO • INDEPENDÊNCIA
+  </div>
+
+  <h2>
+    BEM-VINDO 👋
+  </h2>
+
+  <p>
+    Seu mundo começa aqui!
+  </p>
+
+</section>
+
+
+<section class="main-cards">
+
+  <div class="main-card box-card" id="boxCard">
+
+    <div class="card-icon">
+      🎁
+    </div>
 
     <h3>
-      ⭐ Seus recursos
+      CAIXA BOX
     </h3>
 
-    <span>
-      Ver todos ›
-    </span>
+    <p>
+      Sua caixa de prêmios
+    </p>
+
+    <div class="arrow">→</div>
 
   </div>
 
 
-  <section class="resources">
+  <div class="main-card adam-card">
 
-    <div class="resource">
-
-      <div class="resource-icon">
-        💎
-      </div>
-
-      <h4>
-        CRÉDITOS
-      </h4>
-
-      <div class="resource-value" id="credits">
-        R$ 0,00
-      </div>
-
+    <div class="card-icon">
+      🏡
     </div>
 
+    <h3>
+      ADAM
+    </h3>
 
-    <div class="resource">
+    <p>
+      Acesse sua ilha e recursos
+    </p>
 
-      <div class="resource-icon">
-        🪙
-      </div>
+    <div class="arrow">→</div>
 
-      <h4>
-        MOEDAS
-      </h4>
+  </div>
 
-      <div class="resource-value" id="coins">
-        0
-      </div>
 
+  <div class="main-card games-card">
+
+    <div class="card-icon">
+      🎮
     </div>
 
+    <h3>
+      JOGOS
+    </h3>
 
-    <div class="resource">
+    <p>
+      Seus jogos cadastrados
+    </p>
 
-      <div class="resource-icon">
-        🗝️
-      </div>
+    <div class="arrow">→</div>
 
-      <h4>
-        CHAVES
-      </h4>
+  </div>
 
-      <div class="resource-value" id="keys">
-        0
-      </div>
+</section>
 
+
+<section class="vip-panel">
+
+  <div class="vip-left">
+
+    <div class="vip-big">
+      👑
     </div>
 
+    <div>
 
-    <div class="resource">
-
-      <div class="resource-icon">
-        🎁
-      </div>
-
-      <h4>
-        CAIXA BOX
-      </h4>
-
-      <div class="resource-value" id="boxStatus">
-        Disponível
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- DADOS -->
-  <section class="info-panel">
-
-    <div class="section-title">
       <h3>
-        👤 Meus dados
+        ÁREA VIP
       </h3>
-    </div>
 
-    <div class="info-grid">
-
-      <div class="info-item">
-        <div class="info-label">Nome</div>
-        <div class="info-value" id="infoNome">—</div>
-      </div>
-
-      <div class="info-item">
-        <div class="info-label">Idade</div>
-        <div class="info-value" id="infoIdade">—</div>
-      </div>
-
-      <div class="info-item">
-        <div class="info-label">Telefone</div>
-        <div class="info-value" id="infoTelefone">—</div>
-      </div>
-
-      <div class="info-item">
-        <div class="info-label">ID Adam Games</div>
-        <div class="info-value" id="infoId">—</div>
-      </div>
-
-      <div class="info-item">
-        <div class="info-label">Fuso horário</div>
-        <div class="info-value" id="infoFuso">—</div>
-      </div>
-
-      <div class="info-item">
-        <div class="info-label">Localização</div>
-        <div class="info-value" id="infoLocal">—</div>
-      </div>
-
-      <div class="info-item">
-        <div class="info-label">Último acesso</div>
-        <div class="info-value" id="infoAcesso">—</div>
-      </div>
-
-      <div class="info-item">
-        <div class="info-label">Caixa Box</div>
-        <div class="info-value" id="infoBox">—</div>
-      </div>
+      <p>
+        Aproveite todos os benefícios exclusivos!
+      </p>
 
     </div>
 
-  </section>
+  </div>
+
+  <button class="vip-access">
+    👑 ACESSAR
+  </button>
+
+</section>
+
+
+<div class="section-title">
+
+  <h3>
+    ⭐ Seus recursos
+  </h3>
+
+  <span>
+    Ver todos ›
+  </span>
 
 </div>
 
 
-<!-- MENU -->
+<section class="resources">
+
+  <div class="resource">
+
+    <div class="resource-icon">
+      💎
+    </div>
+
+    <h4>
+      CRÉDITOS
+    </h4>
+
+    <div class="resource-value" id="creditos">
+      R$ 0,00
+    </div>
+
+  </div>
+
+
+  <div class="resource">
+
+    <div class="resource-icon">
+      🪙
+    </div>
+
+    <h4>
+      MOEDAS
+    </h4>
+
+    <div class="resource-value" id="moedas">
+      0
+    </div>
+
+  </div>
+
+
+  <div class="resource">
+
+    <div class="resource-icon">
+      🗝️
+    </div>
+
+    <h4>
+      CHAVES
+    </h4>
+
+    <div class="resource-value" id="chaves">
+      0
+    </div>
+
+  </div>
+
+
+  <div class="resource">
+
+    <div class="resource-icon">
+      🎁
+    </div>
+
+    <h4>
+      CAIXA BOX
+    </h4>
+
+    <div class="resource-value" id="boxStatus">
+      Disponível
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="info-panel">
+
+  <div class="section-title">
+    <h3>👤 Meus dados</h3>
+  </div>
+
+  <div class="info-grid">
+
+    <div class="info-item">
+      <div class="info-label">Nome</div>
+      <div class="info-value" id="dNome">—</div>
+    </div>
+
+    <div class="info-item">
+      <div class="info-label">Idade</div>
+      <div class="info-value" id="dIdade">—</div>
+    </div>
+
+    <div class="info-item">
+      <div class="info-label">Telefone</div>
+      <div class="info-value" id="dTelefone">—</div>
+    </div>
+
+    <div class="info-item">
+      <div class="info-label">ID Adam Games</div>
+      <div class="info-value" id="dId">—</div>
+    </div>
+
+    <div class="info-item">
+      <div class="info-label">Fuso horário</div>
+      <div class="info-value" id="dFuso">—</div>
+    </div>
+
+    <div class="info-item">
+      <div class="info-label">Localização</div>
+      <div class="info-value" id="dLocal">—</div>
+    </div>
+
+    <div class="info-item">
+      <div class="info-label">Último acesso</div>
+      <div class="info-value" id="dAcesso">Agora</div>
+    </div>
+
+    <div class="info-item">
+      <div class="info-label">Caixa Box</div>
+      <div class="info-value" id="dBox">—</div>
+    </div>
+
+  </div>
+
+</section>
+
+</div>
+
+
 <nav class="bottom-nav">
 
   <button class="nav-item active">
@@ -1061,451 +969,337 @@
 
 <script type="module">
 
-  /* ==========================================
-     FIREBASE
-  ========================================== */
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
-  import {
-    initializeApp
-  } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+import {
+  getAuth,
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
-  import {
-    getAuth,
-    onAuthStateChanged,
-    signOut
-  } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-
-  import {
-    getFirestore,
-    doc,
-    getDoc,
-    setDoc,
-    updateDoc,
-    serverTimestamp,
-    query,
-    collection,
-    where,
-    getDocs
-  } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+import {
+  getFirestore,
+  collection,
+  query,
+  where,
+  getDocs,
+  doc,
+  setDoc,
+  updateDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
-  const firebaseConfig = {
+/* =====================================
+   FIREBASE
+===================================== */
 
-    apiKey: "AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",
+const firebaseConfig = {
 
-    authDomain:
-      "adam-games-21081.firebaseapp.com",
+  apiKey:
+    "AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",
 
-    projectId:
-      "adam-games-21081",
+  authDomain:
+    "adam-games-21081.firebaseapp.com",
 
-    storageBucket:
-      "adam-games-21081.firebasestorage.app",
+  projectId:
+    "adam-games-21081",
 
-    messagingSenderId:
-      "1055528418738",
+  storageBucket:
+    "adam-games-21081.firebasestorage.app",
 
-    appId:
-      "1:1055528418738:web:5fafdf63424ba9744eb8ab",
+  messagingSenderId:
+    "1055528418738",
 
-    measurementId:
-      "G-KVFSF864GE"
-  };
+  appId:
+    "1:1055528418738:web:5fafdf63424ba9744eb8ab",
 
-
-  const app =
-    initializeApp(firebaseConfig);
-
-  const auth =
-    getAuth(app);
-
-  const db =
-    getFirestore(app);
+  measurementId:
+    "G-KVFSF864GE"
+};
 
 
-  /* ==========================================
-     TEMPORADAS
-  ========================================== */
+const app =
+  initializeApp(firebaseConfig);
 
-  const themes = {
+const auth =
+  getAuth(app);
 
-    8: {
-      className: "september",
-      name: "🇧🇷 SETEMBRO • INDEPENDÊNCIA"
-    },
-
-    9: {
-      className: "september",
-      name: "🇧🇷 SETEMBRO • INDEPENDÊNCIA"
-    },
-
-    10: {
-      className: "october",
-      name: "🎃 OUTUBRO • HALLOWEEN"
-    },
-
-    11: {
-      className: "november",
-      name: "✊🏿 NOVEMBRO • CONSCIÊNCIA NEGRA"
-    },
-
-    12: {
-      className: "december",
-      name: "🎄 DEZEMBRO • NATAL"
-    }
-  };
+const db =
+  getFirestore(app);
 
 
-  function applyTheme() {
+/* =====================================
+   TEMAS
+===================================== */
 
-    const month =
-      new Date().getMonth() + 1;
+const mes =
+  new Date().getMonth() + 1;
 
-    const theme =
-      themes[month] || themes[9];
+if(mes === 10){
+  document.body.classList.add("october");
 
-    document.body.classList.remove(
-      "september",
-      "october",
-      "november",
-      "december"
+  document.getElementById("tema").textContent =
+    "🎃 OUTUBRO • HALLOWEEN";
+}
+
+if(mes === 11){
+  document.body.classList.add("november");
+
+  document.getElementById("tema").textContent =
+    "✊🏿 NOVEMBRO • CONSCIÊNCIA NEGRA";
+}
+
+if(mes === 12){
+  document.body.classList.add("december");
+
+  document.getElementById("tema").textContent =
+    "🎄 DEZEMBRO • NATAL";
+}
+
+
+/* =====================================
+   ID DE 7 CARACTERES
+===================================== */
+
+function gerarID(){
+
+  const letras =
+    "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+  let id = "";
+
+  for(let i=0;i<7;i++){
+
+    id +=
+      letras[
+        Math.floor(
+          Math.random()*letras.length
+        )
+      ];
+
+  }
+
+  return id;
+}
+
+
+/* =====================================
+   HORA
+===================================== */
+
+function atualizarHora(){
+
+  const agora =
+    new Date();
+
+  document.getElementById("hora")
+    .textContent =
+    "🕐 " +
+    agora.toLocaleTimeString(
+      "pt-BR",
+      {
+        hour:"2-digit",
+        minute:"2-digit"
+      }
     );
 
-    document.body.classList.add(
-      theme.className
-    );
+  document.getElementById("dFuso")
+    .textContent =
+    Intl.DateTimeFormat()
+      .resolvedOptions()
+      .timeZone;
+}
 
-    document.getElementById(
-      "season"
-    ).textContent = theme.name;
+atualizarHora();
+
+setInterval(
+  atualizarHora,
+  30000
+);
+
+
+/* =====================================
+   LOCALIZAÇÃO
+===================================== */
+
+function localizar(){
+
+  if(!navigator.geolocation){
+
+    document.getElementById("local")
+      .textContent =
+      "📍 Indisponível";
+
+    return;
   }
 
 
-  applyTheme();
+  navigator.geolocation.getCurrentPosition(
+
+    async position => {
+
+      const lat =
+        position.coords.latitude;
+
+      const lon =
+        position.coords.longitude;
 
 
-  /* ==========================================
-     ID PÚBLICO — 7 CARACTERES
-  ========================================== */
+      document.getElementById("local")
+        .textContent =
+        "📍 Localização autorizada";
 
-  function generatePublicId() {
+      document.getElementById("dLocal")
+        .textContent =
+        `${lat.toFixed(4)}, ${lon.toFixed(4)}`;
 
-    const chars =
-      "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
 
-    let result = "";
+      /*
+        IMPORTANTE:
+        Não bloqueamos o painel esperando
+        a localização.
+      */
 
-    for (let i = 0; i < 7; i++) {
+      try{
 
-      result +=
-        chars.charAt(
-          Math.floor(
-            Math.random() * chars.length
-          )
+        const resposta =
+          await fetch(
+            `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=pt`
+          );
+
+        const dados =
+          await resposta.json();
+
+        const cidade =
+          dados.city ||
+          dados.locality ||
+          "";
+
+        const estado =
+          dados.principalSubdivision ||
+          "";
+
+        if(cidade){
+
+          document.getElementById("local")
+            .textContent =
+            `📍 ${cidade}`;
+
+          document.getElementById("dLocal")
+            .textContent =
+            `${cidade}${estado ? ", " + estado : ""}`;
+        }
+
+      }catch(e){
+
+        console.log(
+          "Não foi possível converter localização."
         );
 
+      }
+
+    },
+
+    () => {
+
+      document.getElementById("local")
+        .textContent =
+        "📍 Localização não autorizada";
+
+      document.getElementById("dLocal")
+        .textContent =
+        "Não autorizada";
+
     }
 
-    return result;
-  }
-
-
-  async function createUniquePublicId() {
-
-    let id;
-    let exists = true;
-
-    while (exists) {
-
-      id = generatePublicId();
-
-      const q = query(
-        collection(db, "usuarios"),
-        where("publicId", "==", id)
-      );
-
-      const snapshot =
-        await getDocs(q);
-
-      exists =
-        !snapshot.empty;
-    }
-
-    return id;
-  }
-
-
-  /* ==========================================
-     HORA LOCAL
-  ========================================== */
-
-  function updateLocalTime() {
-
-    const now = new Date();
-
-    const time =
-      now.toLocaleTimeString(
-        "pt-BR",
-        {
-          hour: "2-digit",
-          minute: "2-digit"
-        }
-      );
-
-    document.getElementById(
-      "horaLocal"
-    ).textContent =
-      "🕐 " + time;
-
-    document.getElementById(
-      "infoFuso"
-    ).textContent =
-      Intl.DateTimeFormat().resolvedOptions().timeZone;
-  }
-
-
-  updateLocalTime();
-
-  setInterval(
-    updateLocalTime,
-    30000
   );
+}
 
 
-  /* ==========================================
-     LOCALIZAÇÃO
-  ========================================== */
+/* =====================================
+   CARREGAR DADOS DO ADMINISTRADOR
+===================================== */
 
-  async function getUserLocation() {
+async function carregarUsuario(firebaseUser){
 
-    const locationElement =
-      document.getElementById(
-        "localUsuario"
-      );
+  const email =
+    firebaseUser.email;
 
-    const infoLocation =
-      document.getElementById(
-        "infoLocal"
-      );
 
+  /*
+    AQUI ESTÁ A CORREÇÃO PRINCIPAL:
 
-    if (!navigator.geolocation) {
+    Agora procuramos na coleção
+    "administradores"
+    pelo e-mail do usuário.
+  */
 
-      locationElement.textContent =
-        "📍 Localização indisponível";
+  const usuariosRef =
+    collection(
+      db,
+      "administradores"
+    );
 
-      infoLocation.textContent =
-        "Indisponível";
 
-      return null;
-    }
+  const busca =
+    query(
+      usuariosRef,
+      where(
+        "e-mail",
+        "==",
+        email
+      )
+    );
 
 
-    return new Promise((resolve) => {
+  const resultado =
+    await getDocs(busca);
 
-      navigator.geolocation.getCurrentPosition(
 
-        async (position) => {
+  let dados;
 
-          const lat =
-            position.coords.latitude;
 
-          const lon =
-            position.coords.longitude;
+  if(!resultado.empty){
 
+    const encontrado =
+      resultado.docs[0];
 
-          try {
+    dados =
+      encontrado.data();
 
-            const response =
-              await fetch(
-                `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=pt`
-              );
 
+    const ref =
+      encontrado.ref;
 
-            const data =
-              await response.json();
 
+    /*
+      Se ainda não existir ID,
+      criamos um.
+    */
 
-            const city =
-              data.city ||
-              data.locality ||
-              data.principalSubdivision ||
-              "Localização encontrada";
+    if(!dados.publicId){
 
-
-            const state =
-              data.principalSubdivision ||
-              "";
-
-
-            const text =
-              `📍 ${city}${state && city !== state ? ", " + state : ""}`;
-
-
-            locationElement.textContent =
-              text;
-
-            infoLocation.textContent =
-              text.replace("📍 ", "");
-
-
-            resolve({
-              latitude: lat,
-              longitude: lon,
-              cidade: city,
-              estado: state
-            });
-
-          } catch (error) {
-
-            locationElement.textContent =
-              "📍 Localização autorizada";
-
-            infoLocation.textContent =
-              `${lat.toFixed(4)}, ${lon.toFixed(4)}`;
-
-            resolve({
-              latitude: lat,
-              longitude: lon
-            });
-
-          }
-
-        },
-
-        () => {
-
-          locationElement.textContent =
-            "📍 Localização não autorizada";
-
-          infoLocation.textContent =
-            "Não autorizada";
-
-          resolve(null);
-
-        },
-
-        {
-          enableHighAccuracy: false,
-          timeout: 10000,
-          maximumAge: 300000
-        }
-
-      );
-
-    });
-
-  }
-
-
-  /* ==========================================
-     CARREGAR USUÁRIO
-  ========================================== */
-
-  async function loadUser(firebaseUser) {
-
-    if (!firebaseUser) {
-      return;
-    }
-
-
-    document.getElementById(
-      "userEmail"
-    ).textContent =
-      firebaseUser.email || "";
-
-
-    const userRef =
-      doc(
-        db,
-        "usuarios",
-        firebaseUser.uid
-      );
-
-
-    const userSnap =
-      await getDoc(userRef);
-
-
-    let userData;
-
-
-    if (!userSnap.exists()) {
-
-      const publicId =
-        await createUniquePublicId();
-
-
-      userData = {
-
-        publicId: publicId,
-
-        nome:
-          firebaseUser.displayName ||
-          firebaseUser.email?.split("@")[0] ||
-          "Jogador",
-
-        idade: "",
-
-        telefone: "",
-
-        email:
-          firebaseUser.email || "",
-
-        avatar:
-          "👑",
-
-        vip:
-          false,
-
-        creditos:
-          0,
-
-        moedas:
-          0,
-
-        chaves:
-          0,
-
-        caixaBox:
-          false,
-
-        cidade:
-          "",
-
-        estado:
-          "",
-
-        latitude:
-          null,
-
-        longitude:
-          null,
-
-        fusoHorario:
-          Intl.DateTimeFormat().resolvedOptions().timeZone,
-
-        criadoEm:
-          serverTimestamp(),
-
-        ultimoAcesso:
-          serverTimestamp()
-      };
-
-
-      await setDoc(
-        userRef,
-        userData
-      );
-
-    } else {
-
-      userData =
-        userSnap.data();
-
+      dados.publicId =
+        gerarID();
 
       await updateDoc(
-        userRef,
+        ref,
+        {
+          publicId:
+            dados.publicId,
+
+          ultimoAcesso:
+            serverTimestamp()
+        }
+      );
+
+    }else{
+
+      await updateDoc(
+        ref,
         {
           ultimoAcesso:
             serverTimestamp()
@@ -1514,299 +1308,318 @@
 
     }
 
+  }else{
 
-    /* ======================================
-       PREENCHER INTERFACE
-    ====================================== */
+    /*
+      Se o e-mail ainda não estiver
+      na coleção, criamos o registro.
+    */
 
-    document.getElementById(
-      "userName"
-    ).textContent =
-      userData.nome || "Jogador";
+    const novoID =
+      gerarID();
 
-
-    document.getElementById(
-      "infoNome"
-    ).textContent =
-      userData.nome || "—";
-
-
-    document.getElementById(
-      "infoIdade"
-    ).textContent =
-      userData.idade || "Não informado";
-
-
-    document.getElementById(
-      "infoTelefone"
-    ).textContent =
-      userData.telefone || "Não informado";
-
-
-    document.getElementById(
-      "userId"
-    ).textContent =
-      "ID: " + (userData.publicId || "-------");
-
-
-    document.getElementById(
-      "infoId"
-    ).textContent =
-      userData.publicId || "—";
-
-
-    /* VIP */
-
-    const vip =
-      userData.vip === true;
-
-
-    const crown =
-      document.getElementById("crown");
-
-    const vipBadge =
-      document.getElementById("vipBadge");
-
-
-    if (vip) {
-
-      crown.style.display =
-        "block";
-
-      vipBadge.textContent =
-        "👑 VIP Ativo";
-
-      vipBadge.className =
-        "vip-badge";
-
-    } else {
-
-      crown.style.display =
-        "none";
-
-      vipBadge.textContent =
-        "⭐ Membro";
-
-      vipBadge.className =
-        "vip-badge normal-badge";
-    }
-
-
-    /* AVATAR */
-
-    document.getElementById(
-      "avatar"
-    ).textContent =
-      userData.avatar || "🙂";
-
-
-    /* RECURSOS */
-
-    const credits =
-      Number(userData.creditos || 0);
-
-    document.getElementById(
-      "credits"
-    ).textContent =
-      credits.toLocaleString(
-        "pt-BR",
-        {
-          style: "currency",
-          currency: "BRL"
-        }
+    const novoRef =
+      doc(
+        db,
+        "administradores",
+        firebaseUser.uid
       );
 
 
-    document.getElementById(
-      "coins"
-    ).textContent =
-      Number(userData.moedas || 0)
-        .toLocaleString("pt-BR");
+    dados = {
+
+      "e-mail":
+        email,
+
+      publicId:
+        novoID,
+
+      nome:
+        email.split("@")[0],
+
+      idade:
+        "",
+
+      telefone:
+        "",
+
+      vip:
+        false,
+
+      creditos:
+        0,
+
+      moedas:
+        0,
+
+      chaves:
+        0,
+
+      caixaBox:
+        false,
+
+      avatar:
+        "🙂",
+
+      ultimoAcesso:
+        serverTimestamp()
+    };
 
 
-    document.getElementById(
-      "keys"
-    ).textContent =
-      Number(userData.chaves || 0)
-        .toLocaleString("pt-BR");
-
-
-    const box =
-      userData.caixaBox === true;
-
-
-    document.getElementById(
-      "boxStatus"
-    ).textContent =
-      box
-        ? "Já resgatada"
-        : "Disponível";
-
-
-    document.getElementById(
-      "infoBox"
-    ).textContent =
-      box
-        ? "Já resgatada"
-        : "Disponível";
-
-
-    /* LOCAL JÁ SALVO */
-
-    if (
-      userData.cidade ||
-      userData.estado
-    ) {
-
-      const local =
-        `📍 ${userData.cidade || ""}${userData.estado ? ", " + userData.estado : ""}`;
-
-      document.getElementById(
-        "localUsuario"
-      ).textContent =
-        local;
-
-      document.getElementById(
-        "infoLocal"
-      ).textContent =
-        local.replace("📍 ", "");
-    }
-
-
-    /* ======================================
-       PEGAR LOCALIZAÇÃO ATUAL
-    ====================================== */
-
-    const location =
-      await getUserLocation();
-
-
-    if (location) {
-
-      const updateData = {
-
-        ultimoAcesso:
-          serverTimestamp(),
-
-        fusoHorario:
-          Intl.DateTimeFormat().resolvedOptions().timeZone
-      };
-
-
-      if (location.latitude) {
-
-        updateData.latitude =
-          location.latitude;
-
-        updateData.longitude =
-          location.longitude;
-      }
-
-
-      if (location.cidade) {
-
-        updateData.cidade =
-          location.cidade;
-
-        updateData.estado =
-          location.estado;
-      }
-
-
-      await updateDoc(
-        userRef,
-        updateData
-      );
-
-    }
+    await setDoc(
+      novoRef,
+      dados
+    );
 
   }
 
 
-  /* ==========================================
-     AUTENTICAÇÃO
-  ========================================== */
-
-  onAuthStateChanged(
-    auth,
-    async (user) => {
-
-      if (!user) {
-
-        /*
-          Se o seu login já possui uma página
-          específica, troque abaixo pelo endereço
-          dela.
-        */
-
-        window.location.href =
-          "index.html";
-
-        return;
-      }
-
-
-      try {
-
-        await loadUser(user);
-
-      } catch (error) {
-
-        console.error(
-          "Erro ao carregar usuário:",
-          error
-        );
-
-      }
-
-    }
-  );
-
-
-  /* ==========================================
-     SAIR
-  ========================================== */
+  /* ===================================
+     PREENCHER PAINEL
+  =================================== */
 
   document.getElementById(
-    "logoutBtn"
-  ).addEventListener(
-    "click",
-    async () => {
+    "nomeUsuario"
+  ).textContent =
+    dados.nome ||
+    email.split("@")[0];
 
-      try {
-
-        await signOut(auth);
-
-        window.location.href =
-          "index.html";
-
-      } catch (error) {
-
-        console.error(error);
-
-      }
-
-    }
-  );
-
-
-  /* ==========================================
-     CAIXA BOX
-  ========================================== */
 
   document.getElementById(
-    "boxCard"
-  ).addEventListener(
-    "click",
-    () => {
+    "emailUsuario"
+  ).textContent =
+    email;
 
-      alert(
-        "🎁 Área da Caixa Box\n\nEm breve você poderá resgatar sua caixa mensal aqui!"
+
+  document.getElementById(
+    "idUsuario"
+  ).textContent =
+    "ID: " +
+    dados.publicId;
+
+
+  document.getElementById(
+    "dId"
+  ).textContent =
+    dados.publicId;
+
+
+  document.getElementById(
+    "dNome"
+  ).textContent =
+    dados.nome || "—";
+
+
+  document.getElementById(
+    "dIdade"
+  ).textContent =
+    dados.idade || "Não informado";
+
+
+  document.getElementById(
+    "dTelefone"
+  ).textContent =
+    dados.telefone || "Não informado";
+
+
+  /* AVATAR */
+
+  document.getElementById(
+    "avatar"
+  ).textContent =
+    dados.avatar || "🙂";
+
+
+  /* VIP */
+
+  const vip =
+    dados.vip === true;
+
+
+  if(vip){
+
+    document.getElementById(
+      "crown"
+    ).style.display =
+      "block";
+
+    document.getElementById(
+      "vipBadge"
+    ).textContent =
+      "👑 VIP Ativo";
+
+  }else{
+
+    document.getElementById(
+      "crown"
+    ).style.display =
+      "none";
+
+    document.getElementById(
+      "vipBadge"
+    ).textContent =
+      "⭐ Membro";
+
+    document.getElementById(
+      "vipBadge"
+    ).classList.add(
+      "member-badge"
+    );
+  }
+
+
+  /* CRÉDITOS */
+
+  const creditos =
+    Number(
+      dados.creditos || 0
+    );
+
+
+  document.getElementById(
+    "creditos"
+  ).textContent =
+    creditos.toLocaleString(
+      "pt-BR",
+      {
+        style:"currency",
+        currency:"BRL"
+      }
+    );
+
+
+  /* MOEDAS */
+
+  document.getElementById(
+    "moedas"
+  ).textContent =
+    Number(
+      dados.moedas || 0
+    ).toLocaleString(
+      "pt-BR"
+    );
+
+
+  /* CHAVES */
+
+  document.getElementById(
+    "chaves"
+  ).textContent =
+    Number(
+      dados.chaves || 0
+    ).toLocaleString(
+      "pt-BR"
+    );
+
+
+  /* BOX */
+
+  const box =
+    dados.caixaBox === true;
+
+
+  document.getElementById(
+    "boxStatus"
+  ).textContent =
+    box
+      ? "Já resgatada"
+      : "Disponível";
+
+
+  document.getElementById(
+    "dBox"
+  ).textContent =
+    box
+      ? "Já resgatada"
+      : "Disponível";
+
+
+  /*
+    Só depois que o painel carregou,
+    pedimos a localização.
+  */
+
+  localizar();
+
+}
+
+
+/* =====================================
+   LOGIN
+===================================== */
+
+onAuthStateChanged(
+  auth,
+  async user => {
+
+    if(!user){
+
+      window.location.href =
+        "index.html";
+
+      return;
+    }
+
+
+    try{
+
+      await carregarUsuario(
+        user
       );
 
-    }
-  );
+    }catch(error){
 
+      console.error(
+        "ERRO FIREBASE:",
+        error
+      );
+
+      document.getElementById(
+        "nomeUsuario"
+      ).textContent =
+        "Erro ao carregar";
+
+    }
+
+  }
+);
+
+
+/* =====================================
+   LOGOUT
+===================================== */
+
+document.getElementById(
+  "logout"
+).addEventListener(
+  "click",
+  async () => {
+
+    await signOut(auth);
+
+    window.location.href =
+      "index.html";
+
+  }
+);
+
+
+/* =====================================
+   CAIXA BOX
+===================================== */
+
+document.getElementById(
+  "boxCard"
+).addEventListener(
+  "click",
+  () => {
+
+    alert(
+      "🎁 CAIXA BOX\n\nSua caixa mensal aparecerá aqui."
+    );
+
+  }
+);
 
 </script>
 
