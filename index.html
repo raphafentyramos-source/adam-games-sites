@@ -6,266 +6,271 @@
 <title>Adam Games</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
 body{
-min-height:100vh;
-font-family:Arial,sans-serif;
-color:#fff;
-background:
-radial-gradient(circle at 50% 5%,#39c5ff 0%,transparent 28%),
-linear-gradient(180deg,#087dcc 0%,#07528e 45%,#03192f 100%);
+  min-height:100vh;
+  font-family:Arial,sans-serif;
+  color:#fff;
+  background:
+    radial-gradient(circle at 50% 5%,#39c5ff 0%,transparent 28%),
+    linear-gradient(180deg,#087dcc 0%,#07528e 45%,#03192f 100%);
 }
 
 .page{
-min-height:100vh;
-padding:25px 18px 35px;
-display:flex;
-flex-direction:column;
-align-items:center;
-position:relative;
-overflow:hidden;
+  min-height:100vh;
+  padding:25px 18px 35px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  position:relative;
+  overflow:hidden;
 }
 
 .language{
-position:absolute;
-top:20px;
-right:18px;
-padding:12px 16px;
-border-radius:20px;
-background:rgba(0,35,75,.75);
-border:1px solid rgba(255,255,255,.2);
-font-weight:bold;
+  position:absolute;
+  top:20px;
+  right:18px;
+  padding:12px 16px;
+  border-radius:20px;
+  background:rgba(0,35,75,.75);
+  border:1px solid rgba(255,255,255,.2);
+  font-weight:bold;
 }
 
 .logo-area{
-text-align:center;
-margin-top:45px;
-margin-bottom:25px;
+  text-align:center;
+  margin-top:45px;
+  margin-bottom:25px;
 }
 
 .shield{
-width:105px;
-height:105px;
-margin:auto;
-display:flex;
-align-items:center;
-justify-content:center;
-background:linear-gradient(145deg,#168cff,#034b9d);
-border:5px solid #ffd029;
-border-radius:30px;
-font-size:55px;
-box-shadow:0 12px 30px rgba(0,0,0,.45);
+  width:105px;
+  height:105px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(145deg,#168cff,#034b9d);
+  border:5px solid #ffd029;
+  border-radius:30px;
+  font-size:55px;
+  box-shadow:0 12px 30px rgba(0,0,0,.45);
 }
 
 .logo{
-margin-top:10px;
-font-size:clamp(48px,13vw,72px);
-font-weight:1000;
-line-height:.82;
-letter-spacing:-5px;
-text-shadow:0 6px #17395f,0 12px 20px rgba(0,0,0,.5);
+  margin-top:10px;
+  font-size:clamp(48px,13vw,72px);
+  font-weight:1000;
+  line-height:.82;
+  letter-spacing:-5px;
+  text-shadow:0 6px #17395f,0 12px 20px rgba(0,0,0,.5);
 }
 
 .logo span{
-display:block;
-color:#ffd029;
-text-shadow:0 5px #9b6000,0 10px 18px rgba(0,0,0,.5);
+  display:block;
+  color:#ffd029;
+  text-shadow:0 5px #9b6000,0 10px 18px rgba(0,0,0,.5);
 }
 
 .tagline{
-display:inline-block;
-margin-top:16px;
-padding:10px 20px;
-border-radius:25px;
-background:rgba(0,65,125,.8);
-font-weight:bold;
+  display:inline-block;
+  margin-top:16px;
+  padding:10px 20px;
+  border-radius:25px;
+  background:rgba(0,65,125,.8);
+  font-weight:bold;
 }
 
 .login-card{
-width:100%;
-max-width:470px;
-padding:30px 22px;
-border-radius:30px;
-background:linear-gradient(145deg,rgba(4,48,91,.97),rgba(2,19,39,.98));
-border:1px solid rgba(255,255,255,.16);
-box-shadow:0 25px 60px rgba(0,0,0,.55);
+  width:100%;
+  max-width:470px;
+  padding:30px 22px;
+  border-radius:30px;
+  background:linear-gradient(145deg,rgba(4,48,91,.97),rgba(2,19,39,.98));
+  border:1px solid rgba(255,255,255,.16);
+  box-shadow:0 25px 60px rgba(0,0,0,.55);
 }
 
 .welcome{
-text-align:center;
-margin-bottom:23px;
+  text-align:center;
+  margin-bottom:23px;
 }
 
 .welcome h1{
-font-size:30px;
-margin-bottom:8px;
+  font-size:30px;
+  margin-bottom:8px;
 }
 
 .welcome p{
-color:#bcd1e6;
+  color:#bcd1e6;
 }
 
 .field{
-margin-bottom:15px;
+  margin-bottom:15px;
 }
 
 .field label{
-display:block;
-margin:0 0 7px 6px;
-font-size:14px;
-font-weight:bold;
+  display:block;
+  margin:0 0 7px 6px;
+  font-size:14px;
+  font-weight:bold;
 }
 
 .input{
-height:62px;
-display:flex;
-align-items:center;
-padding:0 14px;
-border-radius:18px;
-background:rgba(0,19,43,.9);
-border:1px solid rgba(87,166,255,.22);
+  height:62px;
+  display:flex;
+  align-items:center;
+  padding:0 14px;
+  border-radius:18px;
+  background:rgba(0,19,43,.9);
+  border:1px solid rgba(87,166,255,.22);
 }
 
 .icon{
-width:40px;
-height:40px;
-display:flex;
-align-items:center;
-justify-content:center;
-margin-right:11px;
-border-radius:12px;
-background:#086bd8;
-font-size:19px;
+  width:40px;
+  height:40px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-right:11px;
+  border-radius:12px;
+  background:#086bd8;
+  font-size:19px;
 }
 
 .input input{
-flex:1;
-min-width:0;
-border:0;
-outline:0;
-background:transparent;
-color:white;
-font-size:16px;
+  flex:1;
+  min-width:0;
+  border:0;
+  outline:0;
+  background:transparent;
+  color:white;
+  font-size:16px;
 }
 
 .input input::placeholder{
-color:#7893ae;
+  color:#7893ae;
 }
 
 .eye{
-cursor:pointer;
-font-size:20px;
+  cursor:pointer;
+  font-size:20px;
 }
 
 .forgot{
-display:block;
-text-align:right;
-margin:5px 5px 18px;
-color:#35a5ff;
-font-weight:bold;
-cursor:pointer;
+  display:block;
+  text-align:right;
+  margin:5px 5px 18px;
+  color:#35a5ff;
+  font-weight:bold;
+  cursor:pointer;
 }
 
 .btn{
-width:100%;
-height:61px;
-border:0;
-border-radius:19px;
-color:white;
-font-size:18px;
-font-weight:900;
-cursor:pointer;
+  width:100%;
+  height:61px;
+  border:0;
+  border-radius:19px;
+  color:white;
+  font-size:18px;
+  font-weight:900;
+  cursor:pointer;
 }
 
 .btn-login{
-background:linear-gradient(180deg,#1592ff,#0562d8);
-box-shadow:0 6px #03499d;
+  background:linear-gradient(180deg,#1592ff,#0562d8);
+  box-shadow:0 6px #03499d;
 }
 
 .btn-register{
-margin-top:18px;
-background:rgba(6,39,72,.8);
-border:1px solid rgba(255,255,255,.13);
+  margin-top:18px;
+  background:rgba(6,39,72,.8);
+  border:1px solid rgba(255,255,255,.13);
 }
 
 .or{
-display:flex;
-align-items:center;
-gap:12px;
-margin:23px 0;
-color:#7893ad;
-font-weight:bold;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin:23px 0;
+  color:#7893ad;
+  font-weight:bold;
 }
 
-.or:before,.or:after{
-content:"";
-flex:1;
-height:1px;
-background:rgba(255,255,255,.12);
+.or:before,
+.or:after{
+  content:"";
+  flex:1;
+  height:1px;
+  background:rgba(255,255,255,.12);
 }
 
 .support{
-width:100%;
-max-width:470px;
-margin-top:17px;
-padding:15px;
-display:flex;
-align-items:center;
-gap:12px;
-border-radius:21px;
-background:rgba(2,38,65,.9);
-border:1px solid rgba(255,255,255,.13);
+  width:100%;
+  max-width:470px;
+  margin-top:17px;
+  padding:15px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  border-radius:21px;
+  background:rgba(2,38,65,.9);
+  border:1px solid rgba(255,255,255,.13);
 }
 
 .whatsapp{
-width:46px;
-height:46px;
-display:flex;
-align-items:center;
-justify-content:center;
-border-radius:14px;
-background:#20c96b;
-font-size:25px;
+  width:46px;
+  height:46px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:14px;
+  background:#20c96b;
+  font-size:25px;
 }
 
 .support-text{
-flex:1;
+  flex:1;
 }
 
 .support-text strong{
-display:block;
-font-size:14px;
+  display:block;
+  font-size:14px;
 }
 
 .support-text small{
-display:block;
-margin-top:4px;
-color:#91abc4;
-font-size:11px;
+  display:block;
+  margin-top:4px;
+  color:#91abc4;
+  font-size:11px;
 }
 
 .support-btn{
-border:0;
-border-radius:12px;
-padding:11px 13px;
-background:#20c96b;
-color:white;
-font-weight:900;
+  border:0;
+  border-radius:12px;
+  padding:11px 13px;
+  background:#20c96b;
+  color:white;
+  font-weight:900;
 }
 
 .footer{
-margin-top:22px;
-text-align:center;
-color:#9bb2c8;
-font-size:12px;
-line-height:1.7;
+  margin-top:22px;
+  text-align:center;
+  color:#9bb2c8;
+  font-size:12px;
+  line-height:1.7;
 }
 
 .footer strong{
-display:block;
-color:#31a2ff;
-font-size:15px;
+  display:block;
+  color:#31a2ff;
+  font-size:15px;
 }
 </style>
 </head>
@@ -274,10 +279,15 @@ font-size:15px;
 
 <div class="page">
 
-<div class="language">🌎 PT-BR ▾</div>
+<div class="language">
+🌎 PT-BR ▾
+</div>
 
 <div class="logo-area">
-<div class="shield">👑</div>
+
+<div class="shield">
+👑
+</div>
 
 <div class="logo">
 ADAM
@@ -287,70 +297,145 @@ ADAM
 <div class="tagline">
 🌎 Seu mundo começa aqui!
 </div>
+
 </div>
+
 
 <main class="login-card">
 
 <div class="welcome">
-<h1 id="title">Bem-vindo! 👋</h1>
-<p id="subtitle">Entre na sua conta para continuar</p>
+
+<h1 id="title">
+Bem-vindo! 👋
+</h1>
+
+<p id="subtitle">
+Entre na sua conta para continuar
+</p>
+
 </div>
+
 
 <div class="field">
-<label>E-mail</label>
+
+<label>
+E-mail
+</label>
 
 <div class="input">
-<div class="icon">✉️</div>
-<input id="email" type="email" placeholder="Digite seu e-mail">
+
+<div class="icon">
+✉️
 </div>
+
+<input
+id="email"
+type="email"
+placeholder="Digite seu e-mail"
+>
+
 </div>
+
+</div>
+
 
 <div class="field">
-<label>Senha</label>
+
+<label>
+Senha
+</label>
 
 <div class="input">
-<div class="icon">🔒</div>
 
-<input id="password" type="password" placeholder="Digite sua senha">
-
-<div class="eye" onclick="togglePassword()">👁️</div>
-</div>
+<div class="icon">
+🔒
 </div>
 
-<div class="forgot" onclick="forgotPassword()">
+<input
+id="password"
+type="password"
+placeholder="Digite sua senha"
+>
+
+<div
+class="eye"
+onclick="togglePassword()"
+>
+👁️
+</div>
+
+</div>
+
+</div>
+
+
+<div
+class="forgot"
+onclick="forgotPassword()"
+>
 Esqueceu a senha?
 </div>
 
-<button class="btn btn-login" onclick="login()">
+
+<button
+class="btn btn-login"
+onclick="login()"
+>
 ENTRAR →
 </button>
 
-<div class="or">OU</div>
 
-<button class="btn btn-register" onclick="register()">
+<div class="or">
+OU
+</div>
+
+
+<button
+class="btn btn-register"
+onclick="register()"
+>
 👤 Criar uma conta
 </button>
 
 </main>
 
+
 <div class="support">
 
-<div class="whatsapp">💬</div>
-
-<div class="support-text">
-<strong>Precisa de ajuda?</strong>
-<small>Fale com nosso suporte via WhatsApp</small>
+<div class="whatsapp">
+💬
 </div>
 
-<button class="support-btn" onclick="support()">
+<div class="support-text">
+
+<strong>
+Precisa de ajuda?
+</strong>
+
+<small>
+Fale com nosso suporte via WhatsApp
+</small>
+
+</div>
+
+<button
+class="support-btn"
+onclick="support()"
+>
 Suporte
 </button>
 
 </div>
 
+
 <div class="footer">
-<strong>♛ Adam Games</strong>
+
+<strong>
+♛ Adam Games
+</strong>
+
 Diversão, aventuras e prêmios te esperam!
+
 </div>
 
 </div>
@@ -362,29 +447,29 @@ import { initializeApp }
 from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
 
 import {
-getAuth,
-signInWithEmailAndPassword,
-createUserWithEmailAndPassword,
-sendPasswordResetEmail
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  sendPasswordResetEmail
 }
 from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
 
 
 const firebaseConfig = {
 
-apiKey: "AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",
+  apiKey: "AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",
 
-authDomain: "adam-games-21081.firebaseapp.com",
+  authDomain: "adam-games-21081.firebaseapp.com",
 
-projectId: "adam-games-21081",
+  projectId: "adam-games-21081",
 
-storageBucket: "adam-games-21081.firebasestorage.app",
+  storageBucket: "adam-games-21081.firebasestorage.app",
 
-messagingSenderId: "1055528418738",
+  messagingSenderId: "1055528418738",
 
-appId: "1:1055528418738:web:5fafdf63424ba9744eb8ab",
+  appId: "1:1055528418738:web:5fafdf63424ba9744eb8ab",
 
-measurementId: "G-KVFSF864GE"
+  measurementId: "G-KVFSF864GE"
 
 };
 
@@ -396,150 +481,189 @@ const auth = getAuth(app);
 
 window.togglePassword = function(){
 
-const password = document.getElementById("password");
+  const password =
+  document.getElementById("password");
 
-password.type =
-password.type === "password"
-? "text"
-: "password";
+  password.type =
+  password.type === "password"
+  ? "text"
+  : "password";
 
 };
 
 
 window.login = async function(){
 
-const email =
-document.getElementById("email").value.trim();
+  const email =
+  document.getElementById("email").value.trim();
 
-const password =
-document.getElementById("password").value;
+  const password =
+  document.getElementById("password").value;
 
-if(!email || !password){
 
-alert("Digite seu e-mail e sua senha.");
+  if(!email || !password){
 
-return;
+    alert("Digite seu e-mail e sua senha.");
 
-}
+    return;
 
-try{
+  }
 
-await signInWithEmailAndPassword(
-auth,
-email,
-password
-);
 
-alert("Login realizado com sucesso! 🎉");
+  try{
 
-}catch(error){
+    await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
 
-console.error(error);
 
-if(error.code === "auth/invalid-credential"){
+    // LOGIN REALIZADO
+    // ABRIR PAINEL
 
-alert("E-mail ou senha incorretos.");
+    window.location.href = "painel.html";
 
-}else{
 
-alert("Não foi possível realizar o login.");
+  }catch(error){
 
-}
+    console.error(error);
 
-}
+
+    if(error.code === "auth/invalid-credential"){
+
+      alert("E-mail ou senha incorretos.");
+
+    }else{
+
+      alert("Não foi possível realizar o login.");
+
+    }
+
+  }
 
 };
 
 
 window.register = async function(){
 
-const email =
-document.getElementById("email").value.trim();
+  const email =
+  document.getElementById("email").value.trim();
 
-const password =
-document.getElementById("password").value;
+  const password =
+  document.getElementById("password").value;
 
-if(!email || !password){
 
-alert("Digite um e-mail e uma senha para criar sua conta.");
+  if(!email || !password){
 
-return;
+    alert(
+      "Digite um e-mail e uma senha para criar sua conta."
+    );
 
-}
+    return;
 
-if(password.length < 6){
+  }
 
-alert("A senha precisa ter pelo menos 6 caracteres.");
 
-return;
+  if(password.length < 6){
 
-}
+    alert(
+      "A senha precisa ter pelo menos 6 caracteres."
+    );
 
-try{
+    return;
 
-await createUserWithEmailAndPassword(
-auth,
-email,
-password
-);
+  }
 
-alert("Conta criada com sucesso! 🎉");
 
-}catch(error){
+  try{
 
-console.error(error);
+    await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
 
-if(error.code === "auth/email-already-in-use"){
 
-alert("Este e-mail já possui uma conta.");
+    // Depois de criar a conta,
+    // também entra automaticamente no painel.
 
-}else{
+    window.location.href = "painel.html";
 
-alert("Não foi possível criar a conta.");
 
-}
+  }catch(error){
 
-}
+    console.error(error);
+
+
+    if(error.code === "auth/email-already-in-use"){
+
+      alert(
+        "Este e-mail já possui uma conta."
+      );
+
+    }else{
+
+      alert(
+        "Não foi possível criar a conta."
+      );
+
+    }
+
+  }
 
 };
 
 
 window.forgotPassword = async function(){
 
-const email =
-document.getElementById("email").value.trim();
+  const email =
+  document.getElementById("email").value.trim();
 
-if(!email){
 
-alert("Digite seu e-mail primeiro.");
+  if(!email){
 
-return;
+    alert(
+      "Digite seu e-mail primeiro."
+    );
 
-}
+    return;
 
-try{
+  }
 
-await sendPasswordResetEmail(
-auth,
-email
-);
 
-alert("Enviamos um e-mail para redefinir sua senha. 📧");
+  try{
 
-}catch(error){
+    await sendPasswordResetEmail(
+      auth,
+      email
+    );
 
-console.error(error);
 
-alert("Não foi possível enviar o e-mail de recuperação.");
+    alert(
+      "Enviamos um e-mail para redefinir sua senha. 📧"
+    );
 
-}
+
+  }catch(error){
+
+    console.error(error);
+
+
+    alert(
+      "Não foi possível enviar o e-mail de recuperação."
+    );
+
+  }
 
 };
 
 
 window.support = function(){
 
-alert("O WhatsApp do suporte será configurado na próxima etapa.");
+  alert(
+    "O WhatsApp do suporte será configurado na próxima etapa."
+  );
 
 };
 
