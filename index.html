@@ -2,7 +2,6 @@
 <html lang="pt-BR">
 
 <head>
-
 <meta charset="UTF-8">
 
 <meta
@@ -27,41 +26,27 @@ body{
 }
 
 body{
-
   min-height:100vh;
-
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
-
+  font-family:Arial,Helvetica,sans-serif;
   color:#fff;
-
   display:flex;
-
   align-items:center;
-
   justify-content:center;
-
   padding:25px 15px;
-
   overflow-x:hidden;
 
   background:
-
     radial-gradient(
       circle at 15% 10%,
       rgba(66,170,255,.95) 0%,
       rgba(66,170,255,.35) 18%,
       transparent 38%
     ),
-
     radial-gradient(
       circle at 90% 85%,
       rgba(0,130,255,.35),
       transparent 35%
     ),
-
     linear-gradient(
       145deg,
       #087ee1 0%,
@@ -173,21 +158,15 @@ body{
 
 .message.error{
   display:block;
-  background:
-    rgba(255,50,70,.15);
-  border:
-    1px solid
-    rgba(255,70,90,.35);
+  background:rgba(255,50,70,.15);
+  border:1px solid rgba(255,70,90,.35);
   color:#ff9ba7;
 }
 
 .message.success{
   display:block;
-  background:
-    rgba(50,255,140,.12);
-  border:
-    1px solid
-    rgba(50,255,140,.3);
+  background:rgba(50,255,140,.12);
+  border:1px solid rgba(50,255,140,.3);
   color:#72ffae;
 }
 
@@ -202,21 +181,11 @@ label{
 .input{
   width:100%;
   height:54px;
-
-  border:
-    1px solid
-    rgba(255,255,255,.13);
-
+  border:1px solid rgba(255,255,255,.13);
   border-radius:15px;
-
-  background:
-    rgba(0,0,0,.22);
-
+  background:rgba(0,0,0,.22);
   color:white;
-
-  padding:
-    0 16px;
-
+  padding:0 16px;
   font-size:16px;
   outline:none;
   margin-bottom:17px;
@@ -228,7 +197,6 @@ label{
 
 .input:focus{
   border-color:#27a1ff;
-
   box-shadow:
     0 0 0 3px
     rgba(39,161,255,.12);
@@ -319,8 +287,7 @@ label{
   content:"";
   height:1px;
   flex:1;
-  background:
-    rgba(255,255,255,.15);
+  background:rgba(255,255,255,.15);
 }
 
 .social-buttons{
@@ -334,12 +301,10 @@ label{
   height:52px;
   border:0;
   border-radius:15px;
-
   display:flex;
   align-items:center;
   justify-content:center;
   gap:10px;
-
   font-size:15px;
   font-weight:bold;
   cursor:pointer;
@@ -387,14 +352,6 @@ label{
   cursor:pointer;
 }
 
-.loading{
-  display:none;
-  text-align:center;
-  margin-top:15px;
-  color:#8fcaff;
-  font-size:13px;
-}
-
 .footer{
   text-align:center;
   margin-top:22px;
@@ -433,9 +390,11 @@ label{
 
 </head>
 
+
 <body>
 
 <div class="login-container">
+
 
   <div class="logo">
 
@@ -474,6 +433,7 @@ label{
       class="message"
     ></div>
 
+
     <form id="loginForm">
 
       <label for="email">
@@ -488,6 +448,7 @@ label{
         autocomplete="email"
         required
       >
+
 
       <label for="password">
         Senha
@@ -514,6 +475,7 @@ label{
 
       </div>
 
+
       <button
         type="submit"
         class="login-button"
@@ -524,6 +486,7 @@ label{
 
     </form>
 
+
     <a
       class="forgot"
       id="forgotPassword"
@@ -531,9 +494,11 @@ label{
       Esqueci minha senha
     </a>
 
+
     <div class="divider">
       ou continue com
     </div>
+
 
     <div class="social-buttons">
 
@@ -542,44 +507,32 @@ label{
         class="social-button google"
         id="googleLogin"
       >
-
-        <span class="social-icon">
-          🌈
-        </span>
-
+        <span class="social-icon">🌈</span>
         Google
-
       </button>
+
 
       <button
         type="button"
         class="social-button facebook"
         id="facebookLogin"
       >
-
-        <span class="social-icon">
-          f
-        </span>
-
+        <span class="social-icon">f</span>
         Facebook
-
       </button>
+
 
       <button
         type="button"
         class="social-button apple"
         id="appleLogin"
       >
-
-        <span class="social-icon">
-          
-        </span>
-
+        <span class="social-icon"></span>
         Apple
-
       </button>
 
     </div>
+
 
     <a
       class="create-account"
@@ -587,13 +540,6 @@ label{
     >
       ✨ Criar minha conta
     </a>
-
-    <div
-      class="loading"
-      id="loading"
-    >
-      🔄 Verificando sua conta...
-    </div>
 
   </div>
 
@@ -613,10 +559,12 @@ label{
       Faça seu cadastro no Adam Games
     </div>
 
+
     <div
       id="registerMessage"
       class="message"
     ></div>
+
 
     <form id="registerForm">
 
@@ -632,6 +580,7 @@ label{
         required
       >
 
+
       <label for="registerEmail">
         E-mail
       </label>
@@ -643,6 +592,7 @@ label{
         placeholder="seu@email.com"
         required
       >
+
 
       <label for="registerPassword">
         Senha
@@ -657,6 +607,7 @@ label{
         required
       >
 
+
       <label for="registerPassword2">
         Confirmar senha
       </label>
@@ -670,6 +621,7 @@ label{
         required
       >
 
+
       <button
         type="submit"
         class="login-button"
@@ -679,6 +631,7 @@ label{
       </button>
 
     </form>
+
 
     <a
       class="back-login"
@@ -698,6 +651,7 @@ label{
 
 
 <script type="module">
+
 
 /* =====================================
    FIREBASE
@@ -719,7 +673,8 @@ import {
   GoogleAuthProvider,
   FacebookAuthProvider,
   OAuthProvider,
-  signInWithPopup
+  signInWithPopup,
+  signOut
 }
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
@@ -735,7 +690,7 @@ from
 
 
 /* =====================================
-   CONFIGURAÇÃO FIREBASE
+   CONFIGURAÇÃO
 ===================================== */
 
 const firebaseConfig = {
@@ -765,9 +720,7 @@ const firebaseConfig = {
 
 
 const app =
-  initializeApp(
-    firebaseConfig
-  );
+  initializeApp(firebaseConfig);
 
 
 const auth =
@@ -787,10 +740,10 @@ const ADMIN_EMAIL =
 
 
 /* =====================================
-   REDIRECIONAMENTO CENTRAL
+   DESTINO DO USUÁRIO
 ===================================== */
 
-function redirecionarUsuario(usuario){
+function entrarNoLocalCorreto(usuario){
 
   if(!usuario){
 
@@ -799,7 +752,7 @@ function redirecionarUsuario(usuario){
   }
 
 
-  const emailUsuario =
+  const email =
     String(
       usuario.email || ""
     )
@@ -809,13 +762,7 @@ function redirecionarUsuario(usuario){
 
   console.log(
     "Usuário autenticado:",
-    emailUsuario
-  );
-
-
-  console.log(
-    "E-mail administrador:",
-    ADMIN_EMAIL.toLowerCase()
+    email
   );
 
 
@@ -824,16 +771,16 @@ function redirecionarUsuario(usuario){
    */
 
   if(
-    emailUsuario ===
+    email ===
     ADMIN_EMAIL.toLowerCase()
   ){
 
     console.log(
-      "ACESSO ADMINISTRADOR"
+      "ADMIN DETECTADO → adminv2.html"
     );
 
     window.location.href =
-      "admin.html";
+      "adminv2.html";
 
     return;
 
@@ -845,7 +792,7 @@ function redirecionarUsuario(usuario){
    */
 
   console.log(
-    "ACESSO USUÁRIO"
+    "USUÁRIO NORMAL → painel.html"
   );
 
   window.location.href =
@@ -859,48 +806,32 @@ function redirecionarUsuario(usuario){
 ===================================== */
 
 const loginBox =
-  document.getElementById(
-    "loginBox"
-  );
+  document.getElementById("loginBox");
 
 const registerBox =
-  document.getElementById(
-    "registerBox"
-  );
+  document.getElementById("registerBox");
 
 const loginForm =
-  document.getElementById(
-    "loginForm"
-  );
+  document.getElementById("loginForm");
 
 const registerForm =
-  document.getElementById(
-    "registerForm"
-  );
+  document.getElementById("registerForm");
 
 const email =
-  document.getElementById(
-    "email"
-  );
+  document.getElementById("email");
 
 const password =
-  document.getElementById(
-    "password"
-  );
+  document.getElementById("password");
 
 const message =
-  document.getElementById(
-    "message"
-  );
+  document.getElementById("message");
 
 const registerMessage =
-  document.getElementById(
-    "registerMessage"
-  );
+  document.getElementById("registerMessage");
 
 
 /* =====================================
-   MENSAGEM
+   MENSAGENS
 ===================================== */
 
 function mostrarMensagem(
@@ -912,8 +843,7 @@ function mostrarMensagem(
     texto;
 
   message.className =
-    "message " +
-    tipo;
+    "message " + tipo;
 
 }
 
@@ -927,8 +857,7 @@ function mostrarMensagemCadastro(
     texto;
 
   registerMessage.className =
-    "message " +
-    tipo;
+    "message " + tipo;
 
 }
 
@@ -938,37 +867,28 @@ function mostrarMensagemCadastro(
 ===================================== */
 
 document
-.getElementById(
-  "showPassword"
-)
+.getElementById("showPassword")
 .addEventListener(
   "click",
   () => {
 
     if(
-      password.type ===
-      "password"
+      password.type === "password"
     ){
 
-      password.type =
-        "text";
+      password.type = "text";
 
-      document.getElementById(
-        "showPassword"
-      ).textContent =
-        "🙈";
+      document
+      .getElementById("showPassword")
+      .textContent = "🙈";
 
-    }
+    }else{
 
-    else{
+      password.type = "password";
 
-      password.type =
-        "password";
-
-      document.getElementById(
-        "showPassword"
-      ).textContent =
-        "👁️";
+      document
+      .getElementById("showPassword")
+      .textContent = "👁️";
 
     }
 
@@ -981,25 +901,16 @@ document
 ===================================== */
 
 document
-.getElementById(
-  "showRegister"
-)
+.getElementById("showRegister")
 .addEventListener(
   "click",
   () => {
 
-    loginBox.classList.add(
-      "hidden"
-    );
+    loginBox.classList.add("hidden");
 
-    registerBox.classList.add(
-      "active"
-    );
+    registerBox.classList.add("active");
 
-    window.scrollTo(
-      0,
-      0
-    );
+    window.scrollTo(0,0);
 
   }
 );
@@ -1010,33 +921,23 @@ document
 ===================================== */
 
 document
-.getElementById(
-  "backLogin"
-)
+.getElementById("backLogin")
 .addEventListener(
   "click",
   () => {
 
-    registerBox.classList.remove(
-      "active"
-    );
+    registerBox.classList.remove("active");
 
-    loginBox.classList.remove(
-      "hidden"
-    );
+    loginBox.classList.remove("hidden");
 
-    registerMessage.textContent =
-      "";
-
-    registerMessage.className =
-      "message";
+    mostrarMensagemCadastro("","");
 
   }
 );
 
 
 /* =====================================
-   LOGIN COM E-MAIL
+   LOGIN E-MAIL
 ===================================== */
 
 loginForm.addEventListener(
@@ -1048,7 +949,6 @@ loginForm.addEventListener(
 
     const emailValue =
       email.value.trim();
-
 
     const passwordValue =
       password.value;
@@ -1074,8 +974,7 @@ loginForm.addEventListener(
       );
 
 
-    button.disabled =
-      true;
+    button.disabled = true;
 
     button.textContent =
       "ENTRANDO...";
@@ -1098,14 +997,15 @@ loginForm.addEventListener(
 
 
       /*
-       * Usa o usuário que acabou
-       * de fazer login.
+       * REDIRECIONAMENTO IMEDIATO
+       * USANDO O USUÁRIO QUE ACABOU
+       * DE FAZER LOGIN.
        */
 
       setTimeout(
         () => {
 
-          redirecionarUsuario(
+          entrarNoLocalCorreto(
             resultado.user
           );
 
@@ -1114,12 +1014,10 @@ loginForm.addEventListener(
       );
 
 
-    }
-
-    catch(error){
+    }catch(error){
 
       console.error(
-        "Erro login:",
+        "ERRO LOGIN:",
         error
       );
 
@@ -1159,13 +1057,9 @@ loginForm.addEventListener(
       }
 
 
-      mostrarMensagem(
-        texto
-      );
+      mostrarMensagem(texto);
 
-
-      button.disabled =
-        false;
+      button.disabled = false;
 
       button.textContent =
         "ENTRAR";
@@ -1177,7 +1071,7 @@ loginForm.addEventListener(
 
 
 /* =====================================
-   CADASTRO
+   CRIAR CONTA
 ===================================== */
 
 registerForm.addEventListener(
@@ -1189,35 +1083,27 @@ registerForm.addEventListener(
 
     const nome =
       document
-      .getElementById(
-        "registerName"
-      )
+      .getElementById("registerName")
       .value
       .trim();
 
 
     const emailNovo =
       document
-      .getElementById(
-        "registerEmail"
-      )
+      .getElementById("registerEmail")
       .value
       .trim();
 
 
     const senha =
       document
-      .getElementById(
-        "registerPassword"
-      )
+      .getElementById("registerPassword")
       .value;
 
 
     const senha2 =
       document
-      .getElementById(
-        "registerPassword2"
-      )
+      .getElementById("registerPassword2")
       .value;
 
 
@@ -1240,8 +1126,7 @@ registerForm.addEventListener(
       );
 
 
-    button.disabled =
-      true;
+    button.disabled = true;
 
     button.textContent =
       "CRIANDO...";
@@ -1261,17 +1146,20 @@ registerForm.addEventListener(
         resultado.user;
 
 
+      /*
+       * GERA ID PÚBLICO
+       */
+
       const caracteres =
         "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
 
 
-      let publicId =
-        "";
+      let publicId = "";
 
 
       for(
-        let i = 0;
-        i < 7;
+        let i=0;
+        i<7;
         i++
       ){
 
@@ -1287,12 +1175,7 @@ registerForm.addEventListener(
 
 
       /*
-       * Conta nova começa:
-       *
-       * VIP = false
-       * Caixa = false
-       * Créditos = 0
-       *
+       * NOVA CONTA COMEÇA SEM VIP
        */
 
       await addDoc(
@@ -1355,27 +1238,25 @@ registerForm.addEventListener(
 
 
       /*
-       * Conta recém-criada
-       * sempre vai para painel.
+       * CONTA NOVA É USUÁRIO NORMAL
        */
 
       setTimeout(
         () => {
 
-          window.location.href =
-            "painel.html";
+          entrarNoLocalCorreto(
+            usuario
+          );
 
         },
         700
       );
 
 
-    }
-
-    catch(error){
+    }catch(error){
 
       console.error(
-        "Erro cadastro:",
+        "ERRO CADASTRO:",
         error
       );
 
@@ -1420,8 +1301,7 @@ registerForm.addEventListener(
       );
 
 
-      button.disabled =
-        false;
+      button.disabled = false;
 
       button.textContent =
         "CRIAR CONTA";
@@ -1437,9 +1317,7 @@ registerForm.addEventListener(
 ===================================== */
 
 document
-.getElementById(
-  "forgotPassword"
-)
+.getElementById("forgotPassword")
 .addEventListener(
   "click",
   async () => {
@@ -1474,9 +1352,8 @@ document
         "success"
       );
 
-    }
 
-    catch(error){
+    }catch(error){
 
       console.error(
         error
@@ -1498,9 +1375,7 @@ document
 ===================================== */
 
 document
-.getElementById(
-  "googleLogin"
-)
+.getElementById("googleLogin")
 .addEventListener(
   "click",
   async () => {
@@ -1518,16 +1393,15 @@ document
         );
 
 
-      redirecionarUsuario(
+      entrarNoLocalCorreto(
         resultado.user
       );
 
-    }
 
-    catch(error){
+    }catch(error){
 
       console.error(
-        "Erro Google:",
+        "ERRO GOOGLE:",
         error
       );
 
@@ -1547,9 +1421,7 @@ document
 ===================================== */
 
 document
-.getElementById(
-  "facebookLogin"
-)
+.getElementById("facebookLogin")
 .addEventListener(
   "click",
   async () => {
@@ -1567,16 +1439,15 @@ document
         );
 
 
-      redirecionarUsuario(
+      entrarNoLocalCorreto(
         resultado.user
       );
 
-    }
 
-    catch(error){
+    }catch(error){
 
       console.error(
-        "Erro Facebook:",
+        "ERRO FACEBOOK:",
         error
       );
 
@@ -1596,9 +1467,7 @@ document
 ===================================== */
 
 document
-.getElementById(
-  "appleLogin"
-)
+.getElementById("appleLogin")
 .addEventListener(
   "click",
   async () => {
@@ -1618,16 +1487,15 @@ document
         );
 
 
-      redirecionarUsuario(
+      entrarNoLocalCorreto(
         resultado.user
       );
 
-    }
 
-    catch(error){
+    }catch(error){
 
       console.error(
-        "Erro Apple:",
+        "ERRO APPLE:",
         error
       );
 
@@ -1643,29 +1511,30 @@ document
 
 
 /* =====================================
-   SESSÃO EXISTENTE
+   SESSÃO JÁ EXISTENTE
 ===================================== */
 
 onAuthStateChanged(
   auth,
   usuario => {
 
-    if(!usuario){
+    if(usuario){
 
-      return;
+      console.log(
+        "SESSÃO ENCONTRADA:",
+        usuario.email
+      );
+
+      /*
+       * Se já estiver autenticado,
+       * vai para o local correto.
+       */
+
+      entrarNoLocalCorreto(
+        usuario
+      );
 
     }
-
-
-    console.log(
-      "Sessão encontrada:",
-      usuario.email
-    );
-
-
-    redirecionarUsuario(
-      usuario
-    );
 
   }
 );
@@ -1673,5 +1542,4 @@ onAuthStateChanged(
 </script>
 
 </body>
-
 </html>
