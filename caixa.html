@@ -86,6 +86,8 @@ body{
 
   font-size:25px;
 
+  cursor:pointer;
+
 }
 
 .title{
@@ -329,11 +331,15 @@ h1{
 
   font-weight:900;
 
+  cursor:pointer;
+
 }
 
 .rescue:disabled{
 
   opacity:.45;
+
+  cursor:not-allowed;
 
 }
 
@@ -346,6 +352,8 @@ h1{
   color:#b9d5ea;
 
   font-size:13px;
+
+  line-height:1.4;
 
 }
 
@@ -436,6 +444,38 @@ h1{
   box-shadow:
     0 8px 25px
     rgba(0,0,0,.35);
+
+}
+
+
+/* =====================================================
+   ERRO TÉCNICO
+===================================================== */
+
+.debug{
+
+  display:none;
+
+  margin-top:15px;
+
+  padding:12px;
+
+  border-radius:12px;
+
+  background:
+    rgba(120,0,0,.35);
+
+  border:
+    1px solid
+    rgba(255,120,120,.3);
+
+  color:#ffd0d0;
+
+  font-size:11px;
+
+  text-align:left;
+
+  word-break:break-word;
 
 }
 
@@ -587,11 +627,18 @@ h1{
     </div>
 
 
+    <div
+      class="debug"
+      id="debug">
+
+    </div>
+
+
   </div>
 
 
   <!-- =================================================
-       CONTEÚDO
+       CONTEÚDO DA CAIXA
   ================================================== -->
 
   <div class="prizes">
@@ -725,7 +772,7 @@ from
 
 
 /* =====================================================
-   CONFIGURAÇÃO DO SEU FIREBASE
+   CONFIGURAÇÃO FIREBASE
 ===================================================== */
 
 const firebaseConfig = {
@@ -750,6 +797,10 @@ const firebaseConfig = {
 
 };
 
+
+/* =====================================================
+   INICIALIZAR
+===================================================== */
 
 const app =
   initializeApp(
@@ -799,20 +850,92 @@ const vipStatus =
   );
 
 
+const debug =
+  document.getElementById(
+    "debug"
+  );
+
+
+/* =====================================================
+   VARIÁVEIS
+===================================================== */
+
 let usuarioRef =
   null;
 
-
 let proximaChance =
   null;
-
 
 let intervalo =
   null;
 
 
 /* =====================================================
-   TIMESTAMP
+   MOSTRAR ERRO
+===================================================== */
+
+function mostrarErro(
+  error
+){
+
+  console.error(
+    "ERRO CAIXA:",
+    error
+  );
+
+
+  const codigo =
+    error &&
+    error.code
+      ? error.code
+      : "sem código";
+
+
+  const texto =
+    error &&
+    error.message
+      ? error.message
+      : "Sem mensagem";
+
+
+  vipStatus.textContent =
+    "⚠️ ERRO AO CARREGAR";
+
+
+  timer.textContent =
+    "--:--:--";
+
+
+  status.textContent =
+    "Erro ao carregar sua Caixa.";
+
+
+  status.className =
+    "status locked";
+
+
+  message.textContent =
+    "O sistema encontrou um erro.";
+
+
+  debug.style.display =
+    "block";
+
+
+  debug.textContent =
+    "Código: "
+    +
+    codigo
+    +
+    " | "
+    +
+    texto;
+
+}
+
+
+/* =====================================================
+   CONVERTER TIMESTAMP
 ===================================================== */
 
 function timestampMs(
@@ -852,7 +975,7 @@ function timestampMs(
 
 
 /* =====================================================
-   FORMATAÇÃO
+   FORMATAR TIMER
 ===================================================== */
 
 function formatar(
@@ -926,10 +1049,10 @@ function formatar(
 
 
 /* =====================================================
-   ATUALIZAR TIMER
+   TIMER
 ===================================================== */
 
-function atualizar(){
+function atualizarTimer(){
 
   /*
   PRIMEIRA CHANCE
@@ -964,7 +1087,7 @@ function atualizar(){
 
 
   /*
-  CHANCE DISPONÍVEL
+  CHANCE LIBERADA
   */
 
   if(
@@ -993,7 +1116,7 @@ function atualizar(){
 
 
   /*
-  ESPERANDO
+  CONTAGEM
   */
 
   timer.textContent =
@@ -1022,9 +1145,6 @@ function atualizar(){
 
 function iniciarTimer(){
 
-  atualizar();
-
-
   if(intervalo){
 
     clearInterval(
@@ -1034,9 +1154,12 @@ function iniciarTimer(){
   }
 
 
+  atualizarTimer();
+
+
   intervalo =
     setInterval(
-      atualizar,
+      atualizarTimer,
       1000
     );
 
@@ -1044,77 +1167,143 @@ function iniciarTimer(){
 
 
 /* =====================================================
-   CARREGAR USUÁRIO
+   BUSCAR CADASTRO
+===================================================== */
+
+async function buscarCadastro(
+  user
+){
+
+  /*
+  -----------------------------------------------------
+  PRIMEIRA TENTATIVA:
+  UID
+  -----------------------------------------------------
+  */
+
+  if(user.uid){
+
+    const porUid =
+      await getDocs(
+
+        query(
+
+          collection(
+            db,
+            "admins"
+          ),
+
+          where(
+            "uid",
+            "==",
+            user.uid
+          )
+
+        )
+
+      );
+
+
+    if(
+      !porUid.empty
+    ){
+
+      return porUid.docs[0];
+
+    }
+
+  }
+
+
+  /*
+  -----------------------------------------------------
+  SEGUNDA TENTATIVA:
+  E-MAIL
+  -----------------------------------------------------
+  */
+
+  if(user.email){
+
+    const porEmail =
+      await getDocs(
+
+        query(
+
+          collection(
+            db,
+            "admins"
+          ),
+
+          where(
+            "email",
+            "==",
+            user.email
+          )
+
+        )
+
+      );
+
+
+    if(
+      !porEmail.empty
+    ){
+
+      return porEmail.docs[0];
+
+    }
+
+  }
+
+
+  /*
+  -----------------------------------------------------
+  NÃO ENCONTROU
+  -----------------------------------------------------
+  */
+
+  throw new Error(
+    "Nenhum cadastro em admins corresponde ao UID ou e-mail desta conta."
+  );
+
+}
+
+
+/* =====================================================
+   CARREGAR
 ===================================================== */
 
 async function carregar(
   user
 ){
 
-  /*
-  -----------------------------------------------------
-  IMPORTANTE:
+  console.log(
+    "Usuário autenticado:",
+    user.uid,
+    user.email
+  );
 
-  Agora procuramos pelo E-MAIL autenticado,
-  não pelo UID.
-  -----------------------------------------------------
-  */
-
-  if(!user.email){
-
-    throw new Error(
-      "Sua conta não possui e-mail."
-    );
-
-  }
-
-
-  const resultado =
-    await getDocs(
-
-      query(
-
-        collection(
-          db,
-          "admins"
-        ),
-
-        where(
-          "email",
-          "==",
-          user.email
-        )
-
-      )
-
-    );
-
-
-  /*
-  CADASTRO NÃO ENCONTRADO
-  */
-
-  if(
-    resultado.empty
-  ){
-
-    throw new Error(
-      "Cadastro não encontrado para este e-mail."
-    );
-
-  }
-
-
-  /*
-  PRIMEIRO DOCUMENTO
-  */
 
   const documento =
-    resultado.docs[0];
+    await buscarCadastro(
+      user
+    );
+
+
+  console.log(
+    "Documento encontrado:",
+    documento.id
+  );
 
 
   const dados =
     documento.data();
+
+
+  console.log(
+    "Dados do cadastro:",
+    dados
+  );
 
 
   usuarioRef =
@@ -1136,7 +1325,7 @@ async function carregar(
   ){
 
     vipStatus.textContent =
-      "🔒 Caixa exclusiva para VIP";
+      "🔒 CAIXA EXCLUSIVA PARA VIP";
 
 
     timer.textContent =
@@ -1144,7 +1333,7 @@ async function carregar(
 
 
     status.textContent =
-      "👑 Torne-se VIP para ter acesso à Caixa Box.";
+      "👑 Esta Caixa Box é exclusiva para membros VIP.";
 
 
     status.className =
@@ -1162,7 +1351,7 @@ async function carregar(
 
   /*
   -----------------------------------------------------
-  VIP CONFIRMADO
+  VIP
   -----------------------------------------------------
   */
 
@@ -1188,7 +1377,7 @@ async function carregar(
 
 
 /* =====================================================
-   RESGATAR CAIXA
+   RESGATAR
 ===================================================== */
 
 rescue.addEventListener(
@@ -1198,6 +1387,9 @@ rescue.addEventListener(
 
 
     if(!usuarioRef){
+
+      message.textContent =
+        "Cadastro ainda não foi carregado.";
 
       return;
 
@@ -1216,25 +1408,28 @@ rescue.addEventListener(
       "";
 
 
+    debug.style.display =
+      "none";
+
+
     try{
 
 
       /*
       -------------------------------------------------
-      HORÁRIO DO RESGATE
-      -------------------------------------------------
-
-      Para esta versão de teste usamos o horário
-      registrado no cliente.
-
-      A proteção definitiva será feita posteriormente
-      pela Cloud Function.
+      HORÁRIO ATUAL
       -------------------------------------------------
       */
 
       const agora =
         Timestamp.now();
 
+
+      /*
+      -------------------------------------------------
+      72 HORAS
+      -------------------------------------------------
+      */
 
       const proxima =
         Timestamp.fromMillis(
@@ -1284,12 +1479,19 @@ rescue.addEventListener(
 
       /*
       -------------------------------------------------
-      ATUALIZAR TELA
+      ATUALIZAR
       -------------------------------------------------
       */
 
       proximaChance =
         proxima.toMillis();
+
+
+      timer.textContent =
+        formatar(
+          proximaChance -
+          Date.now()
+        );
 
 
       status.textContent =
@@ -1310,18 +1512,14 @@ rescue.addEventListener(
 
       iniciarTimer();
 
-
     }
+
 
     catch(error){
 
       console.error(
+        "ERRO AO RESGATAR:",
         error
-      );
-
-
-      console.error(
-        error.message
       );
 
 
@@ -1342,7 +1540,27 @@ rescue.addEventListener(
 
 
       message.textContent =
-        error.message;
+        "O resgate foi recusado pelo Firebase.";
+
+
+      debug.style.display =
+        "block";
+
+
+      debug.textContent =
+        "Código: "
+        +
+        (
+          error.code ||
+          "sem código"
+        )
+        +
+        " | "
+        +
+        (
+          error.message ||
+          "sem mensagem"
+        );
 
     }
 
@@ -1352,7 +1570,7 @@ rescue.addEventListener(
 
 
 /* =====================================================
-   VOLTAR
+   BOTÃO VOLTAR
 ===================================================== */
 
 document
@@ -1384,6 +1602,18 @@ onAuthStateChanged(
   async user => {
 
 
+    console.log(
+      "AUTH DISPAROU:",
+      user
+    );
+
+
+    /*
+    ---------------------------------------------------
+    NÃO LOGADO
+    ---------------------------------------------------
+    */
+
     if(!user){
 
       window.location.href =
@@ -1393,6 +1623,12 @@ onAuthStateChanged(
 
     }
 
+
+    /*
+    ---------------------------------------------------
+    LOGADO
+    ---------------------------------------------------
+    */
 
     try{
 
@@ -1404,29 +1640,9 @@ onAuthStateChanged(
 
     catch(error){
 
-      console.error(
+      mostrarErro(
         error
       );
-
-
-      vipStatus.textContent =
-        "⚠️ Não foi possível verificar";
-
-
-      timer.textContent =
-        "--:--:--";
-
-
-      status.textContent =
-        "Erro ao carregar sua Caixa.";
-
-
-      status.className =
-        "status locked";
-
-
-      message.textContent =
-        error.message;
 
     }
 
