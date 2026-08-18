@@ -21,21 +21,36 @@
 }
 
 body{
-  font-family:Arial,sans-serif;
+  font-family:Arial,Helvetica,sans-serif;
   color:#fff;
   min-height:100vh;
+
   background:
+    radial-gradient(
+      circle at 15% 5%,
+      #43aaff 0%,
+      transparent 30%
+    ),
+
     linear-gradient(
       145deg,
       #087fe0,
       #031b3d 75%
     );
-  padding:20px 12px 40px;
+
+  padding:20px 12px 50px;
 }
 
 .container{
-  max-width:900px;
+  max-width:950px;
   margin:auto;
+}
+
+button{
+  border:0;
+  cursor:pointer;
+  color:#fff;
+  font-weight:bold;
 }
 
 header{
@@ -56,10 +71,13 @@ header{
   width:58px;
   height:58px;
   border-radius:18px;
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   font-size:30px;
+
   background:
     linear-gradient(
       145deg,
@@ -81,15 +99,10 @@ header{
   margin-top:5px;
   padding:5px 9px;
   border-radius:8px;
-  background:#d99b12;
-  font-size:11px;
-  font-weight:bold;
-}
 
-button{
-  border:0;
-  cursor:pointer;
-  color:#fff;
+  background:#d99b12;
+
+  font-size:11px;
   font-weight:bold;
 }
 
@@ -111,13 +124,21 @@ h2{
 
 .card{
   background:
-    rgba(2,30,62,.92);
+    rgba(2,30,62,.94);
+
   border:
     1px solid
     rgba(255,255,255,.1);
+
   border-radius:22px;
+
   padding:20px;
+
   margin-bottom:18px;
+
+  box-shadow:
+    0 15px 35px
+    rgba(0,0,0,.18);
 }
 
 .card h3{
@@ -126,50 +147,93 @@ h2{
 }
 
 .search{
-  display:flex;
+  display:grid;
+
+  grid-template-columns:
+    1fr
+    130px;
+
   gap:10px;
 }
 
 input,
 select{
+
   width:100%;
+
   height:50px;
+
   border:
     1px solid
     rgba(255,255,255,.15);
+
   border-radius:12px;
+
   background:#071f40;
+
   color:#fff;
+
   padding:0 14px;
+
   font-size:15px;
+
   outline:none;
 }
 
+input:focus,
+select:focus{
+
+  border-color:#2aa7ff;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(42,167,255,.1);
+}
+
 .search button{
-  min-width:130px;
+
   border-radius:12px;
-  background:#168ff0;
+
+  background:
+    linear-gradient(
+      135deg,
+      #1c9aff,
+      #006bd5
+    );
 }
 
 .message{
+
   margin-top:12px;
+
   padding:12px;
+
   border-radius:10px;
+
   display:none;
+
   font-size:14px;
+
+  line-height:1.4;
 }
 
 .success{
+
   display:block;
+
   background:
     rgba(0,220,110,.12);
+
   color:#72ffae;
 }
 
 .error{
+
   display:block;
+
   background:
     rgba(255,50,70,.12);
+
   color:#ff9ca8;
 }
 
@@ -178,49 +242,122 @@ select{
 }
 
 .user{
+
   display:flex;
+
   align-items:center;
+
   gap:15px;
+
   margin-bottom:20px;
 }
 
 .avatar{
-  width:65px;
-  height:65px;
-  border-radius:18px;
+
+  width:68px;
+
+  height:68px;
+
+  border-radius:19px;
+
   background:#ffd52b;
+
   color:#111;
+
   display:flex;
+
   align-items:center;
+
   justify-content:center;
-  font-size:32px;
+
+  font-size:33px;
+
+  flex-shrink:0;
 }
 
 .userName{
+
   font-size:22px;
+
   font-weight:bold;
 }
 
 .userEmail,
-.userId{
+.userId,
+.userUid{
+
   margin-top:4px;
+
   color:#a9c8e5;
+
   font-size:13px;
+
+  word-break:break-all;
+}
+
+.status-row{
+
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:8px;
+
+  margin-top:10px;
+}
+
+.status{
+
+  padding:6px 9px;
+
+  border-radius:9px;
+
+  font-size:11px;
+
+  font-weight:bold;
+
+  background:
+    rgba(255,255,255,.08);
+}
+
+.status.vip{
+
+  background:
+    rgba(255,193,7,.2);
+
+  color:#ffd84c;
+}
+
+.status.normal{
+
+  color:#a9c8e5;
 }
 
 .balances{
+
   display:grid;
+
   grid-template-columns:
     repeat(4,1fr);
+
   gap:10px;
+
   margin-bottom:22px;
 }
 
 .balance{
+
   text-align:center;
+
   padding:15px 8px;
+
   border-radius:15px;
+
   background:
+    rgba(255,255,255,.05);
+
+  border:
+    1px solid
     rgba(255,255,255,.05);
 }
 
@@ -229,30 +366,46 @@ select{
 }
 
 .balanceName{
+
   color:#91b2cf;
+
   font-size:10px;
+
   font-weight:bold;
+
   margin-top:5px;
 }
 
 .balanceValue{
+
   font-size:18px;
+
   font-weight:bold;
+
   margin-top:5px;
 }
 
 .form{
+
   display:grid;
+
   grid-template-columns:
-    1fr 1fr;
+    1fr
+    1fr;
+
   gap:12px;
 }
 
 .field label{
+
   display:block;
+
   color:#a9c8e5;
+
   font-size:11px;
+
   font-weight:bold;
+
   margin-bottom:6px;
 }
 
@@ -261,70 +414,168 @@ select{
 }
 
 .actions{
+
   display:grid;
+
   grid-template-columns:
-    1fr 1fr;
+    1fr
+    1fr;
+
   gap:10px;
+
   margin-top:15px;
 }
 
 .add{
-  background:#07934c;
+
+  background:
+    linear-gradient(
+      135deg,
+      #0ba85a,
+      #087a42
+    );
+
   padding:14px;
+
   border-radius:12px;
 }
 
 .remove{
-  background:#c8233c;
+
+  background:
+    linear-gradient(
+      135deg,
+      #d72d47,
+      #a8172d
+    );
+
   padding:14px;
+
   border-radius:12px;
 }
 
 .special{
+
   display:grid;
+
   grid-template-columns:
-    1fr 1fr;
+    1fr
+    1fr;
+
   gap:10px;
+
   margin-top:10px;
 }
 
 .vip{
+
   padding:14px;
+
   border-radius:12px;
-  background:#c38b0d;
+
+  background:
+    linear-gradient(
+      135deg,
+      #d29a16,
+      #9d6800
+    );
 }
 
 .box{
+
   padding:14px;
+
   border-radius:12px;
-  background:#087edb;
+
+  background:
+    linear-gradient(
+      135deg,
+      #118eea,
+      #0562ad
+    );
+}
+
+.info-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
+  gap:10px;
+
+  margin-bottom:20px;
+}
+
+.info-item{
+
+  padding:12px;
+
+  border-radius:13px;
+
+  background:
+    rgba(255,255,255,.045);
+}
+
+.info-label{
+
+  color:#77a9cf;
+
+  font-size:10px;
+
+  font-weight:bold;
+
+  text-transform:uppercase;
+}
+
+.info-value{
+
+  margin-top:5px;
+
+  font-size:14px;
+
+  word-break:break-word;
 }
 
 .history{
+
   margin-top:22px;
 }
 
 .historyItem{
+
   padding:15px;
+
   margin-top:9px;
+
   border-radius:14px;
+
   background:
     rgba(255,255,255,.05);
+
   border:
     1px solid
     rgba(255,255,255,.06);
 }
 
 .historyTop{
+
   display:flex;
+
   justify-content:space-between;
+
   gap:10px;
+
   font-weight:bold;
 }
 
 .historyDate{
+
   color:#75d4ff;
+
   font-size:12px;
+
   text-align:right;
 }
 
@@ -337,29 +588,66 @@ select{
 }
 
 .historyInfo{
+
   color:#9dbbd3;
+
   font-size:12px;
+
   margin-top:8px;
+
   line-height:1.6;
 }
 
 .operation-id{
+
   margin-top:8px;
+
   padding:7px 9px;
+
   border-radius:8px;
+
   background:
     rgba(0,0,0,.2);
+
   color:#7fc9ff;
+
   font-size:11px;
+
   word-break:break-all;
 }
 
 .empty{
+
   padding:15px;
+
   border-radius:12px;
+
   background:
     rgba(255,255,255,.04);
+
   color:#9dbbd3;
+}
+
+.warning{
+
+  margin-top:10px;
+
+  padding:11px;
+
+  border-radius:11px;
+
+  background:
+    rgba(255,193,7,.08);
+
+  border:
+    1px solid
+    rgba(255,193,7,.18);
+
+  color:#e8cf8a;
+
+  font-size:12px;
+
+  line-height:1.5;
 }
 
 @media(max-width:650px){
@@ -368,40 +656,65 @@ select{
     font-size:32px;
   }
 
+  header{
+    align-items:flex-start;
+  }
+
   .search{
-    flex-direction:column;
+
+    grid-template-columns:
+      1fr;
+
   }
 
   .search button{
+
     width:100%;
+
     height:50px;
   }
 
   .balances{
+
     grid-template-columns:
       1fr 1fr;
+
   }
 
   .form{
+
     grid-template-columns:
       1fr;
+
   }
 
   .full{
+
     grid-column:auto;
   }
 
   .actions,
   .special{
+
     grid-template-columns:
       1fr;
+
+  }
+
+  .info-grid{
+
+    grid-template-columns:
+      1fr;
+
   }
 
   .historyTop{
+
     flex-direction:column;
   }
 
   .historyDate{
+
     text-align:left;
   }
 
@@ -413,6 +726,7 @@ select{
 
 
 <body>
+
 
 <div class="container">
 
@@ -462,9 +776,9 @@ select{
 </p>
 
 
-<!-- ================================
-     BUSCAR USUÁRIO
-================================ -->
+<!-- =====================================================
+     BUSCA
+===================================================== -->
 
 <div class="card">
 
@@ -476,9 +790,9 @@ select{
   <div class="search">
 
     <input
-      id="publicId"
+      id="searchInput"
       type="text"
-      placeholder="Digite o ID Adam Games"
+      placeholder="Digite o ID Adam Games ou o e-mail"
       autocomplete="off"
     >
 
@@ -494,6 +808,16 @@ select{
   </div>
 
 
+  <div class="warning">
+
+    Você pode pesquisar pelo
+    <strong>ID Adam Games</strong>
+    ou pelo
+    <strong>e-mail cadastrado</strong>.
+
+  </div>
+
+
   <div
     id="searchMessage"
     class="message">
@@ -502,9 +826,9 @@ select{
 </div>
 
 
-<!-- ================================
-     ÁREA DO USUÁRIO
-================================ -->
+<!-- =====================================================
+     USUÁRIO
+===================================================== -->
 
 <div id="userArea">
 
@@ -552,15 +876,162 @@ select{
 
       </div>
 
+
+      <div
+        class="userUid"
+        id="uid">
+
+        UID: —
+
+      </div>
+
+
+      <div class="status-row">
+
+        <span
+          class="status normal"
+          id="vipStatus">
+
+          ⭐ NÃO VIP
+
+        </span>
+
+
+        <span
+          class="status"
+          id="boxStatus">
+
+          🎁 CAIXA
+
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ===================================================
+       DADOS
+  ==================================================== -->
+
+  <div class="info-grid">
+
+
+    <div class="info-item">
+
+      <div class="info-label">
+        Nome
+      </div>
+
+      <div
+        class="info-value"
+        id="infoNome">
+
+        —
+
+      </div>
+
+    </div>
+
+
+    <div class="info-item">
+
+      <div class="info-label">
+        E-mail
+      </div>
+
+      <div
+        class="info-value"
+        id="infoEmail">
+
+        —
+
+      </div>
+
+    </div>
+
+
+    <div class="info-item">
+
+      <div class="info-label">
+        ID Adam Games
+      </div>
+
+      <div
+        class="info-value"
+        id="infoId">
+
+        —
+
+      </div>
+
+    </div>
+
+
+    <div class="info-item">
+
+      <div class="info-label">
+        UID Firebase
+      </div>
+
+      <div
+        class="info-value"
+        id="infoUid">
+
+        —
+
+      </div>
+
+    </div>
+
+
+    <div class="info-item">
+
+      <div class="info-label">
+        Idade
+      </div>
+
+      <div
+        class="info-value"
+        id="infoIdade">
+
+        Não informado
+
+      </div>
+
+    </div>
+
+
+    <div class="info-item">
+
+      <div class="info-label">
+        Telefone
+      </div>
+
+      <div
+        class="info-value"
+        id="infoTelefone">
+
+        Não informado
+
+      </div>
+
     </div>
 
 
   </div>
 
 
-  <!-- ================================
+  <!-- ===================================================
        SALDOS
-  ================================= -->
+  ==================================================== -->
+
+  <h3>
+    📊 Recursos atuais
+  </h3>
+
 
   <div class="balances">
 
@@ -652,9 +1123,9 @@ select{
   </div>
 
 
-  <!-- ================================
+  <!-- ===================================================
        MOVIMENTAÇÃO
-  ================================= -->
+  ==================================================== -->
 
   <h3>
     🎁 Fazer movimentação
@@ -704,8 +1175,8 @@ select{
       <input
         id="quantidade"
         type="number"
-        min="1"
-        step="1"
+        min="0.01"
+        step="0.01"
         placeholder="Quantidade"
       >
 
@@ -780,7 +1251,6 @@ select{
 
     </button>
 
-
   </div>
 
 
@@ -790,12 +1260,11 @@ select{
   </div>
 
 
-  <!-- ================================
-       EXTRATO
-  ================================= -->
+  <!-- ===================================================
+       HISTÓRICO
+  ==================================================== -->
 
   <div class="history">
-
 
     <h3>
       📜 Extrato do usuário
@@ -805,16 +1274,18 @@ select{
     <div id="historyList">
 
       <div class="empty">
+
         Nenhuma movimentação carregada.
+
       </div>
 
     </div>
-
 
   </div>
 
 
 </div>
+
 
 </div>
 
@@ -825,10 +1296,9 @@ select{
 <script type="module">
 
 
-/* ==========================================
+/* =====================================================
    FIREBASE
-========================================== */
-
+===================================================== */
 
 import {
   initializeApp
@@ -858,6 +1328,10 @@ import {
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
+
+/* =====================================================
+   CONFIG
+===================================================== */
 
 const firebaseConfig = {
 
@@ -896,27 +1370,55 @@ const db =
   getFirestore(app);
 
 
-/* ==========================================
+/* =====================================================
    ADMIN
-========================================== */
+===================================================== */
 
-const ADMIN =
+const ADMIN_EMAIL =
   "raphafentyramos@gmail.com";
+
+
+let adminUsuario =
+  null;
 
 
 let usuarioSelecionado =
   null;
 
 
-let adminLogado =
-  null;
+/* =====================================================
+   ELEMENTOS
+===================================================== */
+
+const searchInput =
+  document.getElementById(
+    "searchInput"
+  );
 
 
-/* ==========================================
-   MENSAGENS
-========================================== */
+const searchMessage =
+  document.getElementById(
+    "searchMessage"
+  );
 
-function mensagem(
+
+const operationMessage =
+  document.getElementById(
+    "operationMessage"
+  );
+
+
+const userArea =
+  document.getElementById(
+    "userArea"
+  );
+
+
+/* =====================================================
+   MENSAGEM
+===================================================== */
+
+function mostrarMensagem(
   elemento,
   texto,
   tipo
@@ -932,34 +1434,32 @@ function mensagem(
 }
 
 
-/* ==========================================
-   NÚMEROS
-========================================== */
+/* =====================================================
+   FORMATAÇÃO
+===================================================== */
 
 function numero(
   valor
 ){
 
-  return Number(
-    valor || 0
-  ).toLocaleString(
+  const n =
+    Number(valor || 0);
+
+  return n.toLocaleString(
     "pt-BR"
   );
 
 }
 
 
-/* ==========================================
-   DINHEIRO
-========================================== */
-
 function dinheiro(
   valor
 ){
 
-  return Number(
-    valor || 0
-  ).toLocaleString(
+  const n =
+    Number(valor || 0);
+
+  return n.toLocaleString(
     "pt-BR",
     {
       style:"currency",
@@ -970,63 +1470,42 @@ function dinheiro(
 }
 
 
-/* ==========================================
-   ID ÚNICO DA MOVIMENTAÇÃO
-========================================== */
+/* =====================================================
+   ID DA OPERAÇÃO
+===================================================== */
 
-function gerarIdMovimentacao(){
+function gerarOperacaoId(){
 
   const agora =
     new Date();
 
 
-  const ano =
-    agora.getFullYear();
+  const parteData =
 
+    agora.getFullYear() +
 
-  const mes =
     String(
-      agora.getMonth() + 1
-    ).padStart(
-      2,
-      "0"
-    );
+      agora.getMonth()+1
+    ).padStart(2,"0") +
 
-
-  const dia =
     String(
       agora.getDate()
-    ).padStart(
-      2,
-      "0"
-    );
+    ).padStart(2,"0");
 
 
-  const hora =
+  const parteHora =
+
     String(
       agora.getHours()
-    ).padStart(
-      2,
-      "0"
-    );
+    ).padStart(2,"0") +
 
-
-  const minuto =
     String(
       agora.getMinutes()
-    ).padStart(
-      2,
-      "0"
-    );
+    ).padStart(2,"0") +
 
-
-  const segundo =
     String(
       agora.getSeconds()
-    ).padStart(
-      2,
-      "0"
-    );
+    ).padStart(2,"0");
 
 
   let aleatorio;
@@ -1044,16 +1523,12 @@ function gerarIdMovimentacao(){
       .toUpperCase();
 
   }
-
   else{
 
     aleatorio =
       Math.random()
       .toString(36)
-      .substring(
-        2,
-        8
-      )
+      .substring(2,8)
       .toUpperCase();
 
   }
@@ -1061,13 +1536,9 @@ function gerarIdMovimentacao(){
 
   return (
     "MOV-" +
-    ano +
-    mes +
-    dia +
+    parteData +
     "-" +
-    hora +
-    minuto +
-    segundo +
+    parteHora +
     "-" +
     aleatorio
   );
@@ -1075,88 +1546,144 @@ function gerarIdMovimentacao(){
 }
 
 
-/* ==========================================
+/* =====================================================
    MOSTRAR USUÁRIO
-========================================== */
+===================================================== */
 
 function mostrarUsuario(
-  doc
+  documento
 ){
 
-  const data =
-    doc.data();
+  const dados =
+    documento.data();
 
 
   usuarioSelecionado = {
 
     ref:
-      doc.ref,
+      documento.ref,
 
     docId:
-      doc.id,
+      documento.id,
 
     data:
-      data
+      dados
 
   };
 
 
-  document.getElementById(
-    "userArea"
-  ).style.display =
+  userArea.style.display =
     "block";
+
+
+  const nome =
+    dados.nome ||
+    dados.name ||
+    "Usuário";
+
+
+  const email =
+    dados.email ||
+    "Sem e-mail";
+
+
+  const publicId =
+    dados.publicId ||
+    "Pendente";
 
 
   document.getElementById(
     "nome"
   ).textContent =
-
-    data.nome ||
-    data.name ||
-    "Usuário";
+    nome;
 
 
   document.getElementById(
     "email"
   ).textContent =
-
-    data.email ||
-    "Sem e-mail";
+    email;
 
 
   document.getElementById(
     "id"
   ).textContent =
-
     "ID: " +
+    publicId;
+
+
+  document.getElementById(
+    "uid"
+  ).textContent =
+    "UID: " +
     (
-      data.publicId ||
-      doc.id
+      dados.uid ||
+      "Não informado"
     );
 
 
   document.getElementById(
     "avatar"
   ).textContent =
-
-    data.avatar ||
+    dados.avatar ||
     "🙂";
+
+
+  document.getElementById(
+    "infoNome"
+  ).textContent =
+    nome;
+
+
+  document.getElementById(
+    "infoEmail"
+  ).textContent =
+    email;
+
+
+  document.getElementById(
+    "infoId"
+  ).textContent =
+    publicId;
+
+
+  document.getElementById(
+    "infoUid"
+  ).textContent =
+    dados.uid ||
+    "Não informado";
+
+
+  document.getElementById(
+    "infoIdade"
+  ).textContent =
+    dados.idade ||
+    "Não informado";
+
+
+  document.getElementById(
+    "infoTelefone"
+  ).textContent =
+    dados.telefone ||
+    dados.phone ||
+    "Não informado";
 
 
   atualizarSaldos();
 
 
+  atualizarStatus();
+
+
   carregarExtrato(
-    data.publicId ||
-    doc.id
+    publicId
   );
 
 }
 
 
-/* ==========================================
-   ATUALIZAR SALDOS
-========================================== */
+/* =====================================================
+   SALDOS
+===================================================== */
 
 function atualizarSaldos(){
 
@@ -1169,67 +1696,193 @@ function atualizarSaldos(){
   }
 
 
-  const data =
+  const dados =
     usuarioSelecionado.data;
 
 
   document.getElementById(
     "chances"
   ).textContent =
-
     numero(
-      data.chances
+      dados.chances
     );
 
 
   document.getElementById(
     "moedas"
   ).textContent =
-
     numero(
-      data.moedas
+      dados.moedas
     );
 
 
   document.getElementById(
     "chaves"
   ).textContent =
-
     numero(
-      data.chaves
+      dados.chaves
     );
 
 
   document.getElementById(
     "creditos"
   ).textContent =
-
     dinheiro(
-      data.creditos
+      dados.creditos
     );
 
 }
 
 
-/* ==========================================
+/* =====================================================
+   STATUS
+===================================================== */
+
+function atualizarStatus(){
+
+  if(
+    !usuarioSelecionado
+  ){
+
+    return;
+
+  }
+
+
+  const dados =
+    usuarioSelecionado.data;
+
+
+  const vip =
+    dados.vip === true;
+
+
+  const caixa =
+    dados.caixaBox === true;
+
+
+  const vipStatus =
+    document.getElementById(
+      "vipStatus"
+    );
+
+
+  if(vip){
+
+    vipStatus.textContent =
+      "👑 VIP ATIVO";
+
+    vipStatus.className =
+      "status vip";
+
+  }
+  else{
+
+    vipStatus.textContent =
+      "⭐ NÃO VIP";
+
+    vipStatus.className =
+      "status normal";
+
+  }
+
+
+  const boxStatus =
+    document.getElementById(
+      "boxStatus"
+    );
+
+
+  boxStatus.textContent =
+    caixa
+      ? "🎁 CAIXA UTILIZADA"
+      : "🎁 CAIXA DISPONÍVEL";
+
+}
+
+
+/* =====================================================
+   BUSCAR POR ID
+===================================================== */
+
+async function buscarPorId(
+  valor
+){
+
+  const referencia =
+    collection(
+      db,
+      "admins"
+    );
+
+
+  const resultado =
+    await getDocs(
+      query(
+        referencia,
+        where(
+          "publicId",
+          "==",
+          valor
+        )
+      )
+    );
+
+
+  return resultado;
+
+}
+
+
+/* =====================================================
+   BUSCAR POR E-MAIL
+===================================================== */
+
+async function buscarPorEmail(
+  valor
+){
+
+  const referencia =
+    collection(
+      db,
+      "admins"
+    );
+
+
+  const resultado =
+    await getDocs(
+      query(
+        referencia,
+        where(
+          "email",
+          "==",
+          valor.toLowerCase()
+        )
+      )
+    );
+
+
+  return resultado;
+
+}
+
+
+/* =====================================================
    BUSCAR USUÁRIO
-========================================== */
+===================================================== */
 
 async function buscarUsuario(){
 
-  const id =
-    document.getElementById(
-      "publicId"
-    ).value.trim();
+  const valor =
+    searchInput.value
+    .trim();
 
 
-  if(!id){
+  if(!valor){
 
-    mensagem(
-      document.getElementById(
-        "searchMessage"
-      ),
-      "Digite o ID do usuário.",
+    mostrarMensagem(
+      searchMessage,
+      "Digite um ID ou e-mail.",
       "error"
     );
 
@@ -1238,86 +1891,83 @@ async function buscarUsuario(){
   }
 
 
+  searchMessage.className =
+    "message";
+
+
+  userArea.style.display =
+    "none";
+
+
   try{
 
-    const ref =
-      collection(
-        db,
-        "admins"
+    /*
+    Primeiro tenta como ID.
+    */
+
+    let resultado =
+      await buscarPorId(
+        valor
       );
 
 
-    const busca =
-      query(
-        ref,
-        where(
-          "publicId",
-          "==",
-          id
-        )
-      );
+    /*
+    Se não encontrou,
+    tenta como e-mail.
+    */
 
+    if(
+      resultado.empty &&
+      valor.includes("@")
+    ){
 
-    const resultado =
-      await getDocs(
-        busca
-      );
+      resultado =
+        await buscarPorEmail(
+          valor
+        );
+
+    }
 
 
     if(
       resultado.empty
     ){
 
-      document.getElementById(
-        "userArea"
-      ).style.display =
-        "none";
-
-
-      mensagem(
-        document.getElementById(
-          "searchMessage"
-        ),
+      mostrarMensagem(
+        searchMessage,
         "Usuário não encontrado.",
         "error"
       );
-
 
       return;
 
     }
 
 
-    const doc =
-      resultado.docs[0];
-
-
     mostrarUsuario(
-      doc
+      resultado.docs[0]
     );
 
 
-    mensagem(
-      document.getElementById(
-        "searchMessage"
-      ),
-      "Usuário encontrado.",
+    mostrarMensagem(
+      searchMessage,
+      "Usuário encontrado com sucesso.",
       "success"
     );
 
 
-  }catch(erro){
+  }
+  catch(error){
 
     console.error(
-      erro
+      "Erro na busca:",
+      error
     );
 
 
-    mensagem(
-      document.getElementById(
-        "searchMessage"
-      ),
-      "Erro ao buscar usuário.",
+    mostrarMensagem(
+      searchMessage,
+      "Não foi possível consultar os usuários.",
       "error"
     );
 
@@ -1326,24 +1976,21 @@ async function buscarUsuario(){
 }
 
 
-/* ==========================================
+/* =====================================================
    ALTERAR SALDO
-========================================== */
+===================================================== */
 
 async function alterarSaldo(
   operacao
 ){
 
   if(
-    !usuarioSelecionado ||
-    !adminLogado
+    !usuarioSelecionado
   ){
 
-    mensagem(
-      document.getElementById(
-        "operationMessage"
-      ),
-      "Nenhum usuário selecionado.",
+    mostrarMensagem(
+      operationMessage,
+      "Primeiro selecione um usuário.",
       "error"
     );
 
@@ -1379,30 +2026,9 @@ async function alterarSaldo(
     quantidade <= 0
   ){
 
-    mensagem(
-      document.getElementById(
-        "operationMessage"
-      ),
+    mostrarMensagem(
+      operationMessage,
       "Digite uma quantidade válida.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  if(
-    !Number.isInteger(
-      quantidade
-    )
-  ){
-
-    mensagem(
-      document.getElementById(
-        "operationMessage"
-      ),
-      "A quantidade deve ser um número inteiro.",
       "error"
     );
 
@@ -1415,11 +2041,9 @@ async function alterarSaldo(
     !motivo
   ){
 
-    mensagem(
-      document.getElementById(
-        "operationMessage"
-      ),
-      "O motivo é obrigatório.",
+    mostrarMensagem(
+      operationMessage,
+      "Informe o motivo da movimentação.",
       "error"
     );
 
@@ -1428,33 +2052,32 @@ async function alterarSaldo(
   }
 
 
-  const antigo =
+  const atual =
     Number(
       usuarioSelecionado.data[item] ||
       0
     );
 
 
-  const movimento =
+  const novo =
 
     operacao === "adicionar"
-      ? quantidade
-      : -quantidade;
 
+      ?
 
-  const novo =
-    antigo +
-    movimento;
+      atual + quantidade
+
+      :
+
+      atual - quantidade;
 
 
   if(
     novo < 0
   ){
 
-    mensagem(
-      document.getElementById(
-        "operationMessage"
-      ),
+    mostrarMensagem(
+      operationMessage,
       "O saldo não pode ficar negativo.",
       "error"
     );
@@ -1464,34 +2087,20 @@ async function alterarSaldo(
   }
 
 
-  const confirmacao =
-
+  const acao =
     operacao === "adicionar"
-
-      ?
-
-      "Adicionar " +
-      numero(
-        quantidade
-      ) +
-      " " +
-      item +
-      " ao usuário?"
-
-      :
-
-      "Remover " +
-      numero(
-        quantidade
-      ) +
-      " " +
-      item +
-      " do usuário?";
+      ? "Adicionar"
+      : "Remover";
 
 
   if(
     !confirm(
-      confirmacao
+      acao +
+      " " +
+      quantidade +
+      " de " +
+      item +
+      "?"
     )
   ){
 
@@ -1500,23 +2109,15 @@ async function alterarSaldo(
   }
 
 
-  const movimentacaoId =
-    gerarIdMovimentacao();
-
-
-  const agora =
-    new Date();
-
-
-  const criadoEm =
-    agora.toISOString();
+  const operacaoId =
+    gerarOperacaoId();
 
 
   try{
 
-    /* ================================
-       ATUALIZA SALDO
-    ================================= */
+    /*
+    Atualiza o usuário.
+    */
 
     await updateDoc(
       usuarioSelecionado.ref,
@@ -1527,9 +2128,9 @@ async function alterarSaldo(
     );
 
 
-    /* ================================
-       REGISTRA HISTÓRICO
-    ================================= */
+    /*
+    Registra o histórico.
+    */
 
     await addDoc(
       collection(
@@ -1539,7 +2140,7 @@ async function alterarSaldo(
       {
 
         movimentacaoId:
-          movimentacaoId,
+          operacaoId,
 
         usuarioId:
           usuarioSelecionado.docId,
@@ -1558,12 +2159,10 @@ async function alterarSaldo(
           "",
 
         adminEmail:
-          adminLogado.email ||
-          "",
+          adminUsuario.email,
 
         adminUid:
-          adminLogado.uid ||
-          "",
+          adminUsuario.uid,
 
         item:
           item,
@@ -1575,7 +2174,7 @@ async function alterarSaldo(
           quantidade,
 
         saldoAnterior:
-          antigo,
+          atual,
 
         saldoFinal:
           novo,
@@ -1584,7 +2183,7 @@ async function alterarSaldo(
           motivo,
 
         criadoEm:
-          criadoEm
+          new Date().toISOString()
 
       }
     );
@@ -1609,11 +2208,10 @@ async function alterarSaldo(
       "";
 
 
-    mensagem(
-      document.getElementById(
-        "operationMessage"
-      ),
-      "Movimentação realizada e registrada no extrato.",
+    mostrarMensagem(
+      operationMessage,
+      "Movimentação realizada com sucesso. ID: " +
+      operacaoId,
       "success"
     );
 
@@ -1624,19 +2222,18 @@ async function alterarSaldo(
     );
 
 
-  }catch(erro){
+  }
+  catch(error){
 
     console.error(
       "Erro na movimentação:",
-      erro
+      error
     );
 
 
-    mensagem(
-      document.getElementById(
-        "operationMessage"
-      ),
-      "Erro ao realizar movimentação.",
+    mostrarMensagem(
+      operationMessage,
+      "Erro ao realizar a movimentação.",
       "error"
     );
 
@@ -1645,277 +2242,21 @@ async function alterarSaldo(
 }
 
 
-/* ==========================================
-   EXTRATO
-========================================== */
-
-async function carregarExtrato(
-  publicId
-){
-
-  const area =
-    document.getElementById(
-      "historyList"
-    );
-
-
-  area.innerHTML =
-    "<div class='empty'>🔄 Carregando extrato...</div>";
-
-
-  try{
-
-    const ref =
-      collection(
-        db,
-        "historico"
-      );
-
-
-    const busca =
-      query(
-        ref,
-        where(
-          "publicId",
-          "==",
-          publicId
-        )
-      );
-
-
-    const resultado =
-      await getDocs(
-        busca
-      );
-
-
-    if(
-      resultado.empty
-    ){
-
-      area.innerHTML =
-        "<div class='empty'>" +
-        "Nenhuma movimentação registrada." +
-        "</div>";
-
-      return;
-
-    }
-
-
-    const registros =
-
-      resultado.docs
-
-      .map(
-        doc => ({
-          id:
-            doc.id,
-          ...doc.data()
-        })
-      )
-
-      .sort(
-        (
-          a,
-          b
-        ) =>
-
-          String(
-            b.criadoEm ||
-            ""
-          ).localeCompare(
-            String(
-              a.criadoEm ||
-              ""
-            )
-          )
-      );
-
-
-    area.innerHTML =
-      "";
-
-
-    registros.forEach(
-      registro => {
-
-
-        const div =
-          document.createElement(
-            "div"
-          );
-
-
-        div.className =
-          "historyItem";
-
-
-        const positivo =
-
-          registro.operacao ===
-          "adicionar";
-
-
-        const sinal =
-          positivo
-            ? "+"
-            : "-";
-
-
-        const classe =
-          positivo
-            ? "plus"
-            : "minus";
-
-
-        const data =
-
-          registro.criadoEm
-
-            ?
-
-            new Date(
-              registro.criadoEm
-            ).toLocaleString(
-              "pt-BR"
-            )
-
-            :
-
-            "—";
-
-
-        div.innerHTML =
-
-          "<div class='historyTop'>" +
-
-            "<span class='" +
-            classe +
-            "'>" +
-
-              sinal +
-              " " +
-
-              numero(
-                registro.quantidade
-              ) +
-
-              " " +
-
-              registro.item +
-
-            "</span>" +
-
-
-            "<span class='historyDate'>" +
-
-              data +
-
-            "</span>" +
-
-          "</div>" +
-
-
-          "<div class='historyInfo'>" +
-
-            "Saldo anterior: " +
-
-            numero(
-              registro.saldoAnterior
-            ) +
-
-            "<br>" +
-
-
-            "Saldo final: " +
-
-            numero(
-              registro.saldoFinal
-            ) +
-
-            "<br>" +
-
-
-            "Motivo: " +
-
-            (
-              registro.motivo ||
-              "—"
-            ) +
-
-            "<br>" +
-
-
-            "Administrador: " +
-
-            (
-              registro.adminEmail ||
-              "—"
-            ) +
-
-            "<br>" +
-
-
-            "UID administrador: " +
-
-            (
-              registro.adminUid ||
-              "—"
-            ) +
-
-          "</div>" +
-
-
-          "<div class='operation-id'>" +
-
-            "🆔 ID da movimentação: " +
-
-            (
-              registro.movimentacaoId ||
-              "Registro antigo"
-            ) +
-
-          "</div>";
-
-
-        area.appendChild(
-          div
-        );
-
-      }
-    );
-
-
-  }catch(erro){
-
-    console.error(
-      "Erro ao carregar extrato:",
-      erro
-    );
-
-
-    area.innerHTML =
-
-      "<div class='empty'>" +
-      "Erro ao carregar o extrato." +
-      "</div>";
-
-  }
-
-}
-
-
-/* ==========================================
-   VIP
-========================================== */
+/* =====================================================
+   ALTERAR VIP
+===================================================== */
 
 async function alterarVIP(){
 
   if(
-    !usuarioSelecionado ||
-    !adminLogado
+    !usuarioSelecionado
   ){
+
+    mostrarMensagem(
+      operationMessage,
+      "Selecione um usuário primeiro.",
+      "error"
+    );
 
     return;
 
@@ -1930,13 +2271,17 @@ async function alterarVIP(){
     !atual;
 
 
+  const pergunta =
+    novo
+      ?
+      "Ativar VIP para este usuário?"
+      :
+      "Desativar VIP deste usuário?";
+
+
   if(
     !confirm(
-      novo
-        ?
-        "Ativar VIP para este usuário?"
-        :
-        "Desativar VIP deste usuário?"
+      pergunta
     )
   ){
 
@@ -1945,8 +2290,8 @@ async function alterarVIP(){
   }
 
 
-  const movimentacaoId =
-    gerarIdMovimentacao();
+  const operacaoId =
+    gerarOperacaoId();
 
 
   try{
@@ -1968,7 +2313,7 @@ async function alterarVIP(){
       {
 
         movimentacaoId:
-          movimentacaoId,
+          operacaoId,
 
         usuarioId:
           usuarioSelecionado.docId,
@@ -1987,12 +2332,10 @@ async function alterarVIP(){
           "",
 
         adminEmail:
-          adminLogado.email ||
-          "",
+          adminUsuario.email,
 
         adminUid:
-          adminLogado.uid ||
-          "",
+          adminUsuario.uid,
 
         item:
           "VIP",
@@ -2033,15 +2376,16 @@ async function alterarVIP(){
       novo;
 
 
-    mensagem(
-      document.getElementById(
-        "operationMessage"
-      ),
+    atualizarStatus();
+
+
+    mostrarMensagem(
+      operationMessage,
       novo
         ?
-        "VIP ativado e registrado."
+        "👑 VIP ativado com sucesso."
         :
-        "VIP desativado e registrado.",
+        "⭐ VIP desativado com sucesso.",
       "success"
     );
 
@@ -2052,18 +2396,18 @@ async function alterarVIP(){
     );
 
 
-  }catch(erro){
+  }
+  catch(error){
 
     console.error(
-      erro
+      "Erro VIP:",
+      error
     );
 
 
-    mensagem(
-      document.getElementById(
-        "operationMessage"
-      ),
-      "Erro ao alterar VIP.",
+    mostrarMensagem(
+      operationMessage,
+      "Não foi possível alterar o VIP.",
       "error"
     );
 
@@ -2072,16 +2416,21 @@ async function alterarVIP(){
 }
 
 
-/* ==========================================
-   CAIXA BOX
-========================================== */
+/* =====================================================
+   ALTERAR CAIXA
+===================================================== */
 
 async function alterarCaixa(){
 
   if(
-    !usuarioSelecionado ||
-    !adminLogado
+    !usuarioSelecionado
   ){
+
+    mostrarMensagem(
+      operationMessage,
+      "Selecione um usuário primeiro.",
+      "error"
+    );
 
     return;
 
@@ -2096,13 +2445,17 @@ async function alterarCaixa(){
     !atual;
 
 
+  const pergunta =
+    novo
+      ?
+      "Marcar a Caixa Box como utilizada?"
+      :
+      "Liberar a Caixa Box novamente?";
+
+
   if(
     !confirm(
-      novo
-        ?
-        "Marcar Caixa Box como utilizada?"
-        :
-        "Liberar novamente a Caixa Box?"
+      pergunta
     )
   ){
 
@@ -2111,8 +2464,8 @@ async function alterarCaixa(){
   }
 
 
-  const movimentacaoId =
-    gerarIdMovimentacao();
+  const operacaoId =
+    gerarOperacaoId();
 
 
   try{
@@ -2134,7 +2487,7 @@ async function alterarCaixa(){
       {
 
         movimentacaoId:
-          movimentacaoId,
+          operacaoId,
 
         usuarioId:
           usuarioSelecionado.docId,
@@ -2153,12 +2506,10 @@ async function alterarCaixa(){
           "",
 
         adminEmail:
-          adminLogado.email ||
-          "",
+          adminUsuario.email,
 
         adminUid:
-          adminLogado.uid ||
-          "",
+          adminUsuario.uid,
 
         item:
           "Caixa Box",
@@ -2199,15 +2550,16 @@ async function alterarCaixa(){
       novo;
 
 
-    mensagem(
-      document.getElementById(
-        "operationMessage"
-      ),
+    atualizarStatus();
+
+
+    mostrarMensagem(
+      operationMessage,
       novo
         ?
-        "Caixa Box marcada como utilizada e registrada."
+        "🎁 Caixa Box marcada como utilizada."
         :
-        "Caixa Box liberada e registrada.",
+        "🎁 Caixa Box liberada novamente.",
       "success"
     );
 
@@ -2218,18 +2570,18 @@ async function alterarCaixa(){
     );
 
 
-  }catch(erro){
+  }
+  catch(error){
 
     console.error(
-      erro
+      "Erro Caixa:",
+      error
     );
 
 
-    mensagem(
-      document.getElementById(
-        "operationMessage"
-      ),
-      "Erro ao alterar Caixa Box.",
+    mostrarMensagem(
+      operationMessage,
+      "Não foi possível alterar a Caixa Box.",
       "error"
     );
 
@@ -2238,9 +2590,286 @@ async function alterarCaixa(){
 }
 
 
-/* ==========================================
-   AUTENTICAÇÃO E ADMIN
-========================================== */
+/* =====================================================
+   HISTÓRICO
+===================================================== */
+
+async function carregarExtrato(
+  publicId
+){
+
+  const lista =
+    document.getElementById(
+      "historyList"
+    );
+
+
+  lista.innerHTML =
+    "<div class='empty'>🔄 Carregando histórico...</div>";
+
+
+  if(
+    !publicId ||
+    publicId === "Pendente"
+  ){
+
+    lista.innerHTML =
+      "<div class='empty'>" +
+      "Este usuário ainda não possui ID público. " +
+      "As movimentações aparecerão aqui após o ID ser criado." +
+      "</div>";
+
+    return;
+
+  }
+
+
+  try{
+
+    const referencia =
+      collection(
+        db,
+        "historico"
+      );
+
+
+    const resultado =
+      await getDocs(
+        query(
+          referencia,
+          where(
+            "publicId",
+            "==",
+            publicId
+          )
+        )
+      );
+
+
+    if(
+      resultado.empty
+    ){
+
+      lista.innerHTML =
+        "<div class='empty'>" +
+        "Nenhuma movimentação registrada." +
+        "</div>";
+
+      return;
+
+    }
+
+
+    const registros =
+
+      resultado.docs
+
+      .map(
+        documento => ({
+          id:
+            documento.id,
+
+          ...documento.data()
+
+        })
+      )
+
+      .sort(
+        (
+          a,
+          b
+        ) =>
+
+          String(
+            b.criadoEm ||
+            ""
+          ).localeCompare(
+            String(
+              a.criadoEm ||
+              ""
+            )
+          )
+      );
+
+
+    lista.innerHTML =
+      "";
+
+
+    registros.forEach(
+      registro => {
+
+
+        const item =
+          document.createElement(
+            "div"
+          );
+
+
+        item.className =
+          "historyItem";
+
+
+        const positivo =
+          registro.operacao ===
+          "adicionar";
+
+
+        const sinal =
+          positivo
+            ? "+"
+            : "-";
+
+
+        const classe =
+          positivo
+            ? "plus"
+            : "minus";
+
+
+        let data =
+          "—";
+
+
+        if(
+          registro.criadoEm
+        ){
+
+          const dataObjeto =
+            new Date(
+              registro.criadoEm
+            );
+
+
+          if(
+            !Number.isNaN(
+              dataObjeto.getTime()
+            )
+          ){
+
+            data =
+              dataObjeto.toLocaleString(
+                "pt-BR"
+              );
+
+          }
+
+        }
+
+
+        item.innerHTML =
+
+          "<div class='historyTop'>" +
+
+            "<span class='" +
+            classe +
+            "'>" +
+
+              sinal +
+              " " +
+
+              numero(
+                registro.quantidade
+              ) +
+
+              " " +
+
+              (
+                registro.item ||
+                ""
+              ) +
+
+            "</span>" +
+
+
+            "<span class='historyDate'>" +
+
+              data +
+
+            "</span>" +
+
+          "</div>" +
+
+
+          "<div class='historyInfo'>" +
+
+            "Saldo anterior: " +
+
+            numero(
+              registro.saldoAnterior
+            ) +
+
+            "<br>" +
+
+            "Saldo final: " +
+
+            numero(
+              registro.saldoFinal
+            ) +
+
+            "<br>" +
+
+            "Motivo: " +
+
+            (
+              registro.motivo ||
+              "—"
+            ) +
+
+            "<br>" +
+
+            "Administrador: " +
+
+            (
+              registro.adminEmail ||
+              "—"
+            ) +
+
+          "</div>" +
+
+
+          "<div class='operation-id'>" +
+
+            "🆔 " +
+
+            (
+              registro.movimentacaoId ||
+              "Sem ID"
+            ) +
+
+          "</div>";
+
+
+        lista.appendChild(
+          item
+        );
+
+      }
+    );
+
+
+  }
+  catch(error){
+
+    console.error(
+      "Erro histórico:",
+      error
+    );
+
+
+    lista.innerHTML =
+      "<div class='empty'>" +
+      "Não foi possível carregar o histórico." +
+      "</div>";
+
+  }
+
+}
+
+
+/* =====================================================
+   AUTENTICAÇÃO DO ADMIN
+===================================================== */
 
 onAuthStateChanged(
   auth,
@@ -2260,15 +2889,20 @@ onAuthStateChanged(
     }
 
 
+    const email =
+      (
+        usuario.email ||
+        ""
+      ).toLowerCase();
+
+
     if(
-      !usuario.email ||
-      usuario.email.toLowerCase()
-      !==
-      ADMIN.toLowerCase()
+      email !==
+      ADMIN_EMAIL.toLowerCase()
     ){
 
       alert(
-        "Acesso negado. Área exclusiva do administrador."
+        "⛔ Acesso negado. Área exclusiva do administrador."
       );
 
 
@@ -2287,23 +2921,22 @@ onAuthStateChanged(
     }
 
 
-    adminLogado =
+    adminUsuario =
       usuario;
 
 
     console.log(
-      "ADMIN AUTENTICADO:",
+      "Administrador autenticado:",
       usuario.email
     );
-
 
   }
 );
 
 
-/* ==========================================
-   BOTÃO BUSCAR
-========================================== */
+/* =====================================================
+   EVENTOS
+===================================================== */
 
 document
   .getElementById(
@@ -2315,20 +2948,13 @@ document
   );
 
 
-/* ==========================================
-   ENTER NO CAMPO ID
-========================================== */
-
-document
-  .getElementById(
-    "publicId"
-  )
+searchInput
   .addEventListener(
     "keydown",
-    evento => {
+    event => {
 
       if(
-        evento.key ===
+        event.key ===
         "Enter"
       ){
 
@@ -2339,10 +2965,6 @@ document
     }
   );
 
-
-/* ==========================================
-   ADICIONAR
-========================================== */
 
 document
   .getElementById(
@@ -2357,10 +2979,6 @@ document
   );
 
 
-/* ==========================================
-   REMOVER
-========================================== */
-
 document
   .getElementById(
     "remover"
@@ -2374,10 +2992,6 @@ document
   );
 
 
-/* ==========================================
-   VIP
-========================================== */
-
 document
   .getElementById(
     "vip"
@@ -2388,10 +3002,6 @@ document
   );
 
 
-/* ==========================================
-   CAIXA
-========================================== */
-
 document
   .getElementById(
     "box"
@@ -2401,10 +3011,6 @@ document
     alterarCaixa
   );
 
-
-/* ==========================================
-   LOGOUT
-========================================== */
 
 document
   .getElementById(
@@ -2420,12 +3026,11 @@ document
           auth
         );
 
-      }catch(
-        erro
-      ){
+      }
+      catch(error){
 
         console.error(
-          erro
+          error
         );
 
       }
@@ -2437,7 +3042,6 @@ document
 
     }
   );
-
 
 </script>
 
