@@ -1,0 +1,2761 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>Adam Games • Admin</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  min-height:100vh;
+
+  color:white;
+
+  background:
+    radial-gradient(
+      circle at 15% 5%,
+      #42aaff 0%,
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      #071f43,
+      #020914 80%
+    );
+
+  padding-bottom:40px;
+}
+
+.container{
+
+  width:
+    min(
+      1100px,
+      calc(100% - 24px)
+    );
+
+  margin:auto;
+}
+
+
+/* ==============================
+   TOPO
+============================== */
+
+.topbar{
+
+  padding:18px 0;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  gap:15px;
+}
+
+.brand{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:12px;
+}
+
+.brand-icon{
+
+  width:58px;
+
+  height:58px;
+
+  border-radius:18px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  font-size:31px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #218fff,
+      #0754a7
+    );
+
+  box-shadow:
+    0 10px 30px
+    rgba(0,0,0,.25);
+}
+
+.brand h1{
+
+  font-size:21px;
+
+  line-height:.95;
+}
+
+.brand h1 span{
+
+  color:#ffd52b;
+}
+
+.admin-badge{
+
+  display:inline-block;
+
+  margin-top:5px;
+
+  padding:5px 9px;
+
+  border-radius:9px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f7c52c,
+      #a66b00
+    );
+
+  color:white;
+
+  font-size:10px;
+
+  font-weight:bold;
+}
+
+.logout-button{
+
+  border:0;
+
+  border-radius:14px;
+
+  padding:12px 17px;
+
+  background:
+    rgba(255,255,255,.1);
+
+  color:white;
+
+  font-weight:bold;
+
+  cursor:pointer;
+}
+
+
+/* ==============================
+   TITULO
+============================== */
+
+.hero{
+
+  margin-top:10px;
+
+  margin-bottom:20px;
+}
+
+.hero h2{
+
+  font-size:
+    clamp(
+      32px,
+      6vw,
+      50px
+    );
+
+  line-height:1;
+}
+
+.hero p{
+
+  margin-top:8px;
+
+  color:#a9c9e8;
+}
+
+
+/* ==============================
+   CARDS RESUMO
+============================== */
+
+.summary{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(4,1fr);
+
+  gap:12px;
+
+  margin-bottom:20px;
+}
+
+.summary-card{
+
+  padding:17px;
+
+  border-radius:20px;
+
+  background:
+    rgba(4,35,70,.85);
+
+  border:
+    1px solid
+    rgba(255,255,255,.1);
+}
+
+.summary-icon{
+
+  font-size:28px;
+}
+
+.summary-label{
+
+  margin-top:8px;
+
+  color:#8fb4d5;
+
+  font-size:11px;
+
+  font-weight:bold;
+
+  text-transform:uppercase;
+}
+
+.summary-value{
+
+  margin-top:5px;
+
+  font-size:22px;
+
+  font-weight:900;
+}
+
+
+/* ==============================
+   PAINEL
+============================== */
+
+.panel{
+
+  padding:20px;
+
+  border-radius:25px;
+
+  background:
+    rgba(3,27,56,.92);
+
+  border:
+    1px solid
+    rgba(255,255,255,.11);
+
+  box-shadow:
+    0 20px 50px
+    rgba(0,0,0,.25);
+
+  margin-bottom:18px;
+}
+
+.panel-title{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:10px;
+
+  margin-bottom:15px;
+}
+
+.panel-title h3{
+
+  font-size:20px;
+}
+
+
+/* ==============================
+   BUSCA
+============================== */
+
+.search-row{
+
+  display:flex;
+
+  gap:10px;
+}
+
+.input{
+
+  width:100%;
+
+  height:52px;
+
+  padding:
+    0
+    15px;
+
+  border-radius:14px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.12);
+
+  outline:none;
+
+  background:
+    rgba(0,0,0,.22);
+
+  color:white;
+
+  font-size:15px;
+}
+
+.input:focus{
+
+  border-color:#2aa2ff;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(42,162,255,.1);
+}
+
+.button{
+
+  height:52px;
+
+  padding:
+    0
+    20px;
+
+  border:0;
+
+  border-radius:14px;
+
+  color:white;
+
+  font-weight:900;
+
+  cursor:pointer;
+
+  white-space:nowrap;
+}
+
+.primary{
+
+  background:
+    linear-gradient(
+      135deg,
+      #22a2ff,
+      #0069db
+    );
+}
+
+.green{
+
+  background:
+    linear-gradient(
+      135deg,
+      #1fcf75,
+      #07904b
+    );
+}
+
+.red{
+
+  background:
+    linear-gradient(
+      135deg,
+      #ff4a5d,
+      #c7182e
+    );
+}
+
+.gold{
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffcf32,
+      #d28a00
+    );
+}
+
+
+/* ==============================
+   USUARIO
+============================== */
+
+.user-card{
+
+  display:none;
+
+  margin-top:18px;
+
+  padding:18px;
+
+  border-radius:20px;
+
+  background:
+    rgba(255,255,255,.05);
+
+  border:
+    1px solid
+    rgba(255,255,255,.08);
+}
+
+.user-header{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:15px;
+
+  margin-bottom:18px;
+}
+
+.avatar{
+
+  width:70px;
+
+  height:70px;
+
+  border-radius:20px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  font-size:38px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #f7b52c,
+      #ffdc65
+    );
+
+  border:
+    3px solid
+    #ffd332;
+}
+
+.user-name{
+
+  font-size:22px;
+
+  font-weight:900;
+}
+
+.user-email{
+
+  margin-top:4px;
+
+  color:#a9c8e5;
+
+  font-size:13px;
+}
+
+.user-id{
+
+  margin-top:5px;
+
+  color:#62bdff;
+
+  font-size:12px;
+
+  font-weight:bold;
+}
+
+
+/* ==============================
+   SALDOS
+============================== */
+
+.balances{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(4,1fr);
+
+  gap:10px;
+
+  margin-bottom:20px;
+}
+
+.balance{
+
+  padding:14px;
+
+  border-radius:16px;
+
+  text-align:center;
+
+  background:
+    rgba(0,0,0,.2);
+
+  border:
+    1px solid
+    rgba(255,255,255,.07);
+}
+
+.balance-icon{
+
+  font-size:28px;
+}
+
+.balance-name{
+
+  margin-top:5px;
+
+  color:#8eb3d4;
+
+  font-size:10px;
+
+  font-weight:bold;
+}
+
+.balance-value{
+
+  margin-top:5px;
+
+  font-size:18px;
+
+  font-weight:900;
+}
+
+
+/* ==============================
+   MOVIMENTAÇÃO
+============================== */
+
+.operation-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
+  gap:12px;
+}
+
+.field label{
+
+  display:block;
+
+  margin-bottom:7px;
+
+  color:#a9c8e5;
+
+  font-size:11px;
+
+  font-weight:bold;
+
+  text-transform:uppercase;
+}
+
+.select{
+
+  width:100%;
+
+  height:50px;
+
+  padding:
+    0
+    13px;
+
+  border-radius:13px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.12);
+
+  background:
+    #092b52;
+
+  color:white;
+
+  outline:none;
+
+  font-size:14px;
+}
+
+.full{
+
+  grid-column:
+    1 / -1;
+}
+
+.operation-buttons{
+
+  display:grid;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
+  gap:10px;
+
+  margin-top:15px;
+}
+
+
+/* ==============================
+   VIP / BOX
+============================== */
+
+.special-actions{
+
+  display:grid;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
+  gap:10px;
+
+  margin-top:15px;
+}
+
+.special-button{
+
+  min-height:50px;
+
+  border:0;
+
+  border-radius:13px;
+
+  color:white;
+
+  font-weight:900;
+
+  cursor:pointer;
+}
+
+
+/* ==============================
+   HISTÓRICO
+============================== */
+
+.history{
+
+  display:none;
+
+  margin-top:18px;
+}
+
+.history-list{
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:8px;
+}
+
+.history-item{
+
+  padding:13px;
+
+  border-radius:14px;
+
+  background:
+    rgba(255,255,255,.045);
+
+  border:
+    1px solid
+    rgba(255,255,255,.06);
+}
+
+.history-top{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  gap:10px;
+
+  font-weight:bold;
+
+  font-size:13px;
+}
+
+.history-positive{
+
+  color:#63ff9f;
+}
+
+.history-negative{
+
+  color:#ff7180;
+}
+
+.history-meta{
+
+  margin-top:6px;
+
+  color:#8eafca;
+
+  font-size:11px;
+
+  line-height:1.5;
+}
+
+
+/* ==============================
+   MENSAGENS
+============================== */
+
+.message{
+
+  display:none;
+
+  margin-top:15px;
+
+  padding:13px;
+
+  border-radius:13px;
+
+  font-size:13px;
+
+  font-weight:bold;
+}
+
+.message.success{
+
+  display:block;
+
+  background:
+    rgba(45,255,140,.1);
+
+  border:
+    1px solid
+    rgba(45,255,140,.25);
+
+  color:#70ffac;
+}
+
+.message.error{
+
+  display:block;
+
+  background:
+    rgba(255,55,75,.1);
+
+  border:
+    1px solid
+    rgba(255,55,75,.25);
+
+  color:#ff9aa5;
+}
+
+
+/* ==============================
+   RESPONSIVO
+============================== */
+
+@media(max-width:800px){
+
+  .summary{
+
+    grid-template-columns:
+      repeat(2,1fr);
+  }
+
+  .balances{
+
+    grid-template-columns:
+      repeat(2,1fr);
+  }
+
+}
+
+@media(max-width:600px){
+
+  .topbar{
+
+    align-items:flex-start;
+  }
+
+  .search-row{
+
+    flex-direction:column;
+  }
+
+  .button{
+
+    width:100%;
+  }
+
+  .operation-grid{
+
+    grid-template-columns:1fr;
+  }
+
+  .full{
+
+    grid-column:auto;
+  }
+
+  .special-actions{
+
+    grid-template-columns:1fr;
+  }
+
+  .operation-buttons{
+
+    grid-template-columns:1fr;
+  }
+
+  .hero h2{
+
+    font-size:36px;
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<header class="topbar">
+
+
+  <div class="brand">
+
+    <div class="brand-icon">
+      👑
+    </div>
+
+    <div>
+
+      <h1>
+        ADAM
+        <span>GAMES</span>
+      </h1>
+
+      <div class="admin-badge">
+        👑 ADMINISTRADOR
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <button
+    class="logout-button"
+    id="logoutButton"
+    type="button">
+
+    ↪️ SAIR
+
+  </button>
+
+</header>
+
+
+<section class="hero">
+
+  <h2>
+    Painel Admin
+  </h2>
+
+  <p>
+    Gerencie usuários e registre todas as movimentações.
+  </p>
+
+</section>
+
+
+<section class="summary">
+
+
+  <div class="summary-card">
+
+    <div class="summary-icon">
+      👥
+    </div>
+
+    <div class="summary-label">
+      Usuário selecionado
+    </div>
+
+    <div
+      class="summary-value"
+      id="summaryUser">
+
+      —
+
+    </div>
+
+  </div>
+
+
+  <div class="summary-card">
+
+    <div class="summary-icon">
+      🎟️
+    </div>
+
+    <div class="summary-label">
+      Chances
+    </div>
+
+    <div
+      class="summary-value"
+      id="summaryChances">
+
+      0
+
+    </div>
+
+  </div>
+
+
+  <div class="summary-card">
+
+    <div class="summary-icon">
+      🪙
+    </div>
+
+    <div class="summary-label">
+      Moedas
+    </div>
+
+    <div
+      class="summary-value"
+      id="summaryMoedas">
+
+      0
+
+    </div>
+
+  </div>
+
+
+  <div class="summary-card">
+
+    <div class="summary-icon">
+      🔑
+    </div>
+
+    <div class="summary-label">
+      Chaves
+    </div>
+
+    <div
+      class="summary-value"
+      id="summaryChaves">
+
+      0
+
+    </div>
+
+  </div>
+
+
+</section>
+
+
+<section class="panel">
+
+
+  <div class="panel-title">
+
+    <h3>
+      🔎 Localizar usuário
+    </h3>
+
+  </div>
+
+
+  <div class="search-row">
+
+    <input
+      id="searchId"
+      class="input"
+      type="text"
+      placeholder="Digite o ID Adam Games"
+      autocomplete="off"
+    >
+
+
+    <button
+      id="searchButton"
+      class="button primary"
+      type="button">
+
+      🔍 LOCALIZAR
+
+    </button>
+
+  </div>
+
+
+  <div
+    id="searchMessage"
+    class="message">
+  </div>
+
+
+  <div
+    id="userCard"
+    class="user-card">
+
+
+    <div class="user-header">
+
+
+      <div
+        class="avatar"
+        id="userAvatar">
+
+        🙂
+
+      </div>
+
+
+      <div>
+
+        <div
+          class="user-name"
+          id="userName">
+
+          —
+
+        </div>
+
+        <div
+          class="user-email"
+          id="userEmail">
+
+          —
+
+        </div>
+
+        <div
+          class="user-id"
+          id="userId">
+
+          —
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="balances">
+
+
+      <div class="balance">
+
+        <div class="balance-icon">
+          🎟️
+        </div>
+
+        <div class="balance-name">
+          CHANCES
+        </div>
+
+        <div
+          class="balance-value"
+          id="balanceChances">
+
+          0
+
+        </div>
+
+      </div>
+
+
+      <div class="balance">
+
+        <div class="balance-icon">
+          🪙
+        </div>
+
+        <div class="balance-name">
+          MOEDAS
+        </div>
+
+        <div
+          class="balance-value"
+          id="balanceMoedas">
+
+          0
+
+        </div>
+
+      </div>
+
+
+      <div class="balance">
+
+        <div class="balance-icon">
+          🔑
+        </div>
+
+        <div class="balance-name">
+          CHAVES
+        </div>
+
+        <div
+          class="balance-value"
+          id="balanceChaves">
+
+          0
+
+        </div>
+
+      </div>
+
+
+      <div class="balance">
+
+        <div class="balance-icon">
+          💎
+        </div>
+
+        <div class="balance-name">
+          CRÉDITOS
+        </div>
+
+        <div
+          class="balance-value"
+          id="balanceCreditos">
+
+          R$ 0,00
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+    <div class="operation-grid">
+
+
+      <div class="field">
+
+        <label>
+          Item
+        </label>
+
+        <select
+          id="itemSelect"
+          class="select">
+
+          <option value="chances">
+            🎟️ Chances
+          </option>
+
+          <option value="moedas">
+            🪙 Moedas
+          </option>
+
+          <option value="chaves">
+            🔑 Chaves
+          </option>
+
+          <option value="creditos">
+            💎 Créditos
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          Quantidade
+        </label>
+
+        <input
+          id="quantity"
+          class="input"
+          type="number"
+          min="1"
+          step="1"
+          placeholder="Quantidade"
+        >
+
+      </div>
+
+
+      <div class="field full">
+
+        <label>
+          Motivo obrigatório
+        </label>
+
+        <input
+          id="reason"
+          class="input"
+          type="text"
+          maxlength="150"
+          placeholder="Ex.: Compra WhatsApp"
+        >
+
+      </div>
+
+
+    </div>
+
+
+    <div class="operation-buttons">
+
+
+      <button
+        id="addButton"
+        class="button green"
+        type="button">
+
+        ➕ ADICIONAR
+
+      </button>
+
+
+      <button
+        id="removeButton"
+        class="button red"
+        type="button">
+
+        ➖ REMOVER
+
+      </button>
+
+
+    </div>
+
+
+    <div class="special-actions">
+
+
+      <button
+        id="vipButton"
+        class="special-button gold"
+        type="button">
+
+        👑 ALTERAR VIP
+
+      </button>
+
+
+      <button
+        id="boxButton"
+        class="special-button primary"
+        type="button">
+
+        🎁 ALTERAR CAIXA
+
+      </button>
+
+
+    </div>
+
+
+    <div
+      id="operationMessage"
+      class="message">
+    </div>
+
+
+    <section
+      id="history"
+      class="history">
+
+
+      <div class="panel-title">
+
+        <h3>
+          📜 Extrato
+        </h3>
+
+      </div>
+
+
+      <div
+        id="historyList"
+        class="history-list">
+
+      </div>
+
+
+    </section>
+
+
+  </div>
+
+</section>
+
+
+</div>
+
+
+<script type="module">
+
+
+/* =========================================
+   FIREBASE
+========================================= */
+
+import {
+  initializeApp
+} from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+import {
+  getAuth,
+  onAuthStateChanged,
+  signOut
+} from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+import {
+  getFirestore,
+  collection,
+  query,
+  where,
+  getDocs,
+  updateDoc,
+  addDoc,
+  orderBy,
+  limit
+} from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+const firebaseConfig = {
+
+  apiKey:
+    "AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",
+
+  authDomain:
+    "adam-games-21081.firebaseapp.com",
+
+  projectId:
+    "adam-games-21081",
+
+  storageBucket:
+    "adam-games-21081.firebasestorage.app",
+
+  messagingSenderId:
+    "1055528418738",
+
+  appId:
+    "1:1055528418738:web:5fafdf63424ba9744eb8ab",
+
+  measurementId:
+    "G-KVFSF864GE"
+
+};
+
+
+const app =
+  initializeApp(
+    firebaseConfig
+  );
+
+
+const auth =
+  getAuth(app);
+
+
+const db =
+  getFirestore(app);
+
+
+/* =========================================
+   ADMIN
+========================================= */
+
+const ADMIN_EMAIL =
+  "raphafentyramos@gmail.com";
+
+
+let currentAdmin = null;
+
+let selectedUser = null;
+
+
+/* =========================================
+   ELEMENTOS
+========================================= */
+
+const searchId =
+  document.getElementById(
+    "searchId"
+  );
+
+
+const searchButton =
+  document.getElementById(
+    "searchButton"
+  );
+
+
+const userCard =
+  document.getElementById(
+    "userCard"
+  );
+
+
+const searchMessage =
+  document.getElementById(
+    "searchMessage"
+  );
+
+
+const operationMessage =
+  document.getElementById(
+    "operationMessage"
+  );
+
+
+const quantity =
+  document.getElementById(
+    "quantity"
+  );
+
+
+const reason =
+  document.getElementById(
+    "reason"
+  );
+
+
+const itemSelect =
+  document.getElementById(
+    "itemSelect"
+  );
+
+
+/* =========================================
+   MENSAGEM
+========================================= */
+
+function showMessage(
+  element,
+  text,
+  type
+){
+
+  element.textContent =
+    text;
+
+  element.className =
+    "message " + type;
+
+}
+
+
+/* =========================================
+   FORMATAR
+========================================= */
+
+function formatNumber(value){
+
+  return Number(
+    value || 0
+  ).toLocaleString(
+    "pt-BR"
+  );
+
+}
+
+
+function formatMoney(value){
+
+  return Number(
+    value || 0
+  ).toLocaleString(
+    "pt-BR",
+    {
+      style:"currency",
+      currency:"BRL"
+    }
+  );
+
+}
+
+
+/* =========================================
+   MOSTRAR USUÁRIO
+========================================= */
+
+function displayUser(
+  doc
+){
+
+  const data =
+    doc.data();
+
+
+  selectedUser = {
+
+    ref:doc.ref,
+
+    id:doc.id,
+
+    data:data
+
+  };
+
+
+  document.getElementById(
+    "userName"
+  ).textContent =
+    data.nome ||
+    data.name ||
+    "Sem nome";
+
+
+  document.getElementById(
+    "userEmail"
+  ).textContent =
+    data.email ||
+    "Sem e-mail";
+
+
+  document.getElementById(
+    "userId"
+  ).textContent =
+    "ID: " +
+    (
+      data.publicId ||
+      doc.id
+    );
+
+
+  document.getElementById(
+    "userAvatar"
+  ).textContent =
+    data.avatar ||
+    "🙂";
+
+
+  updateBalances(
+    data
+  );
+
+
+  userCard.style.display =
+    "block";
+
+
+  document.getElementById(
+    "summaryUser"
+  ).textContent =
+    data.nome ||
+    data.name ||
+    "Usuário";
+
+
+  loadHistory(
+    data.publicId ||
+    doc.id
+  );
+
+}
+
+
+/* =========================================
+   ATUALIZAR SALDOS
+========================================= */
+
+function updateBalances(
+  data
+){
+
+  const chances =
+    Number(
+      data.chances || 0
+    );
+
+
+  const moedas =
+    Number(
+      data.moedas ||
+      data.coins ||
+      0
+    );
+
+
+  const chaves =
+    Number(
+      data.chaves ||
+      data.keys ||
+      0
+    );
+
+
+  const creditos =
+    Number(
+      data.creditos ||
+      data.credits ||
+      0
+    );
+
+
+  document.getElementById(
+    "balanceChances"
+  ).textContent =
+    formatNumber(
+      chances
+    );
+
+
+  document.getElementById(
+    "balanceMoedas"
+  ).textContent =
+    formatNumber(
+      moedas
+    );
+
+
+  document.getElementById(
+    "balanceChaves"
+  ).textContent =
+    formatNumber(
+      chaves
+    );
+
+
+  document.getElementById(
+    "balanceCreditos"
+  ).textContent =
+    formatMoney(
+      creditos
+    );
+
+
+  document.getElementById(
+    "summaryChances"
+  ).textContent =
+    formatNumber(
+      chances
+    );
+
+
+  document.getElementById(
+    "summaryMoedas"
+  ).textContent =
+    formatNumber(
+      moedas
+    );
+
+
+  document.getElementById(
+    "summaryChaves"
+  ).textContent =
+    formatNumber(
+      chaves
+    );
+
+}
+
+
+/* =========================================
+   BUSCAR USUÁRIO
+========================================= */
+
+async function searchUser(){
+
+  const id =
+    searchId.value.trim();
+
+
+  if(!id){
+
+    showMessage(
+      searchMessage,
+      "Digite o ID do usuário.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  searchButton.disabled =
+    true;
+
+
+  searchButton.textContent =
+    "🔄 BUSCANDO...";
+
+
+  userCard.style.display =
+    "none";
+
+
+  try{
+
+
+    const admins =
+      collection(
+        db,
+        "admins"
+      );
+
+
+    const q =
+      query(
+        admins,
+        where(
+          "publicId",
+          "==",
+          id
+        )
+      );
+
+
+    const result =
+      await getDocs(
+        q
+      );
+
+
+    if(
+      result.empty
+    ){
+
+      showMessage(
+        searchMessage,
+        "Usuário não encontrado.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    showMessage(
+      searchMessage,
+      "Usuário encontrado.",
+      "success"
+    );
+
+
+    displayUser(
+      result.docs[0]
+    );
+
+
+  }catch(error){
+
+    console.error(
+      error
+    );
+
+
+    showMessage(
+      searchMessage,
+      "Erro ao localizar usuário.",
+      "error"
+    );
+
+  }finally{
+
+    searchButton.disabled =
+      false;
+
+
+    searchButton.textContent =
+      "🔍 LOCALIZAR";
+
+  }
+
+}
+
+
+/* =========================================
+   ADICIONAR / REMOVER
+========================================= */
+
+async function changeBalance(
+  operation
+){
+
+  if(!selectedUser){
+
+    showMessage(
+      operationMessage,
+      "Primeiro localize um usuário.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const amount =
+    Number(
+      quantity.value
+    );
+
+
+  if(
+    !Number.isFinite(amount) ||
+    amount <= 0
+  ){
+
+    showMessage(
+      operationMessage,
+      "Digite uma quantidade válida.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const motivo =
+    reason.value.trim();
+
+
+  if(!motivo){
+
+    showMessage(
+      operationMessage,
+      "O motivo é obrigatório.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const item =
+    itemSelect.value;
+
+
+  const data =
+    selectedUser.data;
+
+
+  let field =
+    item;
+
+
+  if(item === "creditos"){
+
+    field =
+      "creditos";
+
+  }
+
+
+  const oldValue =
+    Number(
+      data[field] || 0
+    );
+
+
+  const movement =
+    operation === "add"
+      ? amount
+      : -amount;
+
+
+  const newValue =
+    oldValue +
+    movement;
+
+
+  if(
+    newValue < 0
+  ){
+
+    showMessage(
+      operationMessage,
+      "O saldo não pode ficar negativo.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const confirmText =
+    operation === "add"
+
+      ?
+
+      "Adicionar " +
+      amount +
+      " ao saldo?"
+
+      :
+
+      "Remover " +
+      amount +
+      " do saldo?";
+
+
+  if(
+    !confirm(
+      confirmText
+    )
+  ){
+
+    return;
+
+  }
+
+
+  try{
+
+
+    /*
+      Atualiza o saldo.
+    */
+
+    await updateDoc(
+      selectedUser.ref,
+      {
+
+        [field]:
+          newValue
+
+      }
+    );
+
+
+    /*
+      Registra a operação.
+    */
+
+    await addDoc(
+      collection(
+        db,
+        "historico"
+      ),
+      {
+
+        usuarioId:
+          selectedUser.id,
+
+        publicId:
+          data.publicId ||
+          selectedUser.id,
+
+        usuarioEmail:
+          data.email ||
+          "",
+
+        usuarioNome:
+          data.nome ||
+          data.name ||
+          "",
+
+        adminEmail:
+          currentAdmin.email,
+
+        item:
+          item,
+
+        operacao:
+          operation,
+
+        quantidade:
+          amount,
+
+        saldoAnterior:
+          oldValue,
+
+        saldoFinal:
+          newValue,
+
+        motivo:
+          motivo,
+
+        criadoEm:
+          new Date().toISOString()
+
+      }
+    );
+
+
+    /*
+      Atualiza memória local.
+    */
+
+    selectedUser.data[field] =
+      newValue;
+
+
+    updateBalances(
+      selectedUser.data
+    );
+
+
+    quantity.value =
+      "";
+
+    reason.value =
+      "";
+
+
+    showMessage(
+      operationMessage,
+      "Movimentação realizada e registrada no extrato.",
+      "success"
+    );
+
+
+    await loadHistory(
+      data.publicId ||
+      selectedUser.id
+    );
+
+
+  }catch(error){
+
+    console.error(
+      error
+    );
+
+
+    showMessage(
+      operationMessage,
+      "Erro ao realizar movimentação.",
+      "error"
+    );
+
+  }
+
+}
+
+
+/* =========================================
+   HISTÓRICO
+========================================= */
+
+async function loadHistory(
+  publicId
+){
+
+  const history =
+    document.getElementById(
+      "history"
+    );
+
+
+  const historyList =
+    document.getElementById(
+      "historyList"
+    );
+
+
+  history.style.display =
+    "block";
+
+
+  historyList.innerHTML =
+    "🔄 Carregando histórico...";
+
+
+  try{
+
+
+    const historico =
+      collection(
+        db,
+        "historico"
+      );
+
+
+    const q =
+      query(
+        historico,
+        where(
+          "publicId",
+          "==",
+          publicId
+        )
+      );
+
+
+    const result =
+      await getDocs(
+        q
+      );
+
+
+    if(
+      result.empty
+    ){
+
+      historyList.innerHTML =
+        "<div class='history-item'>" +
+        "Nenhuma movimentação registrada." +
+        "</div>";
+
+      return;
+
+    }
+
+
+    const items =
+      result.docs
+        .map(
+          doc => doc.data()
+        )
+        .sort(
+          (a,b) =>
+            String(
+              b.criadoEm || ""
+            ).localeCompare(
+              String(
+                a.criadoEm || ""
+              )
+            )
+        )
+        .slice(
+          0,
+          50
+        );
+
+
+    historyList.innerHTML =
+      "";
+
+
+    items.forEach(
+      item => {
+
+        const div =
+          document.createElement(
+            "div"
+          );
+
+
+        div.className =
+          "history-item";
+
+
+        const sinal =
+          item.operacao === "add"
+            ? "+"
+            : "-";
+
+
+        const classe =
+          item.operacao === "add"
+            ? "history-positive"
+            : "history-negative";
+
+
+        const data =
+          item.criadoEm
+            ? new Date(
+                item.criadoEm
+              ).toLocaleString(
+                "pt-BR"
+              )
+            : "Data não informada";
+
+
+        div.innerHTML =
+
+          "<div class='history-top'>" +
+
+          "<span>" +
+
+          sinal +
+
+          " " +
+
+          formatNumber(
+            item.quantidade
+          ) +
+
+          " " +
+
+          item.item +
+
+          "</span>" +
+
+          "<span class='" +
+          classe +
+          "'>" +
+
+          data +
+
+          "</span>" +
+
+          "</div>" +
+
+          "<div class='history-meta'>" +
+
+          "Anterior: " +
+
+          formatNumber(
+            item.saldoAnterior
+          ) +
+
+          " • " +
+
+          "Final: " +
+
+          formatNumber(
+            item.saldoFinal
+          ) +
+
+          "<br>" +
+
+          "Motivo: " +
+
+          (
+            item.motivo ||
+            "—"
+          ) +
+
+          "<br>" +
+
+          "Admin: " +
+
+          (
+            item.adminEmail ||
+            "—"
+          ) +
+
+          "</div>";
+
+
+        historyList.appendChild(
+          div
+        );
+
+      }
+    );
+
+
+  }catch(error){
+
+    console.error(
+      error
+    );
+
+
+    historyList.innerHTML =
+      "<div class='history-item'>" +
+      "Erro ao carregar histórico." +
+      "</div>";
+
+  }
+
+}
+
+
+/* =========================================
+   VIP
+========================================= */
+
+async function toggleVip(){
+
+  if(!selectedUser){
+
+    showMessage(
+      operationMessage,
+      "Primeiro localize um usuário.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const atual =
+    selectedUser.data.vip === true;
+
+
+  const novo =
+    !atual;
+
+
+  if(
+    !confirm(
+      novo
+        ? "Ativar VIP para este usuário?"
+        : "Desativar VIP para este usuário?"
+    )
+  ){
+
+    return;
+
+  }
+
+
+  try{
+
+
+    await updateDoc(
+      selectedUser.ref,
+      {
+
+        vip:
+          novo
+
+      }
+    );
+
+
+    selectedUser.data.vip =
+      novo;
+
+
+    await addDoc(
+      collection(
+        db,
+        "historico"
+      ),
+      {
+
+        usuarioId:
+          selectedUser.id,
+
+        publicId:
+          selectedUser.data.publicId ||
+          selectedUser.id,
+
+        usuarioEmail:
+          selectedUser.data.email ||
+          "",
+
+        usuarioNome:
+          selectedUser.data.nome ||
+          "",
+
+        adminEmail:
+          currentAdmin.email,
+
+        item:
+          "VIP",
+
+        operacao:
+          novo
+            ? "add"
+            : "remove",
+
+        quantidade:
+          1,
+
+        saldoAnterior:
+          atual
+            ? 1
+            : 0,
+
+        saldoFinal:
+          novo
+            ? 1
+            : 0,
+
+        motivo:
+          novo
+            ? "VIP ativado pelo administrador"
+            : "VIP desativado pelo administrador",
+
+        criadoEm:
+          new Date().toISOString()
+
+      }
+    );
+
+
+    showMessage(
+      operationMessage,
+      novo
+        ? "VIP ativado."
+        : "VIP desativado.",
+      "success"
+    );
+
+
+    await loadHistory(
+      selectedUser.data.publicId ||
+      selectedUser.id
+    );
+
+
+  }catch(error){
+
+    console.error(
+      error
+    );
+
+
+    showMessage(
+      operationMessage,
+      "Erro ao alterar VIP.",
+      "error"
+    );
+
+  }
+
+}
+
+
+/* =========================================
+   CAIXA
+========================================= */
+
+async function toggleBox(){
+
+  if(!selectedUser){
+
+    showMessage(
+      operationMessage,
+      "Primeiro localize um usuário.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const atual =
+    selectedUser.data.caixaBox === true;
+
+
+  const novo =
+    !atual;
+
+
+  if(
+    !confirm(
+      novo
+        ? "Marcar Caixa Box como resgatada?"
+        : "Liberar novamente a Caixa Box?"
+    )
+  ){
+
+    return;
+
+  }
+
+
+  try{
+
+
+    await updateDoc(
+      selectedUser.ref,
+      {
+
+        caixaBox:
+          novo
+
+      }
+    );
+
+
+    selectedUser.data.caixaBox =
+      novo;
+
+
+    await addDoc(
+      collection(
+        db,
+        "historico"
+      ),
+      {
+
+        usuarioId:
+          selectedUser.id,
+
+        publicId:
+          selectedUser.data.publicId ||
+          selectedUser.id,
+
+        usuarioEmail:
+          selectedUser.data.email ||
+          "",
+
+        usuarioNome:
+          selectedUser.data.nome ||
+          "",
+
+        adminEmail:
+          currentAdmin.email,
+
+        item:
+          "Caixa Box",
+
+        operacao:
+          novo
+            ? "remove"
+            : "add",
+
+        quantidade:
+          1,
+
+        saldoAnterior:
+          atual
+            ? 1
+            : 0,
+
+        saldoFinal:
+          novo
+            ? 1
+            : 0,
+
+        motivo:
+          novo
+            ? "Caixa marcada como resgatada"
+            : "Caixa liberada pelo administrador",
+
+        criadoEm:
+          new Date().toISOString()
+
+      }
+    );
+
+
+    showMessage(
+      operationMessage,
+      novo
+        ? "Caixa marcada como resgatada."
+        : "Caixa liberada.",
+      "success"
+    );
+
+
+    await loadHistory(
+      selectedUser.data.publicId ||
+      selectedUser.id
+    );
+
+
+  }catch(error){
+
+    console.error(
+      error
+    );
+
+
+    showMessage(
+      operationMessage,
+      "Erro ao alterar Caixa Box.",
+      "error"
+    );
+
+  }
+
+}
+
+
+/* =========================================
+   AUTENTICAÇÃO
+========================================= */
+
+onAuthStateChanged(
+  auth,
+  usuario => {
+
+    if(!usuario){
+
+      window.location.replace(
+        "index.html"
+      );
+
+      return;
+
+    }
+
+
+    if(
+      usuario.email
+        .toLowerCase()
+      !==
+      ADMIN_EMAIL
+        .toLowerCase()
+    ){
+
+      alert(
+        "Acesso negado. Esta área é exclusiva para administradores."
+      );
+
+
+      signOut(
+        auth
+      ).finally(
+        () => {
+
+          window.location.replace(
+            "index.html"
+          );
+
+        }
+      );
+
+
+      return;
+
+    }
+
+
+    currentAdmin =
+      usuario;
+
+
+    console.log(
+      "Administrador autenticado:",
+      usuario.email
+    );
+
+  }
+);
+
+
+/* =========================================
+   EVENTOS
+========================================= */
+
+searchButton.addEventListener(
+  "click",
+  searchUser
+);
+
+
+searchId.addEventListener(
+  "keydown",
+  event => {
+
+    if(
+      event.key ===
+      "Enter"
+    ){
+
+      searchUser();
+
+    }
+
+  }
+);
+
+
+document.getElementById(
+  "addButton"
+).addEventListener(
+  "click",
+  () => {
+
+    changeBalance(
+      "add"
+    );
+
+  }
+);
+
+
+document.getElementById(
+  "removeButton"
+).addEventListener(
+  "click",
+  () => {
+
+    changeBalance(
+      "remove"
+    );
+
+  }
+);
+
+
+document.getElementById(
+  "vipButton"
+).addEventListener(
+  "click",
+  toggleVip
+);
+
+
+document.getElementById(
+  "boxButton"
+).addEventListener(
+  "click",
+  toggleBox
+);
+
+
+/* =========================================
+   LOGOUT
+========================================= */
+
+document.getElementById(
+  "logoutButton"
+).addEventListener(
+  "click",
+  async () => {
+
+    await signOut(
+      auth
+    );
+
+    window.location.replace(
+      "index.html"
+    );
+
+  }
+);
+
+</script>
+
+</body>
+
+</html>
