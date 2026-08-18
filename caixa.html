@@ -1,0 +1,2157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>Adam Games • Caixa Box</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html,
+body{
+  min-height:100%;
+}
+
+body{
+
+  min-height:100vh;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  color:#fff;
+
+  overflow-x:hidden;
+
+  background:
+
+    radial-gradient(
+      circle at 50% 0%,
+      #42a9ff 0%,
+      transparent 32%
+    ),
+
+    linear-gradient(
+      135deg,
+      #087fe0 0%,
+      #061d43 80%
+    );
+
+}
+
+
+.page{
+
+  width:100%;
+  max-width:850px;
+
+  margin:auto;
+
+  padding:15px;
+
+  padding-bottom:120px;
+
+}
+
+
+/* =====================================================
+   TOPO
+===================================================== */
+
+.topbar{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:10px;
+
+  margin-bottom:15px;
+
+}
+
+
+.back-button{
+
+  border:0;
+
+  width:52px;
+  height:52px;
+
+  border-radius:18px;
+
+  background:
+    rgba(3,35,72,.9);
+
+  color:#fff;
+
+  font-size:25px;
+
+  cursor:pointer;
+
+}
+
+
+.title-area{
+
+  flex:1;
+
+  text-align:center;
+
+}
+
+
+.title-area h1{
+
+  font-size:21px;
+
+  font-weight:900;
+
+}
+
+
+.title-area p{
+
+  margin-top:3px;
+
+  color:#a9c9e7;
+
+  font-size:11px;
+
+}
+
+
+.top-space{
+
+  width:52px;
+
+}
+
+
+/* =====================================================
+   CABEÇALHO
+===================================================== */
+
+.month-title{
+
+  text-align:center;
+
+  margin-top:12px;
+
+}
+
+
+.month-badge{
+
+  display:inline-block;
+
+  padding:8px 15px;
+
+  border-radius:20px;
+
+  background:
+    rgba(255,255,255,.12);
+
+  border:
+    1px solid
+    rgba(255,255,255,.16);
+
+  font-size:12px;
+
+  font-weight:900;
+
+}
+
+
+.month-title h2{
+
+  margin-top:14px;
+
+  font-size:
+    clamp(31px,7vw,48px);
+
+  line-height:1;
+
+  text-shadow:
+    0 5px 2px
+    rgba(0,0,0,.25);
+
+}
+
+
+.month-title p{
+
+  margin-top:8px;
+
+  color:#d1e7f8;
+
+  font-size:14px;
+
+}
+
+
+/* =====================================================
+   NAVEGAÇÃO DAS CAIXAS
+===================================================== */
+
+.box-selector{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:8px;
+
+  margin-top:22px;
+
+}
+
+
+.box-arrow{
+
+  flex-shrink:0;
+
+  width:48px;
+  height:48px;
+
+  border:0;
+
+  border-radius:50%;
+
+  background:
+    rgba(3,34,70,.9);
+
+  color:#fff;
+
+  font-size:25px;
+
+  cursor:pointer;
+
+}
+
+
+.box-arrow:disabled{
+
+  opacity:.3;
+
+}
+
+
+.box-name{
+
+  flex:1;
+
+  text-align:center;
+
+}
+
+
+.box-name strong{
+
+  display:block;
+
+  font-size:17px;
+
+}
+
+
+.box-name span{
+
+  display:block;
+
+  margin-top:4px;
+
+  color:#9dc7e9;
+
+  font-size:11px;
+
+}
+
+
+/* =====================================================
+   CAIXA
+===================================================== */
+
+.box-stage{
+
+  position:relative;
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  min-height:310px;
+
+  margin-top:10px;
+
+}
+
+
+.glow{
+
+  position:absolute;
+
+  width:240px;
+  height:240px;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,218,50,.28),
+      transparent 68%
+    );
+
+  filter:blur(5px);
+
+}
+
+
+.box{
+
+  position:relative;
+
+  z-index:2;
+
+  width:215px;
+  height:190px;
+
+  cursor:pointer;
+
+  filter:
+    drop-shadow(
+      0 22px 20px
+      rgba(0,0,0,.35)
+    );
+
+  transition:
+    transform .2s ease;
+
+}
+
+
+.box:hover{
+
+  transform:
+    translateY(-5px)
+    scale(1.03);
+
+}
+
+
+.box:active{
+
+  transform:
+    scale(.96);
+
+}
+
+
+.box-lid{
+
+  position:absolute;
+
+  left:7px;
+  top:10px;
+
+  width:201px;
+  height:65px;
+
+  border-radius:17px 17px 10px 10px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #2d8aef,
+      #0061c8
+    );
+
+  border:
+    4px solid
+    #f6d32d;
+
+}
+
+
+.box-body{
+
+  position:absolute;
+
+  left:18px;
+  top:65px;
+
+  width:179px;
+  height:112px;
+
+  border-radius:
+    8px
+    8px
+    20px
+    20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #1789eb,
+      #0753aa
+    );
+
+  border:
+    4px solid
+    #f6d32d;
+
+}
+
+
+.box-ribbon-v{
+
+  position:absolute;
+
+  z-index:4;
+
+  left:91px;
+  top:8px;
+
+  width:34px;
+  height:169px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #f9df48,
+      #e6b91b,
+      #fff16a
+    );
+
+}
+
+
+.box-ribbon-h{
+
+  position:absolute;
+
+  z-index:5;
+
+  left:4px;
+  top:30px;
+
+  width:207px;
+  height:27px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #f9df48,
+      #e6b91b,
+      #fff16a
+    );
+
+}
+
+
+.box-star{
+
+  position:absolute;
+
+  z-index:7;
+
+  left:50%;
+  top:105px;
+
+  transform:
+    translateX(-50%);
+
+  font-size:48px;
+
+  text-shadow:
+    0 4px 5px
+    rgba(0,0,0,.35);
+
+}
+
+
+.box-brazil{
+
+  position:absolute;
+
+  z-index:8;
+
+  right:-2px;
+  top:-8px;
+
+  width:45px;
+  height:45px;
+
+  border-radius:50%;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  background:
+    linear-gradient(
+      135deg,
+      #009c3b 50%,
+      #ffdf00 50%
+    );
+
+  border:
+    3px solid
+    #fff;
+
+  font-size:22px;
+
+}
+
+
+/* =====================================================
+   INFORMAÇÕES DE CHANCE
+===================================================== */
+
+.chance-panel{
+
+  margin-top:5px;
+
+  padding:17px;
+
+  border-radius:22px;
+
+  background:
+    rgba(2,27,57,.88);
+
+  border:
+    1px solid
+    rgba(255,255,255,.12);
+
+}
+
+
+.vip-status{
+
+  text-align:center;
+
+  margin-bottom:14px;
+
+}
+
+
+.vip-status span{
+
+  display:inline-block;
+
+  padding:7px 13px;
+
+  border-radius:15px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #a87709,
+      #eac02f
+    );
+
+  font-size:12px;
+
+  font-weight:900;
+
+}
+
+
+.timer-title{
+
+  text-align:center;
+
+  color:#a8c8e4;
+
+  font-size:11px;
+
+  font-weight:bold;
+
+  text-transform:uppercase;
+
+}
+
+
+.timer{
+
+  margin-top:5px;
+
+  text-align:center;
+
+  font-size:31px;
+
+  font-weight:900;
+
+  letter-spacing:1px;
+
+}
+
+
+.timer.ready{
+
+  color:#5dff9c;
+
+}
+
+
+.timer-description{
+
+  margin-top:4px;
+
+  text-align:center;
+
+  color:#9bbbd7;
+
+  font-size:12px;
+
+}
+
+
+/* =====================================================
+   CHANCES + SEQUÊNCIA
+===================================================== */
+
+.stats{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,1fr);
+
+  gap:10px;
+
+  margin-top:15px;
+
+}
+
+
+.stat{
+
+  padding:14px;
+
+  border-radius:17px;
+
+  text-align:center;
+
+  background:
+    rgba(255,255,255,.055);
+
+}
+
+
+.stat-icon{
+
+  font-size:28px;
+
+}
+
+
+.stat-label{
+
+  margin-top:5px;
+
+  color:#91b5d5;
+
+  font-size:10px;
+
+  font-weight:bold;
+
+  text-transform:uppercase;
+
+}
+
+
+.stat-value{
+
+  margin-top:4px;
+
+  font-size:23px;
+
+  font-weight:900;
+
+}
+
+
+/* =====================================================
+   CONTEÚDO
+===================================================== */
+
+.content{
+
+  margin-top:16px;
+
+  padding:18px;
+
+  border-radius:22px;
+
+  background:
+    rgba(2,27,57,.88);
+
+  border:
+    1px solid
+    rgba(255,255,255,.12);
+
+}
+
+
+.content h3{
+
+  font-size:18px;
+
+  margin-bottom:13px;
+
+}
+
+
+.prizes{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,1fr);
+
+  gap:9px;
+
+}
+
+
+.prize{
+
+  padding:13px 10px;
+
+  border-radius:15px;
+
+  background:
+    rgba(255,255,255,.055);
+
+  border:
+    1px solid
+    rgba(255,255,255,.06);
+
+}
+
+
+.prize-icon{
+
+  font-size:25px;
+
+}
+
+
+.prize-name{
+
+  margin-top:5px;
+
+  font-size:12px;
+
+  font-weight:bold;
+
+}
+
+
+.prize-value{
+
+  margin-top:3px;
+
+  color:#8fd0ff;
+
+  font-size:12px;
+
+}
+
+
+/* =====================================================
+   DESCONTO
+===================================================== */
+
+.discount{
+
+  margin-top:12px;
+
+  padding:14px;
+
+  border-radius:16px;
+
+  text-align:center;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,203,40,.16),
+      rgba(255,168,0,.07)
+    );
+
+  border:
+    1px solid
+    rgba(255,204,50,.3);
+
+}
+
+
+.discount strong{
+
+  display:block;
+
+  color:#ffd83b;
+
+  font-size:17px;
+
+}
+
+
+.discount span{
+
+  display:block;
+
+  margin-top:4px;
+
+  color:#d9d4c0;
+
+  font-size:11px;
+
+}
+
+
+/* =====================================================
+   BOTÃO RESGATAR
+===================================================== */
+
+.claim-button{
+
+  width:100%;
+
+  height:55px;
+
+  margin-top:16px;
+
+  border:0;
+
+  border-radius:17px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #2b9dff,
+      #0067d9
+    );
+
+  color:#fff;
+
+  font-size:16px;
+
+  font-weight:900;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 10px 25px
+    rgba(0,91,190,.35);
+
+}
+
+
+.claim-button:disabled{
+
+  opacity:.45;
+
+  cursor:not-allowed;
+
+}
+
+
+/* =====================================================
+   BLOQUEIO NÃO VIP
+===================================================== */
+
+.locked{
+
+  display:none;
+
+  margin-top:20px;
+
+  padding:28px 18px;
+
+  border-radius:23px;
+
+  text-align:center;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(55,31,6,.95),
+      rgba(29,20,7,.95)
+    );
+
+  border:
+    1px solid
+    rgba(255,196,45,.35);
+
+}
+
+
+.lock-icon{
+
+  font-size:52px;
+
+}
+
+
+.locked h3{
+
+  margin-top:9px;
+
+  color:#ffd33a;
+
+  font-size:21px;
+
+}
+
+
+.locked p{
+
+  margin-top:8px;
+
+  color:#d4c8ac;
+
+  font-size:13px;
+
+  line-height:1.5;
+
+}
+
+
+.whatsapp-button{
+
+  display:block;
+
+  width:100%;
+
+  margin-top:16px;
+
+  padding:14px;
+
+  border-radius:15px;
+
+  background:#1fc95b;
+
+  color:#fff;
+
+  text-decoration:none;
+
+  font-weight:900;
+
+}
+
+
+/* =====================================================
+   RODAPÉ
+===================================================== */
+
+.footer{
+
+  margin-top:20px;
+
+  text-align:center;
+
+  color:#759abb;
+
+  font-size:10px;
+
+}
+
+
+/* =====================================================
+   RESPONSIVO
+===================================================== */
+
+@media(max-width:500px){
+
+  .page{
+    padding:11px;
+    padding-bottom:110px;
+  }
+
+  .box-stage{
+    min-height:285px;
+  }
+
+  .box{
+    transform:scale(.9);
+  }
+
+  .box:hover{
+    transform:scale(.93);
+  }
+
+  .prizes{
+    grid-template-columns:
+      repeat(2,1fr);
+  }
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+<!-- =====================================================
+     TOPO
+===================================================== -->
+
+<header class="topbar">
+
+  <button
+    class="back-button"
+    id="backButton"
+    type="button">
+
+    ←
+
+  </button>
+
+
+  <div class="title-area">
+
+    <h1>
+      🎁 CAIXA BOX
+    </h1>
+
+    <p>
+      Adam Games
+    </p>
+
+  </div>
+
+
+  <div class="top-space"></div>
+
+</header>
+
+
+
+<!-- =====================================================
+     MÊS
+===================================================== -->
+
+<section class="month-title">
+
+  <div class="month-badge">
+
+    🇧🇷 SETEMBRO • INDEPENDÊNCIA
+
+  </div>
+
+
+  <h2>
+    CAIXA INDEPENDÊNCIA
+  </h2>
+
+
+  <p>
+    Sua recompensa especial do mês
+  </p>
+
+</section>
+
+
+
+<!-- =====================================================
+     SELETOR
+===================================================== -->
+
+<section class="box-selector">
+
+
+  <button
+    class="box-arrow"
+    id="previousBox"
+    type="button"
+    disabled>
+
+    ‹
+
+  </button>
+
+
+  <div class="box-name">
+
+    <strong>
+      🇧🇷 Caixa de Setembro
+    </strong>
+
+    <span>
+      Caixa atual
+    </span>
+
+  </div>
+
+
+  <button
+    class="box-arrow"
+    id="nextBox"
+    type="button"
+    disabled>
+
+    ›
+
+  </button>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     CAIXA CENTRAL
+===================================================== -->
+
+<section class="box-stage">
+
+  <div class="glow"></div>
+
+
+  <div
+    class="box"
+    id="boxVisual"
+    title="Caixa Independência">
+
+
+    <div class="box-lid"></div>
+
+
+    <div class="box-body"></div>
+
+
+    <div class="box-ribbon-v"></div>
+
+
+    <div class="box-ribbon-h"></div>
+
+
+    <div class="box-star">
+      ★
+    </div>
+
+
+    <div class="box-brazil">
+      🇧🇷
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ÁREA VIP
+===================================================== -->
+
+<section
+  class="chance-panel"
+  id="vipPanel">
+
+
+  <div class="vip-status">
+
+    <span id="vipStatus">
+      👑 VERIFICANDO VIP...
+    </span>
+
+  </div>
+
+
+  <div class="timer-title">
+
+    PRÓXIMA CHANCE
+
+  </div>
+
+
+  <div
+    class="timer"
+    id="timer">
+
+    --:--:--
+
+  </div>
+
+
+  <div
+    class="timer-description"
+    id="timerDescription">
+
+    Verificando sua conta...
+
+  </div>
+
+
+  <div class="stats">
+
+
+    <div class="stat">
+
+      <div class="stat-icon">
+        🎟️
+      </div>
+
+      <div class="stat-label">
+        Chances disponíveis
+      </div>
+
+      <div
+        class="stat-value"
+        id="chanceValue">
+
+        0
+
+      </div>
+
+    </div>
+
+
+    <div class="stat">
+
+      <div class="stat-icon">
+        🔥
+      </div>
+
+      <div class="stat-label">
+        Dias seguidos
+      </div>
+
+      <div
+        class="stat-value"
+        id="streakValue">
+
+        0
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+  <button
+    class="claim-button"
+    id="claimButton"
+    type="button"
+    disabled>
+
+    🎁 RESGATAR CAIXA
+
+  </button>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     NÃO VIP
+===================================================== -->
+
+<section
+  class="locked"
+  id="lockedPanel">
+
+
+  <div class="lock-icon">
+    🔒
+  </div>
+
+
+  <h3>
+    Caixa Box exclusiva para VIP
+  </h3>
+
+
+  <p>
+
+    A Caixa Box é um benefício exclusivo
+    dos membros VIP.
+
+    <br><br>
+
+    Torne-se VIP para receber suas caixas
+    e participar das recompensas mensais.
+
+  </p>
+
+
+  <a
+    class="whatsapp-button"
+    href="https://wa.me/5531987350267?text=Ol%C3%A1%21%20Quero%20saber%20como%20me%20tornar%20VIP%20no%20Adam%20Games."
+    target="_blank">
+
+    💬 FALAR NO WHATSAPP
+
+  </a>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     CONTEÚDO
+===================================================== -->
+
+<section
+  class="content"
+  id="contentPanel">
+
+
+  <h3>
+    🎁 O que vem na Caixa Independência?
+  </h3>
+
+
+  <div class="prizes">
+
+
+    <div class="prize">
+
+      <div class="prize-icon">
+        🃏
+      </div>
+
+      <div class="prize-name">
+        Coringas
+      </div>
+
+      <div class="prize-value">
+        500 unidades
+      </div>
+
+    </div>
+
+
+    <div class="prize">
+
+      <div class="prize-icon">
+        🔧
+      </div>
+
+      <div class="prize-name">
+        Ferramentas de Rubi
+      </div>
+
+      <div class="prize-value">
+        3.000 unidades
+      </div>
+
+    </div>
+
+
+    <div class="prize">
+
+      <div class="prize-icon">
+        🎒
+      </div>
+
+      <div class="prize-name">
+        Itens
+      </div>
+
+      <div class="prize-value">
+        1.000 unidades
+      </div>
+
+    </div>
+
+
+    <div class="prize">
+
+      <div class="prize-icon">
+        🎰
+      </div>
+
+      <div class="prize-name">
+        Giros na Roleta
+      </div>
+
+      <div class="prize-value">
+        2 giros
+      </div>
+
+    </div>
+
+
+    <div class="prize">
+
+      <div class="prize-icon">
+        📅
+      </div>
+
+      <div class="prize-name">
+        Evento do Dia
+      </div>
+
+      <div class="prize-value">
+        Recompensa especial
+      </div>
+
+    </div>
+
+
+    <div class="prize">
+
+      <div class="prize-icon">
+        🗝️
+      </div>
+
+      <div class="prize-name">
+        Chave mensal
+      </div>
+
+      <div class="prize-value">
+        1 chave
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+
+  <div class="discount">
+
+    <strong>
+      🏷️ 5% DE DESCONTO
+    </strong>
+
+    <span>
+      Toda Caixa Box dá direito a 5% de desconto
+      em pacotes, exceto ofertas promocionais.
+    </span>
+
+  </div>
+
+
+</section>
+
+
+
+<div class="footer">
+
+  Adam Games • Caixa Box
+
+</div>
+
+
+</div>
+
+
+
+<script type="module">
+
+
+/* =====================================================
+   FIREBASE
+===================================================== */
+
+import {
+  initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+import {
+  getAuth,
+  onAuthStateChanged
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+import {
+  getFirestore,
+  collection,
+  query,
+  where,
+  getDocs
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+
+/* =====================================================
+   CONFIG
+===================================================== */
+
+const firebaseConfig = {
+
+  apiKey:
+    "AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",
+
+  authDomain:
+    "adam-games-21081.firebaseapp.com",
+
+  projectId:
+    "adam-games-21081",
+
+  storageBucket:
+    "adam-games-21081.firebasestorage.app",
+
+  messagingSenderId:
+    "1055528418738",
+
+  appId:
+    "1:1055528418738:web:5fafdf63424ba9744eb8ab",
+
+  measurementId:
+    "G-KVFSF864GE"
+
+};
+
+
+const app =
+  initializeApp(firebaseConfig);
+
+
+const auth =
+  getAuth(app);
+
+
+const db =
+  getFirestore(app);
+
+
+
+/* =====================================================
+   ELEMENTOS
+===================================================== */
+
+const vipStatus =
+  document.getElementById(
+    "vipStatus"
+  );
+
+
+const timer =
+  document.getElementById(
+    "timer"
+  );
+
+
+const timerDescription =
+  document.getElementById(
+    "timerDescription"
+  );
+
+
+const chanceValue =
+  document.getElementById(
+    "chanceValue"
+  );
+
+
+const streakValue =
+  document.getElementById(
+    "streakValue"
+  );
+
+
+const claimButton =
+  document.getElementById(
+    "claimButton"
+  );
+
+
+const vipPanel =
+  document.getElementById(
+    "vipPanel"
+  );
+
+
+const lockedPanel =
+  document.getElementById(
+    "lockedPanel"
+  );
+
+
+const contentPanel =
+  document.getElementById(
+    "contentPanel"
+  );
+
+
+
+/* =====================================================
+   VOLTAR
+===================================================== */
+
+document.getElementById(
+  "backButton"
+).addEventListener(
+  "click",
+  () => {
+
+    window.location.href =
+      "painel.html";
+
+  }
+);
+
+
+
+/* =====================================================
+   CONTADOR
+===================================================== */
+
+let timerInterval = null;
+
+
+function formatarTempo(ms){
+
+  if(ms <= 0){
+
+    return "00:00:00";
+
+  }
+
+
+  const totalSegundos =
+    Math.floor(
+      ms / 1000
+    );
+
+
+  const horas =
+    Math.floor(
+      totalSegundos / 3600
+    );
+
+
+  const minutos =
+    Math.floor(
+      (
+        totalSegundos % 3600
+      ) / 60
+    );
+
+
+  const segundos =
+    totalSegundos % 60;
+
+
+  return [
+
+    String(horas)
+      .padStart(2,"0"),
+
+    String(minutos)
+      .padStart(2,"0"),
+
+    String(segundos)
+      .padStart(2,"0")
+
+  ].join(":");
+
+}
+
+
+
+function iniciarContador(
+  ultimaChance,
+  intervaloHoras
+){
+
+  if(timerInterval){
+
+    clearInterval(
+      timerInterval
+    );
+
+  }
+
+
+  const intervalo =
+    intervaloHoras *
+    60 *
+    60 *
+    1000;
+
+
+  function atualizar(){
+
+    const agora =
+      Date.now();
+
+
+    const proxima =
+      ultimaChance +
+      intervalo;
+
+
+    const restante =
+      proxima -
+      agora;
+
+
+    if(restante <= 0){
+
+      timer.textContent =
+        "PRONTA!";
+
+      timer.classList.add(
+        "ready"
+      );
+
+      timerDescription.textContent =
+        "Sua próxima chance está disponível.";
+
+      return;
+
+    }
+
+
+    timer.classList.remove(
+      "ready"
+    );
+
+
+    timer.textContent =
+      formatarTempo(
+        restante
+      );
+
+
+    timerDescription.textContent =
+      "Nova chance a cada " +
+      intervaloHoras +
+      " horas.";
+
+  }
+
+
+  atualizar();
+
+
+  timerInterval =
+    setInterval(
+      atualizar,
+      1000
+    );
+
+}
+
+
+
+/* =====================================================
+   CARREGAR USUÁRIO
+===================================================== */
+
+async function carregarUsuario(
+  firebaseUser
+){
+
+  const admins =
+    collection(
+      db,
+      "admins"
+    );
+
+
+  let snapshot;
+
+
+  /* PRIMEIRO UID */
+
+  try{
+
+    snapshot =
+      await getDocs(
+        query(
+          admins,
+          where(
+            "uid",
+            "==",
+            firebaseUser.uid
+          )
+        )
+      );
+
+  }
+  catch(error){
+
+    throw new Error(
+      "Não foi possível consultar sua conta."
+    );
+
+  }
+
+
+  /* DEPOIS E-MAIL */
+
+  if(
+    snapshot.empty &&
+    firebaseUser.email
+  ){
+
+    try{
+
+      snapshot =
+        await getDocs(
+          query(
+            admins,
+            where(
+              "email",
+              "==",
+              firebaseUser.email
+                .trim()
+                .toLowerCase()
+            )
+          )
+        );
+
+    }
+    catch(error){
+
+      throw new Error(
+        "Não foi possível consultar seu cadastro."
+      );
+
+    }
+
+  }
+
+
+  if(snapshot.empty){
+
+    return null;
+
+  }
+
+
+  return snapshot.docs[0].data();
+
+}
+
+
+
+/* =====================================================
+   MOSTRAR CONTA
+===================================================== */
+
+function mostrarConta(
+  dados
+){
+
+  /*
+  ======================================================
+  VIP É EXCLUSIVAMENTE O CAMPO:
+  
+      vip === true
+
+  Não importa:
+  - e-mail
+  - login
+  - nome
+  - administrador
+  - quantidade de chances
+  ======================================================
+  */
+
+
+  const vip =
+    dados &&
+    dados.vip === true;
+
+
+  if(!vip){
+
+    /* NÃO VIP */
+
+    vipPanel.style.display =
+      "none";
+
+
+    contentPanel.style.display =
+      "none";
+
+
+    lockedPanel.style.display =
+      "block";
+
+
+    return;
+
+  }
+
+
+  /* ==================================================
+     VIP
+  ================================================== */
+
+  vipPanel.style.display =
+    "block";
+
+
+  contentPanel.style.display =
+    "block";
+
+
+  lockedPanel.style.display =
+    "none";
+
+
+  vipStatus.textContent =
+    "👑 VIP ATIVO";
+
+
+  /*
+  ----------------------------------------------------
+  CHANCES
+  ----------------------------------------------------
+  */
+
+  const chances =
+    Number(
+      dados.chances || 0
+    );
+
+
+  chanceValue.textContent =
+    chances.toLocaleString(
+      "pt-BR"
+    );
+
+
+  /*
+  ----------------------------------------------------
+  DIAS SEGUIDOS
+  ----------------------------------------------------
+  */
+
+  const streak =
+    Number(
+      dados.diasSeguidos ||
+      dados.streak ||
+      0
+    );
+
+
+  streakValue.textContent =
+    streak;
+
+
+  /*
+  ----------------------------------------------------
+  INTERVALO VIP
+  ----------------------------------------------------
+
+  VIP:
+  1 chance a cada 72 horas.
+
+  ----------------------------------------------------
+  */
+
+  const intervaloVIP =
+    72;
+
+
+  /*
+  ----------------------------------------------------
+  ÚLTIMA CHANCE
+  ----------------------------------------------------
+  */
+
+  let ultimaChance =
+    dados.ultimaChance
+      ? new Date(
+          dados.ultimaChance
+        ).getTime()
+      : Date.now();
+
+
+  if(
+    !Number.isFinite(
+      ultimaChance
+    )
+  ){
+
+    ultimaChance =
+      Date.now();
+
+  }
+
+
+  iniciarContador(
+    ultimaChance,
+    intervaloVIP
+  );
+
+
+  /*
+  ----------------------------------------------------
+  BOTÃO
+  ----------------------------------------------------
+  */
+
+  if(chances > 0){
+
+    claimButton.disabled =
+      false;
+
+    claimButton.textContent =
+      "🎁 RESGATAR CAIXA";
+
+  }
+  else{
+
+    claimButton.disabled =
+      true;
+
+    claimButton.textContent =
+      "⏳ AGUARDE SUA CHANCE";
+
+  }
+
+}
+
+
+
+/* =====================================================
+   AUTENTICAÇÃO
+===================================================== */
+
+onAuthStateChanged(
+
+  auth,
+
+  async firebaseUser => {
+
+
+    if(!firebaseUser){
+
+      window.location.replace(
+        "index.html"
+      );
+
+      return;
+
+    }
+
+
+    try{
+
+      const dados =
+        await carregarUsuario(
+          firebaseUser
+        );
+
+
+      mostrarConta(
+        dados
+      );
+
+    }
+    catch(error){
+
+      console.error(error);
+
+
+      vipPanel.style.display =
+        "none";
+
+
+      contentPanel.style.display =
+        "none";
+
+
+      lockedPanel.style.display =
+        "block";
+
+
+      lockedPanel.innerHTML = `
+
+        <div class="lock-icon">
+          ⚠️
+        </div>
+
+        <h3>
+          Não foi possível carregar
+        </h3>
+
+        <p>
+          Tente atualizar a página.
+        </p>
+
+        <a
+          class="whatsapp-button"
+          href="https://wa.me/5531987350267"
+          target="_blank">
+
+          💬 FALAR NO WHATSAPP
+
+        </a>
+
+      `;
+
+    }
+
+  }
+
+);
+
+
+
+/* =====================================================
+   BOTÃO RESGATAR
+===================================================== */
+
+claimButton.addEventListener(
+  "click",
+  () => {
+
+    alert(
+      "🎁 CAIXA INDEPENDÊNCIA\n\n" +
+      "O sistema de entrega dos prêmios será conectado ao Firebase na próxima etapa."
+    );
+
+  }
+);
+
+</script>
+
+</body>
+
+</html>
