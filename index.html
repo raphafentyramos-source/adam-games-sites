@@ -10,7 +10,7 @@
   content="width=device-width, initial-scale=1.0"
 >
 
-<title>Adam Games • Login</title>
+<title>Adam Games</title>
 
 <style>
 
@@ -28,6 +28,8 @@ body{
 
 body{
 
+  min-height:100vh;
+
   font-family:
     Arial,
     Helvetica,
@@ -35,102 +37,75 @@ body{
 
   color:#fff;
 
-  min-height:100vh;
-
-  overflow-x:hidden;
-
-  background:
-    #087ee1
-    url("fundo-login-adam-games.png")
-    center center
-    / cover
-    fixed
-    no-repeat;
-}
-
-
-/* =========================
-   CAMADA SOBRE O FUNDO
-========================= */
-
-body::before{
-
-  content:"";
-
-  position:fixed;
-
-  inset:0;
-
-  z-index:0;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(0,35,75,.10),
-      rgba(0,20,50,.45)
-    );
-
-  pointer-events:none;
-}
-
-
-/* =========================
-   CONTAINER
-========================= */
-
-.page{
-
-  position:relative;
-
-  z-index:1;
-
-  min-height:100vh;
-
   display:flex;
 
   align-items:center;
 
   justify-content:center;
 
-  padding:35px 18px;
+  padding:25px 15px;
 
+  overflow-x:hidden;
+
+  background-color:#061d43;
+
+  background-image:
+    linear-gradient(
+      rgba(2,20,55,.30),
+      rgba(2,20,55,.48)
+    ),
+    url("./fundo-login-adam-games.png");
+
+  background-size:cover;
+
+  background-position:center;
+
+  background-repeat:no-repeat;
+
+  background-attachment:fixed;
 }
 
 
-/* =========================
-   LOGIN
-========================= */
+/* =====================================
+   CONTAINER
+===================================== */
 
 .login-container{
 
   width:100%;
 
-  max-width:470px;
+  max-width:450px;
 
+  position:relative;
+
+  z-index:2;
 }
 
 
-/* =========================
+/* =====================================
    LOGO
-========================= */
+===================================== */
 
 .logo{
 
   text-align:center;
 
-  margin-bottom:18px;
+  margin-bottom:20px;
 
+  text-shadow:
+    0 4px 15px
+    rgba(0,0,0,.45);
 }
 
 .logo-icon{
 
-  width:88px;
+  width:92px;
 
-  height:88px;
+  height:92px;
 
-  margin:0 auto;
+  margin:auto;
 
-  border-radius:25px;
+  border-radius:27px;
 
   display:flex;
 
@@ -138,7 +113,7 @@ body::before{
 
   justify-content:center;
 
-  font-size:52px;
+  font-size:55px;
 
   background:
     linear-gradient(
@@ -153,30 +128,23 @@ body::before{
 
   box-shadow:
     0 15px 40px
-    rgba(0,0,0,.35);
-
+    rgba(0,0,0,.4);
 }
 
 .logo h1{
 
-  margin-top:12px;
+  margin-top:13px;
 
   font-size:34px;
 
   font-weight:900;
 
-  line-height:.9;
-
-  text-shadow:
-    0 4px 10px
-    rgba(0,0,0,.35);
-
+  line-height:.95;
 }
 
 .logo h1 span{
 
   color:#ffd52b;
-
 }
 
 .logo p{
@@ -186,27 +154,24 @@ body::before{
   color:#e0efff;
 
   font-size:14px;
-
-  font-weight:bold;
-
 }
 
 
-/* =========================
+/* =====================================
    CARD
-========================= */
+===================================== */
 
 .login-card{
 
-  padding:27px;
+  padding:26px;
 
   border-radius:30px;
 
   background:
     linear-gradient(
       145deg,
-      rgba(3,38,79,.97),
-      rgba(2,18,43,.97)
+      rgba(4,45,95,.94),
+      rgba(2,20,48,.96)
     );
 
   border:
@@ -218,41 +183,33 @@ body::before{
     rgba(0,0,0,.45);
 
   backdrop-filter:
-    blur(8px);
-
+    blur(10px);
 }
-
-
-/* =========================
-   TÍTULO
-========================= */
 
 .login-card h2{
 
   text-align:center;
 
-  font-size:27px;
+  font-size:25px;
 
   margin-bottom:7px;
-
 }
 
 .subtitle{
 
   text-align:center;
 
-  color:#a9c7e4;
+  color:#b9d4ee;
 
   font-size:14px;
 
   margin-bottom:22px;
-
 }
 
 
-/* =========================
+/* =====================================
    MENSAGEM
-========================= */
+===================================== */
 
 .message{
 
@@ -260,7 +217,7 @@ body::before{
 
   margin-bottom:16px;
 
-  padding:13px;
+  padding:12px;
 
   border-radius:13px;
 
@@ -269,7 +226,6 @@ body::before{
   font-size:13px;
 
   font-weight:bold;
-
 }
 
 .message.error{
@@ -283,8 +239,7 @@ body::before{
     1px solid
     rgba(255,70,90,.35);
 
-  color:#ff9ba7;
-
+  color:#ff9ca8;
 }
 
 .message.success{
@@ -296,16 +251,15 @@ body::before{
 
   border:
     1px solid
-    rgba(50,255,140,.3);
+    rgba(50,255,140,.30);
 
   color:#72ffae;
-
 }
 
 
-/* =========================
-   LABEL
-========================= */
+/* =====================================
+   CAMPOS
+===================================== */
 
 label{
 
@@ -317,47 +271,39 @@ label{
 
   font-weight:bold;
 
-  color:#cce3f8;
-
+  color:#d5e8fa;
 }
-
-
-/* =========================
-   INPUT
-========================= */
 
 .input{
 
   width:100%;
 
-  height:52px;
+  height:54px;
 
   border:
     1px solid
-    rgba(255,255,255,.14);
+    rgba(255,255,255,.15);
 
   border-radius:15px;
 
   background:
-    rgba(0,0,0,.25);
+    rgba(0,0,0,.27);
 
-  color:white;
+  color:#fff;
 
   padding:
-    0 15px;
+    0 16px;
 
-  font-size:15px;
+  font-size:16px;
 
   outline:none;
 
   margin-bottom:16px;
-
 }
 
 .input::placeholder{
 
-  color:#7594b4;
-
+  color:#8ca8c3;
 }
 
 .input:focus{
@@ -367,64 +313,55 @@ label{
   box-shadow:
     0 0 0 3px
     rgba(39,161,255,.12);
-
 }
-
-
-/* =========================
-   SENHA
-========================= */
 
 .password-wrap{
 
   position:relative;
-
 }
 
 .password-wrap .input{
 
   padding-right:55px;
-
 }
 
 .show-password{
 
   position:absolute;
 
-  right:7px;
+  right:8px;
 
   top:0;
 
   width:45px;
 
-  height:52px;
+  height:54px;
 
   border:0;
 
   background:transparent;
 
-  color:#9fc4e5;
+  color:#a9c8e5;
 
-  font-size:20px;
+  font-size:21px;
 
   cursor:pointer;
-
 }
 
 
-/* =========================
+/* =====================================
    BOTÃO LOGIN
-========================= */
+===================================== */
 
 .login-button{
 
   width:100%;
 
-  height:54px;
+  height:55px;
 
   border:0;
 
-  border-radius:15px;
+  border-radius:16px;
 
   background:
     linear-gradient(
@@ -433,7 +370,7 @@ label{
       #0069db
     );
 
-  color:white;
+  color:#fff;
 
   font-size:16px;
 
@@ -443,8 +380,7 @@ label{
 
   box-shadow:
     0 10px 25px
-    rgba(0,105,219,.3);
-
+    rgba(0,105,219,.35);
 }
 
 .login-button:disabled{
@@ -452,13 +388,12 @@ label{
   opacity:.6;
 
   cursor:not-allowed;
-
 }
 
 
-/* =========================
+/* =====================================
    ESQUECI SENHA
-========================= */
+===================================== */
 
 .forgot{
 
@@ -468,20 +403,19 @@ label{
 
   margin-top:16px;
 
-  color:#65bdff;
+  color:#6dc3ff;
 
   font-size:13px;
 
   text-decoration:none;
 
   cursor:pointer;
-
 }
 
 
-/* =========================
+/* =====================================
    DIVISOR
-========================= */
+===================================== */
 
 .divider{
 
@@ -489,14 +423,13 @@ label{
 
   align-items:center;
 
-  gap:12px;
+  gap:10px;
 
-  margin:22px 0 15px;
+  margin:22px 0;
 
-  color:#7e9bb8;
+  color:#7897b6;
 
   font-size:12px;
-
 }
 
 .divider::before,
@@ -504,19 +437,18 @@ label{
 
   content:"";
 
-  flex:1;
-
   height:1px;
 
-  background:
-    rgba(255,255,255,.12);
+  flex:1;
 
+  background:
+    rgba(255,255,255,.13);
 }
 
 
-/* =========================
+/* =====================================
    LOGIN SOCIAL
-========================= */
+===================================== */
 
 .social-buttons{
 
@@ -525,26 +457,25 @@ label{
   grid-template-columns:
     repeat(3,1fr);
 
-  gap:8px;
-
+  gap:9px;
 }
 
 .social-button{
 
   height:48px;
 
-  border:0;
-
   border-radius:13px;
 
+  border:
+    1px solid
+    rgba(255,255,255,.12);
+
   background:
-    rgba(255,255,255,.95);
+    rgba(255,255,255,.07);
 
-  color:#172238;
+  color:#fff;
 
-  font-size:13px;
-
-  font-weight:bold;
+  font-size:20px;
 
   cursor:pointer;
 
@@ -554,63 +485,81 @@ label{
 
   justify-content:center;
 
-  gap:5px;
-
+  gap:6px;
 }
 
-.social-button:hover{
+.social-button span{
 
-  transform:translateY(-1px);
+  font-size:11px;
 
+  font-weight:bold;
+}
+
+.google{
+
+  background:
+    rgba(255,255,255,.09);
+}
+
+.facebook{
+
+  background:
+    rgba(24,119,242,.28);
+}
+
+.apple{
+
+  background:
+    rgba(0,0,0,.35);
 }
 
 
-/* =========================
+/* =====================================
    CRIAR CONTA
-========================= */
+===================================== */
 
-.create-area{
+.create-account{
 
-  margin-top:20px;
+  margin-top:22px;
 
-  padding-top:19px;
+  padding-top:20px;
 
   border-top:
     1px solid
     rgba(255,255,255,.10);
 
   text-align:center;
-
 }
 
-.create-area p{
+.create-account p{
 
   color:#a9c7e4;
 
   font-size:13px;
 
-  margin-bottom:11px;
-
+  margin-bottom:10px;
 }
 
 .create-button{
 
   width:100%;
 
-  height:52px;
+  height:50px;
 
-  border:0;
+  border-radius:14px;
 
-  border-radius:15px;
+  border:
+    1px solid
+    rgba(255,211,43,.55);
 
   background:
     linear-gradient(
       135deg,
-      #16c85b,
-      #07943f
+      #d99b12,
+      #f3c62d
     );
 
-  color:white;
+  color:#fff;
 
   font-size:15px;
 
@@ -618,179 +567,37 @@ label{
 
   cursor:pointer;
 
+  box-shadow:
+    0 8px 20px
+    rgba(217,155,18,.25);
 }
 
 
-/* =========================
-   RECURSOS
-========================= */
+/* =====================================
+   CADASTRO
+===================================== */
 
-.features{
+.register-panel{
 
-  display:grid;
-
-  grid-template-columns:
-    repeat(4,1fr);
-
-  gap:7px;
+  display:none;
 
   margin-top:20px;
 
-}
+  padding-top:20px;
 
-.feature{
-
-  text-align:center;
-
-  color:#a9c7e4;
-
-  font-size:10px;
-
-  line-height:1.3;
-
-}
-
-.feature-icon{
-
-  font-size:22px;
-
-  margin-bottom:4px;
-
-}
-
-.feature strong{
-
-  display:block;
-
-  color:#fff;
-
-  font-size:11px;
-
-}
-
-
-/* =========================
-   LOADING
-========================= */
-
-.loading{
-
-  display:none;
-
-  text-align:center;
-
-  margin-top:13px;
-
-  color:#8fcaff;
-
-  font-size:13px;
-
-}
-
-
-/* =========================
-   MODAL CRIAR CONTA
-========================= */
-
-.modal{
-
-  position:fixed;
-
-  inset:0;
-
-  z-index:100;
-
-  display:none;
-
-  align-items:center;
-
-  justify-content:center;
-
-  padding:18px;
-
-  background:
-    rgba(0,0,0,.68);
-
-  backdrop-filter:
-    blur(8px);
-
-}
-
-.modal-box{
-
-  width:100%;
-
-  max-width:430px;
-
-  max-height:
-    calc(100vh - 30px);
-
-  overflow-y:auto;
-
-  padding:25px;
-
-  border-radius:25px;
-
-  background:
-    linear-gradient(
-      145deg,
-      #073d76,
-      #021a38
-    );
-
-  border:
+  border-top:
     1px solid
-    rgba(255,255,255,.17);
-
-  box-shadow:
-    0 30px 70px
-    rgba(0,0,0,.5);
-
-}
-
-.modal-header{
-
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
-
-  margin-bottom:18px;
-
-}
-
-.modal-header h3{
-
-  font-size:22px;
-
-}
-
-.close-modal{
-
-  width:38px;
-
-  height:38px;
-
-  border:0;
-
-  border-radius:50%;
-
-  background:
     rgba(255,255,255,.10);
+}
 
-  color:white;
+.register-panel h3{
+
+  text-align:center;
 
   font-size:20px;
 
-  cursor:pointer;
-
+  margin-bottom:18px;
 }
-
-
-/* =========================
-   CADASTRO
-========================= */
 
 .register-button{
 
@@ -800,125 +607,118 @@ label{
 
   border:0;
 
-  border-radius:15px;
+  border-radius:14px;
 
   background:
     linear-gradient(
       135deg,
-      #16c85b,
-      #07943f
+      #12b866,
+      #078b4b
     );
 
   color:white;
 
   font-weight:900;
 
-  font-size:15px;
+  cursor:pointer;
+}
+
+.back-login{
+
+  display:block;
+
+  margin-top:13px;
+
+  text-align:center;
+
+  color:#69c2ff;
+
+  font-size:13px;
 
   cursor:pointer;
-
 }
 
 
-/* =========================
-   RODAPÉ
-========================= */
+/* =====================================
+   LOADING
+===================================== */
+
+.loading{
+
+  display:none;
+
+  text-align:center;
+
+  margin-top:14px;
+
+  color:#8fcaff;
+
+  font-size:13px;
+}
+
+
+/* =====================================
+   FOOTER
+===================================== */
 
 .footer{
 
   text-align:center;
 
-  margin-top:15px;
+  margin-top:18px;
 
-  color:#d5e7f7;
+  color:#d2e4f5;
 
   font-size:11px;
 
   text-shadow:
-    0 2px 5px
+    0 2px 8px
     rgba(0,0,0,.5);
-
 }
 
 
-/* =========================
+/* =====================================
    MOBILE
-========================= */
+===================================== */
 
-@media(max-width:600px){
+@media(max-width:500px){
 
   body{
 
-    background-position:
-      center center;
-
-    background-attachment:
-      scroll;
-
-  }
-
-  .page{
-
     padding:
-      22px 12px;
-
-  }
-
-  .login-container{
-
-    max-width:440px;
-
+      18px
+      12px;
   }
 
   .logo-icon{
 
-    width:72px;
+    width:78px;
 
-    height:72px;
+    height:78px;
 
-    font-size:43px;
-
+    font-size:45px;
   }
 
   .logo h1{
 
-    font-size:28px;
-
+    font-size:29px;
   }
 
   .login-card{
 
-    padding:21px;
+    padding:22px 18px;
 
-    border-radius:24px;
-
+    border-radius:25px;
   }
 
   .login-card h2{
 
-    font-size:23px;
-
+    font-size:22px;
   }
 
-  .social-buttons{
+  .social-button span{
 
-    grid-template-columns:1fr;
-
-  }
-
-  .social-button{
-
-    height:46px;
-
-  }
-
-  .features{
-
-    grid-template-columns:
-      repeat(2,1fr);
-
-    row-gap:13px;
-
+    display:none;
   }
 
 }
@@ -931,362 +731,60 @@ label{
 <body>
 
 
-<div class="page">
-
-
 <div class="login-container">
 
 
-<!-- =========================
-     LOGO
-========================= -->
+  <!-- LOGO -->
 
-<div class="logo">
+  <div class="logo">
 
-  <div class="logo-icon">
-    👑
-  </div>
-
-  <h1>
-    ADAM <span>GAMES</span>
-  </h1>
-
-  <p>
-    Seu mundo começa aqui!
-  </p>
-
-</div>
-
-
-<!-- =========================
-     LOGIN
-========================= -->
-
-<div class="login-card">
-
-  <h2>
-    Bem-vindo de volta! 👋
-  </h2>
-
-  <div class="subtitle">
-    Entre na sua conta para continuar
-  </div>
-
-
-  <div
-    id="message"
-    class="message">
-  </div>
-
-
-  <form id="loginForm">
-
-
-    <label for="email">
-      E-mail
-    </label>
-
-    <input
-      id="email"
-      class="input"
-      type="email"
-      placeholder="seu@email.com"
-      autocomplete="email"
-      required
-    >
-
-
-    <label for="password">
-      Senha
-    </label>
-
-    <div class="password-wrap">
-
-      <input
-        id="password"
-        class="input"
-        type="password"
-        placeholder="Digite sua senha"
-        autocomplete="current-password"
-        required
-      >
-
-      <button
-        type="button"
-        class="show-password"
-        id="showPassword">
-
-        👁️
-
-      </button>
-
+    <div class="logo-icon">
+      👑
     </div>
 
-
-    <button
-      type="submit"
-      class="login-button"
-      id="loginButton">
-
-      ENTRAR
-
-    </button>
-
-  </form>
-
-
-  <a
-    href="#"
-    class="forgot"
-    id="forgotPassword">
-
-    Esqueci minha senha
-
-  </a>
-
-
-  <div class="loading" id="loading">
-
-    🔄 Verificando sua conta...
-
-  </div>
-
-
-  <!-- =========================
-       REDES SOCIAIS
-  ========================= -->
-
-  <div class="divider">
-    ou continue com
-  </div>
-
-
-  <div class="social-buttons">
-
-    <button
-      type="button"
-      class="social-button"
-      id="googleLogin">
-
-      🌈 Google
-
-    </button>
-
-
-    <button
-      type="button"
-      class="social-button"
-      id="facebookLogin">
-
-      🔵 Facebook
-
-    </button>
-
-
-    <button
-      type="button"
-      class="social-button"
-      id="appleLogin">
-
-       Apple
-
-    </button>
-
-  </div>
-
-
-  <!-- =========================
-       CRIAR CONTA
-  ========================= -->
-
-  <div class="create-area">
+    <h1>
+      ADAM
+      <span>GAMES</span>
+    </h1>
 
     <p>
-      Ainda não tem uma conta?
+      Seu mundo começa aqui!
     </p>
 
-    <button
-      type="button"
-      class="create-button"
-      id="createAccount">
-
-      👤 CRIAR MINHA CONTA
-
-    </button>
-
   </div>
 
 
-  <!-- =========================
-       RECURSOS
-  ========================= -->
+  <!-- LOGIN -->
 
-  <div class="features">
-
-    <div class="feature">
-
-      <div class="feature-icon">
-        🛡️
-      </div>
-
-      <strong>
-        Seguro
-      </strong>
-
-      Seus dados protegidos
-
-    </div>
+  <div class="login-card">
 
 
-    <div class="feature">
-
-      <div class="feature-icon">
-        👑
-      </div>
-
-      <strong>
-        Diversão
-      </strong>
-
-      Jogos incríveis
-
-    </div>
+    <h2>
+      Bem-vindo de volta 👋
+    </h2>
 
 
-    <div class="feature">
-
-      <div class="feature-icon">
-        🎁
-      </div>
-
-      <strong>
-        Prêmios
-      </strong>
-
-      Benefícios exclusivos
-
-    </div>
-
-
-    <div class="feature">
-
-      <div class="feature-icon">
-        💎
-      </div>
-
-      <strong>
-        Comunidade
-      </strong>
-
-      Jogue com amigos
-
-    </div>
-
-  </div>
-
-</div>
-
-
-<div class="footer">
-
-  © 2026 Adam Games • Todos os direitos reservados.
-
-</div>
-
-
-</div>
-
-</div>
-
-
-<!-- =========================
-     MODAL CADASTRO
-========================= -->
-
-<div
-  class="modal"
-  id="registerModal">
-
-
-  <div class="modal-box">
-
-
-    <div class="modal-header">
-
-      <h3>
-        Criar minha conta 👑
-      </h3>
-
-      <button
-        type="button"
-        class="close-modal"
-        id="closeModal">
-
-        ×
-
-      </button>
-
+    <div class="subtitle">
+      Entre na sua conta para continuar
     </div>
 
 
     <div
-      id="registerMessage"
+      id="message"
       class="message">
     </div>
 
 
-    <form id="registerForm">
+    <form id="loginForm">
 
 
-      <label for="registerName">
-        Nome
-      </label>
-
-      <input
-        id="registerName"
-        class="input"
-        type="text"
-        placeholder="Seu nome"
-        autocomplete="name"
-        maxlength="80"
-        required
-      >
-
-
-      <label for="registerAge">
-        Idade
-      </label>
-
-      <input
-        id="registerAge"
-        class="input"
-        type="number"
-        min="13"
-        max="120"
-        placeholder="Sua idade"
-        required
-      >
-
-
-      <label for="registerPhone">
-        Telefone
-      </label>
-
-      <input
-        id="registerPhone"
-        class="input"
-        type="tel"
-        placeholder="(00) 00000-0000"
-        autocomplete="tel"
-      >
-
-
-      <label for="registerEmail">
+      <label for="email">
         E-mail
       </label>
 
+
       <input
-        id="registerEmail"
+        id="email"
         class="input"
         type="email"
         placeholder="seu@email.com"
@@ -1295,38 +793,181 @@ label{
       >
 
 
+      <label for="password">
+        Senha
+      </label>
+
+
+      <div class="password-wrap">
+
+
+        <input
+          id="password"
+          class="input"
+          type="password"
+          placeholder="Digite sua senha"
+          autocomplete="current-password"
+          required
+        >
+
+
+        <button
+          type="button"
+          class="show-password"
+          id="showPassword">
+
+          👁️
+
+        </button>
+
+
+      </div>
+
+
+      <button
+        type="submit"
+        class="login-button"
+        id="loginButton">
+
+        ENTRAR
+
+      </button>
+
+
+    </form>
+
+
+    <a
+      href="#"
+      class="forgot"
+      id="forgotPassword">
+
+      Esqueci minha senha
+
+    </a>
+
+
+    <!-- SOCIAL -->
+
+    <div class="divider">
+      OU CONTINUE COM
+    </div>
+
+
+    <div class="social-buttons">
+
+
+      <button
+        type="button"
+        class="social-button google"
+        id="googleLogin">
+
+        🔵
+        <span>Google</span>
+
+      </button>
+
+
+      <button
+        type="button"
+        class="social-button facebook"
+        id="facebookLogin">
+
+        🔵
+        <span>Facebook</span>
+
+      </button>
+
+
+      <button
+        type="button"
+        class="social-button apple"
+        id="appleLogin">
+
+        
+        <span>Apple</span>
+
+      </button>
+
+
+    </div>
+
+
+    <!-- CRIAR CONTA -->
+
+    <div class="create-account">
+
+      <p>
+        Ainda não tem uma conta?
+      </p>
+
+
+      <button
+        type="button"
+        class="create-button"
+        id="createButton">
+
+        👤 CRIAR MINHA CONTA
+
+      </button>
+
+
+    </div>
+
+
+    <!-- CADASTRO -->
+
+    <div
+      class="register-panel"
+      id="registerPanel">
+
+
+      <h3>
+        Criar conta 🎮
+      </h3>
+
+
+      <label for="registerName">
+        Nome
+      </label>
+
+
+      <input
+        id="registerName"
+        class="input"
+        type="text"
+        placeholder="Seu nome"
+      >
+
+
+      <label for="registerEmail">
+        E-mail
+      </label>
+
+
+      <input
+        id="registerEmail"
+        class="input"
+        type="email"
+        placeholder="seu@email.com"
+      >
+
+
       <label for="registerPassword">
         Senha
       </label>
+
 
       <input
         id="registerPassword"
         class="input"
         type="password"
         placeholder="Mínimo de 6 caracteres"
-        autocomplete="new-password"
-        minlength="6"
-        required
-      >
-
-
-      <label for="registerPassword2">
-        Confirmar senha
-      </label>
-
-      <input
-        id="registerPassword2"
-        class="input"
-        type="password"
-        placeholder="Digite a senha novamente"
-        autocomplete="new-password"
-        minlength="6"
-        required
       >
 
 
       <button
-        type="submit"
+        type="button"
         class="register-button"
         id="registerButton">
 
@@ -1335,10 +976,36 @@ label{
       </button>
 
 
-    </form>
+      <span
+        class="back-login"
+        id="backLogin">
+
+        ← Voltar para entrar
+
+      </span>
+
+
+    </div>
+
+
+    <div
+      class="loading"
+      id="loading">
+
+      🔄 Verificando sua conta...
+
+    </div>
 
 
   </div>
+
+
+  <div class="footer">
+
+    © 2026 Adam Games
+
+  </div>
+
 
 </div>
 
@@ -1361,11 +1028,9 @@ import {
   getAuth,
   onAuthStateChanged,
   signInWithEmailAndPassword,
-  sendPasswordResetEmail,
   createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
   GoogleAuthProvider,
-  FacebookAuthProvider,
-  OAuthProvider,
   signInWithPopup
 }
 from
@@ -1385,7 +1050,7 @@ from
 
 
 /* =====================================
-   CONFIGURAÇÃO
+   CONFIG
 ===================================== */
 
 const firebaseConfig = {
@@ -1437,95 +1102,77 @@ const form =
     "loginForm"
   );
 
-
 const email =
   document.getElementById(
     "email"
   );
-
 
 const password =
   document.getElementById(
     "password"
   );
 
-
 const button =
   document.getElementById(
     "loginButton"
   );
-
 
 const message =
   document.getElementById(
     "message"
   );
 
-
 const loading =
   document.getElementById(
     "loading"
   );
-
 
 const forgot =
   document.getElementById(
     "forgotPassword"
   );
 
-
 const showPassword =
   document.getElementById(
     "showPassword"
   );
 
-
-const registerModal =
+const createButton =
   document.getElementById(
-    "registerModal"
+    "createButton"
   );
 
-
-const registerForm =
+const registerPanel =
   document.getElementById(
-    "registerForm"
+    "registerPanel"
   );
 
-
-const registerMessage =
+const registerButton =
   document.getElementById(
-    "registerMessage"
+    "registerButton"
+  );
+
+const backLogin =
+  document.getElementById(
+    "backLogin"
   );
 
 
 /* =====================================
-   MENSAGENS
+   MENSAGEM
 ===================================== */
 
 function mostrarMensagem(
   texto,
-  tipo = "error"
+  tipo="error"
 ){
 
   message.textContent =
     texto;
 
   message.className =
-    "message " + tipo;
-
-}
-
-
-function mostrarRegistro(
-  texto,
-  tipo = "error"
-){
-
-  registerMessage.textContent =
-    texto;
-
-  registerMessage.className =
-    "message " + tipo;
+    "message " +
+    tipo;
 
 }
 
@@ -1549,7 +1196,9 @@ showPassword.addEventListener(
       showPassword.textContent =
         "🙈";
 
-    }else{
+    }
+
+    else{
 
       password.type =
         "password";
@@ -1564,7 +1213,7 @@ showPassword.addEventListener(
 
 
 /* =====================================
-   LOGIN
+   LOGIN NORMAL
 ===================================== */
 
 form.addEventListener(
@@ -1608,10 +1257,6 @@ form.addEventListener(
       "block";
 
 
-    message.className =
-      "message";
-
-
     try{
 
       await signInWithEmailAndPassword(
@@ -1639,71 +1284,17 @@ form.addEventListener(
       );
 
 
-    }catch(error){
+    }
+
+    catch(error){
 
       console.error(
-        "Erro de login:",
         error
       );
 
 
-      let texto =
-        "Não foi possível entrar.";
-
-
-      if(
-        error.code ===
-        "auth/invalid-credential"
-      ){
-
-        texto =
-          "E-mail ou senha incorretos.";
-
-      }
-
-      else if(
-        error.code ===
-        "auth/user-not-found"
-      ){
-
-        texto =
-          "Usuário não encontrado.";
-
-      }
-
-      else if(
-        error.code ===
-        "auth/wrong-password"
-      ){
-
-        texto =
-          "Senha incorreta.";
-
-      }
-
-      else if(
-        error.code ===
-        "auth/invalid-email"
-      ){
-
-        texto =
-          "Digite um e-mail válido.";
-
-      }
-
-      else if(
-        error.code ===
-        "auth/too-many-requests"
-      ){
-
-        texto =
-          "Muitas tentativas. Aguarde alguns minutos.";
-
-      }
-
-
       mostrarMensagem(
-        texto
+        "E-mail ou senha incorretos."
       );
 
 
@@ -1717,6 +1308,234 @@ form.addEventListener(
 
       loading.style.display =
         "none";
+
+    }
+
+  }
+);
+
+
+/* =====================================
+   CRIAR CONTA
+===================================== */
+
+createButton.addEventListener(
+  "click",
+  () => {
+
+    registerPanel.style.display =
+      "block";
+
+    createButton.style.display =
+      "none";
+
+  }
+);
+
+
+/* =====================================
+   VOLTAR
+===================================== */
+
+backLogin.addEventListener(
+  "click",
+  () => {
+
+    registerPanel.style.display =
+      "none";
+
+    createButton.style.display =
+      "block";
+
+  }
+);
+
+
+/* =====================================
+   CADASTRO
+===================================== */
+
+registerButton.addEventListener(
+  "click",
+  async () => {
+
+    const nome =
+      document.getElementById(
+        "registerName"
+      ).value.trim();
+
+
+    const emailCadastro =
+      document.getElementById(
+        "registerEmail"
+      ).value.trim();
+
+
+    const senha =
+      document.getElementById(
+        "registerPassword"
+      ).value;
+
+
+    if(
+      !nome ||
+      !emailCadastro ||
+      !senha
+    ){
+
+      mostrarMensagem(
+        "Preencha nome, e-mail e senha."
+      );
+
+      return;
+
+    }
+
+
+    if(
+      senha.length < 6
+    ){
+
+      mostrarMensagem(
+        "A senha precisa ter pelo menos 6 caracteres."
+      );
+
+      return;
+
+    }
+
+
+    registerButton.disabled =
+      true;
+
+
+    registerButton.textContent =
+      "CRIANDO...";
+
+
+    try{
+
+      const resultado =
+        await createUserWithEmailAndPassword(
+          auth,
+          emailCadastro,
+          senha
+        );
+
+
+      /*
+        Criamos o cadastro inicial
+        na coleção admins.
+      */
+
+      await addDoc(
+        collection(
+          db,
+          "admins"
+        ),
+        {
+
+          uid:
+            resultado.user.uid,
+
+          nome:
+            nome,
+
+          name:
+            nome,
+
+          email:
+            emailCadastro,
+
+          chances:
+            0,
+
+          moedas:
+            0,
+
+          chaves:
+            0,
+
+          creditos:
+            0,
+
+          vip:
+            false,
+
+          caixaBox:
+            false,
+
+          criadoEm:
+            new Date().toISOString()
+
+        }
+      );
+
+
+      mostrarMensagem(
+        "Conta criada com sucesso! Entrando...",
+        "success"
+      );
+
+
+      setTimeout(
+        () => {
+
+          window.location.replace(
+            "painel.html"
+          );
+
+        },
+        800
+      );
+
+
+    }
+
+    catch(error){
+
+      console.error(
+        error
+      );
+
+
+      if(
+        error.code ===
+        "auth/email-already-in-use"
+      ){
+
+        mostrarMensagem(
+          "Este e-mail já possui uma conta."
+        );
+
+      }
+
+      else if(
+        error.code ===
+        "auth/invalid-email"
+      ){
+
+        mostrarMensagem(
+          "Digite um e-mail válido."
+        );
+
+      }
+
+      else{
+
+        mostrarMensagem(
+          "Não foi possível criar a conta."
+        );
+
+      }
+
+
+      registerButton.disabled =
+        false;
+
+
+      registerButton.textContent =
+        "CRIAR CONTA";
 
     }
 
@@ -1745,9 +1564,7 @@ forgot.addEventListener(
         "Digite seu e-mail primeiro."
       );
 
-
       email.focus();
-
 
       return;
 
@@ -1767,8 +1584,9 @@ forgot.addEventListener(
         "success"
       );
 
+    }
 
-    }catch(error){
+    catch(error){
 
       console.error(
         error
@@ -1776,7 +1594,7 @@ forgot.addEventListener(
 
 
       mostrarMensagem(
-        "Não foi possível enviar o e-mail de recuperação."
+        "Não foi possível enviar o e-mail."
       );
 
     }
@@ -1786,430 +1604,7 @@ forgot.addEventListener(
 
 
 /* =====================================
-   ABRIR CADASTRO
-===================================== */
-
-document
-.getElementById(
-  "createAccount"
-)
-.addEventListener(
-  "click",
-  () => {
-
-    registerModal.style.display =
-      "flex";
-
-    document
-      .getElementById(
-        "registerName"
-      )
-      .focus();
-
-  }
-);
-
-
-/* =====================================
-   FECHAR CADASTRO
-===================================== */
-
-document
-.getElementById(
-  "closeModal"
-)
-.addEventListener(
-  "click",
-  () => {
-
-    registerModal.style.display =
-      "none";
-
-  }
-);
-
-
-registerModal.addEventListener(
-  "click",
-  event => {
-
-    if(
-      event.target ===
-      registerModal
-    ){
-
-      registerModal.style.display =
-        "none";
-
-    }
-
-  }
-);
-
-
-/* =====================================
-   GERAR ID ADAM GAMES
-===================================== */
-
-function gerarID(){
-
-  const caracteres =
-    "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-
-
-  let id =
-    "";
-
-
-  for(
-    let i = 0;
-    i < 7;
-    i++
-  ){
-
-    id +=
-      caracteres[
-        Math.floor(
-          Math.random() *
-          caracteres.length
-        )
-      ];
-
-  }
-
-
-  return id;
-
-}
-
-
-/* =====================================
-   GARANTIR ID ÚNICO
-===================================== */
-
-async function gerarPublicIdUnico(){
-
-  let id;
-
-  let existe = true;
-
-
-  while(existe){
-
-    id =
-      gerarID();
-
-
-    const consulta =
-      query(
-        collection(
-          db,
-          "admins"
-        ),
-        where(
-          "publicId",
-          "==",
-          id
-        )
-      );
-
-
-    const resultado =
-      await getDocs(
-        consulta
-      );
-
-
-    existe =
-      !resultado.empty;
-
-  }
-
-
-  return id;
-
-}
-
-
-/* =====================================
-   CRIAR CONTA
-===================================== */
-
-registerForm.addEventListener(
-  "submit",
-  async event => {
-
-    event.preventDefault();
-
-
-    const nome =
-      document
-        .getElementById(
-          "registerName"
-        )
-        .value
-        .trim();
-
-
-    const idade =
-      Number(
-        document
-          .getElementById(
-            "registerAge"
-          )
-          .value
-      );
-
-
-    const telefone =
-      document
-        .getElementById(
-          "registerPhone"
-        )
-        .value
-        .trim();
-
-
-    const emailNovo =
-      document
-        .getElementById(
-          "registerEmail"
-        )
-        .value
-        .trim();
-
-
-    const senha =
-      document
-        .getElementById(
-          "registerPassword"
-        )
-        .value;
-
-
-    const senha2 =
-      document
-        .getElementById(
-          "registerPassword2"
-        )
-        .value;
-
-
-    if(
-      senha !==
-      senha2
-    ){
-
-      mostrarRegistro(
-        "As senhas não são iguais."
-      );
-
-      return;
-
-    }
-
-
-    if(
-      idade < 13 ||
-      idade > 120
-    ){
-
-      mostrarRegistro(
-        "Digite uma idade válida."
-      );
-
-      return;
-
-    }
-
-
-    const registerButton =
-      document.getElementById(
-        "registerButton"
-      );
-
-
-    registerButton.disabled =
-      true;
-
-
-    registerButton.textContent =
-      "CRIANDO...";
-
-
-    try{
-
-      /*
-        Cria o usuário
-        no Firebase Authentication.
-      */
-
-      const resultado =
-        await createUserWithEmailAndPassword(
-          auth,
-          emailNovo,
-          senha
-        );
-
-
-      /*
-        Gera o ID Adam Games.
-      */
-
-      const publicId =
-        await gerarPublicIdUnico();
-
-
-      /*
-        Cria o cadastro
-        na coleção admins.
-      */
-
-      await addDoc(
-        collection(
-          db,
-          "admins"
-        ),
-        {
-
-          uid:
-            resultado.user.uid,
-
-          publicId:
-            publicId,
-
-          nome:
-            nome,
-
-          idade:
-            idade,
-
-          telefone:
-            telefone,
-
-          email:
-            emailNovo,
-
-          avatar:
-            "🙂",
-
-          vip:
-            false,
-
-          caixaBox:
-            false,
-
-          chances:
-            0,
-
-          moedas:
-            0,
-
-          chaves:
-            0,
-
-          creditos:
-            0,
-
-          criadoEm:
-            new Date().toISOString()
-
-        }
-      );
-
-
-      mostrarRegistro(
-        "Conta criada com sucesso! Seu ID é " +
-        publicId,
-        "success"
-      );
-
-
-      setTimeout(
-        () => {
-
-          window.location.replace(
-            "painel.html"
-          );
-
-        },
-        1000
-      );
-
-
-    }catch(error){
-
-      console.error(
-        "Erro ao criar conta:",
-        error
-      );
-
-
-      let texto =
-        "Não foi possível criar a conta.";
-
-
-      if(
-        error.code ===
-        "auth/email-already-in-use"
-      ){
-
-        texto =
-          "Este e-mail já possui uma conta.";
-
-      }
-
-      else if(
-        error.code ===
-        "auth/invalid-email"
-      ){
-
-        texto =
-          "Digite um e-mail válido.";
-
-      }
-
-      else if(
-        error.code ===
-        "auth/weak-password"
-      ){
-
-        texto =
-          "A senha precisa ter pelo menos 6 caracteres.";
-
-      }
-
-      else if(
-        error.code ===
-        "auth/network-request-failed"
-      ){
-
-        texto =
-          "Falha de conexão. Tente novamente.";
-
-      }
-
-
-      mostrarRegistro(
-        texto
-      );
-
-
-      registerButton.disabled =
-        false;
-
-
-      registerButton.textContent =
-        "CRIAR CONTA";
-
-    }
-
-  }
-);
-
-
-/* =====================================
-   LOGIN GOOGLE
+   GOOGLE
 ===================================== */
 
 document
@@ -2236,17 +1631,17 @@ document
         "painel.html"
       );
 
+    }
 
-    }catch(error){
+    catch(error){
 
       console.error(
-        "Google:",
         error
       );
 
 
       mostrarMensagem(
-        "Não foi possível entrar com o Google."
+        "Não foi possível entrar com Google."
       );
 
     }
@@ -2256,7 +1651,7 @@ document
 
 
 /* =====================================
-   LOGIN FACEBOOK
+   FACEBOOK
 ===================================== */
 
 document
@@ -2265,45 +1660,18 @@ document
 )
 .addEventListener(
   "click",
-  async () => {
+  () => {
 
-    try{
-
-      const provider =
-        new FacebookAuthProvider();
-
-
-      await signInWithPopup(
-        auth,
-        provider
-      );
-
-
-      window.location.replace(
-        "painel.html"
-      );
-
-
-    }catch(error){
-
-      console.error(
-        "Facebook:",
-        error
-      );
-
-
-      mostrarMensagem(
-        "Não foi possível entrar com o Facebook. Verifique se o Facebook está ativado no Firebase."
-      );
-
-    }
+    mostrarMensagem(
+      "Facebook precisa ser ativado no Firebase antes de funcionar."
+    );
 
   }
 );
 
 
 /* =====================================
-   LOGIN APPLE
+   APPLE
 ===================================== */
 
 document
@@ -2312,47 +1680,18 @@ document
 )
 .addEventListener(
   "click",
-  async () => {
+  () => {
 
-    try{
-
-      const provider =
-        new OAuthProvider(
-          "apple.com"
-        );
-
-
-      await signInWithPopup(
-        auth,
-        provider
-      );
-
-
-      window.location.replace(
-        "painel.html"
-      );
-
-
-    }catch(error){
-
-      console.error(
-        "Apple:",
-        error
-      );
-
-
-      mostrarMensagem(
-        "Não foi possível entrar com a Apple. Verifique se a Apple está ativada no Firebase."
-      );
-
-    }
+    mostrarMensagem(
+      "Apple precisa ser configurado no Firebase antes de funcionar."
+    );
 
   }
 );
 
 
 /* =====================================
-   VERIFICAR SESSÃO
+   SESSÃO
 ===================================== */
 
 onAuthStateChanged(
@@ -2369,6 +1708,7 @@ onAuthStateChanged(
 
   }
 );
+
 
 </script>
 
