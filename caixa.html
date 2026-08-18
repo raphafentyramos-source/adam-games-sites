@@ -7,7 +7,7 @@
 
 <meta
   name="viewport"
-  content="width=device-width, initial-scale=1.0"
+  content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
 >
 
 <title>Adam Games - Caixa da Independência</title>
@@ -24,44 +24,31 @@
   padding:0;
 }
 
-html{
-  background:#03152f;
+html,
+body{
+  width:100%;
+  min-height:100%;
 }
 
 body{
-
-  min-height:100vh;
 
   font-family:
     Arial,
     Helvetica,
     sans-serif;
 
+  background:
+    #03152f;
+
   color:#fff;
 
-  background:
-    linear-gradient(
-      rgba(2,24,55,.18),
-      rgba(2,24,55,.45)
-    ),
-    url("caixa-independencia-fundo.png")
-    center top / 100% auto
-    no-repeat,
-
-    linear-gradient(
-      180deg,
-      #087ddc,
-      #03152f
-    );
-
-  background-attachment:
-    scroll;
+  overflow-x:hidden;
 
 }
 
 
 /* =====================================================
-   CONTAINER
+   PÁGINA
 ===================================================== */
 
 .page{
@@ -70,111 +57,115 @@ body{
 
   max-width:650px;
 
-  min-height:100vh;
-
   margin:0 auto;
 
   padding:
-    18px
-    16px
+    0
+    0
     80px;
 
 }
 
 
 /* =====================================================
-   TOPO
+   PALCO DA ARTE
 ===================================================== */
 
-.top{
+.art{
+
+  position:relative;
+
+  width:100%;
+
+  aspect-ratio:
+    1024 / 1536;
+
+  background-image:
+    url("caixa-independencia-fundo.png");
+
+  background-size:
+    100% 100%;
+
+  background-position:
+    center;
+
+  background-repeat:
+    no-repeat;
+
+}
+
+
+/* =====================================================
+   BOTÃO VOLTAR
+===================================================== */
+
+.back{
+
+  position:absolute;
+
+  top:2.2%;
+
+  left:3%;
+
+  z-index:20;
+
+  width:9%;
+
+  aspect-ratio:1;
+
+  border:
+    2px solid
+    rgba(255,255,255,.35);
+
+  border-radius:18%;
+
+  background:
+    rgba(0,20,50,.86);
+
+  color:#fff;
+
+  font-size:
+    clamp(20px,6vw,32px);
+
+  font-weight:bold;
+
+  cursor:pointer;
 
   display:flex;
 
   align-items:center;
 
-  justify-content:space-between;
+  justify-content:center;
 
-  position:relative;
-
-  z-index:5;
-
-}
-
-.back{
-
-  width:45px;
-
-  height:45px;
-
-  border:none;
-
-  border-radius:14px;
-
-  background:
-    rgba(0,25,60,.82);
-
-  color:#fff;
-
-  font-size:25px;
-
-  cursor:pointer;
+  box-shadow:
+    0 5px 15px
+    rgba(0,0,0,.35);
 
 }
 
 
 /* =====================================================
    TÍTULO
-===================================================== */
-
-.title{
-
-  text-align:center;
-
-  text-shadow:
-    0 2px 8px #000;
-
-}
-
-.title small{
-
-  display:block;
-
-  font-size:10px;
-
-  color:#d7eaff;
-
-}
-
-.title strong{
-
-  font-size:18px;
-
-}
-
-
-/* =====================================================
-   ESPAÇO SUPERIOR
-===================================================== */
-
-.hero-space{
-
-  height:340px;
-
-}
-
-
-/* =====================================================
-   CABEÇALHO DA CAIXA
+   FICA SOBRE A FAIXA VERDE DA IMAGEM
 ===================================================== */
 
 .box-title{
 
+  position:absolute;
+
+  top:40.7%;
+
+  left:7%;
+
+  width:86%;
+
   text-align:center;
 
-  margin-top:0;
+  z-index:5;
 
   text-shadow:
-    0 3px 8px #000;
+    0 3px 8px
+    rgba(0,0,0,.85);
 
 }
 
@@ -182,58 +173,154 @@ body{
 
   font-size:
     clamp(
-      25px,
-      7vw,
+      22px,
+      6.3vw,
       38px
     );
 
+  line-height:1.05;
+
   font-weight:900;
+
+  color:#ffd82e;
 
 }
 
 .box-title p{
 
-  margin-top:8px;
+  margin-top:1.3%;
 
-  font-size:15px;
+  font-size:
+    clamp(
+      11px,
+      3.2vw,
+      17px
+    );
 
-  color:#d9ecff;
+  color:#fff;
+
+  font-weight:600;
 
 }
 
 
 /* =====================================================
    STATUS VIP
+   FAIXA AZUL LOGO ABAIXO DO TÍTULO
 ===================================================== */
 
 .vip{
 
-  margin-top:18px;
+  position:absolute;
 
-  padding:13px 15px;
+  top:46.5%;
 
-  border-radius:16px;
+  left:13%;
 
-  text-align:center;
+  width:74%;
 
-  font-size:17px;
+  height:4.4%;
 
-  font-weight:900;
+  min-height:30px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  z-index:8;
+
+  border-radius:20px;
 
   background:
     linear-gradient(
       135deg,
-      #e2b629,
-      #8c5e00
+      #e4b82a,
+      #956400
     );
 
   border:
     2px solid
-    rgba(255,229,120,.55);
+    rgba(255,231,119,.7);
 
   box-shadow:
-    0 5px 18px
+    0 5px 15px
     rgba(0,0,0,.35);
+
+  color:#fff;
+
+  font-size:
+    clamp(
+      13px,
+      3.5vw,
+      19px
+    );
+
+  font-weight:900;
+
+}
+
+
+/* =====================================================
+   TIMER CARD
+   DENTRO DO GRANDE PAINEL AZUL
+===================================================== */
+
+.timer-card{
+
+  position:absolute;
+
+  top:51.3%;
+
+  left:8%;
+
+  width:84%;
+
+  height:17.2%;
+
+  z-index:7;
+
+  text-align:center;
+
+  padding:
+    2.2%
+    3%;
+
+  border-radius:22px;
+
+  background:
+    rgba(1,22,53,.88);
+
+  border:
+    2px solid
+    rgba(30,142,255,.35);
+
+  box-shadow:
+    0 10px 30px
+    rgba(0,0,0,.30);
+
+}
+
+
+/* =====================================================
+   LABEL TIMER
+===================================================== */
+
+.timer-label{
+
+  color:#a9d4ff;
+
+  font-size:
+    clamp(
+      11px,
+      3vw,
+      17px
+    );
+
+  font-weight:900;
+
+  letter-spacing:.4px;
 
 }
 
@@ -242,74 +329,49 @@ body{
    TIMER
 ===================================================== */
 
-.timer-card{
-
-  margin-top:17px;
-
-  padding:20px 16px;
-
-  border-radius:24px;
-
-  background:
-    rgba(2,24,55,.93);
-
-  border:
-    2px solid
-    rgba(34,135,255,.3);
-
-  box-shadow:
-    0 10px 35px
-    rgba(0,0,0,.35);
-
-  text-align:center;
-
-}
-
-.timer-label{
-
-  color:#9cc8ed;
-
-  font-size:13px;
-
-  font-weight:900;
-
-  letter-spacing:.3px;
-
-}
-
 .timer{
 
-  margin-top:5px;
+  margin-top:1%;
 
   font-size:
     clamp(
-      34px,
-      10vw,
-      55px
+      30px,
+      9vw,
+      57px
     );
 
   line-height:1;
 
   font-weight:900;
 
-  color:#ffd92e;
+  color:#ffd82d;
 
   text-shadow:
-    0 2px 8px
-    rgba(255,210,20,.35);
+    0 3px 10px
+    rgba(255,211,20,.35);
 
   font-variant-numeric:
     tabular-nums;
 
 }
 
+
+/* =====================================================
+   STATUS
+===================================================== */
+
 .status{
 
-  margin-top:12px;
+  margin-top:1.2%;
 
-  font-size:15px;
+  font-size:
+    clamp(
+      10px,
+      2.8vw,
+      15px
+    );
 
-  line-height:1.4;
+  line-height:1.25;
 
 }
 
@@ -340,19 +402,24 @@ body{
 
   width:100%;
 
-  height:12px;
+  height:
+    clamp(
+      6px,
+      1.7vw,
+      11px
+    );
 
-  margin-top:17px;
+  margin-top:2.2%;
 
   overflow:hidden;
 
   border-radius:20px;
 
-  background:#0b274c;
+  background:#08264b;
 
   border:
     1px solid
-    rgba(255,255,255,.15);
+    rgba(255,255,255,.2);
 
 }
 
@@ -368,8 +435,8 @@ body{
     linear-gradient(
       90deg,
       #ffd900,
-      #4cff75,
-      #179bff
+      #55ff70,
+      #169dff
     );
 
   transition:
@@ -379,20 +446,25 @@ body{
 
 
 /* =====================================================
-   BOTÃO
+   BOTÃO RESGATAR
 ===================================================== */
 
 .rescue{
 
   width:100%;
 
-  height:58px;
+  height:
+    clamp(
+      38px,
+      8vw,
+      58px
+    );
 
-  margin-top:18px;
+  margin-top:2.5%;
 
   border:none;
 
-  border-radius:17px;
+  border-radius:16px;
 
   background:
     linear-gradient(
@@ -403,14 +475,19 @@ body{
 
   color:#fff;
 
-  font-size:17px;
+  font-size:
+    clamp(
+      12px,
+      3.4vw,
+      18px
+    );
 
   font-weight:900;
 
   cursor:pointer;
 
   box-shadow:
-    0 7px 18px
+    0 6px 17px
     rgba(0,0,0,.3);
 
 }
@@ -425,24 +502,42 @@ body{
 
 .message{
 
-  min-height:20px;
+  position:absolute;
 
-  margin-top:12px;
+  width:90%;
 
-  color:#c3ddf3;
+  left:5%;
 
-  font-size:13px;
+  bottom:-12%;
 
-  line-height:1.45;
+  font-size:
+    clamp(
+      9px,
+      2.5vw,
+      13px
+    );
+
+  color:#c5def6;
 
 }
 
 
 /* =====================================================
    CHANCES
+   PAINEL INFERIOR
 ===================================================== */
 
 .chance-card{
+
+  position:absolute;
+
+  top:68.9%;
+
+  left:7%;
+
+  width:86%;
+
+  height:8%;
 
   display:flex;
 
@@ -450,38 +545,64 @@ body{
 
   justify-content:space-between;
 
-  gap:15px;
+  gap:2%;
 
-  margin-top:17px;
-
-  padding:17px;
-
-  border-radius:20px;
-
-  background:
-    rgba(2,24,55,.92);
-
-  border:
-    1px solid
-    rgba(255,255,255,.08);
+  z-index:8;
 
 }
+
+
+/* =====================================================
+   SUAS CHANCES
+===================================================== */
+
+.chance-left{
+
+  width:46%;
+
+  height:100%;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:8%;
+
+  text-align:center;
+
+}
+
 
 .chance-title{
 
-  color:#a7c9e7;
+  color:#9fd2ff;
 
-  font-size:12px;
+  font-size:
+    clamp(
+      10px,
+      2.8vw,
+      16px
+    );
 
-  font-weight:bold;
+  font-weight:900;
 
 }
 
+
 .chance-number{
 
-  margin-top:3px;
+  margin-top:1%;
 
-  font-size:34px;
+  font-size:
+    clamp(
+      25px,
+      7vw,
+      43px
+    );
+
+  line-height:1;
 
   font-weight:900;
 
@@ -489,23 +610,41 @@ body{
 
 }
 
+
+/* =====================================================
+   VIP INFO
+===================================================== */
+
 .vip-info{
 
-  flex:1;
+  width:48%;
 
-  padding-left:14px;
+  height:100%;
 
-  border-left:
-    1px solid
-    rgba(255,255,255,.12);
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  text-align:center;
+
+  padding:
+    2%;
 
   color:#dcecff;
 
-  font-size:13px;
+  font-size:
+    clamp(
+      8px,
+      2.5vw,
+      14px
+    );
 
-  line-height:1.35;
+  line-height:1.2;
 
 }
+
 
 .vip-info strong{
 
@@ -513,9 +652,14 @@ body{
 
   color:#ffd92e;
 
-  font-size:14px;
+  font-size:
+    clamp(
+      10px,
+      3vw,
+      16px
+    );
 
-  margin-bottom:3px;
+  margin-bottom:2%;
 
 }
 
@@ -526,59 +670,169 @@ body{
 
 .prizes{
 
-  margin-top:17px;
+  position:absolute;
 
-  padding:17px;
+  top:77.2%;
 
-  border-radius:22px;
+  left:6%;
 
-  background:
-    rgba(2,24,55,.93);
+  width:88%;
 
-  border:
-    1px solid
-    rgba(255,255,255,.08);
+  height:14.4%;
+
+  z-index:8;
 
 }
+
+
+/* =====================================================
+   TÍTULO PRÊMIOS
+===================================================== */
 
 .prizes h2{
 
+  position:absolute;
+
+  top:0;
+
+  left:20%;
+
+  width:60%;
+
   text-align:center;
 
-  font-size:19px;
+  color:#ffd72d;
 
-  color:#fff;
+  font-size:
+    clamp(
+      12px,
+      3.5vw,
+      20px
+    );
+
+  font-weight:900;
 
 }
+
+
+/* =====================================================
+   GRID
+===================================================== */
+
+.prize-grid{
+
+  position:absolute;
+
+  top:17%;
+
+  left:1%;
+
+  width:98%;
+
+  height:83%;
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(6,1fr);
+
+  gap:1.2%;
+
+}
+
+
+/* =====================================================
+   PRÊMIO INDIVIDUAL
+===================================================== */
 
 .prize{
 
   display:flex;
 
+  flex-direction:column;
+
   align-items:center;
 
-  gap:12px;
-
-  margin-top:10px;
-
-  padding:12px;
-
-  border-radius:13px;
-
-  background:
-    rgba(255,255,255,.055);
-
-  font-size:14px;
-
-}
-
-.prize span{
-
-  width:30px;
+  justify-content:center;
 
   text-align:center;
 
-  font-size:22px;
+  border-radius:10px;
+
+  background:
+    rgba(0,20,50,.22);
+
+  color:#fff;
+
+  padding:2%;
+
+}
+
+
+.prize span{
+
+  font-size:
+    clamp(
+      20px,
+      5vw,
+      38px
+    );
+
+  line-height:1;
+
+}
+
+
+.prize b{
+
+  margin-top:5%;
+
+  font-size:
+    clamp(
+      7px,
+      2vw,
+      12px
+    );
+
+  line-height:1.1;
+
+}
+
+
+/* =====================================================
+   AVISO FINAL
+===================================================== */
+
+.vip-lock{
+
+  position:absolute;
+
+  top:92.2%;
+
+  left:25%;
+
+  width:50%;
+
+  height:4.2%;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  text-align:center;
+
+  color:#ffd83a;
+
+  font-size:
+    clamp(
+      8px,
+      2.5vw,
+      13px
+    );
+
+  font-weight:bold;
 
 }
 
@@ -619,7 +873,7 @@ body{
     0 7px 22px
     rgba(0,0,0,.35);
 
-  z-index:50;
+  z-index:100;
 
 }
 
@@ -632,20 +886,73 @@ body{
 
   display:none;
 
-  margin-top:12px;
+  position:fixed;
+
+  left:10px;
+
+  right:10px;
+
+  bottom:10px;
+
+  z-index:200;
 
   padding:10px;
 
   border-radius:10px;
 
   background:
-    rgba(120,0,0,.4);
+    rgba(120,0,0,.9);
 
   color:#ffd1d1;
 
   font-size:11px;
 
   word-break:break-word;
+
+}
+
+
+/* =====================================================
+   CELULAR PEQUENO
+===================================================== */
+
+@media(max-width:390px){
+
+  .timer-card{
+
+    padding-top:2%;
+
+  }
+
+  .timer{
+
+    font-size:31px;
+
+  }
+
+  .vip{
+
+    font-size:12px;
+
+  }
+
+}
+
+
+/* =====================================================
+   TELAS GRANDES
+===================================================== */
+
+@media(min-width:651px){
+
+  .art{
+
+    border-radius:
+      0 0 25px 25px;
+
+    overflow:hidden;
+
+  }
 
 }
 
@@ -660,149 +967,130 @@ body{
 <div class="page">
 
 
-  <!-- TOPO -->
-
-  <div class="top">
-
-    <button
-      class="back"
-      id="back">
-
-      ←
-
-    </button>
+<div class="art">
 
 
-    <div class="title">
+<!-- ==================================================
+     VOLTAR
+================================================== -->
 
-      <small>
-        ADAM GAMES
-      </small>
+<button
+  class="back"
+  id="back">
 
-      <strong>
-        CAIXA BOX
-      </strong>
+  ←
 
-    </div>
-
-
-    <div
-      style="width:45px">
-    </div>
-
-  </div>
+</button>
 
 
-  <!--
-  =====================================================
-  ÁREA RESERVADA PARA A IMAGEM
-  =====================================================
-  -->
+<!-- ==================================================
+     TÍTULO
+================================================== -->
 
-  <div class="hero-space"></div>
+<div class="box-title">
 
+  <h1>
+    🎁 Caixa da Independência
+  </h1>
 
-  <!-- TÍTULO -->
+  <p>
+    Recompensa exclusiva para membros VIP.
+  </p>
 
-  <div class="box-title">
-
-    <h1>
-      🎁 Caixa da Independência
-    </h1>
-
-    <p>
-      Recompensa exclusiva para membros VIP.
-    </p>
-
-  </div>
+</div>
 
 
-  <!-- VIP -->
+<!-- ==================================================
+     STATUS VIP
+================================================== -->
+
+<div
+  class="vip"
+  id="vipStatus">
+
+  👑 Verificando VIP...
+
+</div>
+
+
+<!-- ==================================================
+     TIMER
+================================================== -->
+
+<div class="timer-card">
+
 
   <div
-    class="vip"
-    id="vipStatus">
+    class="timer-label"
+    id="timerLabel">
 
-    👑 Verificando VIP...
+    PRÓXIMA CHANCE
 
   </div>
 
 
-  <!-- TIMER -->
+  <div
+    class="timer"
+    id="timer">
 
-  <div class="timer-card">
+    --:--:--
+
+  </div>
 
 
-    <div
-      class="timer-label"
-      id="timerLabel">
-
-      PRÓXIMA CHANCE
-
-    </div>
-
+  <div class="progress">
 
     <div
-      class="timer"
-      id="timer">
-
-      --:--:--
-
-    </div>
-
-
-    <div
-      class="progress">
-
-      <div
-        class="progress-bar"
-        id="progressBar">
-      </div>
-
-    </div>
-
-
-    <div
-      class="status waiting"
-      id="status">
-
-      Verificando...
-
-    </div>
-
-
-    <button
-      class="rescue"
-      id="rescue"
-      disabled>
-
-      🎁 RESGATAR CAIXA
-
-    </button>
-
-
-    <div
-      class="message"
-      id="message">
-    </div>
-
-
-    <div
-      class="debug"
-      id="debug">
+      class="progress-bar"
+      id="progressBar">
     </div>
 
   </div>
 
 
-  <!-- CHANCES -->
+  <div
+    class="status waiting"
+    id="status">
 
-  <div class="chance-card">
+    Verificando...
+
+  </div>
+
+
+  <button
+    class="rescue"
+    id="rescue"
+    disabled>
+
+    🎁 RESGATAR CAIXA
+
+  </button>
+
+
+  <div
+    class="message"
+    id="message">
+  </div>
+
+
+</div>
+
+
+<!-- ==================================================
+     CHANCES
+================================================== -->
+
+<div class="chance-card">
+
+
+  <div class="chance-left">
 
     <div>
 
       <div class="chance-title">
+
         🎟️ SUAS CHANCES
+
       </div>
 
       <div
@@ -815,28 +1103,41 @@ body{
 
     </div>
 
+  </div>
 
-    <div class="vip-info">
+
+  <div class="vip-info">
+
+    <div>
 
       <strong>
         👑 EXCLUSIVO VIP
       </strong>
 
       Resgate sua Caixa e receba
-      as recompensas do evento.
+      recompensas incríveis!
 
     </div>
 
   </div>
 
 
-  <!-- PRÊMIOS -->
+</div>
 
-  <div class="prizes">
 
-    <h2>
-      🎁 CONTEÚDO DA CAIXA
-    </h2>
+<!-- ==================================================
+     PRÊMIOS
+================================================== -->
+
+<div class="prizes">
+
+
+  <h2>
+    🎁 CONTEÚDO DA CAIXA
+  </h2>
+
+
+  <div class="prize-grid">
 
 
     <div class="prize">
@@ -846,7 +1147,8 @@ body{
       </span>
 
       <b>
-        500 Coringas
+        500<br>
+        Coringas
       </b>
 
     </div>
@@ -859,7 +1161,8 @@ body{
       </span>
 
       <b>
-        3.000 Ferramentas de Rubi
+        3.000<br>
+        Ferramentas
       </b>
 
     </div>
@@ -872,7 +1175,8 @@ body{
       </span>
 
       <b>
-        1.000 Itens
+        1.000<br>
+        Itens
       </b>
 
     </div>
@@ -885,7 +1189,8 @@ body{
       </span>
 
       <b>
-        2 Giros na Roleta
+        2 Giros<br>
+        na Roleta
       </b>
 
     </div>
@@ -898,7 +1203,8 @@ body{
       </span>
 
       <b>
-        Evento do Dia
+        Evento<br>
+        do Dia
       </b>
 
     </div>
@@ -911,28 +1217,12 @@ body{
       </span>
 
       <b>
-        1 Chave da Independência
+        1 Chave<br>
+        Independência
       </b>
 
     </div>
 
-
-    <div
-      style="
-        margin-top:14px;
-        padding:11px;
-        text-align:center;
-        border-radius:13px;
-        background:rgba(0,0,0,.25);
-        color:#ffd83a;
-        font-size:13px;
-        font-weight:bold;
-      "
-    >
-
-      🔒 Caixa Box exclusiva para membros VIP.
-
-    </div>
 
   </div>
 
@@ -940,16 +1230,46 @@ body{
 </div>
 
 
-<!-- WHATSAPP -->
+<!-- ==================================================
+     AVISO FINAL
+================================================== -->
+
+<div class="vip-lock">
+
+  🔒 Caixa Box exclusiva para membros VIP.
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+<!-- ==================================================
+     WHATSAPP
+================================================== -->
 
 <a
   class="whatsapp"
   href="https://wa.me/5531987350267"
-  target="_blank">
+  target="_blank"
+  rel="noopener">
 
   💬
 
 </a>
+
+
+<!-- ==================================================
+     DEBUG
+================================================== -->
+
+<div
+  class="debug"
+  id="debug">
+</div>
 
 
 <script type="module">
@@ -1075,6 +1395,10 @@ const debug =
   );
 
 
+/* =====================================================
+   ESTADO
+===================================================== */
+
 let usuarioRef =
   null;
 
@@ -1104,17 +1428,14 @@ const HORAS_NAO_VIP =
 const HORAS_VIP =
   72;
 
-
 const MS_HORA =
   60 *
   60 *
   1000;
 
-
 const MS_NAO_VIP =
   HORAS_NAO_VIP *
   MS_HORA;
-
 
 const MS_VIP =
   HORAS_VIP *
@@ -1122,7 +1443,7 @@ const MS_VIP =
 
 
 /* =====================================================
-   CHAVE LOCAL
+   CHAVES LOCAL
 ===================================================== */
 
 function chaveTimer(){
@@ -1135,47 +1456,181 @@ function chaveTimer(){
 }
 
 
-/* =====================================================
-   ERRO
-===================================================== */
+function chaveChance(){
 
-function mostrarErro(error){
-
-  console.error(
-    "ERRO CAIXA:",
-    error
+  return (
+    "adam_caixa_chances_" +
+    userUid
   );
 
-
-  debug.style.display =
-    "block";
+}
 
 
-  debug.textContent =
-    (
-      error.code ||
-      "erro"
-    )
-    +
-    " — "
-    +
-    (
-      error.message ||
-      "Erro desconhecido."
-    );
+function chaveLiberacao(){
+
+  return (
+    "adam_caixa_liberado_" +
+    userUid
+  );
 
 }
 
 
 /* =====================================================
-   FORMATAR TIMER
+   TIMER LOCAL
+===================================================== */
+
+function lerTimerLocal(){
+
+  try{
+
+    const valor =
+      localStorage.getItem(
+        chaveTimer()
+      );
+
+    if(!valor){
+
+      return null;
+
+    }
+
+    const numero =
+      Number(valor);
+
+    if(
+      !Number.isFinite(numero) ||
+      numero <= 0
+    ){
+
+      return null;
+
+    }
+
+    return numero;
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    return null;
+
+  }
+
+}
+
+
+function salvarTimerLocal(valor){
+
+  try{
+
+    localStorage.setItem(
+      chaveTimer(),
+      String(valor)
+    );
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+  }
+
+}
+
+
+function apagarTimerLocal(){
+
+  try{
+
+    localStorage.removeItem(
+      chaveTimer()
+    );
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+  }
+
+}
+
+
+/* =====================================================
+   CHANCE LOCAL
+===================================================== */
+
+function lerChanceLocal(){
+
+  try{
+
+    const valor =
+      localStorage.getItem(
+        chaveChance()
+      );
+
+    if(valor === null){
+
+      return null;
+
+    }
+
+    const numero =
+      Number(valor);
+
+    if(
+      !Number.isFinite(numero)
+    ){
+
+      return null;
+
+    }
+
+    return numero;
+
+  }
+
+  catch(error){
+
+    return null;
+
+  }
+
+}
+
+
+function salvarChanceLocal(valor){
+
+  try{
+
+    localStorage.setItem(
+      chaveChance(),
+      String(valor)
+    );
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+  }
+
+}
+
+
+/* =====================================================
+   FORMATAR
 ===================================================== */
 
 function formatar(ms){
 
-  if(
-    ms <= 0
-  ){
+  if(ms <= 0){
 
     return "00:00:00";
 
@@ -1196,9 +1651,7 @@ function formatar(ms){
 
   const minutos =
     Math.floor(
-      (
-        total % 3600
-      ) / 60
+      (total % 3600) / 60
     );
 
 
@@ -1211,20 +1664,12 @@ function formatar(ms){
     String(horas)
       .padStart(2,"0")
 
-    +
-
-    ":"
-
-    +
+    + ":" +
 
     String(minutos)
       .padStart(2,"0")
 
-    +
-
-    ":"
-
-    +
+    + ":" +
 
     String(segundos)
       .padStart(2,"0")
@@ -1235,137 +1680,51 @@ function formatar(ms){
 
 
 /* =====================================================
-   LER TIMER LOCAL
+   MOSTRAR ERRO
 ===================================================== */
 
-function lerTimerLocal(){
+function mostrarErro(error){
 
-  try{
+  console.error(
+    "ERRO CAIXA:",
+    error
+  );
 
-    const valor =
-      localStorage.getItem(
-        chaveTimer()
-      );
+  debug.style.display =
+    "block";
 
-
-    if(!valor){
-
-      return null;
-
-    }
-
-
-    const numero =
-      Number(valor);
-
-
-    if(
-      !Number.isFinite(
-        numero
-      )
-    ){
-
-      return null;
-
-    }
-
-
-    return numero;
-
-  }
-
-  catch(error){
-
-    console.error(
-      error
+  debug.textContent =
+    (
+      error?.code ||
+      "erro"
+    )
+    +
+    " — "
+    +
+    (
+      error?.message ||
+      "Erro desconhecido."
     );
-
-    return null;
-
-  }
 
 }
 
 
 /* =====================================================
-   SALVAR TIMER LOCAL
+   CRIAR TIMER
 ===================================================== */
 
-function salvarTimerLocal(timestamp){
-
-  try{
-
-    localStorage.setItem(
-
-      chaveTimer(),
-
-      String(
-        timestamp
-      )
-
-    );
-
-  }
-
-  catch(error){
-
-    console.error(
-      error
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-   REMOVER TIMER LOCAL
-===================================================== */
-
-function apagarTimerLocal(){
-
-  try{
-
-    localStorage.removeItem(
-      chaveTimer()
-    );
-
-  }
-
-  catch(error){
-
-    console.error(
-      error
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-   CRIAR CICLO NÃO VIP
-===================================================== */
-
-function criarCicloNaoVip(){
-
-  const inicio =
-    Date.now();
-
+function criarTimer(duracao){
 
   const fim =
-    inicio +
-    MS_NAO_VIP;
-
+    Date.now() +
+    duracao;
 
   salvarTimerLocal(
     fim
   );
 
-
   proximaChance =
     fim;
-
 
   return fim;
 
@@ -1373,36 +1732,7 @@ function criarCicloNaoVip(){
 
 
 /* =====================================================
-   CRIAR CICLO VIP
-===================================================== */
-
-function criarCicloVip(){
-
-  const inicio =
-    Date.now();
-
-
-  const fim =
-    inicio +
-    MS_VIP;
-
-
-  salvarTimerLocal(
-    fim
-  );
-
-
-  proximaChance =
-    fim;
-
-
-  return fim;
-
-}
-
-
-/* =====================================================
-   ATUALIZAR BARRA
+   BARRA
 ===================================================== */
 
 function atualizarBarra(restante){
@@ -1413,7 +1743,7 @@ function atualizarBarra(restante){
       : MS_NAO_VIP;
 
 
-  let porcentagem =
+  let percentual =
     (
       restante /
       total
@@ -1422,156 +1752,60 @@ function atualizarBarra(restante){
     100;
 
 
-  if(
-    porcentagem < 0
-  ){
-
-    porcentagem =
-      0;
-
-  }
-
-
-  if(
-    porcentagem > 100
-  ){
-
-    porcentagem =
-      100;
-
-  }
+  percentual =
+    Math.max(
+      0,
+      Math.min(
+        100,
+        percentual
+      )
+    );
 
 
   progressBar.style.width =
-    porcentagem +
-    "%";
+    percentual + "%";
 
 }
 
 
 /* =====================================================
-   SALVAR CHANCE LOCAL
-===================================================== */
-
-function chaveChance(){
-
-  return (
-    "adam_caixa_chances_" +
-    userUid
-  );
-
-}
-
-
-function lerChanceLocal(){
-
-  try{
-
-    const valor =
-      localStorage.getItem(
-        chaveChance()
-      );
-
-
-    if(valor === null){
-
-      return null;
-
-    }
-
-
-    const numero =
-      Number(valor);
-
-
-    if(
-      !Number.isFinite(
-        numero
-      )
-    ){
-
-      return null;
-
-    }
-
-
-    return numero;
-
-  }
-
-  catch(error){
-
-    return null;
-
-  }
-
-}
-
-
-function salvarChanceLocal(valor){
-
-  try{
-
-    localStorage.setItem(
-
-      chaveChance(),
-
-      String(
-        valor
-      )
-
-    );
-
-  }
-
-  catch(error){
-
-    console.error(
-      error
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-   ATUALIZAR TIMER
+   TIMER
 ===================================================== */
 
 async function atualizarTimer(){
 
-  if(
-    !proximaChance
-  ){
+  if(!proximaChance){
 
     return;
 
   }
 
 
-  const restante =
-    proximaChance -
+  const agora =
     Date.now();
 
 
+  const restante =
+    proximaChance -
+    agora;
+
+
   /* ---------------------------------------------------
-     AINDA NÃO ACABOU
+     CONTANDO
   --------------------------------------------------- */
 
-  if(
-    restante > 0
-  ){
+  if(restante > 0){
 
     timer.textContent =
-      formatar(
-        restante
-      );
-
+      formatar(restante);
 
     atualizarBarra(
       restante
     );
+
+
+    rescue.disabled =
+      true;
 
 
     if(ehVip){
@@ -1592,18 +1826,17 @@ async function atualizarTimer(){
     status.className =
       "status waiting";
 
-
     return;
 
   }
 
 
   /* ---------------------------------------------------
-     TIMER TERMINOU
+     TERMINOU
   --------------------------------------------------- */
 
   timer.textContent =
-    "00:00:00";
+    "DISPONÍVEL";
 
 
   atualizarBarra(
@@ -1611,9 +1844,9 @@ async function atualizarTimer(){
   );
 
 
-  /* ---------------------------------------------------
+  /* ===================================================
      VIP
-  --------------------------------------------------- */
+  =================================================== */
 
   if(ehVip){
 
@@ -1626,84 +1859,89 @@ async function atualizarTimer(){
     rescue.disabled =
       false;
 
+    message.textContent =
+      "Você pode resgatar sua Caixa da Independência.";
+
     return;
 
   }
 
 
-  /* ---------------------------------------------------
+  /* ===================================================
      NÃO VIP
-  --------------------------------------------------- */
+     LIBERA UMA CHANCE
+  =================================================== */
 
-  const ultimaLiberacao =
+  const marcadorAnterior =
     localStorage.getItem(
-      "adam_caixa_liberado_" +
-      userUid
+      chaveLiberacao()
+    );
+
+
+  const marcadorAtual =
+    String(
+      proximaChance
     );
 
 
   /*
-  Evita adicionar a mesma chance
-  várias vezes enquanto a página
-  estiver aberta.
+   Impede que o mesmo vencimento
+   libere várias chances.
   */
 
   if(
-    ultimaLiberacao ===
-    String(
-      proximaChance
-    )
+    marcadorAnterior !==
+    marcadorAtual
   ){
 
-    return;
+    const banco =
+      Number(
+        usuario?.chances ||
+        0
+      );
+
+
+    const local =
+      lerChanceLocal();
+
+
+    const atual =
+      local === null
+        ? banco
+        : Math.max(
+            banco,
+            local
+          );
+
+
+    const novaChance =
+      atual + 1;
+
+
+    salvarChanceLocal(
+      novaChance
+    );
+
+
+    localStorage.setItem(
+      chaveLiberacao(),
+      marcadorAtual
+    );
+
+
+    chanceNumber.textContent =
+      novaChance;
 
   }
 
 
-  const chanceAtual =
-    Number(
-      localStorage.getItem(
-        chaveChance()
-      )
-      ||
-      usuario?.chances
-      ||
-      0
-    );
-
-
-  const novaChance =
-    chanceAtual +
-    1;
-
-
   /*
-  Salva a chance localmente.
-  */
+   A chance foi liberada.
 
-  salvarChanceLocal(
-    novaChance
-  );
+   Agora começa um NOVO ciclo
+   de 120 horas.
 
-
-  localStorage.setItem(
-
-    "adam_caixa_liberado_" +
-    userUid,
-
-    String(
-      proximaChance
-    )
-
-  );
-
-
-  chanceNumber.textContent =
-    novaChance;
-
-
-  /*
-  NOVO CICLO DE 120 HORAS
+   Isso acontece automaticamente.
   */
 
   const novoFim =
@@ -1736,7 +1974,6 @@ async function atualizarTimer(){
   status.textContent =
     "🎟️ +1 chance liberada!";
 
-
   status.className =
     "status available";
 
@@ -1752,7 +1989,7 @@ async function atualizarTimer(){
 
 
 /* =====================================================
-   INICIAR TIMER
+   INICIAR
 ===================================================== */
 
 function iniciarTimer(){
@@ -1771,11 +2008,8 @@ function iniciarTimer(){
 
   intervalo =
     setInterval(
-
       atualizarTimer,
-
       1000
-
     );
 
 }
@@ -1788,7 +2022,7 @@ function iniciarTimer(){
 async function buscarCadastro(user){
 
   /*
-  UID
+   PRIMEIRO PELO UID
   */
 
   try{
@@ -1835,12 +2069,10 @@ async function buscarCadastro(user){
 
 
   /*
-  EMAIL
+   DEPOIS PELO EMAIL
   */
 
-  if(
-    user.email
-  ){
+  if(user.email){
 
     try{
 
@@ -1893,7 +2125,7 @@ async function buscarCadastro(user){
 
 
 /* =====================================================
-   CARREGAR
+   CARREGAR USUÁRIO
 ===================================================== */
 
 async function carregar(user){
@@ -1908,21 +2140,19 @@ async function carregar(user){
     );
 
 
-  /*
-  -----------------------------------------------------
-  CADASTRO NÃO ENCONTRADO
-  -----------------------------------------------------
-  */
+  /* ===================================================
+     SEM CADASTRO
+  =================================================== */
 
   if(!documento){
 
     ehVip =
       false;
 
-    usuarioRef =
+    usuario =
       null;
 
-    usuario =
+    usuarioRef =
       null;
 
 
@@ -1934,26 +2164,27 @@ async function carregar(user){
       "PRÓXIMA CHANCE";
 
 
-    let local =
+    let fim =
       lerTimerLocal();
 
 
-    if(!local){
+    if(!fim){
 
-      local =
-        criarCicloNaoVip();
+      fim =
+        criarTimer(
+          MS_NAO_VIP
+        );
 
     }
 
 
     proximaChance =
-      local;
+      fim;
 
 
     chanceNumber.textContent =
       lerChanceLocal()
-      ??
-      0;
+      ?? 0;
 
 
     rescue.disabled =
@@ -1966,17 +2197,14 @@ async function carregar(user){
 
     iniciarTimer();
 
-
     return;
 
   }
 
 
-  /*
-  -----------------------------------------------------
-  CADASTRO ENCONTRADO
-  -----------------------------------------------------
-  */
+  /* ===================================================
+     CADASTRO ENCONTRADO
+  =================================================== */
 
   usuario =
     documento.data();
@@ -1994,11 +2222,9 @@ async function carregar(user){
     usuario.vip === true;
 
 
-  /*
-  =====================================================
-  VIP
-  =====================================================
-  */
+  /* ===================================================
+     VIP
+  =================================================== */
 
   if(ehVip){
 
@@ -2010,7 +2236,7 @@ async function carregar(user){
       "PRÓXIMA CHANCE VIP";
 
 
-    const chanceBanco =
+    const chances =
       Number(
         usuario.chances ||
         0
@@ -2018,22 +2244,15 @@ async function carregar(user){
 
 
     chanceNumber.textContent =
-      chanceBanco;
+      chances;
 
-
-    /*
-    Para VIP damos prioridade
-    ao proximaChance do Firestore,
-    pois ele já está funcionando.
-    */
 
     let bancoFim =
       null;
 
 
     if(
-      usuario.proximaChance
-      &&
+      usuario.proximaChance &&
       typeof
       usuario.proximaChance.toMillis
       ===
@@ -2047,8 +2266,9 @@ async function carregar(user){
 
 
     /*
-    Se já existe timer válido,
-    usa ele.
+     Se o Firestore tem uma
+     próxima chance futura,
+     usa ela.
     */
 
     if(
@@ -2063,61 +2283,62 @@ async function carregar(user){
         bancoFim
       );
 
-    }
-
-    else{
-
-      /*
-      Se não existe timer,
-      Caixa disponível.
-      */
-
-      proximaChance =
-        null;
-
-      apagarTimerLocal();
-
-
-      timer.textContent =
-        "DISPONÍVEL";
-
-
-      progressBar.style.width =
-        "100%";
-
-
-      status.textContent =
-        "🎟️ Sua chance está disponível!";
-
-
-      status.className =
-        "status available";
-
-
       rescue.disabled =
-        false;
-
+        true;
 
       message.textContent =
-        "Você pode resgatar sua Caixa da Independência.";
+        "Sua próxima chance está sendo liberada automaticamente.";
+
+      iniciarTimer();
 
       return;
 
     }
 
 
-    iniciarTimer();
+    /*
+     Sem próxima chance:
+     está disponível.
+    */
+
+    proximaChance =
+      null;
+
+
+    apagarTimerLocal();
+
+
+    timer.textContent =
+      "DISPONÍVEL";
+
+
+    progressBar.style.width =
+      "100%";
+
+
+    status.textContent =
+      "🎟️ Sua chance está disponível!";
+
+
+    status.className =
+      "status available";
+
+
+    rescue.disabled =
+      false;
+
+
+    message.textContent =
+      "Você pode resgatar sua Caixa da Independência.";
 
     return;
 
   }
 
 
-  /*
-  =====================================================
-  NÃO VIP
-  =====================================================
-  */
+  /* ===================================================
+     NÃO VIP
+  =================================================== */
 
   vipStatus.textContent =
     "🔒 NÃO VIP";
@@ -2131,83 +2352,61 @@ async function carregar(user){
     true;
 
 
-  /*
-  Chance do usuário.
-  */
-
-  const chanceBanco =
+  const bancoChances =
     Number(
       usuario.chances ||
       0
     );
 
 
-  const chanceLocal =
+  const localChances =
     lerChanceLocal();
 
 
-  const chanceFinal =
-    chanceLocal === null
-      ? chanceBanco
+  const chancesFinais =
+    localChances === null
+      ? bancoChances
       : Math.max(
-          chanceBanco,
-          chanceLocal
+          bancoChances,
+          localChances
         );
 
 
   chanceNumber.textContent =
-    chanceFinal;
+    chancesFinais;
 
 
-  if(
-    chanceLocal === null
-  ){
+  if(localChances === null){
 
     salvarChanceLocal(
-      chanceFinal
+      chancesFinais
     );
 
   }
 
 
   /*
-  -----------------------------------------------------
-  TIMER NÃO VIP
-  -----------------------------------------------------
+   TIMER NÃO VIP
 
-  AQUI ESTÁ A CORREÇÃO PRINCIPAL.
-
-  O timer não depende do Firestore
-  para ficar contando.
-
-  -----------------------------------------------------
+   Começa automaticamente.
   */
 
-  let local =
+  let fim =
     lerTimerLocal();
 
 
-  /*
-  Se não existe timer local,
-  começa imediatamente.
-  */
+  if(!fim){
 
-  if(!local){
-
-    local =
-      criarCicloNaoVip();
+    fim =
+      criarTimer(
+        MS_NAO_VIP
+      );
 
   }
 
 
-  /*
-  Se o timer local já venceu,
-  atualizaTimer() vai liberar
-  a chance automaticamente.
-  */
-
   proximaChance =
-    local;
+    fim;
 
 
   message.textContent =
@@ -2220,13 +2419,11 @@ async function carregar(user){
 
 
 /* =====================================================
-   RESGATE VIP
+   RESGATAR CAIXA VIP
 ===================================================== */
 
 rescue.addEventListener(
-
   "click",
-
   async () => {
 
 
@@ -2349,14 +2546,12 @@ rescue.addEventListener(
       status.textContent =
         "⚠️ Não foi possível resgatar a Caixa.";
 
-
       status.className =
         "status locked";
 
 
       message.textContent =
-        "Tente novamente.";
-
+        "Não foi possível registrar o resgate.";
 
       mostrarErro(
         error
@@ -2365,7 +2560,6 @@ rescue.addEventListener(
     }
 
   }
-
 );
 
 
@@ -2374,20 +2568,15 @@ rescue.addEventListener(
 ===================================================== */
 
 document
-  .getElementById(
-    "back"
-  )
+  .getElementById("back")
   .addEventListener(
-
     "click",
-
     () => {
 
       window.location.href =
         "painel.html";
 
     }
-
   );
 
 
