@@ -1,11 +1,20 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
 <title>Adam Games • Administração</title>
 
+
 <style>
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -16,7 +25,12 @@ body{
   font-family:Arial,sans-serif;
   color:#fff;
   min-height:100vh;
-  background:linear-gradient(145deg,#087fe0,#031b3d 75%);
+  background:
+    linear-gradient(
+      145deg,
+      #087fe0,
+      #031b3d 75%
+    );
   padding:20px 12px 40px;
 }
 
@@ -47,7 +61,12 @@ header{
   align-items:center;
   justify-content:center;
   font-size:30px;
-  background:linear-gradient(145deg,#168eff,#064b99);
+  background:
+    linear-gradient(
+      145deg,
+      #168eff,
+      #064b99
+    );
 }
 
 .logo h1{
@@ -75,6 +94,11 @@ button{
   font-weight:bold;
 }
 
+button:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+}
+
 .logout{
   padding:12px 16px;
   border-radius:12px;
@@ -92,8 +116,11 @@ h2{
 }
 
 .card{
-  background:rgba(2,30,62,.92);
-  border:1px solid rgba(255,255,255,.1);
+  background:
+    rgba(2,30,62,.92);
+  border:
+    1px solid
+    rgba(255,255,255,.1);
   border-radius:22px;
   padding:20px;
   margin-bottom:18px;
@@ -109,16 +136,24 @@ h2{
   gap:10px;
 }
 
-input,select{
+input,
+select{
   width:100%;
   height:50px;
-  border:1px solid rgba(255,255,255,.15);
+  border:
+    1px solid
+    rgba(255,255,255,.15);
   border-radius:12px;
   background:#071f40;
   color:#fff;
   padding:0 14px;
   font-size:15px;
   outline:none;
+}
+
+input:focus,
+select:focus{
+  border-color:#168ff0;
 }
 
 .search button{
@@ -137,13 +172,15 @@ input,select{
 
 .success{
   display:block;
-  background:rgba(0,220,110,.12);
+  background:
+    rgba(0,220,110,.12);
   color:#72ffae;
 }
 
 .error{
   display:block;
-  background:rgba(255,50,70,.12);
+  background:
+    rgba(255,50,70,.12);
   color:#ff9ca8;
 }
 
@@ -184,7 +221,8 @@ input,select{
 
 .balances{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+  grid-template-columns:
+    repeat(4,1fr);
   gap:10px;
   margin-bottom:22px;
 }
@@ -193,7 +231,8 @@ input,select{
   text-align:center;
   padding:15px 8px;
   border-radius:15px;
-  background:rgba(255,255,255,.05);
+  background:
+    rgba(255,255,255,.05);
 }
 
 .balanceIcon{
@@ -215,7 +254,8 @@ input,select{
 
 .form{
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:
+    1fr 1fr;
   gap:12px;
 }
 
@@ -233,7 +273,8 @@ input,select{
 
 .actions{
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:
+    1fr 1fr;
   gap:10px;
   margin-top:15px;
 }
@@ -252,7 +293,8 @@ input,select{
 
 .special{
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:
+    1fr 1fr;
   gap:10px;
   margin-top:10px;
 }
@@ -273,12 +315,27 @@ input,select{
   margin-top:22px;
 }
 
+.historyHeader{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:10px;
+}
+
+.historyHeader h3{
+  margin-bottom:0;
+}
+
 .historyItem{
-  padding:13px;
+  padding:14px;
   margin-top:8px;
   border-radius:12px;
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.06);
+  background:
+    rgba(255,255,255,.05);
+  border:
+    1px solid
+    rgba(255,255,255,.06);
 }
 
 .historyTop{
@@ -299,7 +356,59 @@ input,select{
 .historyInfo{
   color:#9dbbd3;
   font-size:12px;
-  margin-top:6px;
+  margin-top:7px;
+  line-height:1.6;
+}
+
+.operationId{
+  margin-top:8px;
+  padding-top:8px;
+  border-top:
+    1px solid
+    rgba(255,255,255,.07);
+  color:#6ca9d5;
+  font-size:10px;
+  word-break:break-all;
+}
+
+.auditBadge{
+  display:inline-block;
+  margin-bottom:7px;
+  padding:4px 8px;
+  border-radius:7px;
+  background:
+    rgba(22,143,240,.15);
+  color:#72c4ff;
+  font-size:10px;
+  font-weight:bold;
+}
+
+.emptyHistory{
+  padding:15px;
+  border-radius:12px;
+  background:
+    rgba(255,255,255,.04);
+  color:#9dbbd3;
+  text-align:center;
+}
+
+.loading{
+  color:#72c4ff;
+  text-align:center;
+  padding:15px;
+}
+
+.securityNotice{
+  margin-top:15px;
+  padding:12px;
+  border-radius:12px;
+  background:
+    rgba(255,193,7,.08);
+  border:
+    1px solid
+    rgba(255,193,7,.18);
+  color:#e9d69a;
+  font-size:11px;
   line-height:1.5;
 }
 
@@ -319,7 +428,8 @@ input,select{
   }
 
   .balances{
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:
+      1fr 1fr;
   }
 
   .form{
@@ -334,42 +444,73 @@ input,select{
   .special{
     grid-template-columns:1fr;
   }
+
+  .historyTop{
+    flex-direction:column;
+  }
+
 }
+
 </style>
+
 </head>
+
 
 <body>
 
 <div class="container">
 
+
 <header>
 
   <div class="logo">
 
-    <div class="logoIcon">👑</div>
+    <div class="logoIcon">
+      👑
+    </div>
 
     <div>
-      <h1>ADAM <span>GAMES</span></h1>
-      <div class="badge">👑 ADMINISTRADOR</div>
+
+      <h1>
+        ADAM <span>GAMES</span>
+      </h1>
+
+      <div class="badge">
+        👑 ADMINISTRADOR
+      </div>
+
     </div>
 
   </div>
 
-  <button class="logout" id="logout">
+
+  <button
+    class="logout"
+    id="logout">
+
     ↪️ Sair
+
   </button>
 
 </header>
 
-<h2>Painel Admin</h2>
+
+<h2>
+  Painel Admin
+</h2>
+
 
 <p class="subtitle">
-Gerenciamento de usuários e movimentações.
+  Gerenciamento de usuários e movimentações.
 </p>
+
 
 <div class="card">
 
-  <h3>🔎 Localizar usuário</h3>
+  <h3>
+    🔎 Localizar usuário
+  </h3>
+
 
   <div class="search">
 
@@ -377,41 +518,71 @@ Gerenciamento de usuários e movimentações.
       id="publicId"
       type="text"
       placeholder="Digite o ID Adam Games"
+      autocomplete="off"
     >
 
-    <button id="buscar">
+
+    <button
+      id="buscar">
+
       🔍 Buscar
+
     </button>
 
   </div>
 
-  <div id="searchMessage" class="message"></div>
+
+  <div
+    id="searchMessage"
+    class="message">
+  </div>
 
 </div>
 
 
 <div id="userArea">
 
+
 <div class="card">
+
 
   <div class="user">
 
-    <div class="avatar" id="avatar">
+    <div
+      class="avatar"
+      id="avatar">
+
       🙂
+
     </div>
+
 
     <div>
 
-      <div class="userName" id="nome">
+      <div
+        class="userName"
+        id="nome">
+
         —
+
       </div>
 
-      <div class="userEmail" id="email">
+
+      <div
+        class="userEmail"
+        id="email">
+
         —
+
       </div>
 
-      <div class="userId" id="id">
+
+      <div
+        class="userId"
+        id="id">
+
         —
+
       </div>
 
     </div>
@@ -421,40 +592,107 @@ Gerenciamento de usuários e movimentações.
 
   <div class="balances">
 
-    <div class="balance">
-      <div class="balanceIcon">🎟️</div>
-      <div class="balanceName">CHANCES</div>
-      <div class="balanceValue" id="chances">0</div>
-    </div>
 
     <div class="balance">
-      <div class="balanceIcon">🪙</div>
-      <div class="balanceName">MOEDAS</div>
-      <div class="balanceValue" id="moedas">0</div>
+
+      <div class="balanceIcon">
+        🎟️
+      </div>
+
+      <div class="balanceName">
+        CHANCES
+      </div>
+
+      <div
+        class="balanceValue"
+        id="chances">
+
+        0
+
+      </div>
+
     </div>
 
-    <div class="balance">
-      <div class="balanceIcon">🔑</div>
-      <div class="balanceName">CHAVES</div>
-      <div class="balanceValue" id="chaves">0</div>
-    </div>
 
     <div class="balance">
-      <div class="balanceIcon">💎</div>
-      <div class="balanceName">CRÉDITOS</div>
-      <div class="balanceValue" id="creditos">R$ 0,00</div>
+
+      <div class="balanceIcon">
+        🪙
+      </div>
+
+      <div class="balanceName">
+        MOEDAS
+      </div>
+
+      <div
+        class="balanceValue"
+        id="moedas">
+
+        0
+
+      </div>
+
+    </div>
+
+
+    <div class="balance">
+
+      <div class="balanceIcon">
+        🔑
+      </div>
+
+      <div class="balanceName">
+        CHAVES
+      </div>
+
+      <div
+        class="balanceValue"
+        id="chaves">
+
+        0
+
+      </div>
+
+    </div>
+
+
+    <div class="balance">
+
+      <div class="balanceIcon">
+        💎
+      </div>
+
+      <div class="balanceName">
+        CRÉDITOS
+      </div>
+
+      <div
+        class="balanceValue"
+        id="creditos">
+
+        R$ 0,00
+
+      </div>
+
     </div>
 
   </div>
 
 
-  <h3>🎁 Fazer movimentação</h3>
+  <h3>
+    🎁 Fazer movimentação
+  </h3>
+
 
   <div class="form">
 
+
     <div class="field">
 
-      <label>ITEM</label>
+      <label>
+        ITEM
+      </label>
+
 
       <select id="item">
 
@@ -481,12 +719,16 @@ Gerenciamento de usuários e movimentações.
 
     <div class="field">
 
-      <label>QUANTIDADE</label>
+      <label>
+        QUANTIDADE
+      </label>
+
 
       <input
         id="quantidade"
         type="number"
-        min="1"
+        min="0.01"
+        step="any"
         placeholder="Quantidade"
       >
 
@@ -495,7 +737,10 @@ Gerenciamento de usuários e movimentações.
 
     <div class="field full">
 
-      <label>MOTIVO — OBRIGATÓRIO</label>
+      <label>
+        MOTIVO — OBRIGATÓRIO
+      </label>
+
 
       <input
         id="motivo"
@@ -511,12 +756,22 @@ Gerenciamento de usuários e movimentações.
 
   <div class="actions">
 
-    <button class="add" id="adicionar">
+
+    <button
+      class="add"
+      id="adicionar">
+
       ➕ ADICIONAR
+
     </button>
 
-    <button class="remove" id="remover">
+
+    <button
+      class="remove"
+      id="remover">
+
       ➖ REMOVER
+
     </button>
 
   </div>
@@ -524,26 +779,63 @@ Gerenciamento de usuários e movimentações.
 
   <div class="special">
 
-    <button class="vip" id="vip">
+
+    <button
+      class="vip"
+      id="vip">
+
       👑 Alterar VIP
+
     </button>
 
-    <button class="box" id="box">
+
+    <button
+      class="box"
+      id="box">
+
       🎁 Alterar Caixa
+
     </button>
 
   </div>
 
 
-  <div id="operationMessage" class="message"></div>
+  <div
+    id="operationMessage"
+    class="message">
+  </div>
 
 
   <div class="history">
 
-    <h3>📜 Extrato do usuário</h3>
+
+    <div class="historyHeader">
+
+      <h3>
+        📜 Extrato do usuário
+      </h3>
+
+    </div>
+
 
     <div id="historyList">
-      Nenhuma movimentação carregada.
+
+      <div class="emptyHistory">
+        Nenhuma movimentação carregada.
+      </div>
+
+    </div>
+
+
+    <div class="securityNotice">
+
+      🔒 <strong>Registro de auditoria:</strong>
+      cada movimentação contém administrador,
+      usuário, operação, quantidade, saldo anterior,
+      saldo final, motivo, data/hora e ID único.
+      O painel não possui função para apagar ou editar
+      essas movimentações.
+
     </div>
 
   </div>
@@ -552,42 +844,61 @@ Gerenciamento de usuários e movimentações.
 
 </div>
 
+
 </div>
 
 
 <script type="module">
 
+
+/* ==========================================
+   FIREBASE
+========================================== */
+
 import {
+
   initializeApp
+
 }
+
 from
+
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
 
 import {
+
   getAuth,
   onAuthStateChanged,
   signOut
+
 }
+
 from
+
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 
 import {
+
   getFirestore,
   collection,
   query,
   where,
   getDocs,
-  updateDoc,
-  addDoc
+  writeBatch,
+  doc,
+  serverTimestamp
+
 }
+
 from
+
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
 /* ==========================================
-   FIREBASE
+   CONFIGURAÇÃO
 ========================================== */
 
 const firebaseConfig = {
@@ -618,12 +929,18 @@ const app =
     firebaseConfig
   );
 
+
 const auth =
   getAuth(app);
+
 
 const db =
   getFirestore(app);
 
+
+/* ==========================================
+   ADMINISTRADOR
+========================================== */
 
 const ADMIN =
   "raphafentyramos@gmail.com";
@@ -632,12 +949,29 @@ const ADMIN =
 let usuarioSelecionado =
   null;
 
+
 let adminLogado =
   null;
 
 
 /* ==========================================
-   FUNÇÕES
+   REFERÊNCIAS
+========================================== */
+
+const searchMessage =
+  document.getElementById(
+    "searchMessage"
+  );
+
+
+const operationMessage =
+  document.getElementById(
+    "operationMessage"
+  );
+
+
+/* ==========================================
+   MENSAGENS
 ========================================== */
 
 function mensagem(
@@ -655,6 +989,10 @@ function mensagem(
 }
 
 
+/* ==========================================
+   NÚMEROS
+========================================== */
+
 function numero(
   valor
 ){
@@ -667,6 +1005,10 @@ function numero(
 
 }
 
+
+/* ==========================================
+   DINHEIRO
+========================================== */
 
 function dinheiro(
   valor
@@ -686,24 +1028,94 @@ function dinheiro(
 
 
 /* ==========================================
+   ID DA MOVIMENTAÇÃO
+========================================== */
+
+function gerarIdMovimentacao(){
+
+  if(
+    crypto &&
+    typeof crypto.randomUUID ===
+    "function"
+  ){
+
+    return crypto.randomUUID();
+
+  }
+
+
+  return (
+
+    Date.now().toString(36) +
+    "-" +
+    Math.random()
+      .toString(36)
+      .substring(2,10)
+
+  );
+
+}
+
+
+/* ==========================================
+   NOME DO ITEM
+========================================== */
+
+function nomeItem(
+  item
+){
+
+  const nomes = {
+
+    chances:
+      "🎟️ Chances",
+
+    moedas:
+      "🪙 Moedas",
+
+    chaves:
+      "🔑 Chaves",
+
+    creditos:
+      "💎 Créditos",
+
+    VIP:
+      "👑 VIP",
+
+    "Caixa Box":
+      "🎁 Caixa Box"
+
+  };
+
+
+  return nomes[item] ||
+    item;
+
+}
+
+
+/* ==========================================
    MOSTRAR USUÁRIO
 ========================================== */
 
 function mostrarUsuario(
-  doc
+  documento
 ){
 
   const data =
-    doc.data();
+    documento.data();
 
 
   usuarioSelecionado = {
 
-    ref:doc.ref,
+    ref:
+      documento.ref,
 
-    docId:doc.id,
+    docId:
+      documento.id,
 
-    data:data
+    data:
+      data
 
   };
 
@@ -717,6 +1129,7 @@ function mostrarUsuario(
   document.getElementById(
     "nome"
   ).textContent =
+
     data.nome ||
     data.name ||
     "Usuário";
@@ -725,6 +1138,7 @@ function mostrarUsuario(
   document.getElementById(
     "email"
   ).textContent =
+
     data.email ||
     "Sem e-mail";
 
@@ -732,16 +1146,19 @@ function mostrarUsuario(
   document.getElementById(
     "id"
   ).textContent =
+
     "ID: " +
+
     (
       data.publicId ||
-      doc.id
+      documento.id
     );
 
 
   document.getElementById(
     "avatar"
   ).textContent =
+
     data.avatar ||
     "🙂";
 
@@ -750,18 +1167,25 @@ function mostrarUsuario(
 
 
   carregarExtrato(
+
     data.publicId ||
-    doc.id
+    documento.id
+
   );
 
 }
 
 
 /* ==========================================
-   SALDOS
+   ATUALIZAR SALDOS
 ========================================== */
 
 function atualizarSaldos(){
+
+  if(!usuarioSelecionado){
+    return;
+  }
+
 
   const data =
     usuarioSelecionado.data;
@@ -770,6 +1194,7 @@ function atualizarSaldos(){
   document.getElementById(
     "chances"
   ).textContent =
+
     numero(
       data.chances
     );
@@ -778,6 +1203,7 @@ function atualizarSaldos(){
   document.getElementById(
     "moedas"
   ).textContent =
+
     numero(
       data.moedas
     );
@@ -786,6 +1212,7 @@ function atualizarSaldos(){
   document.getElementById(
     "chaves"
   ).textContent =
+
     numero(
       data.chaves
     );
@@ -794,6 +1221,7 @@ function atualizarSaldos(){
   document.getElementById(
     "creditos"
   ).textContent =
+
     dinheiro(
       data.creditos
     );
@@ -802,7 +1230,7 @@ function atualizarSaldos(){
 
 
 /* ==========================================
-   BUSCAR
+   BUSCAR USUÁRIO
 ========================================== */
 
 async function buscarUsuario(){
@@ -816,9 +1244,7 @@ async function buscarUsuario(){
   if(!id){
 
     mensagem(
-      document.getElementById(
-        "searchMessage"
-      ),
+      searchMessage,
       "Digite o ID do usuário.",
       "error"
     );
@@ -862,32 +1288,33 @@ async function buscarUsuario(){
         "none";
 
 
+      usuarioSelecionado =
+        null;
+
+
       mensagem(
-        document.getElementById(
-          "searchMessage"
-        ),
+        searchMessage,
         "Usuário não encontrado.",
         "error"
       );
+
 
       return;
 
     }
 
 
-    const doc =
+    const documento =
       resultado.docs[0];
 
 
     mostrarUsuario(
-      doc
+      documento
     );
 
 
     mensagem(
-      document.getElementById(
-        "searchMessage"
-      ),
+      searchMessage,
       "Usuário encontrado.",
       "success"
     );
@@ -896,19 +1323,108 @@ async function buscarUsuario(){
   }catch(erro){
 
     console.error(
+      "Erro ao buscar usuário:",
       erro
     );
 
 
     mensagem(
-      document.getElementById(
-        "searchMessage"
-      ),
+      searchMessage,
       "Erro ao buscar usuário.",
       "error"
     );
 
   }
+
+}
+
+
+/* ==========================================
+   CRIAR REGISTRO DE AUDITORIA
+========================================== */
+
+function criarHistorico(
+
+  batch,
+  dadosMovimento
+
+){
+
+  const id =
+    gerarIdMovimentacao();
+
+
+  const historicoRef =
+    doc(
+      collection(
+        db,
+        "historico"
+      )
+    );
+
+
+  batch.set(
+
+    historicoRef,
+
+    {
+
+      movimentacaoId:
+        id,
+
+      usuarioId:
+        dadosMovimento.usuarioId,
+
+      publicId:
+        dadosMovimento.publicId,
+
+      usuarioEmail:
+        dadosMovimento.usuarioEmail,
+
+      usuarioNome:
+        dadosMovimento.usuarioNome,
+
+      adminEmail:
+        dadosMovimento.adminEmail,
+
+      adminUid:
+        dadosMovimento.adminUid,
+
+      item:
+        dadosMovimento.item,
+
+      itemNome:
+        nomeItem(
+          dadosMovimento.item
+        ),
+
+      operacao:
+        dadosMovimento.operacao,
+
+      quantidade:
+        dadosMovimento.quantidade,
+
+      saldoAnterior:
+        dadosMovimento.saldoAnterior,
+
+      saldoFinal:
+        dadosMovimento.saldoFinal,
+
+      motivo:
+        dadosMovimento.motivo,
+
+      criadoEm:
+        serverTimestamp(),
+
+      criadoEmCliente:
+        new Date().toISOString()
+
+    }
+
+  );
+
+
+  return id;
 
 }
 
@@ -922,6 +1438,25 @@ async function alterarSaldo(
 ){
 
   if(!usuarioSelecionado){
+
+    mensagem(
+      operationMessage,
+      "Primeiro localize um usuário.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(!adminLogado){
+
+    mensagem(
+      operationMessage,
+      "Administrador ainda não autenticado.",
+      "error"
+    );
 
     return;
 
@@ -956,9 +1491,7 @@ async function alterarSaldo(
   ){
 
     mensagem(
-      document.getElementById(
-        "operationMessage"
-      ),
+      operationMessage,
       "Digite uma quantidade válida.",
       "error"
     );
@@ -971,9 +1504,7 @@ async function alterarSaldo(
   if(!motivo){
 
     mensagem(
-      document.getElementById(
-        "operationMessage"
-      ),
+      operationMessage,
       "O motivo é obrigatório.",
       "error"
     );
@@ -991,7 +1522,10 @@ async function alterarSaldo(
 
 
   const movimento =
-    operacao === "adicionar"
+
+    operacao ===
+    "adicionar"
+
       ? quantidade
       : -quantidade;
 
@@ -1004,9 +1538,7 @@ async function alterarSaldo(
   if(novo < 0){
 
     mensagem(
-      document.getElementById(
-        "operationMessage"
-      ),
+      operationMessage,
       "O saldo não pode ficar negativo.",
       "error"
     );
@@ -1016,17 +1548,46 @@ async function alterarSaldo(
   }
 
 
+  const acao =
+    operacao ===
+    "adicionar"
+      ? "Adicionar"
+      : "Remover";
+
+
   const confirmar =
     confirm(
-      operacao === "adicionar"
-        ?
-        "Adicionar " +
-        numero(quantidade) +
-        " ao usuário?"
-        :
-        "Remover " +
-        numero(quantidade) +
-        " do usuário?"
+
+      acao +
+      " " +
+      numero(
+        quantidade
+      ) +
+      " " +
+      nomeItem(
+        item
+      ) +
+      "?" +
+
+      "\n\n" +
+
+      "Saldo anterior: " +
+      numero(
+        antigo
+      ) +
+
+      "\n" +
+
+      "Saldo final: " +
+      numero(
+        novo
+      ) +
+
+      "\n\n" +
+
+      "Motivo: " +
+      motivo
+
     );
 
 
@@ -1035,70 +1596,119 @@ async function alterarSaldo(
   }
 
 
+  const botaoAdicionar =
+    document.getElementById(
+      "adicionar"
+    );
+
+
+  const botaoRemover =
+    document.getElementById(
+      "remover"
+    );
+
+
+  botaoAdicionar.disabled =
+    true;
+
+
+  botaoRemover.disabled =
+    true;
+
+
   try{
 
-    /* Atualiza o saldo */
+    /*
+      BATCH:
+      saldo + extrato são gravados
+      juntos.
+    */
 
-    await updateDoc(
+    const batch =
+      writeBatch(
+        db
+      );
+
+
+    batch.update(
+
       usuarioSelecionado.ref,
+
       {
-        [item]:novo
+
+        [item]:
+          novo
+
       }
+
     );
 
 
-    /* Registra no extrato */
+    const movimentacaoId =
+      criarHistorico(
 
-    await addDoc(
-      collection(
-        db,
-        "historico"
-      ),
-      {
+        batch,
 
-        usuarioId:
-          usuarioSelecionado.docId,
+        {
 
-        publicId:
-          usuarioSelecionado.data.publicId ||
-          usuarioSelecionado.docId,
+          usuarioId:
+            usuarioSelecionado.docId,
 
-        usuarioEmail:
-          usuarioSelecionado.data.email ||
-          "",
+          publicId:
+            usuarioSelecionado.data.publicId ||
+            usuarioSelecionado.docId,
 
-        usuarioNome:
-          usuarioSelecionado.data.nome ||
-          usuarioSelecionado.data.name ||
-          "",
+          usuarioEmail:
+            usuarioSelecionado.data.email ||
+            "",
 
-        adminEmail:
-          adminLogado.email,
+          usuarioNome:
+            usuarioSelecionado.data.nome ||
+            usuarioSelecionado.data.name ||
+            "",
 
-        item:
-          item,
+          adminEmail:
+            adminLogado.email ||
+            "",
 
-        operacao:
-          operacao,
+          adminUid:
+            adminLogado.uid ||
+            "",
 
-        quantidade:
-          quantidade,
+          item:
+            item,
 
-        saldoAnterior:
-          antigo,
+          operacao:
+            operacao,
 
-        saldoFinal:
-          novo,
+          quantidade:
+            quantidade,
 
-        motivo:
-          motivo,
+          saldoAnterior:
+            antigo,
 
-        criadoEm:
-          new Date().toISOString()
+          saldoFinal:
+            novo,
 
-      }
-    );
+          motivo:
+            motivo
 
+        }
+
+      );
+
+
+    /*
+      Commit atômico.
+    */
+
+    await batch.commit();
+
+
+    /*
+      Atualiza memória local
+      somente depois do sucesso.
+    */
 
     usuarioSelecionado.data[item] =
       novo;
@@ -1120,34 +1730,51 @@ async function alterarSaldo(
 
 
     mensagem(
-      document.getElementById(
-        "operationMessage"
-      ),
-      "Movimentação realizada e registrada no extrato.",
+      operationMessage,
+
+      "Movimentação realizada. " +
+      "ID: " +
+      movimentacaoId,
+
       "success"
+
     );
 
 
-    carregarExtrato(
+    await carregarExtrato(
+
       usuarioSelecionado.data.publicId ||
       usuarioSelecionado.docId
+
     );
 
 
   }catch(erro){
 
     console.error(
+      "Erro na movimentação:",
       erro
     );
 
 
     mensagem(
-      document.getElementById(
-        "operationMessage"
-      ),
-      "Erro ao realizar movimentação.",
+
+      operationMessage,
+
+      "Erro ao realizar a movimentação. " +
+      "Nenhuma alteração foi confirmada.",
+
       "error"
+
     );
+
+  }finally{
+
+    botaoAdicionar.disabled =
+      false;
+
+    botaoRemover.disabled =
+      false;
 
   }
 
@@ -1169,7 +1796,9 @@ async function carregarExtrato(
 
 
   area.innerHTML =
-    "🔄 Carregando...";
+    "<div class='loading'>" +
+    "🔄 Carregando extrato..." +
+    "</div>";
 
 
   try{
@@ -1183,12 +1812,15 @@ async function carregarExtrato(
 
     const busca =
       query(
+
         ref,
+
         where(
           "publicId",
           "==",
           publicId
         )
+
       );
 
 
@@ -1201,8 +1833,11 @@ async function carregarExtrato(
     if(resultado.empty){
 
       area.innerHTML =
-        "<div class='historyItem'>" +
+
+        "<div class='emptyHistory'>" +
+
         "Nenhuma movimentação registrada." +
+
         "</div>";
 
       return;
@@ -1211,20 +1846,48 @@ async function carregarExtrato(
 
 
     const registros =
+
       resultado.docs
+
       .map(
-        doc =>
-          doc.data()
+
+        documento => ({
+
+          id:
+            documento.id,
+
+          ...documento.data()
+
+        })
+
       )
+
       .sort(
-        (a,b) =>
-          String(
-            b.criadoEm || ""
-          ).localeCompare(
-            String(
-              a.criadoEm || ""
-            )
-          )
+
+        (a,b) => {
+
+          const dataA =
+            a.criadoEm?.toMillis
+              ? a.criadoEm.toMillis()
+              : Date.parse(
+                  a.criadoEmCliente ||
+                  ""
+                ) || 0;
+
+
+          const dataB =
+            b.criadoEm?.toMillis
+              ? b.criadoEm.toMillis()
+              : Date.parse(
+                  b.criadoEmCliente ||
+                  ""
+                ) || 0;
+
+
+          return dataB - dataA;
+
+        }
+
       );
 
 
@@ -1262,19 +1925,47 @@ async function carregarExtrato(
             : "minus";
 
 
-        const data =
-          registro.criadoEm
-            ?
+        let dataTexto =
+          "—";
+
+
+        if(
+          registro.criadoEm &&
+          typeof registro.criadoEm.toDate ===
+          "function"
+        ){
+
+          dataTexto =
+            registro.criadoEm
+              .toDate()
+              .toLocaleString(
+                "pt-BR"
+              );
+
+        }
+
+        else if(
+          registro.criadoEmCliente
+        ){
+
+          dataTexto =
             new Date(
-              registro.criadoEm
+              registro.criadoEmCliente
             ).toLocaleString(
               "pt-BR"
-            )
-            :
-            "—";
+            );
+
+        }
 
 
         div.innerHTML =
+
+          "<div class='auditBadge'>" +
+
+          "🔐 AUDITORIA • REGISTRO PERMANENTE" +
+
+          "</div>" +
+
 
           "<div class='historyTop'>" +
 
@@ -1282,39 +1973,54 @@ async function carregarExtrato(
 
           sinal +
           " " +
+
           numero(
             registro.quantidade
           ) +
+
           " " +
-          registro.item +
+
+          (
+            registro.itemNome ||
+            nomeItem(
+              registro.item
+            )
+          ) +
 
           "</span>" +
+
 
           "<span class='" +
           classe +
           "'>" +
-          data +
+
+          dataTexto +
+
           "</span>" +
 
           "</div>" +
 
+
           "<div class='historyInfo'>" +
 
-          "Saldo anterior: " +
+          "📊 Saldo anterior: " +
+
           numero(
             registro.saldoAnterior
           ) +
 
           "<br>" +
 
-          "Saldo final: " +
+          "📊 Saldo final: " +
+
           numero(
             registro.saldoFinal
           ) +
 
           "<br>" +
 
-          "Motivo: " +
+          "📝 Motivo: " +
+
           (
             registro.motivo ||
             "—"
@@ -1322,9 +2028,41 @@ async function carregarExtrato(
 
           "<br>" +
 
-          "Administrador: " +
+          "👤 Usuário: " +
+
+          (
+            registro.usuarioNome ||
+            "—"
+          ) +
+
+          "<br>" +
+
+          "📧 E-mail: " +
+
+          (
+            registro.usuarioEmail ||
+            "—"
+          ) +
+
+          "<br>" +
+
+          "👑 Administrador: " +
+
           (
             registro.adminEmail ||
+            "—"
+          ) +
+
+          "</div>" +
+
+
+          "<div class='operationId'>" +
+
+          "🆔 ID da movimentação: " +
+
+          (
+            registro.movimentacaoId ||
+            registro.id ||
             "—"
           ) +
 
@@ -1336,19 +2074,24 @@ async function carregarExtrato(
         );
 
       }
+
     );
 
 
   }catch(erro){
 
     console.error(
+      "Erro ao carregar extrato:",
       erro
     );
 
 
     area.innerHTML =
+
       "<div class='historyItem'>" +
-      "Erro ao carregar o extrato." +
+
+      "❌ Erro ao carregar o extrato." +
+
       "</div>";
 
   }
@@ -1363,7 +2106,22 @@ async function carregarExtrato(
 async function alterarVIP(){
 
   if(!usuarioSelecionado){
+
+    mensagem(
+      operationMessage,
+      "Primeiro localize um usuário.",
+      "error"
+    );
+
     return;
+
+  }
+
+
+  if(!adminLogado){
+
+    return;
+
   }
 
 
@@ -1375,86 +2133,114 @@ async function alterarVIP(){
     !atual;
 
 
-  if(
-    !confirm(
+  const confirmar =
+    confirm(
+
       novo
+
         ?
-        "Ativar VIP?"
+
+        "Ativar VIP para este usuário?"
+
         :
-        "Desativar VIP?"
-    )
-  ){
+
+        "Desativar VIP deste usuário?"
+
+    );
+
+
+  if(!confirmar){
     return;
   }
 
 
   try{
 
-    await updateDoc(
+    const batch =
+      writeBatch(
+        db
+      );
+
+
+    batch.update(
+
       usuarioSelecionado.ref,
+
       {
-        vip:novo
+
+        vip:
+          novo
+
       }
+
     );
 
 
-    await addDoc(
-      collection(
-        db,
-        "historico"
-      ),
-      {
+    const movimentacaoId =
+      criarHistorico(
 
-        usuarioId:
-          usuarioSelecionado.docId,
+        batch,
 
-        publicId:
-          usuarioSelecionado.data.publicId ||
-          usuarioSelecionado.docId,
+        {
 
-        usuarioEmail:
-          usuarioSelecionado.data.email ||
-          "",
+          usuarioId:
+            usuarioSelecionado.docId,
 
-        usuarioNome:
-          usuarioSelecionado.data.nome ||
-          "",
+          publicId:
+            usuarioSelecionado.data.publicId ||
+            usuarioSelecionado.docId,
 
-        adminEmail:
-          adminLogado.email,
+          usuarioEmail:
+            usuarioSelecionado.data.email ||
+            "",
 
-        item:
-          "VIP",
+          usuarioNome:
+            usuarioSelecionado.data.nome ||
+            usuarioSelecionado.data.name ||
+            "",
 
-        operacao:
-          novo
-            ? "adicionar"
-            : "remover",
+          adminEmail:
+            adminLogado.email ||
+            "",
 
-        quantidade:1,
+          adminUid:
+            adminLogado.uid ||
+            "",
 
-        saldoAnterior:
-          atual
-            ? 1
-            : 0,
+          item:
+            "VIP",
 
-        saldoFinal:
-          novo
-            ? 1
-            : 0,
+          operacao:
+            novo
+              ? "adicionar"
+              : "remover",
 
-        motivo:
-          novo
-            ?
-            "VIP ativado pelo administrador"
-            :
-            "VIP desativado pelo administrador",
+          quantidade:
+            1,
 
-        criadoEm:
-          new Date().toISOString()
+          saldoAnterior:
+            atual
+              ? 1
+              : 0,
 
-      }
-    );
+          saldoFinal:
+            novo
+              ? 1
+              : 0,
+
+          motivo:
+            novo
+              ?
+              "VIP ativado pelo administrador"
+              :
+              "VIP desativado pelo administrador"
+
+        }
+
+      );
+
+
+    await batch.commit();
 
 
     usuarioSelecionado.data.vip =
@@ -1462,35 +2248,42 @@ async function alterarVIP(){
 
 
     mensagem(
-      document.getElementById(
-        "operationMessage"
-      ),
-      novo
-        ?
-        "VIP ativado."
-        :
-        "VIP desativado.",
+
+      operationMessage,
+
+      (
+        novo
+          ? "VIP ativado."
+          : "VIP desativado."
+      ) +
+
+      " ID: " +
+      movimentacaoId,
+
       "success"
+
     );
 
 
     carregarExtrato(
+
       usuarioSelecionado.data.publicId ||
       usuarioSelecionado.docId
+
     );
 
 
   }catch(erro){
 
     console.error(
+      "Erro ao alterar VIP:",
       erro
     );
 
+
     mensagem(
-      document.getElementById(
-        "operationMessage"
-      ),
-      "Erro ao alterar VIP.",
+      operationMessage,
+      "Erro ao alterar VIP. Nenhuma alteração foi confirmada.",
       "error"
     );
 
@@ -1506,6 +2299,19 @@ async function alterarVIP(){
 async function alterarCaixa(){
 
   if(!usuarioSelecionado){
+
+    mensagem(
+      operationMessage,
+      "Primeiro localize um usuário.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(!adminLogado){
     return;
   }
 
@@ -1518,86 +2324,114 @@ async function alterarCaixa(){
     !atual;
 
 
-  if(
-    !confirm(
+  const confirmar =
+    confirm(
+
       novo
+
         ?
+
         "Marcar Caixa Box como utilizada?"
+
         :
+
         "Liberar novamente a Caixa Box?"
-    )
-  ){
+
+    );
+
+
+  if(!confirmar){
     return;
   }
 
 
   try{
 
-    await updateDoc(
+    const batch =
+      writeBatch(
+        db
+      );
+
+
+    batch.update(
+
       usuarioSelecionado.ref,
+
       {
-        caixaBox:novo
+
+        caixaBox:
+          novo
+
       }
+
     );
 
 
-    await addDoc(
-      collection(
-        db,
-        "historico"
-      ),
-      {
+    const movimentacaoId =
+      criarHistorico(
 
-        usuarioId:
-          usuarioSelecionado.docId,
+        batch,
 
-        publicId:
-          usuarioSelecionado.data.publicId ||
-          usuarioSelecionado.docId,
+        {
 
-        usuarioEmail:
-          usuarioSelecionado.data.email ||
-          "",
+          usuarioId:
+            usuarioSelecionado.docId,
 
-        usuarioNome:
-          usuarioSelecionado.data.nome ||
-          "",
+          publicId:
+            usuarioSelecionado.data.publicId ||
+            usuarioSelecionado.docId,
 
-        adminEmail:
-          adminLogado.email,
+          usuarioEmail:
+            usuarioSelecionado.data.email ||
+            "",
 
-        item:
-          "Caixa Box",
+          usuarioNome:
+            usuarioSelecionado.data.nome ||
+            usuarioSelecionado.data.name ||
+            "",
 
-        operacao:
-          novo
-            ? "remover"
-            : "adicionar",
+          adminEmail:
+            adminLogado.email ||
+            "",
 
-        quantidade:1,
+          adminUid:
+            adminLogado.uid ||
+            "",
 
-        saldoAnterior:
-          atual
-            ? 1
-            : 0,
+          item:
+            "Caixa Box",
 
-        saldoFinal:
-          novo
-            ? 1
-            : 0,
+          operacao:
+            novo
+              ? "remover"
+              : "adicionar",
 
-        motivo:
-          novo
-            ?
-            "Caixa Box marcada como utilizada"
-            :
-            "Caixa Box liberada pelo administrador",
+          quantidade:
+            1,
 
-        criadoEm:
-          new Date().toISOString()
+          saldoAnterior:
+            atual
+              ? 1
+              : 0,
 
-      }
-    );
+          saldoFinal:
+            novo
+              ? 1
+              : 0,
+
+          motivo:
+            novo
+              ?
+              "Caixa Box marcada como utilizada"
+              :
+              "Caixa Box liberada pelo administrador"
+
+        }
+
+      );
+
+
+    await batch.commit();
 
 
     usuarioSelecionado.data.caixaBox =
@@ -1605,35 +2439,44 @@ async function alterarCaixa(){
 
 
     mensagem(
-      document.getElementById(
-        "operationMessage"
-      ),
-      novo
-        ?
-        "Caixa Box marcada como utilizada."
-        :
-        "Caixa Box liberada.",
+
+      operationMessage,
+
+      (
+        novo
+          ?
+          "Caixa Box marcada como utilizada."
+          :
+          "Caixa Box liberada."
+      ) +
+
+      " ID: " +
+      movimentacaoId,
+
       "success"
+
     );
 
 
     carregarExtrato(
+
       usuarioSelecionado.data.publicId ||
       usuarioSelecionado.docId
+
     );
 
 
   }catch(erro){
 
     console.error(
+      "Erro ao alterar Caixa:",
       erro
     );
 
+
     mensagem(
-      document.getElementById(
-        "operationMessage"
-      ),
-      "Erro ao alterar Caixa Box.",
+      operationMessage,
+      "Erro ao alterar Caixa. Nenhuma alteração foi confirmada.",
       "error"
     );
 
@@ -1643,12 +2486,15 @@ async function alterarCaixa(){
 
 
 /* ==========================================
-   LOGIN / SEGURANÇA
+   AUTENTICAÇÃO / ADMIN
 ========================================== */
 
 onAuthStateChanged(
+
   auth,
+
   async usuario => {
+
 
     if(!usuario){
 
@@ -1661,10 +2507,19 @@ onAuthStateChanged(
     }
 
 
+    /*
+      Primeira barreira:
+      somente o e-mail administrativo.
+    */
+
     if(
+
+      !usuario.email ||
+
       usuario.email.toLowerCase()
       !==
       ADMIN.toLowerCase()
+
     ){
 
       alert(
@@ -1692,98 +2547,172 @@ onAuthStateChanged(
 
 
     console.log(
-      "ADMIN:",
+      "ADMIN autenticado:",
       usuario.email
     );
 
   }
+
 );
 
 
 /* ==========================================
-   BOTÕES
+   BUSCAR
 ========================================== */
 
 document
-.getElementById("buscar")
-.addEventListener(
-  "click",
-  buscarUsuario
-);
+  .getElementById(
+    "buscar"
+  )
+  .addEventListener(
+    "click",
+    buscarUsuario
+  );
 
+
+/* ==========================================
+   ENTER NA BUSCA
+========================================== */
 
 document
-.getElementById("publicId")
-.addEventListener(
-  "keydown",
-  evento => {
+  .getElementById(
+    "publicId"
+  )
+  .addEventListener(
 
-    if(
-      evento.key === "Enter"
-    ){
-      buscarUsuario();
+    "keydown",
+
+    evento => {
+
+      if(
+        evento.key ===
+        "Enter"
+      ){
+
+        buscarUsuario();
+
+      }
+
     }
 
-  }
-);
+  );
 
 
-document
-.getElementById("adicionar")
-.addEventListener(
-  "click",
-  () =>
-    alterarSaldo(
-      "adicionar"
-    )
-);
-
+/* ==========================================
+   ADICIONAR
+========================================== */
 
 document
-.getElementById("remover")
-.addEventListener(
-  "click",
-  () =>
-    alterarSaldo(
-      "remover"
-    )
-);
+  .getElementById(
+    "adicionar"
+  )
+  .addEventListener(
+
+    "click",
+
+    () => {
+
+      alterarSaldo(
+        "adicionar"
+      );
+
+    }
+
+  );
 
 
-document
-.getElementById("vip")
-.addEventListener(
-  "click",
-  alterarVIP
-);
-
-
-document
-.getElementById("box")
-.addEventListener(
-  "click",
-  alterarCaixa
-);
-
+/* ==========================================
+   REMOVER
+========================================== */
 
 document
-.getElementById("logout")
-.addEventListener(
-  "click",
-  async () => {
+  .getElementById(
+    "remover"
+  )
+  .addEventListener(
 
-    await signOut(
-      auth
-    );
+    "click",
 
-    window.location.replace(
-      "index.html"
-    );
+    () => {
 
-  }
-);
+      alterarSaldo(
+        "remover"
+      );
+
+    }
+
+  );
+
+
+/* ==========================================
+   VIP
+========================================== */
+
+document
+  .getElementById(
+    "vip"
+  )
+  .addEventListener(
+
+    "click",
+
+    alterarVIP
+
+  );
+
+
+/* ==========================================
+   BOX
+========================================== */
+
+document
+  .getElementById(
+    "box"
+  )
+  .addEventListener(
+
+    "click",
+
+    alterarCaixa
+
+  );
+
+
+/* ==========================================
+   LOGOUT
+========================================== */
+
+document
+  .getElementById(
+    "logout"
+  )
+  .addEventListener(
+
+    "click",
+
+    async () => {
+
+      try{
+
+        await signOut(
+          auth
+        );
+
+      }finally{
+
+        window.location.replace(
+          "index.html"
+        );
+
+      }
+
+    }
+
+  );
+
 
 </script>
 
 </body>
+
 </html>
