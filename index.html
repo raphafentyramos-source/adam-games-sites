@@ -10,7 +10,7 @@
   content="width=device-width, initial-scale=1.0"
 >
 
-<title>Adam Games • Login</title>
+<title>Adam Games • Painel</title>
 
 <style>
 
@@ -37,74 +37,237 @@ body{
 
   color:#fff;
 
+  overflow-x:hidden;
+
+  background:
+
+    radial-gradient(
+      circle at 15% 5%,
+      #43aaff 0%,
+      transparent 30%
+    ),
+
+    linear-gradient(
+      135deg,
+      #087ee1 0%,
+      #061d43 78%
+    );
+}
+
+
+.page{
+
+  width:100%;
+
+  max-width:1100px;
+
+  margin:auto;
+
+  padding:15px;
+
+}
+
+
+/* =====================================================
+   TOPO
+===================================================== */
+
+.topbar{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:10px;
+
+  margin-bottom:15px;
+
+}
+
+
+.brand{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:11px;
+
+  padding:9px 16px 9px 9px;
+
+  border-radius:22px;
+
+  background:
+    rgba(4,45,91,.82);
+
+  border:
+    1px solid
+    rgba(255,255,255,.14);
+
+  box-shadow:
+    0 12px 30px
+    rgba(0,0,0,.22);
+
+}
+
+
+.brand-icon{
+
+  width:60px;
+
+  height:60px;
+
+  border-radius:18px;
+
   display:flex;
 
   align-items:center;
 
   justify-content:center;
 
-  padding:25px 15px;
+  font-size:34px;
 
-  overflow-x:hidden;
+  background:
+    linear-gradient(
+      145deg,
+      #218fff,
+      #0754a7
+    );
+
+}
+
+
+.brand-name{
+
+  font-size:21px;
+
+  font-weight:900;
+
+  line-height:.95;
+
+}
+
+
+.brand-name span{
+
+  color:#ffd52b;
+
+}
+
+
+.top-buttons{
+
+  display:flex;
+
+  gap:8px;
+
+}
+
+
+.top-button{
+
+  width:55px;
+
+  height:55px;
+
+  border:0;
+
+  border-radius:18px;
+
+  color:#fff;
+
+  background:
+    rgba(4,40,82,.9);
+
+  font-size:24px;
+
+  position:relative;
+
+  cursor:pointer;
+
+}
+
+
+.notification{
+
+  position:absolute;
+
+  right:-4px;
+
+  top:-5px;
+
+  width:23px;
+
+  height:23px;
+
+  border-radius:50%;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  background:#ff3048;
+
+  font-size:12px;
+
+  font-weight:900;
+
+}
+
+
+/* =====================================================
+   PERFIL
+===================================================== */
+
+.profile{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:17px;
+
+  padding:18px;
+
+  border-radius:28px;
 
   background:
 
-    radial-gradient(
-      circle at 15% 10%,
-      rgba(66,170,255,.95) 0%,
-      rgba(66,170,255,.35) 18%,
-      transparent 38%
-    ),
-
-    radial-gradient(
-      circle at 90% 85%,
-      rgba(0,130,255,.35),
-      transparent 35%
-    ),
-
     linear-gradient(
       145deg,
-      #087ee1 0%,
-      #0755a8 35%,
-      #061d43 78%,
-      #020d20 100%
+      rgba(4,55,110,.97),
+      rgba(2,25,56,.97)
     );
+
+  border:
+    1px solid
+    rgba(255,255,255,.14);
+
+  box-shadow:
+    0 20px 45px
+    rgba(0,0,0,.25);
+
 }
 
 
-/* =====================================
-   CONTAINER
-===================================== */
+.avatar-area{
 
-.login-container{
+  position:relative;
 
-  width:100%;
+  flex-shrink:0;
 
-  max-width:440px;
-
-  margin:auto;
 }
 
 
-/* =====================================
-   LOGO
-===================================== */
+.avatar{
 
-.logo{
+  width:96px;
 
-  text-align:center;
-
-  margin-bottom:25px;
-}
-
-
-.logo-icon{
-
-  width:100px;
-
-  height:100px;
-
-  margin:auto;
+  height:96px;
 
   border-radius:28px;
 
@@ -114,429 +277,78 @@ body{
 
   justify-content:center;
 
-  font-size:58px;
+  font-size:55px;
 
   background:
-
     linear-gradient(
       145deg,
-      #218fff,
-      #0754a7
+      #ffd347,
+      #f4a800
     );
 
   border:
-    3px solid
-    rgba(255,255,255,.16);
+    4px solid
+    #ffd52b;
 
-  box-shadow:
-
-    0 20px 50px
-    rgba(0,0,0,.30);
 }
 
 
-.logo h1{
-
-  margin-top:15px;
-
-  font-size:35px;
-
-  font-weight:900;
-
-  line-height:.95;
-
-  letter-spacing:-1px;
-}
-
-
-.logo h1 span{
-
-  color:#ffd52b;
-}
-
-
-.logo p{
-
-  margin-top:10px;
-
-  color:#c5def5;
-
-  font-size:15px;
-
-  font-weight:600;
-}
-
-
-/* =====================================
-   CARD
-===================================== */
-
-.login-card{
-
-  width:100%;
-
-  padding:28px;
-
-  border-radius:30px;
-
-  background:
-
-    linear-gradient(
-      145deg,
-      rgba(4,55,110,.97),
-      rgba(2,25,56,.98)
-    );
-
-  border:
-    1px solid
-    rgba(255,255,255,.14);
-
-  box-shadow:
-
-    0 25px 60px
-    rgba(0,0,0,.38);
-}
-
-
-.login-card h2{
-
-  text-align:center;
-
-  font-size:27px;
-
-  margin-bottom:8px;
-}
-
-
-.subtitle{
-
-  text-align:center;
-
-  color:#a9c7e4;
-
-  font-size:14px;
-
-  margin-bottom:25px;
-}
-
-
-/* =====================================
-   MENSAGENS
-===================================== */
-
-.message{
-
-  display:none;
-
-  margin-bottom:18px;
-
-  padding:14px;
-
-  border-radius:13px;
-
-  text-align:center;
-
-  font-size:13px;
-
-  font-weight:bold;
-
-  line-height:1.5;
-}
-
-
-.message.error{
-
-  display:block;
-
-  background:
-    rgba(255,50,70,.15);
-
-  border:
-    1px solid
-    rgba(255,70,90,.35);
-
-  color:#ff9ba7;
-}
-
-
-.message.success{
-
-  display:block;
-
-  background:
-    rgba(50,255,140,.12);
-
-  border:
-    1px solid
-    rgba(50,255,140,.3);
-
-  color:#72ffae;
-}
-
-
-.message.info{
-
-  display:block;
-
-  background:
-    rgba(40,160,255,.12);
-
-  border:
-    1px solid
-    rgba(40,160,255,.3);
-
-  color:#8dceff;
-}
-
-
-/* =====================================
-   CAMPOS
-===================================== */
-
-label{
-
-  display:block;
-
-  margin-bottom:7px;
-
-  font-size:13px;
-
-  font-weight:bold;
-
-  color:#cce3f8;
-}
-
-
-.input{
-
-  width:100%;
-
-  height:54px;
-
-  border:
-    1px solid
-    rgba(255,255,255,.13);
-
-  border-radius:15px;
-
-  background:
-    rgba(0,0,0,.22);
-
-  color:white;
-
-  padding:
-    0 16px;
-
-  font-size:16px;
-
-  outline:none;
-
-  margin-bottom:17px;
-}
-
-
-.input::placeholder{
-
-  color:#8fa8c0;
-}
-
-
-.input:focus{
-
-  border-color:#27a1ff;
-
-  box-shadow:
-    0 0 0 3px
-    rgba(39,161,255,.12);
-}
-
-
-/* =====================================
-   SENHA
-===================================== */
-
-.password-wrap{
-
-  position:relative;
-}
-
-
-.password-wrap .input{
-
-  padding-right:55px;
-}
-
-
-.show-password{
+.avatar-crown{
 
   position:absolute;
 
-  right:8px;
+  top:-19px;
 
-  top:0;
+  right:-10px;
 
-  width:45px;
+  font-size:33px;
 
-  height:54px;
+  display:none;
 
-  border:0;
 
-  background:transparent;
-
-  color:#9fc4e5;
-
-  font-size:21px;
-
-  cursor:pointer;
 }
 
 
-/* =====================================
-   BOTÕES
-===================================== */
-
-.login-button{
-
-  width:100%;
-
-  height:55px;
-
-  border:0;
-
-  border-radius:16px;
-
-  background:
-
-    linear-gradient(
-      135deg,
-      #22a2ff,
-      #0069db
-    );
-
-  color:white;
-
-  font-size:16px;
-
-  font-weight:900;
-
-  cursor:pointer;
-
-  box-shadow:
-
-    0 10px 25px
-    rgba(0,105,219,.3);
-}
-
-
-.login-button:disabled{
-
-  opacity:.6;
-
-  cursor:not-allowed;
-}
-
-
-/* =====================================
-   LINKS
-===================================== */
-
-.forgot{
-
-  display:block;
-
-  text-align:center;
-
-  margin-top:18px;
-
-  color:#65bdff;
-
-  font-size:13px;
-
-  text-decoration:none;
-
-  cursor:pointer;
-}
-
-
-.create-account{
-
-  display:block;
-
-  text-align:center;
-
-  margin-top:18px;
-
-  color:#ffd52b;
-
-  font-size:14px;
-
-  font-weight:bold;
-
-  text-decoration:none;
-
-  cursor:pointer;
-}
-
-
-/* =====================================
-   DIVISOR
-===================================== */
-
-.divider{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:12px;
-
-  margin:25px 0 18px;
-
-  color:#a9c7e4;
-
-  font-size:13px;
-
-  white-space:nowrap;
-}
-
-
-.divider::before,
-.divider::after{
-
-  content:"";
-
-  height:1px;
+.profile-data{
 
   flex:1;
 
-  background:
-    rgba(255,255,255,.15);
+  min-width:0;
+
 }
 
 
-/* =====================================
-   SOCIAL
-===================================== */
-
-.social-buttons{
+.profile-name-line{
 
   display:flex;
 
-  flex-direction:column;
+  align-items:center;
 
-  gap:10px;
+  gap:7px;
+
 }
 
 
-.social-button{
+.profile-name{
 
-  width:100%;
+  font-size:23px;
 
-  height:52px;
+  font-weight:900;
 
-  border:0;
+  word-break:break-word;
 
-  border-radius:15px;
+}
+
+
+.verified{
+
+  width:24px;
+
+  height:24px;
+
+  border-radius:50%;
+
+  background:#168cff;
 
   display:flex;
 
@@ -544,346 +356,1230 @@ label{
 
   justify-content:center;
 
-  gap:10px;
+  font-size:14px;
 
-  font-size:15px;
+  font-weight:900;
 
-  font-weight:bold;
-
-  cursor:pointer;
 }
 
 
-.google{
+.profile-email{
 
-  background:#fff;
+  margin-top:5px;
 
-  color:#202124;
+  color:#b9d3ec;
+
+  font-size:14px;
+
+  word-break:break-word;
+
 }
 
 
-.facebook{
+.vip-badge{
 
-  background:#1877f2;
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:5px;
+
+  margin-top:9px;
+
+  padding:7px 13px;
+
+  border-radius:13px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #9b7111,
+      #f0c32f
+    );
 
   color:#fff;
-}
-
-
-.apple{
-
-  background:#000;
-
-  color:#fff;
-}
-
-
-.social-icon{
-
-  font-size:19px;
-
-  width:25px;
-
-  text-align:center;
-}
-
-
-/* =====================================
-   CADASTRO
-===================================== */
-
-.register-box{
-
-  display:none;
-}
-
-
-.register-box.active{
-
-  display:block;
-}
-
-
-.login-box.hidden{
-
-  display:none;
-}
-
-
-.back-login{
-
-  display:block;
-
-  text-align:center;
-
-  margin-top:18px;
-
-  color:#65bdff;
 
   font-size:13px;
 
-  cursor:pointer;
+  font-weight:900;
+
 }
 
 
-/* =====================================
-   VERIFICAÇÃO
-===================================== */
+.member-badge{
 
-.verification-box{
+  background:
+    rgba(255,255,255,.11);
 
-  display:none;
+  color:#d4e6f7;
+
 }
 
 
-.verification-box.active{
+.user-id{
 
-  display:block;
+  margin-top:8px;
+
+  color:#75c5ff;
+
+  font-size:12px;
+
+  font-weight:bold;
+
+  word-break:break-all;
+
 }
 
 
-.verification-icon{
-
-  width:82px;
-
-  height:82px;
-
-  margin:0 auto 18px;
-
-  border-radius:25px;
+.status-line{
 
   display:flex;
 
-  align-items:center;
+  flex-wrap:wrap;
 
-  justify-content:center;
+  gap:6px 14px;
 
-  font-size:44px;
+  margin-top:8px;
+
+  color:#b9d4eb;
+
+  font-size:12px;
+
+}
+
+
+.online{
+
+  color:#62ff9e;
+
+  font-weight:bold;
+
+}
+
+
+/* =====================================================
+   ERRO
+===================================================== */
+
+.error-panel{
+
+  display:none;
+
+  margin-top:15px;
+
+  padding:16px;
+
+  border-radius:18px;
+
+  background:
+    rgba(120,15,35,.45);
+
+  border:
+    1px solid
+    rgba(255,85,105,.35);
+
+  color:#ffd5da;
+
+  font-size:13px;
+
+  line-height:1.5;
+
+}
+
+
+.error-title{
+
+  display:block;
+
+  margin-bottom:5px;
+
+  color:#ff9aa7;
+
+  font-weight:900;
+
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero{
+
+  padding:30px 5px 20px;
+
+}
+
+
+.season{
+
+  display:inline-block;
+
+  padding:8px 14px;
+
+  border-radius:20px;
+
+  background:
+    rgba(255,255,255,.12);
+
+  border:
+    1px solid
+    rgba(255,255,255,.15);
+
+  font-size:12px;
+
+  font-weight:bold;
+
+}
+
+
+.hero h2{
+
+  margin-top:17px;
+
+  font-size:
+    clamp(42px,8vw,72px);
+
+  line-height:.92;
+
+  text-shadow:
+    0 6px 2px
+    rgba(0,0,0,.25);
+
+}
+
+
+.hero p{
+
+  margin-top:10px;
+
+  font-size:21px;
+
+  font-weight:bold;
+
+}
+
+
+/* =====================================================
+   CARDS
+===================================================== */
+
+.cards{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:14px;
+
+}
+
+
+.card{
+
+  min-height:225px;
+
+  padding:20px;
+
+  border-radius:26px;
+
+  position:relative;
+
+  overflow:hidden;
+
+  border:
+    1px solid
+    rgba(255,255,255,.15);
+
+  box-shadow:
+    0 15px 35px
+    rgba(0,0,0,.25);
+
+  cursor:pointer;
+
+}
+
+
+.card-box{
 
   background:
     linear-gradient(
       145deg,
-      #168ff0,
-      #064b99
+      #9321ed,
+      #45109e
+    );
+
+}
+
+
+.card-adam{
+
+  background:
+    linear-gradient(
+      145deg,
+      #087ddd,
+      #064ba1
+    );
+
+}
+
+
+.card-games{
+
+  background:
+    linear-gradient(
+      145deg,
+      #16bd60,
+      #087d43
+    );
+
+}
+
+
+.card-icon{
+
+  font-size:70px;
+
+  text-align:center;
+
+  margin-bottom:10px;
+
+}
+
+
+.card h3{
+
+  font-size:21px;
+
+  margin-bottom:7px;
+
+}
+
+
+.card p{
+
+  color:
+    rgba(255,255,255,.82);
+
+  font-size:14px;
+
+  line-height:1.4;
+
+}
+
+
+.card-arrow{
+
+  position:absolute;
+
+  right:15px;
+
+  bottom:14px;
+
+  width:43px;
+
+  height:43px;
+
+  border-radius:50%;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  background:
+    rgba(255,255,255,.15);
+
+  font-size:23px;
+
+}
+
+
+/* =====================================================
+   VIP
+===================================================== */
+
+.vip-panel{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:15px;
+
+  margin-top:17px;
+
+  padding:18px;
+
+  border-radius:25px;
+
+  background:
+
+    radial-gradient(
+      circle at 90% 10%,
+      rgba(255,211,65,.2),
+      transparent 28%
+    ),
+
+    linear-gradient(
+      135deg,
+      #281c06,
+      #100d07
     );
 
   border:
+    1px solid
+    rgba(255,201,55,.5);
+
+}
+
+
+.vip-info{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:14px;
+
+
+}
+
+
+.vip-icon{
+
+  width:65px;
+
+  height:65px;
+
+  border-radius:20px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  font-size:37px;
+
+  border:
     2px solid
-    rgba(255,255,255,.15);
+    #e6b72d;
+
 }
 
 
-.verification-email{
+.vip-panel h3{
 
-  margin:15px 0;
+  color:#ffd329;
 
-  padding:13px;
+  font-size:23px;
 
-  border-radius:12px;
-
-  background:
-    rgba(255,255,255,.06);
-
-  color:#72c5ff;
-
-  font-weight:bold;
-
-  text-align:center;
-
-  word-break:break-word;
 }
 
 
-.verification-text{
+.vip-panel p{
 
-  color:#b7d1e8;
+  margin-top:4px;
 
-  font-size:14px;
+  color:#d9d0ba;
 
-  line-height:1.6;
+  font-size:13px;
 
-  text-align:center;
-
-  margin-bottom:20px;
 }
 
 
-.verify-button{
+.vip-button{
 
-  width:100%;
-
-  min-height:52px;
-
-  border:0;
-
-  border-radius:15px;
-
-  background:
-
-    linear-gradient(
-      135deg,
-      #18b86a,
-      #078747
-    );
-
-  color:white;
-
-  font-size:14px;
-
-  font-weight:900;
-
-  cursor:pointer;
-
-  margin-bottom:10px;
-}
-
-
-.resend-button{
-
-  width:100%;
-
-  min-height:52px;
-
-  border:0;
-
-  border-radius:15px;
-
-  background:
-
-    linear-gradient(
-      135deg,
-      #239eff,
-      #0869d5
-    );
-
-  color:white;
-
-  font-size:14px;
-
-  font-weight:900;
-
-  cursor:pointer;
-
-  margin-bottom:10px;
-}
-
-
-.change-account{
-
-  width:100%;
-
-  min-height:48px;
+  padding:14px 20px;
 
   border:0;
 
   border-radius:14px;
 
   background:
-    rgba(255,255,255,.09);
+    linear-gradient(
+      135deg,
+      #ffcd2c,
+      #d98b06
+    );
 
-  color:#bcd6ec;
+  color:white;
 
-  font-size:13px;
+  font-weight:900;
+
+}
+
+
+/* =====================================================
+   RECURSOS
+===================================================== */
+
+.section-header{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  margin:20px 3px 11px;
+
+}
+
+
+.section-header h3{
+
+  font-size:19px;
+
+}
+
+
+.section-header span{
+
+  color:#9ec7e8;
+
+  font-size:12px;
+
+}
+
+
+.resources{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(4,1fr);
+
+  gap:12px;
+
+}
+
+
+.resource{
+
+  padding:15px 10px;
+
+  text-align:center;
+
+  border-radius:20px;
+
+  background:
+    rgba(3,30,62,.82);
+
+  border:
+    1px solid
+    rgba(255,255,255,.1);
+
+}
+
+
+.resource-icon{
+
+  font-size:40px;
+
+}
+
+
+.resource-name{
+
+  margin-top:5px;
+
+  color:#b9d3eb;
+
+  font-size:11px;
 
   font-weight:bold;
 
-  cursor:pointer;
+}
+
+
+.resource-value{
+
+  margin-top:6px;
+
+  font-size:18px;
+
+  font-weight:900;
+
+}
+
+
+/* =====================================================
+   DADOS
+===================================================== */
+
+.data-panel{
+
+  margin-top:20px;
+
+  margin-bottom:110px;
+
+  padding:18px;
+
+  border-radius:24px;
+
+  background:
+    rgba(2,25,52,.82);
+
+  border:
+    1px solid
+    rgba(255,255,255,.1);
+
+}
+
+
+.data-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,1fr);
+
+  gap:10px;
+
+}
+
+
+.data-item{
+
+  padding:12px;
+
+  border-radius:14px;
+
+  background:
+    rgba(255,255,255,.055);
+
+}
+
+
+.data-label{
+
+  color:#7fb4dc;
+
+  font-size:10px;
+
+  font-weight:bold;
+
+  text-transform:uppercase;
+
+}
+
+
+.data-value{
 
   margin-top:5px;
+
+  color:#fff;
+
+  font-size:14px;
+
+  word-break:break-word;
+
 }
 
 
-.verify-status{
+/* =====================================================
+   MENU
+===================================================== */
 
-  margin-top:13px;
+.bottom-nav{
 
-  min-height:20px;
+  position:fixed;
 
-  color:#8ecbfa;
+  z-index:100;
 
-  font-size:12px;
+  left:50%;
 
-  text-align:center;
+  bottom:10px;
 
-  line-height:1.5;
+  transform:translateX(-50%);
+
+  width:min(95%,900px);
+
+  padding:9px;
+
+  border-radius:27px;
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(5,1fr);
+
+  background:
+    rgba(4,25,52,.96);
+
+  backdrop-filter:blur(15px);
+
+  border:
+    1px solid
+    rgba(255,255,255,.13);
+
+  box-shadow:
+    0 15px 40px
+    rgba(0,0,0,.4);
+
 }
 
 
-/* =====================================
-   LOADING
-===================================== */
+.nav-button{
 
-.loading{
+  border:0;
+
+  background:transparent;
+
+  color:#8198af;
+
+  padding:6px;
+
+  font-size:11px;
+
+  font-weight:bold;
+
+}
+
+
+.nav-button span{
+
+  display:block;
+
+  margin-bottom:3px;
+
+  font-size:24px;
+
+}
+
+
+.nav-button.active{
+
+  color:#1fa2ff;
+
+}
+
+
+.diamond{
+
+  width:65px;
+
+  height:65px;
+
+  margin:-24px auto 0;
+
+  border-radius:50%;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  background:
+    linear-gradient(
+      145deg,
+      #2a9dff,
+      #0069db
+    );
+
+  border:
+    4px solid
+    #0b315e;
+
+  font-size:31px;
+
+  box-shadow:
+    0 0 25px
+    rgba(0,143,255,.4);
+
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+.modal{
+
+  position:fixed;
+
+  z-index:999;
+
+  inset:0;
 
   display:none;
 
-  text-align:center;
+  align-items:center;
 
-  margin-top:15px;
+  justify-content:center;
 
-  color:#8fcaff;
+  padding:20px;
 
-  font-size:13px;
+  background:
+    rgba(0,0,0,.65);
+
+  backdrop-filter:blur(8px);
+
 }
 
 
-/* =====================================
-   FOOTER
-===================================== */
+.modal-box{
 
-.footer{
+  width:100%;
+
+  max-width:360px;
+
+  padding:24px;
+
+  border-radius:24px;
 
   text-align:center;
 
-  margin-top:22px;
+  background:
+    linear-gradient(
+      145deg,
+      #073d76,
+      #021a38
+    );
 
-  color:#9ab9d5;
+  border:
+    1px solid
+    rgba(255,255,255,.15);
 
-  font-size:12px;
 }
 
 
-/* =====================================
-   MOBILE
-===================================== */
+.modal-box h3{
 
-@media(max-width:480px){
+  font-size:22px;
 
-  body{
+  margin-bottom:9px;
 
-    padding:
-      18px
-      12px;
+}
+
+
+.modal-box p{
+
+  color:#b7d2e9;
+
+  font-size:14px;
+
+  margin-bottom:20px;
+
+}
+
+
+.modal-buttons{
+
+  display:flex;
+
+  gap:10px;
+
+}
+
+
+.modal-buttons button{
+
+  flex:1;
+
+  height:47px;
+
+  border:0;
+
+  border-radius:13px;
+
+  color:white;
+
+  font-weight:bold;
+
+}
+
+
+.cancel{
+
+  background:
+    rgba(255,255,255,.12);
+
+}
+
+
+.confirm{
+
+  background:
+    linear-gradient(
+      135deg,
+      #ff4055,
+      #c8172c
+    );
+
+}
+
+
+/* =====================================================
+   WHATSAPP
+===================================================== */
+
+.adam-whatsapp-button{
+
+  position:fixed;
+
+  right:18px;
+
+  bottom:105px;
+
+  z-index:99998;
+
+  width:58px;
+
+  height:58px;
+
+  border:0;
+
+  border-radius:50%;
+
+  background:#25D366;
+
+  color:#fff;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  font-size:29px;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 8px 25px
+    rgba(0,0,0,.35);
+
+  transition:
+    transform .2s ease;
+}
+
+
+.adam-whatsapp-button:hover{
+
+  transform:scale(1.08);
+}
+
+
+.adam-whatsapp-menu{
+
+  position:fixed;
+
+  right:18px;
+
+  bottom:174px;
+
+  z-index:99998;
+
+  width:270px;
+
+  padding:17px;
+
+  border-radius:20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #073d76,
+      #021a38
+    );
+
+  border:
+    1px solid
+    rgba(255,255,255,.15);
+
+  box-shadow:
+    0 15px 40px
+    rgba(0,0,0,.45);
+
+  display:none;
+}
+
+
+.adam-whatsapp-menu.active{
+
+  display:block;
+}
+
+
+.adam-whatsapp-title{
+
+  font-size:16px;
+
+  font-weight:900;
+
+  margin-bottom:12px;
+}
+
+
+.adam-whatsapp-option{
+
+  width:100%;
+
+  border:0;
+
+  border-radius:13px;
+
+  padding:14px 12px;
+
+  margin-top:8px;
+
+  color:#fff;
+
+  font-size:14px;
+
+  font-weight:800;
+
+  text-align:left;
+
+  cursor:pointer;
+}
+
+
+.adam-whatsapp-buy{
+
+  background:#07934c;
+}
+
+
+.adam-whatsapp-help{
+
+  background:#168ff0;
+}
+
+
+.adam-whatsapp-close{
+
+  width:100%;
+
+  margin-top:10px;
+
+  border:0;
+
+  border-radius:12px;
+
+  padding:9px;
+
+  background:
+    rgba(255,255,255,.08);
+
+  color:#a9c8e5;
+
+  cursor:pointer;
+}
+
+
+/* =====================================================
+   RESPONSIVO
+===================================================== */
+
+@media(max-width:700px){
+
+  .page{
+
+    padding:11px;
+
   }
 
 
-  .logo-icon{
+  .brand-icon{
 
-    width:88px;
+    width:55px;
 
-    height:88px;
-
-    font-size:50px;
-  }
-
-
-  .logo h1{
+    height:55px;
 
     font-size:31px;
+
   }
 
 
-  .login-card{
+  .brand-name{
 
-    padding:23px 18px;
+    font-size:18px;
 
-    border-radius:25px;
   }
 
 
-  .login-card h2{
+  .top-button{
 
-    font-size:24px;
+    width:50px;
+
+    height:50px;
+
+  }
+
+
+  .profile{
+
+    padding:14px;
+
+  }
+
+
+  .avatar{
+
+    width:80px;
+
+    height:80px;
+
+    font-size:44px;
+
+  }
+
+
+  .avatar-crown{
+
+    font-size:28px;
+
+  }
+
+
+  .profile-name{
+
+    font-size:18px;
+
+  }
+
+
+  .cards{
+
+    gap:8px;
+
+  }
+
+
+  .card{
+
+    min-height:210px;
+
+    padding:12px;
+
+    border-radius:21px;
+
+  }
+
+
+  .card-icon{
+
+    font-size:53px;
+
+  }
+
+
+  .card h3{
+
+    font-size:16px;
+
+  }
+
+
+  .card p{
+
+    font-size:12px;
+
+  }
+
+
+  .card-arrow{
+
+    width:34px;
+
+    height:34px;
+
+    right:8px;
+
+    bottom:8px;
+
+  }
+
+
+  .resources{
+
+    grid-template-columns:
+      repeat(2,1fr);
+
+  }
+
+
+  .data-grid{
+
+    grid-template-columns:1fr;
+
+  }
+
+
+  .vip-panel{
+
+    padding:14px;
+
+  }
+
+
+  .vip-icon{
+
+    width:56px;
+
+    height:56px;
+
+    font-size:30px;
+
+  }
+
+
+  .vip-panel h3{
+
+    font-size:18px;
+
+  }
+
+
+  .vip-panel p{
+
+    font-size:11px;
+
+  }
+
+
+  .vip-button{
+
+    padding:11px;
+
+    font-size:11px;
+
+  }
+
+
+  .adam-whatsapp-button{
+
+    right:15px;
+
+    bottom:88px;
+
+    width:56px;
+
+    height:56px;
+
+  }
+
+
+  .adam-whatsapp-menu{
+
+    right:15px;
+
+    bottom:155px;
+
+    width:
+      calc(100% - 30px);
+
+    max-width:300px;
+
   }
 
 }
@@ -896,414 +1592,732 @@ label{
 <body>
 
 
-<div class="login-container">
+<div class="page">
 
 
-  <!-- =====================================
-       LOGO
-  ====================================== -->
+<header class="topbar">
 
-  <div class="logo">
+  <div class="brand">
 
-    <div class="logo-icon">
+    <div class="brand-icon">
       👑
     </div>
 
-    <h1>
-      ADAM <span>GAMES</span>
-    </h1>
-
-    <p>
-      Seu mundo começa aqui!
-    </p>
+    <div class="brand-name">
+      ADAM<br>
+      <span>GAMES</span>
+    </div>
 
   </div>
 
 
-  <!-- =====================================
-       LOGIN
-  ====================================== -->
+  <div class="top-buttons">
 
-  <div
-    class="login-card login-box"
-    id="loginBox"
-  >
+    <button
+      class="top-button"
+      type="button">
 
-    <h2>
-      Bem-vindo de volta! 👋
-    </h2>
+      🔔
 
-    <div class="subtitle">
-      Entre na sua conta para continuar
+      <span class="notification">
+        3
+      </span>
+
+    </button>
+
+
+    <button
+      class="top-button"
+      id="logoutButton"
+      type="button">
+
+      ↪️
+
+    </button>
+
+  </div>
+
+</header>
+
+
+<section class="profile">
+
+  <div class="avatar-area">
+
+    <div
+      class="avatar"
+      id="avatar">
+
+      🙂
+
     </div>
 
 
     <div
-      id="message"
-      class="message"
-    ></div>
+      class="avatar-crown"
+      id="avatarCrown">
+
+      👑
+
+    </div>
+
+  </div>
 
 
-    <form id="loginForm">
+  <div class="profile-data">
 
+    <div class="profile-name-line">
 
-      <label for="email">
-        E-mail
-      </label>
+      <div
+        class="profile-name"
+        id="profileName">
 
-
-      <input
-        id="email"
-        class="input"
-        type="email"
-        placeholder="seu@email.com"
-        autocomplete="email"
-        required
-      >
-
-
-      <label for="password">
-        Senha
-      </label>
-
-
-      <div class="password-wrap">
-
-        <input
-          id="password"
-          class="input"
-          type="password"
-          placeholder="Digite sua senha"
-          autocomplete="current-password"
-          required
-        >
-
-
-        <button
-          type="button"
-          class="show-password"
-          id="showPassword"
-        >
-          👁️
-        </button>
+        Carregando...
 
       </div>
 
 
-      <button
-        type="submit"
-        class="login-button"
-        id="loginButton"
-      >
-        ENTRAR
-      </button>
+      <div class="verified">
+        ✓
+      </div>
 
-
-    </form>
-
-
-    <a
-      class="forgot"
-      id="forgotPassword"
-    >
-      Esqueci minha senha
-    </a>
-
-
-    <div class="divider">
-      ou continue com
-    </div>
-
-
-    <div class="social-buttons">
-
-
-      <button
-        type="button"
-        class="social-button google"
-        id="googleLogin"
-      >
-
-        <span class="social-icon">
-          🌈
-        </span>
-
-        Google
-
-      </button>
-
-
-      <button
-        type="button"
-        class="social-button facebook"
-        id="facebookLogin"
-      >
-
-        <span class="social-icon">
-          f
-        </span>
-
-        Facebook
-
-      </button>
-
-
-      <button
-        type="button"
-        class="social-button apple"
-        id="appleLogin"
-      >
-
-        <span class="social-icon">
-          
-        </span>
-
-        Apple
-
-      </button>
-
-
-    </div>
-
-
-    <a
-      class="create-account"
-      id="showRegister"
-    >
-      ✨ Criar minha conta
-    </a>
-
-
-    <div
-      class="loading"
-      id="loading"
-    >
-      🔄 Verificando sua conta...
-    </div>
-
-
-  </div>
-
-
-  <!-- =====================================
-       VERIFICAÇÃO DE E-MAIL
-  ====================================== -->
-
-  <div
-    class="login-card verification-box"
-    id="verificationBox"
-  >
-
-    <div class="verification-icon">
-      📧
-    </div>
-
-
-    <h2>
-      Confirme seu e-mail
-    </h2>
-
-
-    <div class="subtitle">
-      Falta só mais um passo para entrar no Adam Games.
     </div>
 
 
     <div
-      class="verification-email"
-      id="verificationEmail">
+      class="profile-email"
+      id="profileEmail">
 
       —
 
     </div>
 
 
-    <div class="verification-text">
+    <div
+      class="vip-badge member-badge"
+      id="vipBadge">
 
-      Enviamos um e-mail de confirmação para o endereço acima.
-
-      <br><br>
-
-      Abra seu e-mail e clique no link de confirmação.
-
-      <br><br>
-
-      Depois volte para esta página e clique em
-      <strong>“Já confirmei meu e-mail”</strong>.
-
-      <br><br>
-
-      Se não encontrar, confira também
-      <strong>Spam</strong>,
-      <strong>Promoções</strong>
-      ou
-      <strong>Lixo eletrônico</strong>.
+      ⭐ Membro
 
     </div>
 
 
     <div
-      id="verificationMessage"
-      class="message"
-    ></div>
+      class="user-id"
+      id="userId">
+
+      ID: carregando...
+
+    </div>
 
 
-    <button
-      type="button"
-      class="verify-button"
-      id="checkVerification"
-    >
+    <div class="status-line">
 
-      ✅ JÁ CONFIRMEI MEU E-MAIL
+      <span class="online">
+        🟢 Online agora
+      </span>
 
-    </button>
+      <span id="clock">
+        🕐 --:--
+      </span>
 
+      <span id="locationStatus">
+        📍 Localização não informada
+      </span>
 
-    <button
-      type="button"
-      class="resend-button"
-      id="resendVerification"
-    >
+    </div>
 
-      📧 REENVIAR E-MAIL DE CONFIRMAÇÃO
+  </div>
 
-    </button>
-
-
-    <button
-      type="button"
-      class="change-account"
-      id="changeAccount"
-    >
-
-      ← VOLTAR PARA O LOGIN
-
-    </button>
+</section>
 
 
-    <div
-      class="verify-status"
-      id="verifyStatus"
-    ></div>
+<div
+  class="error-panel"
+  id="errorPanel">
 
+  <span class="error-title">
+    ⚠️ Atenção
+  </span>
+
+  <span id="errorText">
+    —
+  </span>
+
+</div>
+
+
+<section class="hero">
+
+  <div
+    class="season"
+    id="season">
+
+    🇧🇷 SETEMBRO • INDEPENDÊNCIA
 
   </div>
 
 
-  <!-- =====================================
-       CADASTRO
-  ====================================== -->
+  <h2>
+    BEM-VINDO 👋
+  </h2>
+
+
+  <p>
+    Seu mundo começa aqui!
+  </p>
+
+</section>
+
+
+<section class="cards">
 
   <div
-    class="login-card register-box"
-    id="registerBox"
-  >
+    class="card card-box"
+    id="boxCard">
 
-    <h2>
-      Criar minha conta ✨
-    </h2>
+    <div class="card-icon">
+      🎁
+    </div>
 
-    <div class="subtitle">
-      Faça seu cadastro no Adam Games
+    <h3>
+      CAIXA BOX
+    </h3>
+
+    <p>
+      Confira sua caixa de prêmios.
+    </p>
+
+    <div class="card-arrow">
+      →
+    </div>
+
+  </div>
+
+
+  <div
+    class="card card-adam">
+
+    <div class="card-icon">
+      🏡
+    </div>
+
+    <h3>
+      ADAM
+    </h3>
+
+    <p>
+      Seus recursos e benefícios.
+    </p>
+
+    <div class="card-arrow">
+      →
+    </div>
+
+  </div>
+
+
+  <div
+    class="card card-games">
+
+    <div class="card-icon">
+      🎮
+    </div>
+
+    <h3>
+      JOGOS
+    </h3>
+
+    <p>
+      Acesse seus jogos cadastrados.
+    </p>
+
+    <div class="card-arrow">
+      →
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="vip-panel">
+
+  <div class="vip-info">
+
+    <div class="vip-icon">
+      👑
     </div>
 
 
+    <div>
+
+      <h3>
+        ÁREA VIP
+      </h3>
+
+      <p id="vipDescription">
+        Benefícios exclusivos para membros VIP.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <button
+    class="vip-button"
+    id="vipButton"
+    type="button">
+
+    👑 ACESSAR
+
+  </button>
+
+</section>
+
+
+<div class="section-header">
+
+  <h3>
+    ⭐ Seus recursos
+  </h3>
+
+  <span>
+    Seus dados
+  </span>
+
+</div>
+
+
+<section class="resources">
+
+  <div class="resource">
+
+    <div class="resource-icon">
+      💎
+    </div>
+
+    <div class="resource-name">
+      CRÉDITOS
+    </div>
+
     <div
-      id="registerMessage"
-      class="message"
-    ></div>
+      class="resource-value"
+      id="credits">
+
+      R$ 0,00
+
+    </div>
+
+  </div>
 
 
-    <form id="registerForm">
+  <div class="resource">
+
+    <div class="resource-icon">
+      🪙
+    </div>
+
+    <div class="resource-name">
+      MOEDAS
+    </div>
+
+    <div
+      class="resource-value"
+      id="coins">
+
+      0
+
+    </div>
+
+  </div>
 
 
-      <label for="registerName">
+  <div class="resource">
+
+    <div class="resource-icon">
+      🗝️
+    </div>
+
+    <div class="resource-name">
+      CHAVES
+    </div>
+
+    <div
+      class="resource-value"
+      id="keys">
+
+      0
+
+    </div>
+
+  </div>
+
+
+  <div class="resource">
+
+    <div class="resource-icon">
+      🎟️
+    </div>
+
+    <div class="resource-name">
+      CHANCES
+    </div>
+
+    <div
+      class="resource-value"
+      id="chances">
+
+      0
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="data-panel">
+
+  <div class="section-header">
+
+    <h3>
+      👤 Meus dados
+    </h3>
+
+  </div>
+
+
+  <div class="data-grid">
+
+    <div class="data-item">
+
+      <div class="data-label">
         Nome
-      </label>
+      </div>
+
+      <div
+        class="data-value"
+        id="dataName">
+
+        —
+
+      </div>
+
+    </div>
 
 
-      <input
-        id="registerName"
-        class="input"
-        type="text"
-        placeholder="Seu nome"
-        required
-      >
+    <div class="data-item">
 
-
-      <label for="registerEmail">
+      <div class="data-label">
         E-mail
-      </label>
+      </div>
+
+      <div
+        class="data-value"
+        id="dataEmail">
+
+        —
+
+      </div>
+
+    </div>
 
 
-      <input
-        id="registerEmail"
-        class="input"
-        type="email"
-        placeholder="seu@email.com"
-        required
-      >
+    <div class="data-item">
+
+      <div class="data-label">
+        ID Adam Games
+      </div>
+
+      <div
+        class="data-value"
+        id="dataId">
+
+        —
+
+      </div>
+
+    </div>
 
 
-      <label for="registerPassword">
-        Senha
-      </label>
+    <div class="data-item">
+
+      <div class="data-label">
+        UID Firebase
+      </div>
+
+      <div
+        class="data-value"
+        id="dataUid">
+
+        —
+
+      </div>
+
+    </div>
 
 
-      <input
-        id="registerPassword"
-        class="input"
-        type="password"
-        placeholder="Crie uma senha"
-        minlength="6"
-        required
-      >
+    <div class="data-item">
+
+      <div class="data-label">
+        Idade
+      </div>
+
+      <div
+        class="data-value"
+        id="dataAge">
+
+        Não informado
+
+      </div>
+
+    </div>
 
 
-      <label for="registerPassword2">
-        Confirmar senha
-      </label>
+    <div class="data-item">
+
+      <div class="data-label">
+        Telefone
+      </div>
+
+      <div
+        class="data-value"
+        id="dataPhone">
+
+        Não informado
+
+      </div>
+
+    </div>
 
 
-      <input
-        id="registerPassword2"
-        class="input"
-        type="password"
-        placeholder="Digite a senha novamente"
-        minlength="6"
-        required
-      >
+    <div class="data-item">
 
+      <div class="data-label">
+        Caixa Box
+      </div>
+
+      <div
+        class="data-value"
+        id="dataBox">
+
+        Disponível
+
+      </div>
+
+    </div>
+
+
+    <div class="data-item">
+
+      <div class="data-label">
+        Último acesso
+      </div>
+
+      <div
+        class="data-value"
+        id="dataAccess">
+
+        Agora
+
+      </div>
+
+    </div>
+
+
+    <div class="data-item">
+
+      <div class="data-label">
+        Fuso horário
+      </div>
+
+      <div
+        class="data-value"
+        id="dataTimezone">
+
+        —
+
+      </div>
+
+    </div>
+
+
+    <div class="data-item">
+
+      <div class="data-label">
+        Localização
+      </div>
+
+      <div
+        class="data-value"
+        id="dataLocation">
+
+        Não informada
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+</div>
+
+
+<nav class="bottom-nav">
+
+  <button
+    class="nav-button active"
+    type="button">
+
+    <span>🏠</span>
+
+    Início
+
+  </button>
+
+
+  <button
+    class="nav-button"
+    type="button">
+
+    <span>👑</span>
+
+    VIP
+
+  </button>
+
+
+  <button
+    class="nav-button"
+    type="button">
+
+    <div class="diamond">
+      💎
+    </div>
+
+  </button>
+
+
+  <button
+    class="nav-button"
+    type="button">
+
+    <span>🎁</span>
+
+    Prêmios
+
+  </button>
+
+
+  <button
+    class="nav-button"
+    type="button">
+
+    <span>🎮</span>
+
+    Jogos
+
+  </button>
+
+</nav>
+
+
+<!-- =====================================================
+     WHATSAPP
+===================================================== -->
+
+<div
+  class="adam-whatsapp-menu"
+  id="adamWhatsAppMenu"
+>
+
+  <div class="adam-whatsapp-title">
+    💬 Como podemos ajudar?
+  </div>
+
+
+  <button
+    type="button"
+    class="adam-whatsapp-option adam-whatsapp-buy"
+    id="adamWhatsAppBuy"
+  >
+    🛒 Quero comprar
+  </button>
+
+
+  <button
+    type="button"
+    class="adam-whatsapp-option adam-whatsapp-help"
+    id="adamWhatsAppHelp"
+  >
+    💬 Tenho uma dúvida
+  </button>
+
+
+  <button
+    type="button"
+    class="adam-whatsapp-close"
+    id="adamWhatsAppClose"
+  >
+    Fechar
+  </button>
+
+</div>
+
+
+<button
+  type="button"
+  class="adam-whatsapp-button"
+  id="adamWhatsAppButton"
+  aria-label="Abrir WhatsApp"
+>
+  💬
+</button>
+
+
+<div
+  class="modal"
+  id="logoutModal">
+
+  <div class="modal-box">
+
+    <h3>
+      Sair da conta?
+    </h3>
+
+    <p>
+      Você será levado novamente para o login.
+    </p>
+
+    <div class="modal-buttons">
 
       <button
-        type="submit"
-        class="login-button"
-        id="registerButton"
-      >
-        CRIAR CONTA
+        class="cancel"
+        id="cancelLogout"
+        type="button">
+
+        CANCELAR
+
       </button>
 
 
-    </form>
+      <button
+        class="confirm"
+        id="confirmLogout"
+        type="button">
 
+        SAIR
 
-    <a
-      class="back-login"
-      id="backLogin"
-    >
-      ← Já tenho uma conta
-    </a>
+      </button>
 
-
-  </div>
-
-
-  <div class="footer">
-
-    © 2026 Adam Games
+    </div>
 
   </div>
-
 
 </div>
 
@@ -1311,9 +2325,9 @@ label{
 <script type="module">
 
 
-/* =====================================
-   FIREBASE APP
-===================================== */
+/* =====================================================
+   FIREBASE
+===================================================== */
 
 import {
   initializeApp
@@ -1322,31 +2336,14 @@ from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
 
-/* =====================================
-   FIREBASE AUTH
-===================================== */
-
 import {
   getAuth,
   onAuthStateChanged,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  sendPasswordResetEmail,
-  sendEmailVerification,
-  reload,
-  signOut,
-  GoogleAuthProvider,
-  FacebookAuthProvider,
-  OAuthProvider,
-  signInWithPopup
+  signOut
 }
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
-
-/* =====================================
-   FIRESTORE
-===================================== */
 
 import {
   getFirestore,
@@ -1360,9 +2357,9 @@ from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
-/* =====================================
-   CONFIGURAÇÃO
-===================================== */
+/* =====================================================
+   CONFIG
+===================================================== */
 
 const firebaseConfig = {
 
@@ -1404,334 +2401,951 @@ const db =
   getFirestore(app);
 
 
-/* =====================================
+/* =====================================================
    ELEMENTOS
-===================================== */
+===================================================== */
 
-const loginBox =
+const profileName =
   document.getElementById(
-    "loginBox"
+    "profileName"
   );
 
 
-const registerBox =
+const profileEmail =
   document.getElementById(
-    "registerBox"
+    "profileEmail"
   );
 
 
-const verificationBox =
+const userId =
   document.getElementById(
-    "verificationBox"
+    "userId"
   );
 
 
-const loginForm =
+const vipBadge =
   document.getElementById(
-    "loginForm"
+    "vipBadge"
   );
 
 
-const registerForm =
+const avatar =
   document.getElementById(
-    "registerForm"
+    "avatar"
   );
 
 
-const email =
+const avatarCrown =
   document.getElementById(
-    "email"
+    "avatarCrown"
   );
 
 
-const password =
+const errorPanel =
   document.getElementById(
-    "password"
+    "errorPanel"
   );
 
 
-const message =
+const errorText =
   document.getElementById(
-    "message"
+    "errorText"
   );
 
 
-const registerMessage =
-  document.getElementById(
-    "registerMessage"
-  );
+/* =====================================================
+   UTILIDADES
+===================================================== */
+
+function gerarPublicId(){
+
+  const chars =
+    "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+  let resultado = "";
 
 
-const verificationMessage =
-  document.getElementById(
-    "verificationMessage"
-  );
+  for(
+    let i = 0;
+    i < 7;
+    i++
+  ){
+
+    resultado +=
+      chars[
+        Math.floor(
+          Math.random() *
+          chars.length
+        )
+      ];
+
+  }
 
 
-const verificationEmail =
-  document.getElementById(
-    "verificationEmail"
-  );
-
-
-const verifyStatus =
-  document.getElementById(
-    "verifyStatus"
-  );
-
-
-let usuarioAguardandoVerificacao =
-  null;
-
-
-let ultimoEnvioVerificacao =
-  0;
-
-
-/* =====================================
-   MENSAGEM LOGIN
-===================================== */
-
-function mostrarMensagem(
-  texto,
-  tipo="error"
-){
-
-  message.textContent =
-    texto;
-
-  message.className =
-    "message " + tipo;
+  return resultado;
 
 }
 
 
-/* =====================================
-   MENSAGEM CADASTRO
-===================================== */
-
-function mostrarMensagemCadastro(
-  texto,
-  tipo="error"
+function mostrarErro(
+  texto
 ){
 
-  registerMessage.textContent =
+  errorText.textContent =
     texto;
 
-  registerMessage.className =
-    "message " + tipo;
+  errorPanel.style.display =
+    "block";
 
 }
 
 
-/* =====================================
-   MENSAGEM VERIFICAÇÃO
-===================================== */
+function limparErro(){
 
-function mostrarMensagemVerificacao(
-  texto,
-  tipo="info"
-){
-
-  verificationMessage.textContent =
-    texto;
-
-  verificationMessage.className =
-    "message " + tipo;
+  errorPanel.style.display =
+    "none";
 
 }
 
 
-/* =====================================
-   LIMPAR MENSAGENS
-===================================== */
+function valorNumerico(
+  valor
+){
 
-function limparMensagemVerificacao(){
+  const numero =
+    Number(valor);
 
-  verificationMessage.textContent =
+  return Number.isFinite(numero)
+    ? numero
+    : 0;
+
+}
+
+
+function formatarMoeda(
+  valor
+){
+
+  return valorNumerico(
+    valor
+  ).toLocaleString(
+    "pt-BR",
+    {
+      style:"currency",
+      currency:"BRL"
+    }
+  );
+
+}
+
+
+/* =====================================================
+   RELÓGIO
+===================================================== */
+
+function atualizarRelogio(){
+
+  const agora =
+    new Date();
+
+
+  document.getElementById(
+    "clock"
+  ).textContent =
+    "🕐 " +
+    agora.toLocaleTimeString(
+      "pt-BR",
+      {
+        hour:"2-digit",
+        minute:"2-digit"
+      }
+    );
+
+
+  document.getElementById(
+    "dataTimezone"
+  ).textContent =
+    Intl.DateTimeFormat()
+      .resolvedOptions()
+      .timeZone;
+
+}
+
+
+atualizarRelogio();
+
+
+setInterval(
+  atualizarRelogio,
+  30000
+);
+
+
+/* =====================================================
+   TEMPORADA
+===================================================== */
+
+const mes =
+  new Date().getMonth() + 1;
+
+
+if(mes === 10){
+
+  document.getElementById(
+    "season"
+  ).textContent =
+    "🎃 OUTUBRO • HALLOWEEN";
+
+}
+
+else if(mes === 11){
+
+  document.getElementById(
+    "season"
+  ).textContent =
+    "✊🏿 NOVEMBRO • CONSCIÊNCIA NEGRA";
+
+}
+
+else if(mes === 12){
+
+  document.getElementById(
+    "season"
+  ).textContent =
+    "🎄 DEZEMBRO • NATAL";
+
+}
+
+
+/* =====================================================
+   LOCALIZAÇÃO
+===================================================== */
+
+function solicitarLocalizacao(){
+
+  if(
+    !navigator.geolocation
+  ){
+
+    return;
+
+  }
+
+
+  navigator.geolocation.getCurrentPosition(
+
+    async position => {
+
+      const latitude =
+        position.coords.latitude;
+
+      const longitude =
+        position.coords.longitude;
+
+
+      document.getElementById(
+        "locationStatus"
+      ).textContent =
+        "📍 Localização autorizada";
+
+
+      document.getElementById(
+        "dataLocation"
+      ).textContent =
+        latitude.toFixed(4) +
+        ", " +
+        longitude.toFixed(4);
+
+
+      try{
+
+        const response =
+          await fetch(
+            "https://api.bigdatacloud.net/data/" +
+            "reverse-geocode-client?" +
+            "latitude=" +
+            latitude +
+            "&longitude=" +
+            longitude +
+            "&localityLanguage=pt"
+          );
+
+
+        if(!response.ok){
+
+          return;
+
+        }
+
+
+        const data =
+          await response.json();
+
+
+        const cidade =
+          data.city ||
+          data.locality ||
+          "";
+
+
+        const estado =
+          data.principalSubdivision ||
+          "";
+
+
+        if(cidade){
+
+          document.getElementById(
+            "locationStatus"
+          ).textContent =
+            "📍 " + cidade;
+
+
+          document.getElementById(
+            "dataLocation"
+          ).textContent =
+            cidade +
+            (
+              estado
+                ? ", " + estado
+                : ""
+            );
+
+        }
+
+      }
+      catch(error){
+
+        console.log(
+          "Localização detalhada indisponível."
+        );
+
+      }
+
+    },
+
+    error => {
+
+      console.log(
+        "Usuário não autorizou localização.",
+        error
+      );
+
+
+      document.getElementById(
+        "locationStatus"
+      ).textContent =
+        "📍 Localização não autorizada";
+
+
+      document.getElementById(
+        "dataLocation"
+      ).textContent =
+        "Não autorizada";
+
+    },
+
+    {
+      enableHighAccuracy:false,
+
+      timeout:8000,
+
+      maximumAge:300000
+
+    }
+
+  );
+
+}
+
+
+/* =====================================================
+   CARREGAR CADASTRO
+===================================================== */
+
+async function carregarCadastro(
+  firebaseUser
+){
+
+  const uid =
+    firebaseUser.uid;
+
+
+  const email =
+    (
+      firebaseUser.email ||
+      ""
+    ).trim().toLowerCase();
+
+
+  const admins =
+    collection(
+      db,
+      "admins"
+    );
+
+
+  let snapshot;
+
+
+  try{
+
+    snapshot =
+      await getDocs(
+        query(
+          admins,
+          where(
+            "uid",
+            "==",
+            uid
+          )
+        )
+      );
+
+  }
+  catch(error){
+
+    console.error(
+      "Erro buscando por UID:",
+      error
+    );
+
+
+    snapshot = {
+      empty:true,
+      docs:[]
+    };
+
+  }
+
+
+  if(
+    snapshot.empty &&
+    email
+  ){
+
+    try{
+
+      snapshot =
+        await getDocs(
+          query(
+            admins,
+            where(
+              "email",
+              "==",
+              email
+            )
+          )
+        );
+
+    }
+    catch(error){
+
+      console.error(
+        "Erro buscando por e-mail:",
+        error
+      );
+
+      snapshot = {
+        empty:true,
+        docs:[]
+      };
+
+    }
+
+  }
+
+
+  if(snapshot.empty){
+
+    const publicId =
+      gerarPublicId();
+
+
+    const novoUsuario = {
+
+      uid:
+        uid,
+
+      email:
+        email,
+
+      nome:
+        firebaseUser.displayName ||
+        (
+          email
+            ? email.split("@")[0]
+            : "Usuário"
+        ),
+
+      publicId:
+        publicId,
+
+      idade:
+        "",
+
+      telefone:
+        "",
+
+      avatar:
+        "🙂",
+
+      vip:
+        false,
+
+      chances:
+        0,
+
+      moedas:
+        0,
+
+      chaves:
+        0,
+
+      creditos:
+        0,
+
+      caixaBox:
+        false,
+
+      criadoEm:
+        new Date().toISOString()
+
+    };
+
+
+    try{
+
+      const documento =
+        await addDoc(
+          admins,
+          novoUsuario
+        );
+
+
+      return {
+
+        id:
+          documento.id,
+
+        data:
+          novoUsuario
+
+      };
+
+    }
+    catch(error){
+
+      console.error(
+        "Erro criando cadastro:",
+        error
+      );
+
+
+      throw new Error(
+        "A conta foi autenticada, mas o cadastro não pôde ser criado no Firestore."
+      );
+
+    }
+
+  }
+
+
+  const documento =
+    snapshot.docs[0];
+
+
+  const dados =
+    documento.data();
+
+
+  return {
+
+    id:
+      documento.id,
+
+    data:
+      dados
+
+  };
+
+}
+
+
+/* =====================================================
+   MOSTRAR DADOS
+===================================================== */
+
+function mostrarDados(
+  firebaseUser,
+  cadastro
+){
+
+  const dados =
+    cadastro.data;
+
+
+  const nome =
+    dados.nome ||
+    dados.name ||
+    firebaseUser.displayName ||
+    (
+      firebaseUser.email
+        ? firebaseUser.email.split("@")[0]
+        : "Usuário"
+    );
+
+
+  profileName.textContent =
+    nome;
+
+
+  document.getElementById(
+    "dataName"
+  ).textContent =
+    nome;
+
+
+  const email =
+    dados.email ||
+    firebaseUser.email ||
+    "—";
+
+
+  profileEmail.textContent =
+    email;
+
+
+  document.getElementById(
+    "dataEmail"
+  ).textContent =
+    email;
+
+
+  document.getElementById(
+    "dataUid"
+  ).textContent =
+    firebaseUser.uid;
+
+
+  const publicId =
+    dados.publicId ||
     "";
 
-  verificationMessage.className =
-    "message";
+
+  if(publicId){
+
+    userId.textContent =
+      "ID: " +
+      publicId;
+
+
+    document.getElementById(
+      "dataId"
+    ).textContent =
+      publicId;
+
+  }
+
+  else{
+
+    userId.textContent =
+      "ID: pendente";
+
+
+    document.getElementById(
+      "dataId"
+    ).textContent =
+      "Pendente";
+
+  }
+
+
+  const vip =
+    dados.vip === true;
+
+
+  if(vip){
+
+    vipBadge.textContent =
+      "👑 VIP Ativo";
+
+
+    vipBadge.classList.remove(
+      "member-badge"
+    );
+
+
+    avatarCrown.style.display =
+      "block";
+
+
+    document.getElementById(
+      "vipDescription"
+    ).textContent =
+      "Você tem acesso aos benefícios exclusivos VIP.";
+
+  }
+
+  else{
+
+    vipBadge.textContent =
+      "⭐ Membro";
+
+
+    vipBadge.classList.add(
+      "member-badge"
+    );
+
+
+    avatarCrown.style.display =
+      "none";
+
+
+    document.getElementById(
+      "vipDescription"
+    ).textContent =
+      "Torne-se VIP para desbloquear benefícios exclusivos.";
+
+  }
+
+
+  avatar.textContent =
+    dados.avatar ||
+    "🙂";
+
+
+  const creditos =
+    valorNumerico(
+      dados.creditos
+    );
+
+
+  const moedas =
+    valorNumerico(
+      dados.moedas
+    );
+
+
+  const chaves =
+    valorNumerico(
+      dados.chaves
+    );
+
+
+  const chances =
+    valorNumerico(
+      dados.chances
+    );
+
+
+  document.getElementById(
+    "credits"
+  ).textContent =
+    formatarMoeda(
+      creditos
+    );
+
+
+  document.getElementById(
+    "coins"
+  ).textContent =
+    moedas.toLocaleString(
+      "pt-BR"
+    );
+
+
+  document.getElementById(
+    "keys"
+  ).textContent =
+    chaves.toLocaleString(
+      "pt-BR"
+    );
+
+
+  document.getElementById(
+    "chances"
+  ).textContent =
+    chances.toLocaleString(
+      "pt-BR"
+    );
+
+
+  document.getElementById(
+    "dataAge"
+  ).textContent =
+    dados.idade ||
+    "Não informado";
+
+
+  document.getElementById(
+    "dataPhone"
+  ).textContent =
+    dados.telefone ||
+    dados.phone ||
+    "Não informado";
+
+
+  const caixa =
+    dados.caixaBox === true;
+
+
+  document.getElementById(
+    "dataBox"
+  ).textContent =
+    caixa
+      ? "Já resgatada"
+      : "Disponível";
+
+
+  document.getElementById(
+    "dataAccess"
+  ).textContent =
+    "Agora";
 
 }
 
 
-/* =====================================
-   MOSTRAR TELA LOGIN
-===================================== */
+/* =====================================================
+   AUTENTICAÇÃO
+===================================================== */
 
-function mostrarLogin(){
+onAuthStateChanged(
 
-  loginBox.classList.remove(
-    "hidden"
-  );
+  auth,
 
-  registerBox.classList.remove(
-    "active"
-  );
+  async firebaseUser => {
 
-  verificationBox.classList.remove(
-    "active"
-  );
+    if(!firebaseUser){
 
-  usuarioAguardandoVerificacao =
-    null;
+      window.location.replace(
+        "index.html"
+      );
 
-  limparMensagemVerificacao();
-
-}
-
-
-/* =====================================
-   MOSTRAR TELA VERIFICAÇÃO
-===================================== */
-
-function mostrarVerificacao(
-  usuario
-){
-
-  usuarioAguardandoVerificacao =
-    usuario;
-
-
-  loginBox.classList.add(
-    "hidden"
-  );
-
-  registerBox.classList.remove(
-    "active"
-  );
-
-  verificationBox.classList.add(
-    "active"
-  );
-
-
-  verificationEmail.textContent =
-    usuario.email ||
-    "Seu e-mail";
-
-
-  limparMensagemVerificacao();
-
-
-  verifyStatus.textContent =
-    "Aguardando confirmação...";
-
-}
-
-
-/* =====================================
-   MOSTRAR / ESCONDER SENHA
-===================================== */
-
-document
-.getElementById(
-  "showPassword"
-)
-.addEventListener(
-  "click",
-  () => {
-
-    if(
-      password.type ===
-      "password"
-    ){
-
-      password.type =
-        "text";
-
-      document.getElementById(
-        "showPassword"
-      ).textContent =
-        "🙈";
+      return;
 
     }
 
-    else{
 
-      password.type =
-        "password";
+    limparErro();
 
-      document.getElementById(
-        "showPassword"
-      ).textContent =
-        "👁️";
+
+    profileEmail.textContent =
+      firebaseUser.email ||
+      "—";
+
+
+    document.getElementById(
+      "dataEmail"
+    ).textContent =
+      firebaseUser.email ||
+      "—";
+
+
+    document.getElementById(
+      "dataUid"
+    ).textContent =
+      firebaseUser.uid;
+
+
+    try{
+
+      const cadastro =
+        await carregarCadastro(
+          firebaseUser
+        );
+
+
+      mostrarDados(
+        firebaseUser,
+        cadastro
+      );
+
+
+      solicitarLocalizacao();
+
+    }
+    catch(error){
+
+      console.error(
+        "Erro real do painel:",
+        error
+      );
+
+
+      mostrarErro(
+        error.message ||
+        "Não foi possível carregar os dados da conta."
+      );
 
     }
 
   }
+
 );
 
 
-/* =====================================
-   ABRIR CADASTRO
-===================================== */
+/* =====================================================
+   LOGOUT
+===================================================== */
 
-document
-.getElementById(
-  "showRegister"
-)
-.addEventListener(
+const logoutButton =
+  document.getElementById(
+    "logoutButton"
+  );
+
+
+const logoutModal =
+  document.getElementById(
+    "logoutModal"
+  );
+
+
+const cancelLogout =
+  document.getElementById(
+    "cancelLogout"
+  );
+
+
+const confirmLogout =
+  document.getElementById(
+    "confirmLogout"
+  );
+
+
+logoutButton.addEventListener(
   "click",
   () => {
 
-    loginBox.classList.add(
-      "hidden"
-    );
-
-    verificationBox.classList.remove(
-      "active"
-    );
-
-    registerBox.classList.add(
-      "active"
-    );
-
-    window.scrollTo(
-      0,
-      0
-    );
+    logoutModal.style.display =
+      "flex";
 
   }
 );
 
 
-/* =====================================
-   VOLTAR LOGIN
-===================================== */
-
-document
-.getElementById(
-  "backLogin"
-)
-.addEventListener(
+cancelLogout.addEventListener(
   "click",
   () => {
 
-    mostrarLogin();
-
-    mostrarMensagemCadastro(
-      "",
-      ""
-    );
+    logoutModal.style.display =
+      "none";
 
   }
 );
 
 
-/* =====================================
-   VOLTAR DA VERIFICAÇÃO
-===================================== */
-
-document
-.getElementById(
-  "changeAccount"
-)
-.addEventListener(
+confirmLogout.addEventListener(
   "click",
   async () => {
+
+    confirmLogout.disabled =
+      true;
+
+
+    confirmLogout.textContent =
+      "SAINDO...";
+
 
     try{
 
@@ -1739,6 +3353,11 @@ document
         auth
       );
 
+
+      window.location.replace(
+        "index.html"
+      );
+
     }
     catch(error){
 
@@ -1746,1173 +3365,190 @@ document
         error
       );
 
+
+      confirmLogout.disabled =
+        false;
+
+
+      confirmLogout.textContent =
+        "SAIR";
+
+
+      alert(
+        "Não foi possível sair. Tente novamente."
+      );
+
     }
-
-
-    mostrarLogin();
 
   }
 );
 
 
-/* =====================================
-   ENVIAR VERIFICAÇÃO
-===================================== */
-
-async function enviarVerificacao(
-  usuario
-){
-
-  if(!usuario){
-
-    return false;
-
-  }
-
-
-  const agora =
-    Date.now();
-
-
-  /*
-    Aguarda 30 segundos entre
-    os envios para evitar spam.
-  */
-
-  if(
-    agora -
-    ultimoEnvioVerificacao
-    <
-    30000
-  ){
-
-    const restante =
-      Math.ceil(
-        (
-          30000 -
-          (
-            agora -
-            ultimoEnvioVerificacao
-          )
-        ) / 1000
-      );
-
-
-    mostrarMensagemVerificacao(
-
-      "Aguarde " +
-      restante +
-      " segundos antes de reenviar.",
-
-      "info"
-
-    );
-
-
-    return false;
-
-  }
-
-
-  try{
-
-    await sendEmailVerification(
-      usuario
-    );
-
-
-    ultimoEnvioVerificacao =
-      Date.now();
-
-
-    mostrarMensagemVerificacao(
-
-      "📧 E-mail de confirmação enviado! " +
-      "Verifique sua caixa de entrada, Spam ou Promoções.",
-
-      "success"
-
-    );
-
-
-    verifyStatus.textContent =
-      "E-mail enviado. Abra a mensagem e clique no link de confirmação.";
-
-
-    return true;
-
-  }
-
-  catch(error){
-
-    console.error(
-      "Erro enviando verificação:",
-      error
-    );
-
-
-    let texto =
-      "Não foi possível enviar o e-mail de confirmação.";
-
+logoutModal.addEventListener(
+  "click",
+  event => {
 
     if(
-      error.code ===
-      "auth/too-many-requests"
+      event.target ===
+      logoutModal
     ){
 
-      texto =
-        "Muitas solicitações. Aguarde alguns minutos e tente novamente.";
+      logoutModal.style.display =
+        "none";
 
     }
 
+  }
+);
 
-    mostrarMensagemVerificacao(
-      texto,
-      "error"
+
+/* =====================================================
+   CAIXA
+===================================================== */
+
+document.getElementById(
+  "boxCard"
+).addEventListener(
+  "click",
+  () => {
+
+    alert(
+      "🎁 CAIXA BOX\n\n" +
+      "A área de resgate da Caixa Box será disponibilizada aqui."
+    );
+
+  }
+);
+
+
+/* =====================================================
+   VIP
+===================================================== */
+
+document.getElementById(
+  "vipButton"
+).addEventListener(
+  "click",
+  () => {
+
+    alert(
+      "👑 ÁREA VIP\n\n" +
+      "Em breve você poderá visualizar todos os benefícios VIP."
+    );
+
+  }
+);
+
+
+/* =====================================================
+   WHATSAPP
+===================================================== */
+
+const whatsappButton =
+  document.getElementById(
+    "adamWhatsAppButton"
+  );
+
+
+const whatsappMenu =
+  document.getElementById(
+    "adamWhatsAppMenu"
+  );
+
+
+whatsappButton.addEventListener(
+  "click",
+  () => {
+
+    whatsappMenu.classList.toggle(
+      "active"
+    );
+
+  }
+);
+
+
+document
+.getElementById(
+  "adamWhatsAppClose"
+)
+.addEventListener(
+  "click",
+  () => {
+
+    whatsappMenu.classList.remove(
+      "active"
+    );
+
+  }
+);
+
+
+function abrirWhatsApp(
+  mensagem
+){
+
+  const url =
+    "https://wa.me/5531987350267?text=" +
+    encodeURIComponent(
+      mensagem
     );
 
 
-    return false;
-
-  }
+  window.open(
+    url,
+    "_blank"
+  );
 
 }
 
 
-/* =====================================
-   REENVIAR VERIFICAÇÃO
-===================================== */
-
 document
 .getElementById(
-  "resendVerification"
+  "adamWhatsAppBuy"
 )
 .addEventListener(
   "click",
-  async () => {
+  () => {
 
-    if(
-      !usuarioAguardandoVerificacao
-    ){
-
-      mostrarMensagemVerificacao(
-        "Nenhuma conta aguardando confirmação.",
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    const button =
-      document.getElementById(
-        "resendVerification"
-      );
-
-
-    button.disabled =
-      true;
-
-
-    button.textContent =
-      "📧 ENVIANDO...";
-
-
-    await enviarVerificacao(
-      usuarioAguardandoVerificacao
+    abrirWhatsApp(
+      "Olá! Vim pelo site Adam Games e quero fazer uma compra. 🛒"
     );
 
+  }
+);
 
-    button.disabled =
-      false;
 
+document
+.getElementById(
+  "adamWhatsAppHelp"
+)
+.addEventListener(
+  "click",
+  () => {
 
-    button.textContent =
-      "📧 REENVIAR E-MAIL DE CONFIRMAÇÃO";
+    abrirWhatsApp(
+      "Olá! Vim pelo site Adam Games e tenho uma dúvida. 💬"
+    );
 
   }
 );
 
 
-/* =====================================
-   JÁ CONFIRMEI
-===================================== */
-
-document
-.getElementById(
-  "checkVerification"
-)
-.addEventListener(
+document.addEventListener(
   "click",
-  async () => {
+  event => {
 
     if(
-      !usuarioAguardandoVerificacao
+      !whatsappMenu.contains(
+        event.target
+      ) &&
+      event.target !==
+      whatsappButton
     ){
 
-      mostrarMensagemVerificacao(
-        "Nenhuma conta aguardando confirmação.",
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    const button =
-      document.getElementById(
-        "checkVerification"
-      );
-
-
-    button.disabled =
-      true;
-
-
-    button.textContent =
-      "🔄 VERIFICANDO...";
-
-
-    try{
-
-      await reload(
-        usuarioAguardandoVerificacao
-      );
-
-
-      /*
-        Depois do reload,
-        o Firebase atualiza
-        emailVerified.
-      */
-
-      if(
-        usuarioAguardandoVerificacao.emailVerified
-      ){
-
-        mostrarMensagemVerificacao(
-
-          "✅ E-mail confirmado! Entrando no Adam Games...",
-
-          "success"
-
-        );
-
-
-        verifyStatus.textContent =
-          "Confirmação concluída.";
-
-
-        setTimeout(
-          () => {
-
-            window.location.replace(
-              "painel.html"
-            );
-
-          },
-          700
-        );
-
-
-        return;
-
-      }
-
-
-      mostrarMensagemVerificacao(
-
-        "O e-mail ainda não aparece como confirmado. " +
-        "Abra o e-mail recebido e clique no link de confirmação.",
-
-        "info"
-
-      );
-
-
-      verifyStatus.textContent =
-        "Ainda aguardando confirmação.";
-
-    }
-
-    catch(error){
-
-      console.error(
-        "Erro verificando e-mail:",
-        error
-      );
-
-
-      mostrarMensagemVerificacao(
-
-        "Não foi possível verificar agora. " +
-        "Tente novamente.",
-
-        "error"
-
-      );
-
-    }
-
-
-    button.disabled =
-      false;
-
-
-    button.textContent =
-      "✅ JÁ CONFIRMEI MEU E-MAIL";
-
-  }
-);
-
-
-/* =====================================
-   LOGIN E-MAIL
-===================================== */
-
-loginForm.addEventListener(
-  "submit",
-  async event => {
-
-    event.preventDefault();
-
-
-    const emailValue =
-      email.value.trim();
-
-
-    const passwordValue =
-      password.value;
-
-
-    if(
-      !emailValue ||
-      !passwordValue
-    ){
-
-      mostrarMensagem(
-        "Preencha seu e-mail e sua senha."
-      );
-
-      return;
-
-    }
-
-
-    const button =
-      document.getElementById(
-        "loginButton"
-      );
-
-
-    button.disabled =
-      true;
-
-
-    button.textContent =
-      "ENTRANDO...";
-
-
-    try{
-
-      const resultado =
-        await signInWithEmailAndPassword(
-          auth,
-          emailValue,
-          passwordValue
-        );
-
-
-      const usuario =
-        resultado.user;
-
-
-      /*
-        IMPORTANTE:
-
-        Conta por e-mail precisa
-        estar verificada.
-
-        Se não estiver,
-        NÃO entra no painel.
-      */
-
-      if(
-        !usuario.emailVerified
-      ){
-
-        mostrarVerificacao(
-          usuario
-        );
-
-
-        /*
-          Tenta enviar automaticamente
-          o primeiro e-mail.
-        */
-
-        await enviarVerificacao(
-          usuario
-        );
-
-
-        button.disabled =
-          false;
-
-
-        button.textContent =
-          "ENTRAR";
-
-
-        return;
-
-      }
-
-
-      mostrarMensagem(
-        "Login realizado! Entrando...",
-        "success"
-      );
-
-
-      setTimeout(
-        () => {
-
-          window.location.replace(
-            "painel.html"
-          );
-
-        },
-        400
-      );
-
-
-    }
-
-    catch(error){
-
-      console.error(
-        error
-      );
-
-
-      let texto =
-        "Não foi possível entrar.";
-
-
-      if(
-        error.code ===
-        "auth/invalid-credential"
-      ){
-
-        texto =
-          "E-mail ou senha incorretos.";
-
-      }
-
-      else if(
-        error.code ===
-        "auth/invalid-email"
-      ){
-
-        texto =
-          "Digite um e-mail válido.";
-
-      }
-
-      else if(
-        error.code ===
-        "auth/too-many-requests"
-      ){
-
-        texto =
-          "Muitas tentativas. Aguarde alguns minutos.";
-
-      }
-
-      else if(
-        error.code ===
-        "auth/user-disabled"
-      ){
-
-        texto =
-          "Esta conta foi desativada.";
-
-      }
-
-
-      mostrarMensagem(
-        texto
-      );
-
-
-      button.disabled =
-        false;
-
-
-      button.textContent =
-        "ENTRAR";
-
-    }
-
-  }
-);
-
-
-/* =====================================
-   CRIAR CONTA
-===================================== */
-
-registerForm.addEventListener(
-  "submit",
-  async event => {
-
-    event.preventDefault();
-
-
-    const nome =
-      document
-      .getElementById(
-        "registerName"
-      )
-      .value
-      .trim();
-
-
-    const emailNovo =
-      document
-      .getElementById(
-        "registerEmail"
-      )
-      .value
-      .trim();
-
-
-    const senha =
-      document
-      .getElementById(
-        "registerPassword"
-      )
-      .value;
-
-
-    const senha2 =
-      document
-      .getElementById(
-        "registerPassword2"
-      )
-      .value;
-
-
-    if(
-      senha !== senha2
-    ){
-
-      mostrarMensagemCadastro(
-        "As senhas não são iguais."
-      );
-
-      return;
-
-    }
-
-
-    const button =
-      document.getElementById(
-        "registerButton"
-      );
-
-
-    button.disabled =
-      true;
-
-
-    button.textContent =
-      "CRIANDO...";
-
-
-    try{
-
-      /*
-        Cria primeiro a conta
-        no Firebase Authentication.
-      */
-
-      const resultado =
-        await createUserWithEmailAndPassword(
-          auth,
-          emailNovo,
-          senha
-        );
-
-
-      const usuario =
-        resultado.user;
-
-
-      /*
-        Cria o cadastro no Firestore.
-
-        VIP começa SEMPRE false.
-      */
-
-      const caracteres =
-        "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-
-
-      let publicId =
-        "";
-
-
-      for(
-        let i=0;
-        i<7;
-        i++
-      ){
-
-        publicId +=
-          caracteres[
-            Math.floor(
-              Math.random() *
-              caracteres.length
-            )
-          ];
-
-      }
-
-
-      await addDoc(
-        collection(
-          db,
-          "admins"
-        ),
-        {
-
-          uid:
-            usuario.uid,
-
-          nome:
-            nome,
-
-          email:
-            emailNovo,
-
-          publicId:
-            publicId,
-
-          idade:
-            "",
-
-          telefone:
-            "",
-
-          avatar:
-            "🙂",
-
-          /*
-            NOVO USUÁRIO NÃO É VIP.
-          */
-
-          vip:
-            false,
-
-          caixaBox:
-            false,
-
-          chances:
-            0,
-
-          moedas:
-            0,
-
-          chaves:
-            0,
-
-          creditos:
-            0,
-
-          criadoEm:
-            new Date().toISOString()
-
-        }
-      );
-
-
-      /*
-        Agora enviamos o e-mail
-        de confirmação.
-      */
-
-      await sendEmailVerification(
-        usuario
-      );
-
-
-      ultimoEnvioVerificacao =
-        Date.now();
-
-
-      /*
-        Mostra a tela de confirmação.
-      */
-
-      mostrarVerificacao(
-        usuario
-      );
-
-
-      mostrarMensagemVerificacao(
-
-        "📧 Conta criada! Enviamos o e-mail de confirmação para você.",
-
-        "success"
-
-      );
-
-
-      verifyStatus.textContent =
-        "Abra seu e-mail, confirme o endereço e depois clique em “Já confirmei meu e-mail”.";
-
-
-    }
-
-    catch(error){
-
-      console.error(
-        "Erro no cadastro:",
-        error
-      );
-
-
-      let texto =
-        "Não foi possível criar a conta.";
-
-
-      if(
-        error.code ===
-        "auth/email-already-in-use"
-      ){
-
-        texto =
-          "Este e-mail já possui uma conta. Tente entrar.";
-
-      }
-
-      else if(
-        error.code ===
-        "auth/weak-password"
-      ){
-
-        texto =
-          "A senha precisa ter pelo menos 6 caracteres.";
-
-      }
-
-      else if(
-        error.code ===
-        "auth/invalid-email"
-      ){
-
-        texto =
-          "Digite um e-mail válido.";
-
-      }
-
-      else if(
-        error.code ===
-        "auth/too-many-requests"
-      ){
-
-        texto =
-          "Muitas tentativas. Aguarde alguns minutos.";
-
-      }
-
-      else if(
-        error.message &&
-        error.message.includes(
-          "Firestore"
-        )
-      ){
-
-        texto =
-          "A conta foi criada, mas houve um problema ao salvar o cadastro.";
-
-      }
-
-
-      mostrarMensagemCadastro(
-        texto
-      );
-
-
-      button.disabled =
-        false;
-
-
-      button.textContent =
-        "CRIAR CONTA";
-
-    }
-
-  }
-);
-
-
-/* =====================================
-   RECUPERAR SENHA
-===================================== */
-
-document
-.getElementById(
-  "forgotPassword"
-)
-.addEventListener(
-  "click",
-  async () => {
-
-    const emailValue =
-      email.value.trim();
-
-
-    if(!emailValue){
-
-      mostrarMensagem(
-        "Digite seu e-mail primeiro."
-      );
-
-      email.focus();
-
-      return;
-
-    }
-
-
-    try{
-
-      await sendPasswordResetEmail(
-        auth,
-        emailValue
-      );
-
-
-      mostrarMensagem(
-
-        "E-mail de recuperação enviado! " +
-        "Confira sua caixa de entrada.",
-
-        "success"
-
-      );
-
-    }
-
-    catch(error){
-
-      console.error(
-        error
-      );
-
-
-      mostrarMensagem(
-        "Não foi possível enviar o e-mail de recuperação."
-      );
-
-    }
-
-  }
-);
-
-
-/* =====================================
-   GOOGLE
-===================================== */
-
-document
-.getElementById(
-  "googleLogin"
-)
-.addEventListener(
-  "click",
-  async () => {
-
-    try{
-
-      const provider =
-        new GoogleAuthProvider();
-
-
-      const resultado =
-        await signInWithPopup(
-          auth,
-          provider
-        );
-
-
-      const usuario =
-        resultado.user;
-
-
-      /*
-        Contas Google normalmente
-        já chegam com e-mail verificado.
-
-        Ainda assim verificamos.
-      */
-
-      if(
-        usuario.emailVerified
-      ){
-
-        window.location.replace(
-          "painel.html"
-        );
-
-        return;
-
-      }
-
-
-      mostrarVerificacao(
-        usuario
-      );
-
-    }
-
-    catch(error){
-
-      console.error(
-        error
-      );
-
-
-      mostrarMensagem(
-        "Não foi possível entrar com Google."
-      );
-
-    }
-
-  }
-);
-
-
-/* =====================================
-   FACEBOOK
-===================================== */
-
-document
-.getElementById(
-  "facebookLogin"
-)
-.addEventListener(
-  "click",
-  async () => {
-
-    try{
-
-      const provider =
-        new FacebookAuthProvider();
-
-
-      const resultado =
-        await signInWithPopup(
-          auth,
-          provider
-        );
-
-
-      const usuario =
-        resultado.user;
-
-
-      if(
-        usuario.emailVerified
-      ){
-
-        window.location.replace(
-          "painel.html"
-        );
-
-        return;
-
-      }
-
-
-      /*
-        Caso o provedor não tenha
-        e-mail verificado.
-      */
-
-      mostrarVerificacao(
-        usuario
-      );
-
-    }
-
-    catch(error){
-
-      console.error(
-        error
-      );
-
-
-      mostrarMensagem(
-        "Não foi possível entrar com Facebook."
-      );
-
-    }
-
-  }
-);
-
-
-/* =====================================
-   APPLE
-===================================== */
-
-document
-.getElementById(
-  "appleLogin"
-)
-.addEventListener(
-  "click",
-  async () => {
-
-    try{
-
-      const provider =
-        new OAuthProvider(
-          "apple.com"
-        );
-
-
-      const resultado =
-        await signInWithPopup(
-          auth,
-          provider
-        );
-
-
-      const usuario =
-        resultado.user;
-
-
-      if(
-        usuario.emailVerified
-      ){
-
-        window.location.replace(
-          "painel.html"
-        );
-
-        return;
-
-      }
-
-
-      mostrarVerificacao(
-        usuario
-      );
-
-    }
-
-    catch(error){
-
-      console.error(
-        error
-      );
-
-
-      mostrarMensagem(
-        "Não foi possível entrar com Apple."
-      );
-
-    }
-
-  }
-);
-
-
-/* =====================================
-   SESSÃO
-===================================== */
-
-onAuthStateChanged(
-  auth,
-  async usuario => {
-
-    /*
-      Se não existe usuário,
-      permanece no login.
-    */
-
-    if(!usuario){
-
-      return;
-
-    }
-
-
-    /*
-      Se a conta já está autenticada
-      e verificada, entra no painel.
-
-      Se NÃO estiver verificada,
-      mostra a tela de confirmação.
-    */
-
-    if(
-      usuario.emailVerified
-    ){
-
-      /*
-        Evita redirecionar se já
-        estamos na tela de verificação.
-      */
-
-      if(
-        verificationBox.classList.contains(
-          "active"
-        )
-      ){
-
-        return;
-
-      }
-
-
-      /*
-        Só redireciona se não estiver
-        digitando/cadastrando.
-      */
-
-      if(
-        !registerBox.classList.contains(
-          "active"
-        )
-      ){
-
-        window.location.replace(
-          "painel.html"
-        );
-
-      }
-
-    }
-
-    else{
-
-      /*
-        Usuário autenticado porém
-        não verificado.
-
-        Não entra no painel.
-      */
-
-      mostrarVerificacao(
-        usuario
+      whatsappMenu.classList.remove(
+        "active"
       );
 
     }
