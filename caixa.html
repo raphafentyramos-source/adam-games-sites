@@ -7,7 +7,7 @@
 
 <meta
   name="viewport"
-  content="width=device-width, initial-scale=1.0"
+  content="width=device-width, initial-scale=1.0, viewport-fit=cover"
 >
 
 <title>Adam Games - Caixa Box Independência</title>
@@ -26,7 +26,7 @@
 
 html{
   min-height:100%;
-  background:#03234a;
+  background:#03152f;
 }
 
 body{
@@ -40,71 +40,22 @@ body{
 
   color:#fff;
 
-  overflow-x:hidden;
-
-  /*
-    FUNDO NAS CORES DA BANDEIRA
-    Verde + amarelo + azul + branco
-  */
-
   background:
-
     radial-gradient(
-      circle at 50% 0%,
-      rgba(255,221,0,.18),
-      transparent 28%
+      circle at 50% 8%,
+      rgba(255,215,40,.10),
+      transparent 25%
     ),
-
     linear-gradient(
-      145deg,
-      #006b32 0%,
-      #008f43 18%,
-      #087ddc 42%,
-      #0757a8 62%,
-      #032c62 82%,
-      #006b32 100%
+      180deg,
+      #075f3d 0%,
+      #087b58 18%,
+      #075a8d 48%,
+      #064b7d 72%,
+      #03152f 100%
     );
 
-}
-
-
-/* =====================================================
-   DETALHE DECORATIVO DO FUNDO
-===================================================== */
-
-body::before{
-
-  content:"";
-
-  position:fixed;
-
-  inset:0;
-
-  pointer-events:none;
-
-  z-index:0;
-
-  opacity:.45;
-
-  background:
-
-    linear-gradient(
-      135deg,
-      transparent 0%,
-      transparent 35%,
-      rgba(255,255,255,.12) 36%,
-      rgba(255,255,255,.12) 39%,
-      transparent 40%
-    ),
-
-    linear-gradient(
-      315deg,
-      transparent 0%,
-      transparent 55%,
-      rgba(255,220,0,.12) 56%,
-      rgba(255,220,0,.12) 59%,
-      transparent 60%
-    );
+  overflow-x:hidden;
 
 }
 
@@ -115,13 +66,8 @@ body::before{
 
 .page{
 
-  position:relative;
-
-  z-index:1;
-
   width:100%;
-
-  max-width:650px;
+  max-width:620px;
 
   min-height:100vh;
 
@@ -151,12 +97,13 @@ body::before{
 
   z-index:10;
 
+  margin-bottom:4px;
+
 }
 
 .back{
 
   width:43px;
-
   height:43px;
 
   border:none;
@@ -164,17 +111,17 @@ body::before{
   border-radius:13px;
 
   background:
-    rgba(2,24,55,.78);
+    rgba(2,25,55,.88);
+
+  border:
+    1px solid
+    rgba(255,255,255,.16);
 
   color:#fff;
 
-  font-size:24px;
+  font-size:25px;
 
   cursor:pointer;
-
-  box-shadow:
-    0 5px 15px
-    rgba(0,0,0,.25);
 
 }
 
@@ -183,8 +130,7 @@ body::before{
   text-align:center;
 
   text-shadow:
-    0 2px 7px
-    rgba(0,0,0,.7);
+    0 2px 8px rgba(0,0,0,.65);
 
 }
 
@@ -192,19 +138,23 @@ body::before{
 
   display:block;
 
+  color:#d9f4ff;
+
   font-size:10px;
 
-  color:#fff;
+  font-weight:bold;
 
-  letter-spacing:1px;
+  letter-spacing:2px;
 
 }
 
 .title strong{
 
+  display:block;
+
   font-size:17px;
 
-  color:#fff;
+  letter-spacing:1px;
 
 }
 
@@ -219,9 +169,7 @@ body::before{
 
   width:100%;
 
-  height:245px;
-
-  margin-top:3px;
+  height:205px;
 
   display:flex;
 
@@ -229,258 +177,440 @@ body::before{
 
   justify-content:center;
 
+  margin-top:2px;
+
+  overflow:visible;
+
 }
 
 
-/*
-   brilho atrás do baú
-*/
+/* brilho atrás do baú */
 
-.chest-area::before{
-
-  content:"";
+.chest-glow{
 
   position:absolute;
 
-  width:250px;
+  width:190px;
+  height:130px;
 
-  height:190px;
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(255,215,40,.40),
+      rgba(30,180,120,.18),
+      transparent 70%
+    );
+
+  filter:blur(12px);
+
+  opacity:.65;
+
+  animation:
+    glowPulse 2.8s ease-in-out infinite;
+
+}
+
+
+/* imagem do baú */
+
+.chest-button{
+
+  position:relative;
+
+  width:205px;
+
+  height:185px;
+
+  border:none;
+
+  background:transparent;
+
+  padding:0;
+
+  cursor:pointer;
+
+  z-index:5;
+
+  -webkit-tap-highlight-color:transparent;
+
+}
+
+
+.chest-image{
+
+  width:100%;
+  height:100%;
+
+  object-fit:contain;
+
+  display:block;
+
+  mix-blend-mode:screen;
+
+  filter:
+    drop-shadow(
+      0 12px 18px
+      rgba(0,0,0,.35)
+    );
+
+  transition:
+    transform .25s ease,
+    filter .25s ease;
+
+}
+
+
+/* =====================================================
+   ESTADO DE CLIQUE
+===================================================== */
+
+.chest-button:hover .chest-image{
+
+  transform:
+    scale(1.04);
+
+}
+
+
+.chest-button.opening .chest-image{
+
+  animation:
+    chestOpen .85s
+    cubic-bezier(.2,.8,.2,1);
+
+  filter:
+    drop-shadow(
+      0 0 18px
+      rgba(255,221,40,.95)
+    )
+    drop-shadow(
+      0 0 35px
+      rgba(46,255,156,.55)
+    );
+
+}
+
+
+/* =====================================================
+   ANIMAÇÃO DO BAÚ
+===================================================== */
+
+@keyframes chestOpen{
+
+  0%{
+
+    transform:
+      scale(1)
+      rotate(0deg);
+
+  }
+
+  18%{
+
+    transform:
+      scale(1.05)
+      rotate(-4deg);
+
+  }
+
+  35%{
+
+    transform:
+      scale(1.10)
+      rotate(4deg);
+
+  }
+
+  52%{
+
+    transform:
+      scale(1.08)
+      rotate(-3deg);
+
+  }
+
+  70%{
+
+    transform:
+      scale(1.12)
+      rotate(2deg);
+
+  }
+
+  100%{
+
+    transform:
+      scale(1)
+      rotate(0deg);
+
+  }
+
+}
+
+
+@keyframes glowPulse{
+
+  0%,
+  100%{
+
+    transform:scale(.92);
+
+    opacity:.45;
+
+  }
+
+  50%{
+
+    transform:scale(1.12);
+
+    opacity:.82;
+
+  }
+
+}
+
+
+/* =====================================================
+   PARTÍCULAS
+===================================================== */
+
+.particles{
+
+  position:absolute;
+
+  inset:0;
+
+  pointer-events:none;
+
+  z-index:20;
+
+}
+
+
+.particle{
+
+  position:absolute;
+
+  left:50%;
+  top:52%;
+
+  width:9px;
+  height:9px;
+
+  background:#ffd928;
+
+  border-radius:2px;
+
+  opacity:0;
+
+  box-shadow:
+    0 0 8px #ffd928;
+
+}
+
+
+.chest-button.opening ~ .particles .particle{
+
+  animation:
+    explode 1.15s
+    ease-out
+    forwards;
+
+}
+
+
+.particle:nth-child(1){
+  --x:-100px;
+  --y:-90px;
+  --r:35deg;
+}
+
+.particle:nth-child(2){
+  --x:-65px;
+  --y:-125px;
+  --r:-20deg;
+}
+
+.particle:nth-child(3){
+  --x:-25px;
+  --y:-105px;
+  --r:50deg;
+}
+
+.particle:nth-child(4){
+  --x:25px;
+  --y:-120px;
+  --r:-35deg;
+}
+
+.particle:nth-child(5){
+  --x:70px;
+  --y:-105px;
+  --r:25deg;
+}
+
+.particle:nth-child(6){
+  --x:105px;
+  --y:-70px;
+  --r:-50deg;
+}
+
+.particle:nth-child(7){
+  --x:-115px;
+  --y:-35px;
+  --r:20deg;
+}
+
+.particle:nth-child(8){
+  --x:115px;
+  --y:-35px;
+  --r:-30deg;
+}
+
+.particle:nth-child(9){
+  --x:-75px;
+  --y:10px;
+  --r:45deg;
+}
+
+.particle:nth-child(10){
+  --x:80px;
+  --y:5px;
+  --r:-45deg;
+}
+
+
+.particle:nth-child(odd){
+
+  background:#fff;
+
+  box-shadow:
+    0 0 10px #fff;
+
+}
+
+
+.particle:nth-child(3n){
+
+  background:#4cff9b;
+
+}
+
+
+@keyframes explode{
+
+  0%{
+
+    opacity:0;
+
+    transform:
+      translate(-50%,-50%)
+      scale(.2)
+      rotate(0deg);
+
+  }
+
+  15%{
+
+    opacity:1;
+
+  }
+
+  100%{
+
+    opacity:0;
+
+    transform:
+      translate(
+        calc(-50% + var(--x)),
+        calc(-50% + var(--y))
+      )
+      scale(1.25)
+      rotate(var(--r));
+
+  }
+
+}
+
+
+/* =====================================================
+   FLASH
+===================================================== */
+
+.flash{
+
+  position:absolute;
+
+  left:50%;
+  top:50%;
+
+  width:120px;
+  height:120px;
+
+  transform:
+    translate(-50%,-50%)
+    scale(.1);
 
   border-radius:50%;
 
   background:
     radial-gradient(
       circle,
-      rgba(255,220,40,.42) 0%,
-      rgba(0,180,255,.18) 42%,
-      transparent 72%
+      rgba(255,255,255,.95),
+      rgba(255,218,40,.65),
+      transparent 70%
     );
 
-  filter:blur(10px);
+  opacity:0;
+
+  pointer-events:none;
+
+  z-index:15;
+
+}
+
+
+.chest-button.opening ~ .flash{
 
   animation:
-    chestGlow 2.5s ease-in-out infinite;
+    flashOpen .8s
+    ease-out
+    forwards;
 
 }
 
 
-/* =====================================================
-   BAÚ
-===================================================== */
-
-.chest-button{
-
-  position:relative;
-
-  width:250px;
-
-  max-width:72vw;
-
-  border:none;
-
-  padding:0;
-
-  background:none;
-
-  cursor:pointer;
-
-  z-index:2;
-
-  -webkit-tap-highlight-color:
-    transparent;
-
-  animation:
-    chestFloat 3s ease-in-out infinite;
-
-  transition:
-    transform .2s ease;
-
-}
-
-.chest-button:active{
-
-  transform:
-    scale(.94);
-
-}
-
-.chest-image{
-
-  display:block;
-
-  width:100%;
-
-  height:auto;
-
-  filter:
-    drop-shadow(
-      0 18px 22px
-      rgba(0,0,0,.48)
-    );
-
-}
-
-
-/* =====================================================
-   ANIMAÇÃO NORMAL
-===================================================== */
-
-@keyframes chestFloat{
+@keyframes flashOpen{
 
   0%{
+
+    opacity:0;
+
     transform:
-      translateY(0);
+      translate(-50%,-50%)
+      scale(.1);
+
   }
 
-  50%{
-    transform:
-      translateY(-8px);
-  }
+  25%{
 
-  100%{
-    transform:
-      translateY(0);
-  }
-
-}
-
-
-@keyframes chestGlow{
-
-  0%{
-    opacity:.55;
-    transform:scale(.92);
-  }
-
-  50%{
     opacity:1;
-    transform:scale(1.05);
-  }
 
-  100%{
-    opacity:.55;
-    transform:scale(.92);
-  }
-
-}
-
-
-/* =====================================================
-   ANIMAÇÃO DE ABERTURA
-===================================================== */
-
-.chest-button.opening{
-
-  animation:
-    chestOpen
-    1.2s
-    ease-in-out
-    forwards;
-
-}
-
-
-.chest-button.opening
-.chest-image{
-
-  animation:
-    chestLight
-    1.2s
-    ease-in-out
-    forwards;
-
-}
-
-
-@keyframes chestOpen{
-
-  0%{
     transform:
-      scale(1)
-      rotate(0deg);
-  }
-
-  15%{
-    transform:
-      scale(1.04)
-      rotate(-2deg);
-  }
-
-  30%{
-    transform:
-      scale(1.08)
-      rotate(2deg);
-  }
-
-  45%{
-    transform:
-      scale(1.12)
-      rotate(-1.5deg);
-  }
-
-  60%{
-    transform:
-      scale(1.08)
-      rotate(1deg);
-  }
-
-  75%{
-    transform:
-      scale(1.05);
-  }
-
-  100%{
-    transform:
-      scale(1);
-  }
-
-}
-
-
-@keyframes chestLight{
-
-  0%{
-
-    filter:
-      drop-shadow(
-        0 18px 22px
-        rgba(0,0,0,.48)
-      );
-
-  }
-
-  35%{
-
-    filter:
-      drop-shadow(
-        0 0 18px
-        rgba(255,220,50,.9)
-      )
-      drop-shadow(
-        0 0 45px
-        rgba(0,190,255,.8)
-      );
-
-  }
-
-  60%{
-
-    filter:
-      brightness(1.35)
-      drop-shadow(
-        0 0 35px
-        rgba(255,220,50,1)
-      );
+      translate(-50%,-50%)
+      scale(1.3);
 
   }
 
   100%{
 
-    filter:
-      drop-shadow(
-        0 18px 22px
-        rgba(0,0,0,.48)
-      );
+    opacity:0;
+
+    transform:
+      translate(-50%,-50%)
+      scale(2.4);
 
   }
 
@@ -488,28 +618,24 @@ body::before{
 
 
 /* =====================================================
-   TEXTO PRINCIPAL
+   TÍTULO DA CAIXA
 ===================================================== */
 
 .box-title{
-
-  position:relative;
-
-  z-index:5;
 
   text-align:center;
 
   margin-top:0;
 
-  padding:
-    0
-    5px;
+  position:relative;
+
+  z-index:4;
 
   text-shadow:
-    0 3px 8px
-    rgba(0,0,0,.7);
+    0 3px 8px rgba(0,0,0,.65);
 
 }
+
 
 .box-title h1{
 
@@ -517,10 +643,10 @@ body::before{
     clamp(
       25px,
       7vw,
-      38px
+      36px
     );
 
-  line-height:1.1;
+  line-height:1.08;
 
   font-weight:900;
 
@@ -528,28 +654,29 @@ body::before{
 
 }
 
+
 .box-title p{
 
   margin-top:8px;
 
   font-size:15px;
 
-  line-height:1.4;
+  line-height:1.35;
 
-  color:#fff;
+  color:#e8f7ff;
 
 }
 
 
 /* =====================================================
-   STATUS VIP
+   VIP
 ===================================================== */
 
 .vip{
 
   margin-top:18px;
 
-  padding:14px 15px;
+  padding:13px 15px;
 
   border-radius:17px;
 
@@ -560,22 +687,19 @@ body::before{
   font-weight:900;
 
   background:
-
     linear-gradient(
       135deg,
-      #e8c333,
-      #b87900
+      #e4bd2b,
+      #9b6900
     );
 
   border:
     2px solid
     rgba(255,235,120,.7);
 
-  color:#fff;
-
   box-shadow:
-    0 8px 22px
-    rgba(0,0,0,.32);
+    0 7px 22px
+    rgba(0,0,0,.30);
 
 }
 
@@ -586,28 +710,26 @@ body::before{
 
 .timer-card{
 
-  margin-top:17px;
+  margin-top:16px;
 
-  padding:
-    21px
-    16px;
+  padding:20px 16px 18px;
 
-  border-radius:25px;
+  border-radius:24px;
 
   background:
     linear-gradient(
-      180deg,
-      rgba(2,36,79,.96),
-      rgba(2,22,53,.96)
+      145deg,
+      rgba(2,29,61,.97),
+      rgba(3,52,83,.95)
     );
 
   border:
     2px solid
-    rgba(40,153,255,.38);
+    rgba(50,161,255,.35);
 
   box-shadow:
     0 12px 35px
-    rgba(0,0,0,.35);
+    rgba(0,0,0,.30);
 
   text-align:center;
 
@@ -616,24 +738,24 @@ body::before{
 
 .timer-label{
 
-  color:#a9d4f5;
+  color:#a9d5f7;
 
   font-size:14px;
 
   font-weight:900;
 
-  letter-spacing:.4px;
+  letter-spacing:.5px;
 
 }
 
 
 .timer{
 
-  margin-top:8px;
+  margin-top:7px;
 
   font-size:
     clamp(
-      34px,
+      37px,
       10vw,
       55px
     );
@@ -646,7 +768,7 @@ body::before{
 
   text-shadow:
     0 2px 10px
-    rgba(255,210,20,.4);
+    rgba(255,210,20,.35);
 
   font-variant-numeric:
     tabular-nums;
@@ -660,7 +782,7 @@ body::before{
 
   font-size:15px;
 
-  line-height:1.45;
+  line-height:1.4;
 
 }
 
@@ -694,7 +816,7 @@ body::before{
 
   width:100%;
 
-  height:12px;
+  height:11px;
 
   margin-top:17px;
 
@@ -702,11 +824,11 @@ body::before{
 
   border-radius:20px;
 
-  background:#071d39;
+  background:#071e3d;
 
   border:
     1px solid
-    rgba(255,255,255,.18);
+    rgba(255,255,255,.15);
 
 }
 
@@ -720,12 +842,11 @@ body::before{
   border-radius:20px;
 
   background:
-
     linear-gradient(
       90deg,
       #ffd900,
-      #48ff72,
-      #159eff
+      #4cff75,
+      #179bff
     );
 
   transition:
@@ -735,7 +856,7 @@ body::before{
 
 
 /* =====================================================
-   BOTÃO RESGATE
+   BOTÃO
 ===================================================== */
 
 .rescue{
@@ -751,10 +872,9 @@ body::before{
   border-radius:17px;
 
   background:
-
     linear-gradient(
       135deg,
-      #20aaff,
+      #22a9ff,
       #0875dd
     );
 
@@ -767,44 +887,8 @@ body::before{
   cursor:pointer;
 
   box-shadow:
-    0 7px 20px
+    0 7px 18px
     rgba(0,0,0,.3);
-
-  transition:
-    transform .15s ease,
-    filter .15s ease;
-
-}
-
-
-.rescue:not(:disabled):active{
-
-  transform:
-    scale(.97);
-
-}
-
-
-.rescue:not(:disabled){
-
-  animation:
-    rescuePulse 2s
-    ease-in-out
-    infinite;
-
-}
-
-
-@keyframes rescuePulse{
-
-  0%,
-  100%{
-    filter:brightness(1);
-  }
-
-  50%{
-    filter:brightness(1.12);
-  }
 
 }
 
@@ -824,7 +908,7 @@ body::before{
 
   margin-top:12px;
 
-  color:#c3ddf3;
+  color:#c9e6fa;
 
   font-size:13px;
 
@@ -843,8 +927,6 @@ body::before{
 
   align-items:center;
 
-  justify-content:space-between;
-
   gap:15px;
 
   margin-top:17px;
@@ -854,15 +936,28 @@ body::before{
   border-radius:20px;
 
   background:
-    rgba(2,24,55,.92);
+    linear-gradient(
+      145deg,
+      rgba(3,36,73,.97),
+      rgba(2,53,72,.94)
+    );
 
   border:
     1px solid
-    rgba(255,255,255,.1);
+    rgba(255,255,255,.10);
 
   box-shadow:
     0 8px 25px
-    rgba(0,0,0,.2);
+    rgba(0,0,0,.22);
+
+}
+
+
+.chance-left{
+
+  min-width:105px;
+
+  text-align:center;
 
 }
 
@@ -880,9 +975,11 @@ body::before{
 
 .chance-number{
 
-  margin-top:3px;
+  margin-top:4px;
 
-  font-size:34px;
+  font-size:36px;
+
+  line-height:1;
 
   font-weight:900;
 
@@ -895,17 +992,17 @@ body::before{
 
   flex:1;
 
-  padding-left:14px;
+  padding-left:15px;
 
   border-left:
     1px solid
-    rgba(255,255,255,.12);
+    rgba(255,255,255,.13);
 
   color:#dcecff;
 
   font-size:13px;
 
-  line-height:1.35;
+  line-height:1.4;
 
 }
 
@@ -918,7 +1015,7 @@ body::before{
 
   font-size:14px;
 
-  margin-bottom:3px;
+  margin-bottom:4px;
 
 }
 
@@ -936,15 +1033,15 @@ body::before{
   border-radius:22px;
 
   background:
-    rgba(2,24,55,.94);
+    linear-gradient(
+      145deg,
+      rgba(3,37,72,.97),
+      rgba(2,55,67,.95)
+    );
 
   border:
     1px solid
-    rgba(255,255,255,.1);
-
-  box-shadow:
-    0 8px 25px
-    rgba(0,0,0,.2);
+    rgba(255,255,255,.10);
 
 }
 
@@ -970,7 +1067,7 @@ body::before{
 
   margin-top:10px;
 
-  padding:13px;
+  padding:12px;
 
   border-radius:13px;
 
@@ -984,9 +1081,7 @@ body::before{
 
 .prize span{
 
-  width:30px;
-
-  min-width:30px;
+  width:32px;
 
   text-align:center;
 
@@ -995,11 +1090,11 @@ body::before{
 }
 
 
-.lock-info{
+.vip-lock{
 
   margin-top:14px;
 
-  padding:12px;
+  padding:11px;
 
   text-align:center;
 
@@ -1027,10 +1122,13 @@ body::before{
 
   right:18px;
 
-  bottom:20px;
+  bottom:
+    calc(
+      20px +
+      env(safe-area-inset-bottom)
+    );
 
   width:57px;
-
   height:57px;
 
   display:flex;
@@ -1053,7 +1151,7 @@ body::before{
     0 7px 22px
     rgba(0,0,0,.35);
 
-  z-index:50;
+  z-index:100;
 
 }
 
@@ -1085,53 +1183,37 @@ body::before{
 
 
 /* =====================================================
-   CELULAR
+   CELULAR PEQUENO
 ===================================================== */
 
-@media(max-width:420px){
+@media(max-width:380px){
 
   .page{
 
-    padding-left:12px;
-
-    padding-right:12px;
+    padding-left:11px;
+    padding-right:11px;
 
   }
 
 
   .chest-area{
 
-    height:225px;
+    height:190px;
 
   }
 
 
   .chest-button{
 
-    width:225px;
+    width:185px;
+    height:170px;
 
   }
 
 
   .box-title h1{
 
-    font-size:27px;
-
-  }
-
-
-  .box-title p{
-
-    font-size:14px;
-
-  }
-
-
-  .timer-card{
-
-    padding:
-      20px
-      13px;
+    font-size:25px;
 
   }
 
@@ -1140,13 +1222,22 @@ body::before{
 
     padding:15px;
 
+    gap:10px;
+
+  }
+
+
+  .chance-left{
+
+    min-width:90px;
+
   }
 
 }
 
 
 /* =====================================================
-   ACESSIBILIDADE
+   REDUZIR ANIMAÇÕES SE NECESSÁRIO
 ===================================================== */
 
 @media(prefers-reduced-motion:reduce){
@@ -1159,7 +1250,7 @@ body::before{
 
     animation-iteration-count:1 !important;
 
-    transition-duration:.01ms !important;
+    transition:none !important;
 
   }
 
@@ -1184,7 +1275,8 @@ body::before{
 
     <button
       class="back"
-      id="back">
+      id="back"
+      aria-label="Voltar">
 
       ←
 
@@ -1204,29 +1296,60 @@ body::before{
     </div>
 
 
-    <div style="width:43px"></div>
+    <div style="width:43px;"></div>
 
   </div>
 
 
   <!-- =================================================
-       BAÚ ANIMADO
+       BAÚ
   ================================================== -->
 
   <div class="chest-area">
 
+
+    <div class="chest-glow"></div>
+
+
     <button
       class="chest-button"
       id="chestButton"
-      aria-label="Abrir Caixa Box da Independência">
+      aria-label="Abrir Caixa da Independência">
 
       <img
         class="chest-image"
-        src="caixa-box-independencia.png"
-        alt="Caixa Box Independência"
+        src="FD0CFE87-8F0F-484E-ACD8-1EF0BCB9368B.png"
+        alt="Baú da Caixa da Independência"
       >
 
     </button>
+
+
+    <!-- PARTÍCULAS -->
+
+    <div
+      class="particles"
+      aria-hidden="true">
+
+      <span class="particle"></span>
+      <span class="particle"></span>
+      <span class="particle"></span>
+      <span class="particle"></span>
+      <span class="particle"></span>
+      <span class="particle"></span>
+      <span class="particle"></span>
+      <span class="particle"></span>
+      <span class="particle"></span>
+      <span class="particle"></span>
+
+    </div>
+
+
+    <div
+      class="flash"
+      aria-hidden="true">
+    </div>
+
 
   </div>
 
@@ -1249,7 +1372,7 @@ body::before{
 
 
   <!-- =================================================
-       STATUS VIP
+       VIP
   ================================================== -->
 
   <div
@@ -1336,14 +1459,11 @@ body::before{
   <div class="chance-card">
 
 
-    <div>
+    <div class="chance-left">
 
       <div class="chance-title">
-
         🎟️ SUAS CHANCES
-
       </div>
-
 
       <div
         class="chance-number"
@@ -1367,14 +1487,16 @@ body::before{
 
     </div>
 
+
   </div>
 
 
   <!-- =================================================
-       PRÊMIOS
+       CONTEÚDO
   ================================================== -->
 
   <div class="prizes">
+
 
     <h2>
       🎁 CONTEÚDO DA CAIXA
@@ -1447,11 +1569,12 @@ body::before{
     </div>
 
 
-    <div class="lock-info">
+    <div class="vip-lock">
 
       🔒 Caixa Box exclusiva para membros VIP.
 
     </div>
+
 
   </div>
 
@@ -1459,15 +1582,15 @@ body::before{
 </div>
 
 
-<!-- =====================================================
+<!-- =================================================
      WHATSAPP
-===================================================== -->
+================================================== -->
 
 <a
   class="whatsapp"
   href="https://wa.me/5531987350267"
   target="_blank"
-  aria-label="WhatsApp">
+  rel="noopener">
 
   💬
 
@@ -1653,22 +1776,18 @@ const MS_VIP =
 ===================================================== */
 
 chestButton.addEventListener(
-
   "click",
-
   () => {
 
-    chestButton.classList.remove(
-      "opening"
-    );
+    if(
+      chestButton.classList.contains(
+        "opening"
+      )
+    ){
 
+      return;
 
-    /*
-      Força o navegador a reiniciar
-      a animação.
-    */
-
-    void chestButton.offsetWidth;
+    }
 
 
     chestButton.classList.add(
@@ -1677,7 +1796,6 @@ chestButton.addEventListener(
 
 
     setTimeout(
-
       () => {
 
         chestButton.classList.remove(
@@ -1685,18 +1803,15 @@ chestButton.addEventListener(
         );
 
       },
-
-      1300
-
+      1200
     );
 
   }
-
 );
 
 
 /* =====================================================
-   CHAVE TIMER
+   CHAVE LOCAL
 ===================================================== */
 
 function chaveTimer(){
@@ -1710,7 +1825,7 @@ function chaveTimer(){
 
 
 /* =====================================================
-   CHAVE CHANCE
+   CHANCE LOCAL
 ===================================================== */
 
 function chaveChance(){
@@ -1724,58 +1839,14 @@ function chaveChance(){
 
 
 /* =====================================================
-   CHAVE LIBERAÇÃO
-===================================================== */
-
-function chaveLiberacao(){
-
-  return (
-    "adam_caixa_liberado_" +
-    userUid
-  );
-
-}
-
-
-/* =====================================================
-   ERRO
-===================================================== */
-
-function mostrarErro(error){
-
-  console.error(
-    "ERRO CAIXA:",
-    error
-  );
-
-
-  debug.style.display =
-    "block";
-
-
-  debug.textContent =
-    (
-      error.code ||
-      "erro"
-    )
-    +
-    " — "
-    +
-    (
-      error.message ||
-      "Erro desconhecido."
-    );
-
-}
-
-
-/* =====================================================
-   FORMATAR TEMPO
+   FORMATAR
 ===================================================== */
 
 function formatar(ms){
 
-  if(ms <= 0){
+  if(
+    ms <= 0
+  ){
 
     return "00:00:00";
 
@@ -1860,9 +1931,7 @@ function lerTimerLocal(){
 
 
     if(
-      !Number.isFinite(
-        numero
-      )
+      !Number.isFinite(numero)
     ){
 
       return null;
@@ -1888,11 +1957,8 @@ function salvarTimerLocal(timestamp){
   try{
 
     localStorage.setItem(
-
       chaveTimer(),
-
       String(timestamp)
-
     );
 
   }
@@ -1926,7 +1992,7 @@ function apagarTimerLocal(){
 
 
 /* =====================================================
-   CRIAR TIMER NÃO VIP
+   CICLO NÃO VIP
 ===================================================== */
 
 function criarCicloNaoVip(){
@@ -1941,17 +2007,13 @@ function criarCicloNaoVip(){
   );
 
 
-  proximaChance =
-    fim;
-
-
   return fim;
 
 }
 
 
 /* =====================================================
-   TIMER VIP
+   CICLO VIP
 ===================================================== */
 
 function criarCicloVip(){
@@ -1966,17 +2028,13 @@ function criarCicloVip(){
   );
 
 
-  proximaChance =
-    fim;
-
-
   return fim;
 
 }
 
 
 /* =====================================================
-   CHANCES
+   CHANCE LOCAL
 ===================================================== */
 
 function lerChanceLocal(){
@@ -1989,21 +2047,8 @@ function lerChanceLocal(){
       );
 
 
-    if(valor === null){
-
-      return null;
-
-    }
-
-
-    const numero =
-      Number(valor);
-
-
     if(
-      !Number.isFinite(
-        numero
-      )
+      valor === null
     ){
 
       return null;
@@ -2011,7 +2056,7 @@ function lerChanceLocal(){
     }
 
 
-    return numero;
+    return Number(valor);
 
   }
 
@@ -2029,11 +2074,8 @@ function salvarChanceLocal(valor){
   try{
 
     localStorage.setItem(
-
       chaveChance(),
-
       String(valor)
-
     );
 
   }
@@ -2077,8 +2119,39 @@ function atualizarBarra(restante){
 
 
   progressBar.style.width =
-    porcentagem +
-    "%";
+    porcentagem + "%";
+
+}
+
+
+/* =====================================================
+   ERRO
+===================================================== */
+
+function mostrarErro(error){
+
+  console.error(
+    "ERRO CAIXA:",
+    error
+  );
+
+
+  debug.style.display =
+    "block";
+
+
+  debug.textContent =
+    (
+      error.code ||
+      "erro"
+    )
+    +
+    " — "
+    +
+    (
+      error.message ||
+      "Erro desconhecido."
+    );
 
 }
 
@@ -2089,7 +2162,9 @@ function atualizarBarra(restante){
 
 async function atualizarTimer(){
 
-  if(!proximaChance){
+  if(
+    !proximaChance
+  ){
 
     return;
 
@@ -2101,16 +2176,18 @@ async function atualizarTimer(){
     Date.now();
 
 
-  /*
-  ================================================
-  TIMER AINDA CONTANDO
-  ================================================
-  */
+  /* ===================================================
+     CONTANDO
+  ================================================== */
 
-  if(restante > 0){
+  if(
+    restante > 0
+  ){
 
     timer.textContent =
-      formatar(restante);
+      formatar(
+        restante
+      );
 
 
     atualizarBarra(
@@ -2146,38 +2223,33 @@ async function atualizarTimer(){
   }
 
 
-  /*
-  ================================================
-  TIMER TERMINOU
-  ================================================
-  */
+  /* ===================================================
+     TERMINOU
+  ================================================== */
 
   timer.textContent =
-    "00:00:00";
+    "DISPONÍVEL";
 
 
-  atualizarBarra(0);
+  atualizarBarra(
+    0
+  );
 
 
-  /*
-  ================================================
-  VIP
-  ================================================
-  */
+  /* ===================================================
+     VIP
+  ================================================== */
 
   if(ehVip){
 
     status.textContent =
       "🎟️ Sua chance está disponível!";
 
-
     status.className =
       "status available";
 
-
     rescue.disabled =
       false;
-
 
     message.textContent =
       "Você pode resgatar sua Caixa da Independência.";
@@ -2187,26 +2259,26 @@ async function atualizarTimer(){
   }
 
 
-  /*
-  ================================================
-  NÃO VIP
-  ================================================
-  */
+  /* ===================================================
+     NÃO VIP
+  =================================================== */
+
+  const chaveLiberacao =
+    "adam_caixa_liberado_" +
+    userUid;
+
 
   const ultimaLiberacao =
     localStorage.getItem(
-      chaveLiberacao()
+      chaveLiberacao
     );
 
 
-  /*
-    Evita liberar várias chances
-    para o mesmo ciclo.
-  */
-
   if(
     ultimaLiberacao ===
-    String(proximaChance)
+    String(
+      proximaChance
+    )
   ){
 
     return;
@@ -2214,24 +2286,20 @@ async function atualizarTimer(){
   }
 
 
-  const chanceLocal =
+  let chanceAtual =
     lerChanceLocal();
 
 
-  const chanceBanco =
-    Number(
-      usuario?.chances ||
-      0
-    );
+  if(
+    chanceAtual === null
+  ){
 
+    chanceAtual =
+      Number(
+        usuario?.chances || 0
+      );
 
-  const chanceAtual =
-    chanceLocal === null
-      ? chanceBanco
-      : Math.max(
-          chanceBanco,
-          chanceLocal
-        );
+  }
 
 
   const novaChance =
@@ -2243,24 +2311,19 @@ async function atualizarTimer(){
   );
 
 
-  localStorage.setItem(
-
-    chaveLiberacao(),
-
-    String(proximaChance)
-
-  );
-
-
   chanceNumber.textContent =
     novaChance;
 
 
-  /*
-  ================================================
-  NOVO CICLO AUTOMÁTICO DE 120 HORAS
-  ================================================
-  */
+  localStorage.setItem(
+    chaveLiberacao,
+    String(
+      proximaChance
+    )
+  );
+
+
+  /* novo ciclo */
 
   const novoFim =
     Date.now() +
@@ -2327,27 +2390,20 @@ function iniciarTimer(){
 
   intervalo =
     setInterval(
-
       atualizarTimer,
-
       1000
-
     );
 
 }
 
 
 /* =====================================================
-   BUSCAR ADMIN
+   BUSCAR CADASTRO
 ===================================================== */
 
 async function buscarCadastro(user){
 
-  /*
-  ================================================
-  PRIMEIRO: UID
-  ================================================
-  */
+  /* UID */
 
   try{
 
@@ -2392,13 +2448,11 @@ async function buscarCadastro(user){
   }
 
 
-  /*
-  ================================================
-  SEGUNDO: EMAIL
-  ================================================
-  */
+  /* EMAIL */
 
-  if(user.email){
+  if(
+    user.email
+  ){
 
     try{
 
@@ -2466,11 +2520,9 @@ async function carregar(user){
     );
 
 
-  /*
-  ================================================
-  NÃO ENCONTROU CADASTRO
-  ================================================
-  */
+  /* ===================================================
+     NÃO ENCONTROU
+  ================================================== */
 
   if(!documento){
 
@@ -2492,17 +2544,9 @@ async function carregar(user){
       "PRÓXIMA CHANCE";
 
 
-    rescue.disabled =
-      true;
-
-
     let local =
       lerTimerLocal();
 
-
-    /*
-      Começa automaticamente.
-    */
 
     if(!local){
 
@@ -2516,18 +2560,16 @@ async function carregar(user){
       local;
 
 
-    const chance =
-      lerChanceLocal();
-
-
     chanceNumber.textContent =
-      chance === null
-        ? 0
-        : chance;
+      lerChanceLocal() ?? 0;
+
+
+    rescue.disabled =
+      true;
 
 
     message.textContent =
-      "Sua chance é liberada automaticamente a cada 120 horas. A Caixa Box continua exclusiva para membros VIP.";
+      "Sua chance é liberada automaticamente após 120 horas. A Caixa Box continua exclusiva para membros VIP.";
 
 
     iniciarTimer();
@@ -2538,11 +2580,9 @@ async function carregar(user){
   }
 
 
-  /*
-  ================================================
-  CADASTRO ENCONTRADO
-  ================================================
-  */
+  /* ===================================================
+     CADASTRO ENCONTRADO
+  ================================================== */
 
   usuario =
     documento.data();
@@ -2560,11 +2600,9 @@ async function carregar(user){
     usuario.vip === true;
 
 
-  /*
-  ================================================
-  VIP
-  ================================================
-  */
+  /* ===================================================
+     VIP
+  ================================================== */
 
   if(ehVip){
 
@@ -2578,13 +2616,21 @@ async function carregar(user){
 
     const chanceBanco =
       Number(
-        usuario.chances ||
-        0
+        usuario.chances || 0
       );
 
 
+    const chanceLocal =
+      lerChanceLocal();
+
+
     chanceNumber.textContent =
-      chanceBanco;
+      chanceLocal === null
+        ? chanceBanco
+        : Math.max(
+            chanceBanco,
+            chanceLocal
+          );
 
 
     let bancoFim =
@@ -2592,7 +2638,8 @@ async function carregar(user){
 
 
     if(
-      usuario.proximaChance &&
+      usuario.proximaChance
+      &&
       typeof
       usuario.proximaChance.toMillis
       ===
@@ -2605,10 +2652,7 @@ async function carregar(user){
     }
 
 
-    /*
-      Se existe um timer no Firebase
-      e ainda não terminou.
-    */
+    /* timer existente */
 
     if(
       bancoFim &&
@@ -2624,22 +2668,14 @@ async function carregar(user){
       );
 
 
-      message.textContent =
-        "Sua próxima chance estará disponível quando o contador terminar.";
-
-
       iniciarTimer();
-
 
       return;
 
     }
 
 
-    /*
-      Sem timer ou timer vencido:
-      Caixa disponível.
-    */
+    /* disponível */
 
     proximaChance =
       null;
@@ -2671,17 +2707,14 @@ async function carregar(user){
     message.textContent =
       "Você pode resgatar sua Caixa da Independência.";
 
-
     return;
 
   }
 
 
-  /*
-  ================================================
-  NÃO VIP
-  ================================================
-  */
+  /* ===================================================
+     NÃO VIP
+  ================================================== */
 
   vipStatus.textContent =
     "🔒 NÃO VIP";
@@ -2697,8 +2730,7 @@ async function carregar(user){
 
   const chanceBanco =
     Number(
-      usuario.chances ||
-      0
+      usuario.chances || 0
     );
 
 
@@ -2719,7 +2751,9 @@ async function carregar(user){
     chanceFinal;
 
 
-  if(chanceLocal === null){
+  if(
+    chanceLocal === null
+  ){
 
     salvarChanceLocal(
       chanceFinal
@@ -2728,20 +2762,9 @@ async function carregar(user){
   }
 
 
-  /*
-  ================================================
-  TIMER NÃO VIP
-  ================================================
-  */
-
   let local =
     lerTimerLocal();
 
-
-  /*
-    Começa automaticamente
-    na primeira entrada.
-  */
 
   if(!local){
 
@@ -2756,7 +2779,7 @@ async function carregar(user){
 
 
   message.textContent =
-    "Sua chance é liberada automaticamente a cada 120 horas. A Caixa Box continua exclusiva para membros VIP.";
+    "Sua próxima chance é liberada automaticamente após 120 horas. A Caixa Box continua exclusiva para membros VIP.";
 
 
   iniciarTimer();
@@ -2765,15 +2788,12 @@ async function carregar(user){
 
 
 /* =====================================================
-   RESGATE VIP
+   RESGATAR CAIXA VIP
 ===================================================== */
 
 rescue.addEventListener(
-
   "click",
-
   async () => {
-
 
     if(!ehVip){
 
@@ -2798,6 +2818,33 @@ rescue.addEventListener(
 
 
     try{
+
+      /* anima o baú */
+
+      chestButton.classList.remove(
+        "opening"
+      );
+
+
+      void chestButton.offsetWidth;
+
+
+      chestButton.classList.add(
+        "opening"
+      );
+
+
+      setTimeout(
+        () => {
+
+          chestButton.classList.remove(
+            "opening"
+          );
+
+        },
+        1200
+      );
+
 
       const agora =
         Timestamp.now();
@@ -2894,7 +2941,6 @@ rescue.addEventListener(
       status.textContent =
         "⚠️ Não foi possível resgatar a Caixa.";
 
-
       status.className =
         "status locked";
 
@@ -2910,7 +2956,6 @@ rescue.addEventListener(
     }
 
   }
-
 );
 
 
@@ -2921,16 +2966,13 @@ rescue.addEventListener(
 document
   .getElementById("back")
   .addEventListener(
-
     "click",
-
     () => {
 
       window.location.href =
         "painel.html";
 
     }
-
   );
 
 
@@ -2939,11 +2981,8 @@ document
 ===================================================== */
 
 onAuthStateChanged(
-
   auth,
-
   async user => {
-
 
     if(!user){
 
@@ -2976,7 +3015,6 @@ onAuthStateChanged(
     }
 
   }
-
 );
 
 </script>
