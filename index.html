@@ -10,7 +10,7 @@
   content="width=device-width, initial-scale=1.0"
 >
 
-<title>Adam Games • Painel</title>
+<title>Adam Games • Login</title>
 
 <style>
 
@@ -37,89 +37,76 @@ body{
 
   color:#fff;
 
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  padding:25px 15px;
+
   overflow-x:hidden;
 
   background:
 
     radial-gradient(
-      circle at 15% 5%,
-      #43aaff 0%,
-      transparent 30%
+      circle at 15% 10%,
+      rgba(66,170,255,.95) 0%,
+      rgba(66,170,255,.35) 18%,
+      transparent 38%
+    ),
+
+    radial-gradient(
+      circle at 90% 85%,
+      rgba(0,130,255,.35),
+      transparent 35%
     ),
 
     linear-gradient(
-      135deg,
+      145deg,
       #087ee1 0%,
-      #061d43 78%
+      #0755a8 35%,
+      #061d43 78%,
+      #020d20 100%
     );
 }
 
 
-.page{
+/* =====================================
+   CONTAINER
+===================================== */
+
+.login-container{
 
   width:100%;
 
-  max-width:1100px;
+  max-width:440px;
+
+  margin:auto;
+}
+
+
+/* =====================================
+   LOGO
+===================================== */
+
+.logo{
+
+  text-align:center;
+
+  margin-bottom:25px;
+}
+
+
+.logo-icon{
+
+  width:100px;
+
+  height:100px;
 
   margin:auto;
 
-  padding:15px;
-
-}
-
-
-/* =====================================================
-   TOPO
-===================================================== */
-
-.topbar{
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:space-between;
-
-  gap:10px;
-
-  margin-bottom:15px;
-
-}
-
-
-.brand{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:11px;
-
-  padding:9px 16px 9px 9px;
-
-  border-radius:22px;
-
-  background:
-    rgba(4,45,91,.82);
-
-  border:
-    1px solid
-    rgba(255,255,255,.14);
-
-  box-shadow:
-    0 12px 30px
-    rgba(0,0,0,.22);
-
-}
-
-
-.brand-icon{
-
-  width:60px;
-
-  height:60px;
-
-  border-radius:18px;
+  border-radius:28px;
 
   display:flex;
 
@@ -127,120 +114,77 @@ body{
 
   justify-content:center;
 
-  font-size:34px;
+  font-size:58px;
 
   background:
+
     linear-gradient(
       145deg,
       #218fff,
       #0754a7
     );
 
+  border:
+    3px solid
+    rgba(255,255,255,.16);
+
+  box-shadow:
+
+    0 20px 50px
+    rgba(0,0,0,.30);
 }
 
 
-.brand-name{
+.logo h1{
 
-  font-size:21px;
+  margin-top:15px;
+
+  font-size:35px;
 
   font-weight:900;
 
   line-height:.95;
 
+  letter-spacing:-1px;
 }
 
 
-.brand-name span{
+.logo h1 span{
 
   color:#ffd52b;
-
 }
 
 
-.top-buttons{
+.logo p{
 
-  display:flex;
+  margin-top:10px;
 
-  gap:8px;
+  color:#c5def5;
 
+  font-size:15px;
+
+  font-weight:600;
 }
 
 
-.top-button{
+/* =====================================
+   CARD
+===================================== */
 
-  width:55px;
+.login-card{
 
-  height:55px;
+  width:100%;
 
-  border:0;
+  padding:28px;
 
-  border-radius:18px;
-
-  color:#fff;
-
-  background:
-    rgba(4,40,82,.9);
-
-  font-size:24px;
-
-  position:relative;
-
-  cursor:pointer;
-
-}
-
-
-.notification{
-
-  position:absolute;
-
-  right:-4px;
-
-  top:-5px;
-
-  width:23px;
-
-  height:23px;
-
-  border-radius:50%;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  background:#ff3048;
-
-  font-size:12px;
-
-  font-weight:900;
-
-}
-
-
-/* =====================================================
-   PERFIL
-===================================================== */
-
-.profile{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:17px;
-
-  padding:18px;
-
-  border-radius:28px;
+  border-radius:30px;
 
   background:
 
     linear-gradient(
       145deg,
       rgba(4,55,110,.97),
-      rgba(2,25,56,.97)
+      rgba(2,25,56,.98)
     );
 
   border:
@@ -248,978 +192,460 @@ body{
     rgba(255,255,255,.14);
 
   box-shadow:
-    0 20px 45px
-    rgba(0,0,0,.25);
 
+    0 25px 60px
+    rgba(0,0,0,.38);
 }
 
 
-.avatar-area{
+.login-card h2{
 
-  position:relative;
+  text-align:center;
 
-  flex-shrink:0;
+  font-size:27px;
 
+  margin-bottom:8px;
 }
 
 
-.avatar{
+.subtitle{
 
-  width:96px;
+  text-align:center;
 
-  height:96px;
+  color:#a9c7e4;
 
-  border-radius:28px;
+  font-size:14px;
 
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  font-size:55px;
-
-  background:
-    linear-gradient(
-      145deg,
-      #ffd347,
-      #f4a800
-    );
-
-  border:
-    4px solid
-    #ffd52b;
-
+  margin-bottom:25px;
 }
 
 
-.avatar-crown{
+/* =====================================
+   MENSAGEM
+===================================== */
 
-  position:absolute;
-
-  top:-19px;
-
-  right:-10px;
-
-  font-size:33px;
+.message{
 
   display:none;
 
+  margin-bottom:18px;
 
-}
-
-
-.profile-data{
-
-  flex:1;
-
-  min-width:0;
-
-}
-
-
-.profile-name-line{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:7px;
-
-}
-
-
-.profile-name{
-
-  font-size:23px;
-
-  font-weight:900;
-
-  word-break:break-word;
-
-}
-
-
-.verified{
-
-  width:24px;
-
-  height:24px;
-
-  border-radius:50%;
-
-  background:#168cff;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  font-size:14px;
-
-  font-weight:900;
-
-}
-
-
-.profile-email{
-
-  margin-top:5px;
-
-  color:#b9d3ec;
-
-  font-size:14px;
-
-  word-break:break-word;
-
-}
-
-
-.vip-badge{
-
-  display:inline-flex;
-
-  align-items:center;
-
-  gap:5px;
-
-  margin-top:9px;
-
-  padding:7px 13px;
+  padding:13px;
 
   border-radius:13px;
 
-  background:
-    linear-gradient(
-      135deg,
-      #9b7111,
-      #f0c32f
-    );
-
-  color:#fff;
+  text-align:center;
 
   font-size:13px;
 
-  font-weight:900;
-
-}
-
-
-.member-badge{
-
-  background:
-    rgba(255,255,255,.11);
-
-  color:#d4e6f7;
-
-}
-
-
-.user-id{
-
-  margin-top:8px;
-
-  color:#75c5ff;
-
-  font-size:12px;
-
   font-weight:bold;
-
-  word-break:break-all;
-
 }
 
 
-.status-line{
-
-  display:flex;
-
-  flex-wrap:wrap;
-
-  gap:6px 14px;
-
-  margin-top:8px;
-
-  color:#b9d4eb;
-
-  font-size:12px;
-
-}
-
-
-.online{
-
-  color:#62ff9e;
-
-  font-weight:bold;
-
-}
-
-
-/* =====================================================
-   ERRO
-===================================================== */
-
-.error-panel{
-
-  display:none;
-
-  margin-top:15px;
-
-  padding:16px;
-
-  border-radius:18px;
-
-  background:
-    rgba(120,15,35,.45);
-
-  border:
-    1px solid
-    rgba(255,85,105,.35);
-
-  color:#ffd5da;
-
-  font-size:13px;
-
-  line-height:1.5;
-
-}
-
-
-.error-title{
+.message.error{
 
   display:block;
 
-  margin-bottom:5px;
-
-  color:#ff9aa7;
-
-  font-weight:900;
-
-}
-
-
-/* =====================================================
-   HERO
-===================================================== */
-
-.hero{
-
-  padding:30px 5px 20px;
-
-}
-
-
-.season{
-
-  display:inline-block;
-
-  padding:8px 14px;
-
-  border-radius:20px;
-
   background:
-    rgba(255,255,255,.12);
+    rgba(255,50,70,.15);
 
   border:
     1px solid
-    rgba(255,255,255,.15);
+    rgba(255,70,90,.35);
 
-  font-size:12px;
-
-  font-weight:bold;
-
+  color:#ff9ba7;
 }
 
 
-.hero h2{
+.message.success{
 
-  margin-top:17px;
+  display:block;
 
-  font-size:
-    clamp(42px,8vw,72px);
-
-  line-height:.92;
-
-  text-shadow:
-    0 6px 2px
-    rgba(0,0,0,.25);
-
-}
-
-
-.hero p{
-
-  margin-top:10px;
-
-  font-size:21px;
-
-  font-weight:bold;
-
-}
-
-
-/* =====================================================
-   CARDS
-===================================================== */
-
-.cards{
-
-  display:grid;
-
-  grid-template-columns:
-    repeat(3,1fr);
-
-  gap:14px;
-
-}
-
-
-.card{
-
-  min-height:225px;
-
-  padding:20px;
-
-  border-radius:26px;
-
-  position:relative;
-
-  overflow:hidden;
+  background:
+    rgba(50,255,140,.12);
 
   border:
     1px solid
-    rgba(255,255,255,.15);
+    rgba(50,255,140,.3);
 
-  box-shadow:
-    0 15px 35px
-    rgba(0,0,0,.25);
-
-  cursor:pointer;
-
+  color:#72ffae;
 }
 
 
-.card-box{
+/* =====================================
+   CAMPOS
+===================================== */
 
-  background:
-    linear-gradient(
-      145deg,
-      #9321ed,
-      #45109e
-    );
+label{
 
-}
-
-
-.card-adam{
-
-  background:
-    linear-gradient(
-      145deg,
-      #087ddd,
-      #064ba1
-    );
-
-}
-
-
-.card-games{
-
-  background:
-    linear-gradient(
-      145deg,
-      #16bd60,
-      #087d43
-    );
-
-}
-
-
-.card-icon{
-
-  font-size:70px;
-
-  text-align:center;
-
-  margin-bottom:10px;
-
-}
-
-
-.card h3{
-
-  font-size:21px;
+  display:block;
 
   margin-bottom:7px;
 
-}
-
-
-.card p{
-
-  color:
-    rgba(255,255,255,.82);
-
-  font-size:14px;
-
-  line-height:1.4;
-
-}
-
-
-.card-arrow{
-
-  position:absolute;
-
-  right:15px;
-
-  bottom:14px;
-
-  width:43px;
-
-  height:43px;
-
-  border-radius:50%;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  background:
-    rgba(255,255,255,.15);
-
-  font-size:23px;
-
-}
-
-
-/* =====================================================
-   VIP
-===================================================== */
-
-.vip-panel{
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:space-between;
-
-  gap:15px;
-
-  margin-top:17px;
-
-  padding:18px;
-
-  border-radius:25px;
-
-  background:
-
-    radial-gradient(
-      circle at 90% 10%,
-      rgba(255,211,65,.2),
-      transparent 28%
-    ),
-
-    linear-gradient(
-      135deg,
-      #281c06,
-      #100d07
-    );
-
-  border:
-    1px solid
-    rgba(255,201,55,.5);
-
-}
-
-
-.vip-info{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:14px;
-
-
-}
-
-
-.vip-icon{
-
-  width:65px;
-
-  height:65px;
-
-  border-radius:20px;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  font-size:37px;
-
-  border:
-    2px solid
-    #e6b72d;
-
-}
-
-
-.vip-panel h3{
-
-  color:#ffd329;
-
-  font-size:23px;
-
-}
-
-
-.vip-panel p{
-
-  margin-top:4px;
-
-  color:#d9d0ba;
-
   font-size:13px;
 
-}
-
-
-.vip-button{
-
-  padding:14px 20px;
-
-  border:0;
-
-  border-radius:14px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #ffcd2c,
-      #d98b06
-    );
-
-  color:white;
-
-  font-weight:900;
-
-}
-
-
-/* =====================================================
-   RECURSOS
-===================================================== */
-
-.section-header{
-
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
-
-  margin:20px 3px 11px;
-
-}
-
-
-.section-header h3{
-
-  font-size:19px;
-
-}
-
-
-.section-header span{
-
-  color:#9ec7e8;
-
-  font-size:12px;
-
-}
-
-
-.resources{
-
-  display:grid;
-
-  grid-template-columns:
-    repeat(4,1fr);
-
-  gap:12px;
-
-}
-
-
-.resource{
-
-  padding:15px 10px;
-
-  text-align:center;
-
-  border-radius:20px;
-
-  background:
-    rgba(3,30,62,.82);
-
-  border:
-    1px solid
-    rgba(255,255,255,.1);
-
-}
-
-
-.resource-icon{
-
-  font-size:40px;
-
-}
-
-
-.resource-name{
-
-  margin-top:5px;
-
-  color:#b9d3eb;
-
-  font-size:11px;
-
   font-weight:bold;
 
+  color:#cce3f8;
 }
 
 
-.resource-value{
+.input{
 
-  margin-top:6px;
+  width:100%;
 
-  font-size:18px;
-
-  font-weight:900;
-
-}
-
-
-/* =====================================================
-   DADOS
-===================================================== */
-
-.data-panel{
-
-  margin-top:20px;
-
-  margin-bottom:110px;
-
-  padding:18px;
-
-  border-radius:24px;
-
-  background:
-    rgba(2,25,52,.82);
-
-  border:
-    1px solid
-    rgba(255,255,255,.1);
-
-}
-
-
-.data-grid{
-
-  display:grid;
-
-  grid-template-columns:
-    repeat(2,1fr);
-
-  gap:10px;
-
-}
-
-
-.data-item{
-
-  padding:12px;
-
-  border-radius:14px;
-
-  background:
-    rgba(255,255,255,.055);
-
-}
-
-
-.data-label{
-
-  color:#7fb4dc;
-
-  font-size:10px;
-
-  font-weight:bold;
-
-  text-transform:uppercase;
-
-}
-
-
-.data-value{
-
-  margin-top:5px;
-
-  color:#fff;
-
-  font-size:14px;
-
-  word-break:break-word;
-
-}
-
-
-/* =====================================================
-   MENU
-===================================================== */
-
-.bottom-nav{
-
-  position:fixed;
-
-  z-index:100;
-
-  left:50%;
-
-  bottom:10px;
-
-  transform:translateX(-50%);
-
-  width:min(95%,900px);
-
-  padding:9px;
-
-  border-radius:27px;
-
-  display:grid;
-
-  grid-template-columns:
-    repeat(5,1fr);
-
-  background:
-    rgba(4,25,52,.96);
-
-  backdrop-filter:blur(15px);
+  height:54px;
 
   border:
     1px solid
     rgba(255,255,255,.13);
 
-  box-shadow:
-    0 15px 40px
-    rgba(0,0,0,.4);
+  border-radius:15px;
 
+  background:
+    rgba(0,0,0,.22);
+
+  color:white;
+
+  padding:
+    0 16px;
+
+  font-size:16px;
+
+  outline:none;
+
+  margin-bottom:17px;
 }
 
 
-.nav-button{
+.input::placeholder{
+
+  color:#8fa8c0;
+}
+
+
+.input:focus{
+
+  border-color:#27a1ff;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(39,161,255,.12);
+}
+
+
+/* =====================================
+   SENHA
+===================================== */
+
+.password-wrap{
+
+  position:relative;
+}
+
+
+.password-wrap .input{
+
+  padding-right:55px;
+}
+
+
+.show-password{
+
+  position:absolute;
+
+  right:8px;
+
+  top:0;
+
+  width:45px;
+
+  height:54px;
 
   border:0;
 
   background:transparent;
 
-  color:#8198af;
+  color:#9fc4e5;
 
-  padding:6px;
+  font-size:21px;
 
-  font-size:11px;
-
-  font-weight:bold;
-
+  cursor:pointer;
 }
 
 
-.nav-button span{
+/* =====================================
+   BOTÃO LOGIN
+===================================== */
 
-  display:block;
-
-  margin-bottom:3px;
-
-  font-size:24px;
-
-}
-
-
-.nav-button.active{
-
-  color:#1fa2ff;
-
-}
-
-
-.diamond{
-
-  width:65px;
-
-  height:65px;
-
-  margin:-24px auto 0;
-
-  border-radius:50%;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  background:
-    linear-gradient(
-      145deg,
-      #2a9dff,
-      #0069db
-    );
-
-  border:
-    4px solid
-    #0b315e;
-
-  font-size:31px;
-
-  box-shadow:
-    0 0 25px
-    rgba(0,143,255,.4);
-
-}
-
-
-/* =====================================================
-   MODAL
-===================================================== */
-
-.modal{
-
-  position:fixed;
-
-  z-index:999;
-
-  inset:0;
-
-  display:none;
-
-  align-items:center;
-
-  justify-content:center;
-
-  padding:20px;
-
-  background:
-    rgba(0,0,0,.65);
-
-  backdrop-filter:blur(8px);
-
-}
-
-
-.modal-box{
+.login-button{
 
   width:100%;
 
-  max-width:360px;
-
-  padding:24px;
-
-  border-radius:24px;
-
-  text-align:center;
-
-  background:
-    linear-gradient(
-      145deg,
-      #073d76,
-      #021a38
-    );
-
-  border:
-    1px solid
-    rgba(255,255,255,.15);
-
-}
-
-
-.modal-box h3{
-
-  font-size:22px;
-
-  margin-bottom:9px;
-
-}
-
-
-.modal-box p{
-
-  color:#b7d2e9;
-
-  font-size:14px;
-
-  margin-bottom:20px;
-
-}
-
-
-.modal-buttons{
-
-  display:flex;
-
-  gap:10px;
-
-}
-
-
-.modal-buttons button{
-
-  flex:1;
-
-  height:47px;
+  height:55px;
 
   border:0;
 
-  border-radius:13px;
+  border-radius:16px;
+
+  background:
+
+    linear-gradient(
+      135deg,
+      #22a2ff,
+      #0069db
+    );
 
   color:white;
 
+  font-size:16px;
+
+  font-weight:900;
+
+  cursor:pointer;
+
+  box-shadow:
+
+    0 10px 25px
+    rgba(0,105,219,.3);
+}
+
+
+.login-button:disabled{
+
+  opacity:.6;
+
+  cursor:not-allowed;
+}
+
+
+/* =====================================
+   LINKS
+===================================== */
+
+.forgot{
+
+  display:block;
+
+  text-align:center;
+
+  margin-top:18px;
+
+  color:#65bdff;
+
+  font-size:13px;
+
+  text-decoration:none;
+
+  cursor:pointer;
+}
+
+
+.create-account{
+
+  display:block;
+
+  text-align:center;
+
+  margin-top:18px;
+
+  color:#ffd52b;
+
+  font-size:14px;
+
   font-weight:bold;
 
+  text-decoration:none;
+
+  cursor:pointer;
 }
 
 
-.cancel{
+/* =====================================
+   DIVISOR
+===================================== */
+
+.divider{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:12px;
+
+  margin:25px 0 18px;
+
+  color:#a9c7e4;
+
+  font-size:13px;
+
+  white-space:nowrap;
+}
+
+
+.divider::before,
+.divider::after{
+
+  content:"";
+
+  height:1px;
+
+  flex:1;
 
   background:
-    rgba(255,255,255,.12);
-
+    rgba(255,255,255,.15);
 }
 
 
-.confirm{
+/* =====================================
+   LOGIN SOCIAL
+===================================== */
 
-  background:
-    linear-gradient(
-      135deg,
-      #ff4055,
-      #c8172c
-    );
+.social-buttons{
 
+  display:flex;
+
+  flex-direction:column;
+
+  gap:10px;
 }
 
 
-/* =====================================================
+.social-button{
+
+  width:100%;
+
+  height:52px;
+
+  border:0;
+
+  border-radius:15px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:10px;
+
+  font-size:15px;
+
+  font-weight:bold;
+
+  cursor:pointer;
+}
+
+
+.google{
+
+  background:#fff;
+
+  color:#202124;
+}
+
+
+.facebook{
+
+  background:#1877f2;
+
+  color:#fff;
+}
+
+
+.apple{
+
+  background:#000;
+
+  color:#fff;
+}
+
+
+.social-icon{
+
+  font-size:19px;
+
+  width:25px;
+
+  text-align:center;
+}
+
+
+/* =====================================
+   CADASTRO
+===================================== */
+
+.register-box{
+
+  display:none;
+}
+
+
+.register-box.active{
+
+  display:block;
+}
+
+
+.login-box.hidden{
+
+  display:none;
+}
+
+
+.back-login{
+
+  display:block;
+
+  text-align:center;
+
+  margin-top:18px;
+
+  color:#65bdff;
+
+  font-size:13px;
+
+  cursor:pointer;
+}
+
+
+/* =====================================
+   LOADING
+===================================== */
+
+.loading{
+
+  display:none;
+
+  text-align:center;
+
+  margin-top:15px;
+
+  color:#8fcaff;
+
+  font-size:13px;
+}
+
+
+/* =====================================
+   FOOTER
+===================================== */
+
+.footer{
+
+  text-align:center;
+
+  margin-top:22px;
+
+  color:#9ab9d5;
+
+  font-size:12px;
+}
+
+
+/* =====================================
    WHATSAPP
-===================================================== */
+===================================== */
 
 .adam-whatsapp-button{
 
@@ -1227,13 +653,13 @@ body{
 
   right:18px;
 
-  bottom:105px;
+  bottom:20px;
 
-  z-index:99998;
+  z-index:99999;
 
-  width:58px;
+  width:60px;
 
-  height:58px;
+  height:60px;
 
   border:0;
 
@@ -1249,7 +675,7 @@ body{
 
   justify-content:center;
 
-  font-size:29px;
+  font-size:30px;
 
   cursor:pointer;
 
@@ -1274,9 +700,9 @@ body{
 
   right:18px;
 
-  bottom:174px;
+  bottom:92px;
 
-  z-index:99998;
+  z-index:99999;
 
   width:270px;
 
@@ -1376,183 +802,43 @@ body{
 }
 
 
-/* =====================================================
-   RESPONSIVO
-===================================================== */
+@media(max-width:480px){
 
-@media(max-width:700px){
+  body{
 
-  .page{
-
-    padding:11px;
-
+    padding:
+      18px
+      12px;
   }
 
 
-  .brand-icon{
+  .logo-icon{
 
-    width:55px;
+    width:88px;
 
-    height:55px;
+    height:88px;
+
+    font-size:50px;
+  }
+
+
+  .logo h1{
 
     font-size:31px;
-
   }
 
 
-  .brand-name{
+  .login-card{
 
-    font-size:18px;
+    padding:23px 18px;
 
+    border-radius:25px;
   }
 
 
-  .top-button{
+  .login-card h2{
 
-    width:50px;
-
-    height:50px;
-
-  }
-
-
-  .profile{
-
-    padding:14px;
-
-  }
-
-
-  .avatar{
-
-    width:80px;
-
-    height:80px;
-
-    font-size:44px;
-
-  }
-
-
-  .avatar-crown{
-
-    font-size:28px;
-
-  }
-
-
-  .profile-name{
-
-    font-size:18px;
-
-  }
-
-
-  .cards{
-
-    gap:8px;
-
-  }
-
-
-  .card{
-
-    min-height:210px;
-
-    padding:12px;
-
-    border-radius:21px;
-
-  }
-
-
-  .card-icon{
-
-    font-size:53px;
-
-  }
-
-
-  .card h3{
-
-    font-size:16px;
-
-  }
-
-
-  .card p{
-
-    font-size:12px;
-
-  }
-
-
-  .card-arrow{
-
-    width:34px;
-
-    height:34px;
-
-    right:8px;
-
-    bottom:8px;
-
-  }
-
-
-  .resources{
-
-    grid-template-columns:
-      repeat(2,1fr);
-
-  }
-
-
-  .data-grid{
-
-    grid-template-columns:1fr;
-
-  }
-
-
-  .vip-panel{
-
-    padding:14px;
-
-  }
-
-
-  .vip-icon{
-
-    width:56px;
-
-    height:56px;
-
-    font-size:30px;
-
-  }
-
-
-  .vip-panel h3{
-
-    font-size:18px;
-
-  }
-
-
-  .vip-panel p{
-
-    font-size:11px;
-
-  }
-
-
-  .vip-button{
-
-    padding:11px;
-
-    font-size:11px;
-
+    font-size:24px;
   }
 
 
@@ -1560,12 +846,11 @@ body{
 
     right:15px;
 
-    bottom:88px;
+    bottom:18px;
 
     width:56px;
 
     height:56px;
-
   }
 
 
@@ -1573,13 +858,12 @@ body{
 
     right:15px;
 
-    bottom:155px;
+    bottom:84px;
 
     width:
       calc(100% - 30px);
 
     max-width:300px;
-
   }
 
 }
@@ -1592,639 +876,282 @@ body{
 <body>
 
 
-<div class="page">
+<div class="login-container">
 
 
-<header class="topbar">
+  <div class="logo">
 
-  <div class="brand">
-
-    <div class="brand-icon">
+    <div class="logo-icon">
       👑
     </div>
 
-    <div class="brand-name">
-      ADAM<br>
-      <span>GAMES</span>
-    </div>
-
-  </div>
-
-
-  <div class="top-buttons">
-
-    <button
-      class="top-button"
-      type="button">
-
-      🔔
-
-      <span class="notification">
-        3
-      </span>
-
-    </button>
-
-
-    <button
-      class="top-button"
-      id="logoutButton"
-      type="button">
-
-      ↪️
-
-    </button>
-
-  </div>
-
-</header>
-
-
-<section class="profile">
-
-  <div class="avatar-area">
-
-    <div
-      class="avatar"
-      id="avatar">
-
-      🙂
-
-    </div>
-
-
-    <div
-      class="avatar-crown"
-      id="avatarCrown">
-
-      👑
-
-    </div>
-
-  </div>
-
-
-  <div class="profile-data">
-
-    <div class="profile-name-line">
-
-      <div
-        class="profile-name"
-        id="profileName">
-
-        Carregando...
-
-      </div>
-
-
-      <div class="verified">
-        ✓
-      </div>
-
-    </div>
-
-
-    <div
-      class="profile-email"
-      id="profileEmail">
-
-      —
-
-    </div>
-
-
-    <div
-      class="vip-badge member-badge"
-      id="vipBadge">
-
-      ⭐ Membro
-
-    </div>
-
-
-    <div
-      class="user-id"
-      id="userId">
-
-      ID: carregando...
-
-    </div>
-
-
-    <div class="status-line">
-
-      <span class="online">
-        🟢 Online agora
-      </span>
-
-      <span id="clock">
-        🕐 --:--
-      </span>
-
-      <span id="locationStatus">
-        📍 Localização não informada
-      </span>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<div
-  class="error-panel"
-  id="errorPanel">
-
-  <span class="error-title">
-    ⚠️ Atenção
-  </span>
-
-  <span id="errorText">
-    —
-  </span>
-
-</div>
-
-
-<section class="hero">
-
-  <div
-    class="season"
-    id="season">
-
-    🇧🇷 SETEMBRO • INDEPENDÊNCIA
-
-  </div>
-
-
-  <h2>
-    BEM-VINDO 👋
-  </h2>
-
-
-  <p>
-    Seu mundo começa aqui!
-  </p>
-
-</section>
-
-
-<section class="cards">
-
-  <div
-    class="card card-box"
-    id="boxCard">
-
-    <div class="card-icon">
-      🎁
-    </div>
-
-    <h3>
-      CAIXA BOX
-    </h3>
+    <h1>
+      ADAM <span>GAMES</span>
+    </h1>
 
     <p>
-      Confira sua caixa de prêmios.
+      Seu mundo começa aqui!
     </p>
-
-    <div class="card-arrow">
-      →
-    </div>
 
   </div>
 
 
   <div
-    class="card card-adam">
+    class="login-card login-box"
+    id="loginBox"
+  >
 
-    <div class="card-icon">
-      🏡
+    <h2>
+      Bem-vindo de volta! 👋
+    </h2>
+
+    <div class="subtitle">
+      Entre na sua conta para continuar
     </div>
 
-    <h3>
-      ADAM
-    </h3>
-
-    <p>
-      Seus recursos e benefícios.
-    </p>
-
-    <div class="card-arrow">
-      →
-    </div>
-
-  </div>
-
-
-  <div
-    class="card card-games">
-
-    <div class="card-icon">
-      🎮
-    </div>
-
-    <h3>
-      JOGOS
-    </h3>
-
-    <p>
-      Acesse seus jogos cadastrados.
-    </p>
-
-    <div class="card-arrow">
-      →
-    </div>
-
-  </div>
-
-</section>
-
-
-<section class="vip-panel">
-
-  <div class="vip-info">
-
-    <div class="vip-icon">
-      👑
-    </div>
-
-
-    <div>
-
-      <h3>
-        ÁREA VIP
-      </h3>
-
-      <p id="vipDescription">
-        Benefícios exclusivos para membros VIP.
-      </p>
-
-    </div>
-
-  </div>
-
-
-  <button
-    class="vip-button"
-    id="vipButton"
-    type="button">
-
-    👑 ACESSAR
-
-  </button>
-
-</section>
-
-
-<div class="section-header">
-
-  <h3>
-    ⭐ Seus recursos
-  </h3>
-
-  <span>
-    Seus dados
-  </span>
-
-</div>
-
-
-<section class="resources">
-
-  <div class="resource">
-
-    <div class="resource-icon">
-      💎
-    </div>
-
-    <div class="resource-name">
-      CRÉDITOS
-    </div>
 
     <div
-      class="resource-value"
-      id="credits">
-
-      R$ 0,00
-
-    </div>
-
-  </div>
+      id="message"
+      class="message"
+    ></div>
 
 
-  <div class="resource">
+    <form id="loginForm">
 
-    <div class="resource-icon">
-      🪙
-    </div>
-
-    <div class="resource-name">
-      MOEDAS
-    </div>
-
-    <div
-      class="resource-value"
-      id="coins">
-
-      0
-
-    </div>
-
-  </div>
-
-
-  <div class="resource">
-
-    <div class="resource-icon">
-      🗝️
-    </div>
-
-    <div class="resource-name">
-      CHAVES
-    </div>
-
-    <div
-      class="resource-value"
-      id="keys">
-
-      0
-
-    </div>
-
-  </div>
-
-
-  <div class="resource">
-
-    <div class="resource-icon">
-      🎟️
-    </div>
-
-    <div class="resource-name">
-      CHANCES
-    </div>
-
-    <div
-      class="resource-value"
-      id="chances">
-
-      0
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<section class="data-panel">
-
-  <div class="section-header">
-
-    <h3>
-      👤 Meus dados
-    </h3>
-
-  </div>
-
-
-  <div class="data-grid">
-
-    <div class="data-item">
-
-      <div class="data-label">
-        Nome
-      </div>
-
-      <div
-        class="data-value"
-        id="dataName">
-
-        —
-
-      </div>
-
-    </div>
-
-
-    <div class="data-item">
-
-      <div class="data-label">
+      <label for="email">
         E-mail
+      </label>
+
+      <input
+        id="email"
+        class="input"
+        type="email"
+        placeholder="seu@email.com"
+        autocomplete="email"
+        required
+      >
+
+
+      <label for="password">
+        Senha
+      </label>
+
+
+      <div class="password-wrap">
+
+        <input
+          id="password"
+          class="input"
+          type="password"
+          placeholder="Digite sua senha"
+          autocomplete="current-password"
+          required
+        >
+
+        <button
+          type="button"
+          class="show-password"
+          id="showPassword"
+        >
+          👁️
+        </button>
+
       </div>
 
-      <div
-        class="data-value"
-        id="dataEmail">
 
-        —
+      <button
+        type="submit"
+        class="login-button"
+        id="loginButton"
+      >
+        ENTRAR
+      </button>
 
-      </div>
+    </form>
+
+
+    <a
+      class="forgot"
+      id="forgotPassword"
+    >
+      Esqueci minha senha
+    </a>
+
+
+    <div class="divider">
+      ou continue com
+    </div>
+
+
+    <div class="social-buttons">
+
+      <button
+        type="button"
+        class="social-button google"
+        id="googleLogin"
+      >
+
+        <span class="social-icon">
+          🌈
+        </span>
+
+        Google
+
+      </button>
+
+
+      <button
+        type="button"
+        class="social-button facebook"
+        id="facebookLogin"
+      >
+
+        <span class="social-icon">
+          f
+        </span>
+
+        Facebook
+
+      </button>
+
+
+      <button
+        type="button"
+        class="social-button apple"
+        id="appleLogin"
+      >
+
+        <span class="social-icon">
+          
+        </span>
+
+        Apple
+
+      </button>
 
     </div>
 
 
-    <div class="data-item">
-
-      <div class="data-label">
-        ID Adam Games
-      </div>
-
-      <div
-        class="data-value"
-        id="dataId">
-
-        —
-
-      </div>
-
-    </div>
+    <a
+      class="create-account"
+      id="showRegister"
+    >
+      ✨ Criar minha conta
+    </a>
 
 
-    <div class="data-item">
-
-      <div class="data-label">
-        UID Firebase
-      </div>
-
-      <div
-        class="data-value"
-        id="dataUid">
-
-        —
-
-      </div>
-
-    </div>
-
-
-    <div class="data-item">
-
-      <div class="data-label">
-        Idade
-      </div>
-
-      <div
-        class="data-value"
-        id="dataAge">
-
-        Não informado
-
-      </div>
-
-    </div>
-
-
-    <div class="data-item">
-
-      <div class="data-label">
-        Telefone
-      </div>
-
-      <div
-        class="data-value"
-        id="dataPhone">
-
-        Não informado
-
-      </div>
-
-    </div>
-
-
-    <div class="data-item">
-
-      <div class="data-label">
-        Caixa Box
-      </div>
-
-      <div
-        class="data-value"
-        id="dataBox">
-
-        Disponível
-
-      </div>
-
-    </div>
-
-
-    <div class="data-item">
-
-      <div class="data-label">
-        Último acesso
-      </div>
-
-      <div
-        class="data-value"
-        id="dataAccess">
-
-        Agora
-
-      </div>
-
-    </div>
-
-
-    <div class="data-item">
-
-      <div class="data-label">
-        Fuso horário
-      </div>
-
-      <div
-        class="data-value"
-        id="dataTimezone">
-
-        —
-
-      </div>
-
-    </div>
-
-
-    <div class="data-item">
-
-      <div class="data-label">
-        Localização
-      </div>
-
-      <div
-        class="data-value"
-        id="dataLocation">
-
-        Não informada
-
-      </div>
-
+    <div
+      class="loading"
+      id="loading"
+    >
+      🔄 Verificando sua conta...
     </div>
 
   </div>
 
-</section>
 
+  <div
+    class="login-card register-box"
+    id="registerBox"
+  >
 
-</div>
+    <h2>
+      Criar minha conta ✨
+    </h2>
 
-
-<nav class="bottom-nav">
-
-  <button
-    class="nav-button active"
-    type="button">
-
-    <span>🏠</span>
-
-    Início
-
-  </button>
-
-
-  <button
-    class="nav-button"
-    type="button">
-
-    <span>👑</span>
-
-    VIP
-
-  </button>
-
-
-  <button
-    class="nav-button"
-    type="button">
-
-    <div class="diamond">
-      💎
+    <div class="subtitle">
+      Faça seu cadastro no Adam Games
     </div>
 
-  </button>
+
+    <div
+      id="registerMessage"
+      class="message"
+    ></div>
 
 
-  <button
-    class="nav-button"
-    type="button">
+    <form id="registerForm">
 
-    <span>🎁</span>
+      <label for="registerName">
+        Nome
+      </label>
 
-    Prêmios
+      <input
+        id="registerName"
+        class="input"
+        type="text"
+        placeholder="Seu nome"
+        required
+      >
 
-  </button>
+
+      <label for="registerEmail">
+        E-mail
+      </label>
+
+      <input
+        id="registerEmail"
+        class="input"
+        type="email"
+        placeholder="seu@email.com"
+        required
+      >
 
 
-  <button
-    class="nav-button"
-    type="button">
+      <label for="registerPassword">
+        Senha
+      </label>
 
-    <span>🎮</span>
+      <input
+        id="registerPassword"
+        class="input"
+        type="password"
+        placeholder="Crie uma senha"
+        minlength="6"
+        required
+      >
 
-    Jogos
 
-  </button>
+      <label for="registerPassword2">
+        Confirmar senha
+      </label>
 
-</nav>
+      <input
+        id="registerPassword2"
+        class="input"
+        type="password"
+        placeholder="Digite a senha novamente"
+        minlength="6"
+        required
+      >
+
+
+      <button
+        type="submit"
+        class="login-button"
+        id="registerButton"
+      >
+        CRIAR CONTA
+      </button>
+
+    </form>
+
+
+    <a
+      class="back-login"
+      id="backLogin"
+    >
+      ← Já tenho uma conta
+    </a>
+
+  </div>
+
+
+  <div class="footer">
+    © 2026 Adam Games
+  </div>
+
+</div>
 
 
 <!-- =====================================================
@@ -2280,54 +1207,12 @@ body{
 </button>
 
 
-<div
-  class="modal"
-  id="logoutModal">
-
-  <div class="modal-box">
-
-    <h3>
-      Sair da conta?
-    </h3>
-
-    <p>
-      Você será levado novamente para o login.
-    </p>
-
-    <div class="modal-buttons">
-
-      <button
-        class="cancel"
-        id="cancelLogout"
-        type="button">
-
-        CANCELAR
-
-      </button>
-
-
-      <button
-        class="confirm"
-        id="confirmLogout"
-        type="button">
-
-        SAIR
-
-      </button>
-
-    </div>
-
-  </div>
-
-</div>
-
-
 <script type="module">
 
 
-/* =====================================================
-   FIREBASE
-===================================================== */
+/* =====================================
+   FIREBASE APP
+===================================== */
 
 import {
   initializeApp
@@ -2336,14 +1221,28 @@ from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
 
+/* =====================================
+   FIREBASE AUTH
+===================================== */
+
 import {
   getAuth,
   onAuthStateChanged,
-  signOut
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
+  GoogleAuthProvider,
+  FacebookAuthProvider,
+  OAuthProvider,
+  signInWithPopup
 }
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
+
+/* =====================================
+   FIRESTORE
+===================================== */
 
 import {
   getFirestore,
@@ -2357,9 +1256,9 @@ from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
-/* =====================================================
-   CONFIG
-===================================================== */
+/* =====================================
+   CONFIGURAÇÃO
+===================================== */
 
 const firebaseConfig = {
 
@@ -2401,825 +1300,221 @@ const db =
   getFirestore(app);
 
 
-/* =====================================================
+/* =====================================
    ELEMENTOS
-===================================================== */
+===================================== */
 
-const profileName =
+const loginBox =
   document.getElementById(
-    "profileName"
+    "loginBox"
   );
 
 
-const profileEmail =
+const registerBox =
   document.getElementById(
-    "profileEmail"
+    "registerBox"
   );
 
 
-const userId =
+const loginForm =
   document.getElementById(
-    "userId"
+    "loginForm"
   );
 
 
-const vipBadge =
+const registerForm =
   document.getElementById(
-    "vipBadge"
+    "registerForm"
   );
 
 
-const avatar =
+const email =
   document.getElementById(
-    "avatar"
+    "email"
   );
 
 
-const avatarCrown =
+const password =
   document.getElementById(
-    "avatarCrown"
+    "password"
   );
 
 
-const errorPanel =
+const message =
   document.getElementById(
-    "errorPanel"
+    "message"
   );
 
 
-const errorText =
+const registerMessage =
   document.getElementById(
-    "errorText"
+    "registerMessage"
   );
 
 
-/* =====================================================
-   UTILIDADES
-===================================================== */
+/* =====================================
+   MENSAGEM LOGIN
+===================================== */
 
-function gerarPublicId(){
-
-  const chars =
-    "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-
-  let resultado = "";
-
-
-  for(
-    let i = 0;
-    i < 7;
-    i++
-  ){
-
-    resultado +=
-      chars[
-        Math.floor(
-          Math.random() *
-          chars.length
-        )
-      ];
-
-  }
-
-
-  return resultado;
-
-}
-
-
-function mostrarErro(
-  texto
+function mostrarMensagem(
+  texto,
+  tipo="error"
 ){
 
-  errorText.textContent =
+  message.textContent =
     texto;
 
-  errorPanel.style.display =
-    "block";
+  message.className =
+    "message " + tipo;
 
 }
 
 
-function limparErro(){
+/* =====================================
+   MENSAGEM CADASTRO
+===================================== */
 
-  errorPanel.style.display =
-    "none";
-
-}
-
-
-function valorNumerico(
-  valor
+function mostrarMensagemCadastro(
+  texto,
+  tipo="error"
 ){
 
-  const numero =
-    Number(valor);
+  registerMessage.textContent =
+    texto;
 
-  return Number.isFinite(numero)
-    ? numero
-    : 0;
+  registerMessage.className =
+    "message " + tipo;
 
 }
 
 
-function formatarMoeda(
-  valor
-){
+/* =====================================
+   SENHA
+===================================== */
 
-  return valorNumerico(
-    valor
-  ).toLocaleString(
-    "pt-BR",
-    {
-      style:"currency",
-      currency:"BRL"
+document
+.getElementById(
+  "showPassword"
+)
+.addEventListener(
+  "click",
+  () => {
+
+    if(
+      password.type ===
+      "password"
+    ){
+
+      password.type =
+        "text";
+
+      document.getElementById(
+        "showPassword"
+      ).textContent =
+        "🙈";
+
     }
-  );
 
-}
+    else{
 
+      password.type =
+        "password";
 
-/* =====================================================
-   RELÓGIO
-===================================================== */
+      document.getElementById(
+        "showPassword"
+      ).textContent =
+        "👁️";
 
-function atualizarRelogio(){
+    }
 
-  const agora =
-    new Date();
-
-
-  document.getElementById(
-    "clock"
-  ).textContent =
-    "🕐 " +
-    agora.toLocaleTimeString(
-      "pt-BR",
-      {
-        hour:"2-digit",
-        minute:"2-digit"
-      }
-    );
-
-
-  document.getElementById(
-    "dataTimezone"
-  ).textContent =
-    Intl.DateTimeFormat()
-      .resolvedOptions()
-      .timeZone;
-
-}
-
-
-atualizarRelogio();
-
-
-setInterval(
-  atualizarRelogio,
-  30000
+  }
 );
 
 
-/* =====================================================
-   TEMPORADA
-===================================================== */
+/* =====================================
+   CADASTRO
+===================================== */
 
-const mes =
-  new Date().getMonth() + 1;
+document
+.getElementById(
+  "showRegister"
+)
+.addEventListener(
+  "click",
+  () => {
 
+    loginBox.classList.add(
+      "hidden"
+    );
 
-if(mes === 10){
+    registerBox.classList.add(
+      "active"
+    );
 
-  document.getElementById(
-    "season"
-  ).textContent =
-    "🎃 OUTUBRO • HALLOWEEN";
-
-}
-
-else if(mes === 11){
-
-  document.getElementById(
-    "season"
-  ).textContent =
-    "✊🏿 NOVEMBRO • CONSCIÊNCIA NEGRA";
-
-}
-
-else if(mes === 12){
-
-  document.getElementById(
-    "season"
-  ).textContent =
-    "🎄 DEZEMBRO • NATAL";
-
-}
-
-
-/* =====================================================
-   LOCALIZAÇÃO
-===================================================== */
-
-function solicitarLocalizacao(){
-
-  if(
-    !navigator.geolocation
-  ){
-
-    return;
+    window.scrollTo(
+      0,
+      0
+    );
 
   }
+);
 
 
-  navigator.geolocation.getCurrentPosition(
+/* =====================================
+   VOLTAR LOGIN
+===================================== */
 
-    async position => {
+document
+.getElementById(
+  "backLogin"
+)
+.addEventListener(
+  "click",
+  () => {
 
-      const latitude =
-        position.coords.latitude;
+    registerBox.classList.remove(
+      "active"
+    );
 
-      const longitude =
-        position.coords.longitude;
+    loginBox.classList.remove(
+      "hidden"
+    );
 
-
-      document.getElementById(
-        "locationStatus"
-      ).textContent =
-        "📍 Localização autorizada";
-
-
-      document.getElementById(
-        "dataLocation"
-      ).textContent =
-        latitude.toFixed(4) +
-        ", " +
-        longitude.toFixed(4);
-
-
-      try{
-
-        const response =
-          await fetch(
-            "https://api.bigdatacloud.net/data/" +
-            "reverse-geocode-client?" +
-            "latitude=" +
-            latitude +
-            "&longitude=" +
-            longitude +
-            "&localityLanguage=pt"
-          );
-
-
-        if(!response.ok){
-
-          return;
-
-        }
-
-
-        const data =
-          await response.json();
-
-
-        const cidade =
-          data.city ||
-          data.locality ||
-          "";
-
-
-        const estado =
-          data.principalSubdivision ||
-          "";
-
-
-        if(cidade){
-
-          document.getElementById(
-            "locationStatus"
-          ).textContent =
-            "📍 " + cidade;
-
-
-          document.getElementById(
-            "dataLocation"
-          ).textContent =
-            cidade +
-            (
-              estado
-                ? ", " + estado
-                : ""
-            );
-
-        }
-
-      }
-      catch(error){
-
-        console.log(
-          "Localização detalhada indisponível."
-        );
-
-      }
-
-    },
-
-    error => {
-
-      console.log(
-        "Usuário não autorizou localização.",
-        error
-      );
-
-
-      document.getElementById(
-        "locationStatus"
-      ).textContent =
-        "📍 Localização não autorizada";
-
-
-      document.getElementById(
-        "dataLocation"
-      ).textContent =
-        "Não autorizada";
-
-    },
-
-    {
-      enableHighAccuracy:false,
-
-      timeout:8000,
-
-      maximumAge:300000
-
-    }
-
-  );
-
-}
-
-
-/* =====================================================
-   CARREGAR CADASTRO
-===================================================== */
-
-async function carregarCadastro(
-  firebaseUser
-){
-
-  const uid =
-    firebaseUser.uid;
-
-
-  const email =
-    (
-      firebaseUser.email ||
+    mostrarMensagemCadastro(
+      "",
       ""
-    ).trim().toLowerCase();
-
-
-  const admins =
-    collection(
-      db,
-      "admins"
     );
-
-
-  let snapshot;
-
-
-  try{
-
-    snapshot =
-      await getDocs(
-        query(
-          admins,
-          where(
-            "uid",
-            "==",
-            uid
-          )
-        )
-      );
 
   }
-  catch(error){
+);
 
-    console.error(
-      "Erro buscando por UID:",
-      error
-    );
 
+/* =====================================
+   LOGIN
+===================================== */
 
-    snapshot = {
-      empty:true,
-      docs:[]
-    };
+loginForm.addEventListener(
+  "submit",
+  async event => {
 
-  }
+    event.preventDefault();
 
 
-  if(
-    snapshot.empty &&
-    email
-  ){
+    const emailValue =
+      email.value.trim();
 
-    try{
 
-      snapshot =
-        await getDocs(
-          query(
-            admins,
-            where(
-              "email",
-              "==",
-              email
-            )
-          )
-        );
+    const passwordValue =
+      password.value;
 
-    }
-    catch(error){
 
-      console.error(
-        "Erro buscando por e-mail:",
-        error
-      );
+    if(
+      !emailValue ||
+      !passwordValue
+    ){
 
-      snapshot = {
-        empty:true,
-        docs:[]
-      };
-
-    }
-
-  }
-
-
-  if(snapshot.empty){
-
-    const publicId =
-      gerarPublicId();
-
-
-    const novoUsuario = {
-
-      uid:
-        uid,
-
-      email:
-        email,
-
-      nome:
-        firebaseUser.displayName ||
-        (
-          email
-            ? email.split("@")[0]
-            : "Usuário"
-        ),
-
-      publicId:
-        publicId,
-
-      idade:
-        "",
-
-      telefone:
-        "",
-
-      avatar:
-        "🙂",
-
-      vip:
-        false,
-
-      chances:
-        0,
-
-      moedas:
-        0,
-
-      chaves:
-        0,
-
-      creditos:
-        0,
-
-      caixaBox:
-        false,
-
-      criadoEm:
-        new Date().toISOString()
-
-    };
-
-
-    try{
-
-      const documento =
-        await addDoc(
-          admins,
-          novoUsuario
-        );
-
-
-      return {
-
-        id:
-          documento.id,
-
-        data:
-          novoUsuario
-
-      };
-
-    }
-    catch(error){
-
-      console.error(
-        "Erro criando cadastro:",
-        error
-      );
-
-
-      throw new Error(
-        "A conta foi autenticada, mas o cadastro não pôde ser criado no Firestore."
-      );
-
-    }
-
-  }
-
-
-  const documento =
-    snapshot.docs[0];
-
-
-  const dados =
-    documento.data();
-
-
-  return {
-
-    id:
-      documento.id,
-
-    data:
-      dados
-
-  };
-
-}
-
-
-/* =====================================================
-   MOSTRAR DADOS
-===================================================== */
-
-function mostrarDados(
-  firebaseUser,
-  cadastro
-){
-
-  const dados =
-    cadastro.data;
-
-
-  const nome =
-    dados.nome ||
-    dados.name ||
-    firebaseUser.displayName ||
-    (
-      firebaseUser.email
-        ? firebaseUser.email.split("@")[0]
-        : "Usuário"
-    );
-
-
-  profileName.textContent =
-    nome;
-
-
-  document.getElementById(
-    "dataName"
-  ).textContent =
-    nome;
-
-
-  const email =
-    dados.email ||
-    firebaseUser.email ||
-    "—";
-
-
-  profileEmail.textContent =
-    email;
-
-
-  document.getElementById(
-    "dataEmail"
-  ).textContent =
-    email;
-
-
-  document.getElementById(
-    "dataUid"
-  ).textContent =
-    firebaseUser.uid;
-
-
-  const publicId =
-    dados.publicId ||
-    "";
-
-
-  if(publicId){
-
-    userId.textContent =
-      "ID: " +
-      publicId;
-
-
-    document.getElementById(
-      "dataId"
-    ).textContent =
-      publicId;
-
-  }
-
-  else{
-
-    userId.textContent =
-      "ID: pendente";
-
-
-    document.getElementById(
-      "dataId"
-    ).textContent =
-      "Pendente";
-
-  }
-
-
-  const vip =
-    dados.vip === true;
-
-
-  if(vip){
-
-    vipBadge.textContent =
-      "👑 VIP Ativo";
-
-
-    vipBadge.classList.remove(
-      "member-badge"
-    );
-
-
-    avatarCrown.style.display =
-      "block";
-
-
-    document.getElementById(
-      "vipDescription"
-    ).textContent =
-      "Você tem acesso aos benefícios exclusivos VIP.";
-
-  }
-
-  else{
-
-    vipBadge.textContent =
-      "⭐ Membro";
-
-
-    vipBadge.classList.add(
-      "member-badge"
-    );
-
-
-    avatarCrown.style.display =
-      "none";
-
-
-    document.getElementById(
-      "vipDescription"
-    ).textContent =
-      "Torne-se VIP para desbloquear benefícios exclusivos.";
-
-  }
-
-
-  avatar.textContent =
-    dados.avatar ||
-    "🙂";
-
-
-  const creditos =
-    valorNumerico(
-      dados.creditos
-    );
-
-
-  const moedas =
-    valorNumerico(
-      dados.moedas
-    );
-
-
-  const chaves =
-    valorNumerico(
-      dados.chaves
-    );
-
-
-  const chances =
-    valorNumerico(
-      dados.chances
-    );
-
-
-  document.getElementById(
-    "credits"
-  ).textContent =
-    formatarMoeda(
-      creditos
-    );
-
-
-  document.getElementById(
-    "coins"
-  ).textContent =
-    moedas.toLocaleString(
-      "pt-BR"
-    );
-
-
-  document.getElementById(
-    "keys"
-  ).textContent =
-    chaves.toLocaleString(
-      "pt-BR"
-    );
-
-
-  document.getElementById(
-    "chances"
-  ).textContent =
-    chances.toLocaleString(
-      "pt-BR"
-    );
-
-
-  document.getElementById(
-    "dataAge"
-  ).textContent =
-    dados.idade ||
-    "Não informado";
-
-
-  document.getElementById(
-    "dataPhone"
-  ).textContent =
-    dados.telefone ||
-    dados.phone ||
-    "Não informado";
-
-
-  const caixa =
-    dados.caixaBox === true;
-
-
-  document.getElementById(
-    "dataBox"
-  ).textContent =
-    caixa
-      ? "Já resgatada"
-      : "Disponível";
-
-
-  document.getElementById(
-    "dataAccess"
-  ).textContent =
-    "Agora";
-
-}
-
-
-/* =====================================================
-   AUTENTICAÇÃO
-===================================================== */
-
-onAuthStateChanged(
-
-  auth,
-
-  async firebaseUser => {
-
-    if(!firebaseUser){
-
-      window.location.replace(
-        "index.html"
+      mostrarMensagem(
+        "Preencha seu e-mail e sua senha."
       );
 
       return;
@@ -3227,138 +1522,440 @@ onAuthStateChanged(
     }
 
 
-    limparErro();
+    const button =
+      document.getElementById(
+        "loginButton"
+      );
 
 
-    profileEmail.textContent =
-      firebaseUser.email ||
-      "—";
+    button.disabled =
+      true;
 
-
-    document.getElementById(
-      "dataEmail"
-    ).textContent =
-      firebaseUser.email ||
-      "—";
-
-
-    document.getElementById(
-      "dataUid"
-    ).textContent =
-      firebaseUser.uid;
+    button.textContent =
+      "ENTRANDO...";
 
 
     try{
 
-      const cadastro =
-        await carregarCadastro(
-          firebaseUser
-        );
-
-
-      mostrarDados(
-        firebaseUser,
-        cadastro
+      await signInWithEmailAndPassword(
+        auth,
+        emailValue,
+        passwordValue
       );
 
 
-      solicitarLocalizacao();
+      mostrarMensagem(
+        "Login realizado! Entrando...",
+        "success"
+      );
+
+
+      setTimeout(
+        () => {
+
+          window.location.replace(
+            "painel.html"
+          );
+
+        },
+        400
+      );
+
 
     }
+
     catch(error){
 
       console.error(
-        "Erro real do painel:",
         error
       );
 
 
-      mostrarErro(
-        error.message ||
-        "Não foi possível carregar os dados da conta."
+      let texto =
+        "Não foi possível entrar.";
+
+
+      if(
+        error.code ===
+        "auth/invalid-credential"
+      ){
+
+        texto =
+          "E-mail ou senha incorretos.";
+
+      }
+
+      else if(
+        error.code ===
+        "auth/invalid-email"
+      ){
+
+        texto =
+          "Digite um e-mail válido.";
+
+      }
+
+      else if(
+        error.code ===
+        "auth/too-many-requests"
+      ){
+
+        texto =
+          "Muitas tentativas. Aguarde alguns minutos.";
+
+      }
+
+
+      mostrarMensagem(
+        texto
+      );
+
+
+      button.disabled =
+        false;
+
+      button.textContent =
+        "ENTRAR";
+
+    }
+
+  }
+);
+
+
+/* =====================================
+   CRIAR CONTA
+===================================== */
+
+registerForm.addEventListener(
+  "submit",
+  async event => {
+
+    event.preventDefault();
+
+
+    const nome =
+      document
+      .getElementById(
+        "registerName"
+      )
+      .value
+      .trim();
+
+
+    const emailNovo =
+      document
+      .getElementById(
+        "registerEmail"
+      )
+      .value
+      .trim();
+
+
+    const senha =
+      document
+      .getElementById(
+        "registerPassword"
+      )
+      .value;
+
+
+    const senha2 =
+      document
+      .getElementById(
+        "registerPassword2"
+      )
+      .value;
+
+
+    if(
+      senha !== senha2
+    ){
+
+      mostrarMensagemCadastro(
+        "As senhas não são iguais."
+      );
+
+      return;
+
+    }
+
+
+    const button =
+      document.getElementById(
+        "registerButton"
+      );
+
+
+    button.disabled =
+      true;
+
+    button.textContent =
+      "CRIANDO...";
+
+
+    try{
+
+      const resultado =
+        await createUserWithEmailAndPassword(
+          auth,
+          emailNovo,
+          senha
+        );
+
+
+      const usuario =
+        resultado.user;
+
+
+      const caracteres =
+        "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+
+      let publicId =
+        "";
+
+
+      for(
+        let i=0;
+        i<7;
+        i++
+      ){
+
+        publicId +=
+          caracteres[
+            Math.floor(
+              Math.random() *
+              caracteres.length
+            )
+          ];
+
+      }
+
+
+      await addDoc(
+        collection(
+          db,
+          "admins"
+        ),
+        {
+
+          uid:
+            usuario.uid,
+
+          nome:
+            nome,
+
+          email:
+            emailNovo,
+
+          publicId:
+            publicId,
+
+          idade:
+            "",
+
+          telefone:
+            "",
+
+          avatar:
+            "🙂",
+
+          vip:
+            false,
+
+          caixaBox:
+            false,
+
+          chances:
+            0,
+
+          moedas:
+            0,
+
+          chaves:
+            0,
+
+          creditos:
+            0,
+
+          criadoEm:
+            new Date().toISOString()
+
+        }
+      );
+
+
+      mostrarMensagemCadastro(
+        "Conta criada com sucesso! Entrando...",
+        "success"
+      );
+
+
+      setTimeout(
+        () => {
+
+          window.location.replace(
+            "painel.html"
+          );
+
+        },
+        700
+      );
+
+
+    }
+
+    catch(error){
+
+      console.error(
+        error
+      );
+
+
+      let texto =
+        "Não foi possível criar a conta.";
+
+
+      if(
+        error.code ===
+        "auth/email-already-in-use"
+      ){
+
+        texto =
+          "Este e-mail já possui uma conta.";
+
+      }
+
+      else if(
+        error.code ===
+        "auth/weak-password"
+      ){
+
+        texto =
+          "A senha precisa ter pelo menos 6 caracteres.";
+
+      }
+
+      else if(
+        error.code ===
+        "auth/invalid-email"
+      ){
+
+        texto =
+          "Digite um e-mail válido.";
+
+      }
+
+
+      mostrarMensagemCadastro(
+        texto
+      );
+
+
+      button.disabled =
+        false;
+
+      button.textContent =
+        "CRIAR CONTA";
+
+    }
+
+  }
+);
+
+
+/* =====================================
+   RECUPERAR SENHA
+===================================== */
+
+document
+.getElementById(
+  "forgotPassword"
+)
+.addEventListener(
+  "click",
+  async () => {
+
+    const emailValue =
+      email.value.trim();
+
+
+    if(!emailValue){
+
+      mostrarMensagem(
+        "Digite seu e-mail primeiro."
+      );
+
+      email.focus();
+
+      return;
+
+    }
+
+
+    try{
+
+      await sendPasswordResetEmail(
+        auth,
+        emailValue
+      );
+
+
+      mostrarMensagem(
+        "E-mail de recuperação enviado!",
+        "success"
+      );
+
+    }
+
+    catch(error){
+
+      console.error(
+        error
+      );
+
+
+      mostrarMensagem(
+        "Não foi possível enviar o e-mail de recuperação."
       );
 
     }
 
   }
-
 );
 
 
-/* =====================================================
-   LOGOUT
-===================================================== */
+/* =====================================
+   GOOGLE
+===================================== */
 
-const logoutButton =
-  document.getElementById(
-    "logoutButton"
-  );
-
-
-const logoutModal =
-  document.getElementById(
-    "logoutModal"
-  );
-
-
-const cancelLogout =
-  document.getElementById(
-    "cancelLogout"
-  );
-
-
-const confirmLogout =
-  document.getElementById(
-    "confirmLogout"
-  );
-
-
-logoutButton.addEventListener(
-  "click",
-  () => {
-
-    logoutModal.style.display =
-      "flex";
-
-  }
-);
-
-
-cancelLogout.addEventListener(
-  "click",
-  () => {
-
-    logoutModal.style.display =
-      "none";
-
-  }
-);
-
-
-confirmLogout.addEventListener(
+document
+.getElementById(
+  "googleLogin"
+)
+.addEventListener(
   "click",
   async () => {
 
-    confirmLogout.disabled =
-      true;
-
-
-    confirmLogout.textContent =
-      "SAINDO...";
-
-
     try{
 
-      await signOut(
-        auth
+      const provider =
+        new GoogleAuthProvider();
+
+
+      await signInWithPopup(
+        auth,
+        provider
       );
 
 
       window.location.replace(
-        "index.html"
+        "painel.html"
       );
 
     }
+
     catch(error){
 
       console.error(
@@ -3366,16 +1963,8 @@ confirmLogout.addEventListener(
       );
 
 
-      confirmLogout.disabled =
-        false;
-
-
-      confirmLogout.textContent =
-        "SAIR";
-
-
-      alert(
-        "Não foi possível sair. Tente novamente."
+      mostrarMensagem(
+        "Não foi possível entrar com Google."
       );
 
     }
@@ -3384,17 +1973,46 @@ confirmLogout.addEventListener(
 );
 
 
-logoutModal.addEventListener(
+/* =====================================
+   FACEBOOK
+===================================== */
+
+document
+.getElementById(
+  "facebookLogin"
+)
+.addEventListener(
   "click",
-  event => {
+  async () => {
 
-    if(
-      event.target ===
-      logoutModal
-    ){
+    try{
 
-      logoutModal.style.display =
-        "none";
+      const provider =
+        new FacebookAuthProvider();
+
+
+      await signInWithPopup(
+        auth,
+        provider
+      );
+
+
+      window.location.replace(
+        "painel.html"
+      );
+
+    }
+
+    catch(error){
+
+      console.error(
+        error
+      );
+
+
+      mostrarMensagem(
+        "Não foi possível entrar com Facebook."
+      );
 
     }
 
@@ -3402,47 +2020,78 @@ logoutModal.addEventListener(
 );
 
 
-/* =====================================================
-   CAIXA
-===================================================== */
+/* =====================================
+   APPLE
+===================================== */
 
-document.getElementById(
-  "boxCard"
-).addEventListener(
+document
+.getElementById(
+  "appleLogin"
+)
+.addEventListener(
   "click",
-  () => {
+  async () => {
 
-    alert(
-      "🎁 CAIXA BOX\n\n" +
-      "A área de resgate da Caixa Box será disponibilizada aqui."
-    );
+    try{
+
+      const provider =
+        new OAuthProvider(
+          "apple.com"
+        );
+
+
+      await signInWithPopup(
+        auth,
+        provider
+      );
+
+
+      window.location.replace(
+        "painel.html"
+      );
+
+    }
+
+    catch(error){
+
+      console.error(
+        error
+      );
+
+
+      mostrarMensagem(
+        "Não foi possível entrar com Apple."
+      );
+
+    }
 
   }
 );
 
 
-/* =====================================================
-   VIP
-===================================================== */
+/* =====================================
+   SESSÃO
+===================================== */
 
-document.getElementById(
-  "vipButton"
-).addEventListener(
-  "click",
-  () => {
+onAuthStateChanged(
+  auth,
+  usuario => {
 
-    alert(
-      "👑 ÁREA VIP\n\n" +
-      "Em breve você poderá visualizar todos os benefícios VIP."
-    );
+    if(usuario){
+
+      window.location.replace(
+        "painel.html"
+      );
+
+    }
 
   }
 );
 
 
-/* =====================================================
+/* =====================================
    WHATSAPP
-===================================================== */
+===================================== */
 
 const whatsappButton =
   document.getElementById(
