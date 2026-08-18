@@ -20,772 +20,336 @@
   padding:0;
 }
 
-html,
 body{
-  width:100%;
-  min-height:100%;
-}
-
-body{
-
   min-height:100vh;
-
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
-
+  font-family:Arial,Helvetica,sans-serif;
   color:#fff;
-
-  overflow-x:hidden;
 
   background:
     radial-gradient(
-      circle at 15% 5%,
-      #43aaff 0%,
-      transparent 30%
+      circle at 50% 5%,
+      #2998f5,
+      transparent 38%
     ),
     linear-gradient(
       135deg,
-      #087ee1 0%,
-      #061d43 78%
+      #087ee1,
+      #061d43
     );
 }
 
-
 .page{
-
   width:100%;
-  max-width:850px;
+  max-width:650px;
   margin:auto;
-  padding:15px 15px 50px;
-
+  padding:16px 15px 100px;
 }
 
+/* TOPO */
 
-/* =====================================================
-   TOPO
-===================================================== */
-
-.topbar{
-
+.top{
   display:flex;
   align-items:center;
   justify-content:space-between;
-
-  margin-bottom:15px;
-
 }
 
-
-.back-button{
-
+.back{
+  width:46px;
+  height:46px;
   border:0;
-
-  padding:12px 17px;
-
-  border-radius:16px;
-
-  color:#fff;
-
-  background:
-    rgba(3,35,72,.9);
-
-  font-size:15px;
-
-  font-weight:bold;
-
-  cursor:pointer;
-
+  border-radius:15px;
+  background:rgba(0,30,70,.8);
+  color:white;
+  font-size:25px;
 }
 
-
-.logo{
-
-  font-size:20px;
-
-  font-weight:900;
-
-}
-
-
-.logo span{
-
-  color:#ffd52b;
-
-}
-
-
-/* =====================================================
-   CABEÇALHO DA CAIXA
-===================================================== */
-
-.header{
-
+.title{
   text-align:center;
+}
 
-  padding:20px 5px 15px;
+.title small{
+  display:block;
+  color:#b7d6ef;
+  font-size:11px;
+}
 
+.title strong{
+  font-size:19px;
 }
 
 
-.flag{
+/* TEMA */
 
+.theme{
+  text-align:center;
+  margin-top:28px;
+}
+
+.theme span{
   display:inline-block;
-
   padding:8px 15px;
-
   border-radius:20px;
 
   background:
     rgba(255,255,255,.12);
 
-  border:
-    1px solid
-    rgba(255,255,255,.15);
-
   font-size:12px;
-
-  font-weight:900;
-
+  font-weight:bold;
 }
 
 
-.header h1{
-
-  margin-top:17px;
-
-  font-size:
-    clamp(32px,7vw,52px);
-
-  line-height:1;
-
-}
-
-
-.header p{
-
-  margin-top:10px;
-
-  color:#c9e2f7;
-
-  font-size:15px;
-
-}
-
-
-/* =====================================================
-   CAIXA
-===================================================== */
-
-.box-area{
-
-  display:flex;
-
-  justify-content:center;
-
-  align-items:center;
-
-  margin:10px 0 20px;
-
-}
-
+/* CAIXA */
 
 .box{
+  width:220px;
+  height:220px;
 
-  width:180px;
-
-  height:180px;
-
-  border-radius:42px;
+  margin:28px auto 22px;
 
   display:flex;
-
   align-items:center;
-
   justify-content:center;
 
-  font-size:105px;
+  border-radius:35px;
+
+  font-size:115px;
 
   background:
     linear-gradient(
       145deg,
-      #19a0ff,
-      #0753ad
+      #f8d943,
+      #b98205
     );
 
-  border:
-    3px solid
-    rgba(255,255,255,.25);
+  border:6px solid white;
 
   box-shadow:
-    0 20px 55px
-    rgba(0,0,0,.35),
-    0 0 35px
-    rgba(0,153,255,.25);
-
+    0 20px 45px rgba(0,0,0,.35),
+    0 0 45px rgba(255,214,50,.3);
 }
 
-
-/* =====================================================
-   PRÊMIOS
-===================================================== */
-
-.prizes{
-
-  padding:17px;
-
-  border-radius:25px;
-
-  background:
-    rgba(3,31,65,.82);
-
-  border:
-    1px solid
-    rgba(255,255,255,.12);
-
-  box-shadow:
-    0 15px 35px
-    rgba(0,0,0,.22);
-
-}
-
-
-.prizes-title{
-
+h1{
   text-align:center;
-
-  margin-bottom:12px;
-
-  font-size:20px;
-
-  font-weight:900;
-
+  font-size:29px;
 }
 
-
-.prize{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:13px;
-
-  padding:13px;
-
+.subtitle{
+  text-align:center;
   margin-top:8px;
-
-  border-radius:16px;
-
-  background:
-    rgba(255,255,255,.07);
-
+  color:#c1d9ed;
+  line-height:1.4;
 }
 
 
-.prize-icon{
+/* VIP */
 
-  width:43px;
-  height:43px;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  flex-shrink:0;
-
-  font-size:27px;
-
-}
-
-
-.prize-name{
-
-  font-size:15px;
-
-  font-weight:800;
-
-}
-
-
-/* =====================================================
-   CHANCE
-===================================================== */
-
-.chance-panel{
-
-  margin-top:17px;
-
-  padding:21px;
-
-  border-radius:25px;
+.vip{
+  margin-top:20px;
+  padding:12px;
 
   text-align:center;
 
+  border-radius:15px;
+
   background:
     linear-gradient(
-      145deg,
-      #052b59,
-      #031a37
+      135deg,
+      #d6a516,
+      #8a5d00
     );
+
+  font-weight:bold;
+}
+
+
+/* TIMER */
+
+.timer-card{
+  margin-top:18px;
+  padding:20px;
+
+  border-radius:25px;
+
+  background:
+    rgba(2,25,55,.82);
 
   border:
     1px solid
-    rgba(255,255,255,.12);
+    rgba(255,255,255,.1);
 
+  text-align:center;
 }
 
-
-.chance-label{
-
-  color:#9ec8e8;
-
-  font-size:13px;
-
-  font-weight:900;
-
-  text-transform:uppercase;
-
+.timer-label{
+  color:#91b9d9;
+  font-size:12px;
+  font-weight:bold;
 }
-
 
 .timer{
-
-  margin-top:8px;
-
-  color:#ffd52b;
-
-  font-size:
-    clamp(36px,9vw,56px);
-
-  font-weight:900;
-
-  letter-spacing:2px;
-
-}
-
-
-.timer.available{
-
-  color:#62ff9e;
-
-  font-size:31px;
-
-  letter-spacing:0;
-
-}
-
-
-.chance-description{
-
   margin-top:7px;
-
-  color:#a9c8e3;
-
-  font-size:13px;
-
+  font-size:35px;
+  font-weight:900;
+  color:#ffd72e;
 }
-
 
 .status{
+  margin-top:8px;
+  font-size:14px;
+}
 
-  margin-top:13px;
+.available{
+  color:#62ff9c;
+}
 
-  padding:10px;
+.waiting{
+  color:#ffd65b;
+}
+
+.locked{
+  color:#ff8995;
+}
+
+.rescue{
+  width:100%;
+  height:56px;
+
+  margin-top:18px;
+
+  border:0;
+  border-radius:17px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #1fa9ff,
+      #0878df
+    );
+
+  color:white;
+
+  font-size:17px;
+  font-weight:900;
+}
+
+.rescue:disabled{
+  opacity:.45;
+}
+
+.message{
+  margin-top:12px;
+  min-height:20px;
+  color:#b9d5ea;
+  font-size:13px;
+}
+
+
+/* PRÊMIOS */
+
+.prizes{
+  margin-top:20px;
+  padding:18px;
+
+  border-radius:23px;
+
+  background:
+    rgba(2,25,55,.75);
+}
+
+.prizes h2{
+  font-size:19px;
+}
+
+.prize{
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+  margin-top:10px;
+  padding:12px;
 
   border-radius:13px;
 
   background:
     rgba(255,255,255,.06);
 
-  color:#d7eafa;
-
-  font-size:13px;
-
-}
-
-
-/* =====================================================
-   BOTÃO
-===================================================== */
-
-.redeem-button{
-
-  width:100%;
-
-  margin-top:15px;
-
-  height:55px;
-
-  border:0;
-
-  border-radius:16px;
-
-  color:#fff;
-
-  background:
-    linear-gradient(
-      135deg,
-      #159aff,
-      #0068db
-    );
-
-  font-size:17px;
-
-  font-weight:900;
-
-  cursor:pointer;
-
-  box-shadow:
-    0 10px 25px
-    rgba(0,107,220,.25);
-
-}
-
-
-.redeem-button:disabled{
-
-  opacity:.45;
-
-  cursor:not-allowed;
-
-  box-shadow:none;
-
-}
-
-
-/* =====================================================
-   VIP BLOQUEADO
-===================================================== */
-
-.locked{
-
-  display:none;
-
-  margin-top:17px;
-
-  padding:22px;
-
-  border-radius:24px;
-
-  text-align:center;
-
-  background:
-    linear-gradient(
-      145deg,
-      #342608,
-      #151006
-    );
-
-  border:
-    1px solid
-    rgba(255,207,47,.4);
-
-}
-
-
-.locked-icon{
-
-  font-size:50px;
-
-}
-
-
-.locked h3{
-
-  margin-top:8px;
-
-  color:#ffd52b;
-
-  font-size:22px;
-
-}
-
-
-.locked p{
-
-  margin-top:8px;
-
-  color:#d7cda9;
-
   font-size:14px;
+}
 
-  line-height:1.45;
-
+.prize span{
+  font-size:23px;
 }
 
 
-/* =====================================================
-   LOGIN
-===================================================== */
-
-.streak{
-
-  margin-top:17px;
-
-  padding:19px;
-
-  border-radius:24px;
-
-  background:
-    rgba(3,31,65,.82);
-
-  border:
-    1px solid
-    rgba(255,255,255,.1);
-
-}
-
-
-.streak-title{
-
-  font-size:17px;
-
-  font-weight:900;
-
-}
-
-
-.streak-count{
-
-  margin-top:8px;
-
-  color:#62ff9e;
-
-  font-size:30px;
-
-  font-weight:900;
-
-}
-
-
-.progress{
-
-  width:100%;
-
-  height:9px;
-
-  margin-top:12px;
-
-  overflow:hidden;
-
-  border-radius:10px;
-
-  background:
-    rgba(255,255,255,.12);
-
-}
-
-
-.progress-bar{
-
-  width:0%;
-
-  height:100%;
-
-  border-radius:10px;
-
-  background:
-    linear-gradient(
-      90deg,
-      #20e47b,
-      #75ffad
-    );
-
-  transition:
-    width .3s ease;
-
-}
-
-
-.streak-info{
-
-  margin-top:8px;
-
-  color:#9dbbd5;
-
-  font-size:12px;
-
-}
-
-
-/* =====================================================
-   ERRO
-===================================================== */
-
-.error{
-
-  display:none;
-
-  margin-top:15px;
-
-  padding:14px;
-
-  border-radius:16px;
-
-  color:#ffd6dc;
-
-  background:
-    rgba(120,15,35,.45);
-
-  border:
-    1px solid
-    rgba(255,80,105,.3);
-
-  font-size:13px;
-
-  line-height:1.4;
-
-}
-
-
-/* =====================================================
-   WHATSAPP
-===================================================== */
+/* WHATSAPP */
 
 .whatsapp{
-
   position:fixed;
 
   right:18px;
+  bottom:22px;
 
-  bottom:20px;
-
-  z-index:100;
-
-  width:61px;
-
-  height:61px;
-
-  border-radius:50%;
+  width:58px;
+  height:58px;
 
   display:flex;
-
   align-items:center;
-
   justify-content:center;
+
+  border-radius:50%;
 
   background:#25d366;
 
   color:white;
-
-  font-size:31px;
-
   text-decoration:none;
+
+  font-size:28px;
 
   box-shadow:
     0 8px 25px
     rgba(0,0,0,.35);
-
-}
-
-
-/* =====================================================
-   RESPONSIVO
-===================================================== */
-
-@media(max-width:600px){
-
-  .page{
-    padding:11px 11px 45px;
-  }
-
-  .box{
-
-    width:155px;
-    height:155px;
-
-    font-size:90px;
-
-  }
-
-  .prizes{
-    padding:13px;
-  }
-
-  .prize{
-    padding:11px;
-  }
-
-  .timer{
-    font-size:38px;
-  }
-
 }
 
 </style>
 
 </head>
 
-
 <body>
-
 
 <div class="page">
 
 
-<!-- =====================================================
-     TOPO
-===================================================== -->
+  <div class="top">
 
-<header class="topbar">
+    <button
+      class="back"
+      id="back">
 
-  <button
-    class="back-button"
-    id="backButton"
-    type="button">
+      ←
 
-    ← Voltar
+    </button>
 
-  </button>
+    <div class="title">
 
+      <small>ADAM GAMES</small>
 
-  <div class="logo">
+      <strong>CAIXA BOX</strong>
 
-    ADAM
-    <span>GAMES</span>
+    </div>
 
-  </div>
-
-</header>
-
-
-<!-- =====================================================
-     CABEÇALHO
-===================================================== -->
-
-<section class="header">
-
-  <div class="flag">
-
-    🇧🇷 SETEMBRO • INDEPENDÊNCIA
+    <div style="width:46px"></div>
 
   </div>
 
 
-  <h1>
+  <div class="theme">
 
-    CAIXA BOX 🎁
+    <span>
+      🇧🇷 SETEMBRO • INDEPENDÊNCIA
+    </span>
 
-  </h1>
+  </div>
 
-
-  <p>
-
-    Sua recompensa exclusiva do mês.
-
-  </p>
-
-</section>
-
-
-<!-- =====================================================
-     CAIXA
-===================================================== -->
-
-<section class="box-area">
 
   <div class="box">
 
@@ -793,257 +357,128 @@ body{
 
   </div>
 
-</section>
 
+  <h1>
+    Caixa da Independência
+  </h1>
 
-<!-- =====================================================
-     PRÊMIOS
-===================================================== -->
 
-<section class="prizes">
+  <p class="subtitle">
 
-  <div class="prizes-title">
-
-    🇧🇷 CAIXA DA INDEPENDÊNCIA
-
-  </div>
-
-
-  <div class="prize">
-
-    <div class="prize-icon">
-      🃏
-    </div>
-
-    <div class="prize-name">
-      500 Coringas
-    </div>
-
-  </div>
-
-
-  <div class="prize">
-
-    <div class="prize-icon">
-      🔧
-    </div>
-
-    <div class="prize-name">
-      3.000 Ferramentas de Rubi
-    </div>
-
-  </div>
-
-
-  <div class="prize">
-
-    <div class="prize-icon">
-      🎁
-    </div>
-
-    <div class="prize-name">
-      1.000 Itens
-    </div>
-
-  </div>
-
-
-  <div class="prize">
-
-    <div class="prize-icon">
-      🎰
-    </div>
-
-    <div class="prize-name">
-      2 Giros na Roleta
-    </div>
-
-  </div>
-
-
-  <div class="prize">
-
-    <div class="prize-icon">
-      📅
-    </div>
-
-    <div class="prize-name">
-      Evento do Dia
-    </div>
-
-  </div>
-
-
-  <div class="prize">
-
-    <div class="prize-icon">
-      🔑
-    </div>
-
-    <div class="prize-name">
-      1 Chave da Independência
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     ÁREA VIP
-===================================================== -->
-
-<section
-  class="chance-panel"
-  id="chancePanel">
-
-  <div class="chance-label" id="chanceLabel">
-
-    🎟️ PRÓXIMA CHANCE VIP
-
-  </div>
-
-
-  <div
-    class="timer"
-    id="timer">
-
-    72:00:00
-
-  </div>
-
-
-  <div
-    class="chance-description"
-    id="chanceDescription">
-
-    1 chance a cada 72 horas
-
-  </div>
-
-
-  <div
-    class="status"
-    id="status">
-
-    Carregando...
-
-  </div>
-
-
-  <button
-    class="redeem-button"
-    id="redeemButton"
-    type="button"
-    disabled>
-
-    🎁 RESGATAR CAIXA
-
-  </button>
-
-</section>
-
-
-<!-- =====================================================
-     NÃO VIP
-===================================================== -->
-
-<section
-  class="locked"
-  id="lockedPanel">
-
-  <div class="locked-icon">
-    👑
-  </div>
-
-
-  <h3>
-    Caixa exclusiva VIP
-  </h3>
-
-
-  <p>
-
-    A Caixa Box mensal é um benefício
-    exclusivo para membros VIP.
-
-    <br><br>
-
-    Você poderá visualizar outras
-    recompensas disponíveis no site.
+    Recompensa exclusiva para membros VIP.
 
   </p>
 
-</section>
-
-
-<!-- =====================================================
-     LOGIN CONSECUTIVO
-===================================================== -->
-
-<section class="streak">
-
-  <div class="streak-title">
-
-    🔥 LOGIN CONSECUTIVO
-
-  </div>
-
 
   <div
-    class="streak-count"
-    id="streakCount">
+    class="vip"
+    id="vipStatus">
 
-    0 / 7 dias
+    👑 Verificando VIP...
 
   </div>
 
 
-  <div class="progress">
+  <div class="timer-card">
+
+
+    <div class="timer-label">
+
+      PRÓXIMA CHANCE VIP
+
+    </div>
+
 
     <div
-      class="progress-bar"
-      id="progressBar">
+      class="timer"
+      id="timer">
+
+      --:--:--
+
+    </div>
+
+
+    <div
+      class="status waiting"
+      id="status">
+
+      Verificando...
+
+    </div>
+
+
+    <button
+      class="rescue"
+      id="rescue"
+      disabled>
+
+      🎁 RESGATAR CAIXA
+
+    </button>
+
+
+    <div
+      class="message"
+      id="message">
+
+    </div>
+
+
+  </div>
+
+
+  <div class="prizes">
+
+    <h2>
+      🎁 Conteúdo da Caixa
+    </h2>
+
+
+    <div class="prize">
+      <span>🃏</span>
+      <b>500 Coringas</b>
+    </div>
+
+
+    <div class="prize">
+      <span>🔧</span>
+      <b>3.000 Ferramentas de Rubi</b>
+    </div>
+
+
+    <div class="prize">
+      <span>📦</span>
+      <b>1.000 Itens</b>
+    </div>
+
+
+    <div class="prize">
+      <span>🎰</span>
+      <b>2 Giros na Roleta</b>
+    </div>
+
+
+    <div class="prize">
+      <span>🎉</span>
+      <b>Evento do Dia</b>
+    </div>
+
+
+    <div class="prize">
+      <span>🔑</span>
+      <b>1 Chave da Independência</b>
     </div>
 
   </div>
 
 
-  <div
-    class="streak-info"
-    id="streakInfo">
-
-    Entre 7 dias seguidos para ganhar
-    uma chance extra.
-
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     ERRO
-===================================================== -->
-
-<div
-  class="error"
-  id="error">
-
 </div>
 
-
-</div>
-
-
-<!-- =====================================================
-     WHATSAPP
-===================================================== -->
 
 <a
   class="whatsapp"
-  href="https://wa.me/5531987350267?text=Olá!%20Tenho%20uma%20dúvida%20sobre%20a%20Caixa%20Box."
-  target="_blank"
-  aria-label="WhatsApp">
+  href="https://wa.me/5531987350267"
+  target="_blank">
 
   💬
 
@@ -1079,16 +514,12 @@ import {
   where,
   getDocs,
   doc,
-  runTransaction,
+  updateDoc,
   Timestamp
 }
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-
-/* =====================================================
-   CONFIGURAÇÃO
-===================================================== */
 
 const firebaseConfig = {
 
@@ -1108,10 +539,7 @@ const firebaseConfig = {
     "1055528418738",
 
   appId:
-    "1:1055528418738:web:5fafdf63424ba9744eb8ab",
-
-  measurementId:
-    "G-KVFSF864GE"
+    "1:1055528418738:web:5fafdf63424ba9744eb8ab"
 
 };
 
@@ -1139,156 +567,115 @@ const timer =
     "timer"
   );
 
-
-const chanceLabel =
-  document.getElementById(
-    "chanceLabel"
-  );
-
-
-const chanceDescription =
-  document.getElementById(
-    "chanceDescription"
-  );
-
-
 const status =
   document.getElementById(
     "status"
   );
 
-
-const redeemButton =
+const rescue =
   document.getElementById(
-    "redeemButton"
+    "rescue"
+  );
+
+const message =
+  document.getElementById(
+    "message"
+  );
+
+const vipStatus =
+  document.getElementById(
+    "vipStatus"
   );
 
 
-const lockedPanel =
-  document.getElementById(
-    "lockedPanel"
-  );
+let usuarioRef = null;
 
-
-const chancePanel =
-  document.getElementById(
-    "chancePanel"
-  );
-
-
-const error =
-  document.getElementById(
-    "error"
-  );
-
-
-const streakCount =
-  document.getElementById(
-    "streakCount"
-  );
-
-
-const streakInfo =
-  document.getElementById(
-    "streakInfo"
-  );
-
-
-const progressBar =
-  document.getElementById(
-    "progressBar"
-  );
-
-
-/* =====================================================
-   VARIÁVEIS
-===================================================== */
-
-let firebaseUser = null;
-
-let cadastro = null;
-
-let cadastroId = null;
-
-let proximaChanceMs = null;
-
-let vip = false;
+let proximaChance = null;
 
 let intervalo = null;
 
 
-/*
-  72 horas para VIP.
-  120 horas para não VIP.
-*/
-
-const VIP_HORAS = 72;
-
-const NAO_VIP_HORAS = 120;
-
-
 /* =====================================================
-   ERRO
+   CONVERTER TIMESTAMP
 ===================================================== */
 
-function mostrarErro(
-  mensagem
-){
+function timestampMs(valor){
 
-  error.textContent =
-    mensagem;
+  if(!valor){
 
-  error.style.display =
-    "block";
+    return null;
+
+  }
+
+
+  if(
+    typeof valor.toMillis ===
+    "function"
+  ){
+
+    return valor.toMillis();
+
+  }
+
+
+  if(
+    typeof valor.seconds ===
+    "number"
+  ){
+
+    return valor.seconds * 1000;
+
+  }
+
+
+  return null;
 
 }
 
 
 /* =====================================================
-   FORMATAR TEMPO
+   FORMATAR
 ===================================================== */
 
-function formatarTempo(
-  totalSegundos
-){
+function formatar(ms){
 
-  totalSegundos =
-    Math.max(
-      0,
-      Math.floor(
-        totalSegundos
-      )
+  if(ms <= 0){
+
+    return "00:00:00";
+
+  }
+
+
+  const total =
+    Math.floor(
+      ms / 1000
     );
 
 
   const horas =
     Math.floor(
-      totalSegundos / 3600
+      total / 3600
     );
 
 
   const minutos =
     Math.floor(
-      (
-        totalSegundos % 3600
-      ) / 60
+      (total % 3600) / 60
     );
 
 
   const segundos =
-    totalSegundos % 60;
+    total % 60;
 
 
   return (
 
     String(horas)
       .padStart(2,"0")
-
     + ":" +
 
     String(minutos)
       .padStart(2,"0")
-
     + ":" +
 
     String(segundos)
@@ -1300,117 +687,81 @@ function formatarTempo(
 
 
 /* =====================================================
-   CONTADOR
+   TIMER
 ===================================================== */
 
-function atualizarContador(){
+function atualizar(){
 
   /*
-    Se não existe uma data,
-    a primeira chance está disponível.
+  Sem próxima chance =
+  primeira chance disponível.
   */
 
-  if(
-    !proximaChanceMs
-  ){
+  if(!proximaChance){
 
     timer.textContent =
-      "CHANCE DISPONÍVEL";
-
-    timer.classList.add(
-      "available"
-    );
+      "DISPONÍVEL";
 
     status.textContent =
-      "🎟️ Você possui uma chance para resgatar.";
+      "🎟️ Sua chance está disponível!";
 
-    redeemButton.disabled =
+    status.className =
+      "status available";
+
+    rescue.disabled =
       false;
-
-    redeemButton.textContent =
-      "🎁 RESGATAR CAIXA";
 
     return;
 
   }
 
 
-  const agora =
+  const restante =
+    proximaChance -
     Date.now();
 
-
-  const restante =
-    proximaChanceMs -
-    agora;
-
-
-  /*
-    Tempo terminou.
-  */
 
   if(
     restante <= 0
   ){
 
     timer.textContent =
-      "CHANCE DISPONÍVEL";
-
-    timer.classList.add(
-      "available"
-    );
+      "00:00:00";
 
     status.textContent =
-      "🎟️ Sua nova chance está disponível!";
+      "🎟️ Sua chance está disponível!";
 
-    redeemButton.disabled =
+    status.className =
+      "status available";
+
+    rescue.disabled =
       false;
-
-    redeemButton.textContent =
-      "🎁 RESGATAR CAIXA";
 
     return;
 
   }
 
 
-  /*
-    Ainda está contando.
-  */
-
-  timer.classList.remove(
-    "available"
-  );
-
-
-  const segundos =
-    Math.floor(
-      restante / 1000
-    );
-
-
   timer.textContent =
-    formatarTempo(
-      segundos
+    formatar(
+      restante
     );
-
 
   status.textContent =
-    "⏳ Aguarde o término do período para receber sua próxima chance.";
+    "⏳ Aguarde para liberar sua próxima chance.";
 
-  redeemButton.disabled =
+  status.className =
+    "status waiting";
+
+  rescue.disabled =
     true;
-
-  redeemButton.textContent =
-    "⏳ AGUARDANDO CHANCE";
 
 }
 
 
-/* =====================================================
-   INICIAR CONTADOR
-===================================================== */
+function iniciarTimer(){
 
-function iniciarContador(){
+  atualizar();
 
   if(intervalo){
 
@@ -1420,13 +771,9 @@ function iniciarContador(){
 
   }
 
-
-  atualizarContador();
-
-
   intervalo =
     setInterval(
-      atualizarContador,
+      atualizar,
       1000
     );
 
@@ -1434,442 +781,240 @@ function iniciarContador(){
 
 
 /* =====================================================
-   CARREGAR CADASTRO
+   CARREGAR USUÁRIO
 ===================================================== */
 
-async function carregarCadastro(
-  user
-){
+async function carregar(user){
 
-  const admins =
-    collection(
-      db,
-      "admins"
-    );
+  const resultado =
+    await getDocs(
 
+      query(
 
-  let snapshot;
+        collection(
+          db,
+          "admins"
+        ),
 
-
-  /*
-    Primeiro tenta pelo UID.
-  */
-
-  try{
-
-    snapshot =
-      await getDocs(
-        query(
-          admins,
-          where(
-            "uid",
-            "==",
-            user.uid
-          )
+        where(
+          "uid",
+          "==",
+          user.uid
         )
-      );
 
-  }
-  catch(err){
+      )
 
-    console.error(
-      err
     );
-
-    throw new Error(
-      "Não foi possível consultar seu cadastro."
-    );
-
-  }
-
-
-  /*
-    Compatibilidade com cadastro antigo.
-  */
-
-  if(
-    snapshot.empty &&
-    user.email
-  ){
-
-    try{
-
-      snapshot =
-        await getDocs(
-          query(
-            admins,
-            where(
-              "email",
-              "==",
-              user.email
-                .trim()
-                .toLowerCase()
-            )
-          )
-        );
-
-    }
-    catch(err){
-
-      console.error(
-        err
-      );
-
-      throw new Error(
-        "Não foi possível localizar seu cadastro."
-      );
-
-    }
-
-  }
 
 
   if(
-    snapshot.empty
+    resultado.empty
   ){
 
     throw new Error(
-      "Seu usuário está autenticado, mas não possui cadastro no sistema."
+      "Cadastro não encontrado."
     );
 
   }
 
 
   const documento =
-    snapshot.docs[0];
+    resultado.docs[0];
 
 
-  return {
-
-    id:
-      documento.id,
-
-    data:
-      documento.data()
-
-  };
-
-}
+  const dados =
+    documento.data();
 
 
-/* =====================================================
-   PREPARAR CAIXA
-===================================================== */
-
-function prepararCaixa(){
-
-  vip =
-    cadastro.data.vip === true;
+  usuarioRef =
+    doc(
+      db,
+      "admins",
+      documento.id
+    );
 
 
   /*
-    NÃO VIP
+  VIP
   */
 
-  if(!vip){
+  if(
+    dados.vip !== true
+  ){
 
-    chancePanel.style.display =
-      "none";
+    vipStatus.textContent =
+      "🔒 Caixa exclusiva para VIP";
 
-    lockedPanel.style.display =
-      "block";
+    timer.textContent =
+      "BLOQUEADA";
+
+    status.textContent =
+      "👑 Torne-se VIP para ter acesso à Caixa Box.";
+
+    status.className =
+      "status locked";
+
+    rescue.disabled =
+      true;
 
     return;
 
   }
 
 
-  /*
-    VIP
-  */
-
-  lockedPanel.style.display =
-    "none";
-
-  chancePanel.style.display =
-    "block";
-
-
-  chanceLabel.textContent =
-    "🎟️ PRÓXIMA CHANCE VIP";
-
-
-  chanceDescription.textContent =
-    "1 chance a cada 72 horas";
+  vipStatus.textContent =
+    "👑 VIP ATIVO";
 
 
   /*
-    Campo salvo no Firebase.
+  Próxima chance
   */
 
-  const proximaChance =
-    cadastro.data.proximaChance;
+  proximaChance =
+    timestampMs(
+      dados.proximaChance
+    );
 
 
-  if(
-    proximaChance &&
-    typeof proximaChance.toMillis ===
-      "function"
-  ){
-
-    proximaChanceMs =
-      proximaChance.toMillis();
-
-  }
-
-  else if(
-    proximaChance &&
-    typeof proximaChance.seconds ===
-      "number"
-  ){
-
-    proximaChanceMs =
-      proximaChance.seconds * 1000;
-
-  }
-
-  else if(
-    typeof proximaChance ===
-      "string"
-  ){
-
-    const convertido =
-      new Date(
-        proximaChance
-      ).getTime();
-
-
-    proximaChanceMs =
-      Number.isFinite(
-        convertido
-      )
-        ? convertido
-        : null;
-
-  }
-
-  else{
-
-    proximaChanceMs =
-      null;
-
-  }
-
-
-  iniciarContador();
+  iniciarTimer();
 
 }
 
 
 /* =====================================================
-   RESGATAR CAIXA
+   RESGATAR
 ===================================================== */
 
-redeemButton.addEventListener(
+rescue.addEventListener(
   "click",
   async () => {
 
-    if(!firebaseUser){
+    if(!usuarioRef){
 
       return;
 
     }
 
 
-    if(!vip){
-
-      return;
-
-    }
-
-
-    redeemButton.disabled =
+    rescue.disabled =
       true;
 
-    redeemButton.textContent =
+    rescue.textContent =
       "PROCESSANDO...";
+
+    message.textContent =
+      "";
 
 
     try{
 
       /*
-        Nova data.
-
-        IMPORTANTE:
-        o período começa SOMENTE
-        depois do resgate.
+      Firestore usa o horário
+      do servidor através de
+      server timestamp.
       */
 
       const agora =
-        Date.now();
+        Timestamp.now();
 
 
-      const novaData =
-        agora +
-        (
-          VIP_HORAS *
-          60 *
-          60 *
-          1000
+      const proxima =
+        Timestamp.fromMillis(
+
+          agora.toMillis()
+          +
+          (
+            72 *
+            60 *
+            60 *
+            1000
+          )
+
         );
 
 
-      const referencia =
-        doc(
-          db,
-          "admins",
-          cadastroId
-        );
+      await updateDoc(
 
+        usuarioRef,
 
-      await runTransaction(
-        db,
-        async transaction => {
+        {
 
-          const documento =
-            await transaction.get(
-              referencia
-            );
+          ultimaCaixaResgatadaEm:
+            agora,
 
+          proximaChance:
+            proxima,
 
-          if(!documento.exists()){
-
-            throw new Error(
-              "Cadastro não encontrado."
-            );
-
-          }
-
-
-          const dados =
-            documento.data();
-
-
-          /*
-            Confirma novamente
-            que o usuário continua VIP.
-          */
-
-          if(
-            dados.vip !== true
-          ){
-
-            throw new Error(
-              "A Caixa Box é exclusiva para membros VIP."
-            );
-
-          }
-
-
-          /*
-            Impede novo resgate
-            enquanto ainda houver
-            tempo restante.
-          */
-
-          const existente =
-            dados.proximaChance;
-
-
-          if(
-            existente &&
-            typeof existente.toMillis ===
-              "function"
-          ){
-
-            const existenteMs =
-              existente.toMillis();
-
-
-            if(
-              existenteMs >
-              Date.now()
-            ){
-
-              throw new Error(
-                "Sua próxima chance ainda não está disponível."
-              );
-
-            }
-
-          }
-
-
-          transaction.update(
-            referencia,
-            {
-
-              proximaChance:
-                Timestamp.fromMillis(
-                  novaData
-                ),
-
-              ultimaCaixaResgatadaEm:
-                Timestamp.fromMillis(
-                  agora
-                )
-
-            }
-          );
+          caixaBox:
+            true
 
         }
+
       );
 
 
       /*
-        Atualiza a tela.
+      Atualiza a tela
       */
 
-      proximaChanceMs =
-        novaData;
+      proximaChance =
+        proxima.toMillis();
 
 
-      timer.classList.remove(
-        "available"
-      );
-
-
-      iniciarContador();
+      timer.textContent =
+        formatar(
+          proximaChance -
+          Date.now()
+        );
 
 
       status.textContent =
-        "🎉 Caixa resgatada! Sua próxima chance começou a contar.";
+        "✅ Caixa resgatada!";
+
+      status.className =
+        "status available";
 
 
-      redeemButton.disabled =
-        true;
+      message.textContent =
+        "Sua próxima chance estará disponível em 72 horas.";
 
 
-      redeemButton.textContent =
-        "⏳ PRÓXIMA CHANCE EM BREVE";
+      rescue.textContent =
+        "CAIXA RESGATADA";
 
 
-      /*
-        Aqui futuramente vamos
-        registrar exatamente quais
-        prêmios foram entregues.
-      */
+      iniciarTimer();
 
-      alert(
-        "🎁 Caixa da Independência resgatada com sucesso!"
-      );
 
     }
-    catch(err){
+    catch(error){
 
       console.error(
-        "Erro ao resgatar:",
-        err
+        error
       );
 
 
-      mostrarErro(
-        err.message ||
-        "Não foi possível resgatar a caixa."
+      console.error(
+        error.message
       );
 
 
-      atualizarContador();
+      rescue.disabled =
+        false;
+
+      rescue.textContent =
+        "🎁 RESGATAR CAIXA";
+
+
+      status.textContent =
+        "⚠️ Não foi possível resgatar.";
+
+      status.className =
+        "status locked";
+
+
+      message.textContent =
+        "Verifique sua conexão e tente novamente.";
 
     }
 
@@ -1878,89 +1023,24 @@ redeemButton.addEventListener(
 
 
 /* =====================================================
-   LOGIN CONSECUTIVO
+   VOLTAR
 ===================================================== */
 
-function mostrarLoginConsecutivo(){
+document
+  .getElementById("back")
+  .addEventListener(
+    "click",
+    () => {
 
-  const dias =
-    Number(
-      cadastro.data.loginConsecutivo
-    ) || 0;
+      window.location.href =
+        "painel.html";
 
-
-  const limite =
-    7;
-
-
-  const percentual =
-    Math.min(
-      100,
-      (
-        dias /
-        limite
-      ) *
-      100
-    );
-
-
-  streakCount.textContent =
-    dias +
-    " / 7 dias";
-
-
-  progressBar.style.width =
-    percentual +
-    "%";
-
-
-  if(
-    dias >= 7
-  ){
-
-    streakInfo.textContent =
-      vip
-        ? "🔥 Sequência completa! VIP recebe 2 chances extras."
-        : "🔥 Sequência completa! Você recebeu 1 chance extra.";
-
-  }
-
-  else{
-
-    const faltam =
-      7 -
-      dias;
-
-
-    streakInfo.textContent =
-      "Faltam " +
-      faltam +
-      " dia(s) para completar a sequência.";
-
-  }
-
-}
+    }
+  );
 
 
 /* =====================================================
-   BOTÃO VOLTAR
-===================================================== */
-
-document.getElementById(
-  "backButton"
-).addEventListener(
-  "click",
-  () => {
-
-    window.location.href =
-      "painel.html";
-
-  }
-);
-
-
-/* =====================================================
-   AUTENTICAÇÃO
+   LOGIN
 ===================================================== */
 
 onAuthStateChanged(
@@ -1971,47 +1051,35 @@ onAuthStateChanged(
 
     if(!user){
 
-      window.location.replace(
-        "index.html"
-      );
+      window.location.href =
+        "index.html";
 
       return;
 
     }
 
 
-    firebaseUser =
-      user;
-
-
     try{
 
-      cadastro =
-        await carregarCadastro(
-          user
-        );
-
-
-      cadastroId =
-        cadastro.id;
-
-
-      prepararCaixa();
-
-      mostrarLoginConsecutivo();
+      await carregar(
+        user
+      );
 
     }
-    catch(err){
+    catch(error){
 
       console.error(
-        err
+        error
       );
 
+      status.textContent =
+        "Erro ao carregar sua Caixa.";
 
-      mostrarErro(
-        err.message ||
-        "Não foi possível carregar a Caixa Box."
-      );
+      status.className =
+        "status locked";
+
+      message.textContent =
+        error.message;
 
     }
 
