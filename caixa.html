@@ -2,12 +2,19 @@
 <html lang="pt-BR">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<title>Adam Games — Caixa Box Independência</title>
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Adam Games - Caixa Box</title>
 
 <style>
+
+/* =====================================================
+   RESET
+===================================================== */
 
 *{
   box-sizing:border-box;
@@ -15,461 +22,542 @@
   padding:0;
 }
 
-html,
-body{
+html{
   min-height:100%;
-  background:#03152f;
+  background:#061b35;
 }
 
 body{
-  font-family:Arial,Helvetica,sans-serif;
+
+  min-height:100vh;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
   color:#fff;
 
   background:
-    radial-gradient(
-      circle at 50% 0%,
-      rgba(0,170,90,.22),
-      transparent 32%
-    ),
     linear-gradient(
       180deg,
-      #006b3c 0%,
-      #008f5a 18%,
-      #075fa8 52%,
-      #063b70 76%,
-      #03152f 100%
+      #087f43 0%,
+      #006b43 30%,
+      #063b62 68%,
+      #061b35 100%
     );
 
-  overflow-x:hidden;
-}
-
-body:after{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:0;
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(255,215,0,.05),
-      transparent 35%,
-      rgba(255,255,255,.04) 70%,
-      transparent
-    );
 }
 
 
-/* ================================
+/* =====================================================
    PÁGINA
-================================ */
+===================================================== */
 
 .page{
-  position:relative;
-  z-index:1;
 
   width:100%;
-  max-width:620px;
 
-  margin:auto;
+  max-width:650px;
+
+  min-height:100vh;
+
+  margin:0 auto;
 
   padding:
     14px
     16px
-    70px;
+    100px;
+
 }
 
 
-/* ================================
+/* =====================================================
    TOPO
-================================ */
+===================================================== */
 
 .top{
+
+  position:relative;
+
   display:flex;
+
   align-items:center;
-  justify-content:space-between;
-
-  height:48px;
-}
-
-.back{
-  width:44px;
-  height:44px;
-
-  border:
-    1px solid
-    rgba(255,255,255,.25);
-
-  border-radius:13px;
-
-  background:
-    rgba(0,25,55,.65);
-
-  color:#fff;
-
-  font-size:25px;
-}
-
-.top-title{
-  text-align:center;
-  line-height:1.05;
-
-  text-shadow:
-    0 2px 7px #000;
-}
-
-.top-title small{
-  display:block;
-
-  font-size:10px;
-
-  color:#dff7eb;
-}
-
-.top-title strong{
-  font-size:17px;
-  color:#fff;
-}
-
-.spacer{
-  width:44px;
-}
-
-
-/* ================================
-   BAÚ
-================================ */
-
-.chest-area{
-
-  height:205px;
-
-  display:flex;
-
-  align-items:flex-end;
 
   justify-content:center;
 
-  position:relative;
+  min-height:55px;
 
-  margin-top:2px;
 }
 
-.chest{
+.back{
+
+  position:absolute;
+
+  left:0;
+
+  top:0;
+
+  width:48px;
+
+  height:48px;
+
+  border:1px solid
+    rgba(255,255,255,.2);
+
+  border-radius:14px;
+
+  background:
+    rgba(0,35,55,.75);
+
+  color:#fff;
+
+  font-size:27px;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 5px 15px
+    rgba(0,0,0,.25);
+
+}
+
+.title{
+
+  text-align:center;
+
+  line-height:1.05;
+
+}
+
+.title small{
+
+  display:block;
+
+  font-size:11px;
+
+  color:#d9f7e9;
+
+  letter-spacing:1px;
+
+}
+
+.title strong{
+
+  display:block;
+
+  font-size:20px;
+
+  color:#fff;
+
+}
+
+
+/* =====================================================
+   BAÚ
+===================================================== */
+
+.chest-area{
 
   position:relative;
 
-  width:
-    min(
-      310px,
-      78vw
-    );
+  display:flex;
 
-  height:190px;
+  flex-direction:column;
+
+  align-items:center;
+
+  justify-content:center;
+
+  margin-top:8px;
+
+  margin-bottom:8px;
+
+}
+
+
+/*
+   IMAGEM DO BAÚ
+*/
+
+.chest-button{
+
+  position:relative;
+
+  width:min(78vw,430px);
+
+  max-width:430px;
+
+  border:none;
+
+  background:transparent;
+
+  padding:0;
 
   cursor:pointer;
+
+  -webkit-tap-highlight-color:transparent;
+
+}
+
+
+/*
+   IMAGEM
+*/
+
+.chest-image{
+
+  display:block;
+
+  width:100%;
+
+  height:auto;
+
+  max-height:260px;
+
+  object-fit:contain;
 
   filter:
     drop-shadow(
       0 15px 18px
-      rgba(0,0,0,.42)
+      rgba(0,0,0,.35)
     );
 
-  transform-origin:
-    50% 88%;
+  transform:
+    scale(.92);
 
   transition:
-    transform .2s ease;
+    transform .16s ease,
+    filter .16s ease;
+
 }
 
-.chest:hover{
+
+/*
+   HOVER
+*/
+
+.chest-button:hover
+.chest-image{
+
   transform:
-    translateY(-3px)
-    scale(1.015);
-}
+    scale(.96);
 
-.chest:active{
-  transform:
-    scale(.97);
 }
 
 
-/* CORPO DO BAÚ */
+/*
+   CLIQUE
+*/
 
-.chest-body{
+.chest-button.opening
+.chest-image{
+
+  animation:
+    chestOpen
+    .42s
+    ease-out;
+
+}
+
+
+@keyframes chestOpen{
+
+  0%{
+
+    transform:
+      scale(.92)
+      translateY(0)
+      rotate(0deg);
+
+  }
+
+  25%{
+
+    transform:
+      scale(1.03)
+      translateY(-8px)
+      rotate(-2deg);
+
+  }
+
+  50%{
+
+    transform:
+      scale(1.08)
+      translateY(-13px)
+      rotate(2deg);
+
+  }
+
+  75%{
+
+    transform:
+      scale(1.02)
+      translateY(-5px)
+      rotate(-1deg);
+
+  }
+
+  100%{
+
+    transform:
+      scale(.96)
+      translateY(0)
+      rotate(0deg);
+
+  }
+
+}
+
+
+/* =====================================================
+   BRILHO
+===================================================== */
+
+.chest-button::after{
+
+  content:"";
 
   position:absolute;
 
   left:50%;
-  bottom:0;
 
-  transform:
-    translateX(-50%);
+  top:48%;
 
-  width:100%;
-  height:72%;
+  width:15px;
 
-  object-fit:contain;
-
-  z-index:2;
-}
-
-
-/* TAMPA */
-
-.chest-lid{
-
-  position:absolute;
-
-  left:50%;
-  top:0;
-
-  transform:
-    translateX(-50%);
-
-  width:100%;
-  height:64%;
-
-  object-fit:contain;
-
-  z-index:3;
-
-  transform-origin:
-    50% 88%;
-
-  transition:
-    transform .75s
-    cubic-bezier(.2,.8,.2,1),
-
-    filter .75s;
-}
-
-
-/* BRILHO */
-
-.chest-glow{
-
-  position:absolute;
-
-  left:50%;
-  top:28%;
-
-  width:65%;
-  height:55%;
-
-  transform:
-    translate(-50%,-50%)
-    scale(.5);
+  height:15px;
 
   border-radius:50%;
 
-  background:
-    radial-gradient(
-      circle,
-      rgba(255,244,126,.95) 0,
-      rgba(255,196,0,.45) 22%,
-      rgba(255,196,0,0) 70%
-    );
+  background:#fff;
 
   opacity:0;
 
-  z-index:1;
+  pointer-events:none;
 
-  transition:
-    opacity .35s,
-    transform .75s;
-}
+  box-shadow:
 
+    0 0 12px #fff,
 
-/* BAÚ ABERTO */
+    0 0 30px #ffd92e,
 
-.chest-open .chest-lid{
-
-  transform:
-    translateX(-50%)
-    rotateX(62deg)
-    translateY(-22px)
-    rotateZ(-2deg);
-
-  filter:
-    brightness(1.25);
-}
-
-.chest-open .chest-glow{
-
-  opacity:1;
+    0 0 55px #4cffd0;
 
   transform:
     translate(-50%,-50%)
-    scale(1.25);
+    scale(.1);
 
-  animation:
-    glow .9s
-    ease-in-out;
 }
 
 
-@keyframes glow{
+.chest-button.opening::after{
+
+  animation:
+    chestGlow
+    .55s
+    ease-out;
+
+}
+
+
+@keyframes chestGlow{
 
   0%{
+
     opacity:0;
 
     transform:
       translate(-50%,-50%)
-      scale(.35);
+      scale(.1);
+
   }
 
-  45%{
+  35%{
+
     opacity:1;
-  }
-
-  100%{
-    opacity:.8;
 
     transform:
       translate(-50%,-50%)
-      scale(1.25);
+      scale(1);
+
   }
+
+  100%{
+
+    opacity:0;
+
+    transform:
+      translate(-50%,-50%)
+      scale(5);
+
+  }
+
 }
 
 
-/* ================================
+/* =====================================================
    ESTRELAS
-================================ */
+===================================================== */
 
 .sparkles{
 
   position:absolute;
 
-  inset:
-    -20px
-    0
-    15px;
+  left:50%;
+
+  top:48%;
+
+  width:1px;
+
+  height:1px;
 
   pointer-events:none;
 
-  z-index:5;
-
-  opacity:0;
 }
 
-.chest-open .sparkles{
-  opacity:1;
-}
 
-.spark{
+.sparkles span{
 
   position:absolute;
 
+  left:0;
+
+  top:0;
+
+  color:#ffe65c;
+
   font-size:20px;
 
+  opacity:0;
+
+  text-shadow:
+    0 0 8px #fff,
+    0 0 18px #ffd000;
+
+}
+
+
+.chest-button.opening
+.sparkles span{
+
   animation:
-    burst .9s
+    sparkle
+    .55s
     ease-out
     forwards;
 
-  opacity:0;
 }
 
-.s1{
-  left:25%;
-  top:55%;
-  --x:-75px;
+
+.sparkles span:nth-child(1){
+  --x:-110px;
+  --y:-80px;
 }
 
-.s2{
-  left:38%;
-  top:40%;
-  font-size:27px;
-  --x:-35px;
+.sparkles span:nth-child(2){
+  --x:105px;
+  --y:-70px;
+  animation-delay:.03s;
 }
 
-.s3{
-  left:52%;
-  top:50%;
-  font-size:24px;
-  --x:0;
+.sparkles span:nth-child(3){
+  --x:-130px;
+  --y:5px;
+  animation-delay:.06s;
 }
 
-.s4{
-  left:66%;
-  top:42%;
-  --x:45px;
+.sparkles span:nth-child(4){
+  --x:125px;
+  --y:15px;
+  animation-delay:.09s;
 }
 
-.s5{
-  left:75%;
-  top:58%;
-  font-size:25px;
-  --x:75px;
+.sparkles span:nth-child(5){
+  --x:-65px;
+  --y:-125px;
+  animation-delay:.12s;
 }
 
-.s6{
-  left:47%;
-  top:30%;
-  font-size:17px;
-  --x:10px;
+.sparkles span:nth-child(6){
+  --x:65px;
+  --y:-120px;
+  animation-delay:.15s;
 }
 
-@keyframes burst{
+
+@keyframes sparkle{
 
   0%{
+
     opacity:0;
 
     transform:
-      translate(0,25px)
+      translate(0,0)
       scale(.2)
-      rotate(0);
+      rotate(0deg);
+
   }
 
   25%{
+
     opacity:1;
+
   }
 
   100%{
+
     opacity:0;
 
     transform:
-      translate(var(--x),-85px)
-      scale(1.25)
+      translate(var(--x),var(--y))
+      scale(1.3)
       rotate(180deg);
+
   }
+
 }
 
 
-/* TEXTO DO BAÚ */
+/* =====================================================
+   TEXTO DO BAÚ
+===================================================== */
 
-.chest-hint{
+.tap-text{
+
+  margin-top:-4px;
+
+  font-size:14px;
+
+  color:#dfffee;
 
   text-align:center;
 
-  color:#dff7eb;
+  text-shadow:
+    0 2px 5px rgba(0,0,0,.4);
 
-  font-size:12px;
-
-  margin-top:2px;
-
-  opacity:.9;
 }
 
-.chest-hint b{
-  color:#ffd92e;
+.tap-text strong{
+
+  color:#ffe04a;
+
 }
 
 
-/* ================================
-   TÍTULO
-================================ */
+/* =====================================================
+   TÍTULO DA CAIXA
+===================================================== */
 
 .box-title{
 
   text-align:center;
 
-  margin-top:10px;
+  margin-top:13px;
 
-  text-shadow:
-    0 3px 8px #000;
+  margin-bottom:16px;
+
 }
 
 .box-title h1{
@@ -478,356 +566,382 @@ body:after{
     clamp(
       25px,
       7vw,
-      37px
+      38px
     );
 
   font-weight:900;
 
-  color:#fff;
+  line-height:1.1;
+
+  text-shadow:
+    0 3px 8px rgba(0,0,0,.45);
+
 }
 
 .box-title p{
 
-  margin-top:6px;
+  margin-top:8px;
 
-  font-size:14px;
+  font-size:15px;
 
-  color:#e6f5ff;
+  color:#e5fff1;
+
 }
 
 
-/* ================================
+/* =====================================================
    VIP
-================================ */
+===================================================== */
 
 .vip{
 
-  margin-top:15px;
+  width:100%;
 
-  padding:
-    12px
-    15px;
+  padding:15px;
 
-  border-radius:16px;
+  border-radius:18px;
 
   text-align:center;
 
-  font-size:17px;
+  font-size:18px;
 
   font-weight:900;
 
   background:
     linear-gradient(
       135deg,
-      #f1ca35,
-      #a16d00
+      #f0c72e,
+      #a96f00
     );
 
   border:
     2px solid
-    rgba(255,237,140,.55);
+    rgba(255,242,150,.65);
 
   box-shadow:
-    0 6px 18px
+    0 7px 20px
     rgba(0,0,0,.3);
+
 }
 
 
-/* ================================
-   CARDS
-================================ */
-
-.timer-card,
-.chance-card,
-.prizes{
-
-  margin-top:15px;
-
-  border-radius:22px;
-
-  background:
-    rgba(2,24,55,.92);
-
-  border:
-    1px solid
-    rgba(255,255,255,.10);
-
-  box-shadow:
-    0 10px 30px
-    rgba(0,0,0,.28);
-}
-
-
-/* ================================
+/* =====================================================
    TIMER
-================================ */
+===================================================== */
 
 .timer-card{
 
-  padding:
-    19px
-    15px;
+  width:100%;
+
+  margin-top:18px;
+
+  padding:22px 17px;
+
+  border-radius:24px;
+
+  background:
+    rgba(2,27,55,.94);
+
+  border:
+    2px solid
+    rgba(47,177,255,.35);
+
+  box-shadow:
+    0 10px 30px
+    rgba(0,0,0,.3);
 
   text-align:center;
+
 }
 
 .timer-label{
 
-  color:#a9d2f2;
+  color:#a8d4f5;
 
   font-size:14px;
 
   font-weight:900;
 
   letter-spacing:.4px;
+
 }
 
 .timer{
 
-  margin-top:6px;
+  margin-top:7px;
 
   font-size:
     clamp(
-      35px,
+      36px,
       10vw,
-      54px
+      58px
     );
 
   line-height:1;
 
   font-weight:900;
 
-  color:#ffd92e;
+  color:#ffdc28;
 
   text-shadow:
-    0 2px 8px
-    rgba(255,210,20,.35);
+    0 2px 10px
+    rgba(255,210,20,.4);
 
   font-variant-numeric:
     tabular-nums;
+
 }
-
-
-/* ================================
-   BARRA
-================================ */
 
 .progress{
 
-  height:11px;
+  width:100%;
 
-  margin-top:16px;
+  height:12px;
+
+  margin-top:18px;
 
   overflow:hidden;
 
   border-radius:20px;
 
-  background:#0a294e;
+  background:#0a2747;
 
   border:
     1px solid
-    rgba(255,255,255,.15);
+    rgba(255,255,255,.18);
+
 }
 
 .progress-bar{
 
-  height:100%;
+  width:100%;
 
-  width:0;
+  height:100%;
 
   border-radius:20px;
 
   background:
     linear-gradient(
       90deg,
-      #ffd900,
-      #45ed70,
+      #ffe000,
+      #5cff74,
       #16a5ff
     );
 
   transition:
-    width .5s linear;
+    width 1s linear;
+
 }
-
-
-/* ================================
-   STATUS
-================================ */
 
 .status{
 
-  margin-top:11px;
+  margin-top:13px;
 
-  font-size:14px;
+  font-size:15px;
 
   line-height:1.4;
+
 }
 
 .available{
-  color:#59ff9a;
+
+  color:#5cff9b;
+
 }
 
 .waiting{
-  color:#ffd75c;
+
+  color:#ffd85c;
+
 }
 
 .locked{
-  color:#ff8e9b;
+
+  color:#ff909d;
+
 }
 
 
-/* ================================
+/* =====================================================
    BOTÃO
-================================ */
+===================================================== */
 
 .rescue{
 
   width:100%;
 
-  height:56px;
+  height:58px;
 
-  margin-top:16px;
+  margin-top:18px;
 
-  border:0;
+  border:none;
 
-  border-radius:16px;
+  border-radius:17px;
 
   background:
     linear-gradient(
       135deg,
-      #23aaff,
-      #0874dd
+      #25aaff,
+      #0877dc
     );
 
   color:#fff;
 
-  font-size:16px;
+  font-size:17px;
 
   font-weight:900;
+
+  cursor:pointer;
 
   box-shadow:
     0 7px 18px
     rgba(0,0,0,.3);
+
 }
 
 .rescue:disabled{
 
-  opacity:.43;
+  opacity:.42;
 
   cursor:not-allowed;
+
 }
+
+
+/* =====================================================
+   MENSAGEM
+===================================================== */
 
 .message{
 
   min-height:20px;
 
-  margin-top:10px;
+  margin-top:12px;
 
-  color:#c5ddf2;
+  color:#cce5f8;
 
-  font-size:12px;
+  font-size:13px;
 
   line-height:1.45;
+
 }
 
 
-/* ================================
+/* =====================================================
    CHANCES
-================================ */
+===================================================== */
 
 .chance-card{
 
-  display:grid;
+  display:flex;
 
-  grid-template-columns:
-    1fr
-    1fr;
+  align-items:center;
 
-  gap:12px;
+  gap:15px;
 
-  padding:16px;
-}
+  width:100%;
 
-.chance-side{
+  margin-top:18px;
 
-  padding:
-    5px
-    4px;
+  padding:18px;
 
-  text-align:center;
+  border-radius:20px;
+
+  background:
+    rgba(2,27,55,.94);
+
+  border:
+    1px solid
+    rgba(255,255,255,.1);
+
 }
 
 .chance-title{
 
-  color:#a7c9e7;
+  color:#a8cde9;
 
   font-size:12px;
 
   font-weight:bold;
+
 }
 
 .chance-number{
 
   margin-top:3px;
 
-  font-size:34px;
+  font-size:36px;
 
   font-weight:900;
 
   color:#fff;
+
 }
 
 .vip-info{
 
+  flex:1;
+
+  padding-left:15px;
+
   border-left:
     1px solid
-    rgba(255,255,255,.12);
+    rgba(255,255,255,.13);
 
-  padding-left:14px;
-
-  color:#dcecff;
+  color:#dcefff;
 
   font-size:13px;
 
-  line-height:1.35;
+  line-height:1.4;
 
-  display:flex;
-
-  flex-direction:column;
-
-  justify-content:center;
 }
 
 .vip-info strong{
+
+  display:block;
+
+  margin-bottom:4px;
 
   color:#ffd92e;
 
   font-size:14px;
 
-  margin-bottom:4px;
 }
 
 
-/* ================================
+/* =====================================================
    PRÊMIOS
-================================ */
+===================================================== */
 
 .prizes{
 
-  padding:16px;
+  width:100%;
 
-  margin-bottom:12px;
+  margin-top:18px;
+
+  padding:18px;
+
+  border-radius:22px;
+
+  background:
+    rgba(2,27,55,.94);
+
+  border:
+    1px solid
+    rgba(255,255,255,.1);
+
 }
 
 .prizes h2{
 
   text-align:center;
 
-  font-size:19px;
+  font-size:20px;
 
   color:#fff;
 
-  margin-bottom:4px;
+  margin-bottom:5px;
+
 }
 
 .prize{
@@ -838,9 +952,9 @@ body:after{
 
   gap:12px;
 
-  margin-top:9px;
+  margin-top:10px;
 
-  padding:11px;
+  padding:13px;
 
   border-radius:13px;
 
@@ -848,22 +962,24 @@ body:after{
     rgba(255,255,255,.055);
 
   font-size:14px;
+
 }
 
 .prize span{
 
-  width:30px;
+  width:32px;
 
   text-align:center;
 
-  font-size:21px;
+  font-size:22px;
+
 }
 
-.lock-note{
+.vip-only{
 
-  margin-top:13px;
+  margin-top:15px;
 
-  padding:11px;
+  padding:12px;
 
   text-align:center;
 
@@ -874,15 +990,16 @@ body:after{
 
   color:#ffd83a;
 
-  font-size:12px;
+  font-size:13px;
 
   font-weight:bold;
+
 }
 
 
-/* ================================
+/* =====================================================
    WHATSAPP
-================================ */
+===================================================== */
 
 .whatsapp{
 
@@ -890,11 +1007,11 @@ body:after{
 
   right:18px;
 
-  bottom:18px;
+  bottom:20px;
 
-  width:56px;
+  width:58px;
 
-  height:56px;
+  height:58px;
 
   display:flex;
 
@@ -910,38 +1027,59 @@ body:after{
 
   text-decoration:none;
 
-  font-size:26px;
+  font-size:28px;
 
   box-shadow:
     0 7px 22px
     rgba(0,0,0,.35);
 
-  z-index:50;
+  z-index:100;
+
 }
 
 
-/* ================================
-   DEBUG
-================================ */
+/* =====================================================
+   RESPONSIVO
+===================================================== */
 
-.debug{
+@media(max-width:420px){
 
-  display:none;
+  .page{
 
-  margin-top:10px;
+    padding-left:13px;
 
-  padding:9px;
+    padding-right:13px;
 
-  border-radius:9px;
+  }
 
-  background:
-    rgba(120,0,0,.4);
+  .chest-button{
 
-  color:#ffd1d1;
+    width:88vw;
 
-  font-size:10px;
+  }
 
-  word-break:break-word;
+  .chest-image{
+
+    max-height:220px;
+
+  }
+
+  .chance-card{
+
+    gap:10px;
+
+    padding:15px;
+
+  }
+
+  .vip-info{
+
+    padding-left:11px;
+
+    font-size:12px;
+
+  }
+
 }
 
 </style>
@@ -951,10 +1089,13 @@ body:after{
 
 <body>
 
+
 <div class="page">
 
 
-  <!-- TOPO -->
+  <!-- =================================================
+       TOPO
+  ================================================== -->
 
   <div class="top">
 
@@ -967,7 +1108,7 @@ body:after{
     </button>
 
 
-    <div class="top-title">
+    <div class="title">
 
       <small>
         ADAM GAMES
@@ -979,93 +1120,59 @@ body:after{
 
     </div>
 
-
-    <div class="spacer"></div>
-
   </div>
 
 
-  <!-- ================================
-       BAÚ ANIMADO
-  ================================= -->
+  <!-- =================================================
+       BAÚ
+  ================================================== -->
 
-  <section class="chest-area">
-
-    <div
-      class="chest"
-      id="chest"
-      aria-label="Abrir baú">
+  <div class="chest-area">
 
 
-      <div
-        class="chest-glow">
-      </div>
+    <button
+      class="chest-button"
+      id="chestButton"
+      type="button"
+      aria-label="Abrir Caixa da Independência">
 
-
-      <!-- CORPO -->
 
       <img
-        class="chest-body"
-        src="bau-corpo.png"
-        alt=""
+        class="chest-image"
+        src="803C73F5-58D3-441E-8362-524A53744019.png"
+        alt="Baú da Caixa da Independência"
       >
 
-
-      <!-- TAMPA -->
-
-      <img
-        class="chest-lid"
-        src="bau-tampa.png"
-        alt=""
-      >
-
-
-      <!-- ESTRELAS -->
 
       <div
         class="sparkles"
         aria-hidden="true">
 
-        <span class="spark s1">
-          ⭐
-        </span>
-
-        <span class="spark s2">
-          ✨
-        </span>
-
-        <span class="spark s3">
-          💎
-        </span>
-
-        <span class="spark s4">
-          ⭐
-        </span>
-
-        <span class="spark s5">
-          ✨
-        </span>
-
-        <span class="spark s6">
-          💫
-        </span>
+        <span>✦</span>
+        <span>✦</span>
+        <span>✧</span>
+        <span>✦</span>
+        <span>✧</span>
+        <span>✦</span>
 
       </div>
 
+    </button>
+
+
+    <div class="tap-text">
+
+      Toque no baú para
+      <strong>abrir ✨</strong>
+
     </div>
-
-  </section>
-
-
-  <div class="chest-hint">
-
-    Toque no baú para
-    <b>abrir</b> ✨
 
   </div>
 
 
-  <!-- TÍTULO -->
+  <!-- =================================================
+       TÍTULO
+  ================================================== -->
 
   <div class="box-title">
 
@@ -1080,7 +1187,9 @@ body:after{
   </div>
 
 
-  <!-- VIP -->
+  <!-- =================================================
+       VIP
+  ================================================== -->
 
   <div
     class="vip"
@@ -1091,9 +1200,12 @@ body:after{
   </div>
 
 
-  <!-- TIMER -->
+  <!-- =================================================
+       TIMER
+  ================================================== -->
 
   <div class="timer-card">
+
 
     <div
       class="timer-label"
@@ -1147,27 +1259,21 @@ body:after{
       id="message">
     </div>
 
-
-    <div
-      class="debug"
-      id="debug">
-    </div>
-
   </div>
 
 
-  <!-- CHANCES -->
+  <!-- =================================================
+       CHANCES
+  ================================================== -->
 
   <div class="chance-card">
 
-    <div class="chance-side">
+
+    <div>
 
       <div class="chance-title">
-
         🎟️ SUAS CHANCES
-
       </div>
-
 
       <div
         class="chance-number"
@@ -1194,9 +1300,12 @@ body:after{
   </div>
 
 
-  <!-- PRÊMIOS -->
+  <!-- =================================================
+       PRÊMIOS
+  ================================================== -->
 
   <div class="prizes">
+
 
     <h2>
       🎁 CONTEÚDO DA CAIXA
@@ -1205,9 +1314,7 @@ body:after{
 
     <div class="prize">
 
-      <span>
-        🃏
-      </span>
+      <span>🃏</span>
 
       <b>
         500 Coringas
@@ -1218,9 +1325,7 @@ body:after{
 
     <div class="prize">
 
-      <span>
-        🔧
-      </span>
+      <span>🔧</span>
 
       <b>
         3.000 Ferramentas de Rubi
@@ -1231,9 +1336,7 @@ body:after{
 
     <div class="prize">
 
-      <span>
-        📦
-      </span>
+      <span>📦</span>
 
       <b>
         1.000 Itens
@@ -1244,9 +1347,7 @@ body:after{
 
     <div class="prize">
 
-      <span>
-        🎰
-      </span>
+      <span>🎰</span>
 
       <b>
         2 Giros na Roleta
@@ -1257,9 +1358,7 @@ body:after{
 
     <div class="prize">
 
-      <span>
-        🎉
-      </span>
+      <span>🎉</span>
 
       <b>
         Evento do Dia
@@ -1270,9 +1369,7 @@ body:after{
 
     <div class="prize">
 
-      <span>
-        🔑
-      </span>
+      <span>🔑</span>
 
       <b>
         1 Chave da Independência
@@ -1281,12 +1378,12 @@ body:after{
     </div>
 
 
-    <div class="lock-note">
+    <div class="vip-only">
 
-      🔒 A Caixa Box é exclusiva
-      para membros VIP.
+      🔒 Caixa Box exclusiva para membros VIP.
 
     </div>
+
 
   </div>
 
@@ -1294,12 +1391,15 @@ body:after{
 </div>
 
 
-<!-- WHATSAPP -->
+<!-- =====================================================
+     WHATSAPP
+====================================================== -->
 
 <a
   class="whatsapp"
   href="https://wa.me/5531987350267"
-  target="_blank">
+  target="_blank"
+  rel="noopener">
 
   💬
 
@@ -1423,14 +1523,9 @@ const progressBar =
     "progressBar"
   );
 
-const debug =
+const chestButton =
   document.getElementById(
-    "debug"
-  );
-
-const chest =
-  document.getElementById(
-    "chest"
+    "chestButton"
   );
 
 
@@ -1457,36 +1552,71 @@ let userUid =
    TEMPOS
 ===================================================== */
 
+const HORAS_NAO_VIP =
+  120;
+
+const HORAS_VIP =
+  72;
+
+
 const MS_HORA =
   60 *
   60 *
   1000;
 
 
-const MS_VIP =
-  72 *
+const MS_NAO_VIP =
+  HORAS_NAO_VIP *
   MS_HORA;
 
 
-const MS_NAO_VIP =
-  120 *
+const MS_VIP =
+  HORAS_VIP *
   MS_HORA;
 
 
 /* =====================================================
-   FORMATAÇÃO
+   CHAVE TIMER
+===================================================== */
+
+function chaveTimer(){
+
+  return (
+    "adam_caixa_timer_" +
+    userUid
+  );
+
+}
+
+
+/* =====================================================
+   CHAVE CHANCE
+===================================================== */
+
+function chaveChance(){
+
+  return (
+    "adam_caixa_chances_" +
+    userUid
+  );
+
+}
+
+
+/* =====================================================
+   FORMATAR
 ===================================================== */
 
 function formatar(ms){
 
-  ms =
-    Math.max(
-      0,
-      ms
-    );
+  if(ms <= 0){
+
+    return "00:00:00";
+
+  }
 
 
-  const segundosTotal =
+  const total =
     Math.floor(
       ms / 1000
     );
@@ -1494,20 +1624,18 @@ function formatar(ms){
 
   const horas =
     Math.floor(
-      segundosTotal / 3600
+      total / 3600
     );
 
 
   const minutos =
     Math.floor(
-      (
-        segundosTotal % 3600
-      ) / 60
+      (total % 3600) / 60
     );
 
 
   const segundos =
-    segundosTotal % 60;
+    total % 60;
 
 
   return (
@@ -1515,22 +1643,14 @@ function formatar(ms){
     String(horas)
       .padStart(2,"0")
 
-    +
+    + ":"
 
-    ":"
-
-    +
-
-    String(minutos)
+    + String(minutos)
       .padStart(2,"0")
 
-    +
+    + ":"
 
-    ":"
-
-    +
-
-    String(segundos)
+    + String(segundos)
       .padStart(2,"0")
 
   );
@@ -1539,93 +1659,397 @@ function formatar(ms){
 
 
 /* =====================================================
-   ANIMAÇÃO DO BAÚ
+   TIMER LOCAL
 ===================================================== */
 
-function abrirAnimacao(){
+function lerTimer(){
 
-  chest.classList.remove(
-    "chest-open"
-  );
-
-
-  void chest.offsetWidth;
+  const valor =
+    localStorage.getItem(
+      chaveTimer()
+    );
 
 
-  chest.classList.add(
-    "chest-open"
-  );
+  if(!valor){
+
+    return null;
+
+  }
 
 
-  setTimeout(
+  const numero =
+    Number(valor);
 
-    () => {
 
-      chest.classList.remove(
-        "chest-open"
-      );
+  if(
+    !Number.isFinite(numero)
+  ){
 
-    },
+    return null;
 
-    1400
+  }
+
+
+  return numero;
+
+}
+
+
+function salvarTimer(valor){
+
+  localStorage.setItem(
+
+    chaveTimer(),
+
+    String(valor)
 
   );
 
 }
 
 
-chest.addEventListener(
-  "click",
-  abrirAnimacao
-);
+/* =====================================================
+   CHANCE LOCAL
+===================================================== */
+
+function lerChance(){
+
+  const valor =
+    localStorage.getItem(
+      chaveChance()
+    );
+
+
+  if(valor === null){
+
+    return null;
+
+  }
+
+
+  const numero =
+    Number(valor);
+
+
+  if(
+    !Number.isFinite(numero)
+  ){
+
+    return null;
+
+  }
+
+
+  return numero;
+
+}
+
+
+function salvarChance(valor){
+
+  localStorage.setItem(
+
+    chaveChance(),
+
+    String(valor)
+
+  );
+
+}
 
 
 /* =====================================================
-   TIMER VISUAL
+   CRIAR TIMER
 ===================================================== */
 
-function setTimerFim(
-  fim,
-  total
-){
+function criarTimerNaoVip(){
+
+  const fim =
+    Date.now() +
+    MS_NAO_VIP;
+
+
+  salvarTimer(
+    fim
+  );
+
 
   proximaChance =
     fim;
 
 
-  const restante =
-    fim -
-    Date.now();
+  return fim;
+
+}
 
 
-  timer.textContent =
-    formatar(
-      restante
-    );
+/* =====================================================
+   BARRA
+===================================================== */
+
+function atualizarBarra(restante){
+
+  const total =
+    ehVip
+      ? MS_VIP
+      : MS_NAO_VIP;
 
 
-  let porcentagem =
+  let percentual =
     (
       restante /
       total
-    )
-    *
-    100;
+    ) * 100;
 
 
-  porcentagem =
+  percentual =
     Math.max(
       0,
       Math.min(
         100,
-        porcentagem
+        percentual
       )
     );
 
 
   progressBar.style.width =
-    porcentagem +
-    "%";
+    percentual + "%";
+
+}
+
+
+/* =====================================================
+   TIMER
+===================================================== */
+
+async function atualizarTimer(){
+
+  if(!proximaChance){
+
+    return;
+
+  }
+
+
+  const restante =
+    proximaChance -
+    Date.now();
+
+
+  /*
+  ==============================================
+  AINDA CONTANDO
+  ==============================================
+  */
+
+  if(restante > 0){
+
+    timer.textContent =
+      formatar(
+        restante
+      );
+
+
+    atualizarBarra(
+      restante
+    );
+
+
+    if(ehVip){
+
+      status.textContent =
+        "⏳ Aguarde para liberar sua próxima chance.";
+
+    }
+
+    else{
+
+      status.textContent =
+        "⏳ Sua próxima chance está contando automaticamente.";
+
+    }
+
+
+    status.className =
+      "status waiting";
+
+
+    rescue.disabled =
+      true;
+
+
+    return;
+
+  }
+
+
+  /*
+  ==============================================
+  TIMER TERMINOU
+  ==============================================
+  */
+
+  timer.textContent =
+    "DISPONÍVEL";
+
+
+  progressBar.style.width =
+    "100%";
+
+
+  /*
+  ==============================================
+  VIP
+  ==============================================
+  */
+
+  if(ehVip){
+
+    status.textContent =
+      "🎟️ Sua chance está disponível!";
+
+    status.className =
+      "status available";
+
+    rescue.disabled =
+      false;
+
+    return;
+
+  }
+
+
+  /*
+  ==============================================
+  NÃO VIP
+  ==============================================
+
+  120 HORAS = +1 CHANCE
+
+  A CAIXA CONTINUA BLOQUEADA.
+  */
+
+  const chaveLiberacao =
+    "adam_caixa_liberacao_" +
+    userUid;
+
+
+  const liberacaoAnterior =
+    localStorage.getItem(
+      chaveLiberacao
+    );
+
+
+  if(
+    liberacaoAnterior !==
+    String(proximaChance)
+  ){
+
+    let chances =
+      lerChance();
+
+
+    if(chances === null){
+
+      chances =
+        Number(
+          usuario?.chances || 0
+        );
+
+    }
+
+
+    chances += 1;
+
+
+    salvarChance(
+      chances
+    );
+
+
+    chanceNumber.textContent =
+      chances;
+
+
+    localStorage.setItem(
+
+      chaveLiberacao,
+
+      String(
+        proximaChance
+      )
+
+    );
+
+  }
+
+
+  status.textContent =
+    "🎟️ +1 chance liberada!";
+
+  status.className =
+    "status available";
+
+
+  /*
+  Não libera a caixa.
+  Apenas libera uma chance.
+  */
+
+  rescue.disabled =
+    true;
+
+
+  message.textContent =
+    "Sua chance foi liberada. A Caixa Box continua exclusiva para membros VIP.";
+
+
+  /*
+  NOVO CICLO AUTOMÁTICO DE 120 HORAS
+  */
+
+  const novoFim =
+    Date.now() +
+    MS_NAO_VIP;
+
+
+  salvarTimer(
+    novoFim
+  );
+
+
+  proximaChance =
+    novoFim;
+
+}
+
+
+/* =====================================================
+   INICIAR TIMER
+===================================================== */
+
+function iniciarTimer(){
+
+  if(intervalo){
+
+    clearInterval(
+      intervalo
+    );
+
+  }
+
+
+  atualizarTimer();
+
+
+  intervalo =
+    setInterval(
+
+      atualizarTimer,
+
+      1000
+
+    );
 
 }
 
@@ -1634,13 +2058,15 @@ function setTimerFim(
    BUSCAR CADASTRO
 ===================================================== */
 
-async function buscarCadastro(
-  user
-){
+async function buscarCadastro(user){
+
+  /*
+  PRIMEIRO UID
+  */
 
   try{
 
-    const resultadoUid =
+    const resultado =
       await getDocs(
 
         query(
@@ -1661,11 +2087,9 @@ async function buscarCadastro(
       );
 
 
-    if(
-      !resultadoUid.empty
-    ){
+    if(!resultado.empty){
 
-      return resultadoUid.docs[0];
+      return resultado.docs[0];
 
     }
 
@@ -1674,15 +2098,18 @@ async function buscarCadastro(
   catch(error){
 
     console.error(
+      "Erro UID:",
       error
     );
 
   }
 
 
-  if(
-    user.email
-  ){
+  /*
+  DEPOIS EMAIL
+  */
+
+  if(user.email){
 
     try{
 
@@ -1707,9 +2134,7 @@ async function buscarCadastro(
         );
 
 
-      if(
-        !resultadoEmail.empty
-      ){
+      if(!resultadoEmail.empty){
 
         return resultadoEmail.docs[0];
 
@@ -1720,6 +2145,7 @@ async function buscarCadastro(
     catch(error){
 
       console.error(
+        "Erro email:",
         error
       );
 
@@ -1734,218 +2160,80 @@ async function buscarCadastro(
 
 
 /* =====================================================
-   GARANTIR TIMER
+   CARREGAR USUÁRIO
 ===================================================== */
 
-async function garantirProximaChance(
-  ref,
-  dados,
-  vip
-){
+async function carregar(user){
 
-  const campo =
-    dados.proximaChance;
+  userUid =
+    user.uid;
 
 
-  if(
-    campo &&
-    typeof campo.toMillis ===
-    "function"
-  ){
-
-    const fim =
-      campo.toMillis();
-
-
-    if(
-      fim >
-      Date.now()
-    ){
-
-      return fim;
-
-    }
-
-  }
-
-
-  const fim =
-    Date.now()
-    +
-    (
-      vip
-        ? MS_VIP
-        : MS_NAO_VIP
+  const documento =
+    await buscarCadastro(
+      user
     );
 
 
-  await updateDoc(
+  /*
+  ==============================================
+  NÃO ENCONTROU
+  ==============================================
+  */
 
-    ref,
+  if(!documento){
 
-    {
+    usuario =
+      null;
 
-      proximaChance:
-        Timestamp.fromMillis(
-          fim
-        )
+    usuarioRef =
+      null;
 
-    }
+    ehVip =
+      false;
 
-  );
 
+    vipStatus.textContent =
+      "🔒 NÃO VIP";
 
-  return fim;
 
-}
+    timerLabel.textContent =
+      "PRÓXIMA CHANCE";
 
 
-/* =====================================================
-   LIBERAR CHANCE NÃO VIP
-===================================================== */
+    let fim =
+      lerTimer();
 
-async function liberarChanceNaoVip(){
 
-  const atual =
-    Number(
-      usuario?.chances ||
-      0
-    );
+    if(!fim){
 
-
-  const nova =
-    atual +
-    1;
-
-
-  const novoFim =
-    Date.now()
-    +
-    MS_NAO_VIP;
-
-
-  await updateDoc(
-
-    usuarioRef,
-
-    {
-
-      chances:
-        nova,
-
-      proximaChance:
-        Timestamp.fromMillis(
-          novoFim
-        )
-
-    }
-
-  );
-
-
-  usuario.chances =
-    nova;
-
-
-  usuario.proximaChance =
-    Timestamp.fromMillis(
-      novoFim
-    );
-
-
-  chanceNumber.textContent =
-    nova;
-
-
-  proximaChance =
-    novoFim;
-
-
-  timer.textContent =
-    formatar(
-      MS_NAO_VIP
-    );
-
-
-  progressBar.style.width =
-    "100%";
-
-
-  status.textContent =
-    "🎟️ +1 chance liberada!";
-
-
-  status.className =
-    "status available";
-
-
-  message.textContent =
-    "Sua chance foi liberada. A Caixa Box continua exclusiva para membros VIP.";
-
-
-  rescue.disabled =
-    true;
-
-}
-
-
-/* =====================================================
-   ATUALIZAR TIMER
-===================================================== */
-
-async function atualizarTimer(){
-
-  if(
-    !proximaChance
-  ){
-
-    return;
-
-  }
-
-
-  const restante =
-    proximaChance -
-    Date.now();
-
-
-  /* TIMER RODANDO */
-
-  if(
-    restante >
-    0
-  ){
-
-    setTimerFim(
-
-      proximaChance,
-
-      ehVip
-        ? MS_VIP
-        : MS_NAO_VIP
-
-    );
-
-
-    if(
-      ehVip
-    ){
-
-      status.textContent =
-        "⏳ Aguarde para liberar sua próxima chance.";
-
-    }
-
-    else{
-
-      status.textContent =
-        "⏳ Sua próxima chance está contando automaticamente.";
+      fim =
+        criarTimerNaoVip();
 
     }
 
 
-    status.className =
-      "status waiting";
+    proximaChance =
+      fim;
+
+
+    const chances =
+      lerChance();
+
+
+    chanceNumber.textContent =
+      chances ?? 0;
+
+
+    rescue.disabled =
+      true;
+
+
+    message.textContent =
+      "A Caixa Box é exclusiva para membros VIP.";
+
+
+    iniciarTimer();
 
 
     return;
@@ -1953,21 +2241,112 @@ async function atualizarTimer(){
   }
 
 
-  /* TIMER ACABOU */
+  /*
+  ==============================================
+  ENCONTROU
+  ==============================================
+  */
 
-  timer.textContent =
-    "00:00:00";
+  usuario =
+    documento.data();
 
 
-  progressBar.style.width =
-    "0%";
+  usuarioRef =
+    doc(
+      db,
+      "admins",
+      documento.id
+    );
 
 
-  /* VIP */
+  ehVip =
+    usuario.vip === true;
 
-  if(
-    ehVip
-  ){
+
+  /*
+  ==============================================
+  VIP
+  ==============================================
+  */
+
+  if(ehVip){
+
+    vipStatus.textContent =
+      "👑 VIP ATIVO";
+
+
+    timerLabel.textContent =
+      "PRÓXIMA CHANCE VIP";
+
+
+    chanceNumber.textContent =
+      Number(
+        usuario.chances || 0
+      );
+
+
+    let bancoFim =
+      null;
+
+
+    if(
+      usuario.proximaChance &&
+      typeof
+      usuario.proximaChance.toMillis
+      === "function"
+    ){
+
+      bancoFim =
+        usuario.proximaChance.toMillis();
+
+    }
+
+
+    /*
+    TIMER VIP EXISTENTE
+    */
+
+    if(
+      bancoFim &&
+      bancoFim > Date.now()
+    ){
+
+      proximaChance =
+        bancoFim;
+
+
+      salvarTimer(
+        bancoFim
+      );
+
+
+      rescue.disabled =
+        true;
+
+
+      iniciarTimer();
+
+
+      return;
+
+    }
+
+
+    /*
+    SEM TIMER = DISPONÍVEL
+    */
+
+    proximaChance =
+      null;
+
+
+    timer.textContent =
+      "DISPONÍVEL";
+
+
+    progressBar.style.width =
+      "100%";
+
 
     status.textContent =
       "🎟️ Sua chance está disponível!";
@@ -1990,202 +2369,125 @@ async function atualizarTimer(){
   }
 
 
-  /* NÃO VIP */
-
-  try{
-
-    rescue.disabled =
-      true;
-
-
-    await liberarChanceNaoVip();
-
-  }
-
-  catch(error){
-
-    mostrarErro(
-      error
-    );
-
-
-    status.textContent =
-      "⚠️ Não foi possível liberar a chance.";
-
-
-    status.className =
-      "status locked";
-
-  }
-
-}
-
-
-/* =====================================================
-   INICIAR TIMER
-===================================================== */
-
-function iniciarTimer(){
-
-  clearInterval(
-    intervalo
-  );
-
-
-  atualizarTimer();
-
-
-  intervalo =
-    setInterval(
-
-      atualizarTimer,
-
-      1000
-
-    );
-
-}
-
-
-/* =====================================================
-   CARREGAR USUÁRIO
-===================================================== */
-
-async function carregar(
-  user
-){
-
-  userUid =
-    user.uid;
-
-
-  const documento =
-    await buscarCadastro(
-      user
-    );
-
-
-  if(
-    !documento
-  ){
-
-    vipStatus.textContent =
-      "🔒 NÃO VIP";
-
-
-    timerLabel.textContent =
-      "PRÓXIMA CHANCE";
-
-
-    chanceNumber.textContent =
-      "0";
-
-
-    rescue.disabled =
-      true;
-
-
-    message.textContent =
-      "Cadastro não encontrado.";
-
-
-    status.textContent =
-      "Não foi possível localizar seu cadastro.";
-
-
-    status.className =
-      "status locked";
-
-
-    return;
-
-  }
-
-
-  usuario =
-    documento.data();
-
-
-  usuarioRef =
-    doc(
-      db,
-      "admins",
-      documento.id
-    );
-
-
-  ehVip =
-    usuario.vip === true;
-
-
-  /* STATUS */
+  /*
+  ==============================================
+  NÃO VIP
+  ==============================================
+  */
 
   vipStatus.textContent =
-    ehVip
-      ? "👑 VIP ATIVO"
-      : "🔒 NÃO VIP";
+    "🔒 NÃO VIP";
 
 
   timerLabel.textContent =
-    ehVip
-      ? "PRÓXIMA CHANCE VIP"
-      : "PRÓXIMA CHANCE";
+    "PRÓXIMA CHANCE";
+
+
+  rescue.disabled =
+    true;
+
+
+  const bancoChances =
+    Number(
+      usuario.chances || 0
+    );
+
+
+  const localChances =
+    lerChance();
+
+
+  const chances =
+    localChances === null
+      ? bancoChances
+      : Math.max(
+          bancoChances,
+          localChances
+        );
+
+
+  salvarChance(
+    chances
+  );
 
 
   chanceNumber.textContent =
-    Number(
-      usuario.chances ||
-      0
-    );
+    chances;
 
 
-  /* TIMER */
+  /*
+  TIMER COMEÇA AUTOMATICAMENTE
+  */
 
-  try{
+  let fim =
+    lerTimer();
 
-    proximaChance =
-      await garantirProximaChance(
 
-        usuarioRef,
+  if(!fim){
 
-        usuario,
-
-        ehVip
-
-      );
-
-  }
-
-  catch(error){
-
-    mostrarErro(
-      error
-    );
-
-    return;
+    fim =
+      criarTimerNaoVip();
 
   }
 
 
-  /* CAIXA */
-
-  rescue.disabled =
-    !ehVip;
+  proximaChance =
+    fim;
 
 
-  if(
-    !ehVip
-  ){
-
-    message.textContent =
-      "Sua chance é liberada automaticamente a cada 120 horas. A Caixa Box continua exclusiva para membros VIP.";
-
-  }
+  message.textContent =
+    "Sua próxima chance é liberada automaticamente a cada 120 horas. A Caixa continua exclusiva para membros VIP.";
 
 
   iniciarTimer();
 
 }
+
+
+/* =====================================================
+   CLIQUE NO BAÚ
+===================================================== */
+
+chestButton.addEventListener(
+
+  "click",
+
+  () => {
+
+    /*
+    Reinicia a animação
+    */
+
+    chestButton.classList.remove(
+      "opening"
+    );
+
+
+    void chestButton.offsetWidth;
+
+
+    chestButton.classList.add(
+      "opening"
+    );
+
+
+    setTimeout(
+
+      () => {
+
+        chestButton.classList.remove(
+          "opening"
+        );
+
+      },
+
+      650
+
+    );
+
+  }
+
+);
 
 
 /* =====================================================
@@ -2198,30 +2500,14 @@ rescue.addEventListener(
 
   async () => {
 
-
-    if(
-      !ehVip
-    ){
+    if(!ehVip){
 
       return;
 
     }
 
 
-    if(
-      !usuarioRef
-    ){
-
-      return;
-
-    }
-
-
-    if(
-      !proximaChance ||
-      proximaChance >
-      Date.now()
-    ){
+    if(!usuarioRef){
 
       return;
 
@@ -2236,12 +2522,24 @@ rescue.addEventListener(
       "PROCESSANDO...";
 
 
+    /*
+    Anima o baú
+    */
+
+    chestButton.classList.remove(
+      "opening"
+    );
+
+
+    void chestButton.offsetWidth;
+
+
+    chestButton.classList.add(
+      "opening"
+    );
+
+
     try{
-
-      /* ABRE O BAÚ */
-
-      abrirAnimacao();
-
 
       const agora =
         Timestamp.now();
@@ -2281,6 +2579,11 @@ rescue.addEventListener(
         proxima.toMillis();
 
 
+      salvarTimer(
+        proximaChance
+      );
+
+
       timer.textContent =
         formatar(
           proximaChance -
@@ -2288,8 +2591,10 @@ rescue.addEventListener(
         );
 
 
-      progressBar.style.width =
-        "100%";
+      atualizarBarra(
+        proximaChance -
+        Date.now()
+      );
 
 
       status.textContent =
@@ -2314,7 +2619,8 @@ rescue.addEventListener(
 
     catch(error){
 
-      mostrarErro(
+      console.error(
+        "Erro ao resgatar:",
         error
       );
 
@@ -2330,9 +2636,12 @@ rescue.addEventListener(
       status.textContent =
         "⚠️ Não foi possível resgatar a Caixa.";
 
-
       status.className =
         "status locked";
+
+
+      message.textContent =
+        "Tente novamente.";
 
     }
 
@@ -2346,16 +2655,14 @@ rescue.addEventListener(
 ===================================================== */
 
 document
-  .getElementById(
-    "back"
-  )
+  .getElementById("back")
   .addEventListener(
 
     "click",
 
     () => {
 
-      location.href =
+      window.location.href =
         "painel.html";
 
     }
@@ -2373,12 +2680,9 @@ onAuthStateChanged(
 
   async user => {
 
+    if(!user){
 
-    if(
-      !user
-    ){
-
-      location.href =
+      window.location.href =
         "index.html";
 
       return;
@@ -2396,9 +2700,19 @@ onAuthStateChanged(
 
     catch(error){
 
-      mostrarErro(
+      console.error(
         error
       );
+
+      status.textContent =
+        "⚠️ Erro ao carregar a Caixa.";
+
+      status.className =
+        "status locked";
+
+      message.textContent =
+        error.message ||
+        "Erro desconhecido.";
 
     }
 
@@ -2409,4 +2723,5 @@ onAuthStateChanged(
 </script>
 
 </body>
+
 </html>
