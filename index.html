@@ -221,7 +221,7 @@ body{
 
 
 /* =====================================
-   MENSAGEM
+   MENSAGENS
 ===================================== */
 
 .message{
@@ -230,7 +230,7 @@ body{
 
   margin-bottom:18px;
 
-  padding:13px;
+  padding:14px;
 
   border-radius:13px;
 
@@ -239,6 +239,8 @@ body{
   font-size:13px;
 
   font-weight:bold;
+
+  line-height:1.5;
 }
 
 
@@ -269,6 +271,21 @@ body{
     rgba(50,255,140,.3);
 
   color:#72ffae;
+}
+
+
+.message.info{
+
+  display:block;
+
+  background:
+    rgba(40,160,255,.12);
+
+  border:
+    1px solid
+    rgba(40,160,255,.3);
+
+  color:#8dceff;
 }
 
 
@@ -375,7 +392,7 @@ label{
 
 
 /* =====================================
-   BOTÃO LOGIN
+   BOTÕES
 ===================================== */
 
 .login-button{
@@ -498,7 +515,7 @@ label{
 
 
 /* =====================================
-   LOGIN SOCIAL
+   SOCIAL
 ===================================== */
 
 .social-buttons{
@@ -610,28 +627,203 @@ label{
 
 
 /* =====================================
-   BOTÃO REENVIAR
+   VERIFICAÇÃO
 ===================================== */
+
+.verification-box{
+
+  display:none;
+}
+
+
+.verification-box.active{
+
+  display:block;
+}
+
+
+.verification-icon{
+
+  width:82px;
+
+  height:82px;
+
+  margin:0 auto 18px;
+
+  border-radius:25px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  font-size:44px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #168ff0,
+      #064b99
+    );
+
+  border:
+    2px solid
+    rgba(255,255,255,.15);
+}
+
+
+.verification-email{
+
+  margin:15px 0;
+
+  padding:13px;
+
+  border-radius:12px;
+
+  background:
+    rgba(255,255,255,.06);
+
+  color:#72c5ff;
+
+  font-weight:bold;
+
+  text-align:center;
+
+  word-break:break-word;
+}
+
+
+.verification-text{
+
+  color:#b7d1e8;
+
+  font-size:14px;
+
+  line-height:1.6;
+
+  text-align:center;
+
+  margin-bottom:20px;
+}
+
+
+.verify-button{
+
+  width:100%;
+
+  min-height:52px;
+
+  border:0;
+
+  border-radius:15px;
+
+  background:
+
+    linear-gradient(
+      135deg,
+      #18b86a,
+      #078747
+    );
+
+  color:white;
+
+  font-size:14px;
+
+  font-weight:900;
+
+  cursor:pointer;
+
+  margin-bottom:10px;
+}
+
 
 .resend-button{
 
   width:100%;
 
-  height:50px;
+  min-height:52px;
 
-  margin-top:10px;
+  border:0;
+
+  border-radius:15px;
+
+  background:
+
+    linear-gradient(
+      135deg,
+      #239eff,
+      #0869d5
+    );
+
+  color:white;
+
+  font-size:14px;
+
+  font-weight:900;
+
+  cursor:pointer;
+
+  margin-bottom:10px;
+}
+
+
+.change-account{
+
+  width:100%;
+
+  min-height:48px;
 
   border:0;
 
   border-radius:14px;
 
-  background:#168ff0;
+  background:
+    rgba(255,255,255,.09);
 
-  color:#fff;
+  color:#bcd6ec;
+
+  font-size:13px;
 
   font-weight:bold;
 
   cursor:pointer;
+
+  margin-top:5px;
+}
+
+
+.verify-status{
+
+  margin-top:13px;
+
+  min-height:20px;
+
+  color:#8ecbfa;
+
+  font-size:12px;
+
+  text-align:center;
+
+  line-height:1.5;
+}
+
+
+/* =====================================
+   LOADING
+===================================== */
+
+.loading{
+
+  display:none;
+
+  text-align:center;
+
+  margin-top:15px;
+
+  color:#8fcaff;
+
+  font-size:13px;
 }
 
 
@@ -882,6 +1074,119 @@ label{
     </a>
 
 
+    <div
+      class="loading"
+      id="loading"
+    >
+      🔄 Verificando sua conta...
+    </div>
+
+
+  </div>
+
+
+  <!-- =====================================
+       VERIFICAÇÃO DE E-MAIL
+  ====================================== -->
+
+  <div
+    class="login-card verification-box"
+    id="verificationBox"
+  >
+
+    <div class="verification-icon">
+      📧
+    </div>
+
+
+    <h2>
+      Confirme seu e-mail
+    </h2>
+
+
+    <div class="subtitle">
+      Falta só mais um passo para entrar no Adam Games.
+    </div>
+
+
+    <div
+      class="verification-email"
+      id="verificationEmail">
+
+      —
+
+    </div>
+
+
+    <div class="verification-text">
+
+      Enviamos um e-mail de confirmação para o endereço acima.
+
+      <br><br>
+
+      Abra seu e-mail e clique no link de confirmação.
+
+      <br><br>
+
+      Depois volte para esta página e clique em
+      <strong>“Já confirmei meu e-mail”</strong>.
+
+      <br><br>
+
+      Se não encontrar, confira também
+      <strong>Spam</strong>,
+      <strong>Promoções</strong>
+      ou
+      <strong>Lixo eletrônico</strong>.
+
+    </div>
+
+
+    <div
+      id="verificationMessage"
+      class="message"
+    ></div>
+
+
+    <button
+      type="button"
+      class="verify-button"
+      id="checkVerification"
+    >
+
+      ✅ JÁ CONFIRMEI MEU E-MAIL
+
+    </button>
+
+
+    <button
+      type="button"
+      class="resend-button"
+      id="resendVerification"
+    >
+
+      📧 REENVIAR E-MAIL DE CONFIRMAÇÃO
+
+    </button>
+
+
+    <button
+      type="button"
+      class="change-account"
+      id="changeAccount"
+    >
+
+      ← VOLTAR PARA O LOGIN
+
+    </button>
+
+
+    <div
+      class="verify-status"
+      id="verifyStatus"
+    ></div>
+
+
   </div>
 
 
@@ -987,7 +1292,6 @@ label{
       id="backLogin"
     >
       ← Já tenho uma conta
-
     </a>
 
 
@@ -1029,6 +1333,8 @@ import {
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
   sendEmailVerification,
+  reload,
+  signOut,
   GoogleAuthProvider,
   FacebookAuthProvider,
   OAuthProvider,
@@ -1045,6 +1351,9 @@ from
 import {
   getFirestore,
   collection,
+  query,
+  where,
+  getDocs,
   addDoc
 }
 from
@@ -1096,14 +1405,6 @@ const db =
 
 
 /* =====================================
-   ADMIN
-===================================== */
-
-const ADMIN_EMAIL =
-  "raphafentyramos@gmail.com";
-
-
-/* =====================================
    ELEMENTOS
 ===================================== */
 
@@ -1116,6 +1417,12 @@ const loginBox =
 const registerBox =
   document.getElementById(
     "registerBox"
+  );
+
+
+const verificationBox =
+  document.getElementById(
+    "verificationBox"
   );
 
 
@@ -1155,8 +1462,34 @@ const registerMessage =
   );
 
 
+const verificationMessage =
+  document.getElementById(
+    "verificationMessage"
+  );
+
+
+const verificationEmail =
+  document.getElementById(
+    "verificationEmail"
+  );
+
+
+const verifyStatus =
+  document.getElementById(
+    "verifyStatus"
+  );
+
+
+let usuarioAguardandoVerificacao =
+  null;
+
+
+let ultimoEnvioVerificacao =
+  0;
+
+
 /* =====================================
-   MENSAGENS
+   MENSAGEM LOGIN
 ===================================== */
 
 function mostrarMensagem(
@@ -1173,6 +1506,10 @@ function mostrarMensagem(
 }
 
 
+/* =====================================
+   MENSAGEM CADASTRO
+===================================== */
+
 function mostrarMensagemCadastro(
   texto,
   tipo="error"
@@ -1188,7 +1525,105 @@ function mostrarMensagemCadastro(
 
 
 /* =====================================
-   MOSTRAR SENHA
+   MENSAGEM VERIFICAÇÃO
+===================================== */
+
+function mostrarMensagemVerificacao(
+  texto,
+  tipo="info"
+){
+
+  verificationMessage.textContent =
+    texto;
+
+  verificationMessage.className =
+    "message " + tipo;
+
+}
+
+
+/* =====================================
+   LIMPAR MENSAGENS
+===================================== */
+
+function limparMensagemVerificacao(){
+
+  verificationMessage.textContent =
+    "";
+
+  verificationMessage.className =
+    "message";
+
+}
+
+
+/* =====================================
+   MOSTRAR TELA LOGIN
+===================================== */
+
+function mostrarLogin(){
+
+  loginBox.classList.remove(
+    "hidden"
+  );
+
+  registerBox.classList.remove(
+    "active"
+  );
+
+  verificationBox.classList.remove(
+    "active"
+  );
+
+  usuarioAguardandoVerificacao =
+    null;
+
+  limparMensagemVerificacao();
+
+}
+
+
+/* =====================================
+   MOSTRAR TELA VERIFICAÇÃO
+===================================== */
+
+function mostrarVerificacao(
+  usuario
+){
+
+  usuarioAguardandoVerificacao =
+    usuario;
+
+
+  loginBox.classList.add(
+    "hidden"
+  );
+
+  registerBox.classList.remove(
+    "active"
+  );
+
+  verificationBox.classList.add(
+    "active"
+  );
+
+
+  verificationEmail.textContent =
+    usuario.email ||
+    "Seu e-mail";
+
+
+  limparMensagemVerificacao();
+
+
+  verifyStatus.textContent =
+    "Aguardando confirmação...";
+
+}
+
+
+/* =====================================
+   MOSTRAR / ESCONDER SENHA
 ===================================== */
 
 document
@@ -1246,6 +1681,10 @@ document
       "hidden"
     );
 
+    verificationBox.classList.remove(
+      "active"
+    );
+
     registerBox.classList.add(
       "active"
     );
@@ -1271,13 +1710,7 @@ document
   "click",
   () => {
 
-    registerBox.classList.remove(
-      "active"
-    );
-
-    loginBox.classList.remove(
-      "hidden"
-    );
+    mostrarLogin();
 
     mostrarMensagemCadastro(
       "",
@@ -1289,112 +1722,182 @@ document
 
 
 /* =====================================
-   LOCALIZAR PÁGINA ADMIN
+   VOLTAR DA VERIFICAÇÃO
 ===================================== */
 
-async function localizarPaginaAdmin(){
-
-  const candidatos = [
-
-    "admin.html",
-
-    "adminv2.html"
-
-  ];
-
-
-  for(
-    const arquivo of candidatos
-  ){
+document
+.getElementById(
+  "changeAccount"
+)
+.addEventListener(
+  "click",
+  async () => {
 
     try{
 
-      const url =
-        new URL(
-          arquivo,
-          window.location.href
-        );
-
-
-      const resposta =
-        await fetch(
-          url.href,
-          {
-            method:"HEAD",
-            cache:"no-store"
-          }
-        );
-
-
-      if(
-        resposta.ok
-      ){
-
-        return arquivo;
-
-      }
+      await signOut(
+        auth
+      );
 
     }
-
     catch(error){
 
-      console.warn(
-        "Erro verificando:",
-        arquivo
+      console.error(
+        error
       );
 
     }
 
+
+    mostrarLogin();
+
   }
-
-
-  return null;
-
-}
+);
 
 
 /* =====================================
-   REDIRECIONAMENTO
+   ENVIAR VERIFICAÇÃO
 ===================================== */
 
-async function direcionarUsuario(
+async function enviarVerificacao(
   usuario
 ){
 
   if(!usuario){
 
-    return;
+    return false;
 
   }
 
 
-  const emailUsuario =
-    String(
-      usuario.email || ""
-    )
-    .trim()
-    .toLowerCase();
+  const agora =
+    Date.now();
 
 
   /*
-   * ADMIN PRINCIPAL
-   */
+    Aguarda 30 segundos entre
+    os envios para evitar spam.
+  */
 
   if(
-    emailUsuario ===
-    ADMIN_EMAIL.toLowerCase()
+    agora -
+    ultimoEnvioVerificacao
+    <
+    30000
   ){
 
-    const paginaAdmin =
-      await localizarPaginaAdmin();
+    const restante =
+      Math.ceil(
+        (
+          30000 -
+          (
+            agora -
+            ultimoEnvioVerificacao
+          )
+        ) / 1000
+      );
+
+
+    mostrarMensagemVerificacao(
+
+      "Aguarde " +
+      restante +
+      " segundos antes de reenviar.",
+
+      "info"
+
+    );
+
+
+    return false;
+
+  }
+
+
+  try{
+
+    await sendEmailVerification(
+      usuario
+    );
+
+
+    ultimoEnvioVerificacao =
+      Date.now();
+
+
+    mostrarMensagemVerificacao(
+
+      "📧 E-mail de confirmação enviado! " +
+      "Verifique sua caixa de entrada, Spam ou Promoções.",
+
+      "success"
+
+    );
+
+
+    verifyStatus.textContent =
+      "E-mail enviado. Abra a mensagem e clique no link de confirmação.";
+
+
+    return true;
+
+  }
+
+  catch(error){
+
+    console.error(
+      "Erro enviando verificação:",
+      error
+    );
+
+
+    let texto =
+      "Não foi possível enviar o e-mail de confirmação.";
 
 
     if(
-      paginaAdmin
+      error.code ===
+      "auth/too-many-requests"
     ){
 
-      window.location.assign(
-        paginaAdmin
+      texto =
+        "Muitas solicitações. Aguarde alguns minutos e tente novamente.";
+
+    }
+
+
+    mostrarMensagemVerificacao(
+      texto,
+      "error"
+    );
+
+
+    return false;
+
+  }
+
+}
+
+
+/* =====================================
+   REENVIAR VERIFICAÇÃO
+===================================== */
+
+document
+.getElementById(
+  "resendVerification"
+)
+.addEventListener(
+  "click",
+  async () => {
+
+    if(
+      !usuarioAguardandoVerificacao
+    ){
+
+      mostrarMensagemVerificacao(
+        "Nenhuma conta aguardando confirmação.",
+        "error"
       );
 
       return;
@@ -1402,29 +1905,171 @@ async function direcionarUsuario(
     }
 
 
-    mostrarMensagem(
-      "Página administrativa não encontrada."
+    const button =
+      document.getElementById(
+        "resendVerification"
+      );
+
+
+    button.disabled =
+      true;
+
+
+    button.textContent =
+      "📧 ENVIANDO...";
+
+
+    await enviarVerificacao(
+      usuarioAguardandoVerificacao
     );
 
 
-    return;
+    button.disabled =
+      false;
+
+
+    button.textContent =
+      "📧 REENVIAR E-MAIL DE CONFIRMAÇÃO";
 
   }
-
-
-  /*
-   * USUÁRIO NORMAL
-   */
-
-  window.location.assign(
-    "painel.html"
-  );
-
-}
+);
 
 
 /* =====================================
-   LOGIN POR E-MAIL
+   JÁ CONFIRMEI
+===================================== */
+
+document
+.getElementById(
+  "checkVerification"
+)
+.addEventListener(
+  "click",
+  async () => {
+
+    if(
+      !usuarioAguardandoVerificacao
+    ){
+
+      mostrarMensagemVerificacao(
+        "Nenhuma conta aguardando confirmação.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    const button =
+      document.getElementById(
+        "checkVerification"
+      );
+
+
+    button.disabled =
+      true;
+
+
+    button.textContent =
+      "🔄 VERIFICANDO...";
+
+
+    try{
+
+      await reload(
+        usuarioAguardandoVerificacao
+      );
+
+
+      /*
+        Depois do reload,
+        o Firebase atualiza
+        emailVerified.
+      */
+
+      if(
+        usuarioAguardandoVerificacao.emailVerified
+      ){
+
+        mostrarMensagemVerificacao(
+
+          "✅ E-mail confirmado! Entrando no Adam Games...",
+
+          "success"
+
+        );
+
+
+        verifyStatus.textContent =
+          "Confirmação concluída.";
+
+
+        setTimeout(
+          () => {
+
+            window.location.replace(
+              "painel.html"
+            );
+
+          },
+          700
+        );
+
+
+        return;
+
+      }
+
+
+      mostrarMensagemVerificacao(
+
+        "O e-mail ainda não aparece como confirmado. " +
+        "Abra o e-mail recebido e clique no link de confirmação.",
+
+        "info"
+
+      );
+
+
+      verifyStatus.textContent =
+        "Ainda aguardando confirmação.";
+
+    }
+
+    catch(error){
+
+      console.error(
+        "Erro verificando e-mail:",
+        error
+      );
+
+
+      mostrarMensagemVerificacao(
+
+        "Não foi possível verificar agora. " +
+        "Tente novamente.",
+
+        "error"
+
+      );
+
+    }
+
+
+    button.disabled =
+      false;
+
+
+    button.textContent =
+      "✅ JÁ CONFIRMEI MEU E-MAIL";
+
+  }
+);
+
+
+/* =====================================
+   LOGIN E-MAIL
 ===================================== */
 
 loginForm.addEventListener(
@@ -1485,44 +2130,31 @@ loginForm.addEventListener(
 
 
       /*
-       * ATUALIZA O ESTADO DO USUÁRIO
-       */
+        IMPORTANTE:
 
-      await usuario.reload();
+        Conta por e-mail precisa
+        estar verificada.
 
-
-      /*
-       * ADMIN PRINCIPAL
-       *
-       * O administrador não fica
-       * bloqueado pela verificação
-       * de e-mail.
-       */
-
-      const ehAdmin =
-
-        String(
-          usuario.email || ""
-        )
-        .trim()
-        .toLowerCase()
-        ===
-        ADMIN_EMAIL.toLowerCase();
-
-
-      /*
-       * CONTA NORMAL
-       *
-       * Precisa confirmar o e-mail.
-       */
+        Se não estiver,
+        NÃO entra no painel.
+      */
 
       if(
-        !ehAdmin &&
         !usuario.emailVerified
       ){
 
-        mostrarMensagem(
-          "Seu e-mail ainda não foi confirmado. Verifique sua caixa de entrada antes de entrar."
+        mostrarVerificacao(
+          usuario
+        );
+
+
+        /*
+          Tenta enviar automaticamente
+          o primeiro e-mail.
+        */
+
+        await enviarVerificacao(
+          usuario
         );
 
 
@@ -1545,16 +2177,23 @@ loginForm.addEventListener(
       );
 
 
-      await direcionarUsuario(
-        usuario
+      setTimeout(
+        () => {
+
+          window.location.replace(
+            "painel.html"
+          );
+
+        },
+        400
       );
+
 
     }
 
     catch(error){
 
       console.error(
-        "ERRO LOGIN:",
         error
       );
 
@@ -1590,6 +2229,16 @@ loginForm.addEventListener(
 
         texto =
           "Muitas tentativas. Aguarde alguns minutos.";
+
+      }
+
+      else if(
+        error.code ===
+        "auth/user-disabled"
+      ){
+
+        texto =
+          "Esta conta foi desativada.";
 
       }
 
@@ -1687,8 +2336,9 @@ registerForm.addEventListener(
     try{
 
       /*
-       * CRIA CONTA NO FIREBASE AUTH
-       */
+        Cria primeiro a conta
+        no Firebase Authentication.
+      */
 
       const resultado =
         await createUserWithEmailAndPassword(
@@ -1703,17 +2353,10 @@ registerForm.addEventListener(
 
 
       /*
-       * ENVIA E-MAIL DE VERIFICAÇÃO
-       */
+        Cria o cadastro no Firestore.
 
-      await sendEmailVerification(
-        usuario
-      );
-
-
-      /*
-       * GERA ID PÚBLICO
-       */
+        VIP começa SEMPRE false.
+      */
 
       const caracteres =
         "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
@@ -1739,14 +2382,6 @@ registerForm.addEventListener(
 
       }
 
-
-      /*
-       * CRIA DOCUMENTO DO USUÁRIO
-       *
-       * SEM VIP
-       * SEM CRÉDITOS
-       * SEM CHANCES
-       */
 
       await addDoc(
         collection(
@@ -1776,6 +2411,10 @@ registerForm.addEventListener(
           avatar:
             "🙂",
 
+          /*
+            NOVO USUÁRIO NÃO É VIP.
+          */
+
           vip:
             false,
 
@@ -1801,59 +2440,48 @@ registerForm.addEventListener(
       );
 
 
-      mostrarMensagemCadastro(
-        "Conta criada! Enviamos um e-mail de confirmação para você. Confirme seu e-mail antes de entrar.",
+      /*
+        Agora enviamos o e-mail
+        de confirmação.
+      */
+
+      await sendEmailVerification(
+        usuario
+      );
+
+
+      ultimoEnvioVerificacao =
+        Date.now();
+
+
+      /*
+        Mostra a tela de confirmação.
+      */
+
+      mostrarVerificacao(
+        usuario
+      );
+
+
+      mostrarMensagemVerificacao(
+
+        "📧 Conta criada! Enviamos o e-mail de confirmação para você.",
+
         "success"
+
       );
 
 
-      /*
-       * NÃO MANDA PARA O PAINEL.
-       *
-       * A pessoa precisa confirmar
-       * o e-mail primeiro.
-       */
+      verifyStatus.textContent =
+        "Abra seu e-mail, confirme o endereço e depois clique em “Já confirmei meu e-mail”.";
 
-      button.disabled =
-        false;
-
-
-      button.textContent =
-        "CRIAR CONTA";
-
-
-      /*
-       * Mostra o login depois de
-       * alguns segundos.
-       */
-
-      setTimeout(
-        () => {
-
-          registerBox.classList.remove(
-            "active"
-          );
-
-          loginBox.classList.remove(
-            "hidden"
-          );
-
-          email.value =
-            emailNovo;
-
-          password.value =
-            "";
-
-        },
-        3500
-      );
 
     }
 
     catch(error){
 
       console.error(
-        "ERRO CADASTRO:",
+        "Erro no cadastro:",
         error
       );
 
@@ -1868,7 +2496,7 @@ registerForm.addEventListener(
       ){
 
         texto =
-          "Este e-mail já possui uma conta.";
+          "Este e-mail já possui uma conta. Tente entrar.";
 
       }
 
@@ -1889,6 +2517,28 @@ registerForm.addEventListener(
 
         texto =
           "Digite um e-mail válido.";
+
+      }
+
+      else if(
+        error.code ===
+        "auth/too-many-requests"
+      ){
+
+        texto =
+          "Muitas tentativas. Aguarde alguns minutos.";
+
+      }
+
+      else if(
+        error.message &&
+        error.message.includes(
+          "Firestore"
+        )
+      ){
+
+        texto =
+          "A conta foi criada, mas houve um problema ao salvar o cadastro.";
 
       }
 
@@ -1949,8 +2599,12 @@ document
 
 
       mostrarMensagem(
-        "E-mail de recuperação enviado!",
+
+        "E-mail de recuperação enviado! " +
+        "Confira sua caixa de entrada.",
+
         "success"
+
       );
 
     }
@@ -1997,8 +2651,32 @@ document
         );
 
 
-      await direcionarUsuario(
-        resultado.user
+      const usuario =
+        resultado.user;
+
+
+      /*
+        Contas Google normalmente
+        já chegam com e-mail verificado.
+
+        Ainda assim verificamos.
+      */
+
+      if(
+        usuario.emailVerified
+      ){
+
+        window.location.replace(
+          "painel.html"
+        );
+
+        return;
+
+      }
+
+
+      mostrarVerificacao(
+        usuario
       );
 
     }
@@ -2006,7 +2684,6 @@ document
     catch(error){
 
       console.error(
-        "ERRO GOOGLE:",
         error
       );
 
@@ -2046,8 +2723,30 @@ document
         );
 
 
-      await direcionarUsuario(
-        resultado.user
+      const usuario =
+        resultado.user;
+
+
+      if(
+        usuario.emailVerified
+      ){
+
+        window.location.replace(
+          "painel.html"
+        );
+
+        return;
+
+      }
+
+
+      /*
+        Caso o provedor não tenha
+        e-mail verificado.
+      */
+
+      mostrarVerificacao(
+        usuario
       );
 
     }
@@ -2055,7 +2754,6 @@ document
     catch(error){
 
       console.error(
-        "ERRO FACEBOOK:",
         error
       );
 
@@ -2097,8 +2795,25 @@ document
         );
 
 
-      await direcionarUsuario(
-        resultado.user
+      const usuario =
+        resultado.user;
+
+
+      if(
+        usuario.emailVerified
+      ){
+
+        window.location.replace(
+          "painel.html"
+        );
+
+        return;
+
+      }
+
+
+      mostrarVerificacao(
+        usuario
       );
 
     }
@@ -2106,7 +2821,6 @@ document
     catch(error){
 
       console.error(
-        "ERRO APPLE:",
         error
       );
 
@@ -2122,58 +2836,86 @@ document
 
 
 /* =====================================
-   SESSÃO EXISTENTE
+   SESSÃO
 ===================================== */
 
 onAuthStateChanged(
   auth,
   async usuario => {
 
-    if(
-      !usuario
-    ){
+    /*
+      Se não existe usuário,
+      permanece no login.
+    */
+
+    if(!usuario){
 
       return;
 
     }
 
 
-    await usuario.reload();
-
-
     /*
-     * Se for o ADMIN, continua normalmente.
-     */
+      Se a conta já está autenticada
+      e verificada, entra no painel.
 
-    const ehAdmin =
-
-      String(
-        usuario.email || ""
-      )
-      .trim()
-      .toLowerCase()
-      ===
-      ADMIN_EMAIL.toLowerCase();
-
-
-    /*
-     * Usuário normal não confirmado:
-     * não redireciona automaticamente.
-     */
+      Se NÃO estiver verificada,
+      mostra a tela de confirmação.
+    */
 
     if(
-      !ehAdmin &&
-      !usuario.emailVerified
+      usuario.emailVerified
     ){
 
-      return;
+      /*
+        Evita redirecionar se já
+        estamos na tela de verificação.
+      */
+
+      if(
+        verificationBox.classList.contains(
+          "active"
+        )
+      ){
+
+        return;
+
+      }
+
+
+      /*
+        Só redireciona se não estiver
+        digitando/cadastrando.
+      */
+
+      if(
+        !registerBox.classList.contains(
+          "active"
+        )
+      ){
+
+        window.location.replace(
+          "painel.html"
+        );
+
+      }
 
     }
 
+    else{
 
-    await direcionarUsuario(
-      usuario
-    );
+      /*
+        Usuário autenticado porém
+        não verificado.
+
+        Não entra no painel.
+      */
+
+      mostrarVerificacao(
+        usuario
+      );
+
+    }
 
   }
 );
