@@ -198,11 +198,13 @@ body{
 
   top:-5px;
 
-  width:23px;
+  min-width:23px;
 
   height:23px;
 
-  border-radius:50%;
+  padding:0 5px;
+
+  border-radius:50px;
 
   display:flex;
 
@@ -915,8 +917,6 @@ body{
 
   margin-top:20px;
 
-  margin-bottom:110px;
-
   padding:18px;
 
   border-radius:24px;
@@ -977,6 +977,264 @@ body{
   font-size:14px;
 
   word-break:break-word;
+
+}
+
+
+/* =====================================================
+   EXTRATO
+===================================================== */
+
+.history-panel{
+
+  margin-top:20px;
+
+  padding:18px;
+
+  border-radius:24px;
+
+  background:
+    rgba(2,25,52,.86);
+
+  border:
+    1px solid
+    rgba(255,255,255,.1);
+
+}
+
+
+.history-empty{
+
+  padding:18px;
+
+  border-radius:15px;
+
+  background:
+    rgba(255,255,255,.05);
+
+  color:#9dbbd3;
+
+  text-align:center;
+
+  font-size:13px;
+
+}
+
+
+.history-item{
+
+  margin-top:10px;
+
+  padding:15px;
+
+  border-radius:16px;
+
+  background:
+    rgba(255,255,255,.055);
+
+  border:
+    1px solid
+    rgba(255,255,255,.07);
+
+}
+
+
+.history-top{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  gap:10px;
+
+}
+
+
+.history-title{
+
+  font-size:15px;
+
+  font-weight:900;
+
+}
+
+
+.history-date{
+
+  color:#75c5ff;
+
+  font-size:11px;
+
+  text-align:right;
+
+}
+
+
+.history-plus{
+
+  color:#63ff9e;
+
+}
+
+
+.history-minus{
+
+  color:#ff7c8c;
+
+}
+
+
+.history-info{
+
+  margin-top:8px;
+
+  color:#a9c5dc;
+
+  font-size:12px;
+
+  line-height:1.6;
+
+}
+
+
+.operation-id{
+
+  margin-top:9px;
+
+  padding:7px 9px;
+
+  border-radius:8px;
+
+  background:
+    rgba(0,0,0,.22);
+
+  color:#70c7ff;
+
+  font-size:10px;
+
+  word-break:break-all;
+
+}
+
+
+/* =====================================================
+   NOTIFICAÇÕES
+===================================================== */
+
+.notification-panel{
+
+  display:none;
+
+  position:fixed;
+
+  z-index:900;
+
+  top:75px;
+
+  right:15px;
+
+  width:min(390px,calc(100% - 30px));
+
+  max-height:70vh;
+
+  overflow:auto;
+
+  padding:16px;
+
+  border-radius:22px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #073d76,
+      #021a38
+    );
+
+  border:
+    1px solid
+    rgba(255,255,255,.15);
+
+  box-shadow:
+    0 20px 50px
+    rgba(0,0,0,.5);
+
+}
+
+
+.notification-header{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  margin-bottom:12px;
+
+}
+
+
+.notification-header h3{
+
+  font-size:18px;
+
+}
+
+
+.close-notifications{
+
+  width:35px;
+
+  height:35px;
+
+  border:0;
+
+  border-radius:10px;
+
+  background:
+    rgba(255,255,255,.1);
+
+  color:#fff;
+
+  font-size:18px;
+
+}
+
+
+.notification-item{
+
+  padding:13px;
+
+  margin-top:9px;
+
+  border-radius:14px;
+
+  background:
+    rgba(255,255,255,.055);
+
+}
+
+
+.notification-item strong{
+
+  display:block;
+
+  font-size:13px;
+
+}
+
+
+.notification-item span{
+
+  display:block;
+
+  margin-top:5px;
+
+  color:#a8c4da;
+
+  font-size:11px;
+
+  line-height:1.5;
 
 }
 
@@ -1225,6 +1483,8 @@ body{
 
     padding:11px;
 
+    padding-bottom:110px;
+
   }
 
 
@@ -1394,6 +1654,20 @@ body{
 
   }
 
+
+  .history-top{
+
+    flex-direction:column;
+
+  }
+
+
+  .history-date{
+
+    text-align:left;
+
+  }
+
 }
 
 </style>
@@ -1431,12 +1705,17 @@ body{
 
     <button
       class="top-button"
+      id="notificationButton"
       type="button">
 
       🔔
 
-      <span class="notification">
-        3
+      <span
+        class="notification"
+        id="notificationCount">
+
+        0
+
       </span>
 
     </button>
@@ -1454,6 +1733,47 @@ body{
   </div>
 
 </header>
+
+
+<!-- =====================================================
+     NOTIFICAÇÕES
+===================================================== -->
+
+<div
+  class="notification-panel"
+  id="notificationPanel">
+
+
+  <div class="notification-header">
+
+    <h3>
+      🔔 Notificações
+    </h3>
+
+
+    <button
+      class="close-notifications"
+      id="closeNotifications"
+      type="button">
+
+      ×
+
+    </button>
+
+  </div>
+
+
+  <div id="notificationList">
+
+    <div class="history-empty">
+
+      Nenhuma movimentação recente.
+
+    </div>
+
+  </div>
+
+</div>
 
 
 <!-- =====================================================
@@ -1556,7 +1876,7 @@ body{
 
 
 <!-- =====================================================
-     ERRO REAL
+     ERRO
 ===================================================== -->
 
 <div
@@ -1620,7 +1940,7 @@ body{
       CAIXA BOX
     </h3>
 
-    <p>
+    <p id="boxCardText">
       Confira sua caixa de prêmios.
     </p>
 
@@ -1699,7 +2019,7 @@ body{
       </h3>
 
       <p id="vipDescription">
-        Benefícios exclusivos para membros VIP.
+        Torne-se VIP para desbloquear benefícios exclusivos.
       </p>
 
     </div>
@@ -2020,6 +2340,39 @@ body{
 </section>
 
 
+<!-- =====================================================
+     EXTRATO
+===================================================== -->
+
+<section class="history-panel">
+
+
+  <div class="section-header">
+
+    <h3>
+      📜 Meu extrato
+    </h3>
+
+    <span>
+      Últimas movimentações
+    </span>
+
+  </div>
+
+
+  <div id="historyList">
+
+    <div class="history-empty">
+
+      🔄 Carregando extrato...
+
+    </div>
+
+  </div>
+
+</section>
+
+
 </div>
 
 
@@ -2043,6 +2396,7 @@ body{
 
   <button
     class="nav-button"
+    id="navVip"
     type="button">
 
     <span>👑</span>
@@ -2168,7 +2522,8 @@ import {
   query,
   where,
   getDocs,
-  addDoc
+  addDoc,
+  limit
 }
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
@@ -2270,6 +2625,10 @@ const errorText =
   );
 
 
+let cadastroAtual =
+  null;
+
+
 /* =====================================================
    UTILIDADES
 ===================================================== */
@@ -2356,6 +2715,37 @@ function formatarMoeda(
 }
 
 
+function escaparHTML(
+  texto
+){
+
+  return String(
+    texto ?? ""
+  )
+  .replaceAll(
+    "&",
+    "&amp;"
+  )
+  .replaceAll(
+    "<",
+    "&lt;"
+  )
+  .replaceAll(
+    ">",
+    "&gt;"
+  )
+  .replaceAll(
+    '"',
+    "&quot;"
+  )
+  .replaceAll(
+    "'",
+    "&#039;"
+  );
+
+}
+
+
 /* =====================================================
    RELÓGIO
 ===================================================== */
@@ -2436,15 +2826,6 @@ else if(mes === 12){
 
 /* =====================================================
    LOCALIZAÇÃO
-=====================================================
-
-   IMPORTANTE:
-
-   A localização NÃO participa do carregamento
-   principal da conta.
-
-   Se o usuário negar localização,
-   o painel continua funcionando normalmente.
 ===================================================== */
 
 function solicitarLocalizacao(){
@@ -2482,13 +2863,6 @@ function solicitarLocalizacao(){
         ", " +
         longitude.toFixed(4);
 
-
-      /*
-        Tenta descobrir cidade/estado.
-
-        Se falhar, NÃO mostra erro
-        no painel.
-      */
 
       try{
 
@@ -2560,8 +2934,7 @@ function solicitarLocalizacao(){
     error => {
 
       console.log(
-        "Usuário não autorizou localização.",
-        error
+        "Localização não autorizada."
       );
 
 
@@ -2611,18 +2984,6 @@ async function carregarCadastro(
     ).trim().toLowerCase();
 
 
-  console.log(
-    "UID:",
-    uid
-  );
-
-
-  console.log(
-    "E-mail:",
-    email
-  );
-
-
   const admins =
     collection(
       db,
@@ -2634,9 +2995,7 @@ async function carregarCadastro(
 
 
   /*
-  -------------------------------------------------------
-  1. PROCURA PELO UID
-  -------------------------------------------------------
+    PRIMEIRO PELO UID
   */
 
   try{
@@ -2662,11 +3021,6 @@ async function carregarCadastro(
     );
 
 
-    /*
-      Não aborta imediatamente.
-      Tentaremos pelo e-mail.
-    */
-
     snapshot = {
       empty:true,
       docs:[]
@@ -2676,9 +3030,7 @@ async function carregarCadastro(
 
 
   /*
-  -------------------------------------------------------
-  2. CADASTRO ANTIGO PELO E-MAIL
-  -------------------------------------------------------
+    DEPOIS PELO E-MAIL
   */
 
   if(
@@ -2708,6 +3060,7 @@ async function carregarCadastro(
         error
       );
 
+
       snapshot = {
         empty:true,
         docs:[]
@@ -2719,20 +3072,11 @@ async function carregarCadastro(
 
 
   /*
-  -------------------------------------------------------
-  3. SE NÃO EXISTE, CRIA UM NOVO
-  -------------------------------------------------------
+    NÃO ENCONTROU:
+    CRIA PERFIL NORMAL.
 
-  IMPORTANTE:
-
-  Novo usuário começa:
-
-  vip = false
-  chances = 0
-  moedas = 0
-  chaves = 0
-  creditos = 0
-  caixaBox = false
+    IMPORTANTE:
+    VIP = FALSE
   */
 
   if(snapshot.empty){
@@ -2802,18 +3146,6 @@ async function carregarCadastro(
         );
 
 
-      console.log(
-        "Novo cadastro criado:",
-        documento.id
-      );
-
-
-      /*
-        Usa os dados recém-criados
-        diretamente, sem fazer outra
-        leitura desnecessária.
-      */
-
       return {
 
         id:
@@ -2834,7 +3166,7 @@ async function carregarCadastro(
 
 
       throw new Error(
-        "A conta foi autenticada, mas o cadastro não pôde ser criado no Firestore."
+        "A conta foi autenticada, mas o cadastro não pôde ser criado."
       );
 
     }
@@ -2842,18 +3174,8 @@ async function carregarCadastro(
   }
 
 
-  /*
-  -------------------------------------------------------
-  4. CADASTRO ENCONTRADO
-  -------------------------------------------------------
-  */
-
   const documento =
     snapshot.docs[0];
-
-
-  const dados =
-    documento.data();
 
 
   return {
@@ -2862,7 +3184,7 @@ async function carregarCadastro(
       documento.id,
 
     data:
-      dados
+      documento.data()
 
   };
 
@@ -2878,15 +3200,13 @@ function mostrarDados(
   cadastro
 ){
 
+  cadastroAtual =
+    cadastro;
+
+
   const dados =
     cadastro.data;
 
-
-  /*
-  -------------------------------------------------------
-  NOME
-  -------------------------------------------------------
-  */
 
   const nome =
     dados.nome ||
@@ -2909,12 +3229,6 @@ function mostrarDados(
     nome;
 
 
-  /*
-  -------------------------------------------------------
-  E-MAIL
-  -------------------------------------------------------
-  */
-
   const email =
     dados.email ||
     firebaseUser.email ||
@@ -2931,32 +3245,11 @@ function mostrarDados(
     email;
 
 
-  /*
-  -------------------------------------------------------
-  UID
-  -------------------------------------------------------
-  */
-
   document.getElementById(
     "dataUid"
   ).textContent =
     firebaseUser.uid;
 
-
-  /*
-  -------------------------------------------------------
-  PUBLIC ID
-  -------------------------------------------------------
-
-  Não tenta gravar aqui.
-
-  Isso evita que a tela dê erro
-  por causa das Rules.
-
-  Se o cadastro ainda não possui
-  publicId, mostramos o UID curto
-  temporariamente.
-  */
 
   const publicId =
     dados.publicId ||
@@ -2992,17 +3285,7 @@ function mostrarDados(
 
 
   /*
-  -------------------------------------------------------
-  VIP
-  -------------------------------------------------------
-
-  SOMENTE o valor verdadeiro salvo
-  no Firebase ativa o VIP.
-
-  Não existe:
-  - ativação automática
-  - VIP por login
-  - VIP por cadastro
+    VIP SOMENTE PELO FIRESTORE
   */
 
   const vip =
@@ -3054,22 +3337,10 @@ function mostrarDados(
   }
 
 
-  /*
-  -------------------------------------------------------
-  AVATAR
-  -------------------------------------------------------
-  */
-
   avatar.textContent =
     dados.avatar ||
     "🙂";
 
-
-  /*
-  -------------------------------------------------------
-  RECURSOS
-  -------------------------------------------------------
-  */
 
   const creditos =
     valorNumerico(
@@ -3127,12 +3398,6 @@ function mostrarDados(
     );
 
 
-  /*
-  -------------------------------------------------------
-  DADOS PESSOAIS
-  -------------------------------------------------------
-  */
-
   document.getElementById(
     "dataAge"
   ).textContent =
@@ -3148,12 +3413,6 @@ function mostrarDados(
     "Não informado";
 
 
-  /*
-  -------------------------------------------------------
-  CAIXA BOX
-  -------------------------------------------------------
-  */
-
   const caixa =
     dados.caixaBox === true;
 
@@ -3167,9 +3426,509 @@ function mostrarDados(
 
 
   document.getElementById(
-    "dataAccess"
+    "boxCardText"
   ).textContent =
-    "Agora";
+    caixa
+      ? "Sua Caixa Box já foi resgatada."
+      : "Confira sua Caixa Box disponível.";
+
+}
+
+
+/* =====================================================
+   NOME DO ITEM
+===================================================== */
+
+function nomeItem(
+  item
+){
+
+  const nomes = {
+
+    creditos:
+      "💎 Créditos",
+
+    chances:
+      "🎟️ Chances",
+
+    moedas:
+      "🪙 Moedas",
+
+    chaves:
+      "🔑 Chaves",
+
+    VIP:
+      "👑 VIP",
+
+    "Caixa Box":
+      "🎁 Caixa Box"
+
+  };
+
+
+  return nomes[item] ||
+    item ||
+    "Item";
+
+}
+
+
+/* =====================================================
+   CARREGAR EXTRATO
+===================================================== */
+
+async function carregarExtrato(
+  publicId
+){
+
+  const area =
+    document.getElementById(
+      "historyList"
+    );
+
+
+  if(!publicId){
+
+    area.innerHTML =
+      "<div class='history-empty'>" +
+      "Seu ID ainda não está disponível." +
+      "</div>";
+
+    atualizarNotificacoes([]);
+
+    return;
+
+  }
+
+
+  try{
+
+    const ref =
+      collection(
+        db,
+        "historico"
+      );
+
+
+    /*
+      SOMENTE LEITURA.
+
+      O usuário consulta apenas
+      registros vinculados ao próprio
+      publicId.
+    */
+
+    const busca =
+      query(
+        ref,
+        where(
+          "publicId",
+          "==",
+          publicId
+        )
+      );
+
+
+    const resultado =
+      await getDocs(
+        busca
+      );
+
+
+    if(resultado.empty){
+
+      area.innerHTML =
+        "<div class='history-empty'>" +
+        "📜 Nenhuma movimentação registrada para sua conta." +
+        "</div>";
+
+
+      atualizarNotificacoes([]);
+
+      return;
+
+    }
+
+
+    const registros =
+      resultado.docs
+      .map(
+        doc => ({
+          id:
+            doc.id,
+
+          ...doc.data()
+
+        })
+      )
+      .sort(
+        (
+          a,
+          b
+        ) =>
+
+          String(
+            b.criadoEm ||
+            ""
+          ).localeCompare(
+            String(
+              a.criadoEm ||
+              ""
+            )
+          )
+      );
+
+
+    area.innerHTML =
+      "";
+
+
+    registros.forEach(
+      registro => {
+
+        const div =
+          document.createElement(
+            "div"
+          );
+
+
+        div.className =
+          "history-item";
+
+
+        const positivo =
+          registro.operacao ===
+          "adicionar";
+
+
+        const sinal =
+          positivo
+            ? "+"
+            : "-";
+
+
+        const classe =
+          positivo
+            ? "history-plus"
+            : "history-minus";
+
+
+        const data =
+          registro.criadoEm
+            ?
+            new Date(
+              registro.criadoEm
+            ).toLocaleString(
+              "pt-BR"
+            )
+            :
+            "—";
+
+
+        const quantidade =
+          registro.item ===
+          "creditos"
+            ?
+            formatarMoeda(
+              registro.quantidade
+            )
+            :
+            Number(
+              registro.quantidade || 0
+            ).toLocaleString(
+              "pt-BR"
+            );
+
+
+        div.innerHTML =
+
+          "<div class='history-top'>" +
+
+            "<div class='history-title " +
+            classe +
+            "'>" +
+
+              escaparHTML(
+                sinal +
+                " " +
+                quantidade +
+                " " +
+                nomeItem(
+                  registro.item
+                )
+              ) +
+
+            "</div>" +
+
+
+            "<div class='history-date'>" +
+
+              escaparHTML(
+                data
+              ) +
+
+            "</div>" +
+
+          "</div>" +
+
+
+          "<div class='history-info'>" +
+
+            "Saldo anterior: " +
+
+            escaparHTML(
+              registro.item === "creditos"
+                ?
+                formatarMoeda(
+                  registro.saldoAnterior
+                )
+                :
+                Number(
+                  registro.saldoAnterior || 0
+                ).toLocaleString(
+                  "pt-BR"
+                )
+            ) +
+
+            "<br>" +
+
+
+            "Saldo final: " +
+
+            escaparHTML(
+              registro.item === "creditos"
+                ?
+                formatarMoeda(
+                  registro.saldoFinal
+                )
+                :
+                Number(
+                  registro.saldoFinal || 0
+                ).toLocaleString(
+                  "pt-BR"
+                )
+            ) +
+
+            "<br>" +
+
+
+            "Motivo: " +
+
+            escaparHTML(
+              registro.motivo ||
+              "—"
+            ) +
+
+            "<br>" +
+
+
+            "Processado por: " +
+
+            escaparHTML(
+              registro.adminEmail ||
+              "Administrador"
+            ) +
+
+          "</div>" +
+
+
+          "<div class='operation-id'>" +
+
+            "🆔 " +
+
+            escaparHTML(
+              registro.movimentacaoId ||
+              "Registro antigo"
+            ) +
+
+          "</div>";
+
+
+        area.appendChild(
+          div
+        );
+
+      }
+    );
+
+
+    atualizarNotificacoes(
+      registros.slice(
+        0,
+        10
+      )
+    );
+
+
+  }
+  catch(error){
+
+    console.error(
+      "Erro ao carregar extrato:",
+      error
+    );
+
+
+    area.innerHTML =
+      "<div class='history-empty'>" +
+      "⚠️ Não foi possível carregar o extrato." +
+      "</div>";
+
+
+    atualizarNotificacoes([]);
+
+  }
+
+}
+
+
+/* =====================================================
+   NOTIFICAÇÕES
+===================================================== */
+
+function atualizarNotificacoes(
+  registros
+){
+
+  const lista =
+    document.getElementById(
+      "notificationList"
+    );
+
+
+  const contador =
+    document.getElementById(
+      "notificationCount"
+    );
+
+
+  contador.textContent =
+    registros.length;
+
+
+  if(
+    registros.length === 0
+  ){
+
+    lista.innerHTML =
+      "<div class='history-empty'>" +
+      "Nenhuma movimentação recente." +
+      "</div>";
+
+    return;
+
+  }
+
+
+  lista.innerHTML =
+    "";
+
+
+  registros.forEach(
+    registro => {
+
+      const item =
+        document.createElement(
+          "div"
+        );
+
+
+      item.className =
+        "notification-item";
+
+
+      const positivo =
+        registro.operacao ===
+        "adicionar";
+
+
+      const sinal =
+        positivo
+          ? "+"
+          : "-";
+
+
+      const data =
+        registro.criadoEm
+          ?
+          new Date(
+            registro.criadoEm
+          ).toLocaleString(
+            "pt-BR"
+          )
+          :
+          "—";
+
+
+      const quantidade =
+        registro.item ===
+        "creditos"
+          ?
+          formatarMoeda(
+            registro.quantidade
+          )
+          :
+          Number(
+            registro.quantidade || 0
+          ).toLocaleString(
+            "pt-BR"
+          );
+
+
+      item.innerHTML =
+
+        "<strong>" +
+
+          (positivo
+            ? "🟢 "
+            : "🔴 ") +
+
+          escaparHTML(
+            sinal +
+            " " +
+            quantidade +
+            " " +
+            nomeItem(
+              registro.item
+            )
+          ) +
+
+        "</strong>" +
+
+
+        "<span>" +
+
+          "Motivo: " +
+
+          escaparHTML(
+            registro.motivo ||
+            "Movimentação administrativa"
+          ) +
+
+          "<br>" +
+
+          "Por: " +
+
+          escaparHTML(
+            registro.adminEmail ||
+            "Administrador"
+          ) +
+
+          "<br>" +
+
+          escaparHTML(
+            data
+          ) +
+
+        "</span>";
+
+
+      lista.appendChild(
+        item
+      );
+
+    }
+  );
 
 }
 
@@ -3185,11 +3944,6 @@ onAuthStateChanged(
   async firebaseUser => {
 
 
-    /*
-      Sem login:
-      volta para index.
-    */
-
     if(!firebaseUser){
 
       window.location.replace(
@@ -3203,11 +3957,6 @@ onAuthStateChanged(
 
     limparErro();
 
-
-    /*
-      Mostra imediatamente o e-mail.
-      Assim a tela não fica vazia.
-    */
 
     profileEmail.textContent =
       firebaseUser.email ||
@@ -3242,12 +3991,19 @@ onAuthStateChanged(
 
 
       /*
-        Localização é executada
-        SOMENTE depois que a conta
-        já carregou.
+        Depois que o perfil carregou,
+        carregamos o extrato.
+      */
 
-        Se der erro, a conta continua
-        funcionando.
+      await carregarExtrato(
+        cadastro.data.publicId ||
+        ""
+      );
+
+
+      /*
+        Localização não interfere
+        no carregamento da conta.
       */
 
       solicitarLocalizacao();
@@ -3261,11 +4017,6 @@ onAuthStateChanged(
       );
 
 
-      /*
-        Mantém o usuário autenticado.
-        Mostra a mensagem específica.
-      */
-
       mostrarErro(
         error.message ||
         "Não foi possível carregar os dados da conta."
@@ -3275,6 +4026,64 @@ onAuthStateChanged(
 
   }
 
+);
+
+
+/* =====================================================
+   NOTIFICAÇÕES
+===================================================== */
+
+const notificationButton =
+  document.getElementById(
+    "notificationButton"
+  );
+
+
+const notificationPanel =
+  document.getElementById(
+    "notificationPanel"
+  );
+
+
+const closeNotifications =
+  document.getElementById(
+    "closeNotifications"
+  );
+
+
+notificationButton.addEventListener(
+  "click",
+  () => {
+
+    if(
+      notificationPanel.style.display ===
+      "block"
+    ){
+
+      notificationPanel.style.display =
+        "none";
+
+    }
+
+    else{
+
+      notificationPanel.style.display =
+        "block";
+
+    }
+
+  }
+);
+
+
+closeNotifications.addEventListener(
+  "click",
+  () => {
+
+    notificationPanel.style.display =
+      "none";
+
+  }
 );
 
 
@@ -3396,7 +4205,7 @@ logoutModal.addEventListener(
 
 
 /* =====================================================
-   BOTÃO CAIXA
+   CAIXA
 ===================================================== */
 
 document.getElementById(
@@ -3405,31 +4214,80 @@ document.getElementById(
   "click",
   () => {
 
-    alert(
-      "🎁 CAIXA BOX\n\n" +
-      "A área de resgate da Caixa Box será disponibilizada aqui."
-    );
+    const caixa =
+      cadastroAtual &&
+      cadastroAtual.data &&
+      cadastroAtual.data.caixaBox === true;
+
+
+    if(caixa){
+
+      alert(
+        "🎁 CAIXA BOX\n\n" +
+        "Sua Caixa Box já foi resgatada."
+      );
+
+    }
+
+    else{
+
+      alert(
+        "🎁 CAIXA BOX\n\n" +
+        "Sua Caixa Box está disponível."
+      );
+
+    }
 
   }
 );
 
 
 /* =====================================================
-   BOTÃO VIP
+   VIP
 ===================================================== */
+
+function abrirVIP(){
+
+  const vip =
+    cadastroAtual &&
+    cadastroAtual.data &&
+    cadastroAtual.data.vip === true;
+
+
+  if(vip){
+
+    alert(
+      "👑 ÁREA VIP\n\n" +
+      "Sua conta possui VIP ativo."
+    );
+
+  }
+
+  else{
+
+    alert(
+      "👑 ÁREA VIP\n\n" +
+      "Sua conta ainda não possui VIP ativo."
+    );
+
+  }
+
+}
+
 
 document.getElementById(
   "vipButton"
 ).addEventListener(
   "click",
-  () => {
+  abrirVIP
+);
 
-    alert(
-      "👑 ÁREA VIP\n\n" +
-      "Em breve você poderá visualizar todos os benefícios VIP."
-    );
 
-  }
+document.getElementById(
+  "navVip"
+).addEventListener(
+  "click",
+  abrirVIP
 );
 
 </script>
