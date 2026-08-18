@@ -198,13 +198,11 @@ body{
 
   top:-5px;
 
-  min-width:23px;
+  width:23px;
 
   height:23px;
 
-  padding:0 5px;
-
-  border-radius:50px;
+  border-radius:50%;
 
   display:flex;
 
@@ -306,6 +304,7 @@ body{
   font-size:33px;
 
   display:none;
+
 
 }
 
@@ -747,6 +746,7 @@ body{
 
   gap:14px;
 
+
 }
 
 
@@ -917,6 +917,8 @@ body{
 
   margin-top:20px;
 
+  margin-bottom:110px;
+
   padding:18px;
 
   border-radius:24px;
@@ -977,264 +979,6 @@ body{
   font-size:14px;
 
   word-break:break-word;
-
-}
-
-
-/* =====================================================
-   EXTRATO
-===================================================== */
-
-.history-panel{
-
-  margin-top:20px;
-
-  padding:18px;
-
-  border-radius:24px;
-
-  background:
-    rgba(2,25,52,.86);
-
-  border:
-    1px solid
-    rgba(255,255,255,.1);
-
-}
-
-
-.history-empty{
-
-  padding:18px;
-
-  border-radius:15px;
-
-  background:
-    rgba(255,255,255,.05);
-
-  color:#9dbbd3;
-
-  text-align:center;
-
-  font-size:13px;
-
-}
-
-
-.history-item{
-
-  margin-top:10px;
-
-  padding:15px;
-
-  border-radius:16px;
-
-  background:
-    rgba(255,255,255,.055);
-
-  border:
-    1px solid
-    rgba(255,255,255,.07);
-
-}
-
-
-.history-top{
-
-  display:flex;
-
-  justify-content:space-between;
-
-  gap:10px;
-
-}
-
-
-.history-title{
-
-  font-size:15px;
-
-  font-weight:900;
-
-}
-
-
-.history-date{
-
-  color:#75c5ff;
-
-  font-size:11px;
-
-  text-align:right;
-
-}
-
-
-.history-plus{
-
-  color:#63ff9e;
-
-}
-
-
-.history-minus{
-
-  color:#ff7c8c;
-
-}
-
-
-.history-info{
-
-  margin-top:8px;
-
-  color:#a9c5dc;
-
-  font-size:12px;
-
-  line-height:1.6;
-
-}
-
-
-.operation-id{
-
-  margin-top:9px;
-
-  padding:7px 9px;
-
-  border-radius:8px;
-
-  background:
-    rgba(0,0,0,.22);
-
-  color:#70c7ff;
-
-  font-size:10px;
-
-  word-break:break-all;
-
-}
-
-
-/* =====================================================
-   NOTIFICAÇÕES
-===================================================== */
-
-.notification-panel{
-
-  display:none;
-
-  position:fixed;
-
-  z-index:900;
-
-  top:75px;
-
-  right:15px;
-
-  width:min(390px,calc(100% - 30px));
-
-  max-height:70vh;
-
-  overflow:auto;
-
-  padding:16px;
-
-  border-radius:22px;
-
-  background:
-    linear-gradient(
-      145deg,
-      #073d76,
-      #021a38
-    );
-
-  border:
-    1px solid
-    rgba(255,255,255,.15);
-
-  box-shadow:
-    0 20px 50px
-    rgba(0,0,0,.5);
-
-}
-
-
-.notification-header{
-
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
-
-  margin-bottom:12px;
-
-}
-
-
-.notification-header h3{
-
-  font-size:18px;
-
-}
-
-
-.close-notifications{
-
-  width:35px;
-
-  height:35px;
-
-  border:0;
-
-  border-radius:10px;
-
-  background:
-    rgba(255,255,255,.1);
-
-  color:#fff;
-
-  font-size:18px;
-
-}
-
-
-.notification-item{
-
-  padding:13px;
-
-  margin-top:9px;
-
-  border-radius:14px;
-
-  background:
-    rgba(255,255,255,.055);
-
-}
-
-
-.notification-item strong{
-
-  display:block;
-
-  font-size:13px;
-
-}
-
-
-.notification-item span{
-
-  display:block;
-
-  margin-top:5px;
-
-  color:#a8c4da;
-
-  font-size:11px;
-
-  line-height:1.5;
 
 }
 
@@ -1474,6 +1218,165 @@ body{
 
 
 /* =====================================================
+   WHATSAPP
+===================================================== */
+
+.adam-whatsapp-button{
+
+  position:fixed;
+
+  right:18px;
+
+  bottom:105px;
+
+  z-index:99998;
+
+  width:58px;
+
+  height:58px;
+
+  border:0;
+
+  border-radius:50%;
+
+  background:#25D366;
+
+  color:#fff;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  font-size:29px;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 8px 25px
+    rgba(0,0,0,.35);
+
+  transition:
+    transform .2s ease;
+}
+
+
+.adam-whatsapp-button:hover{
+
+  transform:scale(1.08);
+}
+
+
+.adam-whatsapp-menu{
+
+  position:fixed;
+
+  right:18px;
+
+  bottom:174px;
+
+  z-index:99998;
+
+  width:270px;
+
+  padding:17px;
+
+  border-radius:20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #073d76,
+      #021a38
+    );
+
+  border:
+    1px solid
+    rgba(255,255,255,.15);
+
+  box-shadow:
+    0 15px 40px
+    rgba(0,0,0,.45);
+
+  display:none;
+}
+
+
+.adam-whatsapp-menu.active{
+
+  display:block;
+}
+
+
+.adam-whatsapp-title{
+
+  font-size:16px;
+
+  font-weight:900;
+
+  margin-bottom:12px;
+}
+
+
+.adam-whatsapp-option{
+
+  width:100%;
+
+  border:0;
+
+  border-radius:13px;
+
+  padding:14px 12px;
+
+  margin-top:8px;
+
+  color:#fff;
+
+  font-size:14px;
+
+  font-weight:800;
+
+  text-align:left;
+
+  cursor:pointer;
+}
+
+
+.adam-whatsapp-buy{
+
+  background:#07934c;
+}
+
+
+.adam-whatsapp-help{
+
+  background:#168ff0;
+}
+
+
+.adam-whatsapp-close{
+
+  width:100%;
+
+  margin-top:10px;
+
+  border:0;
+
+  border-radius:12px;
+
+  padding:9px;
+
+  background:
+    rgba(255,255,255,.08);
+
+  color:#a9c8e5;
+
+  cursor:pointer;
+}
+
+
+/* =====================================================
    RESPONSIVO
 ===================================================== */
 
@@ -1482,8 +1385,6 @@ body{
   .page{
 
     padding:11px;
-
-    padding-bottom:110px;
 
   }
 
@@ -1655,16 +1556,29 @@ body{
   }
 
 
-  .history-top{
+  .adam-whatsapp-button{
 
-    flex-direction:column;
+    right:15px;
+
+    bottom:88px;
+
+    width:56px;
+
+    height:56px;
 
   }
 
 
-  .history-date{
+  .adam-whatsapp-menu{
 
-    text-align:left;
+    right:15px;
+
+    bottom:155px;
+
+    width:
+      calc(100% - 30px);
+
+    max-width:300px;
 
   }
 
@@ -1680,10 +1594,6 @@ body{
 
 <div class="page">
 
-
-<!-- =====================================================
-     TOPO
-===================================================== -->
 
 <header class="topbar">
 
@@ -1705,17 +1615,12 @@ body{
 
     <button
       class="top-button"
-      id="notificationButton"
       type="button">
 
       🔔
 
-      <span
-        class="notification"
-        id="notificationCount">
-
-        0
-
+      <span class="notification">
+        3
       </span>
 
     </button>
@@ -1735,53 +1640,7 @@ body{
 </header>
 
 
-<!-- =====================================================
-     NOTIFICAÇÕES
-===================================================== -->
-
-<div
-  class="notification-panel"
-  id="notificationPanel">
-
-
-  <div class="notification-header">
-
-    <h3>
-      🔔 Notificações
-    </h3>
-
-
-    <button
-      class="close-notifications"
-      id="closeNotifications"
-      type="button">
-
-      ×
-
-    </button>
-
-  </div>
-
-
-  <div id="notificationList">
-
-    <div class="history-empty">
-
-      Nenhuma movimentação recente.
-
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- =====================================================
-     PERFIL
-===================================================== -->
-
 <section class="profile">
-
 
   <div class="avatar-area">
 
@@ -1806,7 +1665,6 @@ body{
 
 
   <div class="profile-data">
-
 
     <div class="profile-name-line">
 
@@ -1869,15 +1727,10 @@ body{
 
     </div>
 
-
   </div>
 
 </section>
 
-
-<!-- =====================================================
-     ERRO
-===================================================== -->
 
 <div
   class="error-panel"
@@ -1893,10 +1746,6 @@ body{
 
 </div>
 
-
-<!-- =====================================================
-     HERO
-===================================================== -->
 
 <section class="hero">
 
@@ -1921,12 +1770,7 @@ body{
 </section>
 
 
-<!-- =====================================================
-     CARDS
-===================================================== -->
-
 <section class="cards">
-
 
   <div
     class="card card-box"
@@ -1940,7 +1784,7 @@ body{
       CAIXA BOX
     </h3>
 
-    <p id="boxCardText">
+    <p>
       Confira sua caixa de prêmios.
     </p>
 
@@ -1994,16 +1838,10 @@ body{
 
   </div>
 
-
 </section>
 
 
-<!-- =====================================================
-     VIP
-===================================================== -->
-
 <section class="vip-panel">
-
 
   <div class="vip-info">
 
@@ -2019,7 +1857,7 @@ body{
       </h3>
 
       <p id="vipDescription">
-        Torne-se VIP para desbloquear benefícios exclusivos.
+        Benefícios exclusivos para membros VIP.
       </p>
 
     </div>
@@ -2039,10 +1877,6 @@ body{
 </section>
 
 
-<!-- =====================================================
-     RECURSOS
-===================================================== -->
-
 <div class="section-header">
 
   <h3>
@@ -2057,7 +1891,6 @@ body{
 
 
 <section class="resources">
-
 
   <div class="resource">
 
@@ -2142,16 +1975,10 @@ body{
 
   </div>
 
-
 </section>
 
 
-<!-- =====================================================
-     MEUS DADOS
-===================================================== -->
-
 <section class="data-panel">
-
 
   <div class="section-header">
 
@@ -2163,7 +1990,6 @@ body{
 
 
   <div class="data-grid">
-
 
     <div class="data-item">
 
@@ -2334,40 +2160,6 @@ body{
 
     </div>
 
-
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     EXTRATO
-===================================================== -->
-
-<section class="history-panel">
-
-
-  <div class="section-header">
-
-    <h3>
-      📜 Meu extrato
-    </h3>
-
-    <span>
-      Últimas movimentações
-    </span>
-
-  </div>
-
-
-  <div id="historyList">
-
-    <div class="history-empty">
-
-      🔄 Carregando extrato...
-
-    </div>
-
   </div>
 
 </section>
@@ -2376,12 +2168,7 @@ body{
 </div>
 
 
-<!-- =====================================================
-     MENU
-===================================================== -->
-
 <nav class="bottom-nav">
-
 
   <button
     class="nav-button active"
@@ -2396,7 +2183,6 @@ body{
 
   <button
     class="nav-button"
-    id="navVip"
     type="button">
 
     <span>👑</span>
@@ -2438,18 +2224,65 @@ body{
 
   </button>
 
-
 </nav>
 
 
 <!-- =====================================================
-     MODAL SAIR
+     WHATSAPP
 ===================================================== -->
+
+<div
+  class="adam-whatsapp-menu"
+  id="adamWhatsAppMenu"
+>
+
+  <div class="adam-whatsapp-title">
+    💬 Como podemos ajudar?
+  </div>
+
+
+  <button
+    type="button"
+    class="adam-whatsapp-option adam-whatsapp-buy"
+    id="adamWhatsAppBuy"
+  >
+    🛒 Quero comprar
+  </button>
+
+
+  <button
+    type="button"
+    class="adam-whatsapp-option adam-whatsapp-help"
+    id="adamWhatsAppHelp"
+  >
+    💬 Tenho uma dúvida
+  </button>
+
+
+  <button
+    type="button"
+    class="adam-whatsapp-close"
+    id="adamWhatsAppClose"
+  >
+    Fechar
+  </button>
+
+</div>
+
+
+<button
+  type="button"
+  class="adam-whatsapp-button"
+  id="adamWhatsAppButton"
+  aria-label="Abrir WhatsApp"
+>
+  💬
+</button>
+
 
 <div
   class="modal"
   id="logoutModal">
-
 
   <div class="modal-box">
 
@@ -2457,14 +2290,11 @@ body{
       Sair da conta?
     </h3>
 
-
     <p>
       Você será levado novamente para o login.
     </p>
 
-
     <div class="modal-buttons">
-
 
       <button
         class="cancel"
@@ -2484,7 +2314,6 @@ body{
         SAIR
 
       </button>
-
 
     </div>
 
@@ -2522,8 +2351,7 @@ import {
   query,
   where,
   getDocs,
-  addDoc,
-  limit
+  addDoc
 }
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
@@ -2625,10 +2453,6 @@ const errorText =
   );
 
 
-let cadastroAtual =
-  null;
-
-
 /* =====================================================
    UTILIDADES
 ===================================================== */
@@ -2710,37 +2534,6 @@ function formatarMoeda(
       style:"currency",
       currency:"BRL"
     }
-  );
-
-}
-
-
-function escaparHTML(
-  texto
-){
-
-  return String(
-    texto ?? ""
-  )
-  .replaceAll(
-    "&",
-    "&amp;"
-  )
-  .replaceAll(
-    "<",
-    "&lt;"
-  )
-  .replaceAll(
-    ">",
-    "&gt;"
-  )
-  .replaceAll(
-    '"',
-    "&quot;"
-  )
-  .replaceAll(
-    "'",
-    "&#039;"
   );
 
 }
@@ -2934,7 +2727,8 @@ function solicitarLocalizacao(){
     error => {
 
       console.log(
-        "Localização não autorizada."
+        "Usuário não autorizou localização.",
+        error
       );
 
 
@@ -2994,10 +2788,6 @@ async function carregarCadastro(
   let snapshot;
 
 
-  /*
-    PRIMEIRO PELO UID
-  */
-
   try{
 
     snapshot =
@@ -3029,10 +2819,6 @@ async function carregarCadastro(
   }
 
 
-  /*
-    DEPOIS PELO E-MAIL
-  */
-
   if(
     snapshot.empty &&
     email
@@ -3060,7 +2846,6 @@ async function carregarCadastro(
         error
       );
 
-
       snapshot = {
         empty:true,
         docs:[]
@@ -3070,14 +2855,6 @@ async function carregarCadastro(
 
   }
 
-
-  /*
-    NÃO ENCONTROU:
-    CRIA PERFIL NORMAL.
-
-    IMPORTANTE:
-    VIP = FALSE
-  */
 
   if(snapshot.empty){
 
@@ -3166,7 +2943,7 @@ async function carregarCadastro(
 
 
       throw new Error(
-        "A conta foi autenticada, mas o cadastro não pôde ser criado."
+        "A conta foi autenticada, mas o cadastro não pôde ser criado no Firestore."
       );
 
     }
@@ -3178,13 +2955,17 @@ async function carregarCadastro(
     snapshot.docs[0];
 
 
+  const dados =
+    documento.data();
+
+
   return {
 
     id:
       documento.id,
 
     data:
-      documento.data()
+      dados
 
   };
 
@@ -3199,10 +2980,6 @@ function mostrarDados(
   firebaseUser,
   cadastro
 ){
-
-  cadastroAtual =
-    cadastro;
-
 
   const dados =
     cadastro.data;
@@ -3283,10 +3060,6 @@ function mostrarDados(
 
   }
 
-
-  /*
-    VIP SOMENTE PELO FIRESTORE
-  */
 
   const vip =
     dados.vip === true;
@@ -3426,509 +3199,9 @@ function mostrarDados(
 
 
   document.getElementById(
-    "boxCardText"
+    "dataAccess"
   ).textContent =
-    caixa
-      ? "Sua Caixa Box já foi resgatada."
-      : "Confira sua Caixa Box disponível.";
-
-}
-
-
-/* =====================================================
-   NOME DO ITEM
-===================================================== */
-
-function nomeItem(
-  item
-){
-
-  const nomes = {
-
-    creditos:
-      "💎 Créditos",
-
-    chances:
-      "🎟️ Chances",
-
-    moedas:
-      "🪙 Moedas",
-
-    chaves:
-      "🔑 Chaves",
-
-    VIP:
-      "👑 VIP",
-
-    "Caixa Box":
-      "🎁 Caixa Box"
-
-  };
-
-
-  return nomes[item] ||
-    item ||
-    "Item";
-
-}
-
-
-/* =====================================================
-   CARREGAR EXTRATO
-===================================================== */
-
-async function carregarExtrato(
-  publicId
-){
-
-  const area =
-    document.getElementById(
-      "historyList"
-    );
-
-
-  if(!publicId){
-
-    area.innerHTML =
-      "<div class='history-empty'>" +
-      "Seu ID ainda não está disponível." +
-      "</div>";
-
-    atualizarNotificacoes([]);
-
-    return;
-
-  }
-
-
-  try{
-
-    const ref =
-      collection(
-        db,
-        "historico"
-      );
-
-
-    /*
-      SOMENTE LEITURA.
-
-      O usuário consulta apenas
-      registros vinculados ao próprio
-      publicId.
-    */
-
-    const busca =
-      query(
-        ref,
-        where(
-          "publicId",
-          "==",
-          publicId
-        )
-      );
-
-
-    const resultado =
-      await getDocs(
-        busca
-      );
-
-
-    if(resultado.empty){
-
-      area.innerHTML =
-        "<div class='history-empty'>" +
-        "📜 Nenhuma movimentação registrada para sua conta." +
-        "</div>";
-
-
-      atualizarNotificacoes([]);
-
-      return;
-
-    }
-
-
-    const registros =
-      resultado.docs
-      .map(
-        doc => ({
-          id:
-            doc.id,
-
-          ...doc.data()
-
-        })
-      )
-      .sort(
-        (
-          a,
-          b
-        ) =>
-
-          String(
-            b.criadoEm ||
-            ""
-          ).localeCompare(
-            String(
-              a.criadoEm ||
-              ""
-            )
-          )
-      );
-
-
-    area.innerHTML =
-      "";
-
-
-    registros.forEach(
-      registro => {
-
-        const div =
-          document.createElement(
-            "div"
-          );
-
-
-        div.className =
-          "history-item";
-
-
-        const positivo =
-          registro.operacao ===
-          "adicionar";
-
-
-        const sinal =
-          positivo
-            ? "+"
-            : "-";
-
-
-        const classe =
-          positivo
-            ? "history-plus"
-            : "history-minus";
-
-
-        const data =
-          registro.criadoEm
-            ?
-            new Date(
-              registro.criadoEm
-            ).toLocaleString(
-              "pt-BR"
-            )
-            :
-            "—";
-
-
-        const quantidade =
-          registro.item ===
-          "creditos"
-            ?
-            formatarMoeda(
-              registro.quantidade
-            )
-            :
-            Number(
-              registro.quantidade || 0
-            ).toLocaleString(
-              "pt-BR"
-            );
-
-
-        div.innerHTML =
-
-          "<div class='history-top'>" +
-
-            "<div class='history-title " +
-            classe +
-            "'>" +
-
-              escaparHTML(
-                sinal +
-                " " +
-                quantidade +
-                " " +
-                nomeItem(
-                  registro.item
-                )
-              ) +
-
-            "</div>" +
-
-
-            "<div class='history-date'>" +
-
-              escaparHTML(
-                data
-              ) +
-
-            "</div>" +
-
-          "</div>" +
-
-
-          "<div class='history-info'>" +
-
-            "Saldo anterior: " +
-
-            escaparHTML(
-              registro.item === "creditos"
-                ?
-                formatarMoeda(
-                  registro.saldoAnterior
-                )
-                :
-                Number(
-                  registro.saldoAnterior || 0
-                ).toLocaleString(
-                  "pt-BR"
-                )
-            ) +
-
-            "<br>" +
-
-
-            "Saldo final: " +
-
-            escaparHTML(
-              registro.item === "creditos"
-                ?
-                formatarMoeda(
-                  registro.saldoFinal
-                )
-                :
-                Number(
-                  registro.saldoFinal || 0
-                ).toLocaleString(
-                  "pt-BR"
-                )
-            ) +
-
-            "<br>" +
-
-
-            "Motivo: " +
-
-            escaparHTML(
-              registro.motivo ||
-              "—"
-            ) +
-
-            "<br>" +
-
-
-            "Processado por: " +
-
-            escaparHTML(
-              registro.adminEmail ||
-              "Administrador"
-            ) +
-
-          "</div>" +
-
-
-          "<div class='operation-id'>" +
-
-            "🆔 " +
-
-            escaparHTML(
-              registro.movimentacaoId ||
-              "Registro antigo"
-            ) +
-
-          "</div>";
-
-
-        area.appendChild(
-          div
-        );
-
-      }
-    );
-
-
-    atualizarNotificacoes(
-      registros.slice(
-        0,
-        10
-      )
-    );
-
-
-  }
-  catch(error){
-
-    console.error(
-      "Erro ao carregar extrato:",
-      error
-    );
-
-
-    area.innerHTML =
-      "<div class='history-empty'>" +
-      "⚠️ Não foi possível carregar o extrato." +
-      "</div>";
-
-
-    atualizarNotificacoes([]);
-
-  }
-
-}
-
-
-/* =====================================================
-   NOTIFICAÇÕES
-===================================================== */
-
-function atualizarNotificacoes(
-  registros
-){
-
-  const lista =
-    document.getElementById(
-      "notificationList"
-    );
-
-
-  const contador =
-    document.getElementById(
-      "notificationCount"
-    );
-
-
-  contador.textContent =
-    registros.length;
-
-
-  if(
-    registros.length === 0
-  ){
-
-    lista.innerHTML =
-      "<div class='history-empty'>" +
-      "Nenhuma movimentação recente." +
-      "</div>";
-
-    return;
-
-  }
-
-
-  lista.innerHTML =
-    "";
-
-
-  registros.forEach(
-    registro => {
-
-      const item =
-        document.createElement(
-          "div"
-        );
-
-
-      item.className =
-        "notification-item";
-
-
-      const positivo =
-        registro.operacao ===
-        "adicionar";
-
-
-      const sinal =
-        positivo
-          ? "+"
-          : "-";
-
-
-      const data =
-        registro.criadoEm
-          ?
-          new Date(
-            registro.criadoEm
-          ).toLocaleString(
-            "pt-BR"
-          )
-          :
-          "—";
-
-
-      const quantidade =
-        registro.item ===
-        "creditos"
-          ?
-          formatarMoeda(
-            registro.quantidade
-          )
-          :
-          Number(
-            registro.quantidade || 0
-          ).toLocaleString(
-            "pt-BR"
-          );
-
-
-      item.innerHTML =
-
-        "<strong>" +
-
-          (positivo
-            ? "🟢 "
-            : "🔴 ") +
-
-          escaparHTML(
-            sinal +
-            " " +
-            quantidade +
-            " " +
-            nomeItem(
-              registro.item
-            )
-          ) +
-
-        "</strong>" +
-
-
-        "<span>" +
-
-          "Motivo: " +
-
-          escaparHTML(
-            registro.motivo ||
-            "Movimentação administrativa"
-          ) +
-
-          "<br>" +
-
-          "Por: " +
-
-          escaparHTML(
-            registro.adminEmail ||
-            "Administrador"
-          ) +
-
-          "<br>" +
-
-          escaparHTML(
-            data
-          ) +
-
-        "</span>";
-
-
-      lista.appendChild(
-        item
-      );
-
-    }
-  );
+    "Agora";
 
 }
 
@@ -3942,7 +3215,6 @@ onAuthStateChanged(
   auth,
 
   async firebaseUser => {
-
 
     if(!firebaseUser){
 
@@ -3990,22 +3262,6 @@ onAuthStateChanged(
       );
 
 
-      /*
-        Depois que o perfil carregou,
-        carregamos o extrato.
-      */
-
-      await carregarExtrato(
-        cadastro.data.publicId ||
-        ""
-      );
-
-
-      /*
-        Localização não interfere
-        no carregamento da conta.
-      */
-
       solicitarLocalizacao();
 
     }
@@ -4026,64 +3282,6 @@ onAuthStateChanged(
 
   }
 
-);
-
-
-/* =====================================================
-   NOTIFICAÇÕES
-===================================================== */
-
-const notificationButton =
-  document.getElementById(
-    "notificationButton"
-  );
-
-
-const notificationPanel =
-  document.getElementById(
-    "notificationPanel"
-  );
-
-
-const closeNotifications =
-  document.getElementById(
-    "closeNotifications"
-  );
-
-
-notificationButton.addEventListener(
-  "click",
-  () => {
-
-    if(
-      notificationPanel.style.display ===
-      "block"
-    ){
-
-      notificationPanel.style.display =
-        "none";
-
-    }
-
-    else{
-
-      notificationPanel.style.display =
-        "block";
-
-    }
-
-  }
-);
-
-
-closeNotifications.addEventListener(
-  "click",
-  () => {
-
-    notificationPanel.style.display =
-      "none";
-
-  }
 );
 
 
@@ -4214,29 +3412,10 @@ document.getElementById(
   "click",
   () => {
 
-    const caixa =
-      cadastroAtual &&
-      cadastroAtual.data &&
-      cadastroAtual.data.caixaBox === true;
-
-
-    if(caixa){
-
-      alert(
-        "🎁 CAIXA BOX\n\n" +
-        "Sua Caixa Box já foi resgatada."
-      );
-
-    }
-
-    else{
-
-      alert(
-        "🎁 CAIXA BOX\n\n" +
-        "Sua Caixa Box está disponível."
-      );
-
-    }
+    alert(
+      "🎁 CAIXA BOX\n\n" +
+      "A área de resgate da Caixa Box será disponibilizada aqui."
+    );
 
   }
 );
@@ -4246,48 +3425,135 @@ document.getElementById(
    VIP
 ===================================================== */
 
-function abrirVIP(){
-
-  const vip =
-    cadastroAtual &&
-    cadastroAtual.data &&
-    cadastroAtual.data.vip === true;
-
-
-  if(vip){
-
-    alert(
-      "👑 ÁREA VIP\n\n" +
-      "Sua conta possui VIP ativo."
-    );
-
-  }
-
-  else{
-
-    alert(
-      "👑 ÁREA VIP\n\n" +
-      "Sua conta ainda não possui VIP ativo."
-    );
-
-  }
-
-}
-
-
 document.getElementById(
   "vipButton"
 ).addEventListener(
   "click",
-  abrirVIP
+  () => {
+
+    alert(
+      "👑 ÁREA VIP\n\n" +
+      "Em breve você poderá visualizar todos os benefícios VIP."
+    );
+
+  }
 );
 
 
-document.getElementById(
-  "navVip"
-).addEventListener(
+/* =====================================================
+   WHATSAPP
+===================================================== */
+
+const whatsappButton =
+  document.getElementById(
+    "adamWhatsAppButton"
+  );
+
+
+const whatsappMenu =
+  document.getElementById(
+    "adamWhatsAppMenu"
+  );
+
+
+whatsappButton.addEventListener(
   "click",
-  abrirVIP
+  () => {
+
+    whatsappMenu.classList.toggle(
+      "active"
+    );
+
+  }
+);
+
+
+document
+.getElementById(
+  "adamWhatsAppClose"
+)
+.addEventListener(
+  "click",
+  () => {
+
+    whatsappMenu.classList.remove(
+      "active"
+    );
+
+  }
+);
+
+
+function abrirWhatsApp(
+  mensagem
+){
+
+  const url =
+    "https://wa.me/5531987350267?text=" +
+    encodeURIComponent(
+      mensagem
+    );
+
+
+  window.open(
+    url,
+    "_blank"
+  );
+
+}
+
+
+document
+.getElementById(
+  "adamWhatsAppBuy"
+)
+.addEventListener(
+  "click",
+  () => {
+
+    abrirWhatsApp(
+      "Olá! Vim pelo site Adam Games e quero fazer uma compra. 🛒"
+    );
+
+  }
+);
+
+
+document
+.getElementById(
+  "adamWhatsAppHelp"
+)
+.addEventListener(
+  "click",
+  () => {
+
+    abrirWhatsApp(
+      "Olá! Vim pelo site Adam Games e tenho uma dúvida. 💬"
+    );
+
+  }
+);
+
+
+document.addEventListener(
+  "click",
+  event => {
+
+    if(
+      !whatsappMenu.contains(
+        event.target
+      ) &&
+      event.target !==
+      whatsappButton
+    ){
+
+      whatsappMenu.classList.remove(
+        "active"
+      );
+
+    }
+
+  }
 );
 
 </script>
