@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>Adam Games • Teste de Segurança</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+
+  min-height:100vh;
+
+  font-family:Arial,sans-serif;
+
+  background:
+    linear-gradient(
+      145deg,
+      #087fe0,
+      #031b3d
+    );
+
+  color:#fff;
+
+  padding:25px 15px;
+}
+
+.container{
+
+  max-width:600px;
+
+  margin:auto;
+}
+
+h1{
+
+  font-size:28px;
+
+  margin-bottom:8px;
+}
+
+.subtitle{
+
+  color:#b9d5ef;
+
+  margin-bottom:25px;
+}
+
+.card{
+
+  background:
+    rgba(2,30,62,.95);
+
+  border:
+    1px solid
+    rgba(255,255,255,.12);
+
+  border-radius:20px;
+
+  padding:20px;
+
+  margin-bottom:15px;
+}
+
+.user{
+
+  color:#72d0ff;
+
+  margin-bottom:15px;
+
+  word-break:break-all;
+}
+
+button{
+
+  width:100%;
+
+  padding:15px;
+
+  margin-top:10px;
+
+  border:0;
+
+  border-radius:12px;
+
+  color:#fff;
+
+  background:#168ff0;
+
+  font-weight:bold;
+
+  cursor:pointer;
+}
+
+button.danger{
+
+  background:#c8233c;
+}
+
+button.warning{
+
+  background:#c38b0d;
+}
+
+button.history{
+
+  background:#7b4bd6;
+}
+
+.result{
+
+  margin-top:10px;
+
+  padding:12px;
+
+  border-radius:10px;
+
+  background:
+    rgba(255,255,255,.05);
+
+  font-size:13px;
+
+  line-height:1.5;
+
+  word-break:break-word;
+}
+
+.ok{
+
+  color:#69ff9d;
+}
+
+.blocked{
+
+  color:#ff8c9a;
+}
+
+.info{
+
+  color:#8fcaff;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<h1>
+  🔐 Teste de Segurança
+</h1>
+
+<div class="subtitle">
+  Página temporária — não faz parte do sistema.
+</div>
+
+
+<div class="card">
+
+  <div>
+    Usuário atualmente conectado:
+  </div>
+
+  <div
+    class="user"
+    id="usuario"
+  >
+    Verificando...
+  </div>
+
+</div>
+
+
+<div class="card">
+
+  <h3>
+    Testes de alteração
+  </h3>
+
+
+  <button
+    id="testeCreditos"
+  >
+    💎 Tentar alterar créditos
+  </button>
+
+  <div
+    id="resultadoCreditos"
+    class="result"
+  >
+    Aguardando teste...
+  </div>
+
+
+  <button
+    id="testeChances"
+  >
+    🎟️ Tentar alterar chances
+  </button>
+
+  <div
+    id="resultadoChances"
+    class="result"
+  >
+    Aguardando teste...
+  </div>
+
+
+  <button
+    id="testeVip"
+    class="warning"
+  >
+    👑 Tentar ativar VIP
+  </button>
+
+  <div
+    id="resultadoVip"
+    class="result"
+  >
+    Aguardando teste...
+  </div>
+
+
+  <button
+    id="testeHistorico"
+    class="history"
+  >
+    📜 Tentar criar histórico falso
+  </button>
+
+  <div
+    id="resultadoHistorico"
+    class="result"
+  >
+    Aguardando teste...
+  </div>
+
+</div>
+
+
+<div class="card">
+
+  <h3>
+    Resultado esperado
+  </h3>
+
+  <p style="margin-top:10px;color:#9fc4e5;line-height:1.6">
+
+    Com uma conta normal, todos os testes acima
+    devem ser bloqueados pelo Firebase.
+
+    <br><br>
+
+    Resultado esperado:
+
+    <br>
+
+    <strong style="color:#69ff9d">
+      permission-denied
+    </strong>
+
+  </p>
+
+</div>
+
+
+</div>
+
+
+<script type="module">
+
+
+/* =====================================
+   FIREBASE
+===================================== */
+
+import {
+  initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+import {
+  getAuth,
+  onAuthStateChanged
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+import {
+  getFirestore,
+  collection,
+  query,
+  where,
+  getDocs,
+  updateDoc,
+  addDoc
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+/* =====================================
+   CONFIGURAÇÃO
+===================================== */
+
+const firebaseConfig = {
+
+  apiKey:
+    "AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",
+
+  authDomain:
+    "adam-games-21081.firebaseapp.com",
+
+  projectId:
+    "adam-games-21081",
+
+  storageBucket:
+    "adam-games-21081.firebasestorage.app",
+
+  messagingSenderId:
+    "1055528418738",
+
+  appId:
+    "1:1055528418738:web:5fafdf63424ba9744eb8ab"
+
+};
+
+
+const app =
+  initializeApp(
+    firebaseConfig
+  );
+
+
+const auth =
+  getAuth(app);
+
+
+const db =
+  getFirestore(app);
+
+
+/* =====================================
+   VARIÁVEL DO USUÁRIO
+===================================== */
+
+let usuarioAtual =
+  null;
+
+let documentoUsuario =
+  null;
+
+
+/* =====================================
+   ELEMENTOS
+===================================== */
+
+const usuarioArea =
+  document.getElementById(
+    "usuario"
+  );
+
+
+/* =====================================
+   MOSTRAR RESULTADO
+===================================== */
+
+function resultado(
+  id,
+  texto,
+  tipo
+){
+
+  const elemento =
+    document.getElementById(
+      id
+    );
+
+
+  elemento.innerHTML =
+    texto;
+
+
+  elemento.className =
+    "result " +
+    tipo;
+
+}
+
+
+/* =====================================
+   LOCALIZAR DOCUMENTO
+===================================== */
+
+async function localizarDocumento(){
+
+  if(
+    !usuarioAtual
+  ){
+
+    return;
+
+  }
+
+
+  try{
+
+    const referencia =
+      collection(
+        db,
+        "admins"
+      );
+
+
+    const busca =
+      query(
+        referencia,
+        where(
+          "uid",
+          "==",
+          usuarioAtual.uid
+        )
+      );
+
+
+    const resultadoBusca =
+      await getDocs(
+        busca
+      );
+
+
+    if(
+      resultadoBusca.empty
+    ){
+
+      usuarioArea.innerHTML =
+        "❌ Documento do usuário não encontrado.";
+
+      return;
+
+    }
+
+
+    documentoUsuario =
+      resultadoBusca.docs[0];
+
+
+    usuarioArea.innerHTML =
+
+      "<strong>E-mail:</strong> " +
+      (
+        usuarioAtual.email ||
+        "—"
+      ) +
+
+      "<br><br>" +
+
+      "<strong>UID:</strong> " +
+      usuarioAtual.uid +
+
+      "<br><br>" +
+
+      "<strong>Documento:</strong> " +
+      documentoUsuario.id;
+
+
+  }
+
+  catch(error){
+
+    console.error(
+      error
+    );
+
+
+    usuarioArea.innerHTML =
+      "Erro ao localizar usuário.";
+
+  }
+
+}
+
+
+/* =====================================
+   TESTE CRÉDITOS
+===================================== */
+
+document
+.getElementById(
+  "testeCreditos"
+)
+.addEventListener(
+  "click",
+  async () => {
+
+    if(
+      !documentoUsuario
+    ){
+
+      resultado(
+        "resultadoCreditos",
+        "Usuário não localizado.",
+        "blocked"
+      );
+
+      return;
+
+    }
+
+
+    try{
+
+      const dados =
+        documentoUsuario.data();
+
+
+      const atual =
+        Number(
+          dados.creditos || 0
+        );
+
+
+      await updateDoc(
+        documentoUsuario.ref,
+        {
+          creditos:
+            atual + 1
+        }
+      );
+
+
+      resultado(
+        "resultadoCreditos",
+        "⚠️ <strong>FALHA DE SEGURANÇA:</strong> o Firebase permitiu alterar créditos.",
+        "blocked"
+      );
+
+    }
+
+    catch(error){
+
+      console.error(
+        error
+      );
+
+
+      if(
+        error.code ===
+        "permission-denied"
+      ){
+
+        resultado(
+          "resultadoCreditos",
+          "✅ BLOQUEADO — Firebase recusou a alteração de créditos.",
+          "ok"
+        );
+
+      }
+
+      else{
+
+        resultado(
+          "resultadoCreditos",
+          "Erro recebido: " +
+          error.code,
+          "info"
+        );
+
+      }
+
+    }
+
+  }
+);
+
+
+/* =====================================
+   TESTE CHANCES
+===================================== */
+
+document
+.getElementById(
+  "testeChances"
+)
+.addEventListener(
+  "click",
+  async () => {
+
+    if(
+      !documentoUsuario
+    ){
+
+      resultado(
+        "resultadoChances",
+        "Usuário não localizado.",
+        "blocked"
+      );
+
+      return;
+
+    }
+
+
+    try{
+
+      const dados =
+        documentoUsuario.data();
+
+
+      const atual =
+        Number(
+          dados.chances || 0
+        );
+
+
+      await updateDoc(
+        documentoUsuario.ref,
+        {
+          chances:
+            atual + 1
+        }
+      );
+
+
+      resultado(
+        "resultadoChances",
+        "⚠️ <strong>FALHA DE SEGURANÇA:</strong> o Firebase permitiu alterar chances.",
+        "blocked"
+      );
+
+    }
+
+    catch(error){
+
+      console.error(
+        error
+      );
+
+
+      if(
+        error.code ===
+        "permission-denied"
+      ){
+
+        resultado(
+          "resultadoChances",
+          "✅ BLOQUEADO — Firebase recusou a alteração de chances.",
+          "ok"
+        );
+
+      }
+
+      else{
+
+        resultado(
+          "resultadoChances",
+          "Erro recebido: " +
+          error.code,
+          "info"
+        );
+
+      }
+
+    }
+
+  }
+);
+
+
+/* =====================================
+   TESTE VIP
+===================================== */
+
+document
+.getElementById(
+  "testeVip"
+)
+.addEventListener(
+  "click",
+  async () => {
+
+    if(
+      !documentoUsuario
+    ){
+
+      resultado(
+        "resultadoVip",
+        "Usuário não localizado.",
+        "blocked"
+      );
+
+      return;
+
+    }
+
+
+    try{
+
+      await updateDoc(
+        documentoUsuario.ref,
+        {
+          vip:
+            true
+        }
+      );
+
+
+      resultado(
+        "resultadoVip",
+        "⚠️ <strong>FALHA DE SEGURANÇA:</strong> o Firebase permitiu ativar VIP.",
+        "blocked"
+      );
+
+    }
+
+    catch(error){
+
+      console.error(
+        error
+      );
+
+
+      if(
+        error.code ===
+        "permission-denied"
+      ){
+
+        resultado(
+          "resultadoVip",
+          "✅ BLOQUEADO — Firebase recusou a ativação do VIP.",
+          "ok"
+        );
+
+      }
+
+      else{
+
+        resultado(
+          "resultadoVip",
+          "Erro recebido: " +
+          error.code,
+          "info"
+        );
+
+      }
+
+    }
+
+  }
+);
+
+
+/* =====================================
+   TESTE HISTÓRICO
+===================================== */
+
+document
+.getElementById(
+  "testeHistorico"
+)
+.addEventListener(
+  "click",
+  async () => {
+
+    if(
+      !usuarioAtual
+    ){
+
+      resultado(
+        "resultadoHistorico",
+        "Usuário não conectado.",
+        "blocked"
+      );
+
+      return;
+
+    }
+
+
+    try{
+
+      await addDoc(
+        collection(
+          db,
+          "historico"
+        ),
+        {
+
+          movimentacaoId:
+            "TESTE-SEGURANCA",
+
+          usuarioId:
+            usuarioAtual.uid,
+
+          publicId:
+            "TESTE",
+
+          usuarioEmail:
+            usuarioAtual.email || "",
+
+          item:
+            "creditos",
+
+          operacao:
+            "adicionar",
+
+          quantidade:
+            999999,
+
+          motivo:
+            "TESTE DE SEGURANÇA",
+
+          criadoEm:
+            new Date().toISOString()
+
+        }
+      );
+
+
+      resultado(
+        "resultadoHistorico",
+        "⚠️ <strong>FALHA DE SEGURANÇA:</strong> o Firebase permitiu criar histórico.",
+        "blocked"
+      );
+
+    }
+
+    catch(error){
+
+      console.error(
+        error
+      );
+
+
+      if(
+        error.code ===
+        "permission-denied"
+      ){
+
+        resultado(
+          "resultadoHistorico",
+          "✅ BLOQUEADO — Firebase recusou a criação do histórico.",
+          "ok"
+        );
+
+      }
+
+      else{
+
+        resultado(
+          "resultadoHistorico",
+          "Erro recebido: " +
+          error.code,
+          "info"
+        );
+
+      }
+
+    }
+
+  }
+);
+
+
+/* =====================================
+   AUTENTICAÇÃO
+===================================== */
+
+onAuthStateChanged(
+  auth,
+  async usuario => {
+
+    if(
+      !usuario
+    ){
+
+      usuarioArea.innerHTML =
+        "❌ Nenhuma conta está logada.";
+
+      return;
+
+    }
+
+
+    usuarioAtual =
+      usuario;
+
+
+    await localizarDocumento();
+
+  }
+);
+
+</script>
+
+</body>
+
+</html>
