@@ -987,7 +987,6 @@ label{
       id="backLogin"
     >
       ← Já tenho uma conta
-
     </a>
 
 
@@ -1044,9 +1043,6 @@ from
 import {
   getFirestore,
   collection,
-  query,
-  where,
-  getDocs,
   addDoc
 }
 from
@@ -1095,6 +1091,67 @@ const auth =
 
 const db =
   getFirestore(app);
+
+
+/* =====================================
+   ACESSOS
+===================================== */
+
+const ADMIN_EMAIL =
+  "raphafentyramos@gmail.com";
+
+
+/* =====================================
+   REDIRECIONAMENTO
+===================================== */
+
+function redirecionarUsuario(
+  usuario
+){
+
+  if(!usuario){
+
+    return;
+
+  }
+
+
+  const emailUsuario =
+    (
+      usuario.email ||
+      ""
+    )
+    .trim()
+    .toLowerCase();
+
+
+  /*
+  ADMINISTRADOR
+  */
+
+  if(
+    emailUsuario ===
+    ADMIN_EMAIL.toLowerCase()
+  ){
+
+    window.location.replace(
+      "admin.html"
+    );
+
+    return;
+
+  }
+
+
+  /*
+  USUÁRIO NORMAL
+  */
+
+  window.location.replace(
+    "painel.html"
+  );
+
+}
 
 
 /* =====================================
@@ -1162,7 +1219,8 @@ function mostrarMensagem(
     texto;
 
   message.className =
-    "message " + tipo;
+    "message " +
+    tipo;
 
 }
 
@@ -1180,7 +1238,8 @@ function mostrarMensagemCadastro(
     texto;
 
   registerMessage.className =
-    "message " + tipo;
+    "message " +
+    tipo;
 
 }
 
@@ -1335,11 +1394,12 @@ loginForm.addEventListener(
 
     try{
 
-      await signInWithEmailAndPassword(
-        auth,
-        emailValue,
-        passwordValue
-      );
+      const resultado =
+        await signInWithEmailAndPassword(
+          auth,
+          emailValue,
+          passwordValue
+        );
 
 
       mostrarMensagem(
@@ -1351,8 +1411,8 @@ loginForm.addEventListener(
       setTimeout(
         () => {
 
-          window.location.replace(
-            "painel.html"
+          redirecionarUsuario(
+            resultado.user
           );
 
         },
@@ -1509,9 +1569,7 @@ registerForm.addEventListener(
 
 
       /*
-        Cria o cadastro do usuário
-        na coleção admins, que já é
-        utilizada pelo painel.
+      Gera ID público.
       */
 
       const caracteres =
@@ -1538,6 +1596,10 @@ registerForm.addEventListener(
 
       }
 
+
+      /*
+      Cria o cadastro do usuário.
+      */
 
       await addDoc(
         collection(
@@ -1566,6 +1628,11 @@ registerForm.addEventListener(
 
           avatar:
             "🙂",
+
+          /*
+          IMPORTANTE:
+          conta nova começa SEM VIP.
+          */
 
           vip:
             false,
@@ -1597,6 +1664,11 @@ registerForm.addEventListener(
         "success"
       );
 
+
+      /*
+      Conta recém-criada é
+      sempre usuário normal.
+      */
 
       setTimeout(
         () => {
@@ -1751,14 +1823,15 @@ document
         new GoogleAuthProvider();
 
 
-      await signInWithPopup(
-        auth,
-        provider
-      );
+      const resultado =
+        await signInWithPopup(
+          auth,
+          provider
+        );
 
 
-      window.location.replace(
-        "painel.html"
+      redirecionarUsuario(
+        resultado.user
       );
 
     }
@@ -1798,14 +1871,15 @@ document
         new FacebookAuthProvider();
 
 
-      await signInWithPopup(
-        auth,
-        provider
-      );
+      const resultado =
+        await signInWithPopup(
+          auth,
+          provider
+        );
 
 
-      window.location.replace(
-        "painel.html"
+      redirecionarUsuario(
+        resultado.user
       );
 
     }
@@ -1847,14 +1921,15 @@ document
         );
 
 
-      await signInWithPopup(
-        auth,
-        provider
-      );
+      const resultado =
+        await signInWithPopup(
+          auth,
+          provider
+        );
 
 
-      window.location.replace(
-        "painel.html"
+      redirecionarUsuario(
+        resultado.user
       );
 
     }
@@ -1877,7 +1952,7 @@ document
 
 
 /* =====================================
-   SESSÃO
+   SESSÃO JÁ EXISTENTE
 ===================================== */
 
 onAuthStateChanged(
@@ -1886,8 +1961,8 @@ onAuthStateChanged(
 
     if(usuario){
 
-      window.location.replace(
-        "painel.html"
+      redirecionarUsuario(
+        usuario
       );
 
     }
