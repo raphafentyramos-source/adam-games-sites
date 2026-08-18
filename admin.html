@@ -1,19 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
-
-<title>Adam Games • Admin</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adam Games • Administração</title>
 
 <style>
-
 *{
   box-sizing:border-box;
   margin:0;
@@ -21,858 +13,405 @@
 }
 
 body{
-
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
-
+  font-family:Arial,sans-serif;
+  color:#fff;
   min-height:100vh;
-
-  color:white;
-
-  background:
-    radial-gradient(
-      circle at 15% 5%,
-      #42aaff 0%,
-      transparent 30%
-    ),
-    linear-gradient(
-      135deg,
-      #071f43,
-      #020914 80%
-    );
-
-  padding-bottom:40px;
+  background:linear-gradient(145deg,#087fe0,#031b3d 75%);
+  padding:20px 12px 40px;
 }
 
 .container{
-
-  width:
-    min(
-      1100px,
-      calc(100% - 24px)
-    );
-
+  max-width:900px;
   margin:auto;
 }
 
-
-/* ==============================
-   TOPO
-============================== */
-
-.topbar{
-
-  padding:18px 0;
-
+header{
   display:flex;
-
   justify-content:space-between;
-
   align-items:center;
-
   gap:15px;
+  margin-bottom:25px;
 }
 
-.brand{
-
+.logo{
   display:flex;
-
   align-items:center;
-
   gap:12px;
 }
 
-.brand-icon{
-
+.logoIcon{
   width:58px;
-
   height:58px;
-
   border-radius:18px;
-
   display:flex;
-
   align-items:center;
-
   justify-content:center;
-
-  font-size:31px;
-
-  background:
-    linear-gradient(
-      145deg,
-      #218fff,
-      #0754a7
-    );
-
-  box-shadow:
-    0 10px 30px
-    rgba(0,0,0,.25);
+  font-size:30px;
+  background:linear-gradient(145deg,#168eff,#064b99);
 }
 
-.brand h1{
-
-  font-size:21px;
-
-  line-height:.95;
-}
-
-.brand h1 span{
-
-  color:#ffd52b;
-}
-
-.admin-badge{
-
-  display:inline-block;
-
-  margin-top:5px;
-
-  padding:5px 9px;
-
-  border-radius:9px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #f7c52c,
-      #a66b00
-    );
-
-  color:white;
-
-  font-size:10px;
-
-  font-weight:bold;
-}
-
-.logout-button{
-
-  border:0;
-
-  border-radius:14px;
-
-  padding:12px 17px;
-
-  background:
-    rgba(255,255,255,.1);
-
-  color:white;
-
-  font-weight:bold;
-
-  cursor:pointer;
-}
-
-
-/* ==============================
-   TITULO
-============================== */
-
-.hero{
-
-  margin-top:10px;
-
-  margin-bottom:20px;
-}
-
-.hero h2{
-
-  font-size:
-    clamp(
-      32px,
-      6vw,
-      50px
-    );
-
-  line-height:1;
-}
-
-.hero p{
-
-  margin-top:8px;
-
-  color:#a9c9e8;
-}
-
-
-/* ==============================
-   CARDS RESUMO
-============================== */
-
-.summary{
-
-  display:grid;
-
-  grid-template-columns:
-    repeat(4,1fr);
-
-  gap:12px;
-
-  margin-bottom:20px;
-}
-
-.summary-card{
-
-  padding:17px;
-
-  border-radius:20px;
-
-  background:
-    rgba(4,35,70,.85);
-
-  border:
-    1px solid
-    rgba(255,255,255,.1);
-}
-
-.summary-icon{
-
-  font-size:28px;
-}
-
-.summary-label{
-
-  margin-top:8px;
-
-  color:#8fb4d5;
-
-  font-size:11px;
-
-  font-weight:bold;
-
-  text-transform:uppercase;
-}
-
-.summary-value{
-
-  margin-top:5px;
-
+.logo h1{
   font-size:22px;
-
-  font-weight:900;
 }
 
+.logo span{
+  color:#ffd32a;
+}
 
-/* ==============================
-   PAINEL
-============================== */
+.badge{
+  display:inline-block;
+  margin-top:5px;
+  padding:5px 9px;
+  border-radius:8px;
+  background:#d99b12;
+  font-size:11px;
+  font-weight:bold;
+}
 
-.panel{
+button{
+  border:0;
+  cursor:pointer;
+  color:#fff;
+  font-weight:bold;
+}
 
+.logout{
+  padding:12px 16px;
+  border-radius:12px;
+  background:#17395f;
+}
+
+h2{
+  font-size:38px;
+  margin-bottom:6px;
+}
+
+.subtitle{
+  color:#b7d4ed;
+  margin-bottom:22px;
+}
+
+.card{
+  background:rgba(2,30,62,.92);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:22px;
   padding:20px;
-
-  border-radius:25px;
-
-  background:
-    rgba(3,27,56,.92);
-
-  border:
-    1px solid
-    rgba(255,255,255,.11);
-
-  box-shadow:
-    0 20px 50px
-    rgba(0,0,0,.25);
-
   margin-bottom:18px;
 }
 
-.panel-title{
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:space-between;
-
-  gap:10px;
-
+.card h3{
   margin-bottom:15px;
-}
-
-.panel-title h3{
-
   font-size:20px;
 }
 
-
-/* ==============================
-   BUSCA
-============================== */
-
-.search-row{
-
+.search{
   display:flex;
-
   gap:10px;
 }
 
-.input{
-
+input,select{
   width:100%;
-
-  height:52px;
-
-  padding:
-    0
-    15px;
-
-  border-radius:14px;
-
-  border:
-    1px solid
-    rgba(255,255,255,.12);
-
-  outline:none;
-
-  background:
-    rgba(0,0,0,.22);
-
-  color:white;
-
+  height:50px;
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:12px;
+  background:#071f40;
+  color:#fff;
+  padding:0 14px;
   font-size:15px;
+  outline:none;
 }
 
-.input:focus{
-
-  border-color:#2aa2ff;
-
-  box-shadow:
-    0 0 0 3px
-    rgba(42,162,255,.1);
+.search button{
+  min-width:130px;
+  border-radius:12px;
+  background:#168ff0;
 }
 
-.button{
-
-  height:52px;
-
-  padding:
-    0
-    20px;
-
-  border:0;
-
-  border-radius:14px;
-
-  color:white;
-
-  font-weight:900;
-
-  cursor:pointer;
-
-  white-space:nowrap;
-}
-
-.primary{
-
-  background:
-    linear-gradient(
-      135deg,
-      #22a2ff,
-      #0069db
-    );
-}
-
-.green{
-
-  background:
-    linear-gradient(
-      135deg,
-      #1fcf75,
-      #07904b
-    );
-}
-
-.red{
-
-  background:
-    linear-gradient(
-      135deg,
-      #ff4a5d,
-      #c7182e
-    );
-}
-
-.gold{
-
-  background:
-    linear-gradient(
-      135deg,
-      #ffcf32,
-      #d28a00
-    );
-}
-
-
-/* ==============================
-   USUARIO
-============================== */
-
-.user-card{
-
+.message{
+  margin-top:12px;
+  padding:12px;
+  border-radius:10px;
   display:none;
-
-  margin-top:18px;
-
-  padding:18px;
-
-  border-radius:20px;
-
-  background:
-    rgba(255,255,255,.05);
-
-  border:
-    1px solid
-    rgba(255,255,255,.08);
+  font-size:14px;
 }
 
-.user-header{
+.success{
+  display:block;
+  background:rgba(0,220,110,.12);
+  color:#72ffae;
+}
 
+.error{
+  display:block;
+  background:rgba(255,50,70,.12);
+  color:#ff9ca8;
+}
+
+#userArea{
+  display:none;
+}
+
+.user{
   display:flex;
-
   align-items:center;
-
   gap:15px;
-
-  margin-bottom:18px;
-}
-
-.avatar{
-
-  width:70px;
-
-  height:70px;
-
-  border-radius:20px;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  font-size:38px;
-
-  background:
-    linear-gradient(
-      145deg,
-      #f7b52c,
-      #ffdc65
-    );
-
-  border:
-    3px solid
-    #ffd332;
-}
-
-.user-name{
-
-  font-size:22px;
-
-  font-weight:900;
-}
-
-.user-email{
-
-  margin-top:4px;
-
-  color:#a9c8e5;
-
-  font-size:13px;
-}
-
-.user-id{
-
-  margin-top:5px;
-
-  color:#62bdff;
-
-  font-size:12px;
-
-  font-weight:bold;
-}
-
-
-/* ==============================
-   SALDOS
-============================== */
-
-.balances{
-
-  display:grid;
-
-  grid-template-columns:
-    repeat(4,1fr);
-
-  gap:10px;
-
   margin-bottom:20px;
 }
 
-.balance{
-
-  padding:14px;
-
-  border-radius:16px;
-
-  text-align:center;
-
-  background:
-    rgba(0,0,0,.2);
-
-  border:
-    1px solid
-    rgba(255,255,255,.07);
+.avatar{
+  width:65px;
+  height:65px;
+  border-radius:18px;
+  background:#ffd52b;
+  color:#111;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:32px;
 }
 
-.balance-icon{
-
-  font-size:28px;
-}
-
-.balance-name{
-
-  margin-top:5px;
-
-  color:#8eb3d4;
-
-  font-size:10px;
-
+.userName{
+  font-size:22px;
   font-weight:bold;
 }
 
-.balance-value{
-
-  margin-top:5px;
-
-  font-size:18px;
-
-  font-weight:900;
+.userEmail,
+.userId{
+  margin-top:4px;
+  color:#a9c8e5;
+  font-size:13px;
 }
 
-
-/* ==============================
-   MOVIMENTAÇÃO
-============================== */
-
-.operation-grid{
-
+.balances{
   display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin-bottom:22px;
+}
 
-  grid-template-columns:
-    1fr
-    1fr;
+.balance{
+  text-align:center;
+  padding:15px 8px;
+  border-radius:15px;
+  background:rgba(255,255,255,.05);
+}
 
+.balanceIcon{
+  font-size:26px;
+}
+
+.balanceName{
+  color:#91b2cf;
+  font-size:10px;
+  font-weight:bold;
+  margin-top:5px;
+}
+
+.balanceValue{
+  font-size:18px;
+  font-weight:bold;
+  margin-top:5px;
+}
+
+.form{
+  display:grid;
+  grid-template-columns:1fr 1fr;
   gap:12px;
 }
 
 .field label{
-
   display:block;
-
-  margin-bottom:7px;
-
   color:#a9c8e5;
-
   font-size:11px;
-
   font-weight:bold;
-
-  text-transform:uppercase;
-}
-
-.select{
-
-  width:100%;
-
-  height:50px;
-
-  padding:
-    0
-    13px;
-
-  border-radius:13px;
-
-  border:
-    1px solid
-    rgba(255,255,255,.12);
-
-  background:
-    #092b52;
-
-  color:white;
-
-  outline:none;
-
-  font-size:14px;
+  margin-bottom:6px;
 }
 
 .full{
-
-  grid-column:
-    1 / -1;
+  grid-column:1 / -1;
 }
 
-.operation-buttons{
-
+.actions{
   display:grid;
-
-  grid-template-columns:
-    1fr
-    1fr;
-
+  grid-template-columns:1fr 1fr;
   gap:10px;
-
   margin-top:15px;
 }
 
+.add{
+  background:#07934c;
+  padding:14px;
+  border-radius:12px;
+}
 
-/* ==============================
-   VIP / BOX
-============================== */
+.remove{
+  background:#c8233c;
+  padding:14px;
+  border-radius:12px;
+}
 
-.special-actions{
-
+.special{
   display:grid;
-
-  grid-template-columns:
-    1fr
-    1fr;
-
+  grid-template-columns:1fr 1fr;
   gap:10px;
-
-  margin-top:15px;
+  margin-top:10px;
 }
 
-.special-button{
-
-  min-height:50px;
-
-  border:0;
-
-  border-radius:13px;
-
-  color:white;
-
-  font-weight:900;
-
-  cursor:pointer;
+.vip{
+  padding:14px;
+  border-radius:12px;
+  background:#c38b0d;
 }
 
-
-/* ==============================
-   HISTÓRICO
-============================== */
+.box{
+  padding:14px;
+  border-radius:12px;
+  background:#087edb;
+}
 
 .history{
-
-  display:none;
-
-  margin-top:18px;
+  margin-top:22px;
 }
 
-.history-list{
-
-  display:flex;
-
-  flex-direction:column;
-
-  gap:8px;
-}
-
-.history-item{
-
+.historyItem{
   padding:13px;
-
-  border-radius:14px;
-
-  background:
-    rgba(255,255,255,.045);
-
-  border:
-    1px solid
-    rgba(255,255,255,.06);
+  margin-top:8px;
+  border-radius:12px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.06);
 }
 
-.history-top{
-
+.historyTop{
   display:flex;
-
   justify-content:space-between;
-
   gap:10px;
-
   font-weight:bold;
-
-  font-size:13px;
 }
 
-.history-positive{
-
-  color:#63ff9f;
+.plus{
+  color:#65ff9c;
 }
 
-.history-negative{
-
-  color:#ff7180;
+.minus{
+  color:#ff7382;
 }
 
-.history-meta{
-
+.historyInfo{
+  color:#9dbbd3;
+  font-size:12px;
   margin-top:6px;
-
-  color:#8eafca;
-
-  font-size:11px;
-
   line-height:1.5;
 }
 
+@media(max-width:650px){
 
-/* ==============================
-   MENSAGENS
-============================== */
-
-.message{
-
-  display:none;
-
-  margin-top:15px;
-
-  padding:13px;
-
-  border-radius:13px;
-
-  font-size:13px;
-
-  font-weight:bold;
-}
-
-.message.success{
-
-  display:block;
-
-  background:
-    rgba(45,255,140,.1);
-
-  border:
-    1px solid
-    rgba(45,255,140,.25);
-
-  color:#70ffac;
-}
-
-.message.error{
-
-  display:block;
-
-  background:
-    rgba(255,55,75,.1);
-
-  border:
-    1px solid
-    rgba(255,55,75,.25);
-
-  color:#ff9aa5;
-}
-
-
-/* ==============================
-   RESPONSIVO
-============================== */
-
-@media(max-width:800px){
-
-  .summary{
-
-    grid-template-columns:
-      repeat(2,1fr);
+  h2{
+    font-size:32px;
   }
 
-  .balances{
-
-    grid-template-columns:
-      repeat(2,1fr);
-  }
-
-}
-
-@media(max-width:600px){
-
-  .topbar{
-
-    align-items:flex-start;
-  }
-
-  .search-row{
-
+  .search{
     flex-direction:column;
   }
 
-  .button{
-
+  .search button{
     width:100%;
+    height:50px;
   }
 
-  .operation-grid{
+  .balances{
+    grid-template-columns:1fr 1fr;
+  }
 
+  .form{
     grid-template-columns:1fr;
   }
 
   .full{
-
     grid-column:auto;
   }
 
-  .special-actions{
-
+  .actions,
+  .special{
     grid-template-columns:1fr;
   }
-
-  .operation-buttons{
-
-    grid-template-columns:1fr;
-  }
-
-  .hero h2{
-
-    font-size:36px;
-  }
-
 }
-
 </style>
-
 </head>
-
 
 <body>
 
-
 <div class="container">
 
+<header>
 
-<header class="topbar">
+  <div class="logo">
+
+    <div class="logoIcon">👑</div>
+
+    <div>
+      <h1>ADAM <span>GAMES</span></h1>
+      <div class="badge">👑 ADMINISTRADOR</div>
+    </div>
+
+  </div>
+
+  <button class="logout" id="logout">
+    ↪️ Sair
+  </button>
+
+</header>
+
+<h2>Painel Admin</h2>
+
+<p class="subtitle">
+Gerenciamento de usuários e movimentações.
+</p>
+
+<div class="card">
+
+  <h3>🔎 Localizar usuário</h3>
+
+  <div class="search">
+
+    <input
+      id="publicId"
+      type="text"
+      placeholder="Digite o ID Adam Games"
+    >
+
+    <button id="buscar">
+      🔍 Buscar
+    </button>
+
+  </div>
+
+  <div id="searchMessage" class="message"></div>
+
+</div>
 
 
-  <div class="brand">
+<div id="userArea">
 
-    <div class="brand-icon">
-      👑
+<div class="card">
+
+  <div class="user">
+
+    <div class="avatar" id="avatar">
+      🙂
     </div>
 
     <div>
 
-      <h1>
-        ADAM
-        <span>GAMES</span>
-      </h1>
+      <div class="userName" id="nome">
+        —
+      </div>
 
-      <div class="admin-badge">
-        👑 ADMINISTRADOR
+      <div class="userEmail" id="email">
+        —
+      </div>
+
+      <div class="userId" id="id">
+        —
       </div>
 
     </div>
@@ -880,472 +419,148 @@ body{
   </div>
 
 
-  <button
-    class="logout-button"
-    id="logoutButton"
-    type="button">
+  <div class="balances">
 
-    ↪️ SAIR
-
-  </button>
-
-</header>
-
-
-<section class="hero">
-
-  <h2>
-    Painel Admin
-  </h2>
-
-  <p>
-    Gerencie usuários e registre todas as movimentações.
-  </p>
-
-</section>
-
-
-<section class="summary">
-
-
-  <div class="summary-card">
-
-    <div class="summary-icon">
-      👥
+    <div class="balance">
+      <div class="balanceIcon">🎟️</div>
+      <div class="balanceName">CHANCES</div>
+      <div class="balanceValue" id="chances">0</div>
     </div>
 
-    <div class="summary-label">
-      Usuário selecionado
+    <div class="balance">
+      <div class="balanceIcon">🪙</div>
+      <div class="balanceName">MOEDAS</div>
+      <div class="balanceValue" id="moedas">0</div>
     </div>
 
-    <div
-      class="summary-value"
-      id="summaryUser">
+    <div class="balance">
+      <div class="balanceIcon">🔑</div>
+      <div class="balanceName">CHAVES</div>
+      <div class="balanceValue" id="chaves">0</div>
+    </div>
 
-      —
+    <div class="balance">
+      <div class="balanceIcon">💎</div>
+      <div class="balanceName">CRÉDITOS</div>
+      <div class="balanceValue" id="creditos">R$ 0,00</div>
+    </div>
+
+  </div>
+
+
+  <h3>🎁 Fazer movimentação</h3>
+
+  <div class="form">
+
+    <div class="field">
+
+      <label>ITEM</label>
+
+      <select id="item">
+
+        <option value="chances">
+          🎟️ Chances
+        </option>
+
+        <option value="moedas">
+          🪙 Moedas
+        </option>
+
+        <option value="chaves">
+          🔑 Chaves
+        </option>
+
+        <option value="creditos">
+          💎 Créditos
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="field">
+
+      <label>QUANTIDADE</label>
+
+      <input
+        id="quantidade"
+        type="number"
+        min="1"
+        placeholder="Quantidade"
+      >
+
+    </div>
+
+
+    <div class="field full">
+
+      <label>MOTIVO — OBRIGATÓRIO</label>
+
+      <input
+        id="motivo"
+        type="text"
+        maxlength="150"
+        placeholder="Ex.: Compra realizada pelo WhatsApp"
+      >
 
     </div>
 
   </div>
 
 
-  <div class="summary-card">
+  <div class="actions">
 
-    <div class="summary-icon">
-      🎟️
-    </div>
+    <button class="add" id="adicionar">
+      ➕ ADICIONAR
+    </button>
 
-    <div class="summary-label">
-      Chances
-    </div>
-
-    <div
-      class="summary-value"
-      id="summaryChances">
-
-      0
-
-    </div>
-
-  </div>
-
-
-  <div class="summary-card">
-
-    <div class="summary-icon">
-      🪙
-    </div>
-
-    <div class="summary-label">
-      Moedas
-    </div>
-
-    <div
-      class="summary-value"
-      id="summaryMoedas">
-
-      0
-
-    </div>
-
-  </div>
-
-
-  <div class="summary-card">
-
-    <div class="summary-icon">
-      🔑
-    </div>
-
-    <div class="summary-label">
-      Chaves
-    </div>
-
-    <div
-      class="summary-value"
-      id="summaryChaves">
-
-      0
-
-    </div>
-
-  </div>
-
-
-</section>
-
-
-<section class="panel">
-
-
-  <div class="panel-title">
-
-    <h3>
-      🔎 Localizar usuário
-    </h3>
-
-  </div>
-
-
-  <div class="search-row">
-
-    <input
-      id="searchId"
-      class="input"
-      type="text"
-      placeholder="Digite o ID Adam Games"
-      autocomplete="off"
-    >
-
-
-    <button
-      id="searchButton"
-      class="button primary"
-      type="button">
-
-      🔍 LOCALIZAR
-
+    <button class="remove" id="remover">
+      ➖ REMOVER
     </button>
 
   </div>
 
 
-  <div
-    id="searchMessage"
-    class="message">
+  <div class="special">
+
+    <button class="vip" id="vip">
+      👑 Alterar VIP
+    </button>
+
+    <button class="box" id="box">
+      🎁 Alterar Caixa
+    </button>
+
   </div>
 
 
-  <div
-    id="userCard"
-    class="user-card">
+  <div id="operationMessage" class="message"></div>
 
 
-    <div class="user-header">
+  <div class="history">
 
+    <h3>📜 Extrato do usuário</h3>
 
-      <div
-        class="avatar"
-        id="userAvatar">
-
-        🙂
-
-      </div>
-
-
-      <div>
-
-        <div
-          class="user-name"
-          id="userName">
-
-          —
-
-        </div>
-
-        <div
-          class="user-email"
-          id="userEmail">
-
-          —
-
-        </div>
-
-        <div
-          class="user-id"
-          id="userId">
-
-          —
-
-        </div>
-
-      </div>
-
+    <div id="historyList">
+      Nenhuma movimentação carregada.
     </div>
-
-
-    <div class="balances">
-
-
-      <div class="balance">
-
-        <div class="balance-icon">
-          🎟️
-        </div>
-
-        <div class="balance-name">
-          CHANCES
-        </div>
-
-        <div
-          class="balance-value"
-          id="balanceChances">
-
-          0
-
-        </div>
-
-      </div>
-
-
-      <div class="balance">
-
-        <div class="balance-icon">
-          🪙
-        </div>
-
-        <div class="balance-name">
-          MOEDAS
-        </div>
-
-        <div
-          class="balance-value"
-          id="balanceMoedas">
-
-          0
-
-        </div>
-
-      </div>
-
-
-      <div class="balance">
-
-        <div class="balance-icon">
-          🔑
-        </div>
-
-        <div class="balance-name">
-          CHAVES
-        </div>
-
-        <div
-          class="balance-value"
-          id="balanceChaves">
-
-          0
-
-        </div>
-
-      </div>
-
-
-      <div class="balance">
-
-        <div class="balance-icon">
-          💎
-        </div>
-
-        <div class="balance-name">
-          CRÉDITOS
-        </div>
-
-        <div
-          class="balance-value"
-          id="balanceCreditos">
-
-          R$ 0,00
-
-        </div>
-
-      </div>
-
-
-    </div>
-
-
-    <div class="operation-grid">
-
-
-      <div class="field">
-
-        <label>
-          Item
-        </label>
-
-        <select
-          id="itemSelect"
-          class="select">
-
-          <option value="chances">
-            🎟️ Chances
-          </option>
-
-          <option value="moedas">
-            🪙 Moedas
-          </option>
-
-          <option value="chaves">
-            🔑 Chaves
-          </option>
-
-          <option value="creditos">
-            💎 Créditos
-          </option>
-
-        </select>
-
-      </div>
-
-
-      <div class="field">
-
-        <label>
-          Quantidade
-        </label>
-
-        <input
-          id="quantity"
-          class="input"
-          type="number"
-          min="1"
-          step="1"
-          placeholder="Quantidade"
-        >
-
-      </div>
-
-
-      <div class="field full">
-
-        <label>
-          Motivo obrigatório
-        </label>
-
-        <input
-          id="reason"
-          class="input"
-          type="text"
-          maxlength="150"
-          placeholder="Ex.: Compra WhatsApp"
-        >
-
-      </div>
-
-
-    </div>
-
-
-    <div class="operation-buttons">
-
-
-      <button
-        id="addButton"
-        class="button green"
-        type="button">
-
-        ➕ ADICIONAR
-
-      </button>
-
-
-      <button
-        id="removeButton"
-        class="button red"
-        type="button">
-
-        ➖ REMOVER
-
-      </button>
-
-
-    </div>
-
-
-    <div class="special-actions">
-
-
-      <button
-        id="vipButton"
-        class="special-button gold"
-        type="button">
-
-        👑 ALTERAR VIP
-
-      </button>
-
-
-      <button
-        id="boxButton"
-        class="special-button primary"
-        type="button">
-
-        🎁 ALTERAR CAIXA
-
-      </button>
-
-
-    </div>
-
-
-    <div
-      id="operationMessage"
-      class="message">
-    </div>
-
-
-    <section
-      id="history"
-      class="history">
-
-
-      <div class="panel-title">
-
-        <h3>
-          📜 Extrato
-        </h3>
-
-      </div>
-
-
-      <div
-        id="historyList"
-        class="history-list">
-
-      </div>
-
-
-    </section>
-
 
   </div>
 
-</section>
+</div>
 
+</div>
 
 </div>
 
 
 <script type="module">
 
-
-/* =========================================
-   FIREBASE
-========================================= */
-
 import {
   initializeApp
-} from
+}
+from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
 
@@ -1353,7 +568,8 @@ import {
   getAuth,
   onAuthStateChanged,
   signOut
-} from
+}
+from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 
@@ -1364,12 +580,15 @@ import {
   where,
   getDocs,
   updateDoc,
-  addDoc,
-  orderBy,
-  limit
-} from
+  addDoc
+}
+from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
+
+/* ==========================================
+   FIREBASE
+========================================== */
 
 const firebaseConfig = {
 
@@ -1389,10 +608,7 @@ const firebaseConfig = {
     "1055528418738",
 
   appId:
-    "1:1055528418738:web:5fafdf63424ba9744eb8ab",
-
-  measurementId:
-    "G-KVFSF864GE"
+    "1:1055528418738:web:5fafdf63424ba9744eb8ab"
 
 };
 
@@ -1402,107 +618,49 @@ const app =
     firebaseConfig
   );
 
-
 const auth =
   getAuth(app);
-
 
 const db =
   getFirestore(app);
 
 
-/* =========================================
-   ADMIN
-========================================= */
-
-const ADMIN_EMAIL =
+const ADMIN =
   "raphafentyramos@gmail.com";
 
 
-let currentAdmin = null;
+let usuarioSelecionado =
+  null;
 
-let selectedUser = null;
-
-
-/* =========================================
-   ELEMENTOS
-========================================= */
-
-const searchId =
-  document.getElementById(
-    "searchId"
-  );
+let adminLogado =
+  null;
 
 
-const searchButton =
-  document.getElementById(
-    "searchButton"
-  );
+/* ==========================================
+   FUNÇÕES
+========================================== */
 
-
-const userCard =
-  document.getElementById(
-    "userCard"
-  );
-
-
-const searchMessage =
-  document.getElementById(
-    "searchMessage"
-  );
-
-
-const operationMessage =
-  document.getElementById(
-    "operationMessage"
-  );
-
-
-const quantity =
-  document.getElementById(
-    "quantity"
-  );
-
-
-const reason =
-  document.getElementById(
-    "reason"
-  );
-
-
-const itemSelect =
-  document.getElementById(
-    "itemSelect"
-  );
-
-
-/* =========================================
-   MENSAGEM
-========================================= */
-
-function showMessage(
-  element,
-  text,
-  type
+function mensagem(
+  elemento,
+  texto,
+  tipo
 ){
 
-  element.textContent =
-    text;
+  elemento.textContent =
+    texto;
 
-  element.className =
-    "message " + type;
+  elemento.className =
+    "message " + tipo;
 
 }
 
 
-/* =========================================
-   FORMATAR
-========================================= */
-
-function formatNumber(value){
+function numero(
+  valor
+){
 
   return Number(
-    value || 0
+    valor || 0
   ).toLocaleString(
     "pt-BR"
   );
@@ -1510,10 +668,12 @@ function formatNumber(value){
 }
 
 
-function formatMoney(value){
+function dinheiro(
+  valor
+){
 
   return Number(
-    value || 0
+    valor || 0
   ).toLocaleString(
     "pt-BR",
     {
@@ -1525,11 +685,11 @@ function formatMoney(value){
 }
 
 
-/* =========================================
+/* ==========================================
    MOSTRAR USUÁRIO
-========================================= */
+========================================== */
 
-function displayUser(
+function mostrarUsuario(
   doc
 ){
 
@@ -1537,11 +697,11 @@ function displayUser(
     doc.data();
 
 
-  selectedUser = {
+  usuarioSelecionado = {
 
     ref:doc.ref,
 
-    id:doc.id,
+    docId:doc.id,
 
     data:data
 
@@ -1549,22 +709,28 @@ function displayUser(
 
 
   document.getElementById(
-    "userName"
-  ).textContent =
-    data.nome ||
-    data.name ||
-    "Sem nome";
+    "userArea"
+  ).style.display =
+    "block";
 
 
   document.getElementById(
-    "userEmail"
+    "nome"
+  ).textContent =
+    data.nome ||
+    data.name ||
+    "Usuário";
+
+
+  document.getElementById(
+    "email"
   ).textContent =
     data.email ||
     "Sem e-mail";
 
 
   document.getElementById(
-    "userId"
+    "id"
   ).textContent =
     "ID: " +
     (
@@ -1574,30 +740,16 @@ function displayUser(
 
 
   document.getElementById(
-    "userAvatar"
+    "avatar"
   ).textContent =
     data.avatar ||
     "🙂";
 
 
-  updateBalances(
-    data
-  );
+  atualizarSaldos();
 
 
-  userCard.style.display =
-    "block";
-
-
-  document.getElementById(
-    "summaryUser"
-  ).textContent =
-    data.nome ||
-    data.name ||
-    "Usuário";
-
-
-  loadHistory(
+  carregarExtrato(
     data.publicId ||
     doc.id
   );
@@ -1605,116 +757,68 @@ function displayUser(
 }
 
 
-/* =========================================
-   ATUALIZAR SALDOS
-========================================= */
+/* ==========================================
+   SALDOS
+========================================== */
 
-function updateBalances(
-  data
-){
+function atualizarSaldos(){
 
-  const chances =
-    Number(
-      data.chances || 0
-    );
+  const data =
+    usuarioSelecionado.data;
 
 
-  const moedas =
-    Number(
-      data.moedas ||
-      data.coins ||
-      0
-    );
-
-
-  const chaves =
-    Number(
-      data.chaves ||
-      data.keys ||
-      0
-    );
-
-
-  const creditos =
-    Number(
-      data.creditos ||
-      data.credits ||
-      0
+  document.getElementById(
+    "chances"
+  ).textContent =
+    numero(
+      data.chances
     );
 
 
   document.getElementById(
-    "balanceChances"
+    "moedas"
   ).textContent =
-    formatNumber(
-      chances
+    numero(
+      data.moedas
     );
 
 
   document.getElementById(
-    "balanceMoedas"
+    "chaves"
   ).textContent =
-    formatNumber(
-      moedas
+    numero(
+      data.chaves
     );
 
 
   document.getElementById(
-    "balanceChaves"
+    "creditos"
   ).textContent =
-    formatNumber(
-      chaves
-    );
-
-
-  document.getElementById(
-    "balanceCreditos"
-  ).textContent =
-    formatMoney(
-      creditos
-    );
-
-
-  document.getElementById(
-    "summaryChances"
-  ).textContent =
-    formatNumber(
-      chances
-    );
-
-
-  document.getElementById(
-    "summaryMoedas"
-  ).textContent =
-    formatNumber(
-      moedas
-    );
-
-
-  document.getElementById(
-    "summaryChaves"
-  ).textContent =
-    formatNumber(
-      chaves
+    dinheiro(
+      data.creditos
     );
 
 }
 
 
-/* =========================================
-   BUSCAR USUÁRIO
-========================================= */
+/* ==========================================
+   BUSCAR
+========================================== */
 
-async function searchUser(){
+async function buscarUsuario(){
 
   const id =
-    searchId.value.trim();
+    document.getElementById(
+      "publicId"
+    ).value.trim();
 
 
   if(!id){
 
-    showMessage(
-      searchMessage,
+    mensagem(
+      document.getElementById(
+        "searchMessage"
+      ),
       "Digite o ID do usuário.",
       "error"
     );
@@ -1724,31 +828,18 @@ async function searchUser(){
   }
 
 
-  searchButton.disabled =
-    true;
-
-
-  searchButton.textContent =
-    "🔄 BUSCANDO...";
-
-
-  userCard.style.display =
-    "none";
-
-
   try{
 
-
-    const admins =
+    const ref =
       collection(
         db,
         "admins"
       );
 
 
-    const q =
+    const busca =
       query(
-        admins,
+        ref,
         where(
           "publicId",
           "==",
@@ -1757,18 +848,24 @@ async function searchUser(){
       );
 
 
-    const result =
+    const resultado =
       await getDocs(
-        q
+        busca
       );
 
 
-    if(
-      result.empty
-    ){
+    if(resultado.empty){
 
-      showMessage(
-        searchMessage,
+      document.getElementById(
+        "userArea"
+      ).style.display =
+        "none";
+
+
+      mensagem(
+        document.getElementById(
+          "searchMessage"
+        ),
         "Usuário não encontrado.",
         "error"
       );
@@ -1778,79 +875,90 @@ async function searchUser(){
     }
 
 
-    showMessage(
-      searchMessage,
+    const doc =
+      resultado.docs[0];
+
+
+    mostrarUsuario(
+      doc
+    );
+
+
+    mensagem(
+      document.getElementById(
+        "searchMessage"
+      ),
       "Usuário encontrado.",
       "success"
     );
 
 
-    displayUser(
-      result.docs[0]
-    );
-
-
-  }catch(error){
+  }catch(erro){
 
     console.error(
-      error
+      erro
     );
 
 
-    showMessage(
-      searchMessage,
-      "Erro ao localizar usuário.",
+    mensagem(
+      document.getElementById(
+        "searchMessage"
+      ),
+      "Erro ao buscar usuário.",
       "error"
     );
-
-  }finally{
-
-    searchButton.disabled =
-      false;
-
-
-    searchButton.textContent =
-      "🔍 LOCALIZAR";
 
   }
 
 }
 
 
-/* =========================================
-   ADICIONAR / REMOVER
-========================================= */
+/* ==========================================
+   ALTERAR SALDO
+========================================== */
 
-async function changeBalance(
-  operation
+async function alterarSaldo(
+  operacao
 ){
 
-  if(!selectedUser){
-
-    showMessage(
-      operationMessage,
-      "Primeiro localize um usuário.",
-      "error"
-    );
+  if(!usuarioSelecionado){
 
     return;
 
   }
 
 
-  const amount =
+  const item =
+    document.getElementById(
+      "item"
+    ).value;
+
+
+  const quantidade =
     Number(
-      quantity.value
+      document.getElementById(
+        "quantidade"
+      ).value
     );
 
 
+  const motivo =
+    document.getElementById(
+      "motivo"
+    ).value.trim();
+
+
   if(
-    !Number.isFinite(amount) ||
-    amount <= 0
+    !Number.isFinite(
+      quantidade
+    ) ||
+    quantidade <= 0
   ){
 
-    showMessage(
-      operationMessage,
+    mensagem(
+      document.getElementById(
+        "operationMessage"
+      ),
       "Digite uma quantidade válida.",
       "error"
     );
@@ -1860,14 +968,12 @@ async function changeBalance(
   }
 
 
-  const motivo =
-    reason.value.trim();
-
-
   if(!motivo){
 
-    showMessage(
-      operationMessage,
+    mensagem(
+      document.getElementById(
+        "operationMessage"
+      ),
       "O motivo é obrigatório.",
       "error"
     );
@@ -1877,49 +983,30 @@ async function changeBalance(
   }
 
 
-  const item =
-    itemSelect.value;
-
-
-  const data =
-    selectedUser.data;
-
-
-  let field =
-    item;
-
-
-  if(item === "creditos"){
-
-    field =
-      "creditos";
-
-  }
-
-
-  const oldValue =
+  const antigo =
     Number(
-      data[field] || 0
+      usuarioSelecionado.data[item] ||
+      0
     );
 
 
-  const movement =
-    operation === "add"
-      ? amount
-      : -amount;
+  const movimento =
+    operacao === "adicionar"
+      ? quantidade
+      : -quantidade;
 
 
-  const newValue =
-    oldValue +
-    movement;
+  const novo =
+    antigo +
+    movimento;
 
 
-  if(
-    newValue < 0
-  ){
+  if(novo < 0){
 
-    showMessage(
-      operationMessage,
+    mensagem(
+      document.getElementById(
+        "operationMessage"
+      ),
       "O saldo não pode ficar negativo.",
       "error"
     );
@@ -1929,54 +1016,38 @@ async function changeBalance(
   }
 
 
-  const confirmText =
-    operation === "add"
-
-      ?
-
-      "Adicionar " +
-      amount +
-      " ao saldo?"
-
-      :
-
-      "Remover " +
-      amount +
-      " do saldo?";
+  const confirmar =
+    confirm(
+      operacao === "adicionar"
+        ?
+        "Adicionar " +
+        numero(quantidade) +
+        " ao usuário?"
+        :
+        "Remover " +
+        numero(quantidade) +
+        " do usuário?"
+    );
 
 
-  if(
-    !confirm(
-      confirmText
-    )
-  ){
-
+  if(!confirmar){
     return;
-
   }
 
 
   try{
 
-
-    /*
-      Atualiza o saldo.
-    */
+    /* Atualiza o saldo */
 
     await updateDoc(
-      selectedUser.ref,
+      usuarioSelecionado.ref,
       {
-
-        [field]:
-          newValue
-
+        [item]:novo
       }
     );
 
 
-    /*
-      Registra a operação.
-    */
+    /* Registra no extrato */
 
     await addDoc(
       collection(
@@ -1986,38 +1057,38 @@ async function changeBalance(
       {
 
         usuarioId:
-          selectedUser.id,
+          usuarioSelecionado.docId,
 
         publicId:
-          data.publicId ||
-          selectedUser.id,
+          usuarioSelecionado.data.publicId ||
+          usuarioSelecionado.docId,
 
         usuarioEmail:
-          data.email ||
+          usuarioSelecionado.data.email ||
           "",
 
         usuarioNome:
-          data.nome ||
-          data.name ||
+          usuarioSelecionado.data.nome ||
+          usuarioSelecionado.data.name ||
           "",
 
         adminEmail:
-          currentAdmin.email,
+          adminLogado.email,
 
         item:
           item,
 
         operacao:
-          operation,
+          operacao,
 
         quantidade:
-          amount,
+          quantidade,
 
         saldoAnterior:
-          oldValue,
+          antigo,
 
         saldoFinal:
-          newValue,
+          novo,
 
         motivo:
           motivo,
@@ -2029,48 +1100,51 @@ async function changeBalance(
     );
 
 
-    /*
-      Atualiza memória local.
-    */
-
-    selectedUser.data[field] =
-      newValue;
+    usuarioSelecionado.data[item] =
+      novo;
 
 
-    updateBalances(
-      selectedUser.data
-    );
+    atualizarSaldos();
 
 
-    quantity.value =
-      "";
-
-    reason.value =
+    document.getElementById(
+      "quantidade"
+    ).value =
       "";
 
 
-    showMessage(
-      operationMessage,
+    document.getElementById(
+      "motivo"
+    ).value =
+      "";
+
+
+    mensagem(
+      document.getElementById(
+        "operationMessage"
+      ),
       "Movimentação realizada e registrada no extrato.",
       "success"
     );
 
 
-    await loadHistory(
-      data.publicId ||
-      selectedUser.id
+    carregarExtrato(
+      usuarioSelecionado.data.publicId ||
+      usuarioSelecionado.docId
     );
 
 
-  }catch(error){
+  }catch(erro){
 
     console.error(
-      error
+      erro
     );
 
 
-    showMessage(
-      operationMessage,
+    mensagem(
+      document.getElementById(
+        "operationMessage"
+      ),
       "Erro ao realizar movimentação.",
       "error"
     );
@@ -2080,47 +1154,36 @@ async function changeBalance(
 }
 
 
-/* =========================================
-   HISTÓRICO
-========================================= */
+/* ==========================================
+   EXTRATO
+========================================== */
 
-async function loadHistory(
+async function carregarExtrato(
   publicId
 ){
 
-  const history =
-    document.getElementById(
-      "history"
-    );
-
-
-  const historyList =
+  const area =
     document.getElementById(
       "historyList"
     );
 
 
-  history.style.display =
-    "block";
-
-
-  historyList.innerHTML =
-    "🔄 Carregando histórico...";
+  area.innerHTML =
+    "🔄 Carregando...";
 
 
   try{
 
-
-    const historico =
+    const ref =
       collection(
         db,
         "historico"
       );
 
 
-    const q =
+    const busca =
       query(
-        historico,
+        ref,
         where(
           "publicId",
           "==",
@@ -2129,18 +1192,16 @@ async function loadHistory(
       );
 
 
-    const result =
+    const resultado =
       await getDocs(
-        q
+        busca
       );
 
 
-    if(
-      result.empty
-    ){
+    if(resultado.empty){
 
-      historyList.innerHTML =
-        "<div class='history-item'>" +
+      area.innerHTML =
+        "<div class='historyItem'>" +
         "Nenhuma movimentação registrada." +
         "</div>";
 
@@ -2149,33 +1210,30 @@ async function loadHistory(
     }
 
 
-    const items =
-      result.docs
-        .map(
-          doc => doc.data()
-        )
-        .sort(
-          (a,b) =>
+    const registros =
+      resultado.docs
+      .map(
+        doc =>
+          doc.data()
+      )
+      .sort(
+        (a,b) =>
+          String(
+            b.criadoEm || ""
+          ).localeCompare(
             String(
-              b.criadoEm || ""
-            ).localeCompare(
-              String(
-                a.criadoEm || ""
-              )
+              a.criadoEm || ""
             )
-        )
-        .slice(
-          0,
-          50
-        );
+          )
+      );
 
 
-    historyList.innerHTML =
+    area.innerHTML =
       "";
 
 
-    items.forEach(
-      item => {
+    registros.forEach(
+      registro => {
 
         const div =
           document.createElement(
@@ -2184,99 +1242,96 @@ async function loadHistory(
 
 
         div.className =
-          "history-item";
+          "historyItem";
+
+
+        const positivo =
+          registro.operacao ===
+          "adicionar";
 
 
         const sinal =
-          item.operacao === "add"
+          positivo
             ? "+"
             : "-";
 
 
         const classe =
-          item.operacao === "add"
-            ? "history-positive"
-            : "history-negative";
+          positivo
+            ? "plus"
+            : "minus";
 
 
         const data =
-          item.criadoEm
-            ? new Date(
-                item.criadoEm
-              ).toLocaleString(
-                "pt-BR"
-              )
-            : "Data não informada";
+          registro.criadoEm
+            ?
+            new Date(
+              registro.criadoEm
+            ).toLocaleString(
+              "pt-BR"
+            )
+            :
+            "—";
 
 
         div.innerHTML =
 
-          "<div class='history-top'>" +
+          "<div class='historyTop'>" +
 
           "<span>" +
 
           sinal +
-
           " " +
-
-          formatNumber(
-            item.quantidade
+          numero(
+            registro.quantidade
           ) +
-
           " " +
-
-          item.item +
+          registro.item +
 
           "</span>" +
 
           "<span class='" +
           classe +
           "'>" +
-
           data +
-
           "</span>" +
 
           "</div>" +
 
-          "<div class='history-meta'>" +
+          "<div class='historyInfo'>" +
 
-          "Anterior: " +
-
-          formatNumber(
-            item.saldoAnterior
+          "Saldo anterior: " +
+          numero(
+            registro.saldoAnterior
           ) +
 
-          " • " +
+          "<br>" +
 
-          "Final: " +
-
-          formatNumber(
-            item.saldoFinal
+          "Saldo final: " +
+          numero(
+            registro.saldoFinal
           ) +
 
           "<br>" +
 
           "Motivo: " +
-
           (
-            item.motivo ||
+            registro.motivo ||
             "—"
           ) +
 
           "<br>" +
 
-          "Admin: " +
-
+          "Administrador: " +
           (
-            item.adminEmail ||
+            registro.adminEmail ||
             "—"
           ) +
 
           "</div>";
 
 
-        historyList.appendChild(
+        area.appendChild(
           div
         );
 
@@ -2284,16 +1339,16 @@ async function loadHistory(
     );
 
 
-  }catch(error){
+  }catch(erro){
 
     console.error(
-      error
+      erro
     );
 
 
-    historyList.innerHTML =
-      "<div class='history-item'>" +
-      "Erro ao carregar histórico." +
+    area.innerHTML =
+      "<div class='historyItem'>" +
+      "Erro ao carregar o extrato." +
       "</div>";
 
   }
@@ -2301,27 +1356,19 @@ async function loadHistory(
 }
 
 
-/* =========================================
+/* ==========================================
    VIP
-========================================= */
+========================================== */
 
-async function toggleVip(){
+async function alterarVIP(){
 
-  if(!selectedUser){
-
-    showMessage(
-      operationMessage,
-      "Primeiro localize um usuário.",
-      "error"
-    );
-
+  if(!usuarioSelecionado){
     return;
-
   }
 
 
   const atual =
-    selectedUser.data.vip === true;
+    usuarioSelecionado.data.vip === true;
 
 
   const novo =
@@ -2331,32 +1378,24 @@ async function toggleVip(){
   if(
     !confirm(
       novo
-        ? "Ativar VIP para este usuário?"
-        : "Desativar VIP para este usuário?"
+        ?
+        "Ativar VIP?"
+        :
+        "Desativar VIP?"
     )
   ){
-
     return;
-
   }
 
 
   try{
 
-
     await updateDoc(
-      selectedUser.ref,
+      usuarioSelecionado.ref,
       {
-
-        vip:
-          novo
-
+        vip:novo
       }
     );
-
-
-    selectedUser.data.vip =
-      novo;
 
 
     await addDoc(
@@ -2367,33 +1406,32 @@ async function toggleVip(){
       {
 
         usuarioId:
-          selectedUser.id,
+          usuarioSelecionado.docId,
 
         publicId:
-          selectedUser.data.publicId ||
-          selectedUser.id,
+          usuarioSelecionado.data.publicId ||
+          usuarioSelecionado.docId,
 
         usuarioEmail:
-          selectedUser.data.email ||
+          usuarioSelecionado.data.email ||
           "",
 
         usuarioNome:
-          selectedUser.data.nome ||
+          usuarioSelecionado.data.nome ||
           "",
 
         adminEmail:
-          currentAdmin.email,
+          adminLogado.email,
 
         item:
           "VIP",
 
         operacao:
           novo
-            ? "add"
-            : "remove",
+            ? "adicionar"
+            : "remover",
 
-        quantidade:
-          1,
+        quantidade:1,
 
         saldoAnterior:
           atual
@@ -2407,8 +1445,10 @@ async function toggleVip(){
 
         motivo:
           novo
-            ? "VIP ativado pelo administrador"
-            : "VIP desativado pelo administrador",
+            ?
+            "VIP ativado pelo administrador"
+            :
+            "VIP desativado pelo administrador",
 
         criadoEm:
           new Date().toISOString()
@@ -2417,30 +1457,39 @@ async function toggleVip(){
     );
 
 
-    showMessage(
-      operationMessage,
+    usuarioSelecionado.data.vip =
+      novo;
+
+
+    mensagem(
+      document.getElementById(
+        "operationMessage"
+      ),
       novo
-        ? "VIP ativado."
-        : "VIP desativado.",
+        ?
+        "VIP ativado."
+        :
+        "VIP desativado.",
       "success"
     );
 
 
-    await loadHistory(
-      selectedUser.data.publicId ||
-      selectedUser.id
+    carregarExtrato(
+      usuarioSelecionado.data.publicId ||
+      usuarioSelecionado.docId
     );
 
 
-  }catch(error){
+  }catch(erro){
 
     console.error(
-      error
+      erro
     );
 
-
-    showMessage(
-      operationMessage,
+    mensagem(
+      document.getElementById(
+        "operationMessage"
+      ),
       "Erro ao alterar VIP.",
       "error"
     );
@@ -2450,27 +1499,19 @@ async function toggleVip(){
 }
 
 
-/* =========================================
+/* ==========================================
    CAIXA
-========================================= */
+========================================== */
 
-async function toggleBox(){
+async function alterarCaixa(){
 
-  if(!selectedUser){
-
-    showMessage(
-      operationMessage,
-      "Primeiro localize um usuário.",
-      "error"
-    );
-
+  if(!usuarioSelecionado){
     return;
-
   }
 
 
   const atual =
-    selectedUser.data.caixaBox === true;
+    usuarioSelecionado.data.caixaBox === true;
 
 
   const novo =
@@ -2480,32 +1521,24 @@ async function toggleBox(){
   if(
     !confirm(
       novo
-        ? "Marcar Caixa Box como resgatada?"
-        : "Liberar novamente a Caixa Box?"
+        ?
+        "Marcar Caixa Box como utilizada?"
+        :
+        "Liberar novamente a Caixa Box?"
     )
   ){
-
     return;
-
   }
 
 
   try{
 
-
     await updateDoc(
-      selectedUser.ref,
+      usuarioSelecionado.ref,
       {
-
-        caixaBox:
-          novo
-
+        caixaBox:novo
       }
     );
-
-
-    selectedUser.data.caixaBox =
-      novo;
 
 
     await addDoc(
@@ -2516,33 +1549,32 @@ async function toggleBox(){
       {
 
         usuarioId:
-          selectedUser.id,
+          usuarioSelecionado.docId,
 
         publicId:
-          selectedUser.data.publicId ||
-          selectedUser.id,
+          usuarioSelecionado.data.publicId ||
+          usuarioSelecionado.docId,
 
         usuarioEmail:
-          selectedUser.data.email ||
+          usuarioSelecionado.data.email ||
           "",
 
         usuarioNome:
-          selectedUser.data.nome ||
+          usuarioSelecionado.data.nome ||
           "",
 
         adminEmail:
-          currentAdmin.email,
+          adminLogado.email,
 
         item:
           "Caixa Box",
 
         operacao:
           novo
-            ? "remove"
-            : "add",
+            ? "remover"
+            : "adicionar",
 
-        quantidade:
-          1,
+        quantidade:1,
 
         saldoAnterior:
           atual
@@ -2556,8 +1588,10 @@ async function toggleBox(){
 
         motivo:
           novo
-            ? "Caixa marcada como resgatada"
-            : "Caixa liberada pelo administrador",
+            ?
+            "Caixa Box marcada como utilizada"
+            :
+            "Caixa Box liberada pelo administrador",
 
         criadoEm:
           new Date().toISOString()
@@ -2566,30 +1600,39 @@ async function toggleBox(){
     );
 
 
-    showMessage(
-      operationMessage,
+    usuarioSelecionado.data.caixaBox =
+      novo;
+
+
+    mensagem(
+      document.getElementById(
+        "operationMessage"
+      ),
       novo
-        ? "Caixa marcada como resgatada."
-        : "Caixa liberada.",
+        ?
+        "Caixa Box marcada como utilizada."
+        :
+        "Caixa Box liberada.",
       "success"
     );
 
 
-    await loadHistory(
-      selectedUser.data.publicId ||
-      selectedUser.id
+    carregarExtrato(
+      usuarioSelecionado.data.publicId ||
+      usuarioSelecionado.docId
     );
 
 
-  }catch(error){
+  }catch(erro){
 
     console.error(
-      error
+      erro
     );
 
-
-    showMessage(
-      operationMessage,
+    mensagem(
+      document.getElementById(
+        "operationMessage"
+      ),
       "Erro ao alterar Caixa Box.",
       "error"
     );
@@ -2599,13 +1642,13 @@ async function toggleBox(){
 }
 
 
-/* =========================================
-   AUTENTICAÇÃO
-========================================= */
+/* ==========================================
+   LOGIN / SEGURANÇA
+========================================== */
 
 onAuthStateChanged(
   auth,
-  usuario => {
+  async usuario => {
 
     if(!usuario){
 
@@ -2619,28 +1662,23 @@ onAuthStateChanged(
 
 
     if(
-      usuario.email
-        .toLowerCase()
+      usuario.email.toLowerCase()
       !==
-      ADMIN_EMAIL
-        .toLowerCase()
+      ADMIN.toLowerCase()
     ){
 
       alert(
-        "Acesso negado. Esta área é exclusiva para administradores."
+        "Acesso negado. Área exclusiva do administrador."
       );
 
 
-      signOut(
+      await signOut(
         auth
-      ).finally(
-        () => {
+      );
 
-          window.location.replace(
-            "index.html"
-          );
 
-        }
+      window.location.replace(
+        "index.html"
       );
 
 
@@ -2649,12 +1687,12 @@ onAuthStateChanged(
     }
 
 
-    currentAdmin =
+    adminLogado =
       usuario;
 
 
     console.log(
-      "Administrador autenticado:",
+      "ADMIN:",
       usuario.email
     );
 
@@ -2662,84 +1700,75 @@ onAuthStateChanged(
 );
 
 
-/* =========================================
-   EVENTOS
-========================================= */
+/* ==========================================
+   BOTÕES
+========================================== */
 
-searchButton.addEventListener(
+document
+.getElementById("buscar")
+.addEventListener(
   "click",
-  searchUser
+  buscarUsuario
 );
 
 
-searchId.addEventListener(
+document
+.getElementById("publicId")
+.addEventListener(
   "keydown",
-  event => {
+  evento => {
 
     if(
-      event.key ===
-      "Enter"
+      evento.key === "Enter"
     ){
-
-      searchUser();
-
+      buscarUsuario();
     }
 
   }
 );
 
 
-document.getElementById(
-  "addButton"
-).addEventListener(
+document
+.getElementById("adicionar")
+.addEventListener(
   "click",
-  () => {
-
-    changeBalance(
-      "add"
-    );
-
-  }
+  () =>
+    alterarSaldo(
+      "adicionar"
+    )
 );
 
 
-document.getElementById(
-  "removeButton"
-).addEventListener(
+document
+.getElementById("remover")
+.addEventListener(
   "click",
-  () => {
-
-    changeBalance(
-      "remove"
-    );
-
-  }
+  () =>
+    alterarSaldo(
+      "remover"
+    )
 );
 
 
-document.getElementById(
-  "vipButton"
-).addEventListener(
+document
+.getElementById("vip")
+.addEventListener(
   "click",
-  toggleVip
+  alterarVIP
 );
 
 
-document.getElementById(
-  "boxButton"
-).addEventListener(
+document
+.getElementById("box")
+.addEventListener(
   "click",
-  toggleBox
+  alterarCaixa
 );
 
 
-/* =========================================
-   LOGOUT
-========================================= */
-
-document.getElementById(
-  "logoutButton"
-).addEventListener(
+document
+.getElementById("logout")
+.addEventListener(
   "click",
   async () => {
 
@@ -2757,5 +1786,4 @@ document.getElementById(
 </script>
 
 </body>
-
 </html>
