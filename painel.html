@@ -305,7 +305,6 @@ body{
 
   display:none;
 
-
 }
 
 
@@ -746,7 +745,6 @@ body{
 
   gap:14px;
 
-
 }
 
 
@@ -1098,7 +1096,557 @@ body{
 
 
 /* =====================================================
-   MODAL
+   MODAL CAIXA BOX
+===================================================== */
+
+.box-modal{
+
+  position:fixed;
+
+  z-index:1000;
+
+  inset:0;
+
+  display:none;
+
+  align-items:center;
+
+  justify-content:center;
+
+  padding:18px;
+
+  background:
+    rgba(0,8,20,.78);
+
+  backdrop-filter:blur(9px);
+
+}
+
+
+.box-modal.show{
+
+  display:flex;
+
+}
+
+
+.box-modal-content{
+
+  width:100%;
+
+  max-width:440px;
+
+  max-height:92vh;
+
+  overflow:auto;
+
+  padding:20px;
+
+  border-radius:30px;
+
+  background:
+
+    linear-gradient(
+      145deg,
+      #073b73,
+      #021a38
+    );
+
+  border:
+    1px solid
+    rgba(255,255,255,.16);
+
+  box-shadow:
+    0 25px 70px
+    rgba(0,0,0,.55);
+
+  text-align:center;
+
+  position:relative;
+
+}
+
+
+.box-close{
+
+  position:absolute;
+
+  top:12px;
+
+  right:12px;
+
+  width:38px;
+
+  height:38px;
+
+  border:0;
+
+  border-radius:50%;
+
+  background:
+    rgba(255,255,255,.12);
+
+  color:white;
+
+  font-size:20px;
+
+  cursor:pointer;
+
+}
+
+
+.box-title{
+
+  margin-top:8px;
+
+  font-size:25px;
+
+  font-weight:900;
+
+}
+
+
+.box-subtitle{
+
+  margin-top:5px;
+
+  color:#a9c9e7;
+
+  font-size:13px;
+
+}
+
+
+.independence-badge{
+
+  display:inline-block;
+
+  margin-top:12px;
+
+  padding:7px 12px;
+
+  border-radius:20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #168c45,
+      #e5c52c
+    );
+
+  font-size:12px;
+
+  font-weight:900;
+
+}
+
+
+.box-main{
+
+  margin-top:18px;
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+}
+
+
+.big-box{
+
+  width:190px;
+
+  height:190px;
+
+  border-radius:35px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  font-size:105px;
+
+  cursor:pointer;
+
+  background:
+
+    radial-gradient(
+      circle,
+      rgba(255,220,50,.2),
+      transparent 65%
+    ),
+
+    rgba(0,0,0,.18);
+
+  border:
+    2px solid
+    rgba(255,215,45,.45);
+
+  box-shadow:
+    0 0 35px
+    rgba(255,207,35,.14);
+
+  transition:
+    transform .2s,
+    box-shadow .2s;
+
+}
+
+
+.big-box:active{
+
+  transform:scale(.95);
+
+}
+
+
+.box-instruction{
+
+  margin-top:10px;
+
+  color:#a8c9e6;
+
+  font-size:12px;
+
+}
+
+
+.box-rewards{
+
+  display:none;
+
+  margin-top:16px;
+
+  text-align:left;
+
+}
+
+
+.box-rewards.show{
+
+  display:block;
+
+}
+
+
+.reward-item{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
+  padding:10px 12px;
+
+  margin-top:7px;
+
+  border-radius:13px;
+
+  background:
+    rgba(255,255,255,.06);
+
+}
+
+
+.reward-icon{
+
+  font-size:25px;
+
+}
+
+
+.reward-text{
+
+  font-size:13px;
+
+  font-weight:bold;
+
+}
+
+
+.box-countdown{
+
+  margin-top:17px;
+
+  padding:15px;
+
+  border-radius:18px;
+
+  background:
+    rgba(0,0,0,.2);
+
+  border:
+    1px solid
+    rgba(255,255,255,.08);
+
+}
+
+
+.countdown-label{
+
+  color:#a9c9e7;
+
+  font-size:11px;
+
+  font-weight:bold;
+
+}
+
+
+.countdown{
+
+  margin-top:6px;
+
+  font-size:27px;
+
+  font-weight:900;
+
+  color:#ffd52b;
+
+  letter-spacing:1px;
+
+}
+
+
+.vip-rule{
+
+  margin-top:5px;
+
+  color:#82bde8;
+
+  font-size:11px;
+
+}
+
+
+.streak{
+
+  margin-top:12px;
+
+  padding:15px;
+
+  border-radius:18px;
+
+  background:
+    rgba(255,255,255,.055);
+
+}
+
+
+.streak-title{
+
+  font-size:13px;
+
+  font-weight:900;
+
+}
+
+
+.streak-days{
+
+  margin-top:5px;
+
+  font-size:22px;
+
+  font-weight:900;
+
+  color:#62ff9e;
+
+}
+
+
+.streak-text{
+
+  margin-top:4px;
+
+  color:#9fbdd5;
+
+  font-size:11px;
+
+}
+
+
+.streak-bar{
+
+  height:8px;
+
+  margin-top:9px;
+
+  border-radius:20px;
+
+  overflow:hidden;
+
+  background:
+    rgba(255,255,255,.1);
+
+}
+
+
+.streak-progress{
+
+  height:100%;
+
+  width:0%;
+
+  border-radius:20px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #15b8ff,
+      #63ff9d
+    );
+
+}
+
+
+.box-button{
+
+  width:100%;
+
+  height:52px;
+
+  margin-top:14px;
+
+  border:0;
+
+  border-radius:15px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #168ff0,
+      #0068d8
+    );
+
+  color:white;
+
+  font-size:15px;
+
+  font-weight:900;
+
+  cursor:pointer;
+
+}
+
+
+.box-button:disabled{
+
+  opacity:.55;
+
+  cursor:not-allowed;
+
+}
+
+
+.box-locked{
+
+  display:none;
+
+  margin-top:15px;
+
+  padding:17px;
+
+  border-radius:18px;
+
+  background:
+    rgba(255,193,7,.09);
+
+  border:
+    1px solid
+    rgba(255,211,50,.25);
+
+}
+
+
+.box-locked.show{
+
+  display:block;
+
+}
+
+
+.lock-icon{
+
+  font-size:35px;
+
+}
+
+
+.lock-title{
+
+  margin-top:6px;
+
+  font-size:17px;
+
+  font-weight:900;
+
+  color:#ffd52b;
+
+}
+
+
+.lock-text{
+
+  margin-top:5px;
+
+  color:#b9cfe2;
+
+  font-size:12px;
+
+  line-height:1.5;
+
+}
+
+
+/* =====================================================
+   WHATSAPP
+===================================================== */
+
+.whatsapp{
+
+  position:fixed;
+
+  z-index:900;
+
+  right:17px;
+
+  bottom:92px;
+
+  width:58px;
+
+  height:58px;
+
+  border-radius:50%;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  text-decoration:none;
+
+  background:#25D366;
+
+  color:#fff;
+
+  font-size:30px;
+
+  box-shadow:
+    0 8px 25px
+    rgba(0,0,0,.35);
+
+}
+
+
+/* =====================================================
+   MODAL SAIR
 ===================================================== */
 
 .modal{
@@ -1214,165 +1762,6 @@ body{
       #c8172c
     );
 
-}
-
-
-/* =====================================================
-   WHATSAPP
-===================================================== */
-
-.adam-whatsapp-button{
-
-  position:fixed;
-
-  right:18px;
-
-  bottom:105px;
-
-  z-index:99998;
-
-  width:58px;
-
-  height:58px;
-
-  border:0;
-
-  border-radius:50%;
-
-  background:#25D366;
-
-  color:#fff;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  font-size:29px;
-
-  cursor:pointer;
-
-  box-shadow:
-    0 8px 25px
-    rgba(0,0,0,.35);
-
-  transition:
-    transform .2s ease;
-}
-
-
-.adam-whatsapp-button:hover{
-
-  transform:scale(1.08);
-}
-
-
-.adam-whatsapp-menu{
-
-  position:fixed;
-
-  right:18px;
-
-  bottom:174px;
-
-  z-index:99998;
-
-  width:270px;
-
-  padding:17px;
-
-  border-radius:20px;
-
-  background:
-    linear-gradient(
-      145deg,
-      #073d76,
-      #021a38
-    );
-
-  border:
-    1px solid
-    rgba(255,255,255,.15);
-
-  box-shadow:
-    0 15px 40px
-    rgba(0,0,0,.45);
-
-  display:none;
-}
-
-
-.adam-whatsapp-menu.active{
-
-  display:block;
-}
-
-
-.adam-whatsapp-title{
-
-  font-size:16px;
-
-  font-weight:900;
-
-  margin-bottom:12px;
-}
-
-
-.adam-whatsapp-option{
-
-  width:100%;
-
-  border:0;
-
-  border-radius:13px;
-
-  padding:14px 12px;
-
-  margin-top:8px;
-
-  color:#fff;
-
-  font-size:14px;
-
-  font-weight:800;
-
-  text-align:left;
-
-  cursor:pointer;
-}
-
-
-.adam-whatsapp-buy{
-
-  background:#07934c;
-}
-
-
-.adam-whatsapp-help{
-
-  background:#168ff0;
-}
-
-
-.adam-whatsapp-close{
-
-  width:100%;
-
-  margin-top:10px;
-
-  border:0;
-
-  border-radius:12px;
-
-  padding:9px;
-
-  background:
-    rgba(255,255,255,.08);
-
-  color:#a9c8e5;
-
-  cursor:pointer;
 }
 
 
@@ -1556,29 +1945,43 @@ body{
   }
 
 
-  .adam-whatsapp-button{
+  .box-modal{
 
-    right:15px;
-
-    bottom:88px;
-
-    width:56px;
-
-    height:56px;
+    padding:10px;
 
   }
 
 
-  .adam-whatsapp-menu{
+  .box-modal-content{
 
-    right:15px;
+    padding:17px;
 
-    bottom:155px;
+    border-radius:25px;
 
-    width:
-      calc(100% - 30px);
+  }
 
-    max-width:300px;
+
+  .big-box{
+
+    width:155px;
+
+    height:155px;
+
+    font-size:85px;
+
+  }
+
+
+  .box-title{
+
+    font-size:22px;
+
+  }
+
+
+  .countdown{
+
+    font-size:24px;
 
   }
 
@@ -1594,6 +1997,10 @@ body{
 
 <div class="page">
 
+
+<!-- =====================================================
+     TOPO
+===================================================== -->
 
 <header class="topbar">
 
@@ -1640,7 +2047,12 @@ body{
 </header>
 
 
+<!-- =====================================================
+     PERFIL
+===================================================== -->
+
 <section class="profile">
+
 
   <div class="avatar-area">
 
@@ -1665,6 +2077,7 @@ body{
 
 
   <div class="profile-data">
+
 
     <div class="profile-name-line">
 
@@ -1727,10 +2140,15 @@ body{
 
     </div>
 
+
   </div>
 
 </section>
 
+
+<!-- =====================================================
+     ERRO
+===================================================== -->
 
 <div
   class="error-panel"
@@ -1746,6 +2164,10 @@ body{
 
 </div>
 
+
+<!-- =====================================================
+     HERO
+===================================================== -->
 
 <section class="hero">
 
@@ -1770,7 +2192,12 @@ body{
 </section>
 
 
+<!-- =====================================================
+     CARDS
+===================================================== -->
+
 <section class="cards">
+
 
   <div
     class="card card-box"
@@ -1838,10 +2265,16 @@ body{
 
   </div>
 
+
 </section>
 
 
+<!-- =====================================================
+     VIP
+===================================================== -->
+
 <section class="vip-panel">
+
 
   <div class="vip-info">
 
@@ -1877,6 +2310,10 @@ body{
 </section>
 
 
+<!-- =====================================================
+     RECURSOS
+===================================================== -->
+
 <div class="section-header">
 
   <h3>
@@ -1891,6 +2328,7 @@ body{
 
 
 <section class="resources">
+
 
   <div class="resource">
 
@@ -1942,6 +2380,7 @@ body{
 
     <div class="resource-name">
       CHAVES
+
     </div>
 
     <div
@@ -1975,10 +2414,16 @@ body{
 
   </div>
 
+
 </section>
 
 
+<!-- =====================================================
+     DADOS
+===================================================== -->
+
 <section class="data-panel">
+
 
   <div class="section-header">
 
@@ -1990,6 +2435,7 @@ body{
 
 
   <div class="data-grid">
+
 
     <div class="data-item">
 
@@ -2160,6 +2606,7 @@ body{
 
     </div>
 
+
   </div>
 
 </section>
@@ -2168,7 +2615,28 @@ body{
 </div>
 
 
+<!-- =====================================================
+     WHATSAPP
+===================================================== -->
+
+<a
+  class="whatsapp"
+  href="https://wa.me/5531987350267?text=Olá%20Adam%20Games!%20Tenho%20uma%20dúvida."
+  target="_blank"
+  rel="noopener"
+  aria-label="Falar no WhatsApp">
+
+  💬
+
+</a>
+
+
+<!-- =====================================================
+     MENU
+===================================================== -->
+
 <nav class="bottom-nav">
+
 
   <button
     class="nav-button active"
@@ -2224,65 +2692,295 @@ body{
 
   </button>
 
+
 </nav>
 
 
 <!-- =====================================================
-     WHATSAPP
+     MODAL CAIXA BOX
 ===================================================== -->
 
 <div
-  class="adam-whatsapp-menu"
-  id="adamWhatsAppMenu"
->
+  class="box-modal"
+  id="boxModal">
 
-  <div class="adam-whatsapp-title">
-    💬 Como podemos ajudar?
+
+  <div class="box-modal-content">
+
+
+    <button
+      class="box-close"
+      id="closeBox"
+      type="button">
+
+      ×
+
+    </button>
+
+
+    <div class="box-title">
+      🎁 CAIXA BOX
+    </div>
+
+
+    <div class="box-subtitle">
+      Recompensa exclusiva para membros VIP
+    </div>
+
+
+    <div class="independence-badge">
+      🇧🇷 CAIXA DA INDEPENDÊNCIA • SETEMBRO
+    </div>
+
+
+    <div
+      class="box-main"
+      id="boxMain">
+
+      <div
+        class="big-box"
+        id="bigBox"
+        title="Toque para ver os prêmios">
+
+        🎁
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="box-instruction"
+      id="boxInstruction">
+
+      👆 Toque na caixa para ver os prêmios
+
+    </div>
+
+
+    <!-- ================================
+         PRÊMIOS
+    ================================= -->
+
+    <div
+      class="box-rewards"
+      id="boxRewards">
+
+
+      <div class="reward-item">
+
+        <div class="reward-icon">
+          🃏
+        </div>
+
+        <div class="reward-text">
+          500 Coringas
+        </div>
+
+      </div>
+
+
+      <div class="reward-item">
+
+        <div class="reward-icon">
+          🔧
+        </div>
+
+        <div class="reward-text">
+          3.000 Ferramentas de Rubi
+        </div>
+
+      </div>
+
+
+      <div class="reward-item">
+
+        <div class="reward-icon">
+          🎁
+        </div>
+
+        <div class="reward-text">
+          1.000 Itens
+        </div>
+
+      </div>
+
+
+      <div class="reward-item">
+
+        <div class="reward-icon">
+          🎰
+        </div>
+
+        <div class="reward-text">
+          2 Giros na Roleta
+        </div>
+
+      </div>
+
+
+      <div class="reward-item">
+
+        <div class="reward-icon">
+          📅
+        </div>
+
+        <div class="reward-text">
+          Evento do Dia
+        </div>
+
+      </div>
+
+
+      <div class="reward-item">
+
+        <div class="reward-icon">
+          🔑
+        </div>
+
+        <div class="reward-text">
+          1 Chave da Independência
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+    <!-- ================================
+         VIP
+    ================================= -->
+
+    <div
+      class="box-countdown"
+      id="vipCountdownArea">
+
+      <div class="countdown-label">
+        🎟️ PRÓXIMA CHANCE VIP
+      </div>
+
+      <div
+        class="countdown"
+        id="chanceCountdown">
+
+        72:00:00
+
+      </div>
+
+      <div class="vip-rule">
+        1 chance a cada 72 horas
+      </div>
+
+    </div>
+
+
+    <!-- ================================
+         LOGIN SEGUIDO
+    ================================= -->
+
+    <div class="streak">
+
+      <div class="streak-title">
+        🔥 LOGIN CONSECUTIVO
+      </div>
+
+      <div
+        class="streak-days"
+        id="streakDays">
+
+        0 / 7 dias
+
+      </div>
+
+      <div
+        class="streak-text"
+        id="streakText">
+
+        Entre todos os dias para receber o bônus.
+
+      </div>
+
+      <div class="streak-bar">
+
+        <div
+          class="streak-progress"
+          id="streakProgress">
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ================================
+         BOTÃO RESGATAR
+    ================================= -->
+
+    <button
+      class="box-button"
+      id="redeemBox"
+      type="button">
+
+      🎁 RESGATAR CAIXA
+
+    </button>
+
+
+    <!-- ================================
+         BLOQUEIO NÃO VIP
+    ================================= -->
+
+    <div
+      class="box-locked"
+      id="boxLocked">
+
+
+      <div class="lock-icon">
+        🔒
+      </div>
+
+
+      <div class="lock-title">
+        CAIXA EXCLUSIVA VIP
+      </div>
+
+
+      <div class="lock-text">
+
+        A Caixa Box, as chances e as recompensas
+        mensais são benefícios exclusivos para
+        membros VIP.
+
+      </div>
+
+
+      <button
+        class="box-button"
+        id="becomeVip"
+        type="button">
+
+        👑 TORNAR-SE VIP
+
+      </button>
+
+
+    </div>
+
+
   </div>
-
-
-  <button
-    type="button"
-    class="adam-whatsapp-option adam-whatsapp-buy"
-    id="adamWhatsAppBuy"
-  >
-    🛒 Quero comprar
-  </button>
-
-
-  <button
-    type="button"
-    class="adam-whatsapp-option adam-whatsapp-help"
-    id="adamWhatsAppHelp"
-  >
-    💬 Tenho uma dúvida
-  </button>
-
-
-  <button
-    type="button"
-    class="adam-whatsapp-close"
-    id="adamWhatsAppClose"
-  >
-    Fechar
-  </button>
 
 </div>
 
 
-<button
-  type="button"
-  class="adam-whatsapp-button"
-  id="adamWhatsAppButton"
-  aria-label="Abrir WhatsApp"
->
-  💬
-</button>
-
+<!-- =====================================================
+     MODAL SAIR
+===================================================== -->
 
 <div
   class="modal"
   id="logoutModal">
+
 
   <div class="modal-box">
 
@@ -2290,11 +2988,14 @@ body{
       Sair da conta?
     </h3>
 
+
     <p>
       Você será levado novamente para o login.
     </p>
 
+
     <div class="modal-buttons">
+
 
       <button
         class="cancel"
@@ -2314,6 +3015,7 @@ body{
         SAIR
 
       </button>
+
 
     </div>
 
@@ -2350,8 +3052,7 @@ import {
   collection,
   query,
   where,
-  getDocs,
-  addDoc
+  getDocs
 }
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
@@ -2399,6 +3100,26 @@ const auth =
 
 const db =
   getFirestore(app);
+
+
+/* =====================================================
+   ESTADO
+===================================================== */
+
+let firebaseUser =
+  null;
+
+
+let cadastroAtual =
+  null;
+
+
+let vipAtual =
+  false;
+
+
+let chanceTimer =
+  null;
 
 
 /* =====================================================
@@ -2585,36 +3306,10 @@ setInterval(
    TEMPORADA
 ===================================================== */
 
-const mes =
-  new Date().getMonth() + 1;
-
-
-if(mes === 10){
-
-  document.getElementById(
-    "season"
-  ).textContent =
-    "🎃 OUTUBRO • HALLOWEEN";
-
-}
-
-else if(mes === 11){
-
-  document.getElementById(
-    "season"
-  ).textContent =
-    "✊🏿 NOVEMBRO • CONSCIÊNCIA NEGRA";
-
-}
-
-else if(mes === 12){
-
-  document.getElementById(
-    "season"
-  ).textContent =
-    "🎄 DEZEMBRO • NATAL";
-
-}
+document.getElementById(
+  "season"
+).textContent =
+  "🇧🇷 SETEMBRO • INDEPENDÊNCIA";
 
 
 /* =====================================================
@@ -2726,12 +3421,6 @@ function solicitarLocalizacao(){
 
     error => {
 
-      console.log(
-        "Usuário não autorizou localização.",
-        error
-      );
-
-
       document.getElementById(
         "locationStatus"
       ).textContent =
@@ -2747,11 +3436,8 @@ function solicitarLocalizacao(){
 
     {
       enableHighAccuracy:false,
-
       timeout:8000,
-
       maximumAge:300000
-
     }
 
   );
@@ -2914,39 +3600,9 @@ async function carregarCadastro(
     };
 
 
-    try{
-
-      const documento =
-        await addDoc(
-          admins,
-          novoUsuario
-        );
-
-
-      return {
-
-        id:
-          documento.id,
-
-        data:
-          novoUsuario
-
-      };
-
-    }
-    catch(error){
-
-      console.error(
-        "Erro criando cadastro:",
-        error
-      );
-
-
-      throw new Error(
-        "A conta foi autenticada, mas o cadastro não pôde ser criado no Firestore."
-      );
-
-    }
+    throw new Error(
+      "Sua conta foi autenticada, mas o cadastro Adam Games ainda não existe. Não foi criado automaticamente nesta versão para evitar problemas de permissão."
+    );
 
   }
 
@@ -2955,17 +3611,13 @@ async function carregarCadastro(
     snapshot.docs[0];
 
 
-  const dados =
-    documento.data();
-
-
   return {
 
     id:
       documento.id,
 
     data:
-      dados
+      documento.data()
 
   };
 
@@ -3061,11 +3713,11 @@ function mostrarDados(
   }
 
 
-  const vip =
+  vipAtual =
     dados.vip === true;
 
 
-  if(vip){
+  if(vipAtual){
 
     vipBadge.textContent =
       "👑 VIP Ativo";
@@ -3186,14 +3838,10 @@ function mostrarDados(
     "Não informado";
 
 
-  const caixa =
-    dados.caixaBox === true;
-
-
   document.getElementById(
     "dataBox"
   ).textContent =
-    caixa
+    dados.caixaBox === true
       ? "Já resgatada"
       : "Disponível";
 
@@ -3203,7 +3851,498 @@ function mostrarDados(
   ).textContent =
     "Agora";
 
+
+  prepararCaixa(
+    dados
+  );
+
 }
+
+
+/* =====================================================
+   LOGIN CONSECUTIVO
+===================================================== */
+
+function prepararLoginConsecutivo(
+  dados
+){
+
+  /*
+    Nesta primeira versão usamos os campos,
+    caso eles já existam no cadastro.
+
+    A contagem definitiva será protegida
+    pelas Rules/servidor na próxima etapa.
+  */
+
+  const dias =
+    Math.max(
+      0,
+      Math.min(
+        7,
+        Number(
+          dados.loginConsecutivo ||
+          0
+        )
+      )
+    );
+
+
+  document.getElementById(
+    "streakDays"
+  ).textContent =
+    dias +
+    " / 7 dias";
+
+
+  document.getElementById(
+    "streakProgress"
+  ).style.width =
+    (
+      dias / 7 * 100
+    ) +
+    "%";
+
+
+  if(dias >= 7){
+
+    document.getElementById(
+      "streakText"
+    ).textContent =
+      vipAtual
+        ? "🎉 Bônus de +2 chances alcançado!"
+        : "🔒 O bônus de chances é exclusivo VIP.";
+
+  }
+
+  else{
+
+    document.getElementById(
+      "streakText"
+    ).textContent =
+      "Faltam " +
+      (
+        7 - dias
+      ) +
+      " dia(s) para completar a sequência.";
+
+  }
+
+}
+
+
+/* =====================================================
+   CRONÔMETRO
+===================================================== */
+
+function formatarTempo(
+  segundos
+){
+
+  segundos =
+    Math.max(
+      0,
+      Math.floor(
+        segundos
+      )
+    );
+
+
+  const horas =
+    Math.floor(
+      segundos / 3600
+    );
+
+
+  const minutos =
+    Math.floor(
+      (
+        segundos % 3600
+      ) / 60
+    );
+
+
+  const segundosRestantes =
+    segundos % 60;
+
+
+  return [
+
+    String(horas)
+      .padStart(2,"0"),
+
+    String(minutos)
+      .padStart(2,"0"),
+
+    String(segundosRestantes)
+      .padStart(2,"0")
+
+  ].join(":");
+
+}
+
+
+function iniciarCronometro(
+  dados
+){
+
+  if(chanceTimer){
+
+    clearInterval(
+      chanceTimer
+    );
+
+  }
+
+
+  if(!vipAtual){
+
+    document.getElementById(
+      "chanceCountdown"
+    ).textContent =
+      "🔒 BLOQUEADO";
+
+    return;
+
+  }
+
+
+  /*
+    Se ainda não existe um horário salvo,
+    mostramos 72h.
+
+    A gravação segura do recebimento
+    automático será implementada junto
+    das Rules do Firebase.
+  */
+
+  const ultimo =
+    dados.ultimaChanceEm
+      ? new Date(
+          dados.ultimaChanceEm
+        ).getTime()
+      : null;
+
+
+  const intervalo =
+    72 * 60 * 60 * 1000;
+
+
+  function atualizar(){
+
+    let restante;
+
+
+    if(!ultimo){
+
+      restante =
+        intervalo;
+
+    }
+
+    else{
+
+      restante =
+        (
+          ultimo +
+          intervalo
+        ) -
+        Date.now();
+
+    }
+
+
+    if(restante <= 0){
+
+      document.getElementById(
+        "chanceCountdown"
+      ).textContent =
+        "🎉 DISPONÍVEL";
+
+      return;
+
+    }
+
+
+    document.getElementById(
+      "chanceCountdown"
+    ).textContent =
+      formatarTempo(
+        restante / 1000
+      );
+
+  }
+
+
+  atualizar();
+
+
+  chanceTimer =
+    setInterval(
+      atualizar,
+      1000
+    );
+
+}
+
+
+/* =====================================================
+   CAIXA BOX
+===================================================== */
+
+function prepararCaixa(
+  dados
+){
+
+  prepararLoginConsecutivo(
+    dados
+  );
+
+
+  iniciarCronometro(
+    dados
+  );
+
+
+  const jaResgatou =
+    dados.caixaBoxSetembro === true;
+
+
+  const redeem =
+    document.getElementById(
+      "redeemBox"
+    );
+
+
+  const locked =
+    document.getElementById(
+      "boxLocked"
+    );
+
+
+  if(vipAtual){
+
+    locked.classList.remove(
+      "show"
+    );
+
+
+    redeem.style.display =
+      "block";
+
+
+    if(jaResgatou){
+
+      redeem.disabled =
+        true;
+
+      redeem.textContent =
+        "✅ CAIXA JÁ RESGATADA";
+
+    }
+
+    else{
+
+      redeem.disabled =
+        false;
+
+      redeem.textContent =
+        "🎁 RESGATAR CAIXA";
+
+    }
+
+  }
+
+  else{
+
+    redeem.style.display =
+      "none";
+
+
+    locked.classList.add(
+      "show"
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   ABRIR MODAL
+===================================================== */
+
+document.getElementById(
+  "boxCard"
+).addEventListener(
+  "click",
+  () => {
+
+    document.getElementById(
+      "boxModal"
+    ).classList.add(
+      "show"
+    );
+
+
+    document.getElementById(
+      "boxRewards"
+    ).classList.remove(
+      "show"
+    );
+
+
+    document.getElementById(
+      "boxInstruction"
+    ).textContent =
+      vipAtual
+        ? "👆 Toque na caixa para ver os prêmios"
+        : "🔒 Esta caixa é exclusiva para VIP.";
+
+  }
+);
+
+
+/* =====================================================
+   FECHAR CAIXA
+===================================================== */
+
+document.getElementById(
+  "closeBox"
+).addEventListener(
+  "click",
+  () => {
+
+    document.getElementById(
+      "boxModal"
+    ).classList.remove(
+      "show"
+    );
+
+  }
+);
+
+
+document.getElementById(
+  "boxModal"
+).addEventListener(
+  "click",
+  event => {
+
+    if(
+      event.target ===
+      document.getElementById(
+        "boxModal"
+      )
+    ){
+
+      document.getElementById(
+        "boxModal"
+      ).classList.remove(
+        "show"
+      );
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   MOSTRAR PRÊMIOS
+===================================================== */
+
+document.getElementById(
+  "bigBox"
+).addEventListener(
+  "click",
+  () => {
+
+    if(!vipAtual){
+
+      return;
+
+    }
+
+
+    document.getElementById(
+      "boxRewards"
+    ).classList.add(
+      "show"
+    );
+
+
+    document.getElementById(
+      "boxInstruction"
+    ).textContent =
+      "🎉 Prêmios da Caixa da Independência";
+
+  }
+);
+
+
+/* =====================================================
+   RESGATAR CAIXA
+===================================================== */
+
+document.getElementById(
+  "redeemBox"
+).addEventListener(
+  "click",
+  () => {
+
+    if(!vipAtual){
+
+      return;
+
+    }
+
+
+    alert(
+      "🎁 A Caixa da Independência está pronta para ser resgatada.\n\n" +
+      "O resgate definitivo dos prêmios será conectado ao Firebase seguro na próxima etapa."
+    );
+
+  }
+);
+
+
+/* =====================================================
+   VIP
+===================================================== */
+
+document.getElementById(
+  "becomeVip"
+).addEventListener(
+  "click",
+  () => {
+
+    window.open(
+      "https://wa.me/5531987350267?text=Olá!%20Quero%20saber%20como%20me%20tornar%20VIP.",
+      "_blank"
+    );
+
+  }
+);
+
+
+/* =====================================================
+   BOTÃO VIP
+===================================================== */
+
+document.getElementById(
+  "vipButton"
+).addEventListener(
+  "click",
+  () => {
+
+    window.open(
+      "https://wa.me/5531987350267?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20VIP%20Adam%20Games.",
+      "_blank"
+    );
+
+  }
+);
 
 
 /* =====================================================
@@ -3225,6 +4364,10 @@ onAuthStateChanged(
       return;
 
     }
+
+
+    firebaseUser =
+      firebaseUser;
 
 
     limparErro();
@@ -3254,6 +4397,10 @@ onAuthStateChanged(
         await carregarCadastro(
           firebaseUser
         );
+
+
+      cadastroAtual =
+        cadastro;
 
 
       mostrarDados(
@@ -3395,161 +4542,6 @@ logoutModal.addEventListener(
 
       logoutModal.style.display =
         "none";
-
-    }
-
-  }
-);
-
-
-/* =====================================================
-   CAIXA
-===================================================== */
-
-document.getElementById(
-  "boxCard"
-).addEventListener(
-  "click",
-  () => {
-
-    alert(
-      "🎁 CAIXA BOX\n\n" +
-      "A área de resgate da Caixa Box será disponibilizada aqui."
-    );
-
-  }
-);
-
-
-/* =====================================================
-   VIP
-===================================================== */
-
-document.getElementById(
-  "vipButton"
-).addEventListener(
-  "click",
-  () => {
-
-    alert(
-      "👑 ÁREA VIP\n\n" +
-      "Em breve você poderá visualizar todos os benefícios VIP."
-    );
-
-  }
-);
-
-
-/* =====================================================
-   WHATSAPP
-===================================================== */
-
-const whatsappButton =
-  document.getElementById(
-    "adamWhatsAppButton"
-  );
-
-
-const whatsappMenu =
-  document.getElementById(
-    "adamWhatsAppMenu"
-  );
-
-
-whatsappButton.addEventListener(
-  "click",
-  () => {
-
-    whatsappMenu.classList.toggle(
-      "active"
-    );
-
-  }
-);
-
-
-document
-.getElementById(
-  "adamWhatsAppClose"
-)
-.addEventListener(
-  "click",
-  () => {
-
-    whatsappMenu.classList.remove(
-      "active"
-    );
-
-  }
-);
-
-
-function abrirWhatsApp(
-  mensagem
-){
-
-  const url =
-    "https://wa.me/5531987350267?text=" +
-    encodeURIComponent(
-      mensagem
-    );
-
-
-  window.open(
-    url,
-    "_blank"
-  );
-
-}
-
-
-document
-.getElementById(
-  "adamWhatsAppBuy"
-)
-.addEventListener(
-  "click",
-  () => {
-
-    abrirWhatsApp(
-      "Olá! Vim pelo site Adam Games e quero fazer uma compra. 🛒"
-    );
-
-  }
-);
-
-
-document
-.getElementById(
-  "adamWhatsAppHelp"
-)
-.addEventListener(
-  "click",
-  () => {
-
-    abrirWhatsApp(
-      "Olá! Vim pelo site Adam Games e tenho uma dúvida. 💬"
-    );
-
-  }
-);
-
-
-document.addEventListener(
-  "click",
-  event => {
-
-    if(
-      !whatsappMenu.contains(
-        event.target
-      ) &&
-      event.target !==
-      whatsappButton
-    ){
-
-      whatsappMenu.classList.remove(
-        "active"
-      );
 
     }
 
