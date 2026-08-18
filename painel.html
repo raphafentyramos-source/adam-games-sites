@@ -182,6 +182,8 @@ body.december{
   display:flex;
 
   gap:9px;
+
+  align-items:center;
 }
 
 .top-btn{
@@ -205,6 +207,86 @@ body.december{
 
   cursor:pointer;
 }
+
+
+/* =========================
+   BOTÃO ADMIN
+========================= */
+
+.admin-btn{
+
+  display:none;
+
+  width:auto;
+
+  min-width:58px;
+
+  height:55px;
+
+  padding:0 13px;
+
+  border:1px solid
+    rgba(255,215,70,.5);
+
+  border-radius:18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #b27b08,
+      #f0c52c
+    );
+
+  color:#fff;
+
+  font-size:12px;
+
+  font-weight:900;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 8px 20px
+    rgba(255,193,7,.2);
+
+  transition:
+    transform .15s ease,
+    filter .15s ease;
+}
+
+.admin-btn:active{
+
+  transform:scale(.96);
+
+}
+
+.admin-btn:hover{
+
+  filter:brightness(1.08);
+
+}
+
+.admin-btn span{
+
+  display:block;
+
+  font-size:22px;
+
+  line-height:20px;
+
+}
+
+.admin-btn small{
+
+  font-size:9px;
+
+  letter-spacing:.4px;
+}
+
+
+/* =========================
+   NOTIFICAÇÃO
+========================= */
 
 .notification{
 
@@ -1084,6 +1166,25 @@ body.december{
     height:50px;
   }
 
+  .admin-btn{
+
+    min-width:50px;
+
+    height:50px;
+
+    padding:0 8px;
+  }
+
+  .admin-btn span{
+
+    font-size:19px;
+  }
+
+  .admin-btn small{
+
+    font-size:8px;
+  }
+
   .profile{
 
     padding:14px;
@@ -1219,6 +1320,28 @@ body.december{
 
 
   <div class="top-buttons">
+
+
+    <!--
+      BOTÃO ADMIN
+
+      Fica escondido inicialmente.
+      O JavaScript só mostra para o
+      e-mail autorizado.
+    -->
+
+    <button
+      class="admin-btn"
+      id="adminButton"
+      type="button"
+      aria-label="Painel Administrativo">
+
+      <span>👑</span>
+
+      <small>ADMIN</small>
+
+    </button>
+
 
     <button
       class="top-btn"
@@ -1836,6 +1959,7 @@ body.december{
 
 <script type="module">
 
+
 /* =====================================
    FIREBASE
 ===================================== */
@@ -1910,6 +2034,127 @@ const db =
 let usuarioAtual = null;
 
 let logoutEmAndamento = false;
+
+
+/* =====================================
+   ADMIN
+===================================== */
+
+/*
+  E-mail autorizado para acessar
+  o painel administrativo.
+*/
+
+const EMAIL_ADMIN =
+  "raphafentyramos@gmail.com";
+
+
+const adminButton =
+  document.getElementById(
+    "adminButton"
+  );
+
+
+/*
+  O botão começa escondido.
+
+  Só será exibido depois que o
+  Firebase confirmar o usuário
+  autenticado.
+*/
+
+function configurarAcessoAdmin(
+  usuario
+){
+
+  /*
+    Primeiro escondemos sempre.
+
+    Isso evita que o botão fique
+    visível por engano enquanto
+    o Firebase ainda verifica a sessão.
+  */
+
+  adminButton.style.display =
+    "none";
+
+
+  if(!usuario){
+
+    return;
+
+  }
+
+
+  const email =
+    String(
+      usuario.email || ""
+    )
+    .trim()
+    .toLowerCase();
+
+
+  /*
+    Somente este e-mail recebe
+    o botão administrativo.
+  */
+
+  if(
+    email ===
+    EMAIL_ADMIN.toLowerCase()
+  ){
+
+    adminButton.style.display =
+      "block";
+
+  }
+
+}
+
+
+/*
+  Clique no painel administrativo.
+*/
+
+adminButton.addEventListener(
+  "click",
+  () => {
+
+    /*
+      Conferência adicional antes
+      de abrir o painel.
+    */
+
+    if(!usuarioAtual){
+
+      return;
+
+    }
+
+
+    const email =
+      String(
+        usuarioAtual.email || ""
+      )
+      .trim()
+      .toLowerCase();
+
+
+    if(
+      email !==
+      EMAIL_ADMIN.toLowerCase()
+    ){
+
+      return;
+
+    }
+
+
+    window.location.href =
+      "admin.html";
+
+  }
+);
 
 
 /* =====================================
@@ -2413,6 +2658,16 @@ onAuthStateChanged(
 
     if(!usuario){
 
+      /*
+        Também escondemos o botão Admin
+        quando não existe sessão.
+      */
+
+      configurarAcessoAdmin(
+        null
+      );
+
+
       window.location.replace(
         "index.html"
       );
@@ -2424,6 +2679,17 @@ onAuthStateChanged(
 
     usuarioAtual =
       usuario;
+
+
+    /*
+      Verifica o acesso administrativo
+      somente depois de confirmar
+      a identidade pelo Firebase Auth.
+    */
+
+    configurarAcessoAdmin(
+      usuario
+    );
 
 
     try{
