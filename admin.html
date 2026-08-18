@@ -12,7 +12,6 @@
 
 <title>Adam Games • Administração</title>
 
-
 <style>
 
 *{
@@ -94,11 +93,6 @@ button{
   font-weight:bold;
 }
 
-button:disabled{
-  opacity:.6;
-  cursor:not-allowed;
-}
-
 .logout{
   padding:12px 16px;
   border-radius:12px;
@@ -149,11 +143,6 @@ select{
   padding:0 14px;
   font-size:15px;
   outline:none;
-}
-
-input:focus,
-select:focus{
-  border-color:#168ff0;
 }
 
 .search button{
@@ -315,22 +304,10 @@ select:focus{
   margin-top:22px;
 }
 
-.historyHeader{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  margin-bottom:10px;
-}
-
-.historyHeader h3{
-  margin-bottom:0;
-}
-
 .historyItem{
-  padding:14px;
-  margin-top:8px;
-  border-radius:12px;
+  padding:15px;
+  margin-top:9px;
+  border-radius:14px;
   background:
     rgba(255,255,255,.05);
   border:
@@ -345,6 +322,12 @@ select:focus{
   font-weight:bold;
 }
 
+.historyDate{
+  color:#75d4ff;
+  font-size:12px;
+  text-align:right;
+}
+
 .plus{
   color:#65ff9c;
 }
@@ -356,60 +339,27 @@ select:focus{
 .historyInfo{
   color:#9dbbd3;
   font-size:12px;
-  margin-top:7px;
+  margin-top:8px;
   line-height:1.6;
 }
 
-.operationId{
+.operation-id{
   margin-top:8px;
-  padding-top:8px;
-  border-top:
-    1px solid
-    rgba(255,255,255,.07);
-  color:#6ca9d5;
-  font-size:10px;
+  padding:7px 9px;
+  border-radius:8px;
+  background:
+    rgba(0,0,0,.2);
+  color:#7fc9ff;
+  font-size:11px;
   word-break:break-all;
 }
 
-.auditBadge{
-  display:inline-block;
-  margin-bottom:7px;
-  padding:4px 8px;
-  border-radius:7px;
-  background:
-    rgba(22,143,240,.15);
-  color:#72c4ff;
-  font-size:10px;
-  font-weight:bold;
-}
-
-.emptyHistory{
+.empty{
   padding:15px;
   border-radius:12px;
   background:
     rgba(255,255,255,.04);
   color:#9dbbd3;
-  text-align:center;
-}
-
-.loading{
-  color:#72c4ff;
-  text-align:center;
-  padding:15px;
-}
-
-.securityNotice{
-  margin-top:15px;
-  padding:12px;
-  border-radius:12px;
-  background:
-    rgba(255,193,7,.08);
-  border:
-    1px solid
-    rgba(255,193,7,.18);
-  color:#e9d69a;
-  font-size:11px;
-  line-height:1.5;
 }
 
 @media(max-width:650px){
@@ -433,7 +383,8 @@ select:focus{
   }
 
   .form{
-    grid-template-columns:1fr;
+    grid-template-columns:
+      1fr;
   }
 
   .full{
@@ -442,11 +393,16 @@ select:focus{
 
   .actions,
   .special{
-    grid-template-columns:1fr;
+    grid-template-columns:
+      1fr;
   }
 
   .historyTop{
     flex-direction:column;
+  }
+
+  .historyDate{
+    text-align:left;
   }
 
 }
@@ -486,7 +442,8 @@ select:focus{
 
   <button
     class="logout"
-    id="logout">
+    id="logout"
+    type="button">
 
     ↪️ Sair
 
@@ -504,6 +461,10 @@ select:focus{
   Gerenciamento de usuários e movimentações.
 </p>
 
+
+<!-- ================================
+     BUSCAR USUÁRIO
+================================ -->
 
 <div class="card">
 
@@ -523,7 +484,8 @@ select:focus{
 
 
     <button
-      id="buscar">
+      id="buscar"
+      type="button">
 
       🔍 Buscar
 
@@ -540,6 +502,10 @@ select:focus{
 </div>
 
 
+<!-- ================================
+     ÁREA DO USUÁRIO
+================================ -->
+
 <div id="userArea">
 
 
@@ -547,6 +513,7 @@ select:focus{
 
 
   <div class="user">
+
 
     <div
       class="avatar"
@@ -587,8 +554,13 @@ select:focus{
 
     </div>
 
+
   </div>
 
+
+  <!-- ================================
+       SALDOS
+  ================================= -->
 
   <div class="balances">
 
@@ -676,8 +648,13 @@ select:focus{
 
     </div>
 
+
   </div>
 
+
+  <!-- ================================
+       MOVIMENTAÇÃO
+  ================================= -->
 
   <h3>
     🎁 Fazer movimentação
@@ -727,8 +704,8 @@ select:focus{
       <input
         id="quantidade"
         type="number"
-        min="0.01"
-        step="any"
+        min="1"
+        step="1"
         placeholder="Quantidade"
       >
 
@@ -751,6 +728,7 @@ select:focus{
 
     </div>
 
+
   </div>
 
 
@@ -759,7 +737,8 @@ select:focus{
 
     <button
       class="add"
-      id="adicionar">
+      id="adicionar"
+      type="button">
 
       ➕ ADICIONAR
 
@@ -768,11 +747,13 @@ select:focus{
 
     <button
       class="remove"
-      id="remover">
+      id="remover"
+      type="button">
 
       ➖ REMOVER
 
     </button>
+
 
   </div>
 
@@ -782,7 +763,8 @@ select:focus{
 
     <button
       class="vip"
-      id="vip">
+      id="vip"
+      type="button">
 
       👑 Alterar VIP
 
@@ -791,11 +773,13 @@ select:focus{
 
     <button
       class="box"
-      id="box">
+      id="box"
+      type="button">
 
       🎁 Alterar Caixa
 
     </button>
+
 
   </div>
 
@@ -806,39 +790,29 @@ select:focus{
   </div>
 
 
+  <!-- ================================
+       EXTRATO
+  ================================= -->
+
   <div class="history">
 
 
-    <div class="historyHeader">
-
-      <h3>
-        📜 Extrato do usuário
-      </h3>
-
-    </div>
+    <h3>
+      📜 Extrato do usuário
+    </h3>
 
 
     <div id="historyList">
 
-      <div class="emptyHistory">
+      <div class="empty">
         Nenhuma movimentação carregada.
       </div>
 
     </div>
 
 
-    <div class="securityNotice">
-
-      🔒 <strong>Registro de auditoria:</strong>
-      cada movimentação contém administrador,
-      usuário, operação, quantidade, saldo anterior,
-      saldo final, motivo, data/hora e ID único.
-      O painel não possui função para apagar ou editar
-      essas movimentações.
-
-    </div>
-
   </div>
+
 
 </div>
 
@@ -855,51 +829,35 @@ select:focus{
    FIREBASE
 ========================================== */
 
+
 import {
-
   initializeApp
-
 }
-
 from
-
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
 
 import {
-
   getAuth,
   onAuthStateChanged,
   signOut
-
 }
-
 from
-
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 
 import {
-
   getFirestore,
   collection,
   query,
   where,
   getDocs,
-  writeBatch,
-  doc,
-  serverTimestamp
-
+  updateDoc,
+  addDoc
 }
-
 from
-
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-
-/* ==========================================
-   CONFIGURAÇÃO
-========================================== */
 
 const firebaseConfig = {
 
@@ -939,7 +897,7 @@ const db =
 
 
 /* ==========================================
-   ADMINISTRADOR
+   ADMIN
 ========================================== */
 
 const ADMIN =
@@ -952,22 +910,6 @@ let usuarioSelecionado =
 
 let adminLogado =
   null;
-
-
-/* ==========================================
-   REFERÊNCIAS
-========================================== */
-
-const searchMessage =
-  document.getElementById(
-    "searchMessage"
-  );
-
-
-const operationMessage =
-  document.getElementById(
-    "operationMessage"
-  );
 
 
 /* ==========================================
@@ -984,7 +926,8 @@ function mensagem(
     texto;
 
   elemento.className =
-    "message " + tipo;
+    "message " +
+    tipo;
 
 }
 
@@ -1028,68 +971,106 @@ function dinheiro(
 
 
 /* ==========================================
-   ID DA MOVIMENTAÇÃO
+   ID ÚNICO DA MOVIMENTAÇÃO
 ========================================== */
 
 function gerarIdMovimentacao(){
 
+  const agora =
+    new Date();
+
+
+  const ano =
+    agora.getFullYear();
+
+
+  const mes =
+    String(
+      agora.getMonth() + 1
+    ).padStart(
+      2,
+      "0"
+    );
+
+
+  const dia =
+    String(
+      agora.getDate()
+    ).padStart(
+      2,
+      "0"
+    );
+
+
+  const hora =
+    String(
+      agora.getHours()
+    ).padStart(
+      2,
+      "0"
+    );
+
+
+  const minuto =
+    String(
+      agora.getMinutes()
+    ).padStart(
+      2,
+      "0"
+    );
+
+
+  const segundo =
+    String(
+      agora.getSeconds()
+    ).padStart(
+      2,
+      "0"
+    );
+
+
+  let aleatorio;
+
+
   if(
-    crypto &&
-    typeof crypto.randomUUID ===
-    "function"
+    window.crypto &&
+    crypto.randomUUID
   ){
 
-    return crypto.randomUUID();
+    aleatorio =
+      crypto
+      .randomUUID()
+      .split("-")[0]
+      .toUpperCase();
+
+  }
+
+  else{
+
+    aleatorio =
+      Math.random()
+      .toString(36)
+      .substring(
+        2,
+        8
+      )
+      .toUpperCase();
 
   }
 
 
   return (
-
-    Date.now().toString(36) +
+    "MOV-" +
+    ano +
+    mes +
+    dia +
     "-" +
-    Math.random()
-      .toString(36)
-      .substring(2,10)
-
+    hora +
+    minuto +
+    segundo +
+    "-" +
+    aleatorio
   );
-
-}
-
-
-/* ==========================================
-   NOME DO ITEM
-========================================== */
-
-function nomeItem(
-  item
-){
-
-  const nomes = {
-
-    chances:
-      "🎟️ Chances",
-
-    moedas:
-      "🪙 Moedas",
-
-    chaves:
-      "🔑 Chaves",
-
-    creditos:
-      "💎 Créditos",
-
-    VIP:
-      "👑 VIP",
-
-    "Caixa Box":
-      "🎁 Caixa Box"
-
-  };
-
-
-  return nomes[item] ||
-    item;
 
 }
 
@@ -1099,20 +1080,20 @@ function nomeItem(
 ========================================== */
 
 function mostrarUsuario(
-  documento
+  doc
 ){
 
   const data =
-    documento.data();
+    doc.data();
 
 
   usuarioSelecionado = {
 
     ref:
-      documento.ref,
+      doc.ref,
 
     docId:
-      documento.id,
+      doc.id,
 
     data:
       data
@@ -1148,10 +1129,9 @@ function mostrarUsuario(
   ).textContent =
 
     "ID: " +
-
     (
       data.publicId ||
-      documento.id
+      doc.id
     );
 
 
@@ -1167,10 +1147,8 @@ function mostrarUsuario(
 
 
   carregarExtrato(
-
     data.publicId ||
-    documento.id
-
+    doc.id
   );
 
 }
@@ -1182,8 +1160,12 @@ function mostrarUsuario(
 
 function atualizarSaldos(){
 
-  if(!usuarioSelecionado){
+  if(
+    !usuarioSelecionado
+  ){
+
     return;
+
   }
 
 
@@ -1244,7 +1226,9 @@ async function buscarUsuario(){
   if(!id){
 
     mensagem(
-      searchMessage,
+      document.getElementById(
+        "searchMessage"
+      ),
       "Digite o ID do usuário.",
       "error"
     );
@@ -1280,7 +1264,9 @@ async function buscarUsuario(){
       );
 
 
-    if(resultado.empty){
+    if(
+      resultado.empty
+    ){
 
       document.getElementById(
         "userArea"
@@ -1288,12 +1274,10 @@ async function buscarUsuario(){
         "none";
 
 
-      usuarioSelecionado =
-        null;
-
-
       mensagem(
-        searchMessage,
+        document.getElementById(
+          "searchMessage"
+        ),
         "Usuário não encontrado.",
         "error"
       );
@@ -1304,17 +1288,19 @@ async function buscarUsuario(){
     }
 
 
-    const documento =
+    const doc =
       resultado.docs[0];
 
 
     mostrarUsuario(
-      documento
+      doc
     );
 
 
     mensagem(
-      searchMessage,
+      document.getElementById(
+        "searchMessage"
+      ),
       "Usuário encontrado.",
       "success"
     );
@@ -1323,108 +1309,19 @@ async function buscarUsuario(){
   }catch(erro){
 
     console.error(
-      "Erro ao buscar usuário:",
       erro
     );
 
 
     mensagem(
-      searchMessage,
+      document.getElementById(
+        "searchMessage"
+      ),
       "Erro ao buscar usuário.",
       "error"
     );
 
   }
-
-}
-
-
-/* ==========================================
-   CRIAR REGISTRO DE AUDITORIA
-========================================== */
-
-function criarHistorico(
-
-  batch,
-  dadosMovimento
-
-){
-
-  const id =
-    gerarIdMovimentacao();
-
-
-  const historicoRef =
-    doc(
-      collection(
-        db,
-        "historico"
-      )
-    );
-
-
-  batch.set(
-
-    historicoRef,
-
-    {
-
-      movimentacaoId:
-        id,
-
-      usuarioId:
-        dadosMovimento.usuarioId,
-
-      publicId:
-        dadosMovimento.publicId,
-
-      usuarioEmail:
-        dadosMovimento.usuarioEmail,
-
-      usuarioNome:
-        dadosMovimento.usuarioNome,
-
-      adminEmail:
-        dadosMovimento.adminEmail,
-
-      adminUid:
-        dadosMovimento.adminUid,
-
-      item:
-        dadosMovimento.item,
-
-      itemNome:
-        nomeItem(
-          dadosMovimento.item
-        ),
-
-      operacao:
-        dadosMovimento.operacao,
-
-      quantidade:
-        dadosMovimento.quantidade,
-
-      saldoAnterior:
-        dadosMovimento.saldoAnterior,
-
-      saldoFinal:
-        dadosMovimento.saldoFinal,
-
-      motivo:
-        dadosMovimento.motivo,
-
-      criadoEm:
-        serverTimestamp(),
-
-      criadoEmCliente:
-        new Date().toISOString()
-
-    }
-
-  );
-
-
-  return id;
 
 }
 
@@ -1437,24 +1334,16 @@ async function alterarSaldo(
   operacao
 ){
 
-  if(!usuarioSelecionado){
+  if(
+    !usuarioSelecionado ||
+    !adminLogado
+  ){
 
     mensagem(
-      operationMessage,
-      "Primeiro localize um usuário.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  if(!adminLogado){
-
-    mensagem(
-      operationMessage,
-      "Administrador ainda não autenticado.",
+      document.getElementById(
+        "operationMessage"
+      ),
+      "Nenhum usuário selecionado.",
       "error"
     );
 
@@ -1491,7 +1380,9 @@ async function alterarSaldo(
   ){
 
     mensagem(
-      operationMessage,
+      document.getElementById(
+        "operationMessage"
+      ),
       "Digite uma quantidade válida.",
       "error"
     );
@@ -1501,10 +1392,33 @@ async function alterarSaldo(
   }
 
 
-  if(!motivo){
+  if(
+    !Number.isInteger(
+      quantidade
+    )
+  ){
 
     mensagem(
-      operationMessage,
+      document.getElementById(
+        "operationMessage"
+      ),
+      "A quantidade deve ser um número inteiro.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(
+    !motivo
+  ){
+
+    mensagem(
+      document.getElementById(
+        "operationMessage"
+      ),
       "O motivo é obrigatório.",
       "error"
     );
@@ -1523,9 +1437,7 @@ async function alterarSaldo(
 
   const movimento =
 
-    operacao ===
-    "adicionar"
-
+    operacao === "adicionar"
       ? quantidade
       : -quantidade;
 
@@ -1535,10 +1447,14 @@ async function alterarSaldo(
     movimento;
 
 
-  if(novo < 0){
+  if(
+    novo < 0
+  ){
 
     mensagem(
-      operationMessage,
+      document.getElementById(
+        "operationMessage"
+      ),
       "O saldo não pode ficar negativo.",
       "error"
     );
@@ -1548,167 +1464,131 @@ async function alterarSaldo(
   }
 
 
-  const acao =
-    operacao ===
-    "adicionar"
-      ? "Adicionar"
-      : "Remover";
+  const confirmacao =
 
+    operacao === "adicionar"
 
-  const confirmar =
-    confirm(
+      ?
 
-      acao +
-      " " +
+      "Adicionar " +
       numero(
         quantidade
       ) +
       " " +
-      nomeItem(
-        item
-      ) +
-      "?" +
+      item +
+      " ao usuário?"
 
-      "\n\n" +
+      :
 
-      "Saldo anterior: " +
+      "Remover " +
       numero(
-        antigo
+        quantidade
       ) +
-
-      "\n" +
-
-      "Saldo final: " +
-      numero(
-        novo
-      ) +
-
-      "\n\n" +
-
-      "Motivo: " +
-      motivo
-
-    );
+      " " +
+      item +
+      " do usuário?";
 
 
-  if(!confirmar){
+  if(
+    !confirm(
+      confirmacao
+    )
+  ){
+
     return;
+
   }
 
 
-  const botaoAdicionar =
-    document.getElementById(
-      "adicionar"
-    );
+  const movimentacaoId =
+    gerarIdMovimentacao();
 
 
-  const botaoRemover =
-    document.getElementById(
-      "remover"
-    );
+  const agora =
+    new Date();
 
 
-  botaoAdicionar.disabled =
-    true;
-
-
-  botaoRemover.disabled =
-    true;
+  const criadoEm =
+    agora.toISOString();
 
 
   try{
 
-    /*
-      BATCH:
-      saldo + extrato são gravados
-      juntos.
-    */
+    /* ================================
+       ATUALIZA SALDO
+    ================================= */
 
-    const batch =
-      writeBatch(
-        db
-      );
-
-
-    batch.update(
-
+    await updateDoc(
       usuarioSelecionado.ref,
-
       {
-
         [item]:
           novo
-
       }
-
     );
 
 
-    const movimentacaoId =
-      criarHistorico(
+    /* ================================
+       REGISTRA HISTÓRICO
+    ================================= */
 
-        batch,
+    await addDoc(
+      collection(
+        db,
+        "historico"
+      ),
+      {
 
-        {
+        movimentacaoId:
+          movimentacaoId,
 
-          usuarioId:
-            usuarioSelecionado.docId,
+        usuarioId:
+          usuarioSelecionado.docId,
 
-          publicId:
-            usuarioSelecionado.data.publicId ||
-            usuarioSelecionado.docId,
+        publicId:
+          usuarioSelecionado.data.publicId ||
+          usuarioSelecionado.docId,
 
-          usuarioEmail:
-            usuarioSelecionado.data.email ||
-            "",
+        usuarioEmail:
+          usuarioSelecionado.data.email ||
+          "",
 
-          usuarioNome:
-            usuarioSelecionado.data.nome ||
-            usuarioSelecionado.data.name ||
-            "",
+        usuarioNome:
+          usuarioSelecionado.data.nome ||
+          usuarioSelecionado.data.name ||
+          "",
 
-          adminEmail:
-            adminLogado.email ||
-            "",
+        adminEmail:
+          adminLogado.email ||
+          "",
 
-          adminUid:
-            adminLogado.uid ||
-            "",
+        adminUid:
+          adminLogado.uid ||
+          "",
 
-          item:
-            item,
+        item:
+          item,
 
-          operacao:
-            operacao,
+        operacao:
+          operacao,
 
-          quantidade:
-            quantidade,
+        quantidade:
+          quantidade,
 
-          saldoAnterior:
-            antigo,
+        saldoAnterior:
+          antigo,
 
-          saldoFinal:
-            novo,
+        saldoFinal:
+          novo,
 
-          motivo:
-            motivo
+        motivo:
+          motivo,
 
-        }
+        criadoEm:
+          criadoEm
 
-      );
+      }
+    );
 
-
-    /*
-      Commit atômico.
-    */
-
-    await batch.commit();
-
-
-    /*
-      Atualiza memória local
-      somente depois do sucesso.
-    */
 
     usuarioSelecionado.data[item] =
       novo;
@@ -1730,22 +1610,17 @@ async function alterarSaldo(
 
 
     mensagem(
-      operationMessage,
-
-      "Movimentação realizada. " +
-      "ID: " +
-      movimentacaoId,
-
+      document.getElementById(
+        "operationMessage"
+      ),
+      "Movimentação realizada e registrada no extrato.",
       "success"
-
     );
 
 
     await carregarExtrato(
-
       usuarioSelecionado.data.publicId ||
       usuarioSelecionado.docId
-
     );
 
 
@@ -1758,23 +1633,12 @@ async function alterarSaldo(
 
 
     mensagem(
-
-      operationMessage,
-
-      "Erro ao realizar a movimentação. " +
-      "Nenhuma alteração foi confirmada.",
-
+      document.getElementById(
+        "operationMessage"
+      ),
+      "Erro ao realizar movimentação.",
       "error"
-
     );
-
-  }finally{
-
-    botaoAdicionar.disabled =
-      false;
-
-    botaoRemover.disabled =
-      false;
 
   }
 
@@ -1796,9 +1660,7 @@ async function carregarExtrato(
 
 
   area.innerHTML =
-    "<div class='loading'>" +
-    "🔄 Carregando extrato..." +
-    "</div>";
+    "<div class='empty'>🔄 Carregando extrato...</div>";
 
 
   try{
@@ -1812,15 +1674,12 @@ async function carregarExtrato(
 
     const busca =
       query(
-
         ref,
-
         where(
           "publicId",
           "==",
           publicId
         )
-
       );
 
 
@@ -1830,14 +1689,13 @@ async function carregarExtrato(
       );
 
 
-    if(resultado.empty){
+    if(
+      resultado.empty
+    ){
 
       area.innerHTML =
-
-        "<div class='emptyHistory'>" +
-
+        "<div class='empty'>" +
         "Nenhuma movimentação registrada." +
-
         "</div>";
 
       return;
@@ -1850,44 +1708,28 @@ async function carregarExtrato(
       resultado.docs
 
       .map(
-
-        documento => ({
-
+        doc => ({
           id:
-            documento.id,
-
-          ...documento.data()
-
+            doc.id,
+          ...doc.data()
         })
-
       )
 
       .sort(
+        (
+          a,
+          b
+        ) =>
 
-        (a,b) => {
-
-          const dataA =
-            a.criadoEm?.toMillis
-              ? a.criadoEm.toMillis()
-              : Date.parse(
-                  a.criadoEmCliente ||
-                  ""
-                ) || 0;
-
-
-          const dataB =
-            b.criadoEm?.toMillis
-              ? b.criadoEm.toMillis()
-              : Date.parse(
-                  b.criadoEmCliente ||
-                  ""
-                ) || 0;
-
-
-          return dataB - dataA;
-
-        }
-
+          String(
+            b.criadoEm ||
+            ""
+          ).localeCompare(
+            String(
+              a.criadoEm ||
+              ""
+            )
+          )
       );
 
 
@@ -1897,6 +1739,7 @@ async function carregarExtrato(
 
     registros.forEach(
       registro => {
+
 
         const div =
           document.createElement(
@@ -1909,6 +1752,7 @@ async function carregarExtrato(
 
 
         const positivo =
+
           registro.operacao ===
           "adicionar";
 
@@ -1925,146 +1769,112 @@ async function carregarExtrato(
             : "minus";
 
 
-        let dataTexto =
-          "—";
+        const data =
 
+          registro.criadoEm
 
-        if(
-          registro.criadoEm &&
-          typeof registro.criadoEm.toDate ===
-          "function"
-        ){
+            ?
 
-          dataTexto =
-            registro.criadoEm
-              .toDate()
-              .toLocaleString(
-                "pt-BR"
-              );
-
-        }
-
-        else if(
-          registro.criadoEmCliente
-        ){
-
-          dataTexto =
             new Date(
-              registro.criadoEmCliente
+              registro.criadoEm
             ).toLocaleString(
               "pt-BR"
-            );
+            )
 
-        }
+            :
+
+            "—";
 
 
         div.innerHTML =
 
-          "<div class='auditBadge'>" +
-
-          "🔐 AUDITORIA • REGISTRO PERMANENTE" +
-
-          "</div>" +
-
-
           "<div class='historyTop'>" +
 
-          "<span>" +
+            "<span class='" +
+            classe +
+            "'>" +
 
-          sinal +
-          " " +
+              sinal +
+              " " +
 
-          numero(
-            registro.quantidade
-          ) +
+              numero(
+                registro.quantidade
+              ) +
 
-          " " +
+              " " +
 
-          (
-            registro.itemNome ||
-            nomeItem(
-              registro.item
-            )
-          ) +
+              registro.item +
 
-          "</span>" +
+            "</span>" +
 
 
-          "<span class='" +
-          classe +
-          "'>" +
+            "<span class='historyDate'>" +
 
-          dataTexto +
+              data +
 
-          "</span>" +
+            "</span>" +
 
           "</div>" +
 
 
           "<div class='historyInfo'>" +
 
-          "📊 Saldo anterior: " +
+            "Saldo anterior: " +
 
-          numero(
-            registro.saldoAnterior
-          ) +
+            numero(
+              registro.saldoAnterior
+            ) +
 
-          "<br>" +
+            "<br>" +
 
-          "📊 Saldo final: " +
 
-          numero(
-            registro.saldoFinal
-          ) +
+            "Saldo final: " +
 
-          "<br>" +
+            numero(
+              registro.saldoFinal
+            ) +
 
-          "📝 Motivo: " +
+            "<br>" +
 
-          (
-            registro.motivo ||
-            "—"
-          ) +
 
-          "<br>" +
+            "Motivo: " +
 
-          "👤 Usuário: " +
+            (
+              registro.motivo ||
+              "—"
+            ) +
 
-          (
-            registro.usuarioNome ||
-            "—"
-          ) +
+            "<br>" +
 
-          "<br>" +
 
-          "📧 E-mail: " +
+            "Administrador: " +
 
-          (
-            registro.usuarioEmail ||
-            "—"
-          ) +
+            (
+              registro.adminEmail ||
+              "—"
+            ) +
 
-          "<br>" +
+            "<br>" +
 
-          "👑 Administrador: " +
 
-          (
-            registro.adminEmail ||
-            "—"
-          ) +
+            "UID administrador: " +
+
+            (
+              registro.adminUid ||
+              "—"
+            ) +
 
           "</div>" +
 
 
-          "<div class='operationId'>" +
+          "<div class='operation-id'>" +
 
-          "🆔 ID da movimentação: " +
+            "🆔 ID da movimentação: " +
 
-          (
-            registro.movimentacaoId ||
-            registro.id ||
-            "—"
-          ) +
+            (
+              registro.movimentacaoId ||
+              "Registro antigo"
+            ) +
 
           "</div>";
 
@@ -2074,7 +1884,6 @@ async function carregarExtrato(
         );
 
       }
-
     );
 
 
@@ -2088,10 +1897,8 @@ async function carregarExtrato(
 
     area.innerHTML =
 
-      "<div class='historyItem'>" +
-
-      "❌ Erro ao carregar o extrato." +
-
+      "<div class='empty'>" +
+      "Erro ao carregar o extrato." +
       "</div>";
 
   }
@@ -2105,20 +1912,10 @@ async function carregarExtrato(
 
 async function alterarVIP(){
 
-  if(!usuarioSelecionado){
-
-    mensagem(
-      operationMessage,
-      "Primeiro localize um usuário.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  if(!adminLogado){
+  if(
+    !usuarioSelecionado ||
+    !adminLogado
+  ){
 
     return;
 
@@ -2133,114 +1930,103 @@ async function alterarVIP(){
     !atual;
 
 
-  const confirmar =
-    confirm(
-
+  if(
+    !confirm(
       novo
-
         ?
-
         "Ativar VIP para este usuário?"
-
         :
-
         "Desativar VIP deste usuário?"
+    )
+  ){
 
-    );
-
-
-  if(!confirmar){
     return;
+
   }
+
+
+  const movimentacaoId =
+    gerarIdMovimentacao();
 
 
   try{
 
-    const batch =
-      writeBatch(
-        db
-      );
-
-
-    batch.update(
-
+    await updateDoc(
       usuarioSelecionado.ref,
-
       {
-
         vip:
           novo
-
       }
-
     );
 
 
-    const movimentacaoId =
-      criarHistorico(
+    await addDoc(
+      collection(
+        db,
+        "historico"
+      ),
+      {
 
-        batch,
+        movimentacaoId:
+          movimentacaoId,
 
-        {
+        usuarioId:
+          usuarioSelecionado.docId,
 
-          usuarioId:
-            usuarioSelecionado.docId,
+        publicId:
+          usuarioSelecionado.data.publicId ||
+          usuarioSelecionado.docId,
 
-          publicId:
-            usuarioSelecionado.data.publicId ||
-            usuarioSelecionado.docId,
+        usuarioEmail:
+          usuarioSelecionado.data.email ||
+          "",
 
-          usuarioEmail:
-            usuarioSelecionado.data.email ||
-            "",
+        usuarioNome:
+          usuarioSelecionado.data.nome ||
+          usuarioSelecionado.data.name ||
+          "",
 
-          usuarioNome:
-            usuarioSelecionado.data.nome ||
-            usuarioSelecionado.data.name ||
-            "",
+        adminEmail:
+          adminLogado.email ||
+          "",
 
-          adminEmail:
-            adminLogado.email ||
-            "",
+        adminUid:
+          adminLogado.uid ||
+          "",
 
-          adminUid:
-            adminLogado.uid ||
-            "",
+        item:
+          "VIP",
 
-          item:
-            "VIP",
+        operacao:
+          novo
+            ? "adicionar"
+            : "remover",
 
-          operacao:
-            novo
-              ? "adicionar"
-              : "remover",
+        quantidade:
+          1,
 
-          quantidade:
-            1,
+        saldoAnterior:
+          atual
+            ? 1
+            : 0,
 
-          saldoAnterior:
-            atual
-              ? 1
-              : 0,
+        saldoFinal:
+          novo
+            ? 1
+            : 0,
 
-          saldoFinal:
-            novo
-              ? 1
-              : 0,
+        motivo:
+          novo
+            ?
+            "VIP ativado pelo administrador"
+            :
+            "VIP desativado pelo administrador",
 
-          motivo:
-            novo
-              ?
-              "VIP ativado pelo administrador"
-              :
-              "VIP desativado pelo administrador"
+        criadoEm:
+          new Date().toISOString()
 
-        }
-
-      );
-
-
-    await batch.commit();
+      }
+    );
 
 
     usuarioSelecionado.data.vip =
@@ -2248,42 +2034,36 @@ async function alterarVIP(){
 
 
     mensagem(
-
-      operationMessage,
-
-      (
-        novo
-          ? "VIP ativado."
-          : "VIP desativado."
-      ) +
-
-      " ID: " +
-      movimentacaoId,
-
+      document.getElementById(
+        "operationMessage"
+      ),
+      novo
+        ?
+        "VIP ativado e registrado."
+        :
+        "VIP desativado e registrado.",
       "success"
-
     );
 
 
-    carregarExtrato(
-
+    await carregarExtrato(
       usuarioSelecionado.data.publicId ||
       usuarioSelecionado.docId
-
     );
 
 
   }catch(erro){
 
     console.error(
-      "Erro ao alterar VIP:",
       erro
     );
 
 
     mensagem(
-      operationMessage,
-      "Erro ao alterar VIP. Nenhuma alteração foi confirmada.",
+      document.getElementById(
+        "operationMessage"
+      ),
+      "Erro ao alterar VIP.",
       "error"
     );
 
@@ -2293,26 +2073,18 @@ async function alterarVIP(){
 
 
 /* ==========================================
-   CAIXA
+   CAIXA BOX
 ========================================== */
 
 async function alterarCaixa(){
 
-  if(!usuarioSelecionado){
-
-    mensagem(
-      operationMessage,
-      "Primeiro localize um usuário.",
-      "error"
-    );
+  if(
+    !usuarioSelecionado ||
+    !adminLogado
+  ){
 
     return;
 
-  }
-
-
-  if(!adminLogado){
-    return;
   }
 
 
@@ -2324,114 +2096,103 @@ async function alterarCaixa(){
     !atual;
 
 
-  const confirmar =
-    confirm(
-
+  if(
+    !confirm(
       novo
-
         ?
-
         "Marcar Caixa Box como utilizada?"
-
         :
-
         "Liberar novamente a Caixa Box?"
+    )
+  ){
 
-    );
-
-
-  if(!confirmar){
     return;
+
   }
+
+
+  const movimentacaoId =
+    gerarIdMovimentacao();
 
 
   try{
 
-    const batch =
-      writeBatch(
-        db
-      );
-
-
-    batch.update(
-
+    await updateDoc(
       usuarioSelecionado.ref,
-
       {
-
         caixaBox:
           novo
-
       }
-
     );
 
 
-    const movimentacaoId =
-      criarHistorico(
+    await addDoc(
+      collection(
+        db,
+        "historico"
+      ),
+      {
 
-        batch,
+        movimentacaoId:
+          movimentacaoId,
 
-        {
+        usuarioId:
+          usuarioSelecionado.docId,
 
-          usuarioId:
-            usuarioSelecionado.docId,
+        publicId:
+          usuarioSelecionado.data.publicId ||
+          usuarioSelecionado.docId,
 
-          publicId:
-            usuarioSelecionado.data.publicId ||
-            usuarioSelecionado.docId,
+        usuarioEmail:
+          usuarioSelecionado.data.email ||
+          "",
 
-          usuarioEmail:
-            usuarioSelecionado.data.email ||
-            "",
+        usuarioNome:
+          usuarioSelecionado.data.nome ||
+          usuarioSelecionado.data.name ||
+          "",
 
-          usuarioNome:
-            usuarioSelecionado.data.nome ||
-            usuarioSelecionado.data.name ||
-            "",
+        adminEmail:
+          adminLogado.email ||
+          "",
 
-          adminEmail:
-            adminLogado.email ||
-            "",
+        adminUid:
+          adminLogado.uid ||
+          "",
 
-          adminUid:
-            adminLogado.uid ||
-            "",
+        item:
+          "Caixa Box",
 
-          item:
-            "Caixa Box",
+        operacao:
+          novo
+            ? "remover"
+            : "adicionar",
 
-          operacao:
-            novo
-              ? "remover"
-              : "adicionar",
+        quantidade:
+          1,
 
-          quantidade:
-            1,
+        saldoAnterior:
+          atual
+            ? 1
+            : 0,
 
-          saldoAnterior:
-            atual
-              ? 1
-              : 0,
+        saldoFinal:
+          novo
+            ? 1
+            : 0,
 
-          saldoFinal:
-            novo
-              ? 1
-              : 0,
+        motivo:
+          novo
+            ?
+            "Caixa Box marcada como utilizada"
+            :
+            "Caixa Box liberada pelo administrador",
 
-          motivo:
-            novo
-              ?
-              "Caixa Box marcada como utilizada"
-              :
-              "Caixa Box liberada pelo administrador"
+        criadoEm:
+          new Date().toISOString()
 
-        }
-
-      );
-
-
-    await batch.commit();
+      }
+    );
 
 
     usuarioSelecionado.data.caixaBox =
@@ -2439,44 +2200,36 @@ async function alterarCaixa(){
 
 
     mensagem(
-
-      operationMessage,
-
-      (
-        novo
-          ?
-          "Caixa Box marcada como utilizada."
-          :
-          "Caixa Box liberada."
-      ) +
-
-      " ID: " +
-      movimentacaoId,
-
+      document.getElementById(
+        "operationMessage"
+      ),
+      novo
+        ?
+        "Caixa Box marcada como utilizada e registrada."
+        :
+        "Caixa Box liberada e registrada.",
       "success"
-
     );
 
 
-    carregarExtrato(
-
+    await carregarExtrato(
       usuarioSelecionado.data.publicId ||
       usuarioSelecionado.docId
-
     );
 
 
   }catch(erro){
 
     console.error(
-      "Erro ao alterar Caixa:",
       erro
     );
 
 
     mensagem(
-      operationMessage,
-      "Erro ao alterar Caixa. Nenhuma alteração foi confirmada.",
+      document.getElementById(
+        "operationMessage"
+      ),
+      "Erro ao alterar Caixa Box.",
       "error"
     );
 
@@ -2486,17 +2239,17 @@ async function alterarCaixa(){
 
 
 /* ==========================================
-   AUTENTICAÇÃO / ADMIN
+   AUTENTICAÇÃO E ADMIN
 ========================================== */
 
 onAuthStateChanged(
-
   auth,
-
   async usuario => {
 
 
-    if(!usuario){
+    if(
+      !usuario
+    ){
 
       window.location.replace(
         "index.html"
@@ -2507,19 +2260,11 @@ onAuthStateChanged(
     }
 
 
-    /*
-      Primeira barreira:
-      somente o e-mail administrativo.
-    */
-
     if(
-
       !usuario.email ||
-
       usuario.email.toLowerCase()
       !==
       ADMIN.toLowerCase()
-
     ){
 
       alert(
@@ -2547,17 +2292,17 @@ onAuthStateChanged(
 
 
     console.log(
-      "ADMIN autenticado:",
+      "ADMIN AUTENTICADO:",
       usuario.email
     );
 
-  }
 
+  }
 );
 
 
 /* ==========================================
-   BUSCAR
+   BOTÃO BUSCAR
 ========================================== */
 
 document
@@ -2571,7 +2316,7 @@ document
 
 
 /* ==========================================
-   ENTER NA BUSCA
+   ENTER NO CAMPO ID
 ========================================== */
 
 document
@@ -2579,9 +2324,7 @@ document
     "publicId"
   )
   .addEventListener(
-
     "keydown",
-
     evento => {
 
       if(
@@ -2594,7 +2337,6 @@ document
       }
 
     }
-
   );
 
 
@@ -2607,17 +2349,11 @@ document
     "adicionar"
   )
   .addEventListener(
-
     "click",
-
-    () => {
-
+    () =>
       alterarSaldo(
         "adicionar"
-      );
-
-    }
-
+      )
   );
 
 
@@ -2630,17 +2366,11 @@ document
     "remover"
   )
   .addEventListener(
-
     "click",
-
-    () => {
-
+    () =>
       alterarSaldo(
         "remover"
-      );
-
-    }
-
+      )
   );
 
 
@@ -2653,16 +2383,13 @@ document
     "vip"
   )
   .addEventListener(
-
     "click",
-
     alterarVIP
-
   );
 
 
 /* ==========================================
-   BOX
+   CAIXA
 ========================================== */
 
 document
@@ -2670,11 +2397,8 @@ document
     "box"
   )
   .addEventListener(
-
     "click",
-
     alterarCaixa
-
   );
 
 
@@ -2687,9 +2411,7 @@ document
     "logout"
   )
   .addEventListener(
-
     "click",
-
     async () => {
 
       try{
@@ -2698,16 +2420,22 @@ document
           auth
         );
 
-      }finally{
+      }catch(
+        erro
+      ){
 
-        window.location.replace(
-          "index.html"
+        console.error(
+          erro
         );
 
       }
 
-    }
 
+      window.location.replace(
+        "index.html"
+      );
+
+    }
   );
 
 
