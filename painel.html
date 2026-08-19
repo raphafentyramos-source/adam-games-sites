@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
 
 <meta charset="UTF-8">
@@ -13,6 +12,10 @@
 <title>Adam Games • Painel</title>
 
 <style>
+
+/* =====================================================
+   RESET
+===================================================== */
 
 *{
   box-sizing:border-box;
@@ -41,18 +44,16 @@ body{
 
   background:
     linear-gradient(
-      rgba(2,20,45,.25),
-      rgba(2,20,45,.55)
+      rgba(2,20,45,.20),
+      rgba(2,20,45,.58)
     ),
     url("6AB154F8-5052-4D70-B604-F3C0BEE88348.png")
     center top / cover fixed no-repeat;
-
 }
 
-
-/* =====================================================
-   PÁGINA
-===================================================== */
+button{
+  font-family:inherit;
+}
 
 .page{
 
@@ -82,7 +83,6 @@ body{
 
 }
 
-
 .brand{
 
   display:flex;
@@ -94,19 +94,13 @@ body{
 
   border-radius:22px;
 
-  background:
-    rgba(4,45,91,.82);
+  background:rgba(4,45,91,.82);
 
-  border:
-    1px solid
-    rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.14);
 
-  box-shadow:
-    0 12px 30px
-    rgba(0,0,0,.22);
+  box-shadow:0 12px 30px rgba(0,0,0,.22);
 
 }
-
 
 .brand-icon{
 
@@ -130,7 +124,6 @@ body{
 
 }
 
-
 .brand-name{
 
   font-size:21px;
@@ -140,11 +133,8 @@ body{
 
 }
 
-
 .brand-name span{
-
   color:#ffd52b;
-
 }
 
 
@@ -159,7 +149,6 @@ body{
 
 }
 
-
 .top-button{
 
   width:55px;
@@ -171,8 +160,7 @@ body{
 
   color:#fff;
 
-  background:
-    rgba(4,40,82,.9);
+  background:rgba(4,40,82,.9);
 
   font-size:24px;
 
@@ -181,11 +169,6 @@ body{
   cursor:pointer;
 
 }
-
-
-/* =====================================================
-   NOTIFICAÇÃO
-===================================================== */
 
 .notification{
 
@@ -209,7 +192,6 @@ body{
   background:#ff3048;
 
   font-size:12px;
-
   font-weight:900;
 
   border:2px solid #061d43;
@@ -242,25 +224,16 @@ body{
 
   backdrop-filter:blur(5px);
 
-  border:
-    1px solid
-    rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.14);
 
-  box-shadow:
-    0 20px 45px
-    rgba(0,0,0,.25);
+  box-shadow:0 20px 45px rgba(0,0,0,.25);
 
 }
-
 
 .avatar-area{
-
   position:relative;
-
   flex-shrink:0;
-
 }
-
 
 .avatar{
 
@@ -282,12 +255,9 @@ body{
       #f4a800
     );
 
-  border:
-    4px solid
-    #ffd52b;
+  border:4px solid #ffd52b;
 
 }
-
 
 .avatar-crown{
 
@@ -302,15 +272,10 @@ body{
 
 }
 
-
 .profile-data{
-
   flex:1;
-
   min-width:0;
-
 }
-
 
 .profile-name-line{
 
@@ -321,17 +286,14 @@ body{
 
 }
 
-
 .profile-name{
 
   font-size:23px;
-
   font-weight:900;
 
   word-break:break-word;
 
 }
-
 
 .verified{
 
@@ -347,11 +309,9 @@ body{
   justify-content:center;
 
   font-size:14px;
-
   font-weight:900;
 
 }
-
 
 .profile-email{
 
@@ -364,7 +324,6 @@ body{
   word-break:break-word;
 
 }
-
 
 .vip-badge{
 
@@ -390,21 +349,17 @@ body{
   color:#fff;
 
   font-size:13px;
-
   font-weight:900;
 
 }
 
-
 .member-badge{
 
-  background:
-    rgba(255,255,255,.11);
+  background:rgba(255,255,255,.11);
 
   color:#d4e6f7;
 
 }
-
 
 .user-id{
 
@@ -420,11 +375,9 @@ body{
 
 }
 
-
 .status-line{
 
   display:flex;
-
   flex-wrap:wrap;
 
   gap:6px 14px;
@@ -437,13 +390,9 @@ body{
 
 }
 
-
 .online{
-
   color:#62ff9e;
-
   font-weight:bold;
-
 }
 
 
@@ -461,12 +410,9 @@ body{
 
   border-radius:18px;
 
-  background:
-    rgba(120,15,35,.45);
+  background:rgba(120,15,35,.45);
 
-  border:
-    1px solid
-    rgba(255,85,105,.35);
+  border:1px solid rgba(255,85,105,.35);
 
   color:#ffd5da;
 
@@ -475,7 +421,6 @@ body{
   line-height:1.5;
 
 }
-
 
 .error-title{
 
@@ -495,11 +440,8 @@ body{
 ===================================================== */
 
 .hero{
-
   padding:30px 5px 20px;
-
 }
-
 
 .season{
 
@@ -509,35 +451,26 @@ body{
 
   border-radius:20px;
 
-  background:
-    rgba(255,255,255,.12);
+  background:rgba(255,255,255,.12);
 
-  border:
-    1px solid
-    rgba(255,255,255,.15);
+  border:1px solid rgba(255,255,255,.15);
 
   font-size:12px;
-
   font-weight:bold;
 
 }
-
 
 .hero h2{
 
   margin-top:17px;
 
-  font-size:
-    clamp(42px,8vw,72px);
+  font-size:clamp(42px,8vw,72px);
 
   line-height:.92;
 
-  text-shadow:
-    0 6px 2px
-    rgba(0,0,0,.25);
+  text-shadow:0 6px 2px rgba(0,0,0,.25);
 
 }
-
 
 .hero p{
 
@@ -565,7 +498,6 @@ body{
 
 }
 
-
 .card{
 
   min-height:225px;
@@ -578,22 +510,15 @@ body{
 
   overflow:hidden;
 
-  border:
-    1px solid
-    rgba(255,255,255,.15);
+  border:1px solid rgba(255,255,255,.15);
 
-  box-shadow:
-    0 15px 35px
-    rgba(0,0,0,.25);
+  box-shadow:0 15px 35px rgba(0,0,0,.25);
 
   cursor:pointer;
 
-  transition:
-    transform .2s ease,
-    filter .2s ease;
+  transition:.2s;
 
 }
-
 
 .card:hover{
 
@@ -602,11 +527,6 @@ body{
   filter:brightness(1.08);
 
 }
-
-
-/* =====================================================
-   CAIXA BOX
-===================================================== */
 
 .card-box{
 
@@ -619,11 +539,6 @@ body{
 
 }
 
-
-/* =====================================================
-   ROLETA
-===================================================== */
-
 .card-roleta{
 
   background:
@@ -633,14 +548,7 @@ body{
       #e88900
     );
 
-  color:#fff;
-
 }
-
-
-/* =====================================================
-   VALE PRESENTE
-===================================================== */
 
 .card-gift{
 
@@ -653,11 +561,6 @@ body{
 
 }
 
-
-/* =====================================================
-   LOJA
-===================================================== */
-
 .card-store{
 
   background:
@@ -668,11 +571,6 @@ body{
     );
 
 }
-
-
-/* =====================================================
-   JOGOS
-===================================================== */
 
 .card-games{
 
@@ -685,11 +583,6 @@ body{
 
 }
 
-
-/* =====================================================
-   ÍCONES
-===================================================== */
-
 .card-icon{
 
   font-size:70px;
@@ -700,7 +593,6 @@ body{
 
 }
 
-
 .card h3{
 
   font-size:21px;
@@ -709,18 +601,15 @@ body{
 
 }
 
-
 .card p{
 
-  color:
-    rgba(255,255,255,.85);
+  color:rgba(255,255,255,.85);
 
   font-size:14px;
 
   line-height:1.4;
 
 }
-
 
 .card-arrow{
 
@@ -739,8 +628,7 @@ body{
   align-items:center;
   justify-content:center;
 
-  background:
-    rgba(255,255,255,.15);
+  background:rgba(255,255,255,.15);
 
   font-size:23px;
 
@@ -756,7 +644,6 @@ body{
   display:flex;
 
   align-items:center;
-
   justify-content:space-between;
 
   gap:15px;
@@ -781,23 +668,18 @@ body{
       #100d07
     );
 
-  border:
-    1px solid
-    rgba(255,201,55,.5);
+  border:1px solid rgba(255,201,55,.5);
 
 }
-
 
 .vip-info{
 
   display:flex;
-
   align-items:center;
 
   gap:14px;
 
 }
-
 
 .vip-icon{
 
@@ -813,12 +695,9 @@ body{
 
   font-size:37px;
 
-  border:
-    2px solid
-    #e6b72d;
+  border:2px solid #e6b72d;
 
 }
-
 
 .vip-panel h3{
 
@@ -827,7 +706,6 @@ body{
   font-size:23px;
 
 }
-
 
 .vip-panel p{
 
@@ -838,7 +716,6 @@ body{
   font-size:13px;
 
 }
-
 
 .vip-button{
 
@@ -873,29 +750,20 @@ body{
   display:flex;
 
   justify-content:space-between;
-
   align-items:center;
 
   margin:20px 3px 11px;
 
 }
 
-
 .section-header h3{
-
   font-size:19px;
-
 }
-
 
 .section-header span{
-
   color:#9ec7e8;
-
   font-size:12px;
-
 }
-
 
 .resources{
 
@@ -908,7 +776,6 @@ body{
 
 }
 
-
 .resource{
 
   padding:15px 10px;
@@ -917,22 +784,15 @@ body{
 
   border-radius:20px;
 
-  background:
-    rgba(3,30,62,.82);
+  background:rgba(3,30,62,.82);
 
-  border:
-    1px solid
-    rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.1);
 
 }
-
 
 .resource-icon{
-
   font-size:40px;
-
 }
-
 
 .resource-name{
 
@@ -941,18 +801,15 @@ body{
   color:#b9d3eb;
 
   font-size:11px;
-
   font-weight:bold;
 
 }
-
 
 .resource-value{
 
   margin-top:6px;
 
   font-size:18px;
-
   font-weight:900;
 
 }
@@ -972,15 +829,11 @@ body{
 
   border-radius:24px;
 
-  background:
-    rgba(2,25,52,.82);
+  background:rgba(2,25,52,.82);
 
-  border:
-    1px solid
-    rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.1);
 
 }
-
 
 .data-grid{
 
@@ -993,18 +846,15 @@ body{
 
 }
 
-
 .data-item{
 
   padding:12px;
 
   border-radius:14px;
 
-  background:
-    rgba(255,255,255,.055);
+  background:rgba(255,255,255,.055);
 
 }
-
 
 .data-label{
 
@@ -1017,7 +867,6 @@ body{
   text-transform:uppercase;
 
 }
-
 
 .data-value{
 
@@ -1033,7 +882,41 @@ body{
 
 
 /* =====================================================
-   MENU INFERIOR
+   BOTÃO EDITAR
+===================================================== */
+
+.edit-data-button{
+
+  width:100%;
+
+  margin-top:15px;
+
+  height:50px;
+
+  border:0;
+
+  border-radius:15px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #168fff,
+      #0065d5
+    );
+
+  color:#fff;
+
+  font-size:15px;
+
+  font-weight:900;
+
+  cursor:pointer;
+
+}
+
+
+/* =====================================================
+   MENU
 ===================================================== */
 
 .bottom-nav{
@@ -1058,21 +941,15 @@ body{
   grid-template-columns:
     repeat(5,1fr);
 
-  background:
-    rgba(4,25,52,.96);
+  background:rgba(4,25,52,.96);
 
   backdrop-filter:blur(15px);
 
-  border:
-    1px solid
-    rgba(255,255,255,.13);
+  border:1px solid rgba(255,255,255,.13);
 
-  box-shadow:
-    0 15px 40px
-    rgba(0,0,0,.4);
+  box-shadow:0 15px 40px rgba(0,0,0,.4);
 
 }
-
 
 .nav-button{
 
@@ -1092,7 +969,6 @@ body{
 
 }
 
-
 .nav-button span{
 
   display:block;
@@ -1103,13 +979,9 @@ body{
 
 }
 
-
 .nav-button.active{
-
   color:#1fa2ff;
-
 }
-
 
 .diamond{
 
@@ -1132,9 +1004,7 @@ body{
       #0069db
     );
 
-  border:
-    4px solid
-    #0b315e;
+  border:4px solid #0b315e;
 
   font-size:31px;
 
@@ -1146,7 +1016,7 @@ body{
 
 
 /* =====================================================
-   MODAL
+   MODAL BASE
 ===================================================== */
 
 .modal{
@@ -1160,30 +1030,29 @@ body{
   display:none;
 
   align-items:center;
-
   justify-content:center;
 
-  padding:20px;
+  padding:18px;
 
-  background:
-    rgba(0,0,0,.65);
+  background:rgba(0,0,0,.68);
 
   backdrop-filter:blur(8px);
 
 }
 
-
 .modal-box{
 
   width:100%;
 
-  max-width:360px;
+  max-width:430px;
 
-  padding:24px;
+  max-height:90vh;
 
-  border-radius:24px;
+  overflow-y:auto;
 
-  text-align:center;
+  padding:23px;
+
+  border-radius:25px;
 
   background:
     linear-gradient(
@@ -1192,53 +1061,176 @@ body{
       #021a38
     );
 
-  border:
-    1px solid
-    rgba(255,255,255,.15);
+  border:1px solid rgba(255,255,255,.16);
+
+  box-shadow:0 25px 80px rgba(0,0,0,.5);
 
 }
-
 
 .modal-box h3{
 
-  font-size:22px;
+  font-size:23px;
 
-  margin-bottom:9px;
+  margin-bottom:7px;
+
+}
+
+.modal-subtitle{
+
+  color:#a9c9e4;
+
+  font-size:13px;
+
+  line-height:1.5;
+
+  margin-bottom:17px;
 
 }
 
 
-.modal-box p{
+/* =====================================================
+   MODAL VIP
+===================================================== */
 
-  color:#b7d2e9;
+.vip-modal-box{
 
-  font-size:14px;
+  background:
+    radial-gradient(
+      circle at 90% 5%,
+      rgba(255,204,38,.22),
+      transparent 35%
+    ),
+    linear-gradient(
+      145deg,
+      #2c2006,
+      #0d0b07
+    );
 
-  margin-bottom:20px;
+  border-color:rgba(255,207,48,.35);
 
 }
 
+.vip-big-icon{
 
-.modal-buttons{
+  width:75px;
+  height:75px;
+
+  margin:0 auto 12px;
+
+  border-radius:22px;
 
   display:flex;
 
-  gap:10px;
+  align-items:center;
+  justify-content:center;
+
+  font-size:43px;
+
+  border:2px solid #e7bd2e;
+
+  background:rgba(255,204,44,.08);
 
 }
 
+.vip-feature{
 
-.modal-buttons button{
+  padding:13px;
 
-  flex:1;
+  margin-top:9px;
 
-  height:47px;
+  border-radius:15px;
+
+  background:rgba(255,255,255,.07);
+
+  color:#eadfc8;
+
+  font-size:13px;
+
+}
+
+.vip-feature strong{
+  color:#ffd52b;
+}
+
+
+/* =====================================================
+   VALE
+===================================================== */
+
+.code-input{
+
+  width:100%;
+
+  height:52px;
+
+  border:1px solid rgba(255,255,255,.18);
+
+  border-radius:14px;
+
+  padding:0 15px;
+
+  background:rgba(0,0,0,.22);
+
+  color:#fff;
+
+  outline:none;
+
+  font-size:16px;
+
+}
+
+.code-input:focus{
+
+  border-color:#28a0ff;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(40,160,255,.12);
+
+}
+
+.primary-button{
+
+  width:100%;
+
+  height:50px;
+
+  margin-top:12px;
+
+  border:0;
+
+  border-radius:14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #168fff,
+      #0065d5
+    );
+
+  color:#fff;
+
+  font-weight:900;
+
+  cursor:pointer;
+
+}
+
+.close-button{
+
+  width:100%;
+
+  height:45px;
+
+  margin-top:10px;
 
   border:0;
 
   border-radius:13px;
 
-  color:white;
+  background:rgba(255,255,255,.09);
+
+  color:#fff;
 
   font-weight:bold;
 
@@ -1246,23 +1238,61 @@ body{
 
 }
 
+.form-group{
 
-.cancel{
-
-  background:
-    rgba(255,255,255,.12);
+  margin-top:12px;
 
 }
 
+.form-label{
 
-.confirm{
+  display:block;
 
-  background:
-    linear-gradient(
-      135deg,
-      #ff4055,
-      #c8172c
-    );
+  margin-bottom:6px;
+
+  color:#8db9dc;
+
+  font-size:11px;
+
+  font-weight:900;
+
+  text-transform:uppercase;
+
+}
+
+.form-input,
+.form-select{
+
+  width:100%;
+
+  height:48px;
+
+  padding:0 13px;
+
+  border-radius:13px;
+
+  border:1px solid rgba(255,255,255,.15);
+
+  background:rgba(255,255,255,.07);
+
+  color:#fff;
+
+  outline:none;
+
+  font-size:15px;
+
+}
+
+.form-input:focus,
+.form-select:focus{
+
+  border-color:#1d98ff;
+
+}
+
+.form-input[readonly]{
+
+  opacity:.55;
 
 }
 
@@ -1282,19 +1312,13 @@ body{
   display:none;
 
   align-items:flex-start;
-
   justify-content:flex-end;
 
-  padding:
-    80px
-    18px
-    18px;
+  padding:80px 18px 18px;
 
-  background:
-    rgba(0,0,0,.15);
+  background:rgba(0,0,0,.15);
 
 }
-
 
 .notifications-box{
 
@@ -1317,36 +1341,26 @@ body{
       #021a38
     );
 
-  border:
-    1px solid
-    rgba(255,255,255,.16);
+  border:1px solid rgba(255,255,255,.16);
 
-  box-shadow:
-    0 20px 60px
-    rgba(0,0,0,.45);
+  box-shadow:0 20px 60px rgba(0,0,0,.45);
 
 }
-
 
 .notifications-header{
 
   display:flex;
 
   align-items:center;
-
   justify-content:space-between;
 
   margin-bottom:12px;
 
 }
 
-
 .notifications-header h3{
-
   font-size:20px;
-
 }
-
 
 .close-notifications{
 
@@ -1357,8 +1371,7 @@ body{
 
   border-radius:12px;
 
-  background:
-    rgba(255,255,255,.1);
+  background:rgba(255,255,255,.1);
 
   color:#fff;
 
@@ -1368,7 +1381,6 @@ body{
 
 }
 
-
 .notification-item{
 
   padding:14px;
@@ -1377,37 +1389,28 @@ body{
 
   border-radius:17px;
 
-  background:
-    rgba(255,255,255,.065);
+  background:rgba(255,255,255,.065);
 
-  border:
-    1px solid
-    rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.07);
 
   cursor:pointer;
 
 }
 
-
 .notification-item.unread{
 
-  background:
-    rgba(21,145,255,.16);
+  background:rgba(21,145,255,.16);
 
-  border-color:
-    rgba(21,154,255,.35);
+  border-color:rgba(21,154,255,.35);
 
 }
-
 
 .notification-item-title{
 
   font-size:14px;
-
   font-weight:900;
 
 }
-
 
 .notification-item-message{
 
@@ -1421,7 +1424,6 @@ body{
 
 }
 
-
 .notification-item-time{
 
   margin-top:7px;
@@ -1431,7 +1433,6 @@ body{
   font-size:10px;
 
 }
-
 
 .empty-notifications{
 
@@ -1457,7 +1458,6 @@ body{
   z-index:150;
 
   right:18px;
-
   bottom:92px;
 
   width:60px;
@@ -1478,9 +1478,7 @@ body{
 
   font-size:31px;
 
-  box-shadow:
-    0 8px 25px
-    rgba(0,0,0,.35);
+  box-shadow:0 8px 25px rgba(0,0,0,.35);
 
 }
 
@@ -1495,7 +1493,7 @@ body{
 
     background:
       linear-gradient(
-        rgba(2,20,45,.22),
+        rgba(2,20,45,.20),
         rgba(2,20,45,.58)
       ),
       url("6AB154F8-5052-4D70-B604-F3C0BEE88348.png")
@@ -1503,13 +1501,9 @@ body{
 
   }
 
-
   .page{
-
     padding:11px;
-
   }
-
 
   .brand-icon{
 
@@ -1520,13 +1514,9 @@ body{
 
   }
 
-
   .brand-name{
-
     font-size:18px;
-
   }
-
 
   .top-button{
 
@@ -1535,13 +1525,9 @@ body{
 
   }
 
-
   .profile{
-
     padding:14px;
-
   }
-
 
   .avatar{
 
@@ -1552,20 +1538,9 @@ body{
 
   }
 
-
-  .avatar-crown{
-
-    font-size:28px;
-
-  }
-
-
   .profile-name{
-
     font-size:18px;
-
   }
-
 
   .cards{
 
@@ -1575,7 +1550,6 @@ body{
     gap:8px;
 
   }
-
 
   .card{
 
@@ -1587,27 +1561,17 @@ body{
 
   }
 
-
   .card-icon{
-
     font-size:50px;
-
   }
-
 
   .card h3{
-
     font-size:16px;
-
   }
-
 
   .card p{
-
     font-size:12px;
-
   }
-
 
   .card-arrow{
 
@@ -1619,7 +1583,6 @@ body{
 
   }
 
-
   .resources{
 
     grid-template-columns:
@@ -1627,20 +1590,13 @@ body{
 
   }
 
-
   .data-grid{
-
     grid-template-columns:1fr;
-
   }
-
 
   .vip-panel{
-
     padding:14px;
-
   }
-
 
   .vip-icon{
 
@@ -1651,20 +1607,13 @@ body{
 
   }
 
-
   .vip-panel h3{
-
     font-size:18px;
-
   }
-
 
   .vip-panel p{
-
     font-size:11px;
-
   }
-
 
   .vip-button{
 
@@ -1674,18 +1623,13 @@ body{
 
   }
 
-
   .notifications-modal{
 
-    padding:
-      72px
-      10px
-      10px;
+    padding:72px 10px 10px;
 
     justify-content:center;
 
   }
-
 
   .bottom-nav{
 
@@ -1694,15 +1638,21 @@ body{
 
   }
 
+  .modal{
+    padding:12px;
+  }
+
+  .modal-box{
+    padding:18px;
+  }
+
 }
 
 </style>
 
 </head>
 
-
 <body>
-
 
 <div class="page">
 
@@ -1851,7 +1801,7 @@ body{
       </span>
 
 
-      <span id="locationStatus">
+      <span>
         📍 Localização não informada
       </span>
 
@@ -1888,9 +1838,7 @@ body{
 
 <section class="hero">
 
-  <div
-    class="season"
-    id="season">
+  <div class="season">
 
     🇧🇷 SETEMBRO • INDEPENDÊNCIA
 
@@ -1916,8 +1864,6 @@ body{
 <section class="cards">
 
 
-  <!-- CAIXA BOX -->
-
   <div
     class="card card-box"
     id="boxCard">
@@ -1926,16 +1872,13 @@ body{
       🎁
     </div>
 
-
     <h3>
       CAIXA BOX
     </h3>
 
-
     <p>
       Confira sua caixa de prêmios VIP.
     </p>
-
 
     <div class="card-arrow">
       →
@@ -1943,8 +1886,6 @@ body{
 
   </div>
 
-
-  <!-- ROLETA -->
 
   <div
     class="card card-roleta"
@@ -1954,16 +1895,13 @@ body{
       🎰
     </div>
 
-
     <h3>
       ROLETA
     </h3>
 
-
     <p>
       Gire a roleta e descubra seu prêmio.
     </p>
-
 
     <div class="card-arrow">
       →
@@ -1971,8 +1909,6 @@ body{
 
   </div>
 
-
-  <!-- VALE PRESENTE -->
 
   <div
     class="card card-gift"
@@ -1982,16 +1918,13 @@ body{
       🎟️
     </div>
 
-
     <h3>
       VALE-PRESENTE
     </h3>
 
-
     <p>
-      Resgate seu código e transforme-o em créditos.
+      Resgate seu código ou adquira um vale.
     </p>
-
 
     <div class="card-arrow">
       →
@@ -1999,8 +1932,6 @@ body{
 
   </div>
 
-
-  <!-- LOJA -->
 
   <div
     class="card card-store"
@@ -2010,16 +1941,13 @@ body{
       💎
     </div>
 
-
     <h3>
       LOJA
     </h3>
 
-
     <p>
-      Troque moedas ou use seu saldo em produtos.
+      Troque moedas ou use seu saldo.
     </p>
-
 
     <div class="card-arrow">
       →
@@ -2027,8 +1955,6 @@ body{
 
   </div>
 
-
-  <!-- JOGOS -->
 
   <div
     class="card card-games"
@@ -2038,16 +1964,13 @@ body{
       🎮
     </div>
 
-
     <h3>
       JOGOS
     </h3>
 
-
     <p>
       Acesse Forca e outros jogos.
     </p>
-
 
     <div class="card-arrow">
       →
@@ -2066,7 +1989,6 @@ body{
 <section class="vip-panel">
 
   <div class="vip-info">
-
 
     <div class="vip-icon">
       👑
@@ -2111,7 +2033,6 @@ body{
     ⭐ Seus recursos
   </h3>
 
-
   <span>
     Seu saldo
   </span>
@@ -2128,11 +2049,9 @@ body{
       💎
     </div>
 
-
     <div class="resource-name">
       CRÉDITOS
     </div>
-
 
     <div
       class="resource-value"
@@ -2151,11 +2070,9 @@ body{
       🪙
     </div>
 
-
     <div class="resource-name">
       MOEDAS
     </div>
-
 
     <div
       class="resource-value"
@@ -2174,11 +2091,9 @@ body{
       🗝️
     </div>
 
-
     <div class="resource-name">
       CHAVES
     </div>
-
 
     <div
       class="resource-value"
@@ -2197,11 +2112,9 @@ body{
       🎟️
     </div>
 
-
     <div class="resource-name">
       CHANCES
     </div>
-
 
     <div
       class="resource-value"
@@ -2217,7 +2130,7 @@ body{
 
 
 <!-- =====================================================
-     DADOS
+     MEUS DADOS
 ===================================================== -->
 
 <section class="data-panel">
@@ -2240,7 +2153,6 @@ body{
         Nome
       </div>
 
-
       <div
         class="data-value"
         id="dataName">
@@ -2257,7 +2169,6 @@ body{
       <div class="data-label">
         E-mail
       </div>
-
 
       <div
         class="data-value"
@@ -2276,7 +2187,6 @@ body{
         ID Adam Games
       </div>
 
-
       <div
         class="data-value"
         id="dataId">
@@ -2293,7 +2203,6 @@ body{
       <div class="data-label">
         UID Firebase
       </div>
-
 
       <div
         class="data-value"
@@ -2312,7 +2221,6 @@ body{
         Idade
       </div>
 
-
       <div
         class="data-value"
         id="dataAge">
@@ -2329,7 +2237,6 @@ body{
       <div class="data-label">
         Telefone
       </div>
-
 
       <div
         class="data-value"
@@ -2348,7 +2255,6 @@ body{
         Caixa Box
       </div>
 
-
       <div
         class="data-value"
         id="dataBox">
@@ -2366,7 +2272,6 @@ body{
         Último acesso
       </div>
 
-
       <div
         class="data-value"
         id="dataAccess">
@@ -2379,6 +2284,17 @@ body{
 
 
   </div>
+
+
+  <button
+    class="edit-data-button"
+    id="editDataButton"
+    type="button">
+
+    ✏️ EDITAR MEUS DADOS
+
+  </button>
+
 
 </section>
 
@@ -2402,7 +2318,7 @@ body{
 
 
 <!-- =====================================================
-     MENU INFERIOR
+     MENU
 ===================================================== -->
 
 <nav class="bottom-nav">
@@ -2413,9 +2329,7 @@ body{
     id="homeNav"
     type="button">
 
-    <span>
-      🏠
-    </span>
+    <span>🏠</span>
 
     Início
 
@@ -2427,9 +2341,7 @@ body{
     id="vipNav"
     type="button">
 
-    <span>
-      👑
-    </span>
+    <span>👑</span>
 
     VIP
 
@@ -2455,9 +2367,7 @@ body{
     id="giftNav"
     type="button">
 
-    <span>
-      🎟️
-    </span>
+    <span>🎟️</span>
 
     Vale
 
@@ -2469,16 +2379,315 @@ body{
     id="gamesNav"
     type="button">
 
-    <span>
-      🎮
-    </span>
+    <span>🎮</span>
 
     Jogos
 
   </button>
 
-
 </nav>
+
+
+<!-- =====================================================
+     MODAL VIP
+===================================================== -->
+
+<div
+  class="modal"
+  id="vipModal">
+
+  <div class="modal-box vip-modal-box">
+
+    <div class="vip-big-icon">
+      👑
+    </div>
+
+    <h3>
+      Área VIP
+    </h3>
+
+    <div
+      class="modal-subtitle"
+      id="vipModalText">
+
+      Confira seus benefícios exclusivos.
+
+    </div>
+
+
+    <div class="vip-feature">
+      🎁 <strong>Caixa Box</strong><br>
+      Sua Caixa Box fica disponível conforme as regras do VIP.
+    </div>
+
+
+    <div class="vip-feature">
+      🎰 <strong>Roleta</strong><br>
+      Acesso às oportunidades e benefícios destinados aos membros.
+    </div>
+
+
+    <div class="vip-feature">
+      ⭐ <strong>Benefícios exclusivos</strong><br>
+      Descontos, recompensas e vantagens especiais.
+    </div>
+
+
+    <button
+      class="primary-button"
+      id="vipBoxButton"
+      type="button">
+
+      🎁 ABRIR CAIXA BOX
+
+    </button>
+
+
+    <button
+      class="close-button"
+      data-close="vipModal"
+      type="button">
+
+      FECHAR
+
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     MODAL VALE-PRESENTE
+===================================================== -->
+
+<div
+  class="modal"
+  id="giftModal">
+
+  <div class="modal-box">
+
+    <h3>
+      🎟️ Vale-Presente
+    </h3>
+
+
+    <div class="modal-subtitle">
+
+      Digite abaixo o código recebido para resgatar seu vale.
+
+    </div>
+
+
+    <input
+      class="code-input"
+      id="giftCode"
+      type="text"
+      placeholder="Digite seu código"
+      autocomplete="off"
+    >
+
+
+    <button
+      class="primary-button"
+      id="redeemGiftButton"
+      type="button">
+
+      🎁 RESGATAR VALE
+
+    </button>
+
+
+    <button
+      class="close-button"
+      data-close="giftModal"
+      type="button">
+
+      FECHAR
+
+    </button>
+
+
+    <div
+      id="giftResult"
+      style="
+        margin-top:12px;
+        text-align:center;
+        color:#9fc8e9;
+        font-size:13px;
+      ">
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     MODAL EDITAR DADOS
+===================================================== -->
+
+<div
+  class="modal"
+  id="editModal">
+
+  <div class="modal-box">
+
+    <h3>
+      ✏️ Editar meus dados
+    </h3>
+
+
+    <div class="modal-subtitle">
+
+      Altere seus dados pessoais abaixo. O ID Adam Games,
+      UID Firebase e e-mail não podem ser alterados aqui.
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label class="form-label">
+        Nome
+      </label>
+
+      <input
+        class="form-input"
+        id="editName"
+        type="text"
+        placeholder="Seu nome"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label class="form-label">
+        Avatar
+      </label>
+
+      <select
+        class="form-select"
+        id="editAvatar">
+
+        <option value="🙂">🙂 Sorridente</option>
+        <option value="😎">😎 Óculos</option>
+        <option value="🤩">🤩 Estrela</option>
+        <option value="🥰">🥰 Apaixonado</option>
+        <option value="😈">😈 Demônio</option>
+        <option value="👑">👑 Coroa</option>
+        <option value="🐯">🐯 Tigre</option>
+        <option value="🐼">🐼 Panda</option>
+        <option value="🦊">🦊 Raposa</option>
+        <option value="🐸">🐸 Sapo</option>
+
+      </select>
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label class="form-label">
+        Idade
+      </label>
+
+      <input
+        class="form-input"
+        id="editAge"
+        type="number"
+        min="1"
+        max="120"
+        placeholder="Sua idade"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label class="form-label">
+        Telefone
+      </label>
+
+      <input
+        class="form-input"
+        id="editPhone"
+        type="tel"
+        placeholder="(00) 00000-0000"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label class="form-label">
+        ID Adam Games
+      </label>
+
+      <input
+        class="form-input"
+        id="editId"
+        type="text"
+        readonly
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label class="form-label">
+        E-mail
+      </label>
+
+      <input
+        class="form-input"
+        id="editEmail"
+        type="email"
+        readonly
+      >
+
+    </div>
+
+
+    <button
+      class="primary-button"
+      id="saveDataButton"
+      type="button">
+
+      💾 SALVAR ALTERAÇÕES
+
+    </button>
+
+
+    <button
+      class="close-button"
+      data-close="editModal"
+      type="button">
+
+      CANCELAR
+
+    </button>
+
+
+    <div
+      id="editResult"
+      style="
+        margin-top:12px;
+        text-align:center;
+        font-size:13px;
+      ">
+
+    </div>
+
+  </div>
+
+</div>
 
 
 <!-- =====================================================
@@ -2496,7 +2705,6 @@ body{
       <h3>
         🔔 Notificações
       </h3>
-
 
       <button
         class="close-notifications"
@@ -2537,16 +2745,19 @@ body{
       Sair da conta?
     </h3>
 
-
-    <p>
+    <p class="modal-subtitle">
       Você será levado novamente para o login.
     </p>
 
 
-    <div class="modal-buttons">
+    <div
+      style="
+        display:flex;
+        gap:10px;
+      ">
 
       <button
-        class="cancel"
+        class="close-button"
         id="cancelLogout"
         type="button">
 
@@ -2556,9 +2767,18 @@ body{
 
 
       <button
-        class="confirm"
+        class="primary-button"
         id="confirmLogout"
-        type="button">
+        type="button"
+        style="
+          margin-top:10px;
+          background:
+            linear-gradient(
+              135deg,
+              #ff4055,
+              #c8172c
+            );
+        ">
 
         SAIR
 
@@ -2572,7 +2792,6 @@ body{
 
 
 <script type="module">
-
 
 /* =====================================================
    FIREBASE
@@ -2674,22 +2893,39 @@ const notificationButton =
     "notificationButton"
   );
 
-
 const notificationCount =
   document.getElementById(
     "notificationCount"
   );
-
 
 const notificationsModal =
   document.getElementById(
     "notificationsModal"
   );
 
-
 const notificationsList =
   document.getElementById(
     "notificationsList"
+  );
+
+const vipModal =
+  document.getElementById(
+    "vipModal"
+  );
+
+const giftModal =
+  document.getElementById(
+    "giftModal"
+  );
+
+const editModal =
+  document.getElementById(
+    "editModal"
+  );
+
+const logoutModal =
+  document.getElementById(
+    "logoutModal"
   );
 
 
@@ -2751,15 +2987,11 @@ function formatarMoeda(
 
 function atualizarRelogio(){
 
-  const agora =
-    new Date();
-
-
   document.getElementById(
     "clock"
   ).textContent =
     "🕐 " +
-    agora.toLocaleTimeString(
+    new Date().toLocaleTimeString(
       "pt-BR",
       {
         hour:"2-digit",
@@ -2769,9 +3001,7 @@ function atualizarRelogio(){
 
 }
 
-
 atualizarRelogio();
-
 
 setInterval(
   atualizarRelogio,
@@ -2780,7 +3010,7 @@ setInterval(
 
 
 /* =====================================================
-   BUSCAR CADASTRO
+   CARREGAR CADASTRO
 ===================================================== */
 
 async function carregarCadastro(
@@ -2799,7 +3029,6 @@ async function carregarCadastro(
 
       query(
         admins,
-
         where(
           "uid",
           "==",
@@ -2820,7 +3049,6 @@ async function carregarCadastro(
 
         query(
           admins,
-
           where(
             "email",
             "==",
@@ -2858,13 +3086,13 @@ async function carregarCadastro(
             : "Usuário"
         ),
 
+      avatar:
+        "🙂",
+
       vip:
         false,
 
       chances:
-        0,
-
-      girosRoleta:
         0,
 
       moedas:
@@ -2874,9 +3102,6 @@ async function carregarCadastro(
         0,
 
       creditos:
-        0,
-
-      loginConsecutivo:
         0,
 
       caixaBox:
@@ -3089,11 +3314,9 @@ function mostrarDados(
       "VIP ativo • Caixa Box disponível conforme suas regras.";
 
     document.getElementById(
-      "dataBox"
+      "vipModalText"
     ).textContent =
-      dados.ultimaCaixaResgatadaEm
-        ? "Já resgatada"
-        : "Disponível";
+      "Você é membro VIP. Confira seus benefícios e sua Caixa Box.";
 
   }
   else{
@@ -3116,17 +3339,827 @@ function mostrarDados(
       "Torne-se VIP para desbloquear benefícios e Caixa Box.";
 
     document.getElementById(
-      "dataBox"
+      "vipModalText"
     ).textContent =
-      "Área VIP";
+      "Você ainda não possui VIP. Confira as vantagens da área VIP.";
 
   }
+
+
+  document.getElementById(
+    "dataBox"
+  ).textContent =
+    dados.ultimaCaixaResgatadaEm
+      ? "Já resgatada"
+      : (
+          vip
+            ? "Disponível"
+            : "Área VIP"
+        );
 
 }
 
 
 /* =====================================================
-   DATA
+   EDITAR DADOS
+===================================================== */
+
+function abrirEditor(){
+
+  if(
+    !cadastroAtual
+  ){
+    return;
+  }
+
+
+  const dados =
+    cadastroAtual.data;
+
+
+  document.getElementById(
+    "editName"
+  ).value =
+    dados.nome ||
+    "";
+
+
+  document.getElementById(
+    "editAvatar"
+  ).value =
+    dados.avatar ||
+    "🙂";
+
+
+  document.getElementById(
+    "editAge"
+  ).value =
+    dados.idade ||
+    "";
+
+
+  document.getElementById(
+    "editPhone"
+  ).value =
+    dados.telefone ||
+    "";
+
+
+  document.getElementById(
+    "editId"
+  ).value =
+    dados.publicId ||
+    cadastroId;
+
+
+  document.getElementById(
+    "editEmail"
+  ).value =
+    dados.email ||
+    usuarioAtual?.email ||
+    "";
+
+
+  document.getElementById(
+    "editResult"
+  ).textContent =
+    "";
+
+
+  editModal.style.display =
+    "flex";
+
+}
+
+
+/* =====================================================
+   SALVAR DADOS
+===================================================== */
+
+document.getElementById(
+  "saveDataButton"
+).addEventListener(
+  "click",
+  async () => {
+
+    if(
+      !usuarioAtual ||
+      !cadastroId
+    ){
+
+      return;
+
+    }
+
+
+    const nome =
+      document.getElementById(
+        "editName"
+      ).value.trim();
+
+
+    const avatar =
+      document.getElementById(
+        "editAvatar"
+      ).value;
+
+
+    const idade =
+      document.getElementById(
+        "editAge"
+      ).value.trim();
+
+
+    const telefone =
+      document.getElementById(
+        "editPhone"
+      ).value.trim();
+
+
+    const resultado =
+      document.getElementById(
+        "editResult"
+      );
+
+
+    if(
+      !nome
+    ){
+
+      resultado.style.color =
+        "#ff9ca9";
+
+      resultado.textContent =
+        "⚠️ Digite seu nome.";
+
+      return;
+
+    }
+
+
+    const botao =
+      document.getElementById(
+        "saveDataButton"
+      );
+
+
+    botao.disabled =
+      true;
+
+    botao.textContent =
+      "⏳ SALVANDO...";
+
+
+    try{
+
+      await updateDoc(
+
+        doc(
+          db,
+          "admins",
+          cadastroId
+        ),
+
+        {
+
+          nome:
+            nome,
+
+          avatar:
+            avatar,
+
+          idade:
+            idade,
+
+          telefone:
+            telefone,
+
+          atualizadoEm:
+            Timestamp.now()
+
+        }
+
+      );
+
+
+      cadastroAtual.data.nome =
+        nome;
+
+      cadastroAtual.data.avatar =
+        avatar;
+
+      cadastroAtual.data.idade =
+        idade;
+
+      cadastroAtual.data.telefone =
+        telefone;
+
+
+      mostrarDados(
+        usuarioAtual,
+        cadastroAtual
+      );
+
+
+      resultado.style.color =
+        "#62ff9e";
+
+      resultado.textContent =
+        "✅ Dados atualizados com sucesso!";
+
+
+      setTimeout(
+        () => {
+
+          editModal.style.display =
+            "none";
+
+        },
+        900
+      );
+
+    }
+    catch(error){
+
+      console.error(
+        "Erro salvando dados:",
+        error
+      );
+
+
+      resultado.style.color =
+        "#ff9ca9";
+
+      resultado.textContent =
+        "❌ Não foi possível salvar. Verifique as permissões do Firebase.";
+
+    }
+    finally{
+
+      botao.disabled =
+        false;
+
+      botao.textContent =
+        "💾 SALVAR ALTERAÇÕES";
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   FECHAR MODAIS
+===================================================== */
+
+document
+  .querySelectorAll(
+    "[data-close]"
+  )
+  .forEach(
+    botao => {
+
+      botao.addEventListener(
+        "click",
+        () => {
+
+          const id =
+            botao.getAttribute(
+              "data-close"
+            );
+
+
+          const modal =
+            document.getElementById(
+              id
+            );
+
+
+          if(modal){
+
+            modal.style.display =
+              "none";
+
+          }
+
+        }
+      );
+
+    }
+  );
+
+
+[
+  vipModal,
+  giftModal,
+  editModal,
+  logoutModal
+]
+.forEach(
+  modal => {
+
+    modal.addEventListener(
+      "click",
+      event => {
+
+        if(
+          event.target ===
+          modal
+        ){
+
+          modal.style.display =
+            "none";
+
+        }
+
+      }
+    );
+
+  }
+);
+
+
+/* =====================================================
+   VIP
+===================================================== */
+
+function abrirVIP(){
+
+  vipModal.style.display =
+    "flex";
+
+}
+
+
+document.getElementById(
+  "vipButton"
+).addEventListener(
+  "click",
+  abrirVIP
+);
+
+
+document.getElementById(
+  "vipNav"
+).addEventListener(
+  "click",
+  abrirVIP
+);
+
+
+/* =====================================================
+   CAIXA BOX
+===================================================== */
+
+function abrirCaixa(){
+
+  window.location.href =
+    "caixa.html";
+
+}
+
+
+document.getElementById(
+  "boxCard"
+).addEventListener(
+  "click",
+  abrirCaixa
+);
+
+
+document.getElementById(
+  "vipBoxButton"
+).addEventListener(
+  "click",
+  abrirCaixa
+);
+
+
+/* =====================================================
+   ROLETA
+===================================================== */
+
+document.getElementById(
+  "roletaCard"
+).addEventListener(
+  "click",
+  () => {
+
+    window.location.href =
+      "roleta.html";
+
+  }
+);
+
+
+/* =====================================================
+   VALE-PRESENTE
+===================================================== */
+
+function abrirVale(){
+
+  document.getElementById(
+    "giftResult"
+  ).textContent =
+    "";
+
+  document.getElementById(
+    "giftCode"
+  ).value =
+    "";
+
+  giftModal.style.display =
+    "flex";
+
+}
+
+
+document.getElementById(
+  "giftCard"
+).addEventListener(
+  "click",
+  abrirVale
+);
+
+
+document.getElementById(
+  "giftNav"
+).addEventListener(
+  "click",
+  abrirVale
+);
+
+
+/* =====================================================
+   RESGATE DO VALE
+===================================================== */
+
+document.getElementById(
+  "redeemGiftButton"
+).addEventListener(
+  "click",
+  async () => {
+
+    const codigo =
+      document.getElementById(
+        "giftCode"
+      ).value
+        .trim()
+        .toUpperCase();
+
+
+    const resultado =
+      document.getElementById(
+        "giftResult"
+      );
+
+
+    if(
+      !codigo
+    ){
+
+      resultado.style.color =
+        "#ff9ca9";
+
+      resultado.textContent =
+        "⚠️ Digite o código do vale.";
+
+      return;
+
+    }
+
+
+    resultado.style.color =
+      "#a9c9e4";
+
+    resultado.textContent =
+      "⏳ Verificando código...";
+
+
+    try{
+
+      const snapshot =
+        await getDocs(
+
+          query(
+
+            collection(
+              db,
+              "vales"
+            ),
+
+            where(
+              "codigo",
+              "==",
+              codigo
+            )
+
+          )
+
+        );
+
+
+      if(
+        snapshot.empty
+      ){
+
+        resultado.style.color =
+          "#ff9ca9";
+
+        resultado.textContent =
+          "❌ Código inválido ou inexistente.";
+
+        return;
+
+      }
+
+
+      const documento =
+        snapshot.docs[0];
+
+
+      const vale =
+        documento.data();
+
+
+      if(
+        vale.ativo === false
+      ){
+
+        resultado.style.color =
+          "#ff9ca9";
+
+        resultado.textContent =
+          "❌ Este vale não está mais disponível.";
+
+        return;
+
+      }
+
+
+      if(
+        vale.usado === true
+      ){
+
+        resultado.style.color =
+          "#ff9ca9";
+
+        resultado.textContent =
+          "❌ Este vale já foi utilizado.";
+
+        return;
+
+      }
+
+
+      const valor =
+        valorNumerico(
+          vale.valor
+        );
+
+
+      const saldoAtual =
+        valorNumerico(
+          cadastroAtual.data.creditos
+        );
+
+
+      await updateDoc(
+
+        doc(
+          db,
+          "admins",
+          cadastroId
+        ),
+
+        {
+
+          creditos:
+            saldoAtual + valor,
+
+          atualizadoEm:
+            Timestamp.now()
+
+        }
+
+      );
+
+
+      await updateDoc(
+
+        doc(
+          db,
+          "vales",
+          documento.id
+        ),
+
+        {
+
+          usado:
+            true,
+
+          usadoPor:
+            usuarioAtual.uid,
+
+          usadoEm:
+            Timestamp.now()
+
+        }
+
+      );
+
+
+      cadastroAtual.data.creditos =
+        saldoAtual + valor;
+
+
+      mostrarDados(
+        usuarioAtual,
+        cadastroAtual
+      );
+
+
+      resultado.style.color =
+        "#62ff9e";
+
+      resultado.textContent =
+        "✅ Vale resgatado! +" +
+        formatarMoeda(valor) +
+        " adicionados ao seu saldo.";
+
+    }
+    catch(error){
+
+      console.error(
+        "Erro resgatando vale:",
+        error
+      );
+
+
+      resultado.style.color =
+        "#ff9ca9";
+
+      resultado.textContent =
+        "❌ Erro ao resgatar o vale.";
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   LOJA
+===================================================== */
+
+function abrirLoja(){
+
+  window.location.href =
+    "loja.html";
+
+}
+
+
+document.getElementById(
+  "storeCard"
+).addEventListener(
+  "click",
+  abrirLoja
+);
+
+
+document.getElementById(
+  "diamondNav"
+).addEventListener(
+  "click",
+  abrirLoja
+);
+
+
+/* =====================================================
+   JOGOS
+===================================================== */
+
+function abrirJogos(){
+
+  window.location.href =
+    "jogos.html";
+
+}
+
+
+document.getElementById(
+  "gamesCard"
+).addEventListener(
+  "click",
+  abrirJogos
+);
+
+
+document.getElementById(
+  "gamesNav"
+).addEventListener(
+  "click",
+  abrirJogos
+);
+
+
+/* =====================================================
+   EDITOR
+===================================================== */
+
+document.getElementById(
+  "editDataButton"
+).addEventListener(
+  "click",
+  abrirEditor
+);
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+document.getElementById(
+  "logoutButton"
+).addEventListener(
+  "click",
+  () => {
+
+    logoutModal.style.display =
+      "flex";
+
+  }
+);
+
+
+document.getElementById(
+  "cancelLogout"
+).addEventListener(
+  "click",
+  () => {
+
+    logoutModal.style.display =
+      "none";
+
+  }
+);
+
+
+document.getElementById(
+  "confirmLogout"
+).addEventListener(
+  "click",
+  async () => {
+
+    try{
+
+      await signOut(
+        auth
+      );
+
+
+      window.location.replace(
+        "index.html"
+      );
+
+    }
+    catch(error){
+
+      alert(
+        "Não foi possível sair."
+      );
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   MENU INÍCIO
+===================================================== */
+
+document.getElementById(
+  "homeNav"
+).addEventListener(
+  "click",
+  () => {
+
+    window.scrollTo({
+
+      top:0,
+
+      behavior:"smooth"
+
+    });
+
+  }
+);
+
+
+/* =====================================================
+   NOTIFICAÇÕES
 ===================================================== */
 
 function converterData(
@@ -3134,9 +4167,7 @@ function converterData(
 ){
 
   if(!valor){
-
     return null;
-
   }
 
 
@@ -3165,10 +4196,6 @@ function converterData(
 }
 
 
-/* =====================================================
-   NOTIFICAÇÃO
-===================================================== */
-
 async function criarNotificacao(
   id,
   titulo,
@@ -3176,7 +4203,9 @@ async function criarNotificacao(
   tipo
 ){
 
-  if(!usuarioAtual){
+  if(
+    !usuarioAtual
+  ){
 
     return;
 
@@ -3222,22 +4251,10 @@ async function criarNotificacao(
 }
 
 
-/* =====================================================
-   VERIFICAR CAIXA VIP
-===================================================== */
-
 async function verificarNotificacaoCaixa(){
 
   if(
-    !usuarioAtual
-  ){
-
-    return;
-
-  }
-
-
-  if(
+    !usuarioAtual ||
     !cadastroAtual ||
     cadastroAtual.data.vip !== true
   ){
@@ -3253,16 +4270,9 @@ async function verificarNotificacaoCaixa(){
     );
 
 
-  if(!proxima){
-
-    return;
-
-  }
-
-
   if(
-    Date.now() <
-    proxima
+    !proxima ||
+    Date.now() < proxima
   ){
 
     return;
@@ -3279,7 +4289,7 @@ async function verificarNotificacaoCaixa(){
 
       "🎁 Sua Caixa Box está disponível!",
 
-      "A Caixa Box VIP já pode ser verificada na sua Área VIP.",
+      "A Caixa Box VIP já pode ser verificada.",
 
       "caixa"
 
@@ -3289,7 +4299,6 @@ async function verificarNotificacaoCaixa(){
   catch(error){
 
     console.error(
-      "Erro criando notificação:",
       error
     );
 
@@ -3297,10 +4306,6 @@ async function verificarNotificacaoCaixa(){
 
 }
 
-
-/* =====================================================
-   NOTIFICAÇÕES
-===================================================== */
 
 async function carregarNotificacoes(){
 
@@ -3358,12 +4363,10 @@ async function carregarNotificacoes(){
                 a.criadaEm
               ) || 0;
 
-
             const bData =
               converterData(
                 b.criadaEm
               ) || 0;
-
 
             return bData - aData;
 
@@ -3464,15 +4467,21 @@ async function carregarNotificacoes(){
         elemento.innerHTML = `
 
           <div class="notification-item-title">
+
             ${item.titulo || "Notificação"}
+
           </div>
 
           <div class="notification-item-message">
+
             ${item.mensagem || ""}
+
           </div>
 
           <div class="notification-item-time">
+
             ${dataTexto}
+
           </div>
 
         `;
@@ -3502,23 +4511,10 @@ async function carregarNotificacoes(){
 
                 );
 
-
-                item.lida =
-                  true;
-
-
-                elemento.classList.remove(
-                  "unread"
-                );
-
-
-                carregarNotificacoes();
-
               }
               catch(error){
 
                 console.error(
-                  "Erro notificacao:",
                   error
                 );
 
@@ -3532,8 +4528,7 @@ async function carregarNotificacoes(){
               "caixa"
             ){
 
-              window.location.href =
-                "vip.html";
+              abrirVIP();
 
             }
 
@@ -3552,7 +4547,6 @@ async function carregarNotificacoes(){
   catch(error){
 
     console.error(
-      "Erro notificações:",
       error
     );
 
@@ -3572,10 +4566,6 @@ async function carregarNotificacoes(){
 }
 
 
-/* =====================================================
-   SINO
-===================================================== */
-
 notificationButton.addEventListener(
   "click",
   async () => {
@@ -3583,9 +4573,7 @@ notificationButton.addEventListener(
     notificationsModal.style.display =
       "flex";
 
-
     await verificarNotificacaoCaixa();
-
 
     await carregarNotificacoes();
 
@@ -3625,230 +4613,6 @@ notificationsModal.addEventListener(
 
 
 /* =====================================================
-   LOGOUT
-===================================================== */
-
-const logoutModal =
-  document.getElementById(
-    "logoutModal"
-  );
-
-
-document.getElementById(
-  "logoutButton"
-).addEventListener(
-  "click",
-  () => {
-
-    logoutModal.style.display =
-      "flex";
-
-  }
-);
-
-
-document.getElementById(
-  "cancelLogout"
-).addEventListener(
-  "click",
-  () => {
-
-    logoutModal.style.display =
-      "none";
-
-  }
-);
-
-
-document.getElementById(
-  "confirmLogout"
-).addEventListener(
-  "click",
-  async () => {
-
-    try{
-
-      await signOut(
-        auth
-      );
-
-
-      window.location.replace(
-        "index.html"
-      );
-
-    }
-    catch(error){
-
-      alert(
-        "Não foi possível sair."
-      );
-
-    }
-
-  }
-);
-
-
-/* =====================================================
-   NAVEGAÇÃO
-===================================================== */
-
-function abrirCaixa(){
-
-  window.location.href =
-    "caixa.html";
-
-}
-
-
-function abrirVIP(){
-
-  window.location.href =
-    "vip.html";
-
-}
-
-
-function abrirRoleta(){
-
-  window.location.href =
-    "roleta.html";
-
-}
-
-
-function abrirValePresente(){
-
-  window.location.href =
-    "vale-presente.html";
-
-}
-
-
-function abrirLoja(){
-
-  window.location.href =
-    "loja.html";
-
-}
-
-
-function abrirJogos(){
-
-  window.location.href =
-    "jogos.html";
-
-}
-
-
-/* =====================================================
-   CARDS
-===================================================== */
-
-document.getElementById(
-  "boxCard"
-).addEventListener(
-  "click",
-  abrirCaixa
-);
-
-
-document.getElementById(
-  "roletaCard"
-).addEventListener(
-  "click",
-  abrirRoleta
-);
-
-
-document.getElementById(
-  "giftCard"
-).addEventListener(
-  "click",
-  abrirValePresente
-);
-
-
-document.getElementById(
-  "storeCard"
-).addEventListener(
-  "click",
-  abrirLoja
-);
-
-
-document.getElementById(
-  "gamesCard"
-).addEventListener(
-  "click",
-  abrirJogos
-);
-
-
-document.getElementById(
-  "vipButton"
-).addEventListener(
-  "click",
-  abrirVIP
-);
-
-
-/* =====================================================
-   MENU INFERIOR
-===================================================== */
-
-document.getElementById(
-  "homeNav"
-).addEventListener(
-  "click",
-  () => {
-
-    window.scrollTo({
-
-      top:0,
-
-      behavior:"smooth"
-
-    });
-
-  }
-);
-
-
-document.getElementById(
-  "vipNav"
-).addEventListener(
-  "click",
-  abrirVIP
-);
-
-
-document.getElementById(
-  "diamondNav"
-).addEventListener(
-  "click",
-  abrirLoja
-);
-
-
-document.getElementById(
-  "giftNav"
-).addEventListener(
-  "click",
-  abrirValePresente
-);
-
-
-document.getElementById(
-  "gamesNav"
-).addEventListener(
-  "click",
-  abrirJogos
-);
-
-
-/* =====================================================
    AUTENTICAÇÃO
 ===================================================== */
 
@@ -3858,7 +4622,9 @@ onAuthStateChanged(
 
   async user => {
 
-    if(!user){
+    if(
+      !user
+    ){
 
       window.location.replace(
         "index.html"
@@ -3921,5 +4687,4 @@ onAuthStateChanged(
 </script>
 
 </body>
-
 </html>
