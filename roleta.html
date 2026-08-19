@@ -33,30 +33,29 @@ body{
 
   background:
     radial-gradient(
-      circle at 10% 0%,
-      #19a9ff 0%,
+      circle at 15% 5%,
+      #20a9ff 0%,
       transparent 32%
     ),
 
     radial-gradient(
-      circle at 100% 25%,
-      #18b96c 0%,
+      circle at 90% 20%,
+      #16b56e 0%,
       transparent 30%
     ),
 
     linear-gradient(
       145deg,
-      #087edb,
+      #0787df,
       #031b3d 78%
     );
 
   padding:
-    24px
+    22px
     12px
     60px;
 
 }
-
 
 .container{
 
@@ -73,38 +72,48 @@ body{
    TOPO
 ===================================================== */
 
-.top{
+.logo{
 
   text-align:center;
 
-  margin-bottom:20px;
+  margin-bottom:8px;
 
 }
 
+.logo h1{
 
-.logo{
-
-  font-size:30px;
+  font-size:
+    clamp(
+      25px,
+      7vw,
+      38px
+    );
 
   font-weight:900;
 
 }
 
+.logo .adam{
 
-.logo span{
-
-  color:#ffd52a;
+  color:#fff;
 
 }
 
+.logo .games{
+
+  color:#ffd329;
+
+}
 
 .subtitle{
 
-  margin-top:8px;
+  text-align:center;
 
-  color:#d3e9f8;
+  color:#c9e2f4;
 
   font-size:16px;
+
+  margin-bottom:20px;
 
 }
 
@@ -115,57 +124,58 @@ body{
 
 .giros{
 
-  width:100%;
-
-  max-width:360px;
+  width:
+    min(
+      100%,
+      350px
+    );
 
   margin:
-    20px
-    auto
-    25px;
+    0 auto
+    22px;
 
   padding:
-    16px
+    14px
     20px;
+
+  border-radius:30px;
 
   text-align:center;
 
-  border-radius:28px;
-
   background:
-    rgba(3,45,82,.92);
+    rgba(4,48,91,.82);
 
   border:
     1px solid
-    rgba(255,255,255,.12);
+    rgba(255,255,255,.15);
 
   box-shadow:
-    0 15px 35px
-    rgba(0,0,0,.22);
+    0 12px 30px
+    rgba(0,0,0,.2);
 
 }
 
+.giros-label{
 
-.girosLabel{
-
-  color:#a9d4ef;
-
-  font-size:13px;
-
-  font-weight:bold;
+  font-size:14px;
 
   letter-spacing:3px;
 
+  font-weight:bold;
+
+  color:#bcd9ed;
+
 }
 
-
-.girosNumero{
+.giros-numero{
 
   margin-top:4px;
 
-  color:#ffd52a;
+  font-size:46px;
 
-  font-size:48px;
+  line-height:1;
+
+  color:#ffd52b;
 
   font-weight:900;
 
@@ -176,41 +186,195 @@ body{
    ROLETA
 ===================================================== */
 
-.wheel-area{
+.roleta-area{
+
+  width:100%;
+
+  display:flex;
+
+  justify-content:center;
+
+  margin:
+    8px
+    auto
+    22px;
+
+}
+
+.roleta-wrap{
 
   position:relative;
 
   width:
     min(
-      92vw,
-      650px
+      88vw,
+      640px
     );
 
-  aspect-ratio:1;
-
-  margin:
-    0
-    auto
-    25px;
+  aspect-ratio:1 / 1;
 
 }
 
 
-#wheel{
+/* BORDA EXTERNA */
 
-  width:100%;
+.roleta-borda{
 
-  height:100%;
+  position:absolute;
 
-  display:block;
+  inset:0;
 
   border-radius:50%;
 
+  background:#ffd329;
+
+  padding:10px;
+
+  box-shadow:
+    0 0 0 7px
+    rgba(0,0,0,.15),
+
+    0 15px 35px
+    rgba(0,0,0,.3);
+
+}
+
+
+/* ÁREA DA ROLETA */
+
+#roleta{
+
+  position:absolute;
+
+  inset:10px;
+
+  border-radius:50%;
+
+  overflow:hidden;
+
+  background:#102d4e;
+
+  border:
+    3px solid
+    rgba(255,255,255,.85);
+
+}
+
+
+/* FATIAS */
+
+.fatia{
+
+  position:absolute;
+
+  left:50%;
+
+  top:50%;
+
+  width:50%;
+
+  height:50%;
+
+  transform-origin:0 0;
+
+  overflow:hidden;
+
+  border:
+    2px solid
+    rgba(0,0,0,.65);
+
+}
+
+
+/*
+A área visual das fatias é criada
+por clip-path.
+*/
+
+.fatia-inner{
+
+  position:absolute;
+
+  inset:0;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  text-align:center;
+
+  padding:15px;
+
+}
+
+
+.fatia-inner img{
+
+  width:
+    58%;
+
+  height:
+    58%;
+
+  object-fit:contain;
+
   filter:
     drop-shadow(
-      0 15px 18px
-      rgba(0,0,0,.3)
+      0 4px 5px
+      rgba(0,0,0,.35)
     );
+
+}
+
+
+/* =====================================================
+   CENTRO
+===================================================== */
+
+.centro{
+
+  position:absolute;
+
+  left:50%;
+
+  top:50%;
+
+  transform:
+    translate(
+      -50%,
+      -50%
+    );
+
+  width:
+    100px;
+
+  height:
+    100px;
+
+  border-radius:50%;
+
+  background:
+    #ffd329;
+
+  border:
+    10px solid
+    #fff;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  z-index:50;
+
+  box-shadow:
+    0 5px 18px
+    rgba(0,0,0,.35);
+
+  font-size:38px;
 
 }
 
@@ -219,15 +383,15 @@ body{
    PONTEIRO
 ===================================================== */
 
-.pointer{
+.ponteiro{
 
   position:absolute;
 
-  z-index:10;
-
-  top:-3px;
+  z-index:100;
 
   left:50%;
+
+  top:-5px;
 
   transform:
     translateX(-50%);
@@ -237,40 +401,22 @@ body{
   height:0;
 
   border-left:
-    31px solid transparent;
+    28px solid
+    transparent;
 
   border-right:
-    31px solid transparent;
+    28px solid
+    transparent;
 
   border-top:
-    72px solid #ffd52a;
+    65px solid
+    #ffd329;
 
   filter:
     drop-shadow(
-      0 5px 5px
+      0 4px 4px
       rgba(0,0,0,.3)
     );
-
-}
-
-
-.pointer::before{
-
-  content:"";
-
-  position:absolute;
-
-  width:27px;
-
-  height:27px;
-
-  border-radius:50%;
-
-  background:#ffd52a;
-
-  top:-73px;
-
-  left:-13.5px;
 
 }
 
@@ -281,34 +427,38 @@ body{
 
 .girar{
 
-  display:block;
-
   width:100%;
 
   max-width:600px;
 
   margin:
-    0
-    auto;
+    0 auto;
+
+  display:block;
 
   padding:
     20px
-    18px;
+    15px;
 
   border:0;
 
-  border-radius:22px;
+  border-radius:18px;
 
   background:
     linear-gradient(
       135deg,
-      #ffd52a,
-      #f5a900
+      #ffd52b,
+      #f3a600
     );
 
-  color:#06264a;
+  color:#06345f;
 
-  font-size:22px;
+  font-size:
+    clamp(
+      20px,
+      5vw,
+      27px
+    );
 
   font-weight:900;
 
@@ -319,11 +469,9 @@ body{
     rgba(0,0,0,.25);
 
   transition:
-    transform .15s,
-    opacity .15s;
+    transform .15s;
 
 }
-
 
 .girar:active{
 
@@ -332,128 +480,72 @@ body{
 
 }
 
-
 .girar:disabled{
 
-  opacity:.5;
+  opacity:.55;
 
   cursor:not-allowed;
 
 }
 
 
-.instruction{
+.aviso{
 
   text-align:center;
 
-  margin:
-    15px
-    auto
-    25px;
+  color:#c5dced;
 
-  color:#c8dfed;
+  margin-top:14px;
 
-  font-size:13px;
+  font-size:14px;
 
 }
 
 
 /* =====================================================
-   RESULTADO
+   MENSAGEM
 ===================================================== */
 
-.resultado{
-
-  display:none;
-
-  padding:25px;
+.message{
 
   margin:
     20px
     auto;
 
-  max-width:520px;
+  padding:14px;
+
+  max-width:700px;
+
+  border-radius:14px;
 
   text-align:center;
 
-  border-radius:22px;
-
   background:
-    rgba(255,255,255,.96);
+    rgba(255,255,255,.07);
 
-  color:#17304d;
-
-  box-shadow:
-    0 20px 50px
-    rgba(0,0,0,.35);
+  display:none;
 
 }
 
-
-.resultado.show{
+.message.error{
 
   display:block;
 
-  animation:
-    aparecer .4s ease;
+  color:#ff9eaa;
+
+  background:
+    rgba(255,40,60,.12);
 
 }
 
+.message.success{
 
-@keyframes aparecer{
+  display:block;
 
-  from{
+  color:#79ffad;
 
-    opacity:0;
-
-    transform:
-      scale(.85);
-
-  }
-
-  to{
-
-    opacity:1;
-
-    transform:
-      scale(1);
-
-  }
-
-}
-
-
-.resultadoTitulo{
-
-  color:#16a45d;
-
-  font-size:25px;
-
-  font-weight:900;
-
-}
-
-
-.resultadoPremio{
-
-  margin-top:15px;
-
-  color:#e34b39;
-
-  font-size:27px;
-
-  font-weight:900;
-
-}
-
-
-.resultadoData{
-
-  margin-top:12px;
-
-  color:#64748b;
-
-  font-size:12px;
+  background:
+    rgba(0,220,110,.12);
 
 }
 
@@ -464,122 +556,39 @@ body{
 
 .card{
 
-  margin-top:30px;
+  margin-top:28px;
 
   padding:22px;
 
-  border-radius:24px;
+  border-radius:22px;
 
   background:
-    rgba(3,34,68,.94);
+    rgba(2,30,62,.94);
 
   border:
     1px solid
     rgba(255,255,255,.1);
 
   box-shadow:
-    0 15px 40px
-    rgba(0,0,0,.2);
+    0 15px 35px
+    rgba(0,0,0,.18);
 
 }
-
 
 .card h2{
 
-  margin-bottom:16px;
+  font-size:
+    clamp(
+      23px,
+      6vw,
+      31px
+    );
 
-  font-size:24px;
-
-}
-
-
-.possibilidades{
-
-  display:grid;
-
-  gap:9px;
+  margin-bottom:17px;
 
 }
 
-
-.possibilidade{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:12px;
-
-  padding:
-    13px
-    14px;
-
-  border-radius:13px;
-
-  background:
-    rgba(255,255,255,.055);
-
-}
-
-
-.possibilidade img{
-
-  width:48px;
-
-  height:48px;
-
-  object-fit:contain;
-
-  border-radius:9px;
-
-}
-
-
-.possibilidadeSemImagem{
-
-  width:48px;
-
-  height:48px;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  border-radius:9px;
-
-  background:
-    rgba(255,255,255,.08);
-
-  font-size:23px;
-
-}
-
-
-.possibilidadeNome{
-
-  font-weight:800;
-
-}
-
-
-.possibilidadeTipo{
-
-  margin-top:4px;
-
-  color:#91b7d2;
-
-  font-size:11px;
-
-}
-
-
-/* =====================================================
-   HISTÓRICO
-===================================================== */
-
-.historico{
+.lista-premios{
 
   display:grid;
 
@@ -587,101 +596,318 @@ body{
 
 }
 
+.premio-publico{
 
-.historicoItem{
+  display:flex;
+
+  align-items:center;
+
+  gap:12px;
+
+  padding:12px;
+
+  border-radius:14px;
+
+  background:
+    rgba(255,255,255,.055);
+
+}
+
+.premio-publico-img{
+
+  width:52px;
+
+  height:52px;
+
+  flex-shrink:0;
+
+  border-radius:11px;
+
+  background:#0a2849;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  overflow:hidden;
+
+  font-size:24px;
+
+}
+
+.premio-publico-img img{
+
+  width:100%;
+
+  height:100%;
+
+  object-fit:contain;
+
+}
+
+.premio-publico-info{
+
+  flex:1;
+
+}
+
+.premio-publico-nome{
+
+  font-size:15px;
+
+  font-weight:bold;
+
+}
+
+.premio-publico-qtd{
+
+  color:#ffd52b;
+
+  margin-top:3px;
+
+  font-size:13px;
+
+  font-weight:bold;
+
+}
+
+.sem-premios{
 
   padding:15px;
 
-  border-radius:14px;
+  color:#9dbbd3;
+
+  text-align:center;
+
+}
+
+
+/* =====================================================
+   HISTÓRICO DO JOGADOR
+===================================================== */
+
+.historico{
+
+  margin-top:28px;
+
+}
+
+.historico h2{
+
+  margin-bottom:15px;
+
+}
+
+.resultado{
+
+  padding:16px;
+
+  margin-top:10px;
+
+  border-radius:15px;
 
   background:
     rgba(255,255,255,.05);
 
   border:
     1px solid
-    rgba(255,255,255,.06);
+    rgba(255,255,255,.07);
 
 }
 
+.resultado-top{
 
-.historicoPremio{
+  display:flex;
 
-  color:#ffd52a;
+  justify-content:space-between;
 
-  font-size:16px;
+  gap:10px;
 
-  font-weight:900;
-
-}
-
-
-.historicoData{
-
-  margin-top:5px;
-
-  color:#9dbbd3;
-
-  font-size:11px;
+  font-weight:bold;
 
 }
 
+.resultado-premio{
 
-.vazio{
+  color:#ffd52b;
 
-  padding:15px;
+  font-size:18px;
 
-  text-align:center;
+}
 
-  color:#9dbbd3;
+.resultado-data{
+
+  color:#8fc5e8;
+
+  font-size:12px;
+
+  text-align:right;
+
+}
+
+.resultado-status{
+
+  margin-top:9px;
+
+  font-size:12px;
+
+  color:#9fc1d8;
+
+}
+
+.resultado-id{
+
+  margin-top:8px;
+
+  padding:7px;
+
+  border-radius:8px;
+
+  background:
+    rgba(0,0,0,.2);
+
+  color:#72c9ff;
+
+  font-size:10px;
+
+  word-break:break-all;
 
 }
 
 
 /* =====================================================
-   MENSAGEM
+   MODAL RESULTADO
 ===================================================== */
 
-.mensagem{
+.modal{
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:1000;
 
   display:none;
 
-  margin:
-    15px
-    auto;
+  align-items:center;
 
-  max-width:600px;
+  justify-content:center;
 
-  padding:13px;
+  padding:20px;
 
-  border-radius:12px;
+  background:
+    rgba(0,10,25,.82);
+
+  backdrop-filter:
+    blur(7px);
+
+}
+
+.modal.show{
+
+  display:flex;
+
+}
+
+.modal-card{
+
+  width:100%;
+
+  max-width:390px;
+
+  padding:28px 22px;
+
+  border-radius:22px;
 
   text-align:center;
 
-  font-size:13px;
+  background:#fff;
+
+  color:#173653;
+
+  box-shadow:
+    0 25px 60px
+    rgba(0,0,0,.4);
 
 }
 
+.modal-card h2{
 
-.mensagem.error{
+  color:#18a85c;
 
-  display:block;
+  font-size:25px;
 
-  background:
-    rgba(255,50,70,.12);
-
-  color:#ff9ca8;
+  margin-bottom:15px;
 
 }
 
+.modal-img{
 
-.mensagem.success{
+  width:120px;
 
-  display:block;
+  height:120px;
 
-  background:
-    rgba(0,220,110,.12);
+  margin:10px auto 15px;
 
-  color:#6effa8;
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+}
+
+.modal-img img{
+
+  max-width:100%;
+
+  max-height:100%;
+
+  object-fit:contain;
+
+}
+
+.modal-premio{
+
+  color:#df4a36;
+
+  font-size:25px;
+
+  font-weight:900;
+
+}
+
+.modal-data{
+
+  margin-top:15px;
+
+  color:#66798b;
+
+  font-size:12px;
+
+}
+
+.fechar{
+
+  width:100%;
+
+  margin-top:20px;
+
+  padding:13px;
+
+  border:0;
+
+  border-radius:12px;
+
+  background:#19a85c;
+
+  color:#fff;
+
+  font-weight:bold;
+
+  cursor:pointer;
 
 }
 
@@ -692,57 +918,37 @@ body{
 
 @media(max-width:600px){
 
-  body{
+  .centro{
 
-    padding:
-      18px
-      10px
-      45px;
+    width:78px;
 
-  }
+    height:78px;
 
+    border-width:7px;
 
-  .logo{
-
-    font-size:25px;
+    font-size:30px;
 
   }
 
+  .ponteiro{
 
-  .girosNumero{
+    border-left-width:22px;
 
-    font-size:42px;
+    border-right-width:22px;
 
-  }
-
-
-  .girar{
-
-    font-size:19px;
+    border-top-width:53px;
 
   }
 
+  .resultado-top{
 
-  .pointer{
-
-    border-left-width:25px;
-
-    border-right-width:25px;
-
-    border-top-width:60px;
+    flex-direction:column;
 
   }
 
+  .resultado-data{
 
-  .pointer::before{
-
-    width:23px;
-
-    height:23px;
-
-    top:-61px;
-
-    left:-11.5px;
+    text-align:left;
 
   }
 
@@ -759,41 +965,34 @@ body{
 <div class="container">
 
 
-<!-- =====================================================
-     TOPO
-===================================================== -->
+<div class="logo">
 
-<div class="top">
+  <h1>
 
-  <div class="logo">
+    🎰
+    <span class="adam">ADAM</span>
+    <span class="games">GAMES</span>
 
-    🎰 ADAM <span>GAMES</span>
-
-  </div>
-
-  <div class="subtitle">
-
-    Gire a roleta e descubra seu prêmio!
-
-  </div>
+  </h1>
 
 </div>
 
 
-<!-- =====================================================
-     GIROS
-===================================================== -->
+<div class="subtitle">
+
+  Gire a roleta e descubra seu prêmio!
+
+</div>
+
 
 <div class="giros">
 
-  <div class="girosLabel">
-
+  <div class="giros-label">
     GIROS DISPONÍVEIS
-
   </div>
 
   <div
-    class="girosNumero"
+    class="giros-numero"
     id="giros">
 
     0
@@ -807,13 +1006,25 @@ body{
      ROLETA
 ===================================================== -->
 
-<div class="wheel-area">
+<div class="roleta-area">
 
-  <div class="pointer"></div>
+  <div class="roleta-wrap">
 
-  <canvas
-    id="wheel">
-  </canvas>
+    <div class="ponteiro"></div>
+
+    <div class="roleta-borda">
+
+      <div id="roleta">
+
+      </div>
+
+    </div>
+
+    <div class="centro">
+      🎰
+    </div>
+
+  </div>
 
 </div>
 
@@ -828,7 +1039,7 @@ body{
 </button>
 
 
-<div class="instruction">
+<div class="aviso">
 
   O prêmio é revelado somente quando a roleta parar.
 
@@ -836,43 +1047,8 @@ body{
 
 
 <div
-  id="mensagem"
-  class="mensagem">
-</div>
-
-
-<!-- =====================================================
-     RESULTADO
-===================================================== -->
-
-<div
-  class="resultado"
-  id="resultado">
-
-  <div class="resultadoTitulo">
-
-    🎉 Você ganhou!
-
-  </div>
-
-
-  <div
-    class="resultadoPremio"
-    id="resultadoPremio">
-
-    —
-
-  </div>
-
-
-  <div
-    class="resultadoData"
-    id="resultadoData">
-
-    —
-
-  </div>
-
+  class="message"
+  id="message">
 </div>
 
 
@@ -883,20 +1059,16 @@ body{
 <div class="card">
 
   <h2>
-
     🎁 Possibilidades de prêmio da Roleta
-
   </h2>
 
 
   <div
-    class="possibilidades"
-    id="possibilidades">
+    class="lista-premios"
+    id="listaPremios">
 
-    <div class="vazio">
-
+    <div class="sem-premios">
       🔄 Carregando prêmios...
-
     </div>
 
   </div>
@@ -908,29 +1080,75 @@ body{
      HISTÓRICO
 ===================================================== -->
 
-<div class="card">
+<div class="card historico">
 
   <h2>
-
-    📜 Meus últimos giros
-
+    📜 Meus resultados
   </h2>
 
 
-  <div
-    class="historico"
-    id="historico">
+  <div id="historicoLista">
 
-    <div class="vazio">
-
-      🔄 Carregando histórico...
-
+    <div class="sem-premios">
+      🔄 Carregando resultados...
     </div>
 
   </div>
 
 </div>
 
+
+</div>
+
+
+<!-- =====================================================
+     MODAL
+===================================================== -->
+
+<div
+  class="modal"
+  id="modal">
+
+  <div class="modal-card">
+
+    <h2>
+      🎉 Você ganhou!
+    </h2>
+
+    <div
+      class="modal-img"
+      id="modalImg">
+
+      🎁
+
+    </div>
+
+    <div
+      class="modal-premio"
+      id="modalPremio">
+
+      —
+
+    </div>
+
+    <div
+      class="modal-data"
+      id="modalData">
+
+      —
+
+    </div>
+
+    <button
+      class="fechar"
+      id="fechar"
+      type="button">
+
+      CONTINUAR
+
+    </button>
+
+  </div>
 
 </div>
 
@@ -963,9 +1181,9 @@ import {
   query,
   where,
   getDocs,
-  getDoc,
   doc,
-  runTransaction,
+  getDoc,
+  updateDoc,
   addDoc,
   serverTimestamp
 }
@@ -986,10 +1204,7 @@ const firebaseConfig = {
     "adam-games-21081.firebaseapp.com",
 
   projectId:
-    "adam-games-21081.firebaseapp.com".replace(
-      ".firebaseapp.com",
-      ""
-    ),
+    "adam-games-21081",
 
   storageBucket:
     "adam-games-21081.firebasestorage.app",
@@ -1021,17 +1236,17 @@ const db =
    ESTADO
 ===================================================== */
 
-let usuarioAtual =
+let usuarioAuth =
   null;
 
-let documentoUsuario =
+let usuarioDoc =
+  null;
+
+let usuarioRef =
   null;
 
 let premios =
   [];
-
-let rotacaoAtual =
-  0;
 
 let girando =
   false;
@@ -1041,93 +1256,55 @@ let girando =
    ELEMENTOS
 ===================================================== */
 
-const canvas =
-  document.getElementById(
-    "wheel"
-  );
-
-
-const ctx =
-  canvas.getContext(
-    "2d"
-  );
-
-
-const girosElement =
+const girosEl =
   document.getElementById(
     "giros"
   );
 
+const roletaEl =
+  document.getElementById(
+    "roleta"
+  );
 
-const botaoGirar =
+const girarBtn =
   document.getElementById(
     "girar"
   );
 
-
-const possibilidades =
+const messageEl =
   document.getElementById(
-    "possibilidades"
+    "message"
   );
 
-
-const historico =
+const listaPremios =
   document.getElementById(
-    "historico"
+    "listaPremios"
   );
 
-
-const resultado =
+const historicoLista =
   document.getElementById(
-    "resultado"
+    "historicoLista"
   );
 
-
-const resultadoPremio =
+const modal =
   document.getElementById(
-    "resultadoPremio"
+    "modal"
   );
 
-
-const resultadoData =
+const modalPremio =
   document.getElementById(
-    "resultadoData"
+    "modalPremio"
   );
 
-
-const mensagem =
+const modalImg =
   document.getElementById(
-    "mensagem"
+    "modalImg"
   );
 
-
-/* =====================================================
-   CORES
-===================================================== */
-
-const CORES = [
-
-  "#e4a514",
-
-  "#a83bd1",
-
-  "#1681d7",
-
-  "#18a96c",
-
-  "#e53985",
-
-  "#f07b1e",
-
-  "#7c4fd8",
-
-  "#e24b36",
-
-  "#22b8a8",
-
-  "#65b96f"
-
-];
+const modalData =
+  document.getElementById(
+    "modalData"
+  );
 
 
 /* =====================================================
@@ -1139,246 +1316,135 @@ function mostrarMensagem(
   tipo
 ){
 
-  mensagem.textContent =
+  messageEl.textContent =
     texto;
 
-  mensagem.className =
-    "mensagem " +
+  messageEl.className =
+    "message " +
     tipo;
 
 }
 
 
 /* =====================================================
-   TAMANHO CANVAS
+   LOCALIZAR CADASTRO
 ===================================================== */
 
-function ajustarCanvas(){
+async function localizarUsuario(
+  usuario
+){
+
+  /*
+  -----------------------------------------------------
+  1. TENTA PELO UID
+  -----------------------------------------------------
+  */
+
+  try{
+
+    const resultadoUID =
+      await getDocs(
+        query(
+          collection(
+            db,
+            "admins"
+          ),
+          where(
+            "uid",
+            "==",
+            usuario.uid
+          )
+        )
+      );
 
-  const tamanho =
-    canvas.clientWidth;
-
-  const dpr =
-    window.devicePixelRatio ||
-    1;
-
-  canvas.width =
-    tamanho * dpr;
-
-  canvas.height =
-    tamanho * dpr;
-
-  ctx.setTransform(
-    dpr,
-    0,
-    0,
-    dpr,
-    0,
-    0
-  );
-
-  desenharRoleta();
-
-}
-
-
-/* =====================================================
-   DESENHAR ROLETA
-===================================================== */
-
-function desenharRoleta(){
-
-  const tamanho =
-    canvas.clientWidth;
-
-
-  if(!tamanho){
-
-    return;
-
-  }
-
-
-  ctx.clearRect(
-    0,
-    0,
-    tamanho,
-    tamanho
-  );
-
-
-  const centro =
-    tamanho / 2;
-
-
-  const raio =
-    tamanho / 2 - 18;
-
-
-  /* ---------------------------------------------------
-     BORDA EXTERNA
-  --------------------------------------------------- */
-
-  ctx.beginPath();
-
-  ctx.arc(
-    centro,
-    centro,
-    raio + 10,
-    0,
-    Math.PI * 2
-  );
-
-  ctx.fillStyle =
-    "#ffd52a";
-
-  ctx.fill();
-
-
-  ctx.beginPath();
-
-  ctx.arc(
-    centro,
-    centro,
-    raio + 2,
-    0,
-    Math.PI * 2
-  );
-
-  ctx.fillStyle =
-    "#fff";
-
-  ctx.fill();
-
-
-  ctx.save();
-
-  ctx.translate(
-    centro,
-    centro
-  );
-
-  ctx.rotate(
-    rotacaoAtual
-  );
-
-  const quantidade =
-    premios.length;
-
-
-  if(
-    quantidade === 0
-  ){
-
-    ctx.beginPath();
-
-    ctx.arc(
-      0,
-      0,
-      raio,
-      0,
-      Math.PI * 2
-    );
-
-    ctx.fillStyle =
-      "#142f4e";
-
-    ctx.fill();
-
-    ctx.restore();
-
-    desenharCentro();
-
-    return;
-
-  }
-
-
-  const angulo =
-    (
-      Math.PI * 2
-    ) /
-    quantidade;
-
-
-  for(
-    let i = 0;
-    i < quantidade;
-    i++
-  ){
-
-    const inicio =
-      -Math.PI / 2 +
-      i * angulo;
-
-
-    const fim =
-      inicio + angulo;
-
-
-    const premio =
-      premios[i];
-
-
-    /*
-    ---------------------------------------------------
-    COR DA FATIA
-    ---------------------------------------------------
-    */
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-      0,
-      0
-    );
-
-    ctx.arc(
-      0,
-      0,
-      raio,
-      inicio,
-      fim
-    );
-
-    ctx.closePath();
-
-
-    ctx.fillStyle =
-      premio.cor ||
-      CORES[
-        i %
-        CORES.length
-      ];
-
-
-    ctx.fill();
-
-
-    ctx.strokeStyle =
-      "rgba(0,0,0,.85)";
-
-    ctx.lineWidth =
-      2;
-
-    ctx.stroke();
-
-
-    /*
-    ---------------------------------------------------
-    IMAGEM TEMÁTICA
-    ---------------------------------------------------
-    */
 
     if(
-      premio.imagem
+      !resultadoUID.empty
     ){
 
-      desenharImagemNaFatia(
-        premio,
-        i,
-        angulo,
-        raio
+      return {
+        ref:
+          resultadoUID.docs[0].ref,
+
+        id:
+          resultadoUID.docs[0].id,
+
+        data:
+          resultadoUID.docs[0].data()
+
+      };
+
+    }
+
+  }
+  catch(error){
+
+    console.error(
+      "Erro na busca por UID:",
+      error
+    );
+
+  }
+
+
+  /*
+  -----------------------------------------------------
+  2. TENTA PELO E-MAIL
+  -----------------------------------------------------
+  */
+
+  if(
+    usuario.email
+  ){
+
+    try{
+
+      const email =
+        usuario.email
+        .trim()
+        .toLowerCase();
+
+
+      const resultadoEmail =
+        await getDocs(
+          query(
+            collection(
+              db,
+              "admins"
+            ),
+            where(
+              "email",
+              "==",
+              email
+            )
+          )
+        );
+
+
+      if(
+        !resultadoEmail.empty
+      ){
+
+        return {
+          ref:
+            resultadoEmail.docs[0].ref,
+
+          id:
+            resultadoEmail.docs[0].id,
+
+          data:
+            resultadoEmail.docs[0].data()
+
+        };
+
+      }
+
+    }
+    catch(error){
+
+      console.error(
+        "Erro na busca por e-mail:",
+        error
       );
 
     }
@@ -1386,266 +1452,98 @@ function desenharRoleta(){
   }
 
 
-  ctx.restore();
+  /*
+  -----------------------------------------------------
+  3. TENTA DOCUMENTO COM ID = UID
+  -----------------------------------------------------
+  */
 
+  try{
 
-  desenharCentro();
-
-}
-
-
-/* =====================================================
-   IMAGEM NA FATIA
-===================================================== */
-
-function desenharImagemNaFatia(
-  premio,
-  indice,
-  angulo,
-  raio
-){
-
-  const imagem =
-    new Image();
-
-
-  imagem.onload =
-    () => {
-
-      const tamanho =
-        canvas.clientWidth;
-
-
-      const centro =
-        tamanho / 2;
-
-
-      const posicao =
-        -Math.PI / 2 +
-        indice * angulo +
-        angulo / 2;
-
-
-      const distancia =
-        raio * .62;
-
-
-      const x =
-        centro +
-        Math.cos(
-          posicao
-        ) *
-        distancia;
-
-
-      const y =
-        centro +
-        Math.sin(
-          posicao
-        ) *
-        distancia;
-
-
-      const lado =
-        Math.min(
-          70,
-          raio *
-          .24
-        );
-
-
-      ctx.save();
-
-      ctx.beginPath();
-
-      ctx.arc(
-        x,
-        y,
-        lado / 2,
-        0,
-        Math.PI * 2
-      );
-
-      ctx.clip();
-
-
-      ctx.drawImage(
-        imagem,
-        x - lado / 2,
-        y - lado / 2,
-        lado,
-        lado
+    const referencia =
+      doc(
+        db,
+        "admins",
+        usuario.uid
       );
 
 
-      ctx.restore();
-
-    };
-
-
-  imagem.onerror =
-    () => {};
+    const documento =
+      await getDoc(
+        referencia
+      );
 
 
-  imagem.src =
-    premio.imagem;
+    if(
+      documento.exists()
+    ){
 
-}
+      return {
 
+        ref:
+          documento.ref,
 
-/* =====================================================
-   CENTRO
-===================================================== */
+        id:
+          documento.id,
 
-function desenharCentro(){
+        data:
+          documento.data()
 
-  const tamanho =
-    canvas.clientWidth;
+      };
 
+    }
 
-  const centro =
-    tamanho / 2;
+  }
+  catch(error){
 
-
-  const raio =
-    Math.max(
-      48,
-      tamanho * .095
+    console.error(
+      "Erro na busca direta:",
+      error
     );
-
-
-  ctx.beginPath();
-
-  ctx.arc(
-    centro,
-    centro,
-    raio + 9,
-    0,
-    Math.PI * 2
-  );
-
-  ctx.fillStyle =
-    "#fff";
-
-  ctx.fill();
-
-
-  ctx.beginPath();
-
-  ctx.arc(
-    centro,
-    centro,
-    raio,
-    0,
-    Math.PI * 2
-  );
-
-  ctx.fillStyle =
-    "#ffd52a";
-
-  ctx.fill();
-
-
-  ctx.font =
-    `${raio * .55}px Arial`;
-
-  ctx.textAlign =
-    "center";
-
-  ctx.textBaseline =
-    "middle";
-
-  ctx.fillText(
-    "🎰",
-    centro,
-    centro
-  );
-
-}
-
-
-/* =====================================================
-   CARREGAR USUÁRIO
-===================================================== */
-
-async function carregarUsuario(){
-
-  if(!usuarioAtual){
-
-    return;
 
   }
 
 
-  const referencia =
-    collection(
-      db,
-      "admins"
-    );
+  return null;
+
+}
 
 
-  const resultado =
-    await getDocs(
-      query(
-        referencia,
-        where(
-          "uid",
-          "==",
-          usuarioAtual.uid
-        )
-      )
-    );
+/* =====================================================
+   ATUALIZAR GIROS
+===================================================== */
 
+function atualizarGiros(){
 
   if(
-    resultado.empty
+    !usuarioDoc
   ){
 
-    mostrarMensagem(
-      "Não foi possível encontrar seu cadastro.",
-      "error"
-    );
+    girosEl.textContent =
+      "0";
 
     return;
 
   }
 
 
-  documentoUsuario =
-    resultado.docs[0];
-
-
-  atualizarGiros(
-    documentoUsuario.data().chances
-  );
-
-}
-
-
-/* =====================================================
-   MOSTRAR GIROS
-===================================================== */
-
-function atualizarGiros(
-  valor
-){
-
-  const numero =
+  const quantidade =
     Number(
-      valor || 0
+      usuarioDoc.girosRoleta ||
+      0
     );
 
 
-  girosElement.textContent =
-    numero.toLocaleString(
+  girosEl.textContent =
+    quantidade.toLocaleString(
       "pt-BR"
     );
 
 
-  botaoGirar.disabled =
-    numero <= 0 ||
-    premios.length === 0 ||
-    girando;
+  girarBtn.disabled =
+    quantidade <= 0 ||
+    girando ||
+    premios.length === 0;
 
 }
 
@@ -1656,65 +1554,56 @@ function atualizarGiros(
 
 async function carregarPremios(){
 
-  possibilidades.innerHTML =
-    "<div class='vazio'>🔄 Carregando prêmios...</div>";
+  try{
+
+    const resultado =
+      await getDocs(
+        collection(
+          db,
+          "premiosRoleta"
+        )
+      );
 
 
-  const referencia =
-    collection(
-      db,
-      "premiosRoleta"
+    premios =
+      resultado.docs
+
+      .map(
+        documento => ({
+
+          id:
+            documento.id,
+
+          ...documento.data()
+
+        })
+      )
+
+      .filter(
+        premio =>
+          premio.ativo === true
+      );
+
+
+    desenharRoleta();
+
+    mostrarPossibilidades();
+
+    atualizarGiros();
+
+  }
+  catch(error){
+
+    console.error(
+      "Erro ao carregar prêmios:",
+      error
     );
 
 
-  const resultado =
-    await getDocs(
-      referencia
-    );
-
-
-  premios =
-    resultado.docs
-
-    .map(
-      documento => ({
-
-        id:
-          documento.id,
-
-        ...documento.data()
-
-      })
-    )
-
-    .filter(
-      premio =>
-        premio.ativo === true
-    );
-
-
-  /*
-  ---------------------------------------------------
-  IMPORTANTE:
-  O NÚMERO DE FATIAS É EXATAMENTE O NÚMERO
-  DE PRÊMIOS ATIVOS.
-  ---------------------------------------------------
-  */
-
-
-  desenharRoleta();
-
-
-  renderizarPossibilidades();
-
-
-  if(
-    documentoUsuario
-  ){
-
-    atualizarGiros(
-      documentoUsuario.data().chances
-    );
+    listaPremios.innerHTML =
+      "<div class='sem-premios'>" +
+      "❌ Não foi possível carregar os prêmios." +
+      "</div>";
 
   }
 
@@ -1722,12 +1611,12 @@ async function carregarPremios(){
 
 
 /* =====================================================
-   POSSIBILIDADES
+   DESENHAR ROLETA
 ===================================================== */
 
-function renderizarPossibilidades(){
+function desenharRoleta(){
 
-  possibilidades.innerHTML =
+  roletaEl.innerHTML =
     "";
 
 
@@ -1735,28 +1624,123 @@ function renderizarPossibilidades(){
     premios.length === 0
   ){
 
-    possibilidades.innerHTML =
-      "<div class='vazio'>" +
-      "Nenhum prêmio disponível no momento." +
-      "</div>";
+    const vazio =
+      document.createElement(
+        "div"
+      );
+
+    vazio.style.cssText = `
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+      font-size:18px;
+      text-align:center;
+      padding:30px;
+    `;
+
+    vazio.textContent =
+      "Nenhum prêmio disponível";
+
+    roletaEl.appendChild(
+      vazio
+    );
 
     return;
 
   }
 
 
-  premios.forEach(
-    premio => {
+  const quantidade =
+    premios.length;
 
-      const item =
+
+  const angulo =
+    360 /
+    quantidade;
+
+
+  const cores = [
+
+    "#1aa66b",
+    "#e6a914",
+    "#a73bd1",
+    "#1684d3",
+    "#e73583",
+    "#7c4dff",
+    "#e75d25",
+    "#2ab7a9",
+    "#d93d3d",
+    "#5b63d8",
+    "#d68c19",
+    "#16a86b"
+
+  ];
+
+
+  premios.forEach(
+    (
+      premio,
+      indice
+    ) => {
+
+      const fatia =
         document.createElement(
           "div"
         );
 
 
-      item.className =
-        "possibilidade";
+      fatia.className =
+        "fatia";
 
+
+      const inicio =
+        indice *
+        angulo -
+        90;
+
+
+      fatia.style.transform =
+        `
+          rotate(${inicio}deg)
+          skewY(${90 - angulo}deg)
+        `;
+
+
+      const inner =
+        document.createElement(
+          "div"
+        );
+
+
+      inner.className =
+        "fatia-inner";
+
+
+      inner.style.background =
+        premio.cor ||
+        cores[
+          indice %
+          cores.length
+        ];
+
+
+      inner.style.transform =
+        `
+          skewY(-${90 - angulo}deg)
+          rotate(${angulo / 2}deg)
+        `;
+
+
+      /*
+      -------------------------------------------------
+      IMPORTANTE:
+      A imagem é mostrada na fatia.
+      O nome e quantidade NÃO aparecem.
+      -------------------------------------------------
+      */
 
       if(
         premio.imagem
@@ -1776,38 +1760,132 @@ function renderizarPossibilidades(){
           "";
 
 
-        item.appendChild(
+        img.onerror =
+          () => {
+
+            img.remove();
+
+          };
+
+
+        inner.appendChild(
+          img
+        );
+
+      }
+
+
+      fatia.appendChild(
+        inner
+      );
+
+
+      roletaEl.appendChild(
+        fatia
+      );
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   POSSIBILIDADES
+===================================================== */
+
+function mostrarPossibilidades(){
+
+  listaPremios.innerHTML =
+    "";
+
+
+  if(
+    premios.length === 0
+  ){
+
+    listaPremios.innerHTML =
+      "<div class='sem-premios'>" +
+      "Nenhum prêmio cadastrado na roleta." +
+      "</div>";
+
+    return;
+
+  }
+
+
+  premios.forEach(
+    premio => {
+
+      const item =
+        document.createElement(
+          "div"
+        );
+
+
+      item.className =
+        "premio-publico";
+
+
+      const imagemBox =
+        document.createElement(
+          "div"
+        );
+
+
+      imagemBox.className =
+        "premio-publico-img";
+
+
+      if(
+        premio.imagem
+      ){
+
+        const img =
+          document.createElement(
+            "img"
+          );
+
+
+        img.src =
+          premio.imagem;
+
+
+        img.alt =
+          premio.nome ||
+          "Prêmio";
+
+
+        img.onerror =
+          () => {
+
+            imagemBox.textContent =
+              "🎁";
+
+          };
+
+
+        imagemBox.appendChild(
           img
         );
 
       }
       else{
 
-        const semImagem =
-          document.createElement(
-            "div"
-          );
-
-
-        semImagem.className =
-          "possibilidadeSemImagem";
-
-
-        semImagem.textContent =
+        imagemBox.textContent =
           "🎁";
-
-
-        item.appendChild(
-          semImagem
-        );
 
       }
 
 
-      const texto =
+      const info =
         document.createElement(
           "div"
         );
+
+
+      info.className =
+        "premio-publico-info";
 
 
       const nome =
@@ -1817,23 +1895,26 @@ function renderizarPossibilidades(){
 
 
       nome.className =
-        "possibilidadeNome";
+        "premio-publico-nome";
 
 
       nome.textContent =
         (
-          Number(
-            premio.quantidade || 0
-          ).toLocaleString(
-            "pt-BR"
-          ) +
-          " " +
-          (
-            premio.nome ||
-            "Prêmio"
-          )
+          premio.quantidade || 0
+        ).toLocaleString(
+          "pt-BR"
+        ) +
+        " " +
+        (
+          premio.nome ||
+          "Prêmio"
         );
 
+
+      /*
+      Aqui a lista pública mostra
+      as possibilidades cadastradas.
+      */
 
       const tipo =
         document.createElement(
@@ -1842,30 +1923,33 @@ function renderizarPossibilidades(){
 
 
       tipo.className =
-        "possibilidadeTipo";
+        "premio-publico-qtd";
 
 
       tipo.textContent =
-        premio.descricao ||
-        "Prêmio da Roleta Adam Games";
+        premio.tipo ||
+        "Prêmio";
 
 
-      texto.appendChild(
+      info.appendChild(
         nome
       );
 
-
-      texto.appendChild(
+      info.appendChild(
         tipo
       );
 
 
       item.appendChild(
-        texto
+        imagemBox
+      );
+
+      item.appendChild(
+        info
       );
 
 
-      possibilidades.appendChild(
+      listaPremios.appendChild(
         item
       );
 
@@ -1876,7 +1960,7 @@ function renderizarPossibilidades(){
 
 
 /* =====================================================
-   ESCOLHER PRÊMIO PELO PESO
+   PESO
 ===================================================== */
 
 function escolherPremio(){
@@ -1890,21 +1974,21 @@ function escolherPremio(){
   }
 
 
-  const total =
-    premios.reduce(
-      (
-        soma,
-        premio
-      ) =>
-        soma +
-        Math.max(
-          1,
-          Number(
-            premio.peso || 1
-          )
-        ),
-      0
-    );
+  let total =
+    0;
+
+
+  premios.forEach(
+    premio => {
+
+      total +=
+        Number(
+          premio.peso ||
+          1
+        );
+
+    }
+  );
 
 
   let sorteio =
@@ -1913,15 +1997,14 @@ function escolherPremio(){
 
 
   for(
-    const premio of premios
+    const premio
+    of premios
   ){
 
     sorteio -=
-      Math.max(
-        1,
-        Number(
-          premio.peso || 1
-        )
+      Number(
+        premio.peso ||
+        1
       );
 
 
@@ -1944,17 +2027,56 @@ function escolherPremio(){
 
 
 /* =====================================================
-   ÍNDICE DA FATIA
+   DATA
 ===================================================== */
 
-function indiceDoPremio(
-  premio
+function formatarData(
+  data
 ){
 
-  return premios.findIndex(
-    item =>
-      item.id ===
-      premio.id
+  if(
+    !data
+  ){
+
+    return "—";
+
+  }
+
+
+  let dataObjeto;
+
+
+  if(
+    data.toDate
+  ){
+
+    dataObjeto =
+      data.toDate();
+
+  }
+  else{
+
+    dataObjeto =
+      new Date(
+        data
+      );
+
+  }
+
+
+  if(
+    Number.isNaN(
+      dataObjeto.getTime()
+    )
+  ){
+
+    return "—";
+
+  }
+
+
+  return dataObjeto.toLocaleString(
+    "pt-BR"
   );
 
 }
@@ -1976,12 +2098,33 @@ async function girarRoleta(){
 
 
   if(
-    !usuarioAtual ||
-    !documentoUsuario
+    !usuarioDoc ||
+    !usuarioRef
   ){
 
     mostrarMensagem(
-      "Aguarde o carregamento da sua conta.",
+      "Não foi possível encontrar seu cadastro.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const girosAtuais =
+    Number(
+      usuarioDoc.girosRoleta ||
+      0
+    );
+
+
+  if(
+    girosAtuais <= 0
+  ){
+
+    mostrarMensagem(
+      "Você não possui giros disponíveis.",
       "error"
     );
 
@@ -1995,7 +2138,7 @@ async function girarRoleta(){
   ){
 
     mostrarMensagem(
-      "Não existem prêmios disponíveis.",
+      "Nenhum prêmio está disponível na roleta.",
       "error"
     );
 
@@ -2004,155 +2147,17 @@ async function girarRoleta(){
   }
 
 
-  /*
-  =====================================================
-  AQUI ESTÁ A CORREÇÃO PRINCIPAL.
-
-  O giro NÃO é descontado no carregamento.
-
-  Ele somente é descontado agora, dentro de uma
-  transação, quando o usuário clicou no botão.
-  =====================================================
-  */
-
-
-  const refUsuario =
-    doc(
-      db,
-      "admins",
-      documentoUsuario.id
-    );
-
-
-  let novoSaldo;
-
-
-  try{
-
-    novoSaldo =
-      await runTransaction(
-        db,
-        async transaction => {
-
-          const snapshot =
-            await transaction.get(
-              refUsuario
-            );
-
-
-          if(
-            !snapshot.exists()
-          ){
-
-            throw new Error(
-              "USER_NOT_FOUND"
-            );
-
-          }
-
-
-          const dados =
-            snapshot.data();
-
-
-          const giros =
-            Number(
-              dados.chances || 0
-            );
-
-
-          if(
-            giros <= 0
-          ){
-
-            throw new Error(
-              "NO_SPINS"
-            );
-
-          }
-
-
-          const novo =
-            giros - 1;
-
-
-          transaction.update(
-            refUsuario,
-            {
-              chances:
-                novo
-            }
-          );
-
-
-          return novo;
-
-        }
-      );
-
-  }
-  catch(error){
-
-    console.error(
-      "Erro ao descontar giro:",
-      error
-    );
-
-
-    if(
-      error.message ===
-      "NO_SPINS"
-    ){
-
-      atualizarGiros(
-        0
-      );
-
-
-      mostrarMensagem(
-        "Você não possui giros disponíveis.",
-        "error"
-      );
-
-    }
-    else{
-
-      mostrarMensagem(
-        "Não foi possível iniciar o giro. Tente novamente.",
-        "error"
-      );
-
-    }
-
-
-    return;
-
-  }
-
-
-  /*
-  =====================================================
-  SOMENTE DEPOIS DO DESCONTO CONFIRMADO
-  A ROLETA COMEÇA A GIRAR.
-  =====================================================
-  */
-
-
   girando =
     true;
 
 
-  atualizarGiros(
-    novoSaldo
-  );
-
-
-  botaoGirar.disabled =
+  girarBtn.disabled =
     true;
 
 
-  resultado.classList.remove(
-    "show"
+  mostrarMensagem(
+    "",
+    ""
   );
 
 
@@ -2167,14 +2172,24 @@ async function girarRoleta(){
     girando =
       false;
 
+    atualizarGiros();
+
     return;
 
   }
 
 
+  /*
+  -----------------------------------------------------
+  Escolhemos o índice visual correspondente ao prêmio.
+  -----------------------------------------------------
+  */
+
   const indice =
-    indiceDoPremio(
-      premio
+    premios.findIndex(
+      p =>
+        p.id ===
+        premio.id
     );
 
 
@@ -2183,161 +2198,209 @@ async function girarRoleta(){
 
 
   const angulo =
-    (
-      Math.PI * 2
-    ) /
+    360 /
     quantidade;
 
 
   /*
-  =====================================================
-  A FATIA DO PRÊMIO FICA CENTRALIZADA NO PONTEIRO.
-  =====================================================
+  O ponteiro fica no topo.
+  Giramos várias voltas + posição do prêmio.
   */
 
-
   const centroDaFatia =
-    -Math.PI / 2 +
-    indice * angulo +
+    indice *
+    angulo +
     angulo / 2;
 
 
   const voltas =
-    6 +
-    Math.floor(
-      Math.random() * 3
+    6;
+
+
+  const rotacaoFinal =
+    voltas * 360 +
+    (
+      360 -
+      centroDaFatia
     );
 
 
-  const alvo =
-    (
-      Math.PI * 2 * voltas
-    ) +
-    (
-      -centroDaFatia
-    );
+  roletaEl.style.transition =
+    "transform 5.5s cubic-bezier(.12,.72,.18,1)";
 
 
-  const inicio =
-    rotacaoAtual;
+  roletaEl.style.transform =
+    `rotate(${rotacaoFinal}deg)`;
 
 
-  const final =
-    inicio +
-    alvo;
+  /*
+  -----------------------------------------------------
+  Espera a animação terminar.
+  -----------------------------------------------------
+  */
+
+  await new Promise(
+    resolve =>
+      setTimeout(
+        resolve,
+        5700
+      )
+  );
 
 
-  const duracao =
-    5200;
+  try{
 
-
-  const inicioTempo =
-    performance.now();
-
-
-  function animar(
-    agora
-  ){
-
-    const progresso =
-      Math.min(
-        1,
-        (
-          agora -
-          inicioTempo
-        ) /
-        duracao
-      );
+    const novoSaldo =
+      girosAtuais - 1;
 
 
     /*
-    Ease-out forte para dar sensação
-    de roleta desacelerando.
+    ---------------------------------------------------
+    BAIXA 1 GIRO
+    ---------------------------------------------------
     */
 
-    const suavizado =
-      1 -
-      Math.pow(
-        1 - progresso,
-        4
+    await updateDoc(
+      usuarioRef,
+      {
+
+        girosRoleta:
+          novoSaldo
+
+      }
+    );
+
+
+    /*
+    ---------------------------------------------------
+    REGISTRA O RESULTADO
+    ---------------------------------------------------
+    */
+
+    const registro =
+      await addDoc(
+        collection(
+          db,
+          "resultadosRoleta"
+        ),
+        {
+
+          usuarioId:
+            usuarioAuth.uid,
+
+          usuarioDocId:
+            usuarioDoc._docId,
+
+          usuarioEmail:
+            usuarioAuth.email ||
+            usuarioDoc.email ||
+            "",
+
+          usuarioNome:
+            usuarioDoc.nome ||
+            usuarioDoc.name ||
+            "",
+
+          publicId:
+            usuarioDoc.publicId ||
+            "",
+
+          premioId:
+            premio.id,
+
+          premioNome:
+            premio.nome ||
+            "",
+
+          quantidade:
+            Number(
+              premio.quantidade ||
+              0
+            ),
+
+          tipo:
+            premio.tipo ||
+            "outro",
+
+          imagem:
+            premio.imagem ||
+            "",
+
+          giroNumero:
+            girosAtuais,
+
+          saldoGirosAnterior:
+            girosAtuais,
+
+          saldoGirosFinal:
+            novoSaldo,
+
+          entregue:
+            false,
+
+          criadoEm:
+            serverTimestamp()
+
+        }
       );
 
 
-    rotacaoAtual =
-      inicio +
-      (
-        final -
-        inicio
-      ) *
-      suavizado;
+    usuarioDoc.girosRoleta =
+      novoSaldo;
 
 
-    desenharRoleta();
+    atualizarGiros();
 
 
-    if(
-      progresso < 1
-    ){
-
-      requestAnimationFrame(
-        animar
-      );
-
-      return;
-
-    }
+    mostrarResultado(
+      premio,
+      registro.id
+    );
 
 
-    rotacaoAtual =
-      final;
+    await carregarHistorico();
 
 
-    desenharRoleta();
+  }
+  catch(error){
+
+    console.error(
+      "Erro ao registrar giro:",
+      error
+    );
 
 
-    finalizarGiro(
-      premio
+    mostrarMensagem(
+      "O giro foi realizado, mas ocorreu um erro ao registrar o resultado.",
+      "error"
     );
 
   }
 
 
-  requestAnimationFrame(
-    animar
-  );
+  girando =
+    false;
+
+
+  atualizarGiros();
 
 }
 
 
 /* =====================================================
-   FINALIZAR GIRO
+   MOSTRAR RESULTADO
 ===================================================== */
 
-async function finalizarGiro(
-  premio
+function mostrarResultado(
+  premio,
+  registroId
 ){
 
-  /*
-  O saldo já foi descontado ANTES da animação.
-  Portanto recarregar durante a animação não gera
-  um segundo desconto.
-  */
+  modalPremio.textContent =
 
-
-  const agora =
-    new Date();
-
-
-  const dataHora =
-    agora.toLocaleString(
-      "pt-BR"
-    );
-
-
-  resultadoPremio.textContent =
-
-    Number(
-      premio.quantidade || 0
+    (
+      premio.quantidade ||
+      0
     ).toLocaleString(
       "pt-BR"
     ) +
@@ -2350,119 +2413,66 @@ async function finalizarGiro(
     );
 
 
-  resultadoData.textContent =
-    "🎰 Giro realizado em " +
-    dataHora;
-
-
-  resultado.classList.add(
-    "show"
-  );
-
-
-  /*
-  =====================================================
-  REGISTRO DO RESULTADO
-  =====================================================
-  */
-
-
-  try{
-
-    await addDoc(
-      collection(
-        db,
-        "resultadosRoleta"
-      ),
-      {
-
-        uid:
-          usuarioAtual.uid,
-
-        usuarioId:
-          documentoUsuario.id,
-
-        email:
-          usuarioAtual.email ||
-          "",
-
-        premioId:
-          premio.id,
-
-        premioNome:
-          premio.nome ||
-          "",
-
-        quantidade:
-          Number(
-            premio.quantidade || 0
-          ),
-
-        tipo:
-          premio.tipo ||
-          "outro",
-
-        imagem:
-          premio.imagem ||
-          "",
-
-        descricao:
-          premio.descricao ||
-          "",
-
-        entregue:
-          false,
-
-        criadoEm:
-          serverTimestamp()
-
-      }
-    );
-
-
-  }
-  catch(error){
-
-    console.error(
-      "Erro ao registrar resultado:",
-      error
-    );
-
-
-    mostrarMensagem(
-      "O prêmio saiu, mas não foi possível registrar o histórico. Avise o administrador.",
-      "error"
-    );
-
-  }
-
-
-  await carregarHistorico();
-
-
-  girando =
-    false;
+  modalImg.innerHTML =
+    "";
 
 
   if(
-    documentoUsuario
+    premio.imagem
   ){
 
-    /*
-    Atualiza o documento local para que o valor
-    permaneça correto mesmo sem recarregar.
-    */
+    const img =
+      document.createElement(
+        "img"
+      );
 
-    documentoUsuario.data().chances =
-      Number(
-        documentoUsuario.data().chances || 0
-      ) - 1;
+
+    img.src =
+      premio.imagem;
+
+
+    img.alt =
+      "Prêmio";
+
+
+    img.onerror =
+      () => {
+
+        modalImg.textContent =
+          "🎁";
+
+      };
+
+
+    modalImg.appendChild(
+      img
+    );
+
+  }
+  else{
+
+    modalImg.textContent =
+      "🎁";
 
   }
 
 
-  atualizarGiros(
-    documentoUsuario.data().chances
+  modalData.textContent =
+
+    "Giro realizado em " +
+
+    new Date()
+      .toLocaleString(
+        "pt-BR"
+      ) +
+
+    " • Registro: " +
+
+    registroId;
+
+
+  modal.classList.add(
+    "show"
   );
 
 }
@@ -2475,7 +2485,7 @@ async function finalizarGiro(
 async function carregarHistorico(){
 
   if(
-    !usuarioAtual
+    !usuarioAuth
   ){
 
     return;
@@ -2483,27 +2493,19 @@ async function carregarHistorico(){
   }
 
 
-  historico.innerHTML =
-    "<div class='vazio'>🔄 Carregando...</div>";
-
-
   try{
-
-    const referencia =
-      collection(
-        db,
-        "resultadosRoleta"
-      );
-
 
     const resultado =
       await getDocs(
         query(
-          referencia,
+          collection(
+            db,
+            "resultadosRoleta"
+          ),
           where(
-            "uid",
+            "usuarioId",
             "==",
-            usuarioAtual.uid
+            usuarioAuth.uid
           )
         )
       );
@@ -2513,8 +2515,8 @@ async function carregarHistorico(){
       resultado.empty
     ){
 
-      historico.innerHTML =
-        "<div class='vazio'>" +
+      historicoLista.innerHTML =
+        "<div class='sem-premios'>" +
         "Você ainda não realizou nenhum giro." +
         "</div>";
 
@@ -2545,16 +2547,12 @@ async function carregarHistorico(){
         ) => {
 
           const aData =
-            a.criadoEm?.toMillis
-              ? a.criadoEm.toMillis()
-              : 0;
-
+            a.criadoEm?.seconds ||
+            0;
 
           const bData =
-            b.criadoEm?.toMillis
-              ? b.criadoEm.toMillis()
-              : 0;
-
+            b.criadoEm?.seconds ||
+            0;
 
           return bData - aData;
 
@@ -2562,107 +2560,137 @@ async function carregarHistorico(){
       );
 
 
-    historico.innerHTML =
+    historicoLista.innerHTML =
       "";
 
 
-    registros
-      .slice(
-        0,
-        20
-      )
-      .forEach(
-        registro => {
+    registros.forEach(
+      registro => {
 
-          const item =
-            document.createElement(
-              "div"
-            );
-
-
-          item.className =
-            "historicoItem";
-
-
-          const premio =
-            document.createElement(
-              "div"
-            );
-
-
-          premio.className =
-            "historicoPremio";
-
-
-          premio.textContent =
-
-            Number(
-              registro.quantidade || 0
-            ).toLocaleString(
-              "pt-BR"
-            ) +
-
-            " " +
-
-            (
-              registro.premioNome ||
-              "Prêmio"
-            );
-
-
-          const data =
-            document.createElement(
-              "div"
-            );
-
-
-          data.className =
-            "historicoData";
-
-
-          let dataTexto =
-            "Data não disponível";
-
-
-          if(
-            registro.criadoEm &&
-            typeof
-            registro.criadoEm.toDate ===
-            "function"
-          ){
-
-            dataTexto =
-              registro.criadoEm
-              .toDate()
-              .toLocaleString(
-                "pt-BR"
-              );
-
-          }
-
-
-          data.textContent =
-            "🎰 " +
-            dataTexto;
-
-
-          item.appendChild(
-            premio
+        const item =
+          document.createElement(
+            "div"
           );
 
 
-          item.appendChild(
-            data
+        item.className =
+          "resultado";
+
+
+        const top =
+          document.createElement(
+            "div"
           );
 
 
-          historico.appendChild(
-            item
+        top.className =
+          "resultado-top";
+
+
+        const premio =
+          document.createElement(
+            "div"
           );
 
-        }
-      );
 
+        premio.className =
+          "resultado-premio";
+
+
+        premio.textContent =
+
+          (
+            registro.quantidade ||
+            0
+          ).toLocaleString(
+            "pt-BR"
+          ) +
+
+          " " +
+
+          (
+            registro.premioNome ||
+            "Prêmio"
+          );
+
+
+        const data =
+          document.createElement(
+            "div"
+          );
+
+
+        data.className =
+          "resultado-data";
+
+
+        data.textContent =
+          formatarData(
+            registro.criadoEm
+          );
+
+
+        top.appendChild(
+          premio
+        );
+
+        top.appendChild(
+          data
+        );
+
+
+        const status =
+          document.createElement(
+            "div"
+          );
+
+
+        status.className =
+          "resultado-status";
+
+
+        status.textContent =
+          registro.entregue === true
+            ?
+            "✅ Prêmio entregue"
+            :
+            "⏳ Aguardando entrega";
+
+
+        const id =
+          document.createElement(
+            "div"
+          );
+
+
+        id.className =
+          "resultado-id";
+
+
+        id.textContent =
+          "ID do resultado: " +
+          registro.id;
+
+
+        item.appendChild(
+          top
+        );
+
+        item.appendChild(
+          status
+        );
+
+        item.appendChild(
+          id
+        );
+
+
+        historicoLista.appendChild(
+          item
+        );
+
+      }
+    );
 
   }
   catch(error){
@@ -2673,9 +2701,9 @@ async function carregarHistorico(){
     );
 
 
-    historico.innerHTML =
-      "<div class='vazio'>" +
-      "Não foi possível carregar o histórico." +
+    historicoLista.innerHTML =
+      "<div class='sem-premios'>" +
+      "Não foi possível carregar seu histórico." +
       "</div>";
 
   }
@@ -2704,58 +2732,118 @@ onAuthStateChanged(
     }
 
 
-    usuarioAtual =
+    usuarioAuth =
       usuario;
 
 
-    try{
+    /*
+    -----------------------------------------------------
+    LOCALIZA O CADASTRO DO JOGADOR
+    -----------------------------------------------------
+    */
 
-      await carregarUsuario();
+    const cadastro =
+      await localizarUsuario(
+        usuario
+      );
 
-      await carregarPremios();
 
-      await carregarHistorico();
-
-      ajustarCanvas();
-
-    }
-    catch(error){
+    if(
+      !cadastro
+    ){
 
       console.error(
-        "Erro inicial:",
-        error
+        "Cadastro não encontrado para:",
+        {
+          uid:
+            usuario.uid,
+
+          email:
+            usuario.email
+        }
       );
 
 
       mostrarMensagem(
-        "Não foi possível carregar a Roleta.",
+        "Não foi possível encontrar seu cadastro.",
         "error"
       );
 
+
+      girosEl.textContent =
+        "0";
+
+
+      girarBtn.disabled =
+        true;
+
+
+      return;
+
     }
+
+
+    /*
+    -----------------------------------------------------
+    SALVA REFERÊNCIA CORRETA
+    -----------------------------------------------------
+    */
+
+    usuarioRef =
+      cadastro.ref;
+
+
+    usuarioDoc = {
+
+      ...cadastro.data,
+
+      _docId:
+        cadastro.id
+
+    };
+
+
+    /*
+    -----------------------------------------------------
+    CARREGA TUDO
+    -----------------------------------------------------
+    */
+
+    await carregarPremios();
+
+    await carregarHistorico();
+
+    atualizarGiros();
 
   }
 );
 
 
 /* =====================================================
-   EVENTO GIRAR
+   EVENTOS
 ===================================================== */
 
-botaoGirar.addEventListener(
+girarBtn.addEventListener(
   "click",
   girarRoleta
 );
 
 
-/* =====================================================
-   REDIMENSIONAMENTO
-===================================================== */
+document
+  .getElementById(
+    "fechar"
+  )
+  .addEventListener(
+    "click",
+    () => {
 
-window.addEventListener(
-  "resize",
-  ajustarCanvas
-);
+      modal.classList.remove(
+        "show"
+      );
+
+    }
+  );
+
 
 </script>
 
