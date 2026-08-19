@@ -7,10 +7,10 @@
 
 <meta
   name="viewport"
-  content="width=device-width, initial-scale=1.0"
+  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
 >
 
-<title>Adam Games • Login</title>
+<title>Adam Games</title>
 
 <style>
 
@@ -41,54 +41,93 @@ body{
 
   color:#fff;
 
-  display:flex;
-
-  align-items:flex-start;
-
-  justify-content:center;
-
-  padding:
-    18px
-    12px
-    30px;
-
   overflow-x:hidden;
 
-  /*
-  =====================================================
-  FUNDO
-  =====================================================
-  */
-
-  background-image:
-    url("6AB154F8-5052-4D70-B604-F3C0BEE88348.png");
-
-  background-size:cover;
-
-  background-position:center top;
-
-  background-repeat:no-repeat;
-
-  background-attachment:scroll;
+  background:
+    #073d73;
 
 }
 
 
 /* =====================================================
-   CONTAINER
+   WALLPAPER
 ===================================================== */
 
-.login-container{
+.background{
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:0;
+
+  overflow:hidden;
+
+}
+
+
+.background img{
+
+  position:absolute;
 
   width:100%;
 
-  max-width:440px;
+  height:100%;
 
-  margin:0 auto;
+  object-fit:cover;
+
+  object-position:center bottom;
+
+}
+
+
+/* =====================================================
+   LEVE ESCURECIMENTO
+===================================================== */
+
+.background::after{
+
+  content:"";
+
+  position:absolute;
+
+  inset:0;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0,20,45,.04) 0%,
+      rgba(0,20,45,.10) 55%,
+      rgba(0,15,35,.28) 100%
+    );
+
+}
+
+
+/* =====================================================
+   CONTEÚDO
+===================================================== */
+
+.page{
 
   position:relative;
 
-  z-index:2;
+  z-index:5;
+
+  width:100%;
+
+  min-height:100vh;
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  padding:
+    12px
+    12px
+    25px;
 
 }
 
@@ -97,7 +136,7 @@ body{
    LOGO
 ===================================================== */
 
-.logo{
+.logo-area{
 
   width:100%;
 
@@ -107,76 +146,75 @@ body{
 
   align-items:center;
 
-  margin:
-    0 auto
-    8px;
-
   position:relative;
 
-  z-index:3;
+  z-index:20;
+
+  margin-bottom:-8px;
+
 }
 
 
-.logo img{
+.logo-area img{
 
   display:block;
 
-  width:
-    min(
-      82vw,
-      330px
-    );
+  width:220px;
 
-  max-height:145px;
+  max-width:58vw;
+
+  height:auto;
 
   object-fit:contain;
 
-  object-position:center;
-
   filter:
     drop-shadow(
-      0 8px 14px
-      rgba(0,0,0,.40)
+      0 5px 9px
+      rgba(0,0,0,.50)
     );
 
 }
 
 
 /* =====================================================
-   CARD LOGIN
+   LOGIN
 ===================================================== */
 
 .login-card{
 
-  width:100%;
+  width:
+    min(
+      100%,
+      350px
+    );
 
   padding:
-    20px
-    22px
-    22px;
+    16px
+    17px
+    17px;
 
-  border-radius:27px;
+  border-radius:23px;
 
   background:
-    linear-gradient(
-      145deg,
-      rgba(4,45,89,.94),
-      rgba(2,24,51,.96)
-    );
+    rgba(3,30,61,.88);
 
   border:
     1px solid
-    rgba(255,255,255,.16);
+    rgba(255,255,255,.13);
 
   box-shadow:
-    0 20px 50px
-    rgba(0,0,0,.45);
+    0 14px 35px
+    rgba(0,0,0,.38);
 
   backdrop-filter:
-    blur(5px);
+    blur(4px);
 
   -webkit-backdrop-filter:
-    blur(5px);
+    blur(4px);
+
+  position:relative;
+
+  z-index:10;
 
 }
 
@@ -189,11 +227,11 @@ body{
 
   text-align:center;
 
-  font-size:24px;
+  font-size:21px;
 
   line-height:1.15;
 
-  margin-bottom:7px;
+  margin-bottom:5px;
 
 }
 
@@ -202,11 +240,11 @@ body{
 
   text-align:center;
 
-  color:#b9d4ec;
+  color:#bcd3e8;
 
-  font-size:13px;
+  font-size:12px;
 
-  margin-bottom:18px;
+  margin-bottom:13px;
 
 }
 
@@ -219,15 +257,15 @@ body{
 
   display:none;
 
-  margin-bottom:15px;
+  padding:9px;
 
-  padding:12px;
+  margin-bottom:10px;
 
-  border-radius:13px;
+  border-radius:10px;
 
   text-align:center;
 
-  font-size:13px;
+  font-size:12px;
 
   font-weight:bold;
 
@@ -238,14 +276,10 @@ body{
 
   display:block;
 
+  color:#ff9da9;
+
   background:
-    rgba(255,50,70,.15);
-
-  border:
-    1px solid
-    rgba(255,70,90,.35);
-
-  color:#ff9ba7;
+    rgba(255,40,60,.14);
 
 }
 
@@ -254,80 +288,80 @@ body{
 
   display:block;
 
-  background:
-    rgba(50,255,140,.12);
-
-  border:
-    1px solid
-    rgba(50,255,140,.3);
-
   color:#72ffae;
+
+  background:
+    rgba(0,220,100,.13);
 
 }
 
 
 /* =====================================================
-   CAMPOS
+   LABEL
 ===================================================== */
 
 label{
 
   display:block;
 
-  margin-bottom:6px;
+  margin-bottom:5px;
 
-  font-size:13px;
+  color:#d8e8f7;
+
+  font-size:12px;
 
   font-weight:bold;
 
-  color:#cce3f8;
-
 }
 
+
+/* =====================================================
+   INPUT
+===================================================== */
 
 .input{
 
   width:100%;
 
-  height:49px;
+  height:43px;
+
+  padding:
+    0 13px;
+
+  margin-bottom:10px;
+
+  border-radius:12px;
 
   border:
     1px solid
     rgba(255,255,255,.14);
 
-  border-radius:14px;
+  outline:none;
 
   background:
     rgba(0,0,0,.25);
 
   color:#fff;
 
-  padding:
-    0 15px;
-
-  font-size:15px;
-
-  outline:none;
-
-  margin-bottom:13px;
+  font-size:13px;
 
 }
 
 
 .input::placeholder{
 
-  color:#8fa8c0;
+  color:#91aac1;
 
 }
 
 
 .input:focus{
 
-  border-color:#27a1ff;
+  border-color:#28a5ff;
 
   box-shadow:
-    0 0 0 3px
-    rgba(39,161,255,.12);
+    0 0 0 2px
+    rgba(40,165,255,.12);
 
 }
 
@@ -345,7 +379,7 @@ label{
 
 .password-wrap .input{
 
-  padding-right:52px;
+  padding-right:45px;
 
 }
 
@@ -354,21 +388,21 @@ label{
 
   position:absolute;
 
-  right:7px;
+  right:3px;
 
   top:0;
 
-  width:43px;
+  width:40px;
 
-  height:49px;
+  height:43px;
 
   border:0;
 
   background:transparent;
 
-  color:#9fc4e5;
+  color:#fff;
 
-  font-size:20px;
+  font-size:17px;
 
   cursor:pointer;
 
@@ -376,44 +410,44 @@ label{
 
 
 /* =====================================================
-   BOTÃO LOGIN
+   BOTÃO ENTRAR
 ===================================================== */
 
 .login-button{
 
   width:100%;
 
-  height:51px;
+  height:45px;
 
   border:0;
 
-  border-radius:15px;
+  border-radius:13px;
 
   background:
     linear-gradient(
       135deg,
-      #22a2ff,
-      #0069db
+      #20a4ff,
+      #0873df
     );
 
-  color:white;
+  color:#fff;
 
-  font-size:16px;
+  font-size:15px;
 
   font-weight:900;
 
   cursor:pointer;
 
   box-shadow:
-    0 9px 22px
-    rgba(0,105,219,.30);
+    0 7px 17px
+    rgba(0,100,220,.28);
 
 }
 
 
 .login-button:disabled{
 
-  opacity:.6;
+  opacity:.55;
 
   cursor:not-allowed;
 
@@ -421,24 +455,22 @@ label{
 
 
 /* =====================================================
-   LINKS
+   ESQUECI SENHA
 ===================================================== */
 
 .forgot{
 
   display:block;
 
+  margin-top:9px;
+
   text-align:center;
 
-  margin-top:13px;
+  color:#66bfff;
 
-  color:#65bdff;
-
-  font-size:13px;
+  font-size:12px;
 
   font-weight:bold;
-
-  text-decoration:none;
 
   cursor:pointer;
 
@@ -455,18 +487,16 @@ label{
 
   align-items:center;
 
-  gap:10px;
+  gap:8px;
 
   margin:
-    19px
+    13px
     0
-    13px;
+    9px;
 
-  color:#a9c7e4;
+  color:#abc4db;
 
-  font-size:12px;
-
-  white-space:nowrap;
+  font-size:11px;
 
 }
 
@@ -487,29 +517,28 @@ label{
 
 
 /* =====================================================
-   LOGIN SOCIAL
+   SOCIAL
 ===================================================== */
 
 .social-buttons{
 
-  display:flex;
+  display:grid;
 
-  gap:8px;
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:6px;
 
 }
 
 
 .social-button{
 
-  flex:1;
-
-  width:100%;
-
-  height:47px;
+  height:40px;
 
   border:0;
 
-  border-radius:13px;
+  border-radius:11px;
 
   display:flex;
 
@@ -517,9 +546,9 @@ label{
 
   justify-content:center;
 
-  gap:6px;
+  gap:4px;
 
-  font-size:13px;
+  font-size:11px;
 
   font-weight:bold;
 
@@ -532,7 +561,7 @@ label{
 
   background:#fff;
 
-  color:#202124;
+  color:#222;
 
 }
 
@@ -557,11 +586,7 @@ label{
 
 .social-icon{
 
-  font-size:17px;
-
-  width:20px;
-
-  text-align:center;
+  font-size:15px;
 
 }
 
@@ -572,40 +597,43 @@ label{
 
 .create-account-box{
 
-  margin-top:14px;
+  margin-top:10px;
 
   padding:
-    12px
-    10px;
+    9px;
 
-  border-radius:15px;
+  border-radius:13px;
 
   background:
     rgba(255,255,255,.045);
 
   border:
     1px solid
-    rgba(255,255,255,.09);
-
-  text-align:center;
+    rgba(255,255,255,.08);
 
 }
 
 
 .create-account-title{
 
-  color:#e4f0fa;
+  text-align:center;
 
-  font-size:12px;
+  color:#dceaf6;
+
+  font-size:11px;
 
   font-weight:bold;
 
-  margin-bottom:8px;
+  margin-bottom:7px;
 
 }
 
 
 .create-account{
+
+  width:100%;
+
+  min-height:42px;
 
   display:flex;
 
@@ -613,24 +641,18 @@ label{
 
   justify-content:center;
 
-  min-height:47px;
-
-  width:100%;
-
-  padding:10px;
-
-  border-radius:13px;
+  border-radius:11px;
 
   background:
     linear-gradient(
       135deg,
-      #20d85d,
-      #09a844
+      #20d45d,
+      #08a946
     );
 
   color:#fff;
 
-  font-size:15px;
+  font-size:13px;
 
   font-weight:900;
 
@@ -638,18 +660,35 @@ label{
 
   cursor:pointer;
 
-  box-shadow:
-    0 7px 18px
-    rgba(0,180,70,.22);
-
 }
 
 
 .create-account-subtitle{
 
-  margin-top:7px;
+  text-align:center;
 
-  color:#a9c7dc;
+  margin-top:5px;
+
+  color:#9fbad0;
+
+  font-size:9px;
+
+}
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+.loading{
+
+  display:none;
+
+  text-align:center;
+
+  margin-top:8px;
+
+  color:#8bcaff;
 
   font-size:11px;
 
@@ -685,13 +724,13 @@ label{
 
   display:block;
 
-  text-align:center;
+  margin-top:12px;
 
-  margin-top:15px;
+  text-align:center;
 
   color:#65bdff;
 
-  font-size:13px;
+  font-size:12px;
 
   cursor:pointer;
 
@@ -699,41 +738,22 @@ label{
 
 
 /* =====================================================
-   LOADING
-===================================================== */
-
-.loading{
-
-  display:none;
-
-  text-align:center;
-
-  margin-top:12px;
-
-  color:#8fcaff;
-
-  font-size:12px;
-
-}
-
-
-/* =====================================================
-   FOOTER
+   RODAPÉ
 ===================================================== */
 
 .footer{
 
+  margin-top:9px;
+
   text-align:center;
 
-  margin-top:13px;
+  color:#d9e7f2;
 
-  color:#d2e1ef;
-
-  font-size:10px;
+  font-size:9px;
 
   text-shadow:
     0 2px 5px
-    rgba(0,0,0,.7);
+    rgba(0,0,0,.8);
 
 }
 
@@ -746,15 +766,15 @@ label{
 
   position:fixed;
 
-  right:15px;
+  right:14px;
 
-  bottom:18px;
+  bottom:15px;
 
   z-index:99999;
 
-  width:58px;
+  width:55px;
 
-  height:58px;
+  height:55px;
 
   border:0;
 
@@ -770,13 +790,13 @@ label{
 
   justify-content:center;
 
-  font-size:29px;
+  font-size:27px;
 
   cursor:pointer;
 
   box-shadow:
-    0 8px 25px
-    rgba(0,0,0,.40);
+    0 7px 20px
+    rgba(0,0,0,.38);
 
 }
 
@@ -785,17 +805,17 @@ label{
 
   position:fixed;
 
-  right:15px;
+  right:14px;
 
-  bottom:84px;
+  bottom:78px;
 
   z-index:99999;
 
   width:270px;
 
-  padding:16px;
+  padding:14px;
 
-  border-radius:20px;
+  border-radius:18px;
 
   background:
     linear-gradient(
@@ -809,7 +829,7 @@ label{
     rgba(255,255,255,.15);
 
   box-shadow:
-    0 15px 40px
+    0 15px 35px
     rgba(0,0,0,.45);
 
   display:none;
@@ -826,11 +846,11 @@ label{
 
 .adam-whatsapp-title{
 
-  font-size:15px;
+  font-size:14px;
 
   font-weight:900;
 
-  margin-bottom:11px;
+  margin-bottom:9px;
 
 }
 
@@ -841,15 +861,15 @@ label{
 
   border:0;
 
-  border-radius:13px;
+  border-radius:11px;
 
-  padding:13px 12px;
+  padding:11px;
 
-  margin-top:8px;
+  margin-top:7px;
 
   color:#fff;
 
-  font-size:14px;
+  font-size:13px;
 
   font-weight:800;
 
@@ -878,143 +898,137 @@ label{
 
   width:100%;
 
-  margin-top:9px;
+  margin-top:7px;
 
   border:0;
 
-  border-radius:12px;
+  border-radius:10px;
 
-  padding:9px;
+  padding:8px;
 
   background:
     rgba(255,255,255,.08);
 
   color:#a9c8e5;
 
-  cursor:pointer;
-
 }
 
 
 /* =====================================================
-   MOBILE
+   CELULAR
 ===================================================== */
 
 @media(max-width:480px){
 
-  body{
+  .page{
 
     padding:
-      8px
+      7px
       10px
-      25px;
-
-    align-items:flex-start;
-
-  }
-
-
-  .login-container{
-
-    max-width:400px;
+      20px;
 
   }
 
 
   /*
-  Logo fica maior e bem acima
-  da caixa.
+  LOGO MUITO MENOR
   */
 
-  .logo{
+  .logo-area{
 
-    margin-bottom:2px;
+    margin-bottom:-6px;
 
   }
 
 
-  .logo img{
+  .logo-area img{
 
-    width:
-      min(
-        90vw,
-        350px
-      );
+    width:185px;
 
-    max-height:145px;
+    max-width:52vw;
 
   }
 
 
   /*
-  CAIXA MENOR
+  CAIXA MUITO MENOR
   */
 
   .login-card{
 
-    padding:
-      17px
-      17px
-      18px;
+    width:
+      min(
+        100%,
+        330px
+      );
 
-    border-radius:24px;
+    padding:
+      14px
+      15px
+      15px;
+
+    border-radius:21px;
 
   }
 
 
   .login-card h2{
 
-    font-size:22px;
-
-    margin-bottom:5px;
+    font-size:19px;
 
   }
 
 
   .subtitle{
 
-    font-size:12px;
-
-    margin-bottom:15px;
-
-  }
-
-
-  .input{
-
-    height:47px;
+    font-size:11px;
 
     margin-bottom:11px;
 
   }
 
 
-  .password-wrap .input{
+  label{
 
-    padding-right:50px;
+    font-size:11px;
+
+  }
+
+
+  .input{
+
+    height:40px;
+
+    font-size:12px;
+
+    margin-bottom:8px;
 
   }
 
 
   .show-password{
 
-    height:47px;
+    height:40px;
+
+    font-size:16px;
 
   }
 
 
   .login-button{
 
-    height:49px;
+    height:42px;
 
-    font-size:15px;
+    font-size:14px;
 
   }
 
 
   .forgot{
 
-    margin-top:11px;
+    margin-top:8px;
+
+    font-size:11px;
 
   }
 
@@ -1022,81 +1036,50 @@ label{
   .divider{
 
     margin:
-      16px
+      11px
       0
-      11px;
+      8px;
 
   }
 
 
   .social-button{
 
-    height:44px;
-
-    font-size:12px;
-
-  }
-
-
-  .create-account-box{
-
-    margin-top:11px;
-
-    padding:
-      10px
-      9px;
-
-  }
-
-
-  .create-account{
-
-    min-height:45px;
-
-    font-size:14px;
-
-  }
-
-
-  .create-account-subtitle{
+    height:37px;
 
     font-size:10px;
 
   }
 
 
+  .create-account-box{
+
+    margin-top:8px;
+
+    padding:8px;
+
+  }
+
+
+  .create-account{
+
+    min-height:39px;
+
+    font-size:12px;
+
+  }
+
+
+  .create-account-subtitle{
+
+    font-size:8px;
+
+  }
+
+
   .footer{
 
-    margin-top:9px;
-
-  }
-
-
-  .adam-whatsapp-button{
-
-    right:13px;
-
-    bottom:16px;
-
-    width:55px;
-
-    height:55px;
-
-  }
-
-
-  .adam-whatsapp-menu{
-
-    right:13px;
-
-    bottom:80px;
-
-    width:
-      calc(
-        100% - 26px
-      );
-
-    max-width:300px;
+    font-size:8px;
 
   }
 
@@ -1104,70 +1087,81 @@ label{
 
 
 /* =====================================================
-   TELAS MUITO BAIXAS
+   IPHONES COM POUCA ALTURA
 ===================================================== */
 
 @media(
   max-width:480px
 ) and (
-  max-height:750px
+  max-height:760px
 ){
 
-  .logo img{
+  .logo-area img{
 
-    max-height:115px;
+    width:165px;
 
   }
 
 
   .login-card{
 
+    width:320px;
+
     padding:
-      15px
-      16px
-      16px;
+      12px
+      14px
+      13px;
 
   }
 
 
   .login-card h2{
 
-    font-size:20px;
+    font-size:18px;
 
   }
 
 
   .subtitle{
 
-    margin-bottom:12px;
+    margin-bottom:9px;
 
   }
 
 
   .input{
 
-    height:44px;
+    height:38px;
+
+    margin-bottom:7px;
 
   }
 
 
   .show-password{
 
-    height:44px;
+    height:38px;
 
   }
 
 
   .login-button{
 
-    height:46px;
+    height:40px;
 
   }
 
 
   .social-button{
 
-    height:41px;
+    height:35px;
+
+  }
+
+
+  .create-account{
+
+    min-height:37px;
 
   }
 
@@ -1181,14 +1175,32 @@ label{
 <body>
 
 
-<div class="login-container">
+<!-- =====================================================
+     FUNDO
+===================================================== -->
+
+<div class="background">
+
+  <img
+    src="6AB154F8-5052-4D70-B604-F3C0BEE88348.png"
+    alt=""
+  >
+
+</div>
 
 
-  <!-- =================================================
-       LOGO ADAM GAMES
-  ================================================== -->
+<!-- =====================================================
+     PÁGINA
+===================================================== -->
 
-  <div class="logo">
+<div class="page">
+
+
+  <!-- ===================================================
+       LOGO SEPARADO
+  ==================================================== -->
+
+  <div class="logo-area">
 
     <img
       src="C7623583-2C09-47D2-B1E5-CF175A142AB3.png"
@@ -1198,9 +1210,9 @@ label{
   </div>
 
 
-  <!-- =================================================
+  <!-- ===================================================
        LOGIN
-  ================================================== -->
+  ==================================================== -->
 
   <div
     class="login-card login-box"
@@ -1292,19 +1304,13 @@ label{
 
     <div class="social-buttons">
 
-
       <button
         type="button"
         class="social-button google"
         id="googleLogin"
       >
-
-        <span class="social-icon">
-          G
-        </span>
-
+        <span class="social-icon">G</span>
         Google
-
       </button>
 
 
@@ -1313,13 +1319,8 @@ label{
         class="social-button facebook"
         id="facebookLogin"
       >
-
-        <span class="social-icon">
-          f
-        </span>
-
+        <span class="social-icon">f</span>
         Facebook
-
       </button>
 
 
@@ -1328,22 +1329,12 @@ label{
         class="social-button apple"
         id="appleLogin"
       >
-
-        <span class="social-icon">
-          
-        </span>
-
+        <span class="social-icon"></span>
         Apple
-
       </button>
-
 
     </div>
 
-
-    <!-- ===============================================
-         CRIAR CONTA
-    ================================================ -->
 
     <div class="create-account-box">
 
@@ -1356,11 +1347,9 @@ label{
         class="create-account"
         id="showRegister"
       >
-
         👤
         &nbsp;
         CRIAR MINHA CONTA
-
       </a>
 
 
@@ -1381,9 +1370,9 @@ label{
   </div>
 
 
-  <!-- =================================================
+  <!-- ===================================================
        CADASTRO
-  ================================================== -->
+  ==================================================== -->
 
   <div
     class="login-card register-box"
@@ -1488,7 +1477,6 @@ label{
     🔒 © 2026 Adam Games. Todos os direitos reservados.
   </div>
 
-
 </div>
 
 
@@ -1539,7 +1527,6 @@ label{
   type="button"
   class="adam-whatsapp-button"
   id="adamWhatsAppButton"
-  aria-label="Abrir WhatsApp"
 >
   💬
 </button>
@@ -1549,7 +1536,7 @@ label{
 
 
 /* =====================================================
-   FIREBASE APP
+   FIREBASE
 ===================================================== */
 
 import {
@@ -1558,10 +1545,6 @@ import {
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
-
-/* =====================================================
-   FIREBASE AUTH
-===================================================== */
 
 import {
   getAuth,
@@ -1578,16 +1561,9 @@ from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 
-/* =====================================================
-   FIRESTORE
-===================================================== */
-
 import {
   getFirestore,
   collection,
-  query,
-  where,
-  getDocs,
   addDoc
 }
 from
@@ -1595,7 +1571,7 @@ from
 
 
 /* =====================================================
-   CONFIGURAÇÃO
+   CONFIG
 ===================================================== */
 
 const firebaseConfig = {
@@ -1647,42 +1623,35 @@ const loginBox =
     "loginBox"
   );
 
-
 const registerBox =
   document.getElementById(
     "registerBox"
   );
-
 
 const loginForm =
   document.getElementById(
     "loginForm"
   );
 
-
 const registerForm =
   document.getElementById(
     "registerForm"
   );
-
 
 const email =
   document.getElementById(
     "email"
   );
 
-
 const password =
   document.getElementById(
     "password"
   );
 
-
 const message =
   document.getElementById(
     "message"
   );
-
 
 const registerMessage =
   document.getElementById(
@@ -1691,7 +1660,7 @@ const registerMessage =
 
 
 /* =====================================================
-   MENSAGEM LOGIN
+   MENSAGENS
 ===================================================== */
 
 function mostrarMensagem(
@@ -1708,10 +1677,6 @@ function mostrarMensagem(
 }
 
 
-/* =====================================================
-   MENSAGEM CADASTRO
-===================================================== */
-
 function mostrarMensagemCadastro(
   texto,
   tipo="error"
@@ -1727,7 +1692,7 @@ function mostrarMensagemCadastro(
 
 
 /* =====================================================
-   SENHA
+   MOSTRAR SENHA
 ===================================================== */
 
 document
@@ -1746,9 +1711,11 @@ document
       password.type =
         "text";
 
-      document.getElementById(
+      document
+      .getElementById(
         "showPassword"
-      ).textContent =
+      )
+      .textContent =
         "🙈";
 
     }
@@ -1757,9 +1724,11 @@ document
       password.type =
         "password";
 
-      document.getElementById(
+      document
+      .getElementById(
         "showPassword"
-      ).textContent =
+      )
+      .textContent =
         "👁️";
 
     }
@@ -1769,7 +1738,7 @@ document
 
 
 /* =====================================================
-   CADASTRO
+   ABRIR CADASTRO
 ===================================================== */
 
 document
@@ -1817,17 +1786,12 @@ document
       "hidden"
     );
 
-    mostrarMensagemCadastro(
-      "",
-      ""
-    );
-
   }
 );
 
 
 /* =====================================================
-   LOGIN
+   LOGIN NORMAL
 ===================================================== */
 
 loginForm.addEventListener(
@@ -1839,7 +1803,6 @@ loginForm.addEventListener(
 
     const emailValue =
       email.value.trim();
-
 
     const passwordValue =
       password.value;
@@ -1897,7 +1860,6 @@ loginForm.addEventListener(
         },
         400
       );
-
 
     }
     catch(error){
@@ -2044,33 +2006,20 @@ registerForm.addEventListener(
         resultado.user;
 
 
-      /*
-      =================================================
-      ID PÚBLICO
-      6 CARACTERES
-      SEMPRE LETRAS MAIÚSCULAS + NÚMEROS
-      =================================================
-      */
-
       const caracteres =
         "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
 
 
-      let publicId =
-        "";
-
-
-      /*
-      Garante que o ID tenha
-      pelo menos uma letra e
-      pelo menos um número.
-      */
-
       const letras =
         "ABCDEFGHJKLMNPQRSTUVWXYZ";
 
+
       const numeros =
         "23456789";
+
+
+      let publicId =
+        "";
 
 
       publicId +=
@@ -2108,12 +2057,12 @@ registerForm.addEventListener(
 
       publicId =
         publicId
-          .split("")
-          .sort(
-            () =>
-              Math.random() - 0.5
-          )
-          .join("");
+        .split("")
+        .sort(
+          () =>
+            Math.random() - .5
+        )
+        .join("");
 
 
       await addDoc(
@@ -2189,9 +2138,7 @@ registerForm.addEventListener(
         700
       );
 
-
     }
-
     catch(error){
 
       console.error(
@@ -2296,7 +2243,6 @@ document
       );
 
     }
-
     catch(error){
 
       console.error(
@@ -2305,7 +2251,7 @@ document
 
 
       mostrarMensagem(
-        "Não foi possível enviar o e-mail de recuperação."
+        "Não foi possível enviar o e-mail."
       );
 
     }
@@ -2343,13 +2289,11 @@ document
       );
 
     }
-
     catch(error){
 
       console.error(
         error
       );
-
 
       mostrarMensagem(
         "Não foi possível entrar com Google."
@@ -2390,13 +2334,11 @@ document
       );
 
     }
-
     catch(error){
 
       console.error(
         error
       );
-
 
       mostrarMensagem(
         "Não foi possível entrar com Facebook."
@@ -2439,13 +2381,11 @@ document
       );
 
     }
-
     catch(error){
 
       console.error(
         error
       );
-
 
       mostrarMensagem(
         "Não foi possível entrar com Apple."
