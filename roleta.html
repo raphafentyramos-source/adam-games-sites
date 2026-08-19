@@ -14,6 +14,10 @@
 
 <style>
 
+/* =====================================================
+   RESET
+===================================================== */
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -323,7 +327,7 @@ body{
 
 
 /* =====================================================
-   IMAGENS
+   IMAGENS DOS PRÊMIOS
 ===================================================== */
 
 .roleta-imagem{
@@ -1038,6 +1042,10 @@ body{
 <div class="container">
 
 
+<!-- =====================================================
+     TOPO
+===================================================== -->
+
 <div class="logo">
 
   <h1>
@@ -1058,6 +1066,10 @@ body{
 </div>
 
 
+<!-- =====================================================
+     GIROS
+===================================================== -->
+
 <div class="giros">
 
   <div class="giros-label">
@@ -1077,6 +1089,10 @@ body{
 
 </div>
 
+
+<!-- =====================================================
+     ROLETA
+===================================================== -->
 
 <div class="roleta-area">
 
@@ -1109,6 +1125,10 @@ body{
 </div>
 
 
+<!-- =====================================================
+     BOTÃO GIRAR
+===================================================== -->
+
 <button
   class="girar"
   id="girar"
@@ -1119,6 +1139,10 @@ body{
 
 </button>
 
+
+<!-- =====================================================
+     JOGOS
+===================================================== -->
 
 <button
   class="jogos-btn"
@@ -1144,6 +1168,10 @@ body{
 ></div>
 
 
+<!-- =====================================================
+     PRÊMIOS
+===================================================== -->
+
 <div class="card">
 
   <h2>
@@ -1168,6 +1196,10 @@ body{
 </div>
 
 
+<!-- =====================================================
+     HISTÓRICO
+===================================================== -->
+
 <div class="card historico">
 
   <h2>
@@ -1191,6 +1223,10 @@ body{
 
 </div>
 
+
+<!-- =====================================================
+     MODAL
+===================================================== -->
 
 <div
   class="modal"
@@ -1277,14 +1313,15 @@ import {
   getDocs,
   updateDoc,
   addDoc,
-  serverTimestamp
+  serverTimestamp,
+  runTransaction
 }
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
 /* =====================================================
-   CONFIG
+   CONFIGURAÇÃO FIREBASE
 ===================================================== */
 
 const firebaseConfig = {
@@ -1315,8 +1352,10 @@ const app =
     firebaseConfig
   );
 
+
 const auth =
   getAuth(app);
+
 
 const db =
   getFirestore(app);
@@ -1348,50 +1387,60 @@ const girosEl =
     "giros"
   );
 
+
 const roletaEl =
   document.getElementById(
     "roleta"
   );
+
 
 const roletaBase =
   document.getElementById(
     "roletaBase"
   );
 
+
 const girarBtn =
   document.getElementById(
     "girar"
   );
+
 
 const messageEl =
   document.getElementById(
     "message"
   );
 
+
 const listaPremios =
   document.getElementById(
     "listaPremios"
   );
+
 
 const historicoLista =
   document.getElementById(
     "historicoLista"
   );
 
+
 const modal =
   document.getElementById(
     "modal"
   );
+
 
 const modalPremio =
   document.getElementById(
     "modalPremio"
   );
 
+
 const modalImg =
   document.getElementById(
     "modalImg"
   );
+
 
 const modalData =
   document.getElementById(
@@ -1430,7 +1479,7 @@ document
 
 
 /* =====================================================
-   JOGOS
+   IR PARA JOGOS
 ===================================================== */
 
 document
@@ -1461,6 +1510,7 @@ function mostrarMensagem(
   messageEl.className =
     "message";
 
+
   if(
     texto &&
     tipo
@@ -1483,26 +1533,35 @@ async function localizarUsuario(
   usuario
 ){
 
+  /*
+  =====================================================
+  PRIMEIRA TENTATIVA
+  UID
+  =====================================================
+  */
+
   try{
+
+    const consultaUID =
+      query(
+
+        collection(
+          db,
+          "admins"
+        ),
+
+        where(
+          "uid",
+          "==",
+          usuario.uid
+        )
+
+      );
+
 
     const resultadoUID =
       await getDocs(
-
-        query(
-
-          collection(
-            db,
-            "admins"
-          ),
-
-          where(
-            "uid",
-            "==",
-            usuario.uid
-          )
-
-        )
-
+        consultaUID
       );
 
 
@@ -1510,16 +1569,20 @@ async function localizarUsuario(
       !resultadoUID.empty
     ){
 
+      const documento =
+        resultadoUID.docs[0];
+
+
       return {
 
         ref:
-          resultadoUID.docs[0].ref,
+          documento.ref,
 
         id:
-          resultadoUID.docs[0].id,
+          documento.id,
 
         data:
-          resultadoUID.docs[0].data()
+          documento.data()
 
       };
 
@@ -1529,12 +1592,19 @@ async function localizarUsuario(
   catch(error){
 
     console.error(
-      "Erro buscando UID:",
+      "Erro buscando usuário pelo UID:",
       error
     );
 
   }
 
+
+  /*
+  =====================================================
+  SEGUNDA TENTATIVA
+  EMAIL
+  =====================================================
+  */
 
   if(
     usuario.email
@@ -1542,26 +1612,32 @@ async function localizarUsuario(
 
     try{
 
-      const resultadoEmail =
-        await getDocs(
+      const email =
+        usuario.email
+          .trim()
+          .toLowerCase();
 
-          query(
 
-            collection(
-              db,
-              "admins"
-            ),
+      const consultaEmail =
+        query(
 
-            where(
-              "email",
-              "==",
-              usuario.email
-                .trim()
-                .toLowerCase()
-            )
+          collection(
+            db,
+            "admins"
+          ),
 
+          where(
+            "email",
+            "==",
+            email
           )
 
+        );
+
+
+      const resultadoEmail =
+        await getDocs(
+          consultaEmail
         );
 
 
@@ -1569,16 +1645,20 @@ async function localizarUsuario(
         !resultadoEmail.empty
       ){
 
+        const documento =
+          resultadoEmail.docs[0];
+
+
         return {
 
           ref:
-            resultadoEmail.docs[0].ref,
+            documento.ref,
 
           id:
-            resultadoEmail.docs[0].id,
+            documento.id,
 
           data:
-            resultadoEmail.docs[0].data()
+            documento.data()
 
         };
 
@@ -1588,7 +1668,7 @@ async function localizarUsuario(
     catch(error){
 
       console.error(
-        "Erro buscando email:",
+        "Erro buscando usuário pelo email:",
         error
       );
 
@@ -1603,7 +1683,7 @@ async function localizarUsuario(
 
 
 /* =====================================================
-   GIROS
+   ATUALIZAR GIROS
 ===================================================== */
 
 function atualizarGiros(){
@@ -1636,8 +1716,11 @@ function atualizarGiros(){
 
 
   girarBtn.disabled =
+
     quantidade <= 0 ||
+
     girando ||
+
     premios.length === 0;
 
 }
@@ -1662,20 +1745,41 @@ async function carregarPremios(){
   try{
 
     /*
-    Carrega a coleção inteira.
+    =====================================================
+    IMPORTANTE
 
-    O filtro é feito no navegador para evitar
-    problemas de consulta/regras/índice.
+    NÃO fazemos mais:
+
+    getDocs(collection(db,"premiosRoleta"))
+
+    porque a Rule exige que usuários normais
+    só leiam documentos com ativo == true.
+
+    A consulta agora já informa ao Firestore
+    que queremos somente os ativos.
+    =====================================================
     */
 
-    const resultado =
-      await getDocs(
+    const consulta =
+      query(
 
         collection(
           db,
           "premiosRoleta"
+        ),
+
+        where(
+          "ativo",
+          "==",
+          true
         )
 
+      );
+
+
+    const resultado =
+      await getDocs(
+        consulta
       );
 
 
@@ -1690,18 +1794,47 @@ async function carregarPremios(){
             ...documento.data()
 
           })
-        )
-        .filter(
-          premio =>
-            premio.ativo === true ||
-            premio.ativo === undefined
         );
 
 
+    /*
+    =====================================================
+    GARANTIA EXTRA
+    =====================================================
+    */
+
+    premios =
+      premios.filter(
+        premio =>
+          premio.ativo === true
+      );
+
+
     console.log(
-      "PRÊMIOS CARREGADOS:",
+      "PRÊMIOS DA ROLETA:",
       premios
     );
+
+
+    if(
+      premios.length === 0
+    ){
+
+      listaPremios.innerHTML =
+
+        "<div class='sem-premios'>" +
+
+        "⚠️ Nenhum prêmio ativo foi cadastrado." +
+
+        "</div>";
+
+      desenharRoleta();
+
+      atualizarGiros();
+
+      return;
+
+    }
 
 
     desenharRoleta();
@@ -1758,6 +1891,7 @@ function desenharRoleta(){
 
   roletaBase.innerHTML =
     "";
+
 
   roletaBase.style.background =
     "";
@@ -1843,6 +1977,12 @@ function desenharRoleta(){
     `conic-gradient(${partes.join(",")})`;
 
 
+  /*
+  =====================================================
+  POSIÇÃO DAS IMAGENS
+  =====================================================
+  */
+
   const raio =
     31;
 
@@ -1854,10 +1994,14 @@ function desenharRoleta(){
     ) => {
 
       const meio =
-        indice *
-        angulo +
-        angulo /
-        2;
+        (
+          indice *
+          angulo
+        ) +
+        (
+          angulo /
+          2
+        );
 
 
       if(
@@ -1933,7 +2077,9 @@ function mostrarPossibilidades(){
     listaPremios.innerHTML =
 
       "<div class='sem-premios'>" +
+
       "Nenhum prêmio ativo na roleta." +
+
       "</div>";
 
     return;
@@ -2060,6 +2206,7 @@ function mostrarPossibilidades(){
         nome
       );
 
+
       info.appendChild(
         tipo
       );
@@ -2068,6 +2215,7 @@ function mostrarPossibilidades(){
       item.appendChild(
         imagemBox
       );
+
 
       item.appendChild(
         info
@@ -2085,7 +2233,7 @@ function mostrarPossibilidades(){
 
 
 /* =====================================================
-   SORTEIO
+   SORTEAR PRÊMIO
 ===================================================== */
 
 function escolherPremio(){
@@ -2113,10 +2261,19 @@ function escolherPremio(){
 
 
       total +=
-        Number.isFinite(peso) &&
+
+        Number.isFinite(
+          peso
+        ) &&
         peso > 0
-          ? peso
-          : 1;
+
+          ?
+
+        peso
+
+          :
+
+        1;
 
     }
   );
@@ -2139,12 +2296,18 @@ function escolherPremio(){
 
     sorteio -=
 
-      Number.isFinite(peso) &&
+      Number.isFinite(
+        peso
+      ) &&
       peso > 0
 
-        ? peso
+        ?
 
-        : 1;
+      peso
+
+        :
+
+      1;
 
 
     if(
@@ -2166,7 +2329,7 @@ function escolherPremio(){
 
 
 /* =====================================================
-   DATA
+   FORMATAR DATA
 ===================================================== */
 
 function formatarData(
@@ -2194,6 +2357,7 @@ function formatarData(
       valor.toDate();
 
   }
+
   else if(
     typeof valor ===
     "number"
@@ -2205,6 +2369,7 @@ function formatarData(
       );
 
   }
+
   else if(
     typeof valor.seconds ===
     "number"
@@ -2217,6 +2382,7 @@ function formatarData(
       );
 
   }
+
   else{
 
     data =
@@ -2304,14 +2470,20 @@ function obterTempoHistorico(
   return Number.isNaN(
     tempo
   )
-    ? 0
-    : tempo;
+
+    ?
+
+    0
+
+    :
+
+    tempo;
 
 }
 
 
 /* =====================================================
-   ELEMENTO HISTÓRICO
+   ELEMENTO DO HISTÓRICO
 ===================================================== */
 
 function criarElementoHistorico(
@@ -2385,6 +2557,7 @@ function criarElementoHistorico(
     premio
   );
 
+
   top.appendChild(
     data
   );
@@ -2444,9 +2617,11 @@ function criarElementoHistorico(
     top
   );
 
+
   item.appendChild(
     status
   );
+
 
   item.appendChild(
     info
@@ -2478,7 +2653,9 @@ async function carregarHistorico(){
     historicoLista.innerHTML =
 
       "<div class='sem-premios'>" +
+
       "Nenhum resultado registrado ainda." +
+
       "</div>";
 
     return;
@@ -2491,9 +2668,9 @@ async function carregarHistorico(){
 
 
   /*
-  ======================================================
+  =====================================================
   HISTÓRICO NOVO
-  ======================================================
+  =====================================================
   */
 
   try{
@@ -2554,9 +2731,9 @@ async function carregarHistorico(){
 
 
   /*
-  ======================================================
+  =====================================================
   HISTÓRICO ANTIGO
-  ======================================================
+  =====================================================
   */
 
   try{
@@ -2700,6 +2877,12 @@ async function carregarHistorico(){
 
 async function girarRoleta(){
 
+  /*
+  =====================================================
+  BLOQUEIO CONTRA DUPLO CLIQUE
+  =====================================================
+  */
+
   if(
     girando
   ){
@@ -2709,13 +2892,20 @@ async function girarRoleta(){
   }
 
 
+  /*
+  =====================================================
+  VERIFICAÇÃO DO USUÁRIO
+  =====================================================
+  */
+
   if(
+    !usuarioAuth ||
     !usuarioDoc ||
     !usuarioRef
   ){
 
     mostrarMensagem(
-      "Não foi possível encontrar seu cadastro.",
+      "Aguarde o carregamento do seu cadastro.",
       "error"
     );
 
@@ -2723,6 +2913,12 @@ async function girarRoleta(){
 
   }
 
+
+  /*
+  =====================================================
+  VERIFICAÇÃO DE GIROS
+  =====================================================
+  */
 
   const girosAtuais =
     Number(
@@ -2743,6 +2939,12 @@ async function girarRoleta(){
 
   }
 
+
+  /*
+  =====================================================
+  VERIFICAÇÃO DE PRÊMIOS
+  =====================================================
+  */
 
   if(
     premios.length === 0
@@ -2768,6 +2970,12 @@ async function girarRoleta(){
   }
 
 
+  /*
+  =====================================================
+  INICIA GIRO
+  =====================================================
+  */
+
   girando =
     true;
 
@@ -2780,6 +2988,12 @@ async function girarRoleta(){
     ""
   );
 
+
+  /*
+  =====================================================
+  ESCOLHE PRÊMIO
+  =====================================================
+  */
 
   const premio =
     escolherPremio();
@@ -2798,6 +3012,12 @@ async function girarRoleta(){
 
   }
 
+
+  /*
+  =====================================================
+  CALCULA POSIÇÃO
+  =====================================================
+  */
 
   const indice =
     premios.findIndex(
@@ -2824,6 +3044,15 @@ async function girarRoleta(){
       2
     );
 
+
+  /*
+  =====================================================
+  PONTEIRO FICA NO TOPO
+
+  A roleta precisa parar fazendo o centro
+  da fatia escolhida ficar exatamente no ponteiro.
+  =====================================================
+  */
 
   const alvo =
     360 -
@@ -2860,6 +3089,12 @@ async function girarRoleta(){
     rotacaoFinal;
 
 
+  /*
+  =====================================================
+  AGUARDA A ANIMAÇÃO
+  =====================================================
+  */
+
   await new Promise(
     resolve =>
       setTimeout(
@@ -2870,32 +3105,87 @@ async function girarRoleta(){
 
 
   /*
-  ======================================================
-  DESCONTA O GIRO
-  ======================================================
+  =====================================================
+  DESCONTA GIRO COM TRANSAÇÃO
+
+  Isso evita problemas se houver:
+  - dois cliques;
+  - duas abas;
+  - atualização simultânea;
+  - saldo alterado em outro lugar.
+  =====================================================
   */
 
-  const novoSaldo =
-    Math.max(
-      0,
-      girosAtuais - 1
-    );
+  let novoSaldo;
 
 
   try{
 
-    await updateDoc(
+    novoSaldo =
+      await runTransaction(
+        db,
+        async transaction => {
 
-      usuarioRef,
+          const snapshot =
+            await transaction.get(
+              usuarioRef
+            );
 
-      {
 
-        girosRoleta:
-          novoSaldo
+          if(
+            !snapshot.exists()
+          ){
 
-      }
+            throw new Error(
+              "Cadastro do usuário não encontrado."
+            );
 
-    );
+          }
+
+
+          const dados =
+            snapshot.data();
+
+
+          const saldoAtual =
+            Number(
+              dados.girosRoleta || 0
+            );
+
+
+          if(
+            saldoAtual <= 0
+          ){
+
+            throw new Error(
+              "Você não possui mais giros disponíveis."
+            );
+
+          }
+
+
+          const saldoNovo =
+            saldoAtual - 1;
+
+
+          transaction.update(
+
+            usuarioRef,
+
+            {
+
+              girosRoleta:
+                saldoNovo
+
+            }
+
+          );
+
+
+          return saldoNovo;
+
+        }
+      );
 
 
     usuarioDoc.girosRoleta =
@@ -2905,18 +3195,26 @@ async function girarRoleta(){
   catch(error){
 
     console.error(
-      "Erro descontando giro:",
+      "Erro ao descontar giro:",
       error
     );
 
 
-    /*
-    Mantém a experiência funcionando
-    mesmo se houver erro secundário.
-    */
+    girando =
+      false;
 
-    usuarioDoc.girosRoleta =
-      novoSaldo;
+
+    atualizarGiros();
+
+
+    mostrarMensagem(
+      error.message ||
+      "Não foi possível confirmar o giro.",
+      "error"
+    );
+
+
+    return;
 
   }
 
@@ -2925,9 +3223,9 @@ async function girarRoleta(){
 
 
   /*
-  ======================================================
+  =====================================================
   REGISTRO DO PRÊMIO
-  ======================================================
+  =====================================================
   */
 
   const agora =
@@ -3004,9 +3302,9 @@ async function girarRoleta(){
 
 
   /*
-  ======================================================
+  =====================================================
   HISTÓRICO PRINCIPAL
-  ======================================================
+  =====================================================
   */
 
   try{
@@ -3025,8 +3323,8 @@ async function girarRoleta(){
   }
   catch(error){
 
-    console.warn(
-      "Não foi possível salvar historicoRoleta:",
+    console.error(
+      "Erro salvando historicoRoleta:",
       error
     );
 
@@ -3034,9 +3332,9 @@ async function girarRoleta(){
 
 
   /*
-  ======================================================
-  COMPATIBILIDADE COM SISTEMA ANTIGO
-  ======================================================
+  =====================================================
+  COMPATIBILIDADE COM RESULTADOS ANTIGOS
+  =====================================================
   */
 
   try{
@@ -3117,18 +3415,27 @@ async function girarRoleta(){
 
 
   /*
-  ======================================================
-  MOSTRA O RESULTADO
-  ======================================================
-  */
+  =====================================================
+  MOSTRAR RESULTADO
+  ===================================================== */
 
   mostrarResultado(
     premio
   );
 
 
-  carregarHistorico();
+  /*
+  =====================================================
+  ATUALIZA HISTÓRICO
+  ===================================================== */
 
+  await carregarHistorico();
+
+
+  /*
+  =====================================================
+  LIBERA BOTÃO
+  ===================================================== */
 
   girando =
     false;
@@ -3248,6 +3555,17 @@ document
 
 
 /* =====================================================
+   CORREÇÃO IMPORTANTE
+   BOTÃO GIRAR ROLETA
+===================================================== */
+
+girarBtn.addEventListener(
+  "click",
+  girarRoleta
+);
+
+
+/* =====================================================
    AUTENTICAÇÃO
 ===================================================== */
 
@@ -3256,6 +3574,12 @@ onAuthStateChanged(
   auth,
 
   async usuario => {
+
+    /*
+    =====================================================
+    NÃO AUTENTICADO
+    =====================================================
+    */
 
     if(
       !usuario
@@ -3274,6 +3598,12 @@ onAuthStateChanged(
       usuario;
 
 
+    /*
+    =====================================================
+    CARREGA CADASTRO
+    =====================================================
+    */
+
     try{
 
       const cadastro =
@@ -3291,10 +3621,20 @@ onAuthStateChanged(
           "error"
         );
 
+
+        atualizarGiros();
+
+
         return;
 
       }
 
+
+      /*
+      ===================================================
+      GUARDA REFERÊNCIA DO FIRESTORE
+      ===================================================
+      */
 
       usuarioRef =
         cadastro.ref;
@@ -3310,9 +3650,29 @@ onAuthStateChanged(
       };
 
 
+      /*
+      ===================================================
+      CARREGA PRÊMIOS
+      ===================================================
+      */
+
       await carregarPremios();
 
+
+      /*
+      ===================================================
+      CARREGA HISTÓRICO
+      ===================================================
+      */
+
       await carregarHistorico();
+
+
+      /*
+      ===================================================
+      ATUALIZA INTERFACE
+      ===================================================
+      */
 
       atualizarGiros();
 
@@ -3320,7 +3680,7 @@ onAuthStateChanged(
     catch(error){
 
       console.error(
-        "ERRO GERAL:",
+        "ERRO GERAL DA ROLETA:",
         error
       );
 
@@ -3329,6 +3689,9 @@ onAuthStateChanged(
         "Ocorreu um erro ao carregar a roleta.",
         "error"
       );
+
+
+      atualizarGiros();
 
     }
 
