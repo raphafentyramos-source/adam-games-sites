@@ -36,7 +36,6 @@ body{
   color:#fff;
 
   background:
-
     radial-gradient(
       circle at 10% 0%,
       rgba(0,190,120,.35),
@@ -57,7 +56,6 @@ body{
     );
 
 }
-
 
 .page{
 
@@ -89,11 +87,9 @@ body{
 
 }
 
-
 .back{
 
   width:45px;
-
   height:45px;
 
   border:0;
@@ -111,7 +107,6 @@ body{
 
 }
 
-
 .title{
 
   text-align:center;
@@ -120,7 +115,6 @@ body{
     0 2px 8px #000;
 
 }
-
 
 .title small{
 
@@ -132,7 +126,6 @@ body{
 
 }
 
-
 .title strong{
 
   font-size:20px;
@@ -141,7 +134,7 @@ body{
 
 
 /* =====================================================
-   CABEÇALHO
+   HERO
 ===================================================== */
 
 .hero{
@@ -163,13 +156,11 @@ body{
 
 }
 
-
 .hero-icon{
 
   font-size:45px;
 
 }
-
 
 .hero h1{
 
@@ -178,7 +169,6 @@ body{
   font-size:30px;
 
 }
-
 
 .hero p{
 
@@ -210,7 +200,6 @@ body{
 
 }
 
-
 .resumo-card{
 
   padding:15px 8px;
@@ -228,7 +217,6 @@ body{
 
 }
 
-
 .resumo-numero{
 
   font-size:27px;
@@ -236,7 +224,6 @@ body{
   font-weight:900;
 
 }
-
 
 .resumo-label{
 
@@ -250,13 +237,11 @@ body{
 
 }
 
-
 .pendente-numero{
 
   color:#ffd52b;
 
 }
-
 
 .entregue-numero{
 
@@ -283,7 +268,6 @@ body{
 
 }
 
-
 .filtro{
 
   height:46px;
@@ -303,7 +287,6 @@ body{
 
 }
 
-
 .filtro.ativo{
 
   background:
@@ -314,7 +297,6 @@ body{
     );
 
 }
-
 
 .busca{
 
@@ -343,7 +325,6 @@ body{
 
 }
 
-
 .busca::placeholder{
 
   color:#789ab2;
@@ -361,7 +342,6 @@ body{
 
 }
 
-
 .sem-resultados{
 
   padding:30px 15px;
@@ -374,6 +354,8 @@ body{
 
   background:
     rgba(2,27,55,.9);
+
+  line-height:1.5;
 
 }
 
@@ -403,7 +385,6 @@ body{
 
 }
 
-
 .pedido-top{
 
   display:flex;
@@ -416,7 +397,6 @@ body{
 
 }
 
-
 .pedido-numero{
 
   color:#72c9ff;
@@ -428,7 +408,6 @@ body{
   word-break:break-all;
 
 }
-
 
 .status{
 
@@ -446,7 +425,6 @@ body{
 
 }
 
-
 .status-pendente{
 
   background:
@@ -455,7 +433,6 @@ body{
   color:#ffd52b;
 
 }
-
 
 .status-entregue{
 
@@ -466,13 +443,11 @@ body{
 
 }
 
-
 .usuario{
 
   margin-top:14px;
 
 }
-
 
 .usuario-nome{
 
@@ -481,7 +456,6 @@ body{
   font-weight:900;
 
 }
-
 
 .usuario-email{
 
@@ -494,7 +468,6 @@ body{
   word-break:break-all;
 
 }
-
 
 .recompensa{
 
@@ -509,7 +482,6 @@ body{
 
 }
 
-
 .recompensa-titulo{
 
   color:#9fc4dc;
@@ -521,7 +493,6 @@ body{
   letter-spacing:1px;
 
 }
-
 
 .recompensa-nome{
 
@@ -535,7 +506,6 @@ body{
 
 }
 
-
 .recompensa-qtd{
 
   margin-top:3px;
@@ -546,17 +516,15 @@ body{
 
 }
 
-
 .detalhes{
 
   margin-top:12px;
 
   display:grid;
 
-  gap:6px;
+  gap:7px;
 
 }
-
 
 .detalhe{
 
@@ -572,7 +540,6 @@ body{
 
 }
 
-
 .detalhe strong{
 
   color:#d9edf8;
@@ -582,7 +549,6 @@ body{
   word-break:break-all;
 
 }
-
 
 .entregar{
 
@@ -613,7 +579,6 @@ body{
 
 }
 
-
 .entregar:disabled{
 
   opacity:.45;
@@ -621,7 +586,6 @@ body{
   cursor:not-allowed;
 
 }
-
 
 .entrega-info{
 
@@ -637,6 +601,32 @@ body{
   color:#73e7a4;
 
   font-size:12px;
+
+  line-height:1.5;
+
+}
+
+
+/* =====================================================
+   ERRO
+===================================================== */
+
+.erro-box{
+
+  padding:18px;
+
+  border-radius:18px;
+
+  background:
+    rgba(255,50,70,.1);
+
+  border:
+    1px solid
+    rgba(255,100,120,.25);
+
+  color:#ffb0b8;
+
+  text-align:center;
 
   line-height:1.5;
 
@@ -689,20 +679,17 @@ body{
 
 }
 
-
 .mensagem.show{
 
   display:block;
 
 }
 
-
 .mensagem.sucesso{
 
   color:#72ffad;
 
 }
-
 
 .mensagem.erro{
 
@@ -716,15 +703,6 @@ body{
 ===================================================== */
 
 @media(max-width:560px){
-
-  .resumo{
-
-    grid-template-columns:
-      1fr
-      1fr
-      1fr;
-
-  }
 
   .resumo-card{
 
@@ -814,8 +792,8 @@ body{
     </h1>
 
     <p>
-      Gerencie as recompensas que precisam
-      ser entregues aos jogadores.
+      Gerencie todos os prêmios e pedidos
+      que precisam ser entregues aos jogadores.
     </p>
 
   </div>
@@ -916,7 +894,7 @@ body{
     class="busca"
     id="busca"
     type="search"
-    placeholder="🔎 Buscar por nome, e-mail ou ID..."
+    placeholder="🔎 Buscar nome, e-mail, recompensa ou ID..."
   >
 
 
@@ -930,7 +908,7 @@ body{
 
     <div class="sem-resultados">
 
-      🔄 Carregando pedidos...
+      🔄 Carregando entregas...
 
     </div>
 
@@ -986,7 +964,7 @@ from
 
 
 /* =====================================================
-   CONFIG
+   FIREBASE CONFIG
 ===================================================== */
 
 const firebaseConfig = {
@@ -1035,42 +1013,35 @@ const lista =
     "lista"
   );
 
-
 const busca =
   document.getElementById(
     "busca"
   );
-
 
 const totalPedidos =
   document.getElementById(
     "totalPedidos"
   );
 
-
 const totalPendentes =
   document.getElementById(
     "totalPendentes"
   );
-
 
 const totalEntregues =
   document.getElementById(
     "totalEntregues"
   );
 
-
 const filtroPendentes =
   document.getElementById(
     "filtroPendentes"
   );
 
-
 const filtroTodos =
   document.getElementById(
     "filtroTodos"
   );
-
 
 const mensagem =
   document.getElementById(
@@ -1082,7 +1053,7 @@ const mensagem =
    ESTADO
 ===================================================== */
 
-let usuarioAdmin =
+let adminAtual =
   null;
 
 let pedidos =
@@ -1131,7 +1102,7 @@ function mostrarMensagem(
 
 
 /* =====================================================
-   DATA
+   CONVERTER DATA
 ===================================================== */
 
 function converterData(
@@ -1233,14 +1204,56 @@ function formatarData(
 
 
 /* =====================================================
-   CARREGAR PEDIDOS
+   CARREGAR ENTREGAS
 ===================================================== */
 
-async function carregarPedidos(){
+async function carregarEntregas(){
+
+  lista.innerHTML = `
+
+    <div class="sem-resultados">
+
+      🔄 Carregando entregas...
+
+    </div>
+
+  `;
+
 
   try{
 
-    const resultado =
+    /*
+    -----------------------------------------------------
+    PRIMEIRA COLEÇÃO
+    -----------------------------------------------------
+
+    A coleção principal será:
+
+      entregas
+
+    */
+
+    const resultadoEntregas =
+      await getDocs(
+        collection(
+          db,
+          "entregas"
+        )
+      );
+
+
+    /*
+    -----------------------------------------------------
+    SEGUNDA COLEÇÃO
+    -----------------------------------------------------
+
+    Também carregamos pedidosRecompensas.
+
+    Isso mantém compatibilidade com os pedidos
+    que criarmos posteriormente pela loja.
+    */
+
+    const resultadoPedidos =
       await getDocs(
         collection(
           db,
@@ -1249,14 +1262,33 @@ async function carregarPedidos(){
       );
 
 
-    pedidos =
-      resultado.docs
+    const listaEntregas =
 
-      .map(
+      resultadoEntregas.docs.map(
         documento => ({
 
           id:
             documento.id,
+
+          origem:
+            "entregas",
+
+          ...documento.data()
+
+        })
+      );
+
+
+    const listaPedidos =
+
+      resultadoPedidos.docs.map(
+        documento => ({
+
+          id:
+            documento.id,
+
+          origem:
+            "pedidosRecompensas",
 
           ...documento.data()
 
@@ -1265,7 +1297,57 @@ async function carregarPedidos(){
 
 
     /*
-    Ordena os mais recentes primeiro.
+    -----------------------------------------------------
+    JUNTA AS DUAS COLEÇÕES
+    -----------------------------------------------------
+    */
+
+    pedidos =
+      [
+        ...listaEntregas,
+        ...listaPedidos
+      ];
+
+
+    /*
+    Remove possíveis duplicados.
+    */
+
+    const mapa =
+      new Map();
+
+
+    pedidos.forEach(
+      pedido => {
+
+        const chave =
+
+          pedido.id +
+          "_" +
+          pedido.uid +
+          "_" +
+          pedido.origem;
+
+
+        mapa.set(
+          chave,
+          pedido
+        );
+
+      }
+    );
+
+
+    pedidos =
+      Array.from(
+        mapa.values()
+      );
+
+
+    /*
+    -----------------------------------------------------
+    ORDENA MAIS RECENTES PRIMEIRO
+    -----------------------------------------------------
     */
 
     pedidos.sort(
@@ -1276,13 +1358,17 @@ async function carregarPedidos(){
 
         const aData =
           converterData(
-            a.criadoEm
+            a.criadoEm ||
+            a.dataHora ||
+            a.solicitadoEm
           )?.getTime() || 0;
 
 
         const bData =
           converterData(
-            b.criadoEm
+            b.criadoEm ||
+            b.dataHora ||
+            b.solicitadoEm
           )?.getTime() || 0;
 
 
@@ -1301,20 +1387,26 @@ async function carregarPedidos(){
   catch(error){
 
     console.error(
-      "Erro ao carregar pedidos:",
+      "Erro ao carregar entregas:",
       error
     );
 
 
     lista.innerHTML = `
 
-      <div class="sem-resultados">
+      <div class="erro-box">
 
-        ❌ Não foi possível carregar os pedidos.
+        ❌ <b>Não foi possível carregar as entregas.</b>
 
         <br><br>
 
-        Verifique as Rules do Firestore.
+        ${error.message || "Erro desconhecido."}
+
+        <br><br>
+
+        Se ainda não existe nenhuma entrega,
+        isso é normal. Quando a primeira recompensa
+        for criada, ela aparecerá aqui.
 
       </div>
 
@@ -1336,6 +1428,9 @@ function atualizarResumo(){
       pedido =>
         pedido.status !==
         "entregue"
+        &&
+        pedido.entregue !==
+        true
     );
 
 
@@ -1344,6 +1439,9 @@ function atualizarResumo(){
       pedido =>
         pedido.status ===
         "entregue"
+        ||
+        pedido.entregue ===
+        true
     );
 
 
@@ -1367,22 +1465,35 @@ function atualizarResumo(){
 
 function pedidosFiltrados(){
 
-  let resultado =
+  let resultado;
 
+
+  if(
     filtroAtual ===
     "pendentes"
+  ){
 
-      ?
+    resultado =
+      pedidos.filter(
+        pedido =>
 
-    pedidos.filter(
-      pedido =>
-        pedido.status !==
-        "entregue"
-    )
+          pedido.status !==
+          "entregue"
 
-      :
+          &&
 
-    [...pedidos];
+          pedido.entregue !==
+          true
+      );
+
+  }
+
+  else{
+
+    resultado =
+      [...pedidos];
+
+  }
 
 
   const termo =
@@ -1403,13 +1514,21 @@ function pedidosFiltrados(){
 
             pedido.id,
 
+            pedido.uid,
+
             pedido.usuarioId,
 
             pedido.usuarioEmail,
 
+            pedido.email,
+
             pedido.usuarioNome,
 
+            pedido.nome,
+
             pedido.recompensaNome,
+
+            pedido.premioNome,
 
             pedido.tipo,
 
@@ -1467,14 +1586,16 @@ function renderizar(){
       "sem-resultados";
 
 
-    vazio.textContent =
+    vazio.innerHTML =
 
       filtroAtual ===
       "pendentes"
 
         ?
 
-      "🎉 Não existem entregas pendentes."
+      "🎉 <b>Nenhuma entrega pendente.</b><br><br>" +
+      "Quando houver um prêmio para entregar, " +
+      "ele aparecerá automaticamente aqui."
 
         :
 
@@ -1525,8 +1646,14 @@ function criarPedido(
 
 
   const entregue =
+
     pedido.status ===
-    "entregue";
+    "entregue"
+
+    ||
+
+    pedido.entregue ===
+    true;
 
 
   /*
@@ -1556,6 +1683,7 @@ function criarPedido(
 
 
   numero.textContent =
+
     "PEDIDO #" +
     pedido.id;
 
@@ -1609,6 +1737,50 @@ function criarPedido(
 
   /*
   -----------------------------------------------------
+  ORIGEM
+  -----------------------------------------------------
+  */
+
+  const origem =
+    document.createElement(
+      "div"
+    );
+
+
+  origem.style.cssText = `
+
+    margin-top:10px;
+
+    color:#72c9ff;
+
+    font-size:11px;
+
+    font-weight:bold;
+
+  `;
+
+
+  origem.textContent =
+
+    pedido.origem ===
+    "pedidosRecompensas"
+
+      ?
+
+    "🛍️ LOJA / PEDIDO"
+
+      :
+
+    "📦 ENTREGA";
+
+
+  card.appendChild(
+    origem
+  );
+
+
+  /*
+  -----------------------------------------------------
   USUÁRIO
   -----------------------------------------------------
   */
@@ -1639,6 +1811,7 @@ function criarPedido(
 
     (
       pedido.usuarioNome ||
+      pedido.nome ||
       "Usuário"
     );
 
@@ -1657,9 +1830,13 @@ function criarPedido(
 
     pedido.usuarioEmail ||
 
+    pedido.email ||
+
+    pedido.uid ||
+
     pedido.usuarioId ||
 
-    "Usuário sem e-mail";
+    "Usuário sem identificação";
 
 
   usuario.appendChild(
@@ -1723,36 +1900,51 @@ function criarPedido(
 
     (
       pedido.recompensaNome ||
+
+      pedido.premioNome ||
+
+      pedido.recompensa ||
+
+      pedido.nomeRecompensa ||
+
       "Recompensa"
     );
 
 
-  const recompensaQtd =
-    document.createElement(
-      "div"
+  const quantidade =
+    pedido.quantidade;
+
+
+  if(
+    quantidade != null
+  ){
+
+    const qtd =
+      document.createElement(
+        "div"
+      );
+
+
+    qtd.className =
+      "recompensa-qtd";
+
+
+    qtd.textContent =
+
+      "Quantidade: " +
+
+      Number(
+        quantidade
+      ).toLocaleString(
+        "pt-BR"
+      );
+
+
+    recompensa.appendChild(
+      qtd
     );
 
-
-  recompensaQtd.className =
-    "recompensa-qtd";
-
-
-  recompensaQtd.textContent =
-
-    pedido.quantidade != null
-
-      ?
-
-    "Quantidade: " +
-    Number(
-      pedido.quantidade
-    ).toLocaleString(
-      "pt-BR"
-    )
-
-      :
-
-    "";
+  }
 
 
   recompensa.appendChild(
@@ -1763,17 +1955,6 @@ function criarPedido(
   recompensa.appendChild(
     recompensaNome
   );
-
-
-  if(
-    recompensaQtd.textContent
-  ){
-
-    recompensa.appendChild(
-      recompensaQtd
-    );
-
-  }
 
 
   card.appendChild(
@@ -1809,7 +1990,9 @@ function criarPedido(
     detalhes,
     "Solicitado em",
     formatarData(
-      pedido.criadoEm
+      pedido.criadoEm ||
+      pedido.dataHora ||
+      pedido.solicitadoEm
     )
   );
 
@@ -1819,14 +2002,19 @@ function criarPedido(
   ){
 
     adicionarDetalhe(
+
       detalhes,
+
       "Custo",
+
       Number(
         pedido.custoMoedas
       ).toLocaleString(
         "pt-BR"
       ) +
+
       " Adam Coins"
+
     );
 
   }
@@ -1839,7 +2027,7 @@ function criarPedido(
 
   /*
   -----------------------------------------------------
-  BOTÃO
+  BOTÃO ENTREGAR
   -----------------------------------------------------
   */
 
@@ -1870,7 +2058,7 @@ function criarPedido(
       () => {
 
         marcarComoEntregue(
-          pedido.id,
+          pedido,
           botao
         );
 
@@ -1885,6 +2073,12 @@ function criarPedido(
   }
 
   else{
+
+    /*
+    ---------------------------------------------------
+    INFORMAÇÃO DA ENTREGA
+    ---------------------------------------------------
+    */
 
     const info =
       document.createElement(
@@ -1903,7 +2097,8 @@ function criarPedido(
       "Data: " +
 
       formatarData(
-        pedido.entregueEm
+        pedido.entregueEm ||
+        pedido.dataEntrega
       ) +
 
       "<br>" +
@@ -1990,13 +2185,18 @@ function adicionarDetalhe(
 ===================================================== */
 
 async function marcarComoEntregue(
-  pedidoId,
+  pedido,
   botao
 ){
 
   if(
-    !usuarioAdmin
+    !adminAtual
   ){
+
+    mostrarMensagem(
+      "❌ Administrador não identificado.",
+      "erro"
+    );
 
     return;
 
@@ -2028,13 +2228,21 @@ async function marcarComoEntregue(
 
   try{
 
+    const referencia =
+      doc(
+
+        db,
+
+        pedido.origem,
+
+        pedido.id
+
+      );
+
+
     await updateDoc(
 
-      doc(
-        db,
-        "pedidosRecompensas",
-        pedidoId
-      ),
+      referencia,
 
       {
 
@@ -2048,7 +2256,7 @@ async function marcarComoEntregue(
           Timestamp.now(),
 
         entreguePor:
-          usuarioAdmin.email
+          adminAtual.email
 
       }
 
@@ -2061,7 +2269,7 @@ async function marcarComoEntregue(
     );
 
 
-    await carregarPedidos();
+    await carregarEntregas();
 
   }
 
@@ -2082,8 +2290,16 @@ async function marcarComoEntregue(
 
 
     mostrarMensagem(
-      "❌ Não foi possível registrar a entrega.",
+
+      "❌ Não foi possível registrar a entrega: " +
+
+      (
+        error.message ||
+        "Erro desconhecido."
+      ),
+
       "erro"
+
     );
 
   }
@@ -2177,7 +2393,7 @@ document
 
 
 /* =====================================================
-   LOGIN / ADMIN
+   LOGIN
 ===================================================== */
 
 onAuthStateChanged(
@@ -2198,25 +2414,35 @@ onAuthStateChanged(
     }
 
 
-    usuarioAdmin =
+    /*
+    -----------------------------------------------------
+    GUARDA ADMIN
+    -----------------------------------------------------
+    */
+
+    adminAtual =
       user;
 
 
     /*
     -----------------------------------------------------
-    SEGURANÇA EXTRA NO FRONT-END
+    SEGURANÇA EXTRA
     -----------------------------------------------------
     */
 
     if(
+
       (
         user.email ||
         ""
       )
       .toLowerCase()
+
       !==
+
       EMAIL_ADMIN
         .toLowerCase()
+
     ){
 
       document.body.innerHTML = `
@@ -2263,7 +2489,13 @@ onAuthStateChanged(
     }
 
 
-    await carregarPedidos();
+    /*
+    -----------------------------------------------------
+    CARREGA ENTREGAS
+    -----------------------------------------------------
+    */
+
+    await carregarEntregas();
 
   }
 
