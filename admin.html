@@ -2,15 +2,9 @@
 <html lang="pt-BR">
 
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
-
-<title>Adam Games • Admin</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adam Games • Administração</title>
 
 <style>
 
@@ -20,1249 +14,829 @@
   padding:0;
 }
 
-html{
-  background:#031a31;
-}
-
 body{
-
-  min-height:100vh;
-
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
-
+  font-family:Arial,Helvetica,sans-serif;
   color:#fff;
-
+  min-height:100vh;
   background:
-    radial-gradient(
-      circle at 10% 0%,
-      #159fe9 0%,
-      transparent 30%
-    ),
-
-    radial-gradient(
-      circle at 90% 10%,
-      #079b63 0%,
-      transparent 28%
-    ),
-
-    linear-gradient(
-      145deg,
-      #087fc5,
-      #031b3d 75%
-    );
-
-  padding:
-    20px
-    14px
-    80px;
-
+    radial-gradient(circle at 15% 5%,#43aaff 0%,transparent 30%),
+    radial-gradient(circle at 90% 10%,#079b63 0%,transparent 25%),
+    linear-gradient(145deg,#087fe0,#031b3d 75%);
+  padding:20px 12px 60px;
 }
 
 .container{
-
-  width:100%;
   max-width:1000px;
   margin:auto;
-
 }
 
+button{
+  border:0;
+  cursor:pointer;
+  color:#fff;
+  font-weight:bold;
+}
 
-/* =====================================================
-   LOGIN
-===================================================== */
-
-.login-box{
-
-  width:100%;
-  max-width:500px;
-
-  margin:
-    50px auto;
-
-  padding:28px;
-
-  border-radius:26px;
-
-  background:
-    rgba(2,31,62,.96);
-
-  border:
-    1px solid
-    rgba(255,255,255,.12);
-
-  box-shadow:
-    0 25px 60px
-    rgba(0,0,0,.35);
-
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin-bottom:25px;
 }
 
 .logo{
-
-  text-align:center;
-  margin-bottom:25px;
-
+  display:flex;
+  align-items:center;
+  gap:12px;
 }
 
-.logo strong{
+.logoIcon{
+  width:58px;
+  height:58px;
+  border-radius:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
+  background:linear-gradient(145deg,#168eff,#064b99);
+}
 
-  display:block;
-
-  font-size:34px;
-  font-weight:900;
-
+.logo h1{
+  font-size:22px;
 }
 
 .logo span{
-
-  color:#ffd52b;
-
+  color:#ffd32a;
 }
 
-.logo small{
-
-  display:block;
-
-  margin-top:7px;
-
-  color:#82afd0;
-
+.badge{
+  display:inline-block;
+  margin-top:5px;
+  padding:5px 9px;
+  border-radius:8px;
+  background:#d99b12;
   font-size:11px;
-
-  letter-spacing:3px;
-
   font-weight:bold;
-
-}
-
-.login-box h2{
-
-  margin-bottom:8px;
-
-  font-size:24px;
-
-}
-
-.login-box p{
-
-  color:#8fb4cf;
-
-  font-size:13px;
-
-  margin-bottom:20px;
-
-}
-
-.input{
-
-  width:100%;
-
-  height:52px;
-
-  margin-top:10px;
-
-  padding:
-    0
-    15px;
-
-  border:
-    1px solid
-    rgba(255,255,255,.12);
-
-  border-radius:14px;
-
-  background:#062544;
-
-  color:#fff;
-
-  outline:none;
-
-  font-size:15px;
-
-}
-
-.input::placeholder{
-
-  color:#6f98b5;
-
-}
-
-.login-button{
-
-  width:100%;
-
-  height:53px;
-
-  margin-top:15px;
-
-  border:0;
-
-  border-radius:15px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #18a9ff,
-      #0871c8
-    );
-
-  color:#fff;
-
-  font-size:15px;
-
-  font-weight:900;
-
-  cursor:pointer;
-
-}
-
-.login-button:disabled{
-
-  opacity:.6;
-
-}
-
-.login-message{
-
-  margin-top:15px;
-
-  padding:13px;
-
-  border-radius:13px;
-
-  display:none;
-
-  font-size:13px;
-
-  text-align:center;
-
-}
-
-.login-message.error{
-
-  display:block;
-
-  color:#ff9fa9;
-
-  background:
-    rgba(255,50,70,.12);
-
-}
-
-.login-message.success{
-
-  display:block;
-
-  color:#70ffae;
-
-  background:
-    rgba(0,220,100,.12);
-
-}
-
-
-/* =====================================================
-   TOPO
-===================================================== */
-
-.top{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:14px;
-
-  margin-bottom:18px;
-
-}
-
-.logo-mini{
-
-  width:54px;
-  height:54px;
-
-  border-radius:17px;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  background:
-    linear-gradient(
-      135deg,
-      #18a9ff,
-      #0871c8
-    );
-
-  font-size:27px;
-
-  flex-shrink:0;
-
-}
-
-.title{
-
-  flex:1;
-
-}
-
-.title small{
-
-  display:block;
-
-  color:#8fc5e8;
-
-  font-size:10px;
-
-  letter-spacing:3px;
-
-  font-weight:bold;
-
-}
-
-.title strong{
-
-  display:block;
-
-  font-size:
-    clamp(
-      23px,
-      6vw,
-      34px
-    );
-
 }
 
 .logout{
-
-  min-height:45px;
-
-  padding:
-    0
-    14px;
-
-  border:0;
-
-  border-radius:13px;
-
-  background:
-    rgba(255,50,70,.15);
-
-  color:#ff9fa9;
-
-  font-weight:900;
-
-  cursor:pointer;
-
-}
-
-
-/* =====================================================
-   MENSAGEM
-===================================================== */
-
-.message{
-
-  margin-top:10px;
-
-  margin-bottom:15px;
-
-  padding:15px;
-
-  border-radius:16px;
-
-  background:
-    rgba(255,255,255,.06);
-
-  color:#b8d8ef;
-
-  text-align:center;
-
-}
-
-.message.error{
-
-  color:#ff9fa9;
-
-  background:
-    rgba(255,50,70,.12);
-
-}
-
-
-/* =====================================================
-   ESTATÍSTICAS
-===================================================== */
-
-.stats{
-
-  display:grid;
-
-  grid-template-columns:
-    repeat(4,1fr);
-
-  gap:11px;
-
-}
-
-.stat{
-
-  padding:17px 10px;
-
-  border-radius:18px;
-
-  background:
-    rgba(2,31,62,.94);
-
-  border:
-    1px solid
-    rgba(255,255,255,.08);
-
-  text-align:center;
-
-}
-
-.stat-icon{
-
-  font-size:25px;
-
-}
-
-.stat-number{
-
-  margin-top:6px;
-
-  font-size:27px;
-
-  font-weight:900;
-
-}
-
-.stat-label{
-
-  margin-top:4px;
-
-  color:#91b7d0;
-
-  font-size:10px;
-
-  font-weight:bold;
-
-}
-
-
-/* =====================================================
-   SEÇÕES
-===================================================== */
-
-.section{
-
-  margin-top:18px;
-
-  padding:20px;
-
-  border-radius:22px;
-
-  background:
-    rgba(2,31,62,.94);
-
-  border:
-    1px solid
-    rgba(255,255,255,.08);
-
-}
-
-.section-head{
-
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
-
-  gap:10px;
-
-  margin-bottom:15px;
-
-}
-
-.section h2{
-
-  font-size:21px;
-
-}
-
-.reload{
-
-  border:0;
-
+  padding:12px 16px;
   border-radius:12px;
-
-  padding:
-    9px
-    12px;
-
-  background:#0a3a60;
-
-  color:#9ed8ff;
-
-  font-weight:bold;
-
-  cursor:pointer;
-
+  background:#17395f;
 }
 
+h2{
+  font-size:38px;
+  margin-bottom:6px;
+}
 
-/* =====================================================
-   BUSCA
-===================================================== */
+.subtitle{
+  color:#b7d4ed;
+  margin-bottom:22px;
+}
+
+.card{
+  background:rgba(2,30,62,.94);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:22px;
+  padding:20px;
+  margin-bottom:18px;
+  box-shadow:0 15px 35px rgba(0,0,0,.18);
+}
+
+.card h3{
+  margin-bottom:15px;
+  font-size:20px;
+}
 
 .search{
+  display:grid;
+  grid-template-columns:1fr 130px;
+  gap:10px;
+}
 
+input,
+select{
   width:100%;
-
-  min-height:50px;
-
-  border:
-    1px solid
-    rgba(255,255,255,.12);
-
-  border-radius:14px;
-
-  background:#062544;
-
+  height:50px;
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:12px;
+  background:#071f40;
   color:#fff;
-
-  padding:
-    0
-    15px;
-
-  font-size:14px;
-
+  padding:0 14px;
+  font-size:15px;
   outline:none;
-
-  margin-bottom:15px;
-
 }
 
-.search::placeholder{
-
-  color:#759bb8;
-
+.search button{
+  border-radius:12px;
+  background:linear-gradient(135deg,#1c9aff,#006bd5);
 }
 
+.message{
+  margin-top:12px;
+  padding:12px;
+  border-radius:10px;
+  display:none;
+  font-size:14px;
+  line-height:1.4;
+}
+
+.success{
+  display:block;
+  background:rgba(0,220,110,.12);
+  color:#72ffae;
+}
+
+.error{
+  display:block;
+  background:rgba(255,50,70,.12);
+  color:#ff9ca8;
+}
+
+.warning{
+  margin-top:10px;
+  padding:11px;
+  border-radius:11px;
+  background:rgba(255,193,7,.08);
+  border:1px solid rgba(255,193,7,.18);
+  color:#e8cf8a;
+  font-size:12px;
+  line-height:1.5;
+}
 
 /* =====================================================
-   CLIENTES
+   ENTREGA GERAL
 ===================================================== */
 
-.clients{
-
+.delivery-summary{
   display:grid;
-
-  gap:11px;
-
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
 }
 
-.client{
-
-  padding:16px;
-
+.delivery-stat{
+  padding:18px 10px;
   border-radius:17px;
-
-  background:
-    rgba(255,255,255,.055);
-
-  border:
-    1px solid
-    rgba(255,255,255,.08);
-
+  text-align:center;
+  background:rgba(255,255,255,.055);
+  border:1px solid rgba(255,255,255,.08);
 }
 
-.client-top{
+.delivery-stat-icon{
+  font-size:27px;
+}
 
+.delivery-stat-number{
+  margin-top:5px;
+  font-size:30px;
+  font-weight:900;
+}
+
+.delivery-stat-label{
+  margin-top:4px;
+  color:#9fc2dc;
+  font-size:11px;
+  font-weight:bold;
+}
+
+.delivery-stat.pending .delivery-stat-number{
+  color:#ffd52b;
+}
+
+.delivery-stat.done .delivery-stat-number{
+  color:#67ffad;
+}
+
+.delivery-list{
+  display:grid;
+  gap:10px;
+  margin-top:18px;
+}
+
+.delivery-item{
+  padding:16px;
+  border-radius:15px;
+  background:rgba(255,255,255,.045);
+  border:1px solid rgba(255,255,255,.07);
+}
+
+.delivery-item-top{
   display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px;
+}
 
+.delivery-title{
+  font-size:16px;
+  font-weight:900;
+}
+
+.delivery-user{
+  margin-top:5px;
+  color:#8fb7d4;
+  font-size:12px;
+}
+
+.delivery-status{
+  flex-shrink:0;
+  padding:6px 10px;
+  border-radius:20px;
+  font-size:10px;
+  font-weight:900;
+}
+
+.delivery-status.pending{
+  background:rgba(255,190,0,.15);
+  color:#ffe27a;
+}
+
+.delivery-status.done{
+  background:rgba(0,220,100,.14);
+  color:#6dffae;
+}
+
+.delivery-info{
+  margin-top:10px;
+  color:#a8c6dd;
+  font-size:12px;
+  line-height:1.6;
+}
+
+.delivery-info b{
+  color:#e9f5ff;
+}
+
+.delivery-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+  margin-top:12px;
+}
+
+.delivery-open{
+  padding:12px;
+  border-radius:11px;
+  background:linear-gradient(135deg,#168fff,#0563b5);
+}
+
+.delivery-profile{
+  padding:12px;
+  border-radius:11px;
+  background:linear-gradient(135deg,#16bb69,#087b45);
+}
+
+.delivery-id{
+  margin-top:9px;
+  padding:7px;
+  border-radius:8px;
+  background:rgba(0,0,0,.2);
+  color:#72c9ff;
+  font-size:10px;
+  word-break:break-all;
+}
+
+/* =====================================================
+   USUÁRIO
+===================================================== */
+
+#userArea{
+  display:none;
+}
+
+.user{
+  display:flex;
   align-items:center;
-
-  gap:13px;
-
+  gap:15px;
+  margin-bottom:20px;
 }
 
 .avatar{
-
-  width:52px;
-  height:52px;
-
-  border-radius:15px;
-
+  width:68px;
+  height:68px;
+  border-radius:19px;
+  background:#ffd52b;
+  color:#111;
   display:flex;
-
   align-items:center;
   justify-content:center;
-
-  background:
-    linear-gradient(
-      135deg,
-      #18a9ff,
-      #0871c8
-    );
-
-  font-size:27px;
-
+  font-size:33px;
   flex-shrink:0;
-
 }
 
-.client-info{
-
-  flex:1;
-
-  min-width:0;
-
+.userName{
+  font-size:22px;
+  font-weight:bold;
 }
 
-.client-name{
-
-  font-size:17px;
-
-  font-weight:900;
-
-}
-
-.client-email{
-
+.userEmail,
+.userId,
+.userUid{
   margin-top:4px;
+  color:#a9c8e5;
+  font-size:13px;
+  word-break:break-all;
+}
 
-  color:#8eb5cf;
+.status-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:10px;
+}
 
+.status{
+  padding:6px 9px;
+  border-radius:9px;
   font-size:11px;
-
-  word-break:break-all;
-
+  font-weight:bold;
+  background:rgba(255,255,255,.08);
 }
 
-.client-id{
+.status.vip{
+  background:rgba(255,193,7,.2);
+  color:#ffd84c;
+}
 
-  margin-top:4px;
+.status.normal{
+  color:#a9c8e5;
+}
 
-  color:#5faedb;
+/* =====================================================
+   DADOS
+===================================================== */
 
+.info-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.info-item{
+  padding:12px;
+  border-radius:13px;
+  background:rgba(255,255,255,.045);
+}
+
+.info-label{
+  color:#77a9cf;
   font-size:10px;
+  font-weight:bold;
+  text-transform:uppercase;
+}
 
-  word-break:break-all;
+.info-value{
+  margin-top:5px;
+  font-size:14px;
+  word-break:break-word;
+}
 
+/* =====================================================
+   SALDOS
+===================================================== */
+
+.balances{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px;
+  margin-bottom:22px;
+}
+
+.balance{
+  text-align:center;
+  padding:15px 8px;
+  border-radius:15px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.05);
+}
+
+.balanceIcon{
+  font-size:26px;
+}
+
+.balanceName{
+  color:#91b2cf;
+  font-size:10px;
+  font-weight:bold;
+  margin-top:5px;
+}
+
+.balanceValue{
+  font-size:18px;
+  font-weight:bold;
+  margin-top:5px;
+}
+
+/* =====================================================
+   ROLETA
+===================================================== */
+
+.roleta-card{
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(255,213,42,.32);
+  background:
+    radial-gradient(circle at 100% 0%,rgba(255,213,42,.16),transparent 35%),
+    linear-gradient(145deg,rgba(8,61,104,.98),rgba(2,30,62,.98));
+}
+
+.roleta-card::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  width:5px;
+  height:100%;
+  background:linear-gradient(180deg,#ffd52a,#ff8c00);
+}
+
+.roleta-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  margin-bottom:18px;
+}
+
+.roleta-title{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.roleta-icon{
+  width:52px;
+  height:52px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:15px;
+  background:linear-gradient(135deg,#ffd52a,#e78a00);
+  font-size:27px;
+}
+
+.roleta-title h3{
+  margin:0;
+  font-size:20px;
+}
+
+.roleta-title p{
+  margin-top:4px;
+  color:#9ec7e5;
+  font-size:12px;
+}
+
+.roleta-saldo{
+  min-width:105px;
+  padding:10px 14px;
+  text-align:center;
+  border-radius:15px;
+  background:rgba(255,213,42,.1);
+  border:1px solid rgba(255,213,42,.22);
+}
+
+.roleta-saldo-label{
+  color:#b8d2e6;
+  font-size:9px;
+  font-weight:bold;
+}
+
+.roleta-saldo-value{
+  margin-top:2px;
+  color:#ffd52a;
+  font-size:24px;
+  font-weight:900;
+}
+
+.roleta-form{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.roleta-field label{
+  display:block;
+  color:#a9c8e5;
+  font-size:11px;
+  font-weight:bold;
+  margin-bottom:6px;
+}
+
+.roleta-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:12px;
+}
+
+.roleta-add{
+  padding:14px;
+  border-radius:12px;
+  background:linear-gradient(135deg,#0dbb69,#087b43);
+}
+
+.roleta-remove{
+  padding:14px;
+  border-radius:12px;
+  background:linear-gradient(135deg,#d52e47,#a6172d);
+}
+
+.roleta-info{
+  margin-top:12px;
+  padding:11px;
+  border-radius:11px;
+  color:#b8d1e4;
+  background:rgba(255,255,255,.04);
+  font-size:11px;
+  line-height:1.5;
+}
+
+/* =====================================================
+   MOVIMENTAÇÃO
+===================================================== */
+
+.form{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.field label{
+  display:block;
+  color:#a9c8e5;
+  font-size:11px;
+  font-weight:bold;
+  margin-bottom:6px;
+}
+
+.full{
+  grid-column:1/-1;
+}
+
+.actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:15px;
+}
+
+.add{
+  background:linear-gradient(135deg,#0ba85a,#087a42);
+  padding:14px;
+  border-radius:12px;
+}
+
+.remove{
+  background:linear-gradient(135deg,#d72d47,#a8172d);
+  padding:14px;
+  border-radius:12px;
+}
+
+.special{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:10px;
 }
 
 .vip{
-
-  display:inline-block;
-
-  margin-top:6px;
-
-  padding:
-    5px
-    9px;
-
-  border-radius:20px;
-
-  background:#a87500;
-
-  color:#ffe68a;
-
-  font-size:10px;
-
-  font-weight:bold;
-
+  padding:14px;
+  border-radius:12px;
+  background:linear-gradient(135deg,#d29a16,#9d6800);
 }
 
-.normal{
-
-  display:inline-block;
-
-  margin-top:6px;
-
-  padding:
-    5px
-    9px;
-
-  border-radius:20px;
-
-  background:#174a73;
-
-  color:#a9d9ff;
-
-  font-size:10px;
-
-  font-weight:bold;
-
+.box{
+  padding:14px;
+  border-radius:12px;
+  background:linear-gradient(135deg,#118eea,#0562ad);
 }
-
-.client-resources{
-
-  display:grid;
-
-  grid-template-columns:
-    repeat(4,1fr);
-
-  gap:7px;
-
-  margin-top:13px;
-
-}
-
-.client-resource{
-
-  padding:9px 5px;
-
-  border-radius:10px;
-
-  background:
-    rgba(0,0,0,.15);
-
-  text-align:center;
-
-}
-
-.client-resource b{
-
-  display:block;
-
-  font-size:14px;
-
-}
-
-.client-resource span{
-
-  display:block;
-
-  margin-top:3px;
-
-  color:#769bb6;
-
-  font-size:8px;
-
-  font-weight:bold;
-
-}
-
-.client-actions{
-
-  display:grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
-  gap:8px;
-
-  margin-top:12px;
-
-}
-
-.profile-button{
-
-  min-height:45px;
-
-  border:0;
-
-  border-radius:13px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #18a9ff,
-      #0871c8
-    );
-
-  color:#fff;
-
-  font-size:12px;
-
-  font-weight:900;
-
-  cursor:pointer;
-
-}
-
-.delivery-button{
-
-  min-height:45px;
-
-  border:0;
-
-  border-radius:13px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #16bb69,
-      #087b45
-    );
-
-  color:#fff;
-
-  font-size:12px;
-
-  font-weight:900;
-
-  cursor:pointer;
-
-}
-
 
 /* =====================================================
-   PENDENTES
+   HISTÓRICO
 ===================================================== */
 
-.pending-list{
-
-  display:grid;
-
-  gap:10px;
-
+.history{
+  margin-top:22px;
 }
 
-.pending{
-
+.historyItem{
   padding:15px;
-
-  border-radius:16px;
-
-  background:
-    rgba(255,190,0,.07);
-
-  border:
-    1px solid
-    rgba(255,190,0,.16);
-
-}
-
-.pending-top{
-
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:flex-start;
-
-  gap:10px;
-
-}
-
-.pending-title{
-
-  font-size:16px;
-
-  font-weight:900;
-
-}
-
-.pending-status{
-
-  padding:
-    6px
-    9px;
-
-  border-radius:20px;
-
-  background:
-    rgba(255,190,0,.15);
-
-  color:#ffe27a;
-
-  font-size:9px;
-
-  font-weight:900;
-
-  white-space:nowrap;
-
-}
-
-.pending-info{
-
   margin-top:9px;
-
-  display:grid;
-
-  gap:4px;
-
+  border-radius:14px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.06);
 }
 
-.pending-info div{
+.historyTop{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  font-weight:bold;
+}
 
-  color:#8faec4;
+.historyDate{
+  color:#75d4ff;
+  font-size:12px;
+  text-align:right;
+}
 
+.plus{
+  color:#65ff9c;
+}
+
+.minus{
+  color:#ff7382;
+}
+
+.historyInfo{
+  color:#9dbbd3;
+  font-size:12px;
+  margin-top:8px;
+  line-height:1.6;
+}
+
+.operation-id{
+  margin-top:8px;
+  padding:7px 9px;
+  border-radius:8px;
+  background:rgba(0,0,0,.2);
+  color:#7fc9ff;
   font-size:11px;
-
+  word-break:break-all;
 }
-
-.pending-info b{
-
-  color:#eaf6ff;
-
-}
-
-.pending-actions{
-
-  display:grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
-  gap:8px;
-
-  margin-top:11px;
-
-}
-
-.pending-profile{
-
-  height:42px;
-
-  border:0;
-
-  border-radius:12px;
-
-  background:#0a3a60;
-
-  color:#a9ddff;
-
-  font-weight:900;
-
-  cursor:pointer;
-
-}
-
-.pending-delivery{
-
-  height:42px;
-
-  border:0;
-
-  border-radius:12px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #16bb69,
-      #087b45
-    );
-
-  color:#fff;
-
-  font-weight:900;
-
-  cursor:pointer;
-
-}
-
-
-/* =====================================================
-   VAZIO
-===================================================== */
 
 .empty{
-
-  padding:25px 10px;
-
+  padding:15px;
+  border-radius:12px;
+  background:rgba(255,255,255,.04);
+  color:#9dbbd3;
   text-align:center;
-
-  color:#7fa4bf;
-
 }
 
-
 /* =====================================================
-   MODAL
+   MODAL PERFIL
 ===================================================== */
 
 .modal{
-
   position:fixed;
-
   inset:0;
-
-  z-index:999;
-
+  z-index:9999;
   display:none;
-
   align-items:center;
   justify-content:center;
-
   padding:15px;
-
-  background:
-    rgba(0,0,0,.7);
-
-  backdrop-filter:
-    blur(5px);
-
+  background:rgba(0,8,20,.82);
+  backdrop-filter:blur(7px);
+  overflow:auto;
 }
 
 .modal.show{
-
   display:flex;
-
 }
 
-.modal-box{
-
+.modal-card{
   width:100%;
-
-  max-width:600px;
-
-  max-height:
-    90vh;
-
+  max-width:850px;
+  max-height:92vh;
   overflow:auto;
-
   padding:22px;
-
   border-radius:23px;
-
-  background:#041f3c;
-
-  border:
-    1px solid
-    rgba(255,255,255,.12);
-
+  background:#061e3b;
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 30px 70px rgba(0,0,0,.45);
 }
 
-.modal-head{
-
+.modal-header{
   display:flex;
-
-  justify-content:space-between;
-
   align-items:center;
-
+  justify-content:space-between;
   gap:10px;
-
   margin-bottom:18px;
-
 }
 
-.modal-head h2{
-
+.modal-header h3{
   font-size:22px;
-
 }
 
-.close{
-
-  width:40px;
-  height:40px;
-
-  border:0;
-
+.close-modal{
+  width:42px;
+  height:42px;
   border-radius:12px;
-
-  background:#0a3a60;
-
-  color:#fff;
-
-  font-size:20px;
-
-  cursor:pointer;
-
+  background:#17395f;
+  font-size:22px;
 }
 
 .modal-profile{
-
   display:flex;
-
   align-items:center;
-
-  gap:13px;
-
+  gap:14px;
+  padding:15px;
+  border-radius:16px;
+  background:rgba(255,255,255,.05);
 }
 
 .modal-avatar{
-
-  width:65px;
-  height:65px;
-
-  border-radius:18px;
-
+  width:60px;
+  height:60px;
+  border-radius:17px;
   display:flex;
-
   align-items:center;
   justify-content:center;
-
-  background:
-    linear-gradient(
-      135deg,
-      #18a9ff,
-      #0871c8
-    );
-
-  font-size:34px;
-
+  background:#ffd52b;
+  color:#111;
+  font-size:30px;
 }
 
 .modal-name{
-
   font-size:20px;
-
   font-weight:900;
-
 }
 
 .modal-email{
-
-  color:#8fb5cf;
-
+  margin-top:4px;
+  color:#9fc5df;
   font-size:12px;
-
-  margin-top:4px;
-
-  word-break:break-all;
-
 }
 
-.detail-grid{
-
+.modal-grid{
   display:grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
-  gap:9px;
-
-  margin-top:18px;
-
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-top:15px;
 }
 
-.detail{
-
-  padding:12px;
-
-  border-radius:13px;
-
-  background:
-    rgba(255,255,255,.05);
-
+.modal-stat{
+  padding:14px 8px;
+  border-radius:14px;
+  text-align:center;
+  background:rgba(255,255,255,.05);
 }
 
-.detail-label{
-
-  color:#759bb7;
-
-  font-size:9px;
-
-  font-weight:bold;
-
-  text-transform:uppercase;
-
+.modal-stat-number{
+  font-size:24px;
+  font-weight:900;
 }
 
-.detail-value{
-
+.modal-stat-label{
   margin-top:4px;
-
-  color:#eaf6ff;
-
-  font-size:13px;
-
-  word-break:break-all;
-
+  color:#91b2cf;
+  font-size:10px;
+  font-weight:bold;
 }
 
 .modal-section{
-
   margin-top:18px;
-
 }
 
-.modal-section h3{
-
-  font-size:16px;
-
+.modal-section h4{
   margin-bottom:10px;
-
+  font-size:17px;
 }
 
-.modal-resource-grid{
-
+.modal-delivery{
   display:grid;
-
-  grid-template-columns:
-    repeat(2,1fr);
-
-  gap:8px;
-
+  gap:9px;
 }
 
-.modal-resource{
-
-  padding:14px;
-
-  border-radius:13px;
-
-  background:
-    rgba(255,255,255,.05);
-
-}
-
-.modal-resource span{
-
-  display:block;
-
-  color:#80a8c2;
-
-  font-size:10px;
-
-  font-weight:bold;
-
-}
-
-.modal-resource b{
-
-  display:block;
-
-  margin-top:5px;
-
-  font-size:21px;
-
-}
-
-.modal-order{
-
+.modal-delivery-item{
   padding:13px;
-
-  margin-top:8px;
-
   border-radius:13px;
-
-  background:
-    rgba(255,255,255,.05);
-
+  background:rgba(255,255,255,.045);
 }
 
-.modal-order-title{
-
-  font-weight:900;
-
-  font-size:14px;
-
+.modal-delivery-title{
+  font-weight:bold;
 }
 
-.modal-order-info{
-
-  margin-top:6px;
-
-  color:#8eafc7;
-
+.modal-delivery-meta{
+  margin-top:5px;
+  color:#9dbbd3;
   font-size:11px;
-
-  line-height:1.6;
-
+  line-height:1.5;
 }
 
+.modal-buttons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:15px;
+}
+
+.modal-buttons button{
+  padding:13px;
+  border-radius:12px;
+}
+
+.open-client{
+  background:linear-gradient(135deg,#168fff,#0563b5);
+}
+
+.open-delivery{
+  background:linear-gradient(135deg,#16bb69,#087b45);
+}
 
 /* =====================================================
    RESPONSIVO
@@ -1270,358 +844,541 @@ body{
 
 @media(max-width:700px){
 
-  .stats{
-
-    grid-template-columns:
-      repeat(2,1fr);
-
+  h2{
+    font-size:32px;
   }
 
-}
-
-@media(max-width:500px){
-
-  .container{
-
-    max-width:100%;
-
+  .search{
+    grid-template-columns:1fr;
   }
 
-  .logout{
-
-    font-size:10px;
-    padding:0 9px;
-
+  .search button{
+    height:50px;
   }
 
-  .client-resources{
-
-    grid-template-columns:
-      repeat(2,1fr);
-
+  .balances{
+    grid-template-columns:repeat(2,1fr);
   }
 
-  .detail-grid{
+  .roleta-header{
+    align-items:flex-start;
+  }
 
-    grid-template-columns:
-      1fr;
+  .roleta-form{
+    grid-template-columns:1fr;
+  }
 
+  .roleta-actions{
+    grid-template-columns:1fr;
+  }
+
+  .form{
+    grid-template-columns:1fr;
+  }
+
+  .full{
+    grid-column:auto;
+  }
+
+  .actions,
+  .special,
+  .delivery-actions,
+  .modal-buttons{
+    grid-template-columns:1fr;
+  }
+
+  .info-grid{
+    grid-template-columns:1fr;
+  }
+
+  .delivery-summary,
+  .modal-grid{
+    grid-template-columns:1fr 1fr 1fr;
+  }
+
+  .delivery-item-top{
+    flex-direction:column;
   }
 
 }
 
 </style>
-
 </head>
-
 
 <body>
 
+<div class="container">
 
-<div id="loginScreen">
+<header>
 
-  <div class="login-box">
+  <div class="logo">
 
-    <div class="logo">
+    <div class="logoIcon">👑</div>
 
-      <strong>
-        ADAM <span>GAMES</span>
-      </strong>
+    <div>
 
-      <small>
-        PAINEL ADMINISTRATIVO
-      </small>
+      <h1>ADAM <span>GAMES</span></h1>
 
-    </div>
-
-
-    <h2>
-      🔐 Acesso administrativo
-    </h2>
-
-    <p>
-      Entre com a conta principal do Adam Games.
-    </p>
-
-
-    <input
-      class="input"
-      id="loginEmail"
-      type="email"
-      value="raphafentyramos@gmail.com"
-      placeholder="E-mail"
-      autocomplete="username"
-    >
-
-
-    <input
-      class="input"
-      id="loginPassword"
-      type="password"
-      placeholder="Senha"
-      autocomplete="current-password"
-    >
-
-
-    <button
-      class="login-button"
-      id="loginButton"
-      type="button">
-
-      ENTRAR NO ADMIN
-
-    </button>
-
-
-    <div
-      class="login-message"
-      id="loginMessage">
+      <div class="badge">👑 ADMINISTRADOR</div>
 
     </div>
 
   </div>
+
+  <button class="logout" id="logout" type="button">
+    ↪️ Sair
+  </button>
+
+</header>
+
+<h2>Painel Admin</h2>
+
+<p class="subtitle">
+  Gerenciamento de usuários, prêmios e entregas.
+</p>
+
+<!-- =====================================================
+     BUSCA
+===================================================== -->
+
+<div class="card">
+
+  <h3>🔎 Localizar usuário</h3>
+
+  <div class="search">
+
+    <input
+      id="searchInput"
+      type="text"
+      placeholder="Digite o ID Adam Games ou o e-mail"
+      autocomplete="off"
+    >
+
+    <button id="buscar" type="button">
+      🔍 Buscar
+    </button>
+
+  </div>
+
+  <div class="warning">
+    Pesquise pelo <strong>ID Adam Games</strong> ou pelo
+    <strong>e-mail cadastrado</strong>.
+  </div>
+
+  <div id="searchMessage" class="message"></div>
 
 </div>
 
+<!-- =====================================================
+     ÁREA GERAL DE ENTREGAS
+===================================================== -->
 
-<div
-  class="container"
-  id="adminScreen"
-  style="display:none"
->
+<div class="card">
 
+  <h3>📦 Prêmios a entregar</h3>
 
-  <!-- =================================================
-       TOPO
-  ================================================== -->
+  <div class="delivery-summary">
 
-  <div class="top">
+    <div class="delivery-stat">
 
-    <div class="logo-mini">
-      👑
-    </div>
-
-    <div class="title">
-
-      <small>
-        ADAM GAMES • ADMIN
-      </small>
-
-      <strong>
-        PAINEL ADMINISTRATIVO
-      </strong>
-
-    </div>
-
-    <button
-      class="logout"
-      id="logoutButton">
-
-      SAIR
-
-    </button>
-
-  </div>
-
-
-  <div
-    class="message"
-    id="message">
-
-    🔄 Carregando painel...
-
-  </div>
-
-
-  <!-- =================================================
-       ESTATÍSTICAS
-  ================================================== -->
-
-  <div class="stats">
-
-
-    <div class="stat">
-
-      <div class="stat-icon">
-        👥
-      </div>
+      <div class="delivery-stat-icon">📦</div>
 
       <div
-        class="stat-number"
-        id="totalClientes">
+        class="delivery-stat-number"
+        id="totalEntregas">
 
         0
 
       </div>
 
-      <div class="stat-label">
-        CLIENTES
+      <div class="delivery-stat-label">
+        TOTAL
       </div>
 
     </div>
 
+    <div class="delivery-stat pending">
 
-    <div class="stat">
-
-      <div class="stat-icon">
-        🎁
-      </div>
+      <div class="delivery-stat-icon">⏳</div>
 
       <div
-        class="stat-number"
-        id="totalPremios">
-
-        0
-
-      </div>
-
-      <div class="stat-label">
-        PRÊMIOS
-      </div>
-
-    </div>
-
-
-    <div class="stat">
-
-      <div class="stat-icon">
-        ⏳
-      </div>
-
-      <div
-        class="stat-number"
+        class="delivery-stat-number"
         id="totalPendentes">
 
         0
 
       </div>
 
-      <div class="stat-label">
+      <div class="delivery-stat-label">
         PENDENTES
       </div>
 
     </div>
 
+    <div class="delivery-stat done">
 
-    <div class="stat">
-
-      <div class="stat-icon">
-        👑
-      </div>
+      <div class="delivery-stat-icon">✅</div>
 
       <div
-        class="stat-number"
-        id="totalVip">
+        class="delivery-stat-number"
+        id="totalEntregues">
 
         0
 
       </div>
 
-      <div class="stat-label">
-        VIP
+      <div class="delivery-stat-label">
+        ENTREGUES
       </div>
 
     </div>
 
+  </div>
+
+  <div
+    class="delivery-list"
+    id="deliveryList">
+
+    <div class="empty">
+      🔄 Carregando prêmios...
+    </div>
 
   </div>
 
-
-  <!-- =================================================
-       PRÊMIOS PENDENTES
-  ================================================== -->
-
-  <section class="section">
-
-    <div class="section-head">
-
-      <h2>
-        ⏳ Prêmios pendentes
-      </h2>
-
-      <button
-        class="reload"
-        id="reloadPending">
-
-        🔄 Atualizar
-
-      </button>
-
-    </div>
-
-
-    <div
-      class="pending-list"
-      id="pendingList">
-
-    </div>
-
-  </section>
-
-
-  <!-- =================================================
-       CLIENTES
-  ================================================== -->
-
-  <section class="section">
-
-    <div class="section-head">
-
-      <h2>
-        👥 Clientes
-      </h2>
-
-      <button
-        class="reload"
-        id="reloadClients">
-
-        🔄 Atualizar
-
-      </button>
-
-    </div>
-
-
-    <input
-      class="search"
-      id="clientSearch"
-      type="search"
-      placeholder="🔎 Buscar cliente por nome, e-mail, UID ou ID público..."
-    >
-
-
-    <div
-      class="clients"
-      id="clients">
-
-    </div>
-
-  </section>
-
+  <div
+    id="deliveryMessage"
+    class="message">
+  </div>
 
 </div>
 
-
 <!-- =====================================================
-     MODAL PERFIL
+     USUÁRIO
 ===================================================== -->
 
-<div
-  class="modal"
-  id="profileModal"
->
+<div id="userArea">
 
-  <div class="modal-box">
+<div class="card">
 
-    <div class="modal-head">
+  <div class="user">
 
-      <h2>
-        👤 Perfil completo
-      </h2>
+    <div class="avatar" id="avatar">🙂</div>
+
+    <div>
+
+      <div class="userName" id="nome">—</div>
+
+      <div class="userEmail" id="email">—</div>
+
+      <div class="userId" id="id">—</div>
+
+      <div class="userUid" id="uid">UID: —</div>
+
+      <div class="status-row">
+
+        <span class="status normal" id="vipStatus">
+          ⭐ NÃO VIP
+        </span>
+
+        <span class="status" id="boxStatus">
+          🎁 CAIXA
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="info-grid">
+
+    <div class="info-item">
+      <div class="info-label">Nome</div>
+      <div class="info-value" id="infoNome">—</div>
+    </div>
+
+    <div class="info-item">
+      <div class="info-label">E-mail</div>
+      <div class="info-value" id="infoEmail">—</div>
+    </div>
+
+    <div class="info-item">
+      <div class="info-label">ID Adam Games</div>
+      <div class="info-value" id="infoId">—</div>
+    </div>
+
+    <div class="info-item">
+      <div class="info-label">UID Firebase</div>
+      <div class="info-value" id="infoUid">—</div>
+    </div>
+
+    <div class="info-item">
+      <div class="info-label">Idade</div>
+      <div class="info-value" id="infoIdade">Não informado</div>
+    </div>
+
+    <div class="info-item">
+      <div class="info-label">Telefone</div>
+      <div class="info-value" id="infoTelefone">Não informado</div>
+    </div>
+
+  </div>
+
+  <h3>📊 Recursos atuais</h3>
+
+  <div class="balances">
+
+    <div class="balance">
+      <div class="balanceIcon">🎟️</div>
+      <div class="balanceName">CHANCES</div>
+      <div class="balanceValue" id="chances">0</div>
+    </div>
+
+    <div class="balance">
+      <div class="balanceIcon">🎰</div>
+      <div class="balanceName">GIROS ROLETA</div>
+      <div class="balanceValue" id="girosRoleta">0</div>
+    </div>
+
+    <div class="balance">
+      <div class="balanceIcon">🪙</div>
+      <div class="balanceName">MOEDAS</div>
+      <div class="balanceValue" id="moedas">0</div>
+    </div>
+
+    <div class="balance">
+      <div class="balanceIcon">🔑</div>
+      <div class="balanceName">CHAVES</div>
+      <div class="balanceValue" id="chaves">0</div>
+    </div>
+
+    <div class="balance">
+      <div class="balanceIcon">💎</div>
+      <div class="balanceName">CRÉDITOS</div>
+      <div class="balanceValue" id="creditos">R$ 0,00</div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     ROLETA
+===================================================== -->
+
+<div class="card roleta-card">
+
+  <div class="roleta-header">
+
+    <div class="roleta-title">
+
+      <div class="roleta-icon">🎰</div>
+
+      <div>
+
+        <h3>Giros da Roleta</h3>
+
+        <p>
+          Saldo exclusivo para a Roleta Adam Games.
+        </p>
+
+      </div>
+
+    </div>
+
+    <div class="roleta-saldo">
+
+      <div class="roleta-saldo-label">
+        GIROS ATUAIS
+      </div>
+
+      <div
+        class="roleta-saldo-value"
+        id="roletaSaldo">
+
+        0
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="roleta-form">
+
+    <div class="roleta-field">
+
+      <label>QUANTIDADE DE GIROS</label>
+
+      <input
+        id="quantidadeGiros"
+        type="number"
+        min="1"
+        step="1"
+        placeholder="Ex.: 5"
+      >
+
+    </div>
+
+    <div class="roleta-field">
+
+      <label>MOTIVO — OBRIGATÓRIO</label>
+
+      <input
+        id="motivoGiros"
+        type="text"
+        maxlength="150"
+        placeholder="Ex.: Bônus de compra"
+      >
+
+    </div>
+
+  </div>
+
+  <div class="roleta-actions">
+
+    <button class="roleta-add" id="adicionarGiros" type="button">
+      🎰 ADICIONAR GIROS
+    </button>
+
+    <button class="roleta-remove" id="removerGiros" type="button">
+      ➖ REMOVER GIROS
+    </button>
+
+  </div>
+
+  <div class="roleta-info">
+    🎰 <strong>Importante:</strong>
+    os Giros da Roleta são totalmente separados das Chances.
+  </div>
+
+  <div id="roletaMessage" class="message"></div>
+
+</div>
+
+<!-- =====================================================
+     MOVIMENTAÇÃO NORMAL
+===================================================== -->
+
+<div class="card">
+
+  <h3>🎁 Fazer movimentação</h3>
+
+  <div class="form">
+
+    <div class="field">
+
+      <label>ITEM</label>
+
+      <select id="item">
+
+        <option value="chances">🎟️ Chances</option>
+
+        <option value="moedas">🪙 Moedas</option>
+
+        <option value="chaves">🔑 Chaves</option>
+
+        <option value="creditos">💎 Créditos</option>
+
+      </select>
+
+    </div>
+
+    <div class="field">
+
+      <label>QUANTIDADE</label>
+
+      <input
+        id="quantidade"
+        type="number"
+        min="0.01"
+        step="0.01"
+        placeholder="Quantidade"
+      >
+
+    </div>
+
+    <div class="field full">
+
+      <label>MOTIVO — OBRIGATÓRIO</label>
+
+      <input
+        id="motivo"
+        type="text"
+        maxlength="150"
+        placeholder="Ex.: Compra realizada pelo WhatsApp"
+      >
+
+    </div>
+
+  </div>
+
+  <div class="actions">
+
+    <button class="add" id="adicionar" type="button">
+      ➕ ADICIONAR
+    </button>
+
+    <button class="remove" id="remover" type="button">
+      ➖ REMOVER
+    </button>
+
+  </div>
+
+  <div class="special">
+
+    <button class="vip" id="vip" type="button">
+      👑 Alterar VIP
+    </button>
+
+    <button class="box" id="box" type="button">
+      🎁 Alterar Caixa
+    </button>
+
+  </div>
+
+  <div id="operationMessage" class="message"></div>
+
+  <!-- ===================================================
+       HISTÓRICO
+  ==================================================== -->
+
+  <div class="history">
+
+    <h3>📜 Extrato do usuário</h3>
+
+    <div id="historyList">
+
+      <div class="empty">
+        Nenhuma movimentação carregada.
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- =====================================================
+     MODAL PERFIL COMPLETO
+===================================================== -->
+
+<div class="modal" id="profileModal">
+
+  <div class="modal-card">
+
+    <div class="modal-header">
+
+      <h3>👤 Perfil completo do cliente</h3>
 
       <button
-        class="close"
-        id="closeModal">
+        class="close-modal"
+        id="closeProfileModal"
+        type="button">
 
         ×
 
@@ -1629,8 +1386,113 @@ body{
 
     </div>
 
+    <div class="modal-profile">
 
-    <div id="modalContent">
+      <div class="modal-avatar" id="modalAvatar">
+        👤
+      </div>
+
+      <div>
+
+        <div class="modal-name" id="modalNome">
+          —
+        </div>
+
+        <div class="modal-email" id="modalEmail">
+          —
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="modal-grid">
+
+      <div class="modal-stat">
+
+        <div
+          class="modal-stat-number"
+          id="modalTotal">
+
+          0
+
+        </div>
+
+        <div class="modal-stat-label">
+          TOTAL
+        </div>
+
+      </div>
+
+      <div class="modal-stat">
+
+        <div
+          class="modal-stat-number"
+          id="modalPendentes">
+
+          0
+
+        </div>
+
+        <div class="modal-stat-label">
+          PENDENTES
+        </div>
+
+      </div>
+
+      <div class="modal-stat">
+
+        <div
+          class="modal-stat-number"
+          id="modalEntregues">
+
+          0
+
+        </div>
+
+        <div class="modal-stat-label">
+          ENTREGUES
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="modal-section">
+
+      <h4>📦 Prêmios deste cliente</h4>
+
+      <div
+        class="modal-delivery"
+        id="modalDeliveryList">
+
+        <div class="empty">
+          Nenhum prêmio.
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="modal-buttons">
+
+      <button
+        class="open-client"
+        id="openClient"
+        type="button">
+
+        👤 VER PERFIL COMPLETO
+
+      </button>
+
+      <button
+        class="open-delivery"
+        id="openDelivery"
+        type="button">
+
+        📦 ABRIR ENTREGAS
+
+      </button>
 
     </div>
 
@@ -1638,60 +1500,37 @@ body{
 
 </div>
 
-
 <script type="module">
-
 
 /* =====================================================
    FIREBASE
 ===================================================== */
 
 import {
-
   initializeApp
-
 }
-
 from
-
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
-
 import {
-
   getAuth,
-
   onAuthStateChanged,
-
-  signInWithEmailAndPassword,
-
   signOut
-
 }
-
 from
-
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
-
 import {
-
   getFirestore,
-
   collection,
-
+  query,
+  where,
   getDocs,
-
-  doc,
-
-  getDoc
-
+  updateDoc,
+  addDoc
 }
-
 from
-
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
-
 
 /* =====================================================
    CONFIG
@@ -1719,54 +1558,97 @@ const firebaseConfig = {
 
 };
 
-
 const app =
   initializeApp(
     firebaseConfig
   );
 
-
 const auth =
   getAuth(app);
-
 
 const db =
   getFirestore(app);
 
-
 /* =====================================================
-   ADMIN PRINCIPAL
+   ADMIN
 ===================================================== */
 
 const ADMIN_EMAIL =
   "raphafentyramos@gmail.com";
 
+let adminUsuario = null;
+
+let usuarioSelecionado = null;
+
+let todasEntregas = [];
+
+let modalClienteUid = null;
 
 /* =====================================================
    ELEMENTOS
 ===================================================== */
 
-const $ =
-  id =>
-    document.getElementById(id);
+const searchInput =
+  document.getElementById(
+    "searchInput"
+  );
 
+const searchMessage =
+  document.getElementById(
+    "searchMessage"
+  );
+
+const operationMessage =
+  document.getElementById(
+    "operationMessage"
+  );
+
+const roletaMessage =
+  document.getElementById(
+    "roletaMessage"
+  );
+
+const userArea =
+  document.getElementById(
+    "userArea"
+  );
+
+const deliveryList =
+  document.getElementById(
+    "deliveryList"
+  );
+
+const deliveryMessage =
+  document.getElementById(
+    "deliveryMessage"
+  );
 
 /* =====================================================
-   ESTADO
+   MENSAGEM
 ===================================================== */
 
-let clientes = [];
+function mostrarMensagem(
+  elemento,
+  texto,
+  tipo
+){
 
-let entregas = [];
+  elemento.textContent =
+    texto;
 
-let usuarioAtual = null;
+  elemento.className =
+    "message " +
+    tipo;
 
+}
 
 /* =====================================================
-   UTILITÁRIOS
+   FORMATAÇÃO
 ===================================================== */
 
-function numero(valor){
+function numero(
+  valor
+){
 
   return Number(
     valor || 0
@@ -1776,134 +1658,50 @@ function numero(valor){
 
 }
 
+function dinheiro(
+  valor
+){
 
-function dinheiro(valor){
-
-  return "R$ " +
-    Number(
-      valor || 0
-    )
-    .toFixed(2)
-    .replace(
-      ".",
-      ","
-    );
-
-}
-
-
-function escapar(valor){
-
-  return String(
-    valor ?? ""
-  )
-
-  .replace(
-    /&/g,
-    "&amp;"
-  )
-
-  .replace(
-    /</g,
-    "&lt;"
-  )
-
-  .replace(
-    />/g,
-    "&gt;"
-  )
-
-  .replace(
-    /"/g,
-    "&quot;"
-  )
-
-  .replace(
-    /'/g,
-    "&#039;"
+  return Number(
+    valor || 0
+  ).toLocaleString(
+    "pt-BR",
+    {
+      style:"currency",
+      currency:"BRL"
+    }
   );
 
 }
 
+function escapar(
+  valor
+){
 
-function data(valor){
-
-  if(!valor){
-
-    return "—";
-
-  }
-
-
-  try{
-
-    if(
-      typeof valor.toDate ===
-      "function"
-    ){
-
-      return valor
-        .toDate()
-        .toLocaleString(
-          "pt-BR"
-        );
-
-    }
-
-
-    if(
-      typeof valor.seconds ===
-      "number"
-    ){
-
-      return new Date(
-        valor.seconds * 1000
-      )
-      .toLocaleString(
-        "pt-BR"
-      );
-
-    }
-
-
-    const d =
-      new Date(valor);
-
-
-    if(
-      Number.isNaN(
-        d.getTime()
-      )
-    ){
-
-      return "—";
-
-    }
-
-
-    return d.toLocaleString(
-      "pt-BR"
-    );
-
-  }
-
-  catch{
-
-    return "—";
-
-  }
+  return String(
+    valor ?? ""
+  )
+  .replace(/&/g,"&amp;")
+  .replace(/</g,"&lt;")
+  .replace(/>/g,"&gt;")
+  .replace(/"/g,"&quot;")
+  .replace(/'/g,"&#039;");
 
 }
 
+/* =====================================================
+   DATA
+===================================================== */
 
-function millis(valor){
+function obterMillis(
+  valor
+){
 
   if(!valor){
 
     return 0;
 
   }
-
 
   if(
     typeof valor.toMillis ===
@@ -1914,6 +1712,14 @@ function millis(valor){
 
   }
 
+  if(
+    typeof valor.toDate ===
+    "function"
+  ){
+
+    return valor.toDate().getTime();
+
+  }
 
   if(
     typeof valor.seconds ===
@@ -1924,235 +1730,2263 @@ function millis(valor){
 
   }
 
-
-  const d =
-    new Date(valor);
-
+  const data =
+    new Date(
+      valor
+    );
 
   return Number.isNaN(
-    d.getTime()
+    data.getTime()
   )
     ? 0
-    : d.getTime();
+    : data.getTime();
 
 }
 
-
-function mensagem(texto, erro=false){
-
-  const el =
-    $("message");
-
-  el.textContent =
-    texto;
-
-  el.className =
-    erro
-      ? "message error"
-      : "message";
-
-}
-
-
-/* =====================================================
-   LOGIN
-===================================================== */
-
-function mensagemLogin(
-  texto,
-  tipo="error"
+function formatarData(
+  valor
 ){
 
-  const el =
-    $("loginMessage");
+  const millis =
+    obterMillis(
+      valor
+    );
 
-  el.textContent =
-    texto;
+  if(!millis){
 
-  el.className =
-    "login-message " +
-    tipo;
-
-}
-
-
-$("loginButton")
-.addEventListener(
-  "click",
-  async () => {
-
-    const email =
-      $("loginEmail")
-      .value
-      .trim()
-      .toLowerCase();
-
-
-    const senha =
-      $("loginPassword")
-      .value;
-
-
-    if(
-      email !==
-      ADMIN_EMAIL
-    ){
-
-      mensagemLogin(
-        "Apenas o administrador principal pode entrar.",
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    if(!senha){
-
-      mensagemLogin(
-        "Digite a senha.",
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    const botao =
-      $("loginButton");
-
-
-    botao.disabled =
-      true;
-
-    botao.textContent =
-      "ENTRANDO...";
-
-
-    try{
-
-      await signInWithEmailAndPassword(
-        auth,
-        email,
-        senha
-      );
-
-
-      mensagemLogin(
-        "Login realizado!",
-        "success"
-      );
-
-    }
-
-    catch(error){
-
-      console.error(
-        error
-      );
-
-
-      mensagemLogin(
-        traduzirErro(
-          error
-        ),
-        "error"
-      );
-
-      botao.disabled =
-        false;
-
-      botao.textContent =
-        "ENTRAR NO ADMIN";
-
-    }
-
-  }
-);
-
-
-$("loginPassword")
-.addEventListener(
-  "keydown",
-  e => {
-
-    if(
-      e.key ===
-      "Enter"
-    ){
-
-      $("loginButton")
-      .click();
-
-    }
-
-  }
-);
-
-
-function traduzirErro(error){
-
-  const code =
-    error?.code ||
-    "";
-
-
-  if(
-    code.includes(
-      "invalid-credential"
-    ) ||
-    code.includes(
-      "wrong-password"
-    )
-  ){
-
-    return "E-mail ou senha incorretos.";
+    return "—";
 
   }
 
-
-  if(
-    code.includes(
-      "user-not-found"
-    )
-  ){
-
-    return "Administrador não encontrado.";
-
-  }
-
-
-  if(
-    code.includes(
-      "too-many-requests"
-    )
-  ){
-
-    return "Muitas tentativas. Aguarde alguns minutos.";
-
-  }
-
-
-  if(
-    code.includes(
-      "network-request-failed"
-    )
-  ){
-
-    return "Erro de conexão com o Firebase.";
-
-  }
-
-
-  return (
-    error?.message ||
-    "Não foi possível entrar."
+  return new Date(
+    millis
+  ).toLocaleString(
+    "pt-BR"
   );
 
 }
 
+/* =====================================================
+   ID OPERAÇÃO
+===================================================== */
+
+function gerarOperacaoId(){
+
+  const agora =
+    new Date();
+
+  const data =
+    agora.getFullYear() +
+    String(
+      agora.getMonth()+1
+    ).padStart(2,"0") +
+    String(
+      agora.getDate()
+    ).padStart(2,"0");
+
+  const hora =
+    String(
+      agora.getHours()
+    ).padStart(2,"0") +
+    String(
+      agora.getMinutes()
+    ).padStart(2,"0") +
+    String(
+      agora.getSeconds()
+    ).padStart(2,"0");
+
+  let aleatorio;
+
+  if(
+    window.crypto &&
+    crypto.randomUUID
+  ){
+
+    aleatorio =
+      crypto
+      .randomUUID()
+      .split("-")[0]
+      .toUpperCase();
+
+  }
+  else{
+
+    aleatorio =
+      Math.random()
+      .toString(36)
+      .substring(2,8)
+      .toUpperCase();
+
+  }
+
+  return (
+    "MOV-" +
+    data +
+    "-" +
+    hora +
+    "-" +
+    aleatorio
+  );
+
+}
+
+/* =====================================================
+   CARREGAR TODAS AS ENTREGAS
+===================================================== */
+
+async function carregarTodasEntregas(){
+
+  deliveryList.innerHTML =
+    "<div class='empty'>🔄 Carregando prêmios...</div>";
+
+  try{
+
+    const resultado =
+      await getDocs(
+        collection(
+          db,
+          "entregas"
+        )
+      );
+
+    todasEntregas =
+      resultado.docs.map(
+        documento => ({
+
+          id:
+            documento.id,
+
+          ...documento.data()
+
+        })
+      );
+
+    renderizarPainelEntregas();
+
+  }
+  catch(error){
+
+    console.error(
+      "Erro ao carregar entregas:",
+      error
+    );
+
+    todasEntregas = [];
+
+    deliveryList.innerHTML =
+      "<div class='empty'>" +
+      "⚠️ Não foi possível carregar a coleção entregas." +
+      "</div>";
+
+    mostrarMensagem(
+      deliveryMessage,
+      "Verifique se as Rules permitem ao administrador ler a coleção entregas.",
+      "error"
+    );
+
+  }
+
+}
+
+/* =====================================================
+   TENTAR TAMBÉM HISTÓRICO DA ROLETA
+===================================================== */
+
+async function carregarHistoricoRoletaParaEntregas(){
+
+  try{
+
+    const resultado =
+      await getDocs(
+        collection(
+          db,
+          "historicoRoleta"
+        )
+      );
+
+    const registros =
+      resultado.docs.map(
+        documento => ({
+
+          id:
+            documento.id,
+
+          ...documento.data()
+
+        })
+      );
+
+    const existentes =
+      new Set(
+        todasEntregas.map(
+          item =>
+            item.roletaResultadoId ||
+            item.id
+        )
+      );
+
+    registros.forEach(
+      registro => {
+
+        const identificador =
+          registro.id;
+
+        if(
+          !existentes.has(
+            identificador
+          ) &&
+          registro.entregue !== true
+        ){
+
+          todasEntregas.push({
+
+            id:
+              "ROULET-" +
+              registro.id,
+
+            uid:
+              registro.uid ||
+              registro.usuarioUid ||
+              registro.usuarioId ||
+              "",
+
+            usuarioUid:
+              registro.uid ||
+              registro.usuarioUid ||
+              registro.usuarioId ||
+              "",
+
+            usuarioEmail:
+              registro.usuarioEmail ||
+              "",
+
+            usuarioNome:
+              registro.usuarioNome ||
+              "",
+
+            premioNome:
+              registro.premioNome ||
+              "Prêmio da Roleta",
+
+            quantidade:
+              Number(
+                registro.quantidade ||
+                0
+              ),
+
+            tipo:
+              "roleta",
+
+            imagem:
+              registro.imagem ||
+              "",
+
+            entregue:
+              registro.entregue === true,
+
+            criadoEm:
+              registro.criadoEm ||
+              registro.dataHora,
+
+            roletaResultadoId:
+              identificador,
+
+            somenteLeitura:
+              true
+
+          });
+
+        }
+
+      }
+    );
+
+    renderizarPainelEntregas();
+
+  }
+  catch(error){
+
+    console.warn(
+      "Não foi possível carregar histórico da roleta:",
+      error
+    );
+
+  }
+
+}
+
+/* =====================================================
+   RENDER ENTREGAS
+===================================================== */
+
+function renderizarPainelEntregas(){
+
+  const total =
+    todasEntregas.length;
+
+  const pendentes =
+    todasEntregas.filter(
+      item =>
+        item.entregue !== true
+    ).length;
+
+  const entregues =
+    todasEntregas.filter(
+      item =>
+        item.entregue === true
+    ).length;
+
+  document.getElementById(
+    "totalEntregas"
+  ).textContent =
+    numero(
+      total
+    );
+
+  document.getElementById(
+    "totalPendentes"
+  ).textContent =
+    numero(
+      pendentes
+    );
+
+  document.getElementById(
+    "totalEntregues"
+  ).textContent =
+    numero(
+      entregues
+    );
+
+  deliveryList.innerHTML =
+    "";
+
+  const pendentesLista =
+    todasEntregas
+    .filter(
+      item =>
+        item.entregue !== true
+    )
+    .sort(
+      (
+        a,
+        b
+      ) =>
+        obterMillis(
+          b.criadoEm ||
+          b.dataHora
+        ) -
+        obterMillis(
+          a.criadoEm ||
+          a.dataHora
+        )
+    );
+
+  if(
+    pendentesLista.length === 0
+  ){
+
+    deliveryList.innerHTML =
+      "<div class='empty'>" +
+      "🎉 Nenhum prêmio pendente de entrega." +
+      "</div>";
+
+    return;
+
+  }
+
+  pendentesLista
+  .slice(0,50)
+  .forEach(
+    pedido => {
+
+      const uid =
+        pedido.uid ||
+        pedido.usuarioUid ||
+        pedido.usuarioId ||
+        "";
+
+      const titulo =
+        pedido.premioNome ||
+        pedido.nome ||
+        pedido.titulo ||
+        "Prêmio";
+
+      const tipo =
+        pedido.tipo ||
+        "outro";
+
+      const quantidade =
+        pedido.quantidade !== undefined
+          ?
+          numero(
+            pedido.quantidade
+          )
+          :
+          "—";
+
+      const div =
+        document.createElement(
+          "div"
+        );
+
+      div.className =
+        "delivery-item";
+
+      div.innerHTML = `
+
+        <div class="delivery-item-top">
+
+          <div>
+
+            <div class="delivery-title">
+              🎁 ${escapar(titulo)}
+            </div>
+
+            <div class="delivery-user">
+              👤 ${
+                escapar(
+                  pedido.usuarioNome ||
+                  "Cliente não identificado"
+                )
+              }
+              ${
+                pedido.usuarioEmail
+                  ? " • " +
+                    escapar(
+                      pedido.usuarioEmail
+                    )
+                  : ""
+              }
+            </div>
+
+          </div>
+
+          <div class="delivery-status pending">
+            ⏳ PENDENTE
+          </div>
+
+        </div>
+
+        <div class="delivery-info">
+
+          Tipo:
+          <b>${escapar(tipo)}</b>
+
+          <br>
+
+          Quantidade:
+          <b>${quantidade}</b>
+
+          <br>
+
+          Data:
+          <b>
+            ${escapar(
+              formatarData(
+                pedido.criadoEm ||
+                pedido.dataHora
+              )
+            )}
+          </b>
+
+          <br>
+
+          UID:
+          <b>${escapar(uid || "Não informado")}</b>
+
+        </div>
+
+        <div class="delivery-actions">
+
+          <button
+            class="delivery-profile"
+            type="button">
+
+            👤 VER PERFIL
+
+          </button>
+
+          <button
+            class="delivery-open"
+            type="button">
+
+            📦 ABRIR ENTREGAS
+
+          </button>
+
+        </div>
+
+        <div class="delivery-id">
+
+          🆔 ID:
+          ${escapar(pedido.id)}
+
+        </div>
+
+      `;
+
+      div
+      .querySelector(
+        ".delivery-profile"
+      )
+      .addEventListener(
+        "click",
+        () => {
+
+          if(!uid){
+
+            alert(
+              "Este prêmio não possui UID do cliente."
+            );
+
+            return;
+
+          }
+
+          buscarUsuarioPorUid(
+            uid
+          );
+
+        }
+      );
+
+      div
+      .querySelector(
+        ".delivery-open"
+      )
+      .addEventListener(
+        "click",
+        () => {
+
+          if(!uid){
+
+            alert(
+              "Este prêmio não possui UID do cliente."
+            );
+
+            return;
+
+          }
+
+          window.location.href =
+            "entregas.html?uid=" +
+            encodeURIComponent(
+              uid
+            );
+
+        }
+      );
+
+      deliveryList.appendChild(
+        div
+      );
+
+    }
+  );
+
+}
+
+/* =====================================================
+   BUSCAR POR UID
+===================================================== */
+
+async function buscarUsuarioPorUid(
+  uid
+){
+
+  try{
+
+    const resultado =
+      await getDocs(
+        query(
+          collection(
+            db,
+            "admins"
+          ),
+          where(
+            "uid",
+            "==",
+            uid
+          )
+        )
+      );
+
+    if(
+      resultado.empty
+    ){
+
+      mostrarMensagem(
+        searchMessage,
+        "Cliente não encontrado pelo UID.",
+        "error"
+      );
+
+      return;
+
+    }
+
+    mostrarUsuario(
+      resultado.docs[0]
+    );
+
+    window.scrollTo({
+      top:
+        document.getElementById(
+          "userArea"
+        ).offsetTop - 20,
+      behavior:"smooth"
+    });
+
+  }
+  catch(error){
+
+    console.error(
+      error
+    );
+
+    mostrarMensagem(
+      searchMessage,
+      "Erro ao localizar o cliente.",
+      "error"
+    );
+
+  }
+
+}
+
+/* =====================================================
+   BUSCAR ID
+===================================================== */
+
+async function buscarPorId(
+  valor
+){
+
+  return await getDocs(
+    query(
+      collection(
+        db,
+        "admins"
+      ),
+      where(
+        "publicId",
+        "==",
+        valor
+      )
+    )
+  );
+
+}
+
+/* =====================================================
+   BUSCAR EMAIL
+===================================================== */
+
+async function buscarPorEmail(
+  valor
+){
+
+  return await getDocs(
+    query(
+      collection(
+        db,
+        "admins"
+      ),
+      where(
+        "email",
+        "==",
+        valor
+          .trim()
+          .toLowerCase()
+      )
+    )
+  );
+
+}
+
+/* =====================================================
+   BUSCAR USUÁRIO
+===================================================== */
+
+async function buscarUsuario(){
+
+  const valor =
+    searchInput.value
+    .trim();
+
+  if(!valor){
+
+    mostrarMensagem(
+      searchMessage,
+      "Digite um ID ou e-mail.",
+      "error"
+    );
+
+    return;
+
+  }
+
+  searchMessage.className =
+    "message";
+
+  userArea.style.display =
+    "none";
+
+  try{
+
+    let resultado =
+      await buscarPorId(
+        valor
+      );
+
+    if(
+      resultado.empty &&
+      valor.includes("@")
+    ){
+
+      resultado =
+        await buscarPorEmail(
+          valor
+        );
+
+    }
+
+    if(
+      resultado.empty
+    ){
+
+      mostrarMensagem(
+        searchMessage,
+        "Usuário não encontrado.",
+        "error"
+      );
+
+      return;
+
+    }
+
+    mostrarUsuario(
+      resultado.docs[0]
+    );
+
+    mostrarMensagem(
+      searchMessage,
+      "Usuário encontrado com sucesso.",
+      "success"
+    );
+
+  }
+  catch(error){
+
+    console.error(
+      "Erro na busca:",
+      error
+    );
+
+    mostrarMensagem(
+      searchMessage,
+      "Não foi possível consultar os usuários.",
+      "error"
+    );
+
+  }
+
+}
+
+/* =====================================================
+   MOSTRAR USUÁRIO
+===================================================== */
+
+function mostrarUsuario(
+  documento
+){
+
+  const dados =
+    documento.data();
+
+  usuarioSelecionado = {
+
+    ref:
+      documento.ref,
+
+    docId:
+      documento.id,
+
+    data:
+      dados
+
+  };
+
+  userArea.style.display =
+    "block";
+
+  const nome =
+    dados.nome ||
+    dados.name ||
+    "Usuário";
+
+  const email =
+    dados.email ||
+    "Sem e-mail";
+
+  const publicId =
+    dados.publicId ||
+    "Pendente";
+
+  document.getElementById(
+    "nome"
+  ).textContent =
+    nome;
+
+  document.getElementById(
+    "email"
+  ).textContent =
+    email;
+
+  document.getElementById(
+    "id"
+  ).textContent =
+    "ID: " +
+    publicId;
+
+  document.getElementById(
+    "uid"
+  ).textContent =
+    "UID: " +
+    (
+      dados.uid ||
+      "Não informado"
+    );
+
+  document.getElementById(
+    "avatar"
+  ).textContent =
+    dados.avatar ||
+    "🙂";
+
+  document.getElementById(
+    "infoNome"
+  ).textContent =
+    nome;
+
+  document.getElementById(
+    "infoEmail"
+  ).textContent =
+    email;
+
+  document.getElementById(
+    "infoId"
+  ).textContent =
+    publicId;
+
+  document.getElementById(
+    "infoUid"
+  ).textContent =
+    dados.uid ||
+    "Não informado";
+
+  document.getElementById(
+    "infoIdade"
+  ).textContent =
+    dados.idade ||
+    "Não informado";
+
+  document.getElementById(
+    "infoTelefone"
+  ).textContent =
+    dados.telefone ||
+    dados.phone ||
+    "Não informado";
+
+  atualizarSaldos();
+
+  atualizarStatus();
+
+  atualizarGirosRoleta();
+
+  carregarExtrato(
+    publicId
+  );
+
+}
+
+/* =====================================================
+   SALDOS
+===================================================== */
+
+function atualizarSaldos(){
+
+  if(
+    !usuarioSelecionado
+  ){
+
+    return;
+
+  }
+
+  const dados =
+    usuarioSelecionado.data;
+
+  document.getElementById(
+    "chances"
+  ).textContent =
+    numero(
+      dados.chances
+    );
+
+  document.getElementById(
+    "moedas"
+  ).textContent =
+    numero(
+      dados.moedas
+    );
+
+  document.getElementById(
+    "chaves"
+  ).textContent =
+    numero(
+      dados.chaves
+    );
+
+  document.getElementById(
+    "creditos"
+  ).textContent =
+    dinheiro(
+      dados.creditos
+    );
+
+}
+
+/* =====================================================
+   GIROS
+===================================================== */
+
+function atualizarGirosRoleta(){
+
+  if(
+    !usuarioSelecionado
+  ){
+
+    return;
+
+  }
+
+  const valor =
+    Number(
+      usuarioSelecionado.data.girosRoleta ||
+      0
+    );
+
+  document.getElementById(
+    "girosRoleta"
+  ).textContent =
+    numero(
+      valor
+    );
+
+  document.getElementById(
+    "roletaSaldo"
+  ).textContent =
+    numero(
+      valor
+    );
+
+}
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+function atualizarStatus(){
+
+  if(
+    !usuarioSelecionado
+  ){
+
+    return;
+
+  }
+
+  const dados =
+    usuarioSelecionado.data;
+
+  const vip =
+    dados.vip === true;
+
+  const caixa =
+    dados.caixaBox === true;
+
+  const vipStatus =
+    document.getElementById(
+      "vipStatus"
+    );
+
+  if(vip){
+
+    vipStatus.textContent =
+      "👑 VIP ATIVO";
+
+    vipStatus.className =
+      "status vip";
+
+  }
+  else{
+
+    vipStatus.textContent =
+      "⭐ NÃO VIP";
+
+    vipStatus.className =
+      "status normal";
+
+  }
+
+  const boxStatus =
+    document.getElementById(
+      "boxStatus"
+    );
+
+  boxStatus.textContent =
+    caixa
+      ? "🎁 CAIXA UTILIZADA"
+      : "🎁 CAIXA DISPONÍVEL";
+
+}
+
+/* =====================================================
+   ALTERAR SALDO
+===================================================== */
+
+async function alterarSaldo(
+  operacao
+){
+
+  if(
+    !usuarioSelecionado
+  ){
+
+    mostrarMensagem(
+      operationMessage,
+      "Primeiro selecione um usuário.",
+      "error"
+    );
+
+    return;
+
+  }
+
+  const item =
+    document.getElementById(
+      "item"
+    ).value;
+
+  const quantidade =
+    Number(
+      document.getElementById(
+        "quantidade"
+      ).value
+    );
+
+  const motivo =
+    document.getElementById(
+      "motivo"
+    ).value.trim();
+
+  if(
+    !Number.isFinite(
+      quantidade
+    ) ||
+    quantidade <= 0
+  ){
+
+    mostrarMensagem(
+      operationMessage,
+      "Digite uma quantidade válida.",
+      "error"
+    );
+
+    return;
+
+  }
+
+  if(!motivo){
+
+    mostrarMensagem(
+      operationMessage,
+      "Informe o motivo da movimentação.",
+      "error"
+    );
+
+    return;
+
+  }
+
+  const atual =
+    Number(
+      usuarioSelecionado.data[item] ||
+      0
+    );
+
+  const novo =
+    operacao === "adicionar"
+      ? atual + quantidade
+      : atual - quantidade;
+
+  if(
+    novo < 0
+  ){
+
+    mostrarMensagem(
+      operationMessage,
+      "O saldo não pode ficar negativo.",
+      "error"
+    );
+
+    return;
+
+  }
+
+  if(
+    !confirm(
+      (
+        operacao === "adicionar"
+          ? "Adicionar "
+          : "Remover "
+      ) +
+      quantidade +
+      " de " +
+      item +
+      "?"
+    )
+  ){
+
+    return;
+
+  }
+
+  const operacaoId =
+    gerarOperacaoId();
+
+  try{
+
+    await updateDoc(
+      usuarioSelecionado.ref,
+      {
+        [item]:
+          novo
+      }
+    );
+
+    await addDoc(
+      collection(
+        db,
+        "historico"
+      ),
+      {
+
+        movimentacaoId:
+          operacaoId,
+
+        usuarioId:
+          usuarioSelecionado.docId,
+
+        publicId:
+          usuarioSelecionado.data.publicId ||
+          usuarioSelecionado.docId,
+
+        usuarioUid:
+          usuarioSelecionado.data.uid ||
+          "",
+
+        usuarioEmail:
+          usuarioSelecionado.data.email ||
+          "",
+
+        usuarioNome:
+          usuarioSelecionado.data.nome ||
+          usuarioSelecionado.data.name ||
+          "",
+
+        adminEmail:
+          adminUsuario.email,
+
+        adminUid:
+          adminUsuario.uid,
+
+        item:
+          item,
+
+        operacao:
+          operacao,
+
+        quantidade:
+          quantidade,
+
+        saldoAnterior:
+          atual,
+
+        saldoFinal:
+          novo,
+
+        motivo:
+          motivo,
+
+        criadoEm:
+          new Date().toISOString()
+
+      }
+    );
+
+    usuarioSelecionado.data[item] =
+      novo;
+
+    atualizarSaldos();
+
+    document.getElementById(
+      "quantidade"
+    ).value =
+      "";
+
+    document.getElementById(
+      "motivo"
+    ).value =
+      "";
+
+    mostrarMensagem(
+      operationMessage,
+      "Movimentação realizada com sucesso. ID: " +
+      operacaoId,
+      "success"
+    );
+
+    await carregarExtrato(
+      usuarioSelecionado.data.publicId ||
+      usuarioSelecionado.docId
+    );
+
+  }
+  catch(error){
+
+    console.error(
+      "Erro na movimentação:",
+      error
+    );
+
+    mostrarMensagem(
+      operationMessage,
+      "Erro ao realizar a movimentação.",
+      "error"
+    );
+
+  }
+
+}
+
+/* =====================================================
+   ALTERAR GIROS
+===================================================== */
+
+async function alterarGirosRoleta(
+  operacao
+){
+
+  if(
+    !usuarioSelecionado
+  ){
+
+    mostrarMensagem(
+      roletaMessage,
+      "Primeiro selecione um usuário.",
+      "error"
+    );
+
+    return;
+
+  }
+
+  const quantidade =
+    Number(
+      document.getElementById(
+        "quantidadeGiros"
+      ).value
+    );
+
+  const motivo =
+    document.getElementById(
+      "motivoGiros"
+    ).value.trim();
+
+  if(
+    !Number.isInteger(
+      quantidade
+    ) ||
+    quantidade <= 0
+  ){
+
+    mostrarMensagem(
+      roletaMessage,
+      "Digite uma quantidade inteira de giros maior que zero.",
+      "error"
+    );
+
+    return;
+
+  }
+
+  if(!motivo){
+
+    mostrarMensagem(
+      roletaMessage,
+      "Informe o motivo da movimentação.",
+      "error"
+    );
+
+    return;
+
+  }
+
+  const atual =
+    Number(
+      usuarioSelecionado.data.girosRoleta ||
+      0
+    );
+
+  const novo =
+    operacao === "adicionar"
+      ? atual + quantidade
+      : atual - quantidade;
+
+  if(
+    novo < 0
+  ){
+
+    mostrarMensagem(
+      roletaMessage,
+      "O saldo de giros não pode ficar negativo.",
+      "error"
+    );
+
+    return;
+
+  }
+
+  if(
+    !confirm(
+      operacao === "adicionar"
+        ?
+        "Adicionar " +
+        quantidade +
+        " giro(s) da Roleta?"
+        :
+        "Remover " +
+        quantidade +
+        " giro(s) da Roleta?"
+    )
+  ){
+
+    return;
+
+  }
+
+  const operacaoId =
+    gerarOperacaoId();
+
+  try{
+
+    await updateDoc(
+      usuarioSelecionado.ref,
+      {
+        girosRoleta:
+          novo
+      }
+    );
+
+    await addDoc(
+      collection(
+        db,
+        "historico"
+      ),
+      {
+
+        movimentacaoId:
+          operacaoId,
+
+        usuarioId:
+          usuarioSelecionado.docId,
+
+        publicId:
+          usuarioSelecionado.data.publicId ||
+          usuarioSelecionado.docId,
+
+        usuarioUid:
+          usuarioSelecionado.data.uid ||
+          "",
+
+        usuarioEmail:
+          usuarioSelecionado.data.email ||
+          "",
+
+        usuarioNome:
+          usuarioSelecionado.data.nome ||
+          usuarioSelecionado.data.name ||
+          "",
+
+        adminEmail:
+          adminUsuario.email,
+
+        adminUid:
+          adminUsuario.uid,
+
+        item:
+          "girosRoleta",
+
+        nomeExibicao:
+          "Giros da Roleta",
+
+        operacao:
+          operacao,
+
+        quantidade:
+          quantidade,
+
+        saldoAnterior:
+          atual,
+
+        saldoFinal:
+          novo,
+
+        motivo:
+          motivo,
+
+        criadoEm:
+          new Date().toISOString()
+
+      }
+    );
+
+    usuarioSelecionado.data.girosRoleta =
+      novo;
+
+    atualizarGirosRoleta();
+
+    document.getElementById(
+      "quantidadeGiros"
+    ).value =
+      "";
+
+    document.getElementById(
+      "motivoGiros"
+    ).value =
+      "";
+
+    mostrarMensagem(
+      roletaMessage,
+      "🎰 Operação realizada com sucesso. Novo saldo: " +
+      novo,
+      "success"
+    );
+
+    await carregarExtrato(
+      usuarioSelecionado.data.publicId ||
+      usuarioSelecionado.docId
+    );
+
+  }
+  catch(error){
+
+    console.error(
+      "Erro nos giros:",
+      error
+    );
+
+    mostrarMensagem(
+      roletaMessage,
+      "Não foi possível alterar os giros da Roleta.",
+      "error"
+    );
+
+  }
+
+}
+
+/* =====================================================
+   VIP
+===================================================== */
+
+async function alterarVIP(){
+
+  if(
+    !usuarioSelecionado
+  ){
+
+    mostrarMensagem(
+      operationMessage,
+      "Selecione um usuário primeiro.",
+      "error"
+    );
+
+    return;
+
+  }
+
+  const atual =
+    usuarioSelecionado.data.vip === true;
+
+  const novo =
+    !atual;
+
+  if(
+    !confirm(
+      novo
+        ?
+        "Ativar VIP para este usuário?"
+        :
+        "Desativar VIP deste usuário?"
+    )
+  ){
+
+    return;
+
+  }
+
+  const operacaoId =
+    gerarOperacaoId();
+
+  try{
+
+    await updateDoc(
+      usuarioSelecionado.ref,
+      {
+        vip:
+          novo
+      }
+    );
+
+    await addDoc(
+      collection(
+        db,
+        "historico"
+      ),
+      {
+
+        movimentacaoId:
+          operacaoId,
+
+        usuarioId:
+          usuarioSelecionado.docId,
+
+        publicId:
+          usuarioSelecionado.data.publicId ||
+          usuarioSelecionado.docId,
+
+        usuarioUid:
+          usuarioSelecionado.data.uid ||
+          "",
+
+        usuarioEmail:
+          usuarioSelecionado.data.email ||
+          "",
+
+        usuarioNome:
+          usuarioSelecionado.data.nome ||
+          usuarioSelecionado.data.name ||
+          "",
+
+        adminEmail:
+          adminUsuario.email,
+
+        adminUid:
+          adminUsuario.uid,
+
+        item:
+          "VIP",
+
+        operacao:
+          novo
+            ? "adicionar"
+            : "remover",
+
+        quantidade:
+          1,
+
+        saldoAnterior:
+          atual
+            ? 1
+            : 0,
+
+        saldoFinal:
+          novo
+            ? 1
+            : 0,
+
+        motivo:
+          novo
+            ?
+            "VIP ativado pelo administrador"
+            :
+            "VIP desativado pelo administrador",
+
+        criadoEm:
+          new Date().toISOString()
+
+      }
+    );
+
+    usuarioSelecionado.data.vip =
+      novo;
+
+    atualizarStatus();
+
+    mostrarMensagem(
+      operationMessage,
+      novo
+        ?
+        "👑 VIP ativado com sucesso."
+        :
+        "⭐ VIP desativado com sucesso.",
+      "success"
+    );
+
+    await carregarExtrato(
+      usuarioSelecionado.data.publicId ||
+      usuarioSelecionado.docId
+    );
+
+  }
+  catch(error){
+
+    console.error(
+      "Erro VIP:",
+      error
+    );
+
+    mostrarMensagem(
+      operationMessage,
+      "Não foi possível alterar o VIP.",
+      "error"
+    );
+
+  }
+
+}
+
+/* =====================================================
+   CAIXA
+===================================================== */
+
+async function alterarCaixa(){
+
+  if(
+    !usuarioSelecionado
+  ){
+
+    mostrarMensagem(
+      operationMessage,
+      "Selecione um usuário primeiro.",
+      "error"
+    );
+
+    return;
+
+  }
+
+  const atual =
+    usuarioSelecionado.data.caixaBox === true;
+
+  const novo =
+    !atual;
+
+  if(
+    !confirm(
+      novo
+        ?
+        "Marcar a Caixa Box como utilizada?"
+        :
+        "Liberar a Caixa Box novamente?"
+    )
+  ){
+
+    return;
+
+  }
+
+  const operacaoId =
+    gerarOperacaoId();
+
+  try{
+
+    await updateDoc(
+      usuarioSelecionado.ref,
+      {
+        caixaBox:
+          novo
+      }
+    );
+
+    await addDoc(
+      collection(
+        db,
+        "historico"
+      ),
+      {
+
+        movimentacaoId:
+          operacaoId,
+
+        usuarioId:
+          usuarioSelecionado.docId,
+
+        publicId:
+          usuarioSelecionado.data.publicId ||
+          usuarioSelecionado.docId,
+
+        usuarioUid:
+          usuarioSelecionado.data.uid ||
+          "",
+
+        usuarioEmail:
+          usuarioSelecionado.data.email ||
+          "",
+
+        usuarioNome:
+          usuarioSelecionado.data.nome ||
+          usuarioSelecionado.data.name ||
+          "",
+
+        adminEmail:
+          adminUsuario.email,
+
+        adminUid:
+          adminUsuario.uid,
+
+        item:
+          "Caixa Box",
+
+        operacao:
+          novo
+            ? "remover"
+            : "adicionar",
+
+        quantidade:
+          1,
+
+        saldoAnterior:
+          atual
+            ? 1
+            : 0,
+
+        saldoFinal:
+          novo
+            ? 1
+            : 0,
+
+        motivo:
+          novo
+            ?
+            "Caixa Box marcada como utilizada"
+            :
+            "Caixa Box liberada pelo administrador",
+
+        criadoEm:
+          new Date().toISOString()
+
+      }
+    );
+
+    usuarioSelecionado.data.caixaBox =
+      novo;
+
+    atualizarStatus();
+
+    mostrarMensagem(
+      operationMessage,
+      novo
+        ?
+        "🎁 Caixa Box marcada como utilizada."
+        :
+        "🎁 Caixa Box liberada novamente.",
+      "success"
+    );
+
+    await carregarExtrato(
+      usuarioSelecionado.data.publicId ||
+      usuarioSelecionado.docId
+    );
+
+  }
+  catch(error){
+
+    console.error(
+      "Erro Caixa:",
+      error
+    );
+
+    mostrarMensagem(
+      operationMessage,
+      "Não foi possível alterar a Caixa Box.",
+      "error"
+    );
+
+  }
+
+}
+
+/* =====================================================
+   EXTRATO
+===================================================== */
+
+async function carregarExtrato(
+  publicId
+){
+
+  const lista =
+    document.getElementById(
+      "historyList"
+    );
+
+  lista.innerHTML =
+    "<div class='empty'>🔄 Carregando histórico...</div>";
+
+  if(
+    !publicId ||
+    publicId === "Pendente"
+  ){
+
+    lista.innerHTML =
+      "<div class='empty'>" +
+      "Este usuário ainda não possui ID público." +
+      "</div>";
+
+    return;
+
+  }
+
+  try{
+
+    const resultado =
+      await getDocs(
+        query(
+          collection(
+            db,
+            "historico"
+          ),
+          where(
+            "publicId",
+            "==",
+            publicId
+          )
+        )
+      );
+
+    if(
+      resultado.empty
+    ){
+
+      lista.innerHTML =
+        "<div class='empty'>" +
+        "Nenhuma movimentação registrada." +
+        "</div>";
+
+      return;
+
+    }
+
+    const registros =
+      resultado.docs
+      .map(
+        documento => ({
+
+          id:
+            documento.id,
+
+          ...documento.data()
+
+        })
+      )
+      .sort(
+        (
+          a,
+          b
+        ) =>
+          obterMillis(
+            b.criadoEm
+          ) -
+          obterMillis(
+            a.criadoEm
+          )
+      );
+
+    lista.innerHTML =
+      "";
+
+    registros.forEach(
+      registro => {
+
+        const item =
+          document.createElement(
+            "div"
+          );
+
+        item.className =
+          "historyItem";
+
+        const positivo =
+          registro.operacao ===
+          "adicionar";
+
+        const sinal =
+          positivo
+            ? "+"
+            : "-";
+
+        const classe =
+          positivo
+            ? "plus"
+            : "minus";
+
+        const nomeItem =
+          registro.item ===
+          "girosRoleta"
+            ?
+            "🎰 Giros da Roleta"
+            :
+            registro.item ||
+            "";
+
+        item.innerHTML =
+
+          "<div class='historyTop'>" +
+
+            "<span class='" +
+            classe +
+            "'>" +
+
+              sinal +
+              " " +
+              numero(
+                registro.quantidade
+              ) +
+              " " +
+              escapar(
+                nomeItem
+              ) +
+
+            "</span>" +
+
+            "<span class='historyDate'>" +
+
+              escapar(
+                formatarData(
+                  registro.criadoEm
+                )
+              ) +
+
+            "</span>" +
+
+          "</div>" +
+
+          "<div class='historyInfo'>" +
+
+            "Saldo anterior: " +
+            numero(
+              registro.saldoAnterior
+            ) +
+
+            "<br>" +
+
+            "Saldo final: " +
+            numero(
+              registro.saldoFinal
+            ) +
+
+            "<br>" +
+
+            "Motivo: " +
+            escapar(
+              registro.motivo ||
+              "—"
+            ) +
+
+            "<br>" +
+
+            "Administrador: " +
+            escapar(
+              registro.adminEmail ||
+              "—"
+            ) +
+
+          "</div>" +
+
+          "<div class='operation-id'>" +
+
+            "🆔 " +
+            escapar(
+              registro.movimentacaoId ||
+              "Sem ID"
+            ) +
+
+          "</div>";
+
+        lista.appendChild(
+          item
+        );
+
+      }
+    );
+
+  }
+  catch(error){
+
+    console.error(
+      "Erro histórico:",
+      error
+    );
+
+    lista.innerHTML =
+      "<div class='empty'>" +
+      "Não foi possível carregar o histórico." +
+      "</div>";
+
+  }
+
+}
+
+/* =====================================================
+   MODAL PERFIL
+===================================================== */
+
+function abrirModalPerfil(
+  uid
+){
+
+  const registros =
+    todasEntregas.filter(
+      item =>
+        (
+          item.uid ||
+          item.usuarioUid ||
+          item.usuarioId ||
+          ""
+        ) === uid
+    );
+
+  modalClienteUid =
+    uid;
+
+  let nome =
+    "Cliente";
+
+  let email =
+    "";
+
+  if(
+    registros.length
+  ){
+
+    nome =
+      registros[0].usuarioNome ||
+      "Cliente";
+
+    email =
+      registros[0].usuarioEmail ||
+      "";
+
+  }
+
+  if(
+    usuarioSelecionado &&
+    usuarioSelecionado.data.uid === uid
+  ){
+
+    nome =
+      usuarioSelecionado.data.nome ||
+      usuarioSelecionado.data.name ||
+      nome;
+
+    email =
+      usuarioSelecionado.data.email ||
+      email;
+
+  }
+
+  document.getElementById(
+    "modalNome"
+  ).textContent =
+    nome;
+
+  document.getElementById(
+    "modalEmail"
+  ).textContent =
+    email ||
+    "E-mail não informado";
+
+  document.getElementById(
+    "modalAvatar"
+  ).textContent =
+    (
+      usuarioSelecionado &&
+      usuarioSelecionado.data.uid === uid
+    )
+      ?
+      (
+        usuarioSelecionado.data.avatar ||
+        "👤"
+      )
+      :
+      "👤";
+
+  const total =
+    registros.length;
+
+  const pendentes =
+    registros.filter(
+      item =>
+        item.entregue !== true
+    ).length;
+
+  const entregues =
+    registros.filter(
+      item =>
+        item.entregue === true
+    ).length;
+
+  document.getElementById(
+    "modalTotal"
+  ).textContent =
+    numero(
+      total
+    );
+
+  document.getElementById(
+    "modalPendentes"
+  ).textContent =
+    numero(
+      pendentes
+    );
+
+  document.getElementById(
+    "modalEntregues"
+  ).textContent =
+    numero(
+      entregues
+    );
+
+  const lista =
+    document.getElementById(
+      "modalDeliveryList"
+    );
+
+  lista.innerHTML =
+    "";
+
+  if(
+    registros.length === 0
+  ){
+
+    lista.innerHTML =
+      "<div class='empty'>Nenhum prêmio encontrado.</div>";
+
+  }
+  else{
+
+    registros
+    .sort(
+      (
+        a,
+        b
+      ) =>
+        obterMillis(
+          b.criadoEm ||
+          b.dataHora
+        ) -
+        obterMillis(
+          a.criadoEm ||
+          a.dataHora
+        )
+    )
+    .forEach(
+      pedido => {
+
+        const div =
+          document.createElement(
+            "div"
+          );
+
+        div.className =
+          "modal-delivery-item";
+
+        div.innerHTML = `
+
+          <div class="modal-delivery-title">
+
+            🎁 ${escapar(
+              pedido.premioNome ||
+              pedido.nome ||
+              pedido.titulo ||
+              "Prêmio"
+            )}
+
+            ${
+              pedido.entregue === true
+                ? " • ✅ ENTREGUE"
+                : " • ⏳ PENDENTE"
+            }
+
+          </div>
+
+          <div class="modal-delivery-meta">
+
+            Tipo:
+            ${escapar(
+              pedido.tipo ||
+              "outro"
+            )}
+
+            <br>
+
+            Quantidade:
+            ${numero(
+              pedido.quantidade
+            )}
+
+            <br>
+
+            Data:
+            ${escapar(
+              formatarData(
+                pedido.criadoEm ||
+                pedido.dataHora
+              )
+            )}
+
+            <br>
+
+            ID:
+            ${escapar(
+              pedido.id
+            )}
+
+          </div>
+
+        `;
+
+        lista.appendChild(
+          div
+        );
+
+      }
+    );
+
+  }
+
+  document
+    .getElementById(
+      "profileModal"
+    )
+    .classList.add(
+      "show"
+    );
+
+}
 
 /* =====================================================
    AUTENTICAÇÃO
@@ -2162,1473 +3996,301 @@ onAuthStateChanged(
   auth,
   async usuario => {
 
-    usuarioAtual =
-      usuario;
-
-
     if(!usuario){
 
-      $("loginScreen")
-        .style
-        .display =
-        "block";
-
-
-      $("adminScreen")
-        .style
-        .display =
-        "none";
-
+      window.location.replace(
+        "index.html"
+      );
 
       return;
 
     }
-
 
     const email =
       (
         usuario.email ||
         ""
-      )
-      .trim()
-      .toLowerCase();
-
+      ).trim().toLowerCase();
 
     if(
       email !==
-      ADMIN_EMAIL
+      ADMIN_EMAIL.toLowerCase()
     ){
 
-      await signOut(auth);
+      alert(
+        "⛔ Acesso negado. Área exclusiva do administrador."
+      );
 
-      mensagemLogin(
-        "Acesso permitido somente ao administrador principal.",
-        "error"
+      await signOut(
+        auth
+      );
+
+      window.location.replace(
+        "index.html"
       );
 
       return;
 
     }
 
+    adminUsuario =
+      usuario;
 
-    $("loginScreen")
-      .style
-      .display =
-      "none";
+    console.log(
+      "Administrador autenticado:",
+      usuario.email
+    );
 
+    /*
+    ===================================================
+    CARREGA A ÁREA DE ENTREGAS ASSIM QUE O ADMIN ABRE
+    ===================================================
+    */
 
-    $("adminScreen")
-      .style
-      .display =
-      "block";
+    await carregarTodasEntregas();
 
+    /*
+    Tenta também localizar prêmios da roleta
+    para que eles apareçam como pendentes.
+    */
 
-    await carregarTudo();
+    await carregarHistoricoRoletaParaEntregas();
 
   }
 );
 
-
 /* =====================================================
-   CARREGAR TUDO
+   EVENTOS
 ===================================================== */
 
-async function carregarTudo(){
-
-  mensagem(
-    "🔄 Carregando clientes e prêmios..."
+document
+  .getElementById(
+    "buscar"
+  )
+  .addEventListener(
+    "click",
+    buscarUsuario
   );
 
-
-  try{
-
-    await Promise.all([
-      carregarClientes(),
-      carregarEntregas()
-    ]);
-
-
-    atualizarEstatisticas();
-
-    renderizarClientes();
-
-    renderizarPendentes();
-
-
-    mensagem(
-      "✅ Painel atualizado."
-    );
-
-  }
-
-  catch(error){
-
-    console.error(
-      error
-    );
-
-
-    mensagem(
-      "Erro ao carregar o painel: " +
-      (
-        error.message ||
-        "erro desconhecido"
-      ),
-      true
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-   CARREGAR CLIENTES
-===================================================== */
-
-async function carregarClientes(){
-
-  clientes = [];
-
-
-  const snapshot =
-    await getDocs(
-      collection(
-        db,
-        "admins"
-      )
-    );
-
-
-  snapshot.forEach(
-    documento => {
-
-      const dados =
-        documento.data();
-
-
-      /*
-        NÃO mostra a própria conta
-        do administrador na lista.
-      */
-
-      const email =
-        String(
-          dados.email ||
-          ""
-        )
-        .trim()
-        .toLowerCase();
-
+searchInput
+  .addEventListener(
+    "keydown",
+    event => {
 
       if(
-        email ===
-        ADMIN_EMAIL
+        event.key ===
+        "Enter"
       ){
+
+        buscarUsuario();
+
+      }
+
+    }
+  );
+
+document
+  .getElementById(
+    "adicionar"
+  )
+  .addEventListener(
+    "click",
+    () =>
+      alterarSaldo(
+        "adicionar"
+      )
+  );
+
+document
+  .getElementById(
+    "remover"
+  )
+  .addEventListener(
+    "click",
+    () =>
+      alterarSaldo(
+        "remover"
+      )
+  );
+
+document
+  .getElementById(
+    "adicionarGiros"
+  )
+  .addEventListener(
+    "click",
+    () =>
+      alterarGirosRoleta(
+        "adicionar"
+      )
+  );
+
+document
+  .getElementById(
+    "removerGiros"
+  )
+  .addEventListener(
+    "click",
+    () =>
+      alterarGirosRoleta(
+        "remover"
+      )
+  );
+
+document
+  .getElementById(
+    "vip"
+  )
+  .addEventListener(
+    "click",
+    alterarVIP
+  );
+
+document
+  .getElementById(
+    "box"
+  )
+  .addEventListener(
+    "click",
+    alterarCaixa
+  );
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+document
+  .getElementById(
+    "closeProfileModal"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      document
+        .getElementById(
+          "profileModal"
+        )
+        .classList.remove(
+          "show"
+        );
+
+    }
+  );
+
+document
+  .getElementById(
+    "profileModal"
+  )
+  .addEventListener(
+    "click",
+    event => {
+
+      if(
+        event.target.id ===
+        "profileModal"
+      ){
+
+        event.currentTarget
+          .classList
+          .remove(
+            "show"
+          );
+
+      }
+
+    }
+  );
+
+/* =====================================================
+   ABRIR CLIENTE NO CLIENTE.HTML
+===================================================== */
+
+document
+  .getElementById(
+    "openClient"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      if(!modalClienteUid){
 
         return;
 
       }
 
-
-      clientes.push({
-
-        id:
-          documento.id,
-
-        ...dados
-
-      });
+      window.location.href =
+        "cliente.html?uid=" +
+        encodeURIComponent(
+          modalClienteUid
+        );
 
     }
   );
-
-
-  clientes.sort(
-    (a,b) => {
-
-      const nomeA =
-        String(
-          a.nome ||
-          a.name ||
-          ""
-        )
-        .toLowerCase();
-
-
-      const nomeB =
-        String(
-          b.nome ||
-          b.name ||
-          ""
-        )
-        .toLowerCase();
-
-
-      return nomeA.localeCompare(
-        nomeB
-      );
-
-    }
-  );
-
-}
-
 
 /* =====================================================
-   CARREGAR ENTREGAS
+   ABRIR ENTREGAS
 ===================================================== */
 
-async function carregarEntregas(){
+document
+  .getElementById(
+    "openDelivery"
+  )
+  .addEventListener(
+    "click",
+    () => {
 
-  entregas = [];
+      if(!modalClienteUid){
 
-
-  const snapshot =
-    await getDocs(
-      collection(
-        db,
-        "entregas"
-      )
-    );
-
-
-  snapshot.forEach(
-    documento => {
-
-      entregas.push({
-
-        id:
-          documento.id,
-
-        ...documento.data()
-
-      });
-
-    }
-  );
-
-
-  entregas.sort(
-    (a,b) => {
-
-      return millis(
-        b.criadoEm ||
-        b.dataHora
-      )
-      -
-      millis(
-        a.criadoEm ||
-        a.dataHora
-      );
-
-    }
-  );
-
-}
-
-
-/* =====================================================
-   ESTATÍSTICAS
-===================================================== */
-
-function atualizarEstatisticas(){
-
-  const pendentes =
-    entregas.filter(
-      item =>
-        item.entregue !== true
-    );
-
-
-  const vip =
-    clientes.filter(
-      item =>
-        item.vip === true
-    );
-
-
-  $("totalClientes")
-    .textContent =
-    numero(
-      clientes.length
-    );
-
-
-  $("totalPremios")
-    .textContent =
-    numero(
-      entregas.length
-    );
-
-
-  $("totalPendentes")
-    .textContent =
-    numero(
-      pendentes.length
-    );
-
-
-  $("totalVip")
-    .textContent =
-    numero(
-      vip.length
-    );
-
-}
-
-
-/* =====================================================
-   RENDER CLIENTES
-===================================================== */
-
-function renderizarClientes(){
-
-  const container =
-    $("clients");
-
-
-  const busca =
-    $("clientSearch")
-    .value
-    .trim()
-    .toLowerCase();
-
-
-  const filtrados =
-    clientes.filter(
-      cliente => {
-
-        if(!busca){
-
-          return true;
-
-        }
-
-
-        const texto =
-
-          (
-            cliente.nome ||
-            cliente.name ||
-            ""
-          )
-
-          + " " +
-
-          (
-            cliente.email ||
-            ""
-          )
-
-          + " " +
-
-          (
-            cliente.uid ||
-            cliente.id ||
-            ""
-          )
-
-          + " " +
-
-          (
-            cliente.publicId ||
-            ""
-          );
-
-
-        return texto
-          .toLowerCase()
-          .includes(
-            busca
-          );
+        return;
 
       }
-    );
 
-
-  container.innerHTML =
-    "";
-
-
-  if(
-    filtrados.length === 0
-  ){
-
-    container.innerHTML = `
-
-      <div class="empty">
-
-        👥 Nenhum cliente encontrado.
-
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-
-  filtrados.forEach(
-    cliente => {
-
-      const uid =
-        cliente.uid ||
-        cliente.id;
-
-
-      const nome =
-        cliente.nome ||
-        cliente.name ||
-        "Cliente";
-
-
-      const email =
-        cliente.email ||
-        "Sem e-mail";
-
-
-      const avatar =
-        cliente.avatar ||
-        "👤";
-
-
-      const vip =
-        cliente.vip === true;
-
-
-      const premios =
-        entregas.filter(
-          item =>
-            String(
-              item.uid ||
-              ""
-            ) ===
-            String(uid)
+      window.location.href =
+        "entregas.html?uid=" +
+        encodeURIComponent(
+          modalClienteUid
         );
-
-
-      const pendentes =
-        premios.filter(
-          item =>
-            item.entregue !== true
-        ).length;
-
-
-      const div =
-        document.createElement(
-          "div"
-        );
-
-
-      div.className =
-        "client";
-
-
-      div.innerHTML = `
-
-        <div class="client-top">
-
-          <div class="avatar">
-
-            ${escapar(avatar)}
-
-          </div>
-
-
-          <div class="client-info">
-
-            <div class="client-name">
-
-              ${escapar(nome)}
-
-            </div>
-
-            <div class="client-email">
-
-              ${escapar(email)}
-
-            </div>
-
-            <div class="client-id">
-
-              UID:
-              ${escapar(uid)}
-
-            </div>
-
-
-            ${
-              vip
-
-              ?
-
-              `
-              <span class="vip">
-                👑 VIP ATIVO
-              </span>
-              `
-
-              :
-
-              `
-              <span class="normal">
-                MEMBRO NORMAL
-              </span>
-              `
-
-            }
-
-          </div>
-
-        </div>
-
-
-        <div class="client-resources">
-
-          <div class="client-resource">
-
-            <b>
-              ${numero(cliente.chances)}
-            </b>
-
-            <span>
-              CHANCES
-            </span>
-
-          </div>
-
-
-          <div class="client-resource">
-
-            <b>
-              ${numero(cliente.girosRoleta)}
-            </b>
-
-            <span>
-              GIROS
-            </span>
-
-          </div>
-
-
-          <div class="client-resource">
-
-            <b>
-              ${numero(cliente.moedas)}
-            </b>
-
-            <span>
-              MOEDAS
-            </span>
-
-          </div>
-
-
-          <div class="client-resource">
-
-            <b>
-              ${numero(cliente.chaves)}
-            </b>
-
-            <span>
-              CHAVES
-            </span>
-
-          </div>
-
-        </div>
-
-
-        <div class="client-actions">
-
-          <button
-            class="profile-button"
-            data-profile="${escapar(uid)}">
-
-            👤 VER PERFIL COMPLETO
-
-          </button>
-
-
-          <button
-            class="delivery-button"
-            data-delivery="${escapar(uid)}">
-
-            🎁 PRÊMIOS
-            ${
-              pendentes > 0
-                ? `(${pendentes})`
-                : ""
-            }
-
-          </button>
-
-        </div>
-
-      `;
-
-
-      container.appendChild(
-        div
-      );
 
     }
   );
-
-
-  container
-    .querySelectorAll(
-      "[data-profile]"
-    )
-    .forEach(
-      botao => {
-
-        botao.addEventListener(
-          "click",
-          () => {
-
-            abrirPerfil(
-              botao.dataset.profile
-            );
-
-          }
-        );
-
-      }
-    );
-
-
-  container
-    .querySelectorAll(
-      "[data-delivery]"
-    )
-    .forEach(
-      botao => {
-
-        botao.addEventListener(
-          "click",
-          () => {
-
-            abrirEntregas(
-              botao.dataset.delivery
-            );
-
-          }
-        );
-
-      }
-    );
-
-}
-
-
-/* =====================================================
-   RENDER PENDENTES
-===================================================== */
-
-function renderizarPendentes(){
-
-  const container =
-    $("pendingList");
-
-
-  const pendentes =
-    entregas.filter(
-      item =>
-        item.entregue !== true
-    );
-
-
-  container.innerHTML =
-    "";
-
-
-  if(
-    pendentes.length === 0
-  ){
-
-    container.innerHTML = `
-
-      <div class="empty">
-
-        🎉 Nenhum prêmio pendente!
-
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-
-  pendentes.forEach(
-    pedido => {
-
-      const uid =
-        pedido.uid ||
-        "";
-
-
-      const cliente =
-        encontrarCliente(
-          uid
-        );
-
-
-      const nomeCliente =
-        cliente?.nome ||
-        cliente?.name ||
-        pedido.nomeCliente ||
-        "Cliente";
-
-
-      const titulo =
-
-        pedido.premioNome ||
-
-        pedido.nome ||
-
-        pedido.titulo ||
-
-        "Recompensa";
-
-
-      const tipo =
-        pedido.tipo ||
-        "outro";
-
-
-      const quantidade =
-        pedido.quantidade;
-
-
-      const div =
-        document.createElement(
-          "div"
-        );
-
-
-      div.className =
-        "pending";
-
-
-      div.innerHTML = `
-
-        <div class="pending-top">
-
-          <div class="pending-title">
-
-            🎁 ${escapar(titulo)}
-
-          </div>
-
-          <div class="pending-status">
-
-            ⏳ PENDENTE
-
-          </div>
-
-        </div>
-
-
-        <div class="pending-info">
-
-          <div>
-            Cliente:
-            <b>
-              ${escapar(nomeCliente)}
-            </b>
-          </div>
-
-
-          <div>
-            Tipo:
-            <b>
-              ${escapar(tipo)}
-            </b>
-          </div>
-
-
-          ${
-            quantidade !== undefined
-
-            ?
-
-            `
-            <div>
-              Quantidade:
-              <b>
-                ${numero(quantidade)}
-              </b>
-            </div>
-            `
-
-            :
-
-            ""
-
-          }
-
-
-          <div>
-            Data:
-            <b>
-              ${escapar(
-                data(
-                  pedido.criadoEm ||
-                  pedido.dataHora
-                )
-              )}
-            </b>
-          </div>
-
-
-          <div>
-            ID:
-            <b>
-              ${escapar(pedido.id)}
-            </b>
-          </div>
-
-        </div>
-
-
-        <div class="pending-actions">
-
-          <button
-            class="pending-profile"
-            data-profile="${escapar(uid)}">
-
-            👤 VER PERFIL
-
-          </button>
-
-
-          <button
-            class="pending-delivery"
-            data-delivery="${escapar(uid)}">
-
-            📦 VER ENTREGAS
-
-          </button>
-
-        </div>
-
-      `;
-
-
-      container.appendChild(
-        div
-      );
-
-    }
-  );
-
-
-  container
-    .querySelectorAll(
-      "[data-profile]"
-    )
-    .forEach(
-      botao => {
-
-        botao.addEventListener(
-          "click",
-          () => {
-
-            abrirPerfil(
-              botao.dataset.profile
-            );
-
-          }
-        );
-
-      }
-    );
-
-
-  container
-    .querySelectorAll(
-      "[data-delivery]"
-    )
-    .forEach(
-      botao => {
-
-        botao.addEventListener(
-          "click",
-          () => {
-
-            abrirEntregas(
-              botao.dataset.delivery
-            );
-
-          }
-        );
-
-      }
-    );
-
-}
-
-
-/* =====================================================
-   ENCONTRAR CLIENTE
-===================================================== */
-
-function encontrarCliente(uid){
-
-  return clientes.find(
-    cliente => {
-
-      return String(
-        cliente.uid ||
-        cliente.id
-      ) ===
-      String(uid);
-
-    }
-  );
-
-}
-
-
-/* =====================================================
-   ABRIR PERFIL
-===================================================== */
-
-async function abrirPerfil(uid){
-
-  const cliente =
-    encontrarCliente(
-      uid
-    );
-
-
-  if(!cliente){
-
-    return;
-
-  }
-
-
-  const premios =
-    entregas.filter(
-      item =>
-        String(
-          item.uid ||
-          ""
-        ) ===
-        String(uid)
-    );
-
-
-  const pendentes =
-    premios.filter(
-      item =>
-        item.entregue !== true
-    );
-
-
-  const entregues =
-    premios.filter(
-      item =>
-        item.entregue === true
-    );
-
-
-  const nome =
-    cliente.nome ||
-    cliente.name ||
-    "Cliente";
-
-
-  $("modalContent")
-    .innerHTML = `
-
-      <div class="modal-profile">
-
-        <div class="modal-avatar">
-
-          ${escapar(
-            cliente.avatar ||
-            "👤"
-          )}
-
-        </div>
-
-
-        <div>
-
-          <div class="modal-name">
-
-            ${escapar(nome)}
-
-          </div>
-
-          <div class="modal-email">
-
-            ${escapar(
-              cliente.email ||
-              "Sem e-mail"
-            )}
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="detail-grid">
-
-
-        <div class="detail">
-
-          <div class="detail-label">
-            UID
-          </div>
-
-          <div class="detail-value">
-            ${escapar(
-              cliente.uid ||
-              cliente.id
-            )}
-          </div>
-
-        </div>
-
-
-        <div class="detail">
-
-          <div class="detail-label">
-            ID público
-          </div>
-
-          <div class="detail-value">
-            ${escapar(
-              cliente.publicId ||
-              "Não definido"
-            )}
-          </div>
-
-        </div>
-
-
-        <div class="detail">
-
-          <div class="detail-label">
-            Documento
-          </div>
-
-          <div class="detail-value">
-            ${escapar(
-              cliente.id
-            )}
-          </div>
-
-        </div>
-
-
-        <div class="detail">
-
-          <div class="detail-label">
-            VIP
-          </div>
-
-          <div class="detail-value">
-
-            ${
-              cliente.vip === true
-                ? "👑 VIP ATIVO"
-                : "🔒 NÃO VIP"
-            }
-
-          </div>
-
-        </div>
-
-
-        <div class="detail">
-
-          <div class="detail-label">
-            Caixa Box
-          </div>
-
-          <div class="detail-value">
-
-            ${
-              cliente.caixaBox === true
-                ? "🎁 Disponível"
-                : "—"
-            }
-
-          </div>
-
-        </div>
-
-
-        <div class="detail">
-
-          <div class="detail-label">
-            Cadastro
-          </div>
-
-          <div class="detail-value">
-
-            ${escapar(
-              data(
-                cliente.criadoEm
-              )
-            )}
-
-          </div>
-
-        </div>
-
-
-      </div>
-
-
-      <div class="modal-section">
-
-        <h3>
-          📊 Recursos
-        </h3>
-
-
-        <div class="modal-resource-grid">
-
-
-          <div class="modal-resource">
-
-            <span>
-              🎟️ CHANCES
-            </span>
-
-            <b>
-              ${numero(
-                cliente.chances
-              )}
-            </b>
-
-          </div>
-
-
-          <div class="modal-resource">
-
-            <span>
-              🎰 GIROS ROLETA
-            </span>
-
-            <b>
-              ${numero(
-                cliente.girosRoleta
-              )}
-            </b>
-
-          </div>
-
-
-          <div class="modal-resource">
-
-            <span>
-              🪙 MOEDAS
-            </span>
-
-            <b>
-              ${numero(
-                cliente.moedas
-              )}
-            </b>
-
-          </div>
-
-
-          <div class="modal-resource">
-
-            <span>
-              🔑 CHAVES
-            </span>
-
-            <b>
-              ${numero(
-                cliente.chaves
-              )}
-            </b>
-
-          </div>
-
-
-          <div class="modal-resource">
-
-            <span>
-              💎 CRÉDITOS
-            </span>
-
-            <b>
-              ${dinheiro(
-                cliente.creditos
-              )}
-            </b>
-
-          </div>
-
-
-          <div class="modal-resource">
-
-            <span>
-              🎁 PRÊMIOS
-            </span>
-
-            <b>
-              ${numero(
-                premios.length
-              )}
-            </b>
-
-          </div>
-
-
-          <div class="modal-resource">
-
-            <span>
-              ⏳ PENDENTES
-            </span>
-
-            <b>
-              ${numero(
-                pendentes.length
-              )}
-            </b>
-
-          </div>
-
-
-          <div class="modal-resource">
-
-            <span>
-              ✅ ENTREGUES
-            </span>
-
-            <b>
-              ${numero(
-                entregues.length
-              )}
-            </b>
-
-          </div>
-
-
-        </div>
-
-      </div>
-
-
-      <div class="modal-section">
-
-        <h3>
-          🎁 Histórico de prêmios
-        </h3>
-
-
-        ${
-          premios.length === 0
-
-          ?
-
-          `
-          <div class="empty">
-            Nenhum prêmio registrado.
-          </div>
-          `
-
-          :
-
-          premios
-          .slice(0,20)
-          .map(
-            pedido => `
-
-              <div class="modal-order">
-
-                <div class="modal-order-title">
-
-                  ${
-                    pedido.entregue === true
-                      ? "✅"
-                      : "⏳"
-                  }
-
-                  ${escapar(
-                    pedido.premioNome ||
-                    pedido.nome ||
-                    pedido.titulo ||
-                    "Recompensa"
-                  )}
-
-                </div>
-
-
-                <div class="modal-order-info">
-
-                  Tipo:
-                  ${escapar(
-                    pedido.tipo ||
-                    "outro"
-                  )}
-
-                  <br>
-
-                  Quantidade:
-                  ${
-                    pedido.quantidade !== undefined
-                      ? numero(
-                          pedido.quantidade
-                        )
-                      : "—"
-                  }
-
-                  <br>
-
-                  Data:
-                  ${escapar(
-                    data(
-                      pedido.criadoEm ||
-                      pedido.dataHora
-                    )
-                  )}
-
-                  <br>
-
-                  ID:
-                  ${escapar(
-                    pedido.id
-                  )}
-
-                </div>
-
-              </div>
-
-            `
-          )
-          .join("")
-
-        }
-
-      </div>
-
-    `;
-
-
-  $("profileModal")
-    .classList
-    .add("show");
-
-}
-
-
-/* =====================================================
-   VER ENTREGAS
-===================================================== */
-
-function abrirEntregas(uid){
-
-  window.location.href =
-    "entregas.html?uid=" +
-    encodeURIComponent(
-      uid
-    );
-
-}
-
-
-/* =====================================================
-   FECHAR MODAL
-===================================================== */
-
-$("closeModal")
-.addEventListener(
-  "click",
-  () => {
-
-    $("profileModal")
-      .classList
-      .remove("show");
-
-  }
-);
-
-
-$("profileModal")
-.addEventListener(
-  "click",
-  e => {
-
-    if(
-      e.target ===
-      $("profileModal")
-    ){
-
-      $("profileModal")
-        .classList
-        .remove("show");
-
-    }
-
-  }
-);
-
-
-/* =====================================================
-   BUSCA
-===================================================== */
-
-$("clientSearch")
-.addEventListener(
-  "input",
-  renderizarClientes
-);
-
-
-/* =====================================================
-   ATUALIZAR
-===================================================== */
-
-$("reloadClients")
-.addEventListener(
-  "click",
-  carregarTudo
-);
-
-
-$("reloadPending")
-.addEventListener(
-  "click",
-  carregarTudo
-);
-
 
 /* =====================================================
    LOGOUT
 ===================================================== */
 
-$("logoutButton")
-.addEventListener(
-  "click",
-  async () => {
+document
+  .getElementById(
+    "logout"
+  )
+  .addEventListener(
+    "click",
+    async () => {
 
-    await signOut(
-      auth
-    );
+      try{
 
-  }
-);
+        await signOut(
+          auth
+        );
+
+      }
+      catch(error){
+
+        console.error(
+          error
+        );
+
+      }
+
+      window.location.replace(
+        "index.html"
+      );
+
+    }
+  );
 
 </script>
 
 </body>
-
 </html>
