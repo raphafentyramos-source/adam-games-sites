@@ -193,7 +193,9 @@ body{
 }
 
 
-/* BORDA */
+/* =====================================================
+   BORDA
+===================================================== */
 
 .roleta-borda{
 
@@ -217,7 +219,9 @@ body{
 }
 
 
-/* ROLETA REAL */
+/* =====================================================
+   ROLETA REAL
+===================================================== */
 
 #roleta{
 
@@ -240,25 +244,9 @@ body{
 }
 
 
-/*
-==========================================================
-FATIAS
-
-A roleta agora usa CONIC-GRADIENT.
-
-Isso garante que:
-
-4 prêmios = 4 fatias de 90°
-
-5 prêmios = 5 fatias de 72°
-
-6 prêmios = 6 fatias de 60°
-
-etc.
-
-Sem deixar fundo azul/cinza sobrando.
-==========================================================
-*/
+/* =====================================================
+   BASE DA ROLETA
+===================================================== */
 
 #roletaBase{
 
@@ -273,7 +261,9 @@ Sem deixar fundo azul/cinza sobrando.
 }
 
 
-/* IMAGENS DOS PRÊMIOS */
+/* =====================================================
+   IMAGENS DOS PRÊMIOS
+===================================================== */
 
 .roleta-imagem{
 
@@ -284,12 +274,6 @@ Sem deixar fundo azul/cinza sobrando.
 
   width:17%;
   height:17%;
-
-  transform-origin:
-    center
-    calc(
-      var(--raio)
-    );
 
   object-fit:contain;
 
@@ -306,7 +290,9 @@ Sem deixar fundo azul/cinza sobrando.
 }
 
 
-/* LINHAS DIVISÓRIAS */
+/* =====================================================
+   LINHAS DIVISÓRIAS
+===================================================== */
 
 .roleta-linha{
 
@@ -415,7 +401,7 @@ Sem deixar fundo azul/cinza sobrando.
 
 
 /* =====================================================
-   BOTÃO
+   BOTÃO GIRAR
 ===================================================== */
 
 .girar{
@@ -467,6 +453,62 @@ Sem deixar fundo azul/cinza sobrando.
   cursor:not-allowed;
 
 }
+
+
+/* =====================================================
+   BOTÃO JOGOS
+===================================================== */
+
+.ir-jogos{
+
+  width:100%;
+  max-width:600px;
+
+  margin:
+    12px auto
+    0;
+
+  display:block;
+
+  padding:
+    16px
+    15px;
+
+  border:0;
+
+  border-radius:17px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #168fff,
+      #0563b5
+    );
+
+  color:#fff;
+
+  font-size:18px;
+
+  font-weight:900;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 8px 22px
+    rgba(0,0,0,.22);
+
+}
+
+.ir-jogos:active{
+
+  transform:scale(.98);
+
+}
+
+
+/* =====================================================
+   AVISO
+===================================================== */
 
 .aviso{
 
@@ -933,6 +975,10 @@ Sem deixar fundo azul/cinza sobrando.
 <div class="container">
 
 
+<!-- =====================================================
+     TOPO
+===================================================== -->
+
 <div class="logo">
 
   <h1>
@@ -952,6 +998,10 @@ Sem deixar fundo azul/cinza sobrando.
 
 </div>
 
+
+<!-- =====================================================
+     GIROS
+===================================================== -->
 
 <div class="giros">
 
@@ -999,12 +1049,30 @@ Sem deixar fundo azul/cinza sobrando.
 </div>
 
 
+<!-- =====================================================
+     GIRAR
+===================================================== -->
+
 <button
   class="girar"
   id="girar"
   type="button">
 
   🎰 GIRAR ROLETA
+
+</button>
+
+
+<!-- =====================================================
+     JOGOS
+===================================================== -->
+
+<button
+  class="ir-jogos"
+  id="irJogos"
+  type="button">
+
+  🎮 IR PARA JOGOS
 
 </button>
 
@@ -1149,8 +1217,8 @@ import {
   query,
   where,
   getDocs,
-  updateDoc,
-  addDoc,
+  doc,
+  runTransaction,
   serverTimestamp
 }
 from
@@ -1224,50 +1292,60 @@ const girosEl =
     "giros"
   );
 
+
 const roletaEl =
   document.getElementById(
     "roleta"
   );
+
 
 const roletaBase =
   document.getElementById(
     "roletaBase"
   );
 
+
 const girarBtn =
   document.getElementById(
     "girar"
   );
+
 
 const messageEl =
   document.getElementById(
     "message"
   );
 
+
 const listaPremios =
   document.getElementById(
     "listaPremios"
   );
+
 
 const historicoLista =
   document.getElementById(
     "historicoLista"
   );
 
+
 const modal =
   document.getElementById(
     "modal"
   );
+
 
 const modalPremio =
   document.getElementById(
     "modalPremio"
   );
 
+
 const modalImg =
   document.getElementById(
     "modalImg"
   );
+
 
 const modalData =
   document.getElementById(
@@ -1290,6 +1368,7 @@ function mostrarMensagem(
   messageEl.className =
     "message";
 
+
   if(
     texto &&
     tipo
@@ -1311,6 +1390,12 @@ function mostrarMensagem(
 async function localizarUsuario(
   usuario
 ){
+
+  /*
+  ------------------------------------------------------
+  PRIMEIRO PELO UID
+  ------------------------------------------------------
+  */
 
   try{
 
@@ -1339,16 +1424,20 @@ async function localizarUsuario(
       !resultadoUID.empty
     ){
 
+      const documento =
+        resultadoUID.docs[0];
+
+
       return {
 
         ref:
-          resultadoUID.docs[0].ref,
+          documento.ref,
 
         id:
-          resultadoUID.docs[0].id,
+          documento.id,
 
         data:
-          resultadoUID.docs[0].data()
+          documento.data()
 
       };
 
@@ -1358,12 +1447,18 @@ async function localizarUsuario(
   catch(error){
 
     console.error(
-      "Busca UID:",
+      "Erro buscando UID:",
       error
     );
 
   }
 
+
+  /*
+  ------------------------------------------------------
+  DEPOIS PELO E-MAIL
+  ------------------------------------------------------
+  */
 
   if(
     usuario.email
@@ -1402,16 +1497,20 @@ async function localizarUsuario(
         !resultadoEmail.empty
       ){
 
+        const documento =
+          resultadoEmail.docs[0];
+
+
         return {
 
           ref:
-            resultadoEmail.docs[0].ref,
+            documento.ref,
 
           id:
-            resultadoEmail.docs[0].id,
+            documento.id,
 
           data:
-            resultadoEmail.docs[0].data()
+            documento.data()
 
         };
 
@@ -1421,7 +1520,7 @@ async function localizarUsuario(
     catch(error){
 
       console.error(
-        "Busca email:",
+        "Erro buscando e-mail:",
         error
       );
 
@@ -1436,7 +1535,7 @@ async function localizarUsuario(
 
 
 /* =====================================================
-   GIROS
+   ATUALIZAR GIROS
 ===================================================== */
 
 function atualizarGiros(){
@@ -1555,6 +1654,7 @@ function desenharRoleta(){
   roletaBase.style.background =
     "";
 
+
   if(
     premios.length === 0
   ){
@@ -1596,7 +1696,7 @@ function desenharRoleta(){
 
   /*
   ------------------------------------------------------
-  CRIA O FUNDO DA PIZZA
+  FUNDO CONIC-GRADIENT
   ------------------------------------------------------
   */
 
@@ -1642,7 +1742,7 @@ function desenharRoleta(){
 
   /*
   ------------------------------------------------------
-  IMAGENS DOS PRÊMIOS
+  IMAGENS
   ------------------------------------------------------
   */
 
@@ -1663,62 +1763,59 @@ function desenharRoleta(){
 
 
       if(
-        premio.imagem
+        !premio.imagem
       ){
 
-        const img =
-          document.createElement(
-            "img"
-          );
-
-
-        img.className =
-          "roleta-imagem";
-
-
-        img.src =
-          premio.imagem;
-
-
-        img.alt =
-          premio.nome ||
-          "Prêmio";
-
-
-        img.style.setProperty(
-          "--raio",
-          `${raio}%`
-        );
-
-
-        /*
-        A imagem vai para o meio
-        da respectiva fatia.
-        */
-
-        img.style.transform =
-
-          `
-            translate(-50%, -50%)
-            rotate(${meio}deg)
-            translateY(-${raio}%)
-            rotate(-${meio}deg)
-          `;
-
-
-        img.onerror =
-          () => {
-
-            img.remove();
-
-          };
-
-
-        roletaBase.appendChild(
-          img
-        );
+        return;
 
       }
+
+
+      const img =
+        document.createElement(
+          "img"
+        );
+
+
+      img.className =
+        "roleta-imagem";
+
+
+      img.src =
+        premio.imagem;
+
+
+      img.alt =
+        premio.nome ||
+        "Prêmio";
+
+
+      /*
+      Posicionamento da imagem
+      no centro da fatia.
+      */
+
+      img.style.transform =
+
+        `
+          translate(-50%, -50%)
+          rotate(${meio}deg)
+          translateY(-${raio}%)
+          rotate(-${meio}deg)
+        `;
+
+
+      img.onerror =
+        () => {
+
+          img.remove();
+
+        };
+
+
+      roletaBase.appendChild(
+        img
+      );
 
     }
   );
@@ -1726,7 +1823,7 @@ function desenharRoleta(){
 
   /*
   ------------------------------------------------------
-  LINHAS DAS FATIAS
+  LINHAS
   ------------------------------------------------------
   */
 
@@ -1736,11 +1833,6 @@ function desenharRoleta(){
       indice
     ) => {
 
-      const anguloLinha =
-        indice *
-        angulo;
-
-
       if(
         indice === 0
       ){
@@ -1748,6 +1840,11 @@ function desenharRoleta(){
         return;
 
       }
+
+
+      const anguloLinha =
+        indice *
+        angulo;
 
 
       const linha =
@@ -1967,11 +2064,17 @@ function escolherPremio(){
   premios.forEach(
     premio => {
 
-      total +=
+      const peso =
         Number(
-          premio.peso ||
-          1
+          premio.peso
         );
+
+
+      total +=
+        Number.isFinite(peso) &&
+        peso > 0
+          ? peso
+          : 1;
 
     }
   );
@@ -1987,11 +2090,20 @@ function escolherPremio(){
     of premios
   ){
 
-    sorteio -=
+    const peso =
       Number(
-        premio.peso ||
-        1
+        premio.peso
       );
+
+
+    sorteio -=
+
+      Number.isFinite(peso) &&
+      peso > 0
+
+        ? peso
+
+        : 1;
 
 
     if(
@@ -2013,7 +2125,7 @@ function escolherPremio(){
 
 
 /* =====================================================
-   LOCAL STORAGE — HISTÓRICO DE SEGURANÇA
+   HISTÓRICO LOCAL
 ===================================================== */
 
 function chaveHistorico(){
@@ -2091,13 +2203,25 @@ function salvarHistoricoLocal(
       obterHistoricoLocal();
 
 
-    lista.unshift(
+    /*
+    Evita duplicação.
+    */
+
+    const semDuplicado =
+      lista.filter(
+        item =>
+          item.id !==
+          registro.id
+      );
+
+
+    semDuplicado.unshift(
       registro
     );
 
 
     const limitada =
-      lista.slice(
+      semDuplicado.slice(
         0,
         50
       );
@@ -2147,13 +2271,15 @@ function formatarData(
 
 
   if(
-    data.toDate
+    typeof data.toDate ===
+    "function"
   ){
 
     dataObjeto =
       data.toDate();
 
   }
+
   else if(
     typeof data ===
     "number"
@@ -2165,6 +2291,7 @@ function formatarData(
       );
 
   }
+
   else{
 
     dataObjeto =
@@ -2194,7 +2321,65 @@ function formatarData(
 
 
 /* =====================================================
-   MOSTRAR UM RESULTADO NO HISTÓRICO
+   TEMPO
+===================================================== */
+
+function obterTempo(
+  valor
+){
+
+  if(
+    !valor
+  ){
+
+    return 0;
+
+  }
+
+
+  if(
+    typeof valor.toDate ===
+    "function"
+  ){
+
+    return valor
+      .toDate()
+      .getTime();
+
+  }
+
+
+  if(
+    valor.seconds
+  ){
+
+    return (
+      Number(
+        valor.seconds
+      ) *
+      1000
+    );
+
+  }
+
+
+  const tempo =
+    new Date(
+      valor
+    ).getTime();
+
+
+  return Number.isNaN(
+    tempo
+  )
+    ? 0
+    : tempo;
+
+}
+
+
+/* =====================================================
+   CRIAR HISTÓRICO
 ===================================================== */
 
 function criarElementoHistorico(
@@ -2262,6 +2447,7 @@ function criarElementoHistorico(
 
   data.textContent =
     formatarData(
+      registro.dataHora ||
       registro.criadoEm
     );
 
@@ -2285,25 +2471,41 @@ function criarElementoHistorico(
     "resultado-status";
 
 
-  status.textContent =
-
+  if(
     registro.entregue === true
+  ){
 
-      ?
+    status.textContent =
+      "✅ Prêmio entregue";
 
-    "✅ Prêmio entregue"
+  }
 
-      :
+  else if(
+    registro.status ===
+    "pendente"
+  ){
 
-    registro.salvoFirebase === false
+    status.textContent =
+      "⏳ Aguardando entrega";
 
-      ?
+  }
 
-    "📱 Resultado salvo neste aparelho"
+  else if(
+    registro.salvoFirebase ===
+    false
+  ){
 
-      :
+    status.textContent =
+      "📱 Resultado salvo neste aparelho";
 
-    "⏳ Aguardando entrega";
+  }
+
+  else{
+
+    status.textContent =
+      "⏳ Aguardando entrega";
+
+  }
 
 
   item.appendChild(
@@ -2356,12 +2558,6 @@ async function carregarHistorico(){
     "";
 
 
-  /*
-  ------------------------------------------------------
-  PRIMEIRO: MOSTRA HISTÓRICO LOCAL
-  ------------------------------------------------------
-  */
-
   const local =
     obterHistoricoLocal();
 
@@ -2378,12 +2574,6 @@ async function carregarHistorico(){
     }
   );
 
-
-  /*
-  ------------------------------------------------------
-  DEPOIS: TENTA FIREBASE
-  ------------------------------------------------------
-  */
 
   if(
     !usuarioAuth
@@ -2448,12 +2638,6 @@ async function carregarHistorico(){
         );
 
 
-    /*
-    ----------------------------------------------------
-    MESCLA FIREBASE + LOCAL
-    ----------------------------------------------------
-    */
-
     const mapa =
       new Map();
 
@@ -2491,6 +2675,7 @@ async function carregarHistorico(){
           (
             "local_" +
             Date.now() +
+            "_" +
             Math.random()
           ),
 
@@ -2514,17 +2699,21 @@ async function carregarHistorico(){
         b
       ) => {
 
-        const aTempo =
-          obterTempo(
-            a.criadoEm
-          );
+        return (
 
-        const bTempo =
           obterTempo(
+            b.dataHora ||
             b.criadoEm
-          );
+          )
 
-        return bTempo - aTempo;
+          -
+
+          obterTempo(
+            a.dataHora ||
+            a.criadoEm
+          )
+
+        );
 
       }
     );
@@ -2565,15 +2754,10 @@ async function carregarHistorico(){
   catch(error){
 
     console.error(
-      "Histórico Firebase indisponível:",
+      "Erro histórico Firebase:",
       error
     );
 
-
-    /*
-    Se Firebase bloquear a leitura,
-    NÃO apaga o histórico local.
-    */
 
     if(
       local.length === 0
@@ -2582,57 +2766,12 @@ async function carregarHistorico(){
       historicoLista.innerHTML =
 
         "<div class='sem-premios'>" +
-        "📱 Histórico temporariamente indisponível. " +
-        "Novos resultados serão mantidos neste aparelho." +
+        "📱 Histórico temporariamente indisponível." +
         "</div>";
 
     }
 
   }
-
-}
-
-
-/* =====================================================
-   TEMPO
-===================================================== */
-
-function obterTempo(
-  valor
-){
-
-  if(
-    !valor
-  ){
-
-    return 0;
-
-  }
-
-
-  if(
-    valor.seconds
-  ){
-
-    return (
-      valor.seconds *
-      1000
-    );
-
-  }
-
-
-  const tempo =
-    new Date(
-      valor
-    ).getTime();
-
-
-  return Number.isNaN(
-    tempo
-  )
-    ? 0
-    : tempo;
 
 }
 
@@ -2654,7 +2793,8 @@ async function girarRoleta(){
 
   if(
     !usuarioDoc ||
-    !usuarioRef
+    !usuarioRef ||
+    !usuarioAuth
   ){
 
     mostrarMensagem(
@@ -2716,9 +2856,9 @@ async function girarRoleta(){
 
 
   /*
-  ------------------------------------------------------
+  =====================================================
   ESCOLHE O PRÊMIO
-  ------------------------------------------------------
+  =====================================================
   */
 
   const premio =
@@ -2747,45 +2887,47 @@ async function girarRoleta(){
     );
 
 
-  const quantidade =
+  const quantidadePremios =
     premios.length;
 
 
   const angulo =
     360 /
-    quantidade;
+    quantidadePremios;
 
 
   /*
-  ------------------------------------------------------
-  O CENTRO DA FATIA É O PONTO
-  QUE DEVE PARAR NO PONTEIRO.
-  ------------------------------------------------------
+  Centro exato da fatia.
   */
 
   const centroDaFatia =
-    (
-      indice *
-      angulo
-    ) +
-    (
-      angulo / 2
-    );
+    indice *
+    angulo +
+    angulo / 2;
 
 
-  const voltas =
-    6;
-
+  /*
+  O ponteiro fica no topo.
+  */
 
   const alvo =
     360 -
     centroDaFatia;
 
 
+  /*
+  Sempre acrescenta várias voltas.
+  */
+
+  const voltas =
+    6;
+
+
   const rotacaoFinal =
     rotacaoAtual +
     (
-      voltas * 360
+      voltas *
+      360
     ) +
     alvo;
 
@@ -2803,9 +2945,9 @@ async function girarRoleta(){
 
 
   /*
-  ------------------------------------------------------
-  ESPERA TERMINAR
-  ------------------------------------------------------
+  =====================================================
+  ESPERA A ANIMAÇÃO
+  =====================================================
   */
 
   await new Promise(
@@ -2818,313 +2960,393 @@ async function girarRoleta(){
 
 
   /*
-  ------------------------------------------------------
-  AGORA DESCONTA O GIRO.
-  ------------------------------------------------------
-  */
+  =====================================================
+  REGISTRO ATÔMICO
+  =====================================================
 
-  const novoSaldo =
-    Math.max(
-      0,
-      girosAtuais - 1
-    );
+  Aqui está a principal correção.
 
+  O desconto do giro e a criação do prêmio
+  são feitos dentro da mesma transação.
 
-  try{
+  Se qualquer parte falhar:
 
-    await updateDoc(
+  - o giro não é descontado;
+  - o prêmio não é criado;
+  - o prêmio não é mostrado como ganho.
 
-      usuarioRef,
-
-      {
-
-        girosRoleta:
-          novoSaldo
-
-      }
-
-    );
-
-
-    usuarioDoc.girosRoleta =
-      novoSaldo;
-
-  }
-  catch(error){
-
-    console.error(
-      "Erro ao descontar giro:",
-      error
-    );
-
-
-    /*
-    Não mostra prêmio como se tivesse
-    dado erro.
-
-    O usuário já viu o resultado.
-    */
-
-    usuarioDoc.girosRoleta =
-      novoSaldo;
-
-  }
-
-
-  atualizarGiros();
-
-
-  /*
-  ------------------------------------------------------
-  CRIA O REGISTRO LOCAL PRIMEIRO.
-  
-  Isso garante que o histórico NÃO desapareça
-  mesmo se Firestore bloquear a gravação.
-  ------------------------------------------------------
+  Isso evita giro consumido sem prêmio
+  ou prêmio mostrado sem registro.
   */
 
   const agora =
     new Date();
 
 
-  const idLocal =
-
-    "local_" +
-    Date.now() +
-    "_" +
-    Math.random()
-      .toString(36)
-      .slice(2,8);
+  const dataHora =
+    agora.toISOString();
 
 
-  const registroLocal = {
-
-    id:
-      idLocal,
-
-    usuarioId:
-      usuarioAuth.uid,
-
-    usuarioDocId:
-      usuarioDoc._docId ||
-      "",
-
-    usuarioEmail:
-      usuarioAuth.email ||
-      usuarioDoc.email ||
-      "",
-
-    usuarioNome:
-      usuarioDoc.nome ||
-      usuarioDoc.name ||
-      "",
-
-    premioId:
-      premio.id,
-
-    premioNome:
-      premio.nome ||
-      "",
-
-    quantidade:
-      Number(
-        premio.quantidade ||
-        0
-      ),
-
-    tipo:
-      premio.tipo ||
-      "outro",
-
-    imagem:
-      premio.imagem ||
-      "",
-
-    criadoEm:
-      agora.toISOString(),
-
-    entregue:
-      false,
-
-    salvoFirebase:
-      false
-
-  };
+  const resultadoRef =
+    doc(
+      collection(
+        db,
+        "resultadosRoleta"
+      )
+    );
 
 
-  salvarHistoricoLocal(
-    registroLocal
-  );
-
-
-  /*
-  ------------------------------------------------------
-  TENTA REGISTRAR NO FIREBASE
-  ------------------------------------------------------
-  */
-
-  let registroId =
-    idLocal;
+  let registroCriado = null;
 
 
   try{
 
-    const registro =
-      await addDoc(
+    await runTransaction(
+      db,
+      async transaction => {
 
-        collection(
-          db,
-          "resultadosRoleta"
-        ),
+        const usuarioSnapshot =
+          await transaction.get(
+            usuarioRef
+          );
 
-        {
 
-          usuarioId:
-            usuarioAuth.uid,
+        if(
+          !usuarioSnapshot.exists()
+        ){
 
-          usuarioDocId:
-            usuarioDoc._docId ||
-            "",
-
-          usuarioEmail:
-            usuarioAuth.email ||
-            usuarioDoc.email ||
-            "",
-
-          usuarioNome:
-            usuarioDoc.nome ||
-            usuarioDoc.name ||
-            "",
-
-          premioId:
-            premio.id,
-
-          premioNome:
-            premio.nome ||
-            "",
-
-          quantidade:
-            Number(
-              premio.quantidade ||
-              0
-            ),
-
-          tipo:
-            premio.tipo ||
-            "outro",
-
-          imagem:
-            premio.imagem ||
-            "",
-
-          saldoGirosAnterior:
-            girosAtuais,
-
-          saldoGirosFinal:
-            novoSaldo,
-
-          entregue:
-            false,
-
-          criadoEm:
-            serverTimestamp()
+          throw new Error(
+            "CADASTRO_NAO_ENCONTRADO"
+          );
 
         }
 
-      );
+
+        const dadosAtuais =
+          usuarioSnapshot.data();
 
 
-    registroId =
-      registro.id;
+        const saldoAtual =
+          Number(
+            dadosAtuais.girosRoleta ||
+            0
+          );
 
 
-    /*
-    Atualiza o ID local para o ID real
-    do Firebase.
+        if(
+          saldoAtual <= 0
+        ){
 
-    */
+          throw new Error(
+            "SEM_GIROS"
+          );
 
-    const historicoAtual =
-      obterHistoricoLocal();
+        }
 
 
-    const atualizado =
-      historicoAtual.map(
-        registroLocal => {
+        const novoSaldo =
+          saldoAtual - 1;
 
-          if(
-            registroLocal.id ===
-            idLocal
-          ){
 
-            return {
+        /*
+        -------------------------------------------------
+        ATUALIZA GIROS
+        -------------------------------------------------
+        */
 
-              ...registroLocal,
+        transaction.update(
 
-              id:
-                registro.id,
+          usuarioRef,
 
-              salvoFirebase:
-                true
+          {
 
-            };
+            girosRoleta:
+              novoSaldo
 
           }
 
-
-          return registroLocal;
-
-        }
-      );
+        );
 
 
-    localStorage.setItem(
+        /*
+        -------------------------------------------------
+        CRIA PRÊMIO PENDENTE
+        -------------------------------------------------
+        */
 
-      chaveHistorico(),
+        transaction.set(
 
-      JSON.stringify(
-        atualizado
-      )
+          resultadoRef,
 
+          {
+
+            usuarioId:
+              usuarioAuth.uid,
+
+            usuarioUid:
+              usuarioAuth.uid,
+
+            usuarioDocId:
+              usuarioDoc._docId ||
+              "",
+
+            usuarioEmail:
+              usuarioAuth.email ||
+              dadosAtuais.email ||
+              "",
+
+            usuarioNome:
+              dadosAtuais.nome ||
+              dadosAtuais.name ||
+              "",
+
+            premioId:
+              String(
+                premio.id ||
+                ""
+              ),
+
+            premioNome:
+              String(
+                premio.nome ||
+                "Prêmio"
+              ),
+
+            quantidade:
+              Number(
+                premio.quantidade ||
+                0
+              ),
+
+            tipo:
+              String(
+                premio.tipo ||
+                "outro"
+              ),
+
+            imagem:
+              String(
+                premio.imagem ||
+                ""
+              ),
+
+            saldoGirosAnterior:
+              saldoAtual,
+
+            saldoGirosFinal:
+              novoSaldo,
+
+            entregue:
+              false,
+
+            status:
+              "pendente",
+
+            dataHora:
+              dataHora,
+
+            criadoEm:
+              serverTimestamp()
+
+          }
+
+        );
+
+
+        /*
+        Atualiza o estado local somente depois
+        que a transação for confirmada.
+        */
+
+        usuarioDoc.girosRoleta =
+          novoSaldo;
+
+      }
     );
+
+
+    registroCriado = {
+
+      id:
+        resultadoRef.id,
+
+      usuarioId:
+        usuarioAuth.uid,
+
+      usuarioUid:
+        usuarioAuth.uid,
+
+      usuarioDocId:
+        usuarioDoc._docId ||
+        "",
+
+      usuarioEmail:
+        usuarioAuth.email ||
+        usuarioDoc.email ||
+        "",
+
+      usuarioNome:
+        usuarioDoc.nome ||
+        usuarioDoc.name ||
+        "",
+
+      premioId:
+        premio.id,
+
+      premioNome:
+        premio.nome ||
+        "Prêmio",
+
+      quantidade:
+        Number(
+          premio.quantidade ||
+          0
+        ),
+
+      tipo:
+        premio.tipo ||
+        "outro",
+
+      imagem:
+        premio.imagem ||
+        "",
+
+      entregue:
+        false,
+
+      status:
+        "pendente",
+
+      dataHora:
+        dataHora,
+
+      criadoEm:
+        dataHora,
+
+      salvoFirebase:
+        true
+
+    };
 
   }
   catch(error){
 
+    console.error(
+      "Erro na transação da roleta:",
+      error
+    );
+
+
+    girando =
+      false;
+
+
+    atualizarGiros();
+
+
+    if(
+      error.message ===
+      "SEM_GIROS"
+    ){
+
+      mostrarMensagem(
+        "Você não possui mais giros disponíveis.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    if(
+      error.message ===
+      "CADASTRO_NAO_ENCONTRADO"
+    ){
+
+      mostrarMensagem(
+        "Seu cadastro não foi encontrado.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
     /*
-    ----------------------------------------------------
-    FIREBASE PODE ESTAR BLOQUEANDO A COLLECTION.
-    
-    MAS ISSO NÃO É MAIS UM ERRO DO GIRO.
-    O resultado já está salvo localmente.
-    ----------------------------------------------------
+    A roleta já girou visualmente,
+    então volta para a posição anterior
+    se o Firebase rejeitar a transação.
     */
 
-    console.warn(
-      "Firebase não registrou o histórico:",
-      error
+    roletaEl.style.transition =
+      "transform .5s ease";
+
+
+    roletaEl.style.transform =
+      `rotate(${rotacaoAtual - (voltasFallback() * 360 + alvoFallback(premios, premio))}deg)`;
+
+
+    rotacaoAtual =
+      rotacaoAtual -
+      (
+        voltasFallback() *
+        360 +
+        alvoFallback(
+          premios,
+          premio
+        )
+      );
+
+
+    mostrarMensagem(
+      "Não foi possível registrar o giro. Nenhum prêmio foi liberado.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  /*
+  =====================================================
+  SALVA HISTÓRICO LOCAL
+  =====================================================
+  */
+
+  if(
+    registroCriado
+  ){
+
+    salvarHistoricoLocal(
+      registroCriado
     );
 
   }
 
 
   /*
-  ------------------------------------------------------
-  MOSTRA O PRÊMIO.
-  ------------------------------------------------------
+  =====================================================
+  MOSTRA O PRÊMIO
+  =====================================================
   */
 
-  mostrarResultado(
+  if(
+    registroCriado
+  ){
 
-    premio,
+    mostrarResultado(
+      premio,
+      registroCriado.id
+    );
 
-    registroId
-
-  );
+  }
 
 
   /*
-  Atualiza histórico imediatamente.
+  Atualiza histórico.
   */
 
   await carregarHistorico();
@@ -3135,6 +3357,67 @@ async function girarRoleta(){
 
 
   atualizarGiros();
+
+}
+
+
+/* =====================================================
+   FUNÇÕES AUXILIARES PARA REVERSÃO VISUAL
+===================================================== */
+
+function voltasFallback(){
+
+  return 6;
+
+}
+
+
+function alvoFallback(
+  lista,
+  premio
+){
+
+  if(
+    !lista ||
+    !lista.length ||
+    !premio
+  ){
+
+    return 0;
+
+  }
+
+
+  const indice =
+    lista.findIndex(
+      p =>
+        p.id ===
+        premio.id
+    );
+
+
+  if(
+    indice < 0
+  ){
+
+    return 0;
+
+  }
+
+
+  const angulo =
+    360 /
+    lista.length;
+
+
+  const centro =
+    indice *
+    angulo +
+    angulo / 2;
+
+
+  return 360 -
+    centro;
 
 }
 
@@ -3186,6 +3469,7 @@ function mostrarResultado(
 
 
     img.alt =
+      premio.nome ||
       "Prêmio";
 
 
@@ -3220,7 +3504,7 @@ function mostrarResultado(
         "pt-BR"
       ) +
 
-    " • Resultado registrado";
+    " • Prêmio registrado como pendente";
 
 
   modal.classList.add(
@@ -3274,11 +3558,14 @@ onAuthStateChanged(
           "error"
         );
 
+
         girosEl.textContent =
           "0";
 
+
         girarBtn.disabled =
           true;
+
 
         return;
 
@@ -3309,7 +3596,7 @@ onAuthStateChanged(
     catch(error){
 
       console.error(
-        "Erro geral:",
+        "Erro geral da roleta:",
         error
       );
 
@@ -3327,7 +3614,7 @@ onAuthStateChanged(
 
 
 /* =====================================================
-   EVENTOS
+   BOTÃO GIRAR
 ===================================================== */
 
 girarBtn.addEventListener(
@@ -3335,6 +3622,29 @@ girarBtn.addEventListener(
   girarRoleta
 );
 
+
+/* =====================================================
+   BOTÃO IR PARA JOGOS
+===================================================== */
+
+document
+  .getElementById(
+    "irJogos"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      window.location.href =
+        "jogos.html";
+
+    }
+  );
+
+
+/* =====================================================
+   FECHAR MODAL
+===================================================== */
 
 document
   .getElementById(
@@ -3350,6 +3660,29 @@ document
 
     }
   );
+
+
+/* =====================================================
+   FECHAR MODAL CLICANDO FORA
+===================================================== */
+
+modal.addEventListener(
+  "click",
+  event => {
+
+    if(
+      event.target ===
+      modal
+    ){
+
+      modal.classList.remove(
+        "show"
+      );
+
+    }
+
+  }
+);
 
 
 </script>
