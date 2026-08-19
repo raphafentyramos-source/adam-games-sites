@@ -286,6 +286,7 @@ body{
 .progress-bar{
 
   width:100%;
+
   height:100%;
 
   border-radius:20px;
@@ -328,11 +329,13 @@ body{
 .rescue{
 
   width:100%;
+
   height:58px;
 
   margin-top:18px;
 
   border:0;
+
   border-radius:17px;
 
   background:
@@ -345,6 +348,7 @@ body{
   color:#fff;
 
   font-size:17px;
+
   font-weight:900;
 
   cursor:pointer;
@@ -465,6 +469,10 @@ body{
 
   cursor:pointer;
 
+  box-shadow:
+    0 6px 15px
+    rgba(0,0,0,.2);
+
 }
 
 .prizes{
@@ -527,6 +535,12 @@ body{
 
 }
 
+.prize b{
+
+  flex:1;
+
+}
+
 .empty-prizes{
 
   padding:20px 10px;
@@ -548,11 +562,13 @@ body{
   bottom:20px;
 
   width:57px;
+
   height:57px;
 
   display:flex;
 
   align-items:center;
+
   justify-content:center;
 
   border-radius:50%;
@@ -577,9 +593,13 @@ body{
 
 </head>
 
+
 <body>
 
 <div class="page">
+
+
+  <!-- TOPO -->
 
   <div class="top">
 
@@ -592,6 +612,7 @@ body{
 
     </button>
 
+
     <div class="title">
 
       <small>ADAM GAMES</small>
@@ -600,10 +621,13 @@ body{
 
     </div>
 
+
     <div style="width:45px"></div>
 
   </div>
 
+
+  <!-- BAÚ -->
 
   <div class="chest-area">
 
@@ -621,6 +645,8 @@ body{
   </div>
 
 
+  <!-- TÍTULO -->
+
   <div class="box-title">
 
     <h1 id="boxTitle">
@@ -634,6 +660,8 @@ body{
   </div>
 
 
+  <!-- VIP -->
+
   <div
     class="vip"
     id="vipStatus">
@@ -642,6 +670,8 @@ body{
 
   </div>
 
+
+  <!-- CRONÔMETRO -->
 
   <div class="timer-card">
 
@@ -653,6 +683,7 @@ body{
 
     </div>
 
+
     <div
       class="timer"
       id="timer">
@@ -660,6 +691,7 @@ body{
       —
 
     </div>
+
 
     <div class="progress">
 
@@ -670,6 +702,7 @@ body{
 
     </div>
 
+
     <div
       class="status waiting"
       id="status">
@@ -677,6 +710,9 @@ body{
       Verificando...
 
     </div>
+
+
+    <!-- RESGATE -->
 
     <button
       class="rescue"
@@ -687,10 +723,12 @@ body{
 
     </button>
 
+
     <div
       class="message"
       id="message">
     </div>
+
 
     <div
       class="rescue-date"
@@ -700,6 +738,8 @@ body{
   </div>
 
 
+  <!-- CHANCES -->
+
   <div class="chance-card">
 
     <div class="chance-title">
@@ -707,6 +747,7 @@ body{
       🎟️ SUAS CHANCES NOS JOGOS
 
     </div>
+
 
     <div
       class="chance-number"
@@ -716,6 +757,7 @@ body{
 
     </div>
 
+
     <div
       class="chance-description"
       id="chanceDescription">
@@ -723,6 +765,7 @@ body{
       —
 
     </div>
+
 
     <button
       class="games-button"
@@ -736,11 +779,14 @@ body{
   </div>
 
 
+  <!-- CONTEÚDO -->
+
   <div class="prizes">
 
     <h2>
       🎁 CONTEÚDO DA CAIXA
     </h2>
+
 
     <div id="prizeList"></div>
 
@@ -748,6 +794,8 @@ body{
 
 </div>
 
+
+<!-- WHATSAPP -->
 
 <a
   class="whatsapp"
@@ -762,11 +810,17 @@ body{
 
 <script type="module">
 
+
+/* =====================================================
+   FIREBASE
+===================================================== */
+
 import {
   initializeApp
 }
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
 
 import {
   getAuth,
@@ -774,6 +828,7 @@ import {
 }
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
 
 import {
   getFirestore,
@@ -789,10 +844,6 @@ import {
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-
-/* =====================================================
-   FIREBASE
-===================================================== */
 
 const firebaseConfig = {
 
@@ -816,13 +867,16 @@ const firebaseConfig = {
 
 };
 
+
 const app =
   initializeApp(
     firebaseConfig
   );
 
+
 const auth =
   getAuth(app);
+
 
 const db =
   getFirestore(app);
@@ -833,68 +887,132 @@ const db =
 ===================================================== */
 
 const timer =
-  document.getElementById("timer");
+  document.getElementById(
+    "timer"
+  );
+
+
+const timerLabel =
+  document.getElementById(
+    "timerLabel"
+  );
+
 
 const status =
-  document.getElementById("status");
+  document.getElementById(
+    "status"
+  );
+
 
 const rescue =
-  document.getElementById("rescue");
+  document.getElementById(
+    "rescue"
+  );
+
 
 const message =
-  document.getElementById("message");
+  document.getElementById(
+    "message"
+  );
+
 
 const vipStatus =
-  document.getElementById("vipStatus");
+  document.getElementById(
+    "vipStatus"
+  );
+
 
 const chanceNumber =
-  document.getElementById("chanceNumber");
+  document.getElementById(
+    "chanceNumber"
+  );
+
 
 const chanceDescription =
-  document.getElementById("chanceDescription");
+  document.getElementById(
+    "chanceDescription"
+  );
+
 
 const progressBar =
-  document.getElementById("progressBar");
+  document.getElementById(
+    "progressBar"
+  );
+
 
 const boxTitle =
-  document.getElementById("boxTitle");
+  document.getElementById(
+    "boxTitle"
+  );
+
 
 const boxSubtitle =
-  document.getElementById("boxSubtitle");
+  document.getElementById(
+    "boxSubtitle"
+  );
+
 
 const prizeList =
-  document.getElementById("prizeList");
+  document.getElementById(
+    "prizeList"
+  );
+
 
 const rescueDate =
-  document.getElementById("rescueDate");
+  document.getElementById(
+    "rescueDate"
+  );
+
 
 const chestImage =
-  document.getElementById("chestImage");
+  document.getElementById(
+    "chestImage"
+  );
 
 
 /* =====================================================
    ESTADO
 ===================================================== */
 
-let usuarioRef = null;
-let usuario = null;
-let ehVip = false;
-let intervalo = null;
-let processando = false;
+let usuarioRef =
+  null;
+
+
+let usuario =
+  null;
+
+
+let ehVip =
+  false;
+
+
+let intervalo =
+  null;
+
+
+let processando =
+  false;
 
 
 /* =====================================================
    TEMPOS
 ===================================================== */
 
-const HORAS_VIP = 72;
-const HORAS_NAO_VIP = 120;
+const HORAS_VIP =
+  72;
+
+
+const HORAS_NAO_VIP =
+  120;
+
 
 const MS_HORA =
   60 * 60 * 1000;
 
+
 const MS_VIP =
   HORAS_VIP * MS_HORA;
+
 
 const MS_NAO_VIP =
   HORAS_NAO_VIP * MS_HORA;
@@ -905,6 +1023,11 @@ const MS_NAO_VIP =
 ===================================================== */
 
 const caixas = {
+
+
+  /* ============================
+     SETEMBRO
+  ============================ */
 
   "09": {
 
@@ -919,22 +1042,44 @@ const caixas = {
 
     itens: [
 
-      ["🎩","500 Chapéus de Bobo"],
+      [
+        "🎩",
+        "500 Chapéus de Bobo"
+      ],
 
-      ["🔧","3.000 Ferramentas de Rubi"],
+      [
+        "🔧",
+        "3.000 Ferramentas de Rubi"
+      ],
 
-      ["📦","1.000 Itens"],
+      [
+        "📦",
+        "1.000 Itens"
+      ],
 
-      ["🎰","2 Giros na Roleta"],
+      [
+        "🎰",
+        "2 Giros na Roleta"
+      ],
 
-      ["🎉","Evento do Dia"],
+      [
+        "🎉",
+        "Evento do Dia"
+      ],
 
-      ["🔑","1 Chave da Independência"]
+      [
+        "🔑",
+        "1 Chave da Independência"
+      ]
 
     ]
 
   },
 
+
+  /* ============================
+     OUTUBRO
+  ============================ */
 
   "10": {
 
@@ -949,22 +1094,44 @@ const caixas = {
 
     itens: [
 
-      ["🎩","500 Chapéus de Bobo"],
+      [
+        "🎩",
+        "500 Chapéus de Bobo"
+      ],
 
-      ["🔧","3.000 Ferramentas de Rubi"],
+      [
+        "🔧",
+        "3.000 Ferramentas de Rubi"
+      ],
 
-      ["📦","1.000 Itens"],
+      [
+        "📦",
+        "1.000 Itens"
+      ],
 
-      ["🎰","2 Giros na Roleta"],
+      [
+        "🎰",
+        "2 Giros na Roleta"
+      ],
 
-      ["🎉","Evento do Dia"],
+      [
+        "🎉",
+        "Evento do Dia"
+      ],
 
-      ["🔑","1 Chave do Halloween"]
+      [
+        "🔑",
+        "1 Chave do Halloween"
+      ]
 
     ]
 
   },
 
+
+  /* ============================
+     NOVEMBRO
+  ============================ */
 
   "11": {
 
@@ -979,24 +1146,49 @@ const caixas = {
 
     itens: [
 
-      ["📦","1.000 Itens"],
+      [
+        "📦",
+        "1.000 Itens"
+      ],
 
-      ["🥘","1.000 Comidas do Castor"],
+      [
+        "🥘",
+        "1.000 Comidas do Castor"
+      ],
 
-      ["🔑","750 Chaves"],
+      [
+        "🔑",
+        "750 Chaves"
+      ],
 
-      ["🎰","1 Giro na Roleta"],
+      [
+        "🎰",
+        "1 Giro na Roleta"
+      ],
 
-      ["🗝️","1 Chave (site)"],
+      [
+        "🗝️",
+        "1 Chave (site)"
+      ],
 
-      ["🎟️","2 Chances"],
+      [
+        "🎟️",
+        "2 Chances"
+      ],
 
-      ["🎉","Evento do Dia"]
+      [
+        "🎉",
+        "Evento do Dia"
+      ]
 
     ]
 
   },
 
+
+  /* ============================
+     DEZEMBRO
+  ============================ */
 
   "12": {
 
@@ -1011,19 +1203,40 @@ const caixas = {
 
     itens: [
 
-      ["📦","1.200 Itens"],
+      [
+        "📦",
+        "1.200 Itens"
+      ],
 
-      ["🔑","1.000 Chaves"],
+      [
+        "🔑",
+        "1.000 Chaves"
+      ],
 
-      ["🔧","2.500 Ferramentas de Rubi"],
+      [
+        "🔧",
+        "2.500 Ferramentas de Rubi"
+      ],
 
-      ["🗝️","1 Chave (site)"],
+      [
+        "🗝️",
+        "1 Chave (site)"
+      ],
 
-      ["🎰","1 Giro na Roleta"],
+      [
+        "🎰",
+        "1 Giro na Roleta"
+      ],
 
-      ["🎟️","1 Chance"],
+      [
+        "🎟️",
+        "1 Chance"
+      ],
 
-      ["🎉","Evento do Dia"]
+      [
+        "🎉",
+        "Evento do Dia"
+      ]
 
     ]
 
@@ -1033,23 +1246,34 @@ const caixas = {
 
 
 /* =====================================================
-   ESCOLHER CAIXA ATIVA
+   CAIXA ATIVA
 ===================================================== */
 
 function configuracaoMes(){
 
-  const agora = new Date();
+  const agora =
+    new Date();
+
 
   const ano =
     agora.getFullYear();
 
+
   const mes =
     agora.getMonth() + 1;
 
+
   /*
-    TESTE:
-    Setembro fica ativo a partir de 19/08/2026
-    até 30/09/2026.
+    TESTE DA CAIXA DE SETEMBRO
+
+    Durante agosto de 2026,
+    setembro fica visível para testes.
+
+    Em setembro inteiro,
+    setembro continua ativo.
+
+    A partir de outubro,
+    muda automaticamente.
   */
 
   if(
@@ -1064,23 +1288,33 @@ function configuracaoMes(){
 
   }
 
-  if(mes === 10){
+
+  if(
+    mes === 10
+  ){
 
     return caixas["10"];
 
   }
 
-  if(mes === 11){
+
+  if(
+    mes === 11
+  ){
 
     return caixas["11"];
 
   }
 
-  if(mes === 12){
+
+  if(
+    mes === 12
+  ){
 
     return caixas["12"];
 
   }
+
 
   return caixas["09"];
 
@@ -1088,7 +1322,50 @@ function configuracaoMes(){
 
 
 /* =====================================================
-   VISUAL
+   IDENTIFICADOR DO MÊS DA CAIXA
+===================================================== */
+
+function identificadorCaixa(){
+
+  const agora =
+    new Date();
+
+
+  /*
+    Durante agosto de 2026,
+    a caixa de teste é setembro.
+  */
+
+  if(
+    agora.getFullYear() === 2026 &&
+    agora.getMonth() === 7
+  ){
+
+    return "2026-09";
+
+  }
+
+
+  return (
+
+    agora.getFullYear() +
+
+    "-" +
+
+    String(
+      agora.getMonth() + 1
+    ).padStart(
+      2,
+      "0"
+    )
+
+  );
+
+}
+
+
+/* =====================================================
+   CARREGAR VISUAL
 ===================================================== */
 
 function carregarVisual(){
@@ -1100,89 +1377,141 @@ function carregarVisual(){
   boxTitle.textContent =
     config.titulo;
 
+
   boxSubtitle.textContent =
     config.subtitulo;
+
 
   chestImage.src =
     config.imagem;
 
 
-  prizeList.innerHTML = "";
+  chestImage.onerror =
+    () => {
 
+      console.error(
+        "Imagem da caixa não encontrada:",
+        config.imagem
+      );
+
+    };
+
+
+  /*
+    LIMPA A LISTA ANTIGA
+  */
+
+  prizeList.replaceChildren();
+
+
+  /*
+    GARANTE QUE OS ITENS EXISTAM
+  */
 
   if(
-    config.itens &&
-    config.itens.length
+    !Array.isArray(
+      config.itens
+    ) ||
+    config.itens.length === 0
   ){
 
-    config.itens.forEach(
-      item => {
-
-        const div =
-          document.createElement(
-            "div"
-          );
-
-        div.className =
-          "prize";
+    const vazio =
+      document.createElement(
+        "div"
+      );
 
 
-        const icon =
-          document.createElement(
-            "span"
-          );
-
-        icon.textContent =
-          item[0];
+    vazio.className =
+      "empty-prizes";
 
 
-        const texto =
-          document.createElement(
-            "b"
-          );
-
-        texto.textContent =
-          item[1];
+    vazio.textContent =
+      "🎁 Nenhum prêmio cadastrado.";
 
 
-        div.appendChild(icon);
-
-        div.appendChild(texto);
-
-        prizeList.appendChild(div);
-
-      }
+    prizeList.appendChild(
+      vazio
     );
 
-  }
-  else{
 
-    prizeList.innerHTML = `
-
-      <div class="empty-prizes">
-
-        🎁 Nenhum prêmio cadastrado.
-
-      </div>
-
-    `;
+    return;
 
   }
+
+
+  /*
+    CRIA CADA PRÊMIO
+  */
+
+  config.itens.forEach(
+    item => {
+
+      const div =
+        document.createElement(
+          "div"
+        );
+
+
+      div.className =
+        "prize";
+
+
+      const icon =
+        document.createElement(
+          "span"
+        );
+
+
+      icon.textContent =
+        item[0];
+
+
+      const texto =
+        document.createElement(
+          "b"
+        );
+
+
+      texto.textContent =
+        item[1];
+
+
+      div.appendChild(
+        icon
+      );
+
+
+      div.appendChild(
+        texto
+      );
+
+
+      prizeList.appendChild(
+        div
+      );
+
+    }
+  );
 
 }
 
 
 /* =====================================================
-   DATA FIREBASE
+   CONVERTER DATA FIREBASE
 ===================================================== */
 
-function converterData(valor){
+function converterData(
+  valor
+){
 
-  if(!valor){
+  if(
+    !valor
+  ){
 
     return null;
 
   }
+
 
   if(
     typeof valor.toMillis ===
@@ -1193,6 +1522,7 @@ function converterData(valor){
 
   }
 
+
   if(
     typeof valor.seconds ===
     "number"
@@ -1201,6 +1531,7 @@ function converterData(valor){
     return valor.seconds * 1000;
 
   }
+
 
   return null;
 
@@ -1211,16 +1542,24 @@ function converterData(valor){
    FORMATAR DATA
 ===================================================== */
 
-function formatarData(valor){
+function formatarData(
+  valor
+){
 
   const millis =
-    converterData(valor);
+    converterData(
+      valor
+    );
 
-  if(!millis){
+
+  if(
+    !millis
+  ){
 
     return "";
 
   }
+
 
   return new Date(
     millis
@@ -1239,7 +1578,9 @@ function formatarData(valor){
    TIMER
 ===================================================== */
 
-function formatarTimer(ms){
+function formatarTimer(
+  ms
+){
 
   const total =
     Math.max(
@@ -1249,15 +1590,20 @@ function formatarTimer(ms){
       )
     );
 
+
   const horas =
     Math.floor(
       total / 3600
     );
 
+
   const minutos =
     Math.floor(
-      (total % 3600) / 60
+      (
+        total % 3600
+      ) / 60
     );
+
 
   const segundos =
     total % 60;
@@ -1265,11 +1611,38 @@ function formatarTimer(ms){
 
   return (
 
-    String(horas).padStart(2,"0") +
-    ":" +
-    String(minutos).padStart(2,"0") +
-    ":" +
-    String(segundos).padStart(2,"0")
+    String(
+      horas
+    ).padStart(
+      2,
+      "0"
+    )
+
+    +
+
+    ":"
+
+    +
+
+    String(
+      minutos
+    ).padStart(
+      2,
+      "0"
+    )
+
+    +
+
+    ":"
+
+    +
+
+    String(
+      segundos
+    ).padStart(
+      2,
+      "0"
+    )
 
   );
 
@@ -1277,12 +1650,17 @@ function formatarTimer(ms){
 
 
 /* =====================================================
-   CADASTRO
+   BUSCAR CADASTRO
 ===================================================== */
 
-async function buscarCadastro(user){
+async function buscarCadastro(
+  user
+){
 
-  let resultado =
+  let resultado;
+
+
+  resultado =
     await getDocs(
 
       query(
@@ -1303,14 +1681,18 @@ async function buscarCadastro(user){
     );
 
 
-  if(!resultado.empty){
+  if(
+    !resultado.empty
+  ){
 
     return resultado.docs[0];
 
   }
 
 
-  if(user.email){
+  if(
+    user.email
+  ){
 
     resultado =
       await getDocs(
@@ -1333,7 +1715,9 @@ async function buscarCadastro(user){
       );
 
 
-    if(!resultado.empty){
+    if(
+      !resultado.empty
+    ){
 
       return resultado.docs[0];
 
@@ -1358,7 +1742,9 @@ async function criarNotificacao(
   tipo
 ){
 
-  if(!usuario){
+  if(
+    !usuario
+  ){
 
     return;
 
@@ -1405,7 +1791,7 @@ async function criarNotificacao(
 
 
 /* =====================================================
-   NOTIFICAÇÃO CAIXA
+   NOTIFICAÇÃO DA CAIXA
 ===================================================== */
 
 async function verificarNotificacaoCaixa(){
@@ -1424,15 +1810,9 @@ async function verificarNotificacaoCaixa(){
     configuracaoMes();
 
 
-  const agora =
-    new Date();
-
-
   const id =
     "caixa_" +
-    agora.getFullYear() +
-    "_" +
-    (agora.getMonth()+1) +
+    identificadorCaixa() +
     "_" +
     usuario.uid;
 
@@ -1457,7 +1837,7 @@ async function verificarNotificacaoCaixa(){
   catch(error){
 
     console.warn(
-      "Notificação aguardando Rules:",
+      "Não foi possível criar notificação da caixa:",
       error
     );
 
@@ -1467,12 +1847,14 @@ async function verificarNotificacaoCaixa(){
 
 
 /* =====================================================
-   NOTIFICAÇÃO CHANCE
+   NOTIFICAÇÃO DE CHANCE
 ===================================================== */
 
 async function criarNotificacaoChance(){
 
-  if(!usuario){
+  if(
+    !usuario
+  ){
 
     return;
 
@@ -1505,7 +1887,7 @@ async function criarNotificacaoChance(){
   catch(error){
 
     console.warn(
-      "Notificação da chance aguardando Rules:",
+      "Não foi possível criar notificação da chance:",
       error
     );
 
@@ -1520,7 +1902,9 @@ async function criarNotificacaoChance(){
 
 async function iniciarCronometro(){
 
-  if(!usuarioRef){
+  if(
+    !usuarioRef
+  ){
 
     return;
 
@@ -1545,7 +1929,16 @@ async function iniciarCronometro(){
     );
 
 
-  if(!fim){
+  /*
+    PRIMEIRA VEZ
+
+    Se ainda não houver contador,
+    começa agora.
+  */
+
+  if(
+    !fim
+  ){
 
     fim =
       Date.now() +
@@ -1563,8 +1956,10 @@ async function iniciarCronometro(){
       usuarioRef,
 
       {
+
         proximaChance:
           timestamp
+
       }
 
     );
@@ -1576,7 +1971,9 @@ async function iniciarCronometro(){
   }
 
 
-  if(intervalo){
+  if(
+    intervalo
+  ){
 
     clearInterval(
       intervalo
@@ -1592,7 +1989,13 @@ async function iniciarCronometro(){
       Date.now();
 
 
-    if(restante > 0){
+    /*
+      CONTANDO
+    */
+
+    if(
+      restante > 0
+    ){
 
       timer.textContent =
         formatarTimer(
@@ -1611,7 +2014,9 @@ async function iniciarCronometro(){
               duracao
             ) * 100
           )
-        ) + "%";
+        ) +
+
+        "%";
 
 
       timerLabel.textContent =
@@ -1632,6 +2037,10 @@ async function iniciarCronometro(){
 
     }
 
+
+    /*
+      TIMER ZEROU
+    */
 
     try{
 
@@ -1689,6 +2098,16 @@ async function iniciarCronometro(){
         novoFim;
 
 
+      timer.textContent =
+        formatarTimer(
+          duracao
+        );
+
+
+      progressBar.style.width =
+        "100%";
+
+
       status.textContent =
         "🎟️ +1 chance liberada!";
 
@@ -1699,12 +2118,12 @@ async function iniciarCronometro(){
 
       await criarNotificacaoChance();
 
-
     }
 
     catch(error){
 
       console.error(
+        "Erro ao liberar chance:",
         error
       );
 
@@ -1734,10 +2153,12 @@ async function iniciarCronometro(){
 
 
 /* =====================================================
-   CARREGAR
+   CARREGAR USUÁRIO
 ===================================================== */
 
-async function carregar(user){
+async function carregar(
+  user
+){
 
   const documento =
     await buscarCadastro(
@@ -1745,22 +2166,29 @@ async function carregar(user){
     );
 
 
-  if(!documento){
+  if(
+    !documento
+  ){
 
     vipStatus.textContent =
       "🔒 CONTA NÃO ENCONTRADA";
 
+
     timer.textContent =
       "—";
+
 
     status.textContent =
       "Conta não encontrada.";
 
+
     status.className =
       "status locked";
 
+
     rescue.disabled =
       true;
+
 
     return;
 
@@ -1770,16 +2198,39 @@ async function carregar(user){
   usuario =
     documento.data();
 
+
   usuarioRef =
     documento.ref;
+
+
+  /*
+    Garante UID para notificações.
+  */
+
+  if(
+    !usuario.uid
+  ){
+
+    usuario.uid =
+      user.uid;
+
+  }
 
 
   ehVip =
     usuario.vip === true;
 
 
+  /*
+    CARREGA A CAIXA PRIMEIRO
+  */
+
   carregarVisual();
 
+
+  /*
+    CARREGA CHANCES
+  */
 
   chanceNumber.textContent =
     Number(
@@ -1787,7 +2238,13 @@ async function carregar(user){
     );
 
 
-  if(ehVip){
+  /*
+    VIP
+  */
+
+  if(
+    ehVip
+  ){
 
     vipStatus.textContent =
       "👑 VIP ATIVO";
@@ -1811,68 +2268,55 @@ async function carregar(user){
 
 
   /*
-    CAIXA VIP:
-    1 resgate por mês.
+    CAIXA BOX
+    1 RESGATE POR MÊS
   */
 
-  if(ehVip){
-
-    const config =
-      configuracaoMes();
-
+  if(
+    ehVip
+  ){
 
     const mesControle =
-      new Date().getFullYear() +
-      "-" +
-      String(
-        new Date().getMonth() + 1
-      ).padStart(
-        2,
-        "0"
-      );
-
-
-    /*
-      Durante o teste de agosto,
-      usamos setembro como referência
-      para o controle da caixa.
-    */
-
-    const referenciaCaixa =
-      (
-        new Date().getFullYear() === 2026 &&
-        new Date().getMonth() === 7
-      )
-        ? "2026-09"
-        : mesControle;
+      identificadorCaixa();
 
 
     if(
       usuario.caixaBoxMes ===
-      referenciaCaixa
+      mesControle
     ){
+
+      timerLabel.textContent =
+        "PRÓXIMA CHANCE EXTRA";
+
 
       rescue.disabled =
         true;
 
+
       rescue.textContent =
         "🎁 CAIXA JÁ RESGATADA";
+
 
       status.textContent =
         "✅ Caixa deste mês já foi resgatada.";
 
+
       status.className =
         "status available";
 
+
       message.textContent =
         "Uma nova Caixa estará disponível no próximo mês.";
+
 
       if(
         usuario.caixaBoxResgatadaEm
       ){
 
         rescueDate.textContent =
+
           "Resgatada em: " +
+
           formatarData(
             usuario.caixaBoxResgatadaEm
           );
@@ -1886,23 +2330,32 @@ async function carregar(user){
       rescue.disabled =
         false;
 
+
       rescue.textContent =
         "🎁 RESGATAR CAIXA";
+
 
       status.textContent =
         "🎟️ Sua Caixa deste mês está disponível!";
 
+
       status.className =
         "status available";
 
+
       message.textContent =
         "Você pode resgatar 1 Caixa Box por mês.";
+
 
       rescueDate.textContent =
         "";
 
     }
 
+
+    /*
+      NOTIFICAÇÃO DA CAIXA
+    */
 
     await verificarNotificacaoCaixa();
 
@@ -1913,8 +2366,10 @@ async function carregar(user){
     rescue.disabled =
       true;
 
+
     rescue.textContent =
       "🔒 EXCLUSIVO VIP";
+
 
     message.textContent =
       "A Caixa Box é exclusiva para membros VIP.";
@@ -1923,7 +2378,7 @@ async function carregar(user){
 
 
   /*
-    CRONÔMETRO
+    CRONÔMETRO DE CHANCES
   */
 
   await iniciarCronometro();
@@ -1932,12 +2387,15 @@ async function carregar(user){
 
 
 /* =====================================================
-   RESGATE
+   RESGATAR CAIXA
 ===================================================== */
 
 rescue.addEventListener(
+
   "click",
+
   async () => {
+
 
     if(
       !ehVip ||
@@ -1950,35 +2408,14 @@ rescue.addEventListener(
     }
 
 
-    const agoraData =
-      new Date();
+    const mesControle =
+      identificadorCaixa();
 
 
     /*
-      Durante agosto de 2026,
-      a caixa ativa é setembro.
+      PROTEÇÃO
+      1 RESGATE POR MÊS
     */
-
-    const mesControle =
-
-      (
-        agoraData.getFullYear() === 2026 &&
-        agoraData.getMonth() === 7
-      )
-
-        ? "2026-09"
-
-        :
-
-        agoraData.getFullYear() +
-        "-" +
-        String(
-          agoraData.getMonth() + 1
-        ).padStart(
-          2,
-          "0"
-        );
-
 
     if(
       usuario.caixaBoxMes ===
@@ -2053,7 +2490,9 @@ rescue.addEventListener(
 
 
       rescueDate.textContent =
+
         "Resgatada em: " +
+
         formatarData(
           agora
         );
@@ -2063,6 +2502,7 @@ rescue.addEventListener(
     catch(error){
 
       console.error(
+        "Erro ao registrar Caixa:",
         error
       );
 
@@ -2097,17 +2537,22 @@ rescue.addEventListener(
     }
 
   }
+
 );
 
 
 /* =====================================================
-   BAÚ
+   ANIMAÇÃO DO BAÚ
 ===================================================== */
 
 document
-  .getElementById("chest")
+  .getElementById(
+    "chest"
+  )
   .addEventListener(
+
     "click",
+
     () => {
 
       const elemento =
@@ -2121,16 +2566,20 @@ document
 
 
       setTimeout(
+
         () => {
 
           elemento.style.transform =
             "scale(1)";
 
         },
+
         180
+
       );
 
     }
+
   );
 
 
@@ -2139,32 +2588,42 @@ document
 ===================================================== */
 
 document
-  .getElementById("back")
+  .getElementById(
+    "back"
+  )
   .addEventListener(
+
     "click",
+
     () => {
 
       window.location.href =
         "painel.html";
 
     }
+
   );
 
 
 /* =====================================================
-   JOGOS
+   IR PARA JOGOS
 ===================================================== */
 
 document
-  .getElementById("gamesButton")
+  .getElementById(
+    "gamesButton"
+  )
   .addEventListener(
+
     "click",
+
     () => {
 
       window.location.href =
         "jogos.html";
 
     }
+
   );
 
 
@@ -2178,7 +2637,9 @@ onAuthStateChanged(
 
   async user => {
 
-    if(!user){
+    if(
+      !user
+    ){
 
       window.location.href =
         "index.html";
