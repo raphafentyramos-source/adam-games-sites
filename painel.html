@@ -13,10 +13,6 @@
 
 <style>
 
-/* =====================================================
-   RESET
-===================================================== */
-
 *{
   box-sizing:border-box;
   margin:0;
@@ -1216,6 +1212,14 @@ button{
 
 }
 
+.primary-button:disabled{
+
+  opacity:.55;
+
+  cursor:not-allowed;
+
+}
+
 .close-button{
 
   width:100%;
@@ -1656,11 +1660,6 @@ button{
 
 <div class="page">
 
-
-<!-- =====================================================
-     TOPO
-===================================================== -->
-
 <header class="topbar">
 
   <div class="brand">
@@ -1713,10 +1712,6 @@ button{
 
 </header>
 
-
-<!-- =====================================================
-     PERFIL
-===================================================== -->
 
 <section class="profile">
 
@@ -1812,10 +1807,6 @@ button{
 </section>
 
 
-<!-- =====================================================
-     ERRO
-===================================================== -->
-
 <div
   class="error-panel"
   id="errorPanel">
@@ -1831,10 +1822,6 @@ button{
 
 </div>
 
-
-<!-- =====================================================
-     HERO
-===================================================== -->
 
 <section class="hero">
 
@@ -1856,10 +1843,6 @@ button{
 
 </section>
 
-
-<!-- =====================================================
-     CARDS
-===================================================== -->
 
 <section class="cards">
 
@@ -1982,10 +1965,6 @@ button{
 </section>
 
 
-<!-- =====================================================
-     VIP
-===================================================== -->
-
 <section class="vip-panel">
 
   <div class="vip-info">
@@ -2022,10 +2001,6 @@ button{
 
 </section>
 
-
-<!-- =====================================================
-     RECURSOS
-===================================================== -->
 
 <div class="section-header">
 
@@ -2128,10 +2103,6 @@ button{
 
 </section>
 
-
-<!-- =====================================================
-     MEUS DADOS
-===================================================== -->
 
 <section class="data-panel">
 
@@ -2302,10 +2273,6 @@ button{
 </div>
 
 
-<!-- =====================================================
-     WHATSAPP
-===================================================== -->
-
 <a
   class="whatsapp-button"
   href="https://wa.me/5531987350267?text=Ol%C3%A1!%20Quero%20comprar%20ou%20tenho%20uma%20d%C3%BAvida."
@@ -2316,10 +2283,6 @@ button{
 
 </a>
 
-
-<!-- =====================================================
-     MENU
-===================================================== -->
 
 <nav class="bottom-nav">
 
@@ -2388,10 +2351,6 @@ button{
 </nav>
 
 
-<!-- =====================================================
-     MODAL VIP
-===================================================== -->
-
 <div
   class="modal"
   id="vipModal">
@@ -2457,10 +2416,6 @@ button{
 </div>
 
 
-<!-- =====================================================
-     MODAL VALE-PRESENTE
-===================================================== -->
-
 <div
   class="modal"
   id="giftModal">
@@ -2523,10 +2478,6 @@ button{
 
 </div>
 
-
-<!-- =====================================================
-     MODAL EDITAR DADOS
-===================================================== -->
 
 <div
   class="modal"
@@ -2690,10 +2641,6 @@ button{
 </div>
 
 
-<!-- =====================================================
-     NOTIFICAÇÕES
-===================================================== -->
-
 <div
   class="notifications-modal"
   id="notificationsModal">
@@ -2730,10 +2677,6 @@ button{
 
 </div>
 
-
-<!-- =====================================================
-     LOGOUT
-===================================================== -->
 
 <div
   class="modal"
@@ -2823,6 +2766,7 @@ import {
   updateDoc,
   doc,
   setDoc,
+  runTransaction,
   Timestamp
 }
 from
@@ -3829,6 +3773,23 @@ document.getElementById(
     }
 
 
+    if(
+      !usuarioAtual ||
+      !cadastroAtual ||
+      !cadastroId
+    ){
+
+      resultado.style.color =
+        "#ff9ca9";
+
+      resultado.textContent =
+        "❌ Usuário não carregado.";
+
+      return;
+
+    }
+
+
     resultado.style.color =
       "#a9c9e4";
 
@@ -3836,7 +3797,27 @@ document.getElementById(
       "⏳ Verificando código...";
 
 
+    const botao =
+      document.getElementById(
+        "redeemGiftButton"
+      );
+
+
+    botao.disabled =
+      true;
+
+
+    botao.textContent =
+      "⏳ VERIFICANDO...";
+
+
     try{
+
+      /*
+      ----------------------------------------------------
+      A COLEÇÃO CORRETA É codigosPresente
+      ----------------------------------------------------
+      */
 
       const snapshot =
         await getDocs(
@@ -3845,7 +3826,7 @@ document.getElementById(
 
             collection(
               db,
-              "vales"
+              "codigosPresente"
             ),
 
             where(
@@ -3878,99 +3859,160 @@ document.getElementById(
         snapshot.docs[0];
 
 
-      const vale =
-        documento.data();
+      const valeRef =
+        documento.ref;
 
 
-      if(
-        vale.ativo === false
-      ){
+      await runTransaction(
 
-        resultado.style.color =
-          "#ff9ca9";
+        db,
 
-        resultado.textContent =
-          "❌ Este vale não está mais disponível.";
+        async transaction => {
 
-        return;
-
-      }
+          const valeSnap =
+            await transaction.get(
+              valeRef
+            );
 
 
-      if(
-        vale.usado === true
-      ){
-
-        resultado.style.color =
-          "#ff9ca9";
-
-        resultado.textContent =
-          "❌ Este vale já foi utilizado.";
-
-        return;
-
-      }
+          const usuarioRef =
+            doc(
+              db,
+              "admins",
+              cadastroId
+            );
 
 
-      const valor =
-        valorNumerico(
-          vale.valor
-        );
+          const usuarioSnap =
+            await transaction.get(
+              usuarioRef
+            );
 
 
-      const saldoAtual =
-        valorNumerico(
-          cadastroAtual.data.creditos
-        );
+          if(
+            !valeSnap.exists()
+          ){
+
+            throw new Error(
+              "CODIGO_NAO_ENCONTRADO"
+            );
+
+          }
 
 
-      await updateDoc(
+          if(
+            !usuarioSnap.exists()
+          ){
 
-        doc(
-          db,
-          "admins",
-          cadastroId
-        ),
+            throw new Error(
+              "USUARIO_NAO_ENCONTRADO"
+            );
 
-        {
+          }
 
-          creditos:
-            saldoAtual + valor,
 
-          atualizadoEm:
-            Timestamp.now()
+          const vale =
+            valeSnap.data();
+
+
+          const dadosUsuario =
+            usuarioSnap.data();
+
+
+          if(
+            vale.ativo !== true
+          ){
+
+            throw new Error(
+              "VALE_INATIVO"
+            );
+
+          }
+
+
+          if(
+            vale.usado === true
+          ){
+
+            throw new Error(
+              "VALE_USADO"
+            );
+
+          }
+
+
+          const valor =
+            Number(
+              vale.quantidade || 0
+            );
+
+
+          if(
+            !Number.isFinite(valor) ||
+            valor <= 0
+          ){
+
+            throw new Error(
+              "VALOR_INVALIDO"
+            );
+
+          }
+
+
+          const creditosAtuais =
+            Number(
+              dadosUsuario.creditos || 0
+            );
+
+
+          const novoSaldo =
+            creditosAtuais +
+            valor;
+
+
+          transaction.update(
+
+            usuarioRef,
+
+            {
+
+              creditos:
+                novoSaldo,
+
+              atualizadoEm:
+                Timestamp.now()
+
+            }
+
+          );
+
+
+          transaction.update(
+
+            valeRef,
+
+            {
+
+              usado:
+                true,
+
+              usadoPor:
+                usuarioAtual.uid,
+
+              usadoEm:
+                Timestamp.now()
+
+            }
+
+          );
+
+
+          cadastroAtual.data.creditos =
+            novoSaldo;
 
         }
 
       );
-
-
-      await updateDoc(
-
-        doc(
-          db,
-          "vales",
-          documento.id
-        ),
-
-        {
-
-          usado:
-            true,
-
-          usadoPor:
-            usuarioAtual.uid,
-
-          usadoEm:
-            Timestamp.now()
-
-        }
-
-      );
-
-
-      cadastroAtual.data.creditos =
-        saldoAtual + valor;
 
 
       mostrarDados(
@@ -3983,9 +4025,14 @@ document.getElementById(
         "#62ff9e";
 
       resultado.textContent =
-        "✅ Vale resgatado! +" +
-        formatarMoeda(valor) +
-        " adicionados ao seu saldo.";
+        "✅ Vale resgatado com sucesso!";
+
+
+      document.getElementById(
+        "giftCode"
+      ).value =
+        "";
+
 
     }
     catch(error){
@@ -3996,11 +4043,86 @@ document.getElementById(
       );
 
 
+      if(
+        error.message ===
+        "CODIGO_NAO_ENCONTRADO"
+      ){
+
+        resultado.textContent =
+          "❌ Código não encontrado.";
+
+      }
+
+      else if(
+        error.message ===
+        "VALE_INATIVO"
+      ){
+
+        resultado.textContent =
+          "❌ Este vale não está ativo.";
+
+      }
+
+      else if(
+        error.message ===
+        "VALE_USADO"
+      ){
+
+        resultado.textContent =
+          "❌ Este vale já foi utilizado.";
+
+      }
+
+      else if(
+        error.message ===
+        "VALOR_INVALIDO"
+      ){
+
+        resultado.textContent =
+          "❌ Este vale possui um valor inválido.";
+
+      }
+
+      else if(
+        error.message ===
+        "USUARIO_NAO_ENCONTRADO"
+      ){
+
+        resultado.textContent =
+          "❌ Seu cadastro não foi encontrado.";
+
+      }
+
+      else if(
+        error.code ===
+        "permission-denied"
+      ){
+
+        resultado.textContent =
+          "❌ O Firebase bloqueou o resgate. A Rule precisa permitir esta operação.";
+
+      }
+
+      else{
+
+        resultado.textContent =
+          "❌ Não foi possível resgatar o vale.";
+
+      }
+
+
       resultado.style.color =
         "#ff9ca9";
 
-      resultado.textContent =
-        "❌ Erro ao resgatar o vale.";
+    }
+
+    finally{
+
+      botao.disabled =
+        false;
+
+      botao.textContent =
+        "🎁 RESGATAR VALE";
 
     }
 
