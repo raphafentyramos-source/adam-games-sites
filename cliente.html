@@ -2,1426 +2,1035 @@
 <html lang="pt-BR">
 
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
-
-<title>Adam Games • Cliente</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adam Games • Administração</title>
 
 <style>
-
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-html{
-  background:#031a31;
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
 body{
-
+  font-family:Arial,Helvetica,sans-serif;
+  color:#fff;
   min-height:100vh;
-
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
-
-  color:#fff;
-
   background:
-    radial-gradient(
-      circle at 10% 0%,
-      #159fe9 0%,
-      transparent 30%
-    ),
-
-    radial-gradient(
-      circle at 90% 10%,
-      #079b63 0%,
-      transparent 28%
-    ),
-
-    linear-gradient(
-      145deg,
-      #087fc5,
-      #031b3d 75%
-    );
-
-  padding:
-    20px
-    14px
-    80px;
-
+    radial-gradient(circle at 15% 5%,#43aaff 0%,transparent 30%),
+    radial-gradient(circle at 90% 10%,#079b63 0%,transparent 25%),
+    linear-gradient(145deg,#087fe0,#031b3d 75%);
+  padding:20px 12px 60px;
 }
 
-.container{
+.container{max-width:950px;margin:auto}
 
-  width:100%;
-
-  max-width:850px;
-
-  margin:auto;
-
-}
-
-
-/* =====================================================
-   TOPO
-===================================================== */
-
-.top{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:14px;
-
-  margin-bottom:18px;
-
-}
-
-.back{
-
-  width:48px;
-  height:48px;
-
+button{
   border:0;
-
-  border-radius:15px;
-
-  background:
-    rgba(2,35,67,.9);
-
-  color:#fff;
-
-  font-size:27px;
-
   cursor:pointer;
-
-  flex-shrink:0;
-
-}
-
-.title{
-
-  flex:1;
-
-}
-
-.title small{
-
-  display:block;
-
-  color:#8fc5e8;
-
-  font-size:11px;
-
-  letter-spacing:3px;
-
+  color:#fff;
   font-weight:bold;
-
 }
 
-.title strong{
-
-  display:block;
-
-  font-size:
-    clamp(
-      24px,
-      6vw,
-      34px
-    );
-
-}
-
-
-/* =====================================================
-   MENSAGEM
-===================================================== */
-
-.message{
-
-  margin-top:20px;
-
-  padding:18px;
-
-  border-radius:18px;
-
-  text-align:center;
-
-  background:
-    rgba(255,255,255,.07);
-
-  color:#b8d8ef;
-
-}
-
-.message.error{
-
-  color:#ff9fa9;
-
-  background:
-    rgba(255,50,70,.12);
-
-}
-
-.message.success{
-
-  color:#6dffae;
-
-  background:
-    rgba(0,220,100,.12);
-
-}
-
-
-/* =====================================================
-   PERFIL
-===================================================== */
-
-.profile{
-
-  margin-top:18px;
-
-  padding:22px;
-
-  border-radius:24px;
-
-  background:
-    rgba(2,31,62,.94);
-
-  border:
-    1px solid
-    rgba(255,255,255,.1);
-
-  box-shadow:
-    0 15px 35px
-    rgba(0,0,0,.25);
-
-}
-
-.profile-head{
-
+header{
   display:flex;
-
+  justify-content:space-between;
   align-items:center;
-
-  gap:16px;
-
+  gap:15px;
+  margin-bottom:25px;
 }
 
-.avatar{
-
-  width:72px;
-  height:72px;
-
-  border-radius:20px;
-
+.logo{
   display:flex;
+  align-items:center;
+  gap:12px;
+}
 
+.logoIcon{
+  width:58px;
+  height:58px;
+  border-radius:18px;
+  display:flex;
   align-items:center;
   justify-content:center;
-
-  background:
-    linear-gradient(
-      135deg,
-      #18a9ff,
-      #0871c8
-    );
-
-  font-size:38px;
-
-  flex-shrink:0;
-
+  font-size:30px;
+  background:linear-gradient(145deg,#168eff,#064b99);
 }
 
-.profile-name{
+.logo h1{font-size:22px}
+.logo span{color:#ffd32a}
 
-  font-size:25px;
-
-  font-weight:900;
-
-}
-
-.profile-email{
-
+.badge{
+  display:inline-block;
   margin-top:5px;
-
-  color:#9fc5df;
-
-  font-size:13px;
-
-  word-break:break-all;
-
-}
-
-.vip-badge{
-
-  display:inline-block;
-
-  margin-top:8px;
-
-  padding:6px 10px;
-
-  border-radius:20px;
-
-  background:#a87500;
-
-  color:#ffe68a;
-
-  font-size:12px;
-
+  padding:5px 9px;
+  border-radius:8px;
+  background:#d99b12;
+  font-size:11px;
   font-weight:bold;
-
 }
 
-.normal-badge{
-
-  display:inline-block;
-
-  margin-top:8px;
-
-  padding:6px 10px;
-
-  border-radius:20px;
-
-  background:#174a73;
-
-  color:#a9d9ff;
-
-  font-size:12px;
-
-  font-weight:bold;
-
-}
-
-
-/* =====================================================
-   IDENTIFICAÇÃO
-===================================================== */
-
-.identificacao{
-
-  margin-top:20px;
-
-  display:grid;
-
-  gap:9px;
-
-}
-
-.identificacao-item{
-
-  padding:12px;
-
+.logout{
+  padding:12px 16px;
   border-radius:12px;
-
-  background:
-    rgba(255,255,255,.045);
-
+  background:#17395f;
 }
 
-.identificacao-label{
+h2{font-size:38px;margin-bottom:6px}
 
-  color:#7fa9c9;
-
-  font-size:11px;
-
-  font-weight:bold;
-
-  text-transform:uppercase;
-
+.subtitle{
+  color:#b7d4ed;
+  margin-bottom:22px;
 }
 
-.identificacao-value{
-
-  margin-top:4px;
-
-  color:#e9f5ff;
-
-  font-size:13px;
-
-  word-break:break-all;
-
-}
-
-
-/* =====================================================
-   RECURSOS
-===================================================== */
-
-.section{
-
-  margin-top:22px;
-
+.card{
+  background:rgba(2,30,62,.94);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:22px;
   padding:20px;
-
-  border-radius:21px;
-
-  background:
-    rgba(2,31,62,.94);
-
-  border:
-    1px solid
-    rgba(255,255,255,.08);
-
+  margin-bottom:18px;
+  box-shadow:0 15px 35px rgba(0,0,0,.18);
 }
 
-.section h2{
-
-  font-size:22px;
-
+.card h3{
   margin-bottom:15px;
-
-}
-
-.resources{
-
-  display:grid;
-
-  grid-template-columns:
-    repeat(2,1fr);
-
-  gap:10px;
-
-}
-
-.resource{
-
-  padding:16px;
-
-  border-radius:15px;
-
-  background:
-    rgba(255,255,255,.055);
-
-  text-align:center;
-
-}
-
-.resource-icon{
-
-  font-size:25px;
-
-}
-
-.resource-label{
-
-  margin-top:7px;
-
-  color:#9ec2dd;
-
-  font-size:12px;
-
-  font-weight:bold;
-
-}
-
-.resource-value{
-
-  margin-top:4px;
-
-  font-size:25px;
-
-  font-weight:900;
-
-  color:#fff;
-
-}
-
-
-/* =====================================================
-   RESUMO
-===================================================== */
-
-.summary{
-
-  display:grid;
-
-  grid-template-columns:
-    repeat(3,1fr);
-
-  gap:10px;
-
-}
-
-.summary-box{
-
-  padding:17px 8px;
-
-  border-radius:16px;
-
-  text-align:center;
-
-  background:
-    rgba(255,255,255,.055);
-
-}
-
-.summary-number{
-
-  font-size:29px;
-
-  font-weight:900;
-
-}
-
-.summary-label{
-
-  margin-top:5px;
-
-  color:#9fc2dc;
-
-  font-size:11px;
-
-  font-weight:bold;
-
-}
-
-
-/* =====================================================
-   FILTROS
-===================================================== */
-
-.filters{
-
-  display:grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
-  gap:10px;
-
-  margin-bottom:15px;
-
-}
-
-.filter{
-
-  min-height:48px;
-
-  border:1px solid
-    rgba(255,255,255,.12);
-
-  border-radius:13px;
-
-  background:#082b4e;
-
-  color:#fff;
-
-  padding:0 13px;
-
-  font-size:14px;
-
+  font-size:20px;
 }
 
 .search{
-
-  grid-column:
-    1 / -1;
-
-  width:100%;
-
-  min-height:50px;
-
-  border:1px solid
-    rgba(255,255,255,.12);
-
-  border-radius:14px;
-
-  background:#062544;
-
-  color:#fff;
-
-  padding:0 15px;
-
-  font-size:15px;
-
-  outline:none;
-
-}
-
-.search::placeholder{
-
-  color:#759bb8;
-
-}
-
-
-/* =====================================================
-   PEDIDOS
-===================================================== */
-
-.orders{
-
   display:grid;
-
-  gap:12px;
-
-}
-
-.order{
-
-  padding:17px;
-
-  border-radius:17px;
-
-  background:
-    rgba(255,255,255,.055);
-
-  border:
-    1px solid
-    rgba(255,255,255,.08);
-
-}
-
-.order-top{
-
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:flex-start;
-
+  grid-template-columns:1fr 130px;
   gap:10px;
-
 }
 
-.order-title{
+input,select{
+  width:100%;
+  height:50px;
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:12px;
+  background:#071f40;
+  color:#fff;
+  padding:0 14px;
+  font-size:15px;
+  outline:none;
+}
 
-  font-size:17px;
+input:focus,select:focus{
+  border-color:#2aa7ff;
+  box-shadow:0 0 0 3px rgba(42,167,255,.1);
+}
 
-  font-weight:900;
+.search button{
+  border-radius:12px;
+  background:linear-gradient(135deg,#1c9aff,#006bd5);
+}
 
+.message{
+  margin-top:12px;
+  padding:12px;
+  border-radius:10px;
+  display:none;
+  font-size:14px;
+  line-height:1.4;
+}
+
+.success{
+  display:block;
+  background:rgba(0,220,110,.12);
+  color:#72ffae;
+}
+
+.error{
+  display:block;
+  background:rgba(255,50,70,.12);
+  color:#ff9ca8;
+}
+
+#userArea{display:none}
+
+.user{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  margin-bottom:20px;
+}
+
+.avatar{
+  width:68px;
+  height:68px;
+  border-radius:19px;
+  background:#ffd52b;
+  color:#111;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:33px;
+  flex-shrink:0;
+}
+
+.userName{
+  font-size:22px;
+  font-weight:bold;
+}
+
+.userEmail,.userId,.userUid{
+  margin-top:4px;
+  color:#a9c8e5;
+  font-size:13px;
+  word-break:break-all;
+}
+
+.status-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:10px;
 }
 
 .status{
-
   padding:6px 9px;
-
-  border-radius:20px;
-
-  font-size:10px;
-
-  font-weight:900;
-
-  white-space:nowrap;
-
-}
-
-.status-pendente{
-
-  color:#ffe27a;
-
-  background:
-    rgba(255,190,0,.15);
-
-}
-
-.status-entregue{
-
-  color:#6dffae;
-
-  background:
-    rgba(0,220,100,.14);
-
-}
-
-.order-info{
-
-  margin-top:12px;
-
-  display:grid;
-
-  gap:5px;
-
-}
-
-.order-info div{
-
-  color:#a8c6dd;
-
-  font-size:12px;
-
-}
-
-.order-info b{
-
-  color:#e9f5ff;
-
-}
-
-.order-id{
-
-  margin-top:12px;
-
-  padding:9px;
-
   border-radius:9px;
-
-  background:
-    rgba(0,0,0,.18);
-
-  color:#69c8ff;
-
-  font-size:10px;
-
-  word-break:break-all;
-
-}
-
-
-/* =====================================================
-   BOTÃO ENTREGAR
-===================================================== */
-
-.entregar-button{
-
-  width:100%;
-
-  margin-top:14px;
-
-  padding:13px;
-
-  border:0;
-
-  border-radius:12px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #18c66d,
-      #087b45
-    );
-
-  color:#fff;
-
-  font-size:14px;
-
-  font-weight:900;
-
-  cursor:pointer;
-
-}
-
-.entregar-button:disabled{
-
-  opacity:.55;
-
-  cursor:not-allowed;
-
-}
-
-.entregar-button:active{
-
-  transform:scale(.98);
-
-}
-
-
-/* =====================================================
-   ROLETA
-===================================================== */
-
-.roleta-result{
-
-  margin-top:10px;
-
-  padding:15px;
-
-  border-radius:15px;
-
-  background:
-    rgba(255,255,255,.045);
-
-}
-
-.roleta-result-top{
-
-  display:flex;
-
-  justify-content:space-between;
-
-  gap:10px;
-
-}
-
-.roleta-premio{
-
-  color:#ffd52b;
-
-  font-size:17px;
-
-  font-weight:900;
-
-}
-
-.roleta-data{
-
-  color:#82afd0;
-
   font-size:11px;
-
-  text-align:right;
-
+  font-weight:bold;
+  background:rgba(255,255,255,.08);
 }
 
-.roleta-status{
+.status.vip{
+  background:rgba(255,193,7,.2);
+  color:#ffd84c;
+}
 
-  margin-top:7px;
+.status.normal{color:#a9c8e5}
 
-  color:#a9c8df;
+.balances{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px;
+  margin-bottom:22px;
+}
 
+.balance{
+  text-align:center;
+  padding:15px 8px;
+  border-radius:15px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.05);
+}
+
+.balanceIcon{font-size:26px}
+
+.balanceName{
+  color:#91b2cf;
+  font-size:10px;
+  font-weight:bold;
+  margin-top:5px;
+}
+
+.balanceValue{
+  font-size:18px;
+  font-weight:bold;
+  margin-top:5px;
+}
+
+.roleta-card{
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(255,213,42,.32);
+  background:
+    radial-gradient(circle at 100% 0%,rgba(255,213,42,.16),transparent 35%),
+    linear-gradient(145deg,rgba(8,61,104,.98),rgba(2,30,62,.98));
+}
+
+.roleta-card::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  width:5px;
+  height:100%;
+  background:linear-gradient(180deg,#ffd52a,#ff8c00);
+}
+
+.roleta-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  margin-bottom:18px;
+}
+
+.roleta-title{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.roleta-icon{
+  width:52px;
+  height:52px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:15px;
+  background:linear-gradient(135deg,#ffd52a,#e78a00);
+  font-size:27px;
+}
+
+.roleta-title h3{margin:0;font-size:20px}
+
+.roleta-title p{
+  margin-top:4px;
+  color:#9ec7e5;
   font-size:12px;
-
 }
 
+.roleta-saldo{
+  min-width:105px;
+  padding:10px 14px;
+  text-align:center;
+  border-radius:15px;
+  background:rgba(255,213,42,.1);
+  border:1px solid rgba(255,213,42,.22);
+}
+
+.roleta-saldo-label{
+  color:#b8d2e6;
+  font-size:9px;
+  font-weight:bold;
+}
+
+.roleta-saldo-value{
+  margin-top:2px;
+  color:#ffd52a;
+  font-size:24px;
+  font-weight:900;
+}
+
+.roleta-form{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.roleta-field label,
+.field label{
+  display:block;
+  color:#a9c8e5;
+  font-size:11px;
+  font-weight:bold;
+  margin-bottom:6px;
+}
+
+.roleta-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:12px;
+}
+
+.roleta-add{
+  padding:14px;
+  border-radius:12px;
+  background:linear-gradient(135deg,#0dbb69,#087b43);
+}
+
+.roleta-remove{
+  padding:14px;
+  border-radius:12px;
+  background:linear-gradient(135deg,#d52e47,#a6172d);
+}
+
+.roleta-info{
+  margin-top:12px;
+  padding:11px;
+  border-radius:11px;
+  color:#b8d1e4;
+  background:rgba(255,255,255,.04);
+  font-size:11px;
+  line-height:1.5;
+}
+
+.form{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.full{grid-column:1/-1}
+
+.actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:15px;
+}
+
+.add{
+  background:linear-gradient(135deg,#0ba85a,#087a42);
+  padding:14px;
+  border-radius:12px;
+}
+
+.remove{
+  background:linear-gradient(135deg,#d72d47,#a8172d);
+  padding:14px;
+  border-radius:12px;
+}
+
+.special{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:10px;
+}
+
+.vip{
+  padding:14px;
+  border-radius:12px;
+  background:linear-gradient(135deg,#d29a16,#9d6800);
+}
+
+.box{
+  padding:14px;
+  border-radius:12px;
+  background:linear-gradient(135deg,#118eea,#0562ad);
+}
 
 /* =====================================================
-   VAZIO
+   PERFIL COMPLETO
 ===================================================== */
+
+.profile-button{
+  width:100%;
+  margin-top:15px;
+  padding:16px;
+  border-radius:14px;
+  background:linear-gradient(135deg,#8b4dff,#5d25c9);
+  font-size:15px;
+}
+
+.profile-button:hover{
+  filter:brightness(1.08);
+}
+
+.pending-card{
+  margin-top:18px;
+  padding:17px;
+  border-radius:17px;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(255,193,7,.12),transparent 40%),
+    rgba(255,255,255,.045);
+  border:1px solid rgba(255,193,7,.18);
+}
+
+.pending-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:12px;
+}
+
+.pending-header h3{
+  margin:0;
+}
+
+.pending-count{
+  min-width:34px;
+  height:34px;
+  padding:0 9px;
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#c98b00;
+  color:#fff;
+  font-weight:900;
+}
+
+.pending-list{
+  display:grid;
+  gap:9px;
+}
+
+.pending-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:12px;
+  border-radius:12px;
+  background:rgba(255,255,255,.05);
+}
+
+.pending-info{
+  min-width:0;
+}
+
+.pending-name{
+  font-weight:bold;
+  font-size:14px;
+}
+
+.pending-meta{
+  margin-top:4px;
+  color:#8fb1ca;
+  font-size:11px;
+}
+
+.pending-status{
+  flex-shrink:0;
+  padding:6px 9px;
+  border-radius:9px;
+  background:rgba(255,190,0,.14);
+  color:#ffe27a;
+  font-size:10px;
+  font-weight:bold;
+}
+
+.pending-empty{
+  padding:13px;
+  color:#8fb1ca;
+  text-align:center;
+  font-size:12px;
+}
+
+/* =====================================================
+   HISTÓRICO
+===================================================== */
+
+.history{margin-top:22px}
+
+.historyItem{
+  padding:15px;
+  margin-top:9px;
+  border-radius:14px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.06);
+}
+
+.historyTop{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  font-weight:bold;
+}
+
+.historyDate{
+  color:#75d4ff;
+  font-size:12px;
+  text-align:right;
+}
+
+.plus{color:#65ff9c}
+.minus{color:#ff7382}
+
+.historyInfo{
+  color:#9dbbd3;
+  font-size:12px;
+  margin-top:8px;
+  line-height:1.6;
+}
+
+.operation-id{
+  margin-top:8px;
+  padding:7px 9px;
+  border-radius:8px;
+  background:rgba(0,0,0,.2);
+  color:#7fc9ff;
+  font-size:11px;
+  word-break:break-all;
+}
 
 .empty{
-
-  padding:25px 12px;
-
-  text-align:center;
-
-  color:#87abc6;
-
+  padding:15px;
+  border-radius:12px;
+  background:rgba(255,255,255,.04);
+  color:#9dbbd3;
 }
 
-
-/* =====================================================
-   BOTÃO ENTREGAS
-===================================================== */
-
-.delivery-button{
-
-  width:100%;
-
-  height:53px;
-
-  margin-top:15px;
-
-  border:0;
-
-  border-radius:15px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #16bb69,
-      #087b45
-    );
-
-  color:#fff;
-
-  font-size:15px;
-
-  font-weight:900;
-
-  cursor:pointer;
-
+.warning{
+  margin-top:10px;
+  padding:11px;
+  border-radius:11px;
+  background:rgba(255,193,7,.08);
+  border:1px solid rgba(255,193,7,.18);
+  color:#e8cf8a;
+  font-size:12px;
+  line-height:1.5;
 }
 
+@media(max-width:700px){
 
-/* =====================================================
-   RESPONSIVO
-===================================================== */
+  h2{font-size:32px}
 
-@media(max-width:600px){
+  .search{grid-template-columns:1fr}
 
-  .summary{
+  .search button{height:50px}
 
-    grid-template-columns:
-      repeat(3,1fr);
+  .balances{grid-template-columns:repeat(2,1fr)}
 
-  }
+  .roleta-header{align-items:flex-start}
 
-  .summary-number{
+  .roleta-form{grid-template-columns:1fr}
 
-    font-size:24px;
+  .roleta-actions{grid-template-columns:1fr}
 
-  }
+  .form{grid-template-columns:1fr}
 
-  .filters{
+  .full{grid-column:auto}
 
-    grid-template-columns:
-      1fr;
+  .actions,.special{grid-template-columns:1fr}
 
-  }
-
-  .search{
-
-    grid-column:auto;
-
-  }
-
-  .order-top{
-
+  .pending-item{
+    align-items:flex-start;
     flex-direction:column;
-
   }
 
-  .roleta-result-top{
-
-    flex-direction:column;
-
+  .pending-status{
+    align-self:flex-start;
   }
 
-  .roleta-data{
+  .historyTop{flex-direction:column}
 
-    text-align:left;
-
-  }
-
+  .historyDate{text-align:left}
 }
-
 </style>
-
 </head>
-
 
 <body>
 
 <div class="container">
 
+<header>
 
-<!-- =================================================
-     TOPO
-================================================== -->
+  <div class="logo">
 
-<div class="top">
-
-  <button
-    class="back"
-    id="back"
-    type="button">
-
-    ←
-
-  </button>
-
-  <div class="title">
-
-    <small>ADAM GAMES • ADMIN</small>
-
-    <strong>👤 PERFIL DO CLIENTE</strong>
-
-  </div>
-
-</div>
-
-
-<!-- =================================================
-     MENSAGEM
-================================================== -->
-
-<div
-  class="message"
-  id="message">
-
-  🔄 Carregando cliente...
-
-</div>
-
-
-<!-- =================================================
-     PERFIL
-================================================== -->
-
-<div
-  class="profile"
-  id="profile"
-  style="display:none">
-
-
-  <div class="profile-head">
-
-    <div
-      class="avatar"
-      id="avatar">
-
-      👤
-
-    </div>
+    <div class="logoIcon">👑</div>
 
     <div>
 
-      <div
-        class="profile-name"
-        id="nome">
+      <h1>ADAM <span>GAMES</span></h1>
 
-        —
-
-      </div>
-
-      <div
-        class="profile-email"
-        id="email">
-
-        —
-
-      </div>
-
-      <div id="vipBadge"></div>
+      <div class="badge">👑 ADMINISTRADOR</div>
 
     </div>
 
   </div>
 
+  <button class="logout" id="logout" type="button">
+    ↪️ Sair
+  </button>
 
-  <div class="identificacao">
+</header>
 
+<h2>Painel Admin</h2>
 
-    <div class="identificacao-item">
+<p class="subtitle">
+  Gerenciamento de usuários, recursos, prêmios e entregas.
+</p>
 
-      <div class="identificacao-label">
-        UID
-      </div>
+<!-- BUSCA -->
 
-      <div
-        class="identificacao-value"
-        id="uid">
+<div class="card">
 
-        —
+  <h3>🔎 Localizar usuário</h3>
 
-      </div>
+  <div class="search">
 
-    </div>
+    <input
+      id="searchInput"
+      type="text"
+      placeholder="Digite o ID Adam Games ou o e-mail"
+      autocomplete="off"
+    >
 
-
-    <div class="identificacao-item">
-
-      <div class="identificacao-label">
-        ID público
-      </div>
-
-      <div
-        class="identificacao-value"
-        id="publicId">
-
-        —
-
-      </div>
-
-    </div>
-
-
-    <div class="identificacao-item">
-
-      <div class="identificacao-label">
-        ID do documento
-      </div>
-
-      <div
-        class="identificacao-value"
-        id="docId">
-
-        —
-
-      </div>
-
-    </div>
-
+    <button id="buscar" type="button">
+      🔍 Buscar
+    </button>
 
   </div>
 
+  <div class="warning">
+    Pesquise pelo <strong>ID Adam Games</strong> ou
+    <strong>e-mail cadastrado</strong>.
+  </div>
+
+  <div id="searchMessage" class="message"></div>
 
 </div>
 
+<!-- USUÁRIO -->
 
-<!-- =================================================
-     RECURSOS
-================================================== -->
+<div id="userArea">
 
-<section
-  class="section"
-  id="recursosSection"
-  style="display:none">
+<div class="card">
 
-  <h2>
-    📊 Recursos atuais
-  </h2>
+  <div class="user">
 
+    <div class="avatar" id="avatar">🙂</div>
 
-  <div class="resources">
+    <div>
 
+      <div class="userName" id="nome">—</div>
 
-    <div class="resource">
+      <div class="userEmail" id="email">—</div>
 
-      <div class="resource-icon">
-        🎟️
-      </div>
+      <div class="userId" id="id">—</div>
 
-      <div class="resource-label">
-        CHANCES
-      </div>
+      <div class="userUid" id="uid">UID: —</div>
 
-      <div
-        class="resource-value"
-        id="rChances">
+      <div class="status-row">
 
-        0
+        <span class="status normal" id="vipStatus">
+          ⭐ NÃO VIP
+        </span>
+
+        <span class="status" id="boxStatus">
+          🎁 CAIXA
+        </span>
 
       </div>
 
     </div>
-
-
-    <div class="resource">
-
-      <div class="resource-icon">
-        🎰
-      </div>
-
-      <div class="resource-label">
-        GIROS ROLETA
-      </div>
-
-      <div
-        class="resource-value"
-        id="rGiros">
-
-        0
-
-      </div>
-
-    </div>
-
-
-    <div class="resource">
-
-      <div class="resource-icon">
-        🪙
-      </div>
-
-      <div class="resource-label">
-        MOEDAS
-      </div>
-
-      <div
-        class="resource-value"
-        id="rMoedas">
-
-        0
-
-      </div>
-
-    </div>
-
-
-    <div class="resource">
-
-      <div class="resource-icon">
-        🔑
-      </div>
-
-      <div class="resource-label">
-        CHAVES
-      </div>
-
-      <div
-        class="resource-value"
-        id="rChaves">
-
-        0
-
-      </div>
-
-    </div>
-
-
-    <div class="resource">
-
-      <div class="resource-icon">
-        💎
-      </div>
-
-      <div class="resource-label">
-        CRÉDITOS
-      </div>
-
-      <div
-        class="resource-value"
-        id="rCreditos">
-
-        R$ 0,00
-
-      </div>
-
-    </div>
-
 
   </div>
 
-</section>
-
-
-<!-- =================================================
-     RESUMO
-================================================== -->
-
-<section
-  class="section"
-  id="resumoSection"
-  style="display:none">
-
-  <h2>
-    🎁 Resumo de prêmios
-  </h2>
-
-
-  <div class="summary">
-
-
-    <div class="summary-box">
-
-      <div
-        class="summary-number"
-        id="totalPremios">
-
-        0
-
-      </div>
-
-      <div class="summary-label">
-        TOTAL
-      </div>
-
-    </div>
-
-
-    <div class="summary-box">
-
-      <div
-        class="summary-number"
-        id="pendentes">
-
-        0
-
-      </div>
-
-      <div class="summary-label">
-        PENDENTES
-      </div>
-
-    </div>
-
-
-    <div class="summary-box">
-
-      <div
-        class="summary-number"
-        id="entregues">
-
-        0
-
-      </div>
-
-      <div class="summary-label">
-        ENTREGUES
-      </div>
-
-    </div>
-
-
-  </div>
-
+  <!-- BOTÃO NOVO -->
 
   <button
-    class="delivery-button"
-    id="deliveryButton"
+    class="profile-button"
+    id="verPerfil"
     type="button">
 
-    📦 VER ENTREGAS DESTE CLIENTE
+    👤 VER PERFIL COMPLETO E PRÊMIOS
 
   </button>
 
-</section>
+  <!-- PENDENTES -->
 
+  <div class="pending-card">
 
-<!-- =================================================
-     PEDIDOS / ENTREGAS
-================================================== -->
+    <div class="pending-header">
 
-<section
-  class="section"
-  id="ordersSection"
-  style="display:none">
+      <h3>⏳ Prêmios pendentes</h3>
 
-  <h2>
-    🎁 Prêmios e pedidos
-  </h2>
+      <div
+        class="pending-count"
+        id="pendingCount">
 
+        0
 
-  <div class="filters">
+      </div>
 
-    <select
-      class="filter"
-      id="statusFilter">
+    </div>
 
-      <option value="todos">
-        Todos os status
-      </option>
+    <div
+      class="pending-list"
+      id="pendingList">
 
-      <option value="pendente">
-        ⏳ Pendentes
-      </option>
+      <div class="pending-empty">
+        🔄 Carregando prêmios...
+      </div>
 
-      <option value="entregue">
-        ✅ Entregues
-      </option>
-
-    </select>
-
-
-    <select
-      class="filter"
-      id="typeFilter">
-
-      <option value="todos">
-        Todos os tipos
-      </option>
-
-      <option value="roleta">
-        🎰 Roleta
-      </option>
-
-      <option value="moedas">
-        🪙 Moedas
-      </option>
-
-      <option value="caixa">
-        🎁 Caixa
-      </option>
-
-      <option value="codigo">
-        🎟️ Código
-      </option>
-
-      <option value="jogo">
-        🎮 Jogo
-      </option>
-
-      <option value="outro">
-        📦 Outros
-      </option>
-
-    </select>
-
-
-    <input
-      class="search"
-      id="search"
-      type="search"
-      placeholder="🔎 Buscar prêmio, ID ou tipo..."
-    >
+    </div>
 
   </div>
 
+  <!-- DADOS -->
 
-  <div
-    class="orders"
-    id="orders">
+  <div class="info-grid">
+
+    <div class="info-item">
+      <div class="info-label">Nome</div>
+      <div class="info-value" id="infoNome">—</div>
+    </div>
+
+    <div class="info-item">
+      <div class="info-label">E-mail</div>
+      <div class="info-value" id="infoEmail">—</div>
+    </div>
+
+    <div class="info-item">
+      <div class="info-label">ID Adam Games</div>
+      <div class="info-value" id="infoId">—</div>
+    </div>
+
+    <div class="info-item">
+      <div class="info-label">UID Firebase</div>
+      <div class="info-value" id="infoUid">—</div>
+    </div>
+
+    <div class="info-item">
+      <div class="info-label">Idade</div>
+      <div class="info-value" id="infoIdade">Não informado</div>
+    </div>
+
+    <div class="info-item">
+      <div class="info-label">Telefone</div>
+      <div class="info-value" id="infoTelefone">Não informado</div>
+    </div>
 
   </div>
 
-</section>
+  <!-- SALDOS -->
 
+  <h3>📊 Recursos atuais</h3>
 
-<!-- =================================================
-     HISTÓRICO ROLETA
-================================================== -->
+  <div class="balances">
 
-<section
-  class="section"
-  id="roletaSection"
-  style="display:none">
+    <div class="balance">
+      <div class="balanceIcon">🎟️</div>
+      <div class="balanceName">CHANCES</div>
+      <div class="balanceValue" id="chances">0</div>
+    </div>
 
-  <h2>
-    🎰 Histórico da Roleta
-  </h2>
+    <div class="balance">
+      <div class="balanceIcon">🎰</div>
+      <div class="balanceName">GIROS ROLETA</div>
+      <div class="balanceValue" id="girosRoleta">0</div>
+    </div>
 
+    <div class="balance">
+      <div class="balanceIcon">🪙</div>
+      <div class="balanceName">MOEDAS</div>
+      <div class="balanceValue" id="moedas">0</div>
+    </div>
 
-  <div
-    id="roletaHistorico">
+    <div class="balance">
+      <div class="balanceIcon">🔑</div>
+      <div class="balanceName">CHAVES</div>
+      <div class="balanceValue" id="chaves">0</div>
+    </div>
+
+    <div class="balance">
+      <div class="balanceIcon">💎</div>
+      <div class="balanceName">CRÉDITOS</div>
+      <div class="balanceValue" id="creditos">R$ 0,00</div>
+    </div>
 
   </div>
 
-</section>
+  <!-- ROLETA -->
 
+  <div class="card roleta-card">
+
+    <div class="roleta-header">
+
+      <div class="roleta-title">
+
+        <div class="roleta-icon">🎰</div>
+
+        <div>
+          <h3>Giros da Roleta</h3>
+          <p>Saldo exclusivo para a Roleta Adam Games.</p>
+        </div>
+
+      </div>
+
+      <div class="roleta-saldo">
+
+        <div class="roleta-saldo-label">
+          GIROS ATUAIS
+        </div>
+
+        <div
+          class="roleta-saldo-value"
+          id="roletaSaldo">
+
+          0
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="roleta-form">
+
+      <div class="roleta-field">
+
+        <label>QUANTIDADE DE GIROS</label>
+
+        <input
+          id="quantidadeGiros"
+          type="number"
+          min="1"
+          step="1"
+          placeholder="Ex.: 5"
+        >
+
+      </div>
+
+      <div class="roleta-field">
+
+        <label>MOTIVO — OBRIGATÓRIO</label>
+
+        <input
+          id="motivoGiros"
+          type="text"
+          maxlength="150"
+          placeholder="Ex.: Bônus de compra"
+        >
+
+      </div>
+
+    </div>
+
+    <div class="roleta-actions">
+
+      <button
+        class="roleta-add"
+        id="adicionarGiros"
+        type="button">
+
+        🎰 ADICIONAR GIROS
+
+      </button>
+
+      <button
+        class="roleta-remove"
+        id="removerGiros"
+        type="button">
+
+        ➖ REMOVER GIROS
+
+      </button>
+
+    </div>
+
+    <div class="roleta-info">
+      🎰 <strong>Importante:</strong>
+      os Giros da Roleta são separados das Chances.
+    </div>
+
+    <div id="roletaMessage" class="message"></div>
+
+  </div>
+
+  <!-- MOVIMENTAÇÃO -->
+
+  <h3>🎁 Fazer movimentação</h3>
+
+  <div class="form">
+
+    <div class="field">
+
+      <label>ITEM</label>
+
+      <select id="item">
+
+        <option value="chances">🎟️ Chances</option>
+        <option value="moedas">🪙 Moedas</option>
+        <option value="chaves">🔑 Chaves</option>
+        <option value="creditos">💎 Créditos</option>
+
+      </select>
+
+    </div>
+
+    <div class="field">
+
+      <label>QUANTIDADE</label>
+
+      <input
+        id="quantidade"
+        type="number"
+        min="0.01"
+        step="0.01"
+        placeholder="Quantidade"
+      >
+
+    </div>
+
+    <div class="field full">
+
+      <label>MOTIVO — OBRIGATÓRIO</label>
+
+      <input
+        id="motivo"
+        type="text"
+        maxlength="150"
+        placeholder="Ex.: Compra realizada pelo WhatsApp"
+      >
+
+    </div>
+
+  </div>
+
+  <div class="actions">
+
+    <button class="add" id="adicionar" type="button">
+      ➕ ADICIONAR
+    </button>
+
+    <button class="remove" id="remover" type="button">
+      ➖ REMOVER
+    </button>
+
+  </div>
+
+  <div class="special">
+
+    <button class="vip" id="vip" type="button">
+      👑 Alterar VIP
+    </button>
+
+    <button class="box" id="box" type="button">
+      🎁 Alterar Caixa
+    </button>
+
+  </div>
+
+  <div id="operationMessage" class="message"></div>
+
+  <!-- HISTÓRICO -->
+
+  <div class="history">
+
+    <h3>📜 Extrato do usuário</h3>
+
+    <div id="historyList">
+
+      <div class="empty">
+        Nenhuma movimentação carregada.
+      </div>
+
+    </div>
+
+  </div>
 
 </div>
 
+</div>
+
+</div>
 
 <script type="module">
 
-
-/* =====================================================
-   FIREBASE
-===================================================== */
-
 import {
-
   initializeApp
-
 }
-
 from
-
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
-
 import {
-
   getAuth,
-
-  onAuthStateChanged
-
+  onAuthStateChanged,
+  signOut
 }
-
 from
-
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
-
 import {
-
   getFirestore,
-
   collection,
-
   query,
-
   where,
-
   getDocs,
-
   updateDoc,
-
-  Timestamp
-
+  addDoc
 }
-
 from
-
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-
-/* =====================================================
-   CONFIG
-===================================================== */
 
 const firebaseConfig = {
 
@@ -1451,86 +1060,54 @@ const app =
     firebaseConfig
   );
 
-
 const auth =
   getAuth(app);
-
 
 const db =
   getFirestore(app);
 
 
-/* =====================================================
-   ELEMENTOS
-===================================================== */
-
-const $ =
-  id =>
-    document.getElementById(
-      id
-    );
+const ADMIN_EMAIL =
+  "raphafentyramos@gmail.com";
 
 
-const message =
-  $("message");
+let adminUsuario = null;
+let usuarioSelecionado = null;
 
 
-/* =====================================================
-   ESTADO
-===================================================== */
+const searchInput =
+  document.getElementById("searchInput");
 
-let cliente =
-  null;
+const searchMessage =
+  document.getElementById("searchMessage");
 
-let entregas =
-  [];
+const operationMessage =
+  document.getElementById("operationMessage");
 
-let resultadosRoleta =
-  [];
+const roletaMessage =
+  document.getElementById("roletaMessage");
 
+const userArea =
+  document.getElementById("userArea");
 
-/* =====================================================
-   URL
-===================================================== */
-
-const parametros =
-  new URLSearchParams(
-    window.location.search
-  );
-
-
-const clienteUid =
-  parametros.get(
-    "uid"
-  );
-
-
-/* =====================================================
-   MENSAGEM
-===================================================== */
 
 function mostrarMensagem(
+  elemento,
   texto,
-  tipo = ""
+  tipo
 ){
 
-  message.textContent =
+  elemento.textContent =
     texto;
 
-  message.className =
+  elemento.className =
     "message " +
     tipo;
 
 }
 
 
-/* =====================================================
-   NÚMERO
-===================================================== */
-
-function numero(
-  valor
-){
+function numero(valor){
 
   return Number(
     valor || 0
@@ -1541,183 +1118,184 @@ function numero(
 }
 
 
-/* =====================================================
-   DATA
-===================================================== */
+function dinheiro(valor){
 
-function formatarData(
-  valor
-){
-
-  if(!valor){
-
-    return "—";
-
-  }
-
-
-  try{
-
-    if(
-      typeof valor.toDate ===
-      "function"
-    ){
-
-      return valor
-        .toDate()
-        .toLocaleString(
-          "pt-BR"
-        );
-
+  return Number(
+    valor || 0
+  ).toLocaleString(
+    "pt-BR",
+    {
+      style:"currency",
+      currency:"BRL"
     }
-
-
-    if(
-      typeof valor.seconds ===
-      "number"
-    ){
-
-      return new Date(
-        valor.seconds * 1000
-      ).toLocaleString(
-        "pt-BR"
-      );
-
-    }
-
-
-    const data =
-      new Date(
-        valor
-      );
-
-
-    if(
-      Number.isNaN(
-        data.getTime()
-      )
-    ){
-
-      return "—";
-
-    }
-
-
-    return data.toLocaleString(
-      "pt-BR"
-    );
-
-  }
-
-  catch{
-
-    return "—";
-
-  }
+  );
 
 }
 
 
-/* =====================================================
-   MILLIS
-===================================================== */
+function gerarOperacaoId(){
 
-function obterMillis(
-  valor
-){
-
-  if(!valor){
-
-    return 0;
-
-  }
-
-
-  if(
-    typeof valor.toMillis ===
-    "function"
-  ){
-
-    return valor.toMillis();
-
-  }
-
-
-  if(
-    typeof valor.seconds ===
-    "number"
-  ){
-
-    return valor.seconds * 1000;
-
-  }
-
+  const agora =
+    new Date();
 
   const data =
-    new Date(
-      valor
-    );
+    agora.getFullYear() +
+    String(
+      agora.getMonth()+1
+    ).padStart(2,"0") +
+    String(
+      agora.getDate()
+    ).padStart(2,"0");
 
+  const hora =
+    String(
+      agora.getHours()
+    ).padStart(2,"0") +
+    String(
+      agora.getMinutes()
+    ).padStart(2,"0") +
+    String(
+      agora.getSeconds()
+    ).padStart(2,"0");
 
-  return Number.isNaN(
-    data.getTime()
-  )
-    ? 0
-    : data.getTime();
+  let aleatorio;
 
-}
+  if(
+    window.crypto &&
+    crypto.randomUUID
+  ){
 
+    aleatorio =
+      crypto
+      .randomUUID()
+      .split("-")[0]
+      .toUpperCase();
 
-/* =====================================================
-   ESCAPAR HTML
-===================================================== */
+  }
+  else{
 
-function escapar(
-  valor
-){
+    aleatorio =
+      Math.random()
+      .toString(36)
+      .substring(2,8)
+      .toUpperCase();
 
-  return String(
-    valor ?? ""
-  )
+  }
 
-  .replace(
-    /&/g,
-    "&amp;"
-  )
-
-  .replace(
-    /</g,
-    "&lt;"
-  )
-
-  .replace(
-    />/g,
-    "&gt;"
-  )
-
-  .replace(
-    /"/g,
-    "&quot;"
-  )
-
-  .replace(
-    /'/g,
-    "&#039;"
+  return (
+    "MOV-" +
+    data +
+    "-" +
+    hora +
+    "-" +
+    aleatorio
   );
 
 }
 
 
 /* =====================================================
-   CARREGAR CLIENTE
+   MOSTRAR USUÁRIO
 ===================================================== */
 
-async function carregarCliente(){
+function mostrarUsuario(documento){
 
-  if(!clienteUid){
+  const dados =
+    documento.data();
+
+  usuarioSelecionado = {
+
+    ref:
+      documento.ref,
+
+    docId:
+      documento.id,
+
+    data:
+      dados
+
+  };
+
+  userArea.style.display =
+    "block";
+
+  const nome =
+    dados.nome ||
+    dados.name ||
+    "Usuário";
+
+  const email =
+    dados.email ||
+    "Sem e-mail";
+
+  const publicId =
+    dados.publicId ||
+    "Pendente";
+
+  document.getElementById("nome").textContent =
+    nome;
+
+  document.getElementById("email").textContent =
+    email;
+
+  document.getElementById("id").textContent =
+    "ID: " + publicId;
+
+  document.getElementById("uid").textContent =
+    "UID: " +
+    (
+      dados.uid ||
+      "Não informado"
+    );
+
+  document.getElementById("avatar").textContent =
+    dados.avatar ||
+    "🙂";
+
+  document.getElementById("infoNome").textContent =
+    nome;
+
+  document.getElementById("infoEmail").textContent =
+    email;
+
+  document.getElementById("infoId").textContent =
+    publicId;
+
+  document.getElementById("infoUid").textContent =
+    dados.uid ||
+    "Não informado";
+
+  document.getElementById("infoIdade").textContent =
+    dados.idade ||
+    "Não informado";
+
+  document.getElementById("infoTelefone").textContent =
+    dados.telefone ||
+    dados.phone ||
+    "Não informado";
+
+  atualizarSaldos();
+  atualizarStatus();
+  atualizarGirosRoleta();
+
+  carregarPremiosPendentes();
+
+}
+
+
+/* =====================================================
+   PERFIL COMPLETO
+===================================================== */
+
+function abrirPerfilCompleto(){
+
+  if(
+    !usuarioSelecionado
+  ){
 
     mostrarMensagem(
-      "Nenhum UID foi informado na URL.",
+      searchMessage,
+      "Primeiro selecione um usuário.",
       "error"
     );
 
@@ -1725,249 +1303,69 @@ async function carregarCliente(){
 
   }
 
+  const uid =
+    usuarioSelecionado.data.uid;
 
-  try{
-
-    /*
-    =====================================================
-    O UID é um CAMPO dentro de admins.
-    Não presumimos que seja o ID do documento.
-    =====================================================
-    */
-
-    const resultado =
-      await getDocs(
-
-        query(
-
-          collection(
-            db,
-            "admins"
-          ),
-
-          where(
-            "uid",
-            "==",
-            clienteUid
-          )
-
-        )
-
-      );
-
-
-    if(
-      resultado.empty
-    ){
-
-      mostrarMensagem(
-        "Cliente não encontrado para este UID.",
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    const documento =
-      resultado.docs[0];
-
-
-    cliente = {
-
-      id:
-        documento.id,
-
-      ...documento.data()
-
-    };
-
-
-    renderizarCliente();
-
-
-    await Promise.all([
-
-      carregarEntregas(),
-
-      carregarRoleta()
-
-    ]);
-
-
-    renderizarResumo();
-
+  if(!uid){
 
     mostrarMensagem(
-      "Cliente carregado com sucesso.",
-      "success"
-    );
-
-  }
-
-  catch(error){
-
-    console.error(
-      "Erro ao carregar cliente:",
-      error
-    );
-
-
-    mostrarMensagem(
-
-      "Não foi possível carregar o cliente: " +
-
-      (
-        error.message ||
-        "erro desconhecido"
-      ),
-
+      searchMessage,
+      "Este usuário não possui UID Firebase.",
       "error"
-
     );
 
+    return;
+
   }
+
+  window.location.href =
+    "cliente.html?uid=" +
+    encodeURIComponent(uid);
 
 }
 
 
 /* =====================================================
-   RENDER CLIENTE
+   PRÊMIOS PENDENTES
 ===================================================== */
 
-function renderizarCliente(){
+async function carregarPremiosPendentes(){
 
-  $("profile").style.display =
-    "block";
+  const lista =
+    document.getElementById(
+      "pendingList"
+    );
 
-  $("recursosSection").style.display =
-    "block";
+  const contador =
+    document.getElementById(
+      "pendingCount"
+    );
 
-  $("resumoSection").style.display =
-    "block";
+  lista.innerHTML =
+    "<div class='pending-empty'>🔄 Carregando...</div>";
 
-  $("ordersSection").style.display =
-    "block";
-
-  $("roletaSection").style.display =
-    "block";
-
-
-  const nome =
-    cliente.nome ||
-    cliente.name ||
-    "Cliente";
-
-
-  $("nome").textContent =
-    nome;
-
-
-  $("email").textContent =
-    cliente.email ||
-    "Sem e-mail";
-
-
-  $("uid").textContent =
-    cliente.uid ||
-    clienteUid;
-
-
-  $("publicId").textContent =
-    cliente.publicId ||
-    "Não definido";
-
-
-  $("docId").textContent =
-    cliente.id;
-
-
-  $("avatar").textContent =
-    cliente.avatar ||
-    "👤";
-
+  contador.textContent =
+    "0";
 
   if(
-    cliente.vip === true
+    !usuarioSelecionado
   ){
 
-    $("vipBadge").innerHTML =
-      `<span class="vip-badge">
-        👑 VIP ATIVO
-      </span>`;
+    return;
 
   }
 
-  else{
+  const uid =
+    usuarioSelecionado.data.uid;
 
-    $("vipBadge").innerHTML =
-      `<span class="normal-badge">
-        🔒 NÃO VIP
-      </span>`;
+  if(!uid){
+
+    lista.innerHTML =
+      "<div class='pending-empty'>UID não encontrado.</div>";
+
+    return;
 
   }
-
-
-  atualizarRecursos();
-
-}
-
-
-/* =====================================================
-   ATUALIZAR RECURSOS
-===================================================== */
-
-function atualizarRecursos(){
-
-  $("rChances").textContent =
-    numero(
-      cliente.chances
-    );
-
-
-  $("rGiros").textContent =
-    numero(
-      cliente.girosRoleta
-    );
-
-
-  $("rMoedas").textContent =
-    numero(
-      cliente.moedas
-    );
-
-
-  $("rChaves").textContent =
-    numero(
-      cliente.chaves
-    );
-
-
-  $("rCreditos").textContent =
-
-    "R$ " +
-
-    Number(
-      cliente.creditos || 0
-    )
-    .toFixed(2)
-    .replace(
-      ".",
-      ","
-    );
-
-}
-
-
-/* =====================================================
-   CARREGAR ENTREGAS
-===================================================== */
-
-async function carregarEntregas(){
-
-  entregas = [];
-
 
   try{
 
@@ -1975,7 +1373,6 @@ async function carregarEntregas(){
       await getDocs(
 
         query(
-
           collection(
             db,
             "entregas"
@@ -1984,196 +1381,345 @@ async function carregarEntregas(){
           where(
             "uid",
             "==",
-            clienteUid
+            uid
           )
-
         )
 
       );
 
-
-    entregas =
-      resultado.docs.map(
+    const pendentes =
+      resultado.docs
+      .map(
         documento => ({
-
           id:
             documento.id,
-
           ...documento.data()
-
         })
+      )
+      .filter(
+        item =>
+          item.entregue !== true
       );
 
-  }
+    contador.textContent =
+      pendentes.length;
 
+    lista.innerHTML =
+      "";
+
+    if(
+      pendentes.length === 0
+    ){
+
+      lista.innerHTML =
+        "<div class='pending-empty'>✅ Nenhum prêmio pendente.</div>";
+
+      return;
+
+    }
+
+    pendentes.forEach(
+      premio => {
+
+        const nome =
+          premio.premioNome ||
+          premio.nome ||
+          premio.titulo ||
+          "Prêmio";
+
+        const tipo =
+          premio.tipo ||
+          "outro";
+
+        const quantidade =
+          premio.quantidade != null
+            ?
+            numero(
+              premio.quantidade
+            )
+            :
+            "";
+
+        const item =
+          document.createElement(
+            "div"
+          );
+
+        item.className =
+          "pending-item";
+
+        item.innerHTML =
+
+          "<div class='pending-info'>" +
+
+            "<div class='pending-name'>" +
+
+              escapar(
+                quantidade
+                  ? quantidade + " " + nome
+                  : nome
+              ) +
+
+            "</div>" +
+
+            "<div class='pending-meta'>" +
+
+              "Tipo: " +
+              escapar(tipo) +
+              " • ID: " +
+              escapar(premio.id) +
+
+            "</div>" +
+
+          "</div>" +
+
+          "<div class='pending-status'>" +
+
+            "⏳ PENDENTE" +
+
+          "</div>";
+
+        lista.appendChild(
+          item
+        );
+
+      }
+    );
+
+  }
   catch(error){
 
-    console.warn(
-      "Erro ao carregar entregas:",
+    console.error(
+      "Erro ao carregar pendentes:",
       error
     );
 
-    entregas = [];
+    lista.innerHTML =
+      "<div class='pending-empty'>⚠️ Não foi possível carregar os prêmios.</div>";
 
   }
-
-
-  renderizarEntregas();
 
 }
 
 
 /* =====================================================
-   MARCAR ENTREGA
+   SALDOS
 ===================================================== */
 
-async function marcarComoEntregue(
-  entregaId
-){
+function atualizarSaldos(){
 
-  if(!entregaId){
+  if(!usuarioSelecionado) return;
 
-    return;
+  const dados =
+    usuarioSelecionado.data;
 
-  }
+  document.getElementById("chances").textContent =
+    numero(dados.chances);
+
+  document.getElementById("moedas").textContent =
+    numero(dados.moedas);
+
+  document.getElementById("chaves").textContent =
+    numero(dados.chaves);
+
+  document.getElementById("creditos").textContent =
+    dinheiro(dados.creditos);
+
+}
 
 
-  const entrega =
-    entregas.find(
-      item =>
-        item.id ===
-        entregaId
+/* =====================================================
+   GIROS
+===================================================== */
+
+function atualizarGirosRoleta(){
+
+  if(!usuarioSelecionado) return;
+
+  const valor =
+    Number(
+      usuarioSelecionado.data.girosRoleta ||
+      0
     );
 
+  document.getElementById("girosRoleta").textContent =
+    numero(valor);
 
-  if(!entrega){
+  document.getElementById("roletaSaldo").textContent =
+    numero(valor);
 
-    return;
+}
 
-  }
 
+/* =====================================================
+   STATUS
+===================================================== */
+
+function atualizarStatus(){
+
+  if(!usuarioSelecionado) return;
+
+  const dados =
+    usuarioSelecionado.data;
+
+  const vipStatus =
+    document.getElementById(
+      "vipStatus"
+    );
 
   if(
-    entrega.entregue === true
+    dados.vip === true
   ){
 
-    return;
+    vipStatus.textContent =
+      "👑 VIP ATIVO";
+
+    vipStatus.className =
+      "status vip";
+
+  }
+  else{
+
+    vipStatus.textContent =
+      "⭐ NÃO VIP";
+
+    vipStatus.className =
+      "status normal";
 
   }
 
+  document.getElementById(
+    "boxStatus"
+  ).textContent =
+    dados.caixaBox === true
+      ?
+      "🎁 CAIXA UTILIZADA"
+      :
+      "🎁 CAIXA DISPONÍVEL";
 
-  const confirmar =
-    confirm(
-      "Marcar este prêmio como ENTREGUE?"
+}
+
+
+/* =====================================================
+   BUSCA
+===================================================== */
+
+async function buscarPorId(valor){
+
+  return await getDocs(
+    query(
+      collection(
+        db,
+        "admins"
+      ),
+      where(
+        "publicId",
+        "==",
+        valor
+      )
+    )
+  );
+
+}
+
+
+async function buscarPorEmail(valor){
+
+  return await getDocs(
+    query(
+      collection(
+        db,
+        "admins"
+      ),
+      where(
+        "email",
+        "==",
+        valor
+      )
+    )
+  );
+
+}
+
+
+async function buscarUsuario(){
+
+  const valor =
+    searchInput.value
+    .trim();
+
+  if(!valor){
+
+    mostrarMensagem(
+      searchMessage,
+      "Digite um ID ou e-mail.",
+      "error"
     );
 
-
-  if(!confirmar){
-
     return;
 
   }
 
+  searchMessage.className =
+    "message";
+
+  userArea.style.display =
+    "none";
 
   try{
 
-    const referencia =
-      /*
-      -------------------------------------------------
-      O ID recebido aqui é o ID do documento
-      da coleção entregas.
-      -------------------------------------------------
-      */
-
-      (
-        await import(
-          "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js"
-        )
-      )
-      .doc(
-        db,
-        "entregas",
-        entregaId
+    let resultado =
+      await buscarPorId(
+        valor
       );
 
+    if(
+      resultado.empty &&
+      valor.includes("@")
+    ){
 
-    const agora =
-      Timestamp.now();
+      resultado =
+        await buscarPorEmail(
+          valor.toLowerCase()
+        );
 
+    }
 
-    const usuarioAdmin =
-      auth.currentUser;
+    if(
+      resultado.empty
+    ){
 
+      mostrarMensagem(
+        searchMessage,
+        "Usuário não encontrado.",
+        "error"
+      );
 
-    await updateDoc(
+      return;
 
-      referencia,
+    }
 
-      {
-
-        entregue:
-          true,
-
-        entregueEm:
-          agora,
-
-        entreguePor:
-          usuarioAdmin?.email ||
-          "Administrador"
-
-      }
-
+    mostrarUsuario(
+      resultado.docs[0]
     );
 
-
-    /*
-    -----------------------------------------------------
-    ATUALIZA LOCALMENTE
-    -----------------------------------------------------
-    */
-
-    entrega.entregue =
-      true;
-
-    entrega.entregueEm =
-      agora;
-
-    entrega.entreguePor =
-      usuarioAdmin?.email ||
-      "Administrador";
-
-
-    renderizarEntregas();
-
-    renderizarResumo();
-
-
     mostrarMensagem(
-      "✅ Prêmio marcado como entregue com sucesso.",
+      searchMessage,
+      "Usuário encontrado com sucesso.",
       "success"
     );
 
   }
-
   catch(error){
 
     console.error(
-      "Erro ao marcar entrega:",
       error
     );
 
-
     mostrarMensagem(
-
-      "❌ Não foi possível marcar como entregue: " +
-
-      (
-        error.message ||
-        "erro desconhecido"
-      ),
-
+      searchMessage,
+      "Não foi possível consultar os usuários.",
       "error"
-
     );
 
   }
@@ -2182,732 +1728,987 @@ async function marcarComoEntregue(
 
 
 /* =====================================================
-   RENDER ENTREGAS
+   ALTERAR SALDO
 ===================================================== */
 
-function renderizarEntregas(){
+async function alterarSaldo(
+  operacao
+){
 
-  const lista =
-    $("orders");
+  if(!usuarioSelecionado){
 
-
-  const statusFiltro =
-    $("statusFilter").value;
-
-
-  const tipoFiltro =
-    $("typeFilter").value;
-
-
-  const busca =
-    $("search")
-      .value
-      .trim()
-      .toLowerCase();
-
-
-  let listaFiltrada =
-    entregas.filter(
-      pedido => {
-
-        const entregue =
-          pedido.entregue === true;
-
-
-        const status =
-          entregue
-            ? "entregue"
-            : "pendente";
-
-
-        if(
-          statusFiltro !==
-          "todos" &&
-          status !==
-          statusFiltro
-        ){
-
-          return false;
-
-        }
-
-
-        const tipo =
-          String(
-            pedido.tipo ||
-            "outro"
-          )
-          .toLowerCase();
-
-
-        if(
-          tipoFiltro !==
-          "todos" &&
-          tipo !==
-          tipoFiltro
-        ){
-
-          return false;
-
-        }
-
-
-        if(
-          busca
-        ){
-
-          const texto =
-
-            (
-
-              pedido.premioNome ||
-
-              pedido.nome ||
-
-              pedido.titulo ||
-
-              ""
-
-            )
-            .toLowerCase() +
-
-            " " +
-
-            (
-
-              pedido.id ||
-
-              ""
-
-            )
-            .toLowerCase() +
-
-            " " +
-
-            tipo;
-
-
-          if(
-            !texto.includes(
-              busca
-            )
-          ){
-
-            return false;
-
-          }
-
-        }
-
-
-        return true;
-
-      }
+    mostrarMensagem(
+      operationMessage,
+      "Primeiro selecione um usuário.",
+      "error"
     );
-
-
-  listaFiltrada.sort(
-    (
-      a,
-      b
-    ) => {
-
-      return (
-
-        obterMillis(
-          b.criadoEm ||
-          b.dataHora
-        )
-
-        -
-
-        obterMillis(
-          a.criadoEm ||
-          a.dataHora
-        )
-
-      );
-
-    }
-  );
-
-
-  lista.innerHTML =
-    "";
-
-
-  if(
-    listaFiltrada.length === 0
-  ){
-
-    lista.innerHTML = `
-
-      <div class="empty">
-
-        🎉 Nenhum pedido encontrado.
-
-      </div>
-
-    `;
 
     return;
 
   }
 
-
-  listaFiltrada.forEach(
-    pedido => {
-
-      const entregue =
-        pedido.entregue === true;
-
-
-      const titulo =
-
-        pedido.premioNome ||
-
-        pedido.nome ||
-
-        pedido.titulo ||
-
-        "Recompensa";
-
-
-      const tipo =
-        pedido.tipo ||
-        "outro";
-
-
-      const quantidade =
-        pedido.quantidade;
-
-
-      const data =
-        formatarData(
-          pedido.criadoEm ||
-          pedido.dataHora
-        );
-
-
-      const div =
-        document.createElement(
-          "div"
-        );
-
-
-      div.className =
-        "order";
-
-
-      div.innerHTML = `
-
-        <div class="order-top">
-
-          <div class="order-title">
-
-            ${escapar(titulo)}
-
-          </div>
-
-          <div class="status ${
-            entregue
-              ? "status-entregue"
-              : "status-pendente"
-          }">
-
-            ${
-              entregue
-                ? "✅ ENTREGUE"
-                : "⏳ PENDENTE"
-            }
-
-          </div>
-
-        </div>
-
-
-        <div class="order-info">
-
-          <div>
-            Tipo:
-            <b>
-              ${escapar(tipo)}
-            </b>
-          </div>
-
-
-          ${
-            quantidade !== undefined
-
-              ?
-
-              `
-              <div>
-
-                Quantidade:
-
-                <b>
-                  ${numero(quantidade)}
-                </b>
-
-              </div>
-              `
-
-              :
-
-              ""
-
-          }
-
-
-          <div>
-
-            Data:
-
-            <b>
-              ${escapar(data)}
-            </b>
-
-          </div>
-
-
-          ${
-            pedido.entregueEm
-
-              ?
-
-              `
-              <div>
-
-                Entregue em:
-
-                <b>
-                  ${escapar(
-                    formatarData(
-                      pedido.entregueEm
-                    )
-                  )}
-                </b>
-
-              </div>
-              `
-
-              :
-
-              ""
-
-          }
-
-
-          ${
-            pedido.entreguePor
-
-              ?
-
-              `
-              <div>
-
-                Entregue por:
-
-                <b>
-                  ${escapar(
-                    pedido.entreguePor
-                  )}
-                </b>
-
-              </div>
-              `
-
-              :
-
-              ""
-
-          }
-
-        </div>
-
-
-        <div class="order-id">
-
-          📦 ID DA ENTREGA:
-
-          ${escapar(pedido.id)}
-
-        </div>
-
-
-        ${
-          !entregue
-
-            ?
-
-            `
-            <button
-              class="entregar-button"
-              data-entrega-id="${escapar(
-                pedido.id
-              )}"
-              type="button">
-
-              ✅ MARCAR COMO ENTREGUE
-
-            </button>
-            `
-
-            :
-
-            ""
-
-        }
-
-      `;
-
-
-      lista.appendChild(
-        div
-      );
-
-    }
-  );
-
-
-  /*
-  =====================================================
-  EVENTOS DOS BOTÕES DE ENTREGA
-  =====================================================
-  */
-
-  lista
-    .querySelectorAll(
-      ".entregar-button"
+  const item =
+    document.getElementById(
+      "item"
+    ).value;
+
+  const quantidade =
+    Number(
+      document.getElementById(
+        "quantidade"
+      ).value
+    );
+
+  const motivo =
+    document.getElementById(
+      "motivo"
+    ).value.trim();
+
+  if(
+    !Number.isFinite(
+      quantidade
+    ) ||
+    quantidade <= 0
+  ){
+
+    mostrarMensagem(
+      operationMessage,
+      "Digite uma quantidade válida.",
+      "error"
+    );
+
+    return;
+
+  }
+
+  if(!motivo){
+
+    mostrarMensagem(
+      operationMessage,
+      "Informe o motivo da movimentação.",
+      "error"
+    );
+
+    return;
+
+  }
+
+  const atual =
+    Number(
+      usuarioSelecionado.data[item] ||
+      0
+    );
+
+  const novo =
+    operacao === "adicionar"
+      ? atual + quantidade
+      : atual - quantidade;
+
+  if(novo < 0){
+
+    mostrarMensagem(
+      operationMessage,
+      "O saldo não pode ficar negativo.",
+      "error"
+    );
+
+    return;
+
+  }
+
+  if(
+    !confirm(
+      (
+        operacao === "adicionar"
+          ? "Adicionar "
+          : "Remover "
+      ) +
+      quantidade +
+      " de " +
+      item +
+      "?"
     )
-    .forEach(
-      botao => {
+  ){
 
-        botao.addEventListener(
-          "click",
-          () => {
+    return;
 
-            marcarComoEntregue(
-              botao.dataset.entregaId
-            );
+  }
 
-          }
-        );
+  const operacaoId =
+    gerarOperacaoId();
+
+  try{
+
+    await updateDoc(
+      usuarioSelecionado.ref,
+      {
+        [item]:
+          novo
+      }
+    );
+
+    await addDoc(
+      collection(
+        db,
+        "historico"
+      ),
+      {
+
+        movimentacaoId:
+          operacaoId,
+
+        usuarioId:
+          usuarioSelecionado.docId,
+
+        publicId:
+          usuarioSelecionado.data.publicId ||
+          usuarioSelecionado.docId,
+
+        usuarioUid:
+          usuarioSelecionado.data.uid ||
+          "",
+
+        usuarioEmail:
+          usuarioSelecionado.data.email ||
+          "",
+
+        usuarioNome:
+          usuarioSelecionado.data.nome ||
+          usuarioSelecionado.data.name ||
+          "",
+
+        adminEmail:
+          adminUsuario.email,
+
+        adminUid:
+          adminUsuario.uid,
+
+        item:
+          item,
+
+        operacao:
+          operacao,
+
+        quantidade:
+          quantidade,
+
+        saldoAnterior:
+          atual,
+
+        saldoFinal:
+          novo,
+
+        motivo:
+          motivo,
+
+        criadoEm:
+          new Date().toISOString()
 
       }
     );
+
+    usuarioSelecionado.data[item] =
+      novo;
+
+    atualizarSaldos();
+
+    document.getElementById(
+      "quantidade"
+    ).value = "";
+
+    document.getElementById(
+      "motivo"
+    ).value = "";
+
+    mostrarMensagem(
+      operationMessage,
+      "Movimentação realizada com sucesso. ID: " +
+      operacaoId,
+      "success"
+    );
+
+    carregarExtrato();
+
+  }
+  catch(error){
+
+    console.error(
+      error
+    );
+
+    mostrarMensagem(
+      operationMessage,
+      "Erro ao realizar a movimentação.",
+      "error"
+    );
+
+  }
 
 }
 
 
 /* =====================================================
-   CARREGAR ROLETA
+   GIROS ROLETA
 ===================================================== */
 
-async function carregarRoleta(){
+async function alterarGirosRoleta(
+  operacao
+){
 
-  resultadosRoleta = [];
+  if(!usuarioSelecionado){
 
+    mostrarMensagem(
+      roletaMessage,
+      "Primeiro selecione um usuário.",
+      "error"
+    );
+
+    return;
+
+  }
+
+  const quantidade =
+    Number(
+      document.getElementById(
+        "quantidadeGiros"
+      ).value
+    );
+
+  const motivo =
+    document.getElementById(
+      "motivoGiros"
+    ).value.trim();
+
+  if(
+    !Number.isInteger(
+      quantidade
+    ) ||
+    quantidade <= 0
+  ){
+
+    mostrarMensagem(
+      roletaMessage,
+      "Digite uma quantidade inteira de giros maior que zero.",
+      "error"
+    );
+
+    return;
+
+  }
+
+  if(!motivo){
+
+    mostrarMensagem(
+      roletaMessage,
+      "Informe o motivo da movimentação.",
+      "error"
+    );
+
+    return;
+
+  }
+
+  const atual =
+    Number(
+      usuarioSelecionado.data.girosRoleta ||
+      0
+    );
+
+  const novo =
+    operacao === "adicionar"
+      ? atual + quantidade
+      : atual - quantidade;
+
+  if(novo < 0){
+
+    mostrarMensagem(
+      roletaMessage,
+      "O saldo de giros não pode ficar negativo.",
+      "error"
+    );
+
+    return;
+
+  }
+
+  if(
+    !confirm(
+      operacao === "adicionar"
+        ?
+        "Adicionar " +
+        quantidade +
+        " giro(s) da Roleta?"
+        :
+        "Remover " +
+        quantidade +
+        " giro(s) da Roleta?"
+    )
+  ){
+
+    return;
+
+  }
+
+  const operacaoId =
+    gerarOperacaoId();
+
+  try{
+
+    await updateDoc(
+      usuarioSelecionado.ref,
+      {
+        girosRoleta:
+          novo
+      }
+    );
+
+    await addDoc(
+      collection(
+        db,
+        "historico"
+      ),
+      {
+
+        movimentacaoId:
+          operacaoId,
+
+        usuarioId:
+          usuarioSelecionado.docId,
+
+        publicId:
+          usuarioSelecionado.data.publicId ||
+          usuarioSelecionado.docId,
+
+        usuarioUid:
+          usuarioSelecionado.data.uid ||
+          "",
+
+        usuarioEmail:
+          usuarioSelecionado.data.email ||
+          "",
+
+        usuarioNome:
+          usuarioSelecionado.data.nome ||
+          usuarioSelecionado.data.name ||
+          "",
+
+        adminEmail:
+          adminUsuario.email,
+
+        adminUid:
+          adminUsuario.uid,
+
+        item:
+          "girosRoleta",
+
+        nomeExibicao:
+          "Giros da Roleta",
+
+        operacao:
+          operacao,
+
+        quantidade:
+          quantidade,
+
+        saldoAnterior:
+          atual,
+
+        saldoFinal:
+          novo,
+
+        motivo:
+          motivo,
+
+        criadoEm:
+          new Date().toISOString()
+
+      }
+    );
+
+    usuarioSelecionado.data.girosRoleta =
+      novo;
+
+    atualizarGirosRoleta();
+
+    document.getElementById(
+      "quantidadeGiros"
+    ).value = "";
+
+    document.getElementById(
+      "motivoGiros"
+    ).value = "";
+
+    mostrarMensagem(
+      roletaMessage,
+      "🎰 Operação realizada. Novo saldo: " +
+      novo,
+      "success"
+    );
+
+    carregarExtrato();
+
+  }
+  catch(error){
+
+    console.error(
+      error
+    );
+
+    mostrarMensagem(
+      roletaMessage,
+      "Não foi possível alterar os giros da Roleta.",
+      "error"
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   VIP
+===================================================== */
+
+async function alterarVIP(){
+
+  if(!usuarioSelecionado){
+
+    mostrarMensagem(
+      operationMessage,
+      "Selecione um usuário primeiro.",
+      "error"
+    );
+
+    return;
+
+  }
+
+  const atual =
+    usuarioSelecionado.data.vip === true;
+
+  const novo =
+    !atual;
+
+  if(
+    !confirm(
+      novo
+        ?
+        "Ativar VIP para este usuário?"
+        :
+        "Desativar VIP deste usuário?"
+    )
+  ){
+
+    return;
+
+  }
+
+  const operacaoId =
+    gerarOperacaoId();
+
+  try{
+
+    await updateDoc(
+      usuarioSelecionado.ref,
+      {
+        vip:
+          novo
+      }
+    );
+
+    await addDoc(
+      collection(
+        db,
+        "historico"
+      ),
+      {
+
+        movimentacaoId:
+          operacaoId,
+
+        usuarioId:
+          usuarioSelecionado.docId,
+
+        publicId:
+          usuarioSelecionado.data.publicId ||
+          usuarioSelecionado.docId,
+
+        usuarioUid:
+          usuarioSelecionado.data.uid ||
+          "",
+
+        usuarioEmail:
+          usuarioSelecionado.data.email ||
+          "",
+
+        usuarioNome:
+          usuarioSelecionado.data.nome ||
+          usuarioSelecionado.data.name ||
+          "",
+
+        adminEmail:
+          adminUsuario.email,
+
+        adminUid:
+          adminUsuario.uid,
+
+        item:
+          "VIP",
+
+        operacao:
+          novo
+            ? "adicionar"
+            : "remover",
+
+        quantidade:
+          1,
+
+        saldoAnterior:
+          atual ? 1 : 0,
+
+        saldoFinal:
+          novo ? 1 : 0,
+
+        motivo:
+          novo
+            ?
+            "VIP ativado pelo administrador"
+            :
+            "VIP desativado pelo administrador",
+
+        criadoEm:
+          new Date().toISOString()
+
+      }
+    );
+
+    usuarioSelecionado.data.vip =
+      novo;
+
+    atualizarStatus();
+
+    mostrarMensagem(
+      operationMessage,
+      novo
+        ?
+        "👑 VIP ativado com sucesso."
+        :
+        "⭐ VIP desativado com sucesso.",
+      "success"
+    );
+
+    carregarExtrato();
+
+  }
+  catch(error){
+
+    console.error(
+      error
+    );
+
+    mostrarMensagem(
+      operationMessage,
+      "Não foi possível alterar o VIP.",
+      "error"
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   CAIXA
+===================================================== */
+
+async function alterarCaixa(){
+
+  if(!usuarioSelecionado){
+
+    mostrarMensagem(
+      operationMessage,
+      "Selecione um usuário primeiro.",
+      "error"
+    );
+
+    return;
+
+  }
+
+  const atual =
+    usuarioSelecionado.data.caixaBox === true;
+
+  const novo =
+    !atual;
+
+  if(
+    !confirm(
+      novo
+        ?
+        "Marcar a Caixa Box como utilizada?"
+        :
+        "Liberar a Caixa Box novamente?"
+    )
+  ){
+
+    return;
+
+  }
+
+  const operacaoId =
+    gerarOperacaoId();
+
+  try{
+
+    await updateDoc(
+      usuarioSelecionado.ref,
+      {
+        caixaBox:
+          novo
+      }
+    );
+
+    await addDoc(
+      collection(
+        db,
+        "historico"
+      ),
+      {
+
+        movimentacaoId:
+          operacaoId,
+
+        usuarioId:
+          usuarioSelecionado.docId,
+
+        publicId:
+          usuarioSelecionado.data.publicId ||
+          usuarioSelecionado.docId,
+
+        usuarioUid:
+          usuarioSelecionado.data.uid ||
+          "",
+
+        usuarioEmail:
+          usuarioSelecionado.data.email ||
+          "",
+
+        usuarioNome:
+          usuarioSelecionado.data.nome ||
+          usuarioSelecionado.data.name ||
+          "",
+
+        adminEmail:
+          adminUsuario.email,
+
+        adminUid:
+          adminUsuario.uid,
+
+        item:
+          "Caixa Box",
+
+        operacao:
+          novo
+            ? "remover"
+            : "adicionar",
+
+        quantidade:
+          1,
+
+        saldoAnterior:
+          atual ? 1 : 0,
+
+        saldoFinal:
+          novo ? 1 : 0,
+
+        motivo:
+          novo
+            ?
+            "Caixa Box marcada como utilizada"
+            :
+            "Caixa Box liberada pelo administrador",
+
+        criadoEm:
+          new Date().toISOString()
+
+      }
+    );
+
+    usuarioSelecionado.data.caixaBox =
+      novo;
+
+    atualizarStatus();
+
+    mostrarMensagem(
+      operationMessage,
+      novo
+        ?
+        "🎁 Caixa Box marcada como utilizada."
+        :
+        "🎁 Caixa Box liberada novamente.",
+      "success"
+    );
+
+    carregarExtrato();
+
+  }
+  catch(error){
+
+    console.error(
+      error
+    );
+
+    mostrarMensagem(
+      operationMessage,
+      "Não foi possível alterar a Caixa Box.",
+      "error"
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   EXTRATO
+===================================================== */
+
+async function carregarExtrato(){
+
+  const lista =
+    document.getElementById(
+      "historyList"
+    );
+
+  lista.innerHTML =
+    "<div class='empty'>🔄 Carregando histórico...</div>";
+
+  if(!usuarioSelecionado){
+
+    return;
+
+  }
+
+  const publicId =
+    usuarioSelecionado.data.publicId;
+
+  if(!publicId){
+
+    lista.innerHTML =
+      "<div class='empty'>Este usuário ainda não possui ID público.</div>";
+
+    return;
+
+  }
 
   try{
 
     const resultado =
       await getDocs(
-
         query(
-
           collection(
             db,
-            "historicoRoleta"
+            "historico"
           ),
-
           where(
-            "uid",
+            "publicId",
             "==",
-            clienteUid
+            publicId
           )
-
         )
-
       );
 
+    if(
+      resultado.empty
+    ){
 
-    resultadosRoleta =
-      resultado.docs.map(
+      lista.innerHTML =
+        "<div class='empty'>Nenhuma movimentação registrada.</div>";
+
+      return;
+
+    }
+
+    const registros =
+      resultado.docs
+      .map(
         documento => ({
-
           id:
             documento.id,
-
           ...documento.data()
-
         })
+      )
+      .sort(
+        (a,b) =>
+          String(
+            b.criadoEm || ""
+          )
+          .localeCompare(
+            String(
+              a.criadoEm || ""
+            )
+          )
       );
 
-  }
+    lista.innerHTML =
+      "";
 
+    registros.forEach(
+      registro => {
+
+        const positivo =
+          registro.operacao ===
+          "adicionar";
+
+        const sinal =
+          positivo ? "+" : "-";
+
+        const classe =
+          positivo ? "plus" : "minus";
+
+        const nomeItem =
+          registro.item ===
+          "girosRoleta"
+            ?
+            "🎰 Giros da Roleta"
+            :
+            registro.item || "";
+
+        const item =
+          document.createElement(
+            "div"
+          );
+
+        item.className =
+          "historyItem";
+
+        const data =
+          registro.criadoEm
+            ?
+            new Date(
+              registro.criadoEm
+            )
+            :
+            null;
+
+        const dataTexto =
+          data &&
+          !Number.isNaN(
+            data.getTime()
+          )
+            ?
+            data.toLocaleString(
+              "pt-BR"
+            )
+            :
+            "—";
+
+        item.innerHTML =
+
+          "<div class='historyTop'>" +
+
+            "<span class='" +
+            classe +
+            "'>" +
+
+              sinal +
+              " " +
+              numero(
+                registro.quantidade
+              ) +
+              " " +
+              escapar(nomeItem) +
+
+            "</span>" +
+
+            "<span class='historyDate'>" +
+
+              escapar(dataTexto) +
+
+            "</span>" +
+
+          "</div>" +
+
+          "<div class='historyInfo'>" +
+
+            "Saldo anterior: " +
+            numero(
+              registro.saldoAnterior
+            ) +
+
+            "<br>" +
+
+            "Saldo final: " +
+            numero(
+              registro.saldoFinal
+            ) +
+
+            "<br>" +
+
+            "Motivo: " +
+            escapar(
+              registro.motivo ||
+              "—"
+            ) +
+
+            "<br>" +
+
+            "Administrador: " +
+            escapar(
+              registro.adminEmail ||
+              "—"
+            ) +
+
+          "</div>" +
+
+          "<div class='operation-id'>" +
+
+            "🆔 " +
+            escapar(
+              registro.movimentacaoId ||
+              "Sem ID"
+            ) +
+
+          "</div>";
+
+        lista.appendChild(
+          item
+        );
+
+      }
+    );
+
+  }
   catch(error){
 
-    console.warn(
-      "Erro histórico Roleta:",
+    console.error(
       error
     );
 
-    resultadosRoleta = [];
+    lista.innerHTML =
+      "<div class='empty'>Não foi possível carregar o histórico.</div>";
 
   }
 
-
-  renderizarRoleta();
-
 }
 
 
 /* =====================================================
-   RENDER ROLETA
+   ESCAPAR
 ===================================================== */
 
-function renderizarRoleta(){
+function escapar(valor){
 
-  const lista =
-    $("roletaHistorico");
-
-
-  lista.innerHTML =
-    "";
-
-
-  if(
-    resultadosRoleta.length === 0
-  ){
-
-    lista.innerHTML = `
-
-      <div class="empty">
-
-        🎰 Este cliente ainda não possui
-        resultados registrados na Roleta.
-
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-
-  resultadosRoleta.sort(
-    (
-      a,
-      b
-    ) => {
-
-      return (
-
-        obterMillis(
-          b.criadoEm ||
-          b.dataHora
-        )
-
-        -
-
-        obterMillis(
-          a.criadoEm ||
-          a.dataHora
-        )
-
-      );
-
-    }
-  );
-
-
-  resultadosRoleta.forEach(
-    resultado => {
-
-      const div =
-        document.createElement(
-          "div"
-        );
-
-
-      div.className =
-        "roleta-result";
-
-
-      const premio =
-
-        (
-          resultado.quantidade ||
-          0
-        ).toLocaleString(
-          "pt-BR"
-        ) +
-
-        " " +
-
-        (
-          resultado.premioNome ||
-          "Prêmio"
-        );
-
-
-      div.innerHTML = `
-
-        <div class="roleta-result-top">
-
-          <div class="roleta-premio">
-
-            🎁 ${escapar(premio)}
-
-          </div>
-
-          <div class="roleta-data">
-
-            ${escapar(
-              formatarData(
-                resultado.criadoEm ||
-                resultado.dataHora
-              )
-            )}
-
-          </div>
-
-        </div>
-
-
-        <div class="roleta-status">
-
-          ${
-            resultado.entregue === true
-              ? "✅ Prêmio entregue"
-              : "⏳ Aguardando entrega"
-          }
-
-        </div>
-
-
-        <div class="order-id">
-
-          🎰 ID:
-
-          ${escapar(
-            resultado.id
-          )}
-
-        </div>
-
-      `;
-
-
-      lista.appendChild(
-        div
-      );
-
-    }
-  );
+  return String(
+    valor ?? ""
+  )
+  .replace(/&/g,"&amp;")
+  .replace(/</g,"&lt;")
+  .replace(/>/g,"&gt;")
+  .replace(/"/g,"&quot;")
+  .replace(/'/g,"&#039;");
 
 }
-
-
-/* =====================================================
-   RESUMO
-===================================================== */
-
-function renderizarResumo(){
-
-  const total =
-    entregas.length;
-
-
-  const pendentes =
-    entregas.filter(
-      item =>
-        item.entregue !== true
-    ).length;
-
-
-  const entregues =
-    entregas.filter(
-      item =>
-        item.entregue === true
-    ).length;
-
-
-  $("totalPremios").textContent =
-    total;
-
-
-  $("pendentes").textContent =
-    pendentes;
-
-
-  $("entregues").textContent =
-    entregues;
-
-}
-
-
-/* =====================================================
-   FILTROS
-===================================================== */
-
-$("statusFilter")
-  .addEventListener(
-    "change",
-    renderizarEntregas
-  );
-
-
-$("typeFilter")
-  .addEventListener(
-    "change",
-    renderizarEntregas
-  );
-
-
-$("search")
-  .addEventListener(
-    "input",
-    renderizarEntregas
-  );
-
-
-/* =====================================================
-   BOTÃO ENTREGAS
-===================================================== */
-
-$("deliveryButton")
-  .addEventListener(
-    "click",
-    () => {
-
-      window.location.href =
-        "entregas.html?uid=" +
-        encodeURIComponent(
-          clienteUid
-        );
-
-    }
-  );
-
-
-/* =====================================================
-   VOLTAR
-===================================================== */
-
-$("back")
-  .addEventListener(
-    "click",
-    () => {
-
-      window.location.href =
-        "admin.html";
-
-    }
-  );
 
 
 /* =====================================================
@@ -2915,9 +2716,7 @@ $("back")
 ===================================================== */
 
 onAuthStateChanged(
-
   auth,
-
   async usuario => {
 
     if(!usuario){
@@ -2930,57 +2729,172 @@ onAuthStateChanged(
 
     }
 
+    const email =
+      (
+        usuario.email ||
+        ""
+      ).toLowerCase();
 
-    try{
+    if(
+      email !==
+      ADMIN_EMAIL.toLowerCase()
+    ){
 
-      const email =
-        (
-          usuario.email ||
-          ""
-        )
-        .trim()
-        .toLowerCase();
+      alert(
+        "⛔ Acesso negado. Área exclusiva do administrador."
+      );
 
+      await signOut(
+        auth
+      );
+
+      window.location.replace(
+        "index.html"
+      );
+
+      return;
+
+    }
+
+    adminUsuario =
+      usuario;
+
+    console.log(
+      "Administrador autenticado:",
+      usuario.email
+    );
+
+  }
+);
+
+
+/* =====================================================
+   EVENTOS
+===================================================== */
+
+document
+  .getElementById("buscar")
+  .addEventListener(
+    "click",
+    buscarUsuario
+  );
+
+
+searchInput
+  .addEventListener(
+    "keydown",
+    event => {
 
       if(
-        email !==
-        "raphafentyramos@gmail.com"
+        event.key ===
+        "Enter"
       ){
 
-        mostrarMensagem(
-          "Acesso permitido somente ao administrador.",
-          "error"
-        );
-
-        return;
+        buscarUsuario();
 
       }
 
-
-      await carregarCliente();
-
     }
+  );
 
-    catch(error){
 
-      console.error(
-        error
+document
+  .getElementById("verPerfil")
+  .addEventListener(
+    "click",
+    abrirPerfilCompleto
+  );
+
+
+document
+  .getElementById("adicionar")
+  .addEventListener(
+    "click",
+    () =>
+      alterarSaldo(
+        "adicionar"
+      )
+  );
+
+
+document
+  .getElementById("remover")
+  .addEventListener(
+    "click",
+    () =>
+      alterarSaldo(
+        "remover"
+      )
+  );
+
+
+document
+  .getElementById("adicionarGiros")
+  .addEventListener(
+    "click",
+    () =>
+      alterarGirosRoleta(
+        "adicionar"
+      )
+  );
+
+
+document
+  .getElementById("removerGiros")
+  .addEventListener(
+    "click",
+    () =>
+      alterarGirosRoleta(
+        "remover"
+      )
+  );
+
+
+document
+  .getElementById("vip")
+  .addEventListener(
+    "click",
+    alterarVIP
+  );
+
+
+document
+  .getElementById("box")
+  .addEventListener(
+    "click",
+    alterarCaixa
+  );
+
+
+document
+  .getElementById("logout")
+  .addEventListener(
+    "click",
+    async () => {
+
+      try{
+
+        await signOut(
+          auth
+        );
+
+      }
+      catch(error){
+
+        console.error(
+          error
+        );
+
+      }
+
+      window.location.replace(
+        "index.html"
       );
 
-
-      mostrarMensagem(
-        "Erro ao abrir o perfil do cliente.",
-        "error"
-      );
-
     }
-
-  }
-
-);
+  );
 
 </script>
 
 </body>
-
 </html>
