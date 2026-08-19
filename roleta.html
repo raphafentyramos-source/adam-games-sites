@@ -195,8 +195,7 @@ body{
   justify-content:center;
 
   margin:
-    8px
-    auto
+    8px auto
     22px;
 
 }
@@ -216,7 +215,9 @@ body{
 }
 
 
-/* BORDA EXTERNA */
+/* =====================================================
+   BORDA
+===================================================== */
 
 .roleta-borda{
 
@@ -240,7 +241,9 @@ body{
 }
 
 
-/* ÁREA DA ROLETA */
+/* =====================================================
+   CÍRCULO DA ROLETA
+===================================================== */
 
 #roleta{
 
@@ -258,44 +261,29 @@ body{
     3px solid
     rgba(255,255,255,.85);
 
-}
+  transform:
+    rotate(0deg);
 
-
-/* FATIAS */
-
-.fatia{
-
-  position:absolute;
-
-  left:50%;
-
-  top:50%;
-
-  width:50%;
-
-  height:50%;
-
-  transform-origin:0 0;
-
-  overflow:hidden;
-
-  border:
-    2px solid
-    rgba(0,0,0,.65);
+  transition:
+    transform 5.5s
+    cubic-bezier(.12,.72,.18,1);
 
 }
 
 
 /*
-A área visual das fatias é criada
-por clip-path.
+---------------------------------------------------------
+IMAGENS DOS PRÊMIOS
+---------------------------------------------------------
 */
 
-.fatia-inner{
+.fatia-imagem{
 
   position:absolute;
 
-  inset:0;
+  width:19%;
+
+  height:19%;
 
   display:flex;
 
@@ -303,27 +291,24 @@ por clip-path.
 
   justify-content:center;
 
-  text-align:center;
+  z-index:5;
 
-  padding:15px;
+  pointer-events:none;
 
 }
 
+.fatia-imagem img{
 
-.fatia-inner img{
+  width:100%;
 
-  width:
-    58%;
-
-  height:
-    58%;
+  height:100%;
 
   object-fit:contain;
 
   filter:
     drop-shadow(
       0 4px 5px
-      rgba(0,0,0,.35)
+      rgba(0,0,0,.4)
     );
 
 }
@@ -467,9 +452,6 @@ por clip-path.
   box-shadow:
     0 10px 25px
     rgba(0,0,0,.25);
-
-  transition:
-    transform .15s;
 
 }
 
@@ -685,7 +667,7 @@ por clip-path.
 
 
 /* =====================================================
-   HISTÓRICO DO JOGADOR
+   HISTÓRICO
 ===================================================== */
 
 .historico{
@@ -778,7 +760,7 @@ por clip-path.
 
 
 /* =====================================================
-   MODAL RESULTADO
+   MODAL
 ===================================================== */
 
 .modal{
@@ -940,6 +922,14 @@ por clip-path.
 
   }
 
+  .fatia-imagem{
+
+    width:22%;
+
+    height:22%;
+
+  }
+
   .resultado-top{
 
     flex-direction:column;
@@ -1014,9 +1004,7 @@ por clip-path.
 
     <div class="roleta-borda">
 
-      <div id="roleta">
-
-      </div>
+      <div id="roleta"></div>
 
     </div>
 
@@ -1102,7 +1090,7 @@ por clip-path.
 
 
 <!-- =====================================================
-     MODAL
+     MODAL RESULTADO
 ===================================================== -->
 
 <div
@@ -1184,7 +1172,7 @@ import {
   doc,
   getDoc,
   updateDoc,
-  addDoc,
+  setDoc,
   serverTimestamp
 }
 from
@@ -1250,6 +1238,9 @@ let premios =
 
 let girando =
   false;
+
+let rotacaoAtual =
+  0;
 
 
 /* =====================================================
@@ -1327,34 +1318,33 @@ function mostrarMensagem(
 
 
 /* =====================================================
-   LOCALIZAR CADASTRO
+   LOCALIZAR USUÁRIO
 ===================================================== */
 
 async function localizarUsuario(
   usuario
 ){
 
-  /*
-  -----------------------------------------------------
-  1. TENTA PELO UID
-  -----------------------------------------------------
-  */
-
   try{
 
     const resultadoUID =
       await getDocs(
+
         query(
+
           collection(
             db,
             "admins"
           ),
+
           where(
             "uid",
             "==",
             usuario.uid
           )
+
         )
+
       );
 
 
@@ -1363,6 +1353,7 @@ async function localizarUsuario(
     ){
 
       return {
+
         ref:
           resultadoUID.docs[0].ref,
 
@@ -1387,12 +1378,6 @@ async function localizarUsuario(
   }
 
 
-  /*
-  -----------------------------------------------------
-  2. TENTA PELO E-MAIL
-  -----------------------------------------------------
-  */
-
   if(
     usuario.email
   ){
@@ -1407,17 +1392,22 @@ async function localizarUsuario(
 
       const resultadoEmail =
         await getDocs(
+
           query(
+
             collection(
               db,
               "admins"
             ),
+
             where(
               "email",
               "==",
               email
             )
+
           )
+
         );
 
 
@@ -1426,6 +1416,7 @@ async function localizarUsuario(
       ){
 
         return {
+
           ref:
             resultadoEmail.docs[0].ref,
 
@@ -1451,12 +1442,6 @@ async function localizarUsuario(
 
   }
 
-
-  /*
-  -----------------------------------------------------
-  3. TENTA DOCUMENTO COM ID = UID
-  -----------------------------------------------------
-  */
 
   try{
 
@@ -1522,6 +1507,9 @@ function atualizarGiros(){
     girosEl.textContent =
       "0";
 
+    girarBtn.disabled =
+      true;
+
     return;
 
   }
@@ -1558,14 +1546,17 @@ async function carregarPremios(){
 
     const resultado =
       await getDocs(
+
         collection(
           db,
           "premiosRoleta"
         )
+
       );
 
 
     premios =
+
       resultado.docs
 
       .map(
@@ -1619,6 +1610,15 @@ function desenharRoleta(){
   roletaEl.innerHTML =
     "";
 
+  roletaEl.style.transition =
+    "none";
+
+  roletaEl.style.transform =
+    "rotate(0deg)";
+
+  rotacaoAtual =
+    0;
+
 
   if(
     premios.length === 0
@@ -1629,24 +1629,38 @@ function desenharRoleta(){
         "div"
       );
 
+
     vazio.style.cssText = `
+
       position:absolute;
+
       inset:0;
+
       display:flex;
+
       align-items:center;
+
       justify-content:center;
+
       color:#fff;
+
       font-size:18px;
+
       text-align:center;
+
       padding:30px;
+
     `;
+
 
     vazio.textContent =
       "Nenhum prêmio disponível";
 
+
     roletaEl.appendChild(
       vazio
     );
+
 
     return;
 
@@ -1664,20 +1678,86 @@ function desenharRoleta(){
 
   const cores = [
 
-    "#1aa66b",
-    "#e6a914",
-    "#a73bd1",
-    "#1684d3",
+    "#18a96b",
+    "#e7aa12",
+    "#a83bd1",
+    "#1685d3",
     "#e73583",
-    "#7c4dff",
+    "#7549df",
     "#e75d25",
-    "#2ab7a9",
-    "#d93d3d",
-    "#5b63d8",
-    "#d68c19",
-    "#16a86b"
+    "#20b49e",
+    "#d83c3c",
+    "#5964d9",
+    "#d58c19",
+    "#15a66b"
 
   ];
+
+
+  /*
+  -----------------------------------------------------
+  A ROLETA AGORA É UMA ÚNICA PIZZA.
+  
+  Conic-gradient divide 100% do círculo.
+  Portanto:
+  
+  4 prêmios = 4 fatias
+  6 prêmios = 6 fatias
+  8 prêmios = 8 fatias
+  
+  Nunca ficam pedaços vazios.
+  -----------------------------------------------------
+  */
+
+
+  const partes =
+    premios.map(
+      (
+        premio,
+        indice
+      ) => {
+
+        const inicio =
+          indice *
+          angulo;
+
+
+        const fim =
+          (
+            indice + 1
+          ) *
+          angulo;
+
+
+        const cor =
+          premio.cor ||
+          cores[
+            indice %
+            cores.length
+          ];
+
+
+        return (
+          `${cor} ${inicio}deg ${fim}deg`
+        );
+
+      }
+    );
+
+
+  roletaEl.style.background =
+    `conic-gradient(from -90deg, ${partes.join(",")})`;
+
+
+  /*
+  -----------------------------------------------------
+  IMAGENS NO CENTRO DE CADA FATIA
+  -----------------------------------------------------
+  */
+
+
+  const raio =
+    31;
 
 
   premios.forEach(
@@ -1686,102 +1766,96 @@ function desenharRoleta(){
       indice
     ) => {
 
-      const fatia =
-        document.createElement(
-          "div"
-        );
-
-
-      fatia.className =
-        "fatia";
-
-
-      const inicio =
-        indice *
-        angulo -
-        90;
-
-
-      fatia.style.transform =
-        `
-          rotate(${inicio}deg)
-          skewY(${90 - angulo}deg)
-        `;
-
-
-      const inner =
-        document.createElement(
-          "div"
-        );
-
-
-      inner.className =
-        "fatia-inner";
-
-
-      inner.style.background =
-        premio.cor ||
-        cores[
-          indice %
-          cores.length
-        ];
-
-
-      inner.style.transform =
-        `
-          skewY(-${90 - angulo}deg)
-          rotate(${angulo / 2}deg)
-        `;
-
-
-      /*
-      -------------------------------------------------
-      IMPORTANTE:
-      A imagem é mostrada na fatia.
-      O nome e quantidade NÃO aparecem.
-      -------------------------------------------------
-      */
-
       if(
-        premio.imagem
+        !premio.imagem
       ){
 
-        const img =
-          document.createElement(
-            "img"
-          );
-
-
-        img.src =
-          premio.imagem;
-
-
-        img.alt =
-          "";
-
-
-        img.onerror =
-          () => {
-
-            img.remove();
-
-          };
-
-
-        inner.appendChild(
-          img
-        );
+        return;
 
       }
 
 
-      fatia.appendChild(
-        inner
+      const centro =
+        indice *
+        angulo +
+        angulo / 2;
+
+
+      const radianos =
+        (
+          centro - 90
+        ) *
+        Math.PI /
+        180;
+
+
+      const x =
+        50 +
+        raio *
+        Math.cos(
+          radianos
+        );
+
+
+      const y =
+        50 +
+        raio *
+        Math.sin(
+          radianos
+        );
+
+
+      const imagemBox =
+        document.createElement(
+          "div"
+        );
+
+
+      imagemBox.className =
+        "fatia-imagem";
+
+
+      imagemBox.style.left =
+        x + "%";
+
+
+      imagemBox.style.top =
+        y + "%";
+
+
+      imagemBox.style.transform =
+        "translate(-50%, -50%)";
+
+
+      const img =
+        document.createElement(
+          "img"
+        );
+
+
+      img.src =
+        premio.imagem;
+
+
+      img.alt =
+        "";
+
+
+      img.onerror =
+        () => {
+
+          imagemBox.remove();
+
+        };
+
+
+      imagemBox.appendChild(
+        img
       );
 
 
       roletaEl.appendChild(
-        fatia
+        imagemBox
       );
 
     }
@@ -1899,22 +1973,25 @@ function mostrarPossibilidades(){
 
 
       nome.textContent =
+
         (
-          premio.quantidade || 0
+          premio.quantidade ||
+          0
         ).toLocaleString(
           "pt-BR"
-        ) +
-        " " +
+        )
+
+        +
+
+        " "
+
+        +
+
         (
           premio.nome ||
           "Prêmio"
         );
 
-
-      /*
-      Aqui a lista pública mostra
-      as possibilidades cadastradas.
-      */
 
       const tipo =
         document.createElement(
@@ -1982,13 +2059,25 @@ function escolherPremio(){
     premio => {
 
       total +=
-        Number(
-          premio.peso ||
-          1
+        Math.max(
+          0,
+          Number(
+            premio.peso ||
+            1
+          )
         );
 
     }
   );
+
+
+  if(
+    total <= 0
+  ){
+
+    return premios[0];
+
+  }
 
 
   let sorteio =
@@ -2002,9 +2091,12 @@ function escolherPremio(){
   ){
 
     sorteio -=
-      Number(
-        premio.peso ||
-        1
+      Math.max(
+        0,
+        Number(
+          premio.peso ||
+          1
+        )
       );
 
 
@@ -2047,7 +2139,8 @@ function formatarData(
 
 
   if(
-    data.toDate
+    typeof data.toDate ===
+    "function"
   ){
 
     dataObjeto =
@@ -2083,7 +2176,7 @@ function formatarData(
 
 
 /* =====================================================
-   GIRAR
+   GIRAR ROLETA
 ===================================================== */
 
 async function girarRoleta(){
@@ -2179,12 +2272,6 @@ async function girarRoleta(){
   }
 
 
-  /*
-  -----------------------------------------------------
-  Escolhemos o índice visual correspondente ao prêmio.
-  -----------------------------------------------------
-  */
-
   const indice =
     premios.findIndex(
       p =>
@@ -2203,26 +2290,42 @@ async function girarRoleta(){
 
 
   /*
-  O ponteiro fica no topo.
-  Giramos várias voltas + posição do prêmio.
+  -----------------------------------------------------
+  Calcula o centro da fatia sorteada.
+  -----------------------------------------------------
   */
 
-  const centroDaFatia =
+  const centroFatia =
     indice *
     angulo +
     angulo / 2;
 
+
+  /*
+  -----------------------------------------------------
+  O ponteiro está no topo.
+  -----------------------------------------------------
+  */
+
+  const alvo =
+    360 -
+    centroFatia;
+
+
+  /*
+  Várias voltas para a animação ficar bonita.
+  */
 
   const voltas =
     6;
 
 
   const rotacaoFinal =
-    voltas * 360 +
+    rotacaoAtual +
     (
-      360 -
-      centroDaFatia
-    );
+      voltas * 360
+    ) +
+    alvo;
 
 
   roletaEl.style.transition =
@@ -2233,9 +2336,13 @@ async function girarRoleta(){
     `rotate(${rotacaoFinal}deg)`;
 
 
+  rotacaoAtual =
+    rotacaoFinal;
+
+
   /*
   -----------------------------------------------------
-  Espera a animação terminar.
+  Espera a animação.
   -----------------------------------------------------
   */
 
@@ -2248,102 +2355,174 @@ async function girarRoleta(){
   );
 
 
+  /*
+  -----------------------------------------------------
+  REGISTRO NO FIREBASE
+  -----------------------------------------------------
+  */
+
   try{
 
+    /*
+    ---------------------------------------------------
+    CONFERE NOVAMENTE O SALDO DIRETAMENTE NO FIREBASE.
+    
+    Isso evita que duas abas usem o mesmo giro.
+    ---------------------------------------------------
+    */
+
+    const documentoAtual =
+      await getDoc(
+        usuarioRef
+      );
+
+
+    if(
+      !documentoAtual.exists()
+    ){
+
+      throw new Error(
+        "Seu cadastro não foi encontrado."
+      );
+
+    }
+
+
+    const dadosAtuais =
+      documentoAtual.data();
+
+
+    const saldoReal =
+      Number(
+        dadosAtuais.girosRoleta ||
+        0
+      );
+
+
+    if(
+      saldoReal <= 0
+    ){
+
+      throw new Error(
+        "Este giro já foi utilizado."
+      );
+
+    }
+
+
     const novoSaldo =
-      girosAtuais - 1;
+      saldoReal - 1;
 
 
     /*
     ---------------------------------------------------
-    BAIXA 1 GIRO
+    ID ÚNICO DO RESULTADO
+    ---------------------------------------------------
+    */
+
+    const resultadoRef =
+      doc(
+        collection(
+          db,
+          "resultadosRoleta"
+        )
+      );
+
+
+    /*
+    ---------------------------------------------------
+    ATUALIZA O SALDO E CRIA O RESULTADO.
+    
+    As duas operações são feitas juntas.
     ---------------------------------------------------
     */
 
     await updateDoc(
+
       usuarioRef,
+
       {
 
         girosRoleta:
           novoSaldo
 
       }
+
+    );
+
+
+    await setDoc(
+
+      resultadoRef,
+
+      {
+
+        usuarioId:
+          usuarioAuth.uid,
+
+        usuarioDocId:
+          usuarioDoc._docId,
+
+        usuarioEmail:
+          usuarioAuth.email ||
+          usuarioDoc.email ||
+          "",
+
+        usuarioNome:
+          usuarioDoc.nome ||
+          usuarioDoc.name ||
+          "",
+
+        publicId:
+          usuarioDoc.publicId ||
+          "",
+
+        premioId:
+          premio.id,
+
+        premioNome:
+          premio.nome ||
+          "",
+
+        quantidade:
+          Number(
+            premio.quantidade ||
+            0
+          ),
+
+        tipo:
+          premio.tipo ||
+          "outro",
+
+        imagem:
+          premio.imagem ||
+          "",
+
+        giroNumero:
+          saldoReal,
+
+        saldoGirosAnterior:
+          saldoReal,
+
+        saldoGirosFinal:
+          novoSaldo,
+
+        entregue:
+          false,
+
+        criadoEm:
+          serverTimestamp()
+
+      }
+
     );
 
 
     /*
     ---------------------------------------------------
-    REGISTRA O RESULTADO
+    ATUALIZA A TELA
     ---------------------------------------------------
     */
-
-    const registro =
-      await addDoc(
-        collection(
-          db,
-          "resultadosRoleta"
-        ),
-        {
-
-          usuarioId:
-            usuarioAuth.uid,
-
-          usuarioDocId:
-            usuarioDoc._docId,
-
-          usuarioEmail:
-            usuarioAuth.email ||
-            usuarioDoc.email ||
-            "",
-
-          usuarioNome:
-            usuarioDoc.nome ||
-            usuarioDoc.name ||
-            "",
-
-          publicId:
-            usuarioDoc.publicId ||
-            "",
-
-          premioId:
-            premio.id,
-
-          premioNome:
-            premio.nome ||
-            "",
-
-          quantidade:
-            Number(
-              premio.quantidade ||
-              0
-            ),
-
-          tipo:
-            premio.tipo ||
-            "outro",
-
-          imagem:
-            premio.imagem ||
-            "",
-
-          giroNumero:
-            girosAtuais,
-
-          saldoGirosAnterior:
-            girosAtuais,
-
-          saldoGirosFinal:
-            novoSaldo,
-
-          entregue:
-            false,
-
-          criadoEm:
-            serverTimestamp()
-
-        }
-      );
-
 
     usuarioDoc.girosRoleta =
       novoSaldo;
@@ -2353,8 +2532,11 @@ async function girarRoleta(){
 
 
     mostrarResultado(
+
       premio,
-      registro.id
+
+      resultadoRef.id
+
     );
 
 
@@ -2365,14 +2547,27 @@ async function girarRoleta(){
   catch(error){
 
     console.error(
-      "Erro ao registrar giro:",
+      "ERRO COMPLETO AO REGISTRAR ROLETA:",
       error
     );
 
 
+    /*
+    ---------------------------------------------------
+    MOSTRA O ERRO REAL.
+    ---------------------------------------------------
+    */
+
     mostrarMensagem(
-      "O giro foi realizado, mas ocorreu um erro ao registrar o resultado.",
+
+      "⚠️ Não foi possível registrar o giro no Firebase: " +
+      (
+        error.message ||
+        "erro desconhecido"
+      ),
+
       "error"
+
     );
 
   }
@@ -2403,9 +2598,13 @@ function mostrarResultado(
       0
     ).toLocaleString(
       "pt-BR"
-    ) +
+    )
 
-    " " +
+    +
+
+    " "
+
+    +
 
     (
       premio.nome ||
@@ -2464,15 +2663,25 @@ function mostrarResultado(
     new Date()
       .toLocaleString(
         "pt-BR"
-      ) +
+      )
 
-    " • Registro: " +
+    +
+
+    " • Registro: "
+
+    +
 
     registroId;
 
 
   modal.classList.add(
     "show"
+  );
+
+
+  mostrarMensagem(
+    "🎉 Giro realizado com sucesso!",
+    "success"
   );
 
 }
@@ -2497,17 +2706,22 @@ async function carregarHistorico(){
 
     const resultado =
       await getDocs(
+
         query(
+
           collection(
             db,
             "resultadosRoleta"
           ),
+
           where(
             "usuarioId",
             "==",
             usuarioAuth.uid
           )
+
         )
+
       );
 
 
@@ -2550,11 +2764,16 @@ async function carregarHistorico(){
             a.criadoEm?.seconds ||
             0;
 
+
           const bData =
             b.criadoEm?.seconds ||
             0;
 
-          return bData - aData;
+
+          return (
+            bData -
+            aData
+          );
 
         }
       );
@@ -2604,9 +2823,13 @@ async function carregarHistorico(){
             0
           ).toLocaleString(
             "pt-BR"
-          ) +
+          )
 
-          " " +
+          +
+
+          " "
+
+          +
 
           (
             registro.premioNome ||
@@ -2634,6 +2857,7 @@ async function carregarHistorico(){
           premio
         );
 
+
         top.appendChild(
           data
         );
@@ -2650,10 +2874,15 @@ async function carregarHistorico(){
 
 
         status.textContent =
+
           registro.entregue === true
+
             ?
+
             "✅ Prêmio entregue"
+
             :
+
             "⏳ Aguardando entrega";
 
 
@@ -2676,9 +2905,11 @@ async function carregarHistorico(){
           top
         );
 
+
         item.appendChild(
           status
         );
+
 
         item.appendChild(
           id
@@ -2716,7 +2947,9 @@ async function carregarHistorico(){
 ===================================================== */
 
 onAuthStateChanged(
+
   auth,
+
   async usuario => {
 
     if(
@@ -2736,86 +2969,88 @@ onAuthStateChanged(
       usuario;
 
 
-    /*
-    -----------------------------------------------------
-    LOCALIZA O CADASTRO DO JOGADOR
-    -----------------------------------------------------
-    */
+    try{
 
-    const cadastro =
-      await localizarUsuario(
-        usuario
-      );
+      const cadastro =
+        await localizarUsuario(
+          usuario
+        );
 
 
-    if(
-      !cadastro
-    ){
+      if(
+        !cadastro
+      ){
+
+        console.error(
+          "Cadastro não encontrado:",
+          usuario.uid
+        );
+
+
+        mostrarMensagem(
+          "Não foi possível encontrar seu cadastro.",
+          "error"
+        );
+
+
+        girosEl.textContent =
+          "0";
+
+
+        girarBtn.disabled =
+          true;
+
+
+        return;
+
+      }
+
+
+      usuarioRef =
+        cadastro.ref;
+
+
+      usuarioDoc = {
+
+        ...cadastro.data,
+
+        _docId:
+          cadastro.id
+
+      };
+
+
+      await carregarPremios();
+
+      await carregarHistorico();
+
+      atualizarGiros();
+
+    }
+    catch(error){
 
       console.error(
-        "Cadastro não encontrado para:",
-        {
-          uid:
-            usuario.uid,
-
-          email:
-            usuario.email
-        }
+        "Erro ao iniciar roleta:",
+        error
       );
 
 
       mostrarMensagem(
-        "Não foi possível encontrar seu cadastro.",
+
+        "⚠️ Erro ao carregar a roleta: " +
+        (
+          error.message ||
+          "erro desconhecido"
+        ),
+
         "error"
+
       );
-
-
-      girosEl.textContent =
-        "0";
-
-
-      girarBtn.disabled =
-        true;
-
-
-      return;
 
     }
 
-
-    /*
-    -----------------------------------------------------
-    SALVA REFERÊNCIA CORRETA
-    -----------------------------------------------------
-    */
-
-    usuarioRef =
-      cadastro.ref;
-
-
-    usuarioDoc = {
-
-      ...cadastro.data,
-
-      _docId:
-        cadastro.id
-
-    };
-
-
-    /*
-    -----------------------------------------------------
-    CARREGA TUDO
-    -----------------------------------------------------
-    */
-
-    await carregarPremios();
-
-    await carregarHistorico();
-
-    atualizarGiros();
-
   }
+
 );
 
 
@@ -2824,8 +3059,11 @@ onAuthStateChanged(
 ===================================================== */
 
 girarBtn.addEventListener(
+
   "click",
+
   girarRoleta
+
 );
 
 
@@ -2834,7 +3072,9 @@ document
     "fechar"
   )
   .addEventListener(
+
     "click",
+
     () => {
 
       modal.classList.remove(
@@ -2842,8 +3082,8 @@ document
       );
 
     }
-  );
 
+  );
 
 </script>
 
