@@ -7,16 +7,12 @@
 
 <meta
   name="viewport"
-  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+  content="width=device-width, initial-scale=1.0"
 >
 
 <title>Adam Games • Login</title>
 
 <style>
-
-/* =====================================================
-   RESET
-===================================================== */
 
 *{
   box-sizing:border-box;
@@ -41,183 +37,193 @@ body{
 
   color:#fff;
 
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:18px 12px 25px;
+
   overflow-x:hidden;
+
+  background-color:#061d43;
 
   /*
   =====================================================
-  WALLPAPER
+  FUNDO DO ADAM GAMES
   =====================================================
   */
 
-  background-color:#071b35;
-
   background-image:
-    url("./6AB154F8-5052-4D70-B604-F3C0BEE88348.png");
-
-  background-repeat:no-repeat;
-
-  background-position:center center;
+    linear-gradient(
+      rgba(0,20,55,.08),
+      rgba(0,20,55,.08)
+    ),
+    url("6AB154F8-5052-4D70-B604-F3C0BEE88348.png");
 
   background-size:cover;
 
-  background-attachment:scroll;
+  background-position:center;
+
+  background-repeat:no-repeat;
+
+  background-attachment:fixed;
 
 }
 
 
 /* =====================================================
-   CONTAINER PRINCIPAL
+   CONTAINER
 ===================================================== */
 
-.page{
+.login-container{
 
   width:100%;
 
-  min-height:100vh;
+  max-width:440px;
 
-  display:flex;
+  margin:auto;
 
-  flex-direction:column;
+  position:relative;
 
-  align-items:center;
-
-  padding:
-    25px
-    15px
-    30px;
+  z-index:2;
 
 }
 
 
 /* =====================================================
-   LOGO SUPERIOR
+   LOGO
 ===================================================== */
 
-.brand{
-
-  width:100%;
-
-  max-width:430px;
+.logo{
 
   text-align:center;
 
-  margin-bottom:15px;
+  margin-bottom:9px;
 
-  text-shadow:
-    0 3px 12px
-    rgba(0,0,0,.8);
+  position:relative;
+
+  z-index:5;
 
 }
 
 
-.brand h1{
+/*
+=========================================================
+ÍCONE DA COROA
+=========================================================
+*/
+
+.logo-icon{
+
+  display:none;
+
+}
+
+
+/*
+=========================================================
+ADAM GAMES
+=========================================================
+*/
+
+.logo h1{
+
+  margin:0;
 
   font-size:
     clamp(
-      27px,
-      8vw,
-      40px
+      38px,
+      10vw,
+      56px
     );
-
-  line-height:1;
 
   font-weight:900;
 
-  letter-spacing:-1px;
+  line-height:.95;
+
+  letter-spacing:-2px;
+
+  text-shadow:
+
+    0 4px 12px
+    rgba(0,0,0,.55),
+
+    0 0 25px
+    rgba(255,255,255,.15);
 
 }
 
 
-.brand .adam{
+.logo h1 .adam{
 
   color:#fff;
 
 }
 
 
-.brand .games{
+.logo h1 .games{
 
   color:#ffd52b;
 
 }
 
 
-.brand p{
+.logo p{
 
-  margin-top:8px;
-
-  color:#fff;
-
-  font-size:13px;
-
-  font-weight:bold;
+  display:none;
 
 }
 
 
 /* =====================================================
-   CARD
+   CARD LOGIN
 ===================================================== */
 
-.card{
+.login-card{
 
   width:100%;
 
-  max-width:420px;
+  max-width:390px;
+
+  margin:0 auto;
 
   padding:
-    25px
     21px
-    22px;
+    23px;
 
-  border-radius:28px;
+  border-radius:26px;
 
   background:
 
     linear-gradient(
       145deg,
-      rgba(3,30,62,.94),
-      rgba(1,15,35,.96)
+      rgba(4,55,110,.93),
+      rgba(2,25,56,.96)
     );
 
   border:
     1px solid
-    rgba(255,255,255,.18);
+    rgba(255,255,255,.17);
 
   box-shadow:
 
-    0 25px 65px
-    rgba(0,0,0,.55),
+    0 20px 50px
+    rgba(0,0,0,.45);
 
-    inset 0 1px 0
-    rgba(255,255,255,.08);
+  position:relative;
 
-  backdrop-filter:
-    blur(5px);
-
-  -webkit-backdrop-filter:
-    blur(5px);
+  z-index:10;
 
 }
 
 
-/* =====================================================
-   TÍTULO
-===================================================== */
-
-.login-box h2,
-.register-box h2{
+.login-card h2{
 
   text-align:center;
 
-  font-size:
-    clamp(
-      23px,
-      6vw,
-      29px
-    );
+  font-size:25px;
 
-  font-weight:900;
+  margin-bottom:6px;
 
 }
 
@@ -226,13 +232,11 @@ body{
 
   text-align:center;
 
-  color:#c2d8ec;
+  color:#b5d0e8;
 
-  font-size:13px;
+  font-size:14px;
 
-  margin-top:7px;
-
-  margin-bottom:21px;
+  margin-bottom:19px;
 
 }
 
@@ -245,11 +249,9 @@ body{
 
   display:none;
 
-  width:100%;
+  margin-bottom:15px;
 
   padding:12px;
-
-  margin-bottom:15px;
 
   border-radius:13px;
 
@@ -266,14 +268,14 @@ body{
 
   display:block;
 
-  color:#ffadb7;
-
   background:
-    rgba(255,40,60,.14);
+    rgba(255,50,70,.15);
 
   border:
     1px solid
-    rgba(255,70,90,.32);
+    rgba(255,70,90,.35);
+
+  color:#ff9ba7;
 
 }
 
@@ -282,20 +284,20 @@ body{
 
   display:block;
 
-  color:#78ffad;
-
   background:
-    rgba(30,220,110,.13);
+    rgba(50,255,140,.12);
 
   border:
     1px solid
-    rgba(50,240,140,.28);
+    rgba(50,255,140,.3);
+
+  color:#72ffae;
 
 }
 
 
 /* =====================================================
-   LABEL
+   CAMPOS
 ===================================================== */
 
 label{
@@ -304,63 +306,58 @@ label{
 
   margin-bottom:6px;
 
-  color:#d7e8f8;
-
   font-size:13px;
 
   font-weight:bold;
 
+  color:#cce3f8;
+
 }
 
-
-/* =====================================================
-   INPUT
-===================================================== */
 
 .input{
 
   width:100%;
 
-  height:53px;
-
-  margin-bottom:15px;
-
-  padding:
-    0
-    15px;
+  height:51px;
 
   border:
     1px solid
-    rgba(255,255,255,.15);
+    rgba(255,255,255,.14);
 
-  border-radius:14px;
+  border-radius:15px;
+
+  background:
+    rgba(0,0,0,.25);
+
+  color:white;
+
+  padding:
+    0 16px;
+
+  font-size:16px;
 
   outline:none;
 
-  background:
-    rgba(0,0,0,.30);
-
-  color:#fff;
-
-  font-size:16px;
+  margin-bottom:14px;
 
 }
 
 
 .input::placeholder{
 
-  color:#91abc3;
+  color:#8fa8c0;
 
 }
 
 
 .input:focus{
 
-  border-color:#27a4ff;
+  border-color:#27a1ff;
 
   box-shadow:
     0 0 0 3px
-    rgba(39,164,255,.14);
+    rgba(39,161,255,.12);
 
 }
 
@@ -387,21 +384,21 @@ label{
 
   position:absolute;
 
-  right:4px;
+  right:8px;
 
   top:0;
 
-  width:48px;
+  width:45px;
 
-  height:53px;
+  height:51px;
 
   border:0;
 
   background:transparent;
 
-  color:#b8d4e9;
+  color:#9fc4e5;
 
-  font-size:20px;
+  font-size:21px;
 
   cursor:pointer;
 
@@ -416,45 +413,39 @@ label{
 
   width:100%;
 
-  height:55px;
+  height:52px;
 
   border:0;
 
-  border-radius:15px;
+  border-radius:16px;
 
   background:
 
     linear-gradient(
       135deg,
-      #20a4ff,
-      #0069df
+      #22a2ff,
+      #0069db
     );
 
-  color:#fff;
+  color:white;
 
-  font-size:17px;
+  font-size:16px;
 
   font-weight:900;
 
   cursor:pointer;
 
   box-shadow:
-    0 9px 24px
-    rgba(0,100,220,.35);
 
-}
-
-
-.login-button:active{
-
-  transform:scale(.985);
+    0 10px 25px
+    rgba(0,105,219,.30);
 
 }
 
 
 .login-button:disabled{
 
-  opacity:.55;
+  opacity:.6;
 
   cursor:not-allowed;
 
@@ -469,15 +460,15 @@ label{
 
   display:block;
 
-  margin-top:14px;
-
   text-align:center;
 
-  color:#72c6ff;
+  margin-top:14px;
+
+  color:#65bdff;
 
   font-size:13px;
 
-  font-weight:bold;
+  text-decoration:none;
 
   cursor:pointer;
 
@@ -497,13 +488,13 @@ label{
   gap:10px;
 
   margin:
-    21px
+    19px
     0
     14px;
 
-  color:#a9c4db;
+  color:#a9c7e4;
 
-  font-size:12px;
+  font-size:13px;
 
   white-space:nowrap;
 
@@ -526,18 +517,14 @@ label{
 
 
 /* =====================================================
-   SOCIAL
+   LOGIN SOCIAL
 ===================================================== */
 
 .social-buttons{
 
-  display:grid;
+  display:flex;
 
-  grid-template-columns:
-    repeat(
-      3,
-      1fr
-    );
+  flex-direction:column;
 
   gap:8px;
 
@@ -546,11 +533,13 @@ label{
 
 .social-button{
 
-  min-height:49px;
+  width:100%;
+
+  height:47px;
 
   border:0;
 
-  border-radius:13px;
+  border-radius:15px;
 
   display:flex;
 
@@ -558,20 +547,13 @@ label{
 
   justify-content:center;
 
-  gap:6px;
+  gap:10px;
 
-  font-size:13px;
+  font-size:15px;
 
-  font-weight:900;
+  font-weight:bold;
 
   cursor:pointer;
-
-}
-
-
-.social-icon{
-
-  font-size:18px;
 
 }
 
@@ -603,55 +585,22 @@ label{
 }
 
 
-/* =====================================================
-   CRIAR CONTA
-===================================================== */
+.social-icon{
 
-.create-area{
+  font-size:19px;
 
-  margin-top:19px;
-
-  padding:
-    15px
-    12px
-    13px;
-
-  border-radius:17px;
-
-  background:
-    rgba(255,255,255,.055);
-
-  border:
-    1px solid
-    rgba(255,255,255,.11);
+  width:25px;
 
   text-align:center;
 
 }
 
 
-.create-title{
-
-  margin-bottom:10px;
-
-  color:#fff;
-
-  font-size:13px;
-
-  font-weight:bold;
-
-}
-
+/* =====================================================
+   CRIAR CONTA
+===================================================== */
 
 .create-account{
-
-  width:100%;
-
-  min-height:58px;
-
-  border:0;
-
-  border-radius:15px;
 
   display:flex;
 
@@ -659,45 +608,43 @@ label{
 
   justify-content:center;
 
-  gap:9px;
+  text-align:center;
+
+  margin-top:14px;
+
+  padding:13px 10px;
+
+  min-height:50px;
+
+  border-radius:14px;
 
   background:
-
     linear-gradient(
       135deg,
-      #20cc68,
-      #07963e
+      #20c95c,
+      #079b42
     );
 
   color:#fff;
 
-  font-size:17px;
+  font-size:15px;
 
   font-weight:900;
+
+  text-decoration:none;
 
   cursor:pointer;
 
   box-shadow:
-    0 9px 22px
-    rgba(0,150,65,.32);
+    0 8px 20px
+    rgba(0,160,70,.22);
 
 }
 
 
-.create-account:active{
+.create-account:hover{
 
-  transform:scale(.985);
-
-}
-
-
-.create-hint{
-
-  margin-top:8px;
-
-  color:#b9d7c6;
-
-  font-size:11px;
+  filter:brightness(1.08);
 
 }
 
@@ -731,15 +678,13 @@ label{
 
   display:block;
 
-  margin-top:17px;
-
   text-align:center;
 
-  color:#74c7ff;
+  margin-top:17px;
+
+  color:#65bdff;
 
   font-size:13px;
-
-  font-weight:bold;
 
   cursor:pointer;
 
@@ -747,46 +692,20 @@ label{
 
 
 /* =====================================================
-   BENEFÍCIOS
+   LOADING
 ===================================================== */
 
-.benefits{
+.loading{
 
-  display:grid;
-
-  grid-template-columns:
-    repeat(
-      4,
-      1fr
-    );
-
-  gap:6px;
-
-  margin-top:19px;
-
-}
-
-
-.benefit{
-
-  color:#abc7dd;
+  display:none;
 
   text-align:center;
 
-  font-size:9px;
+  margin-top:14px;
 
-  line-height:1.25;
+  color:#8fcaff;
 
-}
-
-
-.benefit-icon{
-
-  display:block;
-
-  margin-bottom:4px;
-
-  font-size:23px;
+  font-size:13px;
 
 }
 
@@ -797,24 +716,17 @@ label{
 
 .footer{
 
-  width:100%;
-
-  max-width:420px;
+  text-align:center;
 
   margin-top:13px;
 
-  padding:7px 12px;
+  color:#d0e2f2;
 
-  border-radius:20px;
+  font-size:11px;
 
-  background:
-    rgba(0,15,35,.65);
-
-  color:#d0deea;
-
-  text-align:center;
-
-  font-size:10px;
+  text-shadow:
+    0 2px 5px
+    rgba(0,0,0,.6);
 
 }
 
@@ -823,15 +735,15 @@ label{
    WHATSAPP
 ===================================================== */
 
-.whatsapp-button{
+.adam-whatsapp-button{
 
   position:fixed;
 
   right:17px;
 
-  bottom:17px;
+  bottom:19px;
 
-  z-index:9999;
+  z-index:99999;
 
   width:58px;
 
@@ -841,49 +753,55 @@ label{
 
   border-radius:50%;
 
+  background:#25D366;
+
+  color:#fff;
+
   display:flex;
 
   align-items:center;
 
   justify-content:center;
 
-  background:#25D366;
-
-  color:#fff;
-
-  font-size:28px;
+  font-size:29px;
 
   cursor:pointer;
 
   box-shadow:
     0 8px 25px
-    rgba(0,0,0,.45);
+    rgba(0,0,0,.38);
+
+  transition:
+    transform .2s ease;
 
 }
 
 
-.whatsapp-menu{
+.adam-whatsapp-button:hover{
+
+  transform:scale(1.08);
+
+}
+
+
+.adam-whatsapp-menu{
 
   position:fixed;
 
   right:17px;
 
-  bottom:84px;
+  bottom:89px;
 
-  z-index:9999;
+  z-index:99999;
 
-  width:
-    calc(100% - 34px);
+  width:270px;
 
-  max-width:300px;
-
-  padding:16px;
+  padding:17px;
 
   border-radius:20px;
 
-  display:none;
-
   background:
+
     linear-gradient(
       145deg,
       #073d76,
@@ -896,46 +814,48 @@ label{
 
   box-shadow:
     0 15px 40px
-    rgba(0,0,0,.5);
+    rgba(0,0,0,.45);
+
+  display:none;
 
 }
 
 
-.whatsapp-menu.active{
+.adam-whatsapp-menu.active{
 
   display:block;
 
 }
 
 
-.whatsapp-title{
+.adam-whatsapp-title{
 
-  font-size:15px;
+  font-size:16px;
 
   font-weight:900;
 
-  margin-bottom:10px;
+  margin-bottom:12px;
 
 }
 
 
-.whatsapp-option{
+.adam-whatsapp-option{
 
   width:100%;
 
-  margin-top:8px;
-
-  padding:13px;
-
   border:0;
 
-  border-radius:12px;
+  border-radius:13px;
+
+  padding:14px 12px;
+
+  margin-top:8px;
 
   color:#fff;
 
-  font-size:13px;
+  font-size:14px;
 
-  font-weight:900;
+  font-weight:800;
 
   text-align:left;
 
@@ -944,36 +864,36 @@ label{
 }
 
 
-.whatsapp-buy{
+.adam-whatsapp-buy{
 
   background:#07934c;
 
 }
 
 
-.whatsapp-help{
+.adam-whatsapp-help{
 
   background:#168ff0;
 
 }
 
 
-.whatsapp-close{
+.adam-whatsapp-close{
 
   width:100%;
 
-  margin-top:9px;
-
-  padding:9px;
+  margin-top:10px;
 
   border:0;
 
-  border-radius:10px;
+  border-radius:12px;
+
+  padding:9px;
 
   background:
     rgba(255,255,255,.08);
 
-  color:#b8d2e7;
+  color:#a9c8e5;
 
   cursor:pointer;
 
@@ -984,137 +904,195 @@ label{
    MOBILE
 ===================================================== */
 
-@media(max-width:600px){
+@media(max-width:480px){
 
-  .page{
+  body{
 
     padding:
-      14px
-      11px
-      25px;
+      12px
+      10px
+      20px;
+
+    align-items:flex-start;
+
+    background-attachment:scroll;
 
   }
 
 
-  .brand{
+  .login-container{
 
-    margin-bottom:9px;
-
-  }
-
-
-  .brand h1{
-
-    font-size:28px;
+    padding-top:6px;
 
   }
 
 
-  .brand p{
+  .logo{
 
-    font-size:11px;
+    margin-bottom:8px;
 
   }
 
 
-  .card{
+  .logo h1{
+
+    font-size:38px;
+
+    letter-spacing:-1.5px;
+
+  }
+
+
+  .login-card{
+
+    width:100%;
 
     max-width:390px;
 
     padding:
-      20px
-      16px
-      19px;
+      19px
+      17px;
 
     border-radius:24px;
 
   }
 
 
-  .login-box h2,
-  .register-box h2{
+  .login-card h2{
 
-    font-size:22px;
-
-  }
-
-
-  .social-button{
-
-    font-size:12px;
+    font-size:23px;
 
   }
 
 
-  .create-account{
+  .subtitle{
 
-    min-height:59px;
+    font-size:13px;
 
-    font-size:16px;
-
-  }
-
-}
-
-
-@media(max-height:760px){
-
-  .page{
-
-    padding-top:9px;
-
-  }
-
-
-  .brand{
-
-    margin-bottom:7px;
-
-  }
-
-
-  .brand p{
-
-    display:none;
-
-  }
-
-
-  .card{
-
-    padding-top:17px;
-
-    padding-bottom:16px;
+    margin-bottom:17px;
 
   }
 
 
   .input{
 
-    height:48px;
+    height:50px;
 
-    margin-bottom:11px;
+    margin-bottom:13px;
 
   }
 
 
   .show-password{
 
-    height:48px;
+    height:50px;
 
   }
 
 
   .login-button{
 
-    height:49px;
+    height:51px;
 
   }
 
 
-  .benefits{
+  .divider{
 
-    display:none;
+    margin:
+      18px
+      0
+      13px;
+
+  }
+
+
+  .social-buttons{
+
+    gap:8px;
+
+  }
+
+
+  .social-button{
+
+    height:46px;
+
+  }
+
+
+  .create-account{
+
+    min-height:52px;
+
+    font-size:15px;
+
+  }
+
+
+  .adam-whatsapp-button{
+
+    right:15px;
+
+    bottom:17px;
+
+    width:56px;
+
+    height:56px;
+
+  }
+
+
+  .adam-whatsapp-menu{
+
+    right:15px;
+
+    bottom:83px;
+
+    width:
+      calc(100% - 30px);
+
+    max-width:300px;
+
+  }
+
+}
+
+
+/* =====================================================
+   TELAS MUITO PEQUENAS
+===================================================== */
+
+@media(max-width:380px){
+
+  .logo h1{
+
+    font-size:34px;
+
+  }
+
+
+  .login-card{
+
+    padding:
+      17px
+      15px;
+
+  }
+
+
+  .login-card h2{
+
+    font-size:21px;
+
+  }
+
+
+  .social-button{
+
+    height:44px;
+
+    font-size:14px;
 
   }
 
@@ -1128,14 +1106,14 @@ label{
 <body>
 
 
-<div class="page">
+<div class="login-container">
 
 
   <!-- =================================================
-       MARCA
+       LOGO
   ================================================== -->
 
-  <div class="brand">
+  <div class="logo">
 
     <h1>
 
@@ -1149,10 +1127,6 @@ label{
 
     </h1>
 
-    <p>
-      Seu mundo começa aqui! 👑
-    </p>
-
   </div>
 
 
@@ -1161,14 +1135,13 @@ label{
   ================================================== -->
 
   <div
-    class="card login-box"
+    class="login-card login-box"
     id="loginBox"
   >
 
     <h2>
       Bem-vindo de volta! 👋
     </h2>
-
 
     <div class="subtitle">
       Entre na sua conta para continuar
@@ -1206,7 +1179,6 @@ label{
 
       <div class="password-wrap">
 
-
         <input
           id="password"
           class="input"
@@ -1225,7 +1197,6 @@ label{
           👁️
         </button>
 
-
       </div>
 
 
@@ -1236,7 +1207,6 @@ label{
       >
         ENTRAR
       </button>
-
 
     </form>
 
@@ -1301,95 +1271,23 @@ label{
 
       </button>
 
-
     </div>
 
 
-    <!-- =================================================
-         CRIAR CONTA
-    ================================================== -->
-
-    <div class="create-area">
-
-
-      <div class="create-title">
-        Ainda não tem uma conta?
-      </div>
+    <a
+      class="create-account"
+      id="showRegister"
+    >
+      👤 CRIAR MINHA CONTA
+    </a>
 
 
-      <button
-        type="button"
-        class="create-account"
-        id="showRegister"
-      >
-
-        👤
-        CRIAR MINHA CONTA
-
-      </button>
-
-
-      <div class="create-hint">
-        É rápido, fácil e grátis! ✨
-      </div>
-
-
+    <div
+      class="loading"
+      id="loading"
+    >
+      🔄 Verificando sua conta...
     </div>
-
-
-    <!-- =================================================
-         BENEFÍCIOS
-    ================================================== -->
-
-    <div class="benefits">
-
-
-      <div class="benefit">
-
-        <span class="benefit-icon">
-          🛡️
-        </span>
-
-        Seguro
-
-      </div>
-
-
-      <div class="benefit">
-
-        <span class="benefit-icon">
-          🎮
-        </span>
-
-        Diversão
-
-      </div>
-
-
-      <div class="benefit">
-
-        <span class="benefit-icon">
-          🎁
-        </span>
-
-        Prêmios
-
-      </div>
-
-
-      <div class="benefit">
-
-        <span class="benefit-icon">
-          💎
-        </span>
-
-        Comunidade
-
-      </div>
-
-
-    </div>
-
 
   </div>
 
@@ -1399,15 +1297,13 @@ label{
   ================================================== -->
 
   <div
-    class="card register-box"
+    class="login-card register-box"
     id="registerBox"
   >
-
 
     <h2>
       Criar minha conta ✨
     </h2>
-
 
     <div class="subtitle">
       Faça seu cadastro no Adam Games
@@ -1433,7 +1329,6 @@ label{
         class="input"
         type="text"
         placeholder="Seu nome"
-        autocomplete="name"
         required
       >
 
@@ -1448,7 +1343,6 @@ label{
         class="input"
         type="email"
         placeholder="seu@email.com"
-        autocomplete="email"
         required
       >
 
@@ -1464,7 +1358,6 @@ label{
         type="password"
         placeholder="Crie uma senha"
         minlength="6"
-        autocomplete="new-password"
         required
       >
 
@@ -1480,7 +1373,6 @@ label{
         type="password"
         placeholder="Digite a senha novamente"
         minlength="6"
-        autocomplete="new-password"
         required
       >
 
@@ -1493,7 +1385,6 @@ label{
         CRIAR CONTA
       </button>
 
-
     </form>
 
 
@@ -1504,43 +1395,35 @@ label{
       ← Já tenho uma conta
     </a>
 
-
   </div>
 
 
-  <!-- =================================================
-       FOOTER
-  ================================================== -->
-
   <div class="footer">
-
-    🔒 © 2026 Adam Games. Todos os direitos reservados.
-
+    © 2026 Adam Games
   </div>
 
 
 </div>
 
 
-<!-- ===================================================
+<!-- =====================================================
      WHATSAPP
-=================================================== -->
+===================================================== -->
 
 <div
-  class="whatsapp-menu"
-  id="whatsappMenu"
+  class="adam-whatsapp-menu"
+  id="adamWhatsAppMenu"
 >
 
-
-  <div class="whatsapp-title">
+  <div class="adam-whatsapp-title">
     💬 Como podemos ajudar?
   </div>
 
 
   <button
     type="button"
-    class="whatsapp-option whatsapp-buy"
-    id="whatsappBuy"
+    class="adam-whatsapp-option adam-whatsapp-buy"
+    id="adamWhatsAppBuy"
   >
     🛒 Quero comprar
   </button>
@@ -1548,8 +1431,8 @@ label{
 
   <button
     type="button"
-    class="whatsapp-option whatsapp-help"
-    id="whatsappHelp"
+    class="adam-whatsapp-option adam-whatsapp-help"
+    id="adamWhatsAppHelp"
   >
     💬 Tenho uma dúvida
   </button>
@@ -1557,20 +1440,19 @@ label{
 
   <button
     type="button"
-    class="whatsapp-close"
-    id="whatsappClose"
+    class="adam-whatsapp-close"
+    id="adamWhatsAppClose"
   >
     Fechar
   </button>
-
 
 </div>
 
 
 <button
   type="button"
-  class="whatsapp-button"
-  id="whatsappButton"
+  class="adam-whatsapp-button"
+  id="adamWhatsAppButton"
   aria-label="Abrir WhatsApp"
 >
   💬
@@ -1627,7 +1509,7 @@ from
 
 
 /* =====================================================
-   CONFIGURAÇÃO
+   CONFIGURAÇÃO FIREBASE
 ===================================================== */
 
 const firebaseConfig = {
@@ -1723,7 +1605,7 @@ const registerMessage =
 
 
 /* =====================================================
-   MENSAGENS
+   MENSAGEM LOGIN
 ===================================================== */
 
 function mostrarMensagem(
@@ -1735,18 +1617,14 @@ function mostrarMensagem(
     texto;
 
   message.className =
-    "message";
-
-  if(texto){
-
-    message.classList.add(
-      tipo
-    );
-
-  }
+    "message " + tipo;
 
 }
 
+
+/* =====================================================
+   MENSAGEM CADASTRO
+===================================================== */
 
 function mostrarMensagemCadastro(
   texto,
@@ -1757,283 +1635,52 @@ function mostrarMensagemCadastro(
     texto;
 
   registerMessage.className =
-    "message";
-
-  if(texto){
-
-    registerMessage.classList.add(
-      tipo
-    );
-
-  }
+    "message " + tipo;
 
 }
 
 
 /* =====================================================
-   GERAR ID PÚBLICO
-===================================================== */
-
-function gerarPublicId(){
-
-  const letras =
-    "ABCDEFGHJKLMNPQRSTUVWXYZ";
-
-  const numeros =
-    "0123456789";
-
-  const todos =
-    letras +
-    numeros;
-
-  let resultado = "";
-
-  /*
-  Pelo menos 2 letras
-  */
-
-  resultado +=
-    letras[
-      Math.floor(
-        Math.random() *
-        letras.length
-      )
-    ];
-
-  resultado +=
-    letras[
-      Math.floor(
-        Math.random() *
-        letras.length
-      )
-    ];
-
-  /*
-  Pelo menos 2 números
-  */
-
-  resultado +=
-    numeros[
-      Math.floor(
-        Math.random() *
-        numeros.length
-      )
-    ];
-
-  resultado +=
-    numeros[
-      Math.floor(
-        Math.random() *
-        numeros.length
-      )
-    ];
-
-  /*
-  Mais 2 caracteres
-  */
-
-  resultado +=
-    todos[
-      Math.floor(
-        Math.random() *
-        todos.length
-      )
-    ];
-
-  resultado +=
-    todos[
-      Math.floor(
-        Math.random() *
-        todos.length
-      )
-    ];
-
-  /*
-  Embaralhar
-  */
-
-  return resultado
-    .split("")
-    .sort(
-      () =>
-        Math.random() -
-        .5
-    )
-    .join("");
-
-}
-
-
-/* =====================================================
-   CRIAR CADASTRO FIRESTORE
-===================================================== */
-
-async function criarCadastroUsuario(
-  usuario,
-  nomeFornecido=""
-){
-
-  /*
-  Verifica se o usuário já possui
-  cadastro.
-  */
-
-  const resultado =
-    await getDocs(
-
-      query(
-
-        collection(
-          db,
-          "admins"
-        ),
-
-        where(
-          "uid",
-          "==",
-          usuario.uid
-        )
-
-      )
-
-    );
-
-
-  if(
-    !resultado.empty
-  ){
-
-    return resultado.docs[0].data();
-
-  }
-
-
-  const cadastro = {
-
-    uid:
-      usuario.uid,
-
-    nome:
-      nomeFornecido ||
-      usuario.displayName ||
-      "Usuário",
-
-    email:
-      usuario.email ||
-      "",
-
-    publicId:
-      gerarPublicId(),
-
-    idade:
-      "",
-
-    telefone:
-      "",
-
-    avatar:
-      "🙂",
-
-    vip:
-      false,
-
-    caixaBox:
-      false,
-
-    caixaBoxMes:
-      "",
-
-    caixaBoxResgatadaEm:
-      "",
-
-    chances:
-      0,
-
-    girosRoleta:
-      0,
-
-    moedas:
-      0,
-
-    chaves:
-      0,
-
-    creditos:
-      0,
-
-    proximaChance:
-      "",
-
-    ultimaCaixaResgatadaEm:
-      "",
-
-    criadoEm:
-      new Date().toISOString()
-
-  };
-
-
-  await addDoc(
-
-    collection(
-      db,
-      "admins"
-    ),
-
-    cadastro
-
-  );
-
-
-  return cadastro;
-
-}
-
-
-/* =====================================================
-   MOSTRAR SENHA
+   MOSTRAR / OCULTAR SENHA
 ===================================================== */
 
 document
-  .getElementById(
-    "showPassword"
-  )
-  .addEventListener(
-    "click",
-    () => {
+.getElementById(
+  "showPassword"
+)
+.addEventListener(
+  "click",
+  () => {
 
-      if(
-        password.type ===
-        "password"
-      ){
+    if(
+      password.type ===
+      "password"
+    ){
 
-        password.type =
-          "text";
+      password.type =
+        "text";
 
-        document
-          .getElementById(
-            "showPassword"
-          )
-          .textContent =
-            "🙈";
-
-      }
-      else{
-
-        password.type =
-          "password";
-
-        document
-          .getElementById(
-            "showPassword"
-          )
-          .textContent =
-            "👁️";
-
-      }
+      document.getElementById(
+        "showPassword"
+      ).textContent =
+        "🙈";
 
     }
-  );
+
+    else{
+
+      password.type =
+        "password";
+
+      document.getElementById(
+        "showPassword"
+      ).textContent =
+        "👁️";
+
+    }
+
+  }
+);
 
 
 /* =====================================================
@@ -2041,56 +1688,57 @@ document
 ===================================================== */
 
 document
-  .getElementById(
-    "showRegister"
-  )
-  .addEventListener(
-    "click",
-    () => {
+.getElementById(
+  "showRegister"
+)
+.addEventListener(
+  "click",
+  () => {
 
-      loginBox.classList.add(
-        "hidden"
-      );
+    loginBox.classList.add(
+      "hidden"
+    );
 
-      registerBox.classList.add(
-        "active"
-      );
+    registerBox.classList.add(
+      "active"
+    );
 
-      window.scrollTo(
-        0,
-        0
-      );
+    window.scrollTo(
+      0,
+      0
+    );
 
-    }
-  );
+  }
+);
 
 
 /* =====================================================
-   VOLTAR PARA LOGIN
+   VOLTAR LOGIN
 ===================================================== */
 
 document
-  .getElementById(
-    "backLogin"
-  )
-  .addEventListener(
-    "click",
-    () => {
+.getElementById(
+  "backLogin"
+)
+.addEventListener(
+  "click",
+  () => {
 
-      registerBox.classList.remove(
-        "active"
-      );
+    registerBox.classList.remove(
+      "active"
+    );
 
-      loginBox.classList.remove(
-        "hidden"
-      );
+    loginBox.classList.remove(
+      "hidden"
+    );
 
-      mostrarMensagemCadastro(
-        ""
-      );
+    mostrarMensagemCadastro(
+      "",
+      ""
+    );
 
-    }
-  );
+  }
+);
 
 
 /* =====================================================
@@ -2103,13 +1751,14 @@ loginForm.addEventListener(
 
     event.preventDefault();
 
+
     const emailValue =
-      email.value
-        .trim()
-        .toLowerCase();
+      email.value.trim();
+
 
     const passwordValue =
       password.value;
+
 
     if(
       !emailValue ||
@@ -2124,10 +1773,12 @@ loginForm.addEventListener(
 
     }
 
+
     const button =
       document.getElementById(
         "loginButton"
       );
+
 
     button.disabled =
       true;
@@ -2144,10 +1795,12 @@ loginForm.addEventListener(
         passwordValue
       );
 
+
       mostrarMensagem(
         "Login realizado! Entrando...",
         "success"
       );
+
 
       setTimeout(
         () => {
@@ -2160,15 +1813,19 @@ loginForm.addEventListener(
         400
       );
 
+
     }
+
     catch(error){
 
       console.error(
         error
       );
 
+
       let texto =
         "Não foi possível entrar.";
+
 
       if(
         error.code ===
@@ -2179,6 +1836,7 @@ loginForm.addEventListener(
           "E-mail ou senha incorretos.";
 
       }
+
       else if(
         error.code ===
         "auth/invalid-email"
@@ -2188,6 +1846,7 @@ loginForm.addEventListener(
           "Digite um e-mail válido.";
 
       }
+
       else if(
         error.code ===
         "auth/too-many-requests"
@@ -2198,9 +1857,11 @@ loginForm.addEventListener(
 
       }
 
+
       mostrarMensagem(
         texto
       );
+
 
       button.disabled =
         false;
@@ -2215,7 +1876,7 @@ loginForm.addEventListener(
 
 
 /* =====================================================
-   CADASTRO
+   CRIAR CONTA
 ===================================================== */
 
 registerForm.addEventListener(
@@ -2227,50 +1888,37 @@ registerForm.addEventListener(
 
     const nome =
       document
-        .getElementById(
-          "registerName"
-        )
-        .value
-        .trim();
+      .getElementById(
+        "registerName"
+      )
+      .value
+      .trim();
 
 
     const emailNovo =
       document
-        .getElementById(
-          "registerEmail"
-        )
-        .value
-        .trim()
-        .toLowerCase();
+      .getElementById(
+        "registerEmail"
+      )
+      .value
+      .trim()
+      .toLowerCase();
 
 
     const senha =
       document
-        .getElementById(
-          "registerPassword"
-        )
-        .value;
+      .getElementById(
+        "registerPassword"
+      )
+      .value;
 
 
     const senha2 =
       document
-        .getElementById(
-          "registerPassword2"
-        )
-        .value;
-
-
-    if(
-      nome.length < 2
-    ){
-
-      mostrarMensagemCadastro(
-        "Digite seu nome."
-      );
-
-      return;
-
-    }
+      .getElementById(
+        "registerPassword2"
+      )
+      .value;
 
 
     if(
@@ -2279,19 +1927,6 @@ registerForm.addEventListener(
 
       mostrarMensagemCadastro(
         "As senhas não são iguais."
-      );
-
-      return;
-
-    }
-
-
-    if(
-      senha.length < 6
-    ){
-
-      mostrarMensagemCadastro(
-        "A senha precisa ter pelo menos 6 caracteres."
       );
 
       return;
@@ -2322,9 +1957,95 @@ registerForm.addEventListener(
         );
 
 
-      await criarCadastroUsuario(
-        resultado.user,
-        nome
+      const usuario =
+        resultado.user;
+
+
+      /* =================================================
+         ID PÚBLICO
+
+         EXATAMENTE 6 CARACTERES
+         LETRAS MAIÚSCULAS + NÚMEROS
+      ================================================= */
+
+      const caracteres =
+        "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+
+      let publicId =
+        "";
+
+
+      for(
+        let i = 0;
+        i < 6;
+        i++
+      ){
+
+        publicId +=
+          caracteres[
+            Math.floor(
+              Math.random() *
+              caracteres.length
+            )
+          ];
+
+      }
+
+
+      await addDoc(
+        collection(
+          db,
+          "admins"
+        ),
+        {
+
+          uid:
+            usuario.uid,
+
+          nome:
+            nome,
+
+          email:
+            emailNovo,
+
+          publicId:
+            publicId,
+
+          idade:
+            "",
+
+          telefone:
+            "",
+
+          avatar:
+            "🙂",
+
+          vip:
+            false,
+
+          caixaBox:
+            false,
+
+          chances:
+            0,
+
+          moedas:
+            0,
+
+          chaves:
+            0,
+
+          creditos:
+            0,
+
+          girosRoleta:
+            0,
+
+          criadoEm:
+            new Date().toISOString()
+
+        }
       );
 
 
@@ -2342,10 +2063,12 @@ registerForm.addEventListener(
           );
 
         },
-        600
+        700
       );
 
+
     }
+
     catch(error){
 
       console.error(
@@ -2366,6 +2089,7 @@ registerForm.addEventListener(
           "Este e-mail já possui uma conta.";
 
       }
+
       else if(
         error.code ===
         "auth/weak-password"
@@ -2375,6 +2099,7 @@ registerForm.addEventListener(
           "A senha precisa ter pelo menos 6 caracteres.";
 
       }
+
       else if(
         error.code ===
         "auth/invalid-email"
@@ -2382,15 +2107,6 @@ registerForm.addEventListener(
 
         texto =
           "Digite um e-mail válido.";
-
-      }
-      else if(
-        error.code ===
-        "permission-denied"
-      ){
-
-        texto =
-          "O cadastro foi bloqueado pelas regras do Firestore.";
 
       }
 
@@ -2417,63 +2133,62 @@ registerForm.addEventListener(
 ===================================================== */
 
 document
-  .getElementById(
-    "forgotPassword"
-  )
-  .addEventListener(
-    "click",
-    async () => {
+.getElementById(
+  "forgotPassword"
+)
+.addEventListener(
+  "click",
+  async () => {
 
-      const emailValue =
-        email.value
-          .trim()
-          .toLowerCase();
+    const emailValue =
+      email.value.trim();
 
 
-      if(
-        !emailValue
-      ){
+    if(
+      !emailValue
+    ){
 
-        mostrarMensagem(
-          "Digite seu e-mail primeiro."
-        );
+      mostrarMensagem(
+        "Digite seu e-mail primeiro."
+      );
 
-        email.focus();
+      email.focus();
 
-        return;
-
-      }
-
-
-      try{
-
-        await sendPasswordResetEmail(
-          auth,
-          emailValue
-        );
-
-
-        mostrarMensagem(
-          "E-mail de recuperação enviado!",
-          "success"
-        );
-
-      }
-      catch(error){
-
-        console.error(
-          error
-        );
-
-
-        mostrarMensagem(
-          "Não foi possível enviar o e-mail de recuperação."
-        );
-
-      }
+      return;
 
     }
-  );
+
+
+    try{
+
+      await sendPasswordResetEmail(
+        auth,
+        emailValue
+      );
+
+
+      mostrarMensagem(
+        "E-mail de recuperação enviado!",
+        "success"
+      );
+
+    }
+
+    catch(error){
+
+      console.error(
+        error
+      );
+
+
+      mostrarMensagem(
+        "Não foi possível enviar o e-mail de recuperação."
+      );
+
+    }
+
+  }
+);
 
 
 /* =====================================================
@@ -2481,116 +2196,46 @@ document
 ===================================================== */
 
 document
-  .getElementById(
-    "googleLogin"
-  )
-  .addEventListener(
-    "click",
-    async () => {
+.getElementById(
+  "googleLogin"
+)
+.addEventListener(
+  "click",
+  async () => {
 
-      const button =
-        document.getElementById(
-          "googleLogin"
-        );
+    try{
 
-
-      button.disabled =
-        true;
+      const provider =
+        new GoogleAuthProvider();
 
 
-      try{
-
-        const provider =
-          new GoogleAuthProvider();
-
-
-        provider.setCustomParameters({
-          prompt:
-            "select_account"
-        });
+      await signInWithPopup(
+        auth,
+        provider
+      );
 
 
-        const resultado =
-          await signInWithPopup(
-            auth,
-            provider
-          );
-
-
-        const usuario =
-          resultado.user;
-
-
-        /*
-        Cria automaticamente o documento
-        no primeiro login Google.
-        */
-
-        await criarCadastroUsuario(
-          usuario,
-          usuario.displayName ||
-          "Usuário"
-        );
-
-
-        window.location.replace(
-          "painel.html"
-        );
-
-      }
-      catch(error){
-
-        console.error(
-          "Google:",
-          error
-        );
-
-
-        let texto =
-          "Não foi possível entrar com Google.";
-
-
-        if(
-          error.code ===
-          "auth/popup-closed-by-user"
-        ){
-
-          texto =
-            "A janela do Google foi fechada.";
-
-        }
-        else if(
-          error.code ===
-          "auth/popup-blocked"
-        ){
-
-          texto =
-            "O navegador bloqueou a janela do Google.";
-
-        }
-        else if(
-          error.code ===
-          "auth/unauthorized-domain"
-        ){
-
-          texto =
-            "Este domínio ainda não está autorizado no Firebase.";
-
-        }
-
-
-        mostrarMensagem(
-          texto
-        );
-
-
-        button.disabled =
-          false;
-
-      }
+      window.location.replace(
+        "painel.html"
+      );
 
     }
-  );
+
+    catch(error){
+
+      console.error(
+        error
+      );
+
+
+      mostrarMensagem(
+        "Não foi possível entrar com Google."
+      );
+
+    }
+
+  }
+);
 
 
 /* =====================================================
@@ -2598,53 +2243,46 @@ document
 ===================================================== */
 
 document
-  .getElementById(
-    "facebookLogin"
-  )
-  .addEventListener(
-    "click",
-    async () => {
+.getElementById(
+  "facebookLogin"
+)
+.addEventListener(
+  "click",
+  async () => {
 
-      try{
+    try{
 
-        const provider =
-          new FacebookAuthProvider();
-
-
-        const resultado =
-          await signInWithPopup(
-            auth,
-            provider
-          );
+      const provider =
+        new FacebookAuthProvider();
 
 
-        await criarCadastroUsuario(
-          resultado.user,
-          resultado.user.displayName ||
-          "Usuário"
-        );
+      await signInWithPopup(
+        auth,
+        provider
+      );
 
 
-        window.location.replace(
-          "painel.html"
-        );
-
-      }
-      catch(error){
-
-        console.error(
-          error
-        );
-
-
-        mostrarMensagem(
-          "Não foi possível entrar com Facebook."
-        );
-
-      }
+      window.location.replace(
+        "painel.html"
+      );
 
     }
-  );
+
+    catch(error){
+
+      console.error(
+        error
+      );
+
+
+      mostrarMensagem(
+        "Não foi possível entrar com Facebook."
+      );
+
+    }
+
+  }
+);
 
 
 /* =====================================================
@@ -2652,55 +2290,48 @@ document
 ===================================================== */
 
 document
-  .getElementById(
-    "appleLogin"
-  )
-  .addEventListener(
-    "click",
-    async () => {
+.getElementById(
+  "appleLogin"
+)
+.addEventListener(
+  "click",
+  async () => {
 
-      try{
+    try{
 
-        const provider =
-          new OAuthProvider(
-            "apple.com"
-          );
-
-
-        const resultado =
-          await signInWithPopup(
-            auth,
-            provider
-          );
-
-
-        await criarCadastroUsuario(
-          resultado.user,
-          resultado.user.displayName ||
-          "Usuário"
+      const provider =
+        new OAuthProvider(
+          "apple.com"
         );
 
 
-        window.location.replace(
-          "painel.html"
-        );
-
-      }
-      catch(error){
-
-        console.error(
-          error
-        );
+      await signInWithPopup(
+        auth,
+        provider
+      );
 
 
-        mostrarMensagem(
-          "Não foi possível entrar com Apple."
-        );
-
-      }
+      window.location.replace(
+        "painel.html"
+      );
 
     }
-  );
+
+    catch(error){
+
+      console.error(
+        error
+      );
+
+
+      mostrarMensagem(
+        "Não foi possível entrar com Apple."
+      );
+
+    }
+
+  }
+);
 
 
 /* =====================================================
@@ -2731,17 +2362,18 @@ onAuthStateChanged(
 
 const whatsappButton =
   document.getElementById(
-    "whatsappButton"
+    "adamWhatsAppButton"
   );
 
 
 const whatsappMenu =
   document.getElementById(
-    "whatsappMenu"
+    "adamWhatsAppMenu"
   );
 
 
-whatsappButton.addEventListener(
+whatsappButton
+.addEventListener(
   "click",
   () => {
 
@@ -2753,21 +2385,29 @@ whatsappButton.addEventListener(
 );
 
 
+/* =====================================================
+   FECHAR WHATSAPP
+===================================================== */
+
 document
-  .getElementById(
-    "whatsappClose"
-  )
-  .addEventListener(
-    "click",
-    () => {
+.getElementById(
+  "adamWhatsAppClose"
+)
+.addEventListener(
+  "click",
+  () => {
 
-      whatsappMenu.classList.remove(
-        "active"
-      );
+    whatsappMenu.classList.remove(
+      "active"
+    );
 
-    }
-  );
+  }
+);
 
+
+/* =====================================================
+   ABRIR WHATSAPP
+===================================================== */
 
 function abrirWhatsApp(
   mensagem
@@ -2788,48 +2428,65 @@ function abrirWhatsApp(
 }
 
 
-document
-  .getElementById(
-    "whatsappBuy"
-  )
-  .addEventListener(
-    "click",
-    () => {
-
-      abrirWhatsApp(
-        "Olá! Vim pelo site Adam Games e quero fazer uma compra. 🛒"
-      );
-
-    }
-  );
-
+/* =====================================================
+   WHATSAPP — COMPRAR
+===================================================== */
 
 document
-  .getElementById(
-    "whatsappHelp"
-  )
-  .addEventListener(
-    "click",
-    () => {
+.getElementById(
+  "adamWhatsAppBuy"
+)
+.addEventListener(
+  "click",
+  () => {
 
-      abrirWhatsApp(
-        "Olá! Vim pelo site Adam Games e tenho uma dúvida. 💬"
-      );
+    abrirWhatsApp(
+      "Olá! Vim pelo site Adam Games e quero fazer uma compra. 🛒"
+    );
 
-    }
-  );
+  }
+);
 
+
+/* =====================================================
+   WHATSAPP — DÚVIDA
+===================================================== */
+
+document
+.getElementById(
+  "adamWhatsAppHelp"
+)
+.addEventListener(
+  "click",
+  () => {
+
+    abrirWhatsApp(
+      "Olá! Vim pelo site Adam Games e tenho uma dúvida. 💬"
+    );
+
+  }
+);
+
+
+/* =====================================================
+   FECHAR MENU AO CLICAR FORA
+===================================================== */
 
 document.addEventListener(
   "click",
   event => {
 
     if(
+
       !whatsappMenu.contains(
         event.target
-      ) &&
+      )
+
+      &&
+
       event.target !==
       whatsappButton
+
     ){
 
       whatsappMenu.classList.remove(
