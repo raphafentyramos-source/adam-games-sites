@@ -14,6 +14,10 @@
 
 <style>
 
+/* =====================================================
+   RESET
+===================================================== */
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -38,35 +42,34 @@ body{
   color:#fff;
 
   display:flex;
-  align-items:center;
+
+  align-items:flex-start;
+
   justify-content:center;
 
-  padding:18px 12px 25px;
+  padding:
+    18px
+    12px
+    30px;
 
   overflow-x:hidden;
 
-  background-color:#061d43;
-
   /*
   =====================================================
-  FUNDO DO ADAM GAMES
+  FUNDO
   =====================================================
   */
 
   background-image:
-    linear-gradient(
-      rgba(0,20,55,.08),
-      rgba(0,20,55,.08)
-    ),
     url("6AB154F8-5052-4D70-B604-F3C0BEE88348.png");
 
   background-size:cover;
 
-  background-position:center;
+  background-position:center top;
 
   background-repeat:no-repeat;
 
-  background-attachment:fixed;
+  background-attachment:scroll;
 
 }
 
@@ -81,7 +84,7 @@ body{
 
   max-width:440px;
 
-  margin:auto;
+  margin:0 auto;
 
   position:relative;
 
@@ -96,81 +99,45 @@ body{
 
 .logo{
 
-  text-align:center;
+  width:100%;
 
-  margin-bottom:9px;
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  margin:
+    0 auto
+    8px;
 
   position:relative;
 
-  z-index:5;
-
+  z-index:3;
 }
 
 
-/*
-=========================================================
-ÍCONE DA COROA
-=========================================================
-*/
+.logo img{
 
-.logo-icon{
+  display:block;
 
-  display:none;
-
-}
-
-
-/*
-=========================================================
-ADAM GAMES
-=========================================================
-*/
-
-.logo h1{
-
-  margin:0;
-
-  font-size:
-    clamp(
-      38px,
-      10vw,
-      56px
+  width:
+    min(
+      82vw,
+      330px
     );
 
-  font-weight:900;
+  max-height:145px;
 
-  line-height:.95;
+  object-fit:contain;
 
-  letter-spacing:-2px;
+  object-position:center;
 
-  text-shadow:
-
-    0 4px 12px
-    rgba(0,0,0,.55),
-
-    0 0 25px
-    rgba(255,255,255,.15);
-
-}
-
-
-.logo h1 .adam{
-
-  color:#fff;
-
-}
-
-
-.logo h1 .games{
-
-  color:#ffd52b;
-
-}
-
-
-.logo p{
-
-  display:none;
+  filter:
+    drop-shadow(
+      0 8px 14px
+      rgba(0,0,0,.40)
+    );
 
 }
 
@@ -183,47 +150,50 @@ ADAM GAMES
 
   width:100%;
 
-  max-width:390px;
-
-  margin:0 auto;
-
   padding:
-    21px
-    23px;
+    20px
+    22px
+    22px;
 
-  border-radius:26px;
+  border-radius:27px;
 
   background:
-
     linear-gradient(
       145deg,
-      rgba(4,55,110,.93),
-      rgba(2,25,56,.96)
+      rgba(4,45,89,.94),
+      rgba(2,24,51,.96)
     );
 
   border:
     1px solid
-    rgba(255,255,255,.17);
+    rgba(255,255,255,.16);
 
   box-shadow:
-
     0 20px 50px
     rgba(0,0,0,.45);
 
-  position:relative;
+  backdrop-filter:
+    blur(5px);
 
-  z-index:10;
+  -webkit-backdrop-filter:
+    blur(5px);
 
 }
 
+
+/* =====================================================
+   TÍTULO
+===================================================== */
 
 .login-card h2{
 
   text-align:center;
 
-  font-size:25px;
+  font-size:24px;
 
-  margin-bottom:6px;
+  line-height:1.15;
+
+  margin-bottom:7px;
 
 }
 
@@ -232,11 +202,11 @@ ADAM GAMES
 
   text-align:center;
 
-  color:#b5d0e8;
+  color:#b9d4ec;
 
-  font-size:14px;
+  font-size:13px;
 
-  margin-bottom:19px;
+  margin-bottom:18px;
 
 }
 
@@ -319,27 +289,27 @@ label{
 
   width:100%;
 
-  height:51px;
+  height:49px;
 
   border:
     1px solid
     rgba(255,255,255,.14);
 
-  border-radius:15px;
+  border-radius:14px;
 
   background:
     rgba(0,0,0,.25);
 
-  color:white;
+  color:#fff;
 
   padding:
-    0 16px;
+    0 15px;
 
-  font-size:16px;
+  font-size:15px;
 
   outline:none;
 
-  margin-bottom:14px;
+  margin-bottom:13px;
 
 }
 
@@ -375,7 +345,7 @@ label{
 
 .password-wrap .input{
 
-  padding-right:55px;
+  padding-right:52px;
 
 }
 
@@ -384,13 +354,13 @@ label{
 
   position:absolute;
 
-  right:8px;
+  right:7px;
 
   top:0;
 
-  width:45px;
+  width:43px;
 
-  height:51px;
+  height:49px;
 
   border:0;
 
@@ -398,7 +368,7 @@ label{
 
   color:#9fc4e5;
 
-  font-size:21px;
+  font-size:20px;
 
   cursor:pointer;
 
@@ -406,21 +376,20 @@ label{
 
 
 /* =====================================================
-   BOTÃO ENTRAR
+   BOTÃO LOGIN
 ===================================================== */
 
 .login-button{
 
   width:100%;
 
-  height:52px;
+  height:51px;
 
   border:0;
 
-  border-radius:16px;
+  border-radius:15px;
 
   background:
-
     linear-gradient(
       135deg,
       #22a2ff,
@@ -436,8 +405,7 @@ label{
   cursor:pointer;
 
   box-shadow:
-
-    0 10px 25px
+    0 9px 22px
     rgba(0,105,219,.30);
 
 }
@@ -453,7 +421,7 @@ label{
 
 
 /* =====================================================
-   ESQUECI SENHA
+   LINKS
 ===================================================== */
 
 .forgot{
@@ -462,11 +430,13 @@ label{
 
   text-align:center;
 
-  margin-top:14px;
+  margin-top:13px;
 
   color:#65bdff;
 
   font-size:13px;
+
+  font-weight:bold;
 
   text-decoration:none;
 
@@ -490,11 +460,11 @@ label{
   margin:
     19px
     0
-    14px;
+    13px;
 
   color:#a9c7e4;
 
-  font-size:13px;
+  font-size:12px;
 
   white-space:nowrap;
 
@@ -524,8 +494,6 @@ label{
 
   display:flex;
 
-  flex-direction:column;
-
   gap:8px;
 
 }
@@ -533,13 +501,15 @@ label{
 
 .social-button{
 
+  flex:1;
+
   width:100%;
 
   height:47px;
 
   border:0;
 
-  border-radius:15px;
+  border-radius:13px;
 
   display:flex;
 
@@ -547,9 +517,9 @@ label{
 
   justify-content:center;
 
-  gap:10px;
+  gap:6px;
 
-  font-size:15px;
+  font-size:13px;
 
   font-weight:bold;
 
@@ -587,9 +557,9 @@ label{
 
 .social-icon{
 
-  font-size:19px;
+  font-size:17px;
 
-  width:25px;
+  width:20px;
 
   text-align:center;
 
@@ -600,6 +570,41 @@ label{
    CRIAR CONTA
 ===================================================== */
 
+.create-account-box{
+
+  margin-top:14px;
+
+  padding:
+    12px
+    10px;
+
+  border-radius:15px;
+
+  background:
+    rgba(255,255,255,.045);
+
+  border:
+    1px solid
+    rgba(255,255,255,.09);
+
+  text-align:center;
+
+}
+
+
+.create-account-title{
+
+  color:#e4f0fa;
+
+  font-size:12px;
+
+  font-weight:bold;
+
+  margin-bottom:8px;
+
+}
+
+
 .create-account{
 
   display:flex;
@@ -608,21 +613,19 @@ label{
 
   justify-content:center;
 
-  text-align:center;
+  min-height:47px;
 
-  margin-top:14px;
+  width:100%;
 
-  padding:13px 10px;
+  padding:10px;
 
-  min-height:50px;
-
-  border-radius:14px;
+  border-radius:13px;
 
   background:
     linear-gradient(
       135deg,
-      #20c95c,
-      #079b42
+      #20d85d,
+      #09a844
     );
 
   color:#fff;
@@ -636,15 +639,19 @@ label{
   cursor:pointer;
 
   box-shadow:
-    0 8px 20px
-    rgba(0,160,70,.22);
+    0 7px 18px
+    rgba(0,180,70,.22);
 
 }
 
 
-.create-account:hover{
+.create-account-subtitle{
 
-  filter:brightness(1.08);
+  margin-top:7px;
+
+  color:#a9c7dc;
+
+  font-size:11px;
 
 }
 
@@ -680,7 +687,7 @@ label{
 
   text-align:center;
 
-  margin-top:17px;
+  margin-top:15px;
 
   color:#65bdff;
 
@@ -701,11 +708,11 @@ label{
 
   text-align:center;
 
-  margin-top:14px;
+  margin-top:12px;
 
   color:#8fcaff;
 
-  font-size:13px;
+  font-size:12px;
 
 }
 
@@ -720,13 +727,13 @@ label{
 
   margin-top:13px;
 
-  color:#d0e2f2;
+  color:#d2e1ef;
 
-  font-size:11px;
+  font-size:10px;
 
   text-shadow:
     0 2px 5px
-    rgba(0,0,0,.6);
+    rgba(0,0,0,.7);
 
 }
 
@@ -739,9 +746,9 @@ label{
 
   position:fixed;
 
-  right:17px;
+  right:15px;
 
-  bottom:19px;
+  bottom:18px;
 
   z-index:99999;
 
@@ -769,17 +776,7 @@ label{
 
   box-shadow:
     0 8px 25px
-    rgba(0,0,0,.38);
-
-  transition:
-    transform .2s ease;
-
-}
-
-
-.adam-whatsapp-button:hover{
-
-  transform:scale(1.08);
+    rgba(0,0,0,.40);
 
 }
 
@@ -788,20 +785,19 @@ label{
 
   position:fixed;
 
-  right:17px;
+  right:15px;
 
-  bottom:89px;
+  bottom:84px;
 
   z-index:99999;
 
   width:270px;
 
-  padding:17px;
+  padding:16px;
 
   border-radius:20px;
 
   background:
-
     linear-gradient(
       145deg,
       #073d76,
@@ -830,11 +826,11 @@ label{
 
 .adam-whatsapp-title{
 
-  font-size:16px;
+  font-size:15px;
 
   font-weight:900;
 
-  margin-bottom:12px;
+  margin-bottom:11px;
 
 }
 
@@ -847,7 +843,7 @@ label{
 
   border-radius:13px;
 
-  padding:14px 12px;
+  padding:13px 12px;
 
   margin-top:8px;
 
@@ -882,7 +878,7 @@ label{
 
   width:100%;
 
-  margin-top:10px;
+  margin-top:9px;
 
   border:0;
 
@@ -909,49 +905,57 @@ label{
   body{
 
     padding:
-      12px
+      8px
       10px
-      20px;
+      25px;
 
     align-items:flex-start;
-
-    background-attachment:scroll;
 
   }
 
 
   .login-container{
 
-    padding-top:6px;
+    max-width:400px;
 
   }
 
+
+  /*
+  Logo fica maior e bem acima
+  da caixa.
+  */
 
   .logo{
 
-    margin-bottom:8px;
+    margin-bottom:2px;
 
   }
 
 
-  .logo h1{
+  .logo img{
 
-    font-size:38px;
+    width:
+      min(
+        90vw,
+        350px
+      );
 
-    letter-spacing:-1.5px;
+    max-height:145px;
 
   }
 
+
+  /*
+  CAIXA MENOR
+  */
 
   .login-card{
 
-    width:100%;
-
-    max-width:390px;
-
     padding:
-      19px
-      17px;
+      17px
+      17px
+      18px;
 
     border-radius:24px;
 
@@ -960,39 +964,57 @@ label{
 
   .login-card h2{
 
-    font-size:23px;
+    font-size:22px;
+
+    margin-bottom:5px;
 
   }
 
 
   .subtitle{
 
-    font-size:13px;
+    font-size:12px;
 
-    margin-bottom:17px;
+    margin-bottom:15px;
 
   }
 
 
   .input{
 
-    height:50px;
+    height:47px;
 
-    margin-bottom:13px;
+    margin-bottom:11px;
+
+  }
+
+
+  .password-wrap .input{
+
+    padding-right:50px;
 
   }
 
 
   .show-password{
 
-    height:50px;
+    height:47px;
 
   }
 
 
   .login-button{
 
-    height:51px;
+    height:49px;
+
+    font-size:15px;
+
+  }
+
+
+  .forgot{
+
+    margin-top:11px;
 
   }
 
@@ -1000,57 +1022,79 @@ label{
   .divider{
 
     margin:
-      18px
+      16px
       0
-      13px;
-
-  }
-
-
-  .social-buttons{
-
-    gap:8px;
+      11px;
 
   }
 
 
   .social-button{
 
-    height:46px;
+    height:44px;
+
+    font-size:12px;
+
+  }
+
+
+  .create-account-box{
+
+    margin-top:11px;
+
+    padding:
+      10px
+      9px;
 
   }
 
 
   .create-account{
 
-    min-height:52px;
+    min-height:45px;
 
-    font-size:15px;
+    font-size:14px;
+
+  }
+
+
+  .create-account-subtitle{
+
+    font-size:10px;
+
+  }
+
+
+  .footer{
+
+    margin-top:9px;
 
   }
 
 
   .adam-whatsapp-button{
 
-    right:15px;
+    right:13px;
 
-    bottom:17px;
+    bottom:16px;
 
-    width:56px;
+    width:55px;
 
-    height:56px;
+    height:55px;
 
   }
 
 
   .adam-whatsapp-menu{
 
-    right:15px;
+    right:13px;
 
-    bottom:83px;
+    bottom:80px;
 
     width:
-      calc(100% - 30px);
+      calc(
+        100% - 26px
+      );
 
     max-width:300px;
 
@@ -1060,14 +1104,18 @@ label{
 
 
 /* =====================================================
-   TELAS MUITO PEQUENAS
+   TELAS MUITO BAIXAS
 ===================================================== */
 
-@media(max-width:380px){
+@media(
+  max-width:480px
+) and (
+  max-height:750px
+){
 
-  .logo h1{
+  .logo img{
 
-    font-size:34px;
+    max-height:115px;
 
   }
 
@@ -1075,24 +1123,51 @@ label{
   .login-card{
 
     padding:
-      17px
-      15px;
+      15px
+      16px
+      16px;
 
   }
 
 
   .login-card h2{
 
-    font-size:21px;
+    font-size:20px;
+
+  }
+
+
+  .subtitle{
+
+    margin-bottom:12px;
+
+  }
+
+
+  .input{
+
+    height:44px;
+
+  }
+
+
+  .show-password{
+
+    height:44px;
+
+  }
+
+
+  .login-button{
+
+    height:46px;
 
   }
 
 
   .social-button{
 
-    height:44px;
-
-    font-size:14px;
+    height:41px;
 
   }
 
@@ -1110,22 +1185,15 @@ label{
 
 
   <!-- =================================================
-       LOGO
+       LOGO ADAM GAMES
   ================================================== -->
 
   <div class="logo">
 
-    <h1>
-
-      <span class="adam">
-        ADAM
-      </span>
-
-      <span class="games">
-        GAMES
-      </span>
-
-    </h1>
+    <img
+      src="C7623583-2C09-47D2-B1E5-CF175A142AB3.png"
+      alt="Adam Games"
+    >
 
   </div>
 
@@ -1161,7 +1229,6 @@ label{
         E-mail
       </label>
 
-
       <input
         id="email"
         class="input"
@@ -1187,7 +1254,6 @@ label{
           autocomplete="current-password"
           required
         >
-
 
         <button
           type="button"
@@ -1234,7 +1300,7 @@ label{
       >
 
         <span class="social-icon">
-          🌈
+          G
         </span>
 
         Google
@@ -1271,15 +1337,38 @@ label{
 
       </button>
 
+
     </div>
 
 
-    <a
-      class="create-account"
-      id="showRegister"
-    >
-      👤 CRIAR MINHA CONTA
-    </a>
+    <!-- ===============================================
+         CRIAR CONTA
+    ================================================ -->
+
+    <div class="create-account-box">
+
+      <div class="create-account-title">
+        Ainda não tem uma conta?
+      </div>
+
+
+      <a
+        class="create-account"
+        id="showRegister"
+      >
+
+        👤
+        &nbsp;
+        CRIAR MINHA CONTA
+
+      </a>
+
+
+      <div class="create-account-subtitle">
+        É rápido, fácil e grátis! ✨
+      </div>
+
+    </div>
 
 
     <div
@@ -1323,7 +1412,6 @@ label{
         Nome
       </label>
 
-
       <input
         id="registerName"
         class="input"
@@ -1336,7 +1424,6 @@ label{
       <label for="registerEmail">
         E-mail
       </label>
-
 
       <input
         id="registerEmail"
@@ -1351,7 +1438,6 @@ label{
         Senha
       </label>
 
-
       <input
         id="registerPassword"
         class="input"
@@ -1365,7 +1451,6 @@ label{
       <label for="registerPassword2">
         Confirmar senha
       </label>
-
 
       <input
         id="registerPassword2"
@@ -1385,6 +1470,7 @@ label{
         CRIAR CONTA
       </button>
 
+
     </form>
 
 
@@ -1399,7 +1485,7 @@ label{
 
 
   <div class="footer">
-    © 2026 Adam Games
+    🔒 © 2026 Adam Games. Todos os direitos reservados.
   </div>
 
 
@@ -1509,7 +1595,7 @@ from
 
 
 /* =====================================================
-   CONFIGURAÇÃO FIREBASE
+   CONFIGURAÇÃO
 ===================================================== */
 
 const firebaseConfig = {
@@ -1641,7 +1727,7 @@ function mostrarMensagemCadastro(
 
 
 /* =====================================================
-   MOSTRAR / OCULTAR SENHA
+   SENHA
 ===================================================== */
 
 document
@@ -1666,7 +1752,6 @@ document
         "🙈";
 
     }
-
     else{
 
       password.type =
@@ -1684,7 +1769,7 @@ document
 
 
 /* =====================================================
-   ABRIR CADASTRO
+   CADASTRO
 ===================================================== */
 
 document
@@ -1742,7 +1827,7 @@ document
 
 
 /* =====================================================
-   LOGIN COM E-MAIL
+   LOGIN
 ===================================================== */
 
 loginForm.addEventListener(
@@ -1815,7 +1900,6 @@ loginForm.addEventListener(
 
 
     }
-
     catch(error){
 
       console.error(
@@ -1901,8 +1985,7 @@ registerForm.addEventListener(
         "registerEmail"
       )
       .value
-      .trim()
-      .toLowerCase();
+      .trim();
 
 
     const senha =
@@ -1961,12 +2044,13 @@ registerForm.addEventListener(
         resultado.user;
 
 
-      /* =================================================
-         ID PÚBLICO
-
-         EXATAMENTE 6 CARACTERES
-         LETRAS MAIÚSCULAS + NÚMEROS
-      ================================================= */
+      /*
+      =================================================
+      ID PÚBLICO
+      6 CARACTERES
+      SEMPRE LETRAS MAIÚSCULAS + NÚMEROS
+      =================================================
+      */
 
       const caracteres =
         "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
@@ -1976,10 +2060,39 @@ registerForm.addEventListener(
         "";
 
 
-      for(
-        let i = 0;
-        i < 6;
-        i++
+      /*
+      Garante que o ID tenha
+      pelo menos uma letra e
+      pelo menos um número.
+      */
+
+      const letras =
+        "ABCDEFGHJKLMNPQRSTUVWXYZ";
+
+      const numeros =
+        "23456789";
+
+
+      publicId +=
+        letras[
+          Math.floor(
+            Math.random() *
+            letras.length
+          )
+        ];
+
+
+      publicId +=
+        numeros[
+          Math.floor(
+            Math.random() *
+            numeros.length
+          )
+        ];
+
+
+      while(
+        publicId.length < 6
       ){
 
         publicId +=
@@ -1991,6 +2104,16 @@ registerForm.addEventListener(
           ];
 
       }
+
+
+      publicId =
+        publicId
+          .split("")
+          .sort(
+            () =>
+              Math.random() - 0.5
+          )
+          .join("");
 
 
       await addDoc(
@@ -2030,6 +2153,9 @@ registerForm.addEventListener(
           chances:
             0,
 
+          girosRoleta:
+            0,
+
           moedas:
             0,
 
@@ -2037,9 +2163,6 @@ registerForm.addEventListener(
             0,
 
           creditos:
-            0,
-
-          girosRoleta:
             0,
 
           criadoEm:
@@ -2372,8 +2495,7 @@ const whatsappMenu =
   );
 
 
-whatsappButton
-.addEventListener(
+whatsappButton.addEventListener(
   "click",
   () => {
 
@@ -2384,10 +2506,6 @@ whatsappButton
   }
 );
 
-
-/* =====================================================
-   FECHAR WHATSAPP
-===================================================== */
 
 document
 .getElementById(
@@ -2404,10 +2522,6 @@ document
   }
 );
 
-
-/* =====================================================
-   ABRIR WHATSAPP
-===================================================== */
 
 function abrirWhatsApp(
   mensagem
@@ -2428,10 +2542,6 @@ function abrirWhatsApp(
 }
 
 
-/* =====================================================
-   WHATSAPP — COMPRAR
-===================================================== */
-
 document
 .getElementById(
   "adamWhatsAppBuy"
@@ -2447,10 +2557,6 @@ document
   }
 );
 
-
-/* =====================================================
-   WHATSAPP — DÚVIDA
-===================================================== */
 
 document
 .getElementById(
@@ -2468,25 +2574,16 @@ document
 );
 
 
-/* =====================================================
-   FECHAR MENU AO CLICAR FORA
-===================================================== */
-
 document.addEventListener(
   "click",
   event => {
 
     if(
-
       !whatsappMenu.contains(
         event.target
-      )
-
-      &&
-
+      ) &&
       event.target !==
       whatsappButton
-
     ){
 
       whatsappMenu.classList.remove(
