@@ -2,9 +2,11 @@
 <html lang="pt-BR">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Adam Games • Administração</title>
+
+<title>Adam Games • Admin</title>
 
 <style>
 
@@ -15,927 +17,1970 @@
 }
 
 body{
-  font-family:Arial,Helvetica,sans-serif;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
   color:#fff;
+
   min-height:100vh;
+
   background:
-    radial-gradient(circle at 15% 5%,#43aaff 0%,transparent 30%),
-    radial-gradient(circle at 90% 10%,#079b63 0%,transparent 25%),
-    linear-gradient(145deg,#087fe0,#031b3d 75%);
-  padding:20px 12px 60px;
+    radial-gradient(
+      circle at 15% 5%,
+      #43aaff 0%,
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 90% 10%,
+      #079b63 0%,
+      transparent 25%
+    ),
+    linear-gradient(
+      145deg,
+      #087fe0,
+      #031b3d 75%
+    );
+
+  padding:
+    20px
+    12px
+    70px;
 }
 
 .container{
-  max-width:1000px;
+
+  width:100%;
+  max-width:1100px;
   margin:auto;
+
 }
 
 button{
+
   border:0;
   cursor:pointer;
   color:#fff;
   font-weight:bold;
+
+}
+
+button:disabled{
+
+  opacity:.55;
+  cursor:not-allowed;
+
 }
 
 header{
+
   display:flex;
   justify-content:space-between;
   align-items:center;
   gap:15px;
+
   margin-bottom:25px;
+
 }
 
 .logo{
+
   display:flex;
   align-items:center;
   gap:12px;
+
 }
 
 .logoIcon{
-  width:58px;
-  height:58px;
-  border-radius:18px;
+
+  width:62px;
+  height:62px;
+
+  border-radius:19px;
+
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:30px;
-  background:linear-gradient(145deg,#168eff,#064b99);
+
+  font-size:31px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #168eff,
+      #064b99
+    );
+
+  box-shadow:
+    0 10px 25px
+    rgba(0,0,0,.18);
+
 }
 
 .logo h1{
+
   font-size:22px;
+
 }
 
 .logo span{
+
   color:#ffd32a;
+
 }
 
 .badge{
+
   display:inline-block;
+
   margin-top:5px;
-  padding:5px 9px;
+
+  padding:
+    5px
+    9px;
+
   border-radius:8px;
+
   background:#d99b12;
+
   font-size:11px;
   font-weight:bold;
+
 }
 
 .logout{
-  padding:12px 16px;
+
+  padding:
+    12px
+    17px;
+
   border-radius:12px;
+
   background:#17395f;
+
+}
+
+.refresh{
+
+  padding:
+    12px
+    17px;
+
+  border-radius:12px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #168fff,
+      #0563b5
+    );
+
+}
+
+.headerButtons{
+
+  display:flex;
+  gap:8px;
+
 }
 
 h2{
+
   font-size:38px;
   margin-bottom:6px;
+
 }
 
 .subtitle{
+
   color:#b7d4ed;
   margin-bottom:22px;
+
 }
 
 .card{
-  background:rgba(2,30,62,.94);
-  border:1px solid rgba(255,255,255,.1);
+
+  background:
+    rgba(
+      2,
+      30,
+      62,
+      .94
+    );
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      .1
+    );
+
   border-radius:22px;
+
   padding:20px;
+
   margin-bottom:18px;
-  box-shadow:0 15px 35px rgba(0,0,0,.18);
+
+  box-shadow:
+    0 15px 35px
+    rgba(
+      0,
+      0,
+      0,
+      .18
+    );
+
 }
 
 .card h3{
+
   margin-bottom:15px;
+
   font-size:20px;
+
 }
 
-.search{
+/* =========================
+   DASHBOARD
+========================= */
+
+.dashboard{
+
   display:grid;
-  grid-template-columns:1fr 130px;
+
+  grid-template-columns:
+    repeat(
+      4,
+      1fr
+    );
+
+  gap:12px;
+
+  margin-bottom:18px;
+
+}
+
+.dash{
+
+  min-height:145px;
+
+  padding:20px 10px;
+
+  border-radius:20px;
+
+  text-align:center;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      .055
+    );
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      .08
+    );
+
+}
+
+.dashIcon{
+
+  font-size:32px;
+
+}
+
+.dashNumber{
+
+  margin-top:8px;
+
+  font-size:34px;
+
+  font-weight:900;
+
+}
+
+.dashLabel{
+
+  margin-top:5px;
+
+  color:#9fc2dc;
+
+  font-size:11px;
+
+  font-weight:bold;
+
+}
+
+.dash.pending .dashNumber{
+
+  color:#ffd52b;
+
+}
+
+.dash.vip .dashNumber{
+
+  color:#ffd52b;
+
+}
+
+.dash.success .dashNumber{
+
+  color:#67ffad;
+
+}
+
+/* =========================
+   BUSCA
+========================= */
+
+.search{
+
+  display:grid;
+
+  grid-template-columns:
+    1fr
+    140px;
+
   gap:10px;
+
 }
 
 input,
 select{
+
   width:100%;
+
   height:50px;
-  border:1px solid rgba(255,255,255,.15);
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      .15
+    );
+
   border-radius:12px;
+
   background:#071f40;
+
   color:#fff;
-  padding:0 14px;
+
+  padding:
+    0
+    14px;
+
   font-size:15px;
+
   outline:none;
+
+}
+
+input:focus,
+select:focus{
+
+  border-color:#2da8ff;
+
 }
 
 .search button{
+
   border-radius:12px;
-  background:linear-gradient(135deg,#1c9aff,#006bd5);
-}
 
-.message{
-  margin-top:12px;
-  padding:12px;
-  border-radius:10px;
-  display:none;
-  font-size:14px;
-  line-height:1.4;
-}
+  background:
+    linear-gradient(
+      135deg,
+      #1c9aff,
+      #006bd5
+    );
 
-.success{
-  display:block;
-  background:rgba(0,220,110,.12);
-  color:#72ffae;
-}
-
-.error{
-  display:block;
-  background:rgba(255,50,70,.12);
-  color:#ff9ca8;
 }
 
 .warning{
+
   margin-top:10px;
+
   padding:11px;
+
   border-radius:11px;
-  background:rgba(255,193,7,.08);
-  border:1px solid rgba(255,193,7,.18);
+
+  background:
+    rgba(
+      255,
+      193,
+      7,
+      .08
+    );
+
+  border:
+    1px solid
+    rgba(
+      255,
+      193,
+      7,
+      .18
+    );
+
   color:#e8cf8a;
+
   font-size:12px;
+
   line-height:1.5;
+
 }
 
-/* =====================================================
-   ENTREGA GERAL
-===================================================== */
+/* =========================
+   MENSAGEM
+========================= */
+
+.message{
+
+  margin-top:12px;
+
+  padding:12px;
+
+  border-radius:10px;
+
+  display:none;
+
+  font-size:14px;
+
+  line-height:1.4;
+
+}
+
+.success{
+
+  display:block;
+
+  background:
+    rgba(
+      0,
+      220,
+      110,
+      .12
+    );
+
+  color:#72ffae;
+
+}
+
+.error{
+
+  display:block;
+
+  background:
+    rgba(
+      255,
+      50,
+      70,
+      .12
+    );
+
+  color:#ff9ca8;
+
+}
+
+/* =========================
+   ENTREGAS
+========================= */
 
 .delivery-summary{
+
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+
+  grid-template-columns:
+    repeat(
+      3,
+      1fr
+    );
+
   gap:12px;
+
 }
 
 .delivery-stat{
+
   padding:18px 10px;
+
   border-radius:17px;
+
   text-align:center;
-  background:rgba(255,255,255,.055);
-  border:1px solid rgba(255,255,255,.08);
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      .055
+    );
+
 }
 
 .delivery-stat-icon{
+
   font-size:27px;
+
 }
 
 .delivery-stat-number{
+
   margin-top:5px;
+
   font-size:30px;
+
   font-weight:900;
+
 }
 
 .delivery-stat-label{
+
   margin-top:4px;
+
   color:#9fc2dc;
+
   font-size:11px;
+
   font-weight:bold;
+
 }
 
-.delivery-stat.pending .delivery-stat-number{
+.delivery-stat.pending
+.delivery-stat-number{
+
   color:#ffd52b;
+
 }
 
-.delivery-stat.done .delivery-stat-number{
+.delivery-stat.done
+.delivery-stat-number{
+
   color:#67ffad;
+
 }
 
 .delivery-list{
+
   display:grid;
+
   gap:10px;
+
   margin-top:18px;
+
 }
 
 .delivery-item{
+
   padding:16px;
+
   border-radius:15px;
-  background:rgba(255,255,255,.045);
-  border:1px solid rgba(255,255,255,.07);
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      .045
+    );
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      .07
+    );
+
 }
 
-.delivery-item-top{
+.delivery-top{
+
   display:flex;
+
   justify-content:space-between;
+
   align-items:flex-start;
+
   gap:12px;
+
 }
 
 .delivery-title{
+
   font-size:16px;
+
   font-weight:900;
+
 }
 
 .delivery-user{
+
   margin-top:5px;
+
   color:#8fb7d4;
+
   font-size:12px;
+
 }
 
 .delivery-status{
+
   flex-shrink:0;
-  padding:6px 10px;
+
+  padding:
+    6px
+    10px;
+
   border-radius:20px;
+
   font-size:10px;
+
   font-weight:900;
+
 }
 
 .delivery-status.pending{
-  background:rgba(255,190,0,.15);
+
+  background:
+    rgba(
+      255,
+      190,
+      0,
+      .15
+    );
+
   color:#ffe27a;
+
 }
 
 .delivery-status.done{
-  background:rgba(0,220,100,.14);
+
+  background:
+    rgba(
+      0,
+      220,
+      100,
+      .14
+    );
+
   color:#6dffae;
+
 }
 
 .delivery-info{
+
   margin-top:10px;
+
   color:#a8c6dd;
+
   font-size:12px;
+
   line-height:1.6;
+
 }
 
 .delivery-info b{
+
   color:#e9f5ff;
+
 }
 
 .delivery-actions{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:9px;
-  margin-top:12px;
-}
 
-.delivery-open{
-  padding:12px;
-  border-radius:11px;
-  background:linear-gradient(135deg,#168fff,#0563b5);
+  display:grid;
+
+  grid-template-columns:
+    1fr
+    1fr
+    1fr;
+
+  gap:9px;
+
+  margin-top:12px;
+
 }
 
 .delivery-profile{
+
   padding:12px;
+
   border-radius:11px;
-  background:linear-gradient(135deg,#16bb69,#087b45);
+
+  background:
+    linear-gradient(
+      135deg,
+      #168fff,
+      #0563b5
+    );
+
+}
+
+.delivery-open{
+
+  padding:12px;
+
+  border-radius:11px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #16bb69,
+      #087b45
+    );
+
+}
+
+.delivery-complete{
+
+  padding:12px;
+
+  border-radius:11px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #d29a16,
+      #9d6800
+    );
+
 }
 
 .delivery-id{
+
   margin-top:9px;
+
   padding:7px;
+
   border-radius:8px;
-  background:rgba(0,0,0,.2);
+
+  background:
+    rgba(
+      0,
+      0,
+      0,
+      .2
+    );
+
   color:#72c9ff;
+
   font-size:10px;
+
   word-break:break-all;
+
 }
 
-/* =====================================================
+/* =========================
    USUÁRIO
-===================================================== */
+========================= */
 
 #userArea{
+
   display:none;
+
 }
 
 .user{
+
   display:flex;
+
   align-items:center;
+
   gap:15px;
+
   margin-bottom:20px;
+
 }
 
 .avatar{
+
   width:68px;
   height:68px;
+
   border-radius:19px;
+
   background:#ffd52b;
+
   color:#111;
+
   display:flex;
+
   align-items:center;
+
   justify-content:center;
+
   font-size:33px;
+
   flex-shrink:0;
+
 }
 
 .userName{
+
   font-size:22px;
+
   font-weight:bold;
+
 }
 
 .userEmail,
 .userId,
 .userUid{
+
   margin-top:4px;
+
   color:#a9c8e5;
+
   font-size:13px;
+
   word-break:break-all;
+
 }
 
 .status-row{
+
   display:flex;
+
   flex-wrap:wrap;
+
   gap:8px;
+
   margin-top:10px;
+
 }
 
 .status{
-  padding:6px 9px;
+
+  padding:
+    6px
+    9px;
+
   border-radius:9px;
+
   font-size:11px;
+
   font-weight:bold;
-  background:rgba(255,255,255,.08);
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      .08
+    );
+
 }
 
 .status.vip{
-  background:rgba(255,193,7,.2);
+
+  background:
+    rgba(
+      255,
+      193,
+      7,
+      .2
+    );
+
   color:#ffd84c;
+
 }
 
-.status.normal{
-  color:#a9c8e5;
-}
-
-/* =====================================================
+/* =========================
    DADOS
-===================================================== */
+========================= */
 
 .info-grid{
+
   display:grid;
-  grid-template-columns:1fr 1fr;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
   gap:10px;
+
   margin-bottom:20px;
+
 }
 
 .info-item{
+
   padding:12px;
+
   border-radius:13px;
-  background:rgba(255,255,255,.045);
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      .045
+    );
+
 }
 
 .info-label{
+
   color:#77a9cf;
+
   font-size:10px;
+
   font-weight:bold;
+
   text-transform:uppercase;
+
 }
 
 .info-value{
+
   margin-top:5px;
+
   font-size:14px;
+
   word-break:break-word;
+
 }
 
-/* =====================================================
+/* =========================
    SALDOS
-===================================================== */
+========================= */
 
 .balances{
+
   display:grid;
-  grid-template-columns:repeat(5,1fr);
+
+  grid-template-columns:
+    repeat(
+      5,
+      1fr
+    );
+
   gap:10px;
-  margin-bottom:22px;
+
 }
 
 .balance{
+
   text-align:center;
-  padding:15px 8px;
+
+  padding:
+    15px
+    8px;
+
   border-radius:15px;
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.05);
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      .05
+    );
+
 }
 
 .balanceIcon{
+
   font-size:26px;
+
 }
 
 .balanceName{
+
   color:#91b2cf;
+
   font-size:10px;
+
   font-weight:bold;
+
   margin-top:5px;
+
 }
 
 .balanceValue{
+
   font-size:18px;
+
   font-weight:bold;
+
   margin-top:5px;
+
 }
 
-/* =====================================================
-   ROLETA
-===================================================== */
-
-.roleta-card{
-  position:relative;
-  overflow:hidden;
-  border:1px solid rgba(255,213,42,.32);
-  background:
-    radial-gradient(circle at 100% 0%,rgba(255,213,42,.16),transparent 35%),
-    linear-gradient(145deg,rgba(8,61,104,.98),rgba(2,30,62,.98));
-}
-
-.roleta-card::before{
-  content:"";
-  position:absolute;
-  left:0;
-  top:0;
-  width:5px;
-  height:100%;
-  background:linear-gradient(180deg,#ffd52a,#ff8c00);
-}
-
-.roleta-header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
-  margin-bottom:18px;
-}
-
-.roleta-title{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-
-.roleta-icon{
-  width:52px;
-  height:52px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:15px;
-  background:linear-gradient(135deg,#ffd52a,#e78a00);
-  font-size:27px;
-}
-
-.roleta-title h3{
-  margin:0;
-  font-size:20px;
-}
-
-.roleta-title p{
-  margin-top:4px;
-  color:#9ec7e5;
-  font-size:12px;
-}
-
-.roleta-saldo{
-  min-width:105px;
-  padding:10px 14px;
-  text-align:center;
-  border-radius:15px;
-  background:rgba(255,213,42,.1);
-  border:1px solid rgba(255,213,42,.22);
-}
-
-.roleta-saldo-label{
-  color:#b8d2e6;
-  font-size:9px;
-  font-weight:bold;
-}
-
-.roleta-saldo-value{
-  margin-top:2px;
-  color:#ffd52a;
-  font-size:24px;
-  font-weight:900;
-}
-
-.roleta-form{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-}
-
-.roleta-field label{
-  display:block;
-  color:#a9c8e5;
-  font-size:11px;
-  font-weight:bold;
-  margin-bottom:6px;
-}
-
-.roleta-actions{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin-top:12px;
-}
-
-.roleta-add{
-  padding:14px;
-  border-radius:12px;
-  background:linear-gradient(135deg,#0dbb69,#087b43);
-}
-
-.roleta-remove{
-  padding:14px;
-  border-radius:12px;
-  background:linear-gradient(135deg,#d52e47,#a6172d);
-}
-
-.roleta-info{
-  margin-top:12px;
-  padding:11px;
-  border-radius:11px;
-  color:#b8d1e4;
-  background:rgba(255,255,255,.04);
-  font-size:11px;
-  line-height:1.5;
-}
-
-/* =====================================================
-   MOVIMENTAÇÃO
-===================================================== */
+/* =========================
+   FORM
+========================= */
 
 .form{
+
   display:grid;
-  grid-template-columns:1fr 1fr;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
   gap:12px;
+
 }
 
 .field label{
+
   display:block;
+
   color:#a9c8e5;
+
   font-size:11px;
+
   font-weight:bold;
+
   margin-bottom:6px;
+
 }
 
 .full{
+
   grid-column:1/-1;
+
 }
 
 .actions{
+
   display:grid;
-  grid-template-columns:1fr 1fr;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
   gap:10px;
+
   margin-top:15px;
+
 }
 
 .add{
-  background:linear-gradient(135deg,#0ba85a,#087a42);
+
+  background:
+    linear-gradient(
+      135deg,
+      #0ba85a,
+      #087a42
+    );
+
   padding:14px;
+
   border-radius:12px;
+
 }
 
 .remove{
-  background:linear-gradient(135deg,#d72d47,#a8172d);
+
+  background:
+    linear-gradient(
+      135deg,
+      #d72d47,
+      #a8172d
+    );
+
   padding:14px;
+
   border-radius:12px;
+
 }
 
 .special{
+
   display:grid;
-  grid-template-columns:1fr 1fr;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
   gap:10px;
+
   margin-top:10px;
+
 }
 
-.vip{
+.vipButton{
+
   padding:14px;
+
   border-radius:12px;
-  background:linear-gradient(135deg,#d29a16,#9d6800);
+
+  background:
+    linear-gradient(
+      135deg,
+      #d29a16,
+      #9d6800
+    );
+
 }
 
-.box{
+.boxButton{
+
   padding:14px;
+
   border-radius:12px;
-  background:linear-gradient(135deg,#118eea,#0562ad);
+
+  background:
+    linear-gradient(
+      135deg,
+      #118eea,
+      #0562ad
+    );
+
 }
 
-/* =====================================================
+/* =========================
+   ROLETA
+========================= */
+
+.roleta-card{
+
+  border:
+    1px solid
+    rgba(
+      255,
+      213,
+      42,
+      .32
+    );
+
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(
+        255,
+        213,
+        42,
+        .16
+      ),
+      transparent 35%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(
+        8,
+        61,
+        104,
+        .98
+      ),
+      rgba(
+        2,
+        30,
+        62,
+        .98
+      )
+    );
+
+}
+
+.roleta-header{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:15px;
+
+  margin-bottom:18px;
+
+}
+
+.roleta-title{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:12px;
+
+}
+
+.roleta-icon{
+
+  width:52px;
+  height:52px;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  border-radius:15px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffd52a,
+      #e78a00
+    );
+
+  font-size:27px;
+
+}
+
+.roleta-title h3{
+
+  margin:0;
+
+}
+
+.roleta-title p{
+
+  margin-top:4px;
+
+  color:#9ec7e5;
+
+  font-size:12px;
+
+}
+
+.roleta-saldo{
+
+  min-width:105px;
+
+  padding:
+    10px
+    14px;
+
+  text-align:center;
+
+  border-radius:15px;
+
+  background:
+    rgba(
+      255,
+      213,
+      42,
+      .1
+    );
+
+}
+
+.roleta-saldo-label{
+
+  color:#b8d2e6;
+
+  font-size:9px;
+
+  font-weight:bold;
+
+}
+
+.roleta-saldo-value{
+
+  margin-top:2px;
+
+  color:#ffd52a;
+
+  font-size:24px;
+
+  font-weight:900;
+
+}
+
+.roleta-form{
+
+  display:grid;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
+  gap:12px;
+
+}
+
+.roleta-field label{
+
+  display:block;
+
+  color:#a9c8e5;
+
+  font-size:11px;
+
+  font-weight:bold;
+
+  margin-bottom:6px;
+
+}
+
+.roleta-actions{
+
+  display:grid;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
+  gap:10px;
+
+  margin-top:12px;
+
+}
+
+.roleta-add{
+
+  padding:14px;
+
+  border-radius:12px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #0dbb69,
+      #087b43
+    );
+
+}
+
+.roleta-remove{
+
+  padding:14px;
+
+  border-radius:12px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #d52e47,
+      #a6172d
+    );
+
+}
+
+/* =========================
    HISTÓRICO
-===================================================== */
+========================= */
 
 .history{
+
   margin-top:22px;
+
 }
 
 .historyItem{
+
   padding:15px;
+
   margin-top:9px;
+
   border-radius:14px;
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.06);
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      .05
+    );
+
 }
 
 .historyTop{
+
   display:flex;
+
   justify-content:space-between;
+
   gap:10px;
+
   font-weight:bold;
+
 }
 
 .historyDate{
+
   color:#75d4ff;
+
   font-size:12px;
+
   text-align:right;
+
 }
 
 .plus{
+
   color:#65ff9c;
+
 }
 
 .minus{
+
   color:#ff7382;
+
 }
 
 .historyInfo{
+
   color:#9dbbd3;
+
   font-size:12px;
+
   margin-top:8px;
+
   line-height:1.6;
+
 }
 
 .operation-id{
+
   margin-top:8px;
+
   padding:7px 9px;
+
   border-radius:8px;
-  background:rgba(0,0,0,.2);
+
+  background:
+    rgba(
+      0,
+      0,
+      0,
+      .2
+    );
+
   color:#7fc9ff;
+
   font-size:11px;
+
   word-break:break-all;
+
 }
 
 .empty{
-  padding:15px;
+
+  padding:18px;
+
   border-radius:12px;
-  background:rgba(255,255,255,.04);
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      .04
+    );
+
   color:#9dbbd3;
+
   text-align:center;
+
 }
 
-/* =====================================================
-   MODAL PERFIL
-===================================================== */
+/* =========================
+   VALE PRESENTE
+========================= */
 
-.modal{
-  position:fixed;
-  inset:0;
-  z-index:9999;
-  display:none;
+.voucher-card{
+
+  border:
+    1px solid
+    rgba(
+      255,
+      213,
+      42,
+      .3
+    );
+
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(
+        255,
+        213,
+        42,
+        .15
+      ),
+      transparent 40%
+    ),
+    rgba(
+      2,
+      30,
+      62,
+      .95
+    );
+
+}
+
+.voucher-title{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:12px;
+
+  margin-bottom:16px;
+
+}
+
+.voucher-icon{
+
+  width:55px;
+  height:55px;
+
+  display:flex;
+
   align-items:center;
   justify-content:center;
-  padding:15px;
-  background:rgba(0,8,20,.82);
-  backdrop-filter:blur(7px);
-  overflow:auto;
-}
 
-.modal.show{
-  display:flex;
-}
-
-.modal-card{
-  width:100%;
-  max-width:850px;
-  max-height:92vh;
-  overflow:auto;
-  padding:22px;
-  border-radius:23px;
-  background:#061e3b;
-  border:1px solid rgba(255,255,255,.12);
-  box-shadow:0 30px 70px rgba(0,0,0,.45);
-}
-
-.modal-header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  margin-bottom:18px;
-}
-
-.modal-header h3{
-  font-size:22px;
-}
-
-.close-modal{
-  width:42px;
-  height:42px;
-  border-radius:12px;
-  background:#17395f;
-  font-size:22px;
-}
-
-.modal-profile{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  padding:15px;
   border-radius:16px;
-  background:rgba(255,255,255,.05);
+
+  font-size:28px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffd52a,
+      #d48b00
+    );
+
 }
 
-.modal-avatar{
-  width:60px;
-  height:60px;
-  border-radius:17px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#ffd52b;
-  color:#111;
-  font-size:30px;
-}
+.voucher-form{
 
-.modal-name{
-  font-size:20px;
-  font-weight:900;
-}
-
-.modal-email{
-  margin-top:4px;
-  color:#9fc5df;
-  font-size:12px;
-}
-
-.modal-grid{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-  margin-top:15px;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
+  gap:12px;
+
 }
 
-.modal-stat{
-  padding:14px 8px;
-  border-radius:14px;
-  text-align:center;
-  background:rgba(255,255,255,.05);
-}
+.generateVoucher{
 
-.modal-stat-number{
-  font-size:24px;
-  font-weight:900;
-}
+  width:100%;
 
-.modal-stat-label{
-  margin-top:4px;
-  color:#91b2cf;
-  font-size:10px;
-  font-weight:bold;
-}
+  margin-top:12px;
 
-.modal-section{
-  margin-top:18px;
-}
+  padding:15px;
 
-.modal-section h4{
-  margin-bottom:10px;
-  font-size:17px;
-}
-
-.modal-delivery{
-  display:grid;
-  gap:9px;
-}
-
-.modal-delivery-item{
-  padding:13px;
   border-radius:13px;
-  background:rgba(255,255,255,.045);
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffd52a,
+      #d88b00
+    );
+
+  color:#111;
+
 }
 
-.modal-delivery-title{
-  font-weight:bold;
+.voucher-result{
+
+  display:none;
+
+  margin-top:16px;
+
+  padding:17px;
+
+  border-radius:16px;
+
+  background:
+    rgba(
+      255,
+      213,
+      42,
+      .08
+    );
+
+  border:
+    1px solid
+    rgba(
+      255,
+      213,
+      42,
+      .2
+    );
+
 }
 
-.modal-delivery-meta{
-  margin-top:5px;
-  color:#9dbbd3;
-  font-size:11px;
-  line-height:1.5;
-}
+.voucher-code{
 
-.modal-buttons{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin-top:15px;
-}
+  margin-top:8px;
 
-.modal-buttons button{
-  padding:13px;
+  padding:15px;
+
   border-radius:12px;
+
+  background:#061a34;
+
+  color:#ffd52a;
+
+  font-size:24px;
+
+  font-weight:900;
+
+  letter-spacing:3px;
+
+  text-align:center;
+
+  word-break:break-all;
+
 }
 
-.open-client{
-  background:linear-gradient(135deg,#168fff,#0563b5);
+.voucher-buttons{
+
+  display:grid;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
+  gap:10px;
+
+  margin-top:10px;
+
 }
 
-.open-delivery{
-  background:linear-gradient(135deg,#16bb69,#087b45);
+.copyVoucher{
+
+  padding:13px;
+
+  border-radius:11px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #168fff,
+      #0563b5
+    );
+
 }
 
-/* =====================================================
+.newVoucher{
+
+  padding:13px;
+
+  border-radius:11px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #16bb69,
+      #087b45
+    );
+
+}
+
+.voucher-list{
+
+  margin-top:18px;
+
+  display:grid;
+
+  gap:9px;
+
+}
+
+.voucher-item{
+
+  padding:14px;
+
+  border-radius:13px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      .045
+    );
+
+}
+
+.voucher-code-small{
+
+  color:#ffd52a;
+
+  font-weight:900;
+
+  letter-spacing:1px;
+
+}
+
+.voucher-meta{
+
+  margin-top:5px;
+
+  color:#9dbbd3;
+
+  font-size:11px;
+
+  line-height:1.5;
+
+}
+
+/* =========================
    RESPONSIVO
-===================================================== */
+========================= */
 
-@media(max-width:700px){
+@media(max-width:800px){
 
-  h2{
-    font-size:32px;
-  }
+  .dashboard{
 
-  .search{
-    grid-template-columns:1fr;
-  }
+    grid-template-columns:
+      1fr
+      1fr;
 
-  .search button{
-    height:50px;
   }
 
   .balances{
-    grid-template-columns:repeat(2,1fr);
+
+    grid-template-columns:
+      repeat(
+        2,
+        1fr
+      );
+
   }
 
-  .roleta-header{
+}
+
+@media(max-width:600px){
+
+  header{
+
     align-items:flex-start;
+
   }
 
-  .roleta-form{
-    grid-template-columns:1fr;
+  .headerButtons{
+
+    flex-direction:column;
+
   }
 
-  .roleta-actions{
-    grid-template-columns:1fr;
+  h2{
+
+    font-size:32px;
+
   }
 
-  .form{
-    grid-template-columns:1fr;
+  .search{
+
+    grid-template-columns:
+      1fr;
+
+  }
+
+  .form,
+  .roleta-form,
+  .voucher-form,
+  .info-grid{
+
+    grid-template-columns:
+      1fr;
+
   }
 
   .full{
+
     grid-column:auto;
+
   }
 
   .actions,
   .special,
-  .delivery-actions,
-  .modal-buttons{
-    grid-template-columns:1fr;
+  .roleta-actions,
+  .voucher-buttons{
+
+    grid-template-columns:
+      1fr;
+
   }
 
-  .info-grid{
-    grid-template-columns:1fr;
+  .delivery-actions{
+
+    grid-template-columns:
+      1fr;
+
   }
 
-  .delivery-summary,
-  .modal-grid{
-    grid-template-columns:1fr 1fr 1fr;
-  }
+  .delivery-top{
 
-  .delivery-item-top{
     flex-direction:column;
+
   }
 
 }
 
 </style>
+
 </head>
 
 <body>
 
 <div class="container">
 
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
 <header>
 
   <div class="logo">
 
-    <div class="logoIcon">👑</div>
+    <div class="logoIcon">
+      👑
+    </div>
 
     <div>
 
-      <h1>ADAM <span>GAMES</span></h1>
+      <h1>
+        ADAM <span>GAMES</span>
+      </h1>
 
-      <div class="badge">👑 ADMINISTRADOR</div>
+      <div class="badge">
+        👑 ADMINISTRADOR
+      </div>
 
     </div>
 
   </div>
 
-  <button class="logout" id="logout" type="button">
-    ↪️ Sair
-  </button>
+  <div class="headerButtons">
+
+    <button
+      class="refresh"
+      id="refreshAll"
+      type="button">
+
+      🔄 Atualizar
+
+    </button>
+
+    <button
+      class="logout"
+      id="logout"
+      type="button">
+
+      ↪️ Sair
+
+    </button>
+
+  </div>
 
 </header>
 
-<h2>Painel Admin</h2>
+<h2>
+  Painel Admin
+</h2>
 
 <p class="subtitle">
-  Gerenciamento de usuários, prêmios e entregas.
+  Gerenciamento completo do Adam Games.
 </p>
+
+
+<!-- =====================================================
+     DASHBOARD
+===================================================== -->
+
+<div class="dashboard">
+
+  <div class="dash">
+
+    <div class="dashIcon">
+      👥
+    </div>
+
+    <div
+      class="dashNumber"
+      id="totalUsuarios">
+
+      0
+
+    </div>
+
+    <div class="dashLabel">
+      USUÁRIOS CADASTRADOS
+    </div>
+
+  </div>
+
+
+  <div class="dash">
+
+    <div class="dashIcon">
+      🎁
+    </div>
+
+    <div
+      class="dashNumber"
+      id="totalPremios">
+
+      0
+
+    </div>
+
+    <div class="dashLabel">
+      PRÊMIOS
+    </div>
+
+  </div>
+
+
+  <div class="dash pending">
+
+    <div class="dashIcon">
+      ⏳
+    </div>
+
+    <div
+      class="dashNumber"
+      id="totalPendentes">
+
+      0
+
+    </div>
+
+    <div class="dashLabel">
+      PENDENTES
+    </div>
+
+  </div>
+
+
+  <div class="dash vip">
+
+    <div class="dashIcon">
+      👑
+    </div>
+
+    <div
+      class="dashNumber"
+      id="totalVip">
+
+      0
+
+    </div>
+
+    <div class="dashLabel">
+      USUÁRIOS VIP
+    </div>
+
+  </div>
+
+</div>
+
 
 <!-- =====================================================
      BUSCA
@@ -943,49 +1988,70 @@ select{
 
 <div class="card">
 
-  <h3>🔎 Localizar usuário</h3>
+  <h3>
+    🔎 Localizar usuário
+  </h3>
 
   <div class="search">
 
     <input
       id="searchInput"
       type="text"
-      placeholder="Digite o ID Adam Games ou o e-mail"
+      placeholder="ID Adam Games, e-mail ou UID"
       autocomplete="off"
     >
 
-    <button id="buscar" type="button">
+    <button
+      id="buscar"
+      type="button">
+
       🔍 Buscar
+
     </button>
 
   </div>
 
   <div class="warning">
-    Pesquise pelo <strong>ID Adam Games</strong> ou pelo
-    <strong>e-mail cadastrado</strong>.
+
+    Pesquise pelo
+    <strong>ID Adam Games</strong>,
+    <strong>e-mail</strong>
+    ou
+    <strong>UID Firebase</strong>.
+
   </div>
 
-  <div id="searchMessage" class="message"></div>
+  <div
+    id="searchMessage"
+    class="message">
+  </div>
 
 </div>
 
+
 <!-- =====================================================
-     ÁREA GERAL DE ENTREGAS
+     ENTREGAS
 ===================================================== -->
 
-<div class="card">
+<div
+  class="card"
+  id="entregasSection">
 
-  <h3>📦 Prêmios a entregar</h3>
+  <h3>
+    📦 Prêmios
+  </h3>
 
   <div class="delivery-summary">
 
     <div class="delivery-stat">
 
-      <div class="delivery-stat-icon">📦</div>
+      <div class="delivery-stat-icon">
+        📦
+      </div>
 
       <div
         class="delivery-stat-number"
-        id="totalEntregas">
+        id="entregaTotal">
 
         0
 
@@ -997,13 +2063,15 @@ select{
 
     </div>
 
-    <div class="delivery-stat pending">
+    <div class="delivery-stat">
 
-      <div class="delivery-stat-icon">⏳</div>
+      <div class="delivery-stat-icon">
+        ⏳
+      </div>
 
       <div
         class="delivery-stat-number"
-        id="totalPendentes">
+        id="entregaPendente">
 
         0
 
@@ -1015,13 +2083,15 @@ select{
 
     </div>
 
-    <div class="delivery-stat done">
+    <div class="delivery-stat">
 
-      <div class="delivery-stat-icon">✅</div>
+      <div class="delivery-stat-icon">
+        ✅
+      </div>
 
       <div
         class="delivery-stat-number"
-        id="totalEntregues">
+        id="entregaEntregue">
 
         0
 
@@ -1052,151 +2122,593 @@ select{
 
 </div>
 
+
 <!-- =====================================================
      USUÁRIO
 ===================================================== -->
 
 <div id="userArea">
 
-<div class="card">
+  <div class="card">
 
-  <div class="user">
+    <div class="user">
 
-    <div class="avatar" id="avatar">🙂</div>
+      <div
+        class="avatar"
+        id="avatar">
+
+        🙂
+
+      </div>
+
+      <div>
+
+        <div
+          class="userName"
+          id="nome">
+
+          —
+
+        </div>
+
+        <div
+          class="userEmail"
+          id="email">
+
+          —
+
+        </div>
+
+        <div
+          class="userId"
+          id="id">
+
+          —
+
+        </div>
+
+        <div
+          class="userUid"
+          id="uid">
+
+          UID: —
+
+        </div>
+
+        <div class="status-row">
+
+          <span
+            class="status"
+            id="vipStatus">
+
+            ⭐ NÃO VIP
+
+          </span>
+
+          <span
+            class="status"
+            id="boxStatus">
+
+            🎁 CAIXA DISPONÍVEL
+
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="info-grid">
+
+      <div class="info-item">
+
+        <div class="info-label">
+          Nome
+        </div>
+
+        <div
+          class="info-value"
+          id="infoNome">
+
+          —
+
+        </div>
+
+      </div>
+
+
+      <div class="info-item">
+
+        <div class="info-label">
+          E-mail
+        </div>
+
+        <div
+          class="info-value"
+          id="infoEmail">
+
+          —
+
+        </div>
+
+      </div>
+
+
+      <div class="info-item">
+
+        <div class="info-label">
+          ID Adam Games
+        </div>
+
+        <div
+          class="info-value"
+          id="infoId">
+
+          —
+
+        </div>
+
+      </div>
+
+
+      <div class="info-item">
+
+        <div class="info-label">
+          UID Firebase
+        </div>
+
+        <div
+          class="info-value"
+          id="infoUid">
+
+          —
+
+        </div>
+
+      </div>
+
+
+      <div class="info-item">
+
+        <div class="info-label">
+          Idade
+        </div>
+
+        <div
+          class="info-value"
+          id="infoIdade">
+
+          Não informado
+
+        </div>
+
+      </div>
+
+
+      <div class="info-item">
+
+        <div class="info-label">
+          Telefone
+        </div>
+
+        <div
+          class="info-value"
+          id="infoTelefone">
+
+          Não informado
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <h3>
+      📊 Recursos atuais
+    </h3>
+
+    <div class="balances">
+
+      <div class="balance">
+
+        <div class="balanceIcon">
+          🎟️
+        </div>
+
+        <div class="balanceName">
+          CHANCES
+        </div>
+
+        <div
+          class="balanceValue"
+          id="chances">
+
+          0
+
+        </div>
+
+      </div>
+
+
+      <div class="balance">
+
+        <div class="balanceIcon">
+          🎰
+        </div>
+
+        <div class="balanceName">
+          GIROS ROLETA
+        </div>
+
+        <div
+          class="balanceValue"
+          id="girosRoleta">
+
+          0
+
+        </div>
+
+      </div>
+
+
+      <div class="balance">
+
+        <div class="balanceIcon">
+          🪙
+        </div>
+
+        <div class="balanceName">
+          MOEDAS
+        </div>
+
+        <div
+          class="balanceValue"
+          id="moedas">
+
+          0
+
+        </div>
+
+      </div>
+
+
+      <div class="balance">
+
+        <div class="balanceIcon">
+          🔑
+        </div>
+
+        <div class="balanceName">
+          CHAVES
+        </div>
+
+        <div
+          class="balanceValue"
+          id="chaves">
+
+          0
+
+        </div>
+
+      </div>
+
+
+      <div class="balance">
+
+        <div class="balanceIcon">
+          💎
+        </div>
+
+        <div class="balanceName">
+          CRÉDITOS
+        </div>
+
+        <div
+          class="balanceValue"
+          id="creditos">
+
+          R$ 0,00
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ===================================================
+       ROLETA
+  ==================================================== -->
+
+  <div class="card roleta-card">
+
+    <div class="roleta-header">
+
+      <div class="roleta-title">
+
+        <div class="roleta-icon">
+          🎰
+        </div>
+
+        <div>
+
+          <h3>
+            Giros da Roleta
+          </h3>
+
+          <p>
+            Saldo exclusivo para a Roleta Adam Games.
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="roleta-saldo">
+
+        <div class="roleta-saldo-label">
+          GIROS ATUAIS
+        </div>
+
+        <div
+          class="roleta-saldo-value"
+          id="roletaSaldo">
+
+          0
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="roleta-form">
+
+      <div class="roleta-field">
+
+        <label>
+          QUANTIDADE DE GIROS
+        </label>
+
+        <input
+          id="quantidadeGiros"
+          type="number"
+          min="1"
+          step="1"
+          placeholder="Ex.: 5"
+        >
+
+      </div>
+
+
+      <div class="roleta-field">
+
+        <label>
+          MOTIVO — OBRIGATÓRIO
+        </label>
+
+        <input
+          id="motivoGiros"
+          type="text"
+          maxlength="150"
+          placeholder="Ex.: Bônus de compra"
+        >
+
+      </div>
+
+    </div>
+
+
+    <div class="roleta-actions">
+
+      <button
+        class="roleta-add"
+        id="adicionarGiros"
+        type="button">
+
+        🎰 ADICIONAR GIROS
+
+      </button>
+
+      <button
+        class="roleta-remove"
+        id="removerGiros"
+        type="button">
+
+        ➖ REMOVER GIROS
+
+      </button>
+
+    </div>
+
+    <div
+      id="roletaMessage"
+      class="message">
+    </div>
+
+  </div>
+
+
+  <!-- ===================================================
+       MOVIMENTAÇÃO
+  ==================================================== -->
+
+  <div class="card">
+
+    <h3>
+      🎁 Fazer movimentação
+    </h3>
+
+    <div class="form">
+
+      <div class="field">
+
+        <label>
+          ITEM
+        </label>
+
+        <select id="item">
+
+          <option value="chances">
+            🎟️ Chances
+          </option>
+
+          <option value="moedas">
+            🪙 Moedas
+          </option>
+
+          <option value="chaves">
+            🔑 Chaves
+          </option>
+
+          <option value="creditos">
+            💎 Créditos
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          QUANTIDADE
+        </label>
+
+        <input
+          id="quantidade"
+          type="number"
+          min="0.01"
+          step="0.01"
+          placeholder="Quantidade"
+        >
+
+      </div>
+
+
+      <div class="field full">
+
+        <label>
+          MOTIVO — OBRIGATÓRIO
+        </label>
+
+        <input
+          id="motivo"
+          type="text"
+          maxlength="150"
+          placeholder="Ex.: Compra realizada pelo WhatsApp"
+        >
+
+      </div>
+
+    </div>
+
+
+    <div class="actions">
+
+      <button
+        class="add"
+        id="adicionar"
+        type="button">
+
+        ➕ ADICIONAR
+
+      </button>
+
+      <button
+        class="remove"
+        id="remover"
+        type="button">
+
+        ➖ REMOVER
+
+      </button>
+
+    </div>
+
+
+    <div class="special">
+
+      <button
+        class="vipButton"
+        id="vip"
+        type="button">
+
+        👑 Alterar VIP
+
+      </button>
+
+      <button
+        class="boxButton"
+        id="box"
+        type="button">
+
+        🎁 Alterar Caixa
+
+      </button>
+
+    </div>
+
+
+    <div
+      id="operationMessage"
+      class="message">
+    </div>
+
+
+    <div class="history">
+
+      <h3>
+        📜 Extrato do usuário
+      </h3>
+
+      <div id="historyList">
+
+        <div class="empty">
+          Nenhuma movimentação carregada.
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     VALE PRESENTE
+===================================================== -->
+
+<div class="card voucher-card">
+
+  <div class="voucher-title">
+
+    <div class="voucher-icon">
+      🎫
+    </div>
 
     <div>
 
-      <div class="userName" id="nome">—</div>
-
-      <div class="userEmail" id="email">—</div>
-
-      <div class="userId" id="id">—</div>
-
-      <div class="userUid" id="uid">UID: —</div>
-
-      <div class="status-row">
-
-        <span class="status normal" id="vipStatus">
-          ⭐ NÃO VIP
-        </span>
-
-        <span class="status" id="boxStatus">
-          🎁 CAIXA
-        </span>
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <div class="info-grid">
-
-    <div class="info-item">
-      <div class="info-label">Nome</div>
-      <div class="info-value" id="infoNome">—</div>
-    </div>
-
-    <div class="info-item">
-      <div class="info-label">E-mail</div>
-      <div class="info-value" id="infoEmail">—</div>
-    </div>
-
-    <div class="info-item">
-      <div class="info-label">ID Adam Games</div>
-      <div class="info-value" id="infoId">—</div>
-    </div>
-
-    <div class="info-item">
-      <div class="info-label">UID Firebase</div>
-      <div class="info-value" id="infoUid">—</div>
-    </div>
-
-    <div class="info-item">
-      <div class="info-label">Idade</div>
-      <div class="info-value" id="infoIdade">Não informado</div>
-    </div>
-
-    <div class="info-item">
-      <div class="info-label">Telefone</div>
-      <div class="info-value" id="infoTelefone">Não informado</div>
-    </div>
-
-  </div>
-
-  <h3>📊 Recursos atuais</h3>
-
-  <div class="balances">
-
-    <div class="balance">
-      <div class="balanceIcon">🎟️</div>
-      <div class="balanceName">CHANCES</div>
-      <div class="balanceValue" id="chances">0</div>
-    </div>
-
-    <div class="balance">
-      <div class="balanceIcon">🎰</div>
-      <div class="balanceName">GIROS ROLETA</div>
-      <div class="balanceValue" id="girosRoleta">0</div>
-    </div>
-
-    <div class="balance">
-      <div class="balanceIcon">🪙</div>
-      <div class="balanceName">MOEDAS</div>
-      <div class="balanceValue" id="moedas">0</div>
-    </div>
-
-    <div class="balance">
-      <div class="balanceIcon">🔑</div>
-      <div class="balanceName">CHAVES</div>
-      <div class="balanceValue" id="chaves">0</div>
-    </div>
-
-    <div class="balance">
-      <div class="balanceIcon">💎</div>
-      <div class="balanceName">CRÉDITOS</div>
-      <div class="balanceValue" id="creditos">R$ 0,00</div>
-    </div>
-
-  </div>
-
-</div>
-
-<!-- =====================================================
-     ROLETA
-===================================================== -->
-
-<div class="card roleta-card">
-
-  <div class="roleta-header">
-
-    <div class="roleta-title">
-
-      <div class="roleta-icon">🎰</div>
-
-      <div>
-
-        <h3>Giros da Roleta</h3>
-
-        <p>
-          Saldo exclusivo para a Roleta Adam Games.
-        </p>
-
-      </div>
-
-    </div>
-
-    <div class="roleta-saldo">
-
-      <div class="roleta-saldo-label">
-        GIROS ATUAIS
-      </div>
+      <h3>
+        Vale Presente
+      </h3>
 
       <div
-        class="roleta-saldo-value"
-        id="roletaSaldo">
+        style="
+          color:#9ec7e5;
+          font-size:12px;
+        ">
 
-        0
+        Gere códigos para os clientes Adam Games.
 
       </div>
 
@@ -1204,293 +2716,107 @@ select{
 
   </div>
 
-  <div class="roleta-form">
 
-    <div class="roleta-field">
-
-      <label>QUANTIDADE DE GIROS</label>
-
-      <input
-        id="quantidadeGiros"
-        type="number"
-        min="1"
-        step="1"
-        placeholder="Ex.: 5"
-      >
-
-    </div>
-
-    <div class="roleta-field">
-
-      <label>MOTIVO — OBRIGATÓRIO</label>
-
-      <input
-        id="motivoGiros"
-        type="text"
-        maxlength="150"
-        placeholder="Ex.: Bônus de compra"
-      >
-
-    </div>
-
-  </div>
-
-  <div class="roleta-actions">
-
-    <button class="roleta-add" id="adicionarGiros" type="button">
-      🎰 ADICIONAR GIROS
-    </button>
-
-    <button class="roleta-remove" id="removerGiros" type="button">
-      ➖ REMOVER GIROS
-    </button>
-
-  </div>
-
-  <div class="roleta-info">
-    🎰 <strong>Importante:</strong>
-    os Giros da Roleta são totalmente separados das Chances.
-  </div>
-
-  <div id="roletaMessage" class="message"></div>
-
-</div>
-
-<!-- =====================================================
-     MOVIMENTAÇÃO NORMAL
-===================================================== -->
-
-<div class="card">
-
-  <h3>🎁 Fazer movimentação</h3>
-
-  <div class="form">
+  <div class="voucher-form">
 
     <div class="field">
 
-      <label>ITEM</label>
-
-      <select id="item">
-
-        <option value="chances">🎟️ Chances</option>
-
-        <option value="moedas">🪙 Moedas</option>
-
-        <option value="chaves">🔑 Chaves</option>
-
-        <option value="creditos">💎 Créditos</option>
-
-      </select>
-
-    </div>
-
-    <div class="field">
-
-      <label>QUANTIDADE</label>
+      <label>
+        VALOR DO VALE
+      </label>
 
       <input
-        id="quantidade"
+        id="voucherValor"
         type="number"
         min="0.01"
         step="0.01"
-        placeholder="Quantidade"
+        placeholder="Ex.: 50"
       >
 
     </div>
 
-    <div class="field full">
 
-      <label>MOTIVO — OBRIGATÓRIO</label>
+    <div class="field">
+
+      <label>
+        DESCRIÇÃO
+      </label>
 
       <input
-        id="motivo"
+        id="voucherDescricao"
         type="text"
-        maxlength="150"
-        placeholder="Ex.: Compra realizada pelo WhatsApp"
+        maxlength="100"
+        placeholder="Ex.: Vale promoção"
       >
 
     </div>
 
   </div>
 
-  <div class="actions">
 
-    <button class="add" id="adicionar" type="button">
-      ➕ ADICIONAR
-    </button>
+  <button
+    class="generateVoucher"
+    id="generateVoucher"
+    type="button">
 
-    <button class="remove" id="remover" type="button">
-      ➖ REMOVER
-    </button>
+    🎫 GERAR VALE PRESENTE
 
-  </div>
+  </button>
 
-  <div class="special">
 
-    <button class="vip" id="vip" type="button">
-      👑 Alterar VIP
-    </button>
+  <div
+    class="voucher-result"
+    id="voucherResult">
 
-    <button class="box" id="box" type="button">
-      🎁 Alterar Caixa
-    </button>
+    <div
+      style="
+        color:#b8d2e6;
+        font-size:11px;
+        font-weight:bold;
+      ">
 
-  </div>
-
-  <div id="operationMessage" class="message"></div>
-
-  <!-- ===================================================
-       HISTÓRICO
-  ==================================================== -->
-
-  <div class="history">
-
-    <h3>📜 Extrato do usuário</h3>
-
-    <div id="historyList">
-
-      <div class="empty">
-        Nenhuma movimentação carregada.
-      </div>
+      CÓDIGO GERADO
 
     </div>
 
-  </div>
+    <div
+      class="voucher-code"
+      id="voucherCode">
 
-</div>
+      ---------------
 
-</div>
+    </div>
 
-</div>
+    <div
+      style="
+        margin-top:8px;
+        color:#9dbbd3;
+        font-size:11px;
+        text-align:center;
+      ">
 
-<!-- =====================================================
-     MODAL PERFIL COMPLETO
-===================================================== -->
+      Exatamente 15 caracteres • letras + números
 
-<div class="modal" id="profileModal">
+    </div>
 
-  <div class="modal-card">
 
-    <div class="modal-header">
-
-      <h3>👤 Perfil completo do cliente</h3>
+    <div class="voucher-buttons">
 
       <button
-        class="close-modal"
-        id="closeProfileModal"
+        class="copyVoucher"
+        id="copyVoucher"
         type="button">
 
-        ×
-
-      </button>
-
-    </div>
-
-    <div class="modal-profile">
-
-      <div class="modal-avatar" id="modalAvatar">
-        👤
-      </div>
-
-      <div>
-
-        <div class="modal-name" id="modalNome">
-          —
-        </div>
-
-        <div class="modal-email" id="modalEmail">
-          —
-        </div>
-
-      </div>
-
-    </div>
-
-    <div class="modal-grid">
-
-      <div class="modal-stat">
-
-        <div
-          class="modal-stat-number"
-          id="modalTotal">
-
-          0
-
-        </div>
-
-        <div class="modal-stat-label">
-          TOTAL
-        </div>
-
-      </div>
-
-      <div class="modal-stat">
-
-        <div
-          class="modal-stat-number"
-          id="modalPendentes">
-
-          0
-
-        </div>
-
-        <div class="modal-stat-label">
-          PENDENTES
-        </div>
-
-      </div>
-
-      <div class="modal-stat">
-
-        <div
-          class="modal-stat-number"
-          id="modalEntregues">
-
-          0
-
-        </div>
-
-        <div class="modal-stat-label">
-          ENTREGUES
-        </div>
-
-      </div>
-
-    </div>
-
-    <div class="modal-section">
-
-      <h4>📦 Prêmios deste cliente</h4>
-
-      <div
-        class="modal-delivery"
-        id="modalDeliveryList">
-
-        <div class="empty">
-          Nenhum prêmio.
-        </div>
-
-      </div>
-
-    </div>
-
-    <div class="modal-buttons">
-
-      <button
-        class="open-client"
-        id="openClient"
-        type="button">
-
-        👤 VER PERFIL COMPLETO
+        📋 COPIAR CÓDIGO
 
       </button>
 
       <button
-        class="open-delivery"
-        id="openDelivery"
+        class="newVoucher"
+        id="newVoucher"
         type="button">
 
-        📦 ABRIR ENTREGAS
+        🎫 NOVO VALE
 
       </button>
 
@@ -1498,7 +2824,38 @@ select{
 
   </div>
 
+
+  <div
+    id="voucherMessage"
+    class="message">
+  </div>
+
+
+  <h3
+    style="
+      margin-top:22px;
+    ">
+
+    🎫 Vales gerados
+
+  </h3>
+
+
+  <div
+    class="voucher-list"
+    id="voucherList">
+
+    <div class="empty">
+      Nenhum vale gerado.
+    </div>
+
+  </div>
+
 </div>
+
+
+</div>
+
 
 <script type="module">
 
@@ -1512,6 +2869,7 @@ import {
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
+
 import {
   getAuth,
   onAuthStateChanged,
@@ -1520,17 +2878,33 @@ import {
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
+
 import {
+
   getFirestore,
+
   collection,
+
   query,
+
   where,
+
   getDocs,
+
+  getCountFromServer,
+
   updateDoc,
-  addDoc
+
+  addDoc,
+
+  doc,
+
+  serverTimestamp
+
 }
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
 
 /* =====================================================
    CONFIG
@@ -1558,16 +2932,24 @@ const firebaseConfig = {
 
 };
 
+
 const app =
   initializeApp(
     firebaseConfig
   );
 
+
 const auth =
-  getAuth(app);
+  getAuth(
+    app
+  );
+
 
 const db =
-  getFirestore(app);
+  getFirestore(
+    app
+  );
+
 
 /* =====================================================
    ADMIN
@@ -1576,13 +2958,15 @@ const db =
 const ADMIN_EMAIL =
   "raphafentyramos@gmail.com";
 
+
 let adminUsuario = null;
 
 let usuarioSelecionado = null;
 
 let todasEntregas = [];
 
-let modalClienteUid = null;
+let todosVales = [];
+
 
 /* =====================================================
    ELEMENTOS
@@ -1608,20 +2992,21 @@ const roletaMessage =
     "roletaMessage"
   );
 
-const userArea =
+const voucherMessage =
   document.getElementById(
-    "userArea"
-  );
-
-const deliveryList =
-  document.getElementById(
-    "deliveryList"
+    "voucherMessage"
   );
 
 const deliveryMessage =
   document.getElementById(
     "deliveryMessage"
   );
+
+const userArea =
+  document.getElementById(
+    "userArea"
+  );
+
 
 /* =====================================================
    MENSAGEM
@@ -1642,8 +3027,9 @@ function mostrarMensagem(
 
 }
 
+
 /* =====================================================
-   FORMATAÇÃO
+   NÚMEROS
 ===================================================== */
 
 function numero(
@@ -1658,6 +3044,7 @@ function numero(
 
 }
 
+
 function dinheiro(
   valor
 ){
@@ -1667,12 +3054,20 @@ function dinheiro(
   ).toLocaleString(
     "pt-BR",
     {
-      style:"currency",
-      currency:"BRL"
+      style:
+        "currency",
+
+      currency:
+        "BRL"
     }
   );
 
 }
+
+
+/* =====================================================
+   ESCAPAR HTML
+===================================================== */
 
 function escapar(
   valor
@@ -1681,13 +3076,29 @@ function escapar(
   return String(
     valor ?? ""
   )
-  .replace(/&/g,"&amp;")
-  .replace(/</g,"&lt;")
-  .replace(/>/g,"&gt;")
-  .replace(/"/g,"&quot;")
-  .replace(/'/g,"&#039;");
+  .replace(
+    /&/g,
+    "&amp;"
+  )
+  .replace(
+    /</g,
+    "&lt;"
+  )
+  .replace(
+    />/g,
+    "&gt;"
+  )
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+  .replace(
+    /'/g,
+    "&#039;"
+  );
 
 }
+
 
 /* =====================================================
    DATA
@@ -1703,6 +3114,7 @@ function obterMillis(
 
   }
 
+
   if(
     typeof valor.toMillis ===
     "function"
@@ -1712,14 +3124,18 @@ function obterMillis(
 
   }
 
+
   if(
     typeof valor.toDate ===
     "function"
   ){
 
-    return valor.toDate().getTime();
+    return valor
+      .toDate()
+      .getTime();
 
   }
+
 
   if(
     typeof valor.seconds ===
@@ -1730,10 +3146,12 @@ function obterMillis(
 
   }
 
+
   const data =
     new Date(
       valor
     );
+
 
   return Number.isNaN(
     data.getTime()
@@ -1742,6 +3160,7 @@ function obterMillis(
     : data.getTime();
 
 }
+
 
 function formatarData(
   valor
@@ -1752,11 +3171,13 @@ function formatarData(
       valor
     );
 
+
   if(!millis){
 
     return "—";
 
   }
+
 
   return new Date(
     millis
@@ -1766,8 +3187,9 @@ function formatarData(
 
 }
 
+
 /* =====================================================
-   ID OPERAÇÃO
+   ID MOVIMENTAÇÃO
 ===================================================== */
 
 function gerarOperacaoId(){
@@ -1775,49 +3197,76 @@ function gerarOperacaoId(){
   const agora =
     new Date();
 
+
   const data =
     agora.getFullYear() +
+
     String(
-      agora.getMonth()+1
-    ).padStart(2,"0") +
+      agora.getMonth() + 1
+    ).padStart(
+      2,
+      "0"
+    ) +
+
     String(
       agora.getDate()
-    ).padStart(2,"0");
+    ).padStart(
+      2,
+      "0"
+    );
+
 
   const hora =
     String(
       agora.getHours()
-    ).padStart(2,"0") +
+    ).padStart(
+      2,
+      "0"
+    ) +
+
     String(
       agora.getMinutes()
-    ).padStart(2,"0") +
+    ).padStart(
+      2,
+      "0"
+    ) +
+
     String(
       agora.getSeconds()
-    ).padStart(2,"0");
+    ).padStart(
+      2,
+      "0"
+    );
+
 
   let aleatorio;
 
+
   if(
-    window.crypto &&
+    crypto &&
     crypto.randomUUID
   ){
 
     aleatorio =
       crypto
-      .randomUUID()
-      .split("-")[0]
-      .toUpperCase();
+        .randomUUID()
+        .split("-")[0]
+        .toUpperCase();
 
   }
   else{
 
     aleatorio =
       Math.random()
-      .toString(36)
-      .substring(2,8)
-      .toUpperCase();
+        .toString(36)
+        .substring(
+          2,
+          8
+        )
+        .toUpperCase();
 
   }
+
 
   return (
     "MOV-" +
@@ -1830,14 +3279,200 @@ function gerarOperacaoId(){
 
 }
 
+
 /* =====================================================
-   CARREGAR TODAS AS ENTREGAS
+   GERADOR DE VALE
+   EXATAMENTE 15 CARACTERES
+   LETRAS + NÚMEROS
 ===================================================== */
 
-async function carregarTodasEntregas(){
+function gerarVale15(){
 
-  deliveryList.innerHTML =
+  const letras =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+  const numeros =
+    "0123456789";
+
+  const conjunto =
+    letras +
+    numeros;
+
+
+  let codigo = "";
+
+
+  /*
+    Garantimos pelo menos:
+
+    1 letra
+    1 número
+
+    Depois completamos até 15.
+  */
+
+  codigo +=
+    letras[
+      Math.floor(
+        Math.random() *
+        letras.length
+      )
+    ];
+
+
+  codigo +=
+    numeros[
+      Math.floor(
+        Math.random() *
+        numeros.length
+      )
+    ];
+
+
+  while(
+    codigo.length < 15
+  ){
+
+    codigo +=
+      conjunto[
+        Math.floor(
+          Math.random() *
+          conjunto.length
+        )
+      ];
+
+  }
+
+
+  /*
+    Embaralha o código
+    para não ficar sempre
+    começando com letra+número.
+  */
+
+  codigo =
+    codigo
+      .split("")
+      .sort(
+        () =>
+          Math.random() -
+          0.5
+      )
+      .join("");
+
+
+  return codigo;
+
+}
+
+
+/* =====================================================
+   CARREGAR DASHBOARD
+===================================================== */
+
+async function carregarDashboard(){
+
+  try{
+
+    /*
+      Conta documentos da coleção admins.
+    */
+
+    const contagem =
+      await getCountFromServer(
+        collection(
+          db,
+          "admins"
+        )
+      );
+
+
+    document.getElementById(
+      "totalUsuarios"
+    ).textContent =
+      numero(
+        contagem.data().count
+      );
+
+
+    /*
+      Para contar VIPs precisamos
+      ler os documentos.
+    */
+
+    const usuarios =
+      await getDocs(
+        collection(
+          db,
+          "admins"
+        )
+      );
+
+
+    let vip = 0;
+
+
+    usuarios.forEach(
+      documento => {
+
+        if(
+          documento.data().vip ===
+          true
+        ){
+
+          vip++;
+
+        }
+
+      }
+    );
+
+
+    document.getElementById(
+      "totalVip"
+    ).textContent =
+      numero(
+        vip
+      );
+
+  }
+  catch(error){
+
+    console.error(
+      "Dashboard:",
+      error
+    );
+
+    document.getElementById(
+      "totalUsuarios"
+    ).textContent =
+      "—";
+
+    document.getElementById(
+      "totalVip"
+    ).textContent =
+      "—";
+
+  }
+
+}
+
+
+/* =====================================================
+   CARREGAR ENTREGAS
+===================================================== */
+
+async function carregarEntregas(){
+
+  const lista =
+    document.getElementById(
+      "deliveryList"
+    );
+
+
+  lista.innerHTML =
     "<div class='empty'>🔄 Carregando prêmios...</div>";
+
 
   try{
 
@@ -1848,6 +3483,7 @@ async function carregarTodasEntregas(){
           "entregas"
         )
       );
+
 
     todasEntregas =
       resultado.docs.map(
@@ -1861,26 +3497,28 @@ async function carregarTodasEntregas(){
         })
       );
 
-    renderizarPainelEntregas();
+
+    renderizarEntregas();
 
   }
   catch(error){
 
     console.error(
-      "Erro ao carregar entregas:",
+      "Entregas:",
       error
     );
 
+
     todasEntregas = [];
 
-    deliveryList.innerHTML =
-      "<div class='empty'>" +
-      "⚠️ Não foi possível carregar a coleção entregas." +
-      "</div>";
+
+    lista.innerHTML =
+      "<div class='empty'>⚠️ Não foi possível carregar os prêmios.</div>";
+
 
     mostrarMensagem(
       deliveryMessage,
-      "Verifique se as Rules permitem ao administrador ler a coleção entregas.",
+      "Verifique as Rules da coleção entregas.",
       "error"
     );
 
@@ -1888,141 +3526,16 @@ async function carregarTodasEntregas(){
 
 }
 
-/* =====================================================
-   TENTAR TAMBÉM HISTÓRICO DA ROLETA
-===================================================== */
-
-async function carregarHistoricoRoletaParaEntregas(){
-
-  try{
-
-    const resultado =
-      await getDocs(
-        collection(
-          db,
-          "historicoRoleta"
-        )
-      );
-
-    const registros =
-      resultado.docs.map(
-        documento => ({
-
-          id:
-            documento.id,
-
-          ...documento.data()
-
-        })
-      );
-
-    const existentes =
-      new Set(
-        todasEntregas.map(
-          item =>
-            item.roletaResultadoId ||
-            item.id
-        )
-      );
-
-    registros.forEach(
-      registro => {
-
-        const identificador =
-          registro.id;
-
-        if(
-          !existentes.has(
-            identificador
-          ) &&
-          registro.entregue !== true
-        ){
-
-          todasEntregas.push({
-
-            id:
-              "ROULET-" +
-              registro.id,
-
-            uid:
-              registro.uid ||
-              registro.usuarioUid ||
-              registro.usuarioId ||
-              "",
-
-            usuarioUid:
-              registro.uid ||
-              registro.usuarioUid ||
-              registro.usuarioId ||
-              "",
-
-            usuarioEmail:
-              registro.usuarioEmail ||
-              "",
-
-            usuarioNome:
-              registro.usuarioNome ||
-              "",
-
-            premioNome:
-              registro.premioNome ||
-              "Prêmio da Roleta",
-
-            quantidade:
-              Number(
-                registro.quantidade ||
-                0
-              ),
-
-            tipo:
-              "roleta",
-
-            imagem:
-              registro.imagem ||
-              "",
-
-            entregue:
-              registro.entregue === true,
-
-            criadoEm:
-              registro.criadoEm ||
-              registro.dataHora,
-
-            roletaResultadoId:
-              identificador,
-
-            somenteLeitura:
-              true
-
-          });
-
-        }
-
-      }
-    );
-
-    renderizarPainelEntregas();
-
-  }
-  catch(error){
-
-    console.warn(
-      "Não foi possível carregar histórico da roleta:",
-      error
-    );
-
-  }
-
-}
 
 /* =====================================================
    RENDER ENTREGAS
 ===================================================== */
 
-function renderizarPainelEntregas(){
+function renderizarEntregas(){
 
   const total =
     todasEntregas.length;
+
 
   const pendentes =
     todasEntregas.filter(
@@ -2030,18 +3543,21 @@ function renderizarPainelEntregas(){
         item.entregue !== true
     ).length;
 
+
   const entregues =
     todasEntregas.filter(
       item =>
         item.entregue === true
     ).length;
 
+
   document.getElementById(
-    "totalEntregas"
+    "totalPremios"
   ).textContent =
     numero(
       total
     );
+
 
   document.getElementById(
     "totalPendentes"
@@ -2050,244 +3566,484 @@ function renderizarPainelEntregas(){
       pendentes
     );
 
+
   document.getElementById(
-    "totalEntregues"
+    "entregaTotal"
+  ).textContent =
+    numero(
+      total
+    );
+
+
+  document.getElementById(
+    "entregaPendente"
+  ).textContent =
+    numero(
+      pendentes
+    );
+
+
+  document.getElementById(
+    "entregaEntregue"
   ).textContent =
     numero(
       entregues
     );
 
-  deliveryList.innerHTML =
-    "";
 
-  const pendentesLista =
-    todasEntregas
-    .filter(
-      item =>
-        item.entregue !== true
-    )
-    .sort(
-      (
-        a,
-        b
-      ) =>
-        obterMillis(
-          b.criadoEm ||
-          b.dataHora
-        ) -
-        obterMillis(
-          a.criadoEm ||
-          a.dataHora
-        )
+  const lista =
+    document.getElementById(
+      "deliveryList"
     );
 
+
+  lista.innerHTML =
+    "";
+
+
+  const ordenadas =
+    [...todasEntregas]
+      .sort(
+        (
+          a,
+          b
+        ) =>
+          obterMillis(
+            b.criadoEm ||
+            b.dataHora
+          ) -
+          obterMillis(
+            a.criadoEm ||
+            a.dataHora
+          )
+      );
+
+
   if(
-    pendentesLista.length === 0
+    !ordenadas.length
   ){
 
-    deliveryList.innerHTML =
-      "<div class='empty'>" +
-      "🎉 Nenhum prêmio pendente de entrega." +
-      "</div>";
+    lista.innerHTML =
+      "<div class='empty'>🎉 Nenhum prêmio cadastrado.</div>";
 
     return;
 
   }
 
-  pendentesLista
-  .slice(0,50)
-  .forEach(
-    pedido => {
 
-      const uid =
-        pedido.uid ||
-        pedido.usuarioUid ||
-        pedido.usuarioId ||
-        "";
+  ordenadas
+    .slice(
+      0,
+      100
+    )
+    .forEach(
+      pedido => {
 
-      const titulo =
-        pedido.premioNome ||
-        pedido.nome ||
-        pedido.titulo ||
-        "Prêmio";
+        const uid =
+          pedido.uid ||
+          pedido.usuarioUid ||
+          pedido.usuarioId ||
+          "";
 
-      const tipo =
-        pedido.tipo ||
-        "outro";
 
-      const quantidade =
-        pedido.quantidade !== undefined
-          ?
-          numero(
-            pedido.quantidade
-          )
-          :
-          "—";
+        const titulo =
+          pedido.premioNome ||
+          pedido.nome ||
+          pedido.titulo ||
+          "Prêmio";
 
-      const div =
-        document.createElement(
-          "div"
-        );
 
-      div.className =
-        "delivery-item";
+        const tipo =
+          pedido.tipo ||
+          "outro";
 
-      div.innerHTML = `
 
-        <div class="delivery-item-top">
+        const quantidade =
+          pedido.quantidade !==
+          undefined
+            ?
+            numero(
+              pedido.quantidade
+            )
+            :
+            "—";
 
-          <div>
 
-            <div class="delivery-title">
-              🎁 ${escapar(titulo)}
-            </div>
+        const entregue =
+          pedido.entregue ===
+          true;
 
-            <div class="delivery-user">
-              👤 ${
-                escapar(
-                  pedido.usuarioNome ||
-                  "Cliente não identificado"
-                )
-              }
-              ${
-                pedido.usuarioEmail
-                  ? " • " +
+
+        const div =
+          document.createElement(
+            "div"
+          );
+
+
+        div.className =
+          "delivery-item";
+
+
+        div.innerHTML = `
+
+          <div class="delivery-top">
+
+            <div>
+
+              <div class="delivery-title">
+
+                🎁 ${escapar(
+                  titulo
+                )}
+
+              </div>
+
+              <div class="delivery-user">
+
+                👤 ${
+                  escapar(
+                    pedido.usuarioNome ||
+                    "Cliente não identificado"
+                  )
+                }
+
+                ${
+                  pedido.usuarioEmail
+                    ?
+                    " • " +
                     escapar(
                       pedido.usuarioEmail
                     )
-                  : ""
+                    :
+                    ""
+                }
+
+              </div>
+
+            </div>
+
+            <div class="delivery-status ${
+              entregue
+                ? "done"
+                : "pending"
+            }">
+
+              ${
+                entregue
+                  ?
+                  "✅ ENTREGUE"
+                  :
+                  "⏳ PENDENTE"
               }
+
             </div>
 
           </div>
 
-          <div class="delivery-status pending">
-            ⏳ PENDENTE
+
+          <div class="delivery-info">
+
+            Tipo:
+            <b>
+              ${escapar(
+                tipo
+              )}
+            </b>
+
+            <br>
+
+            Quantidade:
+            <b>
+              ${quantidade}
+            </b>
+
+            <br>
+
+            Data:
+            <b>
+              ${escapar(
+                formatarData(
+                  pedido.criadoEm ||
+                  pedido.dataHora
+                )
+              )}
+            </b>
+
+            <br>
+
+            UID:
+            <b>
+              ${escapar(
+                uid ||
+                "Não informado"
+              )}
+            </b>
+
           </div>
 
-        </div>
 
-        <div class="delivery-info">
+          <div class="delivery-actions">
 
-          Tipo:
-          <b>${escapar(tipo)}</b>
+            <button
+              class="delivery-profile"
+              type="button">
 
-          <br>
+              👤 PERFIL
 
-          Quantidade:
-          <b>${quantidade}</b>
+            </button>
 
-          <br>
 
-          Data:
-          <b>
+            <button
+              class="delivery-open"
+              type="button">
+
+              🔎 FILTRAR CLIENTE
+
+            </button>
+
+
+            ${
+              entregue
+                ?
+                `
+                  <button
+                    class="delivery-complete"
+                    type="button">
+
+                    ↩️ DESFAZER
+
+                  </button>
+                `
+                :
+                `
+                  <button
+                    class="delivery-complete"
+                    type="button">
+
+                    ✅ ENTREGAR
+
+                  </button>
+                `
+            }
+
+          </div>
+
+
+          <div class="delivery-id">
+
+            🆔 ID:
             ${escapar(
-              formatarData(
-                pedido.criadoEm ||
-                pedido.dataHora
-              )
+              pedido.id
             )}
-          </b>
 
-          <br>
+          </div>
 
-          UID:
-          <b>${escapar(uid || "Não informado")}</b>
+        `;
 
-        </div>
 
-        <div class="delivery-actions">
+        /*
+          PERFIL
+        */
 
-          <button
-            class="delivery-profile"
-            type="button">
+        div
+          .querySelector(
+            ".delivery-profile"
+          )
+          .addEventListener(
+            "click",
+            () => {
 
-            👤 VER PERFIL
+              if(!uid){
 
-          </button>
+                alert(
+                  "Este prêmio não possui UID."
+                );
 
-          <button
-            class="delivery-open"
-            type="button">
+                return;
 
-            📦 ABRIR ENTREGAS
+              }
 
-          </button>
 
-        </div>
+              buscarUsuarioPorUid(
+                uid
+              );
 
-        <div class="delivery-id">
-
-          🆔 ID:
-          ${escapar(pedido.id)}
-
-        </div>
-
-      `;
-
-      div
-      .querySelector(
-        ".delivery-profile"
-      )
-      .addEventListener(
-        "click",
-        () => {
-
-          if(!uid){
-
-            alert(
-              "Este prêmio não possui UID do cliente."
-            );
-
-            return;
-
-          }
-
-          buscarUsuarioPorUid(
-            uid
+            }
           );
 
-        }
-      );
 
-      div
-      .querySelector(
-        ".delivery-open"
-      )
-      .addEventListener(
-        "click",
-        () => {
+        /*
+          FILTRAR CLIENTE
+        */
 
-          if(!uid){
-
-            alert(
-              "Este prêmio não possui UID do cliente."
-            );
-
-            return;
-
-          }
-
-          window.location.href =
-            "entregas.html?uid=" +
-            encodeURIComponent(
-              uid
-            );
-
-        }
-      );
-
-      deliveryList.appendChild(
         div
-      );
+          .querySelector(
+            ".delivery-open"
+          )
+          .addEventListener(
+            "click",
+            () => {
 
-    }
-  );
+              if(!uid){
+
+                return;
+
+              }
+
+
+              const cliente =
+                todasEntregas.filter(
+                  item =>
+                    (
+                      item.uid ||
+                      item.usuarioUid ||
+                      item.usuarioId ||
+                      ""
+                    ) === uid
+                );
+
+
+              renderizarEntregas(
+                cliente
+              );
+
+            }
+          );
+
+
+        /*
+          ENTREGAR / DESFAZER
+        */
+
+        div
+          .querySelector(
+            ".delivery-complete"
+          )
+          .addEventListener(
+            "click",
+            async () => {
+
+              await alterarEntrega(
+                pedido
+              );
+
+            }
+          );
+
+
+        lista.appendChild(
+          div
+        );
+
+      }
+    );
 
 }
 
+
 /* =====================================================
-   BUSCAR POR UID
+   ALTERAR ENTREGA
+===================================================== */
+
+async function alterarEntrega(
+  pedido
+){
+
+  const novoStatus =
+    pedido.entregue !== true;
+
+
+  const pergunta =
+    novoStatus
+      ?
+      "Marcar este prêmio como ENTREGUE?"
+      :
+      "Desfazer o status de entregue?";
+
+
+  if(
+    !confirm(
+      pergunta
+    )
+  ){
+
+    return;
+
+  }
+
+
+  try{
+
+    await updateDoc(
+      doc(
+        db,
+        "entregas",
+        pedido.id
+      ),
+      {
+
+        entregue:
+          novoStatus,
+
+        entregueEm:
+          novoStatus
+            ?
+            serverTimestamp()
+            :
+            null,
+
+        entreguePor:
+          novoStatus
+            ?
+            (
+              adminUsuario?.email ||
+              ""
+            )
+            :
+            ""
+
+      }
+    );
+
+
+    pedido.entregue =
+      novoStatus;
+
+
+    renderizarEntregas();
+
+
+    mostrarMensagem(
+      deliveryMessage,
+      novoStatus
+        ?
+        "✅ Prêmio marcado como entregue."
+        :
+        "↩️ Prêmio voltou para pendente.",
+      "success"
+    );
+
+  }
+  catch(error){
+
+    console.error(
+      error
+    );
+
+
+    mostrarMensagem(
+      deliveryMessage,
+      "Não foi possível alterar a entrega.",
+      "error"
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   BUSCAR UID
 ===================================================== */
 
 async function buscarUsuarioPorUid(
@@ -2311,13 +4067,14 @@ async function buscarUsuarioPorUid(
         )
       );
 
+
     if(
       resultado.empty
     ){
 
       mostrarMensagem(
         searchMessage,
-        "Cliente não encontrado pelo UID.",
+        "Usuário não encontrado pelo UID.",
         "error"
       );
 
@@ -2325,16 +4082,20 @@ async function buscarUsuarioPorUid(
 
     }
 
+
     mostrarUsuario(
       resultado.docs[0]
     );
 
+
     window.scrollTo({
+
       top:
-        document.getElementById(
-          "userArea"
-        ).offsetTop - 20,
-      behavior:"smooth"
+        userArea.offsetTop - 20,
+
+      behavior:
+        "smooth"
+
     });
 
   }
@@ -2344,9 +4105,10 @@ async function buscarUsuarioPorUid(
       error
     );
 
+
     mostrarMensagem(
       searchMessage,
-      "Erro ao localizar o cliente.",
+      "Erro ao localizar usuário.",
       "error"
     );
 
@@ -2354,55 +4116,6 @@ async function buscarUsuarioPorUid(
 
 }
 
-/* =====================================================
-   BUSCAR ID
-===================================================== */
-
-async function buscarPorId(
-  valor
-){
-
-  return await getDocs(
-    query(
-      collection(
-        db,
-        "admins"
-      ),
-      where(
-        "publicId",
-        "==",
-        valor
-      )
-    )
-  );
-
-}
-
-/* =====================================================
-   BUSCAR EMAIL
-===================================================== */
-
-async function buscarPorEmail(
-  valor
-){
-
-  return await getDocs(
-    query(
-      collection(
-        db,
-        "admins"
-      ),
-      where(
-        "email",
-        "==",
-        valor
-          .trim()
-          .toLowerCase()
-      )
-    )
-  );
-
-}
 
 /* =====================================================
    BUSCAR USUÁRIO
@@ -2411,14 +4124,14 @@ async function buscarPorEmail(
 async function buscarUsuario(){
 
   const valor =
-    searchInput.value
-    .trim();
+    searchInput.value.trim();
+
 
   if(!valor){
 
     mostrarMensagem(
       searchMessage,
-      "Digite um ID ou e-mail.",
+      "Digite um ID, e-mail ou UID.",
       "error"
     );
 
@@ -2426,18 +4139,28 @@ async function buscarUsuario(){
 
   }
 
-  searchMessage.className =
-    "message";
 
   userArea.style.display =
     "none";
 
+
   try{
 
     let resultado =
-      await buscarPorId(
-        valor
+      await getDocs(
+        query(
+          collection(
+            db,
+            "admins"
+          ),
+          where(
+            "publicId",
+            "==",
+            valor
+          )
+        )
       );
+
 
     if(
       resultado.empty &&
@@ -2445,11 +4168,44 @@ async function buscarUsuario(){
     ){
 
       resultado =
-        await buscarPorEmail(
-          valor
+        await getDocs(
+          query(
+            collection(
+              db,
+              "admins"
+            ),
+            where(
+              "email",
+              "==",
+              valor.toLowerCase()
+            )
+          )
         );
 
     }
+
+
+    if(
+      resultado.empty
+    ){
+
+      resultado =
+        await getDocs(
+          query(
+            collection(
+              db,
+              "admins"
+            ),
+            where(
+              "uid",
+              "==",
+              valor
+            )
+          )
+        );
+
+    }
+
 
     if(
       resultado.empty
@@ -2465,23 +4221,36 @@ async function buscarUsuario(){
 
     }
 
+
     mostrarUsuario(
       resultado.docs[0]
     );
 
+
     mostrarMensagem(
       searchMessage,
-      "Usuário encontrado com sucesso.",
+      "✅ Usuário encontrado.",
       "success"
     );
+
+
+    window.scrollTo({
+
+      top:
+        userArea.offsetTop - 20,
+
+      behavior:
+        "smooth"
+
+    });
 
   }
   catch(error){
 
     console.error(
-      "Erro na busca:",
       error
     );
+
 
     mostrarMensagem(
       searchMessage,
@@ -2493,6 +4262,7 @@ async function buscarUsuario(){
 
 }
 
+
 /* =====================================================
    MOSTRAR USUÁRIO
 ===================================================== */
@@ -2503,6 +4273,7 @@ function mostrarUsuario(
 
   const dados =
     documento.data();
+
 
   usuarioSelecionado = {
 
@@ -2517,37 +4288,45 @@ function mostrarUsuario(
 
   };
 
+
   userArea.style.display =
     "block";
+
 
   const nome =
     dados.nome ||
     dados.name ||
     "Usuário";
 
+
   const email =
     dados.email ||
     "Sem e-mail";
 
+
   const publicId =
     dados.publicId ||
     "Pendente";
+
 
   document.getElementById(
     "nome"
   ).textContent =
     nome;
 
+
   document.getElementById(
     "email"
   ).textContent =
     email;
+
 
   document.getElementById(
     "id"
   ).textContent =
     "ID: " +
     publicId;
+
 
   document.getElementById(
     "uid"
@@ -2558,26 +4337,31 @@ function mostrarUsuario(
       "Não informado"
     );
 
+
   document.getElementById(
     "avatar"
   ).textContent =
     dados.avatar ||
     "🙂";
 
+
   document.getElementById(
     "infoNome"
   ).textContent =
     nome;
+
 
   document.getElementById(
     "infoEmail"
   ).textContent =
     email;
 
+
   document.getElementById(
     "infoId"
   ).textContent =
     publicId;
+
 
   document.getElementById(
     "infoUid"
@@ -2585,11 +4369,13 @@ function mostrarUsuario(
     dados.uid ||
     "Não informado";
 
+
   document.getElementById(
     "infoIdade"
   ).textContent =
     dados.idade ||
     "Não informado";
+
 
   document.getElementById(
     "infoTelefone"
@@ -2598,17 +4384,19 @@ function mostrarUsuario(
     dados.phone ||
     "Não informado";
 
+
   atualizarSaldos();
 
   atualizarStatus();
 
-  atualizarGirosRoleta();
+  atualizarGiros();
 
   carregarExtrato(
     publicId
   );
 
 }
+
 
 /* =====================================================
    SALDOS
@@ -2624,8 +4412,10 @@ function atualizarSaldos(){
 
   }
 
+
   const dados =
     usuarioSelecionado.data;
+
 
   document.getElementById(
     "chances"
@@ -2634,6 +4424,7 @@ function atualizarSaldos(){
       dados.chances
     );
 
+
   document.getElementById(
     "moedas"
   ).textContent =
@@ -2641,12 +4432,14 @@ function atualizarSaldos(){
       dados.moedas
     );
 
+
   document.getElementById(
     "chaves"
   ).textContent =
     numero(
       dados.chaves
     );
+
 
   document.getElementById(
     "creditos"
@@ -2657,25 +4450,20 @@ function atualizarSaldos(){
 
 }
 
+
 /* =====================================================
    GIROS
 ===================================================== */
 
-function atualizarGirosRoleta(){
-
-  if(
-    !usuarioSelecionado
-  ){
-
-    return;
-
-  }
+function atualizarGiros(){
 
   const valor =
     Number(
-      usuarioSelecionado.data.girosRoleta ||
+      usuarioSelecionado?.data
+        ?.girosRoleta ||
       0
     );
+
 
   document.getElementById(
     "girosRoleta"
@@ -2683,6 +4471,7 @@ function atualizarGirosRoleta(){
     numero(
       valor
     );
+
 
   document.getElementById(
     "roletaSaldo"
@@ -2692,6 +4481,7 @@ function atualizarGirosRoleta(){
     );
 
 }
+
 
 /* =====================================================
    STATUS
@@ -2707,19 +4497,24 @@ function atualizarStatus(){
 
   }
 
+
   const dados =
     usuarioSelecionado.data;
+
 
   const vip =
     dados.vip === true;
 
+
   const caixa =
     dados.caixaBox === true;
+
 
   const vipStatus =
     document.getElementById(
       "vipStatus"
     );
+
 
   if(vip){
 
@@ -2736,21 +4531,22 @@ function atualizarStatus(){
       "⭐ NÃO VIP";
 
     vipStatus.className =
-      "status normal";
+      "status";
 
   }
 
-  const boxStatus =
-    document.getElementById(
-      "boxStatus"
-    );
 
-  boxStatus.textContent =
+  document.getElementById(
+    "boxStatus"
+  ).textContent =
     caixa
-      ? "🎁 CAIXA UTILIZADA"
-      : "🎁 CAIXA DISPONÍVEL";
+      ?
+      "🎁 CAIXA UTILIZADA"
+      :
+      "🎁 CAIXA DISPONÍVEL";
 
 }
+
 
 /* =====================================================
    ALTERAR SALDO
@@ -2766,7 +4562,7 @@ async function alterarSaldo(
 
     mostrarMensagem(
       operationMessage,
-      "Primeiro selecione um usuário.",
+      "Selecione um usuário.",
       "error"
     );
 
@@ -2774,10 +4570,12 @@ async function alterarSaldo(
 
   }
 
+
   const item =
     document.getElementById(
       "item"
     ).value;
+
 
   const quantidade =
     Number(
@@ -2786,10 +4584,12 @@ async function alterarSaldo(
       ).value
     );
 
+
   const motivo =
     document.getElementById(
       "motivo"
     ).value.trim();
+
 
   if(
     !Number.isFinite(
@@ -2808,11 +4608,12 @@ async function alterarSaldo(
 
   }
 
+
   if(!motivo){
 
     mostrarMensagem(
       operationMessage,
-      "Informe o motivo da movimentação.",
+      "Informe o motivo.",
       "error"
     );
 
@@ -2820,16 +4621,24 @@ async function alterarSaldo(
 
   }
 
+
   const atual =
     Number(
       usuarioSelecionado.data[item] ||
       0
     );
 
+
   const novo =
-    operacao === "adicionar"
-      ? atual + quantidade
-      : atual - quantidade;
+    operacao ===
+    "adicionar"
+
+      ?
+      atual + quantidade
+
+      :
+      atual - quantidade;
+
 
   if(
     novo < 0
@@ -2845,12 +4654,16 @@ async function alterarSaldo(
 
   }
 
+
   if(
     !confirm(
       (
-        operacao === "adicionar"
-          ? "Adicionar "
-          : "Remover "
+        operacao ===
+        "adicionar"
+          ?
+          "Adicionar "
+          :
+          "Remover "
       ) +
       quantidade +
       " de " +
@@ -2863,18 +4676,23 @@ async function alterarSaldo(
 
   }
 
+
   const operacaoId =
     gerarOperacaoId();
+
 
   try{
 
     await updateDoc(
       usuarioSelecionado.ref,
       {
+
         [item]:
           novo
+
       }
     );
+
 
     await addDoc(
       collection(
@@ -2936,29 +4754,35 @@ async function alterarSaldo(
       }
     );
 
+
     usuarioSelecionado.data[item] =
       novo;
 
+
     atualizarSaldos();
+
 
     document.getElementById(
       "quantidade"
     ).value =
       "";
 
+
     document.getElementById(
       "motivo"
     ).value =
       "";
 
+
     mostrarMensagem(
       operationMessage,
-      "Movimentação realizada com sucesso. ID: " +
+      "✅ Movimentação realizada. ID: " +
       operacaoId,
       "success"
     );
 
-    await carregarExtrato(
+
+    carregarExtrato(
       usuarioSelecionado.data.publicId ||
       usuarioSelecionado.docId
     );
@@ -2967,13 +4791,13 @@ async function alterarSaldo(
   catch(error){
 
     console.error(
-      "Erro na movimentação:",
       error
     );
 
+
     mostrarMensagem(
       operationMessage,
-      "Erro ao realizar a movimentação.",
+      "Erro ao realizar movimentação.",
       "error"
     );
 
@@ -2981,11 +4805,12 @@ async function alterarSaldo(
 
 }
 
+
 /* =====================================================
    ALTERAR GIROS
 ===================================================== */
 
-async function alterarGirosRoleta(
+async function alterarGiros(
   operacao
 ){
 
@@ -2995,13 +4820,14 @@ async function alterarGirosRoleta(
 
     mostrarMensagem(
       roletaMessage,
-      "Primeiro selecione um usuário.",
+      "Selecione um usuário.",
       "error"
     );
 
     return;
 
   }
+
 
   const quantidade =
     Number(
@@ -3010,10 +4836,12 @@ async function alterarGirosRoleta(
       ).value
     );
 
+
   const motivo =
     document.getElementById(
       "motivoGiros"
     ).value.trim();
+
 
   if(
     !Number.isInteger(
@@ -3024,25 +4852,27 @@ async function alterarGirosRoleta(
 
     mostrarMensagem(
       roletaMessage,
-      "Digite uma quantidade inteira de giros maior que zero.",
+      "A quantidade precisa ser um número inteiro.",
       "error"
     );
 
     return;
 
   }
+
 
   if(!motivo){
 
     mostrarMensagem(
       roletaMessage,
-      "Informe o motivo da movimentação.",
+      "Informe o motivo.",
       "error"
     );
 
     return;
 
   }
+
 
   const atual =
     Number(
@@ -3050,10 +4880,17 @@ async function alterarGirosRoleta(
       0
     );
 
+
   const novo =
-    operacao === "adicionar"
-      ? atual + quantidade
-      : atual - quantidade;
+    operacao ===
+    "adicionar"
+
+      ?
+      atual + quantidade
+
+      :
+      atual - quantidade;
+
 
   if(
     novo < 0
@@ -3061,7 +4898,7 @@ async function alterarGirosRoleta(
 
     mostrarMensagem(
       roletaMessage,
-      "O saldo de giros não pode ficar negativo.",
+      "Os giros não podem ficar negativos.",
       "error"
     );
 
@@ -3069,17 +4906,21 @@ async function alterarGirosRoleta(
 
   }
 
+
   if(
     !confirm(
-      operacao === "adicionar"
+      operacao ===
+      "adicionar"
+
         ?
         "Adicionar " +
         quantidade +
-        " giro(s) da Roleta?"
+        " giro(s)?"
+
         :
         "Remover " +
         quantidade +
-        " giro(s) da Roleta?"
+        " giro(s)?"
     )
   ){
 
@@ -3087,18 +4928,23 @@ async function alterarGirosRoleta(
 
   }
 
+
   const operacaoId =
     gerarOperacaoId();
+
 
   try{
 
     await updateDoc(
       usuarioSelecionado.ref,
       {
+
         girosRoleta:
           novo
+
       }
     );
+
 
     await addDoc(
       collection(
@@ -3127,7 +4973,6 @@ async function alterarGirosRoleta(
 
         usuarioNome:
           usuarioSelecionado.data.nome ||
-          usuarioSelecionado.data.name ||
           "",
 
         adminEmail:
@@ -3163,29 +5008,35 @@ async function alterarGirosRoleta(
       }
     );
 
+
     usuarioSelecionado.data.girosRoleta =
       novo;
 
-    atualizarGirosRoleta();
+
+    atualizarGiros();
+
 
     document.getElementById(
       "quantidadeGiros"
     ).value =
       "";
 
+
     document.getElementById(
       "motivoGiros"
     ).value =
       "";
 
+
     mostrarMensagem(
       roletaMessage,
-      "🎰 Operação realizada com sucesso. Novo saldo: " +
+      "🎰 Operação realizada. Novo saldo: " +
       novo,
       "success"
     );
 
-    await carregarExtrato(
+
+    carregarExtrato(
       usuarioSelecionado.data.publicId ||
       usuarioSelecionado.docId
     );
@@ -3194,19 +5045,20 @@ async function alterarGirosRoleta(
   catch(error){
 
     console.error(
-      "Erro nos giros:",
       error
     );
 
+
     mostrarMensagem(
       roletaMessage,
-      "Não foi possível alterar os giros da Roleta.",
+      "Não foi possível alterar os giros.",
       "error"
     );
 
   }
 
 }
+
 
 /* =====================================================
    VIP
@@ -3220,7 +5072,7 @@ async function alterarVIP(){
 
     mostrarMensagem(
       operationMessage,
-      "Selecione um usuário primeiro.",
+      "Selecione um usuário.",
       "error"
     );
 
@@ -3228,19 +5080,23 @@ async function alterarVIP(){
 
   }
 
+
   const atual =
-    usuarioSelecionado.data.vip === true;
+    usuarioSelecionado.data.vip ===
+    true;
+
 
   const novo =
     !atual;
+
 
   if(
     !confirm(
       novo
         ?
-        "Ativar VIP para este usuário?"
+        "Ativar VIP?"
         :
-        "Desativar VIP deste usuário?"
+        "Desativar VIP?"
     )
   ){
 
@@ -3248,18 +5104,23 @@ async function alterarVIP(){
 
   }
 
+
   const operacaoId =
     gerarOperacaoId();
+
 
   try{
 
     await updateDoc(
       usuarioSelecionado.ref,
       {
+
         vip:
           novo
+
       }
     );
+
 
     await addDoc(
       collection(
@@ -3288,7 +5149,6 @@ async function alterarVIP(){
 
         usuarioNome:
           usuarioSelecionado.data.nome ||
-          usuarioSelecionado.data.name ||
           "",
 
         adminEmail:
@@ -3302,21 +5162,27 @@ async function alterarVIP(){
 
         operacao:
           novo
-            ? "adicionar"
-            : "remover",
+            ?
+            "adicionar"
+            :
+            "remover",
 
         quantidade:
           1,
 
         saldoAnterior:
           atual
-            ? 1
-            : 0,
+            ?
+            1
+            :
+            0,
 
         saldoFinal:
           novo
-            ? 1
-            : 0,
+            ?
+            1
+            :
+            0,
 
         motivo:
           novo
@@ -3331,22 +5197,29 @@ async function alterarVIP(){
       }
     );
 
+
     usuarioSelecionado.data.vip =
       novo;
 
+
     atualizarStatus();
+
 
     mostrarMensagem(
       operationMessage,
       novo
         ?
-        "👑 VIP ativado com sucesso."
+        "👑 VIP ativado."
         :
-        "⭐ VIP desativado com sucesso.",
+        "⭐ VIP desativado.",
       "success"
     );
 
-    await carregarExtrato(
+
+    carregarDashboard();
+
+
+    carregarExtrato(
       usuarioSelecionado.data.publicId ||
       usuarioSelecionado.docId
     );
@@ -3355,9 +5228,9 @@ async function alterarVIP(){
   catch(error){
 
     console.error(
-      "Erro VIP:",
       error
     );
+
 
     mostrarMensagem(
       operationMessage,
@@ -3368,6 +5241,7 @@ async function alterarVIP(){
   }
 
 }
+
 
 /* =====================================================
    CAIXA
@@ -3381,7 +5255,7 @@ async function alterarCaixa(){
 
     mostrarMensagem(
       operationMessage,
-      "Selecione um usuário primeiro.",
+      "Selecione um usuário.",
       "error"
     );
 
@@ -3389,19 +5263,23 @@ async function alterarCaixa(){
 
   }
 
+
   const atual =
-    usuarioSelecionado.data.caixaBox === true;
+    usuarioSelecionado.data.caixaBox ===
+    true;
+
 
   const novo =
     !atual;
+
 
   if(
     !confirm(
       novo
         ?
-        "Marcar a Caixa Box como utilizada?"
+        "Marcar Caixa como utilizada?"
         :
-        "Liberar a Caixa Box novamente?"
+        "Liberar Caixa novamente?"
     )
   ){
 
@@ -3409,18 +5287,23 @@ async function alterarCaixa(){
 
   }
 
+
   const operacaoId =
     gerarOperacaoId();
+
 
   try{
 
     await updateDoc(
       usuarioSelecionado.ref,
       {
+
         caixaBox:
           novo
+
       }
     );
+
 
     await addDoc(
       collection(
@@ -3449,7 +5332,6 @@ async function alterarCaixa(){
 
         usuarioNome:
           usuarioSelecionado.data.nome ||
-          usuarioSelecionado.data.name ||
           "",
 
         adminEmail:
@@ -3463,28 +5345,34 @@ async function alterarCaixa(){
 
         operacao:
           novo
-            ? "remover"
-            : "adicionar",
+            ?
+            "remover"
+            :
+            "adicionar",
 
         quantidade:
           1,
 
         saldoAnterior:
           atual
-            ? 1
-            : 0,
+            ?
+            1
+            :
+            0,
 
         saldoFinal:
           novo
-            ? 1
-            : 0,
+            ?
+            1
+            :
+            0,
 
         motivo:
           novo
             ?
-            "Caixa Box marcada como utilizada"
+            "Caixa Box utilizada"
             :
-            "Caixa Box liberada pelo administrador",
+            "Caixa Box liberada",
 
         criadoEm:
           new Date().toISOString()
@@ -3492,22 +5380,26 @@ async function alterarCaixa(){
       }
     );
 
+
     usuarioSelecionado.data.caixaBox =
       novo;
 
+
     atualizarStatus();
+
 
     mostrarMensagem(
       operationMessage,
       novo
         ?
-        "🎁 Caixa Box marcada como utilizada."
+        "🎁 Caixa marcada como utilizada."
         :
-        "🎁 Caixa Box liberada novamente.",
+        "🎁 Caixa liberada.",
       "success"
     );
 
-    await carregarExtrato(
+
+    carregarExtrato(
       usuarioSelecionado.data.publicId ||
       usuarioSelecionado.docId
     );
@@ -3516,13 +5408,13 @@ async function alterarCaixa(){
   catch(error){
 
     console.error(
-      "Erro Caixa:",
       error
     );
 
+
     mostrarMensagem(
       operationMessage,
-      "Não foi possível alterar a Caixa Box.",
+      "Não foi possível alterar a Caixa.",
       "error"
     );
 
@@ -3530,8 +5422,9 @@ async function alterarCaixa(){
 
 }
 
+
 /* =====================================================
-   EXTRATO
+   HISTÓRICO
 ===================================================== */
 
 async function carregarExtrato(
@@ -3543,22 +5436,24 @@ async function carregarExtrato(
       "historyList"
     );
 
+
   lista.innerHTML =
     "<div class='empty'>🔄 Carregando histórico...</div>";
 
+
   if(
     !publicId ||
-    publicId === "Pendente"
+    publicId ===
+    "Pendente"
   ){
 
     lista.innerHTML =
-      "<div class='empty'>" +
-      "Este usuário ainda não possui ID público." +
-      "</div>";
+      "<div class='empty'>Este usuário ainda não possui ID público.</div>";
 
     return;
 
   }
+
 
   try{
 
@@ -3577,46 +5472,48 @@ async function carregarExtrato(
         )
       );
 
+
     if(
       resultado.empty
     ){
 
       lista.innerHTML =
-        "<div class='empty'>" +
-        "Nenhuma movimentação registrada." +
-        "</div>";
+        "<div class='empty'>Nenhuma movimentação registrada.</div>";
 
       return;
 
     }
 
+
     const registros =
       resultado.docs
-      .map(
-        documento => ({
+        .map(
+          documento => ({
 
-          id:
-            documento.id,
+            id:
+              documento.id,
 
-          ...documento.data()
+            ...documento.data()
 
-        })
-      )
-      .sort(
-        (
-          a,
-          b
-        ) =>
-          obterMillis(
-            b.criadoEm
-          ) -
-          obterMillis(
-            a.criadoEm
-          )
-      );
+          })
+        )
+        .sort(
+          (
+            a,
+            b
+          ) =>
+            obterMillis(
+              b.criadoEm
+            ) -
+            obterMillis(
+              a.criadoEm
+            )
+        );
+
 
     lista.innerHTML =
       "";
+
 
     registros.forEach(
       registro => {
@@ -3626,22 +5523,31 @@ async function carregarExtrato(
             "div"
           );
 
+
         item.className =
           "historyItem";
+
 
         const positivo =
           registro.operacao ===
           "adicionar";
 
+
         const sinal =
           positivo
-            ? "+"
-            : "-";
+            ?
+            "+"
+            :
+            "-";
+
 
         const classe =
           positivo
-            ? "plus"
-            : "minus";
+            ?
+            "plus"
+            :
+            "minus";
+
 
         const nomeItem =
           registro.item ===
@@ -3652,79 +5558,82 @@ async function carregarExtrato(
             registro.item ||
             "";
 
-        item.innerHTML =
 
-          "<div class='historyTop'>" +
+        item.innerHTML = `
 
-            "<span class='" +
-            classe +
-            "'>" +
+          <div class="historyTop">
 
-              sinal +
-              " " +
-              numero(
+            <span class="${classe}">
+
+              ${sinal}
+              ${numero(
                 registro.quantidade
-              ) +
-              " " +
-              escapar(
+              )}
+              ${escapar(
                 nomeItem
-              ) +
+              )}
 
-            "</span>" +
+            </span>
 
-            "<span class='historyDate'>" +
 
-              escapar(
+            <span class="historyDate">
+
+              ${escapar(
                 formatarData(
                   registro.criadoEm
                 )
-              ) +
+              )}
 
-            "</span>" +
+            </span>
 
-          "</div>" +
+          </div>
 
-          "<div class='historyInfo'>" +
 
-            "Saldo anterior: " +
-            numero(
+          <div class="historyInfo">
+
+            Saldo anterior:
+            ${numero(
               registro.saldoAnterior
-            ) +
+            )}
 
-            "<br>" +
+            <br>
 
-            "Saldo final: " +
-            numero(
+            Saldo final:
+            ${numero(
               registro.saldoFinal
-            ) +
+            )}
 
-            "<br>" +
+            <br>
 
-            "Motivo: " +
-            escapar(
+            Motivo:
+            ${escapar(
               registro.motivo ||
               "—"
-            ) +
+            )}
 
-            "<br>" +
+            <br>
 
-            "Administrador: " +
-            escapar(
+            Administrador:
+            ${escapar(
               registro.adminEmail ||
               "—"
-            ) +
+            )}
 
-          "</div>" +
+          </div>
 
-          "<div class='operation-id'>" +
 
-            "🆔 " +
-            escapar(
+          <div class="operation-id">
+
+            🆔
+            ${escapar(
               registro.movimentacaoId ||
               "Sem ID"
-            ) +
+            )}
 
-          "</div>";
+          </div>
+
+        `;
+
 
         lista.appendChild(
           item
@@ -3737,256 +5646,462 @@ async function carregarExtrato(
   catch(error){
 
     console.error(
-      "Erro histórico:",
       error
     );
 
+
     lista.innerHTML =
-      "<div class='empty'>" +
-      "Não foi possível carregar o histórico." +
-      "</div>";
+      "<div class='empty'>Não foi possível carregar o histórico.</div>";
 
   }
 
 }
 
+
 /* =====================================================
-   MODAL PERFIL
+   GERAR VALE PRESENTE
 ===================================================== */
 
-function abrirModalPerfil(
-  uid
-){
+async function gerarNovoVale(){
 
-  const registros =
-    todasEntregas.filter(
-      item =>
-        (
-          item.uid ||
-          item.usuarioUid ||
-          item.usuarioId ||
-          ""
-        ) === uid
+  const valor =
+    Number(
+      document.getElementById(
+        "voucherValor"
+      ).value
     );
 
-  modalClienteUid =
-    uid;
 
-  let nome =
-    "Cliente";
-
-  let email =
-    "";
-
-  if(
-    registros.length
-  ){
-
-    nome =
-      registros[0].usuarioNome ||
-      "Cliente";
-
-    email =
-      registros[0].usuarioEmail ||
-      "";
-
-  }
-
-  if(
-    usuarioSelecionado &&
-    usuarioSelecionado.data.uid === uid
-  ){
-
-    nome =
-      usuarioSelecionado.data.nome ||
-      usuarioSelecionado.data.name ||
-      nome;
-
-    email =
-      usuarioSelecionado.data.email ||
-      email;
-
-  }
-
-  document.getElementById(
-    "modalNome"
-  ).textContent =
-    nome;
-
-  document.getElementById(
-    "modalEmail"
-  ).textContent =
-    email ||
-    "E-mail não informado";
-
-  document.getElementById(
-    "modalAvatar"
-  ).textContent =
-    (
-      usuarioSelecionado &&
-      usuarioSelecionado.data.uid === uid
-    )
-      ?
-      (
-        usuarioSelecionado.data.avatar ||
-        "👤"
-      )
-      :
-      "👤";
-
-  const total =
-    registros.length;
-
-  const pendentes =
-    registros.filter(
-      item =>
-        item.entregue !== true
-    ).length;
-
-  const entregues =
-    registros.filter(
-      item =>
-        item.entregue === true
-    ).length;
-
-  document.getElementById(
-    "modalTotal"
-  ).textContent =
-    numero(
-      total
-    );
-
-  document.getElementById(
-    "modalPendentes"
-  ).textContent =
-    numero(
-      pendentes
-    );
-
-  document.getElementById(
-    "modalEntregues"
-  ).textContent =
-    numero(
-      entregues
-    );
-
-  const lista =
+  const descricao =
     document.getElementById(
-      "modalDeliveryList"
-    );
+      "voucherDescricao"
+    ).value.trim();
 
-  lista.innerHTML =
-    "";
 
   if(
-    registros.length === 0
+    !Number.isFinite(
+      valor
+    ) ||
+    valor <= 0
   ){
 
-    lista.innerHTML =
-      "<div class='empty'>Nenhum prêmio encontrado.</div>";
+    mostrarMensagem(
+      voucherMessage,
+      "Digite um valor válido para o vale.",
+      "error"
+    );
+
+    return;
 
   }
-  else{
 
-    registros
-    .sort(
-      (
-        a,
-        b
-      ) =>
-        obterMillis(
-          b.criadoEm ||
-          b.dataHora
-        ) -
-        obterMillis(
-          a.criadoEm ||
-          a.dataHora
+
+  let codigo =
+    "";
+
+
+  /*
+    Verifica até encontrar
+    um código ainda não utilizado.
+  */
+
+  for(
+    let tentativa = 0;
+    tentativa < 10;
+    tentativa++
+  ){
+
+    const candidato =
+      gerarVale15();
+
+
+    const existente =
+      await getDocs(
+        query(
+          collection(
+            db,
+            "valesPresentes"
+          ),
+          where(
+            "codigo",
+            "==",
+            candidato
+          )
         )
-    )
-    .forEach(
-      pedido => {
+      );
 
-        const div =
-          document.createElement(
-            "div"
-          );
 
-        div.className =
-          "modal-delivery-item";
+    if(
+      existente.empty
+    ){
 
-        div.innerHTML = `
+      codigo =
+        candidato;
 
-          <div class="modal-delivery-title">
+      break;
 
-            🎁 ${escapar(
-              pedido.premioNome ||
-              pedido.nome ||
-              pedido.titulo ||
-              "Prêmio"
-            )}
+    }
 
-            ${
-              pedido.entregue === true
-                ? " • ✅ ENTREGUE"
-                : " • ⏳ PENDENTE"
-            }
+  }
 
-          </div>
 
-          <div class="modal-delivery-meta">
+  if(!codigo){
 
-            Tipo:
-            ${escapar(
-              pedido.tipo ||
-              "outro"
-            )}
+    mostrarMensagem(
+      voucherMessage,
+      "Não foi possível gerar um código único. Tente novamente.",
+      "error"
+    );
 
-            <br>
+    return;
 
-            Quantidade:
-            ${numero(
-              pedido.quantidade
-            )}
+  }
 
-            <br>
 
-            Data:
-            ${escapar(
-              formatarData(
-                pedido.criadoEm ||
-                pedido.dataHora
-              )
-            )}
+  try{
 
-            <br>
+    await addDoc(
+      collection(
+        db,
+        "valesPresentes"
+      ),
+      {
 
-            ID:
-            ${escapar(
-              pedido.id
-            )}
+        codigo:
+          codigo,
 
-          </div>
+        valor:
+          valor,
 
-        `;
+        descricao:
+          descricao ||
+          "Vale Presente Adam Games",
 
-        lista.appendChild(
-          div
-        );
+        usado:
+          false,
+
+        criadoPor:
+          adminUsuario?.email ||
+          "",
+
+        criadoPorUid:
+          adminUsuario?.uid ||
+          "",
+
+        criadoEm:
+          serverTimestamp()
 
       }
     );
 
-  }
 
-  document
-    .getElementById(
-      "profileModal"
-    )
-    .classList.add(
-      "show"
+    document.getElementById(
+      "voucherCode"
+    ).textContent =
+      codigo;
+
+
+    document.getElementById(
+      "voucherResult"
+    ).style.display =
+      "block";
+
+
+    mostrarMensagem(
+      voucherMessage,
+      "🎫 Vale criado com sucesso.",
+      "success"
     );
 
+
+    document.getElementById(
+      "voucherValor"
+    ).value =
+      "";
+
+
+    document.getElementById(
+      "voucherDescricao"
+    ).value =
+      "";
+
+
+    await carregarVales();
+
+  }
+  catch(error){
+
+    console.error(
+      "Vale:",
+      error
+    );
+
+
+    mostrarMensagem(
+      voucherMessage,
+      "Erro ao criar o Vale Presente.",
+      "error"
+    );
+
+  }
+
 }
+
+
+/* =====================================================
+   COPIAR VALE
+===================================================== */
+
+async function copiarVale(){
+
+  const codigo =
+    document.getElementById(
+      "voucherCode"
+    ).textContent.trim();
+
+
+  if(
+    !codigo ||
+    codigo.length !== 15
+  ){
+
+    return;
+
+  }
+
+
+  try{
+
+    await navigator.clipboard.writeText(
+      codigo
+    );
+
+
+    mostrarMensagem(
+      voucherMessage,
+      "📋 Código copiado.",
+      "success"
+    );
+
+  }
+  catch(error){
+
+    prompt(
+      "Copie o código:",
+      codigo
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   CARREGAR VALES
+===================================================== */
+
+async function carregarVales(){
+
+  const lista =
+    document.getElementById(
+      "voucherList"
+    );
+
+
+  try{
+
+    const resultado =
+      await getDocs(
+        collection(
+          db,
+          "valesPresentes"
+        )
+      );
+
+
+    todosVales =
+      resultado.docs
+        .map(
+          documento => ({
+
+            id:
+              documento.id,
+
+            ...documento.data()
+
+          })
+        )
+        .sort(
+          (
+            a,
+            b
+          ) =>
+            obterMillis(
+              b.criadoEm
+            ) -
+            obterMillis(
+              a.criadoEm
+            )
+        );
+
+
+    lista.innerHTML =
+      "";
+
+
+    if(
+      !todosVales.length
+    ){
+
+      lista.innerHTML =
+        "<div class='empty'>Nenhum vale gerado.</div>";
+
+      return;
+
+    }
+
+
+    todosVales
+      .slice(
+        0,
+        50
+      )
+      .forEach(
+        vale => {
+
+          const div =
+            document.createElement(
+              "div"
+            );
+
+
+          div.className =
+            "voucher-item";
+
+
+          div.innerHTML = `
+
+            <div class="voucher-code-small">
+
+              🎫
+              ${escapar(
+                vale.codigo
+              )}
+
+            </div>
+
+
+            <div class="voucher-meta">
+
+              Valor:
+              <strong>
+                ${dinheiro(
+                  vale.valor
+                )}
+              </strong>
+
+              <br>
+
+              Status:
+              ${
+                vale.usado === true
+                  ?
+                  "🔴 UTILIZADO"
+                  :
+                  "🟢 DISPONÍVEL"
+              }
+
+              <br>
+
+              ${
+                escapar(
+                  vale.descricao ||
+                  "Vale Presente Adam Games"
+                )
+              }
+
+              <br>
+
+              Criado em:
+              ${escapar(
+                formatarData(
+                  vale.criadoEm
+                )
+              )}
+
+            </div>
+
+          `;
+
+
+          lista.appendChild(
+            div
+          );
+
+        }
+      );
+
+  }
+  catch(error){
+
+    console.error(
+      error
+    );
+
+
+    lista.innerHTML =
+      "<div class='empty'>Não foi possível carregar os vales.</div>";
+
+  }
+
+}
+
+
+/* =====================================================
+   ATUALIZAR TUDO
+===================================================== */
+
+async function atualizarTudo(){
+
+  const botao =
+    document.getElementById(
+      "refreshAll"
+    );
+
+
+  botao.disabled =
+    true;
+
+
+  botao.textContent =
+    "🔄 Atualizando...";
+
+
+  try{
+
+    await Promise.all([
+
+      carregarDashboard(),
+
+      carregarEntregas(),
+
+      carregarVales()
+
+    ]);
+
+  }
+  finally{
+
+    botao.disabled =
+      false;
+
+    botao.textContent =
+      "🔄 Atualizar";
+
+  }
+
+}
+
 
 /* =====================================================
    AUTENTICAÇÃO
@@ -4006,11 +6121,15 @@ onAuthStateChanged(
 
     }
 
+
     const email =
       (
         usuario.email ||
         ""
-      ).trim().toLowerCase();
+      )
+      .trim()
+      .toLowerCase();
+
 
     if(
       email !==
@@ -4021,43 +6140,37 @@ onAuthStateChanged(
         "⛔ Acesso negado. Área exclusiva do administrador."
       );
 
+
       await signOut(
         auth
       );
+
 
       window.location.replace(
         "index.html"
       );
 
+
       return;
 
     }
 
+
     adminUsuario =
       usuario;
 
+
     console.log(
-      "Administrador autenticado:",
+      "Administrador:",
       usuario.email
     );
 
-    /*
-    ===================================================
-    CARREGA A ÁREA DE ENTREGAS ASSIM QUE O ADMIN ABRE
-    ===================================================
-    */
 
-    await carregarTodasEntregas();
-
-    /*
-    Tenta também localizar prêmios da roleta
-    para que eles apareçam como pendentes.
-    */
-
-    await carregarHistoricoRoletaParaEntregas();
+    await atualizarTudo();
 
   }
 );
+
 
 /* =====================================================
    EVENTOS
@@ -4071,6 +6184,7 @@ document
     "click",
     buscarUsuario
   );
+
 
 searchInput
   .addEventListener(
@@ -4089,6 +6203,17 @@ searchInput
     }
   );
 
+
+document
+  .getElementById(
+    "refreshAll"
+  )
+  .addEventListener(
+    "click",
+    atualizarTudo
+  );
+
+
 document
   .getElementById(
     "adicionar"
@@ -4100,6 +6225,7 @@ document
         "adicionar"
       )
   );
+
 
 document
   .getElementById(
@@ -4113,6 +6239,7 @@ document
       )
   );
 
+
 document
   .getElementById(
     "adicionarGiros"
@@ -4120,10 +6247,11 @@ document
   .addEventListener(
     "click",
     () =>
-      alterarGirosRoleta(
+      alterarGiros(
         "adicionar"
       )
   );
+
 
 document
   .getElementById(
@@ -4132,10 +6260,11 @@ document
   .addEventListener(
     "click",
     () =>
-      alterarGirosRoleta(
+      alterarGiros(
         "remover"
       )
   );
+
 
 document
   .getElementById(
@@ -4146,6 +6275,7 @@ document
     alterarVIP
   );
 
+
 document
   .getElementById(
     "box"
@@ -4155,106 +6285,51 @@ document
     alterarCaixa
   );
 
+
 /* =====================================================
-   MODAL
+   VALE
 ===================================================== */
 
 document
   .getElementById(
-    "closeProfileModal"
+    "generateVoucher"
+  )
+  .addEventListener(
+    "click",
+    gerarNovoVale
+  );
+
+
+document
+  .getElementById(
+    "copyVoucher"
+  )
+  .addEventListener(
+    "click",
+    copiarVale
+  );
+
+
+document
+  .getElementById(
+    "newVoucher"
   )
   .addEventListener(
     "click",
     () => {
 
-      document
-        .getElementById(
-          "profileModal"
-        )
-        .classList.remove(
-          "show"
-        );
+      document.getElementById(
+        "voucherResult"
+      ).style.display =
+        "none";
+
+      document.getElementById(
+        "voucherValor"
+      ).focus();
 
     }
   );
 
-document
-  .getElementById(
-    "profileModal"
-  )
-  .addEventListener(
-    "click",
-    event => {
-
-      if(
-        event.target.id ===
-        "profileModal"
-      ){
-
-        event.currentTarget
-          .classList
-          .remove(
-            "show"
-          );
-
-      }
-
-    }
-  );
-
-/* =====================================================
-   ABRIR CLIENTE NO CLIENTE.HTML
-===================================================== */
-
-document
-  .getElementById(
-    "openClient"
-  )
-  .addEventListener(
-    "click",
-    () => {
-
-      if(!modalClienteUid){
-
-        return;
-
-      }
-
-      window.location.href =
-        "cliente.html?uid=" +
-        encodeURIComponent(
-          modalClienteUid
-        );
-
-    }
-  );
-
-/* =====================================================
-   ABRIR ENTREGAS
-===================================================== */
-
-document
-  .getElementById(
-    "openDelivery"
-  )
-  .addEventListener(
-    "click",
-    () => {
-
-      if(!modalClienteUid){
-
-        return;
-
-      }
-
-      window.location.href =
-        "entregas.html?uid=" +
-        encodeURIComponent(
-          modalClienteUid
-        );
-
-    }
-  );
 
 /* =====================================================
    LOGOUT
@@ -4282,6 +6357,7 @@ document
         );
 
       }
+
 
       window.location.replace(
         "index.html"
