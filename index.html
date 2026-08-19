@@ -441,23 +441,68 @@ label{
 }
 
 
+/* =====================================
+   CRIAR CONTA - GRANDE
+===================================== */
+
 .create-account{
 
-  display:block;
+  display:flex;
 
-  text-align:center;
+  align-items:center;
 
-  margin-top:18px;
+  justify-content:center;
 
-  color:#ffd52b;
+  width:100%;
 
-  font-size:14px;
+  min-height:62px;
 
-  font-weight:bold;
+  margin-top:22px;
+
+  padding:15px 18px;
+
+  border-radius:17px;
+
+  background:
+
+    linear-gradient(
+      135deg,
+      #ffd52b,
+      #e79a00
+    );
+
+  color:#17233b;
+
+  font-size:18px;
+
+  font-weight:900;
 
   text-decoration:none;
 
   cursor:pointer;
+
+  box-shadow:
+
+    0 10px 28px
+    rgba(255,190,0,.28);
+
+  transition:
+    transform .15s ease,
+    filter .15s ease;
+}
+
+
+.create-account:hover{
+
+  filter:brightness(1.08);
+
+  transform:translateY(-1px);
+}
+
+
+.create-account:active{
+
+  transform:scale(.98);
 }
 
 
@@ -534,6 +579,14 @@ label{
   font-weight:bold;
 
   cursor:pointer;
+}
+
+
+.social-button:disabled{
+
+  opacity:.6;
+
+  cursor:not-allowed;
 }
 
 
@@ -842,6 +895,14 @@ label{
   }
 
 
+  .create-account{
+
+    min-height:60px;
+
+    font-size:17px;
+  }
+
+
   .adam-whatsapp-button{
 
     right:15px;
@@ -895,6 +956,10 @@ label{
 
   </div>
 
+
+  <!-- =====================================
+       LOGIN
+  ====================================== -->
 
   <div
     class="login-card login-box"
@@ -978,6 +1043,16 @@ label{
     </a>
 
 
+    <!-- BOTÃO GRANDE DE CADASTRO -->
+
+    <a
+      class="create-account"
+      id="showRegister"
+    >
+      ✨ CRIAR UMA NOVA CONTA
+    </a>
+
+
     <div class="divider">
       ou continue com
     </div>
@@ -1032,14 +1107,6 @@ label{
     </div>
 
 
-    <a
-      class="create-account"
-      id="showRegister"
-    >
-      ✨ Criar minha conta
-    </a>
-
-
     <div
       class="loading"
       id="loading"
@@ -1049,6 +1116,10 @@ label{
 
   </div>
 
+
+  <!-- =====================================
+       CADASTRO
+  ====================================== -->
 
   <div
     class="login-card register-box"
@@ -1389,6 +1460,97 @@ function mostrarMensagemCadastro(
 
 
 /* =====================================
+   ID ADAM GAMES
+   6 CARACTERES
+   MAIÚSCULAS + NÚMEROS
+===================================== */
+
+function gerarPublicId(){
+
+  const letras =
+    "ABCDEFGHJKLMNPQRSTUVWXYZ";
+
+  const numeros =
+    "23456789";
+
+  const todos =
+    letras + numeros;
+
+  let resultado =
+    "";
+
+  /*
+  Garante que sempre existam
+  letras e números.
+  */
+
+  resultado +=
+    letras[
+      Math.floor(
+        Math.random() *
+        letras.length
+      )
+    ];
+
+  resultado +=
+    letras[
+      Math.floor(
+        Math.random() *
+        letras.length
+      )
+    ];
+
+  resultado +=
+    numeros[
+      Math.floor(
+        Math.random() *
+        numeros.length
+      )
+    ];
+
+  resultado +=
+    numeros[
+      Math.floor(
+        Math.random() *
+        numeros.length
+      )
+    ];
+
+  /*
+  Completa até 6 caracteres.
+  */
+
+  while(
+    resultado.length < 6
+  ){
+
+    resultado +=
+      todos[
+        Math.floor(
+          Math.random() *
+          todos.length
+        )
+      ];
+
+  }
+
+  /*
+  Embaralha para não ficar
+  sempre no mesmo padrão.
+  */
+
+  return resultado
+    .split("")
+    .sort(
+      () =>
+        Math.random() - 0.5
+    )
+    .join("");
+
+}
+
+
+/* =====================================
    SENHA
 ===================================== */
 
@@ -1480,17 +1642,18 @@ document
       "hidden"
     );
 
-    mostrarMensagemCadastro(
-      "",
-      ""
-    );
+    registerMessage.textContent =
+      "";
+
+    registerMessage.className =
+      "message";
 
   }
 );
 
 
 /* =====================================
-   LOGIN
+   LOGIN E-MAIL
 ===================================== */
 
 loginForm.addEventListener(
@@ -1567,6 +1730,7 @@ loginForm.addEventListener(
     catch(error){
 
       console.error(
+        "Erro login:",
         error
       );
 
@@ -1624,7 +1788,7 @@ loginForm.addEventListener(
 
 
 /* =====================================
-   CRIAR CONTA
+   CRIAR CONTA COM E-MAIL
 ===================================== */
 
 registerForm.addEventListener(
@@ -1649,7 +1813,8 @@ registerForm.addEventListener(
         "registerEmail"
       )
       .value
-      .trim();
+      .trim()
+      .toLowerCase();
 
 
     const senha =
@@ -1666,6 +1831,19 @@ registerForm.addEventListener(
         "registerPassword2"
       )
       .value;
+
+
+    if(
+      !nome
+    ){
+
+      mostrarMensagemCadastro(
+        "Digite seu nome."
+      );
+
+      return;
+
+    }
 
 
     if(
@@ -1708,29 +1886,8 @@ registerForm.addEventListener(
         resultado.user;
 
 
-      const caracteres =
-        "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-
-
-      let publicId =
-        "";
-
-
-      for(
-        let i=0;
-        i<7;
-        i++
-      ){
-
-        publicId +=
-          caracteres[
-            Math.floor(
-              Math.random() *
-              caracteres.length
-            )
-          ];
-
-      }
+      const publicId =
+        gerarPublicId();
 
 
       await addDoc(
@@ -1779,6 +1936,9 @@ registerForm.addEventListener(
           creditos:
             0,
 
+          girosRoleta:
+            0,
+
           criadoEm:
             new Date().toISOString()
 
@@ -1787,7 +1947,9 @@ registerForm.addEventListener(
 
 
       mostrarMensagemCadastro(
-        "Conta criada com sucesso! Entrando...",
+        "Conta criada com sucesso! Seu ID Adam Games é " +
+        publicId +
+        ". Entrando...",
         "success"
       );
 
@@ -1800,7 +1962,7 @@ registerForm.addEventListener(
           );
 
         },
-        700
+        900
       );
 
 
@@ -1809,6 +1971,7 @@ registerForm.addEventListener(
     catch(error){
 
       console.error(
+        "Erro cadastro:",
         error
       );
 
@@ -1866,6 +2029,456 @@ registerForm.addEventListener(
 
 
 /* =====================================
+   GOOGLE
+===================================== */
+
+document
+.getElementById(
+  "googleLogin"
+)
+.addEventListener(
+  "click",
+  async () => {
+
+    const button =
+      document.getElementById(
+        "googleLogin"
+      );
+
+
+    button.disabled =
+      true;
+
+    button.innerHTML =
+      "🔄 Entrando com Google...";
+
+
+    try{
+
+      const provider =
+        new GoogleAuthProvider();
+
+
+      provider.setCustomParameters({
+        prompt:
+          "select_account"
+      });
+
+
+      const resultado =
+        await signInWithPopup(
+          auth,
+          provider
+        );
+
+
+      const usuario =
+        resultado.user;
+
+
+      /*
+      Procura primeiro pelo UID.
+      */
+
+      let busca =
+        await getDocs(
+          query(
+            collection(
+              db,
+              "admins"
+            ),
+            where(
+              "uid",
+              "==",
+              usuario.uid
+            )
+          )
+        );
+
+
+      /*
+      Se não encontrou pelo UID,
+      procura pelo e-mail.
+
+      Isso também evita criar
+      uma segunda conta para um
+      e-mail que já esteja cadastrado.
+      */
+
+      if(
+        busca.empty &&
+        usuario.email
+      ){
+
+        busca =
+          await getDocs(
+            query(
+              collection(
+                db,
+                "admins"
+              ),
+              where(
+                "email",
+                "==",
+                usuario.email
+                  .trim()
+                  .toLowerCase()
+              )
+            )
+          );
+
+      }
+
+
+      /*
+      PRIMEIRO LOGIN GOOGLE
+      */
+
+      if(
+        busca.empty
+      ){
+
+        const publicId =
+          gerarPublicId();
+
+
+        await addDoc(
+          collection(
+            db,
+            "admins"
+          ),
+          {
+
+            uid:
+              usuario.uid,
+
+            nome:
+              usuario.displayName ||
+              "Usuário",
+
+            email:
+              (
+                usuario.email ||
+                ""
+              )
+              .trim()
+              .toLowerCase(),
+
+            publicId:
+              publicId,
+
+            idade:
+              "",
+
+            telefone:
+              "",
+
+            avatar:
+              "🙂",
+
+            vip:
+              false,
+
+            caixaBox:
+              false,
+
+            chances:
+              0,
+
+            moedas:
+              0,
+
+            chaves:
+              0,
+
+            creditos:
+              0,
+
+            girosRoleta:
+              0,
+
+            criadoEm:
+              new Date().toISOString()
+
+          }
+        );
+
+
+        console.log(
+          "Cadastro Google criado:",
+          publicId
+        );
+
+
+        mostrarMensagem(
+          "Conta criada com Google! Seu ID Adam Games é " +
+          publicId +
+          ". Entrando...",
+          "success"
+        );
+
+      }
+
+      else{
+
+        /*
+        Usuário Google já cadastrado.
+        */
+
+        const dados =
+          busca.docs[0].data();
+
+
+        mostrarMensagem(
+          "Login com Google realizado! Entrando...",
+          "success"
+        );
+
+
+        console.log(
+          "Usuário Google existente:",
+          dados.publicId
+        );
+
+      }
+
+
+      setTimeout(
+        () => {
+
+          window.location.replace(
+            "painel.html"
+          );
+
+        },
+        700
+      );
+
+    }
+
+    catch(error){
+
+      console.error(
+        "ERRO GOOGLE:",
+        error
+      );
+
+
+      let texto =
+        "Não foi possível entrar com Google.";
+
+
+      if(
+        error.code ===
+        "auth/popup-closed-by-user"
+      ){
+
+        texto =
+          "A janela do Google foi fechada.";
+
+      }
+
+      else if(
+        error.code ===
+        "auth/popup-blocked"
+      ){
+
+        texto =
+          "O navegador bloqueou a janela do Google.";
+
+      }
+
+      else if(
+        error.code ===
+        "auth/unauthorized-domain"
+      ){
+
+        texto =
+          "Este domínio não está autorizado no Firebase Authentication.";
+
+      }
+
+      else if(
+        error.code ===
+        "auth/operation-not-allowed"
+      ){
+
+        texto =
+          "O login com Google não está ativado no Firebase.";
+
+      }
+
+      else if(
+        error.code ===
+        "auth/account-exists-with-different-credential"
+      ){
+
+        texto =
+          "Este e-mail já possui uma conta usando outro método de login.";
+
+      }
+
+      else if(
+        error.code ===
+        "permission-denied"
+      ){
+
+        texto =
+          "O Firebase bloqueou a criação do cadastro. Verifique as Rules do Firestore.";
+
+      }
+
+
+      mostrarMensagem(
+        texto
+      );
+
+
+      button.disabled =
+        false;
+
+
+      button.innerHTML =
+        `
+        <span class="social-icon">
+          🌈
+        </span>
+        Google
+        `;
+
+    }
+
+  }
+);
+
+
+/* =====================================
+   FACEBOOK
+===================================== */
+
+document
+.getElementById(
+  "facebookLogin"
+)
+.addEventListener(
+  "click",
+  async () => {
+
+    const button =
+      document.getElementById(
+        "facebookLogin"
+      );
+
+
+    button.disabled =
+      true;
+
+
+    try{
+
+      const provider =
+        new FacebookAuthProvider();
+
+
+      await signInWithPopup(
+        auth,
+        provider
+      );
+
+
+      window.location.replace(
+        "painel.html"
+      );
+
+    }
+
+    catch(error){
+
+      console.error(
+        "Erro Facebook:",
+        error
+      );
+
+
+      mostrarMensagem(
+        "Não foi possível entrar com Facebook."
+      );
+
+
+      button.disabled =
+        false;
+
+    }
+
+  }
+);
+
+
+/* =====================================
+   APPLE
+===================================== */
+
+document
+.getElementById(
+  "appleLogin"
+)
+.addEventListener(
+  "click",
+  async () => {
+
+    const button =
+      document.getElementById(
+        "appleLogin"
+      );
+
+
+    button.disabled =
+      true;
+
+
+    try{
+
+      const provider =
+        new OAuthProvider(
+          "apple.com"
+        );
+
+
+      await signInWithPopup(
+        auth,
+        provider
+      );
+
+
+      window.location.replace(
+        "painel.html"
+      );
+
+    }
+
+    catch(error){
+
+      console.error(
+        "Erro Apple:",
+        error
+      );
+
+
+      mostrarMensagem(
+        "Não foi possível entrar com Apple."
+      );
+
+
+      button.disabled =
+        false;
+
+    }
+
+  }
+);
+
+
+/* =====================================
    RECUPERAR SENHA
 ===================================== */
 
@@ -1881,7 +2494,9 @@ document
       email.value.trim();
 
 
-    if(!emailValue){
+    if(
+      !emailValue
+    ){
 
       mostrarMensagem(
         "Digite seu e-mail primeiro."
@@ -1912,155 +2527,13 @@ document
     catch(error){
 
       console.error(
+        "Erro recuperação:",
         error
       );
 
 
       mostrarMensagem(
         "Não foi possível enviar o e-mail de recuperação."
-      );
-
-    }
-
-  }
-);
-
-
-/* =====================================
-   GOOGLE
-===================================== */
-
-document
-.getElementById(
-  "googleLogin"
-)
-.addEventListener(
-  "click",
-  async () => {
-
-    try{
-
-      const provider =
-        new GoogleAuthProvider();
-
-
-      await signInWithPopup(
-        auth,
-        provider
-      );
-
-
-      window.location.replace(
-        "painel.html"
-      );
-
-    }
-
-    catch(error){
-
-      console.error(
-        error
-      );
-
-
-      mostrarMensagem(
-        "Não foi possível entrar com Google."
-      );
-
-    }
-
-  }
-);
-
-
-/* =====================================
-   FACEBOOK
-===================================== */
-
-document
-.getElementById(
-  "facebookLogin"
-)
-.addEventListener(
-  "click",
-  async () => {
-
-    try{
-
-      const provider =
-        new FacebookAuthProvider();
-
-
-      await signInWithPopup(
-        auth,
-        provider
-      );
-
-
-      window.location.replace(
-        "painel.html"
-      );
-
-    }
-
-    catch(error){
-
-      console.error(
-        error
-      );
-
-
-      mostrarMensagem(
-        "Não foi possível entrar com Facebook."
-      );
-
-    }
-
-  }
-);
-
-
-/* =====================================
-   APPLE
-===================================== */
-
-document
-.getElementById(
-  "appleLogin"
-)
-.addEventListener(
-  "click",
-  async () => {
-
-    try{
-
-      const provider =
-        new OAuthProvider(
-          "apple.com"
-        );
-
-
-      await signInWithPopup(
-        auth,
-        provider
-      );
-
-
-      window.location.replace(
-        "painel.html"
-      );
-
-    }
-
-    catch(error){
-
-      console.error(
-        error
-      );
-
-
-      mostrarMensagem(
-        "Não foi possível entrar com Apple."
       );
 
     }
@@ -2077,13 +2550,12 @@ onAuthStateChanged(
   auth,
   usuario => {
 
-    if(usuario){
-
-      window.location.replace(
-        "painel.html"
-      );
-
-    }
+    console.log(
+      "Estado da autenticação:",
+      usuario
+        ? usuario.email
+        : "não autenticado"
+    );
 
   }
 );
