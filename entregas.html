@@ -1,0 +1,2276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>Adam Games • Entregas</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  background:#061b2d;
+}
+
+body{
+
+  min-height:100vh;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  color:#fff;
+
+  background:
+
+    radial-gradient(
+      circle at 10% 0%,
+      rgba(0,190,120,.35),
+      transparent 30%
+    ),
+
+    radial-gradient(
+      circle at 90% 10%,
+      rgba(20,160,255,.35),
+      transparent 30%
+    ),
+
+    linear-gradient(
+      180deg,
+      #087fc1 0%,
+      #064b80 45%,
+      #031c35 100%
+    );
+
+}
+
+
+.page{
+
+  width:100%;
+
+  max-width:850px;
+
+  margin:0 auto;
+
+  padding:
+    18px
+    16px
+    80px;
+
+}
+
+
+/* =====================================================
+   TOPO
+===================================================== */
+
+.top{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+}
+
+
+.back{
+
+  width:45px;
+
+  height:45px;
+
+  border:0;
+
+  border-radius:14px;
+
+  background:
+    rgba(0,25,55,.8);
+
+  color:#fff;
+
+  font-size:25px;
+
+  cursor:pointer;
+
+}
+
+
+.title{
+
+  text-align:center;
+
+  text-shadow:
+    0 2px 8px #000;
+
+}
+
+
+.title small{
+
+  display:block;
+
+  font-size:10px;
+
+  letter-spacing:2px;
+
+}
+
+
+.title strong{
+
+  font-size:20px;
+
+}
+
+
+/* =====================================================
+   CABEÇALHO
+===================================================== */
+
+.hero{
+
+  margin-top:20px;
+
+  padding:22px 18px;
+
+  border-radius:23px;
+
+  text-align:center;
+
+  background:
+    rgba(2,27,55,.94);
+
+  border:
+    1px solid
+    rgba(255,255,255,.1);
+
+}
+
+
+.hero-icon{
+
+  font-size:45px;
+
+}
+
+
+.hero h1{
+
+  margin-top:6px;
+
+  font-size:30px;
+
+}
+
+
+.hero p{
+
+  margin-top:7px;
+
+  color:#a9cde3;
+
+  font-size:13px;
+
+}
+
+
+/* =====================================================
+   RESUMO
+===================================================== */
+
+.resumo{
+
+  display:grid;
+
+  grid-template-columns:
+    1fr
+    1fr
+    1fr;
+
+  gap:10px;
+
+  margin-top:15px;
+
+}
+
+
+.resumo-card{
+
+  padding:15px 8px;
+
+  border-radius:16px;
+
+  text-align:center;
+
+  background:
+    rgba(2,27,55,.94);
+
+  border:
+    1px solid
+    rgba(255,255,255,.08);
+
+}
+
+
+.resumo-numero{
+
+  font-size:27px;
+
+  font-weight:900;
+
+}
+
+
+.resumo-label{
+
+  margin-top:4px;
+
+  color:#9fc4dc;
+
+  font-size:10px;
+
+  font-weight:bold;
+
+}
+
+
+.pendente-numero{
+
+  color:#ffd52b;
+
+}
+
+
+.entregue-numero{
+
+  color:#58ff9b;
+
+}
+
+
+/* =====================================================
+   FILTROS
+===================================================== */
+
+.filtros{
+
+  margin-top:18px;
+
+  display:grid;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
+  gap:10px;
+
+}
+
+
+.filtro{
+
+  height:46px;
+
+  border:0;
+
+  border-radius:13px;
+
+  background:
+    rgba(255,255,255,.08);
+
+  color:#fff;
+
+  font-weight:900;
+
+  cursor:pointer;
+
+}
+
+
+.filtro.ativo{
+
+  background:
+    linear-gradient(
+      135deg,
+      #18bd68,
+      #087d45
+    );
+
+}
+
+
+.busca{
+
+  width:100%;
+
+  height:47px;
+
+  margin-top:10px;
+
+  padding:
+    0
+    15px;
+
+  border:0;
+
+  outline:none;
+
+  border-radius:13px;
+
+  background:
+    rgba(2,27,55,.95);
+
+  color:#fff;
+
+  font-size:14px;
+
+}
+
+
+.busca::placeholder{
+
+  color:#789ab2;
+
+}
+
+
+/* =====================================================
+   LISTA
+===================================================== */
+
+.lista{
+
+  margin-top:18px;
+
+}
+
+
+.sem-resultados{
+
+  padding:30px 15px;
+
+  text-align:center;
+
+  color:#91b3ca;
+
+  border-radius:18px;
+
+  background:
+    rgba(2,27,55,.9);
+
+}
+
+
+/* =====================================================
+   PEDIDO
+===================================================== */
+
+.pedido{
+
+  margin-top:12px;
+
+  padding:17px;
+
+  border-radius:20px;
+
+  background:
+    rgba(2,27,55,.95);
+
+  border:
+    1px solid
+    rgba(255,255,255,.09);
+
+  box-shadow:
+    0 8px 22px
+    rgba(0,0,0,.18);
+
+}
+
+
+.pedido-top{
+
+  display:flex;
+
+  align-items:flex-start;
+
+  justify-content:space-between;
+
+  gap:10px;
+
+}
+
+
+.pedido-numero{
+
+  color:#72c9ff;
+
+  font-size:11px;
+
+  font-weight:bold;
+
+  word-break:break-all;
+
+}
+
+
+.status{
+
+  flex-shrink:0;
+
+  padding:
+    6px
+    9px;
+
+  border-radius:10px;
+
+  font-size:10px;
+
+  font-weight:900;
+
+}
+
+
+.status-pendente{
+
+  background:
+    rgba(255,210,40,.14);
+
+  color:#ffd52b;
+
+}
+
+
+.status-entregue{
+
+  background:
+    rgba(0,220,110,.14);
+
+  color:#58ff9b;
+
+}
+
+
+.usuario{
+
+  margin-top:14px;
+
+}
+
+
+.usuario-nome{
+
+  font-size:18px;
+
+  font-weight:900;
+
+}
+
+
+.usuario-email{
+
+  margin-top:3px;
+
+  color:#8fb6ce;
+
+  font-size:12px;
+
+  word-break:break-all;
+
+}
+
+
+.recompensa{
+
+  margin-top:14px;
+
+  padding:14px;
+
+  border-radius:14px;
+
+  background:
+    rgba(255,255,255,.055);
+
+}
+
+
+.recompensa-titulo{
+
+  color:#9fc4dc;
+
+  font-size:10px;
+
+  font-weight:bold;
+
+  letter-spacing:1px;
+
+}
+
+
+.recompensa-nome{
+
+  margin-top:5px;
+
+  color:#ffd52b;
+
+  font-size:19px;
+
+  font-weight:900;
+
+}
+
+
+.recompensa-qtd{
+
+  margin-top:3px;
+
+  color:#c1dceb;
+
+  font-size:13px;
+
+}
+
+
+.detalhes{
+
+  margin-top:12px;
+
+  display:grid;
+
+  gap:6px;
+
+}
+
+
+.detalhe{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  gap:10px;
+
+  color:#91b2c8;
+
+  font-size:11px;
+
+}
+
+
+.detalhe strong{
+
+  color:#d9edf8;
+
+  text-align:right;
+
+  word-break:break-all;
+
+}
+
+
+.entregar{
+
+  width:100%;
+
+  height:50px;
+
+  margin-top:15px;
+
+  border:0;
+
+  border-radius:13px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #18bd68,
+      #087d45
+    );
+
+  color:#fff;
+
+  font-size:14px;
+
+  font-weight:900;
+
+  cursor:pointer;
+
+}
+
+
+.entregar:disabled{
+
+  opacity:.45;
+
+  cursor:not-allowed;
+
+}
+
+
+.entrega-info{
+
+  margin-top:13px;
+
+  padding:11px;
+
+  border-radius:12px;
+
+  background:
+    rgba(0,220,110,.07);
+
+  color:#73e7a4;
+
+  font-size:12px;
+
+  line-height:1.5;
+
+}
+
+
+/* =====================================================
+   MENSAGEM
+===================================================== */
+
+.mensagem{
+
+  position:fixed;
+
+  left:50%;
+
+  bottom:20px;
+
+  transform:
+    translateX(-50%);
+
+  width:
+    min(
+      calc(100% - 30px),
+      500px
+    );
+
+  padding:14px;
+
+  border-radius:14px;
+
+  text-align:center;
+
+  background:
+    #082742;
+
+  border:
+    1px solid
+    rgba(255,255,255,.1);
+
+  box-shadow:
+    0 10px 30px
+    rgba(0,0,0,.4);
+
+  font-size:13px;
+
+  display:none;
+
+  z-index:100;
+
+}
+
+
+.mensagem.show{
+
+  display:block;
+
+}
+
+
+.mensagem.sucesso{
+
+  color:#72ffad;
+
+}
+
+
+.mensagem.erro{
+
+  color:#ff9da8;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:560px){
+
+  .resumo{
+
+    grid-template-columns:
+      1fr
+      1fr
+      1fr;
+
+  }
+
+  .resumo-card{
+
+    padding:12px 5px;
+
+  }
+
+  .resumo-numero{
+
+    font-size:23px;
+
+  }
+
+  .detalhe{
+
+    flex-direction:column;
+
+    gap:2px;
+
+  }
+
+  .detalhe strong{
+
+    text-align:left;
+
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+  <!-- =================================================
+       TOPO
+  ================================================== -->
+
+  <div class="top">
+
+    <button
+      class="back"
+      id="back"
+      type="button">
+
+      ←
+
+    </button>
+
+
+    <div class="title">
+
+      <small>
+        ADAM GAMES
+      </small>
+
+      <strong>
+        ENTREGAS
+      </strong>
+
+    </div>
+
+
+    <div style="width:45px"></div>
+
+  </div>
+
+
+  <!-- =================================================
+       HERO
+  ================================================== -->
+
+  <div class="hero">
+
+    <div class="hero-icon">
+      📦
+    </div>
+
+    <h1>
+      Pedidos e Recompensas
+    </h1>
+
+    <p>
+      Gerencie as recompensas que precisam
+      ser entregues aos jogadores.
+    </p>
+
+  </div>
+
+
+  <!-- =================================================
+       RESUMO
+  ================================================== -->
+
+  <div class="resumo">
+
+
+    <div class="resumo-card">
+
+      <div
+        class="resumo-numero"
+        id="totalPedidos">
+
+        0
+
+      </div>
+
+      <div class="resumo-label">
+        TOTAL
+      </div>
+
+    </div>
+
+
+    <div class="resumo-card">
+
+      <div
+        class="resumo-numero pendente-numero"
+        id="totalPendentes">
+
+        0
+
+      </div>
+
+      <div class="resumo-label">
+        PENDENTES
+      </div>
+
+    </div>
+
+
+    <div class="resumo-card">
+
+      <div
+        class="resumo-numero entregue-numero"
+        id="totalEntregues">
+
+        0
+
+      </div>
+
+      <div class="resumo-label">
+        ENTREGUES
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+  <!-- =================================================
+       FILTROS
+  ================================================== -->
+
+  <div class="filtros">
+
+
+    <button
+      class="filtro ativo"
+      id="filtroPendentes"
+      type="button">
+
+      ⏳ PENDENTES
+
+    </button>
+
+
+    <button
+      class="filtro"
+      id="filtroTodos"
+      type="button">
+
+      📜 TODOS
+
+    </button>
+
+
+  </div>
+
+
+  <input
+    class="busca"
+    id="busca"
+    type="search"
+    placeholder="🔎 Buscar por nome, e-mail ou ID..."
+  >
+
+
+  <!-- =================================================
+       LISTA
+  ================================================== -->
+
+  <div
+    class="lista"
+    id="lista">
+
+    <div class="sem-resultados">
+
+      🔄 Carregando pedidos...
+
+    </div>
+
+  </div>
+
+
+</div>
+
+
+<!-- =====================================================
+     MENSAGEM
+===================================================== -->
+
+<div
+  class="mensagem"
+  id="mensagem">
+
+</div>
+
+
+<script type="module">
+
+
+/* =====================================================
+   FIREBASE
+===================================================== */
+
+import {
+  initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+import {
+  getAuth,
+  onAuthStateChanged
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  updateDoc,
+  doc,
+  Timestamp
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+/* =====================================================
+   CONFIG
+===================================================== */
+
+const firebaseConfig = {
+
+  apiKey:
+    "AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",
+
+  authDomain:
+    "adam-games-21081.firebaseapp.com",
+
+  projectId:
+    "adam-games-21081",
+
+  storageBucket:
+    "adam-games-21081.firebasestorage.app",
+
+  messagingSenderId:
+    "1055528418738",
+
+  appId:
+    "1:1055528418738:web:5fafdf63424ba9744eb8ab"
+
+};
+
+
+const app =
+  initializeApp(
+    firebaseConfig
+  );
+
+
+const auth =
+  getAuth(app);
+
+
+const db =
+  getFirestore(app);
+
+
+/* =====================================================
+   ELEMENTOS
+===================================================== */
+
+const lista =
+  document.getElementById(
+    "lista"
+  );
+
+
+const busca =
+  document.getElementById(
+    "busca"
+  );
+
+
+const totalPedidos =
+  document.getElementById(
+    "totalPedidos"
+  );
+
+
+const totalPendentes =
+  document.getElementById(
+    "totalPendentes"
+  );
+
+
+const totalEntregues =
+  document.getElementById(
+    "totalEntregues"
+  );
+
+
+const filtroPendentes =
+  document.getElementById(
+    "filtroPendentes"
+  );
+
+
+const filtroTodos =
+  document.getElementById(
+    "filtroTodos"
+  );
+
+
+const mensagem =
+  document.getElementById(
+    "mensagem"
+  );
+
+
+/* =====================================================
+   ESTADO
+===================================================== */
+
+let usuarioAdmin =
+  null;
+
+let pedidos =
+  [];
+
+let filtroAtual =
+  "pendentes";
+
+
+/* =====================================================
+   ADMIN
+===================================================== */
+
+const EMAIL_ADMIN =
+  "raphafentyramos@gmail.com";
+
+
+/* =====================================================
+   MENSAGEM
+===================================================== */
+
+function mostrarMensagem(
+  texto,
+  tipo
+){
+
+  mensagem.textContent =
+    texto;
+
+  mensagem.className =
+    "mensagem show " +
+    tipo;
+
+
+  setTimeout(
+    () => {
+
+      mensagem.className =
+        "mensagem";
+
+    },
+    3500
+  );
+
+}
+
+
+/* =====================================================
+   DATA
+===================================================== */
+
+function converterData(
+  valor
+){
+
+  if(
+    !valor
+  ){
+
+    return null;
+
+  }
+
+
+  if(
+    typeof valor.toDate ===
+    "function"
+  ){
+
+    return valor.toDate();
+
+  }
+
+
+  if(
+    typeof valor.toMillis ===
+    "function"
+  ){
+
+    return new Date(
+      valor.toMillis()
+    );
+
+  }
+
+
+  if(
+    typeof valor.seconds ===
+    "number"
+  ){
+
+    return new Date(
+      valor.seconds * 1000
+    );
+
+  }
+
+
+  if(
+    valor instanceof Date
+  ){
+
+    return valor;
+
+  }
+
+
+  return null;
+
+}
+
+
+/* =====================================================
+   FORMATAR DATA
+===================================================== */
+
+function formatarData(
+  valor
+){
+
+  const data =
+    converterData(
+      valor
+    );
+
+
+  if(
+    !data
+  ){
+
+    return "—";
+
+  }
+
+
+  return data.toLocaleString(
+    "pt-BR",
+    {
+      dateStyle:
+        "short",
+
+      timeStyle:
+        "medium"
+    }
+  );
+
+}
+
+
+/* =====================================================
+   CARREGAR PEDIDOS
+===================================================== */
+
+async function carregarPedidos(){
+
+  try{
+
+    const resultado =
+      await getDocs(
+        collection(
+          db,
+          "pedidosRecompensas"
+        )
+      );
+
+
+    pedidos =
+      resultado.docs
+
+      .map(
+        documento => ({
+
+          id:
+            documento.id,
+
+          ...documento.data()
+
+        })
+      );
+
+
+    /*
+    Ordena os mais recentes primeiro.
+    */
+
+    pedidos.sort(
+      (
+        a,
+        b
+      ) => {
+
+        const aData =
+          converterData(
+            a.criadoEm
+          )?.getTime() || 0;
+
+
+        const bData =
+          converterData(
+            b.criadoEm
+          )?.getTime() || 0;
+
+
+        return bData - aData;
+
+      }
+    );
+
+
+    atualizarResumo();
+
+    renderizar();
+
+  }
+
+  catch(error){
+
+    console.error(
+      "Erro ao carregar pedidos:",
+      error
+    );
+
+
+    lista.innerHTML = `
+
+      <div class="sem-resultados">
+
+        ❌ Não foi possível carregar os pedidos.
+
+        <br><br>
+
+        Verifique as Rules do Firestore.
+
+      </div>
+
+    `;
+
+  }
+
+}
+
+
+/* =====================================================
+   RESUMO
+===================================================== */
+
+function atualizarResumo(){
+
+  const pendentes =
+    pedidos.filter(
+      pedido =>
+        pedido.status !==
+        "entregue"
+    );
+
+
+  const entregues =
+    pedidos.filter(
+      pedido =>
+        pedido.status ===
+        "entregue"
+    );
+
+
+  totalPedidos.textContent =
+    pedidos.length;
+
+
+  totalPendentes.textContent =
+    pendentes.length;
+
+
+  totalEntregues.textContent =
+    entregues.length;
+
+}
+
+
+/* =====================================================
+   FILTRAR
+===================================================== */
+
+function pedidosFiltrados(){
+
+  let resultado =
+
+    filtroAtual ===
+    "pendentes"
+
+      ?
+
+    pedidos.filter(
+      pedido =>
+        pedido.status !==
+        "entregue"
+    )
+
+      :
+
+    [...pedidos];
+
+
+  const termo =
+    busca.value
+      .trim()
+      .toLowerCase();
+
+
+  if(
+    termo
+  ){
+
+    resultado =
+      resultado.filter(
+        pedido => {
+
+          const texto = [
+
+            pedido.id,
+
+            pedido.usuarioId,
+
+            pedido.usuarioEmail,
+
+            pedido.usuarioNome,
+
+            pedido.recompensaNome,
+
+            pedido.tipo,
+
+            pedido.status
+
+          ]
+
+          .filter(Boolean)
+
+          .join(" ")
+
+          .toLowerCase();
+
+
+          return texto.includes(
+            termo
+          );
+
+        }
+      );
+
+  }
+
+
+  return resultado;
+
+}
+
+
+/* =====================================================
+   RENDERIZAR
+===================================================== */
+
+function renderizar(){
+
+  const listaAtual =
+    pedidosFiltrados();
+
+
+  lista.innerHTML =
+    "";
+
+
+  if(
+    listaAtual.length === 0
+  ){
+
+    const vazio =
+      document.createElement(
+        "div"
+      );
+
+
+    vazio.className =
+      "sem-resultados";
+
+
+    vazio.textContent =
+
+      filtroAtual ===
+      "pendentes"
+
+        ?
+
+      "🎉 Não existem entregas pendentes."
+
+        :
+
+      "📜 Nenhum pedido encontrado.";
+
+
+    lista.appendChild(
+      vazio
+    );
+
+
+    return;
+
+  }
+
+
+  listaAtual.forEach(
+    pedido => {
+
+      lista.appendChild(
+        criarPedido(
+          pedido
+        )
+      );
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   CRIAR CARD
+===================================================== */
+
+function criarPedido(
+  pedido
+){
+
+  const card =
+    document.createElement(
+      "div"
+    );
+
+
+  card.className =
+    "pedido";
+
+
+  const entregue =
+    pedido.status ===
+    "entregue";
+
+
+  /*
+  -----------------------------------------------------
+  TOPO
+  -----------------------------------------------------
+  */
+
+  const top =
+    document.createElement(
+      "div"
+    );
+
+
+  top.className =
+    "pedido-top";
+
+
+  const numero =
+    document.createElement(
+      "div"
+    );
+
+
+  numero.className =
+    "pedido-numero";
+
+
+  numero.textContent =
+    "PEDIDO #" +
+    pedido.id;
+
+
+  const status =
+    document.createElement(
+      "div"
+    );
+
+
+  status.className =
+
+    entregue
+
+      ?
+
+    "status status-entregue"
+
+      :
+
+    "status status-pendente";
+
+
+  status.textContent =
+
+    entregue
+
+      ?
+
+    "✅ ENTREGUE"
+
+      :
+
+    "⏳ PENDENTE";
+
+
+  top.appendChild(
+    numero
+  );
+
+
+  top.appendChild(
+    status
+  );
+
+
+  card.appendChild(
+    top
+  );
+
+
+  /*
+  -----------------------------------------------------
+  USUÁRIO
+  -----------------------------------------------------
+  */
+
+  const usuario =
+    document.createElement(
+      "div"
+    );
+
+
+  usuario.className =
+    "usuario";
+
+
+  const nome =
+    document.createElement(
+      "div"
+    );
+
+
+  nome.className =
+    "usuario-nome";
+
+
+  nome.textContent =
+
+    "👤 " +
+
+    (
+      pedido.usuarioNome ||
+      "Usuário"
+    );
+
+
+  const email =
+    document.createElement(
+      "div"
+    );
+
+
+  email.className =
+    "usuario-email";
+
+
+  email.textContent =
+
+    pedido.usuarioEmail ||
+
+    pedido.usuarioId ||
+
+    "Usuário sem e-mail";
+
+
+  usuario.appendChild(
+    nome
+  );
+
+
+  usuario.appendChild(
+    email
+  );
+
+
+  card.appendChild(
+    usuario
+  );
+
+
+  /*
+  -----------------------------------------------------
+  RECOMPENSA
+  -----------------------------------------------------
+  */
+
+  const recompensa =
+    document.createElement(
+      "div"
+    );
+
+
+  recompensa.className =
+    "recompensa";
+
+
+  const titulo =
+    document.createElement(
+      "div"
+    );
+
+
+  titulo.className =
+    "recompensa-titulo";
+
+
+  titulo.textContent =
+    "RECOMPENSA";
+
+
+  const recompensaNome =
+    document.createElement(
+      "div"
+    );
+
+
+  recompensaNome.className =
+    "recompensa-nome";
+
+
+  recompensaNome.textContent =
+
+    "🎁 " +
+
+    (
+      pedido.recompensaNome ||
+      "Recompensa"
+    );
+
+
+  const recompensaQtd =
+    document.createElement(
+      "div"
+    );
+
+
+  recompensaQtd.className =
+    "recompensa-qtd";
+
+
+  recompensaQtd.textContent =
+
+    pedido.quantidade != null
+
+      ?
+
+    "Quantidade: " +
+    Number(
+      pedido.quantidade
+    ).toLocaleString(
+      "pt-BR"
+    )
+
+      :
+
+    "";
+
+
+  recompensa.appendChild(
+    titulo
+  );
+
+
+  recompensa.appendChild(
+    recompensaNome
+  );
+
+
+  if(
+    recompensaQtd.textContent
+  ){
+
+    recompensa.appendChild(
+      recompensaQtd
+    );
+
+  }
+
+
+  card.appendChild(
+    recompensa
+  );
+
+
+  /*
+  -----------------------------------------------------
+  DETALHES
+  -----------------------------------------------------
+  */
+
+  const detalhes =
+    document.createElement(
+      "div"
+    );
+
+
+  detalhes.className =
+    "detalhes";
+
+
+  adicionarDetalhe(
+    detalhes,
+    "Tipo",
+    pedido.tipo ||
+    "recompensa"
+  );
+
+
+  adicionarDetalhe(
+    detalhes,
+    "Solicitado em",
+    formatarData(
+      pedido.criadoEm
+    )
+  );
+
+
+  if(
+    pedido.custoMoedas != null
+  ){
+
+    adicionarDetalhe(
+      detalhes,
+      "Custo",
+      Number(
+        pedido.custoMoedas
+      ).toLocaleString(
+        "pt-BR"
+      ) +
+      " Adam Coins"
+    );
+
+  }
+
+
+  card.appendChild(
+    detalhes
+  );
+
+
+  /*
+  -----------------------------------------------------
+  BOTÃO
+  -----------------------------------------------------
+  */
+
+  if(
+    !entregue
+  ){
+
+    const botao =
+      document.createElement(
+        "button"
+      );
+
+
+    botao.className =
+      "entregar";
+
+
+    botao.type =
+      "button";
+
+
+    botao.textContent =
+      "✅ MARCAR COMO ENTREGUE";
+
+
+    botao.addEventListener(
+      "click",
+      () => {
+
+        marcarComoEntregue(
+          pedido.id,
+          botao
+        );
+
+      }
+    );
+
+
+    card.appendChild(
+      botao
+    );
+
+  }
+
+  else{
+
+    const info =
+      document.createElement(
+        "div"
+      );
+
+
+    info.className =
+      "entrega-info";
+
+
+    info.innerHTML =
+
+      "✅ <b>Prêmio entregue</b><br>" +
+
+      "Data: " +
+
+      formatarData(
+        pedido.entregueEm
+      ) +
+
+      "<br>" +
+
+      "Entregue por: " +
+
+      (
+        pedido.entreguePor ||
+        "Administrador"
+      );
+
+
+    card.appendChild(
+      info
+    );
+
+  }
+
+
+  return card;
+
+}
+
+
+/* =====================================================
+   DETALHE
+===================================================== */
+
+function adicionarDetalhe(
+  container,
+  titulo,
+  valor
+){
+
+  const linha =
+    document.createElement(
+      "div"
+    );
+
+
+  linha.className =
+    "detalhe";
+
+
+  const label =
+    document.createElement(
+      "span"
+    );
+
+
+  label.textContent =
+    titulo;
+
+
+  const valorEl =
+    document.createElement(
+      "strong"
+    );
+
+
+  valorEl.textContent =
+    valor;
+
+
+  linha.appendChild(
+    label
+  );
+
+
+  linha.appendChild(
+    valorEl
+  );
+
+
+  container.appendChild(
+    linha
+  );
+
+}
+
+
+/* =====================================================
+   MARCAR COMO ENTREGUE
+===================================================== */
+
+async function marcarComoEntregue(
+  pedidoId,
+  botao
+){
+
+  if(
+    !usuarioAdmin
+  ){
+
+    return;
+
+  }
+
+
+  const confirmar =
+    confirm(
+      "Marcar este prêmio como ENTREGUE?"
+    );
+
+
+  if(
+    !confirmar
+  ){
+
+    return;
+
+  }
+
+
+  botao.disabled =
+    true;
+
+
+  botao.textContent =
+    "REGISTRANDO...";
+
+
+  try{
+
+    await updateDoc(
+
+      doc(
+        db,
+        "pedidosRecompensas",
+        pedidoId
+      ),
+
+      {
+
+        status:
+          "entregue",
+
+        entregue:
+          true,
+
+        entregueEm:
+          Timestamp.now(),
+
+        entreguePor:
+          usuarioAdmin.email
+
+      }
+
+    );
+
+
+    mostrarMensagem(
+      "✅ Prêmio marcado como entregue!",
+      "sucesso"
+    );
+
+
+    await carregarPedidos();
+
+  }
+
+  catch(error){
+
+    console.error(
+      "Erro ao marcar entrega:",
+      error
+    );
+
+
+    botao.disabled =
+      false;
+
+
+    botao.textContent =
+      "✅ MARCAR COMO ENTREGUE";
+
+
+    mostrarMensagem(
+      "❌ Não foi possível registrar a entrega.",
+      "erro"
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   FILTRO PENDENTES
+===================================================== */
+
+filtroPendentes.addEventListener(
+  "click",
+  () => {
+
+    filtroAtual =
+      "pendentes";
+
+
+    filtroPendentes.classList.add(
+      "ativo"
+    );
+
+
+    filtroTodos.classList.remove(
+      "ativo"
+    );
+
+
+    renderizar();
+
+  }
+);
+
+
+/* =====================================================
+   FILTRO TODOS
+===================================================== */
+
+filtroTodos.addEventListener(
+  "click",
+  () => {
+
+    filtroAtual =
+      "todos";
+
+
+    filtroTodos.classList.add(
+      "ativo"
+    );
+
+
+    filtroPendentes.classList.remove(
+      "ativo"
+    );
+
+
+    renderizar();
+
+  }
+);
+
+
+/* =====================================================
+   BUSCA
+===================================================== */
+
+busca.addEventListener(
+  "input",
+  renderizar
+);
+
+
+/* =====================================================
+   VOLTAR
+===================================================== */
+
+document
+  .getElementById(
+    "back"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      window.location.href =
+        "painel.html";
+
+    }
+  );
+
+
+/* =====================================================
+   LOGIN / ADMIN
+===================================================== */
+
+onAuthStateChanged(
+
+  auth,
+
+  async user => {
+
+    if(
+      !user
+    ){
+
+      window.location.href =
+        "index.html";
+
+      return;
+
+    }
+
+
+    usuarioAdmin =
+      user;
+
+
+    /*
+    -----------------------------------------------------
+    SEGURANÇA EXTRA NO FRONT-END
+    -----------------------------------------------------
+    */
+
+    if(
+      (
+        user.email ||
+        ""
+      )
+      .toLowerCase()
+      !==
+      EMAIL_ADMIN
+        .toLowerCase()
+    ){
+
+      document.body.innerHTML = `
+
+        <div style="
+          min-height:100vh;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          padding:30px;
+          text-align:center;
+          font-family:Arial;
+          color:white;
+          background:#061b2d;
+        ">
+
+          <div>
+
+            <div style="
+              font-size:55px;
+            ">
+              🔒
+            </div>
+
+            <h1>
+              Acesso restrito
+            </h1>
+
+            <p style="
+              margin-top:10px;
+              color:#9fc5e3;
+            ">
+              Esta área é exclusiva do administrador.
+            </p>
+
+          </div>
+
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+
+    await carregarPedidos();
+
+  }
+
+);
+
+</script>
+
+</body>
+
+</html>
