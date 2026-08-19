@@ -193,7 +193,7 @@ body{
 
 
 /* =====================================================
-   NOTIFICAÇÕES - BOLINHA
+   NOTIFICAÇÕES
 ===================================================== */
 
 .notification{
@@ -596,6 +596,19 @@ body{
 
   cursor:pointer;
 
+  transition:
+    transform .2s ease,
+    filter .2s ease;
+
+}
+
+
+.card:hover{
+
+  transform:translateY(-3px);
+
+  filter:brightness(1.08);
+
 }
 
 
@@ -611,17 +624,35 @@ body{
 }
 
 
-.card-adam{
+/* =====================================================
+   ROLETA
+===================================================== */
+
+.card-roleta{
 
   background:
     linear-gradient(
       145deg,
-      #087ddd,
-      #064ba1
+      #f7c62b,
+      #e88900
     );
+
+  color:#fff;
 
 }
 
+
+.card-roleta p{
+
+  color:
+    rgba(255,255,255,.9);
+
+}
+
+
+/* =====================================================
+   JOGOS
+===================================================== */
 
 .card-games{
 
@@ -1876,6 +1907,8 @@ body{
 <section class="cards">
 
 
+  <!-- CAIXA BOX -->
+
   <div
     class="card card-box"
     id="boxCard">
@@ -1912,28 +1945,30 @@ body{
   </div>
 
 
+  <!-- ROLETA -->
+
   <div
-    class="card card-adam"
-    id="adamCard">
+    class="card card-roleta"
+    id="roletaCard">
 
 
     <div class="card-icon">
 
-      🏡
+      🎰
 
     </div>
 
 
     <h3>
 
-      ADAM
+      ROLETA
 
     </h3>
 
 
     <p>
 
-      Seus recursos e benefícios.
+      Gire a roleta e descubra seu prêmio.
 
     </p>
 
@@ -1947,6 +1982,8 @@ body{
 
   </div>
 
+
+  <!-- JOGOS -->
 
   <div
     class="card card-games"
@@ -3207,21 +3244,12 @@ async function verificarNotificacaoCaixa(){
     );
 
 
-  /*
-    Sem resgate anterior:
-    não cria notificação.
-  */
-
   if(!proxima){
 
     return;
 
   }
 
-
-  /*
-    Ainda não chegou a hora.
-  */
 
   if(
     Date.now() <
@@ -3232,12 +3260,6 @@ async function verificarNotificacaoCaixa(){
 
   }
 
-
-  /*
-    ID baseado na data da próxima chance.
-
-    Isso impede duplicação.
-  */
 
   const id =
     "caixa_" +
@@ -3348,10 +3370,6 @@ async function carregarNotificacoes(){
       ).length;
 
 
-    /*
-      Atualiza número vermelho.
-    */
-
     if(
       naoLidas > 0
     ){
@@ -3372,10 +3390,6 @@ async function carregarNotificacoes(){
 
     }
 
-
-    /*
-      Lista vazia.
-    */
 
     if(
       lista.length === 0
@@ -3509,11 +3523,6 @@ async function carregarNotificacoes(){
 
             }
 
-
-            /*
-              Se for Caixa,
-              leva direto para ela.
-            */
 
             if(
               item.tipo ===
@@ -3700,7 +3709,24 @@ document.getElementById(
 
 
 /* =====================================================
-   OUTROS BOTÕES
+   ROLETA
+===================================================== */
+
+document.getElementById(
+  "roletaCard"
+).addEventListener(
+  "click",
+  () => {
+
+    window.location.href =
+      "roleta.html";
+
+  }
+);
+
+
+/* =====================================================
+   VIP
 ===================================================== */
 
 document.getElementById(
@@ -3717,19 +3743,9 @@ document.getElementById(
 );
 
 
-document.getElementById(
-  "adamCard"
-).addEventListener(
-  "click",
-  () => {
-
-    alert(
-      "🏡 Área Adam em construção."
-    );
-
-  }
-);
-
+/* =====================================================
+   JOGOS
+===================================================== */
 
 document.getElementById(
   "gamesCard"
@@ -3862,17 +3878,8 @@ onAuthStateChanged(
       );
 
 
-      /*
-        Primeiro verifica se a Caixa
-        venceu e pode gerar aviso.
-      */
-
       await verificarNotificacaoCaixa();
 
-
-      /*
-        Depois carrega o sino.
-      */
 
       await carregarNotificacoes();
 
