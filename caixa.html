@@ -793,11 +793,6 @@ body{
 
 <script type="module">
 
-
-/* =====================================================
-   FIREBASE
-===================================================== */
-
 import {
   initializeApp
 }
@@ -829,7 +824,7 @@ from
 
 
 /* =====================================================
-   CONFIGURAÇÃO
+   FIREBASE
 ===================================================== */
 
 const firebaseConfig = {
@@ -1257,22 +1252,86 @@ function carregarVisual(){
   const config =
     configuracaoMes();
 
+
   boxTitle.textContent =
     config.titulo;
+
 
   boxSubtitle.textContent =
     config.subtitulo;
 
+
   chestImage.src =
     config.imagem;
+
 
   prizeList.innerHTML =
     "";
 
+
+  /*
+  MOSTRA TODOS OS PRÊMIOS
+  DA CAIXA ATUAL.
+  */
+
   if(
-    !config.itens ||
-    config.itens.length === 0
+    config.itens &&
+    config.itens.length > 0
   ){
+
+    config.itens.forEach(
+      (item, index) => {
+
+        const div =
+          document.createElement(
+            "div"
+          );
+
+
+        div.className =
+          "prize";
+
+
+        const icon =
+          document.createElement(
+            "span"
+          );
+
+
+        icon.textContent =
+          item[0];
+
+
+        const texto =
+          document.createElement(
+            "b"
+          );
+
+
+        texto.textContent =
+          item[1];
+
+
+        div.appendChild(
+          icon
+        );
+
+
+        div.appendChild(
+          texto
+        );
+
+
+        prizeList.appendChild(
+          div
+        );
+
+      }
+    );
+
+  }
+
+  else{
 
     prizeList.innerHTML = `
 
@@ -1284,52 +1343,7 @@ function carregarVisual(){
 
     `;
 
-    return;
-
   }
-
-
-  config.itens.forEach(
-    item => {
-
-      const div =
-        document.createElement(
-          "div"
-        );
-
-      div.className =
-        "prize";
-
-      const icon =
-        document.createElement(
-          "span"
-        );
-
-      icon.textContent =
-        item[0];
-
-      const texto =
-        document.createElement(
-          "b"
-        );
-
-      texto.textContent =
-        item[1];
-
-      div.appendChild(
-        icon
-      );
-
-      div.appendChild(
-        texto
-      );
-
-      prizeList.appendChild(
-        div
-      );
-
-    }
-  );
 
 }
 
@@ -1348,6 +1362,7 @@ function converterData(
 
   }
 
+
   if(
     typeof valor.toMillis ===
     "function"
@@ -1357,6 +1372,7 @@ function converterData(
 
   }
 
+
   if(
     typeof valor.seconds ===
     "number"
@@ -1365,6 +1381,7 @@ function converterData(
     return valor.seconds * 1000;
 
   }
+
 
   return null;
 
@@ -1384,19 +1401,24 @@ function formatarData(
       valor
     );
 
+
   if(!millis){
 
     return "";
 
   }
 
+
   return new Date(
     millis
   ).toLocaleString(
     "pt-BR",
     {
+
       dateStyle:"short",
+
       timeStyle:"medium"
+
     }
   );
 
@@ -1419,10 +1441,12 @@ function formatarTimer(
       )
     );
 
+
   const horas =
     Math.floor(
       total / 3600
     );
+
 
   const minutos =
     Math.floor(
@@ -1431,8 +1455,10 @@ function formatarTimer(
       ) / 60
     );
 
+
   const segundos =
     total % 60;
+
 
   return (
 
@@ -1475,7 +1501,7 @@ function formatarTimer(
 
 
 /* =====================================================
-   CRIAR NOTIFICAÇÃO
+   NOTIFICAÇÃO
 ===================================================== */
 
 async function criarNotificacao(
@@ -1490,6 +1516,7 @@ async function criarNotificacao(
     return;
 
   }
+
 
   await setDoc(
 
@@ -1531,7 +1558,7 @@ async function criarNotificacao(
 
 
 /* =====================================================
-   NOTIFICAÇÃO DA CAIXA DO MÊS
+   NOTIFICAÇÃO DA CAIXA
 ===================================================== */
 
 async function verificarNotificacaoCaixa(){
@@ -1545,14 +1572,18 @@ async function verificarNotificacaoCaixa(){
 
   }
 
+
   const mes =
     mesAtual();
+
 
   const ano =
     anoAtual();
 
+
   const config =
     caixas[mes];
+
 
   if(!config){
 
@@ -1560,10 +1591,6 @@ async function verificarNotificacaoCaixa(){
 
   }
 
-  /*
-  A notificação é criada somente uma vez
-  para aquele usuário naquele mês.
-  */
 
   const id =
     "caixa_" +
@@ -1572,6 +1599,7 @@ async function verificarNotificacaoCaixa(){
     mes +
     "_" +
     usuario.uid;
+
 
   try{
 
@@ -1591,8 +1619,14 @@ async function verificarNotificacaoCaixa(){
   }
   catch(error){
 
-    console.error(
-      "Erro ao criar notificação da Caixa:",
+    /*
+    Caso as Rules ainda não permitam
+    criação da notificação pelo usuário,
+    a Caixa continua funcionando normalmente.
+    */
+
+    console.warn(
+      "Notificação da Caixa aguardando Rules:",
       error
     );
 
@@ -1613,11 +1647,13 @@ async function criarNotificacaoChance(){
 
   }
 
+
   const id =
     "chance_" +
     usuario.uid +
     "_" +
     Date.now();
+
 
   try{
 
@@ -1636,8 +1672,8 @@ async function criarNotificacaoChance(){
   }
   catch(error){
 
-    console.error(
-      "Erro criando notificação da chance:",
+    console.warn(
+      "Notificação da chance aguardando Rules:",
       error
     );
 
@@ -1658,10 +1694,12 @@ async function iniciarCronometro(){
 
   }
 
+
   const duracao =
     ehVip
       ? MS_VIP
       : MS_NAO_VIP;
+
 
   const horas =
     ehVip
@@ -1677,9 +1715,6 @@ async function iniciarCronometro(){
 
   /*
   PRIMEIRO ACESSO
-
-  Se não existe contador,
-  começa agora.
   */
 
   if(!fim){
@@ -1688,31 +1723,32 @@ async function iniciarCronometro(){
       Date.now() +
       duracao;
 
+
     const timestamp =
       Timestamp.fromMillis(
         fim
       );
+
 
     await updateDoc(
 
       usuarioRef,
 
       {
+
         proximaChance:
           timestamp
+
       }
 
     );
+
 
     usuario.proximaChance =
       timestamp;
 
   }
 
-
-  /*
-  Limpa contador anterior.
-  */
 
   if(intervalo){
 
@@ -1725,12 +1761,9 @@ async function iniciarCronometro(){
 
   async function atualizar(){
 
-    const agora =
-      Date.now();
-
     const restante =
       fim -
-      agora;
+      Date.now();
 
 
     /*
@@ -1745,6 +1778,7 @@ async function iniciarCronometro(){
         formatarTimer(
           restante
         );
+
 
       progressBar.style.width =
 
@@ -1761,16 +1795,20 @@ async function iniciarCronometro(){
 
         + "%";
 
+
       timerLabel.textContent =
         "PRÓXIMA CHANCE EXTRA";
+
 
       status.textContent =
         "⏳ Próxima chance em " +
         horas +
         " horas.";
 
+
       status.className =
         "status waiting";
+
 
       return;
 
@@ -1778,9 +1816,7 @@ async function iniciarCronometro(){
 
 
     /*
-    TIMER ZEROU
-
-    Libera a chance.
+    ZEROU
     */
 
     try{
@@ -1790,17 +1826,15 @@ async function iniciarCronometro(){
           usuario.chances || 0
         );
 
+
       const novasChances =
         chancesAtuais + 1;
 
-      /*
-      Novo contador começa
-      exatamente a partir de agora.
-      */
 
       const novoFim =
         Date.now() +
         duracao;
+
 
       const novoTimestamp =
         Timestamp.fromMillis(
@@ -1828,23 +1862,14 @@ async function iniciarCronometro(){
       usuario.chances =
         novasChances;
 
+
       usuario.proximaChance =
         novoTimestamp;
+
 
       chanceNumber.textContent =
         novasChances;
 
-
-      /*
-      Notificação da chance.
-      */
-
-      await criarNotificacaoChance();
-
-
-      /*
-      Reinicia o cronômetro.
-      */
 
       fim =
         novoFim;
@@ -1855,28 +1880,26 @@ async function iniciarCronometro(){
           duracao
         );
 
+
       progressBar.style.width =
         "100%";
 
+
       status.textContent =
         "🎟️ +1 chance liberada!";
+
 
       status.className =
         "status available";
 
 
-      /*
-      Depois de alguns segundos
-      volta a mostrar a contagem.
-      */
+      await criarNotificacaoChance();
+
 
       setTimeout(
         () => {
 
-          if(
-            usuario &&
-            fim
-          ){
+          if(usuario){
 
             status.textContent =
               "⏳ Próxima chance em " +
@@ -1900,8 +1923,10 @@ async function iniciarCronometro(){
         error
       );
 
+
       status.textContent =
         "⚠️ Erro ao liberar sua chance.";
+
 
       status.className =
         "status locked";
@@ -1913,11 +1938,6 @@ async function iniciarCronometro(){
 
   await atualizar();
 
-
-  /*
-  Atualiza automaticamente
-  a cada segundo.
-  */
 
   intervalo =
     setInterval(
@@ -2028,17 +2048,22 @@ async function carregar(
     vipStatus.textContent =
       "🔒 CONTA NÃO ENCONTRADA";
 
+
     timer.textContent =
       "—";
+
 
     status.textContent =
       "Não foi possível encontrar seu cadastro.";
 
+
     status.className =
       "status locked";
 
+
     rescue.disabled =
       true;
+
 
     return;
 
@@ -2048,33 +2073,23 @@ async function carregar(
   usuario =
     documento.data();
 
+
   usuarioRef =
     documento.ref;
+
 
   ehVip =
     usuario.vip === true;
 
 
-  /*
-  Carrega caixa do mês.
-  */
-
   carregarVisual();
 
-
-  /*
-  Mostra chances.
-  */
 
   chanceNumber.textContent =
     Number(
       usuario.chances || 0
     );
 
-
-  /*
-  VIP
-  */
 
   if(
     ehVip
@@ -2083,20 +2098,17 @@ async function carregar(
     vipStatus.textContent =
       "👑 VIP ATIVO";
 
+
     chanceDescription.textContent =
       "A cada 72 horas você recebe +1 chance para usar nos jogos.";
 
   }
 
-
-  /*
-  NÃO VIP
-  */
-
   else{
 
     vipStatus.textContent =
       "🔒 NÃO VIP";
+
 
     chanceDescription.textContent =
       "A cada 120 horas você recebe +1 chance para usar nos jogos.";
@@ -2105,10 +2117,7 @@ async function carregar(
 
 
   /*
-  Caixa Box:
-
-  Somente VIP.
-  Uma vez por mês.
+  CAIXA BOX
   */
 
   if(
@@ -2117,6 +2126,7 @@ async function carregar(
 
     const mes =
       mesAtual();
+
 
     const jaResgatou =
       usuario.caixaBoxMes ===
@@ -2130,14 +2140,18 @@ async function carregar(
       rescue.disabled =
         true;
 
+
       rescue.textContent =
         "🎁 CAIXA JÁ RESGATADA";
+
 
       message.textContent =
         "Uma nova Caixa estará disponível no dia 1º do próximo mês.";
 
+
       status.textContent =
         "✅ Caixa deste mês já foi resgatada.";
+
 
       status.className =
         "status available";
@@ -2162,11 +2176,14 @@ async function carregar(
       rescue.disabled =
         false;
 
+
       rescue.textContent =
         "🎁 RESGATAR CAIXA";
 
+
       message.textContent =
         "Você pode resgatar 1 Caixa Box por mês.";
+
 
       rescueDate.textContent =
         "";
@@ -2174,26 +2191,23 @@ async function carregar(
     }
 
 
-    /*
-    Verifica a notificação
-    da nova Caixa.
-    */
-
     await verificarNotificacaoCaixa();
 
   }
-
 
   else{
 
     rescue.disabled =
       true;
 
+
     rescue.textContent =
       "🔒 EXCLUSIVO VIP";
 
+
     message.textContent =
       "A Caixa Box é exclusiva para membros VIP.";
+
 
     rescueDate.textContent =
       "";
@@ -2202,13 +2216,10 @@ async function carregar(
 
 
   /*
-  IMPORTANTE:
+  CRONÔMETRO:
 
-  O cronômetro funciona tanto
-  para VIP quanto para não VIP.
-
-  VIP = 72h
-  Não VIP = 120h
+  VIP = 72 HORAS
+  NÃO VIP = 120 HORAS
   */
 
   await iniciarCronometro();
@@ -2252,8 +2263,10 @@ rescue.addEventListener(
     processando =
       true;
 
+
     rescue.disabled =
       true;
+
 
     rescue.textContent =
       "REGISTRANDO...";
@@ -2288,6 +2301,7 @@ rescue.addEventListener(
       usuario.caixaBoxMes =
         mes;
 
+
       usuario.caixaBoxResgatadaEm =
         agora;
 
@@ -2298,6 +2312,7 @@ rescue.addEventListener(
 
       status.textContent =
         "🎉 Caixa resgatada com sucesso!";
+
 
       status.className =
         "status available";
@@ -2314,6 +2329,7 @@ rescue.addEventListener(
         );
 
     }
+
     catch(error){
 
       console.error(
@@ -2325,12 +2341,14 @@ rescue.addEventListener(
       rescue.disabled =
         false;
 
+
       rescue.textContent =
         "🎁 RESGATAR CAIXA";
 
 
       status.textContent =
         "⚠️ Não foi possível registrar o resgate.";
+
 
       status.className =
         "status locked";
@@ -2341,6 +2359,7 @@ rescue.addEventListener(
         "Tente novamente.";
 
     }
+
     finally{
 
       processando =
@@ -2404,7 +2423,7 @@ document
 
 
 /* =====================================================
-   IR PARA JOGOS
+   JOGOS
 ===================================================== */
 
 document
@@ -2449,6 +2468,7 @@ onAuthStateChanged(
       );
 
     }
+
     catch(error){
 
       console.error(
