@@ -64,11 +64,6 @@ body{
 
 }
 
-
-/* =====================================================
-   CONTAINER
-===================================================== */
-
 .container{
 
   width:100%;
@@ -98,7 +93,6 @@ body{
 
 }
 
-
 .voltar{
 
   width:48px;
@@ -122,7 +116,6 @@ body{
 
 }
 
-
 .titulo{
 
   flex:1;
@@ -131,7 +124,6 @@ body{
 
 }
 
-
 .titulo h1{
 
   font-size:28px;
@@ -139,7 +131,6 @@ body{
   font-weight:900;
 
 }
-
 
 .titulo p{
 
@@ -150,7 +141,6 @@ body{
   font-size:13px;
 
 }
-
 
 .espaco-topo{
 
@@ -168,8 +158,7 @@ body{
   display:grid;
 
   grid-template-columns:
-    1fr
-    1fr;
+    repeat(3,1fr);
 
   gap:10px;
 
@@ -177,12 +166,11 @@ body{
 
 }
 
-
 .saldo-card{
 
   min-width:0;
 
-  padding:14px;
+  padding:14px 8px;
 
   border-radius:18px;
 
@@ -197,19 +185,27 @@ body{
     0 10px 25px
     rgba(0,0,0,.18);
 
+  text-align:center;
+
 }
 
+.saldo-icone{
+
+  font-size:23px;
+
+}
 
 .saldo-label{
 
+  margin-top:3px;
+
   color:#a9c8e2;
 
-  font-size:12px;
+  font-size:11px;
 
   font-weight:bold;
 
 }
-
 
 .saldo-valor{
 
@@ -217,7 +213,7 @@ body{
 
   color:#ffd52b;
 
-  font-size:22px;
+  font-size:20px;
 
   font-weight:900;
 
@@ -229,6 +225,12 @@ body{
 
 }
 
+.saldo-card.chaves
+.saldo-valor{
+
+  color:#65c0ff;
+
+}
 
 .saldo-card.dinheiro
 .saldo-valor{
@@ -261,17 +263,17 @@ body{
     1px solid
     rgba(255,255,255,.14);
 
-}
+  line-height:1.45;
 
+}
 
 .aviso strong{
 
   display:block;
 
-  font-size:17px;
+  font-size:16px;
 
 }
-
 
 .aviso span{
 
@@ -281,9 +283,62 @@ body{
 
   color:#c5def3;
 
+  font-size:12px;
+
+}
+
+
+/* =====================================================
+   MENSAGEM
+===================================================== */
+
+.message{
+
+  display:none;
+
+  margin-bottom:15px;
+
+  padding:13px;
+
+  border-radius:13px;
+
+  text-align:center;
+
   font-size:13px;
 
-  line-height:1.4;
+  font-weight:bold;
+
+}
+
+.message.show{
+
+  display:block;
+
+}
+
+.message.error{
+
+  color:#ff9eaa;
+
+  background:
+    rgba(255,40,60,.14);
+
+  border:
+    1px solid
+    rgba(255,70,90,.25);
+
+}
+
+.message.success{
+
+  color:#72ffae;
+
+  background:
+    rgba(0,220,110,.13);
+
+  border:
+    1px solid
+    rgba(0,220,110,.25);
 
 }
 
@@ -304,13 +359,11 @@ body{
 
 }
 
-
 .produtos-topo h2{
 
   font-size:22px;
 
 }
-
 
 .quantidade-produtos{
 
@@ -367,7 +420,6 @@ body{
 
 }
 
-
 .produto-imagem{
 
   width:100%;
@@ -391,7 +443,6 @@ body{
 
 }
 
-
 .produto-imagem img{
 
   width:100%;
@@ -404,41 +455,9 @@ body{
 
 }
 
-
 .produto-sem-imagem{
 
   font-size:55px;
-
-}
-
-
-/* =====================================================
-   DESCONTO
-===================================================== */
-
-.desconto{
-
-  position:absolute;
-
-  top:9px;
-
-  left:9px;
-
-  padding:6px 9px;
-
-  border-radius:10px;
-
-  background:#ff3f55;
-
-  color:#fff;
-
-  font-size:11px;
-
-  font-weight:900;
-
-  box-shadow:
-    0 5px 12px
-    rgba(0,0,0,.3);
 
 }
 
@@ -452,7 +471,6 @@ body{
   padding:13px;
 
 }
-
 
 .produto-nome{
 
@@ -468,7 +486,6 @@ body{
 
 }
 
-
 .produto-descricao{
 
   min-height:34px;
@@ -483,55 +500,43 @@ body{
 
 }
 
-
 .preco{
 
   margin-top:10px;
 
 }
 
-
-.preco-antigo{
-
-  min-height:15px;
-
-  color:#7f9ab3;
-
-  font-size:11px;
-
-  text-decoration:line-through;
-
-}
-
-
-.preco-principal{
-
-  margin-top:2px;
-
-  color:#ffd52b;
-
-  font-size:18px;
-
-  font-weight:900;
-
-}
-
-
-.preco-saldo{
-
-  margin-top:3px;
-
-  color:#5dff99;
+.preco-item{
 
   font-size:13px;
 
   font-weight:900;
 
+  line-height:1.7;
+
+}
+
+.preco-moedas{
+
+  color:#ffd52b;
+
+}
+
+.preco-chaves{
+
+  color:#65c0ff;
+
+}
+
+.preco-saldo{
+
+  color:#63ff9b;
+
 }
 
 
 /* =====================================================
-   BOTÃO COMPRAR
+   BOTÃO
 ===================================================== */
 
 .comprar{
@@ -561,16 +566,11 @@ body{
 
   cursor:pointer;
 
-  box-shadow:
-    0 7px 18px
-    rgba(0,105,219,.25);
-
 }
-
 
 .comprar:disabled{
 
-  opacity:.55;
+  opacity:.5;
 
   cursor:not-allowed;
 
@@ -603,7 +603,6 @@ body{
 
 }
 
-
 .sem-produtos strong{
 
   display:block;
@@ -618,65 +617,7 @@ body{
 
 
 /* =====================================================
-   MENSAGEM
-===================================================== */
-
-.message{
-
-  display:none;
-
-  margin-bottom:15px;
-
-  padding:13px;
-
-  border-radius:13px;
-
-  text-align:center;
-
-  font-size:13px;
-
-  font-weight:bold;
-
-}
-
-
-.message.show{
-
-  display:block;
-
-}
-
-
-.message.error{
-
-  color:#ff9eaa;
-
-  background:
-    rgba(255,40,60,.14);
-
-  border:
-    1px solid
-    rgba(255,70,90,.25);
-
-}
-
-
-.message.success{
-
-  color:#72ffae;
-
-  background:
-    rgba(0,220,110,.13);
-
-  border:
-    1px solid
-    rgba(0,220,110,.25);
-
-}
-
-
-/* =====================================================
-   MODAL COMPRA
+   MODAL
 ===================================================== */
 
 .modal{
@@ -703,13 +644,11 @@ body{
 
 }
 
-
 .modal.show{
 
   display:flex;
 
 }
-
 
 .modal-card{
 
@@ -742,7 +681,6 @@ body{
 
 }
 
-
 .modal-card h2{
 
   font-size:22px;
@@ -751,12 +689,11 @@ body{
 
 }
 
-
 .modal-produto{
 
   margin-top:15px;
 
-  padding:13px;
+  padding:14px;
 
   border-radius:15px;
 
@@ -767,7 +704,6 @@ body{
 
 }
 
-
 .modal-produto-nome{
 
   font-size:18px;
@@ -776,17 +712,15 @@ body{
 
 }
 
+.modal-produto-precos{
 
-.modal-produto-preco{
+  margin-top:7px;
 
-  margin-top:5px;
+  line-height:1.7;
 
-  color:#ffd52b;
-
-  font-weight:900;
+  font-size:13px;
 
 }
-
 
 .escolha{
 
@@ -797,7 +731,6 @@ body{
   gap:10px;
 
 }
-
 
 .opcao{
 
@@ -811,7 +744,7 @@ body{
 
   cursor:pointer;
 
-  font-size:15px;
+  font-size:14px;
 
   font-weight:900;
 
@@ -819,35 +752,37 @@ body{
 
 }
 
-
 .opcao-moedas{
 
-  background:
-    #e9ad12;
+  background:#e9ad12;
 
   color:#172c43;
 
 }
 
+.opcao-chaves{
 
-.opcao-saldo{
-
-  background:
-    #20ad63;
+  background:#168fff;
 
   color:#fff;
 
 }
 
+.opcao-saldo{
 
-.opcao-indisponivel{
+  background:#20ad63;
+
+  color:#fff;
+
+}
+
+.opcao:disabled{
 
   opacity:.4;
 
   cursor:not-allowed;
 
 }
-
 
 .cancelar{
 
@@ -890,7 +825,7 @@ body{
 
 
 /* =====================================================
-   BARRA INFERIOR
+   NAV
 ===================================================== */
 
 .nav{
@@ -938,7 +873,6 @@ body{
 
 }
 
-
 .nav-item{
 
   border:0;
@@ -967,13 +901,11 @@ body{
 
 }
 
-
 .nav-item span:first-child{
 
   font-size:23px;
 
 }
-
 
 .nav-item.ativo{
 
@@ -981,13 +913,6 @@ body{
 
   background:
     rgba(19,130,232,.2);
-
-}
-
-
-.nav-item.loja-ativo{
-
-  color:#65c0ff;
 
 }
 
@@ -1007,13 +932,26 @@ body{
 
   }
 
-
   .titulo h1{
 
     font-size:25px;
 
   }
 
+  .saldos{
+
+    grid-template-columns:
+      1fr
+      1fr;
+
+  }
+
+  .saldo-card.dinheiro{
+
+    grid-column:
+      1 / -1;
+
+  }
 
   .lista-produtos{
 
@@ -1021,13 +959,11 @@ body{
 
   }
 
-
   .produto-conteudo{
 
     padding:10px;
 
   }
-
 
   .produto-nome{
 
@@ -1035,27 +971,11 @@ body{
 
   }
 
-
   .produto-descricao{
 
     font-size:10px;
 
   }
-
-
-  .preco-principal{
-
-    font-size:16px;
-
-  }
-
-
-  .preco-saldo{
-
-    font-size:11px;
-
-  }
-
 
   .comprar{
 
@@ -1066,7 +986,6 @@ body{
   }
 
 }
-
 
 @media(max-width:350px){
 
@@ -1100,7 +1019,6 @@ body{
       class="voltar"
       id="voltar"
       type="button"
-      aria-label="Voltar"
     >
       ←
     </button>
@@ -1113,7 +1031,7 @@ body{
       </h1>
 
       <p>
-        Troque suas moedas ou saldo por prêmios
+        Troque moedas, chaves ou saldo por prêmios
       </p>
 
     </div>
@@ -1130,10 +1048,15 @@ body{
 
   <div class="saldos">
 
+
     <div class="saldo-card">
 
+      <div class="saldo-icone">
+        🪙
+      </div>
+
       <div class="saldo-label">
-        🪙 MOEDAS
+        MOEDAS
       </div>
 
       <div
@@ -1146,10 +1069,34 @@ body{
     </div>
 
 
-    <div class="saldo-card dinheiro">
+    <div class="saldo-card chaves">
+
+      <div class="saldo-icone">
+        🔑
+      </div>
 
       <div class="saldo-label">
-        💵 SALDO
+        CHAVES
+      </div>
+
+      <div
+        class="saldo-valor"
+        id="saldoChaves"
+      >
+        0
+      </div>
+
+    </div>
+
+
+    <div class="saldo-card dinheiro">
+
+      <div class="saldo-icone">
+        💵
+      </div>
+
+      <div class="saldo-label">
+        SALDO
       </div>
 
       <div
@@ -1161,6 +1108,7 @@ body{
 
     </div>
 
+
   </div>
 
 
@@ -1171,12 +1119,15 @@ body{
   <div class="aviso">
 
     <strong>
-      🛍️ Escolha seu prêmio!
+      🛍️ Solicitação de troca
     </strong>
 
     <span>
-      Alguns produtos podem ser adquiridos com moedas,
-      saldo ou qualquer uma das opções disponíveis.
+      Após solicitar o pacote, seu pedido ficará pendente.
+      A aprovação será feita pelo administrador em até
+      <b>24 horas úteis da loja</b>.
+      O valor em moedas, chaves ou saldo somente será
+      descontado após a aprovação.
     </span>
 
   </div>
@@ -1228,7 +1179,7 @@ body{
 
 
 <!-- =====================================================
-     MODAL DE COMPRA
+     MODAL
 ===================================================== -->
 
 <div
@@ -1239,7 +1190,7 @@ body{
   <div class="modal-card">
 
     <h2>
-      🛒 Confirmar compra
+      🛒 Solicitar troca
     </h2>
 
 
@@ -1253,8 +1204,8 @@ body{
       </div>
 
       <div
-        class="modal-produto-preco"
-        id="modalPreco"
+        class="modal-produto-precos"
+        id="modalPrecos"
       >
         —
       </div>
@@ -1264,12 +1215,22 @@ body{
 
     <div class="escolha">
 
+
       <button
         class="opcao opcao-moedas"
         id="comprarMoedas"
         type="button"
       >
-        🪙 Comprar com moedas
+        🪙 Solicitar com moedas
+      </button>
+
+
+      <button
+        class="opcao opcao-chaves"
+        id="comprarChaves"
+        type="button"
+      >
+        🔑 Solicitar com chaves
       </button>
 
 
@@ -1278,8 +1239,9 @@ body{
         id="comprarSaldo"
         type="button"
       >
-        💵 Comprar com saldo
+        💵 Solicitar com saldo
       </button>
+
 
     </div>
 
@@ -1298,7 +1260,7 @@ body{
 
 
 <!-- =====================================================
-     BARRA INFERIOR
+     NAV
 ===================================================== -->
 
 <nav class="nav">
@@ -1328,7 +1290,7 @@ body{
 
 
   <button
-    class="nav-item loja-ativo ativo"
+    class="nav-item ativo"
     id="navLoja"
     type="button"
   >
@@ -1381,8 +1343,6 @@ import {
   query,
   where,
   getDocs,
-  doc,
-  runTransaction,
   serverTimestamp,
   addDoc
 }
@@ -1391,7 +1351,7 @@ from
 
 
 /* =====================================================
-   CONFIGURAÇÃO
+   CONFIG
 ===================================================== */
 
 const firebaseConfig = {
@@ -1437,9 +1397,9 @@ const db =
 
 let usuarioAuth = null;
 
-let usuarioDoc = null;
-
 let usuarioRef = null;
+
+let usuarioDoc = null;
 
 let produtos = [];
 
@@ -1455,54 +1415,55 @@ const listaProdutos =
     "listaProdutos"
   );
 
-
 const quantidadeProdutos =
   document.getElementById(
     "quantidadeProdutos"
   );
-
 
 const saldoMoedas =
   document.getElementById(
     "saldoMoedas"
   );
 
+const saldoChaves =
+  document.getElementById(
+    "saldoChaves"
+  );
 
 const saldoDinheiro =
   document.getElementById(
     "saldoDinheiro"
   );
 
-
 const message =
   document.getElementById(
     "message"
   );
-
 
 const modal =
   document.getElementById(
     "modal"
   );
 
-
 const modalNome =
   document.getElementById(
     "modalNome"
   );
 
-
-const modalPreco =
+const modalPrecos =
   document.getElementById(
-    "modalPreco"
+    "modalPrecos"
   );
-
 
 const comprarMoedas =
   document.getElementById(
     "comprarMoedas"
   );
 
+const comprarChaves =
+  document.getElementById(
+    "comprarChaves"
+  );
 
 const comprarSaldo =
   document.getElementById(
@@ -1526,9 +1487,7 @@ function mostrarMensagem(
     "message";
 
 
-  if(
-    texto
-  ){
+  if(texto){
 
     message.classList.add(
       "show"
@@ -1537,9 +1496,7 @@ function mostrarMensagem(
   }
 
 
-  if(
-    tipo
-  ){
+  if(tipo){
 
     message.classList.add(
       tipo
@@ -1554,7 +1511,7 @@ function mostrarMensagem(
    FORMATAÇÃO
 ===================================================== */
 
-function formatarMoedas(
+function formatarNumero(
   valor
 ){
 
@@ -1585,14 +1542,14 @@ function formatarDinheiro(
 
 
 /* =====================================================
-   LOCALIZAR CADASTRO
+   LOCALIZAR USUÁRIO
 ===================================================== */
 
 async function localizarUsuario(
   usuario
 ){
 
-  const resultado =
+  let resultado =
     await getDocs(
 
       query(
@@ -1614,34 +1571,11 @@ async function localizarUsuario(
 
 
   if(
-    !resultado.empty
-  ){
-
-    const documento =
-      resultado.docs[0];
-
-
-    return {
-
-      ref:
-        documento.ref,
-
-      id:
-        documento.id,
-
-      data:
-        documento.data()
-
-    };
-
-  }
-
-
-  if(
+    resultado.empty &&
     usuario.email
   ){
 
-    const resultadoEmail =
+    resultado =
       await getDocs(
 
         query(
@@ -1663,40 +1597,40 @@ async function localizarUsuario(
 
       );
 
-
-    if(
-      !resultadoEmail.empty
-    ){
-
-      const documento =
-        resultadoEmail.docs[0];
+  }
 
 
-      return {
+  if(
+    resultado.empty
+  ){
 
-        ref:
-          documento.ref,
-
-        id:
-          documento.id,
-
-        data:
-          documento.data()
-
-      };
-
-    }
+    return null;
 
   }
 
 
-  return null;
+  const documento =
+    resultado.docs[0];
+
+
+  return {
+
+    ref:
+      documento.ref,
+
+    id:
+      documento.id,
+
+    data:
+      documento.data()
+
+  };
 
 }
 
 
 /* =====================================================
-   ATUALIZAR SALDOS
+   SALDOS
 ===================================================== */
 
 function atualizarSaldos(){
@@ -1708,6 +1642,9 @@ function atualizarSaldos(){
     saldoMoedas.textContent =
       "0";
 
+    saldoChaves.textContent =
+      "0";
+
     saldoDinheiro.textContent =
       "R$ 0,00";
 
@@ -1716,81 +1653,24 @@ function atualizarSaldos(){
   }
 
 
-  const moedas =
-    Number(
-      usuarioDoc.moedas ||
-      0
-    );
-
-
-  /*
-  ------------------------------------------------------
-  O sistema usa "creditos" como saldo.
-  Também aceita "saldo" caso você tenha esse campo.
-  ------------------------------------------------------
-  */
-
-  const saldo =
-    Number(
-      usuarioDoc.creditos ??
-      usuarioDoc.saldo ??
-      0
-    );
-
-
   saldoMoedas.textContent =
-    formatarMoedas(
-      moedas
+    formatarNumero(
+      usuarioDoc.moedas
+    );
+
+
+  saldoChaves.textContent =
+    formatarNumero(
+      usuarioDoc.chaves
     );
 
 
   saldoDinheiro.textContent =
     formatarDinheiro(
-      saldo
+      usuarioDoc.creditos ??
+      usuarioDoc.saldo ??
+      0
     );
-
-}
-
-
-/* =====================================================
-   CALCULAR PREÇO COM DESCONTO
-===================================================== */
-
-function calcularPreco(
-  valor,
-  desconto
-){
-
-  const preco =
-    Number(
-      valor || 0
-    );
-
-
-  const porcentagem =
-    Number(
-      desconto || 0
-    );
-
-
-  if(
-    porcentagem <= 0
-  ){
-
-    return preco;
-
-  }
-
-
-  return Math.max(
-    0,
-    preco -
-    (
-      preco *
-      porcentagem /
-      100
-    )
-  );
 
 }
 
@@ -1835,35 +1715,20 @@ async function carregarProdutos(){
         );
 
 
-    /*
-    ----------------------------------------------------
-    Ordenação
-    ----------------------------------------------------
-    */
-
     produtos.sort(
       (
         a,
         b
-      ) => {
+      ) =>
 
-        const ordemA =
-          Number(
-            a.ordem ||
-            0
-          );
+        Number(
+          a.ordem || 0
+        )
+        -
+        Number(
+          b.ordem || 0
+        )
 
-
-        const ordemB =
-          Number(
-            b.ordem ||
-            0
-          );
-
-
-        return ordemA - ordemB;
-
-      }
     );
 
 
@@ -1873,7 +1738,6 @@ async function carregarProdutos(){
   catch(error){
 
     console.error(
-      "Erro ao carregar produtos:",
       error
     );
 
@@ -1884,10 +1748,10 @@ async function carregarProdutos(){
       <div class="sem-produtos">
 
         <strong>
-          ⚠️ Não foi possível carregar a loja
+          ⚠️ Erro ao carregar a loja
         </strong>
 
-        Verifique a conexão e tente novamente.
+        Verifique sua conexão.
 
       </div>
       `;
@@ -1931,7 +1795,7 @@ function mostrarProdutos(){
           🛍️ Loja em preparação
         </strong>
 
-        Nenhum produto está disponível no momento.
+        Nenhum produto está disponível.
 
       </div>
       `;
@@ -1954,51 +1818,7 @@ function mostrarProdutos(){
         "produto";
 
 
-      /*
-      --------------------------------------------------
-      DESCONTO
-      --------------------------------------------------
-      */
-
-      const desconto =
-        Number(
-          produto.desconto ||
-          0
-        );
-
-
-      if(
-        desconto > 0
-      ){
-
-        const etiqueta =
-          document.createElement(
-            "div"
-          );
-
-
-        etiqueta.className =
-          "desconto";
-
-
-        etiqueta.textContent =
-          "-" +
-          desconto +
-          "%";
-
-
-        card.appendChild(
-          etiqueta
-        );
-
-      }
-
-
-      /*
-      --------------------------------------------------
-      IMAGEM
-      --------------------------------------------------
-      */
+      /* IMAGEM */
 
       const imagem =
         document.createElement(
@@ -2056,11 +1876,7 @@ function mostrarProdutos(){
       );
 
 
-      /*
-      --------------------------------------------------
-      CONTEÚDO
-      --------------------------------------------------
-      */
+      /* CONTEÚDO */
 
       const conteudo =
         document.createElement(
@@ -2104,7 +1920,7 @@ function mostrarProdutos(){
 
       descricao.textContent =
         produto.descricao ||
-        "Prêmio disponível na loja."
+        "Prêmio disponível na loja.";
 
 
       conteudo.appendChild(
@@ -2112,11 +1928,7 @@ function mostrarProdutos(){
       );
 
 
-      /*
-      --------------------------------------------------
-      PREÇOS
-      --------------------------------------------------
-      */
+      /* PREÇOS */
 
       const preco =
         document.createElement(
@@ -2128,120 +1940,94 @@ function mostrarProdutos(){
         "preco";
 
 
-      const precoMoedasOriginal =
-        Number(
-          produto.precoMoedas ||
-          0
-        );
-
-
-      const precoSaldoOriginal =
-        Number(
-          produto.precoSaldo ||
-          0
-        );
-
-
       const precoMoedas =
-        calcularPreco(
-          precoMoedasOriginal,
-          desconto
+        Number(
+          produto.precoMoedas || 0
+        );
+
+
+      const precoChaves =
+        Number(
+          produto.precoChaves || 0
         );
 
 
       const precoSaldo =
-        calcularPreco(
-          precoSaldoOriginal,
-          desconto
+        Number(
+          produto.precoSaldo || 0
         );
 
 
       if(
-        precoMoedasOriginal > 0
+        precoMoedas > 0
       ){
 
-        const antigo =
+        const item =
           document.createElement(
             "div"
           );
 
+        item.className =
+          "preco-item preco-moedas";
 
-        antigo.className =
-          "preco-antigo";
-
-
-        if(
-          desconto > 0
-        ){
-
-          antigo.textContent =
-
-            "🪙 " +
-
-            formatarMoedas(
-              precoMoedasOriginal
-            );
-
-        }
-
-
-        preco.appendChild(
-          antigo
-        );
-
-
-        const atual =
-          document.createElement(
-            "div"
-          );
-
-
-        atual.className =
-          "preco-principal";
-
-
-        atual.textContent =
-
+        item.textContent =
           "🪙 " +
-
-          formatarMoedas(
+          formatarNumero(
             precoMoedas
           );
 
-
         preco.appendChild(
-          atual
-
+          item
         );
 
       }
 
 
       if(
-        precoSaldoOriginal > 0
+        precoChaves > 0
       ){
 
-        const saldoAtual =
+        const item =
           document.createElement(
             "div"
           );
 
+        item.className =
+          "preco-item preco-chaves";
 
-        saldoAtual.className =
-          "preco-saldo";
+        item.textContent =
+          "🔑 " +
+          formatarNumero(
+            precoChaves
+          );
+
+        preco.appendChild(
+          item
+        );
+
+      }
 
 
-        saldoAtual.textContent =
+      if(
+        precoSaldo > 0
+      ){
 
+        const item =
+          document.createElement(
+            "div"
+          );
+
+        item.className =
+          "preco-item preco-saldo";
+
+        item.textContent =
           "💵 " +
-
           formatarDinheiro(
             precoSaldo
           );
 
-
         preco.appendChild(
-          saldoAtual
+          item
         );
 
       }
@@ -2252,11 +2038,7 @@ function mostrarProdutos(){
       );
 
 
-      /*
-      --------------------------------------------------
-      BOTÃO
-      --------------------------------------------------
-      */
+      /* BOTÃO */
 
       const comprar =
         document.createElement(
@@ -2273,7 +2055,7 @@ function mostrarProdutos(){
 
 
       comprar.textContent =
-        "🛒 COMPRAR";
+        "🛒 SOLICITAR TROCA";
 
 
       comprar.addEventListener(
@@ -2320,167 +2102,172 @@ function abrirCompra(
     produto;
 
 
-  const desconto =
-    Number(
-      produto.desconto ||
-      0
-    );
-
-
-  const precoMoedas =
-    calcularPreco(
-      Number(
-        produto.precoMoedas ||
-        0
-      ),
-      desconto
-    );
-
-
-  const precoSaldo =
-    calcularPreco(
-      Number(
-        produto.precoSaldo ||
-        0
-      ),
-      desconto
-    );
-
-
   modalNome.textContent =
     produto.nome ||
     "Prêmio";
 
 
-  let textoPreco =
-    "";
+  const precos = [];
+
+
+  const moedas =
+    Number(
+      produto.precoMoedas || 0
+    );
+
+
+  const chaves =
+    Number(
+      produto.precoChaves || 0
+    );
+
+
+  const saldo =
+    Number(
+      produto.precoSaldo || 0
+    );
 
 
   if(
-    precoMoedas > 0
+    moedas > 0
   ){
 
-    textoPreco +=
-
+    precos.push(
       "🪙 " +
-
-      formatarMoedas(
-        precoMoedas
-      ) +
-
-      " moedas";
+      formatarNumero(
+        moedas
+      )
+    );
 
   }
 
 
   if(
-    precoSaldo > 0
+    chaves > 0
   ){
 
-    if(
-      textoPreco
-    ){
-
-      textoPreco +=
-        "  •  ";
-
-    }
-
-
-    textoPreco +=
-
-      "💵 " +
-
-      formatarDinheiro(
-        precoSaldo
-      );
+    precos.push(
+      "🔑 " +
+      formatarNumero(
+        chaves
+      )
+    );
 
   }
 
 
-  modalPreco.textContent =
-    textoPreco ||
+  if(
+    saldo > 0
+  ){
+
+    precos.push(
+      "💵 " +
+      formatarDinheiro(
+        saldo
+      )
+    );
+
+  }
+
+
+  modalPrecos.textContent =
+    precos.join(
+      "  •  "
+    ) ||
     "Preço não configurado";
 
 
-  /*
-  ----------------------------------------------------
-  HABILITA/DESABILITA MÉTODO
-  ----------------------------------------------------
-  */
-
-  const moedasDisponiveis =
-    Number(
-      usuarioDoc?.moedas ||
-      0
-    );
-
-
-  const saldoDisponivel =
-    Number(
-      usuarioDoc?.creditos ??
-      usuarioDoc?.saldo ??
-      0
-    );
-
-
-  comprarMoedas.disabled =
-    precoMoedas <= 0;
-
-
-  comprarSaldo.disabled =
-    precoSaldo <= 0;
-
-
-  comprarMoedas.classList.toggle(
-    "opcao-indisponivel",
-    precoMoedas <= 0
+  configurarBotao(
+    comprarMoedas,
+    "moedas",
+    moedas,
+    "🪙 Solicitar com moedas"
   );
 
 
-  comprarSaldo.classList.toggle(
-    "opcao-indisponivel",
-    precoSaldo <= 0
+  configurarBotao(
+    comprarChaves,
+    "chaves",
+    chaves,
+    "🔑 Solicitar com chaves"
   );
 
 
-  if(
-    precoMoedas > 0 &&
-    moedasDisponiveis < precoMoedas
-  ){
-
-    comprarMoedas.textContent =
-      "🪙 Comprar com moedas • saldo insuficiente";
-
-  }
-  else{
-
-    comprarMoedas.textContent =
-      "🪙 Comprar com moedas";
-
-  }
-
-
-  if(
-    precoSaldo > 0 &&
-    saldoDisponivel < precoSaldo
-  ){
-
-    comprarSaldo.textContent =
-      "💵 Comprar com saldo • saldo insuficiente";
-
-  }
-  else{
-
-    comprarSaldo.textContent =
-      "💵 Comprar com saldo";
-
-  }
+  configurarBotao(
+    comprarSaldo,
+    "saldo",
+    saldo,
+    "💵 Solicitar com saldo"
+  );
 
 
   modal.classList.add(
     "show"
   );
+
+}
+
+
+/* =====================================================
+   CONFIGURAR BOTÃO
+===================================================== */
+
+function configurarBotao(
+  botao,
+  metodo,
+  preco,
+  texto
+){
+
+  const campo =
+    metodo === "saldo"
+      ? "creditos"
+      : metodo;
+
+
+  const disponivel =
+    Number(
+      usuarioDoc?.[campo] || 0
+    );
+
+
+  if(
+    preco <= 0
+  ){
+
+    botao.disabled =
+      true;
+
+    botao.textContent =
+      texto +
+      " • indisponível";
+
+    return;
+
+  }
+
+
+  if(
+    disponivel < preco
+  ){
+
+    botao.disabled =
+      true;
+
+    botao.textContent =
+      texto +
+      " • saldo insuficiente";
+
+    return;
+
+  }
+
+
+  botao.disabled =
+    false;
+
+  botao.textContent =
+    texto;
 
 }
 
@@ -2502,17 +2289,17 @@ function fecharModal(){
 
 
 /* =====================================================
-   COMPRAR
+   CRIAR PEDIDO
 ===================================================== */
 
-async function comprar(
+async function criarPedido(
   metodo
 ){
 
   if(
     !produtoSelecionado ||
-    !usuarioRef ||
-    !usuarioAuth
+    !usuarioAuth ||
+    !usuarioRef
   ){
 
     return;
@@ -2524,37 +2311,22 @@ async function comprar(
     produtoSelecionado;
 
 
-  const desconto =
-    Number(
-      produto.desconto ||
-      0
-    );
-
-
-  const precoMoedas =
-    calcularPreco(
-      Number(
-        produto.precoMoedas ||
-        0
-      ),
-      desconto
-    );
-
-
-  const precoSaldo =
-    calcularPreco(
-      Number(
-        produto.precoSaldo ||
-        0
-      ),
-      desconto
-    );
+  const campo =
+    metodo === "saldo"
+      ? "creditos"
+      : metodo;
 
 
   const preco =
-    metodo === "moedas"
-      ? precoMoedas
-      : precoSaldo;
+    Number(
+
+      metodo === "moedas"
+        ? produto.precoMoedas
+        : metodo === "chaves"
+          ? produto.precoChaves
+          : produto.precoSaldo
+
+    || 0);
 
 
   if(
@@ -2571,263 +2343,177 @@ async function comprar(
   }
 
 
+  const saldoAntes =
+    Number(
+      usuarioDoc?.[campo] || 0
+    );
+
+
+  if(
+    saldoAntes < preco
+  ){
+
+    mostrarMensagem(
+      "❌ Você não possui saldo suficiente.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
   const botao =
+
     metodo === "moedas"
       ? comprarMoedas
-      : comprarSaldo;
+      : metodo === "chaves"
+        ? comprarChaves
+        : comprarSaldo;
 
 
   botao.disabled =
     true;
 
-
   botao.textContent =
-    "⏳ PROCESSANDO...";
+    "⏳ ENVIANDO PEDIDO...";
 
 
   try{
 
     /*
-    ----------------------------------------------------
-    TRANSACTION
-    ----------------------------------------------------
+    ====================================================
+    IMPORTANTE
 
-    A compra acontece de forma atômica:
+    Aqui NÃO descontamos o saldo.
 
-    1. verifica o saldo
-    2. desconta
-    3. registra a compra
+    O pedido apenas registra:
 
+    saldoAntes
+    custo
+    saldoDepoisPrevisto
+
+    O desconto real será feito pelo ADMIN
+    no momento da aprovação.
+    ====================================================
     */
 
-    let saldoFinal =
-      0;
+
+    await addDoc(
+
+      collection(
+        db,
+        "pedidosLoja"
+      ),
+
+      {
+
+        uid:
+          usuarioAuth.uid,
+
+        usuarioNome:
+          usuarioDoc.nome ||
+          usuarioDoc.name ||
+          "",
+
+        usuarioEmail:
+          usuarioAuth.email ||
+          usuarioDoc.email ||
+          "",
+
+        usuarioPublicId:
+          usuarioDoc.publicId ||
+          usuarioDoc.codigo ||
+          usuarioDoc.idPublico ||
+          "",
 
 
-    await runTransaction(
-      db,
-      async transaction => {
+        produtoId:
+          produto.id,
 
-        const usuarioSnap =
-          await transaction.get(
-            usuarioRef
-          );
+        produtoNome:
+          produto.nome ||
+          "",
 
+        produtoDescricao:
+          produto.descricao ||
+          "",
 
-        if(
-          !usuarioSnap.exists()
-        ){
-
-          throw new Error(
-            "USUARIO_NAO_ENCONTRADO"
-          );
-
-        }
+        imagem:
+          produto.imagem ||
+          "",
 
 
-        const dados =
-          usuarioSnap.data();
+        metodoPagamento:
+          metodo,
+
+        custo:
+          preco,
 
 
-        const moedasAtuais =
-          Number(
-            dados.moedas ||
-            0
-          );
+        /*
+        ================================================
+        SNAPSHOT DO SALDO
+        ================================================
+        */
+
+        saldoAntes:
+          saldoAntes,
+
+        saldoDepoisPrevisto:
+          saldoAntes - preco,
 
 
-        const saldoAtual =
-          Number(
-            dados.creditos ??
-            dados.saldo ??
-            0
-          );
+        /*
+        ================================================
+        STATUS
+        ================================================
+        */
+
+        status:
+          "pendente",
+
+        entregue:
+          false,
 
 
-        if(
-          metodo === "moedas"
-        ){
+        /*
+        ================================================
+        PRAZO
+        ================================================
+        */
 
-          if(
-            moedasAtuais < preco
-          ){
-
-            throw new Error(
-              "MOEDAS_INSUFICIENTES"
-            );
-
-          }
+        prazoAprovacao:
+          "até 24 horas úteis da loja",
 
 
-          saldoFinal =
-            moedasAtuais -
-            preco;
+        /*
+        ================================================
+        AUDITORIA
+        ================================================
+        */
 
+        criadoEm:
+          serverTimestamp(),
 
-          transaction.update(
-            usuarioRef,
-            {
+        aprovadoEm:
+          null,
 
-              moedas:
-                saldoFinal
+        aprovadoPor:
+          "",
 
-            }
-          );
+        recusadoEm:
+          null,
 
-        }
-        else{
+        recusadoPor:
+          "",
 
-          if(
-            saldoAtual < preco
-          ){
-
-            throw new Error(
-              "SALDO_INSUFICIENTE"
-            );
-
-          }
-
-
-          saldoFinal =
-            saldoAtual -
-            preco;
-
-
-          /*
-          ------------------------------------------------
-          Mantém o campo "creditos" como principal.
-          ------------------------------------------------
-          */
-
-          transaction.update(
-            usuarioRef,
-            {
-
-              creditos:
-                saldoFinal
-
-            }
-          );
-
-        }
-
+        motivoRecusa:
+          ""
 
       }
+
     );
-
-
-    /*
-    ----------------------------------------------------
-    ATUALIZA MEMÓRIA LOCAL
-    ----------------------------------------------------
-    */
-
-    if(
-      metodo === "moedas"
-    ){
-
-      usuarioDoc.moedas =
-        saldoFinal;
-
-    }
-    else{
-
-      usuarioDoc.creditos =
-        saldoFinal;
-
-    }
-
-
-    atualizarSaldos();
-
-
-    /*
-    ----------------------------------------------------
-    REGISTRA HISTÓRICO DA COMPRA
-    ----------------------------------------------------
-    */
-
-    try{
-
-      await addDoc(
-
-        collection(
-          db,
-          "historicoCompras"
-        ),
-
-        {
-
-          usuarioId:
-            usuarioAuth.uid,
-
-          usuarioDocId:
-            usuarioDoc._docId ||
-            "",
-
-          usuarioNome:
-            usuarioDoc.nome ||
-            "",
-
-          usuarioEmail:
-            usuarioAuth.email ||
-            usuarioDoc.email ||
-            "",
-
-          produtoId:
-            produto.id,
-
-          produtoNome:
-            produto.nome ||
-            "",
-
-          produtoDescricao:
-            produto.descricao ||
-            "",
-
-          imagem:
-            produto.imagem ||
-            "",
-
-          metodoPagamento:
-            metodo,
-
-          valor:
-            preco,
-
-          desconto:
-            desconto,
-
-          moeda:
-            metodo === "moedas"
-              ? "moedas"
-              : "saldo",
-
-          criadoEm:
-            serverTimestamp(),
-
-          status:
-            "pendente"
-
-        }
-
-      );
-
-    }
-    catch(error){
-
-      /*
-      A compra já foi concluída.
-      Se o histórico falhar, não desfazemos
-      a compra.
-      */
-
-      console.error(
-        "Erro ao registrar histórico:",
-        error
-      );
-
-    }
 
 
     fecharModal();
@@ -2835,8 +2521,8 @@ async function comprar(
 
     mostrarMensagem(
 
-      "✅ Compra realizada com sucesso! " +
-      "Seu pedido está pendente.",
+      "✅ Solicitação enviada com sucesso! " +
+      "A aprovação ocorre em até 24 horas úteis da loja.",
 
       "success"
 
@@ -2847,173 +2533,62 @@ async function comprar(
   catch(error){
 
     console.error(
-      "Erro na compra:",
+      "Erro ao criar pedido:",
       error
     );
 
 
-    if(
-      error.message ===
-      "MOEDAS_INSUFICIENTES"
-    ){
+    mostrarMensagem(
 
-      mostrarMensagem(
-        "🪙 Você não possui moedas suficientes.",
-        "error"
-      );
+      error.code ===
+      "permission-denied"
 
-    }
+        ? "❌ O pedido foi bloqueado pelas Rules do Firestore."
 
-    else if(
-      error.message ===
-      "SALDO_INSUFICIENTE"
-    ){
+        : "❌ Não foi possível enviar o pedido.",
 
-      mostrarMensagem(
-        "💵 Você não possui saldo suficiente.",
-        "error"
-      );
+      "error"
 
-    }
-
-    else if(
-      error.message ===
-      "USUARIO_NAO_ENCONTRADO"
-    ){
-
-      mostrarMensagem(
-        "Não foi possível encontrar sua conta.",
-        "error"
-      );
-
-    }
-
-    else{
-
-      mostrarMensagem(
-        "❌ Não foi possível concluir a compra.",
-        "error"
-      );
-
-    }
+    );
 
   }
 
 
-  /*
-  ----------------------------------------------------
-  RESTAURA BOTÃO
-  ----------------------------------------------------
-  */
-
-  const precoTexto =
-    metodo === "moedas"
-      ? "🪙 Comprar com moedas"
-      : "💵 Comprar com saldo";
+  configurarBotao(
+    comprarMoedas,
+    "moedas",
+    Number(
+      produto.precoMoedas || 0
+    ),
+    "🪙 Solicitar com moedas"
+  );
 
 
-  botao.disabled =
-    false;
+  configurarBotao(
+    comprarChaves,
+    "chaves",
+    Number(
+      produto.precoChaves || 0
+    ),
+    "🔑 Solicitar com chaves"
+  );
 
 
-  botao.textContent =
-    precoTexto;
+  configurarBotao(
+    comprarSaldo,
+    "saldo",
+    Number(
+      produto.precoSaldo || 0
+    ),
+    "💵 Solicitar com saldo"
+  );
 
 }
 
 
 /* =====================================================
-   NAVEGAÇÃO
+   BOTÕES
 ===================================================== */
-
-document
-.getElementById(
-  "voltar"
-)
-.addEventListener(
-  "click",
-  () => {
-
-    window.location.href =
-      "painel.html";
-
-  }
-);
-
-
-document
-.getElementById(
-  "navInicio"
-)
-.addEventListener(
-  "click",
-  () => {
-
-    window.location.href =
-      "painel.html";
-
-  }
-);
-
-
-document
-.getElementById(
-  "navRoleta"
-)
-.addEventListener(
-  "click",
-  () => {
-
-    window.location.href =
-      "roleta.html";
-
-  }
-);
-
-
-document
-.getElementById(
-  "navLoja"
-)
-.addEventListener(
-  "click",
-  () => {
-
-    window.location.href =
-      "loja.html";
-
-  }
-);
-
-
-document
-.getElementById(
-  "navPremios"
-)
-.addEventListener(
-  "click",
-  () => {
-
-    window.location.href =
-      "caixa.html";
-
-  }
-);
-
-
-/* =====================================================
-   MODAL
-===================================================== */
-
-document
-.getElementById(
-  "cancelarCompra"
-)
-.addEventListener(
-  "click",
-  fecharModal
-);
-
 
 comprarMoedas.addEventListener(
   "click",
@@ -3023,8 +2598,26 @@ comprarMoedas.addEventListener(
       !comprarMoedas.disabled
     ){
 
-      comprar(
+      criarPedido(
         "moedas"
+      );
+
+    }
+
+  }
+);
+
+
+comprarChaves.addEventListener(
+  "click",
+  () => {
+
+    if(
+      !comprarChaves.disabled
+    ){
+
+      criarPedido(
+        "chaves"
       );
 
     }
@@ -3041,13 +2634,23 @@ comprarSaldo.addEventListener(
       !comprarSaldo.disabled
     ){
 
-      comprar(
+      criarPedido(
         "saldo"
       );
 
     }
 
   }
+);
+
+
+document
+.getElementById(
+  "cancelarCompra"
+)
+.addEventListener(
+  "click",
+  fecharModal
 );
 
 
@@ -3069,6 +2672,85 @@ modal.addEventListener(
 
 
 /* =====================================================
+   NAVEGAÇÃO
+===================================================== */
+
+document
+.getElementById(
+  "voltar"
+)
+.addEventListener(
+  "click",
+  () => {
+
+    location.href =
+      "painel.html";
+
+  }
+);
+
+
+document
+.getElementById(
+  "navInicio"
+)
+.addEventListener(
+  "click",
+  () => {
+
+    location.href =
+      "painel.html";
+
+  }
+);
+
+
+document
+.getElementById(
+  "navRoleta"
+)
+.addEventListener(
+  "click",
+  () => {
+
+    location.href =
+      "roleta.html";
+
+  }
+);
+
+
+document
+.getElementById(
+  "navLoja"
+)
+.addEventListener(
+  "click",
+  () => {
+
+    location.href =
+      "loja.html";
+
+  }
+);
+
+
+document
+.getElementById(
+  "navPremios"
+)
+.addEventListener(
+  "click",
+  () => {
+
+    location.href =
+      "caixa.html";
+
+  }
+);
+
+
+/* =====================================================
    AUTENTICAÇÃO
 ===================================================== */
 
@@ -3082,7 +2764,7 @@ onAuthStateChanged(
       !usuario
     ){
 
-      window.location.replace(
+      location.replace(
         "index.html"
       );
 
@@ -3108,7 +2790,7 @@ onAuthStateChanged(
       ){
 
         mostrarMensagem(
-          "Não foi possível encontrar seu cadastro.",
+          "❌ Não foi possível encontrar seu cadastro.",
           "error"
         );
 
