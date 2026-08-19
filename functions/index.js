@@ -1,300 +1,287 @@
-const {
-  onCall,
-  HttpsError
-} = require("firebase-functions/v2/https");
+const functions = require("firebase-functions");
+const admin = require("firebase-admin");
 
-const {
-  initializeApp
-} = require("firebase-admin/app");
+admin.initializeApp();
 
-const {
-  getFirestore,
-  Timestamp
-} = require("firebase-admin/firestore");
+const db = admin.firestore();
 
-initializeApp();
+/* =====================================================
+   CONFIGURAÇÃO DAS CAIXAS
+===================================================== */
 
-const db = getFirestore();
+const caixas = {
 
-const HORAS_CAIXA = 72;
+  "09": {
+    titulo: "🇧🇷 Caixa da Independência",
+    mensagem:
+      "A Caixa da Independência já está disponível para resgate."
+  },
 
+  "10": {
+    titulo: "🎃 Caixa Halloween",
+    mensagem:
+      "A nova Caixa Halloween já está disponível para resgate."
+  },
+
+  "11": {
+    titulo: "🖤 Caixa da Consciência Negra",
+    mensagem:
+      "A nova Caixa da Consciência Negra já está disponível para resgate."
+  },
+
+  "12": {
+    titulo: "🎄 Caixa de Natal",
+    mensagem:
+      "A nova Caixa de Natal já está disponível para resgate."
+  }
+
+};
+
+
+/* =====================================================
+   NOTIFICAÇÃO DA NOVA CAIXA
+===================================================== */
 
 /*
-=====================================================
-RESGATAR CAIXA BOX
-=====================================================
+   Executa todos os dias às 00:05.
+   A função somente cria a notificação
+   quando for o primeiro dia do mês.
+
+   Timezone:
+   America/Sao_Paulo
 */
 
-exports.resgatarCaixa = onCall(
-  async (request) => {
+exports.notificarNovaCaixa =
+  functions.pubsub
+    .schedule("5 0 1 * *")
+    .timeZone("America/Sao_Paulo")
+    .onRun(async () => {
 
-    /*
-    -------------------------------------------------
-    1. VERIFICAR LOGIN
-    -------------------------------------------------
-    */
+      const agora =
+        new Date();
 
-    if (!request.auth) {
+      const mes =
+        String(
+          agora.getMonth() + 1
+        ).padStart(
+          2,
+          "0"
+        );
 
-      throw new HttpsError(
-        "unauthenticated",
-        "Você precisa estar logado."
-      );
+      const ano =
+        agora.getFullYear();
 
-    }
+      const caixa =
+        caixas[mes];
 
+      /*
+         Se não houver Caixa programada
+         para esse mês, não faz nada.
+      */
 
-    const uid = request.auth.uid;
+      if(!caixa){
 
+        console.log(
+          "Nenhuma Caixa programada para o mês:",
+          mes
+        );
 
-    /*
-    -------------------------------------------------
-    2. LOCALIZAR CADASTRO
-    -------------------------------------------------
-    */
+        return null;
 
-    const admins =
-      db.collection("admins");
-
-
-    const snapshot =
-      await admins
-        .where(
-          "uid",
-          "==",
-          uid
-        )
-        .limit(1)
-        .get();
+      }
 
 
-    if (snapshot.empty) {
-
-      throw new HttpsError(
-        "not-found",
-        "Cadastro do usuário não encontrado."
-      );
-
-    }
-
-
-    const usuarioRef =
-      snapshot.docs[0].ref;
-
-
-    const usuario =
-      snapshot.docs[0].data();
-
-
-    /*
-    -------------------------------------------------
-    3. VERIFICAR VIP
-    -------------------------------------------------
-    */
-
-    if (usuario.vip !== true) {
-
-      throw new HttpsError(
-        "permission-denied",
-        "A Caixa Box é exclusiva para membros VIP."
-      );
-
-    }
-
-
-    /*
-    -------------------------------------------------
-    4. VERIFICAR SE JÁ EXISTE UMA ESPERA
-    -------------------------------------------------
-    */
-
-    const agora =
-      Date.now();
-
-
-    let proximaChance = null;
-
-
-    if (
-      usuario.proximaChance &&
-      typeof usuario.proximaChance.toMillis ===
-        "function"
-    ) {
-
-      proximaChance =
-        usuario.proximaChance.toMillis();
-
-    }
-
-
-    /*
-    Ainda não chegou a hora.
-    */
-
-    if (
-      proximaChance &&
-      agora < proximaChance
-    ) {
-
-      throw new HttpsError(
-        "failed-precondition",
-        "Sua próxima chance ainda não está disponível.",
-        {
-          proximaChance:
-            proximaChance,
-
-          restante:
-            proximaChance - agora
-        }
-      );
-
-    }
-
-
-    /*
-    -------------------------------------------------
-    5. CALCULAR NOVAS 72 HORAS
-    -------------------------------------------------
-    */
-
-    const proxima =
-      new Date(
-        agora +
-        (
-          HORAS_CAIXA *
-          60 *
-          60 *
-          1000
-        )
+      console.log(
+        "Iniciando notificações da Caixa:",
+        caixa.titulo
       );
 
 
-    const proximaTimestamp =
-      Timestamp.fromDate(
-        proxima
-      );
+      /*
+         Busca todos os VIPs.
+      */
+
+      const snapshot =
+        await db
+          .collection("admins")
+          .where(
+            "vip",
+            "==",
+            true
+          )
+          .get();
 
 
-    /*
-    -------------------------------------------------
-    6. TRANSACTION
-    -------------------------------------------------
+      if(snapshot.empty){
 
-    A transaction evita dois cliques/resgates
-    simultâneos.
-    */
+        console.log(
+          "Nenhum VIP encontrado."
+        );
 
-    await db.runTransaction(
-      async transaction => {
+        return null;
 
-        const documento =
-          await transaction.get(
-            usuarioRef
+      }
+
+
+      /*
+         Firestore permite no máximo
+         500 operações por batch.
+      */
+
+      let batch =
+        db.batch();
+
+      let quantidade =
+        0;
+
+      let batches = [];
+
+
+      for(
+        const documento
+        of snapshot.docs
+      ){
+
+        const uid =
+          documento.data().uid;
+
+
+        if(!uid){
+
+          console.log(
+            "Usuário sem UID:",
+            documento.id
           );
 
-
-        const dados =
-          documento.data();
-
-
-        let proximaAtual = null;
-
-
-        if (
-          dados.proximaChance &&
-          typeof dados.proximaChance.toMillis ===
-            "function"
-        ) {
-
-          proximaAtual =
-            dados.proximaChance.toMillis();
+          continue;
 
         }
 
 
         /*
-        Reconfere dentro da transaction.
+           ID único da notificação.
+
+           Exemplo:
+           caixa_2026_09_UID
+
+           Isso impede que a mesma Caixa
+           seja enviada duas vezes.
         */
 
-        if (
-          proximaAtual &&
-          Date.now() < proximaAtual
-        ) {
+        const notificacaoId =
+          "caixa_" +
+          ano +
+          "_" +
+          mes +
+          "_" +
+          uid;
 
-          throw new HttpsError(
-            "failed-precondition",
-            "Sua chance ainda não está disponível."
+
+        const referencia =
+          db
+            .collection("notificacoes")
+            .doc(
+              notificacaoId
+            );
+
+
+        batch.set(
+
+          referencia,
+
+          {
+
+            uid:
+              uid,
+
+            titulo:
+              "🎁 Nova Caixa Box disponível!",
+
+            mensagem:
+              caixa.titulo +
+              " já está disponível para resgate.",
+
+            tipo:
+              "caixa",
+
+            mes:
+              mes,
+
+            ano:
+              ano,
+
+            caixa:
+              caixa.titulo,
+
+            lida:
+              false,
+
+            criadaEm:
+              admin.firestore.FieldValue.serverTimestamp()
+
+          },
+
+          {
+            merge: false
+          }
+
+        );
+
+
+        quantidade++;
+
+
+        /*
+           A cada 500 operações,
+           fecha um batch e começa outro.
+        */
+
+        if(
+          quantidade === 500
+        ){
+
+          batches.push(
+            batch.commit()
           );
+
+          batch =
+            db.batch();
+
+          quantidade =
+            0;
 
         }
 
+      }
 
-        transaction.update(
-          usuarioRef,
-          {
 
-            ultimaCaixaResgatadaEm:
-              Timestamp.now(),
+      /*
+         Envia o último batch.
+      */
 
-            proximaChance:
-              proximaTimestamp,
+      if(
+        quantidade > 0
+      ){
 
-            caixaBox:
-              true
-
-          }
+        batches.push(
+          batch.commit()
         );
 
       }
-    );
 
 
-    /*
-    -------------------------------------------------
-    7. REGISTRAR HISTÓRICO
-    -------------------------------------------------
-    */
-
-    await db
-      .collection("historico")
-      .add({
-
-        usuarioId:
-          uid,
-
-        tipo:
-          "caixa_box",
-
-        acao:
-          "resgate",
-
-        caixa:
-          "Independência",
-
-        registradoEm:
-          Timestamp.now()
-
-      });
+      await Promise.all(
+        batches
+      );
 
 
-    /*
-    -------------------------------------------------
-    8. RETORNO PARA O SITE
-    -------------------------------------------------
-    */
+      console.log(
+        "Notificações enviadas para:",
+        snapshot.size,
+        "VIPs."
+      );
 
-    return {
 
-      sucesso:
-        true,
+      return null;
 
-      proximaChance:
-        proximaTimestamp.toMillis(),
-
-      mensagem:
-        "Caixa Box resgatada com sucesso."
-
-    };
-
-  }
-);
+    });
