@@ -1,0 +1,2614 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>Adam Games • Cliente</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  background:#031a31;
+}
+
+body{
+
+  min-height:100vh;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  color:#fff;
+
+  background:
+    radial-gradient(
+      circle at 10% 0%,
+      #159fe9 0%,
+      transparent 30%
+    ),
+
+    radial-gradient(
+      circle at 90% 10%,
+      #079b63 0%,
+      transparent 28%
+    ),
+
+    linear-gradient(
+      145deg,
+      #087fc5,
+      #031b3d 75%
+    );
+
+  padding:
+    20px
+    14px
+    80px;
+
+}
+
+.container{
+
+  width:100%;
+
+  max-width:850px;
+
+  margin:auto;
+
+}
+
+
+/* =====================================================
+   TOPO
+===================================================== */
+
+.top{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:14px;
+
+  margin-bottom:18px;
+
+}
+
+.back{
+
+  width:48px;
+  height:48px;
+
+  border:0;
+
+  border-radius:15px;
+
+  background:
+    rgba(2,35,67,.9);
+
+  color:#fff;
+
+  font-size:27px;
+
+  cursor:pointer;
+
+  flex-shrink:0;
+
+}
+
+.title{
+
+  flex:1;
+
+}
+
+.title small{
+
+  display:block;
+
+  color:#8fc5e8;
+
+  font-size:11px;
+
+  letter-spacing:3px;
+
+  font-weight:bold;
+
+}
+
+.title strong{
+
+  display:block;
+
+  font-size:
+    clamp(
+      24px,
+      6vw,
+      34px
+    );
+
+}
+
+
+/* =====================================================
+   CARREGANDO / ERRO
+===================================================== */
+
+.message{
+
+  margin-top:20px;
+
+  padding:18px;
+
+  border-radius:18px;
+
+  text-align:center;
+
+  background:
+    rgba(255,255,255,.07);
+
+  color:#b8d8ef;
+
+}
+
+.message.error{
+
+  color:#ff9fa9;
+
+  background:
+    rgba(255,50,70,.12);
+
+}
+
+
+/* =====================================================
+   PERFIL
+===================================================== */
+
+.profile{
+
+  margin-top:18px;
+
+  padding:22px;
+
+  border-radius:24px;
+
+  background:
+    rgba(2,31,62,.94);
+
+  border:
+    1px solid
+    rgba(255,255,255,.1);
+
+  box-shadow:
+    0 15px 35px
+    rgba(0,0,0,.25);
+
+}
+
+.profile-head{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:16px;
+
+}
+
+.avatar{
+
+  width:72px;
+  height:72px;
+
+  border-radius:20px;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  background:
+    linear-gradient(
+      135deg,
+      #18a9ff,
+      #0871c8
+    );
+
+  font-size:38px;
+
+  flex-shrink:0;
+
+}
+
+.profile-name{
+
+  font-size:25px;
+
+  font-weight:900;
+
+}
+
+.profile-email{
+
+  margin-top:5px;
+
+  color:#9fc5df;
+
+  font-size:13px;
+
+  word-break:break-all;
+
+}
+
+.vip-badge{
+
+  display:inline-block;
+
+  margin-top:8px;
+
+  padding:6px 10px;
+
+  border-radius:20px;
+
+  background:#a87500;
+
+  color:#ffe68a;
+
+  font-size:12px;
+
+  font-weight:bold;
+
+}
+
+.normal-badge{
+
+  display:inline-block;
+
+  margin-top:8px;
+
+  padding:6px 10px;
+
+  border-radius:20px;
+
+  background:#174a73;
+
+  color:#a9d9ff;
+
+  font-size:12px;
+
+  font-weight:bold;
+
+}
+
+
+/* =====================================================
+   IDENTIFICAÇÃO
+===================================================== */
+
+.identificacao{
+
+  margin-top:20px;
+
+  display:grid;
+
+  gap:9px;
+
+}
+
+.identificacao-item{
+
+  padding:12px;
+
+  border-radius:12px;
+
+  background:
+    rgba(255,255,255,.045);
+
+}
+
+.identificacao-label{
+
+  color:#7fa9c9;
+
+  font-size:11px;
+
+  font-weight:bold;
+
+  text-transform:uppercase;
+
+}
+
+.identificacao-value{
+
+  margin-top:4px;
+
+  color:#e9f5ff;
+
+  font-size:13px;
+
+  word-break:break-all;
+
+}
+
+
+/* =====================================================
+   RECURSOS
+===================================================== */
+
+.section{
+
+  margin-top:22px;
+
+  padding:20px;
+
+  border-radius:21px;
+
+  background:
+    rgba(2,31,62,.94);
+
+  border:
+    1px solid
+    rgba(255,255,255,.08);
+
+}
+
+.section h2{
+
+  font-size:22px;
+
+  margin-bottom:15px;
+
+}
+
+.resources{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,1fr);
+
+  gap:10px;
+
+}
+
+.resource{
+
+  padding:16px;
+
+  border-radius:15px;
+
+  background:
+    rgba(255,255,255,.055);
+
+  text-align:center;
+
+}
+
+.resource-icon{
+
+  font-size:25px;
+
+}
+
+.resource-label{
+
+  margin-top:7px;
+
+  color:#9ec2dd;
+
+  font-size:12px;
+
+  font-weight:bold;
+
+}
+
+.resource-value{
+
+  margin-top:4px;
+
+  font-size:25px;
+
+  font-weight:900;
+
+  color:#fff;
+
+}
+
+
+/* =====================================================
+   RESUMO DE PRÊMIOS
+===================================================== */
+
+.summary{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:10px;
+
+}
+
+.summary-box{
+
+  padding:17px 8px;
+
+  border-radius:16px;
+
+  text-align:center;
+
+  background:
+    rgba(255,255,255,.055);
+
+}
+
+.summary-number{
+
+  font-size:29px;
+
+  font-weight:900;
+
+}
+
+.summary-label{
+
+  margin-top:5px;
+
+  color:#9fc2dc;
+
+  font-size:11px;
+
+  font-weight:bold;
+
+}
+
+
+/* =====================================================
+   FILTROS
+===================================================== */
+
+.filters{
+
+  display:grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:10px;
+
+  margin-bottom:15px;
+
+}
+
+.filter{
+
+  min-height:48px;
+
+  border:1px solid
+    rgba(255,255,255,.12);
+
+  border-radius:13px;
+
+  background:#082b4e;
+
+  color:#fff;
+
+  padding:0 13px;
+
+  font-size:14px;
+
+}
+
+.search{
+
+  grid-column:
+    1 / -1;
+
+  width:100%;
+
+  min-height:50px;
+
+  border:1px solid
+    rgba(255,255,255,.12);
+
+  border-radius:14px;
+
+  background:#062544;
+
+  color:#fff;
+
+  padding:0 15px;
+
+  font-size:15px;
+
+  outline:none;
+
+}
+
+.search::placeholder{
+
+  color:#759bb8;
+
+}
+
+
+/* =====================================================
+   PEDIDOS
+===================================================== */
+
+.orders{
+
+  display:grid;
+
+  gap:12px;
+
+}
+
+.order{
+
+  padding:17px;
+
+  border-radius:17px;
+
+  background:
+    rgba(255,255,255,.055);
+
+  border:
+    1px solid
+    rgba(255,255,255,.08);
+
+}
+
+.order-top{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:flex-start;
+
+  gap:10px;
+
+}
+
+.order-title{
+
+  font-size:17px;
+
+  font-weight:900;
+
+}
+
+.status{
+
+  padding:6px 9px;
+
+  border-radius:20px;
+
+  font-size:10px;
+
+  font-weight:900;
+
+  white-space:nowrap;
+
+}
+
+.status-pendente{
+
+  color:#ffe27a;
+
+  background:
+    rgba(255,190,0,.15);
+
+}
+
+.status-entregue{
+
+  color:#6dffae;
+
+  background:
+    rgba(0,220,100,.14);
+
+}
+
+.order-info{
+
+  margin-top:12px;
+
+  display:grid;
+
+  gap:5px;
+
+}
+
+.order-info div{
+
+  color:#a8c6dd;
+
+  font-size:12px;
+
+}
+
+.order-info b{
+
+  color:#e9f5ff;
+
+}
+
+.order-id{
+
+  margin-top:12px;
+
+  padding:9px;
+
+  border-radius:9px;
+
+  background:
+    rgba(0,0,0,.18);
+
+  color:#69c8ff;
+
+  font-size:10px;
+
+  word-break:break-all;
+
+}
+
+
+/* =====================================================
+   ROLETA
+===================================================== */
+
+.roleta-result{
+
+  margin-top:10px;
+
+  padding:15px;
+
+  border-radius:15px;
+
+  background:
+    rgba(255,255,255,.045);
+
+}
+
+.roleta-result-top{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  gap:10px;
+
+}
+
+.roleta-premio{
+
+  color:#ffd52b;
+
+  font-size:17px;
+
+  font-weight:900;
+
+}
+
+.roleta-data{
+
+  color:#82afd0;
+
+  font-size:11px;
+
+  text-align:right;
+
+}
+
+.roleta-status{
+
+  margin-top:7px;
+
+  color:#a9c8df;
+
+  font-size:12px;
+
+}
+
+
+/* =====================================================
+   VAZIO
+===================================================== */
+
+.empty{
+
+  padding:25px 12px;
+
+  text-align:center;
+
+  color:#87abc6;
+
+}
+
+
+/* =====================================================
+   BOTÃO ENTREGAS
+===================================================== */
+
+.delivery-button{
+
+  width:100%;
+
+  height:53px;
+
+  margin-top:15px;
+
+  border:0;
+
+  border-radius:15px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #16bb69,
+      #087b45
+    );
+
+  color:#fff;
+
+  font-size:15px;
+
+  font-weight:900;
+
+  cursor:pointer;
+
+}
+
+
+/* =====================================================
+   RESPONSIVO
+===================================================== */
+
+@media(max-width:600px){
+
+  .summary{
+
+    grid-template-columns:
+      repeat(3,1fr);
+
+  }
+
+  .summary-number{
+
+    font-size:24px;
+
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+  <!-- =================================================
+       TOPO
+  ================================================== -->
+
+  <div class="top">
+
+    <button
+      class="back"
+      id="back"
+      type="button">
+
+      ←
+
+    </button>
+
+    <div class="title">
+
+      <small>ADAM GAMES • ADMIN</small>
+
+      <strong>👤 PERFIL DO CLIENTE</strong>
+
+    </div>
+
+  </div>
+
+
+  <!-- =================================================
+       MENSAGEM
+  ================================================== -->
+
+  <div
+    class="message"
+    id="message">
+
+    🔄 Carregando cliente...
+
+  </div>
+
+
+  <!-- =================================================
+       PERFIL
+  ================================================== -->
+
+  <div
+    class="profile"
+    id="profile"
+    style="display:none">
+
+
+    <div class="profile-head">
+
+      <div
+        class="avatar"
+        id="avatar">
+
+        👤
+
+      </div>
+
+      <div>
+
+        <div
+          class="profile-name"
+          id="nome">
+
+          —
+
+        </div>
+
+        <div
+          class="profile-email"
+          id="email">
+
+          —
+
+        </div>
+
+        <div id="vipBadge"></div>
+
+      </div>
+
+    </div>
+
+
+    <div class="identificacao">
+
+
+      <div class="identificacao-item">
+
+        <div class="identificacao-label">
+          UID
+        </div>
+
+        <div
+          class="identificacao-value"
+          id="uid">
+
+          —
+
+        </div>
+
+      </div>
+
+
+      <div class="identificacao-item">
+
+        <div class="identificacao-label">
+          ID público
+        </div>
+
+        <div
+          class="identificacao-value"
+          id="publicId">
+
+          —
+
+        </div>
+
+      </div>
+
+
+      <div class="identificacao-item">
+
+        <div class="identificacao-label">
+          ID do documento
+        </div>
+
+        <div
+          class="identificacao-value"
+          id="docId">
+
+          —
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+  <!-- =================================================
+       RECURSOS
+  ================================================== -->
+
+  <section
+    class="section"
+    id="recursosSection"
+    style="display:none">
+
+    <h2>
+      📊 Recursos atuais
+    </h2>
+
+
+    <div class="resources">
+
+
+      <div class="resource">
+
+        <div class="resource-icon">
+          🎟️
+        </div>
+
+        <div class="resource-label">
+          CHANCES
+        </div>
+
+        <div
+          class="resource-value"
+          id="rChances">
+
+          0
+
+        </div>
+
+      </div>
+
+
+      <div class="resource">
+
+        <div class="resource-icon">
+          🎰
+        </div>
+
+        <div class="resource-label">
+          GIROS ROLETA
+        </div>
+
+        <div
+          class="resource-value"
+          id="rGiros">
+
+          0
+
+        </div>
+
+      </div>
+
+
+      <div class="resource">
+
+        <div class="resource-icon">
+          🪙
+        </div>
+
+        <div class="resource-label">
+          MOEDAS
+        </div>
+
+        <div
+          class="resource-value"
+          id="rMoedas">
+
+          0
+
+        </div>
+
+      </div>
+
+
+      <div class="resource">
+
+        <div class="resource-icon">
+          🔑
+        </div>
+
+        <div class="resource-label">
+          CHAVES
+        </div>
+
+        <div
+          class="resource-value"
+          id="rChaves">
+
+          0
+
+        </div>
+
+      </div>
+
+
+      <div class="resource">
+
+        <div class="resource-icon">
+          💎
+        </div>
+
+        <div class="resource-label">
+          CRÉDITOS
+        </div>
+
+        <div
+          class="resource-value"
+          id="rCreditos">
+
+          R$ 0,00
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+  <!-- =================================================
+       RESUMO
+  ================================================== -->
+
+  <section
+    class="section"
+    id="resumoSection"
+    style="display:none">
+
+    <h2>
+      🎁 Resumo de prêmios
+    </h2>
+
+
+    <div class="summary">
+
+
+      <div class="summary-box">
+
+        <div
+          class="summary-number"
+          id="totalPremios">
+
+          0
+
+        </div>
+
+        <div class="summary-label">
+          TOTAL
+        </div>
+
+      </div>
+
+
+      <div class="summary-box">
+
+        <div
+          class="summary-number"
+          id="pendentes">
+
+          0
+
+        </div>
+
+        <div class="summary-label">
+          PENDENTES
+        </div>
+
+      </div>
+
+
+      <div class="summary-box">
+
+        <div
+          class="summary-number"
+          id="entregues">
+
+          0
+
+        </div>
+
+        <div class="summary-label">
+          ENTREGUES
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+    <button
+      class="delivery-button"
+      id="deliveryButton"
+      type="button">
+
+      📦 VER ENTREGAS DESTE CLIENTE
+
+    </button>
+
+  </section>
+
+
+  <!-- =================================================
+       PEDIDOS / ENTREGAS
+  ================================================== -->
+
+  <section
+    class="section"
+    id="ordersSection"
+    style="display:none">
+
+    <h2>
+      🎁 Prêmios e pedidos
+    </h2>
+
+
+    <div class="filters">
+
+      <select
+        class="filter"
+        id="statusFilter">
+
+        <option value="todos">
+          Todos os status
+        </option>
+
+        <option value="pendente">
+          ⏳ Pendentes
+        </option>
+
+        <option value="entregue">
+          ✅ Entregues
+        </option>
+
+      </select>
+
+
+      <select
+        class="filter"
+        id="typeFilter">
+
+        <option value="todos">
+          Todos os tipos
+        </option>
+
+        <option value="roleta">
+          🎰 Roleta
+        </option>
+
+        <option value="moedas">
+          🪙 Moedas
+        </option>
+
+        <option value="caixa">
+          🎁 Caixa
+        </option>
+
+        <option value="codigo">
+          🎟️ Código
+        </option>
+
+        <option value="jogo">
+          🎮 Jogo
+        </option>
+
+        <option value="outro">
+          📦 Outros
+        </option>
+
+      </select>
+
+
+      <input
+        class="search"
+        id="search"
+        type="search"
+        placeholder="🔎 Buscar prêmio, ID ou tipo..."
+      >
+
+    </div>
+
+
+    <div
+      class="orders"
+      id="orders">
+
+    </div>
+
+  </section>
+
+
+  <!-- =================================================
+       HISTÓRICO DA ROLETA
+  ================================================== -->
+
+  <section
+    class="section"
+    id="roletaSection"
+    style="display:none">
+
+    <h2>
+      🎰 Histórico da Roleta
+    </h2>
+
+
+    <div
+      id="roletaHistorico">
+
+    </div>
+
+  </section>
+
+
+</div>
+
+
+<script type="module">
+
+
+/* =====================================================
+   FIREBASE
+===================================================== */
+
+import {
+
+  initializeApp
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+import {
+
+  getAuth,
+
+  onAuthStateChanged
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+import {
+
+  getFirestore,
+
+  doc,
+
+  getDoc,
+
+  collection,
+
+  query,
+
+  where,
+
+  getDocs
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+/* =====================================================
+   CONFIG
+===================================================== */
+
+const firebaseConfig = {
+
+  apiKey:
+    "AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",
+
+  authDomain:
+    "adam-games-21081.firebaseapp.com",
+
+  projectId:
+    "adam-games-21081",
+
+  storageBucket:
+    "adam-games-21081.firebasestorage.app",
+
+  messagingSenderId:
+    "1055528418738",
+
+  appId:
+    "1:1055528418738:web:5fafdf63424ba9744eb8ab"
+
+};
+
+
+const app =
+  initializeApp(
+    firebaseConfig
+  );
+
+
+const auth =
+  getAuth(app);
+
+
+const db =
+  getFirestore(app);
+
+
+/* =====================================================
+   ELEMENTOS
+===================================================== */
+
+const $ =
+  id =>
+    document.getElementById(id);
+
+
+const message =
+  $("message");
+
+
+/* =====================================================
+   ESTADO
+===================================================== */
+
+let cliente = null;
+
+let entregas = [];
+
+let resultadosRoleta = [];
+
+
+/* =====================================================
+   URL
+===================================================== */
+
+const parametros =
+  new URLSearchParams(
+    window.location.search
+  );
+
+
+const clienteUid =
+  parametros.get("uid");
+
+
+/* =====================================================
+   MENSAGEM
+===================================================== */
+
+function mostrarMensagem(
+  texto,
+  erro = false
+){
+
+  message.textContent =
+    texto;
+
+  message.className =
+    erro
+      ? "message error"
+      : "message";
+
+}
+
+
+/* =====================================================
+   NÚMERO
+===================================================== */
+
+function numero(
+  valor
+){
+
+  return Number(
+    valor || 0
+  ).toLocaleString(
+    "pt-BR"
+  );
+
+}
+
+
+/* =====================================================
+   DATA
+===================================================== */
+
+function formatarData(
+  valor
+){
+
+  if(!valor){
+
+    return "—";
+
+  }
+
+
+  try{
+
+    if(
+      typeof valor.toDate ===
+      "function"
+    ){
+
+      return valor
+        .toDate()
+        .toLocaleString(
+          "pt-BR"
+        );
+
+    }
+
+
+    if(
+      typeof valor.seconds ===
+      "number"
+    ){
+
+      return new Date(
+        valor.seconds * 1000
+      ).toLocaleString(
+        "pt-BR"
+      );
+
+    }
+
+
+    const data =
+      new Date(
+        valor
+      );
+
+
+    if(
+      Number.isNaN(
+        data.getTime()
+      )
+    ){
+
+      return "—";
+
+    }
+
+
+    return data.toLocaleString(
+      "pt-BR"
+    );
+
+  }
+
+  catch{
+
+    return "—";
+
+  }
+
+}
+
+
+/* =====================================================
+   CARREGAR CLIENTE
+===================================================== */
+
+async function carregarCliente(){
+
+  if(!clienteUid){
+
+    mostrarMensagem(
+      "Nenhum UID foi informado na URL.",
+      true
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    const referencia =
+      doc(
+        db,
+        "admins",
+        clienteUid
+      );
+
+
+    const documento =
+      await getDoc(
+        referencia
+      );
+
+
+    if(
+      !documento.exists()
+    ){
+
+      mostrarMensagem(
+        "Cliente não encontrado.",
+        true
+      );
+
+      return;
+
+    }
+
+
+    cliente = {
+
+      id:
+        documento.id,
+
+      ...documento.data()
+
+    };
+
+
+    renderizarCliente();
+
+
+    await Promise.all([
+
+      carregarEntregas(),
+
+      carregarRoleta()
+
+    ]);
+
+
+    renderizarResumo();
+
+
+    mostrarMensagem(
+      "Cliente carregado com sucesso."
+    );
+
+  }
+
+  catch(error){
+
+    console.error(
+      error
+    );
+
+
+    mostrarMensagem(
+
+      "Não foi possível carregar o cliente: " +
+
+      (
+        error.message ||
+        "erro desconhecido"
+      ),
+
+      true
+
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   RENDER CLIENTE
+===================================================== */
+
+function renderizarCliente(){
+
+  $("profile").style.display =
+    "block";
+
+  $("recursosSection").style.display =
+    "block";
+
+  $("resumoSection").style.display =
+    "block";
+
+  $("ordersSection").style.display =
+    "block";
+
+  $("roletaSection").style.display =
+    "block";
+
+
+  const nome =
+    cliente.nome ||
+    cliente.name ||
+    "Cliente";
+
+
+  $("nome").textContent =
+    nome;
+
+
+  $("email").textContent =
+    cliente.email ||
+    "Sem e-mail";
+
+
+  $("uid").textContent =
+    cliente.uid ||
+    clienteUid;
+
+
+  $("publicId").textContent =
+    cliente.publicId ||
+    "Não definido";
+
+
+  $("docId").textContent =
+    cliente.id;
+
+
+  $("avatar").textContent =
+    cliente.avatar ||
+    "👤";
+
+
+  if(
+    cliente.vip === true
+  ){
+
+    $("vipBadge").innerHTML =
+      `<span class="vip-badge">
+        👑 VIP ATIVO
+      </span>`;
+
+  }
+
+  else{
+
+    $("vipBadge").innerHTML =
+      `<span class="normal-badge">
+        🔒 NÃO VIP
+      </span>`;
+
+  }
+
+
+  $("rChances").textContent =
+    numero(
+      cliente.chances
+    );
+
+
+  $("rGiros").textContent =
+    numero(
+      cliente.girosRoleta
+    );
+
+
+  $("rMoedas").textContent =
+    numero(
+      cliente.moedas
+    );
+
+
+  $("rChaves").textContent =
+    numero(
+      cliente.chaves
+    );
+
+
+  $("rCreditos").textContent =
+    "R$ " +
+    Number(
+      cliente.creditos || 0
+    ).toFixed(2)
+    .replace(
+      ".",
+      ","
+    );
+
+}
+
+
+/* =====================================================
+   CARREGAR ENTREGAS
+===================================================== */
+
+async function carregarEntregas(){
+
+  entregas = [];
+
+
+  try{
+
+    const resultado =
+      await getDocs(
+
+        query(
+
+          collection(
+            db,
+            "entregas"
+          ),
+
+          where(
+            "uid",
+            "==",
+            clienteUid
+          )
+
+        )
+
+      );
+
+
+    entregas =
+      resultado.docs.map(
+        documento => ({
+
+          id:
+            documento.id,
+
+          ...documento.data()
+
+        })
+      );
+
+  }
+
+  catch(error){
+
+    console.warn(
+      "Coleção entregas:",
+      error
+    );
+
+    /*
+      Se a coleção ainda estiver vazia
+      ou as Rules ainda não tiverem sido
+      publicadas, não derruba o perfil.
+    */
+
+    entregas = [];
+
+  }
+
+
+  renderizarEntregas();
+
+}
+
+
+/* =====================================================
+   RENDER ENTREGAS
+===================================================== */
+
+function renderizarEntregas(){
+
+  const lista =
+    $("orders");
+
+
+  const statusFiltro =
+    $("statusFilter").value;
+
+
+  const tipoFiltro =
+    $("typeFilter").value;
+
+
+  const busca =
+    $("search")
+      .value
+      .trim()
+      .toLowerCase();
+
+
+  let listaFiltrada =
+    entregas.filter(
+      pedido => {
+
+        const entregue =
+          pedido.entregue === true;
+
+
+        const status =
+          entregue
+            ? "entregue"
+            : "pendente";
+
+
+        if(
+          statusFiltro !==
+          "todos" &&
+          status !==
+          statusFiltro
+        ){
+
+          return false;
+
+        }
+
+
+        const tipo =
+          String(
+            pedido.tipo ||
+            "outro"
+          )
+          .toLowerCase();
+
+
+        if(
+          tipoFiltro !==
+          "todos" &&
+          tipo !==
+          tipoFiltro
+        ){
+
+          return false;
+
+        }
+
+
+        if(
+          busca
+        ){
+
+          const texto =
+
+            (
+
+              pedido.premioNome ||
+
+              pedido.nome ||
+
+              pedido.titulo ||
+
+              ""
+
+            )
+            .toLowerCase() +
+
+            " " +
+
+            (
+
+              pedido.id ||
+
+              ""
+
+            )
+            .toLowerCase() +
+
+            " " +
+
+            tipo;
+
+
+          if(
+            !texto.includes(
+              busca
+            )
+          ){
+
+            return false;
+
+          }
+
+        }
+
+
+        return true;
+
+      }
+    );
+
+
+  listaFiltrada.sort(
+    (
+      a,
+      b
+    ) => {
+
+      const aTempo =
+        obterMillis(
+          a.criadoEm ||
+          a.dataHora
+        );
+
+
+      const bTempo =
+        obterMillis(
+          b.criadoEm ||
+          b.dataHora
+        );
+
+
+      return bTempo - aTempo;
+
+    }
+  );
+
+
+  lista.innerHTML =
+    "";
+
+
+  if(
+    listaFiltrada.length === 0
+  ){
+
+    lista.innerHTML = `
+
+      <div class="empty">
+
+        🎉 Nenhum pedido encontrado.
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  listaFiltrada.forEach(
+    pedido => {
+
+      const entregue =
+        pedido.entregue === true;
+
+
+      const titulo =
+
+        pedido.premioNome ||
+
+        pedido.nome ||
+
+        pedido.titulo ||
+
+        "Recompensa";
+
+
+      const tipo =
+        pedido.tipo ||
+        "outro";
+
+
+      const quantidade =
+        pedido.quantidade;
+
+
+      const data =
+        formatarData(
+          pedido.criadoEm ||
+          pedido.dataHora
+        );
+
+
+      const div =
+        document.createElement(
+          "div"
+        );
+
+
+      div.className =
+        "order";
+
+
+      div.innerHTML = `
+
+        <div class="order-top">
+
+          <div class="order-title">
+
+            ${escapar(titulo)}
+
+          </div>
+
+          <div class="status ${
+            entregue
+              ? "status-entregue"
+              : "status-pendente"
+          }">
+
+            ${
+              entregue
+                ? "✅ ENTREGUE"
+                : "⏳ PENDENTE"
+            }
+
+          </div>
+
+        </div>
+
+
+        <div class="order-info">
+
+          <div>
+            Tipo:
+            <b>
+              ${escapar(tipo)}
+            </b>
+          </div>
+
+          ${
+            quantidade !== undefined
+              ?
+              `
+              <div>
+                Quantidade:
+                <b>
+                  ${numero(quantidade)}
+                </b>
+              </div>
+              `
+              :
+              ""
+          }
+
+          <div>
+            Data:
+            <b>
+              ${escapar(data)}
+            </b>
+          </div>
+
+          ${
+            pedido.entregueEm
+              ?
+              `
+              <div>
+                Entregue em:
+                <b>
+                  ${escapar(
+                    formatarData(
+                      pedido.entregueEm
+                    )
+                  )}
+                </b>
+              </div>
+              `
+              :
+              ""
+          }
+
+          ${
+            pedido.entreguePor
+              ?
+              `
+              <div>
+                Entregue por:
+                <b>
+                  ${escapar(
+                    pedido.entreguePor
+                  )}
+                </b>
+              </div>
+              `
+              :
+              ""
+          }
+
+        </div>
+
+
+        <div class="order-id">
+
+          📦 ID DA ENTREGA:
+
+          ${escapar(pedido.id)}
+
+        </div>
+
+      `;
+
+
+      lista.appendChild(
+        div
+      );
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   CARREGAR ROLETA
+===================================================== */
+
+async function carregarRoleta(){
+
+  resultadosRoleta = [];
+
+
+  try{
+
+    const resultado =
+      await getDocs(
+
+        query(
+
+          collection(
+            db,
+            "historicoRoleta"
+          ),
+
+          where(
+            "uid",
+            "==",
+            clienteUid
+          )
+
+        )
+
+      );
+
+
+    resultadosRoleta =
+      resultado.docs.map(
+        documento => ({
+
+          id:
+            documento.id,
+
+          ...documento.data()
+
+        })
+      );
+
+  }
+
+  catch(error){
+
+    console.warn(
+      "historicoRoleta:",
+      error
+    );
+
+    resultadosRoleta = [];
+
+  }
+
+
+  renderizarRoleta();
+
+}
+
+
+/* =====================================================
+   RENDER ROLETA
+===================================================== */
+
+function renderizarRoleta(){
+
+  const lista =
+    $("roletaHistorico");
+
+
+  lista.innerHTML =
+    "";
+
+
+  if(
+    resultadosRoleta.length === 0
+  ){
+
+    lista.innerHTML = `
+
+      <div class="empty">
+
+        🎰 Este cliente ainda não possui
+        resultados registrados na Roleta.
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  resultadosRoleta.sort(
+    (
+      a,
+      b
+    ) => {
+
+      return obterMillis(
+        b.criadoEm ||
+        b.dataHora
+      )
+      -
+      obterMillis(
+        a.criadoEm ||
+        a.dataHora
+      );
+
+    }
+  );
+
+
+  resultadosRoleta.forEach(
+    resultado => {
+
+      const div =
+        document.createElement(
+          "div"
+        );
+
+
+      div.className =
+        "roleta-result";
+
+
+      const premio =
+
+        (
+          resultado.quantidade ||
+          0
+        ).toLocaleString(
+          "pt-BR"
+        ) +
+
+        " " +
+
+        (
+          resultado.premioNome ||
+          "Prêmio"
+        );
+
+
+      div.innerHTML = `
+
+        <div class="roleta-result-top">
+
+          <div class="roleta-premio">
+
+            🎁 ${escapar(premio)}
+
+          </div>
+
+          <div class="roleta-data">
+
+            ${escapar(
+              formatarData(
+                resultado.criadoEm ||
+                resultado.dataHora
+              )
+            )}
+
+          </div>
+
+        </div>
+
+
+        <div class="roleta-status">
+
+          ${
+            resultado.entregue === true
+              ? "✅ Prêmio entregue"
+              : "⏳ Aguardando entrega"
+          }
+
+        </div>
+
+
+        <div class="order-id">
+
+          🎰 ID:
+
+          ${escapar(resultado.id)}
+
+        </div>
+
+      `;
+
+
+      lista.appendChild(
+        div
+      );
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   RESUMO
+===================================================== */
+
+function renderizarResumo(){
+
+  const total =
+    entregas.length;
+
+
+  const pendentes =
+    entregas.filter(
+      item =>
+        item.entregue !== true
+    ).length;
+
+
+  const entregues =
+    entregas.filter(
+      item =>
+        item.entregue === true
+    ).length;
+
+
+  $("totalPremios").textContent =
+    total;
+
+
+  $("pendentes").textContent =
+    pendentes;
+
+
+  $("entregues").textContent =
+    entregues;
+
+}
+
+
+/* =====================================================
+   MILLIS
+===================================================== */
+
+function obterMillis(
+  valor
+){
+
+  if(!valor){
+
+    return 0;
+
+  }
+
+
+  if(
+    typeof valor.toMillis ===
+    "function"
+  ){
+
+    return valor.toMillis();
+
+  }
+
+
+  if(
+    typeof valor.seconds ===
+    "number"
+  ){
+
+    return valor.seconds * 1000;
+
+  }
+
+
+  const data =
+    new Date(
+      valor
+    );
+
+
+  return Number.isNaN(
+    data.getTime()
+  )
+    ? 0
+    : data.getTime();
+
+}
+
+
+/* =====================================================
+   ESCAPAR HTML
+===================================================== */
+
+function escapar(
+  valor
+){
+
+  return String(
+    valor ?? ""
+  )
+  .replace(
+    /&/g,
+    "&amp;"
+  )
+  .replace(
+    /</g,
+    "&lt;"
+  )
+  .replace(
+    />/g,
+    "&gt;"
+  )
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+  .replace(
+    /'/g,
+    "&#039;"
+  );
+
+}
+
+
+/* =====================================================
+   FILTROS
+===================================================== */
+
+$("statusFilter")
+  .addEventListener(
+    "change",
+    renderizarEntregas
+  );
+
+
+$("typeFilter")
+  .addEventListener(
+    "change",
+    renderizarEntregas
+  );
+
+
+$("search")
+  .addEventListener(
+    "input",
+    renderizarEntregas
+  );
+
+
+/* =====================================================
+   BOTÃO ENTREGAS
+===================================================== */
+
+$("deliveryButton")
+  .addEventListener(
+    "click",
+    () => {
+
+      window.location.href =
+        "entregas.html?uid=" +
+        encodeURIComponent(
+          clienteUid
+        );
+
+    }
+  );
+
+
+/* =====================================================
+   VOLTAR
+===================================================== */
+
+$("back")
+  .addEventListener(
+    "click",
+    () => {
+
+      window.location.href =
+        "admin.html";
+
+    }
+  );
+
+
+/* =====================================================
+   AUTENTICAÇÃO
+===================================================== */
+
+onAuthStateChanged(
+
+  auth,
+
+  async usuario => {
+
+    if(!usuario){
+
+      window.location.replace(
+        "index.html"
+      );
+
+      return;
+
+    }
+
+
+    try{
+
+      /*
+      Apenas o administrador principal
+      pode abrir esta página.
+      */
+
+      const email =
+        (
+          usuario.email ||
+          ""
+        )
+        .trim()
+        .toLowerCase();
+
+
+      if(
+        email !==
+        "raphafentyramos@gmail.com"
+      ){
+
+        mostrarMensagem(
+          "Acesso permitido somente ao administrador.",
+          true
+        );
+
+        return;
+
+      }
+
+
+      await carregarCliente();
+
+    }
+
+    catch(error){
+
+      console.error(
+        error
+      );
+
+
+      mostrarMensagem(
+        "Erro ao abrir o perfil do cliente.",
+        true
+      );
+
+    }
+
+  }
+
+);
+
+</script>
+
+</body>
+
+</html>
