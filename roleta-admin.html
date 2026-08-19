@@ -1,1 +1,2124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
 
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>Adam Games • Admin da Roleta</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+
+  min-height:100vh;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  color:#fff;
+
+  background:
+    radial-gradient(
+      circle at 20% 0%,
+      #20a9ff 0%,
+      transparent 30%
+    ),
+
+    radial-gradient(
+      circle at 90% 20%,
+      #16a56b 0%,
+      transparent 28%
+    ),
+
+    linear-gradient(
+      145deg,
+      #087edb,
+      #031a3b 75%
+    );
+
+  padding:
+    18px
+    12px
+    60px;
+
+}
+
+
+.container{
+
+  width:100%;
+
+  max-width:950px;
+
+  margin:auto;
+
+}
+
+
+/* =====================================================
+   TOPO
+===================================================== */
+
+header{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:15px;
+
+  margin-bottom:25px;
+
+}
+
+
+.logo{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:12px;
+
+}
+
+
+.logoIcon{
+
+  width:58px;
+
+  height:58px;
+
+  border-radius:18px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  font-size:30px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffd72a,
+      #c68100
+    );
+
+  box-shadow:
+    0 8px 20px
+    rgba(0,0,0,.25);
+
+}
+
+
+.logo h1{
+
+  font-size:22px;
+
+}
+
+
+.logo span{
+
+  color:#ffd52b;
+
+}
+
+
+.badge{
+
+  display:inline-block;
+
+  margin-top:5px;
+
+  padding:
+    5px
+    9px;
+
+  border-radius:8px;
+
+  background:#087bca;
+
+  font-size:11px;
+
+  font-weight:bold;
+
+}
+
+
+.back{
+
+  padding:
+    12px
+    16px;
+
+  border:0;
+
+  border-radius:12px;
+
+  background:#123b65;
+
+  color:#fff;
+
+  font-weight:bold;
+
+  cursor:pointer;
+
+}
+
+
+h2{
+
+  font-size:
+    clamp(
+      28px,
+      7vw,
+      40px
+    );
+
+  margin-bottom:6px;
+
+}
+
+
+.subtitle{
+
+  color:#b9d8ef;
+
+  margin-bottom:22px;
+
+}
+
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.card{
+
+  background:
+    rgba(2,30,62,.95);
+
+  border:
+    1px solid
+    rgba(255,255,255,.1);
+
+  border-radius:22px;
+
+  padding:20px;
+
+  margin-bottom:18px;
+
+  box-shadow:
+    0 15px 40px
+    rgba(0,0,0,.22);
+
+}
+
+
+.card h3{
+
+  font-size:20px;
+
+  margin-bottom:16px;
+
+}
+
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.form{
+
+  display:grid;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
+  gap:12px;
+
+}
+
+
+.field label{
+
+  display:block;
+
+  margin-bottom:6px;
+
+  color:#9ec4e3;
+
+  font-size:11px;
+
+  font-weight:bold;
+
+}
+
+
+.field.full{
+
+  grid-column:
+    1 / -1;
+
+}
+
+
+input,
+select{
+
+  width:100%;
+
+  height:50px;
+
+  padding:
+    0
+    14px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.14);
+
+  border-radius:12px;
+
+  outline:none;
+
+  background:#071f40;
+
+  color:#fff;
+
+  font-size:15px;
+
+}
+
+
+input:focus,
+select:focus{
+
+  border-color:#26a9ff;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(38,169,255,.1);
+
+}
+
+
+.image-preview{
+
+  width:100%;
+
+  min-height:150px;
+
+  margin-top:10px;
+
+  border-radius:15px;
+
+  background:
+    rgba(255,255,255,.04);
+
+  border:
+    1px dashed
+    rgba(255,255,255,.16);
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  overflow:hidden;
+
+  color:#789bb8;
+
+  text-align:center;
+
+  padding:10px;
+
+}
+
+
+.image-preview img{
+
+  max-width:100%;
+
+  max-height:180px;
+
+  object-fit:contain;
+
+  border-radius:10px;
+
+}
+
+
+.actions{
+
+  display:grid;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
+  gap:10px;
+
+  margin-top:15px;
+
+}
+
+
+button{
+
+  border:0;
+
+  cursor:pointer;
+
+  color:#fff;
+
+  font-weight:bold;
+
+}
+
+
+.save{
+
+  padding:15px;
+
+  border-radius:13px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #11b968,
+      #087b43
+    );
+
+}
+
+
+.clear{
+
+  padding:15px;
+
+  border-radius:13px;
+
+  background:
+    #183c62;
+
+}
+
+
+.message{
+
+  display:none;
+
+  margin-top:12px;
+
+  padding:12px;
+
+  border-radius:10px;
+
+  font-size:13px;
+
+  line-height:1.4;
+
+}
+
+
+.message.success{
+
+  display:block;
+
+  background:
+    rgba(0,220,110,.12);
+
+  color:#6effa8;
+
+}
+
+
+.message.error{
+
+  display:block;
+
+  background:
+    rgba(255,50,70,.12);
+
+  color:#ff9ca8;
+
+}
+
+
+/* =====================================================
+   PESOS
+===================================================== */
+
+.weight-info{
+
+  margin-top:15px;
+
+  padding:13px;
+
+  border-radius:12px;
+
+  background:
+    rgba(255,211,42,.07);
+
+  border:
+    1px solid
+    rgba(255,211,42,.15);
+
+  color:#e8d68b;
+
+  font-size:12px;
+
+  line-height:1.5;
+
+}
+
+
+/* =====================================================
+   LISTA
+===================================================== */
+
+.prize-list{
+
+  display:grid;
+
+  gap:12px;
+
+}
+
+
+.prize{
+
+  display:grid;
+
+  grid-template-columns:
+    90px
+    1fr
+    auto;
+
+  gap:14px;
+
+  align-items:center;
+
+  padding:13px;
+
+  border-radius:16px;
+
+  background:
+    rgba(255,255,255,.045);
+
+  border:
+    1px solid
+    rgba(255,255,255,.07);
+
+}
+
+
+.prize-image{
+
+  width:90px;
+
+  height:90px;
+
+  border-radius:13px;
+
+  background:#071f40;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  overflow:hidden;
+
+  font-size:30px;
+
+}
+
+
+.prize-image img{
+
+  width:100%;
+
+  height:100%;
+
+  object-fit:contain;
+
+}
+
+
+.prize-name{
+
+  font-size:17px;
+
+  font-weight:900;
+
+}
+
+
+.prize-quantity{
+
+  margin-top:5px;
+
+  color:#ffd72b;
+
+  font-size:15px;
+
+  font-weight:bold;
+
+}
+
+
+.prize-details{
+
+  margin-top:7px;
+
+  color:#9fc1dd;
+
+  font-size:11px;
+
+  line-height:1.5;
+
+}
+
+
+.prize-actions{
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:7px;
+
+}
+
+
+.edit{
+
+  padding:
+    9px
+    12px;
+
+  border-radius:9px;
+
+  background:#087fd8;
+
+}
+
+
+.delete{
+
+  padding:
+    9px
+    12px;
+
+  border-radius:9px;
+
+  background:#c52e43;
+
+}
+
+
+.active{
+
+  color:#62ffa2;
+
+  font-weight:bold;
+
+}
+
+
+.inactive{
+
+  color:#ff8997;
+
+  font-weight:bold;
+
+}
+
+
+.empty{
+
+  padding:20px;
+
+  border-radius:14px;
+
+  background:
+    rgba(255,255,255,.04);
+
+  color:#9dbbd3;
+
+  text-align:center;
+
+}
+
+
+/* =====================================================
+   RESPONSIVO
+===================================================== */
+
+@media(max-width:650px){
+
+  header{
+
+    align-items:flex-start;
+
+  }
+
+
+  .form{
+
+    grid-template-columns:
+      1fr;
+
+  }
+
+
+  .field.full{
+
+    grid-column:auto;
+
+  }
+
+
+  .actions{
+
+    grid-template-columns:
+      1fr;
+
+  }
+
+
+  .prize{
+
+    grid-template-columns:
+      75px
+      1fr;
+
+  }
+
+
+  .prize-image{
+
+    width:75px;
+
+    height:75px;
+
+  }
+
+
+  .prize-actions{
+
+    grid-column:
+      1 / -1;
+
+    flex-direction:row;
+
+  }
+
+
+  .prize-actions button{
+
+    flex:1;
+
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<header>
+
+  <div class="logo">
+
+    <div class="logoIcon">
+      🎰
+    </div>
+
+    <div>
+
+      <h1>
+        ADAM <span>GAMES</span>
+      </h1>
+
+      <div class="badge">
+        🎰 ADMIN • ROLETA
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <button
+    class="back"
+    id="back"
+    type="button">
+
+    ← Painel
+
+  </button>
+
+</header>
+
+
+<h2>
+  🎰 Administração da Roleta
+</h2>
+
+
+<p class="subtitle">
+  Cadastre os prêmios que poderão aparecer nos giros.
+</p>
+
+
+<!-- =====================================================
+     CADASTRO
+===================================================== -->
+
+<div class="card">
+
+  <h3>
+    ➕ Cadastrar prêmio
+  </h3>
+
+
+  <div class="form">
+
+
+    <div class="field">
+
+      <label>
+        NOME DO PRÊMIO
+      </label>
+
+      <input
+        id="nome"
+        type="text"
+        maxlength="80"
+        placeholder="Ex.: Rubis"
+      >
+
+    </div>
+
+
+    <div class="field">
+
+      <label>
+        QUANTIDADE
+      </label>
+
+      <input
+        id="quantidade"
+        type="number"
+        min="1"
+        step="1"
+        placeholder="Ex.: 5000"
+      >
+
+    </div>
+
+
+    <div class="field">
+
+      <label>
+        TIPO
+      </label>
+
+      <select id="tipo">
+
+        <option value="rubis">
+          💎 Rubis
+        </option>
+
+        <option value="itens">
+          📦 Itens
+        </option>
+
+        <option value="chaves">
+          🔑 Chaves
+        </option>
+
+        <option value="ferramentas_rubi">
+          🔴 Ferramentas de Rubi
+        </option>
+
+        <option value="ferramentas_ouro">
+          🟡 Ferramentas de Ouro
+        </option>
+
+        <option value="energias">
+          ⚡ Energias
+        </option>
+
+        <option value="comida_castor">
+          🦫 Comida do Castor
+        </option>
+
+        <option value="chapeus_bobo">
+          🎩 Chapéus de Bobo
+        </option>
+
+        <option value="evento">
+          🎉 Evento
+        </option>
+
+        <option value="outro">
+          ✨ Outro
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="field">
+
+      <label>
+        PESO / CHANCE
+      </label>
+
+      <input
+        id="peso"
+        type="number"
+        min="1"
+        step="1"
+        value="10"
+        placeholder="Ex.: 10"
+      >
+
+    </div>
+
+
+    <div class="field full">
+
+      <label>
+        IMAGEM DO PRÊMIO
+      </label>
+
+      <input
+        id="imagem"
+        type="text"
+        placeholder="Ex.: rubis.png"
+      >
+
+
+      <div
+        class="image-preview"
+        id="imagePreview">
+
+        🖼️
+        <br>
+        Digite o nome/caminho da imagem para visualizar.
+
+      </div>
+
+    </div>
+
+
+    <div class="field full">
+
+      <label>
+        DESCRIÇÃO OPCIONAL
+      </label>
+
+      <input
+        id="descricao"
+        type="text"
+        maxlength="150"
+        placeholder="Ex.: Prêmio especial da Roleta Adam Games"
+      >
+
+    </div>
+
+
+    <div class="field">
+
+      <label>
+        STATUS
+      </label>
+
+      <select id="ativo">
+
+        <option value="true">
+          ✅ Ativo
+        </option>
+
+        <option value="false">
+          🔒 Inativo
+        </option>
+
+      </select>
+
+    </div>
+
+
+  </div>
+
+
+  <div class="weight-info">
+
+    🎯 <strong>Como funciona o peso:</strong><br>
+
+    Quanto maior o peso, maior a frequência com que
+    o prêmio poderá ser sorteado. O jogador não verá
+    esses pesos nem saberá quais prêmios estão cadastrados.
+
+  </div>
+
+
+  <div class="actions">
+
+    <button
+      class="save"
+      id="salvar"
+      type="button">
+
+      💾 SALVAR PRÊMIO
+
+    </button>
+
+
+    <button
+      class="clear"
+      id="limpar"
+      type="button">
+
+      🧹 LIMPAR
+
+    </button>
+
+  </div>
+
+
+  <div
+    class="message"
+    id="message">
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     PRÊMIOS CADASTRADOS
+===================================================== -->
+
+<div class="card">
+
+  <h3>
+    🎁 Prêmios cadastrados
+  </h3>
+
+
+  <div
+    class="prize-list"
+    id="prizeList">
+
+    <div class="empty">
+      🔄 Carregando prêmios...
+    </div>
+
+  </div>
+
+</div>
+
+
+</div>
+
+
+<script type="module">
+
+
+/* =====================================================
+   FIREBASE
+===================================================== */
+
+import {
+  initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+import {
+  getAuth,
+  onAuthStateChanged
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  doc,
+  updateDoc,
+  deleteDoc,
+  orderBy,
+  query,
+  serverTimestamp
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+/* =====================================================
+   CONFIG
+===================================================== */
+
+const firebaseConfig = {
+
+  apiKey:
+    "AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",
+
+  authDomain:
+    "adam-games-21081.firebaseapp.com",
+
+  projectId:
+    "adam-games-21081",
+
+  storageBucket:
+    "adam-games-21081.firebasestorage.app",
+
+  messagingSenderId:
+    "1055528418738",
+
+  appId:
+    "1:1055528418738:web:5fafdf63424ba9744eb8ab"
+
+};
+
+
+const app =
+  initializeApp(
+    firebaseConfig
+  );
+
+
+const auth =
+  getAuth(app);
+
+
+const db =
+  getFirestore(app);
+
+
+/* =====================================================
+   ADMIN
+===================================================== */
+
+const ADMIN_EMAIL =
+  "raphafentyramos@gmail.com";
+
+
+let adminUsuario =
+  null;
+
+let premioEditando =
+  null;
+
+
+/* =====================================================
+   ELEMENTOS
+===================================================== */
+
+const nome =
+  document.getElementById(
+    "nome"
+  );
+
+const quantidade =
+  document.getElementById(
+    "quantidade"
+  );
+
+const tipo =
+  document.getElementById(
+    "tipo"
+  );
+
+const peso =
+  document.getElementById(
+    "peso"
+  );
+
+const imagem =
+  document.getElementById(
+    "imagem"
+  );
+
+const descricao =
+  document.getElementById(
+    "descricao"
+  );
+
+const ativo =
+  document.getElementById(
+    "ativo"
+  );
+
+const message =
+  document.getElementById(
+    "message"
+  );
+
+const prizeList =
+  document.getElementById(
+    "prizeList"
+  );
+
+const imagePreview =
+  document.getElementById(
+    "imagePreview"
+  );
+
+
+/* =====================================================
+   MENSAGEM
+===================================================== */
+
+function mostrarMensagem(
+  texto,
+  classe
+){
+
+  message.textContent =
+    texto;
+
+  message.className =
+    "message " +
+    classe;
+
+}
+
+
+/* =====================================================
+   PREVIEW
+===================================================== */
+
+imagem.addEventListener(
+  "input",
+  atualizarPreview
+);
+
+
+function atualizarPreview(){
+
+  const caminho =
+    imagem.value.trim();
+
+
+  if(!caminho){
+
+    imagePreview.innerHTML =
+      "🖼️<br>Digite o nome/caminho da imagem para visualizar.";
+
+    return;
+
+  }
+
+
+  imagePreview.innerHTML =
+    "";
+
+
+  const img =
+    document.createElement(
+      "img"
+    );
+
+
+  img.src =
+    caminho;
+
+
+  img.alt =
+    "Prévia";
+
+
+  img.onerror =
+    () => {
+
+      imagePreview.innerHTML =
+        "⚠️ Não foi possível encontrar a imagem.<br>" +
+        "Confira o nome do arquivo.";
+
+    };
+
+
+  imagePreview.appendChild(
+    img
+  );
+
+}
+
+
+/* =====================================================
+   LIMPAR
+===================================================== */
+
+function limparFormulario(){
+
+  premioEditando =
+    null;
+
+
+  nome.value =
+    "";
+
+  quantidade.value =
+    "";
+
+  tipo.value =
+    "rubis";
+
+  peso.value =
+    "10";
+
+  imagem.value =
+    "";
+
+  descricao.value =
+    "";
+
+  ativo.value =
+    "true";
+
+
+  document.getElementById(
+    "salvar"
+  ).textContent =
+    "💾 SALVAR PRÊMIO";
+
+
+  imagePreview.innerHTML =
+    "🖼️<br>Digite o nome/caminho da imagem para visualizar.";
+
+}
+
+
+/* =====================================================
+   SALVAR
+===================================================== */
+
+async function salvarPremio(){
+
+  if(!adminUsuario){
+
+    mostrarMensagem(
+      "Administrador não autenticado.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const nomeValor =
+    nome.value.trim();
+
+
+  const quantidadeValor =
+    Number(
+      quantidade.value
+    );
+
+
+  const pesoValor =
+    Number(
+      peso.value
+    );
+
+
+  const imagemValor =
+    imagem.value.trim();
+
+
+  const descricaoValor =
+    descricao.value.trim();
+
+
+  const ativoValor =
+    ativo.value ===
+    "true";
+
+
+  if(!nomeValor){
+
+    mostrarMensagem(
+      "Informe o nome do prêmio.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(
+    !Number.isFinite(
+      quantidadeValor
+    ) ||
+    quantidadeValor <= 0
+  ){
+
+    mostrarMensagem(
+      "Informe uma quantidade válida.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(
+    !Number.isFinite(
+      pesoValor
+    ) ||
+    pesoValor <= 0
+  ){
+
+    mostrarMensagem(
+      "Informe um peso maior que zero.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(!imagemValor){
+
+    mostrarMensagem(
+      "Informe a imagem do prêmio.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const dados = {
+
+    nome:
+      nomeValor,
+
+    quantidade:
+      quantidadeValor,
+
+    tipo:
+      tipo.value,
+
+    peso:
+      pesoValor,
+
+    imagem:
+      imagemValor,
+
+    descricao:
+      descricaoValor,
+
+    ativo:
+      ativoValor,
+
+    atualizadoEm:
+      serverTimestamp(),
+
+    atualizadoPor:
+      adminUsuario.email
+
+  };
+
+
+  try{
+
+    if(
+      premioEditando
+    ){
+
+      await updateDoc(
+        doc(
+          db,
+          "premiosRoleta",
+          premioEditando
+        ),
+        dados
+      );
+
+
+      mostrarMensagem(
+        "✅ Prêmio atualizado com sucesso.",
+        "success"
+      );
+
+    }
+
+    else{
+
+      await addDoc(
+        collection(
+          db,
+          "premiosRoleta"
+        ),
+        {
+
+          ...dados,
+
+          criadoEm:
+            serverTimestamp(),
+
+          criadoPor:
+            adminUsuario.email
+
+        }
+      );
+
+
+      mostrarMensagem(
+        "🎰 Prêmio cadastrado com sucesso.",
+        "success"
+      );
+
+    }
+
+
+    limparFormulario();
+
+    await carregarPremios();
+
+  }
+  catch(error){
+
+    console.error(
+      "Erro ao salvar prêmio:",
+      error
+    );
+
+
+    mostrarMensagem(
+      "❌ Não foi possível salvar o prêmio: " +
+      (
+        error.message ||
+        "erro desconhecido"
+      ),
+      "error"
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   CARREGAR PRÊMIOS
+===================================================== */
+
+async function carregarPremios(){
+
+  prizeList.innerHTML =
+    "<div class='empty'>🔄 Carregando...</div>";
+
+
+  try{
+
+    const referencia =
+      collection(
+        db,
+        "premiosRoleta"
+      );
+
+
+    const resultado =
+      await getDocs(
+        referencia
+      );
+
+
+    if(
+      resultado.empty
+    ){
+
+      prizeList.innerHTML =
+        "<div class='empty'>" +
+        "Nenhum prêmio cadastrado ainda." +
+        "</div>";
+
+      return;
+
+    }
+
+
+    const premios =
+
+      resultado.docs
+
+      .map(
+        documento => ({
+
+          id:
+            documento.id,
+
+          ...documento.data()
+
+        })
+      )
+
+      .sort(
+        (
+          a,
+          b
+        ) => {
+
+          const nomeA =
+            String(
+              a.nome ||
+              ""
+            );
+
+          const nomeB =
+            String(
+              b.nome ||
+              ""
+            );
+
+          return nomeA.localeCompare(
+            nomeB,
+            "pt-BR"
+          );
+
+        }
+      );
+
+
+    prizeList.innerHTML =
+      "";
+
+
+    premios.forEach(
+      premio => {
+
+        const item =
+          document.createElement(
+            "div"
+          );
+
+
+        item.className =
+          "prize";
+
+
+        const imagemBox =
+          document.createElement(
+            "div"
+          );
+
+
+        imagemBox.className =
+          "prize-image";
+
+
+        if(
+          premio.imagem
+        ){
+
+          const img =
+            document.createElement(
+              "img"
+            );
+
+
+          img.src =
+            premio.imagem;
+
+
+          img.alt =
+            premio.nome ||
+            "Prêmio";
+
+
+          img.onerror =
+            () => {
+
+              imagemBox.textContent =
+                "🖼️";
+
+            };
+
+
+          imagemBox.appendChild(
+            img
+          );
+
+        }
+        else{
+
+          imagemBox.textContent =
+            "🎁";
+
+        }
+
+
+        const info =
+          document.createElement(
+            "div"
+          );
+
+
+        const nomeDiv =
+          document.createElement(
+            "div"
+          );
+
+
+        nomeDiv.className =
+          "prize-name";
+
+
+        nomeDiv.textContent =
+          premio.nome ||
+          "Sem nome";
+
+
+        const quantidadeDiv =
+          document.createElement(
+            "div"
+          );
+
+
+        quantidadeDiv.className =
+          "prize-quantity";
+
+
+        quantidadeDiv.textContent =
+          (
+            premio.quantidade ||
+            0
+          ).toLocaleString(
+            "pt-BR"
+          );
+
+
+        const details =
+          document.createElement(
+            "div"
+          );
+
+
+        details.className =
+          "prize-details";
+
+
+        const status =
+          premio.ativo === true
+            ?
+            "<span class='active'>● ATIVO</span>"
+            :
+            "<span class='inactive'>● INATIVO</span>";
+
+
+        details.innerHTML =
+
+          "Tipo: " +
+          (
+            premio.tipo ||
+            "outro"
+          ) +
+
+          " • Peso: " +
+
+          (
+            premio.peso ||
+            0
+          ) +
+
+          "<br>" +
+
+          status;
+
+
+        info.appendChild(
+          nomeDiv
+        );
+
+        info.appendChild(
+          quantidadeDiv
+        );
+
+        info.appendChild(
+          details
+        );
+
+
+        const actions =
+          document.createElement(
+            "div"
+          );
+
+
+        actions.className =
+          "prize-actions";
+
+
+        const editar =
+          document.createElement(
+            "button"
+          );
+
+
+        editar.className =
+          "edit";
+
+        editar.type =
+          "button";
+
+        editar.textContent =
+          "✏️ Editar";
+
+
+        editar.addEventListener(
+          "click",
+          () => editarPremio(
+            premio
+          )
+        );
+
+
+        const excluir =
+          document.createElement(
+            "button"
+          );
+
+
+        excluir.className =
+          "delete";
+
+        excluir.type =
+          "button";
+
+        excluir.textContent =
+          "🗑️ Excluir";
+
+
+        excluir.addEventListener(
+          "click",
+          () => excluirPremio(
+            premio.id,
+            premio.nome
+          )
+        );
+
+
+        actions.appendChild(
+          editar
+        );
+
+        actions.appendChild(
+          excluir
+        );
+
+
+        item.appendChild(
+          imagemBox
+        );
+
+        item.appendChild(
+          info
+        );
+
+        item.appendChild(
+          actions
+        );
+
+
+        prizeList.appendChild(
+          item
+        );
+
+      }
+    );
+
+
+  }
+  catch(error){
+
+    console.error(
+      "Erro ao carregar prêmios:",
+      error
+    );
+
+
+    prizeList.innerHTML =
+      "<div class='empty'>" +
+      "❌ Não foi possível carregar os prêmios." +
+      "</div>";
+
+  }
+
+}
+
+
+/* =====================================================
+   EDITAR
+===================================================== */
+
+function editarPremio(
+  premio
+){
+
+  premioEditando =
+    premio.id;
+
+
+  nome.value =
+    premio.nome ||
+    "";
+
+  quantidade.value =
+    premio.quantidade ||
+    "";
+
+  tipo.value =
+    premio.tipo ||
+    "outro";
+
+  peso.value =
+    premio.peso ||
+    10;
+
+  imagem.value =
+    premio.imagem ||
+    "";
+
+  descricao.value =
+    premio.descricao ||
+    "";
+
+  ativo.value =
+    premio.ativo === false
+      ?
+      "false"
+      :
+      "true";
+
+
+  document.getElementById(
+    "salvar"
+  ).textContent =
+    "💾 ATUALIZAR PRÊMIO";
+
+
+  atualizarPreview();
+
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+
+  mostrarMensagem(
+    "✏️ Editando: " +
+    premio.nome,
+    "success"
+  );
+
+}
+
+
+/* =====================================================
+   EXCLUIR
+===================================================== */
+
+async function excluirPremio(
+  id,
+  nomePremio
+){
+
+  if(
+    !confirm(
+      "Excluir o prêmio \"" +
+      nomePremio +
+      "\"?"
+    )
+  ){
+
+    return;
+
+  }
+
+
+  try{
+
+    await deleteDoc(
+      doc(
+        db,
+        "premiosRoleta",
+        id
+      )
+    );
+
+
+    mostrarMensagem(
+      "🗑️ Prêmio excluído.",
+      "success"
+    );
+
+
+    await carregarPremios();
+
+  }
+  catch(error){
+
+    console.error(
+      "Erro ao excluir:",
+      error
+    );
+
+
+    mostrarMensagem(
+      "❌ Não foi possível excluir o prêmio.",
+      "error"
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   EVENTOS
+===================================================== */
+
+document
+  .getElementById(
+    "salvar"
+  )
+  .addEventListener(
+    "click",
+    salvarPremio
+  );
+
+
+document
+  .getElementById(
+    "limpar"
+  )
+  .addEventListener(
+    "click",
+    limparFormulario
+  );
+
+
+document
+  .getElementById(
+    "back"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      window.location.href =
+        "painel.html";
+
+    }
+  );
+
+
+/* =====================================================
+   AUTENTICAÇÃO
+===================================================== */
+
+onAuthStateChanged(
+  auth,
+  async usuarioLogado => {
+
+    if(
+      !usuarioLogado
+    ){
+
+      window.location.replace(
+        "index.html"
+      );
+
+      return;
+
+    }
+
+
+    const email =
+      (
+        usuarioLogado.email ||
+        ""
+      ).toLowerCase();
+
+
+    if(
+      email !==
+      ADMIN_EMAIL.toLowerCase()
+    ){
+
+      alert(
+        "⛔ Acesso negado. Área exclusiva do administrador."
+      );
+
+
+      window.location.replace(
+        "index.html"
+      );
+
+      return;
+
+    }
+
+
+    adminUsuario =
+      usuarioLogado;
+
+
+    await carregarPremios();
+
+  }
+);
+
+</script>
+
+</body>
+
+</html>
