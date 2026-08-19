@@ -7,10 +7,10 @@
 
 <meta
   name="viewport"
-  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+  content="width=device-width, initial-scale=1.0"
 >
 
-<title>Adam Games</title>
+<title>Adam Games • Login</title>
 
 <style>
 
@@ -41,93 +41,52 @@ body{
 
   color:#fff;
 
+  display:flex;
+
+  align-items:flex-start;
+
+  justify-content:center;
+
+  padding:
+    28px
+    14px
+    40px;
+
   overflow-x:hidden;
 
-  background:
-    #073d73;
+  /*
+  FUNDO DO ADAM GAMES
+  */
+
+  background-image:
+    url("6AB154F8-5052-4D70-B604-F3C0BEE88348.png");
+
+  background-size:cover;
+
+  background-position:center top;
+
+  background-repeat:no-repeat;
+
+  background-attachment:scroll;
 
 }
 
 
 /* =====================================================
-   WALLPAPER
+   CONTAINER
 ===================================================== */
 
-.background{
-
-  position:fixed;
-
-  inset:0;
-
-  z-index:0;
-
-  overflow:hidden;
-
-}
-
-
-.background img{
-
-  position:absolute;
+.login-container{
 
   width:100%;
 
-  height:100%;
+  max-width:430px;
 
-  object-fit:cover;
-
-  object-position:center bottom;
-
-}
-
-
-/* =====================================================
-   LEVE ESCURECIMENTO
-===================================================== */
-
-.background::after{
-
-  content:"";
-
-  position:absolute;
-
-  inset:0;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(0,20,45,.04) 0%,
-      rgba(0,20,45,.10) 55%,
-      rgba(0,15,35,.28) 100%
-    );
-
-}
-
-
-/* =====================================================
-   CONTEÚDO
-===================================================== */
-
-.page{
+  margin:0 auto;
 
   position:relative;
 
-  z-index:5;
-
-  width:100%;
-
-  min-height:100vh;
-
-  display:flex;
-
-  flex-direction:column;
-
-  align-items:center;
-
-  padding:
-    12px
-    12px
-    25px;
+  z-index:10;
 
 }
 
@@ -136,7 +95,11 @@ body{
    LOGO
 ===================================================== */
 
-.logo-area{
+.logo{
+
+  position:relative;
+
+  z-index:20;
 
   width:100%;
 
@@ -146,75 +109,92 @@ body{
 
   align-items:center;
 
-  position:relative;
+  margin-bottom:-30px;
 
-  z-index:20;
-
-  margin-bottom:-8px;
-
+  pointer-events:none;
 }
 
 
-.logo-area img{
+.logo img{
 
   display:block;
 
-  width:220px;
-
-  max-width:58vw;
+  width:
+    min(
+      280px,
+      72vw
+    );
 
   height:auto;
+
+  max-height:150px;
 
   object-fit:contain;
 
   filter:
     drop-shadow(
-      0 5px 9px
-      rgba(0,0,0,.50)
+      0 8px 14px
+      rgba(0,0,0,.35)
     );
 
 }
 
 
 /* =====================================================
-   LOGIN
+   CARD DE LOGIN
 ===================================================== */
 
 .login-card{
 
-  width:
-    min(
-      100%,
-      350px
-    );
+  width:100%;
 
   padding:
-    16px
-    17px
-    17px;
+    48px
+    26px
+    24px;
 
-  border-radius:23px;
+  border-radius:28px;
+
+  /*
+  SEMI TRANSPARENTE
+  */
 
   background:
-    rgba(3,30,61,.88);
+    rgba(
+      2,
+      30,
+      62,
+      .68
+    );
+
+  /*
+  EFEITO DE VIDRO
+  */
+
+  backdrop-filter:
+    blur(5px);
+
+  -webkit-backdrop-filter:
+    blur(5px);
 
   border:
     1px solid
-    rgba(255,255,255,.13);
+    rgba(
+      255,
+      255,
+      255,
+      .20
+    );
 
   box-shadow:
-    0 14px 35px
-    rgba(0,0,0,.38);
 
-  backdrop-filter:
-    blur(4px);
-
-  -webkit-backdrop-filter:
-    blur(4px);
-
-  position:relative;
-
-  z-index:10;
+    0 20px 50px
+    rgba(
+      0,
+      0,
+      0,
+      .40
+    );
 
 }
 
@@ -227,11 +207,11 @@ body{
 
   text-align:center;
 
-  font-size:21px;
+  font-size:26px;
 
   line-height:1.15;
 
-  margin-bottom:5px;
+  margin-bottom:7px;
 
 }
 
@@ -240,11 +220,11 @@ body{
 
   text-align:center;
 
-  color:#bcd3e8;
+  color:#c9dff3;
 
-  font-size:12px;
+  font-size:14px;
 
-  margin-bottom:13px;
+  margin-bottom:20px;
 
 }
 
@@ -257,15 +237,15 @@ body{
 
   display:none;
 
-  padding:9px;
+  margin-bottom:15px;
 
-  margin-bottom:10px;
+  padding:12px;
 
-  border-radius:10px;
+  border-radius:12px;
 
   text-align:center;
 
-  font-size:12px;
+  font-size:13px;
 
   font-weight:bold;
 
@@ -276,10 +256,24 @@ body{
 
   display:block;
 
-  color:#ff9da9;
-
   background:
-    rgba(255,40,60,.14);
+    rgba(
+      255,
+      50,
+      70,
+      .18
+    );
+
+  border:
+    1px solid
+    rgba(
+      255,
+      70,
+      90,
+      .35
+    );
+
+  color:#ffb0b8;
 
 }
 
@@ -288,10 +282,24 @@ body{
 
   display:block;
 
-  color:#72ffae;
-
   background:
-    rgba(0,220,100,.13);
+    rgba(
+      50,
+      255,
+      140,
+      .15
+    );
+
+  border:
+    1px solid
+    rgba(
+      50,
+      255,
+      140,
+      .30
+    );
+
+  color:#72ffae;
 
 }
 
@@ -304,13 +312,13 @@ label{
 
   display:block;
 
-  margin-bottom:5px;
+  margin-bottom:6px;
 
-  color:#d8e8f7;
-
-  font-size:12px;
+  font-size:13px;
 
   font-weight:bold;
+
+  color:#e1effc;
 
 }
 
@@ -323,45 +331,60 @@ label{
 
   width:100%;
 
-  height:43px;
-
-  padding:
-    0 13px;
-
-  margin-bottom:10px;
-
-  border-radius:12px;
+  height:50px;
 
   border:
     1px solid
-    rgba(255,255,255,.14);
+    rgba(
+      255,
+      255,
+      255,
+      .18
+    );
 
-  outline:none;
+  border-radius:14px;
 
   background:
-    rgba(0,0,0,.25);
+    rgba(
+      0,
+      10,
+      25,
+      .38
+    );
 
   color:#fff;
 
-  font-size:13px;
+  padding:
+    0 15px;
+
+  font-size:15px;
+
+  outline:none;
+
+  margin-bottom:14px;
 
 }
 
 
 .input::placeholder{
 
-  color:#91aac1;
+  color:#a9bfd5;
 
 }
 
 
 .input:focus{
 
-  border-color:#28a5ff;
+  border-color:#2aa4ff;
 
   box-shadow:
-    0 0 0 2px
-    rgba(40,165,255,.12);
+    0 0 0 3px
+    rgba(
+      39,
+      161,
+      255,
+      .12
+    );
 
 }
 
@@ -379,7 +402,7 @@ label{
 
 .password-wrap .input{
 
-  padding-right:45px;
+  padding-right:52px;
 
 }
 
@@ -388,21 +411,21 @@ label{
 
   position:absolute;
 
-  right:3px;
+  right:7px;
 
   top:0;
 
-  width:40px;
+  width:43px;
 
-  height:43px;
+  height:50px;
 
   border:0;
 
   background:transparent;
 
-  color:#fff;
+  color:#b8d1e8;
 
-  font-size:17px;
+  font-size:20px;
 
   cursor:pointer;
 
@@ -417,37 +440,44 @@ label{
 
   width:100%;
 
-  height:45px;
+  height:52px;
 
   border:0;
 
-  border-radius:13px;
+  border-radius:15px;
 
   background:
+
     linear-gradient(
       135deg,
-      #20a4ff,
-      #0873df
+      #22a2ff,
+      #0069db
     );
 
   color:#fff;
 
-  font-size:15px;
+  font-size:16px;
 
   font-weight:900;
 
   cursor:pointer;
 
   box-shadow:
-    0 7px 17px
-    rgba(0,100,220,.28);
+
+    0 8px 20px
+    rgba(
+      0,
+      105,
+      219,
+      .30
+    );
 
 }
 
 
 .login-button:disabled{
 
-  opacity:.55;
+  opacity:.6;
 
   cursor:not-allowed;
 
@@ -462,15 +492,15 @@ label{
 
   display:block;
 
-  margin-top:9px;
-
   text-align:center;
 
-  color:#66bfff;
+  margin-top:15px;
 
-  font-size:12px;
+  color:#65bdff;
 
-  font-weight:bold;
+  font-size:13px;
+
+  text-decoration:none;
 
   cursor:pointer;
 
@@ -487,16 +517,18 @@ label{
 
   align-items:center;
 
-  gap:8px;
+  gap:10px;
 
   margin:
-    13px
+    19px
     0
-    9px;
+    14px;
 
-  color:#abc4db;
+  color:#b9cee1;
 
-  font-size:11px;
+  font-size:12px;
+
+  white-space:nowrap;
 
 }
 
@@ -511,13 +543,18 @@ label{
   flex:1;
 
   background:
-    rgba(255,255,255,.15);
+    rgba(
+      255,
+      255,
+      255,
+      .20
+    );
 
 }
 
 
 /* =====================================================
-   SOCIAL
+   LOGIN SOCIAL
 ===================================================== */
 
 .social-buttons{
@@ -525,20 +562,25 @@ label{
   display:grid;
 
   grid-template-columns:
-    repeat(3,1fr);
+    repeat(
+      3,
+      1fr
+    );
 
-  gap:6px;
+  gap:8px;
 
 }
 
 
 .social-button{
 
-  height:40px;
+  width:100%;
+
+  height:48px;
 
   border:0;
 
-  border-radius:11px;
+  border-radius:13px;
 
   display:flex;
 
@@ -546,9 +588,9 @@ label{
 
   justify-content:center;
 
-  gap:4px;
+  gap:7px;
 
-  font-size:11px;
+  font-size:13px;
 
   font-weight:bold;
 
@@ -561,7 +603,7 @@ label{
 
   background:#fff;
 
-  color:#222;
+  color:#202124;
 
 }
 
@@ -586,7 +628,11 @@ label{
 
 .social-icon{
 
-  font-size:15px;
+  font-size:17px;
+
+  width:20px;
+
+  text-align:center;
 
 }
 
@@ -597,43 +643,50 @@ label{
 
 .create-account-box{
 
-  margin-top:10px;
+  margin-top:17px;
 
   padding:
-    9px;
+    14px
+    12px;
 
-  border-radius:13px;
+  border-radius:16px;
 
   background:
-    rgba(255,255,255,.045);
+    rgba(
+      0,
+      15,
+      35,
+      .30
+    );
 
   border:
     1px solid
-    rgba(255,255,255,.08);
+    rgba(
+      255,
+      255,
+      255,
+      .12
+    );
+
+  text-align:center;
 
 }
 
 
 .create-account-title{
 
-  text-align:center;
+  color:#fff;
 
-  color:#dceaf6;
-
-  font-size:11px;
+  font-size:13px;
 
   font-weight:bold;
 
-  margin-bottom:7px;
+  margin-bottom:9px;
 
 }
 
 
 .create-account{
-
-  width:100%;
-
-  min-height:42px;
 
   display:flex;
 
@@ -641,18 +694,22 @@ label{
 
   justify-content:center;
 
-  border-radius:11px;
+  width:100%;
+
+  min-height:48px;
+
+  border-radius:13px;
 
   background:
     linear-gradient(
       135deg,
-      #20d45d,
-      #08a946
+      #20d85a,
+      #08a942
     );
 
   color:#fff;
 
-  font-size:13px;
+  font-size:15px;
 
   font-weight:900;
 
@@ -660,35 +717,23 @@ label{
 
   cursor:pointer;
 
+  box-shadow:
+    0 8px 18px
+    rgba(
+      0,
+      180,
+      70,
+      .20
+    );
+
 }
 
 
 .create-account-subtitle{
 
-  text-align:center;
-
-  margin-top:5px;
-
-  color:#9fbad0;
-
-  font-size:9px;
-
-}
-
-
-/* =====================================================
-   LOADING
-===================================================== */
-
-.loading{
-
-  display:none;
-
-  text-align:center;
-
   margin-top:8px;
 
-  color:#8bcaff;
+  color:#c8dceb;
 
   font-size:11px;
 
@@ -724,13 +769,13 @@ label{
 
   display:block;
 
-  margin-top:12px;
-
   text-align:center;
+
+  margin-top:16px;
 
   color:#65bdff;
 
-  font-size:12px;
+  font-size:13px;
 
   cursor:pointer;
 
@@ -738,22 +783,62 @@ label{
 
 
 /* =====================================================
-   RODAPÉ
+   LOADING
+===================================================== */
+
+.loading{
+
+  display:none;
+
+  text-align:center;
+
+  margin-top:12px;
+
+  color:#8fcaff;
+
+  font-size:13px;
+
+}
+
+
+/* =====================================================
+   FOOTER
 ===================================================== */
 
 .footer{
 
-  margin-top:9px;
-
   text-align:center;
 
-  color:#d9e7f2;
+  margin-top:18px;
 
-  font-size:9px;
+  padding:
+    8px
+    14px;
 
-  text-shadow:
-    0 2px 5px
-    rgba(0,0,0,.8);
+  display:inline-block;
+
+  position:relative;
+
+  left:50%;
+
+  transform:
+    translateX(-50%);
+
+  border-radius:20px;
+
+  background:
+    rgba(
+      0,
+      20,
+      45,
+      .60
+    );
+
+  color:#c2d6e8;
+
+  font-size:11px;
+
+  white-space:nowrap;
 
 }
 
@@ -766,15 +851,15 @@ label{
 
   position:fixed;
 
-  right:14px;
+  right:16px;
 
-  bottom:15px;
+  bottom:18px;
 
   z-index:99999;
 
-  width:55px;
+  width:58px;
 
-  height:55px;
+  height:58px;
 
   border:0;
 
@@ -790,13 +875,18 @@ label{
 
   justify-content:center;
 
-  font-size:27px;
+  font-size:28px;
 
   cursor:pointer;
 
   box-shadow:
-    0 7px 20px
-    rgba(0,0,0,.38);
+    0 8px 25px
+    rgba(
+      0,
+      0,
+      0,
+      .35
+    );
 
 }
 
@@ -805,17 +895,17 @@ label{
 
   position:fixed;
 
-  right:14px;
+  right:16px;
 
-  bottom:78px;
+  bottom:88px;
 
   z-index:99999;
 
   width:270px;
 
-  padding:14px;
+  padding:16px;
 
-  border-radius:18px;
+  border-radius:20px;
 
   background:
     linear-gradient(
@@ -826,11 +916,21 @@ label{
 
   border:
     1px solid
-    rgba(255,255,255,.15);
+    rgba(
+      255,
+      255,
+      255,
+      .15
+    );
 
   box-shadow:
-    0 15px 35px
-    rgba(0,0,0,.45);
+    0 15px 40px
+    rgba(
+      0,
+      0,
+      0,
+      .45
+    );
 
   display:none;
 
@@ -846,11 +946,11 @@ label{
 
 .adam-whatsapp-title{
 
-  font-size:14px;
+  font-size:15px;
 
   font-weight:900;
 
-  margin-bottom:9px;
+  margin-bottom:10px;
 
 }
 
@@ -861,11 +961,11 @@ label{
 
   border:0;
 
-  border-radius:11px;
+  border-radius:13px;
 
-  padding:11px;
+  padding:13px 12px;
 
-  margin-top:7px;
+  margin-top:8px;
 
   color:#fff;
 
@@ -898,137 +998,168 @@ label{
 
   width:100%;
 
-  margin-top:7px;
+  margin-top:9px;
 
   border:0;
 
-  border-radius:10px;
+  border-radius:12px;
 
   padding:8px;
 
   background:
-    rgba(255,255,255,.08);
+    rgba(
+      255,
+      255,
+      255,
+      .08
+    );
 
   color:#a9c8e5;
+
+  cursor:pointer;
 
 }
 
 
 /* =====================================================
-   CELULAR
+   MOBILE
 ===================================================== */
 
 @media(max-width:480px){
 
-  .page{
+  body{
 
     padding:
-      7px
+      20px
       10px
-      20px;
+      35px;
+
+    background-position:
+      center top;
+
+  }
+
+
+  .login-container{
+
+    max-width:390px;
 
   }
 
 
   /*
-  LOGO MUITO MENOR
+  LOGO MENOR
   */
 
-  .logo-area{
+  .logo{
 
-    margin-bottom:-6px;
+    margin-bottom:-24px;
 
   }
 
 
-  .logo-area img{
+  .logo img{
 
-    width:185px;
+    width:
+      min(
+        245px,
+        68vw
+      );
 
-    max-width:52vw;
+    max-height:125px;
 
   }
 
 
   /*
-  CAIXA MUITO MENOR
+  CAIXA BEM MENOR
   */
 
   .login-card{
 
-    width:
-      min(
-        100%,
-        330px
+    padding:
+      39px
+      20px
+      19px;
+
+    border-radius:24px;
+
+    background:
+      rgba(
+        2,
+        30,
+        62,
+        .58
       );
 
-    padding:
-      14px
-      15px
-      15px;
+    backdrop-filter:
+      blur(4px);
 
-    border-radius:21px;
+    -webkit-backdrop-filter:
+      blur(4px);
 
   }
 
 
   .login-card h2{
 
-    font-size:19px;
+    font-size:22px;
+
+    margin-bottom:5px;
 
   }
 
 
   .subtitle{
 
-    font-size:11px;
+    font-size:12px;
 
-    margin-bottom:11px;
+    margin-bottom:16px;
 
   }
 
 
   label{
 
-    font-size:11px;
+    font-size:12px;
+
+    margin-bottom:5px;
 
   }
 
 
   .input{
 
-    height:40px;
+    height:46px;
 
-    font-size:12px;
+    font-size:14px;
 
-    margin-bottom:8px;
+    margin-bottom:11px;
 
   }
 
 
   .show-password{
 
-    height:40px;
-
-    font-size:16px;
+    height:46px;
 
   }
 
 
   .login-button{
 
-    height:42px;
+    height:47px;
 
-    font-size:14px;
+    font-size:15px;
 
   }
 
 
   .forgot{
 
-    margin-top:8px;
+    margin-top:12px;
 
-    font-size:11px;
+    font-size:12px;
 
   }
 
@@ -1036,132 +1167,100 @@ label{
   .divider{
 
     margin:
-      11px
+      16px
       0
-      8px;
+      11px;
+
+    font-size:11px;
 
   }
 
 
   .social-button{
 
-    height:37px;
+    height:43px;
 
-    font-size:10px;
+    font-size:12px;
+
+    border-radius:11px;
 
   }
 
 
   .create-account-box{
 
-    margin-top:8px;
-
-    padding:8px;
-
-  }
-
-
-  .create-account{
-
-    min-height:39px;
-
-    font-size:12px;
-
-  }
-
-
-  .create-account-subtitle{
-
-    font-size:8px;
-
-  }
-
-
-  .footer{
-
-    font-size:8px;
-
-  }
-
-}
-
-
-/* =====================================================
-   IPHONES COM POUCA ALTURA
-===================================================== */
-
-@media(
-  max-width:480px
-) and (
-  max-height:760px
-){
-
-  .logo-area img{
-
-    width:165px;
-
-  }
-
-
-  .login-card{
-
-    width:320px;
+    margin-top:13px;
 
     padding:
-      12px
-      14px
-      13px;
+      11px
+      9px;
 
   }
 
 
-  .login-card h2{
+  .create-account-title{
 
-    font-size:18px;
-
-  }
-
-
-  .subtitle{
-
-    margin-bottom:9px;
-
-  }
-
-
-  .input{
-
-    height:38px;
+    font-size:12px;
 
     margin-bottom:7px;
 
   }
 
 
-  .show-password{
-
-    height:38px;
-
-  }
-
-
-  .login-button{
-
-    height:40px;
-
-  }
-
-
-  .social-button{
-
-    height:35px;
-
-  }
-
-
   .create-account{
 
-    min-height:37px;
+    min-height:44px;
+
+    font-size:14px;
+
+  }
+
+
+  .create-account-subtitle{
+
+    margin-top:6px;
+
+    font-size:10px;
+
+  }
+
+
+  .footer{
+
+    margin-top:14px;
+
+    font-size:10px;
+
+  }
+
+
+  .adam-whatsapp-button{
+
+    width:54px;
+
+    height:54px;
+
+    right:13px;
+
+    bottom:16px;
+
+    font-size:26px;
+
+  }
+
+
+  .adam-whatsapp-menu{
+
+    right:13px;
+
+    bottom:78px;
+
+    width:
+      calc(
+        100% - 26px
+      );
+
+    max-width:300px;
 
   }
 
@@ -1175,32 +1274,14 @@ label{
 <body>
 
 
-<!-- =====================================================
-     FUNDO
-===================================================== -->
-
-<div class="background">
-
-  <img
-    src="6AB154F8-5052-4D70-B604-F3C0BEE88348.png"
-    alt=""
-  >
-
-</div>
+<div class="login-container">
 
 
-<!-- =====================================================
-     PÁGINA
-===================================================== -->
+  <!-- =================================================
+       LOGO SOBRE A CAIXA
+  ================================================== -->
 
-<div class="page">
-
-
-  <!-- ===================================================
-       LOGO SEPARADO
-  ==================================================== -->
-
-  <div class="logo-area">
+  <div class="logo">
 
     <img
       src="C7623583-2C09-47D2-B1E5-CF175A142AB3.png"
@@ -1210,9 +1291,9 @@ label{
   </div>
 
 
-  <!-- ===================================================
+  <!-- =================================================
        LOGIN
-  ==================================================== -->
+  ================================================== -->
 
   <div
     class="login-card login-box"
@@ -1235,7 +1316,6 @@ label{
 
 
     <form id="loginForm">
-
 
       <label for="email">
         E-mail
@@ -1309,8 +1389,13 @@ label{
         class="social-button google"
         id="googleLogin"
       >
-        <span class="social-icon">G</span>
+
+        <span class="social-icon">
+          G
+        </span>
+
         Google
+
       </button>
 
 
@@ -1319,8 +1404,13 @@ label{
         class="social-button facebook"
         id="facebookLogin"
       >
-        <span class="social-icon">f</span>
+
+        <span class="social-icon">
+          f
+        </span>
+
         Facebook
+
       </button>
 
 
@@ -1329,8 +1419,13 @@ label{
         class="social-button apple"
         id="appleLogin"
       >
-        <span class="social-icon"></span>
+
+        <span class="social-icon">
+          
+        </span>
+
         Apple
+
       </button>
 
     </div>
@@ -1342,16 +1437,12 @@ label{
         Ainda não tem uma conta?
       </div>
 
-
       <a
         class="create-account"
         id="showRegister"
       >
-        👤
-        &nbsp;
-        CRIAR MINHA CONTA
+        👤 CRIAR MINHA CONTA
       </a>
-
 
       <div class="create-account-subtitle">
         É rápido, fácil e grátis! ✨
@@ -1370,9 +1461,9 @@ label{
   </div>
 
 
-  <!-- ===================================================
+  <!-- =================================================
        CADASTRO
-  ==================================================== -->
+  ================================================== -->
 
   <div
     class="login-card register-box"
@@ -1395,7 +1486,6 @@ label{
 
 
     <form id="registerForm">
-
 
       <label for="registerName">
         Nome
@@ -1458,7 +1548,6 @@ label{
       >
         CRIAR CONTA
       </button>
-
 
     </form>
 
@@ -1527,6 +1616,7 @@ label{
   type="button"
   class="adam-whatsapp-button"
   id="adamWhatsAppButton"
+  aria-label="Abrir WhatsApp"
 >
   💬
 </button>
@@ -1564,6 +1654,9 @@ from
 import {
   getFirestore,
   collection,
+  query,
+  where,
+  getDocs,
   addDoc
 }
 from
@@ -1571,7 +1664,7 @@ from
 
 
 /* =====================================================
-   CONFIG
+   CONFIGURAÇÃO FIREBASE
 ===================================================== */
 
 const firebaseConfig = {
@@ -1623,35 +1716,42 @@ const loginBox =
     "loginBox"
   );
 
+
 const registerBox =
   document.getElementById(
     "registerBox"
   );
+
 
 const loginForm =
   document.getElementById(
     "loginForm"
   );
 
+
 const registerForm =
   document.getElementById(
     "registerForm"
   );
+
 
 const email =
   document.getElementById(
     "email"
   );
 
+
 const password =
   document.getElementById(
     "password"
   );
 
+
 const message =
   document.getElementById(
     "message"
   );
+
 
 const registerMessage =
   document.getElementById(
@@ -1660,7 +1760,7 @@ const registerMessage =
 
 
 /* =====================================================
-   MENSAGENS
+   MENSAGEM LOGIN
 ===================================================== */
 
 function mostrarMensagem(
@@ -1676,6 +1776,10 @@ function mostrarMensagem(
 
 }
 
+
+/* =====================================================
+   MENSAGEM CADASTRO
+===================================================== */
 
 function mostrarMensagemCadastro(
   texto,
@@ -1711,24 +1815,21 @@ document
       password.type =
         "text";
 
-      document
-      .getElementById(
+      document.getElementById(
         "showPassword"
-      )
-      .textContent =
+      ).textContent =
         "🙈";
 
     }
+
     else{
 
       password.type =
         "password";
 
-      document
-      .getElementById(
+      document.getElementById(
         "showPassword"
-      )
-      .textContent =
+      ).textContent =
         "👁️";
 
     }
@@ -1786,12 +1887,17 @@ document
       "hidden"
     );
 
+    mostrarMensagemCadastro(
+      "",
+      ""
+    );
+
   }
 );
 
 
 /* =====================================================
-   LOGIN NORMAL
+   LOGIN COM E-MAIL
 ===================================================== */
 
 loginForm.addEventListener(
@@ -1803,6 +1909,7 @@ loginForm.addEventListener(
 
     const emailValue =
       email.value.trim();
+
 
     const passwordValue =
       password.value;
@@ -1862,6 +1969,7 @@ loginForm.addEventListener(
       );
 
     }
+
     catch(error){
 
       console.error(
@@ -1922,7 +2030,7 @@ loginForm.addEventListener(
 
 
 /* =====================================================
-   CRIAR CONTA
+   CADASTRO
 ===================================================== */
 
 registerForm.addEventListener(
@@ -2010,38 +2118,14 @@ registerForm.addEventListener(
         "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
 
 
-      const letras =
-        "ABCDEFGHJKLMNPQRSTUVWXYZ";
-
-
-      const numeros =
-        "23456789";
-
-
       let publicId =
         "";
 
 
-      publicId +=
-        letras[
-          Math.floor(
-            Math.random() *
-            letras.length
-          )
-        ];
-
-
-      publicId +=
-        numeros[
-          Math.floor(
-            Math.random() *
-            numeros.length
-          )
-        ];
-
-
-      while(
-        publicId.length < 6
+      for(
+        let i=0;
+        i<7;
+        i++
       ){
 
         publicId +=
@@ -2053,16 +2137,6 @@ registerForm.addEventListener(
           ];
 
       }
-
-
-      publicId =
-        publicId
-        .split("")
-        .sort(
-          () =>
-            Math.random() - .5
-        )
-        .join("");
 
 
       await addDoc(
@@ -2102,9 +2176,6 @@ registerForm.addEventListener(
           chances:
             0,
 
-          girosRoleta:
-            0,
-
           moedas:
             0,
 
@@ -2139,6 +2210,7 @@ registerForm.addEventListener(
       );
 
     }
+
     catch(error){
 
       console.error(
@@ -2214,9 +2286,7 @@ document
       email.value.trim();
 
 
-    if(
-      !emailValue
-    ){
+    if(!emailValue){
 
       mostrarMensagem(
         "Digite seu e-mail primeiro."
@@ -2243,6 +2313,7 @@ document
       );
 
     }
+
     catch(error){
 
       console.error(
@@ -2251,7 +2322,7 @@ document
 
 
       mostrarMensagem(
-        "Não foi possível enviar o e-mail."
+        "Não foi possível enviar o e-mail de recuperação."
       );
 
     }
@@ -2289,11 +2360,13 @@ document
       );
 
     }
+
     catch(error){
 
       console.error(
         error
       );
+
 
       mostrarMensagem(
         "Não foi possível entrar com Google."
@@ -2334,11 +2407,13 @@ document
       );
 
     }
+
     catch(error){
 
       console.error(
         error
       );
+
 
       mostrarMensagem(
         "Não foi possível entrar com Facebook."
@@ -2381,11 +2456,13 @@ document
       );
 
     }
+
     catch(error){
 
       console.error(
         error
       );
+
 
       mostrarMensagem(
         "Não foi possível entrar com Apple."
@@ -2405,9 +2482,7 @@ onAuthStateChanged(
   auth,
   usuario => {
 
-    if(
-      usuario
-    ){
+    if(usuario){
 
       window.location.replace(
         "painel.html"
