@@ -60,9 +60,7 @@ body{
 .container{
 
   width:100%;
-
   max-width:850px;
-
   margin:auto;
 
 }
@@ -75,7 +73,6 @@ body{
 .logo{
 
   text-align:center;
-
   margin-bottom:8px;
 
 }
@@ -94,25 +91,18 @@ body{
 }
 
 .logo .adam{
-
   color:#fff;
-
 }
 
 .logo .games{
-
   color:#ffd329;
-
 }
 
 .subtitle{
 
   text-align:center;
-
   color:#c9e2f4;
-
   font-size:16px;
-
   margin-bottom:20px;
 
 }
@@ -124,11 +114,7 @@ body{
 
 .giros{
 
-  width:
-    min(
-      100%,
-      350px
-    );
+  width:min(100%,350px);
 
   margin:
     0 auto
@@ -158,11 +144,8 @@ body{
 .giros-label{
 
   font-size:14px;
-
   letter-spacing:3px;
-
   font-weight:bold;
-
   color:#bcd9ed;
 
 }
@@ -170,13 +153,9 @@ body{
 .giros-numero{
 
   margin-top:4px;
-
   font-size:46px;
-
   line-height:1;
-
   color:#ffd52b;
-
   font-weight:900;
 
 }
@@ -191,7 +170,6 @@ body{
   width:100%;
 
   display:flex;
-
   justify-content:center;
 
   margin:
@@ -230,7 +208,6 @@ body{
   padding:10px;
 
   box-shadow:
-
     0 0 0 7px
     rgba(0,0,0,.15),
 
@@ -240,7 +217,7 @@ body{
 }
 
 
-/* SVG */
+/* ROLETA REAL */
 
 #roleta{
 
@@ -248,52 +225,107 @@ body{
 
   inset:10px;
 
-  width:calc(100% - 20px);
+  border-radius:50%;
 
-  height:calc(100% - 20px);
+  overflow:hidden;
+
+  border:
+    3px solid
+    rgba(255,255,255,.85);
+
+  transform:rotate(0deg);
+
+  transform-origin:center center;
+
+}
+
+
+/*
+==========================================================
+FATIAS
+
+A roleta agora usa CONIC-GRADIENT.
+
+Isso garante que:
+
+4 prêmios = 4 fatias de 90°
+
+5 prêmios = 5 fatias de 72°
+
+6 prêmios = 6 fatias de 60°
+
+etc.
+
+Sem deixar fundo azul/cinza sobrando.
+==========================================================
+*/
+
+#roletaBase{
+
+  position:absolute;
+
+  inset:0;
 
   border-radius:50%;
 
-  overflow:visible;
+  overflow:hidden;
 
 }
 
 
-/* GRUPO QUE GIRA */
+/* IMAGENS DOS PRÊMIOS */
 
-#roletaGrupo{
+.roleta-imagem{
+
+  position:absolute;
+
+  left:50%;
+  top:50%;
+
+  width:17%;
+  height:17%;
 
   transform-origin:
-    250px 250px;
+    center
+    calc(
+      var(--raio)
+    );
 
-  transform-box:
-    fill-box;
+  object-fit:contain;
 
-}
+  filter:
+    drop-shadow(
+      0 4px 5px
+      rgba(0,0,0,.45)
+    );
 
-
-/* FATIAS */
-
-.setor{
-
-  stroke:
-    rgba(0,0,0,.65);
-
-  stroke-width:4;
-
-  vector-effect:
-    non-scaling-stroke;
-
-}
-
-
-/* IMAGENS */
-
-.setor-imagem{
+  z-index:5;
 
   pointer-events:none;
 
-  user-select:none;
+}
+
+
+/* LINHAS DIVISÓRIAS */
+
+.roleta-linha{
+
+  position:absolute;
+
+  left:50%;
+  top:50%;
+
+  width:50%;
+  height:3px;
+
+  background:
+    rgba(0,0,0,.72);
+
+  transform-origin:left center;
+
+  z-index:8;
+
+  pointer-events:none;
 
 }
 
@@ -307,7 +339,6 @@ body{
   position:absolute;
 
   left:50%;
-
   top:50%;
 
   transform:
@@ -317,7 +348,6 @@ body{
     );
 
   width:100px;
-
   height:100px;
 
   border-radius:50%;
@@ -331,7 +361,6 @@ body{
   display:flex;
 
   align-items:center;
-
   justify-content:center;
 
   z-index:50;
@@ -356,14 +385,12 @@ body{
   z-index:100;
 
   left:50%;
-
   top:-5px;
 
   transform:
     translateX(-50%);
 
   width:0;
-
   height:0;
 
   border-left:
@@ -394,11 +421,9 @@ body{
 .girar{
 
   width:100%;
-
   max-width:600px;
 
-  margin:
-    0 auto;
+  margin:0 auto;
 
   display:block;
 
@@ -436,25 +461,12 @@ body{
 
 }
 
-.girar:active{
-
-  transform:
-    scale(.98);
-
-}
-
 .girar:disabled{
 
   opacity:.55;
-
   cursor:not-allowed;
 
 }
-
-
-/* =====================================================
-   AVISO
-===================================================== */
 
 .aviso{
 
@@ -476,8 +488,7 @@ body{
 .message{
 
   margin:
-    20px
-    auto;
+    20px auto;
 
   padding:14px;
 
@@ -558,7 +569,6 @@ body{
 .lista-premios{
 
   display:grid;
-
   gap:10px;
 
 }
@@ -566,7 +576,6 @@ body{
 .premio-publico{
 
   display:flex;
-
   align-items:center;
 
   gap:12px;
@@ -583,7 +592,6 @@ body{
 .premio-publico-img{
 
   width:52px;
-
   height:52px;
 
   flex-shrink:0;
@@ -595,7 +603,6 @@ body{
   display:flex;
 
   align-items:center;
-
   justify-content:center;
 
   overflow:hidden;
@@ -607,7 +614,6 @@ body{
 .premio-publico-img img{
 
   width:100%;
-
   height:100%;
 
   object-fit:contain;
@@ -623,7 +629,6 @@ body{
 .premio-publico-nome{
 
   font-size:15px;
-
   font-weight:bold;
 
 }
@@ -759,7 +764,6 @@ body{
   display:none;
 
   align-items:center;
-
   justify-content:center;
 
   padding:20px;
@@ -781,10 +785,11 @@ body{
 .modal-card{
 
   width:100%;
-
   max-width:390px;
 
-  padding:28px 22px;
+  padding:
+    28px
+    22px;
 
   border-radius:22px;
 
@@ -813,15 +818,15 @@ body{
 .modal-img{
 
   width:120px;
-
   height:120px;
 
-  margin:10px auto 15px;
+  margin:
+    10px auto
+    15px;
 
   display:flex;
 
   align-items:center;
-
   justify-content:center;
 
 }
@@ -829,7 +834,6 @@ body{
 .modal-img img{
 
   max-width:100%;
-
   max-height:100%;
 
   object-fit:contain;
@@ -888,7 +892,6 @@ body{
   .centro{
 
     width:78px;
-
     height:78px;
 
     border-width:7px;
@@ -900,9 +903,7 @@ body{
   .ponteiro{
 
     border-left-width:22px;
-
     border-right-width:22px;
-
     border-top-width:53px;
 
   }
@@ -955,9 +956,7 @@ body{
 <div class="giros">
 
   <div class="giros-label">
-
     GIROS DISPONÍVEIS
-
   </div>
 
   <div
@@ -983,21 +982,16 @@ body{
 
     <div class="roleta-borda">
 
-      <svg
-        id="roleta"
-        viewBox="0 0 500 500"
-        xmlns="http://www.w3.org/2000/svg">
+      <div id="roleta">
 
-        <g id="roletaGrupo"></g>
+        <div id="roletaBase"></div>
 
-      </svg>
+      </div>
 
     </div>
 
     <div class="centro">
-
       🎰
-
     </div>
 
   </div>
@@ -1035,20 +1029,15 @@ body{
 <div class="card">
 
   <h2>
-
     🎁 Possibilidades de prêmio da Roleta
-
   </h2>
-
 
   <div
     class="lista-premios"
     id="listaPremios">
 
     <div class="sem-premios">
-
       🔄 Carregando prêmios...
-
     </div>
 
   </div>
@@ -1063,18 +1052,13 @@ body{
 <div class="card historico">
 
   <h2>
-
     📜 Meus resultados
-
   </h2>
-
 
   <div id="historicoLista">
 
     <div class="sem-premios">
-
       🔄 Carregando resultados...
-
     </div>
 
   </div>
@@ -1096,11 +1080,8 @@ body{
   <div class="modal-card">
 
     <h2>
-
       🎉 Você ganhou!
-
     </h2>
-
 
     <div
       class="modal-img"
@@ -1110,7 +1091,6 @@ body{
 
     </div>
 
-
     <div
       class="modal-premio"
       id="modalPremio">
@@ -1119,7 +1099,6 @@ body{
 
     </div>
 
-
     <div
       class="modal-data"
       id="modalData">
@@ -1127,7 +1106,6 @@ body{
       —
 
     </div>
-
 
     <button
       class="fechar"
@@ -1171,8 +1149,6 @@ import {
   query,
   where,
   getDocs,
-  doc,
-  getDoc,
   updateDoc,
   addDoc,
   serverTimestamp
@@ -1226,23 +1202,17 @@ const db =
    ESTADO
 ===================================================== */
 
-let usuarioAuth =
-  null;
+let usuarioAuth = null;
 
-let usuarioDoc =
-  null;
+let usuarioDoc = null;
 
-let usuarioRef =
-  null;
+let usuarioRef = null;
 
-let premios =
-  [];
+let premios = [];
 
-let girando =
-  false;
+let girando = false;
 
-let rotacaoAtual =
-  0;
+let rotacaoAtual = 0;
 
 
 /* =====================================================
@@ -1254,54 +1224,50 @@ const girosEl =
     "giros"
   );
 
-
-const roletaGrupo =
+const roletaEl =
   document.getElementById(
-    "roletaGrupo"
+    "roleta"
   );
 
+const roletaBase =
+  document.getElementById(
+    "roletaBase"
+  );
 
 const girarBtn =
   document.getElementById(
     "girar"
   );
 
-
 const messageEl =
   document.getElementById(
     "message"
   );
-
 
 const listaPremios =
   document.getElementById(
     "listaPremios"
   );
 
-
 const historicoLista =
   document.getElementById(
     "historicoLista"
   );
-
 
 const modal =
   document.getElementById(
     "modal"
   );
 
-
 const modalPremio =
   document.getElementById(
     "modalPremio"
   );
 
-
 const modalImg =
   document.getElementById(
     "modalImg"
   );
-
 
 const modalData =
   document.getElementById(
@@ -1318,25 +1284,22 @@ function mostrarMensagem(
   tipo
 ){
 
-  if(!texto){
-
-    messageEl.textContent =
-      "";
-
-    messageEl.className =
-      "message";
-
-    return;
-
-  }
-
-
   messageEl.textContent =
     texto;
 
   messageEl.className =
-    "message " +
-    tipo;
+    "message";
+
+  if(
+    texto &&
+    tipo
+  ){
+
+    messageEl.classList.add(
+      tipo
+    );
+
+  }
 
 }
 
@@ -1392,11 +1355,10 @@ async function localizarUsuario(
     }
 
   }
-
   catch(error){
 
     console.error(
-      "Erro na busca por UID:",
+      "Busca UID:",
       error
     );
 
@@ -1456,62 +1418,14 @@ async function localizarUsuario(
       }
 
     }
-
     catch(error){
 
       console.error(
-        "Erro na busca por e-mail:",
+        "Busca email:",
         error
       );
 
     }
-
-  }
-
-
-  try{
-
-    const referencia =
-      doc(
-        db,
-        "admins",
-        usuario.uid
-      );
-
-
-    const documento =
-      await getDoc(
-        referencia
-      );
-
-
-    if(
-      documento.exists()
-    ){
-
-      return {
-
-        ref:
-          documento.ref,
-
-        id:
-          documento.id,
-
-        data:
-          documento.data()
-
-      };
-
-    }
-
-  }
-
-  catch(error){
-
-    console.error(
-      "Erro na busca direta:",
-      error
-    );
 
   }
 
@@ -1527,7 +1441,9 @@ async function localizarUsuario(
 
 function atualizarGiros(){
 
-  if(!usuarioDoc){
+  if(
+    !usuarioDoc
+  ){
 
     girosEl.textContent =
       "0";
@@ -1608,7 +1524,6 @@ async function carregarPremios(){
     atualizarGiros();
 
   }
-
   catch(error){
 
     console.error(
@@ -1620,9 +1535,7 @@ async function carregarPremios(){
     listaPremios.innerHTML =
 
       "<div class='sem-premios'>" +
-
       "❌ Não foi possível carregar os prêmios." +
-
       "</div>";
 
   }
@@ -1631,114 +1544,23 @@ async function carregarPremios(){
 
 
 /* =====================================================
-   CALCULAR PONTO NA CIRCUNFERÊNCIA
-===================================================== */
-
-function pontoCirculo(
-  angulo,
-  raio
-){
-
-  const rad =
-    angulo *
-    Math.PI /
-    180;
-
-
-  return {
-
-    x:
-      250 +
-      raio *
-      Math.sin(rad),
-
-    y:
-      250 -
-      raio *
-      Math.cos(rad)
-
-  };
-
-}
-
-
-/* =====================================================
-   CRIAR SETOR SVG
-===================================================== */
-
-function criarCaminhoSetor(
-  inicio,
-  fim
-){
-
-  const raio =
-    245;
-
-
-  const p1 =
-    pontoCirculo(
-      inicio,
-      raio
-    );
-
-
-  const p2 =
-    pontoCirculo(
-      fim,
-      raio
-    );
-
-
-  const tamanho =
-    fim -
-    inicio;
-
-
-  const grandeArco =
-    tamanho >
-    180
-      ? 1
-      : 0;
-
-
-  return `
-
-    M 250 250
-
-    L ${p1.x} ${p1.y}
-
-    A ${raio} ${raio}
-      0 ${grandeArco} 1
-      ${p2.x} ${p2.y}
-
-    Z
-
-  `;
-
-}
-
-
-/* =====================================================
-   DESENHAR ROLETA NOVA
+   DESENHAR ROLETA
 ===================================================== */
 
 function desenharRoleta(){
 
-  roletaGrupo.innerHTML =
+  roletaBase.innerHTML =
     "";
 
-
-  rotacaoAtual =
-    0;
-
-
-  roletaGrupo.style.transform =
-    "rotate(0deg)";
-
+  roletaBase.style.background =
+    "";
 
   if(
     premios.length === 0
   ){
+
+    roletaBase.style.background =
+      "#102d4e";
 
     return;
 
@@ -1756,20 +1578,31 @@ function desenharRoleta(){
 
   const cores = [
 
-    "#19a86b",
-    "#e8aa13",
-    "#a93bd2",
-    "#1886d5",
+    "#18a96b",
+    "#eaae10",
+    "#a83bd1",
+    "#1685d4",
     "#e73583",
-    "#7047df",
-    "#e65d25",
-    "#22ae9b",
-    "#d83e3e",
-    "#5965d9",
-    "#d58a18",
-    "#15a66a"
+    "#7c4dff",
+    "#e75d25",
+    "#2ab7a9",
+    "#d93d3d",
+    "#5b63d8",
+    "#d68c19",
+    "#16a86b"
 
   ];
+
+
+  /*
+  ------------------------------------------------------
+  CRIA O FUNDO DA PIZZA
+  ------------------------------------------------------
+  */
+
+  const partes = [];
+
+  let inicio = 0;
 
 
   premios.forEach(
@@ -1778,144 +1611,162 @@ function desenharRoleta(){
       indice
     ) => {
 
-      const inicio =
-        indice *
-        angulo;
-
-
       const fim =
         inicio +
         angulo;
 
 
-      const centro =
-        inicio +
-        angulo / 2;
-
-
-      /*
-      SETOR
-      */
-
-      const path =
-        document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "path"
-        );
-
-
-      path.setAttribute(
-        "d",
-        criarCaminhoSetor(
-          inicio,
-          fim
-        )
-      );
-
-
-      path.setAttribute(
-        "fill",
+      const cor =
         premio.cor ||
         cores[
           indice %
           cores.length
-        ]
+        ];
+
+
+      partes.push(
+        `${cor} ${inicio}deg ${fim}deg`
       );
 
 
-      path.setAttribute(
-        "class",
-        "setor"
-      );
+      inicio =
+        fim;
+
+    }
+  );
 
 
-      roletaGrupo.appendChild(
-        path
-      );
+  roletaBase.style.background =
+    `conic-gradient(${partes.join(",")})`;
 
 
-      /*
-      IMAGEM
-      */
+  /*
+  ------------------------------------------------------
+  IMAGENS DOS PRÊMIOS
+  ------------------------------------------------------
+  */
+
+  const raio =
+    31;
+
+
+  premios.forEach(
+    (
+      premio,
+      indice
+    ) => {
+
+      const meio =
+        indice *
+        angulo +
+        angulo / 2;
+
 
       if(
         premio.imagem
       ){
 
-        const pos =
-          pontoCirculo(
-            centro,
-            165
+        const img =
+          document.createElement(
+            "img"
           );
 
 
-        const imagem =
-          document.createElementNS(
-            "http://www.w3.org/2000/svg",
-            "image"
-          );
+        img.className =
+          "roleta-imagem";
 
 
-        const tamanho =
-          Math.min(
-            105,
-            Math.max(
-              58,
-              270 /
-              quantidade
-            )
-          );
+        img.src =
+          premio.imagem;
 
 
-        imagem.setAttribute(
-          "href",
-          premio.imagem
+        img.alt =
+          premio.nome ||
+          "Prêmio";
+
+
+        img.style.setProperty(
+          "--raio",
+          `${raio}%`
         );
 
 
-        imagem.setAttribute(
-          "x",
-          pos.x -
-          tamanho / 2
-        );
+        /*
+        A imagem vai para o meio
+        da respectiva fatia.
+        */
+
+        img.style.transform =
+
+          `
+            translate(-50%, -50%)
+            rotate(${meio}deg)
+            translateY(-${raio}%)
+            rotate(-${meio}deg)
+          `;
 
 
-        imagem.setAttribute(
-          "y",
-          pos.y -
-          tamanho / 2
-        );
+        img.onerror =
+          () => {
+
+            img.remove();
+
+          };
 
 
-        imagem.setAttribute(
-          "width",
-          tamanho
-        );
-
-
-        imagem.setAttribute(
-          "height",
-          tamanho
-        );
-
-
-        imagem.setAttribute(
-          "preserveAspectRatio",
-          "xMidYMid meet"
-        );
-
-
-        imagem.setAttribute(
-          "class",
-          "setor-imagem"
-        );
-
-
-        roletaGrupo.appendChild(
-          imagem
+        roletaBase.appendChild(
+          img
         );
 
       }
+
+    }
+  );
+
+
+  /*
+  ------------------------------------------------------
+  LINHAS DAS FATIAS
+  ------------------------------------------------------
+  */
+
+  premios.forEach(
+    (
+      premio,
+      indice
+    ) => {
+
+      const anguloLinha =
+        indice *
+        angulo;
+
+
+      if(
+        indice === 0
+      ){
+
+        return;
+
+      }
+
+
+      const linha =
+        document.createElement(
+          "div"
+        );
+
+
+      linha.className =
+        "roleta-linha";
+
+
+      linha.style.transform =
+        `rotate(${anguloLinha}deg)`;
+
+
+      roletaBase.appendChild(
+        linha
+      );
 
     }
   );
@@ -1940,9 +1791,7 @@ function mostrarPossibilidades(){
     listaPremios.innerHTML =
 
       "<div class='sem-premios'>" +
-
       "Nenhum prêmio cadastrado na roleta." +
-
       "</div>";
 
     return;
@@ -2006,7 +1855,6 @@ function mostrarPossibilidades(){
         );
 
       }
-
       else{
 
         imagemBox.textContent =
@@ -2037,18 +1885,16 @@ function mostrarPossibilidades(){
 
       nome.textContent =
 
-        Number(
-          premio.quantidade ||
-          0
+        (
+          Number(
+            premio.quantidade ||
+            0
+          )
         ).toLocaleString(
           "pt-BR"
-        )
+        ) +
 
-        +
-
-        " "
-
-        +
+        " " +
 
         (
           premio.nome ||
@@ -2167,7 +2013,121 @@ function escolherPremio(){
 
 
 /* =====================================================
-   FORMATAR DATA
+   LOCAL STORAGE — HISTÓRICO DE SEGURANÇA
+===================================================== */
+
+function chaveHistorico(){
+
+  if(
+    !usuarioAuth
+  ){
+
+    return "adamGamesHistoricoRoleta";
+
+  }
+
+
+  return (
+    "adamGamesHistoricoRoleta_" +
+    usuarioAuth.uid
+  );
+
+}
+
+
+function obterHistoricoLocal(){
+
+  try{
+
+    const dados =
+      localStorage.getItem(
+        chaveHistorico()
+      );
+
+
+    if(
+      !dados
+    ){
+
+      return [];
+
+    }
+
+
+    const lista =
+      JSON.parse(
+        dados
+      );
+
+
+    return Array.isArray(
+      lista
+    )
+      ? lista
+      : [];
+
+  }
+  catch(error){
+
+    console.error(
+      "Erro histórico local:",
+      error
+    );
+
+    return [];
+
+  }
+
+}
+
+
+function salvarHistoricoLocal(
+  registro
+){
+
+  try{
+
+    const lista =
+      obterHistoricoLocal();
+
+
+    lista.unshift(
+      registro
+    );
+
+
+    const limitada =
+      lista.slice(
+        0,
+        50
+      );
+
+
+    localStorage.setItem(
+
+      chaveHistorico(),
+
+      JSON.stringify(
+        limitada
+      )
+
+    );
+
+  }
+  catch(error){
+
+    console.error(
+      "Erro salvando histórico local:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   DATA
 ===================================================== */
 
 function formatarData(
@@ -2183,22 +2143,31 @@ function formatarData(
   }
 
 
-  let objeto;
+  let dataObjeto;
 
 
   if(
-    typeof data.toDate ===
-    "function"
+    data.toDate
   ){
 
-    objeto =
+    dataObjeto =
       data.toDate();
 
   }
+  else if(
+    typeof data ===
+    "number"
+  ){
 
+    dataObjeto =
+      new Date(
+        data
+      );
+
+  }
   else{
 
-    objeto =
+    dataObjeto =
       new Date(
         data
       );
@@ -2208,7 +2177,7 @@ function formatarData(
 
   if(
     Number.isNaN(
-      objeto.getTime()
+      dataObjeto.getTime()
     )
   ){
 
@@ -2217,7 +2186,7 @@ function formatarData(
   }
 
 
-  return objeto.toLocaleString(
+  return dataObjeto.toLocaleString(
     "pt-BR"
   );
 
@@ -2225,108 +2194,399 @@ function formatarData(
 
 
 /* =====================================================
-   SALVAR RESULTADO
+   MOSTRAR UM RESULTADO NO HISTÓRICO
 ===================================================== */
 
-async function salvarResultado(
-  premio,
-  girosAnterior,
-  saldoFinal
+function criarElementoHistorico(
+  registro
 ){
+
+  const item =
+    document.createElement(
+      "div"
+    );
+
+
+  item.className =
+    "resultado";
+
+
+  const top =
+    document.createElement(
+      "div"
+    );
+
+
+  top.className =
+    "resultado-top";
+
+
+  const premio =
+    document.createElement(
+      "div"
+    );
+
+
+  premio.className =
+    "resultado-premio";
+
+
+  premio.textContent =
+
+    (
+      Number(
+        registro.quantidade ||
+        0
+      )
+    ).toLocaleString(
+      "pt-BR"
+    ) +
+
+    " " +
+
+    (
+      registro.premioNome ||
+      "Prêmio"
+    );
+
+
+  const data =
+    document.createElement(
+      "div"
+    );
+
+
+  data.className =
+    "resultado-data";
+
+
+  data.textContent =
+    formatarData(
+      registro.criadoEm
+    );
+
+
+  top.appendChild(
+    premio
+  );
+
+  top.appendChild(
+    data
+  );
+
+
+  const status =
+    document.createElement(
+      "div"
+    );
+
+
+  status.className =
+    "resultado-status";
+
+
+  status.textContent =
+
+    registro.entregue === true
+
+      ?
+
+    "✅ Prêmio entregue"
+
+      :
+
+    registro.salvoFirebase === false
+
+      ?
+
+    "📱 Resultado salvo neste aparelho"
+
+      :
+
+    "⏳ Aguardando entrega";
+
+
+  item.appendChild(
+    top
+  );
+
+  item.appendChild(
+    status
+  );
+
+
+  if(
+    registro.id
+  ){
+
+    const id =
+      document.createElement(
+        "div"
+      );
+
+
+    id.className =
+      "resultado-id";
+
+
+    id.textContent =
+      "ID do resultado: " +
+      registro.id;
+
+
+    item.appendChild(
+      id
+    );
+
+  }
+
+
+  return item;
+
+}
+
+
+/* =====================================================
+   CARREGAR HISTÓRICO
+===================================================== */
+
+async function carregarHistorico(){
+
+  historicoLista.innerHTML =
+    "";
+
+
+  /*
+  ------------------------------------------------------
+  PRIMEIRO: MOSTRA HISTÓRICO LOCAL
+  ------------------------------------------------------
+  */
+
+  const local =
+    obterHistoricoLocal();
+
+
+  local.forEach(
+    registro => {
+
+      historicoLista.appendChild(
+        criarElementoHistorico(
+          registro
+        )
+      );
+
+    }
+  );
+
+
+  /*
+  ------------------------------------------------------
+  DEPOIS: TENTA FIREBASE
+  ------------------------------------------------------
+  */
+
+  if(
+    !usuarioAuth
+  ){
+
+    if(
+      local.length === 0
+    ){
+
+      historicoLista.innerHTML =
+
+        "<div class='sem-premios'>" +
+        "Nenhum resultado registrado ainda." +
+        "</div>";
+
+    }
+
+    return;
+
+  }
+
 
   try{
 
-    const registro =
-      await addDoc(
+    const resultado =
+      await getDocs(
 
-        collection(
-          db,
-          "resultadosRoleta"
-        ),
+        query(
 
-        {
+          collection(
+            db,
+            "resultadosRoleta"
+          ),
 
-          usuarioId:
-            usuarioAuth.uid,
+          where(
+            "usuarioId",
+            "==",
+            usuarioAuth.uid
+          )
 
-          usuarioDocId:
-            usuarioDoc._docId,
-
-          usuarioEmail:
-            usuarioAuth.email ||
-            usuarioDoc.email ||
-            "",
-
-          usuarioNome:
-            usuarioDoc.nome ||
-            usuarioDoc.name ||
-            "",
-
-          publicId:
-            usuarioDoc.publicId ||
-            "",
-
-          premioId:
-            premio.id,
-
-          premioNome:
-            premio.nome ||
-            "",
-
-          quantidade:
-            Number(
-              premio.quantidade ||
-              0
-            ),
-
-          tipo:
-            premio.tipo ||
-            "outro",
-
-          imagem:
-            premio.imagem ||
-            "",
-
-          giroNumero:
-            girosAnterior,
-
-          saldoGirosAnterior:
-            girosAnterior,
-
-          saldoGirosFinal:
-            saldoFinal,
-
-          entregue:
-            false,
-
-          criadoEm:
-            serverTimestamp()
-
-        }
+        )
 
       );
 
 
-    return registro.id;
+    const firebaseRegistros =
 
-  }
+      resultado.docs
 
-  catch(error){
+        .map(
+          documento => ({
+
+            id:
+              documento.id,
+
+            ...documento.data(),
+
+            salvoFirebase:
+              true
+
+          })
+        );
+
 
     /*
-    IMPORTANTE:
-
-    Se as Rules impedirem o histórico,
-    NÃO impedimos o prêmio de aparecer.
+    ----------------------------------------------------
+    MESCLA FIREBASE + LOCAL
+    ----------------------------------------------------
     */
 
+    const mapa =
+      new Map();
+
+
+    firebaseRegistros.forEach(
+      registro => {
+
+        mapa.set(
+          registro.id,
+          registro
+        );
+
+      }
+    );
+
+
+    local.forEach(
+      registro => {
+
+        if(
+          registro.id &&
+          mapa.has(
+            registro.id
+          )
+        ){
+
+          return;
+
+        }
+
+
+        mapa.set(
+
+          registro.id ||
+          (
+            "local_" +
+            Date.now() +
+            Math.random()
+          ),
+
+          registro
+
+        );
+
+      }
+    );
+
+
+    const todos =
+      Array.from(
+        mapa.values()
+      );
+
+
+    todos.sort(
+      (
+        a,
+        b
+      ) => {
+
+        const aTempo =
+          obterTempo(
+            a.criadoEm
+          );
+
+        const bTempo =
+          obterTempo(
+            b.criadoEm
+          );
+
+        return bTempo - aTempo;
+
+      }
+    );
+
+
+    historicoLista.innerHTML =
+      "";
+
+
+    if(
+      todos.length === 0
+    ){
+
+      historicoLista.innerHTML =
+
+        "<div class='sem-premios'>" +
+        "Você ainda não realizou nenhum giro." +
+        "</div>";
+
+      return;
+
+    }
+
+
+    todos.forEach(
+      registro => {
+
+        historicoLista.appendChild(
+          criarElementoHistorico(
+            registro
+          )
+        );
+
+      }
+    );
+
+  }
+  catch(error){
+
     console.error(
-      "Não foi possível salvar histórico:",
+      "Histórico Firebase indisponível:",
       error
     );
 
 
-    return null;
+    /*
+    Se Firebase bloquear a leitura,
+    NÃO apaga o histórico local.
+    */
+
+    if(
+      local.length === 0
+    ){
+
+      historicoLista.innerHTML =
+
+        "<div class='sem-premios'>" +
+        "📱 Histórico temporariamente indisponível. " +
+        "Novos resultados serão mantidos neste aparelho." +
+        "</div>";
+
+    }
 
   }
 
@@ -2334,104 +2594,45 @@ async function salvarResultado(
 
 
 /* =====================================================
-   MOSTRAR RESULTADO
+   TEMPO
 ===================================================== */
 
-function mostrarResultado(
-  premio,
-  registroId
+function obterTempo(
+  valor
 ){
 
-  modalPremio.textContent =
+  if(
+    !valor
+  ){
 
-    Number(
-      premio.quantidade ||
-      0
-    ).toLocaleString(
-      "pt-BR"
-    )
+    return 0;
 
-    +
-
-    " "
-
-    +
-
-    (
-      premio.nome ||
-      "Prêmio"
-    );
-
-
-  modalImg.innerHTML =
-    "";
+  }
 
 
   if(
-    premio.imagem
+    valor.seconds
   ){
 
-    const img =
-      document.createElement(
-        "img"
-      );
-
-
-    img.src =
-      premio.imagem;
-
-
-    img.alt =
-      "Prêmio";
-
-
-    img.onerror =
-      () => {
-
-        modalImg.textContent =
-          "🎁";
-
-      };
-
-
-    modalImg.appendChild(
-      img
+    return (
+      valor.seconds *
+      1000
     );
 
   }
 
-  else{
 
-    modalImg.textContent =
-      "🎁";
-
-  }
-
-
-  modalData.textContent =
-
-    "Giro realizado em " +
-
-    new Date()
-      .toLocaleString(
-        "pt-BR"
-      )
-
-    +
-
-    (
-      registroId
-        ?
-        " • Registro: " +
-        registroId
-        :
-        " • Resultado registrado localmente"
-    );
+  const tempo =
+    new Date(
+      valor
+    ).getTime();
 
 
-  modal.classList.add(
-    "show"
-  );
+  return Number.isNaN(
+    tempo
+  )
+    ? 0
+    : tempo;
 
 }
 
@@ -2505,8 +2706,7 @@ async function girarRoleta(){
     true;
 
 
-  girarBtn.disabled =
-    true;
+  atualizarGiros();
 
 
   mostrarMensagem(
@@ -2516,9 +2716,9 @@ async function girarRoleta(){
 
 
   /*
-  -----------------------------------------------------
+  ------------------------------------------------------
   ESCOLHE O PRÊMIO
-  -----------------------------------------------------
+  ------------------------------------------------------
   */
 
   const premio =
@@ -2557,52 +2757,45 @@ async function girarRoleta(){
 
 
   /*
-  -----------------------------------------------------
-  CENTRO DA FATIA
-  -----------------------------------------------------
+  ------------------------------------------------------
+  O CENTRO DA FATIA É O PONTO
+  QUE DEVE PARAR NO PONTEIRO.
+  ------------------------------------------------------
   */
 
   const centroDaFatia =
-    indice *
-    angulo +
-    angulo / 2;
+    (
+      indice *
+      angulo
+    ) +
+    (
+      angulo / 2
+    );
 
-
-  /*
-  -----------------------------------------------------
-  QUEREMOS QUE O CENTRO DA FATIA
-  TERMINE EXATAMENTE NO PONTEIRO.
-  -----------------------------------------------------
-  */
 
   const voltas =
     6;
 
 
-  const ajuste =
+  const alvo =
     360 -
     centroDaFatia;
 
 
   const rotacaoFinal =
-
     rotacaoAtual +
+    (
+      voltas * 360
+    ) +
+    alvo;
 
-    voltas * 360 +
 
-    ajuste;
-
-
-  roletaGrupo.style.transition =
-
+  roletaEl.style.transition =
     "transform 5.5s cubic-bezier(.12,.72,.18,1)";
 
 
-  roletaGrupo.style.transform =
-
-    "rotate(" +
-    rotacaoFinal +
-    "deg)";
+  roletaEl.style.transform =
+    `rotate(${rotacaoFinal}deg)`;
 
 
   rotacaoAtual =
@@ -2610,9 +2803,9 @@ async function girarRoleta(){
 
 
   /*
-  -----------------------------------------------------
-  ESPERA A ROLETA PARAR
-  -----------------------------------------------------
+  ------------------------------------------------------
+  ESPERA TERMINAR
+  ------------------------------------------------------
   */
 
   await new Promise(
@@ -2625,9 +2818,9 @@ async function girarRoleta(){
 
 
   /*
-  -----------------------------------------------------
-  DESCONTA O GIRO
-  -----------------------------------------------------
+  ------------------------------------------------------
+  AGORA DESCONTA O GIRO.
+  ------------------------------------------------------
   */
 
   const novoSaldo =
@@ -2656,9 +2849,7 @@ async function girarRoleta(){
     usuarioDoc.girosRoleta =
       novoSaldo;
 
-
   }
-
   catch(error){
 
     console.error(
@@ -2668,66 +2859,272 @@ async function girarRoleta(){
 
 
     /*
-    Mesmo que dê erro,
-    não escondemos o prêmio.
+    Não mostra prêmio como se tivesse
+    dado erro.
+
+    O usuário já viu o resultado.
     */
 
-    mostrarMensagem(
-      "⚠️ O prêmio foi sorteado. Houve um problema ao atualizar seus giros.",
-      "error"
+    usuarioDoc.girosRoleta =
+      novoSaldo;
+
+  }
+
+
+  atualizarGiros();
+
+
+  /*
+  ------------------------------------------------------
+  CRIA O REGISTRO LOCAL PRIMEIRO.
+  
+  Isso garante que o histórico NÃO desapareça
+  mesmo se Firestore bloquear a gravação.
+  ------------------------------------------------------
+  */
+
+  const agora =
+    new Date();
+
+
+  const idLocal =
+
+    "local_" +
+    Date.now() +
+    "_" +
+    Math.random()
+      .toString(36)
+      .slice(2,8);
+
+
+  const registroLocal = {
+
+    id:
+      idLocal,
+
+    usuarioId:
+      usuarioAuth.uid,
+
+    usuarioDocId:
+      usuarioDoc._docId ||
+      "",
+
+    usuarioEmail:
+      usuarioAuth.email ||
+      usuarioDoc.email ||
+      "",
+
+    usuarioNome:
+      usuarioDoc.nome ||
+      usuarioDoc.name ||
+      "",
+
+    premioId:
+      premio.id,
+
+    premioNome:
+      premio.nome ||
+      "",
+
+    quantidade:
+      Number(
+        premio.quantidade ||
+        0
+      ),
+
+    tipo:
+      premio.tipo ||
+      "outro",
+
+    imagem:
+      premio.imagem ||
+      "",
+
+    criadoEm:
+      agora.toISOString(),
+
+    entregue:
+      false,
+
+    salvoFirebase:
+      false
+
+  };
+
+
+  salvarHistoricoLocal(
+    registroLocal
+  );
+
+
+  /*
+  ------------------------------------------------------
+  TENTA REGISTRAR NO FIREBASE
+  ------------------------------------------------------
+  */
+
+  let registroId =
+    idLocal;
+
+
+  try{
+
+    const registro =
+      await addDoc(
+
+        collection(
+          db,
+          "resultadosRoleta"
+        ),
+
+        {
+
+          usuarioId:
+            usuarioAuth.uid,
+
+          usuarioDocId:
+            usuarioDoc._docId ||
+            "",
+
+          usuarioEmail:
+            usuarioAuth.email ||
+            usuarioDoc.email ||
+            "",
+
+          usuarioNome:
+            usuarioDoc.nome ||
+            usuarioDoc.name ||
+            "",
+
+          premioId:
+            premio.id,
+
+          premioNome:
+            premio.nome ||
+            "",
+
+          quantidade:
+            Number(
+              premio.quantidade ||
+              0
+            ),
+
+          tipo:
+            premio.tipo ||
+            "outro",
+
+          imagem:
+            premio.imagem ||
+            "",
+
+          saldoGirosAnterior:
+            girosAtuais,
+
+          saldoGirosFinal:
+            novoSaldo,
+
+          entregue:
+            false,
+
+          criadoEm:
+            serverTimestamp()
+
+        }
+
+      );
+
+
+    registroId =
+      registro.id;
+
+
+    /*
+    Atualiza o ID local para o ID real
+    do Firebase.
+
+    */
+
+    const historicoAtual =
+      obterHistoricoLocal();
+
+
+    const atualizado =
+      historicoAtual.map(
+        registroLocal => {
+
+          if(
+            registroLocal.id ===
+            idLocal
+          ){
+
+            return {
+
+              ...registroLocal,
+
+              id:
+                registro.id,
+
+              salvoFirebase:
+                true
+
+            };
+
+          }
+
+
+          return registroLocal;
+
+        }
+      );
+
+
+    localStorage.setItem(
+
+      chaveHistorico(),
+
+      JSON.stringify(
+        atualizado
+      )
+
+    );
+
+  }
+  catch(error){
+
+    /*
+    ----------------------------------------------------
+    FIREBASE PODE ESTAR BLOQUEANDO A COLLECTION.
+    
+    MAS ISSO NÃO É MAIS UM ERRO DO GIRO.
+    O resultado já está salvo localmente.
+    ----------------------------------------------------
+    */
+
+    console.warn(
+      "Firebase não registrou o histórico:",
+      error
     );
 
   }
 
 
   /*
-  -----------------------------------------------------
-  ATUALIZA NÚMERO DE GIROS
-  -----------------------------------------------------
-  */
-
-  atualizarGiros();
-
-
-  /*
-  -----------------------------------------------------
-  MOSTRA O PRÊMIO IMEDIATAMENTE
-  -----------------------------------------------------
-  */
-
-  let registroId =
-    null;
-
-
-  /*
-  Tentamos salvar o histórico,
-  mas isso NÃO pode impedir o prêmio.
-  */
-
-  registroId =
-    await salvarResultado(
-      premio,
-      girosAtuais,
-      novoSaldo
-    );
-
-
-  /*
-  -----------------------------------------------------
-  MOSTRA RESULTADO
-  -----------------------------------------------------
+  ------------------------------------------------------
+  MOSTRA O PRÊMIO.
+  ------------------------------------------------------
   */
 
   mostrarResultado(
+
     premio,
+
     registroId
+
   );
 
 
   /*
-  -----------------------------------------------------
-  HISTÓRICO
-  -----------------------------------------------------
+  Atualiza histórico imediatamente.
   */
 
   await carregarHistorico();
@@ -2743,266 +3140,92 @@ async function girarRoleta(){
 
 
 /* =====================================================
-   HISTÓRICO
+   MOSTRAR RESULTADO
 ===================================================== */
 
-async function carregarHistorico(){
+function mostrarResultado(
+  premio,
+  registroId
+){
+
+  modalPremio.textContent =
+
+    (
+      Number(
+        premio.quantidade ||
+        0
+      )
+    ).toLocaleString(
+      "pt-BR"
+    ) +
+
+    " " +
+
+    (
+      premio.nome ||
+      "Prêmio"
+    );
+
+
+  modalImg.innerHTML =
+    "";
+
 
   if(
-    !usuarioAuth
+    premio.imagem
   ){
 
-    return;
-
-  }
-
-
-  try{
-
-    const resultado =
-      await getDocs(
-
-        query(
-
-          collection(
-            db,
-            "resultadosRoleta"
-          ),
-
-          where(
-            "usuarioId",
-            "==",
-            usuarioAuth.uid
-          )
-
-        )
-
+    const img =
+      document.createElement(
+        "img"
       );
 
 
-    if(
-      resultado.empty
-    ){
+    img.src =
+      premio.imagem;
 
-      historicoLista.innerHTML =
 
-        "<div class='sem-premios'>" +
+    img.alt =
+      "Prêmio";
 
-        "Você ainda não realizou nenhum giro." +
 
-        "</div>";
+    img.onerror =
+      () => {
 
-      return;
+        modalImg.textContent =
+          "🎁";
 
-    }
+      };
 
 
-    const registros =
-
-      resultado.docs
-
-        .map(
-          documento => ({
-
-            id:
-              documento.id,
-
-            ...documento.data()
-
-          })
-        )
-
-        .sort(
-          (
-            a,
-            b
-          ) => {
-
-            const aData =
-              a.criadoEm?.seconds ||
-              0;
-
-
-            const bData =
-              b.criadoEm?.seconds ||
-              0;
-
-
-            return bData - aData;
-
-          }
-        );
-
-
-    historicoLista.innerHTML =
-      "";
-
-
-    registros.forEach(
-      registro => {
-
-        const item =
-          document.createElement(
-            "div"
-          );
-
-
-        item.className =
-          "resultado";
-
-
-        const top =
-          document.createElement(
-            "div"
-          );
-
-
-        top.className =
-          "resultado-top";
-
-
-        const premio =
-          document.createElement(
-            "div"
-          );
-
-
-        premio.className =
-          "resultado-premio";
-
-
-        premio.textContent =
-
-          Number(
-            registro.quantidade ||
-            0
-          ).toLocaleString(
-            "pt-BR"
-          )
-
-          +
-
-          " "
-
-          +
-
-          (
-            registro.premioNome ||
-            "Prêmio"
-          );
-
-
-        const data =
-          document.createElement(
-            "div"
-          );
-
-
-        data.className =
-          "resultado-data";
-
-
-        data.textContent =
-          formatarData(
-            registro.criadoEm
-          );
-
-
-        top.appendChild(
-          premio
-        );
-
-
-        top.appendChild(
-          data
-        );
-
-
-        const status =
-          document.createElement(
-            "div"
-          );
-
-
-        status.className =
-          "resultado-status";
-
-
-        status.textContent =
-
-          registro.entregue === true
-
-            ?
-
-            "✅ Prêmio entregue"
-
-            :
-
-            "⏳ Aguardando entrega";
-
-
-        const id =
-          document.createElement(
-            "div"
-          );
-
-
-        id.className =
-          "resultado-id";
-
-
-        id.textContent =
-
-          "ID do resultado: " +
-          registro.id;
-
-
-        item.appendChild(
-          top
-        );
-
-
-        item.appendChild(
-          status
-        );
-
-
-        item.appendChild(
-          id
-        );
-
-
-        historicoLista.appendChild(
-          item
-        );
-
-      }
+    modalImg.appendChild(
+      img
     );
 
   }
+  else{
 
-  catch(error){
-
-    /*
-    Se as Rules ainda não permitirem
-    leitura do histórico, NÃO quebra a roleta.
-    */
-
-    console.warn(
-      "Histórico indisponível:",
-      error
-    );
-
-
-    historicoLista.innerHTML =
-
-      "<div class='sem-premios'>" +
-
-      "📜 Histórico temporariamente indisponível." +
-
-      "</div>";
+    modalImg.textContent =
+      "🎁";
 
   }
+
+
+  modalData.textContent =
+
+    "Giro realizado em " +
+
+    new Date()
+      .toLocaleString(
+        "pt-BR"
+      ) +
+
+    " • Resultado registrado";
+
+
+  modal.classList.add(
+    "show"
+  );
 
 }
 
@@ -3051,14 +3274,11 @@ onAuthStateChanged(
           "error"
         );
 
-
         girosEl.textContent =
           "0";
 
-
         girarBtn.disabled =
           true;
-
 
         return;
 
@@ -3086,17 +3306,16 @@ onAuthStateChanged(
       atualizarGiros();
 
     }
-
     catch(error){
 
       console.error(
-        "Erro ao iniciar roleta:",
+        "Erro geral:",
         error
       );
 
 
       mostrarMensagem(
-        "Erro ao carregar a roleta.",
+        "Ocorreu um erro ao carregar a roleta.",
         "error"
       );
 
@@ -3132,28 +3351,6 @@ document
     }
   );
 
-
-/*
-Fecha o modal clicando fora.
-*/
-
-modal.addEventListener(
-  "click",
-  event => {
-
-    if(
-      event.target ===
-      modal
-    ){
-
-      modal.classList.remove(
-        "show"
-      );
-
-    }
-
-  }
-);
 
 </script>
 
