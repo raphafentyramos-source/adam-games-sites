@@ -5,10 +5,7 @@
 
 <meta charset="UTF-8">
 
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Adam Games • Admin da Roleta</title>
 
@@ -21,40 +18,16 @@
 }
 
 body{
-
   min-height:100vh;
-
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
-
+  font-family:Arial,Helvetica,sans-serif;
   color:#fff;
 
   background:
-    radial-gradient(
-      circle at 20% 0%,
-      #20a9ff 0%,
-      transparent 30%
-    ),
+    radial-gradient(circle at 20% 0%,#20a9ff 0%,transparent 30%),
+    radial-gradient(circle at 90% 20%,#16a56b 0%,transparent 28%),
+    linear-gradient(145deg,#087edb,#031a3b 75%);
 
-    radial-gradient(
-      circle at 90% 20%,
-      #16a56b 0%,
-      transparent 28%
-    ),
-
-    linear-gradient(
-      145deg,
-      #087edb,
-      #031a3b 75%
-    );
-
-  padding:
-    18px
-    12px
-    60px;
-
+  padding:18px 12px 60px;
 }
 
 .container{
@@ -63,31 +36,21 @@ body{
   margin:auto;
 }
 
-
-/* =====================================================
-   TOPO
-===================================================== */
-
 header{
-
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:15px;
   margin-bottom:25px;
-
 }
 
 .logo{
-
   display:flex;
   align-items:center;
   gap:12px;
-
 }
 
 .logoIcon{
-
   width:58px;
   height:58px;
   border-radius:18px;
@@ -99,16 +62,9 @@ header{
   font-size:30px;
 
   background:
-    linear-gradient(
-      145deg,
-      #ffd72a,
-      #c68100
-    );
+    linear-gradient(145deg,#ffd72a,#c68100);
 
-  box-shadow:
-    0 8px 20px
-    rgba(0,0,0,.25);
-
+  box-shadow:0 8px 20px rgba(0,0,0,.25);
 }
 
 .logo h1{
@@ -120,72 +76,39 @@ header{
 }
 
 .badge{
-
   display:inline-block;
   margin-top:5px;
   padding:5px 9px;
   border-radius:8px;
-
   background:#087bca;
-
   font-size:11px;
   font-weight:bold;
-
 }
 
 .back{
-
   padding:12px 16px;
-
   border:0;
   border-radius:12px;
-
   background:#123b65;
   color:#fff;
-
   font-weight:bold;
   cursor:pointer;
-
 }
 
-
-/* =====================================================
-   TÍTULO
-===================================================== */
-
 h2{
-
-  font-size:
-    clamp(
-      28px,
-      7vw,
-      40px
-    );
-
+  font-size:clamp(28px,7vw,40px);
   margin-bottom:6px;
-
 }
 
 .subtitle{
-
   color:#b9d8ef;
   margin-bottom:22px;
-
 }
 
-
-/* =====================================================
-   CARD
-===================================================== */
-
 .card{
+  background:rgba(2,30,62,.95);
 
-  background:
-    rgba(2,30,62,.95);
-
-  border:
-    1px solid
-    rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.1);
 
   border-radius:22px;
 
@@ -193,47 +116,26 @@ h2{
 
   margin-bottom:18px;
 
-  box-shadow:
-    0 15px 40px
-    rgba(0,0,0,.22);
-
+  box-shadow:0 15px 40px rgba(0,0,0,.22);
 }
 
 .card h3{
-
   font-size:20px;
   margin-bottom:16px;
-
 }
 
-
-/* =====================================================
-   FORM
-===================================================== */
-
 .form{
-
   display:grid;
-
-  grid-template-columns:
-    1fr
-    1fr;
-
+  grid-template-columns:1fr 1fr;
   gap:12px;
-
 }
 
 .field label{
-
   display:block;
-
   margin-bottom:6px;
-
   color:#9ec4e3;
-
   font-size:11px;
   font-weight:bold;
-
 }
 
 .field.full{
@@ -242,15 +144,12 @@ h2{
 
 input,
 select{
-
   width:100%;
   height:50px;
 
   padding:0 14px;
 
-  border:
-    1px solid
-    rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.14);
 
   border-radius:12px;
 
@@ -260,39 +159,25 @@ select{
   color:#fff;
 
   font-size:15px;
-
 }
 
 input:focus,
 select:focus{
-
   border-color:#26a9ff;
 
   box-shadow:
     0 0 0 3px
     rgba(38,169,255,.1);
-
 }
 
-
-/* =====================================================
-   IMAGEM
-===================================================== */
-
 .image-help{
-
   margin-top:7px;
-
   color:#7fa7c6;
-
   font-size:11px;
-
   line-height:1.4;
-
 }
 
 .image-preview{
-
   width:100%;
   min-height:150px;
 
@@ -300,15 +185,11 @@ select:focus{
 
   border-radius:15px;
 
-  background:
-    rgba(255,255,255,.04);
+  background:rgba(255,255,255,.04);
 
-  border:
-    1px dashed
-    rgba(255,255,255,.16);
+  border:1px dashed rgba(255,255,255,.16);
 
   display:flex;
-
   align-items:center;
   justify-content:center;
 
@@ -319,87 +200,51 @@ select:focus{
   text-align:center;
 
   padding:10px;
-
 }
 
 .image-preview img{
-
   max-width:100%;
   max-height:180px;
 
   object-fit:contain;
 
   border-radius:10px;
-
 }
 
 .no-image{
-
   font-size:48px;
   opacity:.8;
-
 }
 
-
-/* =====================================================
-   BOTÕES
-===================================================== */
-
 .actions{
-
   display:grid;
-
-  grid-template-columns:
-    1fr
-    1fr;
-
+  grid-template-columns:1fr 1fr;
   gap:10px;
-
   margin-top:15px;
-
 }
 
 button{
-
   border:0;
   cursor:pointer;
   color:#fff;
   font-weight:bold;
-
 }
 
 .save{
-
   padding:15px;
-
   border-radius:13px;
 
   background:
-    linear-gradient(
-      135deg,
-      #11b968,
-      #087b43
-    );
-
+    linear-gradient(135deg,#11b968,#087b43);
 }
 
 .clear{
-
   padding:15px;
-
   border-radius:13px;
-
   background:#183c62;
-
 }
 
-
-/* =====================================================
-   MENSAGEM
-===================================================== */
-
 .message{
-
   display:none;
 
   margin-top:12px;
@@ -411,73 +256,48 @@ button{
   font-size:13px;
 
   line-height:1.4;
-
 }
 
 .message.success{
-
   display:block;
 
-  background:
-    rgba(0,220,110,.12);
+  background:rgba(0,220,110,.12);
 
   color:#6effa8;
-
 }
 
 .message.error{
-
   display:block;
 
-  background:
-    rgba(255,50,70,.12);
+  background:rgba(255,50,70,.12);
 
   color:#ff9ca8;
-
 }
 
-
-/* =====================================================
-   PESO
-===================================================== */
-
 .weight-info{
-
   margin-top:15px;
 
   padding:13px;
 
   border-radius:12px;
 
-  background:
-    rgba(255,211,42,.07);
+  background:rgba(255,211,42,.07);
 
-  border:
-    1px solid
-    rgba(255,211,42,.15);
+  border:1px solid rgba(255,211,42,.15);
 
   color:#e8d68b;
 
   font-size:12px;
 
   line-height:1.5;
-
 }
 
-
-/* =====================================================
-   LISTA
-===================================================== */
-
 .prize-list{
-
   display:grid;
   gap:12px;
-
 }
 
 .prize{
-
   display:grid;
 
   grid-template-columns:
@@ -493,17 +313,12 @@ button{
 
   border-radius:16px;
 
-  background:
-    rgba(255,255,255,.045);
+  background:rgba(255,255,255,.045);
 
-  border:
-    1px solid
-    rgba(255,255,255,.07);
-
+  border:1px solid rgba(255,255,255,.07);
 }
 
 .prize-image{
-
   width:90px;
   height:90px;
 
@@ -519,38 +334,29 @@ button{
   overflow:hidden;
 
   font-size:38px;
-
 }
 
 .prize-image img{
-
   width:100%;
   height:100%;
-
   object-fit:contain;
-
 }
 
 .prize-name{
-
   font-size:17px;
   font-weight:900;
-
 }
 
 .prize-quantity{
-
   margin-top:5px;
 
   color:#ffd72b;
 
   font-size:15px;
   font-weight:bold;
-
 }
 
 .prize-details{
-
   margin-top:7px;
 
   color:#9fc1dd;
@@ -558,72 +364,47 @@ button{
   font-size:11px;
 
   line-height:1.5;
-
 }
 
 .prize-actions{
-
   display:flex;
-
   flex-direction:column;
-
   gap:7px;
-
 }
 
 .edit{
-
   padding:9px 12px;
-
   border-radius:9px;
-
   background:#087fd8;
-
 }
 
 .delete{
-
   padding:9px 12px;
-
   border-radius:9px;
-
   background:#c52e43;
-
 }
 
 .active{
-
   color:#62ffa2;
   font-weight:bold;
-
 }
 
 .inactive{
-
   color:#ff8997;
   font-weight:bold;
-
 }
 
 .empty{
-
   padding:20px;
 
   border-radius:14px;
 
-  background:
-    rgba(255,255,255,.04);
+  background:rgba(255,255,255,.04);
 
   color:#9dbbd3;
 
   text-align:center;
-
 }
-
-
-/* =====================================================
-   RESPONSIVO
-===================================================== */
 
 @media(max-width:650px){
 
@@ -644,26 +425,17 @@ button{
   }
 
   .prize{
-
-    grid-template-columns:
-      75px
-      1fr;
-
+    grid-template-columns:75px 1fr;
   }
 
   .prize-image{
-
     width:75px;
     height:75px;
-
   }
 
   .prize-actions{
-
     grid-column:1 / -1;
-
     flex-direction:row;
-
   }
 
   .prize-actions button{
@@ -860,9 +632,9 @@ button{
 
       <div class="image-help">
 
-        🖼️ Se informar uma imagem, ela será usada
-        na roleta e no resultado. Se deixar vazio,
-        será usado o ícone padrão do tipo do prêmio.
+        🖼️ A imagem é opcional.
+        Se deixar vazio, o prêmio será salvo normalmente
+        e a roleta usará o ícone padrão.
 
       </div>
 
@@ -872,8 +644,17 @@ button{
         id="imagePreview">
 
         <div>
-          <div class="no-image">🎁</div>
-          Sem imagem — será usado o ícone padrão.
+
+          <div
+            class="no-image"
+            id="previewIcon">
+
+            💎
+
+          </div>
+
+          Sem imagem — ícone padrão.
+
         </div>
 
       </div>
@@ -1028,7 +809,7 @@ from
 
 
 /* =====================================================
-   CONFIG
+   CONFIGURAÇÃO
 ===================================================== */
 
 const firebaseConfig = {
@@ -1076,11 +857,9 @@ const ADMIN_EMAIL =
   "raphafentyramos@gmail.com";
 
 
-let adminUsuario =
-  null;
+let adminUsuario = null;
 
-let premioEditando =
-  null;
+let premioEditando = null;
 
 
 /* =====================================================
@@ -1088,54 +867,37 @@ let premioEditando =
 ===================================================== */
 
 const nome =
-  document.getElementById(
-    "nome"
-  );
+  document.getElementById("nome");
 
 const quantidade =
-  document.getElementById(
-    "quantidade"
-  );
+  document.getElementById("quantidade");
 
 const tipo =
-  document.getElementById(
-    "tipo"
-  );
+  document.getElementById("tipo");
 
 const peso =
-  document.getElementById(
-    "peso"
-  );
+  document.getElementById("peso");
 
 const imagem =
-  document.getElementById(
-    "imagem"
-  );
+  document.getElementById("imagem");
 
 const descricao =
-  document.getElementById(
-    "descricao"
-  );
+  document.getElementById("descricao");
 
 const ativo =
-  document.getElementById(
-    "ativo"
-  );
+  document.getElementById("ativo");
 
 const message =
-  document.getElementById(
-    "message"
-  );
+  document.getElementById("message");
 
 const prizeList =
-  document.getElementById(
-    "prizeList"
-  );
+  document.getElementById("prizeList");
 
 const imagePreview =
-  document.getElementById(
-    "imagePreview"
-  );
+  document.getElementById("imagePreview");
+
+const previewIcon =
+  document.getElementById("previewIcon");
 
 
 /* =====================================================
@@ -1177,14 +939,10 @@ const iconesPorTipo = {
 };
 
 
-function obterIcone(
-  tipoPremio
-){
+function obterIcone(tipoPremio){
 
   return (
-    iconesPorTipo[
-      tipoPremio
-    ]
+    iconesPorTipo[tipoPremio]
     ||
     "🎁"
   );
@@ -1196,27 +954,29 @@ function obterIcone(
    MENSAGEM
 ===================================================== */
 
-function mostrarMensagem(
-  texto,
-  classe
-){
+function mostrarMensagem(texto,classe){
 
   message.textContent =
     texto;
 
   message.className =
-    "message " +
-    classe;
+    "message " + classe;
 
 }
 
 
 /* =====================================================
-   PREVIEW
+   PREVIEW DA IMAGEM
 ===================================================== */
 
 imagem.addEventListener(
   "input",
+  atualizarPreview
+);
+
+
+tipo.addEventListener(
+  "change",
   atualizarPreview
 );
 
@@ -1226,6 +986,10 @@ function atualizarPreview(){
   const caminho =
     imagem.value.trim();
 
+
+  /*
+  SEM IMAGEM
+  */
 
   if(!caminho){
 
@@ -1241,7 +1005,7 @@ function atualizarPreview(){
 
         "</div>" +
 
-        "Sem imagem — será usado o ícone padrão." +
+        "Sem imagem — ícone padrão." +
 
       "</div>";
 
@@ -1250,14 +1014,16 @@ function atualizarPreview(){
   }
 
 
+  /*
+  COM IMAGEM
+  */
+
   imagePreview.innerHTML =
     "";
 
 
   const img =
-    document.createElement(
-      "img"
-    );
+    document.createElement("img");
 
 
   img.src =
@@ -1265,11 +1031,11 @@ function atualizarPreview(){
 
 
   img.alt =
-    "Prévia";
+    "Prévia do prêmio";
 
 
   img.onerror =
-    () => {
+    function(){
 
       imagePreview.innerHTML =
 
@@ -1283,7 +1049,7 @@ function atualizarPreview(){
 
           "</div>" +
 
-          "⚠️ Imagem não encontrada.<br>" +
+          "⚠️ Não foi possível visualizar esta imagem.<br>" +
 
           "O prêmio ainda poderá ser salvo." +
 
@@ -1299,24 +1065,8 @@ function atualizarPreview(){
 }
 
 
-tipo.addEventListener(
-  "change",
-  () => {
-
-    if(
-      !imagem.value.trim()
-    ){
-
-      atualizarPreview();
-
-    }
-
-  }
-);
-
-
 /* =====================================================
-   LIMPAR
+   LIMPAR FORMULÁRIO
 ===================================================== */
 
 function limparFormulario(){
@@ -1359,7 +1109,7 @@ function limparFormulario(){
 
 
 /* =====================================================
-   SALVAR
+   SALVAR PRÊMIO
 ===================================================== */
 
 async function salvarPremio(){
@@ -1401,9 +1151,12 @@ async function salvarPremio(){
 
 
   const ativoValor =
-    ativo.value ===
-    "true";
+    ativo.value === "true";
 
+
+  /*
+  NOME
+  */
 
   if(!nomeValor){
 
@@ -1417,10 +1170,15 @@ async function salvarPremio(){
   }
 
 
+  /*
+  QUANTIDADE
+  */
+
   if(
     !Number.isFinite(
       quantidadeValor
-    ) ||
+    )
+    ||
     quantidadeValor <= 0
   ){
 
@@ -1434,10 +1192,15 @@ async function salvarPremio(){
   }
 
 
+  /*
+  PESO
+  */
+
   if(
     !Number.isFinite(
       pesoValor
-    ) ||
+    )
+    ||
     pesoValor <= 0
   ){
 
@@ -1452,7 +1215,22 @@ async function salvarPremio(){
 
 
   /*
-  IMAGEM NÃO É MAIS OBRIGATÓRIA.
+  =====================================================
+  IMPORTANTE:
+  NÃO EXISTE VALIDAÇÃO DE IMAGEM AQUI.
+
+  imagemValor pode ser:
+
+  ""
+  
+  OU
+
+  "rubis.png"
+  
+  OU
+
+  qualquer caminho/URL válido.
+  =====================================================
   */
 
 
@@ -1471,10 +1249,10 @@ async function salvarPremio(){
       pesoValor,
 
     imagem:
-      imagemValor || "",
+      imagemValor,
 
     temImagem:
-      imagemValor !== "",
+      imagemValor.length > 0,
 
     descricao:
       descricaoValor,
@@ -1493,9 +1271,11 @@ async function salvarPremio(){
 
   try{
 
-    if(
-      premioEditando
-    ){
+    /*
+    EDITANDO
+    */
+
+    if(premioEditando){
 
       await updateDoc(
 
@@ -1516,6 +1296,11 @@ async function salvarPremio(){
       );
 
     }
+
+
+    /*
+    NOVO PRÊMIO
+    */
 
     else{
 
@@ -1554,6 +1339,7 @@ async function salvarPremio(){
     await carregarPremios();
 
   }
+
   catch(error){
 
     console.error(
@@ -1564,7 +1350,7 @@ async function salvarPremio(){
 
     mostrarMensagem(
 
-      "❌ Não foi possível salvar o prêmio: " +
+      "❌ Erro ao salvar o prêmio: " +
 
       (
         error.message ||
@@ -1587,7 +1373,7 @@ async function salvarPremio(){
 async function carregarPremios(){
 
   prizeList.innerHTML =
-    "<div class='empty'>🔄 Carregando...</div>";
+    "<div class='empty'>🔄 Carregando prêmios...</div>";
 
 
   try{
@@ -1603,9 +1389,7 @@ async function carregarPremios(){
       );
 
 
-    if(
-      resultado.empty
-    ){
+    if(resultado.empty){
 
       prizeList.innerHTML =
         "<div class='empty'>" +
@@ -1619,9 +1403,7 @@ async function carregarPremios(){
 
     const premios =
 
-      resultado.docs
-
-      .map(
+      resultado.docs.map(
         documento => ({
 
           id:
@@ -1630,35 +1412,23 @@ async function carregarPremios(){
           ...documento.data()
 
         })
-
-      )
-
-      .sort(
-        (
-          a,
-          b
-        ) => {
-
-          const nomeA =
-            String(
-              a.nome ||
-              ""
-            );
-
-          const nomeB =
-            String(
-              b.nome ||
-              ""
-            );
-
-          return nomeA.localeCompare(
-            nomeB,
-            "pt-BR"
-          );
-
-        }
-
       );
+
+
+    premios.sort(
+      (a,b) => {
+
+        return String(
+          a.nome || ""
+        ).localeCompare(
+          String(
+            b.nome || ""
+          ),
+          "pt-BR"
+        );
+
+      }
+    );
 
 
     prizeList.innerHTML =
@@ -1668,265 +1438,19 @@ async function carregarPremios(){
     premios.forEach(
       premio => {
 
-        const item =
-          document.createElement(
-            "div"
-          );
-
-
-        item.className =
-          "prize";
-
-
-        const imagemBox =
-          document.createElement(
-            "div"
-          );
-
-
-        imagemBox.className =
-          "prize-image";
-
-
-        if(
-          premio.imagem
-        ){
-
-          const img =
-            document.createElement(
-              "img"
-            );
-
-
-          img.src =
-            premio.imagem;
-
-
-          img.alt =
-            premio.nome ||
-            "Prêmio";
-
-
-          img.onerror =
-            () => {
-
-              imagemBox.innerHTML =
-                obterIcone(
-                  premio.tipo
-                );
-
-            };
-
-
-          imagemBox.appendChild(
-            img
-          );
-
-        }
-
-        else{
-
-          imagemBox.textContent =
-            obterIcone(
-              premio.tipo
-            );
-
-        }
-
-
-        const info =
-          document.createElement(
-            "div"
-          );
-
-
-        const nomeDiv =
-          document.createElement(
-            "div"
-          );
-
-
-        nomeDiv.className =
-          "prize-name";
-
-
-        nomeDiv.textContent =
-          premio.nome ||
-          "Sem nome";
-
-
-        const quantidadeDiv =
-          document.createElement(
-            "div"
-          );
-
-
-        quantidadeDiv.className =
-          "prize-quantity";
-
-
-        quantidadeDiv.textContent =
-
-          (
-            premio.quantidade ||
-            0
-          ).toLocaleString(
-            "pt-BR"
-          );
-
-
-        const details =
-          document.createElement(
-            "div"
-          );
-
-
-        details.className =
-          "prize-details";
-
-
-        const status =
-          premio.ativo === true
-
-            ?
-
-            "<span class='active'>● ATIVO</span>"
-
-            :
-
-            "<span class='inactive'>● INATIVO</span>";
-
-
-        details.innerHTML =
-
-          "Tipo: " +
-
-          (
-            premio.tipo ||
-            "outro"
-          ) +
-
-          " • Peso: " +
-
-          (
-            premio.peso ||
-            0
-          ) +
-
-          "<br>" +
-
-          status;
-
-
-        info.appendChild(
-          nomeDiv
-        );
-
-        info.appendChild(
-          quantidadeDiv
-        );
-
-        info.appendChild(
-          details
-        );
-
-
-        const actions =
-          document.createElement(
-            "div"
-          );
-
-
-        actions.className =
-          "prize-actions";
-
-
-        const editar =
-          document.createElement(
-            "button"
-          );
-
-
-        editar.className =
-          "edit";
-
-        editar.type =
-          "button";
-
-        editar.textContent =
-          "✏️ Editar";
-
-
-        editar.addEventListener(
-          "click",
-          () =>
-            editarPremio(
-              premio
-            )
-        );
-
-
-        const excluir =
-          document.createElement(
-            "button"
-          );
-
-
-        excluir.className =
-          "delete";
-
-        excluir.type =
-          "button";
-
-        excluir.textContent =
-          "🗑️ Excluir";
-
-
-        excluir.addEventListener(
-          "click",
-          () =>
-            excluirPremio(
-              premio.id,
-              premio.nome
-            )
-        );
-
-
-        actions.appendChild(
-          editar
-        );
-
-        actions.appendChild(
-          excluir
-        );
-
-
-        item.appendChild(
-          imagemBox
-        );
-
-        item.appendChild(
-          info
-        );
-
-        item.appendChild(
-          actions
-        );
-
-
-        prizeList.appendChild(
-          item
+        criarItemPremio(
+          premio
         );
 
       }
     );
 
-
   }
+
   catch(error){
 
     console.error(
-      "Erro ao carregar prêmios:",
+      "Erro ao carregar:",
       error
     );
 
@@ -1945,12 +1469,277 @@ async function carregarPremios(){
 
 
 /* =====================================================
-   EDITAR
+   CRIAR ITEM DA LISTA
 ===================================================== */
 
-function editarPremio(
-  premio
-){
+function criarItemPremio(premio){
+
+  const item =
+    document.createElement("div");
+
+
+  item.className =
+    "prize";
+
+
+  /*
+  IMAGEM
+  */
+
+  const imagemBox =
+    document.createElement("div");
+
+
+  imagemBox.className =
+    "prize-image";
+
+
+  if(
+    premio.imagem &&
+    String(
+      premio.imagem
+    ).trim() !== ""
+  ){
+
+    const img =
+      document.createElement("img");
+
+
+    img.src =
+      premio.imagem;
+
+
+    img.alt =
+      premio.nome ||
+      "Prêmio";
+
+
+    img.onerror =
+      function(){
+
+        imagemBox.textContent =
+          obterIcone(
+            premio.tipo
+          );
+
+      };
+
+
+    imagemBox.appendChild(
+      img
+    );
+
+  }
+
+  else{
+
+    imagemBox.textContent =
+      obterIcone(
+        premio.tipo
+      );
+
+  }
+
+
+  /*
+  INFORMAÇÕES
+  */
+
+  const info =
+    document.createElement("div");
+
+
+  const nomeDiv =
+    document.createElement("div");
+
+
+  nomeDiv.className =
+    "prize-name";
+
+
+  nomeDiv.textContent =
+    premio.nome ||
+    "Sem nome";
+
+
+  const quantidadeDiv =
+    document.createElement("div");
+
+
+  quantidadeDiv.className =
+    "prize-quantity";
+
+
+  quantidadeDiv.textContent =
+
+    Number(
+      premio.quantidade || 0
+    ).toLocaleString(
+      "pt-BR"
+    );
+
+
+  const details =
+    document.createElement("div");
+
+
+  details.className =
+    "prize-details";
+
+
+  const status =
+    premio.ativo === true
+
+      ?
+
+      "<span class='active'>● ATIVO</span>"
+
+      :
+
+      "<span class='inactive'>● INATIVO</span>";
+
+
+  details.innerHTML =
+
+    "Tipo: " +
+    (
+      premio.tipo ||
+      "outro"
+    ) +
+
+    " • Peso: " +
+    (
+      premio.peso ||
+      0
+    ) +
+
+    "<br>" +
+
+    status +
+
+    "<br>" +
+
+    (
+      premio.imagem
+        ?
+        "🖼️ Com imagem"
+        :
+        "🎁 Sem imagem — ícone padrão"
+    );
+
+
+  info.appendChild(
+    nomeDiv
+  );
+
+  info.appendChild(
+    quantidadeDiv
+  );
+
+  info.appendChild(
+    details
+  );
+
+
+  /*
+  BOTÕES
+  */
+
+  const actions =
+    document.createElement("div");
+
+
+  actions.className =
+    "prize-actions";
+
+
+  const editar =
+    document.createElement("button");
+
+
+  editar.type =
+    "button";
+
+  editar.className =
+    "edit";
+
+  editar.textContent =
+    "✏️ Editar";
+
+
+  editar.addEventListener(
+    "click",
+    function(){
+
+      editarPremio(
+        premio
+      );
+
+    }
+  );
+
+
+  const excluir =
+    document.createElement("button");
+
+
+  excluir.type =
+    "button";
+
+  excluir.className =
+    "delete";
+
+  excluir.textContent =
+    "🗑️ Excluir";
+
+
+  excluir.addEventListener(
+    "click",
+    function(){
+
+      excluirPremio(
+        premio.id,
+        premio.nome
+      );
+
+    }
+  );
+
+
+  actions.appendChild(
+    editar
+  );
+
+  actions.appendChild(
+    excluir
+  );
+
+
+  item.appendChild(
+    imagemBox
+  );
+
+  item.appendChild(
+    info
+  );
+
+  item.appendChild(
+    actions
+  );
+
+
+  prizeList.appendChild(
+    item
+  );
+
+}
+
+
+/* =====================================================
+   EDITAR PRÊMIO
+===================================================== */
+
+function editarPremio(premio){
 
   premioEditando =
     premio.id;
@@ -2022,7 +1811,7 @@ function editarPremio(
 
 
 /* =====================================================
-   EXCLUIR
+   EXCLUIR PRÊMIO
 ===================================================== */
 
 async function excluirPremio(
@@ -2030,16 +1819,23 @@ async function excluirPremio(
   nomePremio
 ){
 
-  if(
-    !confirm(
+  const confirmou =
+    confirm(
+
       "Excluir o prêmio \"" +
-      nomePremio +
+
+      (
+        nomePremio ||
+        "sem nome"
+      ) +
+
       "\"?"
-    )
-  ){
 
+    );
+
+
+  if(!confirmou){
     return;
-
   }
 
 
@@ -2065,6 +1861,7 @@ async function excluirPremio(
     await carregarPremios();
 
   }
+
   catch(error){
 
     console.error(
@@ -2084,13 +1881,11 @@ async function excluirPremio(
 
 
 /* =====================================================
-   EVENTOS
+   BOTÕES
 ===================================================== */
 
 document
-  .getElementById(
-    "salvar"
-  )
+  .getElementById("salvar")
   .addEventListener(
     "click",
     salvarPremio
@@ -2098,9 +1893,7 @@ document
 
 
 document
-  .getElementById(
-    "limpar"
-  )
+  .getElementById("limpar")
   .addEventListener(
     "click",
     limparFormulario
@@ -2108,12 +1901,10 @@ document
 
 
 document
-  .getElementById(
-    "back"
-  )
+  .getElementById("back")
   .addEventListener(
     "click",
-    () => {
+    function(){
 
       window.location.href =
         "painel.html";
@@ -2132,9 +1923,7 @@ onAuthStateChanged(
 
   async usuarioLogado => {
 
-    if(
-      !usuarioLogado
-    ){
+    if(!usuarioLogado){
 
       window.location.replace(
         "index.html"
