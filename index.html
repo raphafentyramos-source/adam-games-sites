@@ -10,7 +10,7 @@
   content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
 >
 
-<title>Adam Games • Entrar</title>
+<title>Adam Games • Login</title>
 
 <style>
 
@@ -43,44 +43,30 @@ body{
 
   overflow-x:hidden;
 
-  background:
-    #061b35
-    url("6AB154F8-5052-4D70-B604-F3C0BEE88348.png")
-    center center
-    / cover
-    no-repeat
-    fixed;
+  /*
+  =====================================================
+  WALLPAPER
+  =====================================================
+  */
+
+  background-color:#071b35;
+
+  background-image:
+    url("./6AB154F8-5052-4D70-B604-F3C0BEE88348.png");
+
+  background-repeat:no-repeat;
+
+  background-position:center center;
+
+  background-size:cover;
+
+  background-attachment:scroll;
 
 }
 
 
 /* =====================================================
-   CAMADA SOBRE O FUNDO
-===================================================== */
-
-body::before{
-
-  content:"";
-
-  position:fixed;
-
-  inset:0;
-
-  z-index:-1;
-
-  background:
-
-    linear-gradient(
-      180deg,
-      rgba(0,20,50,.08),
-      rgba(0,10,30,.38)
-    );
-
-}
-
-
-/* =====================================================
-   CONTAINER
+   CONTAINER PRINCIPAL
 ===================================================== */
 
 .page{
@@ -95,18 +81,16 @@ body::before{
 
   align-items:center;
 
-  justify-content:flex-start;
-
   padding:
-    22px
+    25px
     15px
-    25px;
+    30px;
 
 }
 
 
 /* =====================================================
-   MARCA SUPERIOR
+   LOGO SUPERIOR
 ===================================================== */
 
 .brand{
@@ -121,7 +105,7 @@ body::before{
 
   text-shadow:
     0 3px 12px
-    rgba(0,0,0,.65);
+    rgba(0,0,0,.8);
 
 }
 
@@ -130,9 +114,9 @@ body::before{
 
   font-size:
     clamp(
-      25px,
+      27px,
       8vw,
-      39px
+      40px
     );
 
   line-height:1;
@@ -160,19 +144,19 @@ body::before{
 
 .brand p{
 
-  margin-top:7px;
+  margin-top:8px;
+
+  color:#fff;
 
   font-size:13px;
 
   font-weight:bold;
 
-  color:#e6f4ff;
-
 }
 
 
 /* =====================================================
-   CARD PRINCIPAL
+   CARD
 ===================================================== */
 
 .card{
@@ -182,7 +166,7 @@ body::before{
   max-width:420px;
 
   padding:
-    24px
+    25px
     21px
     22px;
 
@@ -192,8 +176,8 @@ body::before{
 
     linear-gradient(
       145deg,
-      rgba(3,35,70,.94),
-      rgba(2,17,39,.96)
+      rgba(3,30,62,.94),
+      rgba(1,15,35,.96)
     );
 
   border:
@@ -203,25 +187,26 @@ body::before{
   box-shadow:
 
     0 25px 65px
-    rgba(0,0,0,.48),
+    rgba(0,0,0,.55),
 
     inset 0 1px 0
     rgba(255,255,255,.08);
 
   backdrop-filter:
-    blur(7px);
+    blur(5px);
 
   -webkit-backdrop-filter:
-    blur(7px);
+    blur(5px);
 
 }
 
 
 /* =====================================================
-   LOGIN
+   TÍTULO
 ===================================================== */
 
-.login-box h2{
+.login-box h2,
+.register-box h2{
 
   text-align:center;
 
@@ -229,7 +214,7 @@ body::before{
     clamp(
       23px,
       6vw,
-      28px
+      29px
     );
 
   font-weight:900;
@@ -241,19 +226,19 @@ body::before{
 
   text-align:center;
 
-  margin-top:7px;
-
-  margin-bottom:20px;
-
-  color:#b9d5ed;
+  color:#c2d8ec;
 
   font-size:13px;
+
+  margin-top:7px;
+
+  margin-bottom:21px;
 
 }
 
 
 /* =====================================================
-   MENSAGENS
+   MENSAGEM
 ===================================================== */
 
 .message{
@@ -281,14 +266,14 @@ body::before{
 
   display:block;
 
-  color:#ffabb5;
+  color:#ffadb7;
 
   background:
-    rgba(255,45,65,.14);
+    rgba(255,40,60,.14);
 
   border:
     1px solid
-    rgba(255,70,90,.3);
+    rgba(255,70,90,.32);
 
 }
 
@@ -297,10 +282,10 @@ body::before{
 
   display:block;
 
-  color:#79ffb0;
+  color:#78ffad;
 
   background:
-    rgba(40,220,120,.13);
+    rgba(30,220,110,.13);
 
   border:
     1px solid
@@ -310,7 +295,7 @@ body::before{
 
 
 /* =====================================================
-   CAMPOS
+   LABEL
 ===================================================== */
 
 label{
@@ -319,7 +304,7 @@ label{
 
   margin-bottom:6px;
 
-  color:#d7e9f9;
+  color:#d7e8f8;
 
   font-size:13px;
 
@@ -328,11 +313,15 @@ label{
 }
 
 
+/* =====================================================
+   INPUT
+===================================================== */
+
 .input{
 
   width:100%;
 
-  height:52px;
+  height:53px;
 
   margin-bottom:15px;
 
@@ -342,14 +331,14 @@ label{
 
   border:
     1px solid
-    rgba(255,255,255,.13);
+    rgba(255,255,255,.15);
 
   border-radius:14px;
 
   outline:none;
 
   background:
-    rgba(0,0,0,.28);
+    rgba(0,0,0,.30);
 
   color:#fff;
 
@@ -360,18 +349,18 @@ label{
 
 .input::placeholder{
 
-  color:#89a6c1;
+  color:#91abc3;
 
 }
 
 
 .input:focus{
 
-  border-color:#27a7ff;
+  border-color:#27a4ff;
 
   box-shadow:
     0 0 0 3px
-    rgba(39,167,255,.13);
+    rgba(39,164,255,.14);
 
 }
 
@@ -398,19 +387,19 @@ label{
 
   position:absolute;
 
-  top:0;
+  right:4px;
 
-  right:5px;
+  top:0;
 
   width:48px;
 
-  height:52px;
+  height:53px;
 
   border:0;
 
   background:transparent;
 
-  color:#b8d8f2;
+  color:#b8d4e9;
 
   font-size:20px;
 
@@ -427,7 +416,7 @@ label{
 
   width:100%;
 
-  height:54px;
+  height:55px;
 
   border:0;
 
@@ -437,21 +426,21 @@ label{
 
     linear-gradient(
       135deg,
-      #1da2ff,
-      #0067df
+      #20a4ff,
+      #0069df
     );
 
   color:#fff;
 
-  font-size:16px;
+  font-size:17px;
 
   font-weight:900;
 
   cursor:pointer;
 
   box-shadow:
-    0 9px 22px
-    rgba(0,95,220,.32);
+    0 9px 24px
+    rgba(0,100,220,.35);
 
 }
 
@@ -484,13 +473,11 @@ label{
 
   text-align:center;
 
-  color:#75c6ff;
+  color:#72c6ff;
 
   font-size:13px;
 
   font-weight:bold;
-
-  text-decoration:none;
 
   cursor:pointer;
 
@@ -510,11 +497,11 @@ label{
   gap:10px;
 
   margin:
-    20px
+    21px
     0
     14px;
 
-  color:#a9c5dc;
+  color:#a9c4db;
 
   font-size:12px;
 
@@ -533,13 +520,13 @@ label{
   flex:1;
 
   background:
-    rgba(255,255,255,.14);
+    rgba(255,255,255,.15);
 
 }
 
 
 /* =====================================================
-   LOGIN SOCIAL
+   SOCIAL
 ===================================================== */
 
 .social-buttons{
@@ -559,7 +546,7 @@ label{
 
 .social-button{
 
-  min-height:48px;
+  min-height:49px;
 
   border:0;
 
@@ -617,12 +604,12 @@ label{
 
 
 /* =====================================================
-   CRIAR CONTA — BEM VISÍVEL
+   CRIAR CONTA
 ===================================================== */
 
 .create-area{
 
-  margin-top:18px;
+  margin-top:19px;
 
   padding:
     15px
@@ -636,7 +623,7 @@ label{
 
   border:
     1px solid
-    rgba(255,255,255,.10);
+    rgba(255,255,255,.11);
 
   text-align:center;
 
@@ -645,13 +632,13 @@ label{
 
 .create-title{
 
+  margin-bottom:10px;
+
   color:#fff;
 
   font-size:13px;
 
   font-weight:bold;
-
-  margin-bottom:10px;
 
 }
 
@@ -660,7 +647,7 @@ label{
 
   width:100%;
 
-  min-height:56px;
+  min-height:58px;
 
   border:0;
 
@@ -678,8 +665,8 @@ label{
 
     linear-gradient(
       135deg,
-      #20c968,
-      #07963f
+      #20cc68,
+      #07963e
     );
 
   color:#fff;
@@ -688,14 +675,11 @@ label{
 
   font-weight:900;
 
-  text-decoration:none;
-
   cursor:pointer;
 
   box-shadow:
-
     0 9px 22px
-    rgba(0,150,65,.28);
+    rgba(0,150,65,.32);
 
 }
 
@@ -747,11 +731,11 @@ label{
 
   display:block;
 
-  margin-top:16px;
+  margin-top:17px;
 
   text-align:center;
 
-  color:#76c8ff;
+  color:#74c7ff;
 
   font-size:13px;
 
@@ -785,9 +769,9 @@ label{
 
 .benefit{
 
-  text-align:center;
+  color:#abc7dd;
 
-  color:#a9c7df;
+  text-align:center;
 
   font-size:9px;
 
@@ -823,17 +807,14 @@ label{
 
   border-radius:20px;
 
+  background:
+    rgba(0,15,35,.65);
+
+  color:#d0deea;
+
   text-align:center;
 
-  color:#c7d9e8;
-
   font-size:10px;
-
-  background:
-    rgba(0,20,45,.58);
-
-  backdrop-filter:
-    blur(5px);
 
 }
 
@@ -852,9 +833,9 @@ label{
 
   z-index:9999;
 
-  width:57px;
+  width:58px;
 
-  height:57px;
+  height:58px;
 
   border:0;
 
@@ -876,7 +857,7 @@ label{
 
   box-shadow:
     0 8px 25px
-    rgba(0,0,0,.4);
+    rgba(0,0,0,.45);
 
 }
 
@@ -887,7 +868,7 @@ label{
 
   right:17px;
 
-  bottom:83px;
+  bottom:84px;
 
   z-index:9999;
 
@@ -1008,23 +989,23 @@ label{
   .page{
 
     padding:
-      15px
+      14px
       11px
-      22px;
+      25px;
 
   }
 
 
   .brand{
 
-    margin-bottom:10px;
+    margin-bottom:9px;
 
   }
 
 
   .brand h1{
 
-    font-size:27px;
+    font-size:28px;
 
   }
 
@@ -1043,14 +1024,15 @@ label{
     padding:
       20px
       16px
-      18px;
+      19px;
 
     border-radius:24px;
 
   }
 
 
-  .login-box h2{
+  .login-box h2,
+  .register-box h2{
 
     font-size:22px;
 
@@ -1066,16 +1048,9 @@ label{
 
   .create-account{
 
-    min-height:58px;
+    min-height:59px;
 
     font-size:16px;
-
-  }
-
-
-  .benefits{
-
-    margin-top:16px;
 
   }
 
@@ -1086,7 +1061,7 @@ label{
 
   .page{
 
-    padding-top:10px;
+    padding-top:9px;
 
   }
 
@@ -1163,8 +1138,15 @@ label{
   <div class="brand">
 
     <h1>
-      <span class="adam">ADAM</span>
-      <span class="games">GAMES</span>
+
+      <span class="adam">
+        ADAM
+      </span>
+
+      <span class="games">
+        GAMES
+      </span>
+
     </h1>
 
     <p>
@@ -1186,6 +1168,7 @@ label{
     <h2>
       Bem-vindo de volta! 👋
     </h2>
+
 
     <div class="subtitle">
       Entre na sua conta para continuar
@@ -1223,6 +1206,7 @@ label{
 
       <div class="password-wrap">
 
+
         <input
           id="password"
           class="input"
@@ -1241,6 +1225,7 @@ label{
           👁️
         </button>
 
+
       </div>
 
 
@@ -1251,6 +1236,7 @@ label{
       >
         ENTRAR
       </button>
+
 
     </form>
 
@@ -1319,11 +1305,12 @@ label{
     </div>
 
 
-    <!-- ===============================================
+    <!-- =================================================
          CRIAR CONTA
-    ================================================ -->
+    ================================================== -->
 
     <div class="create-area">
+
 
       <div class="create-title">
         Ainda não tem uma conta?
@@ -1346,12 +1333,13 @@ label{
         É rápido, fácil e grátis! ✨
       </div>
 
+
     </div>
 
 
-    <!-- ===============================================
+    <!-- =================================================
          BENEFÍCIOS
-    ================================================ -->
+    ================================================== -->
 
     <div class="benefits">
 
@@ -1415,9 +1403,11 @@ label{
     id="registerBox"
   >
 
+
     <h2>
       Criar minha conta ✨
     </h2>
+
 
     <div class="subtitle">
       Faça seu cadastro no Adam Games
@@ -1637,7 +1627,7 @@ from
 
 
 /* =====================================================
-   CONFIGURAÇÃO FIREBASE
+   CONFIGURAÇÃO
 ===================================================== */
 
 const firebaseConfig = {
@@ -1733,12 +1723,12 @@ const registerMessage =
 
 
 /* =====================================================
-   MENSAGEM LOGIN
+   MENSAGENS
 ===================================================== */
 
 function mostrarMensagem(
   texto,
-  tipo = "error"
+  tipo="error"
 ){
 
   message.textContent =
@@ -1747,9 +1737,7 @@ function mostrarMensagem(
   message.className =
     "message";
 
-  if(
-    texto
-  ){
+  if(texto){
 
     message.classList.add(
       tipo
@@ -1760,13 +1748,9 @@ function mostrarMensagem(
 }
 
 
-/* =====================================================
-   MENSAGEM CADASTRO
-===================================================== */
-
 function mostrarMensagemCadastro(
   texto,
-  tipo = "error"
+  tipo="error"
 ){
 
   registerMessage.textContent =
@@ -1775,9 +1759,7 @@ function mostrarMensagemCadastro(
   registerMessage.className =
     "message";
 
-  if(
-    texto
-  ){
+  if(texto){
 
     registerMessage.classList.add(
       tipo
@@ -1789,22 +1771,8 @@ function mostrarMensagemCadastro(
 
 
 /* =====================================================
-   ID PÚBLICO
+   GERAR ID PÚBLICO
 ===================================================== */
-
-/*
-  Sempre exatamente 6 caracteres.
-
-  Exemplo:
-
-  A7K2M9
-  B4P8X2
-  Q9T3L7
-
-  Sempre contém:
-  - letras MAIÚSCULAS
-  - números
-*/
 
 function gerarPublicId(){
 
@@ -1814,97 +1782,82 @@ function gerarPublicId(){
   const numeros =
     "0123456789";
 
-
-  let resultado = "";
-
-
-  /*
-  Garante pelo menos
-  2 letras.
-  */
-
-  resultado +=
-    letras[
-      Math.floor(
-        Math.random() *
-        letras.length
-      )
-    ];
-
-
-  resultado +=
-    letras[
-      Math.floor(
-        Math.random() *
-        letras.length
-      )
-    ];
-
-
-  /*
-  Garante pelo menos
-  2 números.
-  */
-
-  resultado +=
-    numeros[
-      Math.floor(
-        Math.random() *
-        numeros.length
-      )
-    ];
-
-
-  resultado +=
-    numeros[
-      Math.floor(
-        Math.random() *
-        numeros.length
-      )
-    ];
-
-
-  /*
-  Completa os outros
-  2 caracteres.
-  */
-
   const todos =
     letras +
     numeros;
 
-
-  resultado +=
-    todos[
-      Math.floor(
-        Math.random() *
-        todos.length
-      )
-    ];
-
-
-  resultado +=
-    todos[
-      Math.floor(
-        Math.random() *
-        todos.length
-      )
-    ];
-
+  let resultado = "";
 
   /*
-  Embaralha.
+  Pelo menos 2 letras
+  */
 
-  Assim não fica sempre:
+  resultado +=
+    letras[
+      Math.floor(
+        Math.random() *
+        letras.length
+      )
+    ];
 
-  LLNNXX
+  resultado +=
+    letras[
+      Math.floor(
+        Math.random() *
+        letras.length
+      )
+    ];
+
+  /*
+  Pelo menos 2 números
+  */
+
+  resultado +=
+    numeros[
+      Math.floor(
+        Math.random() *
+        numeros.length
+      )
+    ];
+
+  resultado +=
+    numeros[
+      Math.floor(
+        Math.random() *
+        numeros.length
+      )
+    ];
+
+  /*
+  Mais 2 caracteres
+  */
+
+  resultado +=
+    todos[
+      Math.floor(
+        Math.random() *
+        todos.length
+      )
+    ];
+
+  resultado +=
+    todos[
+      Math.floor(
+        Math.random() *
+        todos.length
+      )
+    ];
+
+  /*
+  Embaralhar
   */
 
   return resultado
     .split("")
     .sort(
       () =>
-        Math.random() - 0.5
+        Math.random() -
+        .5
     )
     .join("");
 
@@ -1912,17 +1865,17 @@ function gerarPublicId(){
 
 
 /* =====================================================
-   CRIAR DOCUMENTO DO USUÁRIO
+   CRIAR CADASTRO FIRESTORE
 ===================================================== */
 
 async function criarCadastroUsuario(
   usuario,
-  nomeFornecido = ""
+  nomeFornecido=""
 ){
 
   /*
-  Primeiro verifica se já existe
-  cadastro pelo UID.
+  Verifica se o usuário já possui
+  cadastro.
   */
 
   const resultado =
@@ -1955,34 +1908,22 @@ async function criarCadastroUsuario(
   }
 
 
-  let nome =
-    nomeFornecido ||
-    usuario.displayName ||
-    "Usuário";
-
-
-  let emailUsuario =
-    usuario.email ||
-    "";
-
-
-  const publicId =
-    gerarPublicId();
-
-
   const cadastro = {
 
     uid:
       usuario.uid,
 
     nome:
-      nome,
+      nomeFornecido ||
+      usuario.displayName ||
+      "Usuário",
 
     email:
-      emailUsuario,
+      usuario.email ||
+      "",
 
     publicId:
-      publicId,
+      gerarPublicId(),
 
     idade:
       "",
@@ -2050,7 +1991,7 @@ async function criarCadastroUsuario(
 
 
 /* =====================================================
-   SENHA
+   MOSTRAR SENHA
 ===================================================== */
 
 document
@@ -2069,10 +2010,12 @@ document
         password.type =
           "text";
 
-        document.getElementById(
-          "showPassword"
-        ).textContent =
-          "🙈";
+        document
+          .getElementById(
+            "showPassword"
+          )
+          .textContent =
+            "🙈";
 
       }
       else{
@@ -2080,10 +2023,12 @@ document
         password.type =
           "password";
 
-        document.getElementById(
-          "showPassword"
-        ).textContent =
-          "👁️";
+        document
+          .getElementById(
+            "showPassword"
+          )
+          .textContent =
+            "👁️";
 
       }
 
@@ -2111,17 +2056,17 @@ document
         "active"
       );
 
-      window.scrollTo({
-        top:0,
-        behavior:"smooth"
-      });
+      window.scrollTo(
+        0,
+        0
+      );
 
     }
   );
 
 
 /* =====================================================
-   VOLTAR LOGIN
+   VOLTAR PARA LOGIN
 ===================================================== */
 
 document
@@ -2149,7 +2094,7 @@ document
 
 
 /* =====================================================
-   LOGIN E-MAIL
+   LOGIN COM E-MAIL
 ===================================================== */
 
 loginForm.addEventListener(
@@ -2158,16 +2103,13 @@ loginForm.addEventListener(
 
     event.preventDefault();
 
-
     const emailValue =
       email.value
         .trim()
         .toLowerCase();
 
-
     const passwordValue =
       password.value;
-
 
     if(
       !emailValue ||
@@ -2182,12 +2124,10 @@ loginForm.addEventListener(
 
     }
 
-
     const button =
       document.getElementById(
         "loginButton"
       );
-
 
     button.disabled =
       true;
@@ -2204,12 +2144,10 @@ loginForm.addEventListener(
         passwordValue
       );
 
-
       mostrarMensagem(
         "Login realizado! Entrando...",
         "success"
       );
-
 
       setTimeout(
         () => {
@@ -2229,10 +2167,8 @@ loginForm.addEventListener(
         error
       );
 
-
       let texto =
         "Não foi possível entrar.";
-
 
       if(
         error.code ===
@@ -2254,15 +2190,6 @@ loginForm.addEventListener(
       }
       else if(
         error.code ===
-        "auth/user-disabled"
-      ){
-
-        texto =
-          "Esta conta foi desativada.";
-
-      }
-      else if(
-        error.code ===
         "auth/too-many-requests"
       ){
 
@@ -2271,11 +2198,9 @@ loginForm.addEventListener(
 
       }
 
-
       mostrarMensagem(
         texto
       );
-
 
       button.disabled =
         false;
@@ -2290,7 +2215,7 @@ loginForm.addEventListener(
 
 
 /* =====================================================
-   CADASTRO POR E-MAIL
+   CADASTRO
 ===================================================== */
 
 registerForm.addEventListener(
@@ -2397,12 +2322,8 @@ registerForm.addEventListener(
         );
 
 
-      const usuario =
-        resultado.user;
-
-
       await criarCadastroUsuario(
-        usuario,
+        resultado.user,
         nome
       );
 
@@ -2469,7 +2390,7 @@ registerForm.addEventListener(
       ){
 
         texto =
-          "A conta foi criada, mas o cadastro não pôde ser salvo. Verifique as regras do Firestore.";
+          "O cadastro foi bloqueado pelas regras do Firestore.";
 
       }
 
@@ -2577,12 +2498,6 @@ document
         true;
 
 
-      mostrarMensagem(
-        "Abrindo Google...",
-        "success"
-      );
-
-
       try{
 
         const provider =
@@ -2590,7 +2505,8 @@ document
 
 
         provider.setCustomParameters({
-          prompt:"select_account"
+          prompt:
+            "select_account"
         });
 
 
@@ -2606,14 +2522,14 @@ document
 
 
         /*
-        Se for a primeira vez no Google,
-        cria automaticamente o cadastro
-        no Firestore.
+        Cria automaticamente o documento
+        no primeiro login Google.
         */
 
         await criarCadastroUsuario(
           usuario,
-          usuario.displayName || "Usuário"
+          usuario.displayName ||
+          "Usuário"
         );
 
 
@@ -2658,16 +2574,7 @@ document
         ){
 
           texto =
-            "Este endereço ainda não está autorizado no Firebase Authentication.";
-
-        }
-        else if(
-          error.code ===
-          "auth/account-exists-with-different-credential"
-        ){
-
-          texto =
-            "Este e-mail já possui uma conta usando outro método de login.";
+            "Este domínio ainda não está autorizado no Firebase.";
 
         }
 
@@ -2713,7 +2620,8 @@ document
 
         await criarCadastroUsuario(
           resultado.user,
-          resultado.user.displayName || "Usuário"
+          resultado.user.displayName ||
+          "Usuário"
         );
 
 
@@ -2725,7 +2633,6 @@ document
       catch(error){
 
         console.error(
-          "Facebook:",
           error
         );
 
@@ -2769,7 +2676,8 @@ document
 
         await criarCadastroUsuario(
           resultado.user,
-          resultado.user.displayName || "Usuário"
+          resultado.user.displayName ||
+          "Usuário"
         );
 
 
@@ -2781,7 +2689,6 @@ document
       catch(error){
 
         console.error(
-          "Apple:",
           error
         );
 
