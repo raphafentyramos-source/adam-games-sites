@@ -1,0 +1,3163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>Adam Games • Loja</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html,
+body{
+  width:100%;
+  min-height:100%;
+}
+
+body{
+
+  min-height:100vh;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  color:#fff;
+
+  background:
+    radial-gradient(
+      circle at 10% 5%,
+      rgba(30,170,255,.85),
+      transparent 32%
+    ),
+
+    radial-gradient(
+      circle at 95% 90%,
+      rgba(0,180,120,.25),
+      transparent 35%
+    ),
+
+    linear-gradient(
+      145deg,
+      #087fdc 0%,
+      #0754a5 38%,
+      #031a3a 100%
+    );
+
+  padding:
+    18px
+    12px
+    100px;
+
+}
+
+
+/* =====================================================
+   CONTAINER
+===================================================== */
+
+.container{
+
+  width:100%;
+
+  max-width:600px;
+
+  margin:auto;
+
+}
+
+
+/* =====================================================
+   TOPO
+===================================================== */
+
+.topo{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:12px;
+
+  margin-bottom:18px;
+
+}
+
+
+.voltar{
+
+  width:48px;
+
+  height:48px;
+
+  flex-shrink:0;
+
+  border:0;
+
+  border-radius:15px;
+
+  background:
+    rgba(2,36,75,.85);
+
+  color:#fff;
+
+  font-size:25px;
+
+  cursor:pointer;
+
+}
+
+
+.titulo{
+
+  flex:1;
+
+  text-align:center;
+
+}
+
+
+.titulo h1{
+
+  font-size:28px;
+
+  font-weight:900;
+
+}
+
+
+.titulo p{
+
+  margin-top:4px;
+
+  color:#bcd8ef;
+
+  font-size:13px;
+
+}
+
+
+.espaco-topo{
+
+  width:48px;
+
+}
+
+
+/* =====================================================
+   SALDOS
+===================================================== */
+
+.saldos{
+
+  display:grid;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
+  gap:10px;
+
+  margin-bottom:18px;
+
+}
+
+
+.saldo-card{
+
+  min-width:0;
+
+  padding:14px;
+
+  border-radius:18px;
+
+  background:
+    rgba(3,39,79,.88);
+
+  border:
+    1px solid
+    rgba(255,255,255,.12);
+
+  box-shadow:
+    0 10px 25px
+    rgba(0,0,0,.18);
+
+}
+
+
+.saldo-label{
+
+  color:#a9c8e2;
+
+  font-size:12px;
+
+  font-weight:bold;
+
+}
+
+
+.saldo-valor{
+
+  margin-top:5px;
+
+  color:#ffd52b;
+
+  font-size:22px;
+
+  font-weight:900;
+
+  white-space:nowrap;
+
+  overflow:hidden;
+
+  text-overflow:ellipsis;
+
+}
+
+
+.saldo-card.dinheiro
+.saldo-valor{
+
+  color:#63ff9b;
+
+}
+
+
+/* =====================================================
+   AVISO
+===================================================== */
+
+.aviso{
+
+  padding:15px;
+
+  margin-bottom:20px;
+
+  border-radius:17px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(0,125,255,.65),
+      rgba(4,61,120,.9)
+    );
+
+  border:
+    1px solid
+    rgba(255,255,255,.14);
+
+}
+
+
+.aviso strong{
+
+  display:block;
+
+  font-size:17px;
+
+}
+
+
+.aviso span{
+
+  display:block;
+
+  margin-top:5px;
+
+  color:#c5def3;
+
+  font-size:13px;
+
+  line-height:1.4;
+
+}
+
+
+/* =====================================================
+   CABEÇALHO PRODUTOS
+===================================================== */
+
+.produtos-topo{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  margin-bottom:12px;
+
+}
+
+
+.produtos-topo h2{
+
+  font-size:22px;
+
+}
+
+
+.quantidade-produtos{
+
+  color:#a8c8e4;
+
+  font-size:12px;
+
+}
+
+
+/* =====================================================
+   LISTA
+===================================================== */
+
+.lista-produtos{
+
+  display:grid;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
+  gap:13px;
+
+}
+
+
+/* =====================================================
+   PRODUTO
+===================================================== */
+
+.produto{
+
+  position:relative;
+
+  overflow:hidden;
+
+  border-radius:20px;
+
+  background:
+    linear-gradient(
+      160deg,
+      rgba(4,52,101,.98),
+      rgba(2,25,53,.98)
+    );
+
+  border:
+    1px solid
+    rgba(255,255,255,.13);
+
+  box-shadow:
+    0 12px 30px
+    rgba(0,0,0,.25);
+
+}
+
+
+.produto-imagem{
+
+  width:100%;
+
+  aspect-ratio:1 / .82;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  overflow:hidden;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(37,157,255,.25),
+      rgba(0,0,0,.18)
+    );
+
+}
+
+
+.produto-imagem img{
+
+  width:100%;
+
+  height:100%;
+
+  object-fit:contain;
+
+  padding:12px;
+
+}
+
+
+.produto-sem-imagem{
+
+  font-size:55px;
+
+}
+
+
+/* =====================================================
+   DESCONTO
+===================================================== */
+
+.desconto{
+
+  position:absolute;
+
+  top:9px;
+
+  left:9px;
+
+  padding:6px 9px;
+
+  border-radius:10px;
+
+  background:#ff3f55;
+
+  color:#fff;
+
+  font-size:11px;
+
+  font-weight:900;
+
+  box-shadow:
+    0 5px 12px
+    rgba(0,0,0,.3);
+
+}
+
+
+/* =====================================================
+   CONTEÚDO
+===================================================== */
+
+.produto-conteudo{
+
+  padding:13px;
+
+}
+
+
+.produto-nome{
+
+  min-height:40px;
+
+  color:#fff;
+
+  font-size:16px;
+
+  font-weight:900;
+
+  line-height:1.2;
+
+}
+
+
+.produto-descricao{
+
+  min-height:34px;
+
+  margin-top:5px;
+
+  color:#9ebbd5;
+
+  font-size:11px;
+
+  line-height:1.35;
+
+}
+
+
+.preco{
+
+  margin-top:10px;
+
+}
+
+
+.preco-antigo{
+
+  min-height:15px;
+
+  color:#7f9ab3;
+
+  font-size:11px;
+
+  text-decoration:line-through;
+
+}
+
+
+.preco-principal{
+
+  margin-top:2px;
+
+  color:#ffd52b;
+
+  font-size:18px;
+
+  font-weight:900;
+
+}
+
+
+.preco-saldo{
+
+  margin-top:3px;
+
+  color:#5dff99;
+
+  font-size:13px;
+
+  font-weight:900;
+
+}
+
+
+/* =====================================================
+   BOTÃO COMPRAR
+===================================================== */
+
+.comprar{
+
+  width:100%;
+
+  margin-top:11px;
+
+  padding:12px 8px;
+
+  border:0;
+
+  border-radius:12px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #19a3ff,
+      #0069d9
+    );
+
+  color:#fff;
+
+  font-size:13px;
+
+  font-weight:900;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 7px 18px
+    rgba(0,105,219,.25);
+
+}
+
+
+.comprar:disabled{
+
+  opacity:.55;
+
+  cursor:not-allowed;
+
+}
+
+
+/* =====================================================
+   SEM PRODUTOS
+===================================================== */
+
+.sem-produtos{
+
+  grid-column:
+    1 / -1;
+
+  padding:40px 20px;
+
+  text-align:center;
+
+  border-radius:20px;
+
+  background:
+    rgba(3,39,79,.85);
+
+  color:#9dbbd4;
+
+  border:
+    1px solid
+    rgba(255,255,255,.1);
+
+}
+
+
+.sem-produtos strong{
+
+  display:block;
+
+  color:#fff;
+
+  font-size:18px;
+
+  margin-bottom:7px;
+
+}
+
+
+/* =====================================================
+   MENSAGEM
+===================================================== */
+
+.message{
+
+  display:none;
+
+  margin-bottom:15px;
+
+  padding:13px;
+
+  border-radius:13px;
+
+  text-align:center;
+
+  font-size:13px;
+
+  font-weight:bold;
+
+}
+
+
+.message.show{
+
+  display:block;
+
+}
+
+
+.message.error{
+
+  color:#ff9eaa;
+
+  background:
+    rgba(255,40,60,.14);
+
+  border:
+    1px solid
+    rgba(255,70,90,.25);
+
+}
+
+
+.message.success{
+
+  color:#72ffae;
+
+  background:
+    rgba(0,220,110,.13);
+
+  border:
+    1px solid
+    rgba(0,220,110,.25);
+
+}
+
+
+/* =====================================================
+   MODAL COMPRA
+===================================================== */
+
+.modal{
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:9999;
+
+  display:none;
+
+  align-items:flex-end;
+
+  justify-content:center;
+
+  padding:15px;
+
+  background:
+    rgba(0,8,22,.78);
+
+  backdrop-filter:
+    blur(6px);
+
+}
+
+
+.modal.show{
+
+  display:flex;
+
+}
+
+
+.modal-card{
+
+  width:100%;
+
+  max-width:500px;
+
+  padding:22px;
+
+  border-radius:
+    25px
+    25px
+    18px
+    18px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #073f78,
+      #021c3c
+    );
+
+  border:
+    1px solid
+    rgba(255,255,255,.15);
+
+  box-shadow:
+    0 -10px 45px
+    rgba(0,0,0,.45);
+
+}
+
+
+.modal-card h2{
+
+  font-size:22px;
+
+  text-align:center;
+
+}
+
+
+.modal-produto{
+
+  margin-top:15px;
+
+  padding:13px;
+
+  border-radius:15px;
+
+  background:
+    rgba(255,255,255,.06);
+
+  text-align:center;
+
+}
+
+
+.modal-produto-nome{
+
+  font-size:18px;
+
+  font-weight:900;
+
+}
+
+
+.modal-produto-preco{
+
+  margin-top:5px;
+
+  color:#ffd52b;
+
+  font-weight:900;
+
+}
+
+
+.escolha{
+
+  margin-top:17px;
+
+  display:grid;
+
+  gap:10px;
+
+}
+
+
+.opcao{
+
+  width:100%;
+
+  padding:15px;
+
+  border:0;
+
+  border-radius:14px;
+
+  cursor:pointer;
+
+  font-size:15px;
+
+  font-weight:900;
+
+  text-align:left;
+
+}
+
+
+.opcao-moedas{
+
+  background:
+    #e9ad12;
+
+  color:#172c43;
+
+}
+
+
+.opcao-saldo{
+
+  background:
+    #20ad63;
+
+  color:#fff;
+
+}
+
+
+.opcao-indisponivel{
+
+  opacity:.4;
+
+  cursor:not-allowed;
+
+}
+
+
+.cancelar{
+
+  width:100%;
+
+  margin-top:10px;
+
+  padding:12px;
+
+  border:0;
+
+  border-radius:12px;
+
+  background:
+    rgba(255,255,255,.08);
+
+  color:#b9d1e6;
+
+  cursor:pointer;
+
+}
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+.carregando{
+
+  grid-column:
+    1 / -1;
+
+  padding:35px;
+
+  text-align:center;
+
+  color:#b5d2e8;
+
+}
+
+
+/* =====================================================
+   BARRA INFERIOR
+===================================================== */
+
+.nav{
+
+  position:fixed;
+
+  left:50%;
+
+  bottom:12px;
+
+  transform:
+    translateX(-50%);
+
+  z-index:5000;
+
+  width:
+    calc(100% - 24px);
+
+  max-width:600px;
+
+  height:68px;
+
+  padding:7px;
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(4,1fr);
+
+  border-radius:24px;
+
+  background:
+    rgba(2,24,52,.97);
+
+  border:
+    1px solid
+    rgba(255,255,255,.12);
+
+  box-shadow:
+    0 12px 35px
+    rgba(0,0,0,.45);
+
+  backdrop-filter:
+    blur(12px);
+
+}
+
+
+.nav-item{
+
+  border:0;
+
+  background:transparent;
+
+  color:#829db8;
+
+  border-radius:18px;
+
+  cursor:pointer;
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:2px;
+
+  font-size:10px;
+
+  font-weight:bold;
+
+}
+
+
+.nav-item span:first-child{
+
+  font-size:23px;
+
+}
+
+
+.nav-item.ativo{
+
+  color:#fff;
+
+  background:
+    rgba(19,130,232,.2);
+
+}
+
+
+.nav-item.loja-ativo{
+
+  color:#65c0ff;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:430px){
+
+  body{
+
+    padding:
+      14px
+      10px
+      95px;
+
+  }
+
+
+  .titulo h1{
+
+    font-size:25px;
+
+  }
+
+
+  .lista-produtos{
+
+    gap:10px;
+
+  }
+
+
+  .produto-conteudo{
+
+    padding:10px;
+
+  }
+
+
+  .produto-nome{
+
+    font-size:14px;
+
+  }
+
+
+  .produto-descricao{
+
+    font-size:10px;
+
+  }
+
+
+  .preco-principal{
+
+    font-size:16px;
+
+  }
+
+
+  .preco-saldo{
+
+    font-size:11px;
+
+  }
+
+
+  .comprar{
+
+    font-size:12px;
+
+    padding:11px 5px;
+
+  }
+
+}
+
+
+@media(max-width:350px){
+
+  .lista-produtos{
+
+    grid-template-columns:
+      1fr;
+
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+  <!-- =================================================
+       TOPO
+  ================================================== -->
+
+  <div class="topo">
+
+    <button
+      class="voltar"
+      id="voltar"
+      type="button"
+      aria-label="Voltar"
+    >
+      ←
+    </button>
+
+
+    <div class="titulo">
+
+      <h1>
+        💎 LOJA
+      </h1>
+
+      <p>
+        Troque suas moedas ou saldo por prêmios
+      </p>
+
+    </div>
+
+
+    <div class="espaco-topo"></div>
+
+  </div>
+
+
+  <!-- =================================================
+       SALDOS
+  ================================================== -->
+
+  <div class="saldos">
+
+    <div class="saldo-card">
+
+      <div class="saldo-label">
+        🪙 MOEDAS
+      </div>
+
+      <div
+        class="saldo-valor"
+        id="saldoMoedas"
+      >
+        0
+      </div>
+
+    </div>
+
+
+    <div class="saldo-card dinheiro">
+
+      <div class="saldo-label">
+        💵 SALDO
+      </div>
+
+      <div
+        class="saldo-valor"
+        id="saldoDinheiro"
+      >
+        R$ 0,00
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =================================================
+       AVISO
+  ================================================== -->
+
+  <div class="aviso">
+
+    <strong>
+      🛍️ Escolha seu prêmio!
+    </strong>
+
+    <span>
+      Alguns produtos podem ser adquiridos com moedas,
+      saldo ou qualquer uma das opções disponíveis.
+    </span>
+
+  </div>
+
+
+  <!-- =================================================
+       MENSAGEM
+  ================================================== -->
+
+  <div
+    class="message"
+    id="message"
+  ></div>
+
+
+  <!-- =================================================
+       PRODUTOS
+  ================================================== -->
+
+  <div class="produtos-topo">
+
+    <h2>
+      🎁 Produtos
+    </h2>
+
+    <div
+      class="quantidade-produtos"
+      id="quantidadeProdutos"
+    >
+      0 produtos
+    </div>
+
+  </div>
+
+
+  <div
+    class="lista-produtos"
+    id="listaProdutos"
+  >
+
+    <div class="carregando">
+      🔄 Carregando produtos...
+    </div>
+
+  </div>
+
+
+</div>
+
+
+<!-- =====================================================
+     MODAL DE COMPRA
+===================================================== -->
+
+<div
+  class="modal"
+  id="modal"
+>
+
+  <div class="modal-card">
+
+    <h2>
+      🛒 Confirmar compra
+    </h2>
+
+
+    <div class="modal-produto">
+
+      <div
+        class="modal-produto-nome"
+        id="modalNome"
+      >
+        —
+      </div>
+
+      <div
+        class="modal-produto-preco"
+        id="modalPreco"
+      >
+        —
+      </div>
+
+    </div>
+
+
+    <div class="escolha">
+
+      <button
+        class="opcao opcao-moedas"
+        id="comprarMoedas"
+        type="button"
+      >
+        🪙 Comprar com moedas
+      </button>
+
+
+      <button
+        class="opcao opcao-saldo"
+        id="comprarSaldo"
+        type="button"
+      >
+        💵 Comprar com saldo
+      </button>
+
+    </div>
+
+
+    <button
+      class="cancelar"
+      id="cancelarCompra"
+      type="button"
+    >
+      Cancelar
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     BARRA INFERIOR
+===================================================== -->
+
+<nav class="nav">
+
+  <button
+    class="nav-item"
+    id="navInicio"
+    type="button"
+  >
+
+    <span>🏠</span>
+    <span>Início</span>
+
+  </button>
+
+
+  <button
+    class="nav-item"
+    id="navRoleta"
+    type="button"
+  >
+
+    <span>👑</span>
+    <span>Roleta</span>
+
+  </button>
+
+
+  <button
+    class="nav-item loja-ativo ativo"
+    id="navLoja"
+    type="button"
+  >
+
+    <span>💎</span>
+    <span>Loja</span>
+
+  </button>
+
+
+  <button
+    class="nav-item"
+    id="navPremios"
+    type="button"
+  >
+
+    <span>🎁</span>
+    <span>Prêmios</span>
+
+  </button>
+
+</nav>
+
+
+<script type="module">
+
+
+/* =====================================================
+   FIREBASE
+===================================================== */
+
+import {
+  initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+import {
+  getAuth,
+  onAuthStateChanged
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+import {
+  getFirestore,
+  collection,
+  query,
+  where,
+  getDocs,
+  doc,
+  runTransaction,
+  serverTimestamp,
+  addDoc
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+/* =====================================================
+   CONFIGURAÇÃO
+===================================================== */
+
+const firebaseConfig = {
+
+  apiKey:
+    "AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",
+
+  authDomain:
+    "adam-games-21081.firebaseapp.com",
+
+  projectId:
+    "adam-games-21081",
+
+  storageBucket:
+    "adam-games-21081.firebasestorage.app",
+
+  messagingSenderId:
+    "1055528418738",
+
+  appId:
+    "1:1055528418738:web:5fafdf63424ba9744eb8ab"
+
+};
+
+
+const app =
+  initializeApp(
+    firebaseConfig
+  );
+
+
+const auth =
+  getAuth(app);
+
+
+const db =
+  getFirestore(app);
+
+
+/* =====================================================
+   ESTADO
+===================================================== */
+
+let usuarioAuth = null;
+
+let usuarioDoc = null;
+
+let usuarioRef = null;
+
+let produtos = [];
+
+let produtoSelecionado = null;
+
+
+/* =====================================================
+   ELEMENTOS
+===================================================== */
+
+const listaProdutos =
+  document.getElementById(
+    "listaProdutos"
+  );
+
+
+const quantidadeProdutos =
+  document.getElementById(
+    "quantidadeProdutos"
+  );
+
+
+const saldoMoedas =
+  document.getElementById(
+    "saldoMoedas"
+  );
+
+
+const saldoDinheiro =
+  document.getElementById(
+    "saldoDinheiro"
+  );
+
+
+const message =
+  document.getElementById(
+    "message"
+  );
+
+
+const modal =
+  document.getElementById(
+    "modal"
+  );
+
+
+const modalNome =
+  document.getElementById(
+    "modalNome"
+  );
+
+
+const modalPreco =
+  document.getElementById(
+    "modalPreco"
+  );
+
+
+const comprarMoedas =
+  document.getElementById(
+    "comprarMoedas"
+  );
+
+
+const comprarSaldo =
+  document.getElementById(
+    "comprarSaldo"
+  );
+
+
+/* =====================================================
+   MENSAGEM
+===================================================== */
+
+function mostrarMensagem(
+  texto,
+  tipo
+){
+
+  message.textContent =
+    texto;
+
+  message.className =
+    "message";
+
+
+  if(
+    texto
+  ){
+
+    message.classList.add(
+      "show"
+    );
+
+  }
+
+
+  if(
+    tipo
+  ){
+
+    message.classList.add(
+      tipo
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   FORMATAÇÃO
+===================================================== */
+
+function formatarMoedas(
+  valor
+){
+
+  return Number(
+    valor || 0
+  ).toLocaleString(
+    "pt-BR"
+  );
+
+}
+
+
+function formatarDinheiro(
+  valor
+){
+
+  return Number(
+    valor || 0
+  ).toLocaleString(
+    "pt-BR",
+    {
+      style:"currency",
+      currency:"BRL"
+    }
+  );
+
+}
+
+
+/* =====================================================
+   LOCALIZAR CADASTRO
+===================================================== */
+
+async function localizarUsuario(
+  usuario
+){
+
+  const resultado =
+    await getDocs(
+
+      query(
+
+        collection(
+          db,
+          "admins"
+        ),
+
+        where(
+          "uid",
+          "==",
+          usuario.uid
+        )
+
+      )
+
+    );
+
+
+  if(
+    !resultado.empty
+  ){
+
+    const documento =
+      resultado.docs[0];
+
+
+    return {
+
+      ref:
+        documento.ref,
+
+      id:
+        documento.id,
+
+      data:
+        documento.data()
+
+    };
+
+  }
+
+
+  if(
+    usuario.email
+  ){
+
+    const resultadoEmail =
+      await getDocs(
+
+        query(
+
+          collection(
+            db,
+            "admins"
+          ),
+
+          where(
+            "email",
+            "==",
+            usuario.email
+              .trim()
+              .toLowerCase()
+          )
+
+        )
+
+      );
+
+
+    if(
+      !resultadoEmail.empty
+    ){
+
+      const documento =
+        resultadoEmail.docs[0];
+
+
+      return {
+
+        ref:
+          documento.ref,
+
+        id:
+          documento.id,
+
+        data:
+          documento.data()
+
+      };
+
+    }
+
+  }
+
+
+  return null;
+
+}
+
+
+/* =====================================================
+   ATUALIZAR SALDOS
+===================================================== */
+
+function atualizarSaldos(){
+
+  if(
+    !usuarioDoc
+  ){
+
+    saldoMoedas.textContent =
+      "0";
+
+    saldoDinheiro.textContent =
+      "R$ 0,00";
+
+    return;
+
+  }
+
+
+  const moedas =
+    Number(
+      usuarioDoc.moedas ||
+      0
+    );
+
+
+  /*
+  ------------------------------------------------------
+  O sistema usa "creditos" como saldo.
+  Também aceita "saldo" caso você tenha esse campo.
+  ------------------------------------------------------
+  */
+
+  const saldo =
+    Number(
+      usuarioDoc.creditos ??
+      usuarioDoc.saldo ??
+      0
+    );
+
+
+  saldoMoedas.textContent =
+    formatarMoedas(
+      moedas
+    );
+
+
+  saldoDinheiro.textContent =
+    formatarDinheiro(
+      saldo
+    );
+
+}
+
+
+/* =====================================================
+   CALCULAR PREÇO COM DESCONTO
+===================================================== */
+
+function calcularPreco(
+  valor,
+  desconto
+){
+
+  const preco =
+    Number(
+      valor || 0
+    );
+
+
+  const porcentagem =
+    Number(
+      desconto || 0
+    );
+
+
+  if(
+    porcentagem <= 0
+  ){
+
+    return preco;
+
+  }
+
+
+  return Math.max(
+    0,
+    preco -
+    (
+      preco *
+      porcentagem /
+      100
+    )
+  );
+
+}
+
+
+/* =====================================================
+   CARREGAR PRODUTOS
+===================================================== */
+
+async function carregarProdutos(){
+
+  try{
+
+    const resultado =
+      await getDocs(
+
+        collection(
+          db,
+          "produtosLoja"
+        )
+
+      );
+
+
+    produtos =
+
+      resultado.docs
+
+        .map(
+          documento => ({
+
+            id:
+              documento.id,
+
+            ...documento.data()
+
+          })
+        )
+
+        .filter(
+          produto =>
+            produto.ativo !== false
+        );
+
+
+    /*
+    ----------------------------------------------------
+    Ordenação
+    ----------------------------------------------------
+    */
+
+    produtos.sort(
+      (
+        a,
+        b
+      ) => {
+
+        const ordemA =
+          Number(
+            a.ordem ||
+            0
+          );
+
+
+        const ordemB =
+          Number(
+            b.ordem ||
+            0
+          );
+
+
+        return ordemA - ordemB;
+
+      }
+    );
+
+
+    mostrarProdutos();
+
+  }
+  catch(error){
+
+    console.error(
+      "Erro ao carregar produtos:",
+      error
+    );
+
+
+    listaProdutos.innerHTML =
+
+      `
+      <div class="sem-produtos">
+
+        <strong>
+          ⚠️ Não foi possível carregar a loja
+        </strong>
+
+        Verifique a conexão e tente novamente.
+
+      </div>
+      `;
+
+  }
+
+}
+
+
+/* =====================================================
+   MOSTRAR PRODUTOS
+===================================================== */
+
+function mostrarProdutos(){
+
+  listaProdutos.innerHTML =
+    "";
+
+
+  quantidadeProdutos.textContent =
+
+    produtos.length +
+
+    (
+      produtos.length === 1
+        ? " produto"
+        : " produtos"
+    );
+
+
+  if(
+    produtos.length === 0
+  ){
+
+    listaProdutos.innerHTML =
+
+      `
+      <div class="sem-produtos">
+
+        <strong>
+          🛍️ Loja em preparação
+        </strong>
+
+        Nenhum produto está disponível no momento.
+
+      </div>
+      `;
+
+    return;
+
+  }
+
+
+  produtos.forEach(
+    produto => {
+
+      const card =
+        document.createElement(
+          "div"
+        );
+
+
+      card.className =
+        "produto";
+
+
+      /*
+      --------------------------------------------------
+      DESCONTO
+      --------------------------------------------------
+      */
+
+      const desconto =
+        Number(
+          produto.desconto ||
+          0
+        );
+
+
+      if(
+        desconto > 0
+      ){
+
+        const etiqueta =
+          document.createElement(
+            "div"
+          );
+
+
+        etiqueta.className =
+          "desconto";
+
+
+        etiqueta.textContent =
+          "-" +
+          desconto +
+          "%";
+
+
+        card.appendChild(
+          etiqueta
+        );
+
+      }
+
+
+      /*
+      --------------------------------------------------
+      IMAGEM
+      --------------------------------------------------
+      */
+
+      const imagem =
+        document.createElement(
+          "div"
+        );
+
+
+      imagem.className =
+        "produto-imagem";
+
+
+      if(
+        produto.imagem
+      ){
+
+        const img =
+          document.createElement(
+            "img"
+          );
+
+
+        img.src =
+          produto.imagem;
+
+
+        img.alt =
+          produto.nome ||
+          "Produto";
+
+
+        img.onerror =
+          () => {
+
+            imagem.innerHTML =
+              "<div class='produto-sem-imagem'>🎁</div>";
+
+          };
+
+
+        imagem.appendChild(
+          img
+        );
+
+      }
+      else{
+
+        imagem.innerHTML =
+          "<div class='produto-sem-imagem'>🎁</div>";
+
+      }
+
+
+      card.appendChild(
+        imagem
+      );
+
+
+      /*
+      --------------------------------------------------
+      CONTEÚDO
+      --------------------------------------------------
+      */
+
+      const conteudo =
+        document.createElement(
+          "div"
+        );
+
+
+      conteudo.className =
+        "produto-conteudo";
+
+
+      const nome =
+        document.createElement(
+          "div"
+        );
+
+
+      nome.className =
+        "produto-nome";
+
+
+      nome.textContent =
+        produto.nome ||
+        "Prêmio";
+
+
+      conteudo.appendChild(
+        nome
+      );
+
+
+      const descricao =
+        document.createElement(
+          "div"
+        );
+
+
+      descricao.className =
+        "produto-descricao";
+
+
+      descricao.textContent =
+        produto.descricao ||
+        "Prêmio disponível na loja."
+
+
+      conteudo.appendChild(
+        descricao
+      );
+
+
+      /*
+      --------------------------------------------------
+      PREÇOS
+      --------------------------------------------------
+      */
+
+      const preco =
+        document.createElement(
+          "div"
+        );
+
+
+      preco.className =
+        "preco";
+
+
+      const precoMoedasOriginal =
+        Number(
+          produto.precoMoedas ||
+          0
+        );
+
+
+      const precoSaldoOriginal =
+        Number(
+          produto.precoSaldo ||
+          0
+        );
+
+
+      const precoMoedas =
+        calcularPreco(
+          precoMoedasOriginal,
+          desconto
+        );
+
+
+      const precoSaldo =
+        calcularPreco(
+          precoSaldoOriginal,
+          desconto
+        );
+
+
+      if(
+        precoMoedasOriginal > 0
+      ){
+
+        const antigo =
+          document.createElement(
+            "div"
+          );
+
+
+        antigo.className =
+          "preco-antigo";
+
+
+        if(
+          desconto > 0
+        ){
+
+          antigo.textContent =
+
+            "🪙 " +
+
+            formatarMoedas(
+              precoMoedasOriginal
+            );
+
+        }
+
+
+        preco.appendChild(
+          antigo
+        );
+
+
+        const atual =
+          document.createElement(
+            "div"
+          );
+
+
+        atual.className =
+          "preco-principal";
+
+
+        atual.textContent =
+
+          "🪙 " +
+
+          formatarMoedas(
+            precoMoedas
+          );
+
+
+        preco.appendChild(
+          atual
+
+        );
+
+      }
+
+
+      if(
+        precoSaldoOriginal > 0
+      ){
+
+        const saldoAtual =
+          document.createElement(
+            "div"
+          );
+
+
+        saldoAtual.className =
+          "preco-saldo";
+
+
+        saldoAtual.textContent =
+
+          "💵 " +
+
+          formatarDinheiro(
+            precoSaldo
+          );
+
+
+        preco.appendChild(
+          saldoAtual
+        );
+
+      }
+
+
+      conteudo.appendChild(
+        preco
+      );
+
+
+      /*
+      --------------------------------------------------
+      BOTÃO
+      --------------------------------------------------
+      */
+
+      const comprar =
+        document.createElement(
+          "button"
+        );
+
+
+      comprar.className =
+        "comprar";
+
+
+      comprar.type =
+        "button";
+
+
+      comprar.textContent =
+        "🛒 COMPRAR";
+
+
+      comprar.addEventListener(
+        "click",
+        () => {
+
+          abrirCompra(
+            produto
+          );
+
+        }
+      );
+
+
+      conteudo.appendChild(
+        comprar
+      );
+
+
+      card.appendChild(
+        conteudo
+      );
+
+
+      listaProdutos.appendChild(
+        card
+      );
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   ABRIR COMPRA
+===================================================== */
+
+function abrirCompra(
+  produto
+){
+
+  produtoSelecionado =
+    produto;
+
+
+  const desconto =
+    Number(
+      produto.desconto ||
+      0
+    );
+
+
+  const precoMoedas =
+    calcularPreco(
+      Number(
+        produto.precoMoedas ||
+        0
+      ),
+      desconto
+    );
+
+
+  const precoSaldo =
+    calcularPreco(
+      Number(
+        produto.precoSaldo ||
+        0
+      ),
+      desconto
+    );
+
+
+  modalNome.textContent =
+    produto.nome ||
+    "Prêmio";
+
+
+  let textoPreco =
+    "";
+
+
+  if(
+    precoMoedas > 0
+  ){
+
+    textoPreco +=
+
+      "🪙 " +
+
+      formatarMoedas(
+        precoMoedas
+      ) +
+
+      " moedas";
+
+  }
+
+
+  if(
+    precoSaldo > 0
+  ){
+
+    if(
+      textoPreco
+    ){
+
+      textoPreco +=
+        "  •  ";
+
+    }
+
+
+    textoPreco +=
+
+      "💵 " +
+
+      formatarDinheiro(
+        precoSaldo
+      );
+
+  }
+
+
+  modalPreco.textContent =
+    textoPreco ||
+    "Preço não configurado";
+
+
+  /*
+  ----------------------------------------------------
+  HABILITA/DESABILITA MÉTODO
+  ----------------------------------------------------
+  */
+
+  const moedasDisponiveis =
+    Number(
+      usuarioDoc?.moedas ||
+      0
+    );
+
+
+  const saldoDisponivel =
+    Number(
+      usuarioDoc?.creditos ??
+      usuarioDoc?.saldo ??
+      0
+    );
+
+
+  comprarMoedas.disabled =
+    precoMoedas <= 0;
+
+
+  comprarSaldo.disabled =
+    precoSaldo <= 0;
+
+
+  comprarMoedas.classList.toggle(
+    "opcao-indisponivel",
+    precoMoedas <= 0
+  );
+
+
+  comprarSaldo.classList.toggle(
+    "opcao-indisponivel",
+    precoSaldo <= 0
+  );
+
+
+  if(
+    precoMoedas > 0 &&
+    moedasDisponiveis < precoMoedas
+  ){
+
+    comprarMoedas.textContent =
+      "🪙 Comprar com moedas • saldo insuficiente";
+
+  }
+  else{
+
+    comprarMoedas.textContent =
+      "🪙 Comprar com moedas";
+
+  }
+
+
+  if(
+    precoSaldo > 0 &&
+    saldoDisponivel < precoSaldo
+  ){
+
+    comprarSaldo.textContent =
+      "💵 Comprar com saldo • saldo insuficiente";
+
+  }
+  else{
+
+    comprarSaldo.textContent =
+      "💵 Comprar com saldo";
+
+  }
+
+
+  modal.classList.add(
+    "show"
+  );
+
+}
+
+
+/* =====================================================
+   FECHAR MODAL
+===================================================== */
+
+function fecharModal(){
+
+  modal.classList.remove(
+    "show"
+  );
+
+  produtoSelecionado =
+    null;
+
+}
+
+
+/* =====================================================
+   COMPRAR
+===================================================== */
+
+async function comprar(
+  metodo
+){
+
+  if(
+    !produtoSelecionado ||
+    !usuarioRef ||
+    !usuarioAuth
+  ){
+
+    return;
+
+  }
+
+
+  const produto =
+    produtoSelecionado;
+
+
+  const desconto =
+    Number(
+      produto.desconto ||
+      0
+    );
+
+
+  const precoMoedas =
+    calcularPreco(
+      Number(
+        produto.precoMoedas ||
+        0
+      ),
+      desconto
+    );
+
+
+  const precoSaldo =
+    calcularPreco(
+      Number(
+        produto.precoSaldo ||
+        0
+      ),
+      desconto
+    );
+
+
+  const preco =
+    metodo === "moedas"
+      ? precoMoedas
+      : precoSaldo;
+
+
+  if(
+    preco <= 0
+  ){
+
+    mostrarMensagem(
+      "Este produto não possui esse método de pagamento.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const botao =
+    metodo === "moedas"
+      ? comprarMoedas
+      : comprarSaldo;
+
+
+  botao.disabled =
+    true;
+
+
+  botao.textContent =
+    "⏳ PROCESSANDO...";
+
+
+  try{
+
+    /*
+    ----------------------------------------------------
+    TRANSACTION
+    ----------------------------------------------------
+
+    A compra acontece de forma atômica:
+
+    1. verifica o saldo
+    2. desconta
+    3. registra a compra
+
+    */
+
+    let saldoFinal =
+      0;
+
+
+    await runTransaction(
+      db,
+      async transaction => {
+
+        const usuarioSnap =
+          await transaction.get(
+            usuarioRef
+          );
+
+
+        if(
+          !usuarioSnap.exists()
+        ){
+
+          throw new Error(
+            "USUARIO_NAO_ENCONTRADO"
+          );
+
+        }
+
+
+        const dados =
+          usuarioSnap.data();
+
+
+        const moedasAtuais =
+          Number(
+            dados.moedas ||
+            0
+          );
+
+
+        const saldoAtual =
+          Number(
+            dados.creditos ??
+            dados.saldo ??
+            0
+          );
+
+
+        if(
+          metodo === "moedas"
+        ){
+
+          if(
+            moedasAtuais < preco
+          ){
+
+            throw new Error(
+              "MOEDAS_INSUFICIENTES"
+            );
+
+          }
+
+
+          saldoFinal =
+            moedasAtuais -
+            preco;
+
+
+          transaction.update(
+            usuarioRef,
+            {
+
+              moedas:
+                saldoFinal
+
+            }
+          );
+
+        }
+        else{
+
+          if(
+            saldoAtual < preco
+          ){
+
+            throw new Error(
+              "SALDO_INSUFICIENTE"
+            );
+
+          }
+
+
+          saldoFinal =
+            saldoAtual -
+            preco;
+
+
+          /*
+          ------------------------------------------------
+          Mantém o campo "creditos" como principal.
+          ------------------------------------------------
+          */
+
+          transaction.update(
+            usuarioRef,
+            {
+
+              creditos:
+                saldoFinal
+
+            }
+          );
+
+        }
+
+
+      }
+    );
+
+
+    /*
+    ----------------------------------------------------
+    ATUALIZA MEMÓRIA LOCAL
+    ----------------------------------------------------
+    */
+
+    if(
+      metodo === "moedas"
+    ){
+
+      usuarioDoc.moedas =
+        saldoFinal;
+
+    }
+    else{
+
+      usuarioDoc.creditos =
+        saldoFinal;
+
+    }
+
+
+    atualizarSaldos();
+
+
+    /*
+    ----------------------------------------------------
+    REGISTRA HISTÓRICO DA COMPRA
+    ----------------------------------------------------
+    */
+
+    try{
+
+      await addDoc(
+
+        collection(
+          db,
+          "historicoCompras"
+        ),
+
+        {
+
+          usuarioId:
+            usuarioAuth.uid,
+
+          usuarioDocId:
+            usuarioDoc._docId ||
+            "",
+
+          usuarioNome:
+            usuarioDoc.nome ||
+            "",
+
+          usuarioEmail:
+            usuarioAuth.email ||
+            usuarioDoc.email ||
+            "",
+
+          produtoId:
+            produto.id,
+
+          produtoNome:
+            produto.nome ||
+            "",
+
+          produtoDescricao:
+            produto.descricao ||
+            "",
+
+          imagem:
+            produto.imagem ||
+            "",
+
+          metodoPagamento:
+            metodo,
+
+          valor:
+            preco,
+
+          desconto:
+            desconto,
+
+          moeda:
+            metodo === "moedas"
+              ? "moedas"
+              : "saldo",
+
+          criadoEm:
+            serverTimestamp(),
+
+          status:
+            "pendente"
+
+        }
+
+      );
+
+    }
+    catch(error){
+
+      /*
+      A compra já foi concluída.
+      Se o histórico falhar, não desfazemos
+      a compra.
+      */
+
+      console.error(
+        "Erro ao registrar histórico:",
+        error
+      );
+
+    }
+
+
+    fecharModal();
+
+
+    mostrarMensagem(
+
+      "✅ Compra realizada com sucesso! " +
+      "Seu pedido está pendente.",
+
+      "success"
+
+    );
+
+
+  }
+  catch(error){
+
+    console.error(
+      "Erro na compra:",
+      error
+    );
+
+
+    if(
+      error.message ===
+      "MOEDAS_INSUFICIENTES"
+    ){
+
+      mostrarMensagem(
+        "🪙 Você não possui moedas suficientes.",
+        "error"
+      );
+
+    }
+
+    else if(
+      error.message ===
+      "SALDO_INSUFICIENTE"
+    ){
+
+      mostrarMensagem(
+        "💵 Você não possui saldo suficiente.",
+        "error"
+      );
+
+    }
+
+    else if(
+      error.message ===
+      "USUARIO_NAO_ENCONTRADO"
+    ){
+
+      mostrarMensagem(
+        "Não foi possível encontrar sua conta.",
+        "error"
+      );
+
+    }
+
+    else{
+
+      mostrarMensagem(
+        "❌ Não foi possível concluir a compra.",
+        "error"
+      );
+
+    }
+
+  }
+
+
+  /*
+  ----------------------------------------------------
+  RESTAURA BOTÃO
+  ----------------------------------------------------
+  */
+
+  const precoTexto =
+    metodo === "moedas"
+      ? "🪙 Comprar com moedas"
+      : "💵 Comprar com saldo";
+
+
+  botao.disabled =
+    false;
+
+
+  botao.textContent =
+    precoTexto;
+
+}
+
+
+/* =====================================================
+   NAVEGAÇÃO
+===================================================== */
+
+document
+.getElementById(
+  "voltar"
+)
+.addEventListener(
+  "click",
+  () => {
+
+    window.location.href =
+      "painel.html";
+
+  }
+);
+
+
+document
+.getElementById(
+  "navInicio"
+)
+.addEventListener(
+  "click",
+  () => {
+
+    window.location.href =
+      "painel.html";
+
+  }
+);
+
+
+document
+.getElementById(
+  "navRoleta"
+)
+.addEventListener(
+  "click",
+  () => {
+
+    window.location.href =
+      "roleta.html";
+
+  }
+);
+
+
+document
+.getElementById(
+  "navLoja"
+)
+.addEventListener(
+  "click",
+  () => {
+
+    window.location.href =
+      "loja.html";
+
+  }
+);
+
+
+document
+.getElementById(
+  "navPremios"
+)
+.addEventListener(
+  "click",
+  () => {
+
+    window.location.href =
+      "caixa.html";
+
+  }
+);
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+document
+.getElementById(
+  "cancelarCompra"
+)
+.addEventListener(
+  "click",
+  fecharModal
+);
+
+
+comprarMoedas.addEventListener(
+  "click",
+  () => {
+
+    if(
+      !comprarMoedas.disabled
+    ){
+
+      comprar(
+        "moedas"
+      );
+
+    }
+
+  }
+);
+
+
+comprarSaldo.addEventListener(
+  "click",
+  () => {
+
+    if(
+      !comprarSaldo.disabled
+    ){
+
+      comprar(
+        "saldo"
+      );
+
+    }
+
+  }
+);
+
+
+modal.addEventListener(
+  "click",
+  event => {
+
+    if(
+      event.target ===
+      modal
+    ){
+
+      fecharModal();
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   AUTENTICAÇÃO
+===================================================== */
+
+onAuthStateChanged(
+
+  auth,
+
+  async usuario => {
+
+    if(
+      !usuario
+    ){
+
+      window.location.replace(
+        "index.html"
+      );
+
+      return;
+
+    }
+
+
+    usuarioAuth =
+      usuario;
+
+
+    try{
+
+      const cadastro =
+        await localizarUsuario(
+          usuario
+        );
+
+
+      if(
+        !cadastro
+      ){
+
+        mostrarMensagem(
+          "Não foi possível encontrar seu cadastro.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      usuarioRef =
+        cadastro.ref;
+
+
+      usuarioDoc = {
+
+        ...cadastro.data,
+
+        _docId:
+          cadastro.id
+
+      };
+
+
+      atualizarSaldos();
+
+
+      await carregarProdutos();
+
+    }
+    catch(error){
+
+      console.error(
+        "Erro ao iniciar loja:",
+        error
+      );
+
+
+      mostrarMensagem(
+        "❌ Não foi possível carregar a loja.",
+        "error"
+      );
+
+    }
+
+  }
+
+);
+
+</script>
+
+</body>
+
+</html>
