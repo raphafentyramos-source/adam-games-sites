@@ -1,0 +1,2078 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>Adam Games • Jogos</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  background:#061b2d;
+}
+
+body{
+
+  min-height:100vh;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  color:#fff;
+
+  background:
+
+    radial-gradient(
+      circle at 10% 0%,
+      rgba(0,205,120,.45),
+      transparent 30%
+    ),
+
+    radial-gradient(
+      circle at 90% 10%,
+      rgba(25,170,255,.45),
+      transparent 30%
+    ),
+
+    linear-gradient(
+      180deg,
+      #087fc1 0%,
+      #064b80 48%,
+      #031c35 100%
+    );
+
+}
+
+
+/* =====================================================
+   PÁGINA
+===================================================== */
+
+.page{
+
+  width:100%;
+
+  max-width:650px;
+
+  margin:0 auto;
+
+  padding:
+    18px
+    16px
+    100px;
+
+}
+
+
+/* =====================================================
+   TOPO
+===================================================== */
+
+.top{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+}
+
+
+.back{
+
+  width:45px;
+
+  height:45px;
+
+  border:0;
+
+  border-radius:14px;
+
+  background:
+    rgba(0,30,60,.78);
+
+  color:#fff;
+
+  font-size:26px;
+
+  cursor:pointer;
+
+}
+
+
+.title{
+
+  text-align:center;
+
+  text-shadow:
+    0 2px 8px #000;
+
+}
+
+
+.title small{
+
+  display:block;
+
+  font-size:10px;
+
+  letter-spacing:2px;
+
+}
+
+
+.title strong{
+
+  font-size:20px;
+
+}
+
+
+/* =====================================================
+   CABEÇALHO
+===================================================== */
+
+.hero{
+
+  margin-top:20px;
+
+  padding:
+    22px
+    18px;
+
+  border-radius:24px;
+
+  text-align:center;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(0,45,80,.96),
+      rgba(2,30,58,.96)
+    );
+
+  border:
+    1px solid
+    rgba(255,255,255,.12);
+
+  box-shadow:
+    0 12px 30px
+    rgba(0,0,0,.25);
+
+}
+
+
+.hero-icon{
+
+  font-size:48px;
+
+}
+
+
+.hero h1{
+
+  margin-top:5px;
+
+  font-size:
+    clamp(
+      27px,
+      8vw,
+      38px
+    );
+
+  font-weight:900;
+
+  text-shadow:
+    0 3px 8px #000;
+
+}
+
+
+.hero p{
+
+  margin-top:7px;
+
+  color:#c5e3f5;
+
+  font-size:14px;
+
+  line-height:1.4;
+
+}
+
+
+/* =====================================================
+   SALDOS
+===================================================== */
+
+.saldos{
+
+  display:grid;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
+  gap:12px;
+
+  margin-top:16px;
+
+}
+
+
+.saldo{
+
+  padding:16px 12px;
+
+  border-radius:18px;
+
+  text-align:center;
+
+  background:
+    rgba(2,27,55,.94);
+
+  border:
+    1px solid
+    rgba(255,255,255,.1);
+
+  box-shadow:
+    0 8px 20px
+    rgba(0,0,0,.2);
+
+}
+
+
+.saldo-label{
+
+  color:#9fc5e3;
+
+  font-size:11px;
+
+  font-weight:bold;
+
+  letter-spacing:1px;
+
+}
+
+
+.saldo-numero{
+
+  margin-top:5px;
+
+  font-size:31px;
+
+  font-weight:900;
+
+}
+
+
+.moedas{
+
+  color:#ffd52b;
+
+}
+
+
+.chances{
+
+  color:#58ff9b;
+
+}
+
+
+/* =====================================================
+   PRÓXIMA CHANCE
+===================================================== */
+
+.proxima{
+
+  margin-top:13px;
+
+  padding:13px;
+
+  border-radius:15px;
+
+  text-align:center;
+
+  background:
+    rgba(2,27,55,.78);
+
+  color:#b8d8ec;
+
+  font-size:13px;
+
+}
+
+
+.proxima strong{
+
+  color:#ffd52b;
+
+}
+
+
+/* =====================================================
+   MENU
+===================================================== */
+
+.menu{
+
+  display:grid;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
+  gap:10px;
+
+  margin-top:15px;
+
+}
+
+
+.menu-button{
+
+  min-height:48px;
+
+  border:0;
+
+  border-radius:14px;
+
+  background:
+    rgba(255,255,255,.1);
+
+  color:#fff;
+
+  font-size:14px;
+
+  font-weight:900;
+
+  cursor:pointer;
+
+  border:
+    1px solid
+    rgba(255,255,255,.08);
+
+}
+
+
+.menu-button:active{
+
+  transform:scale(.98);
+
+}
+
+
+/* =====================================================
+   TÍTULO JOGOS
+===================================================== */
+
+.section-title{
+
+  margin-top:26px;
+
+  margin-bottom:12px;
+
+  font-size:22px;
+
+  font-weight:900;
+
+}
+
+
+/* =====================================================
+   JOGOS
+===================================================== */
+
+.games{
+
+  display:grid;
+
+  gap:12px;
+
+}
+
+
+.game{
+
+  position:relative;
+
+  overflow:hidden;
+
+  padding:17px;
+
+  border-radius:20px;
+
+  background:
+    rgba(2,27,55,.95);
+
+  border:
+    1px solid
+    rgba(255,255,255,.1);
+
+  box-shadow:
+    0 9px 24px
+    rgba(0,0,0,.22);
+
+}
+
+
+.game-top{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:14px;
+
+}
+
+
+.game-icon{
+
+  width:58px;
+
+  height:58px;
+
+  flex-shrink:0;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  border-radius:16px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(25,180,255,.28),
+      rgba(0,180,100,.22)
+    );
+
+  font-size:31px;
+
+}
+
+
+.game-info{
+
+  flex:1;
+
+}
+
+
+.game-name{
+
+  font-size:18px;
+
+  font-weight:900;
+
+}
+
+
+.game-description{
+
+  margin-top:4px;
+
+  color:#a9cce2;
+
+  font-size:12px;
+
+  line-height:1.35;
+
+}
+
+
+.game-bottom{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:10px;
+
+  margin-top:14px;
+
+}
+
+
+.game-reward{
+
+  color:#ffd52b;
+
+  font-size:12px;
+
+  font-weight:bold;
+
+}
+
+
+.play{
+
+  min-width:105px;
+
+  height:43px;
+
+  border:0;
+
+  border-radius:12px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #18bd68,
+      #087d45
+    );
+
+  color:#fff;
+
+  font-size:13px;
+
+  font-weight:900;
+
+  cursor:pointer;
+
+}
+
+
+.play:disabled{
+
+  opacity:.4;
+
+  cursor:not-allowed;
+
+}
+
+
+.coming{
+
+  background:
+    rgba(255,255,255,.08);
+
+  color:#9fb9cb;
+
+  cursor:default;
+
+}
+
+
+/* =====================================================
+   INFORMAÇÃO
+===================================================== */
+
+.info-card{
+
+  margin-top:18px;
+
+  padding:17px;
+
+  border-radius:18px;
+
+  background:
+    rgba(2,27,55,.9);
+
+  border:
+    1px solid
+    rgba(255,255,255,.08);
+
+}
+
+
+.info-card h2{
+
+  font-size:17px;
+
+}
+
+
+.info-card p{
+
+  margin-top:8px;
+
+  color:#b5d2e5;
+
+  font-size:13px;
+
+  line-height:1.5;
+
+}
+
+
+.info-card b{
+
+  color:#ffd52b;
+
+}
+
+
+/* =====================================================
+   MODAL SEM CHANCE
+===================================================== */
+
+.modal{
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:100;
+
+  display:none;
+
+  align-items:center;
+
+  justify-content:center;
+
+  padding:20px;
+
+  background:
+    rgba(0,10,25,.82);
+
+  backdrop-filter:
+    blur(5px);
+
+}
+
+
+.modal.show{
+
+  display:flex;
+
+}
+
+
+.modal-card{
+
+  width:100%;
+
+  max-width:380px;
+
+  padding:25px 20px;
+
+  border-radius:22px;
+
+  text-align:center;
+
+  background:
+    #082742;
+
+  border:
+    1px solid
+    rgba(255,255,255,.12);
+
+  box-shadow:
+    0 20px 50px
+    rgba(0,0,0,.4);
+
+}
+
+
+.modal-icon{
+
+  font-size:45px;
+
+}
+
+
+.modal-card h2{
+
+  margin-top:8px;
+
+  font-size:23px;
+
+}
+
+
+.modal-card p{
+
+  margin-top:9px;
+
+  color:#b9d5e8;
+
+  font-size:14px;
+
+  line-height:1.45;
+
+}
+
+
+.modal-close{
+
+  width:100%;
+
+  margin-top:20px;
+
+  height:48px;
+
+  border:0;
+
+  border-radius:13px;
+
+  background:#18a85c;
+
+  color:#fff;
+
+  font-weight:900;
+
+  cursor:pointer;
+
+}
+
+
+/* =====================================================
+   WHATSAPP
+===================================================== */
+
+.whatsapp{
+
+  position:fixed;
+
+  right:18px;
+
+  bottom:20px;
+
+  width:57px;
+
+  height:57px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  border-radius:50%;
+
+  background:#25d366;
+
+  color:#fff;
+
+  text-decoration:none;
+
+  font-size:26px;
+
+  box-shadow:
+    0 7px 22px
+    rgba(0,0,0,.4);
+
+  z-index:50;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:430px){
+
+  .menu{
+
+    grid-template-columns:
+      1fr;
+
+  }
+
+  .game-name{
+
+    font-size:17px;
+
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+  <!-- =================================================
+       TOPO
+  ================================================== -->
+
+  <div class="top">
+
+    <button
+      class="back"
+      id="back"
+      type="button">
+
+      ←
+
+    </button>
+
+
+    <div class="title">
+
+      <small>
+        ADAM GAMES
+      </small>
+
+      <strong>
+        JOGOS
+      </strong>
+
+    </div>
+
+
+    <div style="width:45px"></div>
+
+  </div>
+
+
+  <!-- =================================================
+       HERO
+  ================================================== -->
+
+  <div class="hero">
+
+    <div class="hero-icon">
+      🎮
+    </div>
+
+    <h1>
+      Adam Games
+    </h1>
+
+    <p>
+      Jogue, divirta-se e acumule
+      <b>Adam Coins</b>.
+    </p>
+
+  </div>
+
+
+  <!-- =================================================
+       SALDOS
+  ================================================== -->
+
+  <div class="saldos">
+
+
+    <div class="saldo">
+
+      <div class="saldo-label">
+        🪙 ADAM COINS
+      </div>
+
+      <div
+        class="saldo-numero moedas"
+        id="moedas">
+
+        0
+
+      </div>
+
+    </div>
+
+
+    <div class="saldo">
+
+      <div class="saldo-label">
+        🎟️ CHANCES
+      </div>
+
+      <div
+        class="saldo-numero chances"
+        id="chances">
+
+        0
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+  <!-- =================================================
+       PRÓXIMA CHANCE
+  ================================================== -->
+
+  <div
+    class="proxima"
+    id="proxima">
+
+    ⏳ Verificando próxima chance...
+
+  </div>
+
+
+  <!-- =================================================
+       MENU
+  ================================================== -->
+
+  <div class="menu">
+
+
+    <button
+      class="menu-button"
+      id="lojaButton"
+      type="button">
+
+      🛍️ LOJA DE RECOMPENSAS
+
+    </button>
+
+
+    <button
+      class="menu-button"
+      id="codigoButton"
+      type="button">
+
+      🎁 RESGATAR CÓDIGO
+
+    </button>
+
+
+  </div>
+
+
+  <!-- =================================================
+       JOGOS
+  ================================================== -->
+
+  <div class="section-title">
+
+    🎮 Escolha seu jogo
+
+  </div>
+
+
+  <div class="games">
+
+
+    <!-- FORCA -->
+
+    <div class="game">
+
+      <div class="game-top">
+
+        <div class="game-icon">
+          🔤
+        </div>
+
+        <div class="game-info">
+
+          <div class="game-name">
+            Forca
+          </div>
+
+          <div class="game-description">
+            Descubra a palavra antes que
+            acabem suas tentativas.
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="game-bottom">
+
+        <div class="game-reward">
+          🪙 Moedas por jogar
+        </div>
+
+        <button
+          class="play"
+          data-game="forca"
+          type="button">
+
+          JOGAR
+
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- CHUVA DE SABORES -->
+
+    <div class="game">
+
+      <div class="game-top">
+
+        <div class="game-icon">
+          🍕
+        </div>
+
+        <div class="game-info">
+
+          <div class="game-name">
+            Chuva de Sabores
+          </div>
+
+          <div class="game-description">
+            Pegue os alimentos certos
+            e acumule pontos.
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="game-bottom">
+
+        <div class="game-reward">
+          🪙 Moedas por jogar
+        </div>
+
+        <button
+          class="play"
+          data-game="chuva"
+          type="button">
+
+          JOGAR
+
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- CAÇA AO TESOURO -->
+
+    <div class="game">
+
+      <div class="game-top">
+
+        <div class="game-icon">
+          🧱
+        </div>
+
+        <div class="game-info">
+
+          <div class="game-name">
+            Caça ao Tesouro
+          </div>
+
+          <div class="game-description">
+            Quebre os blocos e descubra
+            o que está escondido.
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="game-bottom">
+
+        <div class="game-reward">
+          🪙 Moedas por jogar
+        </div>
+
+        <button
+          class="play"
+          data-game="tesouro"
+          type="button">
+
+          JOGAR
+
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- ACERTE O ALVO -->
+
+    <div class="game">
+
+      <div class="game-top">
+
+        <div class="game-icon">
+          🎯
+        </div>
+
+        <div class="game-info">
+
+          <div class="game-name">
+            Acerte o Alvo
+          </div>
+
+          <div class="game-description">
+            Teste sua precisão e
+            velocidade.
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="game-bottom">
+
+        <div class="game-reward">
+          🪙 Moedas por jogar
+        </div>
+
+        <button
+          class="play"
+          data-game="alvo"
+          type="button">
+
+          JOGAR
+
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- MEMÓRIA -->
+
+    <div class="game">
+
+      <div class="game-top">
+
+        <div class="game-icon">
+          🃏
+        </div>
+
+        <div class="game-info">
+
+          <div class="game-name">
+            Memória Maluca
+          </div>
+
+          <div class="game-description">
+            Encontre os pares antes
+            que o tempo termine.
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="game-bottom">
+
+        <div class="game-reward">
+          🪙 Moedas por jogar
+        </div>
+
+        <button
+          class="play"
+          data-game="memoria"
+          type="button">
+
+          JOGAR
+
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- REAÇÃO -->
+
+    <div class="game">
+
+      <div class="game-top">
+
+        <div class="game-icon">
+          ⚡
+        </div>
+
+        <div class="game-info">
+
+          <div class="game-name">
+            Reação Relâmpago
+          </div>
+
+          <div class="game-description">
+            Reaja rapidamente aos
+            comandos da tela.
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="game-bottom">
+
+        <div class="game-reward">
+          🪙 Moedas por jogar
+        </div>
+
+        <button
+          class="play"
+          data-game="reacao"
+          type="button">
+
+          JOGAR
+
+        </button>
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+  <!-- =================================================
+       COMO FUNCIONA
+  ================================================== -->
+
+  <div class="info-card">
+
+    <h2>
+      🪙 Como funciona?
+    </h2>
+
+    <p>
+
+      Cada partida utiliza uma
+      <b>chance</b>.
+
+      Mesmo que você perca,
+      a partida poderá conceder
+      uma quantidade mínima de
+      <b>Adam Coins</b>.
+
+      Quanto melhor seu desempenho,
+      maiores poderão ser suas
+      recompensas.
+
+    </p>
+
+  </div>
+
+
+</div>
+
+
+<!-- =====================================================
+     MODAL SEM CHANCE
+===================================================== -->
+
+<div
+  class="modal"
+  id="modalSemChance">
+
+  <div class="modal-card">
+
+    <div class="modal-icon">
+      🎟️
+    </div>
+
+    <h2>
+      Você não tem chances
+    </h2>
+
+    <p>
+
+      Aguarde sua próxima chance
+      ou utilize uma recompensa
+      disponível para continuar
+      jogando.
+
+    </p>
+
+    <button
+      class="modal-close"
+      id="fecharModal"
+      type="button">
+
+      ENTENDI
+
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     WHATSAPP
+===================================================== -->
+
+<a
+  class="whatsapp"
+  href="https://wa.me/5531987350267"
+  target="_blank"
+  rel="noopener noreferrer">
+
+  💬
+
+</a>
+
+
+<script type="module">
+
+
+/* =====================================================
+   FIREBASE
+===================================================== */
+
+import {
+  initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+import {
+  getAuth,
+  onAuthStateChanged
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+import {
+  getFirestore,
+  collection,
+  query,
+  where,
+  getDocs
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+/* =====================================================
+   CONFIGURAÇÃO
+===================================================== */
+
+const firebaseConfig = {
+
+  apiKey:
+    "AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",
+
+  authDomain:
+    "adam-games-21081.firebaseapp.com",
+
+  projectId:
+    "adam-games-21081",
+
+  storageBucket:
+    "adam-games-21081.firebasestorage.app",
+
+  messagingSenderId:
+    "1055528418738",
+
+  appId:
+    "1:1055528418738:web:5fafdf63424ba9744eb8ab"
+
+};
+
+
+const app =
+  initializeApp(
+    firebaseConfig
+  );
+
+
+const auth =
+  getAuth(app);
+
+
+const db =
+  getFirestore(app);
+
+
+/* =====================================================
+   ELEMENTOS
+===================================================== */
+
+const moedasEl =
+  document.getElementById(
+    "moedas"
+  );
+
+
+const chancesEl =
+  document.getElementById(
+    "chances"
+  );
+
+
+const proximaEl =
+  document.getElementById(
+    "proxima"
+  );
+
+
+const modalSemChance =
+  document.getElementById(
+    "modalSemChance"
+  );
+
+
+/* =====================================================
+   ESTADO
+===================================================== */
+
+let usuario =
+  null;
+
+let usuarioRef =
+  null;
+
+
+/* =====================================================
+   TEMPOS
+===================================================== */
+
+const HORAS_VIP =
+  72;
+
+const HORAS_NAO_VIP =
+  120;
+
+const MS_HORA =
+  60 * 60 * 1000;
+
+
+/* =====================================================
+   LOCALIZAR USUÁRIO
+===================================================== */
+
+async function localizarUsuario(
+  user
+){
+
+  let resultado;
+
+
+  /*
+  -----------------------------------------------------
+  UID
+  -----------------------------------------------------
+  */
+
+  resultado =
+    await getDocs(
+
+      query(
+
+        collection(
+          db,
+          "admins"
+        ),
+
+        where(
+          "uid",
+          "==",
+          user.uid
+        )
+
+      )
+
+    );
+
+
+  if(
+    !resultado.empty
+  ){
+
+    return resultado.docs[0];
+
+  }
+
+
+  /*
+  -----------------------------------------------------
+  E-MAIL
+  -----------------------------------------------------
+  */
+
+  if(
+    user.email
+  ){
+
+    resultado =
+      await getDocs(
+
+        query(
+
+          collection(
+            db,
+            "admins"
+          ),
+
+          where(
+            "email",
+            "==",
+            user.email
+          )
+
+        )
+
+      );
+
+
+    if(
+      !resultado.empty
+    ){
+
+      return resultado.docs[0];
+
+    }
+
+  }
+
+
+  return null;
+
+}
+
+
+/* =====================================================
+   FORMATAR TEMPO
+===================================================== */
+
+function formatarTempo(
+  ms
+){
+
+  const total =
+    Math.max(
+      0,
+      Math.floor(
+        ms / 1000
+      )
+    );
+
+
+  const horas =
+    Math.floor(
+      total / 3600
+    );
+
+
+  const minutos =
+    Math.floor(
+      (
+        total % 3600
+      ) / 60
+    );
+
+
+  const segundos =
+    total % 60;
+
+
+  return (
+
+    String(
+      horas
+    ).padStart(
+      2,
+      "0"
+    )
+
+    +
+
+    ":"
+
+    +
+
+    String(
+      minutos
+    ).padStart(
+      2,
+      "0"
+    )
+
+    +
+
+    ":"
+
+    +
+
+    String(
+      segundos
+    ).padStart(
+      2,
+      "0"
+    )
+
+  );
+
+}
+
+
+/* =====================================================
+   DATA FIREBASE
+===================================================== */
+
+function converterData(
+  valor
+){
+
+  if(
+    !valor
+  ){
+
+    return null;
+
+  }
+
+
+  if(
+    typeof valor.toMillis ===
+    "function"
+  ){
+
+    return valor.toMillis();
+
+  }
+
+
+  if(
+    typeof valor.seconds ===
+    "number"
+  ){
+
+    return valor.seconds * 1000;
+
+  }
+
+
+  return null;
+
+}
+
+
+/* =====================================================
+   ATUALIZAR SALDOS
+===================================================== */
+
+function atualizarSaldos(){
+
+  if(
+    !usuario
+  ){
+
+    moedasEl.textContent =
+      "0";
+
+    chancesEl.textContent =
+      "0";
+
+    return;
+
+  }
+
+
+  moedasEl.textContent =
+    Number(
+      usuario.moedas || 0
+    ).toLocaleString(
+      "pt-BR"
+    );
+
+
+  chancesEl.textContent =
+    Number(
+      usuario.chances || 0
+    ).toLocaleString(
+      "pt-BR"
+    );
+
+}
+
+
+/* =====================================================
+   CRONÔMETRO
+===================================================== */
+
+function iniciarContador(){
+
+  if(
+    !usuario
+  ){
+
+    return;
+
+  }
+
+
+  let fim =
+    converterData(
+      usuario.proximaChance
+    );
+
+
+  const duracao =
+
+    usuario.vip === true
+
+      ?
+
+    HORAS_VIP *
+    MS_HORA
+
+      :
+
+    HORAS_NAO_VIP *
+    MS_HORA;
+
+
+  if(
+    !fim
+  ){
+
+    proximaEl.innerHTML =
+      "⏳ Próxima chance ainda não foi iniciada.";
+
+    return;
+
+  }
+
+
+  function atualizar(){
+
+    const restante =
+      fim -
+      Date.now();
+
+
+    if(
+      restante <= 0
+    ){
+
+      proximaEl.innerHTML =
+        "🎟️ <strong>Chance pronta para ser liberada!</strong>";
+
+      return;
+
+    }
+
+
+    proximaEl.innerHTML =
+
+      "⏳ Próxima chance em " +
+
+      "<strong>" +
+
+      formatarTempo(
+        restante
+      ) +
+
+      "</strong>";
+
+  }
+
+
+  atualizar();
+
+
+  setInterval(
+    atualizar,
+    1000
+  );
+
+}
+
+
+/* =====================================================
+   VERIFICAR SE PODE JOGAR
+===================================================== */
+
+function verificarJogo(
+  jogo
+){
+
+  const chances =
+    Number(
+      usuario?.chances || 0
+    );
+
+
+  if(
+    chances <= 0
+  ){
+
+    modalSemChance.classList.add(
+      "show"
+    );
+
+    return;
+
+  }
+
+
+  /*
+  -----------------------------------------------------
+  TEMPORARIAMENTE
+  -----------------------------------------------------
+
+  Nesta primeira versão os jogos ainda não existem.
+
+  Quando criarmos cada jogo, este botão será conectado
+  ao arquivo correspondente.
+
+  -----------------------------------------------------
+  */
+
+  const paginas = {
+
+    forca:
+      "forca.html",
+
+    chuva:
+      "chuva.html",
+
+    tesouro:
+      "tesouro.html",
+
+    alvo:
+      "alvo.html",
+
+    memoria:
+      "memoria.html",
+
+    reacao:
+      "reacao.html"
+
+  };
+
+
+  const pagina =
+    paginas[jogo];
+
+
+  if(
+    pagina
+  ){
+
+    window.location.href =
+      pagina;
+
+  }
+
+}
+
+
+/* =====================================================
+   BOTÕES DOS JOGOS
+===================================================== */
+
+document
+  .querySelectorAll(
+    ".play"
+  )
+  .forEach(
+    botao => {
+
+      botao.addEventListener(
+        "click",
+        () => {
+
+          verificarJogo(
+            botao.dataset.game
+          );
+
+        }
+      );
+
+    }
+  );
+
+
+/* =====================================================
+   LOJA
+===================================================== */
+
+document
+  .getElementById(
+    "lojaButton"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      /*
+      Página será criada
+      na próxima etapa.
+      */
+
+      window.location.href =
+        "loja.html";
+
+    }
+  );
+
+
+/* =====================================================
+   CÓDIGO
+===================================================== */
+
+document
+  .getElementById(
+    "codigoButton"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      /*
+      Página será criada
+      na próxima etapa.
+      */
+
+      window.location.href =
+        "resgatar.html";
+
+    }
+  );
+
+
+/* =====================================================
+   FECHAR MODAL
+===================================================== */
+
+document
+  .getElementById(
+    "fecharModal"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      modalSemChance.classList.remove(
+        "show"
+      );
+
+    }
+  );
+
+
+/* =====================================================
+   VOLTAR
+===================================================== */
+
+document
+  .getElementById(
+    "back"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      window.location.href =
+        "painel.html";
+
+    }
+  );
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+onAuthStateChanged(
+
+  auth,
+
+  async user => {
+
+    if(
+      !user
+    ){
+
+      window.location.href =
+        "index.html";
+
+      return;
+
+    }
+
+
+    try{
+
+      const documento =
+        await localizarUsuario(
+          user
+        );
+
+
+      if(
+        !documento
+      ){
+
+        proximaEl.textContent =
+          "⚠️ Cadastro não encontrado.";
+
+        return;
+
+      }
+
+
+      usuario =
+        documento.data();
+
+
+      usuarioRef =
+        documento.ref;
+
+
+      atualizarSaldos();
+
+      iniciarContador();
+
+    }
+
+    catch(error){
+
+      console.error(
+        "Erro ao carregar jogos:",
+        error
+      );
+
+
+      proximaEl.textContent =
+        "⚠️ Não foi possível carregar seus dados.";
+
+    }
+
+  }
+
+);
+
+</script>
+
+</body>
+
+</html>
