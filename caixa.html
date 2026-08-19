@@ -1,11 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
 <title>Adam Games • Caixa Box</title>
 
 <style>
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -17,296 +25,583 @@ html{
 }
 
 body{
+
   min-height:100vh;
-  font-family:Arial,Helvetica,sans-serif;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
   color:#fff;
-  background:linear-gradient(180deg,#008f4c 0%,#087fc1 48%,#064b80 100%);
+
+  background:
+    linear-gradient(
+      180deg,
+      #008f4c 0%,
+      #087fc1 48%,
+      #064b80 100%
+    );
+
 }
 
 .page{
+
   width:100%;
   max-width:650px;
+
   margin:0 auto;
-  padding:18px 16px 100px;
+
+  padding:
+    18px
+    16px
+    100px;
+
 }
 
 .top{
+
   display:flex;
   align-items:center;
   justify-content:space-between;
+
 }
 
 .back{
+
   width:45px;
   height:45px;
+
   border:0;
   border-radius:14px;
-  background:rgba(0,30,60,.75);
+
+  background:
+    rgba(0,30,60,.75);
+
   color:#fff;
+
   font-size:26px;
+
   cursor:pointer;
+
 }
 
 .title{
+
   text-align:center;
-  text-shadow:0 2px 8px #000;
+
+  text-shadow:
+    0 2px 8px #000;
+
 }
 
 .title small{
+
   display:block;
+
   font-size:10px;
+
 }
 
 .title strong{
+
   font-size:19px;
+
 }
 
 .chest-area{
+
   text-align:center;
+
   margin-top:15px;
+
 }
 
 .chest{
+
   width:min(310px,78vw);
+
   margin:auto;
+
   cursor:pointer;
-  filter:drop-shadow(0 15px 25px rgba(0,0,0,.4));
-  transition:transform .15s ease;
+
+  filter:
+    drop-shadow(
+      0 15px 25px
+      rgba(0,0,0,.4)
+    );
+
+  transition:
+    transform .15s ease;
+
 }
 
 .chest:active{
+
   transform:scale(.94);
+
 }
 
 .chest img{
+
   width:100%;
   height:auto;
+
   display:block;
+
 }
 
 .box-title{
+
   text-align:center;
+
   margin-top:4px;
-  text-shadow:0 3px 8px #000;
+
+  text-shadow:
+    0 3px 8px #000;
+
 }
 
 .box-title h1{
-  font-size:clamp(25px,7vw,37px);
+
+  font-size:
+    clamp(
+      25px,
+      7vw,
+      37px
+    );
+
   font-weight:900;
+
 }
 
 .box-title p{
+
   margin-top:7px;
+
   color:#e8f7ff;
+
   font-size:14px;
+
 }
 
 .vip{
+
   margin-top:18px;
+
   padding:14px;
+
   border-radius:17px;
+
   text-align:center;
+
   font-size:17px;
+
   font-weight:900;
-  background:linear-gradient(135deg,#e8bd2d,#996400);
-  border:2px solid rgba(255,240,140,.5);
-  box-shadow:0 8px 22px rgba(0,0,0,.25);
+
+  background:
+    linear-gradient(
+      135deg,
+      #e8bd2d,
+      #996400
+    );
+
+  border:
+    2px solid
+    rgba(255,240,140,.5);
+
+  box-shadow:
+    0 8px 22px
+    rgba(0,0,0,.25);
+
 }
 
 .timer-card{
+
   margin-top:18px;
+
   padding:21px 16px;
+
   border-radius:23px;
-  background:rgba(2,27,55,.94);
-  border:1px solid rgba(255,255,255,.12);
+
+  background:
+    rgba(2,27,55,.94);
+
+  border:
+    1px solid
+    rgba(255,255,255,.12);
+
   text-align:center;
-  box-shadow:0 10px 30px rgba(0,0,0,.25);
+
+  box-shadow:
+    0 10px 30px
+    rgba(0,0,0,.25);
+
 }
 
 .timer-label{
+
   color:#a9d2ef;
+
   font-size:13px;
+
   font-weight:bold;
+
 }
 
 .timer{
+
   margin-top:7px;
-  font-size:clamp(35px,10vw,56px);
+
+  font-size:
+    clamp(
+      35px,
+      10vw,
+      56px
+    );
+
   font-weight:900;
+
   color:#ffd72e;
-  font-variant-numeric:tabular-nums;
+
+  font-variant-numeric:
+    tabular-nums;
+
 }
 
 .progress{
+
   height:11px;
+
   margin-top:17px;
+
   border-radius:20px;
+
   overflow:hidden;
+
   background:#092746;
+
 }
 
 .progress-bar{
+
   width:100%;
   height:100%;
+
   border-radius:20px;
-  background:linear-gradient(90deg,#ffd900,#50ff78,#159fff);
-  transition:width 1s linear;
+
+  background:
+    linear-gradient(
+      90deg,
+      #ffd900,
+      #50ff78,
+      #159fff
+    );
+
+  transition:
+    width 1s linear;
+
 }
 
 .status{
+
   margin-top:12px;
+
   font-size:15px;
+
   line-height:1.4;
+
 }
 
 .available{
+
   color:#58ff9b;
+
 }
 
 .waiting{
+
   color:#ffd85c;
+
 }
 
 .locked{
+
   color:#ff9ca8;
+
 }
 
 .rescue{
+
   width:100%;
   height:58px;
+
   margin-top:18px;
+
   border:0;
   border-radius:17px;
-  background:linear-gradient(135deg,#25aaff,#0873dc);
+
+  background:
+    linear-gradient(
+      135deg,
+      #25aaff,
+      #0873dc
+    );
+
   color:#fff;
+
   font-size:17px;
   font-weight:900;
+
   cursor:pointer;
-  box-shadow:0 7px 18px rgba(0,0,0,.25);
+
+  box-shadow:
+    0 7px 18px
+    rgba(0,0,0,.25);
+
 }
 
 .rescue:disabled{
+
   opacity:.4;
+
   cursor:not-allowed;
+
 }
 
 .message{
+
   margin-top:11px;
+
   min-height:20px;
+
   color:#c6e2f5;
+
   font-size:13px;
+
   line-height:1.45;
+
 }
 
 .rescue-date{
+
   margin-top:12px;
+
   color:#86b9da;
+
   font-size:12px;
+
   text-align:center;
+
 }
 
 .chance-card{
+
   margin-top:17px;
+
   padding:18px;
+
   border-radius:20px;
-  background:rgba(2,27,55,.94);
-  border:1px solid rgba(255,255,255,.08);
+
+  background:
+    rgba(2,27,55,.94);
+
+  border:
+    1px solid
+    rgba(255,255,255,.08);
+
 }
 
 .chance-title{
+
   color:#9fc5e3;
+
   font-size:12px;
+
   font-weight:bold;
+
 }
 
 .chance-number{
+
   margin-top:3px;
+
   font-size:38px;
+
   font-weight:900;
+
 }
 
 .chance-description{
+
   margin-top:5px;
+
   color:#cfe6f7;
+
   font-size:13px;
+
   line-height:1.4;
+
 }
 
 .games-button{
+
   width:100%;
+
   height:50px;
+
   margin-top:14px;
+
   border:0;
+
   border-radius:14px;
-  background:linear-gradient(135deg,#18bd68,#087d45);
+
+  background:
+    linear-gradient(
+      135deg,
+      #18bd68,
+      #087d45
+    );
+
   color:#fff;
+
   font-size:15px;
+
   font-weight:900;
+
   cursor:pointer;
-  box-shadow:0 7px 18px rgba(0,0,0,.22);
+
+  box-shadow:
+    0 7px 18px
+    rgba(0,0,0,.22);
+
 }
 
 .games-button:active{
+
   transform:scale(.98);
+
 }
 
 .prizes{
+
   margin-top:17px;
+
   padding:18px;
+
   border-radius:21px;
-  background:rgba(2,27,55,.94);
-  border:1px solid rgba(255,255,255,.08);
+
+  background:
+    rgba(2,27,55,.94);
+
+  border:
+    1px solid
+    rgba(255,255,255,.08);
+
 }
 
 .prizes h2{
+
   text-align:center;
+
   font-size:19px;
+
   margin-bottom:10px;
+
 }
 
 .prize{
+
   display:flex;
+
   align-items:center;
+
   gap:12px;
+
   padding:12px;
+
   margin-top:8px;
+
   border-radius:13px;
-  background:rgba(255,255,255,.055);
+
+  background:
+    rgba(255,255,255,.055);
+
   font-size:14px;
+
 }
 
 .prize span{
+
   width:30px;
+
   flex-shrink:0;
+
   text-align:center;
+
   font-size:22px;
+
+}
+
+.empty-prizes{
+
+  padding:20px 10px;
+
+  text-align:center;
+
+  color:#9fc5e3;
+
+  font-size:13px;
+
 }
 
 .whatsapp{
+
   position:fixed;
+
   right:18px;
+
   bottom:20px;
+
   width:57px;
   height:57px;
+
   display:flex;
+
   align-items:center;
   justify-content:center;
+
   border-radius:50%;
+
   background:#25d366;
+
   color:#fff;
+
   text-decoration:none;
+
   font-size:26px;
-  box-shadow:0 7px 22px rgba(0,0,0,.4);
+
+  box-shadow:
+    0 7px 22px
+    rgba(0,0,0,.4);
+
   z-index:50;
+
 }
 
 @media(max-width:500px){
+
   .page{
+
     padding-left:12px;
     padding-right:12px;
+
   }
+
 }
+
 </style>
+
 </head>
 
 <body>
@@ -315,30 +610,47 @@ body{
 
   <div class="top">
 
-    <button class="back" id="back" type="button">←</button>
+    <button
+      class="back"
+      id="back"
+      type="button">
+
+      ←
+
+    </button>
 
     <div class="title">
-      <small>ADAM GAMES</small>
-      <strong>CAIXA BOX</strong>
+
+      <small>
+        ADAM GAMES
+      </small>
+
+      <strong>
+        CAIXA BOX
+      </strong>
+
     </div>
 
     <div style="width:45px"></div>
 
   </div>
 
+
   <div class="chest-area">
 
-    <div class="chest" id="chest">
+    <div
+      class="chest"
+      id="chest">
 
       <img
         id="chestImage"
         src="803C73F5-58D3-441E-8362-524A53744019.png"
-        alt="Caixa Box"
-      >
+        alt="Caixa Box">
 
     </div>
 
   </div>
+
 
   <div class="box-title">
 
@@ -352,18 +664,32 @@ body{
 
   </div>
 
-  <div class="vip" id="vipStatus">
+
+  <div
+    class="vip"
+    id="vipStatus">
+
     👑 Verificando VIP...
+
   </div>
+
 
   <div class="timer-card">
 
-    <div class="timer-label" id="timerLabel">
+    <div
+      class="timer-label"
+      id="timerLabel">
+
       PRÓXIMA CHANCE EXTRA
+
     </div>
 
-    <div class="timer" id="timer">
+    <div
+      class="timer"
+      id="timer">
+
       —
+
     </div>
 
     <div class="progress">
@@ -375,49 +701,75 @@ body{
 
     </div>
 
-    <div class="status waiting" id="status">
+    <div
+      class="status waiting"
+      id="status">
+
       Verificando...
+
     </div>
 
     <button
       class="rescue"
       id="rescue"
       disabled>
+
       🎁 RESGATAR CAIXA
+
     </button>
 
-    <div class="message" id="message"></div>
+    <div
+      class="message"
+      id="message">
+    </div>
 
-    <div class="rescue-date" id="rescueDate"></div>
+    <div
+      class="rescue-date"
+      id="rescueDate">
+    </div>
 
   </div>
+
 
   <div class="chance-card">
 
     <div class="chance-title">
+
       🎟️ SUAS CHANCES NOS JOGOS
+
     </div>
 
-    <div class="chance-number" id="chanceNumber">
+    <div
+      class="chance-number"
+      id="chanceNumber">
+
       0
+
     </div>
 
-    <div class="chance-description" id="chanceDescription">
+    <div
+      class="chance-description"
+      id="chanceDescription">
+
       —
+
     </div>
 
     <button
       class="games-button"
       id="gamesButton"
       type="button">
+
       🎮 IR PARA JOGOS
+
     </button>
 
   </div>
 
+
   <div class="prizes">
 
-    <h2 id="prizesTitle">
+    <h2>
       🎁 CONTEÚDO DA CAIXA
     </h2>
 
@@ -427,15 +779,24 @@ body{
 
 </div>
 
+
 <a
   class="whatsapp"
   href="https://wa.me/5531987350267"
   target="_blank"
   rel="noopener noreferrer">
+
   💬
+
 </a>
 
+
 <script type="module">
+
+
+/* =====================================================
+   FIREBASE
+===================================================== */
 
 import {
   initializeApp
@@ -443,12 +804,14 @@ import {
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
+
 import {
   getAuth,
   onAuthStateChanged
 }
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
 
 import {
   getFirestore,
@@ -466,7 +829,7 @@ from
 
 
 /* =====================================================
-   FIREBASE
+   CONFIGURAÇÃO
 ===================================================== */
 
 const firebaseConfig = {
@@ -491,13 +854,16 @@ const firebaseConfig = {
 
 };
 
+
 const app =
   initializeApp(
     firebaseConfig
   );
 
+
 const auth =
   getAuth(app);
+
 
 const db =
   getFirestore(app);
@@ -508,67 +874,100 @@ const db =
 ===================================================== */
 
 const timer =
-  document.getElementById("timer");
+  document.getElementById(
+    "timer"
+  );
 
 const status =
-  document.getElementById("status");
+  document.getElementById(
+    "status"
+  );
 
 const rescue =
-  document.getElementById("rescue");
+  document.getElementById(
+    "rescue"
+  );
 
 const message =
-  document.getElementById("message");
+  document.getElementById(
+    "message"
+  );
 
 const vipStatus =
-  document.getElementById("vipStatus");
+  document.getElementById(
+    "vipStatus"
+  );
 
 const chanceNumber =
-  document.getElementById("chanceNumber");
+  document.getElementById(
+    "chanceNumber"
+  );
 
 const chanceDescription =
-  document.getElementById("chanceDescription");
+  document.getElementById(
+    "chanceDescription"
+  );
 
 const progressBar =
-  document.getElementById("progressBar");
+  document.getElementById(
+    "progressBar"
+  );
 
 const boxTitle =
-  document.getElementById("boxTitle");
+  document.getElementById(
+    "boxTitle"
+  );
 
 const boxSubtitle =
-  document.getElementById("boxSubtitle");
+  document.getElementById(
+    "boxSubtitle"
+  );
 
 const prizeList =
-  document.getElementById("prizeList");
+  document.getElementById(
+    "prizeList"
+  );
 
 const rescueDate =
-  document.getElementById("rescueDate");
+  document.getElementById(
+    "rescueDate"
+  );
 
 const chestImage =
-  document.getElementById("chestImage");
+  document.getElementById(
+    "chestImage"
+  );
 
 
 /* =====================================================
    ESTADO
 ===================================================== */
 
-let usuarioRef = null;
+let usuarioRef =
+  null;
 
-let usuario = null;
+let usuario =
+  null;
 
-let ehVip = false;
+let ehVip =
+  false;
 
-let intervalo = null;
+let intervalo =
+  null;
 
-let processando = false;
+let processando =
+  false;
 
 
 /* =====================================================
    TEMPOS
 ===================================================== */
 
-const HORAS_VIP = 72;
+const HORAS_VIP =
+  72;
 
-const HORAS_NAO_VIP = 120;
+const HORAS_NAO_VIP =
+  120;
 
 const MS_HORA =
   60 * 60 * 1000;
@@ -581,7 +980,7 @@ const MS_NAO_VIP =
 
 
 /* =====================================================
-   CONFIGURAÇÃO DAS CAIXAS
+   CAIXAS MENSAIS
 ===================================================== */
 
 const caixas = {
@@ -791,16 +1190,13 @@ const caixas = {
 
 
 /* =====================================================
-   DATA ATUAL
+   DATA
 ===================================================== */
 
-function obterMesAtual(){
-
-  const agora =
-    new Date();
+function mesAtual(){
 
   return String(
-    agora.getMonth() + 1
+    new Date().getMonth() + 1
   ).padStart(
     2,
     "0"
@@ -808,7 +1204,8 @@ function obterMesAtual(){
 
 }
 
-function obterAnoAtual(){
+
+function anoAtual(){
 
   return new Date()
     .getFullYear();
@@ -817,42 +1214,42 @@ function obterAnoAtual(){
 
 
 /* =====================================================
-   CAIXA DO MÊS
+   CONFIGURAÇÃO DA CAIXA
 ===================================================== */
 
 function configuracaoMes(){
 
   const mes =
-    obterMesAtual();
+    mesAtual();
 
-  if(
+  return (
+
     caixas[mes]
-  ){
 
-    return caixas[mes];
+    ||
 
-  }
+    {
 
-  return {
+      titulo:
+        "🎁 Caixa do Mês",
 
-    titulo:
-      "🎁 Caixa do Mês",
+      subtitulo:
+        "Nova recompensa Adam Games.",
 
-    subtitulo:
-      "Nova recompensa Adam Games.",
+      imagem:
+        "803C73F5-58D3-441E-8362-524A53744019.png",
 
-    imagem:
-      "803C73F5-58D3-441E-8362-524A53744019.png",
+      itens:[]
 
-    itens:[]
+    }
 
-  };
+  );
 
 }
 
 
 /* =====================================================
-   CARREGAR VISUAL
+   VISUAL DA CAIXA
 ===================================================== */
 
 function carregarVisual(){
@@ -872,6 +1269,26 @@ function carregarVisual(){
   prizeList.innerHTML =
     "";
 
+  if(
+    !config.itens ||
+    config.itens.length === 0
+  ){
+
+    prizeList.innerHTML = `
+
+      <div class="empty-prizes">
+
+        🎁 Os prêmios desta Caixa serão anunciados em breve.
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
   config.itens.forEach(
     item => {
 
@@ -883,12 +1300,12 @@ function carregarVisual(){
       div.className =
         "prize";
 
-      const span =
+      const icon =
         document.createElement(
           "span"
         );
 
-      span.textContent =
+      icon.textContent =
         item[0];
 
       const texto =
@@ -900,7 +1317,7 @@ function carregarVisual(){
         item[1];
 
       div.appendChild(
-        span
+        icon
       );
 
       div.appendChild(
@@ -921,10 +1338,14 @@ function carregarVisual(){
    DATA FIREBASE
 ===================================================== */
 
-function converterData(valor){
+function converterData(
+  valor
+){
 
   if(!valor){
+
     return null;
+
   }
 
   if(
@@ -954,13 +1375,19 @@ function converterData(valor){
    FORMATAR DATA
 ===================================================== */
 
-function formatarData(valor){
+function formatarData(
+  valor
+){
 
   const millis =
-    converterData(valor);
+    converterData(
+      valor
+    );
 
   if(!millis){
+
     return "";
+
   }
 
   return new Date(
@@ -980,7 +1407,9 @@ function formatarData(valor){
    FORMATAR TIMER
 ===================================================== */
 
-function formatarTimer(ms){
+function formatarTimer(
+  ms
+){
 
   const total =
     Math.max(
@@ -1046,7 +1475,7 @@ function formatarTimer(ms){
 
 
 /* =====================================================
-   NOTIFICAÇÃO
+   CRIAR NOTIFICAÇÃO
 ===================================================== */
 
 async function criarNotificacao(
@@ -1057,7 +1486,9 @@ async function criarNotificacao(
 ){
 
   if(!usuario){
+
     return;
+
   }
 
   await setDoc(
@@ -1100,7 +1531,7 @@ async function criarNotificacao(
 
 
 /* =====================================================
-   NOTIFICAÇÃO DA NOVA CAIXA
+   NOTIFICAÇÃO DA CAIXA DO MÊS
 ===================================================== */
 
 async function verificarNotificacaoCaixa(){
@@ -1115,32 +1546,27 @@ async function verificarNotificacaoCaixa(){
   }
 
   const mes =
-    obterMesAtual();
+    mesAtual();
 
   const ano =
-    obterAnoAtual();
+    anoAtual();
 
-  /*
-  Só existe caixa especial programada
-  de setembro a dezembro.
-  */
+  const config =
+    caixas[mes];
 
-  if(
-    !caixas[mes]
-  ){
+  if(!config){
 
     return;
 
   }
 
   /*
-  A notificação usa ano + mês.
-  Assim cada mês possui somente
-  uma notificação.
+  A notificação é criada somente uma vez
+  para aquele usuário naquele mês.
   */
 
   const id =
-    "caixa_box_" +
+    "caixa_" +
     ano +
     "_" +
     mes +
@@ -1155,7 +1581,7 @@ async function verificarNotificacaoCaixa(){
 
       "🎁 Nova Caixa Box disponível!",
 
-      caixas[mes].titulo +
+      config.titulo +
       " já está disponível para resgate.",
 
       "caixa"
@@ -1166,7 +1592,7 @@ async function verificarNotificacaoCaixa(){
   catch(error){
 
     console.error(
-      "Erro na notificação da Caixa:",
+      "Erro ao criar notificação da Caixa:",
       error
     );
 
@@ -1176,13 +1602,60 @@ async function verificarNotificacaoCaixa(){
 
 
 /* =====================================================
-   INICIAR CRONÔMETRO DE CHANCES
+   NOTIFICAÇÃO DA CHANCE
+===================================================== */
+
+async function criarNotificacaoChance(){
+
+  if(!usuario){
+
+    return;
+
+  }
+
+  const id =
+    "chance_" +
+    usuario.uid +
+    "_" +
+    Date.now();
+
+  try{
+
+    await criarNotificacao(
+
+      id,
+
+      "🎟️ Nova chance disponível!",
+
+      "Você recebeu +1 chance para usar nos jogos.",
+
+      "chance"
+
+    );
+
+  }
+  catch(error){
+
+    console.error(
+      "Erro criando notificação da chance:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   CRONÔMETRO
 ===================================================== */
 
 async function iniciarCronometro(){
 
   if(!usuarioRef){
+
     return;
+
   }
 
   const duracao =
@@ -1195,15 +1668,19 @@ async function iniciarCronometro(){
       ? HORAS_VIP
       : HORAS_NAO_VIP;
 
-  /*
-  Se não existe próxima chance,
-  cria o primeiro contador.
-  */
 
   let fim =
     converterData(
       usuario.proximaChance
     );
+
+
+  /*
+  PRIMEIRO ACESSO
+
+  Se não existe contador,
+  começa agora.
+  */
 
   if(!fim){
 
@@ -1211,27 +1688,31 @@ async function iniciarCronometro(){
       Date.now() +
       duracao;
 
+    const timestamp =
+      Timestamp.fromMillis(
+        fim
+      );
+
     await updateDoc(
 
       usuarioRef,
 
       {
-
         proximaChance:
-          Timestamp.fromMillis(
-            fim
-          )
-
+          timestamp
       }
 
     );
 
     usuario.proximaChance =
-      Timestamp.fromMillis(
-        fim
-      );
+      timestamp;
 
   }
+
+
+  /*
+  Limpa contador anterior.
+  */
 
   if(intervalo){
 
@@ -1241,11 +1722,20 @@ async function iniciarCronometro(){
 
   }
 
+
   async function atualizar(){
+
+    const agora =
+      Date.now();
 
     const restante =
       fim -
-      Date.now();
+      agora;
+
+
+    /*
+    CONTANDO
+    */
 
     if(
       restante > 0
@@ -1267,7 +1757,9 @@ async function iniciarCronometro(){
               duracao
             ) * 100
           )
-        ) + "%";
+        )
+
+        + "%";
 
       timerLabel.textContent =
         "PRÓXIMA CHANCE EXTRA";
@@ -1275,7 +1767,7 @@ async function iniciarCronometro(){
       status.textContent =
         "⏳ Próxima chance em " +
         horas +
-        " horas de intervalo.";
+        " horas.";
 
       status.className =
         "status waiting";
@@ -1284,21 +1776,37 @@ async function iniciarCronometro(){
 
     }
 
+
     /*
-    Timer zerou.
-    Libera +1 chance.
+    TIMER ZEROU
+
+    Libera a chance.
     */
 
     try{
 
-      const chances =
+      const chancesAtuais =
         Number(
           usuario.chances || 0
-        ) + 1;
+        );
+
+      const novasChances =
+        chancesAtuais + 1;
+
+      /*
+      Novo contador começa
+      exatamente a partir de agora.
+      */
 
       const novoFim =
         Date.now() +
         duracao;
+
+      const novoTimestamp =
+        Timestamp.fromMillis(
+          novoFim
+        );
+
 
       await updateDoc(
 
@@ -1307,30 +1815,40 @@ async function iniciarCronometro(){
         {
 
           chances:
-            chances,
+            novasChances,
 
           proximaChance:
-            Timestamp.fromMillis(
-              novoFim
-            )
+            novoTimestamp
 
         }
 
       );
 
+
       usuario.chances =
-        chances;
+        novasChances;
 
       usuario.proximaChance =
-        Timestamp.fromMillis(
-          novoFim
-        );
+        novoTimestamp;
 
       chanceNumber.textContent =
-        chances;
+        novasChances;
+
+
+      /*
+      Notificação da chance.
+      */
+
+      await criarNotificacaoChance();
+
+
+      /*
+      Reinicia o cronômetro.
+      */
 
       fim =
         novoFim;
+
 
       timer.textContent =
         formatarTimer(
@@ -1346,26 +1864,32 @@ async function iniciarCronometro(){
       status.className =
         "status available";
 
+
       /*
-      Cria a notificação individual.
+      Depois de alguns segundos
+      volta a mostrar a contagem.
       */
 
-      const id =
-        "chance_" +
-        usuario.uid +
-        "_" +
-        Date.now();
+      setTimeout(
+        () => {
 
-      await criarNotificacao(
+          if(
+            usuario &&
+            fim
+          ){
 
-        id,
+            status.textContent =
+              "⏳ Próxima chance em " +
+              horas +
+              " horas.";
 
-        "🎟️ Nova chance disponível!",
+            status.className =
+              "status waiting";
 
-        "Você recebeu +1 chance para usar nos jogos.",
+          }
 
-        "chance"
-
+        },
+        3000
       );
 
     }
@@ -1377,7 +1901,7 @@ async function iniciarCronometro(){
       );
 
       status.textContent =
-        "⚠️ Não foi possível liberar a chance.";
+        "⚠️ Erro ao liberar sua chance.";
 
       status.className =
         "status locked";
@@ -1386,7 +1910,14 @@ async function iniciarCronometro(){
 
   }
 
+
   await atualizar();
+
+
+  /*
+  Atualiza automaticamente
+  a cada segundo.
+  */
 
   intervalo =
     setInterval(
@@ -1398,10 +1929,12 @@ async function iniciarCronometro(){
 
 
 /* =====================================================
-   BUSCAR USUÁRIO
+   BUSCAR CADASTRO
 ===================================================== */
 
-async function buscarCadastro(user){
+async function buscarCadastro(
+  user
+){
 
   let resultado =
     await getDocs(
@@ -1423,6 +1956,7 @@ async function buscarCadastro(user){
 
     );
 
+
   if(
     !resultado.empty
   ){
@@ -1430,6 +1964,7 @@ async function buscarCadastro(user){
     return resultado.docs[0];
 
   }
+
 
   if(
     user.email
@@ -1455,6 +1990,7 @@ async function buscarCadastro(user){
 
       );
 
+
     if(
       !resultado.empty
     ){
@@ -1465,21 +2001,25 @@ async function buscarCadastro(user){
 
   }
 
+
   return null;
 
 }
 
 
 /* =====================================================
-   CARREGAR PÁGINA
+   CARREGAR USUÁRIO
 ===================================================== */
 
-async function carregar(user){
+async function carregar(
+  user
+){
 
   const documento =
     await buscarCadastro(
       user
     );
+
 
   if(
     !documento
@@ -1504,6 +2044,7 @@ async function carregar(user){
 
   }
 
+
   usuario =
     documento.data();
 
@@ -1513,12 +2054,27 @@ async function carregar(user){
   ehVip =
     usuario.vip === true;
 
+
+  /*
+  Carrega caixa do mês.
+  */
+
   carregarVisual();
+
+
+  /*
+  Mostra chances.
+  */
 
   chanceNumber.textContent =
     Number(
       usuario.chances || 0
     );
+
+
+  /*
+  VIP
+  */
 
   if(
     ehVip
@@ -1530,19 +2086,45 @@ async function carregar(user){
     chanceDescription.textContent =
       "A cada 72 horas você recebe +1 chance para usar nos jogos.";
 
-    /*
-    Caixa VIP:
-    uma vez por mês.
-    */
+  }
+
+
+  /*
+  NÃO VIP
+  */
+
+  else{
+
+    vipStatus.textContent =
+      "🔒 NÃO VIP";
+
+    chanceDescription.textContent =
+      "A cada 120 horas você recebe +1 chance para usar nos jogos.";
+
+  }
+
+
+  /*
+  Caixa Box:
+
+  Somente VIP.
+  Uma vez por mês.
+  */
+
+  if(
+    ehVip
+  ){
 
     const mes =
-      obterMesAtual();
+      mesAtual();
 
-    const resgatou =
-      usuario.caixaBoxMes === mes;
+    const jaResgatou =
+      usuario.caixaBoxMes ===
+      mes;
+
 
     if(
-      resgatou
+      jaResgatou
     ){
 
       rescue.disabled =
@@ -1551,17 +2133,15 @@ async function carregar(user){
       rescue.textContent =
         "🎁 CAIXA JÁ RESGATADA";
 
-      timerLabel.textContent =
-        "PRÓXIMA CHANCE EXTRA";
+      message.textContent =
+        "Uma nova Caixa estará disponível no dia 1º do próximo mês.";
 
       status.textContent =
-        "✅ A Caixa deste mês já foi resgatada.";
+        "✅ Caixa deste mês já foi resgatada.";
 
       status.className =
         "status available";
 
-      message.textContent =
-        "Uma nova Caixa estará disponível no dia 1º do próximo mês.";
 
       if(
         usuario.caixaBoxResgatadaEm
@@ -1576,6 +2156,7 @@ async function carregar(user){
       }
 
     }
+
     else{
 
       rescue.disabled =
@@ -1592,14 +2173,18 @@ async function carregar(user){
 
     }
 
+
+    /*
+    Verifica a notificação
+    da nova Caixa.
+    */
+
+    await verificarNotificacaoCaixa();
+
   }
+
+
   else{
-
-    vipStatus.textContent =
-      "🔒 NÃO VIP";
-
-    chanceDescription.textContent =
-      "A cada 120 horas você recebe +1 chance para usar nos jogos.";
 
     rescue.disabled =
       true;
@@ -1615,18 +2200,18 @@ async function carregar(user){
 
   }
 
+
   /*
-  O cronômetro é sempre de chances.
-  Não controla a Caixa.
+  IMPORTANTE:
+
+  O cronômetro funciona tanto
+  para VIP quanto para não VIP.
+
+  VIP = 72h
+  Não VIP = 120h
   */
 
   await iniciarCronometro();
-
-  /*
-  Verifica a notificação da Caixa.
-  */
-
-  await verificarNotificacaoCaixa();
 
 }
 
@@ -1649,16 +2234,20 @@ rescue.addEventListener(
 
     }
 
+
     const mes =
-      obterMesAtual();
+      mesAtual();
+
 
     if(
-      usuario.caixaBoxMes === mes
+      usuario.caixaBoxMes ===
+      mes
     ){
 
       return;
 
     }
+
 
     processando =
       true;
@@ -1669,10 +2258,12 @@ rescue.addEventListener(
     rescue.textContent =
       "REGISTRANDO...";
 
+
     try{
 
       const agora =
         Timestamp.now();
+
 
       await updateDoc(
 
@@ -1693,14 +2284,17 @@ rescue.addEventListener(
 
       );
 
+
       usuario.caixaBoxMes =
         mes;
 
       usuario.caixaBoxResgatadaEm =
         agora;
 
+
       rescue.textContent =
         "🎁 CAIXA JÁ RESGATADA";
+
 
       status.textContent =
         "🎉 Caixa resgatada com sucesso!";
@@ -1708,8 +2302,10 @@ rescue.addEventListener(
       status.className =
         "status available";
 
+
       message.textContent =
         "Seu resgate foi registrado. Uma nova Caixa estará disponível no dia 1º do próximo mês.";
+
 
       rescueDate.textContent =
         "Resgatada em: " +
@@ -1725,17 +2321,20 @@ rescue.addEventListener(
         error
       );
 
+
       rescue.disabled =
         false;
 
       rescue.textContent =
         "🎁 RESGATAR CAIXA";
 
+
       status.textContent =
         "⚠️ Não foi possível registrar o resgate.";
 
       status.className =
         "status locked";
+
 
       message.textContent =
         error.message ||
@@ -1768,8 +2367,10 @@ document
           "chest"
         );
 
+
       elemento.style.transform =
         "scale(1.06)";
+
 
       setTimeout(
         () => {
@@ -1840,6 +2441,7 @@ onAuthStateChanged(
 
     }
 
+
     try{
 
       await carregar(
@@ -1854,11 +2456,14 @@ onAuthStateChanged(
         error
       );
 
+
       vipStatus.textContent =
         "⚠️ ERRO";
 
+
       status.textContent =
         "Não foi possível carregar a Caixa.";
+
 
       status.className =
         "status locked";
@@ -1872,4 +2477,5 @@ onAuthStateChanged(
 </script>
 
 </body>
+
 </html>
