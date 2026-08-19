@@ -14,10 +14,6 @@
 
 <style>
 
-/* =====================================================
-   RESET
-===================================================== */
-
 *{
   box-sizing:border-box;
   margin:0;
@@ -44,18 +40,13 @@ body{
   overflow-x:hidden;
 
   background:
-
-    radial-gradient(
-      circle at 15% 5%,
-      #43aaff 0%,
-      transparent 30%
-    ),
-
     linear-gradient(
-      135deg,
-      #087ee1 0%,
-      #061d43 78%
-    );
+      rgba(2,20,45,.25),
+      rgba(2,20,45,.55)
+    ),
+    url("6AB154F8-5052-4D70-B604-F3C0BEE88348.png")
+    center top / cover fixed no-repeat;
+
 }
 
 
@@ -158,7 +149,7 @@ body{
 
 
 /* =====================================================
-   BOTÕES DO TOPO
+   BOTÕES TOPO
 ===================================================== */
 
 .top-buttons{
@@ -193,7 +184,7 @@ body{
 
 
 /* =====================================================
-   NOTIFICAÇÕES
+   NOTIFICAÇÃO
 ===================================================== */
 
 .notification{
@@ -243,12 +234,13 @@ body{
   border-radius:28px;
 
   background:
-
     linear-gradient(
       145deg,
-      rgba(4,55,110,.97),
-      rgba(2,25,56,.97)
+      rgba(4,55,110,.88),
+      rgba(2,25,56,.88)
     );
+
+  backdrop-filter:blur(5px);
 
   border:
     1px solid
@@ -612,6 +604,10 @@ body{
 }
 
 
+/* =====================================================
+   CAIXA BOX
+===================================================== */
+
 .card-box{
 
   background:
@@ -642,10 +638,34 @@ body{
 }
 
 
-.card-roleta p{
+/* =====================================================
+   VALE PRESENTE
+===================================================== */
 
-  color:
-    rgba(255,255,255,.9);
+.card-gift{
+
+  background:
+    linear-gradient(
+      145deg,
+      #d83c8a,
+      #731b73
+    );
+
+}
+
+
+/* =====================================================
+   LOJA
+===================================================== */
+
+.card-store{
+
+  background:
+    linear-gradient(
+      145deg,
+      #168fff,
+      #064aaf
+    );
 
 }
 
@@ -665,6 +685,10 @@ body{
 
 }
 
+
+/* =====================================================
+   ÍCONES
+===================================================== */
 
 .card-icon{
 
@@ -689,7 +713,7 @@ body{
 .card p{
 
   color:
-    rgba(255,255,255,.82);
+    rgba(255,255,255,.85);
 
   font-size:14px;
 
@@ -1009,7 +1033,7 @@ body{
 
 
 /* =====================================================
-   MENU
+   MENU INFERIOR
 ===================================================== */
 
 .bottom-nav{
@@ -1060,7 +1084,7 @@ body{
 
   padding:6px;
 
-  font-size:11px;
+  font-size:10px;
 
   font-weight:bold;
 
@@ -1122,7 +1146,7 @@ body{
 
 
 /* =====================================================
-   MODAL SAIR
+   MODAL
 ===================================================== */
 
 .modal{
@@ -1244,7 +1268,7 @@ body{
 
 
 /* =====================================================
-   MODAL NOTIFICAÇÕES
+   NOTIFICAÇÕES
 ===================================================== */
 
 .notifications-modal{
@@ -1462,10 +1486,23 @@ body{
 
 
 /* =====================================================
-   RESPONSIVO
+   MOBILE
 ===================================================== */
 
 @media(max-width:700px){
+
+  body{
+
+    background:
+      linear-gradient(
+        rgba(2,20,45,.22),
+        rgba(2,20,45,.58)
+      ),
+      url("6AB154F8-5052-4D70-B604-F3C0BEE88348.png")
+      center top / cover fixed no-repeat;
+
+  }
+
 
   .page{
 
@@ -1532,6 +1569,9 @@ body{
 
   .cards{
 
+    grid-template-columns:
+      repeat(2,1fr);
+
     gap:8px;
 
   }
@@ -1539,7 +1579,7 @@ body{
 
   .card{
 
-    min-height:210px;
+    min-height:190px;
 
     padding:12px;
 
@@ -1550,7 +1590,7 @@ body{
 
   .card-icon{
 
-    font-size:53px;
+    font-size:50px;
 
   }
 
@@ -1646,6 +1686,14 @@ body{
 
   }
 
+
+  .bottom-nav{
+
+    width:
+      calc(100% - 16px);
+
+  }
+
 }
 
 </style>
@@ -1665,16 +1713,11 @@ body{
 
 <header class="topbar">
 
-
   <div class="brand">
 
-
     <div class="brand-icon">
-
       👑
-
     </div>
-
 
     <div class="brand-name">
 
@@ -1684,12 +1727,10 @@ body{
 
     </div>
 
-
   </div>
 
 
   <div class="top-buttons">
-
 
     <button
       class="top-button"
@@ -1718,9 +1759,7 @@ body{
 
     </button>
 
-
   </div>
-
 
 </header>
 
@@ -1731,9 +1770,7 @@ body{
 
 <section class="profile">
 
-
   <div class="avatar-area">
-
 
     <div
       class="avatar"
@@ -1752,15 +1789,12 @@ body{
 
     </div>
 
-
   </div>
 
 
   <div class="profile-data">
 
-
     <div class="profile-name-line">
-
 
       <div
         class="profile-name"
@@ -1772,11 +1806,8 @@ body{
 
 
       <div class="verified">
-
         ✓
-
       </div>
-
 
     </div>
 
@@ -1810,33 +1841,23 @@ body{
 
     <div class="status-line">
 
-
       <span class="online">
-
         🟢 Online agora
-
       </span>
 
 
       <span id="clock">
-
         🕐 --:--
-
       </span>
 
 
       <span id="locationStatus">
-
         📍 Localização não informada
-
       </span>
-
 
     </div>
 
-
   </div>
-
 
 </section>
 
@@ -1849,20 +1870,14 @@ body{
   class="error-panel"
   id="errorPanel">
 
-
   <span class="error-title">
-
     ⚠️ Atenção
-
   </span>
 
 
   <span id="errorText">
-
     —
-
   </span>
-
 
 </div>
 
@@ -1872,7 +1887,6 @@ body{
 ===================================================== -->
 
 <section class="hero">
-
 
   <div
     class="season"
@@ -1884,18 +1898,13 @@ body{
 
 
   <h2>
-
     BEM-VINDO 👋
-
   </h2>
 
 
   <p>
-
     Seu mundo começa aqui!
-
   </p>
-
 
 </section>
 
@@ -1913,34 +1922,24 @@ body{
     class="card card-box"
     id="boxCard">
 
-
     <div class="card-icon">
-
       🎁
-
     </div>
 
 
     <h3>
-
       CAIXA BOX
-
     </h3>
 
 
     <p>
-
-      Confira sua caixa de prêmios.
-
+      Confira sua caixa de prêmios VIP.
     </p>
 
 
     <div class="card-arrow">
-
       →
-
     </div>
-
 
   </div>
 
@@ -1951,34 +1950,80 @@ body{
     class="card card-roleta"
     id="roletaCard">
 
-
     <div class="card-icon">
-
       🎰
-
     </div>
 
 
     <h3>
-
       ROLETA
-
     </h3>
 
 
     <p>
-
       Gire a roleta e descubra seu prêmio.
-
     </p>
 
 
     <div class="card-arrow">
-
       →
-
     </div>
 
+  </div>
+
+
+  <!-- VALE PRESENTE -->
+
+  <div
+    class="card card-gift"
+    id="giftCard">
+
+    <div class="card-icon">
+      🎟️
+    </div>
+
+
+    <h3>
+      VALE-PRESENTE
+    </h3>
+
+
+    <p>
+      Resgate seu código e transforme-o em créditos.
+    </p>
+
+
+    <div class="card-arrow">
+      →
+    </div>
+
+  </div>
+
+
+  <!-- LOJA -->
+
+  <div
+    class="card card-store"
+    id="storeCard">
+
+    <div class="card-icon">
+      💎
+    </div>
+
+
+    <h3>
+      LOJA
+    </h3>
+
+
+    <p>
+      Troque moedas ou use seu saldo em produtos.
+    </p>
+
+
+    <div class="card-arrow">
+      →
+    </div>
 
   </div>
 
@@ -1989,34 +2034,24 @@ body{
     class="card card-games"
     id="gamesCard">
 
-
     <div class="card-icon">
-
       🎮
-
     </div>
 
 
     <h3>
-
       JOGOS
-
     </h3>
 
 
     <p>
-
-      Acesse seus jogos cadastrados.
-
+      Acesse Forca e outros jogos.
     </p>
 
 
     <div class="card-arrow">
-
       →
-
     </div>
-
 
   </div>
 
@@ -2030,36 +2065,26 @@ body{
 
 <section class="vip-panel">
 
-
   <div class="vip-info">
 
 
     <div class="vip-icon">
-
       👑
-
     </div>
 
 
     <div>
 
-
       <h3>
-
         ÁREA VIP
-
       </h3>
 
 
       <p id="vipDescription">
-
-        Benefícios exclusivos para membros VIP.
-
+        Benefícios exclusivos + Caixa Box para membros VIP.
       </p>
 
-
     </div>
-
 
   </div>
 
@@ -2073,7 +2098,6 @@ body{
 
   </button>
 
-
 </section>
 
 
@@ -2083,20 +2107,14 @@ body{
 
 <div class="section-header">
 
-
   <h3>
-
     ⭐ Seus recursos
-
   </h3>
 
 
   <span>
-
-    Seus dados
-
+    Seu saldo
   </span>
-
 
 </div>
 
@@ -2107,16 +2125,12 @@ body{
   <div class="resource">
 
     <div class="resource-icon">
-
       💎
-
     </div>
 
 
     <div class="resource-name">
-
       CRÉDITOS
-
     </div>
 
 
@@ -2134,16 +2148,12 @@ body{
   <div class="resource">
 
     <div class="resource-icon">
-
       🪙
-
     </div>
 
 
     <div class="resource-name">
-
       MOEDAS
-
     </div>
 
 
@@ -2161,16 +2171,12 @@ body{
   <div class="resource">
 
     <div class="resource-icon">
-
       🗝️
-
     </div>
 
 
     <div class="resource-name">
-
       CHAVES
-
     </div>
 
 
@@ -2188,16 +2194,12 @@ body{
   <div class="resource">
 
     <div class="resource-icon">
-
       🎟️
-
     </div>
 
 
     <div class="resource-name">
-
       CHANCES
-
     </div>
 
 
@@ -2211,7 +2213,6 @@ body{
 
   </div>
 
-
 </section>
 
 
@@ -2221,13 +2222,10 @@ body{
 
 <section class="data-panel">
 
-
   <div class="section-header">
 
     <h3>
-
       👤 Meus dados
-
     </h3>
 
   </div>
@@ -2241,6 +2239,7 @@ body{
       <div class="data-label">
         Nome
       </div>
+
 
       <div
         class="data-value"
@@ -2259,6 +2258,7 @@ body{
         E-mail
       </div>
 
+
       <div
         class="data-value"
         id="dataEmail">
@@ -2275,6 +2275,7 @@ body{
       <div class="data-label">
         ID Adam Games
       </div>
+
 
       <div
         class="data-value"
@@ -2293,6 +2294,7 @@ body{
         UID Firebase
       </div>
 
+
       <div
         class="data-value"
         id="dataUid">
@@ -2309,6 +2311,7 @@ body{
       <div class="data-label">
         Idade
       </div>
+
 
       <div
         class="data-value"
@@ -2327,6 +2330,7 @@ body{
         Telefone
       </div>
 
+
       <div
         class="data-value"
         id="dataPhone">
@@ -2343,6 +2347,7 @@ body{
       <div class="data-label">
         Caixa Box
       </div>
+
 
       <div
         class="data-value"
@@ -2361,6 +2366,7 @@ body{
         Último acesso
       </div>
 
+
       <div
         class="data-value"
         id="dataAccess">
@@ -2373,7 +2379,6 @@ body{
 
 
   </div>
-
 
 </section>
 
@@ -2397,7 +2402,7 @@ body{
 
 
 <!-- =====================================================
-     MENU
+     MENU INFERIOR
 ===================================================== -->
 
 <nav class="bottom-nav">
@@ -2408,7 +2413,9 @@ body{
     id="homeNav"
     type="button">
 
-    <span>🏠</span>
+    <span>
+      🏠
+    </span>
 
     Início
 
@@ -2420,7 +2427,9 @@ body{
     id="vipNav"
     type="button">
 
-    <span>👑</span>
+    <span>
+      👑
+    </span>
 
     VIP
 
@@ -2433,22 +2442,24 @@ body{
     type="button">
 
     <div class="diamond">
-
       💎
-
     </div>
+
+    Loja
 
   </button>
 
 
   <button
     class="nav-button"
-    id="prizesNav"
+    id="giftNav"
     type="button">
 
-    <span>🎁</span>
+    <span>
+      🎟️
+    </span>
 
-    Prêmios
+    Vale
 
   </button>
 
@@ -2458,7 +2469,9 @@ body{
     id="gamesNav"
     type="button">
 
-    <span>🎮</span>
+    <span>
+      🎮
+    </span>
 
     Jogos
 
@@ -2469,24 +2482,19 @@ body{
 
 
 <!-- =====================================================
-     MODAL NOTIFICAÇÕES
+     NOTIFICAÇÕES
 ===================================================== -->
 
 <div
   class="notifications-modal"
   id="notificationsModal">
 
-
   <div class="notifications-box">
-
 
     <div class="notifications-header">
 
-
       <h3>
-
         🔔 Notificações
-
       </h3>
 
 
@@ -2499,55 +2507,43 @@ body{
 
       </button>
 
-
     </div>
 
 
     <div id="notificationsList">
 
       <div class="empty-notifications">
-
         Carregando notificações...
-
       </div>
 
     </div>
 
-
   </div>
-
 
 </div>
 
 
 <!-- =====================================================
-     MODAL LOGOUT
+     LOGOUT
 ===================================================== -->
 
 <div
   class="modal"
   id="logoutModal">
 
-
   <div class="modal-box">
 
-
     <h3>
-
       Sair da conta?
-
     </h3>
 
 
     <p>
-
       Você será levado novamente para o login.
-
     </p>
 
 
     <div class="modal-buttons">
-
 
       <button
         class="cancel"
@@ -2568,12 +2564,9 @@ body{
 
       </button>
 
-
     </div>
 
-
   </div>
-
 
 </div>
 
@@ -2618,7 +2611,7 @@ from
 
 
 /* =====================================================
-   FIREBASE CONFIG
+   CONFIG
 ===================================================== */
 
 const firebaseConfig = {
@@ -2803,14 +2796,17 @@ async function carregarCadastro(
 
   let snapshot =
     await getDocs(
+
       query(
         admins,
+
         where(
           "uid",
           "==",
           user.uid
         )
       )
+
     );
 
 
@@ -2821,8 +2817,10 @@ async function carregarCadastro(
 
     snapshot =
       await getDocs(
+
         query(
           admins,
+
           where(
             "email",
             "==",
@@ -2831,6 +2829,7 @@ async function carregarCadastro(
               .toLowerCase()
           )
         )
+
       );
 
   }
@@ -2863,6 +2862,9 @@ async function carregarCadastro(
         false,
 
       chances:
+        0,
+
+      girosRoleta:
         0,
 
       moedas:
@@ -2924,7 +2926,7 @@ async function carregarCadastro(
 
 
 /* =====================================================
-   MOSTRAR PERFIL
+   MOSTRAR DADOS
 ===================================================== */
 
 function mostrarDados(
@@ -2980,21 +2982,22 @@ function mostrarDados(
     user.uid;
 
 
+  const idPublico =
+    dados.publicId ||
+    cadastro.id;
+
+
   document.getElementById(
     "userId"
   ).textContent =
     "ID: " +
-    (
-      dados.publicId ||
-      cadastro.id
-    );
+    idPublico;
 
 
   document.getElementById(
     "dataId"
   ).textContent =
-    dados.publicId ||
-    cadastro.id;
+    idPublico;
 
 
   document.getElementById(
@@ -3083,7 +3086,14 @@ function mostrarDados(
     document.getElementById(
       "vipDescription"
     ).textContent =
-      "Você tem acesso aos benefícios exclusivos VIP.";
+      "VIP ativo • Caixa Box disponível conforme suas regras.";
+
+    document.getElementById(
+      "dataBox"
+    ).textContent =
+      dados.ultimaCaixaResgatadaEm
+        ? "Já resgatada"
+        : "Disponível";
 
   }
   else{
@@ -3103,23 +3113,20 @@ function mostrarDados(
     document.getElementById(
       "vipDescription"
     ).textContent =
-      "Torne-se VIP para desbloquear benefícios exclusivos.";
+      "Torne-se VIP para desbloquear benefícios e Caixa Box.";
+
+    document.getElementById(
+      "dataBox"
+    ).textContent =
+      "Área VIP";
 
   }
-
-
-  document.getElementById(
-    "dataBox"
-  ).textContent =
-    dados.ultimaCaixaResgatadaEm
-      ? "Já resgatada"
-      : "Disponível";
 
 }
 
 
 /* =====================================================
-   CONVERTER DATA FIREBASE
+   DATA
 ===================================================== */
 
 function converterData(
@@ -3135,7 +3142,7 @@ function converterData(
 
   if(
     typeof valor.toMillis ===
-      "function"
+    "function"
   ){
 
     return valor.toMillis();
@@ -3145,7 +3152,7 @@ function converterData(
 
   if(
     typeof valor.seconds ===
-      "number"
+    "number"
   ){
 
     return valor.seconds * 1000;
@@ -3159,7 +3166,7 @@ function converterData(
 
 
 /* =====================================================
-   CRIAR NOTIFICAÇÃO
+   NOTIFICAÇÃO
 ===================================================== */
 
 async function criarNotificacao(
@@ -3176,16 +3183,14 @@ async function criarNotificacao(
   }
 
 
-  const referencia =
+  await setDoc(
+
     doc(
       db,
       "notificacoes",
       id
-    );
+    ),
 
-
-  await setDoc(
-    referencia,
     {
 
       uid:
@@ -3207,21 +3212,25 @@ async function criarNotificacao(
         Timestamp.now()
 
     },
+
     {
       merge:true
     }
+
   );
 
 }
 
 
 /* =====================================================
-   VERIFICAR CAIXA
+   VERIFICAR CAIXA VIP
 ===================================================== */
 
 async function verificarNotificacaoCaixa(){
 
-  if(!usuarioAtual){
+  if(
+    !usuarioAtual
+  ){
 
     return;
 
@@ -3261,22 +3270,16 @@ async function verificarNotificacaoCaixa(){
   }
 
 
-  const id =
-    "caixa_" +
-    String(
-      proxima
-    );
-
-
   try{
 
     await criarNotificacao(
 
-      id,
+      "caixa_" +
+      String(proxima),
 
-      "🎁 Sua chance está disponível!",
+      "🎁 Sua Caixa Box está disponível!",
 
-      "A Caixa Box da Independência já pode ser resgatada.",
+      "A Caixa Box VIP já pode ser verificada na sua Área VIP.",
 
       "caixa"
 
@@ -3286,7 +3289,7 @@ async function verificarNotificacaoCaixa(){
   catch(error){
 
     console.error(
-      "Erro criando notificação da Caixa:",
+      "Erro criando notificação:",
       error
     );
 
@@ -3296,12 +3299,14 @@ async function verificarNotificacaoCaixa(){
 
 
 /* =====================================================
-   CARREGAR NOTIFICAÇÕES
+   NOTIFICAÇÕES
 ===================================================== */
 
 async function carregarNotificacoes(){
 
-  if(!usuarioAtual){
+  if(
+    !usuarioAtual
+  ){
 
     return;
 
@@ -3310,28 +3315,30 @@ async function carregarNotificacoes(){
 
   try{
 
-    const notificacoes =
-      collection(
-        db,
-        "notificacoes"
-      );
-
-
     const snapshot =
       await getDocs(
+
         query(
-          notificacoes,
+
+          collection(
+            db,
+            "notificacoes"
+          ),
+
           where(
             "uid",
             "==",
             usuarioAtual.uid
           )
+
         )
+
       );
 
 
     const lista =
       snapshot.docs
+
         .map(
           documento => ({
 
@@ -3342,6 +3349,7 @@ async function carregarNotificacoes(){
 
           })
         )
+
         .sort(
           (a,b) => {
 
@@ -3456,23 +3464,15 @@ async function carregarNotificacoes(){
         elemento.innerHTML = `
 
           <div class="notification-item-title">
-
             ${item.titulo || "Notificação"}
-
           </div>
-
 
           <div class="notification-item-message">
-
             ${item.mensagem || ""}
-
           </div>
 
-
           <div class="notification-item-time">
-
             ${dataTexto}
-
           </div>
 
         `;
@@ -3489,14 +3489,17 @@ async function carregarNotificacoes(){
               try{
 
                 await updateDoc(
+
                   doc(
                     db,
                     "notificacoes",
                     item.id
                   ),
+
                   {
                     lida:true
                   }
+
                 );
 
 
@@ -3515,7 +3518,7 @@ async function carregarNotificacoes(){
               catch(error){
 
                 console.error(
-                  "Erro marcando notificação:",
+                  "Erro notificacao:",
                   error
                 );
 
@@ -3530,7 +3533,7 @@ async function carregarNotificacoes(){
             ){
 
               window.location.href =
-                "caixa.html";
+                "vip.html";
 
             }
 
@@ -3549,7 +3552,7 @@ async function carregarNotificacoes(){
   catch(error){
 
     console.error(
-      "Erro carregando notificações:",
+      "Erro notificações:",
       error
     );
 
@@ -3570,7 +3573,7 @@ async function carregarNotificacoes(){
 
 
 /* =====================================================
-   ABRIR SINO
+   SINO
 ===================================================== */
 
 notificationButton.addEventListener(
@@ -3589,10 +3592,6 @@ notificationButton.addEventListener(
   }
 );
 
-
-/* =====================================================
-   FECHAR NOTIFICAÇÕES
-===================================================== */
 
 document.getElementById(
   "closeNotifications"
@@ -3692,77 +3691,111 @@ document.getElementById(
 
 
 /* =====================================================
-   CAIXA BOX
+   NAVEGAÇÃO
+===================================================== */
+
+function abrirCaixa(){
+
+  window.location.href =
+    "caixa.html";
+
+}
+
+
+function abrirVIP(){
+
+  window.location.href =
+    "vip.html";
+
+}
+
+
+function abrirRoleta(){
+
+  window.location.href =
+    "roleta.html";
+
+}
+
+
+function abrirValePresente(){
+
+  window.location.href =
+    "vale-presente.html";
+
+}
+
+
+function abrirLoja(){
+
+  window.location.href =
+    "loja.html";
+
+}
+
+
+function abrirJogos(){
+
+  window.location.href =
+    "jogos.html";
+
+}
+
+
+/* =====================================================
+   CARDS
 ===================================================== */
 
 document.getElementById(
   "boxCard"
 ).addEventListener(
   "click",
-  () => {
-
-    window.location.href =
-      "caixa.html";
-
-  }
+  abrirCaixa
 );
 
-
-/* =====================================================
-   ROLETA
-===================================================== */
 
 document.getElementById(
   "roletaCard"
 ).addEventListener(
   "click",
-  () => {
-
-    window.location.href =
-      "roleta.html";
-
-  }
+  abrirRoleta
 );
 
-
-/* =====================================================
-   VIP
-===================================================== */
 
 document.getElementById(
-  "vipButton"
+  "giftCard"
 ).addEventListener(
   "click",
-  () => {
-
-    alert(
-      "👑 Área VIP em construção."
-    );
-
-  }
+  abrirValePresente
 );
 
 
-/* =====================================================
-   JOGOS
-===================================================== */
+document.getElementById(
+  "storeCard"
+).addEventListener(
+  "click",
+  abrirLoja
+);
+
 
 document.getElementById(
   "gamesCard"
 ).addEventListener(
   "click",
-  () => {
+  abrirJogos
+);
 
-    alert(
-      "🎮 Área de jogos em construção."
-    );
 
-  }
+document.getElementById(
+  "vipButton"
+).addEventListener(
+  "click",
+  abrirVIP
 );
 
 
 /* =====================================================
-   MENU
+   MENU INFERIOR
 ===================================================== */
 
 document.getElementById(
@@ -3772,22 +3805,12 @@ document.getElementById(
   () => {
 
     window.scrollTo({
+
       top:0,
+
       behavior:"smooth"
+
     });
-
-  }
-);
-
-
-document.getElementById(
-  "prizesNav"
-).addEventListener(
-  "click",
-  () => {
-
-    window.location.href =
-      "caixa.html";
 
   }
 );
@@ -3797,27 +3820,7 @@ document.getElementById(
   "vipNav"
 ).addEventListener(
   "click",
-  () => {
-
-    alert(
-      "👑 Área VIP em construção."
-    );
-
-  }
-);
-
-
-document.getElementById(
-  "gamesNav"
-).addEventListener(
-  "click",
-  () => {
-
-    alert(
-      "🎮 Área de jogos em construção."
-    );
-
-  }
+  abrirVIP
 );
 
 
@@ -3825,18 +3828,28 @@ document.getElementById(
   "diamondNav"
 ).addEventListener(
   "click",
-  () => {
+  abrirLoja
+);
 
-    alert(
-      "💎 Área de recursos em construção."
-    );
 
-  }
+document.getElementById(
+  "giftNav"
+).addEventListener(
+  "click",
+  abrirValePresente
+);
+
+
+document.getElementById(
+  "gamesNav"
+).addEventListener(
+  "click",
+  abrirJogos
 );
 
 
 /* =====================================================
-   LOGIN
+   AUTENTICAÇÃO
 ===================================================== */
 
 onAuthStateChanged(
@@ -3893,8 +3906,10 @@ onAuthStateChanged(
 
 
       mostrarErro(
+
         error.message ||
         "Não foi possível carregar o painel."
+
       );
 
     }
