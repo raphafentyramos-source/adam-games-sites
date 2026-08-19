@@ -145,7 +145,7 @@ body{
 
 
 /* =====================================================
-   CARREGANDO / ERRO
+   MENSAGEM
 ===================================================== */
 
 .message{
@@ -171,6 +171,15 @@ body{
 
   background:
     rgba(255,50,70,.12);
+
+}
+
+.message.success{
+
+  color:#6dffae;
+
+  background:
+    rgba(0,220,100,.12);
 
 }
 
@@ -431,7 +440,7 @@ body{
 
 
 /* =====================================================
-   RESUMO DE PRÊMIOS
+   RESUMO
 ===================================================== */
 
 .summary{
@@ -672,6 +681,54 @@ body{
 
 
 /* =====================================================
+   BOTÃO ENTREGAR
+===================================================== */
+
+.entregar-button{
+
+  width:100%;
+
+  margin-top:14px;
+
+  padding:13px;
+
+  border:0;
+
+  border-radius:12px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #18c66d,
+      #087b45
+    );
+
+  color:#fff;
+
+  font-size:14px;
+
+  font-weight:900;
+
+  cursor:pointer;
+
+}
+
+.entregar-button:disabled{
+
+  opacity:.55;
+
+  cursor:not-allowed;
+
+}
+
+.entregar-button:active{
+
+  transform:scale(.98);
+
+}
+
+
+/* =====================================================
    ROLETA
 ===================================================== */
 
@@ -797,6 +854,37 @@ body{
 
   }
 
+  .filters{
+
+    grid-template-columns:
+      1fr;
+
+  }
+
+  .search{
+
+    grid-column:auto;
+
+  }
+
+  .order-top{
+
+    flex-direction:column;
+
+  }
+
+  .roleta-result-top{
+
+    flex-direction:column;
+
+  }
+
+  .roleta-data{
+
+    text-align:left;
+
+  }
+
 }
 
 </style>
@@ -809,143 +897,140 @@ body{
 <div class="container">
 
 
-  <!-- =================================================
-       TOPO
-  ================================================== -->
+<!-- =================================================
+     TOPO
+================================================== -->
 
-  <div class="top">
+<div class="top">
 
-    <button
-      class="back"
-      id="back"
-      type="button">
+  <button
+    class="back"
+    id="back"
+    type="button">
 
-      ←
+    ←
 
-    </button>
+  </button>
 
-    <div class="title">
+  <div class="title">
 
-      <small>ADAM GAMES • ADMIN</small>
+    <small>ADAM GAMES • ADMIN</small>
 
-      <strong>👤 PERFIL DO CLIENTE</strong>
+    <strong>👤 PERFIL DO CLIENTE</strong>
+
+  </div>
+
+</div>
+
+
+<!-- =================================================
+     MENSAGEM
+================================================== -->
+
+<div
+  class="message"
+  id="message">
+
+  🔄 Carregando cliente...
+
+</div>
+
+
+<!-- =================================================
+     PERFIL
+================================================== -->
+
+<div
+  class="profile"
+  id="profile"
+  style="display:none">
+
+
+  <div class="profile-head">
+
+    <div
+      class="avatar"
+      id="avatar">
+
+      👤
 
     </div>
 
-  </div>
-
-
-  <!-- =================================================
-       MENSAGEM
-  ================================================== -->
-
-  <div
-    class="message"
-    id="message">
-
-    🔄 Carregando cliente...
-
-  </div>
-
-
-  <!-- =================================================
-       PERFIL
-  ================================================== -->
-
-  <div
-    class="profile"
-    id="profile"
-    style="display:none">
-
-
-    <div class="profile-head">
+    <div>
 
       <div
-        class="avatar"
-        id="avatar">
+        class="profile-name"
+        id="nome">
 
-        👤
+        —
 
       </div>
 
-      <div>
+      <div
+        class="profile-email"
+        id="email">
 
-        <div
-          class="profile-name"
-          id="nome">
+        —
 
-          —
+      </div>
 
-        </div>
+      <div id="vipBadge"></div>
 
-        <div
-          class="profile-email"
-          id="email">
+    </div>
 
-          —
+  </div>
 
-        </div>
 
-        <div id="vipBadge"></div>
+  <div class="identificacao">
+
+
+    <div class="identificacao-item">
+
+      <div class="identificacao-label">
+        UID
+      </div>
+
+      <div
+        class="identificacao-value"
+        id="uid">
+
+        —
 
       </div>
 
     </div>
 
 
-    <div class="identificacao">
+    <div class="identificacao-item">
 
+      <div class="identificacao-label">
+        ID público
+      </div>
 
-      <div class="identificacao-item">
+      <div
+        class="identificacao-value"
+        id="publicId">
 
-        <div class="identificacao-label">
-          UID
-        </div>
-
-        <div
-          class="identificacao-value"
-          id="uid">
-
-          —
-
-        </div>
+        —
 
       </div>
 
+    </div>
 
-      <div class="identificacao-item">
 
-        <div class="identificacao-label">
-          ID público
-        </div>
+    <div class="identificacao-item">
 
-        <div
-          class="identificacao-value"
-          id="publicId">
-
-          —
-
-        </div>
-
+      <div class="identificacao-label">
+        ID do documento
       </div>
 
+      <div
+        class="identificacao-value"
+        id="docId">
 
-      <div class="identificacao-item">
-
-        <div class="identificacao-label">
-          ID do documento
-        </div>
-
-        <div
-          class="identificacao-value"
-          id="docId">
-
-          —
-
-        </div>
+        —
 
       </div>
-
 
     </div>
 
@@ -953,325 +1038,328 @@ body{
   </div>
 
 
-  <!-- =================================================
-       RECURSOS
-  ================================================== -->
-
-  <section
-    class="section"
-    id="recursosSection"
-    style="display:none">
-
-    <h2>
-      📊 Recursos atuais
-    </h2>
+</div>
 
 
-    <div class="resources">
+<!-- =================================================
+     RECURSOS
+================================================== -->
+
+<section
+  class="section"
+  id="recursosSection"
+  style="display:none">
+
+  <h2>
+    📊 Recursos atuais
+  </h2>
 
 
-      <div class="resource">
+  <div class="resources">
 
-        <div class="resource-icon">
-          🎟️
-        </div>
 
-        <div class="resource-label">
-          CHANCES
-        </div>
+    <div class="resource">
 
-        <div
-          class="resource-value"
-          id="rChances">
-
-          0
-
-        </div>
-
+      <div class="resource-icon">
+        🎟️
       </div>
 
-
-      <div class="resource">
-
-        <div class="resource-icon">
-          🎰
-        </div>
-
-        <div class="resource-label">
-          GIROS ROLETA
-        </div>
-
-        <div
-          class="resource-value"
-          id="rGiros">
-
-          0
-
-        </div>
-
+      <div class="resource-label">
+        CHANCES
       </div>
 
+      <div
+        class="resource-value"
+        id="rChances">
 
-      <div class="resource">
-
-        <div class="resource-icon">
-          🪙
-        </div>
-
-        <div class="resource-label">
-          MOEDAS
-        </div>
-
-        <div
-          class="resource-value"
-          id="rMoedas">
-
-          0
-
-        </div>
+        0
 
       </div>
-
-
-      <div class="resource">
-
-        <div class="resource-icon">
-          🔑
-        </div>
-
-        <div class="resource-label">
-          CHAVES
-        </div>
-
-        <div
-          class="resource-value"
-          id="rChaves">
-
-          0
-
-        </div>
-
-      </div>
-
-
-      <div class="resource">
-
-        <div class="resource-icon">
-          💎
-        </div>
-
-        <div class="resource-label">
-          CRÉDITOS
-        </div>
-
-        <div
-          class="resource-value"
-          id="rCreditos">
-
-          R$ 0,00
-
-        </div>
-
-      </div>
-
-
-    </div>
-
-  </section>
-
-
-  <!-- =================================================
-       RESUMO
-  ================================================== -->
-
-  <section
-    class="section"
-    id="resumoSection"
-    style="display:none">
-
-    <h2>
-      🎁 Resumo de prêmios
-    </h2>
-
-
-    <div class="summary">
-
-
-      <div class="summary-box">
-
-        <div
-          class="summary-number"
-          id="totalPremios">
-
-          0
-
-        </div>
-
-        <div class="summary-label">
-          TOTAL
-        </div>
-
-      </div>
-
-
-      <div class="summary-box">
-
-        <div
-          class="summary-number"
-          id="pendentes">
-
-          0
-
-        </div>
-
-        <div class="summary-label">
-          PENDENTES
-        </div>
-
-      </div>
-
-
-      <div class="summary-box">
-
-        <div
-          class="summary-number"
-          id="entregues">
-
-          0
-
-        </div>
-
-        <div class="summary-label">
-          ENTREGUES
-        </div>
-
-      </div>
-
 
     </div>
 
 
-    <button
-      class="delivery-button"
-      id="deliveryButton"
-      type="button">
+    <div class="resource">
 
-      📦 VER ENTREGAS DESTE CLIENTE
+      <div class="resource-icon">
+        🎰
+      </div>
 
-    </button>
+      <div class="resource-label">
+        GIROS ROLETA
+      </div>
 
-  </section>
+      <div
+        class="resource-value"
+        id="rGiros">
 
+        0
 
-  <!-- =================================================
-       PEDIDOS / ENTREGAS
-  ================================================== -->
-
-  <section
-    class="section"
-    id="ordersSection"
-    style="display:none">
-
-    <h2>
-      🎁 Prêmios e pedidos
-    </h2>
-
-
-    <div class="filters">
-
-      <select
-        class="filter"
-        id="statusFilter">
-
-        <option value="todos">
-          Todos os status
-        </option>
-
-        <option value="pendente">
-          ⏳ Pendentes
-        </option>
-
-        <option value="entregue">
-          ✅ Entregues
-        </option>
-
-      </select>
-
-
-      <select
-        class="filter"
-        id="typeFilter">
-
-        <option value="todos">
-          Todos os tipos
-        </option>
-
-        <option value="roleta">
-          🎰 Roleta
-        </option>
-
-        <option value="moedas">
-          🪙 Moedas
-        </option>
-
-        <option value="caixa">
-          🎁 Caixa
-        </option>
-
-        <option value="codigo">
-          🎟️ Código
-        </option>
-
-        <option value="jogo">
-          🎮 Jogo
-        </option>
-
-        <option value="outro">
-          📦 Outros
-        </option>
-
-      </select>
-
-
-      <input
-        class="search"
-        id="search"
-        type="search"
-        placeholder="🔎 Buscar prêmio, ID ou tipo..."
-      >
+      </div>
 
     </div>
 
 
-    <div
-      class="orders"
-      id="orders">
+    <div class="resource">
+
+      <div class="resource-icon">
+        🪙
+      </div>
+
+      <div class="resource-label">
+        MOEDAS
+      </div>
+
+      <div
+        class="resource-value"
+        id="rMoedas">
+
+        0
+
+      </div>
 
     </div>
 
-  </section>
 
+    <div class="resource">
 
-  <!-- =================================================
-       HISTÓRICO DA ROLETA
-  ================================================== -->
+      <div class="resource-icon">
+        🔑
+      </div>
 
-  <section
-    class="section"
-    id="roletaSection"
-    style="display:none">
+      <div class="resource-label">
+        CHAVES
+      </div>
 
-    <h2>
-      🎰 Histórico da Roleta
-    </h2>
+      <div
+        class="resource-value"
+        id="rChaves">
 
+        0
 
-    <div
-      id="roletaHistorico">
+      </div>
 
     </div>
 
-  </section>
+
+    <div class="resource">
+
+      <div class="resource-icon">
+        💎
+      </div>
+
+      <div class="resource-label">
+        CRÉDITOS
+      </div>
+
+      <div
+        class="resource-value"
+        id="rCreditos">
+
+        R$ 0,00
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+<!-- =================================================
+     RESUMO
+================================================== -->
+
+<section
+  class="section"
+  id="resumoSection"
+  style="display:none">
+
+  <h2>
+    🎁 Resumo de prêmios
+  </h2>
+
+
+  <div class="summary">
+
+
+    <div class="summary-box">
+
+      <div
+        class="summary-number"
+        id="totalPremios">
+
+        0
+
+      </div>
+
+      <div class="summary-label">
+        TOTAL
+      </div>
+
+    </div>
+
+
+    <div class="summary-box">
+
+      <div
+        class="summary-number"
+        id="pendentes">
+
+        0
+
+      </div>
+
+      <div class="summary-label">
+        PENDENTES
+      </div>
+
+    </div>
+
+
+    <div class="summary-box">
+
+      <div
+        class="summary-number"
+        id="entregues">
+
+        0
+
+      </div>
+
+      <div class="summary-label">
+        ENTREGUES
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+  <button
+    class="delivery-button"
+    id="deliveryButton"
+    type="button">
+
+    📦 VER ENTREGAS DESTE CLIENTE
+
+  </button>
+
+</section>
+
+
+<!-- =================================================
+     PEDIDOS / ENTREGAS
+================================================== -->
+
+<section
+  class="section"
+  id="ordersSection"
+  style="display:none">
+
+  <h2>
+    🎁 Prêmios e pedidos
+  </h2>
+
+
+  <div class="filters">
+
+    <select
+      class="filter"
+      id="statusFilter">
+
+      <option value="todos">
+        Todos os status
+      </option>
+
+      <option value="pendente">
+        ⏳ Pendentes
+      </option>
+
+      <option value="entregue">
+        ✅ Entregues
+      </option>
+
+    </select>
+
+
+    <select
+      class="filter"
+      id="typeFilter">
+
+      <option value="todos">
+        Todos os tipos
+      </option>
+
+      <option value="roleta">
+        🎰 Roleta
+      </option>
+
+      <option value="moedas">
+        🪙 Moedas
+      </option>
+
+      <option value="caixa">
+        🎁 Caixa
+      </option>
+
+      <option value="codigo">
+        🎟️ Código
+      </option>
+
+      <option value="jogo">
+        🎮 Jogo
+      </option>
+
+      <option value="outro">
+        📦 Outros
+      </option>
+
+    </select>
+
+
+    <input
+      class="search"
+      id="search"
+      type="search"
+      placeholder="🔎 Buscar prêmio, ID ou tipo..."
+    >
+
+  </div>
+
+
+  <div
+    class="orders"
+    id="orders">
+
+  </div>
+
+</section>
+
+
+<!-- =================================================
+     HISTÓRICO ROLETA
+================================================== -->
+
+<section
+  class="section"
+  id="roletaSection"
+  style="display:none">
+
+  <h2>
+    🎰 Histórico da Roleta
+  </h2>
+
+
+  <div
+    id="roletaHistorico">
+
+  </div>
+
+</section>
 
 
 </div>
@@ -1312,17 +1400,17 @@ import {
 
   getFirestore,
 
-  doc,
-
-  getDoc,
-
   collection,
 
   query,
 
   where,
 
-  getDocs
+  getDocs,
+
+  updateDoc,
+
+  Timestamp
 
 }
 
@@ -1378,7 +1466,9 @@ const db =
 
 const $ =
   id =>
-    document.getElementById(id);
+    document.getElementById(
+      id
+    );
 
 
 const message =
@@ -1389,11 +1479,14 @@ const message =
    ESTADO
 ===================================================== */
 
-let cliente = null;
+let cliente =
+  null;
 
-let entregas = [];
+let entregas =
+  [];
 
-let resultadosRoleta = [];
+let resultadosRoleta =
+  [];
 
 
 /* =====================================================
@@ -1407,7 +1500,9 @@ const parametros =
 
 
 const clienteUid =
-  parametros.get("uid");
+  parametros.get(
+    "uid"
+  );
 
 
 /* =====================================================
@@ -1416,16 +1511,15 @@ const clienteUid =
 
 function mostrarMensagem(
   texto,
-  erro = false
+  tipo = ""
 ){
 
   message.textContent =
     texto;
 
   message.className =
-    erro
-      ? "message error"
-      : "message";
+    "message " +
+    tipo;
 
 }
 
@@ -1525,6 +1619,96 @@ function formatarData(
 
 
 /* =====================================================
+   MILLIS
+===================================================== */
+
+function obterMillis(
+  valor
+){
+
+  if(!valor){
+
+    return 0;
+
+  }
+
+
+  if(
+    typeof valor.toMillis ===
+    "function"
+  ){
+
+    return valor.toMillis();
+
+  }
+
+
+  if(
+    typeof valor.seconds ===
+    "number"
+  ){
+
+    return valor.seconds * 1000;
+
+  }
+
+
+  const data =
+    new Date(
+      valor
+    );
+
+
+  return Number.isNaN(
+    data.getTime()
+  )
+    ? 0
+    : data.getTime();
+
+}
+
+
+/* =====================================================
+   ESCAPAR HTML
+===================================================== */
+
+function escapar(
+  valor
+){
+
+  return String(
+    valor ?? ""
+  )
+
+  .replace(
+    /&/g,
+    "&amp;"
+  )
+
+  .replace(
+    /</g,
+    "&lt;"
+  )
+
+  .replace(
+    />/g,
+    "&gt;"
+  )
+
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+
+  .replace(
+    /'/g,
+    "&#039;"
+  );
+
+}
+
+
+/* =====================================================
    CARREGAR CLIENTE
 ===================================================== */
 
@@ -1534,7 +1718,7 @@ async function carregarCliente(){
 
     mostrarMensagem(
       "Nenhum UID foi informado na URL.",
-      true
+      "error"
     );
 
     return;
@@ -1544,32 +1728,50 @@ async function carregarCliente(){
 
   try{
 
-    const referencia =
-      doc(
-        db,
-        "admins",
-        clienteUid
-      );
+    /*
+    =====================================================
+    O UID é um CAMPO dentro de admins.
+    Não presumimos que seja o ID do documento.
+    =====================================================
+    */
 
+    const resultado =
+      await getDocs(
 
-    const documento =
-      await getDoc(
-        referencia
+        query(
+
+          collection(
+            db,
+            "admins"
+          ),
+
+          where(
+            "uid",
+            "==",
+            clienteUid
+          )
+
+        )
+
       );
 
 
     if(
-      !documento.exists()
+      resultado.empty
     ){
 
       mostrarMensagem(
-        "Cliente não encontrado.",
-        true
+        "Cliente não encontrado para este UID.",
+        "error"
       );
 
       return;
 
     }
+
+
+    const documento =
+      resultado.docs[0];
 
 
     cliente = {
@@ -1598,7 +1800,8 @@ async function carregarCliente(){
 
 
     mostrarMensagem(
-      "Cliente carregado com sucesso."
+      "Cliente carregado com sucesso.",
+      "success"
     );
 
   }
@@ -1606,6 +1809,7 @@ async function carregarCliente(){
   catch(error){
 
     console.error(
+      "Erro ao carregar cliente:",
       error
     );
 
@@ -1619,7 +1823,7 @@ async function carregarCliente(){
         "erro desconhecido"
       ),
 
-      true
+      "error"
 
     );
 
@@ -1705,6 +1909,17 @@ function renderizarCliente(){
   }
 
 
+  atualizarRecursos();
+
+}
+
+
+/* =====================================================
+   ATUALIZAR RECURSOS
+===================================================== */
+
+function atualizarRecursos(){
+
   $("rChances").textContent =
     numero(
       cliente.chances
@@ -1730,10 +1945,13 @@ function renderizarCliente(){
 
 
   $("rCreditos").textContent =
+
     "R$ " +
+
     Number(
       cliente.creditos || 0
-    ).toFixed(2)
+    )
+    .toFixed(2)
     .replace(
       ".",
       ","
@@ -1791,15 +2009,9 @@ async function carregarEntregas(){
   catch(error){
 
     console.warn(
-      "Coleção entregas:",
+      "Erro ao carregar entregas:",
       error
     );
-
-    /*
-      Se a coleção ainda estiver vazia
-      ou as Rules ainda não tiverem sido
-      publicadas, não derruba o perfil.
-    */
 
     entregas = [];
 
@@ -1807,6 +2019,164 @@ async function carregarEntregas(){
 
 
   renderizarEntregas();
+
+}
+
+
+/* =====================================================
+   MARCAR ENTREGA
+===================================================== */
+
+async function marcarComoEntregue(
+  entregaId
+){
+
+  if(!entregaId){
+
+    return;
+
+  }
+
+
+  const entrega =
+    entregas.find(
+      item =>
+        item.id ===
+        entregaId
+    );
+
+
+  if(!entrega){
+
+    return;
+
+  }
+
+
+  if(
+    entrega.entregue === true
+  ){
+
+    return;
+
+  }
+
+
+  const confirmar =
+    confirm(
+      "Marcar este prêmio como ENTREGUE?"
+    );
+
+
+  if(!confirmar){
+
+    return;
+
+  }
+
+
+  try{
+
+    const referencia =
+      /*
+      -------------------------------------------------
+      O ID recebido aqui é o ID do documento
+      da coleção entregas.
+      -------------------------------------------------
+      */
+
+      (
+        await import(
+          "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js"
+        )
+      )
+      .doc(
+        db,
+        "entregas",
+        entregaId
+      );
+
+
+    const agora =
+      Timestamp.now();
+
+
+    const usuarioAdmin =
+      auth.currentUser;
+
+
+    await updateDoc(
+
+      referencia,
+
+      {
+
+        entregue:
+          true,
+
+        entregueEm:
+          agora,
+
+        entreguePor:
+          usuarioAdmin?.email ||
+          "Administrador"
+
+      }
+
+    );
+
+
+    /*
+    -----------------------------------------------------
+    ATUALIZA LOCALMENTE
+    -----------------------------------------------------
+    */
+
+    entrega.entregue =
+      true;
+
+    entrega.entregueEm =
+      agora;
+
+    entrega.entreguePor =
+      usuarioAdmin?.email ||
+      "Administrador";
+
+
+    renderizarEntregas();
+
+    renderizarResumo();
+
+
+    mostrarMensagem(
+      "✅ Prêmio marcado como entregue com sucesso.",
+      "success"
+    );
+
+  }
+
+  catch(error){
+
+    console.error(
+      "Erro ao marcar entrega:",
+      error
+    );
+
+
+    mostrarMensagem(
+
+      "❌ Não foi possível marcar como entregue: " +
+
+      (
+        error.message ||
+        "erro desconhecido"
+      ),
+
+      "error"
+
+    );
+
+  }
 
 }
 
@@ -1942,21 +2312,21 @@ function renderizarEntregas(){
       b
     ) => {
 
-      const aTempo =
-        obterMillis(
-          a.criadoEm ||
-          a.dataHora
-        );
+      return (
 
-
-      const bTempo =
         obterMillis(
           b.criadoEm ||
           b.dataHora
-        );
+        )
 
+        -
 
-      return bTempo - aTempo;
+        obterMillis(
+          a.criadoEm ||
+          a.dataHora
+        )
+
+      );
 
     }
   );
@@ -2065,34 +2435,52 @@ function renderizarEntregas(){
             </b>
           </div>
 
+
           ${
             quantidade !== undefined
+
               ?
+
               `
               <div>
+
                 Quantidade:
+
                 <b>
                   ${numero(quantidade)}
                 </b>
+
               </div>
               `
+
               :
+
               ""
+
           }
 
+
           <div>
+
             Data:
+
             <b>
               ${escapar(data)}
             </b>
+
           </div>
+
 
           ${
             pedido.entregueEm
+
               ?
+
               `
               <div>
+
                 Entregue em:
+
                 <b>
                   ${escapar(
                     formatarData(
@@ -2100,27 +2488,40 @@ function renderizarEntregas(){
                     )
                   )}
                 </b>
+
               </div>
               `
+
               :
+
               ""
+
           }
+
 
           ${
             pedido.entreguePor
+
               ?
+
               `
               <div>
+
                 Entregue por:
+
                 <b>
                   ${escapar(
                     pedido.entreguePor
                   )}
                 </b>
+
               </div>
               `
+
               :
+
               ""
+
           }
 
         </div>
@@ -2134,6 +2535,31 @@ function renderizarEntregas(){
 
         </div>
 
+
+        ${
+          !entregue
+
+            ?
+
+            `
+            <button
+              class="entregar-button"
+              data-entrega-id="${escapar(
+                pedido.id
+              )}"
+              type="button">
+
+              ✅ MARCAR COMO ENTREGUE
+
+            </button>
+            `
+
+            :
+
+            ""
+
+        }
+
       `;
 
 
@@ -2143,6 +2569,34 @@ function renderizarEntregas(){
 
     }
   );
+
+
+  /*
+  =====================================================
+  EVENTOS DOS BOTÕES DE ENTREGA
+  =====================================================
+  */
+
+  lista
+    .querySelectorAll(
+      ".entregar-button"
+    )
+    .forEach(
+      botao => {
+
+        botao.addEventListener(
+          "click",
+          () => {
+
+            marcarComoEntregue(
+              botao.dataset.entregaId
+            );
+
+          }
+        );
+
+      }
+    );
 
 }
 
@@ -2196,7 +2650,7 @@ async function carregarRoleta(){
   catch(error){
 
     console.warn(
-      "historicoRoleta:",
+      "Erro histórico Roleta:",
       error
     );
 
@@ -2250,14 +2704,20 @@ function renderizarRoleta(){
       b
     ) => {
 
-      return obterMillis(
-        b.criadoEm ||
-        b.dataHora
-      )
-      -
-      obterMillis(
-        a.criadoEm ||
-        a.dataHora
+      return (
+
+        obterMillis(
+          b.criadoEm ||
+          b.dataHora
+        )
+
+        -
+
+        obterMillis(
+          a.criadoEm ||
+          a.dataHora
+        )
+
       );
 
     }
@@ -2333,7 +2793,9 @@ function renderizarRoleta(){
 
           🎰 ID:
 
-          ${escapar(resultado.id)}
+          ${escapar(
+            resultado.id
+          )}
 
         </div>
 
@@ -2384,91 +2846,6 @@ function renderizarResumo(){
 
   $("entregues").textContent =
     entregues;
-
-}
-
-
-/* =====================================================
-   MILLIS
-===================================================== */
-
-function obterMillis(
-  valor
-){
-
-  if(!valor){
-
-    return 0;
-
-  }
-
-
-  if(
-    typeof valor.toMillis ===
-    "function"
-  ){
-
-    return valor.toMillis();
-
-  }
-
-
-  if(
-    typeof valor.seconds ===
-    "number"
-  ){
-
-    return valor.seconds * 1000;
-
-  }
-
-
-  const data =
-    new Date(
-      valor
-    );
-
-
-  return Number.isNaN(
-    data.getTime()
-  )
-    ? 0
-    : data.getTime();
-
-}
-
-
-/* =====================================================
-   ESCAPAR HTML
-===================================================== */
-
-function escapar(
-  valor
-){
-
-  return String(
-    valor ?? ""
-  )
-  .replace(
-    /&/g,
-    "&amp;"
-  )
-  .replace(
-    /</g,
-    "&lt;"
-  )
-  .replace(
-    />/g,
-    "&gt;"
-  )
-  .replace(
-    /"/g,
-    "&quot;"
-  )
-  .replace(
-    /'/g,
-    "&#039;"
-  );
 
 }
 
@@ -2556,11 +2933,6 @@ onAuthStateChanged(
 
     try{
 
-      /*
-      Apenas o administrador principal
-      pode abrir esta página.
-      */
-
       const email =
         (
           usuario.email ||
@@ -2577,7 +2949,7 @@ onAuthStateChanged(
 
         mostrarMensagem(
           "Acesso permitido somente ao administrador.",
-          true
+          "error"
         );
 
         return;
@@ -2598,7 +2970,7 @@ onAuthStateChanged(
 
       mostrarMensagem(
         "Erro ao abrir o perfil do cliente.",
-        true
+        "error"
       );
 
     }
