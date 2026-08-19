@@ -5,10 +5,7 @@
 
 <meta charset="UTF-8">
 
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Adam Games • Roleta</title>
 
@@ -21,80 +18,45 @@
 }
 
 body{
-
   min-height:100vh;
-
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
-
+  font-family:Arial,Helvetica,sans-serif;
   color:#fff;
 
   background:
-    radial-gradient(
-      circle at 20% 0%,
-      #20a9ff 0%,
-      transparent 30%
-    ),
+    radial-gradient(circle at 15% 0%,#20a9ff 0%,transparent 30%),
+    radial-gradient(circle at 90% 20%,#16a56b 0%,transparent 28%),
+    linear-gradient(145deg,#087edb,#031a3b 75%);
 
-    radial-gradient(
-      circle at 90% 20%,
-      #16a56b 0%,
-      transparent 28%
-    ),
-
-    linear-gradient(
-      145deg,
-      #087edb,
-      #031a3b 75%
-    );
-
-  padding:
-    18px
-    12px
-    60px;
-
+  padding:18px 12px 60px;
 }
 
 .container{
-
   width:100%;
-  max-width:760px;
+  max-width:820px;
   margin:auto;
-
 }
-
 
 /* =====================================================
    TOPO
 ===================================================== */
 
 header{
-
   display:flex;
   align-items:center;
   justify-content:space-between;
-
   gap:12px;
-
   margin-bottom:20px;
-
 }
 
 .logo{
-
   display:flex;
   align-items:center;
   gap:11px;
-
 }
 
 .logoIcon{
-
   width:52px;
   height:52px;
-
   border-radius:16px;
 
   display:flex;
@@ -104,230 +66,128 @@ header{
   font-size:27px;
 
   background:
-    linear-gradient(
-      145deg,
-      #ffd72a,
-      #c68100
-    );
+    linear-gradient(145deg,#ffd72a,#c68100);
 
   box-shadow:
-    0 8px 20px
-    rgba(0,0,0,.25);
-
+    0 8px 20px rgba(0,0,0,.25);
 }
 
 .logo h1{
-
   font-size:20px;
-
 }
 
 .logo span{
-
   color:#ffd52b;
-
 }
 
 .back{
-
   border:0;
-
-  padding:
-    11px
-    14px;
-
+  padding:11px 14px;
   border-radius:11px;
-
   background:#123b65;
-
   color:#fff;
-
   font-weight:bold;
-
   cursor:pointer;
-
 }
-
 
 /* =====================================================
    TÍTULO
 ===================================================== */
 
 .title{
-
   text-align:center;
-
-  margin-bottom:8px;
-
+  margin-bottom:10px;
 }
 
 .title h2{
-
-  font-size:
-    clamp(
-      30px,
-      8vw,
-      42px
-    );
-
+  font-size:clamp(30px,8vw,42px);
   font-weight:900;
-
 }
 
 .title p{
-
   color:#b9d8ef;
-
   margin-top:7px;
-
   font-size:14px;
-
 }
-
 
 /* =====================================================
    GIROS
 ===================================================== */
 
 .spins{
-
   width:max-content;
-
   max-width:100%;
+  margin:18px auto;
 
-  margin:
-    18px
-    auto;
-
-  padding:
-    10px
-    18px;
+  padding:10px 22px;
 
   border-radius:30px;
 
-  background:
-    rgba(0,0,0,.25);
+  background:rgba(0,0,0,.25);
 
-  border:
-    1px solid
-    rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.12);
 
   box-shadow:
-    0 8px 25px
-    rgba(0,0,0,.18);
+    0 8px 25px rgba(0,0,0,.18);
 
   text-align:center;
-
 }
 
 .spins small{
-
   display:block;
-
   color:#a9c9e4;
-
   font-size:10px;
-
   font-weight:bold;
-
   letter-spacing:1px;
-
 }
 
 .spins strong{
-
   display:block;
-
   margin-top:3px;
-
   color:#ffd52b;
-
   font-size:24px;
-
 }
-
 
 /* =====================================================
    ROLETA
 ===================================================== */
 
 .wheel-area{
-
   position:relative;
 
-  width:
-    min(
-      92vw,
-      560px
-    );
-
+  width:min(92vw,560px);
   aspect-ratio:1;
 
-  margin:
-    20px
-    auto
-    25px;
+  margin:20px auto 25px;
 
   display:flex;
-
   align-items:center;
   justify-content:center;
-
 }
 
-
-/*
----------------------------------------------------------
-PONTEIRO
----------------------------------------------------------
-*/
-
 .pointer{
-
   position:absolute;
-
   z-index:20;
 
   top:-5px;
-
   left:50%;
 
-  transform:
-    translateX(-50%);
+  transform:translateX(-50%);
 
   width:0;
   height:0;
 
-  border-left:
-    17px solid transparent;
-
-  border-right:
-    17px solid transparent;
-
-  border-top:
-    42px solid #ffd52b;
+  border-left:17px solid transparent;
+  border-right:17px solid transparent;
+  border-top:42px solid #ffd52b;
 
   filter:
-    drop-shadow(
-      0 4px 5px
-      rgba(0,0,0,.45)
-    );
-
+    drop-shadow(0 4px 5px rgba(0,0,0,.45));
 }
 
-
-/*
----------------------------------------------------------
-BRILHO EXTERNO
----------------------------------------------------------
-*/
-
 .wheel-glow{
-
   position:absolute;
-
   inset:-10px;
-
   border-radius:50%;
 
   background:
@@ -339,68 +199,33 @@ BRILHO EXTERNO
     );
 
   pointer-events:none;
-
 }
 
-
-/*
----------------------------------------------------------
-RODA
----------------------------------------------------------
-*/
-
 .wheel{
-
   position:relative;
 
   width:100%;
   height:100%;
 
   border-radius:50%;
-
   overflow:hidden;
 
-  border:
-    9px solid
-    #f6c72b;
+  border:9px solid #f6c72b;
 
   box-shadow:
-
-    0 0 0 5px
-    #163b63,
-
-    0 15px 45px
-    rgba(0,0,0,.45),
-
-    inset 0 0 25px
-    rgba(0,0,0,.5);
+    0 0 0 5px #163b63,
+    0 15px 45px rgba(0,0,0,.45),
+    inset 0 0 25px rgba(0,0,0,.5);
 
   background:#132e4d;
 
-  transform:
-    rotate(0deg);
+  transform:rotate(0deg);
 
   transition:
-    transform
-    5s
-    cubic-bezier(
-      .12,
-      .7,
-      .08,
-      1
-    );
-
+    transform 5s cubic-bezier(.12,.7,.08,1);
 }
 
-
-/*
----------------------------------------------------------
-FATIAS
----------------------------------------------------------
-*/
-
 .slice{
-
   position:absolute;
 
   width:50%;
@@ -409,8 +234,9 @@ FATIAS
   left:50%;
   top:50%;
 
-  transform-origin:
-    0 0;
+  transform-origin:0 0;
+
+  overflow:hidden;
 
   clip-path:
     polygon(
@@ -419,18 +245,11 @@ FATIAS
       0 100%
     );
 
-  overflow:hidden;
-
+  border-right:1px solid rgba(255,255,255,.28);
+  border-bottom:1px solid rgba(255,255,255,.20);
 }
 
-
-/*
-Conteúdo visual da fatia.
-O prêmio NÃO será mostrado aqui.
-*/
-
 .sliceVisual{
-
   position:absolute;
 
   width:100%;
@@ -440,71 +259,55 @@ O prêmio NÃO será mostrado aqui.
   top:0;
 
   display:flex;
-
   align-items:center;
   justify-content:center;
 
-  padding:
-    8px;
+  padding:8px;
 
-  transform:
-    rotate(22deg);
+  transform:rotate(22deg);
 
   pointer-events:none;
-
 }
 
 .sliceVisual img{
-
-  width:
-    62px;
-
-  height:
-    62px;
+  width:62px;
+  height:62px;
 
   object-fit:contain;
 
   filter:
-    drop-shadow(
-      0 3px 4px
-      rgba(0,0,0,.35)
-    );
+    drop-shadow(0 3px 4px rgba(0,0,0,.4));
+}
 
+.sliceIcon{
+  position:relative;
+  z-index:3;
+
+  font-size:38px;
+
+  filter:
+    drop-shadow(0 3px 4px rgba(0,0,0,.4));
 }
 
 .sliceColor{
-
   position:absolute;
-
   inset:0;
-
-  opacity:.95;
-
 }
 
-
-/*
----------------------------------------------------------
-CENTRO
----------------------------------------------------------
-*/
+/* =====================================================
+   CENTRO
+===================================================== */
 
 .center{
-
   position:absolute;
-
   z-index:15;
 
-  width:
-    92px;
-
-  height:
-    92px;
+  width:92px;
+  height:92px;
 
   border-radius:50%;
 
   display:flex;
-
   align-items:center;
   justify-content:center;
 
@@ -516,120 +319,175 @@ CENTRO
       #a96c00
     );
 
-  border:
-    6px solid
-    #fff;
+  border:6px solid #fff;
 
   box-shadow:
-
-    0 0 0 5px
-    #173a5e,
-
-    0 8px 18px
-    rgba(0,0,0,.4);
+    0 0 0 5px #173a5e,
+    0 8px 18px rgba(0,0,0,.4);
 
   font-size:37px;
-
 }
 
-
 /* =====================================================
-   BOTÃO GIRAR
+   BOTÃO
 ===================================================== */
 
 .spin-button{
-
   display:block;
 
-  width:
-    min(
-      90%,
-      390px
-    );
+  width:min(90%,390px);
 
-  margin:
-    0
-    auto
-    18px;
+  margin:0 auto 18px;
 
-  padding:
-    17px;
+  padding:17px;
 
   border:0;
-
   border-radius:16px;
 
   background:
-    linear-gradient(
-      135deg,
-      #ffd72a,
-      #e89400
-    );
+    linear-gradient(135deg,#ffd72a,#e89400);
 
   color:#17243a;
 
   font-size:18px;
-
   font-weight:900;
 
   box-shadow:
-    0 10px 25px
-    rgba(0,0,0,.25);
+    0 10px 25px rgba(0,0,0,.25);
 
   cursor:pointer;
-
-  transition:
-    transform .15s,
-    filter .15s;
-
 }
 
 .spin-button:active{
-
-  transform:
-    scale(.97);
-
+  transform:scale(.97);
 }
 
 .spin-button:disabled{
-
   cursor:not-allowed;
-
   opacity:.45;
-
-  filter:
-    grayscale(.5);
-
 }
-
 
 /* =====================================================
    AVISO
 ===================================================== */
 
 .notice{
-
   text-align:center;
-
   color:#94b6d2;
-
   font-size:11px;
-
-  margin-bottom:18px;
-
+  margin-bottom:22px;
 }
 
+/* =====================================================
+   POSSIBILIDADES
+===================================================== */
+
+.possibilidades{
+  background:rgba(2,30,62,.94);
+
+  border:
+    1px solid rgba(255,255,255,.10);
+
+  border-radius:22px;
+
+  padding:20px;
+
+  margin-top:18px;
+
+  box-shadow:
+    0 15px 35px rgba(0,0,0,.20);
+}
+
+.possibilidades h3{
+  font-size:20px;
+  margin-bottom:5px;
+}
+
+.possibilidadesSub{
+  color:#91b2cf;
+  font-size:12px;
+  margin-bottom:15px;
+}
+
+.prize-list{
+  display:grid;
+  gap:9px;
+}
+
+.possible-prize{
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  padding:11px;
+
+  border-radius:13px;
+
+  background:rgba(255,255,255,.045);
+
+  border:
+    1px solid rgba(255,255,255,.06);
+}
+
+.possible-icon{
+  width:52px;
+  height:52px;
+
+  flex-shrink:0;
+
+  border-radius:12px;
+
+  background:#071f40;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  overflow:hidden;
+
+  font-size:27px;
+}
+
+.possible-icon img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+
+.possible-name{
+  font-size:15px;
+  font-weight:800;
+}
+
+.possible-quantity{
+  margin-top:4px;
+
+  color:#ffd52b;
+
+  font-size:13px;
+  font-weight:bold;
+}
+
+.empty{
+  padding:18px;
+
+  border-radius:13px;
+
+  background:rgba(255,255,255,.04);
+
+  color:#9dbbd3;
+
+  text-align:center;
+}
 
 /* =====================================================
    RESULTADO
 ===================================================== */
 
 .result{
-
   display:none;
 
   margin-top:20px;
-
   padding:22px;
 
   border-radius:22px;
@@ -644,129 +502,184 @@ CENTRO
     );
 
   border:
-    1px solid
-    rgba(91,255,170,.3);
+    1px solid rgba(91,255,170,.3);
 
   box-shadow:
-    0 15px 35px
-    rgba(0,0,0,.25);
+    0 15px 35px rgba(0,0,0,.25);
 
   animation:
     resultIn .45s ease;
-
 }
 
 .result.show{
-
   display:block;
-
 }
 
 @keyframes resultIn{
-
   from{
-
     opacity:0;
-
-    transform:
-      translateY(15px)
-      scale(.96);
-
+    transform:translateY(15px) scale(.96);
   }
 
   to{
-
     opacity:1;
-
-    transform:
-      translateY(0)
-      scale(1);
-
+    transform:translateY(0) scale(1);
   }
-
 }
 
 .resultTitle{
-
   color:#6effa8;
 
   font-size:12px;
-
   font-weight:bold;
 
   letter-spacing:1px;
-
 }
 
 .resultImage{
-
   width:105px;
   height:105px;
 
-  margin:
-    13px
-    auto;
+  margin:13px auto;
 
   border-radius:20px;
 
   display:flex;
-
   align-items:center;
   justify-content:center;
 
-  background:
-    rgba(255,255,255,.06);
+  background:rgba(255,255,255,.06);
 
   overflow:hidden;
 
   font-size:52px;
-
 }
 
 .resultImage img{
-
   width:100%;
   height:100%;
-
   object-fit:contain;
-
 }
 
 .resultName{
-
   font-size:24px;
-
   font-weight:900;
-
 }
 
 .resultQuantity{
-
   margin-top:5px;
 
   color:#ffd52b;
 
   font-size:19px;
-
   font-weight:bold;
-
 }
 
-
 /* =====================================================
-   CARREGANDO
+   HISTÓRICO
 ===================================================== */
 
-.loading{
+.history{
+  margin-top:20px;
+
+  background:rgba(2,30,62,.94);
+
+  border:
+    1px solid rgba(255,255,255,.10);
+
+  border-radius:22px;
+
+  padding:20px;
+}
+
+.history h3{
+  font-size:20px;
+  margin-bottom:14px;
+}
+
+.history-list{
+  display:grid;
+  gap:9px;
+}
+
+.history-item{
+  padding:13px;
+
+  border-radius:13px;
+
+  background:rgba(255,255,255,.045);
+
+  border:
+    1px solid rgba(255,255,255,.06);
+}
+
+.history-top{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.history-prize{
+  font-weight:900;
+}
+
+.history-date{
+  color:#73caff;
+  font-size:11px;
+  text-align:right;
+}
+
+.history-status{
+  display:inline-block;
+
+  margin-top:7px;
+
+  padding:5px 8px;
+
+  border-radius:8px;
+
+  font-size:10px;
+  font-weight:bold;
+
+  background:rgba(255,193,7,.12);
+  color:#ffd52b;
+}
+
+.history-status.entregue{
+  background:rgba(0,220,110,.12);
+  color:#6effa8;
+}
+
+/* =====================================================
+   ERRO
+===================================================== */
+
+.error{
+  display:none;
+
+  margin:15px auto;
+
+  max-width:600px;
+
+  padding:14px;
+
+  border-radius:12px;
+
+  background:rgba(255,50,70,.12);
+
+  border:
+    1px solid rgba(255,50,70,.2);
+
+  color:#ff9ca8;
 
   text-align:center;
 
-  padding:20px;
-
-  color:#a9c9e4;
-
+  font-size:13px;
 }
 
+.error.show{
+  display:block;
+}
 
 /* =====================================================
    RESPONSIVO
@@ -779,83 +692,42 @@ CENTRO
   }
 
   .logoIcon{
-
     width:46px;
     height:46px;
-
     font-size:24px;
-
   }
 
   .back{
-
-    padding:
-      9px
-      11px;
-
+    padding:9px 11px;
     font-size:11px;
-
   }
 
   .wheel{
-
     border-width:7px;
-
   }
 
   .center{
-
     width:76px;
     height:76px;
-
     font-size:29px;
-
   }
 
   .sliceVisual img{
-
     width:45px;
     height:45px;
-
   }
 
-}
+  .sliceIcon{
+    font-size:28px;
+  }
 
+  .history-top{
+    flex-direction:column;
+  }
 
-/* =====================================================
-   ERRO
-===================================================== */
-
-.error{
-
-  display:none;
-
-  margin:15px auto;
-
-  max-width:600px;
-
-  padding:14px;
-
-  border-radius:12px;
-
-  background:
-    rgba(255,50,70,.12);
-
-  border:
-    1px solid
-    rgba(255,50,70,.2);
-
-  color:#ff9ca8;
-
-  text-align:center;
-
-  font-size:13px;
-
-}
-
-.error.show{
-
-  display:block;
+  .history-date{
+    text-align:left;
+  }
 
 }
 
@@ -865,7 +737,6 @@ CENTRO
 
 
 <body>
-
 
 <div class="container">
 
@@ -939,10 +810,6 @@ CENTRO
 </div>
 
 
-<!-- =====================================================
-     ERRO
-===================================================== -->
-
 <div
   class="error"
   id="error">
@@ -967,12 +834,11 @@ CENTRO
       class="loading"
       id="wheelLoading">
 
-      🎰
+      🎰 Carregando...
 
     </div>
 
   </div>
-
 
   <div class="center">
     🎰
@@ -980,10 +846,6 @@ CENTRO
 
 </div>
 
-
-<!-- =====================================================
-     BOTÃO
-===================================================== -->
 
 <button
   class="spin-button"
@@ -1015,7 +877,6 @@ CENTRO
     🎉 VOCÊ GANHOU!
   </div>
 
-
   <div
     class="resultImage"
     id="resultImage">
@@ -1023,7 +884,6 @@ CENTRO
     🎁
 
   </div>
-
 
   <div
     class="resultName"
@@ -1033,12 +893,64 @@ CENTRO
 
   </div>
 
-
   <div
     class="resultQuantity"
     id="resultQuantity">
 
     —
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     POSSIBILIDADES
+===================================================== -->
+
+<div class="possibilidades">
+
+  <h3>
+    🎁 Possibilidades de prêmio da roleta
+  </h3>
+
+  <div class="possibilidadesSub">
+
+    Estes são os prêmios atualmente cadastrados
+    e ativos na Roleta.
+
+  </div>
+
+  <div
+    class="prize-list"
+    id="possiblePrizeList">
+
+    <div class="empty">
+      🔄 Carregando prêmios...
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     HISTÓRICO
+===================================================== -->
+
+<div class="history">
+
+  <h3>
+    📜 Meus giros
+  </h3>
+
+  <div
+    class="history-list"
+    id="historyList">
+
+    <div class="empty">
+      Nenhum giro realizado ainda.
+    </div>
 
   </div>
 
@@ -1111,10 +1023,8 @@ const app =
     firebaseConfig
   );
 
-
 const auth =
   getAuth(app);
-
 
 const db =
   getFirestore(app);
@@ -1129,42 +1039,45 @@ const wheel =
     "wheel"
   );
 
-
 const spinButton =
   document.getElementById(
     "spinButton"
   );
-
 
 const spinCount =
   document.getElementById(
     "spinCount"
   );
 
+const possiblePrizeList =
+  document.getElementById(
+    "possiblePrizeList"
+  );
 
 const result =
   document.getElementById(
     "result"
   );
 
-
 const resultImage =
   document.getElementById(
     "resultImage"
   );
-
 
 const resultName =
   document.getElementById(
     "resultName"
   );
 
-
 const resultQuantity =
   document.getElementById(
     "resultQuantity"
   );
 
+const historyList =
+  document.getElementById(
+    "historyList"
+  );
 
 const errorBox =
   document.getElementById(
@@ -1189,24 +1102,8 @@ let rotacaoAtual =
   0;
 
 
-/*
----------------------------------------------------------
-IMPORTANTE
-
-Nesta primeira versão estamos preparando
-a interface.
-
-O sorteio definitivo será conectado ao
-servidor em seguida.
-
-Não vamos confiar no navegador para decidir
-o prêmio definitivo.
----------------------------------------------------------
-*/
-
-
 /* =====================================================
-   ÍCONES PADRÃO
+   ÍCONES
 ===================================================== */
 
 const icones = {
@@ -1258,6 +1155,28 @@ function obterIcone(
 
 
 /* =====================================================
+   CORES
+===================================================== */
+
+const cores = [
+
+  "#087edb",
+  "#e83e8c",
+  "#16a56b",
+  "#8b5cf6",
+  "#f59e0b",
+  "#ef4444",
+  "#06b6d4",
+  "#7c3aed",
+  "#10b981",
+  "#ec4899",
+  "#2563eb",
+  "#d97706"
+
+];
+
+
+/* =====================================================
    ERRO
 ===================================================== */
 
@@ -1285,28 +1204,6 @@ function esconderErro(){
 
 
 /* =====================================================
-   CORES DAS FATIAS
-===================================================== */
-
-const cores = [
-
-  "#087edb",
-  "#e83e8c",
-  "#16a56b",
-  "#8b5cf6",
-  "#f59e0b",
-  "#ef4444",
-  "#06b6d4",
-  "#7c3aed",
-  "#10b981",
-  "#ec4899",
-  "#2563eb",
-  "#d97706"
-
-];
-
-
-/* =====================================================
    CRIAR ROLETA
 ===================================================== */
 
@@ -1317,17 +1214,14 @@ function criarRoleta(
   wheel.innerHTML =
     "";
 
-
   if(
     !lista.length
   ){
 
     wheel.innerHTML =
 
-      "<div class='loading'>" +
-
-        "Nenhum prêmio disponível." +
-
+      "<div class='empty'>" +
+      "Nenhum prêmio ativo." +
       "</div>";
 
     spinButton.disabled =
@@ -1340,7 +1234,6 @@ function criarRoleta(
 
   const total =
     lista.length;
-
 
   const angulo =
     360 / total;
@@ -1357,15 +1250,9 @@ function criarRoleta(
           "div"
         );
 
-
       slice.className =
         "slice";
 
-
-      /*
-      Cada fatia recebe sua
-      rotação correspondente.
-      */
 
       slice.style.transform =
 
@@ -1376,31 +1263,27 @@ function criarRoleta(
         "deg)";
 
 
-      /*
-      Visual da fatia.
-      */
-
       const visual =
         document.createElement(
           "div"
         );
-
 
       visual.className =
         "sliceVisual";
 
 
       /*
-      Se o prêmio tiver imagem,
-      usa a imagem.
-
-      Caso contrário,
-      usa a cor/ícone.
+      A fatia NÃO mostra o prêmio.
+      Ela mostra somente imagem temática
+      cadastrada no campo imagem.
+      Caso não tenha imagem, mostra cor.
       */
 
       if(
         premio.imagem &&
-        premio.imagem.trim() !== ""
+        String(
+          premio.imagem
+        ).trim() !== ""
       ){
 
         const img =
@@ -1408,27 +1291,37 @@ function criarRoleta(
             "img"
           );
 
-
         img.src =
           premio.imagem;
 
-
         img.alt =
           "";
-
 
         img.onerror =
           () => {
 
             visual.innerHTML =
-              "<div style='font-size:42px'>" +
-              obterIcone(
-                premio.tipo
-              ) +
-              "</div>";
+              "";
+
+            const cor =
+              document.createElement(
+                "div"
+              );
+
+            cor.className =
+              "sliceColor";
+
+            cor.style.background =
+              cores[
+                index %
+                cores.length
+              ];
+
+            visual.appendChild(
+              cor
+            );
 
           };
-
 
         visual.appendChild(
           img
@@ -1437,54 +1330,22 @@ function criarRoleta(
       }
       else{
 
-        const color =
+        const cor =
           document.createElement(
             "div"
           );
 
-
-        color.className =
+        cor.className =
           "sliceColor";
 
-
-        color.style.background =
+        cor.style.background =
           cores[
             index %
             cores.length
           ];
 
-
         visual.appendChild(
-          color
-        );
-
-
-        const icon =
-          document.createElement(
-            "div"
-          );
-
-
-        icon.style.position =
-          "relative";
-
-
-        icon.style.zIndex =
-          "2";
-
-
-        icon.style.fontSize =
-          "38px";
-
-
-        icon.textContent =
-          obterIcone(
-            premio.tipo
-          );
-
-
-        visual.appendChild(
-          icon
+          cor
         );
 
       }
@@ -1494,9 +1355,168 @@ function criarRoleta(
         visual
       );
 
-
       wheel.appendChild(
         slice
+      );
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   LISTA DE POSSIBILIDADES
+===================================================== */
+
+function criarListaPossibilidades(
+  lista
+){
+
+  possiblePrizeList.innerHTML =
+    "";
+
+
+  if(
+    !lista.length
+  ){
+
+    possiblePrizeList.innerHTML =
+
+      "<div class='empty'>" +
+
+        "Nenhum prêmio ativo cadastrado." +
+
+      "</div>";
+
+    return;
+
+  }
+
+
+  lista.forEach(
+    premio => {
+
+      const item =
+        document.createElement(
+          "div"
+        );
+
+      item.className =
+        "possible-prize";
+
+
+      const imagem =
+        document.createElement(
+          "div"
+        );
+
+      imagem.className =
+        "possible-icon";
+
+
+      if(
+        premio.imagem &&
+        String(
+          premio.imagem
+        ).trim() !== ""
+      ){
+
+        const img =
+          document.createElement(
+            "img"
+          );
+
+        img.src =
+          premio.imagem;
+
+        img.alt =
+          premio.nome ||
+          "Prêmio";
+
+
+        img.onerror =
+          () => {
+
+            imagem.textContent =
+              obterIcone(
+                premio.tipo
+              );
+
+          };
+
+
+        imagem.appendChild(
+          img
+        );
+
+      }
+      else{
+
+        imagem.textContent =
+          obterIcone(
+            premio.tipo
+          );
+
+      }
+
+
+      const info =
+        document.createElement(
+          "div"
+        );
+
+
+      const nome =
+        document.createElement(
+          "div"
+        );
+
+      nome.className =
+        "possible-name";
+
+      nome.textContent =
+        premio.nome ||
+        "Prêmio";
+
+
+      const quantidade =
+        document.createElement(
+          "div"
+        );
+
+      quantidade.className =
+        "possible-quantity";
+
+      quantidade.textContent =
+
+        Number(
+          premio.quantidade || 0
+        ).toLocaleString(
+          "pt-BR"
+        );
+
+
+      info.appendChild(
+        nome
+      );
+
+      info.appendChild(
+        quantidade
+      );
+
+
+      item.appendChild(
+        imagem
+      );
+
+      item.appendChild(
+        info
+      );
+
+
+      possiblePrizeList.appendChild(
+        item
       );
 
     }
@@ -1512,17 +1532,6 @@ function criarRoleta(
 async function carregarPremios(){
 
   try{
-
-    /*
-    Atenção:
-    Esta leitura é apenas provisória para
-    construir a interface.
-
-    Antes de colocar a roleta em produção,
-    vamos substituir isso por uma função
-    protegida que não entregue a lista
-    completa dos prêmios ao jogador.
-    */
 
     const resultado =
       await getDocs(
@@ -1561,29 +1570,32 @@ async function carregarPremios(){
     );
 
 
+    criarListaPossibilidades(
+      premios
+    );
+
+
     /*
-    Para teste visual:
+    Neste momento o contador ainda é
+    somente visual. A conexão real dos
+    giros será feita na etapa seguinte.
     */
 
-    if(
-      premios.length > 0
-    ){
+    spinCount.textContent =
+      "0";
 
-      spinButton.disabled =
-        false;
-
-    }
 
   }
   catch(error){
 
     console.error(
+      "Erro ao carregar prêmios:",
       error
     );
 
 
     mostrarErro(
-      "Não foi possível carregar a roleta."
+      "Não foi possível carregar os prêmios da Roleta."
     );
 
   }
@@ -1595,7 +1607,7 @@ async function carregarPremios(){
    SORTEIO TEMPORÁRIO
 ===================================================== */
 
-function sortearPremioTeste(){
+function sortearPremio(){
 
   if(
     !premios.length
@@ -1671,186 +1683,7 @@ function sortearPremioTeste(){
 
 
 /* =====================================================
-   LOCALIZAR FATIA
-===================================================== */
-
-function indiceDoPremio(
-  premio
-){
-
-  return premios.findIndex(
-    item =>
-      item.id ===
-      premio.id
-  );
-
-}
-
-
-/* =====================================================
-   GIRAR
-===================================================== */
-
-async function girar(){
-
-  if(
-    girando
-  ){
-
-    return;
-
-  }
-
-
-  if(
-    !premios.length
-  ){
-
-    mostrarErro(
-      "Não existem prêmios ativos na roleta."
-    );
-
-    return;
-
-  }
-
-
-  girando =
-    true;
-
-
-  spinButton.disabled =
-    true;
-
-
-  esconderErro();
-
-
-  result.classList.remove(
-    "show"
-  );
-
-
-  /*
-  Sorteio temporário.
-
-  Depois vamos substituir pelo
-  resultado seguro do backend.
-  */
-
-  const premio =
-    sortearPremioTeste();
-
-
-  if(
-    !premio
-  ){
-
-    girando =
-      false;
-
-    spinButton.disabled =
-      false;
-
-    return;
-
-  }
-
-
-  const indice =
-    indiceDoPremio(
-      premio
-    );
-
-
-  const quantidade =
-    premios.length;
-
-
-  const angulo =
-    360 / quantidade;
-
-
-  /*
-  O ponteiro fica no topo.
-
-  Calculamos o centro da fatia
-  sorteada e fazemos várias voltas.
-  */
-
-  const centroFatia =
-    (
-      indice * angulo
-    ) +
-    (
-      angulo / 2
-    );
-
-
-  const voltas =
-    5 +
-    Math.floor(
-      Math.random() * 3
-    );
-
-
-  const destino =
-    (
-      rotacaoAtual +
-      (
-        voltas * 360
-      ) +
-      (
-        360 -
-        centroFatia
-      )
-    );
-
-
-  rotacaoAtual =
-    destino;
-
-
-  wheel.style.transform =
-    "rotate(" +
-    destino +
-    "deg)";
-
-
-  setTimeout(
-    () => {
-
-      mostrarResultado(
-        premio
-      );
-
-
-      girando =
-        false;
-
-
-      /*
-      Temporariamente mantém o botão
-      bloqueado após um giro.
-
-      O sistema real de giros será conectado
-      na próxima etapa.
-      */
-
-      spinButton.disabled =
-        true;
-
-    },
-
-    5250
-
-  );
-
-}
-
-
-/* =====================================================
-   MOSTRAR RESULTADO
+   RESULTADO
 ===================================================== */
 
 function mostrarResultado(
@@ -1882,7 +1715,9 @@ function mostrarResultado(
 
   if(
     premio.imagem &&
-    premio.imagem.trim() !== ""
+    String(
+      premio.imagem
+    ).trim() !== ""
   ){
 
     const img =
@@ -1890,10 +1725,8 @@ function mostrarResultado(
         "img"
       );
 
-
     img.src =
       premio.imagem;
-
 
     img.alt =
       premio.nome ||
@@ -1935,8 +1768,134 @@ function mostrarResultado(
 
 
 /* =====================================================
-   BOTÃO
+   GIRO
 ===================================================== */
+
+function girar(){
+
+  if(
+    girando ||
+    !premios.length
+  ){
+
+    return;
+
+  }
+
+
+  girando =
+    true;
+
+  spinButton.disabled =
+    true;
+
+  esconderErro();
+
+
+  result.classList.remove(
+    "show"
+  );
+
+
+  const premio =
+    sortearPremio();
+
+
+  if(
+    !premio
+  ){
+
+    girando =
+      false;
+
+    return;
+
+  }
+
+
+  const indice =
+    premios.findIndex(
+      item =>
+        item.id ===
+        premio.id
+    );
+
+
+  const total =
+    premios.length;
+
+
+  const angulo =
+    360 / total;
+
+
+  const centroFatia =
+    (
+      indice * angulo
+    ) +
+    (
+      angulo / 2
+    );
+
+
+  const voltas =
+    5 +
+    Math.floor(
+      Math.random() * 3
+    );
+
+
+  const destino =
+
+    rotacaoAtual +
+
+    (
+      voltas * 360
+    ) +
+
+    (
+      360 -
+      centroFatia
+    );
+
+
+  rotacaoAtual =
+    destino;
+
+
+  wheel.style.transform =
+    "rotate(" +
+    destino +
+    "deg)";
+
+
+  setTimeout(
+    () => {
+
+      mostrarResultado(
+        premio
+      );
+
+
+      girando =
+        false;
+
+
+      /*
+      Ainda não descontamos o giro.
+      Essa parte será ligada ao Firebase
+      no próximo código.
+
+      Por segurança, o botão permanece
+      desativado nesta versão.
+      */
+
+    },
+    5250
+  );
+
+}
+
 
 spinButton.addEventListener(
   "click",
@@ -1989,19 +1948,28 @@ onAuthStateChanged(
       usuario;
 
 
-    /*
-    Por enquanto deixamos
-    o contador visual em 0.
+    await carregarPremios();
 
-    Na próxima etapa vamos ligar
-    ao campo de giros do usuário.
+
+    /*
+    Por enquanto liberamos 1 giro apenas
+    para teste visual da roleta.
+
+    NÃO representa o sistema definitivo
+    de giros do usuário.
     */
 
-    spinCount.textContent =
-      "0";
+    if(
+      premios.length > 0
+    ){
 
+      spinCount.textContent =
+        "1";
 
-    await carregarPremios();
+      spinButton.disabled =
+        false;
+
+    }
 
   }
 
