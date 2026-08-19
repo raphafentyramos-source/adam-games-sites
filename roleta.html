@@ -215,9 +215,7 @@ body{
 }
 
 
-/* =====================================================
-   BORDA
-===================================================== */
+/* BORDA */
 
 .roleta-borda{
 
@@ -232,6 +230,7 @@ body{
   padding:10px;
 
   box-shadow:
+
     0 0 0 7px
     rgba(0,0,0,.15),
 
@@ -241,9 +240,7 @@ body{
 }
 
 
-/* =====================================================
-   CÍRCULO DA ROLETA
-===================================================== */
+/* SVG */
 
 #roleta{
 
@@ -251,65 +248,52 @@ body{
 
   inset:10px;
 
+  width:calc(100% - 20px);
+
+  height:calc(100% - 20px);
+
   border-radius:50%;
 
-  overflow:hidden;
-
-  background:#102d4e;
-
-  border:
-    3px solid
-    rgba(255,255,255,.85);
-
-  transform:
-    rotate(0deg);
-
-  transition:
-    transform 5.5s
-    cubic-bezier(.12,.72,.18,1);
+  overflow:visible;
 
 }
 
 
-/*
----------------------------------------------------------
-IMAGENS DOS PRÊMIOS
----------------------------------------------------------
-*/
+/* GRUPO QUE GIRA */
 
-.fatia-imagem{
+#roletaGrupo{
 
-  position:absolute;
+  transform-origin:
+    250px 250px;
 
-  width:19%;
+  transform-box:
+    fill-box;
 
-  height:19%;
+}
 
-  display:flex;
 
-  align-items:center;
+/* FATIAS */
 
-  justify-content:center;
+.setor{
 
-  z-index:5;
+  stroke:
+    rgba(0,0,0,.65);
+
+  stroke-width:4;
+
+  vector-effect:
+    non-scaling-stroke;
+
+}
+
+
+/* IMAGENS */
+
+.setor-imagem{
 
   pointer-events:none;
 
-}
-
-.fatia-imagem img{
-
-  width:100%;
-
-  height:100%;
-
-  object-fit:contain;
-
-  filter:
-    drop-shadow(
-      0 4px 5px
-      rgba(0,0,0,.4)
-    );
+  user-select:none;
 
 }
 
@@ -332,16 +316,13 @@ IMAGENS DOS PRÊMIOS
       -50%
     );
 
-  width:
-    100px;
+  width:100px;
 
-  height:
-    100px;
+  height:100px;
 
   border-radius:50%;
 
-  background:
-    #ffd329;
+  background:#ffd329;
 
   border:
     10px solid
@@ -470,6 +451,10 @@ IMAGENS DOS PRÊMIOS
 
 }
 
+
+/* =====================================================
+   AVISO
+===================================================== */
 
 .aviso{
 
@@ -922,14 +907,6 @@ IMAGENS DOS PRÊMIOS
 
   }
 
-  .fatia-imagem{
-
-    width:22%;
-
-    height:22%;
-
-  }
-
   .resultado-top{
 
     flex-direction:column;
@@ -978,7 +955,9 @@ IMAGENS DOS PRÊMIOS
 <div class="giros">
 
   <div class="giros-label">
+
     GIROS DISPONÍVEIS
+
   </div>
 
   <div
@@ -1004,12 +983,21 @@ IMAGENS DOS PRÊMIOS
 
     <div class="roleta-borda">
 
-      <div id="roleta"></div>
+      <svg
+        id="roleta"
+        viewBox="0 0 500 500"
+        xmlns="http://www.w3.org/2000/svg">
+
+        <g id="roletaGrupo"></g>
+
+      </svg>
 
     </div>
 
     <div class="centro">
+
       🎰
+
     </div>
 
   </div>
@@ -1047,7 +1035,9 @@ IMAGENS DOS PRÊMIOS
 <div class="card">
 
   <h2>
+
     🎁 Possibilidades de prêmio da Roleta
+
   </h2>
 
 
@@ -1056,7 +1046,9 @@ IMAGENS DOS PRÊMIOS
     id="listaPremios">
 
     <div class="sem-premios">
+
       🔄 Carregando prêmios...
+
     </div>
 
   </div>
@@ -1071,14 +1063,18 @@ IMAGENS DOS PRÊMIOS
 <div class="card historico">
 
   <h2>
+
     📜 Meus resultados
+
   </h2>
 
 
   <div id="historicoLista">
 
     <div class="sem-premios">
+
       🔄 Carregando resultados...
+
     </div>
 
   </div>
@@ -1090,7 +1086,7 @@ IMAGENS DOS PRÊMIOS
 
 
 <!-- =====================================================
-     MODAL RESULTADO
+     MODAL
 ===================================================== -->
 
 <div
@@ -1100,8 +1096,11 @@ IMAGENS DOS PRÊMIOS
   <div class="modal-card">
 
     <h2>
+
       🎉 Você ganhou!
+
     </h2>
+
 
     <div
       class="modal-img"
@@ -1111,6 +1110,7 @@ IMAGENS DOS PRÊMIOS
 
     </div>
 
+
     <div
       class="modal-premio"
       id="modalPremio">
@@ -1119,6 +1119,7 @@ IMAGENS DOS PRÊMIOS
 
     </div>
 
+
     <div
       class="modal-data"
       id="modalData">
@@ -1126,6 +1127,7 @@ IMAGENS DOS PRÊMIOS
       —
 
     </div>
+
 
     <button
       class="fechar"
@@ -1172,7 +1174,7 @@ import {
   doc,
   getDoc,
   updateDoc,
-  setDoc,
+  addDoc,
   serverTimestamp
 }
 from
@@ -1252,45 +1254,54 @@ const girosEl =
     "giros"
   );
 
-const roletaEl =
+
+const roletaGrupo =
   document.getElementById(
-    "roleta"
+    "roletaGrupo"
   );
+
 
 const girarBtn =
   document.getElementById(
     "girar"
   );
 
+
 const messageEl =
   document.getElementById(
     "message"
   );
+
 
 const listaPremios =
   document.getElementById(
     "listaPremios"
   );
 
+
 const historicoLista =
   document.getElementById(
     "historicoLista"
   );
+
 
 const modal =
   document.getElementById(
     "modal"
   );
 
+
 const modalPremio =
   document.getElementById(
     "modalPremio"
   );
 
+
 const modalImg =
   document.getElementById(
     "modalImg"
   );
+
 
 const modalData =
   document.getElementById(
@@ -1306,6 +1317,19 @@ function mostrarMensagem(
   texto,
   tipo
 ){
+
+  if(!texto){
+
+    messageEl.textContent =
+      "";
+
+    messageEl.className =
+      "message";
+
+    return;
+
+  }
+
 
   messageEl.textContent =
     texto;
@@ -1368,6 +1392,7 @@ async function localizarUsuario(
     }
 
   }
+
   catch(error){
 
     console.error(
@@ -1386,8 +1411,8 @@ async function localizarUsuario(
 
       const email =
         usuario.email
-        .trim()
-        .toLowerCase();
+          .trim()
+          .toLowerCase();
 
 
       const resultadoEmail =
@@ -1431,6 +1456,7 @@ async function localizarUsuario(
       }
 
     }
+
     catch(error){
 
       console.error(
@@ -1479,6 +1505,7 @@ async function localizarUsuario(
     }
 
   }
+
   catch(error){
 
     console.error(
@@ -1495,14 +1522,12 @@ async function localizarUsuario(
 
 
 /* =====================================================
-   ATUALIZAR GIROS
+   GIROS
 ===================================================== */
 
 function atualizarGiros(){
 
-  if(
-    !usuarioDoc
-  ){
+  if(!usuarioDoc){
 
     girosEl.textContent =
       "0";
@@ -1559,21 +1584,21 @@ async function carregarPremios(){
 
       resultado.docs
 
-      .map(
-        documento => ({
+        .map(
+          documento => ({
 
-          id:
-            documento.id,
+            id:
+              documento.id,
 
-          ...documento.data()
+            ...documento.data()
 
-        })
-      )
+          })
+        )
 
-      .filter(
-        premio =>
-          premio.ativo === true
-      );
+        .filter(
+          premio =>
+            premio.ativo === true
+        );
 
 
     desenharRoleta();
@@ -1583,6 +1608,7 @@ async function carregarPremios(){
     atualizarGiros();
 
   }
+
   catch(error){
 
     console.error(
@@ -1592,8 +1618,11 @@ async function carregarPremios(){
 
 
     listaPremios.innerHTML =
+
       "<div class='sem-premios'>" +
+
       "❌ Não foi possível carregar os prêmios." +
+
       "</div>";
 
   }
@@ -1602,65 +1631,114 @@ async function carregarPremios(){
 
 
 /* =====================================================
-   DESENHAR ROLETA
+   CALCULAR PONTO NA CIRCUNFERÊNCIA
+===================================================== */
+
+function pontoCirculo(
+  angulo,
+  raio
+){
+
+  const rad =
+    angulo *
+    Math.PI /
+    180;
+
+
+  return {
+
+    x:
+      250 +
+      raio *
+      Math.sin(rad),
+
+    y:
+      250 -
+      raio *
+      Math.cos(rad)
+
+  };
+
+}
+
+
+/* =====================================================
+   CRIAR SETOR SVG
+===================================================== */
+
+function criarCaminhoSetor(
+  inicio,
+  fim
+){
+
+  const raio =
+    245;
+
+
+  const p1 =
+    pontoCirculo(
+      inicio,
+      raio
+    );
+
+
+  const p2 =
+    pontoCirculo(
+      fim,
+      raio
+    );
+
+
+  const tamanho =
+    fim -
+    inicio;
+
+
+  const grandeArco =
+    tamanho >
+    180
+      ? 1
+      : 0;
+
+
+  return `
+
+    M 250 250
+
+    L ${p1.x} ${p1.y}
+
+    A ${raio} ${raio}
+      0 ${grandeArco} 1
+      ${p2.x} ${p2.y}
+
+    Z
+
+  `;
+
+}
+
+
+/* =====================================================
+   DESENHAR ROLETA NOVA
 ===================================================== */
 
 function desenharRoleta(){
 
-  roletaEl.innerHTML =
+  roletaGrupo.innerHTML =
     "";
 
-  roletaEl.style.transition =
-    "none";
-
-  roletaEl.style.transform =
-    "rotate(0deg)";
 
   rotacaoAtual =
     0;
 
 
+  roletaGrupo.style.transform =
+    "rotate(0deg)";
+
+
   if(
     premios.length === 0
   ){
-
-    const vazio =
-      document.createElement(
-        "div"
-      );
-
-
-    vazio.style.cssText = `
-
-      position:absolute;
-
-      inset:0;
-
-      display:flex;
-
-      align-items:center;
-
-      justify-content:center;
-
-      color:#fff;
-
-      font-size:18px;
-
-      text-align:center;
-
-      padding:30px;
-
-    `;
-
-
-    vazio.textContent =
-      "Nenhum prêmio disponível";
-
-
-    roletaEl.appendChild(
-      vazio
-    );
-
 
     return;
 
@@ -1678,86 +1756,20 @@ function desenharRoleta(){
 
   const cores = [
 
-    "#18a96b",
-    "#e7aa12",
-    "#a83bd1",
-    "#1685d3",
+    "#19a86b",
+    "#e8aa13",
+    "#a93bd2",
+    "#1886d5",
     "#e73583",
-    "#7549df",
-    "#e75d25",
-    "#20b49e",
-    "#d83c3c",
-    "#5964d9",
-    "#d58c19",
-    "#15a66b"
+    "#7047df",
+    "#e65d25",
+    "#22ae9b",
+    "#d83e3e",
+    "#5965d9",
+    "#d58a18",
+    "#15a66a"
 
   ];
-
-
-  /*
-  -----------------------------------------------------
-  A ROLETA AGORA É UMA ÚNICA PIZZA.
-  
-  Conic-gradient divide 100% do círculo.
-  Portanto:
-  
-  4 prêmios = 4 fatias
-  6 prêmios = 6 fatias
-  8 prêmios = 8 fatias
-  
-  Nunca ficam pedaços vazios.
-  -----------------------------------------------------
-  */
-
-
-  const partes =
-    premios.map(
-      (
-        premio,
-        indice
-      ) => {
-
-        const inicio =
-          indice *
-          angulo;
-
-
-        const fim =
-          (
-            indice + 1
-          ) *
-          angulo;
-
-
-        const cor =
-          premio.cor ||
-          cores[
-            indice %
-            cores.length
-          ];
-
-
-        return (
-          `${cor} ${inicio}deg ${fim}deg`
-        );
-
-      }
-    );
-
-
-  roletaEl.style.background =
-    `conic-gradient(from -90deg, ${partes.join(",")})`;
-
-
-  /*
-  -----------------------------------------------------
-  IMAGENS NO CENTRO DE CADA FATIA
-  -----------------------------------------------------
-  */
-
-
-  const raio =
-    31;
 
 
   premios.forEach(
@@ -1766,97 +1778,144 @@ function desenharRoleta(){
       indice
     ) => {
 
-      if(
-        !premio.imagem
-      ){
+      const inicio =
+        indice *
+        angulo;
 
-        return;
 
-      }
+      const fim =
+        inicio +
+        angulo;
 
 
       const centro =
-        indice *
-        angulo +
+        inicio +
         angulo / 2;
 
 
-      const radianos =
-        (
-          centro - 90
-        ) *
-        Math.PI /
-        180;
+      /*
+      SETOR
+      */
 
-
-      const x =
-        50 +
-        raio *
-        Math.cos(
-          radianos
+      const path =
+        document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "path"
         );
 
 
-      const y =
-        50 +
-        raio *
-        Math.sin(
-          radianos
-        );
-
-
-      const imagemBox =
-        document.createElement(
-          "div"
-        );
-
-
-      imagemBox.className =
-        "fatia-imagem";
-
-
-      imagemBox.style.left =
-        x + "%";
-
-
-      imagemBox.style.top =
-        y + "%";
-
-
-      imagemBox.style.transform =
-        "translate(-50%, -50%)";
-
-
-      const img =
-        document.createElement(
-          "img"
-        );
-
-
-      img.src =
-        premio.imagem;
-
-
-      img.alt =
-        "";
-
-
-      img.onerror =
-        () => {
-
-          imagemBox.remove();
-
-        };
-
-
-      imagemBox.appendChild(
-        img
+      path.setAttribute(
+        "d",
+        criarCaminhoSetor(
+          inicio,
+          fim
+        )
       );
 
 
-      roletaEl.appendChild(
-        imagemBox
+      path.setAttribute(
+        "fill",
+        premio.cor ||
+        cores[
+          indice %
+          cores.length
+        ]
       );
+
+
+      path.setAttribute(
+        "class",
+        "setor"
+      );
+
+
+      roletaGrupo.appendChild(
+        path
+      );
+
+
+      /*
+      IMAGEM
+      */
+
+      if(
+        premio.imagem
+      ){
+
+        const pos =
+          pontoCirculo(
+            centro,
+            165
+          );
+
+
+        const imagem =
+          document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "image"
+          );
+
+
+        const tamanho =
+          Math.min(
+            105,
+            Math.max(
+              58,
+              270 /
+              quantidade
+            )
+          );
+
+
+        imagem.setAttribute(
+          "href",
+          premio.imagem
+        );
+
+
+        imagem.setAttribute(
+          "x",
+          pos.x -
+          tamanho / 2
+        );
+
+
+        imagem.setAttribute(
+          "y",
+          pos.y -
+          tamanho / 2
+        );
+
+
+        imagem.setAttribute(
+          "width",
+          tamanho
+        );
+
+
+        imagem.setAttribute(
+          "height",
+          tamanho
+        );
+
+
+        imagem.setAttribute(
+          "preserveAspectRatio",
+          "xMidYMid meet"
+        );
+
+
+        imagem.setAttribute(
+          "class",
+          "setor-imagem"
+        );
+
+
+        roletaGrupo.appendChild(
+          imagem
+        );
+
+      }
 
     }
   );
@@ -1879,8 +1938,11 @@ function mostrarPossibilidades(){
   ){
 
     listaPremios.innerHTML =
+
       "<div class='sem-premios'>" +
+
       "Nenhum prêmio cadastrado na roleta." +
+
       "</div>";
 
     return;
@@ -1933,7 +1995,7 @@ function mostrarPossibilidades(){
         img.onerror =
           () => {
 
-            imagemBox.textContent =
+            imagemBox.innerHTML =
               "🎁";
 
           };
@@ -1944,6 +2006,7 @@ function mostrarPossibilidades(){
         );
 
       }
+
       else{
 
         imagemBox.textContent =
@@ -1974,7 +2037,7 @@ function mostrarPossibilidades(){
 
       nome.textContent =
 
-        (
+        Number(
           premio.quantidade ||
           0
         ).toLocaleString(
@@ -2037,7 +2100,7 @@ function mostrarPossibilidades(){
 
 
 /* =====================================================
-   PESO
+   SORTEIO
 ===================================================== */
 
 function escolherPremio(){
@@ -2059,25 +2122,13 @@ function escolherPremio(){
     premio => {
 
       total +=
-        Math.max(
-          0,
-          Number(
-            premio.peso ||
-            1
-          )
+        Number(
+          premio.peso ||
+          1
         );
 
     }
   );
-
-
-  if(
-    total <= 0
-  ){
-
-    return premios[0];
-
-  }
 
 
   let sorteio =
@@ -2091,12 +2142,9 @@ function escolherPremio(){
   ){
 
     sorteio -=
-      Math.max(
-        0,
-        Number(
-          premio.peso ||
-          1
-        )
+      Number(
+        premio.peso ||
+        1
       );
 
 
@@ -2119,7 +2167,7 @@ function escolherPremio(){
 
 
 /* =====================================================
-   DATA
+   FORMATAR DATA
 ===================================================== */
 
 function formatarData(
@@ -2135,7 +2183,7 @@ function formatarData(
   }
 
 
-  let dataObjeto;
+  let objeto;
 
 
   if(
@@ -2143,13 +2191,14 @@ function formatarData(
     "function"
   ){
 
-    dataObjeto =
+    objeto =
       data.toDate();
 
   }
+
   else{
 
-    dataObjeto =
+    objeto =
       new Date(
         data
       );
@@ -2159,7 +2208,7 @@ function formatarData(
 
   if(
     Number.isNaN(
-      dataObjeto.getTime()
+      objeto.getTime()
     )
   ){
 
@@ -2168,8 +2217,220 @@ function formatarData(
   }
 
 
-  return dataObjeto.toLocaleString(
+  return objeto.toLocaleString(
     "pt-BR"
+  );
+
+}
+
+
+/* =====================================================
+   SALVAR RESULTADO
+===================================================== */
+
+async function salvarResultado(
+  premio,
+  girosAnterior,
+  saldoFinal
+){
+
+  try{
+
+    const registro =
+      await addDoc(
+
+        collection(
+          db,
+          "resultadosRoleta"
+        ),
+
+        {
+
+          usuarioId:
+            usuarioAuth.uid,
+
+          usuarioDocId:
+            usuarioDoc._docId,
+
+          usuarioEmail:
+            usuarioAuth.email ||
+            usuarioDoc.email ||
+            "",
+
+          usuarioNome:
+            usuarioDoc.nome ||
+            usuarioDoc.name ||
+            "",
+
+          publicId:
+            usuarioDoc.publicId ||
+            "",
+
+          premioId:
+            premio.id,
+
+          premioNome:
+            premio.nome ||
+            "",
+
+          quantidade:
+            Number(
+              premio.quantidade ||
+              0
+            ),
+
+          tipo:
+            premio.tipo ||
+            "outro",
+
+          imagem:
+            premio.imagem ||
+            "",
+
+          giroNumero:
+            girosAnterior,
+
+          saldoGirosAnterior:
+            girosAnterior,
+
+          saldoGirosFinal:
+            saldoFinal,
+
+          entregue:
+            false,
+
+          criadoEm:
+            serverTimestamp()
+
+        }
+
+      );
+
+
+    return registro.id;
+
+  }
+
+  catch(error){
+
+    /*
+    IMPORTANTE:
+
+    Se as Rules impedirem o histórico,
+    NÃO impedimos o prêmio de aparecer.
+    */
+
+    console.error(
+      "Não foi possível salvar histórico:",
+      error
+    );
+
+
+    return null;
+
+  }
+
+}
+
+
+/* =====================================================
+   MOSTRAR RESULTADO
+===================================================== */
+
+function mostrarResultado(
+  premio,
+  registroId
+){
+
+  modalPremio.textContent =
+
+    Number(
+      premio.quantidade ||
+      0
+    ).toLocaleString(
+      "pt-BR"
+    )
+
+    +
+
+    " "
+
+    +
+
+    (
+      premio.nome ||
+      "Prêmio"
+    );
+
+
+  modalImg.innerHTML =
+    "";
+
+
+  if(
+    premio.imagem
+  ){
+
+    const img =
+      document.createElement(
+        "img"
+      );
+
+
+    img.src =
+      premio.imagem;
+
+
+    img.alt =
+      "Prêmio";
+
+
+    img.onerror =
+      () => {
+
+        modalImg.textContent =
+          "🎁";
+
+      };
+
+
+    modalImg.appendChild(
+      img
+    );
+
+  }
+
+  else{
+
+    modalImg.textContent =
+      "🎁";
+
+  }
+
+
+  modalData.textContent =
+
+    "Giro realizado em " +
+
+    new Date()
+      .toLocaleString(
+        "pt-BR"
+      )
+
+    +
+
+    (
+      registroId
+        ?
+        " • Registro: " +
+        registroId
+        :
+        " • Resultado registrado localmente"
+    );
+
+
+  modal.classList.add(
+    "show"
   );
 
 }
@@ -2254,6 +2515,12 @@ async function girarRoleta(){
   );
 
 
+  /*
+  -----------------------------------------------------
+  ESCOLHE O PRÊMIO
+  -----------------------------------------------------
+  */
+
   const premio =
     escolherPremio();
 
@@ -2291,11 +2558,11 @@ async function girarRoleta(){
 
   /*
   -----------------------------------------------------
-  Calcula o centro da fatia sorteada.
+  CENTRO DA FATIA
   -----------------------------------------------------
   */
 
-  const centroFatia =
+  const centroDaFatia =
     indice *
     angulo +
     angulo / 2;
@@ -2303,37 +2570,39 @@ async function girarRoleta(){
 
   /*
   -----------------------------------------------------
-  O ponteiro está no topo.
+  QUEREMOS QUE O CENTRO DA FATIA
+  TERMINE EXATAMENTE NO PONTEIRO.
   -----------------------------------------------------
-  */
-
-  const alvo =
-    360 -
-    centroFatia;
-
-
-  /*
-  Várias voltas para a animação ficar bonita.
   */
 
   const voltas =
     6;
 
 
+  const ajuste =
+    360 -
+    centroDaFatia;
+
+
   const rotacaoFinal =
+
     rotacaoAtual +
-    (
-      voltas * 360
-    ) +
-    alvo;
+
+    voltas * 360 +
+
+    ajuste;
 
 
-  roletaEl.style.transition =
+  roletaGrupo.style.transition =
+
     "transform 5.5s cubic-bezier(.12,.72,.18,1)";
 
 
-  roletaEl.style.transform =
-    `rotate(${rotacaoFinal}deg)`;
+  roletaGrupo.style.transform =
+
+    "rotate(" +
+    rotacaoFinal +
+    "deg)";
 
 
   rotacaoAtual =
@@ -2342,7 +2611,7 @@ async function girarRoleta(){
 
   /*
   -----------------------------------------------------
-  Espera a animação.
+  ESPERA A ROLETA PARAR
   -----------------------------------------------------
   */
 
@@ -2357,85 +2626,18 @@ async function girarRoleta(){
 
   /*
   -----------------------------------------------------
-  REGISTRO NO FIREBASE
+  DESCONTA O GIRO
   -----------------------------------------------------
   */
 
+  const novoSaldo =
+    Math.max(
+      0,
+      girosAtuais - 1
+    );
+
+
   try{
-
-    /*
-    ---------------------------------------------------
-    CONFERE NOVAMENTE O SALDO DIRETAMENTE NO FIREBASE.
-    
-    Isso evita que duas abas usem o mesmo giro.
-    ---------------------------------------------------
-    */
-
-    const documentoAtual =
-      await getDoc(
-        usuarioRef
-      );
-
-
-    if(
-      !documentoAtual.exists()
-    ){
-
-      throw new Error(
-        "Seu cadastro não foi encontrado."
-      );
-
-    }
-
-
-    const dadosAtuais =
-      documentoAtual.data();
-
-
-    const saldoReal =
-      Number(
-        dadosAtuais.girosRoleta ||
-        0
-      );
-
-
-    if(
-      saldoReal <= 0
-    ){
-
-      throw new Error(
-        "Este giro já foi utilizado."
-      );
-
-    }
-
-
-    const novoSaldo =
-      saldoReal - 1;
-
-
-    /*
-    ---------------------------------------------------
-    ID ÚNICO DO RESULTADO
-    ---------------------------------------------------
-    */
-
-    const resultadoRef =
-      doc(
-        collection(
-          db,
-          "resultadosRoleta"
-        )
-      );
-
-
-    /*
-    ---------------------------------------------------
-    ATUALIZA O SALDO E CRIA O RESULTADO.
-    
-    As duas operações são feitas juntas.
-    ---------------------------------------------------
-    */
 
     await updateDoc(
 
@@ -2451,126 +2653,84 @@ async function girarRoleta(){
     );
 
 
-    await setDoc(
-
-      resultadoRef,
-
-      {
-
-        usuarioId:
-          usuarioAuth.uid,
-
-        usuarioDocId:
-          usuarioDoc._docId,
-
-        usuarioEmail:
-          usuarioAuth.email ||
-          usuarioDoc.email ||
-          "",
-
-        usuarioNome:
-          usuarioDoc.nome ||
-          usuarioDoc.name ||
-          "",
-
-        publicId:
-          usuarioDoc.publicId ||
-          "",
-
-        premioId:
-          premio.id,
-
-        premioNome:
-          premio.nome ||
-          "",
-
-        quantidade:
-          Number(
-            premio.quantidade ||
-            0
-          ),
-
-        tipo:
-          premio.tipo ||
-          "outro",
-
-        imagem:
-          premio.imagem ||
-          "",
-
-        giroNumero:
-          saldoReal,
-
-        saldoGirosAnterior:
-          saldoReal,
-
-        saldoGirosFinal:
-          novoSaldo,
-
-        entregue:
-          false,
-
-        criadoEm:
-          serverTimestamp()
-
-      }
-
-    );
-
-
-    /*
-    ---------------------------------------------------
-    ATUALIZA A TELA
-    ---------------------------------------------------
-    */
-
     usuarioDoc.girosRoleta =
       novoSaldo;
 
 
-    atualizarGiros();
-
-
-    mostrarResultado(
-
-      premio,
-
-      resultadoRef.id
-
-    );
-
-
-    await carregarHistorico();
-
-
   }
+
   catch(error){
 
     console.error(
-      "ERRO COMPLETO AO REGISTRAR ROLETA:",
+      "Erro ao descontar giro:",
       error
     );
 
 
     /*
-    ---------------------------------------------------
-    MOSTRA O ERRO REAL.
-    ---------------------------------------------------
+    Mesmo que dê erro,
+    não escondemos o prêmio.
     */
 
     mostrarMensagem(
-
-      "⚠️ Não foi possível registrar o giro no Firebase: " +
-      (
-        error.message ||
-        "erro desconhecido"
-      ),
-
+      "⚠️ O prêmio foi sorteado. Houve um problema ao atualizar seus giros.",
       "error"
-
     );
 
   }
+
+
+  /*
+  -----------------------------------------------------
+  ATUALIZA NÚMERO DE GIROS
+  -----------------------------------------------------
+  */
+
+  atualizarGiros();
+
+
+  /*
+  -----------------------------------------------------
+  MOSTRA O PRÊMIO IMEDIATAMENTE
+  -----------------------------------------------------
+  */
+
+  let registroId =
+    null;
+
+
+  /*
+  Tentamos salvar o histórico,
+  mas isso NÃO pode impedir o prêmio.
+  */
+
+  registroId =
+    await salvarResultado(
+      premio,
+      girosAtuais,
+      novoSaldo
+    );
+
+
+  /*
+  -----------------------------------------------------
+  MOSTRA RESULTADO
+  -----------------------------------------------------
+  */
+
+  mostrarResultado(
+    premio,
+    registroId
+  );
+
+
+  /*
+  -----------------------------------------------------
+  HISTÓRICO
+  -----------------------------------------------------
+  */
+
+  await carregarHistorico();
 
 
   girando =
@@ -2578,111 +2738,6 @@ async function girarRoleta(){
 
 
   atualizarGiros();
-
-}
-
-
-/* =====================================================
-   MOSTRAR RESULTADO
-===================================================== */
-
-function mostrarResultado(
-  premio,
-  registroId
-){
-
-  modalPremio.textContent =
-
-    (
-      premio.quantidade ||
-      0
-    ).toLocaleString(
-      "pt-BR"
-    )
-
-    +
-
-    " "
-
-    +
-
-    (
-      premio.nome ||
-      "Prêmio"
-    );
-
-
-  modalImg.innerHTML =
-    "";
-
-
-  if(
-    premio.imagem
-  ){
-
-    const img =
-      document.createElement(
-        "img"
-      );
-
-
-    img.src =
-      premio.imagem;
-
-
-    img.alt =
-      "Prêmio";
-
-
-    img.onerror =
-      () => {
-
-        modalImg.textContent =
-          "🎁";
-
-      };
-
-
-    modalImg.appendChild(
-      img
-    );
-
-  }
-  else{
-
-    modalImg.textContent =
-      "🎁";
-
-  }
-
-
-  modalData.textContent =
-
-    "Giro realizado em " +
-
-    new Date()
-      .toLocaleString(
-        "pt-BR"
-      )
-
-    +
-
-    " • Registro: "
-
-    +
-
-    registroId;
-
-
-  modal.classList.add(
-    "show"
-  );
-
-
-  mostrarMensagem(
-    "🎉 Giro realizado com sucesso!",
-    "success"
-  );
 
 }
 
@@ -2730,8 +2785,11 @@ async function carregarHistorico(){
     ){
 
       historicoLista.innerHTML =
+
         "<div class='sem-premios'>" +
+
         "Você ainda não realizou nenhum giro." +
+
         "</div>";
 
       return;
@@ -2743,40 +2801,37 @@ async function carregarHistorico(){
 
       resultado.docs
 
-      .map(
-        documento => ({
+        .map(
+          documento => ({
 
-          id:
-            documento.id,
+            id:
+              documento.id,
 
-          ...documento.data()
+            ...documento.data()
 
-        })
-      )
+          })
+        )
 
-      .sort(
-        (
-          a,
-          b
-        ) => {
+        .sort(
+          (
+            a,
+            b
+          ) => {
 
-          const aData =
-            a.criadoEm?.seconds ||
-            0;
-
-
-          const bData =
-            b.criadoEm?.seconds ||
-            0;
+            const aData =
+              a.criadoEm?.seconds ||
+              0;
 
 
-          return (
-            bData -
-            aData
-          );
+            const bData =
+              b.criadoEm?.seconds ||
+              0;
 
-        }
-      );
+
+            return bData - aData;
+
+          }
+        );
 
 
     historicoLista.innerHTML =
@@ -2818,7 +2873,7 @@ async function carregarHistorico(){
 
         premio.textContent =
 
-          (
+          Number(
             registro.quantidade ||
             0
           ).toLocaleString(
@@ -2897,6 +2952,7 @@ async function carregarHistorico(){
 
 
         id.textContent =
+
           "ID do resultado: " +
           registro.id;
 
@@ -2924,17 +2980,26 @@ async function carregarHistorico(){
     );
 
   }
+
   catch(error){
 
-    console.error(
-      "Erro no histórico:",
+    /*
+    Se as Rules ainda não permitirem
+    leitura do histórico, NÃO quebra a roleta.
+    */
+
+    console.warn(
+      "Histórico indisponível:",
       error
     );
 
 
     historicoLista.innerHTML =
+
       "<div class='sem-premios'>" +
-      "Não foi possível carregar seu histórico." +
+
+      "📜 Histórico temporariamente indisponível." +
+
       "</div>";
 
   }
@@ -2981,12 +3046,6 @@ onAuthStateChanged(
         !cadastro
       ){
 
-        console.error(
-          "Cadastro não encontrado:",
-          usuario.uid
-        );
-
-
         mostrarMensagem(
           "Não foi possível encontrar seu cadastro.",
           "error"
@@ -3027,6 +3086,7 @@ onAuthStateChanged(
       atualizarGiros();
 
     }
+
     catch(error){
 
       console.error(
@@ -3036,15 +3096,8 @@ onAuthStateChanged(
 
 
       mostrarMensagem(
-
-        "⚠️ Erro ao carregar a roleta: " +
-        (
-          error.message ||
-          "erro desconhecido"
-        ),
-
+        "Erro ao carregar a roleta.",
         "error"
-
       );
 
     }
@@ -3059,11 +3112,8 @@ onAuthStateChanged(
 ===================================================== */
 
 girarBtn.addEventListener(
-
   "click",
-
   girarRoleta
-
 );
 
 
@@ -3072,9 +3122,7 @@ document
     "fechar"
   )
   .addEventListener(
-
     "click",
-
     () => {
 
       modal.classList.remove(
@@ -3082,8 +3130,30 @@ document
       );
 
     }
-
   );
+
+
+/*
+Fecha o modal clicando fora.
+*/
+
+modal.addEventListener(
+  "click",
+  event => {
+
+    if(
+      event.target ===
+      modal
+    ){
+
+      modal.classList.remove(
+        "show"
+      );
+
+    }
+
+  }
+);
 
 </script>
 
