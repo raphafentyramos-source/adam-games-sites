@@ -1,0 +1,2220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Adam Games • Roleta</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html,
+body{
+  min-height:100%;
+}
+
+body{
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  color:#fff;
+
+  min-height:100vh;
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(180,70,255,.32),
+      transparent 38%
+    ),
+    linear-gradient(
+      160deg,
+      #087fe0 0%,
+      #073d79 42%,
+      #07152f 100%
+    );
+
+  padding:
+    18px
+    14px
+    70px;
+
+}
+
+.page{
+
+  width:100%;
+
+  max-width:650px;
+
+  margin:0 auto;
+
+}
+
+
+/* =====================================================
+   TOPO
+===================================================== */
+
+.top{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  margin-bottom:18px;
+
+}
+
+.back{
+
+  width:45px;
+
+  height:45px;
+
+  border:0;
+
+  border-radius:14px;
+
+  background:
+    rgba(2,24,55,.82);
+
+  color:#fff;
+
+  font-size:25px;
+
+  cursor:pointer;
+
+}
+
+.title{
+
+  text-align:center;
+
+  text-shadow:
+    0 2px 8px #000;
+
+}
+
+.title small{
+
+  display:block;
+
+  color:#c9e8ff;
+
+  font-size:10px;
+
+}
+
+.title strong{
+
+  font-size:19px;
+
+}
+
+.spacer{
+
+  width:45px;
+
+}
+
+
+/* =====================================================
+   CABEÇALHO
+===================================================== */
+
+.hero{
+
+  text-align:center;
+
+  margin-top:8px;
+
+}
+
+.hero-icon{
+
+  font-size:54px;
+
+  filter:
+    drop-shadow(
+      0 5px 15px
+      rgba(0,0,0,.4)
+    );
+
+}
+
+.hero h1{
+
+  margin-top:3px;
+
+  font-size:
+    clamp(
+      28px,
+      8vw,
+      40px
+    );
+
+  font-weight:900;
+
+  text-shadow:
+    0 3px 12px #000;
+
+}
+
+.hero p{
+
+  margin-top:7px;
+
+  color:#d8edff;
+
+  font-size:14px;
+
+}
+
+
+/* =====================================================
+   GIROS
+===================================================== */
+
+.spin-card{
+
+  margin-top:18px;
+
+  padding:15px 18px;
+
+  border-radius:18px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:15px;
+
+  background:
+    rgba(2,25,55,.88);
+
+  border:
+    1px solid
+    rgba(255,255,255,.12);
+
+  box-shadow:
+    0 10px 30px
+    rgba(0,0,0,.25);
+
+}
+
+.spin-label{
+
+  color:#a9c9e5;
+
+  font-size:11px;
+
+  font-weight:bold;
+
+}
+
+.spin-number{
+
+  margin-top:3px;
+
+  font-size:30px;
+
+  font-weight:900;
+
+  color:#fff;
+
+}
+
+.spin-badge{
+
+  padding:9px 12px;
+
+  border-radius:12px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #a82dff,
+      #6917b5
+    );
+
+  font-size:12px;
+
+  font-weight:900;
+
+}
+
+
+/* =====================================================
+   ROLETA
+===================================================== */
+
+.roulette-wrap{
+
+  position:relative;
+
+  width:
+    min(
+      88vw,
+      520px
+    );
+
+  aspect-ratio:1;
+
+  margin:
+    25px
+    auto
+    0;
+
+}
+
+.roulette{
+
+  position:absolute;
+
+  inset:0;
+
+  border-radius:50%;
+
+  overflow:hidden;
+
+  border:
+    9px solid
+    rgba(255,255,255,.92);
+
+  box-shadow:
+
+    0 0 0 5px
+    rgba(0,0,0,.25),
+
+    0 18px 45px
+    rgba(0,0,0,.45);
+
+  transition:
+    transform 4.2s
+    cubic-bezier(
+      .12,
+      .65,
+      .08,
+      1
+    );
+
+  background:#222;
+
+}
+
+.slice{
+
+  position:absolute;
+
+  width:50%;
+
+  height:50%;
+
+  left:50%;
+
+  top:0;
+
+  transform-origin:
+    0% 100%;
+
+  overflow:hidden;
+
+}
+
+.slice-content{
+
+  position:absolute;
+
+  left:8%;
+
+  top:8%;
+
+  width:84%;
+
+  height:84%;
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  justify-content:center;
+
+  text-align:center;
+
+  transform:
+    rotate(22.5deg);
+
+  font-size:11px;
+
+  font-weight:900;
+
+  text-shadow:
+    0 2px 4px #000;
+
+}
+
+.prize-image{
+
+  width:48px;
+
+  height:48px;
+
+  object-fit:contain;
+
+  margin-bottom:4px;
+
+  filter:
+    drop-shadow(
+      0 3px 5px
+      rgba(0,0,0,.45)
+    );
+
+}
+
+.slice:nth-child(1){
+
+  background:#168eff;
+
+  transform:
+    rotate(0deg)
+    skewY(-45deg);
+
+}
+
+.slice:nth-child(2){
+
+  background:#7d28c9;
+
+  transform:
+    rotate(45deg)
+    skewY(-45deg);
+
+}
+
+.slice:nth-child(3){
+
+  background:#10a66a;
+
+  transform:
+    rotate(90deg)
+    skewY(-45deg);
+
+}
+
+.slice:nth-child(4){
+
+  background:#e19b17;
+
+  transform:
+    rotate(135deg)
+    skewY(-45deg);
+
+}
+
+.slice:nth-child(5){
+
+  background:#e14955;
+
+  transform:
+    rotate(180deg)
+    skewY(-45deg);
+
+}
+
+.slice:nth-child(6){
+
+  background:#168eff;
+
+  transform:
+    rotate(225deg)
+    skewY(-45deg);
+
+}
+
+.slice:nth-child(7){
+
+  background:#7d28c9;
+
+  transform:
+    rotate(270deg)
+    skewY(-45deg);
+
+}
+
+.slice:nth-child(8){
+
+  background:#10a66a;
+
+  transform:
+    rotate(315deg)
+    skewY(-45deg);
+
+}
+
+
+/* =====================================================
+   PONTA
+===================================================== */
+
+.pointer{
+
+  position:absolute;
+
+  z-index:10;
+
+  top:-8px;
+
+  left:50%;
+
+  transform:
+    translateX(-50%);
+
+  width:0;
+
+  height:0;
+
+  border-left:
+    18px solid transparent;
+
+  border-right:
+    18px solid transparent;
+
+  border-top:
+    36px solid #ffd52a;
+
+  filter:
+    drop-shadow(
+      0 3px 5px
+      rgba(0,0,0,.5)
+    );
+
+}
+
+
+/* =====================================================
+   CENTRO
+===================================================== */
+
+.center{
+
+  position:absolute;
+
+  z-index:12;
+
+  left:50%;
+
+  top:50%;
+
+  transform:
+    translate(-50%,-50%);
+
+  width:88px;
+
+  height:88px;
+
+  border-radius:50%;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  background:
+    radial-gradient(
+      circle,
+      #ffd94a,
+      #d58c00
+    );
+
+  border:
+    7px solid
+    #fff;
+
+  box-shadow:
+    0 5px 15px
+    rgba(0,0,0,.45);
+
+  font-size:34px;
+
+}
+
+
+/* =====================================================
+   BOTÃO GIRAR
+===================================================== */
+
+.spin-button{
+
+  width:100%;
+
+  max-width:520px;
+
+  height:62px;
+
+  display:block;
+
+  margin:
+    24px
+    auto
+    0;
+
+  border:0;
+
+  border-radius:18px;
+
+  color:#fff;
+
+  font-size:18px;
+
+  font-weight:900;
+
+  cursor:pointer;
+
+  background:
+    linear-gradient(
+      135deg,
+      #b52dff,
+      #6c16c0
+    );
+
+  box-shadow:
+    0 9px 25px
+    rgba(99,0,180,.35);
+
+}
+
+.spin-button:disabled{
+
+  opacity:.4;
+
+  cursor:not-allowed;
+
+}
+
+
+/* =====================================================
+   RESULTADO
+===================================================== */
+
+.result{
+
+  min-height:90px;
+
+  margin-top:18px;
+
+  padding:17px;
+
+  border-radius:20px;
+
+  text-align:center;
+
+  background:
+    rgba(2,25,55,.91);
+
+  border:
+    1px solid
+    rgba(255,255,255,.1);
+
+  box-shadow:
+    0 10px 30px
+    rgba(0,0,0,.25);
+
+}
+
+.result-title{
+
+  color:#a9c9e5;
+
+  font-size:11px;
+
+  font-weight:bold;
+
+  text-transform:uppercase;
+
+}
+
+.result-value{
+
+  margin-top:6px;
+
+  color:#ffd93d;
+
+  font-size:21px;
+
+  font-weight:900;
+
+}
+
+.result-image{
+
+  width:58px;
+
+  height:58px;
+
+  object-fit:contain;
+
+  margin-top:8px;
+
+}
+
+
+/* =====================================================
+   PRÊMIOS
+===================================================== */
+
+.prizes{
+
+  margin-top:18px;
+
+  padding:18px;
+
+  border-radius:20px;
+
+  background:
+    rgba(2,25,55,.88);
+
+  border:
+    1px solid
+    rgba(255,255,255,.08);
+
+}
+
+.prizes h2{
+
+  text-align:center;
+
+  font-size:19px;
+
+}
+
+.prize-list{
+
+  display:grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:9px;
+
+  margin-top:13px;
+
+}
+
+.prize-item{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:9px;
+
+  min-height:65px;
+
+  padding:9px;
+
+  border-radius:13px;
+
+  background:
+    rgba(255,255,255,.055);
+
+}
+
+.prize-item img{
+
+  width:42px;
+
+  height:42px;
+
+  object-fit:contain;
+
+}
+
+.prize-item div{
+
+  font-size:12px;
+
+  font-weight:bold;
+
+  line-height:1.25;
+
+}
+
+
+/* =====================================================
+   AVISO
+===================================================== */
+
+.notice{
+
+  margin-top:15px;
+
+  padding:12px;
+
+  border-radius:13px;
+
+  background:
+    rgba(255,193,7,.08);
+
+  border:
+    1px solid
+    rgba(255,193,7,.15);
+
+  color:#e8d28f;
+
+  font-size:12px;
+
+  line-height:1.5;
+
+  text-align:center;
+
+}
+
+
+/* =====================================================
+   WHATSAPP
+===================================================== */
+
+.whatsapp{
+
+  position:fixed;
+
+  right:18px;
+
+  bottom:20px;
+
+  width:57px;
+
+  height:57px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  border-radius:50%;
+
+  background:#25d366;
+
+  color:#fff;
+
+  text-decoration:none;
+
+  font-size:27px;
+
+  box-shadow:
+    0 7px 22px
+    rgba(0,0,0,.35);
+
+  z-index:50;
+
+}
+
+
+@media(max-width:500px){
+
+  .roulette-wrap{
+
+    width:
+      min(
+        94vw,
+        430px
+      );
+
+  }
+
+  .prize-list{
+
+    grid-template-columns:
+      1fr;
+
+  }
+
+  .slice-content{
+
+    font-size:9px;
+
+  }
+
+  .prize-image{
+
+    width:38px;
+
+    height:38px;
+
+  }
+
+  .center{
+
+    width:72px;
+
+    height:72px;
+
+    font-size:28px;
+
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+<!-- =====================================================
+     TOPO
+===================================================== -->
+
+<div class="top">
+
+  <button
+    class="back"
+    id="back">
+
+    ←
+
+  </button>
+
+
+  <div class="title">
+
+    <small>
+      ADAM GAMES
+    </small>
+
+    <strong>
+      ROLETA DE PRÊMIOS
+    </strong>
+
+  </div>
+
+
+  <div class="spacer"></div>
+
+</div>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<div class="hero">
+
+  <div class="hero-icon">
+    🎰
+  </div>
+
+  <h1>
+    Roleta Adam Games
+  </h1>
+
+  <p>
+    Gire e descubra seu prêmio!
+  </p>
+
+</div>
+
+
+<!-- =====================================================
+     GIROS
+===================================================== -->
+
+<div class="spin-card">
+
+  <div>
+
+    <div class="spin-label">
+      SEUS GIROS DISPONÍVEIS
+    </div>
+
+    <div
+      class="spin-number"
+      id="spinNumber">
+
+      0
+
+    </div>
+
+  </div>
+
+
+  <div class="spin-badge">
+    🎰 GIROS
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     ROLETA
+===================================================== -->
+
+<div class="roulette-wrap">
+
+
+  <div class="pointer"></div>
+
+
+  <div
+    class="roulette"
+    id="roulette">
+
+
+    <div class="slice">
+
+      <div class="slice-content">
+
+        <img
+          class="prize-image"
+          src="premio1.png"
+          onerror="this.style.display='none'"
+        >
+
+        <span>
+          500 Chapéus
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="slice">
+
+      <div class="slice-content">
+
+        <img
+          class="prize-image"
+          src="premio2.png"
+          onerror="this.style.display='none'"
+        >
+
+        <span>
+          Chave
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="slice">
+
+      <div class="slice-content">
+
+        <img
+          class="prize-image"
+          src="premio3.png"
+          onerror="this.style.display='none'"
+        >
+
+        <span>
+          2 Chances
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="slice">
+
+      <div class="slice-content">
+
+        <img
+          class="prize-image"
+          src="premio4.png"
+          onerror="this.style.display='none'"
+        >
+
+        <span>
+          1.000 Itens
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="slice">
+
+      <div class="slice-content">
+
+        <img
+          class="prize-image"
+          src="premio5.png"
+          onerror="this.style.display='none'"
+        >
+
+        <span>
+          Comidas
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="slice">
+
+      <div class="slice-content">
+
+        <img
+          class="prize-image"
+          src="premio6.png"
+          onerror="this.style.display='none'"
+        >
+
+        <span>
+          Giro Extra
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="slice">
+
+      <div class="slice-content">
+
+        <img
+          class="prize-image"
+          src="premio7.png"
+          onerror="this.style.display='none'"
+        >
+
+        <span>
+          Prêmio Especial
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="slice">
+
+      <div class="slice-content">
+
+        <img
+          class="prize-image"
+          src="premio8.png"
+          onerror="this.style.display='none'"
+        >
+
+        <span>
+          Evento
+        </span>
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+  <div class="center">
+    🎁
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     BOTÃO
+===================================================== -->
+
+<button
+  class="spin-button"
+  id="spinButton"
+  disabled>
+
+  🎰 GIRAR ROLETA
+
+</button>
+
+
+<!-- =====================================================
+     RESULTADO
+===================================================== -->
+
+<div class="result">
+
+  <div class="result-title">
+    Resultado
+  </div>
+
+  <div
+    class="result-value"
+    id="resultValue">
+
+    Faça um giro para descobrir!
+
+  </div>
+
+  <img
+    class="result-image"
+    id="resultImage"
+    style="display:none"
+  >
+
+</div>
+
+
+<!-- =====================================================
+     PRÊMIOS
+===================================================== -->
+
+<div class="prizes">
+
+  <h2>
+    🎁 Prêmios da Roleta
+  </h2>
+
+
+  <div class="prize-list">
+
+
+    <div class="prize-item">
+
+      <img
+        src="premio1.png"
+        onerror="this.style.display='none'"
+      >
+
+      <div>
+        500 Chapéus de Bobo
+      </div>
+
+    </div>
+
+
+    <div class="prize-item">
+
+      <img
+        src="premio2.png"
+        onerror="this.style.display='none'"
+      >
+
+      <div>
+        1 Chave
+      </div>
+
+    </div>
+
+
+    <div class="prize-item">
+
+      <img
+        src="premio3.png"
+        onerror="this.style.display='none'"
+      >
+
+      <div>
+        2 Chances
+      </div>
+
+    </div>
+
+
+    <div class="prize-item">
+
+      <img
+        src="premio4.png"
+        onerror="this.style.display='none'"
+      >
+
+      <div>
+        1.000 Itens
+      </div>
+
+    </div>
+
+
+    <div class="prize-item">
+
+      <img
+        src="premio5.png"
+        onerror="this.style.display='none'"
+      >
+
+      <div>
+        1.000 Comidas do Castor
+      </div>
+
+    </div>
+
+
+    <div class="prize-item">
+
+      <img
+        src="premio6.png"
+        onerror="this.style.display='none'"
+      >
+
+      <div>
+        1 Giro Extra
+      </div>
+
+    </div>
+
+
+    <div class="prize-item">
+
+      <img
+        src="premio7.png"
+        onerror="this.style.display='none'"
+      >
+
+      <div>
+        Prêmio Especial
+      </div>
+
+    </div>
+
+
+    <div class="prize-item">
+
+      <img
+        src="premio8.png"
+        onerror="this.style.display='none'"
+      >
+
+      <div>
+        Evento do Dia
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+  <div class="notice">
+
+    Cada giro consome <strong>1 giro</strong>.
+    O prêmio é registrado no Firebase.
+
+  </div>
+
+</div>
+
+
+</div>
+
+
+<!-- =====================================================
+     WHATSAPP
+===================================================== -->
+
+<a
+  class="whatsapp"
+  href="https://wa.me/5531987350267"
+  target="_blank">
+
+  💬
+
+</a>
+
+
+<script type="module">
+
+
+/* =====================================================
+   FIREBASE
+===================================================== */
+
+import {
+  initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+import {
+  getAuth,
+  onAuthStateChanged
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+import {
+  getFirestore,
+  collection,
+  query,
+  where,
+  getDocs,
+  doc,
+  updateDoc,
+  addDoc,
+  Timestamp
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+const firebaseConfig = {
+
+  apiKey:
+    "AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",
+
+  authDomain:
+    "adam-games-21081.firebaseapp.com",
+
+  projectId:
+    "adam-games-21081",
+
+  storageBucket:
+    "adam-games-21081.firebasestorage.app",
+
+  messagingSenderId:
+    "1055528418738",
+
+  appId:
+    "1:1055528418738:web:5fafdf63424ba9744eb8ab"
+
+};
+
+
+const app =
+  initializeApp(
+    firebaseConfig
+  );
+
+
+const auth =
+  getAuth(app);
+
+
+const db =
+  getFirestore(app);
+
+
+/* =====================================================
+   ELEMENTOS
+===================================================== */
+
+const roulette =
+  document.getElementById(
+    "roulette"
+  );
+
+const spinButton =
+  document.getElementById(
+    "spinButton"
+  );
+
+const spinNumber =
+  document.getElementById(
+    "spinNumber"
+  );
+
+const resultValue =
+  document.getElementById(
+    "resultValue"
+  );
+
+const resultImage =
+  document.getElementById(
+    "resultImage"
+  );
+
+
+/* =====================================================
+   ESTADO
+===================================================== */
+
+let usuarioRef =
+  null;
+
+let usuario =
+  null;
+
+let girando =
+  false;
+
+let rotacaoAtual =
+  0;
+
+
+/* =====================================================
+   PRÊMIOS
+===================================================== */
+
+const premios = [
+
+  {
+    nome:
+      "500 Chapéus de Bobo",
+
+    imagem:
+      "premio1.png",
+
+    tipo:
+      "chapeusBobo",
+
+    quantidade:
+      500
+
+  },
+
+  {
+    nome:
+      "1 Chave",
+
+    imagem:
+      "premio2.png",
+
+    tipo:
+      "chaves",
+
+    quantidade:
+      1
+
+  },
+
+  {
+    nome:
+      "2 Chances",
+
+    imagem:
+      "premio3.png",
+
+    tipo:
+      "chances",
+
+    quantidade:
+      2
+
+  },
+
+  {
+    nome:
+      "1.000 Itens",
+
+    imagem:
+      "premio4.png",
+
+    tipo:
+      "itens",
+
+    quantidade:
+      1000
+
+  },
+
+  {
+    nome:
+      "1.000 Comidas do Castor",
+
+    imagem:
+      "premio5.png",
+
+    tipo:
+      "comidasCastor",
+
+    quantidade:
+      1000
+
+  },
+
+  {
+    nome:
+      "1 Giro Extra",
+
+    imagem:
+      "premio6.png",
+
+    tipo:
+      "girosRoleta",
+
+    quantidade:
+      1
+
+  },
+
+  {
+    nome:
+      "Prêmio Especial",
+
+    imagem:
+      "premio7.png",
+
+    tipo:
+      "premioEspecial",
+
+    quantidade:
+      1
+
+  },
+
+  {
+    nome:
+      "Evento do Dia",
+
+    imagem:
+      "premio8.png",
+
+    tipo:
+      "eventoDia",
+
+    quantidade:
+      1
+
+  }
+
+];
+
+
+/* =====================================================
+   BUSCAR CADASTRO
+===================================================== */
+
+async function buscarCadastro(
+  user
+){
+
+  let resultado =
+    await getDocs(
+
+      query(
+
+        collection(
+          db,
+          "admins"
+        ),
+
+        where(
+          "uid",
+          "==",
+          user.uid
+        )
+
+      )
+
+    );
+
+
+  if(
+    !resultado.empty
+  ){
+
+    return resultado.docs[0];
+
+  }
+
+
+  if(
+    user.email
+  ){
+
+    resultado =
+      await getDocs(
+
+        query(
+
+          collection(
+            db,
+            "admins"
+          ),
+
+          where(
+            "email",
+            "==",
+            user.email
+          )
+
+        )
+
+      );
+
+
+    if(
+      !resultado.empty
+    ){
+
+      return resultado.docs[0];
+
+    }
+
+  }
+
+
+  return null;
+
+}
+
+
+/* =====================================================
+   CARREGAR USUÁRIO
+===================================================== */
+
+async function carregarUsuario(
+  user
+){
+
+  const documento =
+    await buscarCadastro(
+      user
+    );
+
+
+  if(
+    !documento
+  ){
+
+    resultValue.textContent =
+      "Usuário não encontrado.";
+
+    spinButton.disabled =
+      true;
+
+    return;
+
+  }
+
+
+  usuarioRef =
+    doc(
+      db,
+      "admins",
+      documento.id
+    );
+
+
+  usuario =
+    documento.data();
+
+
+  atualizarGiros();
+
+}
+
+
+/* =====================================================
+   ATUALIZAR GIROS
+===================================================== */
+
+function atualizarGiros(){
+
+  const giros =
+    Number(
+      usuario?.girosRoleta ||
+      0
+    );
+
+
+  spinNumber.textContent =
+    giros;
+
+
+  spinButton.disabled =
+    giros <= 0 ||
+    girando;
+
+}
+
+
+/* =====================================================
+   ESCOLHER PRÊMIO
+===================================================== */
+
+function escolherPremio(){
+
+  const indice =
+    Math.floor(
+      Math.random() *
+      premios.length
+    );
+
+
+  return {
+
+    indice:
+      indice,
+
+    premio:
+      premios[indice]
+
+  };
+
+}
+
+
+/* =====================================================
+   CONSUMIR GIRO
+===================================================== */
+
+async function consumirGiro(){
+
+  const atual =
+    Number(
+      usuario.girosRoleta ||
+      0
+    );
+
+
+  if(
+    atual <= 0
+  ){
+
+    throw new Error(
+      "Você não possui giros disponíveis."
+    );
+
+  }
+
+
+  const novo =
+    atual - 1;
+
+
+  await updateDoc(
+
+    usuarioRef,
+
+    {
+
+      girosRoleta:
+        novo
+
+    }
+
+  );
+
+
+  usuario.girosRoleta =
+    novo;
+
+}
+
+
+/* =====================================================
+   ENTREGAR PRÊMIO
+===================================================== */
+
+async function entregarPremio(
+  premio
+){
+
+  const dados =
+    usuario;
+
+
+  const atual =
+    Number(
+      dados[premio.tipo] ||
+      0
+    );
+
+
+  /*
+  Recursos que já possuem
+  campos próprios no cadastro.
+  */
+
+  if(
+    [
+      "chapeusBobo",
+      "chances",
+      "chaves",
+      "itens",
+      "comidasCastor",
+      "girosRoleta"
+    ].includes(
+      premio.tipo
+    )
+  ){
+
+    await updateDoc(
+
+      usuarioRef,
+
+      {
+
+        [premio.tipo]:
+          atual +
+          premio.quantidade
+
+      }
+
+    );
+
+
+    usuario[premio.tipo] =
+      atual +
+      premio.quantidade;
+
+  }
+
+
+  /*
+  Prêmios especiais/evento ficam
+  registrados no histórico da roleta.
+  */
+
+  const agora =
+    Timestamp.now();
+
+
+  await addDoc(
+
+    collection(
+      db,
+      "historicoRoleta"
+    ),
+
+    {
+
+      usuarioId:
+        usuario.uid ||
+        usuarioRef.id,
+
+      publicId:
+        usuario.publicId ||
+        "",
+
+      usuarioEmail:
+        usuario.email ||
+        "",
+
+      premio:
+        premio.nome,
+
+      premioTipo:
+        premio.tipo,
+
+      quantidade:
+        premio.quantidade,
+
+      criadoEm:
+        agora
+
+    }
+
+  );
+
+}
+
+
+/* =====================================================
+   GIRAR
+===================================================== */
+
+spinButton.addEventListener(
+
+  "click",
+
+  async () => {
+
+    if(
+      girando
+    ){
+
+      return;
+
+    }
+
+
+    if(
+      !usuarioRef ||
+      !usuario
+    ){
+
+      return;
+
+    }
+
+
+    if(
+      Number(
+        usuario.girosRoleta ||
+        0
+      ) <= 0
+    ){
+
+      return;
+
+    }
+
+
+    girando =
+      true;
+
+
+    spinButton.disabled =
+      true;
+
+
+    resultValue.textContent =
+      "🎰 Girando...";
+
+
+    resultImage.style.display =
+      "none";
+
+
+    try{
+
+      /*
+      O giro é consumido antes da animação.
+      */
+
+      await consumirGiro();
+
+
+      atualizarGiros();
+
+
+      /*
+      Sorteio do prêmio.
+      */
+
+      const resultado =
+        escolherPremio();
+
+
+      /*
+      8 fatias.
+      Cada fatia ocupa 45 graus.
+      O centro da fatia precisa chegar
+      ao ponteiro superior.
+      */
+
+      const grausPorFatía =
+        360 /
+        premios.length;
+
+
+      const centroPremio =
+        resultado.indice *
+        grausPorFatía +
+        grausPorFatía / 2;
+
+
+      const voltas =
+        5 +
+        Math.floor(
+          Math.random() * 3
+        );
+
+
+      const destino =
+        (
+          voltas *
+          360
+        ) +
+
+        (
+          360 -
+          centroPremio
+        );
+
+
+      rotacaoAtual +=
+        destino;
+
+
+      roulette.style.transform =
+        "rotate(" +
+        rotacaoAtual +
+        "deg)";
+
+
+      /*
+      Aguarda a animação.
+      */
+
+      await new Promise(
+        resolve =>
+          setTimeout(
+            resolve,
+            4300
+          )
+      );
+
+
+      /*
+      Entrega o prêmio
+      depois da animação.
+      */
+
+      await entregarPremio(
+        resultado.premio
+      );
+
+
+      resultValue.textContent =
+        "🎉 " +
+        resultado.premio.nome;
+
+
+      resultImage.src =
+        resultado.premio.imagem;
+
+      resultImage.style.display =
+        "block";
+
+
+      atualizarGiros();
+
+
+    }
+
+    catch(error){
+
+      console.error(
+        "Erro na roleta:",
+        error
+      );
+
+
+      resultValue.textContent =
+        "⚠️ Não foi possível concluir o giro.";
+
+
+      /*
+      Recarrega o cadastro para
+      manter o saldo correto.
+      */
+
+      const user =
+        auth.currentUser;
+
+
+      if(user){
+
+        try{
+
+          await carregarUsuario(
+            user
+          );
+
+        }
+
+        catch(e){
+
+          console.error(e);
+
+        }
+
+      }
+
+    }
+
+    finally{
+
+      girando =
+        false;
+
+      atualizarGiros();
+
+    }
+
+  }
+
+);
+
+
+/* =====================================================
+   VOLTAR
+===================================================== */
+
+document
+  .getElementById(
+    "back"
+  )
+  .addEventListener(
+
+    "click",
+
+    () => {
+
+      window.location.href =
+        "painel.html";
+
+    }
+
+  );
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+onAuthStateChanged(
+
+  auth,
+
+  async user => {
+
+    if(
+      !user
+    ){
+
+      window.location.href =
+        "index.html";
+
+      return;
+
+    }
+
+
+    try{
+
+      await carregarUsuario(
+        user
+      );
+
+    }
+
+    catch(error){
+
+      console.error(
+        error
+      );
+
+      resultValue.textContent =
+        "Erro ao carregar seus giros.";
+
+    }
+
+  }
+
+);
+
+</script>
+
+
+</body>
+
+</html>
