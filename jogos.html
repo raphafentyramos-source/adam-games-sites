@@ -551,6 +551,34 @@ body{
 
 
 /* =====================================================
+   CHUVA DE SABORES
+   BANNER INTEIRO CLICÁVEL
+===================================================== */
+
+.game[data-game="frutas"]{
+
+  cursor:pointer;
+
+}
+
+
+.game[data-game="frutas"] .game-image{
+
+  cursor:pointer;
+
+}
+
+
+.game[data-game="frutas"]:hover{
+
+  box-shadow:
+    0 12px 32px
+    rgba(0,0,0,.38);
+
+}
+
+
+/* =====================================================
    INFORMAÇÃO
 ===================================================== */
 
@@ -969,11 +997,14 @@ body{
     </div>
 
 
-    <!-- CHUVA -->
+    <!-- =================================================
+         CHUVA DE SABORES / FRUTAS
+         BANNER + BOTÃO ABREM frutas.html
+    ================================================== -->
 
     <div
       class="game"
-      data-game="chuva">
+      data-game="frutas">
 
       <img
         class="game-image"
@@ -987,13 +1018,13 @@ body{
         </div>
 
         <div class="game-description">
-          Pegue as comidas e evite o lixo.
+          Pegue as frutas e comidas, faça pontos e evite o lixo.
         </div>
 
         <div class="game-bottom">
 
           <div class="game-reward">
-            🪙 Moedas por jogar
+            🪙 Moedas por fase
           </div>
 
           <button
@@ -1418,34 +1449,9 @@ let usuario =
   null;
 
 
-const paginas = {
-
-  forca:
-    "forca.html",
-
-  chuva:
-    "chuva.html",
-
-  tesouro:
-    "tesouro.html",
-
-  alvo:
-    "alvo.html",
-
-  memoria:
-    "memoria.html",
-
-  reacao:
-    "reacao.html",
-
-  sequencia:
-    "sequencia.html",
-
-  palavra:
-    "palavra.html"
-
-};
-
+/* =====================================================
+   LOCALIZAR USUÁRIO
+===================================================== */
 
 async function localizarUsuario(user){
 
@@ -1496,6 +1502,10 @@ async function localizarUsuario(user){
 }
 
 
+/* =====================================================
+   SALDOS
+===================================================== */
+
 function atualizarSaldos(){
 
   if(!usuario){
@@ -1524,6 +1534,44 @@ function atualizarSaldos(){
 
 }
 
+
+/* =====================================================
+   PÁGINAS DOS JOGOS
+===================================================== */
+
+const paginas = {
+
+  forca:
+    "forca.html",
+
+  /* NOVO JOGO */
+  frutas:
+    "frutas.html",
+
+  tesouro:
+    "alvo.html",
+
+  alvo:
+    "alvo.html",
+
+  memoria:
+    "memoria.html",
+
+  reacao:
+    "reacao.html",
+
+  sequencia:
+    "sequencia.html",
+
+  palavra:
+    "palavra.html"
+
+};
+
+
+/* =====================================================
+   ABRIR JOGO
+===================================================== */
 
 function verificarJogo(jogo){
 
@@ -1572,6 +1620,21 @@ function verificarJogo(jogo){
 }
 
 
+/* =====================================================
+   CLIQUE NOS CARDS
+===================================================== */
+
+/*
+   O CARD INTEIRO é clicável.
+
+   Isso significa que no Chuva de Sabores:
+   - clicar na imagem/banner abre frutas.html
+   - clicar no nome abre frutas.html
+   - clicar na descrição abre frutas.html
+   - clicar no espaço do card abre frutas.html
+   - clicar no botão JOGAR também abre frutas.html
+*/
+
 document
   .querySelectorAll(".game")
   .forEach(card => {
@@ -1579,6 +1642,11 @@ document
     card.addEventListener(
       "click",
       event => {
+
+        /*
+           Se clicou no botão, o próprio
+           evento do botão cuidará da abertura.
+        */
 
         if(
           event.target.closest(".play")
@@ -1601,21 +1669,29 @@ document
       card.querySelector(".play");
 
 
-    botao.addEventListener(
-      "click",
-      event => {
+    if(botao){
 
-        event.stopPropagation();
+      botao.addEventListener(
+        "click",
+        event => {
 
-        verificarJogo(
-          card.dataset.game
-        );
+          event.stopPropagation();
 
-      }
-    );
+          verificarJogo(
+            card.dataset.game
+          );
+
+        }
+      );
+
+    }
 
   });
 
+
+/* =====================================================
+   LOJA
+===================================================== */
 
 document
   .getElementById("lojaButton")
@@ -1630,6 +1706,10 @@ document
   );
 
 
+/* =====================================================
+   CÓDIGO
+===================================================== */
+
 document
   .getElementById("codigoButton")
   .addEventListener(
@@ -1643,6 +1723,10 @@ document
   );
 
 
+/* =====================================================
+   FECHAR MODAL
+===================================================== */
+
 document
   .getElementById("fecharModal")
   .addEventListener(
@@ -1654,6 +1738,10 @@ document
     }
   );
 
+
+/* =====================================================
+   VOLTAR
+===================================================== */
 
 document
   .getElementById("back")
@@ -1667,6 +1755,10 @@ document
     }
   );
 
+
+/* =====================================================
+   FIREBASE
+===================================================== */
 
 onAuthStateChanged(
   auth,
