@@ -1,0 +1,1573 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adam Games - Forca</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;min-height:100%;overflow-x:hidden}
+body{min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:#fff;background:radial-gradient(circle at 10% 0%,rgba(0,190,120,.30),transparent 32%),radial-gradient(circle at 90% 0%,rgba(20,150,255,.30),transparent 32%),linear-gradient(180deg,#06233d,#031a2e)}
+.page{width:100%;max-width:650px;margin:auto;padding:15px 15px 70px}
+.top{display:flex;align-items:center;justify-content:space-between}
+.back{width:45px;height:45px;border:0;border-radius:13px;background:rgba(0,40,70,.9);color:#fff;font-size:26px;cursor:pointer}
+.title{text-align:center}.title small{display:block;color:#8bb8d5;font-size:8px;letter-spacing:2px}.title strong{display:block;margin-top:2px;font-size:21px}
+.top-coins{min-width:88px;padding:7px 9px;border-radius:13px;text-align:center;background:rgba(255,213,43,.08);border:1px solid rgba(255,213,43,.15)}
+.top-coins-label{color:#9ab9cd;font-size:8px;font-weight:bold}.top-coins-value{margin-top:2px;color:#ffd52b;font-size:17px;font-weight:900}.top-chances{margin-top:2px;color:#ffcf4a;font-size:10px;font-weight:900}
+.hero{margin-top:14px;padding:18px;border-radius:22px;text-align:center;background:linear-gradient(135deg,rgba(5,48,82,.97),rgba(3,27,49,.97));border:1px solid rgba(255,255,255,.08)}
+.hero-icon{font-size:42px}.hero h1{margin-top:3px;font-size:30px}.hero p{margin-top:5px;color:#b7d0e2;font-size:13px}
+.level-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:11px}.level-box{padding:10px 5px;border-radius:13px;text-align:center;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.07)}
+.level-label{color:#91b2c9;font-size:8px;font-weight:bold}.level-value{margin-top:3px;font-size:15px;font-weight:900}
+.progress-card{margin-top:11px;padding:13px;border-radius:15px;background:rgba(2,25,46,.9)}.progress-top{display:flex;justify-content:space-between;align-items:center}.progress-title{font-size:11px;font-weight:900}.progress-count{color:#9bb9ce;font-size:10px}.progress-bar{width:100%;height:8px;margin-top:8px;overflow:hidden;border-radius:20px;background:rgba(255,255,255,.09)}.progress-fill{height:100%;width:0;border-radius:20px;background:linear-gradient(90deg,#13b965,#ffd52b);transition:width .3s ease}
+.game-card{margin-top:12px;padding:13px;border-radius:21px;background:rgba(2,25,47,.97);border:1px solid rgba(255,255,255,.09)}
+.hangman-wrap{position:relative;width:100%;aspect-ratio:437/275;overflow:hidden;border-radius:17px;background:#071f35;line-height:0;isolation:isolate}
+.hangman-layer{position:absolute;inset:0;width:100%!important;height:100%!important;object-fit:fill;opacity:0;visibility:hidden;pointer-events:none;user-select:none;-webkit-user-drag:none}
+.hangman-layer.active{opacity:1;visibility:visible;z-index:2}
+.errors-row{min-height:10px;display:flex;align-items:center;justify-content:center;gap:7px;margin-top:11px}.error-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.13)}.error-dot.active{background:#ff5365;box-shadow:0 0 7px rgba(255,70,90,.5)}
+.hint{margin-top:12px;padding:12px;border-radius:14px;text-align:center;background:rgba(20,145,220,.08);border:1px solid rgba(20,145,220,.12)}.hint-label{color:#69c5fa;font-size:8px;font-weight:900;letter-spacing:1px}.hint-text{margin-top:4px;color:#fff;font-size:14px;font-weight:bold}
+.word{min-height:47px;width:100%;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:center;gap:5px;margin-top:17px;padding:0 2px}.letter{width:26px;height:39px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:4px;border-bottom:3px solid #62c9ff;font-size:22px;font-weight:900;text-transform:uppercase;flex:0 0 26px}.word.long-word{gap:3px}.word.long-word .letter{width:20px;flex-basis:20px;font-size:18px}@media(max-width:430px){.keyboard{gap:4px}.key{min-height:38px;font-size:13px}.letter{width:24px;font-size:21px}.word.long-word{gap:2px}.word.long-word .letter{width:18px;flex-basis:18px;font-size:16px}}
+.keyboard{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-top:19px}.key{min-height:41px;border:0;border-radius:9px;background:linear-gradient(145deg,#126a9e,#07466e);color:#fff;font-size:14px;font-weight:900;cursor:pointer}.key.correct{background:linear-gradient(145deg,#16bd68,#087d45)}.key.wrong{background:linear-gradient(145deg,#c9344a,#8b182b)}.key:disabled{cursor:not-allowed;opacity:.42}
+.message{display:none;margin-top:13px;padding:13px;border-radius:14px;text-align:center;font-size:13px;font-weight:bold}.message.show{display:block}.message.success{color:#70ffac;background:rgba(0,210,100,.1);border:1px solid rgba(0,210,100,.18)}.message.error{color:#ff9ca8;background:rgba(255,50,70,.1);border:1px solid rgba(255,50,70,.18)}
+.reward{display:none;margin-top:12px;padding:12px;border-radius:14px;text-align:center;background:rgba(255,213,43,.07);border:1px solid rgba(255,213,43,.15)}.reward strong{color:#ffd52b;font-size:20px}
+.modal{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(0,8,20,.86);backdrop-filter:blur(6px)}.modal.show{display:flex}.modal-card{width:100%;max-width:380px;padding:25px 20px;border-radius:23px;text-align:center;background:#082843;border:1px solid rgba(255,255,255,.12);box-shadow:0 20px 60px rgba(0,0,0,.5)}.modal-icon{font-size:54px}.modal-card h2{margin-top:8px;font-size:25px}.modal-card p{margin-top:9px;color:#b8d3e5;font-size:14px;line-height:1.5}.modal-coins{margin-top:13px;color:#ffd52b;font-size:21px;font-weight:900}.modal-button{width:100%;height:49px;margin-top:18px;border:0;border-radius:14px;background:#18ae60;color:#fff;font-size:13px;font-weight:900;cursor:pointer}
+.timer-box{display:none;margin-top:10px;padding:10px;border-radius:12px;text-align:center;background:rgba(255,213,43,.08);border:1px solid rgba(255,213,43,.2);color:#ffd52b;font-weight:900;font-size:15px}.timer-box small{display:block;color:#b7d0e2;font-size:9px;margin-bottom:3px}
+/* SEGURANCA DE LAYOUT */
+html,body{overflow-x:hidden!important;}
+</style>
+
+<style id="loss-continue-style">
+#lossContinueModal{
+  position:fixed;
+  inset:0;
+  z-index:99999;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(0,0,0,.72);
+  backdrop-filter:blur(5px);
+}
+#lossContinueModal.show{display:flex}
+#lossContinueBox{
+  width:min(440px,100%);
+  padding:26px 22px;
+  border-radius:24px;
+  text-align:center;
+  color:#fff;
+  background:linear-gradient(145deg,#092d57,#03172f);
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow:0 25px 70px rgba(0,0,0,.45);
+}
+#lossContinueBox .lossIcon{font-size:52px;margin-bottom:8px}
+#lossContinueBox h2{margin:0 0 8px;font-size:27px}
+#lossContinueBox p{margin:7px 0;color:#b8d4ea;line-height:1.5}
+#lossContinueBox .lossLevel{
+  display:inline-block;
+  margin:10px 0 14px;
+  padding:7px 12px;
+  border-radius:12px;
+  background:rgba(255,213,42,.13);
+  color:#ffd52a;
+  font-weight:900;
+  font-size:12px;
+}
+#lossContinueBox .lossButtons{
+  display:grid;
+  gap:10px;
+  margin-top:18px;
+}
+#lossContinueBox button{
+  border:0;
+  border-radius:13px;
+  padding:14px 16px;
+  color:#fff;
+  font-weight:900;
+  font-size:15px;
+  cursor:pointer;
+}
+#lossContinueSame{
+  background:linear-gradient(135deg,#168fff,#0563b5);
+}
+#lossContinueExit{
+  background:rgba(255,255,255,.09);
+}
+</style>
+
+</head>
+<body>
+<!-- Banco de palavras mantido somente dentro dos scripts. -->
+
+<div id="lossContinueModal" aria-hidden="true">
+  <div id="lossContinueBox">
+    <div class="lossIcon">😢</div>
+    <h2>Você perdeu!</h2>
+    <p id="lossContinueText">
+      Não desista! Você pode continuar jogando no mesmo nível.
+    </p>
+    <div class="lossLevel" id="lossContinueLevel">MESMO NÍVEL</div>
+    <p>
+      Use 1 chance para continuar no mesmo nível com uma nova palavra.
+    </p>
+    <div class="lossButtons">
+      <button id="lossContinueSame" type="button">
+        🔄 CONTINUAR NO MESMO NÍVEL
+      </button>
+      <button id="lossContinueExit" type="button">
+        ✖️ SAIR
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+<div class="top"><button class="back" id="back" type="button">←</button><div class="title"><small>ADAM GAMES</small><strong>FORCA</strong></div><div class="top-coins"><div class="top-coins-label">ADAM COINS</div><div class="top-coins-value" id="coins">0</div><div class="top-chances" id="chances">🎟️ 0</div></div></div>
+<div class="hero"><div class="hero-icon">🔤</div><h1>Forca</h1><p>Descubra a palavra e avance até a rodada bônus.</p></div>
+<div class="level-row"><div class="level-box"><div class="level-label">NÍVEL DA PALAVRA</div><div class="level-value" id="levelName">FÁCIL</div></div><div class="level-box"><div class="level-label">RODADA</div><div class="level-value" id="roundNumber">1 / 9</div></div><div class="level-box"><div class="level-label">RECOMPENSA</div><div class="level-value" id="roundReward">🪙 20</div></div></div>
+<div class="progress-card"><div class="progress-top"><div class="progress-title">PROGRESSO DA SEQUÊNCIA</div><div class="progress-count" id="progressText">1 / 9</div></div><div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div></div>
+<div class="game-card"><div class="hangman-wrap">
+<img class="hangman-layer active" src="01_forca_0_erros.png"><img class="hangman-layer" src="02_forca_1_erro.png"><img class="hangman-layer" src="03_forca_2_erros.png"><img class="hangman-layer" src="04_forca_3_erros.png"><img class="hangman-layer" src="05_forca_4_erros.png"><img class="hangman-layer" src="06_forca_5_erros.png"><img class="hangman-layer" src="07_forca_6_erros.png">
+</div><div class="errors-row" id="errorsRow"><span class="error-dot"></span><span class="error-dot"></span><span class="error-dot"></span><span class="error-dot"></span><span class="error-dot"></span><span class="error-dot"></span></div>
+<div class="hint"><div class="hint-label">💡 PISTA</div><div class="hint-text" id="hint">—</div></div><div class="timer-box" id="timerBox"><small>⏱️ TEMPO DO DESAFIO</small><span id="timerValue">0.0s</span></div><div class="word" id="word"></div><div class="keyboard" id="keyboard"></div><div class="message" id="message"></div><div class="reward" id="reward">🪙 Você ganhou <strong id="rewardValue">20</strong> Adam Coins!</div></div></div>
+<div class="modal" id="modal"><div class="modal-card"><div class="modal-icon" id="modalIcon">💀</div><h2 id="modalTitle">Você perdeu!</h2><p id="modalText"></p><div class="modal-coins" id="modalCoins"></div><button class="modal-button" id="modalButton">CONTINUAR</button></div></div>
+
+
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+import {getAuth,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+import {getFirestore,collection,query,where,getDocs,getDoc,runTransaction,doc,addDoc,serverTimestamp} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+const firebaseConfig={apiKey:"AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",authDomain:"adam-games-21081.firebaseapp.com",projectId:"adam-games-21081",storageBucket:"adam-games-21081.firebasestorage.app",messagingSenderId:"1055528418738",appId:"1:1055528418738:web:5fafdf63424ba9744eb8ab"};
+const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app);
+
+const EASY=[
+  {palavra:"abacate",pista:"Fruta verde, cremosa e muito usada em saladas e vitaminas."},
+  {palavra:"abacaxi",pista:"Fruta tropical de casca áspera e polpa amarela."},
+  {palavra:"abelha",pista:"Inseto que produz mel e ajuda na polinização das flores."},
+  {palavra:"abóbora",pista:"Fruto usado em sopas, doces e outros pratos."},
+  {palavra:"academia",pista:"Local de treino."},
+  {palavra:"acidente",pista:"Acontecimento inesperado que pode causar danos."},
+  {palavra:"acorde",pista:"Conjunto de notas musicais tocadas ao mesmo tempo."},
+  {palavra:"acordo",pista:"Combinado feito entre duas ou mais pessoas ou partes."},
+  {palavra:"açúcar",pista:"Ingrediente doce usado em bebidas e receitas."},
+  {palavra:"adereço",pista:"Objeto usado para complementar uma roupa ou decoração."},
+  {palavra:"adulto",pista:"Pessoa que já passou da fase da infância e adolescência."},
+  {palavra:"aventura",pista:"Experiência emocionante."},
+  {palavra:"avião",pista:"Aeronave que voa e transporta pessoas ou cargas."},
+  {palavra:"avenida",pista:"Via urbana geralmente larga e movimentada."},
+  {palavra:"banheiro",pista:"Cômodo de higiene."},
+  {palavra:"batalha",pista:"Confronto entre dois grupos ou forças."},
+  {palavra:"beleza",pista:"Qualidade que faz algo ou alguém ser considerado bonito."},
+  {palavra:"bicicleta",pista:"Veículo de pedais."},
+  {palavra:"bilhete",pista:"Pequena mensagem ou papel que pode servir como ingresso."},
+  {palavra:"bosque",pista:"Área com muitas árvores, menor que uma grande floresta."},
+  {palavra:"brinquedo",pista:"Objeto para brincar."},
+  {palavra:"cachorro",pista:"Animal doméstico."},
+  {palavra:"cadeira",pista:"Móvel usado para sentar."},
+  {palavra:"caderno",pista:"Objeto com folhas usado para escrever ou desenhar."},
+  {palavra:"camisa",pista:"Peça de roupa usada na parte superior do corpo."},
+  {palavra:"caneta",pista:"Objeto usado para escrever com tinta."},
+  {palavra:"caneca",pista:"Recipiente com alça usado para beber."},
+  {palavra:"canção",pista:"Música com melodia e letra."},
+  {palavra:"castelo",pista:"Grande construção associada a reis e cavaleiros."},
+  {palavra:"cebola",pista:"Ingrediente usado em muitos pratos e que pode fazer chorar ao cortar."},
+  {palavra:"celular",pista:"Aparelho usado para ligações, mensagens, fotos e internet."},
+  {palavra:"cenoura",pista:"Raiz geralmente laranja usada em saladas e receitas."},
+  {palavra:"cinema",pista:"Lugar onde filmes são exibidos em uma tela grande."},
+  {palavra:"cidade",pista:"Área urbana com ruas, casas, comércio e serviços."},
+  {palavra:"ciência",pista:"Conhecimento obtido por estudo e investigação."},
+  {palavra:"clareira",pista:"Espaço aberto no meio de uma área com árvores."},
+  {palavra:"cliente",pista:"Pessoa que compra ou utiliza um produto ou serviço."},
+  {palavra:"cozinha",pista:"Cômodo onde alimentos são preparados."},
+  {palavra:"coelho",pista:"Animal pequeno conhecido pelas orelhas compridas."},
+  {palavra:"coluna",pista:"Pode ser parte de uma construção ou conjunto de vértebras."},
+  {palavra:"comida",pista:"Aquilo que é preparado para ser consumido."},
+  {palavra:"convite",pista:"Mensagem usada para chamar alguém para um evento."},
+  {palavra:"coragem",pista:"Força para enfrentar medo ou dificuldade."},
+  {palavra:"criança",pista:"Pessoa que está na fase da infância."},
+  {palavra:"desenho",pista:"Imagem feita com linhas, formas ou traços."},
+  {palavra:"destino",pista:"Lugar para onde alguém ou algo está indo; também pode significar futuro."},
+  {palavra:"detalhe",pista:"Pequena parte que ajuda a completar algo."},
+  {palavra:"dinheiro",pista:"Meio de pagamento."},
+  {palavra:"domingo",pista:"Dia da semana que vem depois do sábado."},
+  {palavra:"escola",pista:"Lugar onde pessoas estudam e aprendem."},
+  {palavra:"escada",pista:"Conjunto de degraus usado para subir ou descer."},
+  {palavra:"espada",pista:"Arma branca longa com lâmina e cabo."},
+  {palavra:"espelho",pista:"Superfície que mostra o reflexo de quem está diante dela."},
+  {palavra:"estrela",pista:"Corpo celeste que produz sua própria luz."},
+  {palavra:"família",pista:"Grupo de pessoas unidas por parentesco ou vínculos afetivos."},
+  {palavra:"farinha",pista:"Ingrediente em pó usado em pães, bolos e outras receitas."},
+  {palavra:"fazenda",pista:"Grande propriedade rural onde podem existir plantações e animais."},
+  {palavra:"feijão",pista:"Grão muito comum na comida brasileira."},
+  {palavra:"festa",pista:"Evento feito para comemorar ou se divertir."},
+  {palavra:"figura",pista:"Imagem, forma ou pessoa representada."},
+  {palavra:"filme",pista:"Obra audiovisual feita com imagens em sequência."},
+  {palavra:"fogão",pista:"Aparelho usado para cozinhar alimentos."},
+  {palavra:"floresta",pista:"Área de árvores."},
+  {palavra:"foguete",pista:"Veículo que pode ser lançado ao espaço."},
+  {palavra:"formiga",pista:"Inseto pequeno que vive em colônias."},
+  {palavra:"galinha",pista:"Ave doméstica que pode botar ovos."},
+  {palavra:"garagem",pista:"Lugar onde carros e outros veículos podem ficar guardados."},
+  {palavra:"garrafa",pista:"Recipiente usado para armazenar líquidos."},
+  {palavra:"girafa",pista:"Animal africano conhecido pelo pescoço comprido."},
+  {palavra:"guitarra",pista:"Instrumento musical de cordas."},
+  {palavra:"governo",pista:"Grupo ou sistema responsável pela administração de um país ou região."},
+  {palavra:"grama",pista:"Planta baixa que forma um tapete verde; também pode significar unidade de massa."},
+  {palavra:"grupo",pista:"Conjunto de pessoas ou coisas reunidas."},
+  {palavra:"hospital",pista:"Local de atendimento."},
+  {palavra:"história",pista:"Relato de acontecimentos reais ou imaginários; também estudo do passado."},
+  {palavra:"jardim",pista:"Lugar onde flores e plantas são cultivadas."},
+  {palavra:"janela",pista:"Abertura em uma parede que permite entrada de luz e ar."},
+  {palavra:"joelho",pista:"Parte do corpo que liga a coxa à perna."},
+  {palavra:"jornal",pista:"Publicação que traz notícias e informações."},
+  {palavra:"laranja",pista:"Fruta cítrica de cor geralmente alaranjada."},
+  {palavra:"limão",pista:"Fruta cítrica usada em sucos, temperos e sobremesas."},
+  {palavra:"limpeza",pista:"Ato de retirar sujeira de um lugar ou objeto."},
+  {palavra:"livro",pista:"Obra com páginas que contém textos ou imagens."},
+  {palavra:"macaco",pista:"Animal conhecido por sua agilidade e por viver em árvores."},
+  {palavra:"madeira",pista:"Material obtido de árvores e usado em móveis e construções."},
+  {palavra:"manhã",pista:"Período do dia que vem depois da madrugada."},
+  {palavra:"mochila",pista:"Bolsa carregada nas costas para transportar objetos."},
+  {palavra:"montanha",pista:"Elevação natural."},
+  {palavra:"morango",pista:"Fruta pequena, vermelha e geralmente doce."},
+  {palavra:"música",pista:"Arte que organiza sons e ritmos."},
+  {palavra:"navio",pista:"Grande embarcação usada para navegar."},
+  {palavra:"negócio",pista:"Atividade comercial ou acordo entre pessoas."},
+  {palavra:"notícia",pista:"Informação sobre um acontecimento."},
+  {palavra:"oceano",pista:"Grande massa de água salgada."},
+  {palavra:"ônibus",pista:"Veículo coletivo usado para transportar passageiros."},
+  {palavra:"oficina",pista:"Lugar onde se consertam ou fabricam objetos e veículos."},
+  {palavra:"palavra",pista:"Unidade da linguagem formada por letras ou sons."},
+  {palavra:"panela",pista:"Recipiente usado para cozinhar alimentos."},
+  {palavra:"parque",pista:"Área destinada ao lazer, passeio ou contato com a natureza."},
+  {palavra:"parede",pista:"Estrutura vertical que separa ou fecha um espaço."},
+  {palavra:"passeio",pista:"Saída feita para caminhar, visitar ou se divertir."},
+  {palavra:"pedido",pista:"Aquilo que alguém solicita."},
+  {palavra:"peixe",pista:"Animal que vive na água e respira por brânquias."},
+  {palavra:"pessoa",pista:"Ser humano."},
+  {palavra:"pintura",pista:"Arte de criar imagens usando tinta ou outros materiais."},
+  {palavra:"pipoca",pista:"Milho que estoura quando é aquecido."},
+  {palavra:"piscina",pista:"Local com água usado para nadar ou se refrescar."},
+  {palavra:"planeta",pista:"Corpo celeste que orbita uma estrela."},
+  {palavra:"praia",pista:"Faixa de areia ou pedras junto ao mar, rio ou lago."},
+  {palavra:"presente",pista:"Objeto oferecido."},
+  {palavra:"professor",pista:"Profissional do ensino."},
+  {palavra:"projeto",pista:"Plano organizado para realizar algo."},
+  {palavra:"queijo",pista:"Alimento produzido a partir do leite."},
+  {palavra:"quarto",pista:"Cômodo usado principalmente para dormir."},
+  {palavra:"receita",pista:"Instruções para preparar um prato; também pode indicar um valor recebido."},
+  {palavra:"relógio",pista:"Objeto ou aparelho que indica as horas."},
+  {palavra:"remédio",pista:"Produto usado para tratar ou aliviar problemas de saúde."},
+  {palavra:"reserva",pista:"Algo guardado para ser usado depois ou um lugar previamente separado."},
+  {palavra:"resposta",pista:"Aquilo que é dito ou escrito para responder a uma pergunta."},
+  {palavra:"revista",pista:"Publicação com matérias, imagens e informações."},
+  {palavra:"sapato",pista:"Calçado usado nos pés."},
+  {palavra:"segredo",pista:"Informação que deve ser mantida em sigilo."},
+  {palavra:"semana",pista:"Período formado por sete dias."},
+  {palavra:"telefone",pista:"Aparelho de comunicação."},
+  {palavra:"trabalho",pista:"Atividade realizada para produzir algo ou obter renda."},
+  {palavra:"universo",pista:"Tudo que existe."},
+  {palavra:"viagem",pista:"Deslocamento de um lugar para outro."},
+  {palavra:"vestido",pista:"Peça de roupa que cobre o corpo e geralmente vai dos ombros para baixo."},
+  {palavra:"vitória",pista:"Resultado de quem vence uma disputa."},
+  {palavra:"vitamina",pista:"Bebida nutritiva."},
+  {palavra:"volante",pista:"Peça usada para controlar a direção de um veículo."},
+  {palavra:"zoológico",pista:"Local de animais."},
+  {palavra:"amendoim",pista:"Grão comestível."},
+  {palavra:"aparelho",pista:"Objeto eletrônico."},
+  {palavra:"aeroporto",pista:"Local de aviões."},
+  {palavra:"almofada",pista:"Objeto macio."},
+  {palavra:"alimento",pista:"Aquilo que é consumido para nutrir o corpo."},
+  {palavra:"aliança",pista:"Pode ser um anel que simboliza união ou um acordo entre partes."},
+  {palavra:"amizade",pista:"Relação de carinho e confiança entre pessoas."},
+  {palavra:"animal",pista:"Ser vivo que geralmente se alimenta de outros organismos e pode se mover."},
+  {palavra:"anúncio",pista:"Mensagem criada para divulgar algo."},
+  {palavra:"apelido",pista:"Nome informal usado no lugar do nome oficial."},
+  {palavra:"aquário",pista:"Recipiente ou local preparado para manter animais aquáticos."},
+  {palavra:"arquivo",pista:"Documento ou conjunto de dados guardado para consulta."},
+  {palavra:"armário",pista:"Móvel usado para guardar roupas e objetos."},
+  {palavra:"assunto",pista:"Tema sobre o qual se fala ou escreve."},
+  {palavra:"atenção",pista:"Concentração dedicada a algo."},
+  {palavra:"bagagem",pista:"Conjunto de malas e objetos levados em uma viagem."},
+  {palavra:"balança",pista:"Instrumento usado para medir peso ou massa."},
+  {palavra:"bandeira",pista:"Pedaço de tecido que representa um país, grupo ou instituição."},
+  {palavra:"bateria",pista:"Pode ser instrumento musical ou conjunto de pilhas que fornece energia."},
+  {palavra:"biologia",pista:"Ciência que estuda os seres vivos."},
+  {palavra:"bloqueio",pista:"Ação ou situação que impede passagem ou funcionamento."},
+  {palavra:"botão",pista:"Peça usada para fechar roupa ou acionar um aparelho."},
+  {palavra:"campanha",pista:"Ação organizada."},
+  {palavra:"canivete",pista:"Objeto dobrável."},
+  {palavra:"caramelo",pista:"Doce ou cor."},
+  {palavra:"carteira",pista:"Objeto para guardar documentos."},
+  {palavra:"castanha",pista:"Semente comestível."},
+  {palavra:"chuveiro",pista:"Objeto do banho."},
+  {palavra:"circuito",pista:"Caminho fechado por onde pode passar corrente elétrica."},
+  {palavra:"corredor",pista:"Espaço de passagem entre cômodos ou áreas."},
+  {palavra:"cultura",pista:"Conjunto de costumes, conhecimentos e manifestações de um povo."},
+  {palavra:"desafio",pista:"Tarefa difícil que exige esforço para ser vencida."},
+  {palavra:"discurso",pista:"Fala preparada para ser apresentada a um público."},
+  {palavra:"doença",pista:"Alteração que prejudica o funcionamento normal do organismo."},
+  {palavra:"energia",pista:"Capacidade de produzir movimento, calor, luz ou outras mudanças."},
+  {palavra:"envelope",pista:"Objeto para cartas."},
+  {palavra:"esporte",pista:"Atividade física praticada por lazer ou competição."},
+  {palavra:"estação",pista:"Pode ser período do ano ou local de parada de um transporte."},
+  {palavra:"estrada",pista:"Via usada para deslocamento entre lugares."},
+  {palavra:"ferramenta",pista:"Objeto de trabalho."},
+  {palavra:"flamingo",pista:"Ave rosada."},
+  {palavra:"florista",pista:"Pessoa ou loja especializada em flores."},
+  {palavra:"gasolina",pista:"Combustível usado por muitos carros."},
+  {palavra:"girassol",pista:"Flor que acompanha o sol."},
+  {palavra:"horário",pista:"Indicação de um momento ou período do dia."},
+  {palavra:"internet",pista:"Rede mundial usada para acessar sites, serviços e informações."},
+  {palavra:"jogador",pista:"Pessoa que participa de um jogo ou esporte."},
+  {palavra:"limonada",pista:"Bebida cítrica."},
+  {palavra:"macarrão",pista:"Massa alimentícia."},
+  {palavra:"mercado",pista:"Lugar ou atividade onde produtos são comprados e vendidos."},
+  {palavra:"melancia",pista:"Fruta grande."},
+  {palavra:"mensagem",pista:"Informação enviada de uma pessoa ou sistema para outro."},
+  {palavra:"motorista",pista:"Pessoa que dirige um veículo."},
+  {palavra:"natureza",pista:"Conjunto do mundo natural, como plantas, animais e paisagens."},
+  {palavra:"número",pista:"Símbolo ou valor usado para representar uma quantidade."},
+  {palavra:"objetivo",pista:"Resultado que alguém deseja alcançar."},
+  {palavra:"pagamento",pista:"Ato de entregar dinheiro ou outro valor em troca de algo."},
+  {palavra:"passagem",pista:"Bilhete para uma viagem ou trecho de um caminho."},
+  {palavra:"política",pista:"Atividade relacionada à organização e administração da sociedade."},
+  {palavra:"problema",pista:"Questão ou dificuldade que precisa ser resolvida."},
+  {palavra:"processo",pista:"Conjunto de etapas para realizar ou transformar algo."},
+  {palavra:"programa",pista:"Conjunto de instruções de um computador ou sequência planejada de atividades."},
+  {palavra:"promessa",pista:"Compromisso de fazer ou cumprir algo."},
+  {palavra:"registro",pista:"Informação guardada para comprovar ou lembrar um acontecimento."},
+  {palavra:"reunião",pista:"Encontro de pessoas para conversar ou decidir algo."},
+  {palavra:"sanduíche",pista:"Comida com pão."},
+  {palavra:"saudade",pista:"Sentimento de falta de alguém, algum lugar ou algum momento."},
+  {palavra:"televisão",pista:"Aparelho de imagem."}
+];
+
+const MEDIUM=[
+  {palavra:"visitante",pista:"Pessoa que está em um lugar por pouco tempo."},
+  {palavra:"autonomia",pista:"Capacidade de tomar decisões por conta própria."},
+  {palavra:"documento",pista:"Registro escrito ou digital que contém informações."},
+  {palavra:"economia",pista:"Área que estuda produção, dinheiro e consumo."},
+  {palavra:"educação",pista:"Processo de ensinar e aprender."},
+  {palavra:"elemento",pista:"Parte que faz parte de um conjunto."},
+  {palavra:"emergência",pista:"Situação inesperada que exige atenção imediata."},
+  {palavra:"engenharia",pista:"Área que aplica conhecimentos para criar e melhorar soluções."},
+  {palavra:"felicidade",pista:"Sentimento de alegria e satisfação."},
+  {palavra:"frequência",pista:"Quantidade de vezes que algo acontece em determinado período."},
+  {palavra:"geografia",pista:"Ciência que estuda lugares, territórios e características da Terra."},
+  {palavra:"identidade",pista:"Conjunto de características que permite reconhecer alguém ou algo."},
+  {palavra:"iniciativa",pista:"Ação de começar algo por vontade própria."},
+  {palavra:"inovação",pista:"Ideia, método ou produto novo ou melhorado."},
+  {palavra:"interesse",pista:"Vontade ou curiosidade por algo."},
+  {palavra:"linguagem",pista:"Sistema usado para comunicar ideias."},
+  {palavra:"liberdade",pista:"Possibilidade de agir ou escolher sem uma imposição indevida."},
+  {palavra:"literatura",pista:"Arte feita por meio de textos e palavras."},
+  {palavra:"manutenção",pista:"Cuidados feitos para manter algo funcionando."},
+  {palavra:"mecanismo",pista:"Conjunto de peças ou processos que faz algo funcionar."},
+  {palavra:"memória",pista:"Capacidade de guardar e lembrar informações."},
+  {palavra:"mineração",pista:"Atividade de retirar recursos minerais da terra."},
+  {palavra:"movimento",pista:"Mudança de posição de algo ou alguém."},
+  {palavra:"município",pista:"Divisão administrativa que possui uma cidade ou área própria."},
+  {palavra:"necessário",pista:"Aquilo que é preciso para alguma coisa acontecer."},
+  {palavra:"operação",pista:"Ação realizada para alcançar determinado resultado."},
+  {palavra:"orientação",pista:"Informação que ajuda a encontrar uma direção ou fazer algo."},
+  {palavra:"pesquisa",pista:"Busca organizada por informações ou respostas."},
+  {palavra:"personagem",pista:"Pessoa ou figura que participa de uma história."},
+  {palavra:"população",pista:"Conjunto de pessoas ou seres que vivem em uma região."},
+  {palavra:"produção",pista:"Ato de fabricar, criar ou gerar algo."},
+  {palavra:"qualidade",pista:"Excelência."},
+  {palavra:"realidade",pista:"Aquilo que existe de fato."},
+  {palavra:"segurança",pista:"Proteção."},
+  {palavra:"sentimento",pista:"Estado emocional que uma pessoa pode experimentar."},
+  {palavra:"sociedade",pista:"Conjunto de pessoas que vivem e se relacionam em comunidade."},
+  {palavra:"variedade",pista:"Conjunto com diferentes tipos ou opções."},
+  {palavra:"abajur",pista:"Luminária usada para iluminar um ambiente."},
+  {palavra:"abertura",pista:"Ato de abrir ou espaço por onde algo pode passar."},
+  {palavra:"abrigo",pista:"Lugar que oferece proteção contra chuva, frio ou perigo."},
+  {palavra:"acesso",pista:"Possibilidade ou caminho para chegar a algum lugar ou recurso."},
+  {palavra:"advogado",pista:"Profissional que atua na área do Direito."},
+  {palavra:"afeto",pista:"Sentimento de carinho por alguém."},
+  {palavra:"agência",pista:"Local ou organização que presta determinado serviço."},
+  {palavra:"agenda",pista:"Objeto ou aplicativo usado para organizar compromissos."},
+  {palavra:"aluguel",pista:"Valor pago para usar temporariamente um imóvel ou objeto."},
+  {palavra:"análise",pista:"Exame detalhado de algo para compreender seus elementos."},
+  {palavra:"aplicação",pista:"Uso de algo em uma situação ou tarefa."},
+  {palavra:"argumento",pista:"Razão apresentada para defender uma ideia."},
+  {palavra:"artista",pista:"Pessoa que cria ou trabalha com arte."},
+  {palavra:"aspecto",pista:"Característica ou maneira pela qual algo pode ser observado."},
+  {palavra:"atividade",pista:"Ação ou tarefa realizada por alguém."},
+  {palavra:"benefício",pista:"Vantagem ou resultado positivo recebido por alguém."},
+  {palavra:"candidato",pista:"Pessoa que se apresenta para disputar uma vaga ou cargo."},
+  {palavra:"carinho",pista:"Demonstração de afeto e cuidado."},
+  {palavra:"categoria",pista:"Grupo formado por coisas que possuem características semelhantes."},
+  {palavra:"certeza",pista:"Convicção de que algo é verdadeiro."},
+  {palavra:"cobrança",pista:"Ato de pedir o pagamento ou cumprimento de algo."},
+  {palavra:"comércio",pista:"Atividade de compra e venda de produtos ou serviços."},
+  {palavra:"comissão",pista:"Grupo encarregado de uma tarefa ou valor pago por uma venda."},
+  {palavra:"comunidade",pista:"Grupo de pessoas que compartilham um lugar ou interesses."},
+  {palavra:"condição",pista:"Circunstância ou requisito necessário para algo."},
+  {palavra:"confiança",pista:"Crença de que alguém ou algo é confiável."},
+  {palavra:"conexão",pista:"Ligação entre pessoas, aparelhos ou ideias."},
+  {palavra:"conselho",pista:"Opinião ou orientação dada para ajudar alguém."},
+  {palavra:"contato",pista:"Ligação ou comunicação entre pessoas ou coisas."},
+  {palavra:"contexto",pista:"Conjunto de circunstâncias que ajudam a entender algo."},
+  {palavra:"controle",pista:"Ação de dirigir, limitar ou verificar algo."},
+  {palavra:"conversa",pista:"Troca de palavras e ideias entre pessoas."},
+  {palavra:"costume",pista:"Hábito ou prática comum de uma pessoa ou grupo."},
+  {palavra:"decisão",pista:"Escolha feita depois de considerar opções."},
+  {palavra:"defesa",pista:"Ação de proteger alguém, algo ou uma ideia."},
+  {palavra:"definição",pista:"Explicação que mostra o significado de uma palavra ou conceito."},
+  {palavra:"descrição",pista:"Texto que apresenta características de algo ou alguém."},
+  {palavra:"design",pista:"Planejamento da aparência e da função de um produto ou objeto."},
+  {palavra:"diálogo",pista:"Conversa entre duas ou mais pessoas."},
+  {palavra:"diferença",pista:"Característica que torna uma coisa diferente de outra."},
+  {palavra:"direção",pista:"Caminho ou sentido para onde algo se move."},
+  {palavra:"disciplina",pista:"Área de estudo ou conjunto de regras e hábitos."},
+  {palavra:"discussão",pista:"Conversa em que diferentes opiniões ou ideias são apresentadas."},
+  {palavra:"distância",pista:"Espaço entre dois pontos ou lugares."},
+  {palavra:"dúvida",pista:"Falta de certeza sobre alguma coisa."},
+  {palavra:"edição",pista:"Processo de revisar, organizar ou preparar um conteúdo."},
+  {palavra:"efeito",pista:"Resultado ou consequência de uma ação."},
+  {palavra:"eleição",pista:"Processo em que pessoas escolhem representantes por votação."},
+  {palavra:"emoção",pista:"Reação intensa de alegria, medo, tristeza, raiva ou outra sensação."},
+  {palavra:"emprego",pista:"Trabalho realizado por uma pessoa em troca de remuneração."},
+  {palavra:"encontro",pista:"Momento em que pessoas se reúnem ou se veem."},
+  {palavra:"ensino",pista:"Ação de transmitir conhecimentos ou habilidades."},
+  {palavra:"entrega",pista:"Ato de levar ou passar algo para alguém."},
+  {palavra:"equipe",pista:"Grupo de pessoas trabalhando juntas."},
+  {palavra:"equilíbrio",pista:"Estado em que forças ou partes se mantêm estáveis."},
+  {palavra:"escolha",pista:"Ato de selecionar uma opção entre várias."},
+  {palavra:"exemplo",pista:"Caso usado para explicar ou representar uma ideia."},
+  {palavra:"exercício",pista:"Atividade feita para treinar o corpo ou a mente."},
+  {palavra:"explicação",pista:"Informação que ajuda a entender algo."},
+  {palavra:"expressão",pista:"Forma de comunicar uma ideia, sentimento ou pensamento."},
+  {palavra:"extensão",pista:"Tamanho, alcance ou prolongamento de algo."},
+  {palavra:"faculdade",pista:"Instituição de ensino superior ou capacidade de realizar algo."},
+  {palavra:"fenômeno",pista:"Acontecimento que pode ser observado ou estudado."},
+  {palavra:"finalidade",pista:"Objetivo ou motivo pelo qual algo existe."},
+  {palavra:"formação",pista:"Processo de adquirir conhecimentos, habilidades ou estrutura."},
+  {palavra:"fronteira",pista:"Limite que separa países, regiões ou áreas."},
+  {palavra:"função",pista:"Finalidade ou tarefa desempenhada por algo ou alguém."},
+  {palavra:"futuro",pista:"Tempo que ainda vai acontecer."},
+  {palavra:"garantia",pista:"Compromisso de que algo será reparado, trocado ou cumprido em certas condições."},
+  {palavra:"geração",pista:"Grupo de pessoas de idade semelhante ou processo de produzir algo."},
+  {palavra:"gesto",pista:"Movimento do corpo que transmite uma mensagem."},
+  {palavra:"herança",pista:"Bens, características ou tradições recebidos de alguém ou de uma geração anterior."},
+  {palavra:"hipótese",pista:"Explicação possível que ainda precisa ser testada."},
+  {palavra:"igualdade",pista:"Princípio de tratar pessoas ou situações de forma equivalente."},
+  {palavra:"imagem",pista:"Representação visual de algo ou alguém."},
+  {palavra:"impacto",pista:"Efeito ou influência causada por uma ação ou acontecimento."},
+  {palavra:"impressão",pista:"Marca deixada por algo ou resultado produzido ao imprimir."},
+  {palavra:"indicador",pista:"Sinal ou medida que ajuda a avaliar uma situação."},
+  {palavra:"indústria",pista:"Atividade de produção de bens em grande escala."},
+  {palavra:"influência",pista:"Capacidade de afetar pensamentos, decisões ou acontecimentos."},
+  {palavra:"instrução",pista:"Orientação que explica como fazer algo."},
+  {palavra:"intervalo",pista:"Espaço de tempo entre dois momentos ou acontecimentos."},
+  {palavra:"liderança",pista:"Capacidade de conduzir ou orientar um grupo."},
+  {palavra:"melhoria",pista:"Mudança que torna algo melhor."},
+  {palavra:"medida",pista:"Valor usado para indicar tamanho, quantidade ou distância."},
+  {palavra:"medicina",pista:"Área dedicada à prevenção, diagnóstico e tratamento de doenças."},
+  {palavra:"método",pista:"Forma organizada de realizar uma tarefa ou alcançar um resultado."},
+  {palavra:"momento",pista:"Ponto específico no tempo."},
+  {palavra:"motivação",pista:"Incentivo."},
+  {palavra:"ocupação",pista:"Atividade ou trabalho realizado por alguém."},
+  {palavra:"opinião",pista:"Ideia ou julgamento pessoal sobre algo."},
+  {palavra:"origem",pista:"Lugar, momento ou causa de onde algo veio."},
+  {palavra:"parceria",pista:"Acordo de cooperação entre pessoas ou organizações."},
+  {palavra:"pensamento",pista:"Ideia ou processo mental."},
+  {palavra:"percepção",pista:"Capacidade de notar e interpretar algo."},
+  {palavra:"período",pista:"Intervalo de tempo."},
+  {palavra:"presença",pista:"Estado de estar em determinado lugar."},
+  {palavra:"princípio",pista:"Ideia ou regra fundamental que orienta algo."},
+  {palavra:"produto",pista:"Objeto ou serviço criado para ser vendido ou utilizado."},
+  {palavra:"proposta",pista:"Ideia ou plano apresentado para ser considerado."},
+  {palavra:"proteção",pista:"Ação de manter alguém ou algo seguro."},
+  {palavra:"público",pista:"Conjunto de pessoas que assiste, acompanha ou utiliza algo."},
+  {palavra:"quantidade",pista:"Número ou medida que indica quanto existe."},
+  {palavra:"questão",pista:"Pergunta, assunto ou problema que precisa de atenção."},
+  {palavra:"razão",pista:"Motivo de algo ou capacidade de pensar logicamente."},
+  {palavra:"recurso",pista:"Meio ou ferramenta disponível para alcançar um objetivo."},
+  {palavra:"relação",pista:"Ligação ou vínculo entre pessoas, ideias ou coisas."},
+  {palavra:"resultado",pista:"Aquilo que acontece como consequência de uma ação."},
+  {palavra:"rotina",pista:"Conjunto de atividades feitas habitualmente."},
+  {palavra:"salário",pista:"Pagamento recebido pelo trabalho realizado."},
+  {palavra:"satisfação",pista:"Sensação de contentamento por ter conseguido ou recebido algo."},
+  {palavra:"serviço",pista:"Atividade realizada para atender uma necessidade."},
+  {palavra:"sistema",pista:"Conjunto de partes que trabalham de forma organizada."},
+  {palavra:"situação",pista:"Conjunto de circunstâncias em determinado momento."},
+  {palavra:"solução",pista:"Resposta ou maneira de resolver um problema."},
+  {palavra:"suporte",pista:"Aquilo que sustenta, ajuda ou oferece assistência."},
+  {palavra:"tarefa",pista:"Atividade que precisa ser realizada."},
+  {palavra:"técnica",pista:"Maneira específica de realizar uma atividade."},
+  {palavra:"teoria",pista:"Conjunto de ideias usado para explicar um fenômeno ou assunto."},
+  {palavra:"tratamento",pista:"Conjunto de medidas usadas para cuidar de um problema ou doença."},
+  {palavra:"unidade",pista:"Elemento individual de um conjunto ou medida padrão."},
+  {palavra:"usuário",pista:"Pessoa que utiliza um produto, serviço ou sistema."},
+  {palavra:"valor",pista:"Importância, preço ou quantidade atribuída a algo."},
+  {palavra:"vantagem",pista:"Característica que coloca alguém ou algo em posição favorável."},
+  {palavra:"veículo",pista:"Meio usado para transportar pessoas ou objetos."},
+  {palavra:"verdade",pista:"Aquilo que corresponde aos fatos."},
+  {palavra:"versão",pista:"Forma específica de um produto, texto ou sistema."},
+  {palavra:"vontade",pista:"Desejo ou disposição para fazer algo."},
+  {palavra:"abacateiro",pista:"Árvore que produz abacates."},
+  {palavra:"acabamento",pista:"Parte final de uma obra ou produto, feita para dar qualidade e aparência."},
+  {palavra:"acomodação",pista:"Lugar ou forma de se instalar e ficar hospedado."},
+  {palavra:"adaptador",pista:"Peça que permite conectar objetos ou aparelhos diferentes."},
+  {palavra:"adicional",pista:"Aquilo que é acrescentado a algo principal."},
+  {palavra:"aeronave",pista:"Veículo capaz de voar."},
+  {palavra:"ambulância",pista:"Veículo usado para transportar pessoas que precisam de atendimento médico."},
+  {palavra:"amostra",pista:"Pequena parte usada para representar ou analisar um conjunto."},
+  {palavra:"amplitude",pista:"Medida da distância entre extremos de uma variação."},
+  {palavra:"ancoragem",pista:"Ato de prender uma embarcação ou objeto com segurança."},
+  {palavra:"aspirador",pista:"Aparelho usado para retirar poeira e sujeira."},
+  {palavra:"automóvel",pista:"Veículo de quatro rodas usado para transporte."},
+  {palavra:"avaliação",pista:"Ato de analisar ou atribuir uma nota ou valor."},
+  {palavra:"bagunceiro",pista:"Pessoa que costuma deixar as coisas desorganizadas."},
+  {palavra:"barragem",pista:"Estrutura construída para conter ou controlar água."},
+  {palavra:"binocular",pista:"Instrumento com duas lentes usado para observar objetos distantes."},
+  {palavra:"carregador",pista:"Aparelho usado para recarregar a bateria de um dispositivo."},
+  {palavra:"comparação",pista:"Ato de colocar duas ou mais coisas lado a lado para encontrar diferenças ou semelhanças."},
+  {palavra:"composição",pista:"Forma como partes são organizadas para formar um todo."},
+  {palavra:"conclusão",pista:"Ideia ou resultado obtido depois de analisar algo."},
+  {palavra:"cronograma",pista:"Planejamento que organiza tarefas e horários."},
+  {palavra:"declaração",pista:"Informação ou afirmação feita de forma oficial."},
+  {palavra:"decoração",pista:"Enfeite."},
+  {palavra:"desempenho",pista:"Resultado ou qualidade com que alguém realiza uma atividade."},
+  {palavra:"dimensão",pista:"Medida ou tamanho de algo."},
+  {palavra:"divulgação",pista:"Ação de tornar uma informação conhecida."},
+  {palavra:"doméstico",pista:"Relacionado à casa ou ao ambiente familiar."},
+  {palavra:"ecologia",pista:"Ciência que estuda as relações entre seres vivos e ambiente."},
+  {palavra:"embalagem",pista:"Material que envolve e protege um produto."},
+  {palavra:"estrutura",pista:"Forma como partes de algo são organizadas ou aquilo que dá sustentação."},
+  {palavra:"evidência",pista:"Informação ou sinal que ajuda a provar algo."},
+  {palavra:"evolução",pista:"Processo de mudança e desenvolvimento ao longo do tempo."},
+  {palavra:"fundamento",pista:"Base ou motivo que sustenta uma ideia."},
+  {palavra:"integração",pista:"Ato de unir partes para que funcionem juntas."},
+  {palavra:"lançamento",pista:"Ato de colocar algo em circulação, apresentar ou arremessar."}
+];
+
+const DIFFICULT=[
+  {palavra:"projeção",pista:"Imagem ou representação que aparece sobre uma superfície."},
+  {palavra:"propaganda",pista:"Anúncio feito para divulgar uma marca, produto ou ideia."},
+  {palavra:"publicação",pista:"Texto, livro ou conteúdo colocado para o público."},
+  {palavra:"sociologia",pista:"Ciência que estuda a sociedade e as relações entre pessoas."},
+  {palavra:"software",pista:"Programa ou conjunto de programas usados em um computador ou celular."},
+  {palavra:"tributação",pista:"Cobrança de impostos pelo governo."},
+  {palavra:"vacinação",pista:"Forma de prevenção contra determinadas doenças."},
+  {palavra:"ventilador",pista:"Aparelho que movimenta o ar."},
+  {palavra:"abandonado",pista:"Algo ou alguém que foi deixado para trás."},
+  {palavra:"abençoado",pista:"Algo que recebeu uma bênção ou é considerado muito afortunado."},
+  {palavra:"abrigado",pista:"Quem está protegido da chuva, frio ou perigo."},
+  {palavra:"acelerado",pista:"Algo que está acontecendo em alta velocidade."},
+  {palavra:"acertado",pista:"Algo feito de maneira correta."},
+  {palavra:"adaptado",pista:"Algo que foi modificado para funcionar em uma nova situação."},
+  {palavra:"admirável",pista:"Algo que merece elogio ou admiração."},
+  {palavra:"afetuoso",pista:"Pessoa que demonstra carinho."},
+  {palavra:"agradável",pista:"Algo que causa uma sensação boa."},
+  {palavra:"assustador",pista:"Algo que provoca medo."},
+  {palavra:"atualizado",pista:"Algo que recebeu informações ou mudanças recentes."},
+  {palavra:"brilhante",pista:"Pode descrever algo que emite luz ou alguém muito inteligente."},
+  {palavra:"cuidadoso",pista:"Pessoa que faz algo com atenção para evitar erros."},
+  {palavra:"conhecido",pista:"Algo ou alguém que muitas pessoas reconhecem."},
+  {palavra:"complicado",pista:"Algo difícil de entender ou resolver."},
+  {palavra:"confiante",pista:"Quem acredita em sua própria capacidade."},
+  {palavra:"consciente",pista:"Quem percebe e entende o que está acontecendo."},
+  {palavra:"curioso",pista:"Quem gosta de descobrir coisas novas."},
+  {palavra:"delicado",pista:"Algo frágil ou feito com cuidado."},
+  {palavra:"divertido",pista:"Algo que provoca diversão ou risadas."},
+  {palavra:"eficiente",pista:"Algo que funciona bem e produz bons resultados."},
+  {palavra:"elegante",pista:"Algo ou alguém com aparência refinada."},
+  {palavra:"encantador",pista:"Algo que desperta simpatia ou admiração."},
+  {palavra:"especial",pista:"Algo diferente do comum e importante para alguém."},
+  {palavra:"espontâneo",pista:"Algo que acontece naturalmente, sem planejamento."},
+  {palavra:"excelente",pista:"Algo de qualidade muito boa."},
+  {palavra:"favorável",pista:"Algo que ajuda ou contribui para um resultado."},
+  {palavra:"frequente",pista:"Algo que acontece muitas vezes."},
+  {palavra:"generoso",pista:"Quem gosta de ajudar ou compartilhar."},
+  {palavra:"gigantesco",pista:"Algo de tamanho enorme."},
+  {palavra:"gostoso",pista:"Algo agradável ao paladar."},
+  {palavra:"importante",pista:"Algo que tem grande valor ou relevância."},
+  {palavra:"incrível",pista:"Algo que causa admiração ou surpresa."},
+  {palavra:"nervoso",pista:"Estado de quem está ansioso ou agitado."},
+  {palavra:"original",pista:"Algo que não é cópia e tem características próprias."},
+  {palavra:"poderoso",pista:"Quem ou aquilo que possui muita força ou influência."},
+  {palavra:"precioso",pista:"Algo de grande valor."},
+  {palavra:"provável",pista:"Algo que tem boa chance de acontecer."},
+  {palavra:"tranquilo",pista:"Algo calmo, sem agitação."},
+  {palavra:"rápido",pista:"Algo que acontece ou se move em pouco tempo."},
+  {palavra:"resistente",pista:"Algo que suporta força, peso ou desgaste."},
+  {palavra:"simpático",pista:"Pessoa agradável e fácil de gostar."},
+  {palavra:"silencioso",pista:"Lugar ou pessoa que não faz barulho."},
+  {palavra:"simples",pista:"Algo fácil de entender ou fazer."},
+  {palavra:"sincero",pista:"Quem fala o que realmente pensa ou sente."},
+  {palavra:"superior",pista:"Algo que está acima ou tem nível maior."},
+  {palavra:"talentoso",pista:"Quem tem grande habilidade em alguma atividade."},
+  {palavra:"verdadeiro",pista:"Algo que corresponde à verdade."},
+  {palavra:"valioso",pista:"Algo que possui grande valor."},
+  {palavra:"variado",pista:"Que apresenta diferentes tipos ou opções."},
+  {palavra:"acústica",pista:"Área que estuda o som e sua propagação."},
+  {palavra:"aquarela",pista:"Técnica de pintura feita com tintas diluídas em água."},
+  {palavra:"aquático",pista:"Algo relacionado à água."},
+  {palavra:"afinação",pista:"Ajuste para que um instrumento produza as notas corretas."},
+  {palavra:"agilidade",pista:"Capacidade de se mover ou agir rapidamente."},
+  {palavra:"alegoria",pista:"História ou imagem que representa uma ideia por símbolos."},
+  {palavra:"algoritmo",pista:"Sequência de passos usada para resolver um problema."},
+  {palavra:"alquimia",pista:"Prática antiga ligada à transformação de substâncias."},
+  {palavra:"altitude",pista:"Distância de um ponto em relação ao nível do mar."},
+  {palavra:"amargura",pista:"Sabor ou sentimento marcado pela falta de doçura."},
+  {palavra:"ambição",pista:"Desejo forte de alcançar algo importante."},
+  {palavra:"amnésia",pista:"Perda parcial ou total de memória."},
+  {palavra:"anatomia",pista:"Estudo da estrutura do corpo."},
+  {palavra:"apocalipse",pista:"Evento descrito como uma grande destruição ou fim do mundo."},
+  {palavra:"asteroide",pista:"Corpo rochoso que gira ao redor do Sol."},
+  {palavra:"atmosfera",pista:"Camada de gases que envolve um planeta."},
+  {palavra:"bacteriana",pista:"Algo relacionado a bactérias."},
+  {palavra:"cromossomo",pista:"Estrutura celular que contém material genético."},
+  {palavra:"hidrologia",pista:"Estudo da água na Terra."},
+  {palavra:"magnetismo",pista:"Fenômeno relacionado a ímãs e campos magnéticos."},
+  {palavra:"patologia",pista:"Área que estuda doenças e suas causas."},
+  {palavra:"admiracao",pista:"Sentimento de respeito ou encantamento por alguém ou algo."},
+  {palavra:"adocao",pista:"Processo de tornar alguém ou um animal parte de uma família."},
+  {palavra:"adoravel",pista:"Algo muito fofo ou fácil de gostar."},
+  {palavra:"alfabetico",pista:"Organizado seguindo a ordem das letras."},
+  {palavra:"amarela",pista:"Cor parecida com a do sol e do limão."},
+  {palavra:"ambiente",pista:"Lugar ou espaço onde pessoas, animais ou coisas estão."},
+  {palavra:"ambicioso",pista:"Quem deseja conquistar objetivos grandes."},
+  {palavra:"analista",pista:"Profissional que examina informações para chegar a conclusões."},
+  {palavra:"ansiedade",pista:"Sensação de preocupação ou expectativa intensa."},
+  {palavra:"artesanal",pista:"Algo produzido principalmente de forma manual."},
+  {palavra:"assinatura",pista:"Nome escrito para identificar ou autorizar algo."},
+  {palavra:"associacao",pista:"Grupo de pessoas reunidas por um objetivo comum."},
+  {palavra:"astronauta",pista:"Pessoa treinada para viajar ao espaço."},
+  {palavra:"brigadeiro",pista:"Doce brasileiro feito tradicionalmente com leite condensado e chocolate."},
+  {palavra:"burocracia",pista:"Conjunto de procedimentos e documentos que pode tornar algo mais demorado."},
+  {palavra:"capacete",pista:"Objeto usado para proteger a cabeça."},
+  {palavra:"caridade",pista:"Ação de ajudar quem precisa."},
+  {palavra:"carnaval",pista:"Festa conhecida por blocos, fantasias e desfiles."},
+  {palavra:"cidadania",pista:"Conjunto de direitos e deveres de uma pessoa na sociedade."},
+  {palavra:"claridade",pista:"Quantidade de luz em um lugar."},
+  {palavra:"comando",pista:"Ordem dada para alguém ou algo executar uma ação."},
+  {palavra:"companhia",pista:"Presença ou grupo de pessoas que acompanham alguém."},
+  {palavra:"conflito",pista:"Situação de confronto entre pessoas ou grupos."},
+  {palavra:"conquista",pista:"Algo alcançado depois de esforço."},
+  {palavra:"contrato",pista:"Acordo formal entre duas ou mais partes."},
+  {palavra:"delicadeza",pista:"Qualidade de quem age com cuidado e gentileza."},
+  {palavra:"dinamica",pista:"Forma como algo funciona ou se movimenta."},
+  {palavra:"ecologico",pista:"Relacionado à preservação do meio ambiente."},
+  {palavra:"editorial",pista:"Texto que apresenta a opinião de uma publicação."},
+  {palavra:"educador",pista:"Pessoa que ensina ou ajuda na formação de outras pessoas."},
+  {palavra:"empatia",pista:"Capacidade de compreender o que outra pessoa sente."},
+  {palavra:"entusiasmo",pista:"Grande animação ou vontade de fazer algo."},
+  {palavra:"equinocio",pista:"Momento do ano em que dia e noite têm duração aproximada."},
+  {palavra:"escultura",pista:"Obra de arte feita moldando ou esculpindo materiais."},
+  {palavra:"estimativa",pista:"Cálculo aproximado de um valor ou quantidade."},
+  {palavra:"etica",pista:"Princípios usados para avaliar o que é correto ou justo."},
+  {palavra:"etnografia",pista:"Estudo detalhado de costumes e modos de vida de grupos."},
+  {palavra:"fantasia",pista:"Imaginação ou roupa usada para representar um personagem."},
+  {palavra:"filosofia",pista:"Área que questiona temas como existência, conhecimento e verdade."},
+  {palavra:"geologia",pista:"Ciência que estuda a Terra, suas rochas e sua formação."},
+  {palavra:"gratidao",pista:"Sentimento de reconhecimento por algo recebido."},
+  {palavra:"harmonia",pista:"Combinação equilibrada entre diferentes partes."},
+  {palavra:"hidraulica",pista:"Área ligada ao uso e movimento de líquidos, especialmente água."},
+  {palavra:"humanidade",pista:"Conjunto de todos os seres humanos."},
+  {palavra:"improviso",pista:"Algo feito na hora, sem preparação anterior."},
+  {palavra:"inspetor",pista:"Pessoa responsável por verificar ou fiscalizar algo."},
+  {palavra:"instituto",pista:"Organização criada para uma finalidade específica."},
+  {palavra:"interacao",pista:"Ação ou influência entre duas ou mais pessoas ou coisas."},
+  {palavra:"inventario",pista:"Lista detalhada de bens ou objetos."},
+  {palavra:"jardinagem",pista:"Atividade de cuidar e cultivar plantas."},
+  {palavra:"jornalismo",pista:"Atividade de apurar e divulgar notícias."},
+  {palavra:"marketing",pista:"Conjunto de estratégias para divulgar e vender produtos ou ideias."},
+  {palavra:"mecanica",pista:"Área que estuda forças, movimento e máquinas."},
+  {palavra:"medieval",pista:"Relacionado à Idade Média."},
+  {palavra:"memorial",pista:"Lugar ou obra criada para lembrar alguém ou algum acontecimento."},
+  {palavra:"meteorito",pista:"Fragmento espacial que chega à superfície da Terra."},
+  {palavra:"migração",pista:"Movimento de pessoas ou animais de uma região para outra."},
+  {palavra:"mobilidade",pista:"Capacidade de se deslocar de um lugar para outro."},
+  {palavra:"numeracao",pista:"Sistema usado para representar e ordenar números."},
+  {palavra:"obstaculo",pista:"Algo que dificulta ou impede a passagem."},
+  {palavra:"oceanico",pista:"Relacionado aos oceanos."},
+  {palavra:"operador",pista:"Pessoa ou sistema que controla uma máquina ou operação."},
+  {palavra:"pedagógico",pista:"Relacionado ao ensino e à educação."},
+  {palavra:"progresso",pista:"Avanço ou melhoria ao longo do tempo."},
+  {palavra:"revelacao",pista:"Descoberta ou informação que antes era desconhecida."},
+  {palavra:"revolucao",pista:"Mudança profunda e rápida em uma sociedade ou sistema."},
+  {palavra:"secretaria",pista:"Setor responsável por atendimento, documentos ou organização."},
+  {palavra:"tempestade",pista:"Fenômeno com chuva, vento forte e às vezes trovões."},
+  {palavra:"urbanismo",pista:"Área que estuda e planeja cidades."},
+  {palavra:"vegetacao",pista:"Conjunto de plantas de uma região."},
+  {palavra:"ventilacao",pista:"Circulação de ar em um ambiente."},
+  {palavra:"zoologia",pista:"Ciência que estuda os animais."},
+  {palavra:"acessivel",pista:"Algo que pode ser alcançado, usado ou compreendido com facilidade."},
+  {palavra:"acrobata",pista:"Pessoa que realiza movimentos corporais difíceis e equilibrados."},
+  {palavra:"acrobacia",pista:"Movimento corporal que exige equilíbrio e habilidade."},
+  {palavra:"adaptacao",pista:"Mudança feita para se ajustar a uma nova situação."},
+  {palavra:"aeroclube",pista:"Organização ligada à prática e ao treinamento de aviação."},
+  {palavra:"agricultor",pista:"Pessoa que trabalha no cultivo da terra."},
+  {palavra:"aguaceiro",pista:"Chuva forte que cai em grande quantidade."},
+  {palavra:"alegria",pista:"Sentimento de felicidade."},
+  {palavra:"alfabeto",pista:"Conjunto de letras usadas para escrever um idioma."},
+  {palavra:"alicerce",pista:"Base que sustenta uma construção."},
+  {palavra:"alpinista",pista:"Pessoa que pratica escalada de montanhas."},
+  {palavra:"anedota",pista:"História curta contada para divertir."},
+  {palavra:"aparador",pista:"Móvel ou objeto usado para apoiar ou guardar coisas."},
+  {palavra:"aperitivo",pista:"Comida ou bebida servida antes da refeição."},
+  {palavra:"aprendiz",pista:"Pessoa que está aprendendo uma profissão ou atividade."},
+  {palavra:"arbusto",pista:"Planta menor que uma árvore, geralmente com vários ramos."},
+  {palavra:"artesao",pista:"Pessoa que produz objetos principalmente de forma manual."},
+  {palavra:"aspiracao",pista:"Desejo ou objetivo que alguém pretende alcançar."},
+  {palavra:"atleta",pista:"Pessoa que pratica esporte de forma competitiva ou intensa."},
+  {palavra:"avestruz",pista:"Ave grande que não voa e corre muito rápido."},
+  {palavra:"baleiro",pista:"Recipiente ou móvel usado para guardar balas e doces."},
+  {palavra:"balanco",pista:"Movimento de ir e voltar ou análise de resultados."},
+  {palavra:"balneario",pista:"Local procurado para banho e lazer, geralmente perto de água."},
+  {palavra:"bandeja",pista:"Objeto plano usado para carregar alimentos ou outros itens."},
+  {palavra:"barulho",pista:"Som forte ou ruído."},
+  {palavra:"bilheteria",pista:"Local onde são vendidos ou retirados ingressos."},
+  {palavra:"bioma",pista:"Grande conjunto de ecossistemas com clima e vida característicos."},
+  {palavra:"biologico",pista:"Relacionado aos seres vivos."},
+  {palavra:"bússola",pista:"Instrumento que ajuda a encontrar direções."},
+  {palavra:"cabide",pista:"Objeto usado para pendurar roupas."},
+  {palavra:"calculo",pista:"Operação matemática para descobrir um resultado."},
+  {palavra:"camarote",pista:"Espaço reservado para assistir a um evento."},
+  {palavra:"caminhada",pista:"Deslocamento feito a pé."},
+  {palavra:"camareira",pista:"Profissional que cuida da limpeza e organização de quartos."},
+  {palavra:"canteiro",pista:"Área preparada para cultivar flores ou plantas."},
+  {palavra:"capital",pista:"Cidade principal de um país ou estado; também pode significar dinheiro investido."},
+  {palavra:"cartaz",pista:"Folha ou painel usado para divulgar uma mensagem."},
+  {palavra:"catavento",pista:"Objeto com pás que giram com a força do vento."},
+  {palavra:"cavernoso",pista:"Que possui aspecto ou estrutura parecida com uma caverna."},
+  {palavra:"cimento",pista:"Material usado em construções para unir ou revestir."},
+  {palavra:"cidadela",pista:"Fortaleza ou área fortificada."},
+  {palavra:"civilidade",pista:"Comportamento educado e respeitoso."},
+  {palavra:"cobertura",pista:"Aquilo que protege ou cobre algo."},
+  {palavra:"coleção",pista:"Conjunto de objetos reunidos por algum motivo."},
+  {palavra:"colorido",pista:"Que possui várias cores."},
+  {palavra:"competicao",pista:"Disputa entre pessoas ou grupos para alcançar um objetivo."},
+  {palavra:"compositor",pista:"Pessoa que cria músicas."},
+  {palavra:"concerto",pista:"Apresentação musical ou obra para instrumentos."},
+  {palavra:"contagem",pista:"Ato de contar pessoas, objetos ou números."},
+  {palavra:"contador",pista:"Pessoa que trabalha com registros financeiros ou aparelho que conta."},
+  {palavra:"cooperacao",pista:"Ação de trabalhar junto para alcançar um objetivo."},
+  {palavra:"cosmico",pista:"Relacionado ao espaço e ao universo."},
+  {palavra:"cronologia",pista:"Organização de acontecimentos na ordem em que ocorreram."},
+  {palavra:"cuidador",pista:"Pessoa responsável por cuidar de alguém, animal ou lugar."},
+  {palavra:"dedicacao",pista:"Esforço e atenção constantes para realizar algo."},
+  {palavra:"delegacia",pista:"Local onde trabalham autoridades policiais."},
+  {palavra:"demografia",pista:"Estudo das características e mudanças de populações."},
+  {palavra:"deposito",pista:"Lugar onde objetos ou mercadorias são armazenados."},
+  {palavra:"diretor",pista:"Pessoa que administra ou lidera uma instituição ou produção."},
+  {palavra:"diretorio",pista:"Lista organizada de pessoas, arquivos ou endereços."},
+  {palavra:"dobradiça",pista:"Peça que permite abrir e fechar portas ou tampas."},
+  {palavra:"editor",pista:"Pessoa que revisa, organiza ou prepara um conteúdo para publicação."},
+  {palavra:"eficiência",pista:"Capacidade de produzir um bom resultado usando bem os recursos."},
+  {palavra:"eleitor",pista:"Pessoa que tem direito de votar."},
+  {palavra:"embarcação",pista:"Veículo feito para navegar na água."},
+  {palavra:"empregado",pista:"Pessoa que trabalha para uma empresa ou outra pessoa."},
+  {palavra:"eraçao",pista:"Termo ligado a uma era ou período histórico."},
+  {palavra:"escadaria",pista:"Conjunto grande de degraus."},
+  {palavra:"espirito",pista:"Pode significar a parte não material de uma pessoa ou disposição interior."},
+  {palavra:"estatuto",pista:"Conjunto de regras que orienta uma organização."},
+  {palavra:"etnologia",pista:"Estudo comparativo de povos e culturas."},
+  {palavra:"examinador",pista:"Pessoa que avalia ou verifica algo."},
+  {palavra:"execução",pista:"Ato de realizar uma tarefa, plano ou ordem."},
+  {palavra:"fabricante",pista:"Empresa ou pessoa que produz determinado objeto."},
+  {palavra:"ferrovia",pista:"Sistema de transporte feito por trilhos e trens."},
+  {palavra:"fundacao",pista:"Ato de criar uma instituição ou base de uma construção."},
+  {palavra:"galeria",pista:"Espaço onde obras de arte ou outros itens são expostos."},
+  {palavra:"genealogia",pista:"Estudo da história e dos antepassados de uma família."},
+  {palavra:"gerador",pista:"Equipamento que produz energia elétrica ou outro tipo de energia."},
+  {palavra:"gerente",pista:"Pessoa responsável por administrar uma equipe ou negócio."},
+  {palavra:"ginastica",pista:"Atividade física que trabalha força, flexibilidade e movimentos."},
+  {palavra:"gravidade",pista:"Força que atrai os corpos em direção uns aos outros."},
+  {palavra:"habitante",pista:"Pessoa ou animal que vive em determinado lugar."},
+  {palavra:"idioma",pista:"Língua usada por uma comunidade."},
+  {palavra:"imperador",pista:"Título de um governante de um império."},
+  {palavra:"impressora",pista:"Aparelho que coloca textos ou imagens no papel."},
+  {palavra:"inclinação",pista:"Ângulo ou posição de algo que não está totalmente reto."},
+  {palavra:"legislador",pista:"Pessoa responsável por criar ou elaborar leis."},
+  {palavra:"locomotiva",pista:"Parte do trem responsável por puxar os vagões."},
+  {palavra:"madrugada",pista:"Período entre a noite e o começo da manhã."},
+  {palavra:"marítimo",pista:"Relacionado ao mar."},
+  {palavra:"material",pista:"Substância ou recurso usado para fabricar ou construir algo."},
+  {palavra:"montaria",pista:"Animal usado para transporte, como um cavalo."},
+  {palavra:"navegador",pista:"Programa usado para acessar sites na internet; também pode ser quem navega."},
+  {palavra:"nebulosa",pista:"Nuvem de gás e poeira no espaço."},
+  {palavra:"notebook",pista:"Computador portátil que pode ser levado para outros lugares."},
+  {palavra:"nutricao",pista:"Processo de obter e usar nutrientes para manter o corpo."},
+  {palavra:"orquestra",pista:"Grande grupo de músicos que toca instrumentos em conjunto."},
+  {palavra:"oxigenio",pista:"Gás essencial para a respiração de muitos seres vivos."},
+  {palavra:"paisagem",pista:"Vista de um lugar, especialmente quando observada de longe."},
+  {palavra:"pavimento",pista:"Superfície sobre a qual pessoas e veículos circulam."},
+  {palavra:"perfume",pista:"Produto usado para deixar um cheiro agradável no corpo."},
+  {palavra:"permissão",pista:"Autorização para fazer algo."},
+  {palavra:"planetação",pista:"Termo relacionado ao ato de plantar ou estabelecer um planeta; palavra pouco comum."},
+  {palavra:"poesia",pista:"Forma de expressão literária que usa versos ou linguagem artística."},
+  {palavra:"policial",pista:"Profissional responsável por ajudar na segurança pública."},
+  {palavra:"presidente",pista:"Pessoa que ocupa a liderança de um país, organização ou instituição."},
+  {palavra:"prevenção",pista:"Medida tomada para evitar um problema."},
+  {palavra:"produtor",pista:"Pessoa ou empresa que cria, fabrica ou organiza algo."},
+  {palavra:"química",pista:"Ciência que estuda substâncias e suas transformações."},
+  {palavra:"raciocinio",pista:"Capacidade de pensar e chegar a uma conclusão."},
+  {palavra:"recepção",pista:"Local ou ato de receber pessoas, mensagens ou objetos."},
+  {palavra:"recipiente",pista:"Objeto usado para guardar ou transportar algo."},
+  {palavra:"reforma",pista:"Mudança feita para melhorar ou renovar algo."},
+  {palavra:"resolução",pista:"Solução encontrada para um problema ou decisão tomada."},
+  {palavra:"roteiro",pista:"Texto que organiza cenas, falas ou etapas de uma produção."},
+  {palavra:"sabedoria",pista:"Conhecimento acompanhado de bom julgamento."},
+  {palavra:"segmento",pista:"Parte de um todo ou trecho de uma linha ou mercado."},
+  {palavra:"seminario",pista:"Encontro ou aula dedicada a um tema específico."},
+  {palavra:"sinal",pista:"Marca, gesto ou indicação que transmite uma informação."},
+  {palavra:"soldado",pista:"Pessoa que faz parte das forças armadas."},
+  {palavra:"surpresa",pista:"Algo inesperado que causa espanto ou alegria."},
+  {palavra:"tradutor",pista:"Pessoa ou ferramenta que passa um texto de um idioma para outro."},
+  {palavra:"tributario",pista:"Relacionado a impostos e tributos."},
+  {palavra:"vacina",pista:"Preparação usada para estimular proteção contra uma doença."},
+  {palavra:"abismo",pista:"Lugar muito profundo, geralmente com uma grande queda."},
+  {palavra:"abuso",pista:"Uso excessivo ou injusto de algo ou de uma posição."},
+  {palavra:"acolhida",pista:"Ato de receber alguém de forma amigável."},
+  {palavra:"açucareiro",pista:"Recipiente usado para guardar açúcar."},
+  {palavra:"adesivo",pista:"Material que serve para colar ou fixar algo."},
+  {palavra:"adjetivo",pista:"Palavra que caracteriza ou descreve um substantivo."},
+  {palavra:"agitado",pista:"Que está em movimento ou muito inquieto."},
+  {palavra:"agulha",pista:"Objeto fino e pontudo usado para costurar ou aplicar algo."},
+  {palavra:"alface",pista:"Folha verde muito usada em saladas."},
+  {palavra:"alicate",pista:"Ferramenta usada para segurar, cortar ou dobrar materiais."},
+  {palavra:"antena",pista:"Dispositivo que transmite ou recebe sinais."},
+  {palavra:"apito",pista:"Objeto que produz um som agudo quando soprado."},
+  {palavra:"aviação",pista:"Atividade relacionada a aeronaves e ao transporte aéreo."},
+  {palavra:"avulso",pista:"Que está separado de um conjunto ou não está preso a outro."},
+  {palavra:"bagunça",pista:"Situação em que objetos estão desorganizados."},
+  {palavra:"balde",pista:"Recipiente com alça usado para carregar líquidos ou materiais."},
+  {palavra:"banana",pista:"Fruta amarela, macia e muito comum."},
+  {palavra:"banco",pista:"Pode ser um assento ou uma instituição que trabalha com dinheiro."},
+  {palavra:"barato",pista:"Algo que custa pouco em comparação com outras opções."},
+  {palavra:"batata",pista:"Alimento que cresce debaixo da terra e é usado em muitos pratos."},
+  {palavra:"batom",pista:"Produto de maquiagem usado nos lábios."},
+  {palavra:"bebida",pista:"Líquido preparado para ser consumido."},
+  {palavra:"bezerro",pista:"Filhote de vaca."},
+  {palavra:"bicho",pista:"Nome popular usado para falar de um animal."}
+];
+
+const HARD=[
+ {palavra:"exoesqueleto",pista:"Armadura externa"},
+ {palavra:"portaavioes",pista:"Navio militar"},
+ {palavra:"subterraneo",pista:"Subterrâneo"},
+ {palavra:"transatlantico",pista:"Navio oceânico"},
+ {palavra:"paralelepipedo",pista:"Sólido geométrico"},
+ {palavra:"hipossoluvel",pista:"Baixa solubilidade"},
+ {palavra:"estratosfera",pista:"Camada atmosférica"},
+ {palavra:"mesosfera",pista:"Camada atmosférica"},
+ {palavra:"troposfera",pista:"Camada atmosférica"},
+ {palavra:"termosfera",pista:"Camada atmosférica"},
+ {palavra:"magnetosfera",pista:"Campo magnético"},
+ {palavra:"eletroencefalograma",pista:"Exame cerebral"},
+ {palavra:"eletrocardiograma",pista:"Exame cardíaco"},
+ {palavra:"microscopia",pista:"Análise ampliada"},
+ {palavra:"espectroscopia",pista:"Análise óptica"},
+ {palavra:"radioatividade",pista:"Emissão nuclear"},
+ {palavra:"radiofrequencia",pista:"Ondas eletromagnéticas"},
+ {palavra:"termometro",pista:"Mede temperatura"},
+ {palavra:"barometro",pista:"Mede pressão"},
+ {palavra:"sismografo",pista:"Registra tremores"},
+ {palavra:"heliocentrismo",pista:"Modelo astronômico"},
+ {palavra:"geocentrismo",pista:"Modelo astronômico"},
+ {palavra:"constelacao",pista:"Grupo estelar"},
+ {palavra:"supernova",pista:"Explosão estelar"},
+ {palavra:"nebulosa",pista:"Nuvem cósmica"},
+ {palavra:"asteroide",pista:"Corpo espacial"},
+ {palavra:"meteoroide",pista:"Rocha espacial"},
+ {palavra:"eletromagnetismo",pista:"Força física"},
+ {palavra:"termossensivel",pista:"Sensível térmico"},
+ {palavra:"impermeabilizacao",pista:"Proteção hídrica"},
+ {palavra:"fotossintese",pista:"Processo vegetal"},
+ {palavra:"bioluminescencia",pista:"Luz natural"},
+ {palavra:"biodiversidade",pista:"Diversidade biológica"},
+ {palavra:"metamorfose",pista:"Mudança corporal"},
+ {palavra:"herbivoro",pista:"Come vegetais"},
+ {palavra:"carnivoro",pista:"Come carne"},
+ {palavra:"onivoro",pista:"Dieta variada"},
+ {palavra:"vertebrado",pista:"Possui coluna"},
+ {palavra:"invertebrado",pista:"Sem coluna"},
+ {palavra:"anfibio",pista:"Dois ambientes"},
+ {palavra:"aracnideo",pista:"Oito patas"},
+ {palavra:"equinodermo",pista:"Animal marinho"},
+ {palavra:"crustaceo",pista:"Animal aquático"},
+ {palavra:"ornitorrinco",pista:"Mamífero peculiar"},
+ {palavra:"rinoceronte",pista:"Grande mamífero"},
+ {palavra:"hipopotamo",pista:"Mamífero africano"},
+ {palavra:"camaleao",pista:"Camuflagem"},
+ {palavra:"polinizacao",pista:"Reprodução vegetal"},
+ {palavra:"germinação",pista:"Germinação"},
+ {palavra:"fototropismo",pista:"Resposta luminosa"},
+ {palavra:"hidroponia",pista:"Cultivo hidropônico"},
+ {palavra:"aquicultura",pista:"Criação aquática"},
+ {palavra:"apicultura",pista:"Criação apícola"},
+ {palavra:"silvicultura",pista:"Cultivo florestal"},
+ {palavra:"arqueologia",pista:"Estuda vestígios"},
+ {palavra:"paleontologia",pista:"Estuda fósseis"},
+ {palavra:"antropologia",pista:"Ciência humana"},
+ {palavra:"sociologia",pista:"Ciência social"},
+ {palavra:"epistemologia",pista:"Conhecimento"},
+ {palavra:"filosofia",pista:"Busca intelectual"},
+ {palavra:"astronomia",pista:"Ciência espacial"},
+ {palavra:"meteorologia",pista:"Ciência climática"},
+ {palavra:"oceanografia",pista:"Ciência oceânica"},
+ {palavra:"vulcanologia",pista:"Ciência vulcânica"},
+ {palavra:"sismologia",pista:"Ciência sísmica"},
+ {palavra:"cartografia",pista:"Mapas"},
+ {palavra:"topografia",pista:"Medição terrestre"},
+ {palavra:"hidrografia",pista:"Ciência hídrica"},
+ {palavra:"climatologia",pista:"Ciência climática"},
+ {palavra:"geopolitica",pista:"Relações internacionais"},
+ {palavra:"democracia",pista:"Sistema político"},
+ {palavra:"burocracia",pista:"Processos excessivos"},
+ {palavra:"meritocracia",pista:"Mérito"},
+ {palavra:"globalizacao",pista:"Integração global"},
+ {palavra:"industrializacao",pista:"Crescimento industrial"},
+ {palavra:"urbanizacao",pista:"Crescimento urbano"},
+ {palavra:"infraestrutura",pista:"Suporte estrutural"},
+ {palavra:"sustentabilidade",pista:"Uso responsável"},
+ {palavra:"reciclagem",pista:"Reaproveitamento"},
+ {palavra:"desmatamento",pista:"Perda florestal"},
+ {palavra:"reflorestamento",pista:"Plantio florestal"},
+ {palavra:"desertificacao",pista:"Solo degradado"},
+ {palavra:"biodiesel",pista:"Combustível vegetal"},
+ {palavra:"hidreletrica",pista:"Energia hídrica"},
+ {palavra:"termoeletrica",pista:"Energia térmica"},
+ {palavra:"aerogerador",pista:"Energia eólica"},
+ {palavra:"fotovoltaico",pista:"Energia solar"},
+ {palavra:"semicondutor",pista:"Material eletrônico"},
+ {palavra:"microprocessador",pista:"Processador"},
+ {palavra:"criptografia",pista:"Proteção digital"},
+ {palavra:"ciberseguranca",pista:"Proteção digital"},
+ {palavra:"telecomunicacao",pista:"Comunicação remota"},
+ {palavra:"nanotecnologia",pista:"Escala nanométrica"},
+ {palavra:"biotecnologia",pista:"Ciência biológica"},
+ {palavra:"inteligencia",pista:"Habilidade mental"},
+ {palavra:"reconhecimento",pista:"Identificação"},
+ {palavra:"autenticacao",pista:"Confirma identidade"},
+ {palavra:"desenvolvimento",pista:"Evolução"},
+ {palavra:"extraordinario",pista:"Excepcional"},
+ {palavra:"inconsequente",pista:"Irresponsável"},
+ {palavra:"intransigente",pista:"Inflexível"},
+ {palavra:"imprescindivel",pista:"Essencial"},
+ {palavra:"incompreensivel",pista:"Incompreensível"},
+ {palavra:"inquestionavel",pista:"Incontestável"},
+ {palavra:"irreversivel",pista:"Irreversível"},
+ {palavra:"incompatibilidade",pista:"Incompatível"}
+];
+
+const FINAL=[
+ {palavra:"eletrodomestico",pista:"Objeto doméstico"},
+ {palavra:"eletrocutado",pista:"Choque elétrico"},
+ {palavra:"eletromagnetico",pista:"Ondas eletromagnéticas"},
+ {palavra:"hidrocarboneto",pista:"Composto químico"},
+ {palavra:"hidrocefalia",pista:"Condição cerebral"},
+ {palavra:"hidroavião",pista:"Aeronave marítima"},
+ {palavra:"aeronautica",pista:"Ciência aérea"},
+ {palavra:"aeroespacial",pista:"Setor aeroespacial"},
+ {palavra:"astronauta",pista:"Viajante espacial"},
+ {palavra:"cosmonauta",pista:"Viajante espacial"},
+ {palavra:"observatorio",pista:"Observação astronômica"},
+ {palavra:"planetario",pista:"Espaço astronômico"},
+ {palavra:"radiotelescopio",pista:"Observação espacial"},
+ {palavra:"telescopio",pista:"Ampliação distante"},
+ {palavra:"microscopio",pista:"Ampliação microscópica"},
+ {palavra:"ultravioleta",pista:"Radiação invisível"},
+ {palavra:"infravermelho",pista:"Radiação térmica"},
+ {palavra:"ultrassonografia",pista:"Exame ultrassônico"},
+ {palavra:"ressonancia",pista:"Fenômeno físico"},
+ {palavra:"supercondutor",pista:"Condução especial"},
+ {palavra:"transistor",pista:"Componente eletrônico"},
+ {palavra:"capacitor",pista:"Armazena carga"},
+ {palavra:"transformador",pista:"Altera tensão"},
+ {palavra:"acelerometro",pista:"Mede aceleração"},
+ {palavra:"giroscopio",pista:"Mede orientação"},
+ {palavra:"anemometro",pista:"Mede vento"},
+ {palavra:"pluviometro",pista:"Mede chuva"},
+ {palavra:"cronometro",pista:"Mede tempo"},
+ {palavra:"espectrometro",pista:"Analisa espectros"},
+ {palavra:"cromatografia",pista:"Separa substâncias"},
+ {palavra:"centrifugacao",pista:"Separa componentes"},
+ {palavra:"cristalizacao",pista:"Forma cristais"},
+ {palavra:"sublimacao",pista:"Mudança física"},
+ {palavra:"condensacao",pista:"Vira líquido"},
+ {palavra:"evaporacao",pista:"Vira vapor"},
+ {palavra:"solidificacao",pista:"Vira sólido"},
+ {palavra:"combustao",pista:"Reação oxidativa"},
+ {palavra:"catalisador",pista:"Acelera reação"},
+ {palavra:"laboratorio",pista:"Pesquisa científica"},
+ {palavra:"microrganismo",pista:"Ser microscópico"},
+ {palavra:"bacteriologia",pista:"Ciência bacteriana"},
+ {palavra:"virologia",pista:"Ciência viral"},
+ {palavra:"imunologia",pista:"Defesa imunológica"},
+ {palavra:"genetica",pista:"Ciência genética"},
+ {palavra:"cromossomo",pista:"Estrutura genética"},
+ {palavra:"mitocondria",pista:"Usina celular"},
+ {palavra:"ribossomo",pista:"Produz proteínas"},
+ {palavra:"cloroplasto",pista:"Organelo vegetal"},
+ {palavra:"citoplasma",pista:"Interior celular"},
+ {palavra:"nucleotideo",pista:"Unidade genética"},
+ {palavra:"neurociencia",pista:"Ciência cerebral"},
+ {palavra:"neurotransmissor",pista:"Sinal nervoso"},
+ {palavra:"cardiovascular",pista:"Sistema corporal"},
+ {palavra:"otorrinolaringologista",pista:"Médico especializado"},
+ {palavra:"oftalmologista",pista:"Saúde ocular"},
+ {palavra:"dermatologista",pista:"Saúde dermatológica"},
+ {palavra:"endocrinologia",pista:"Ciência hormonal"},
+ {palavra:"gastroenterologia",pista:"Saúde digestiva"},
+ {palavra:"neurocirurgia",pista:"Cirurgia neurológica"},
+ {palavra:"transplante",pista:"Transplante"},
+ {palavra:"imunossupressao",pista:"Imunidade reduzida"},
+ {palavra:"antibiotico",pista:"Ação antibacteriana"},
+ {palavra:"paleontologo",pista:"Estuda fósseis"},
+ {palavra:"arqueologico",pista:"Vestígios antigos"},
+ {palavra:"antropologico",pista:"Humano"},
+ {palavra:"estratigrafia",pista:"Camadas terrestres"},
+ {palavra:"sedimentacao",pista:"Depósito sedimentar"},
+ {palavra:"erosao",pista:"Desgaste natural"},
+ {palavra:"tectonismo",pista:"Movimento tectônico"},
+ {palavra:"vulcanismo",pista:"Vulcões"},
+ {palavra:"terremoto",pista:"Abalo sísmico"},
+ {palavra:"tsunami",pista:"Onda gigante"},
+ {palavra:"ciclone",pista:"Tempestade ciclônica"},
+ {palavra:"anticiclone",pista:"Pressão atmosférica"},
+ {palavra:"precipitacao",pista:"Chuva atmosférica"},
+ {palavra:"evapotranspiracao",pista:"Ciclo hídrico"},
+ {palavra:"permafrost",pista:"Solo congelado"},
+ {palavra:"arquipelago",pista:"Ilhas agrupadas"},
+ {palavra:"peninsula",pista:"Terra marítima"},
+ {palavra:"cordilheira",pista:"Cadeia montanhosa"},
+ {palavra:"planicie",pista:"Terreno plano"},
+ {palavra:"depressao",pista:"Terreno rebaixado"},
+ {palavra:"continentalidade",pista:"Influência continental"},
+ {palavra:"baciahidrografica",pista:"Drenagem hídrica"},
+ {palavra:"aquífero",pista:"Água subterrânea"},
+ {palavra:"submersivel",pista:"Submersão"},
+ {palavra:"submarino",pista:"Veículo subaquático"},
+ {palavra:"quebraondas",pista:"Barreira marítima"},
+ {palavra:"helicoptero",pista:"Aeronave rotativa"},
+ {palavra:"paraquedas",pista:"Salto aéreo"},
+ {palavra:"paraquedista",pista:"Salto aéreo"},
+ {palavra:"parapente",pista:"Esporte aéreo"},
+ {palavra:"locomotiva",pista:"Tração ferroviária"},
+ {palavra:"ferroviario",pista:"Transporte ferroviário"},
+ {palavra:"metropolitano",pista:"Transporte urbano"},
+ {palavra:"teleferico",pista:"Transporte aéreo"},
+ {palavra:"escavadeira",pista:"Máquina pesada"},
+ {palavra:"retroescavadeira",pista:"Escavação pesada"},
+ {palavra:"guindaste",pista:"Carga pesada"},
+ {palavra:"empilhadeira",pista:"Carga logística"},
+ {palavra:"parafernalia",pista:"Objetos diversos"},
+ {palavra:"caleidoscopio",pista:"Imagens multicoloridas"},
+ {palavra:"periscopio",pista:"Visão indireta"},
+ {palavra:"estereoscopio",pista:"Visão 3D"},
+ {palavra:"criptograma",pista:"Mensagem secreta"},
+ {palavra:"decodificador",pista:"Decodificação"},
+ {palavra:"algoritmico",pista:"Regras lógicas"},
+ {palavra:"programavel",pista:"Programável"},
+ {palavra:"nanorobotica",pista:"Robôs microscópicos"},
+ {palavra:"engenharia",pista:"Projeto técnico"},
+ {palavra:"aerodinamica",pista:"Aerodinâmica"},
+ {palavra:"hidrodinamica",pista:"Hidrodinâmica"},
+ {palavra:"termodinamica",pista:"Ciência térmica"},
+ {palavra:"eletrodinamica",pista:"Cargas elétricas"},
+ {palavra:"quantizacao",pista:"Física quântica"},
+ {palavra:"superposicao",pista:"Física quântica"},
+ {palavra:"entrelacamento",pista:"Física quântica"},
+ {palavra:"relatividade",pista:"Teoria física"},
+ {palavra:"gravitacional",pista:"Força gravitacional"},
+ {palavra:"inconstitucional",pista:"Norma inconstitucional"},
+ {palavra:"irrefutavel",pista:"Sem contestação"},
+ {palavra:"ininteligivel",pista:"Difícil compreensão"},
+ {palavra:"incomensuravel",pista:"Incomparável"},
+ {palavra:"intransponivel",pista:"Difícil superar"},
+ {palavra:"incontornavel",pista:"Inevitável"},
+ {palavra:"extraoficial",pista:"Não oficial"},
+ {palavra:"ultrapassagem",pista:"Passagem"},
+ {palavra:"contracorrente",pista:"Fluxo oposto"},
+ {palavra:"contraditorio",pista:"Ideias opostas"},
+ {palavra:"paradoxalmente",pista:"Ideia paradoxal"},
+ {palavra:"multidisciplinar",pista:"Múltiplas áreas"},
+ {palavra:"interdisciplinar",pista:"Entre disciplinas"},
+ {palavra:"tridimensional",pista:"Três dimensões"},
+ {palavra:"quadridimensional",pista:"Quatro dimensões"},
+ {palavra:"onipresente",pista:"Todo lugar"},
+ {palavra:"onisciente",pista:"Conhecimento total"},
+ {palavra:"incongruencia",pista:"Incoerência"},
+ {palavra:"ambivalencia",pista:"Sentidos opostos"},
+ {palavra:"idiossincrasia",pista:"Traço peculiar"},
+ {palavra:"perspicacia",pista:"Percepção aguçada"},
+ {palavra:"eloquencia",pista:"Boa expressão"},
+ {palavra:"procrastinacao",pista:"Adiar tarefas"},
+ {palavra:"ubiquidade",pista:"Presença simultânea"},
+ {palavra:"inexoravel",pista:"Não cede"},
+ {palavra:"imprescritivel",pista:"Sem prescrição"},
+ {palavra:"inviolabilidade",pista:"Proteção jurídica"},
+ {palavra:"jurisprudencia",pista:"Decisões judiciais"},
+ {palavra:"constitucionalidade",pista:"Validade constitucional"},
+ {palavra:"responsabilidade",pista:"Dever jurídico"},
+ {palavra:"proporcionalidade",pista:"Relação proporcional"},
+ {palavra:"confidencialidade",pista:"Sigilo informacional"},
+ {palavra:"intransferivel",pista:"Sem transferência"},
+ {palavra:"intercontinental",pista:"Entre continentes"},
+ {palavra:"extraterrestre",pista:"Extraterrestre"},
+ {palavra:"interplanetario",pista:"Entre planetas"},
+ {palavra:"interestelar",pista:"Entre estrelas"},
+ {palavra:"astrofisica",pista:"Física espacial"},
+ {palavra:"astrobiologia",pista:"Vida extraterrestre"},
+ {palavra:"exoplaneta",pista:"Planeta distante"},
+ {palavra:"singularidade",pista:"Ponto extremo"},
+ {palavra:"buraconegro",pista:"Objeto cósmico"},
+ {palavra:"antimateria",pista:"Matéria oposta"},
+ {palavra:"particula",pista:"Partícula"},
+ {palavra:"acelerador",pista:"Acelera partículas"},
+ {palavra:"supercomputador",pista:"Alta computação"},
+ {palavra:"nanotubos",pista:"Estruturas nanométricas"},
+ {palavra:"grafeno",pista:"Material avançado"}
+];
+
+const EXTRA_EASY=[
+ {palavra:"arco-íris",pista:"Tem várias cores no céu depois da chuva."},
+ {palavra:"caixadagua",pista:"Fica no alto e armazena água em muitas casas."},
+ {palavra:"melancia",pista:"Fruta grande e muito suculenta."},
+ {palavra:"arroz",pista:"Acompanha muitos pratos brasileiros."},
+ {palavra:"tomate",pista:"Pode ser vermelho e usado em saladas e molhos."},
+ {palavra:"girassol",pista:"Flor grande que lembra o sol."},
+ {palavra:"picolé",pista:"Doce gelado servido no palito."},
+ {palavra:"sorvete",pista:"Sobremesa gelada."},
+ {palavra:"pipoca",pista:"Estoura quando o milho é aquecido."},
+ {palavra:"guarda-chuva",pista:"Usado para se proteger da chuva."},
+ {palavra:"escova",pista:"Usada para limpar ou pentear."},
+ {palavra:"travesseiro",pista:"Fica na cama e apoia a cabeça."},
+ {palavra:"geladeira",pista:"Mantém alimentos e bebidas gelados."},
+ {palavra:"televisao",pista:"Aparelho usado para assistir programas."},
+ {palavra:"sapato",pista:"Usado nos pés."},
+ {palavra:"camisa",pista:"Peça de roupa usada na parte de cima do corpo."},
+ {palavra:"janela",pista:"Pode deixar luz e ar entrarem em uma casa."},
+ {palavra:"porta",pista:"Pode abrir e fechar a entrada de um cômodo."},
+ {palavra:"cama",pista:"Lugar onde dormimos."},
+ {palavra:"chuva",pista:"Cai do céu e molha o chão."},
+ {palavra:"sol",pista:"Estrela que ilumina nosso dia."},
+ {palavra:"lua",pista:"Aparece no céu principalmente à noite."},
+ {palavra:"estrela",pista:"Ponto brilhante visto no céu noturno."},
+ {palavra:"banana",pista:"Fruta amarela muito comum."},
+ {palavra:"morango",pista:"Fruta vermelha e pequena."}
+];
+
+const EXTRA_MEDIUM=[
+ {palavra:"labirinto",pista:"Lugar cheio de caminhos onde é fácil se perder."},
+ {palavra:"tempestade",pista:"Pode trazer chuva forte, vento e trovões."},
+ {palavra:"cachoeira",pista:"Água que cai de uma altura natural."},
+ {palavra:"vulcao",pista:"Pode expelir lava e cinzas."},
+ {palavra:"telescopio",pista:"Ajuda a observar objetos muito distantes no céu."},
+ {palavra:"biblioteca",pista:"Lugar onde muitos livros ficam guardados."},
+ {palavra:"aeroporto",pista:"Local de chegada e partida de aviões."},
+ {palavra:"laboratorio",pista:"Local usado para experiências e pesquisas."},
+ {palavra:"fotografia",pista:"Imagem registrada por uma câmera."},
+ {palavra:"aventura",pista:"Experiência emocionante ou inesperada."},
+ {palavra:"montanha",pista:"Grande elevação natural do terreno."},
+ {palavra:"oceano",pista:"Grande massa de água salgada."},
+ {palavra:"castelo",pista:"Construção antiga que lembra reis e cavaleiros."},
+ {palavra:"bússola",pista:"Instrumento usado para ajudar na orientação."},
+ {palavra:"tesouro",pista:"Algo valioso que pode estar escondido."},
+ {palavra:"pirata",pista:"Personagem ligado a navios e tesouros escondidos."},
+ {palavra:"dinossauro",pista:"Animal pré-histórico que não vive mais hoje."},
+ {palavra:"borboleta",pista:"Inseto com asas coloridas."},
+ {palavra:"elefante",pista:"Grande animal com tromba."},
+ {palavra:"girafa",pista:"Animal conhecido pelo pescoço muito comprido."}
+];
+
+const EXTRA_DIFFICULT=[
+ {palavra:"arquitetura",pista:"Arte e técnica de projetar construções."},
+ {palavra:"astronauta",pista:"Pessoa treinada para viajar ao espaço."},
+ {palavra:"arqueologia",pista:"Estudo de vestígios deixados por povos antigos."},
+ {palavra:"eletricidade",pista:"Forma de energia ligada ao movimento de cargas."},
+ {palavra:"fotossintese",pista:"Processo pelo qual plantas produzem seu alimento usando luz."},
+ {palavra:"biodiversidade",pista:"Variedade de formas de vida em uma região."},
+ {palavra:"meteorologia",pista:"Ciência que estuda a atmosfera e o tempo."},
+ {palavra:"cartografia",pista:"Área ligada à produção e estudo de mapas."},
+ {palavra:"vulcanologia",pista:"Ciência que estuda vulcões."},
+ {palavra:"hidrologia",pista:"Estudo da água na Terra."},
+ {palavra:"geometria",pista:"Área da matemática que estuda formas e medidas."},
+ {palavra:"psicologia",pista:"Área que estuda comportamento e processos mentais."},
+ {palavra:"democracia",pista:"Sistema político baseado na participação dos cidadãos."},
+ {palavra:"sustentabilidade",pista:"Busca atender necessidades sem prejudicar o futuro."},
+ {palavra:"reciclagem",pista:"Transformação de materiais para reaproveitamento."}
+];
+
+const EXTRA_HARD=[
+ {palavra:"espectrofotometro",pista:"Instrumento usado para medir características da luz."},
+ {palavra:"termoeletricidade",pista:"Fenômeno relacionado a calor e eletricidade."},
+ {palavra:"eletroquimica",pista:"Área que relaciona reações químicas e eletricidade."},
+ {palavra:"microbiologia",pista:"Estudo de seres microscópicos."},
+ {palavra:"neurotransmissor",pista:"Substância envolvida na comunicação entre neurônios."},
+ {palavra:"criptografia",pista:"Técnica para proteger informações por códigos."},
+ {palavra:"nanotecnologia",pista:"Tecnologia que trabalha em escala extremamente pequena."},
+ {palavra:"paleontologia",pista:"Ciência que estuda fósseis e vida antiga."},
+ {palavra:"oceanografia",pista:"Ciência que estuda os oceanos."},
+ {palavra:"infraestrutura",pista:"Conjunto de estruturas que dá suporte a uma atividade ou cidade."}
+];
+
+const EXTRA_FINAL=[
+ {palavra:"otorrinolaringologista",pista:"Médico especializado em ouvido, nariz e garganta."},
+ {palavra:"gastroenterologia",pista:"Área médica ligada ao sistema digestivo."},
+ {palavra:"eletroencefalograma",pista:"Exame que registra a atividade elétrica do cérebro."},
+ {palavra:"eletrocardiograma",pista:"Exame que registra a atividade elétrica do coração."},
+ {palavra:"evapotranspiracao",pista:"Processo que reúne evaporação e transpiração das plantas."},
+ {palavra:"interdisciplinar",pista:"Que envolve diferentes áreas do conhecimento."},
+ {palavra:"inconstitucional",pista:"Que está em desacordo com a Constituição."},
+ {palavra:"idiossincrasia",pista:"Característica muito particular de uma pessoa ou grupo."},
+ {palavra:"procrastinacao",pista:"Hábito de deixar tarefas para depois."},
+ {palavra:"supercondutor",pista:"Material que pode conduzir eletricidade com resistência muito baixa."}
+];
+
+EASY.push(...EXTRA_EASY);
+MEDIUM.push(...EXTRA_MEDIUM);
+DIFFICULT.push(...EXTRA_DIFFICULT);
+HARD.push(...EXTRA_HARD);
+FINAL.push(...EXTRA_FINAL);
+
+
+const rewards=[20,20,30,30,20,20,30,75];
+const TOTAL_ROUNDS=9;
+const storageEasy="adam_games_forca_used_easy_v6";
+const storageMedium="adam_games_forca_used_medium_v6";
+const storageDifficult="adam_games_forca_used_difficult_v6";
+const storageHard="adam_games_forca_used_hard_v6";
+const storageFinal="adam_games_forca_used_final_v3";
+const storageAll="adam_games_forca_used_all_v7";
+const stateKeyPrefix="adam_games_forca_state_v7_";
+const entryKeyPrefix="adam_games_forca_entry_v7_";
+
+let user=null,userRef=null,coins=0,chances=0,round=1,errors=0,current=null;
+let stateStatus="playing",resumeLost=false;
+let usedLetters=new Set(),locked=false,action=null,timerStarted=false,timerStart=0,timerInterval=null;
+let hardTarget=10, entryConsumed=false, loading=false;
+
+const usedEasy=new Set(JSON.parse(localStorage.getItem(storageEasy)||"[]"));
+const usedMedium=new Set(JSON.parse(localStorage.getItem(storageMedium)||"[]"));
+const usedDifficult=new Set(JSON.parse(localStorage.getItem(storageDifficult)||"[]"));
+const usedHard=new Set(JSON.parse(localStorage.getItem(storageHard)||"[]"));
+const usedFinal=new Set(JSON.parse(localStorage.getItem(storageFinal)||"[]"));
+const usedAll=new Set(JSON.parse(localStorage.getItem(storageAll)||"[]"));
+const $=id=>document.getElementById(id);
+function norm(s){return String(s).normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z]/g,"")}
+function saveSet(key,set){localStorage.setItem(key,JSON.stringify([...set]))}
+function chooseFrom(pool,set,key){
+  let available=pool.filter(x=>!usedAll.has(norm(x.palavra)));
+  if(!available.length){
+    // Se não houver palavra inédita neste nível, libera apenas as palavras deste nível.
+    available=pool.filter(x=>!set.has(norm(x.palavra)));
+  }
+  if(!available.length){
+    set.clear();saveSet(key,set);
+    available=[...pool];
+  }
+  const x=available[Math.floor(Math.random()*available.length)];
+  const n=norm(x.palavra);
+  set.add(n);saveSet(key,set);
+  usedAll.add(n);localStorage.setItem(storageAll,JSON.stringify([...usedAll]));
+  return {...x,normal:n};
+}
+function choose(){if(round<=2)return chooseFrom(EASY,usedEasy,storageEasy);if(round<=4)return chooseFrom(MEDIUM,usedMedium,storageMedium);if(round<=7)return chooseFrom(DIFFICULT,usedDifficult,storageDifficult);if(round===8)return chooseFrom(HARD,usedHard,storageHard);return chooseFrom(FINAL,usedFinal,storageFinal)}
+function coinsUI(){$("coins").textContent=Number(coins||0).toLocaleString("pt-BR")}
+function chancesUI(){$("chances").textContent="🎟️ "+Number(chances||0)}
+function frame(){const n=Math.min(errors,6);document.querySelectorAll(".hangman-layer").forEach((x,i)=>x.classList.toggle("active",i===n));[...$("errorsRow").children].forEach((x,i)=>x.classList.toggle("active",i<errors))}
+function wordUI(){const box=$("word");box.innerHTML="";box.classList.toggle("long-word",current.normal.length>=12);for(const c of current.normal){const el=document.createElement("span");el.className="letter";el.textContent=usedLetters.has(c)?c.toUpperCase():"";box.appendChild(el)}}
+function complete(){return [...new Set(current.normal)].every(c=>usedLetters.has(c))}
+function keyboard(){const k=$("keyboard");k.innerHTML="";for(const c of "ABCDEFGHIJKLMNOPQRSTUVWXYZ"){const b=document.createElement("button");b.className="key";b.type="button";b.textContent=c;b.onclick=()=>guess(c.toLowerCase(),b);k.appendChild(b)}}
+function lock(){
+  $("keyboard").querySelectorAll("button").forEach(b=>b.disabled=true)
+}
+function msg(t,c){$("message").textContent=t;$("message").className="message show "+c}
+function stopTimer(){if(timerInterval){clearInterval(timerInterval);timerInterval=null}timerStarted=false;$("timerBox").style.display="none"}
+function startTimer(){if(timerStarted||(round!==8&&round!==9))return;timerStarted=true;timerStart=performance.now();$("timerBox").style.display="block";timerInterval=setInterval(()=>{$("timerValue").textContent=((performance.now()-timerStart)/1000).toFixed(1)+"s"},100)}
+function currentSeconds(){return timerStarted?(performance.now()-timerStart)/1000:null}
+function stateKey(){return user?stateKeyPrefix+user.uid:""}
+function saveState(status=stateStatus){if(!user||!current)return;stateStatus=status;localStorage.setItem(stateKey(),JSON.stringify({round,current,usedLetters:[...usedLetters],errors,hardTarget,status}))}
+function clearState(){if(user)localStorage.removeItem(stateKey())}
+function loadState(){if(!user)return false;try{const raw=localStorage.getItem(stateKey());if(!raw)return false;const st=JSON.parse(raw);if(!st||!st.current||!st.round)return false;round=Number(st.round);current=st.current;usedLetters=new Set(st.usedLetters||[]);errors=Number(st.errors||0);hardTarget=Number(st.hardTarget||10);stateStatus=st.status||"playing";resumeLost=stateStatus==="lost";locked=resumeLost;return true}catch(e){console.warn("Estado salvo inválido",e);return false}}
+function setUI(){const isHard=round===8,isFinal=round===9;if(isFinal){$("levelName").textContent="👑 FINAL";$("roundReward").textContent="🪙 100–150"}else if(isHard){$("levelName").textContent="🔥 HARD";const hardBonus={9:25,10:20,11:15,12:10}[hardTarget]||15;$("roundReward").textContent="🪙 75 + "+hardBonus}else{$("levelName").textContent=round<=2?"FÁCIL":round<=4?"MÉDIO":"DIFÍCIL";$("roundReward").textContent="🪙 "+rewards[round-1]}$("roundNumber").textContent=round+" / "+TOTAL_ROUNDS;$("progressText").textContent=round+" / "+TOTAL_ROUNDS;$("progressFill").style.width=(round/TOTAL_ROUNDS*100)+"%";const pista=String(current?.pista||"").replace(/\s*[—–-]\s*dica\s*\d+/gi,"").replace(/\bdica\s*\d+\b/gi,"").trim();$("hint").textContent=pista||"Descubra a palavra."}
+function render(){setUI();$("reward").style.display="none";$("message").className="message";$("message").textContent="";$("timerBox").style.display="none";$("timerValue").textContent="0.0s";frame();wordUI();keyboard();saveState()}
+function startNewRound(){stopTimer();errors=0;locked=false;resumeLost=false;stateStatus="playing";usedLetters=new Set();current=choose();if(round===8)hardTarget=[9,10,11,12][Math.floor(Math.random()*4)];render()}
+function showModal(icon,title,coinsText,text,button,nextAction){$("modalIcon").textContent=icon;$("modalTitle").textContent=title;$("modalCoins").textContent=coinsText;$("modalText").textContent=text;$("modalButton").textContent=button;action=nextAction;$("modal").classList.add("show")}
+
+async function spendChanceAndGiveCoins(reason,rewardCoins=30){
+  if(!userRef)throw new Error("Cadastro não encontrado.");
+
+  // PRIMEIRO: consome a chance. Esta operação é independente do prêmio/log.
+  await runTransaction(db,async tx=>{
+    const snap=await tx.get(userRef);
+    if(!snap.exists())throw new Error("Cadastro não encontrado.");
+    const availableChances=Number(snap.data().chances||0);
+    if(availableChances<=0)throw new Error("SEM_CHANCES");
+    tx.update(userRef,{chances:availableChances-1});
+  });
+  chances=Math.max(0,Number(chances||0)-1);
+  chancesUI();
+
+  // SEGUNDO: tenta entregar o prêmio. Se as Rules não permitirem moedas,
+  // a chance continua consumida e o jogo não fica travado.
+  try{
+    await runTransaction(db,async tx=>{
+      const snap=await tx.get(userRef);
+      if(!snap.exists())throw new Error("Cadastro não encontrado.");
+      const oldCoins=Number(snap.data().moedas||0);
+      tx.update(userRef,{moedas:oldCoins+rewardCoins});
+    });
+    coins+=rewardCoins;coinsUI();
+  }catch(e){
+    console.error("Chance consumida, mas não foi possível registrar +30 moedas:",e);
+  }
+
+  // TERCEIRO: log opcional. Nunca bloqueia a partida.
+  try{
+    await addDoc(collection(db,"resultadosJogos"),{
+      uid:user.uid,jogoId:"forca",moedasGanhos:rewardCoins,motivo:reason,rodada:round,
+      palavraId:norm(current?.palavra||""),dataHora:new Date().toISOString(),criadoEm:serverTimestamp()
+    });
+  }catch(e){
+    console.warn("Log da chance não pôde ser gravado:",e);
+  }
+}
+
+async function consumeEntryChance(){
+  const key=entryKeyPrefix+(user?.uid||"");
+  if(sessionStorage.getItem(key)==="1"){entryConsumed=true;return true}
+  try{
+    await spendChanceAndGiveCoins("entrada");
+    sessionStorage.setItem(key,"1");
+    entryConsumed=true;
+    msg("🎟️ Chance usada! 🪙 +30 Adam Coins.","success");
+    return true;
+  }catch(e){
+    if(e.message==="SEM_CHANCES"){
+      showModal("🎟️","Sem chances","","Você não tem nenhuma chance disponível para jogar a Forca.","VOLTAR AOS JOGOS","exit");
+      return false;
+    }
+    throw e;
+  }
+}
+
+async function continueSameLevel(){
+  if(loading)return false;
+
+  loading=true;
+
+  const btn=$("lossContinueSame");
+
+  try{
+    await spendChanceAndGiveCoins("continuacao",20);
+
+    $("lossContinueModal").classList.remove("show");
+    $("lossContinueModal").setAttribute("aria-hidden","true");
+
+    clearState();
+
+    // Mantém exatamente o mesmo round.
+    // startNewRound() escolhe uma NOVA palavra.
+    startNewRound();
+
+    msg("🎟️ Chance usada! 🪙 +20 Adam Coins! Nova palavra.","success");
+
+    return true;
+
+  }catch(e){
+    console.error("Erro ao continuar no mesmo nível:",e);
+    throw e;
+
+  }finally{
+    loading=false;
+
+    if(btn){
+      btn.disabled=false;
+      btn.textContent="🔄 CONTINUAR NO MESMO NÍVEL";
+    }
+  }
+}
+window.continuarForcaMesmoNivel=continueSameLevel;
+
+async function win(){
+  if(locked)return;
+  locked=true;
+  lock();
+  const secs=currentSeconds();
+  stopTimer();
+  const bonus=round===9?(secs!==null&&secs<=8?150:secs!==null&&secs<=15?125:100):(round===8?75:rewards[round-1]);
+
+  // A vitória e a mudança de fase NÃO dependem do log de resultados.
+  try{
+    if(userRef){
+      try{
+        await runTransaction(db,async tx=>{
+          const snap=await tx.get(userRef);
+          if(!snap.exists())throw new Error("Cadastro não encontrado.");
+          const old=Number(snap.data().moedas||0);
+          tx.update(userRef,{moedas:old+bonus});
+        });
+        coins+=bonus;coinsUI();
+      }catch(e){
+        console.warn("Vitória registrada, mas recompensa de moedas não pôde ser salva:",e);
+      }
+
+      try{
+        await addDoc(collection(db,"resultadosJogos"),{
+          uid:user.uid,jogoId:"forca",moedasGanhos:bonus,motivo:"acerto",rodada:round,
+          palavraId:norm(current.palavra),tempoSegundos:secs,dataHora:new Date().toISOString(),criadoEm:serverTimestamp()
+        });
+      }catch(e){
+        console.warn("Log da vitória não pôde ser gravado:",e);
+      }
+    }
+
+    $("rewardValue").textContent=bonus;
+    $("reward").style.display="block";
+    msg("🎉 Palavra correta!","success");
+    clearState();
+
+    setTimeout(()=>{
+      if(round<TOTAL_ROUNDS){
+        showModal("🎉","Muito bem!","🪙 +"+bonus,"Você acertou a palavra e avançou para a próxima rodada.","PRÓXIMA RODADA","next");
+      }else{
+        showModal("👑","Desafio concluído!","🪙 +"+bonus,"Você terminou todas as rodadas da Forca.","VOLTAR AOS JOGOS","exit");
+      }
+    },700);
+  }catch(e){
+    console.error("Erro inesperado na vitória:",e);
+    // Mesmo em erro inesperado, libera a tela para não deixar a rodada travada.
+    locked=false;
+    msg("🎉 Palavra correta!","success");
+    clearState();
+    setTimeout(()=>{
+      if(round<TOTAL_ROUNDS)showModal("🎉","Muito bem!","","Você acertou a palavra e pode avançar.","PRÓXIMA RODADA","next");
+      else showModal("👑","Desafio concluído!","","Você terminou todas as rodadas da Forca.","VOLTAR AOS JOGOS","exit");
+    },500);
+  }
+}
+
+function loss(){
+  if(locked)return;
+
+  locked=true;
+  lock();
+  stopTimer();
+
+  errors=6;
+  frame();
+
+  msg("💀 Você perdeu!","error");
+  saveState("lost");
+
+  if(round===9){
+    showModal(
+      "💀",
+      "Você perdeu!",
+      "",
+      "O desafio final terminou. Você pode voltar aos jogos e tentar novamente.",
+      "VOLTAR AOS JOGOS",
+      "exit"
+    );
+    return;
+  }
+
+  $("lossContinueLevel").textContent=
+    "NÍVEL: "+
+    (round===8?"HARD":round<=2?"FÁCIL":round<=4?"MÉDIO":"DIFÍCIL")+
+    " • RODADA "+
+    round;
+
+  $("lossContinueText").textContent=
+    "Você perdeu esta tentativa. Use 1 chance para continuar no mesmo nível com uma nova palavra.";
+
+  $("lossContinueModal").classList.add("show");
+  $("lossContinueModal").setAttribute("aria-hidden","false");
+}
+function guess(c,b){if(locked||usedLetters.has(c))return;usedLetters.add(c);b.disabled=true;if(current.normal.includes(c)){b.classList.add("correct");wordUI();if((round===8||round===9)&&!timerStarted)startTimer();saveState();if(complete())win()}else{b.classList.add("wrong");errors++;frame();saveState();if(errors>=6)loss()}}
+
+$("modalButton").onclick=()=>{
+  $("modal").classList.remove("show");
+
+  if(action==="next"){
+    round++;
+    locked=false;
+    startNewRound();
+    return;
+  }
+
+  location.href="jogos.html";
+};
+$("back").onclick=()=>location.href="jogos.html";
+
+async function findUser(u){let s=await getDocs(query(collection(db,"admins"),where("uid","==",u.uid)));if(!s.empty)return s.docs[0].ref;if(u.email){s=await getDocs(query(collection(db,"admins"),where("email","==",u.email)));if(!s.empty)return s.docs[0].ref}return null}
+
+$("lossContinueExit").onclick=()=>{$("lossContinueModal").classList.remove("show");$("lossContinueModal").setAttribute("aria-hidden","true");location.href="jogos.html"};
+$("lossContinueSame").onclick=async()=>{
+  const btn=$("lossContinueSame");
+  const text=$("lossContinueText");
+
+  if(loading)return;
+
+  btn.disabled=true;
+  btn.textContent="⏳ VERIFICANDO CHANCE...";
+
+  try{
+    await continueSameLevel();
+
+  }catch(e){
+
+    if(e.message==="SEM_CHANCES"){
+      text.textContent=
+        "Você não tem chances disponíveis. Consiga 1 chance para continuar.";
+
+      btn.textContent="🚫 SEM CHANCES";
+      btn.disabled=true;
+
+    }else{
+      console.error("Erro no botão continuar:",e);
+
+      text.textContent=
+        "Não foi possível usar a chance agora. Tente novamente.";
+
+      btn.disabled=false;
+      btn.textContent="🔄 CONTINUAR • USAR 1 CHANCE";
+    }
+  }
+};
+
+onAuthStateChanged(auth,async u=>{
+  if(!u){location.href="index.html";return}user=u;
+  try{
+    userRef=await findUser(u);if(!userRef){alert("Cadastro Adam Games não encontrado.");location.href="jogos.html";return}
+    const snap=await getDoc(userRef);coins=Number(snap.data()?.moedas||0);chances=Number(snap.data()?.chances||0);coinsUI();chancesUI();
+    const resumed=loadState();
+    // Abrir a Forca usa 1 chance. Se houver partida salva, a mesma chance é usada
+    // para retomar de onde parou. Um simples refresh não cobra novamente porque
+    // a sessão mantém esta marca.
+    const canPlay=await consumeEntryChance();
+    if(!canPlay)return;
+    if(resumed){
+      render();
+      if(resumeLost){
+        if(round===9){
+          showModal("💀","Você perdeu!","","O desafio final terminou. Você pode voltar aos jogos e tentar novamente.","VOLTAR AOS JOGOS","exit");
+        }else{
+          $("lossContinueLevel").textContent="NÍVEL: "+(round===8?"HARD":round<=2?"FÁCIL":round<=4?"MÉDIO":"DIFÍCIL")+" • RODADA "+round;
+          $("lossContinueText").textContent="Você perdeu esta tentativa. Use 1 chance para continuar no mesmo nível com uma nova palavra.";
+          $("lossContinueModal").classList.add("show");
+          $("lossContinueModal").setAttribute("aria-hidden","false");
+        }
+      }else{
+        msg("↩️ Partida recuperada de onde você parou. 🎟️ Chance usada.","success");
+      }
+    }else{
+      startNewRound();
+    }
+  }catch(e){console.error("Erro ao carregar dados da Forca:",e);alert(e.message==="PERMISSION_DENIED"?"Permissão negada pelo Firebase. Atualize as Rules da Firestore para permitir a recompensa da Forca.":"Erro ao carregar seus dados.")}
+});
+</script>
+
+
+
+</body>
+</html>
