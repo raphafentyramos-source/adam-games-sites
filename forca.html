@@ -1,1 +1,3191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
 
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>Adam Games • Forca</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  background:#061b2d;
+}
+
+body{
+
+  min-height:100vh;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  color:#fff;
+
+  background:
+
+    radial-gradient(
+      circle at 10% 0%,
+      rgba(0,205,120,.42),
+      transparent 30%
+    ),
+
+    radial-gradient(
+      circle at 90% 10%,
+      rgba(25,170,255,.42),
+      transparent 30%
+    ),
+
+    linear-gradient(
+      180deg,
+      #087fc1 0%,
+      #064b80 48%,
+      #031c35 100%
+    );
+
+}
+
+
+/* =====================================================
+   PÁGINA
+===================================================== */
+
+.page{
+
+  width:100%;
+
+  max-width:650px;
+
+  margin:0 auto;
+
+  padding:
+    16px
+    15px
+    80px;
+
+}
+
+
+/* =====================================================
+   TOPO
+===================================================== */
+
+.top{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+}
+
+
+.back{
+
+  width:45px;
+
+  height:45px;
+
+  border:0;
+
+  border-radius:14px;
+
+  background:
+    rgba(0,30,60,.82);
+
+  color:#fff;
+
+  font-size:25px;
+
+  cursor:pointer;
+
+}
+
+
+.title{
+
+  text-align:center;
+
+  text-shadow:
+    0 2px 8px #000;
+
+}
+
+
+.title small{
+
+  display:block;
+
+  font-size:9px;
+
+  letter-spacing:2px;
+
+}
+
+
+.title strong{
+
+  font-size:20px;
+
+}
+
+
+/* =====================================================
+   SALDO
+===================================================== */
+
+.top-coins{
+
+  min-width:72px;
+
+  padding:7px 9px;
+
+  border-radius:12px;
+
+  text-align:center;
+
+  background:
+    rgba(255,213,43,.12);
+
+  border:
+    1px solid
+    rgba(255,213,43,.2);
+
+}
+
+
+.top-coins-label{
+
+  color:#b8d2e6;
+
+  font-size:8px;
+
+  font-weight:bold;
+
+}
+
+
+.top-coins-value{
+
+  margin-top:2px;
+
+  color:#ffd52b;
+
+  font-size:17px;
+
+  font-weight:900;
+
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero{
+
+  margin-top:15px;
+
+  padding:18px;
+
+  border-radius:23px;
+
+  text-align:center;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(0,45,80,.97),
+      rgba(2,30,58,.97)
+    );
+
+  border:
+    1px solid
+    rgba(255,255,255,.1);
+
+  box-shadow:
+    0 12px 30px
+    rgba(0,0,0,.25);
+
+}
+
+
+.hero-icon{
+
+  font-size:43px;
+
+}
+
+
+.hero h1{
+
+  margin-top:4px;
+
+  font-size:31px;
+
+  font-weight:900;
+
+}
+
+
+.hero p{
+
+  margin-top:5px;
+
+  color:#bcd9ec;
+
+  font-size:13px;
+
+}
+
+
+/* =====================================================
+   NÍVEL
+===================================================== */
+
+.level-row{
+
+  display:grid;
+
+  grid-template-columns:
+    1fr
+    1fr
+    1fr;
+
+  gap:8px;
+
+  margin-top:12px;
+
+}
+
+
+.level-box{
+
+  padding:10px 6px;
+
+  border-radius:13px;
+
+  text-align:center;
+
+  background:
+    rgba(255,255,255,.065);
+
+  border:
+    1px solid
+    rgba(255,255,255,.08);
+
+}
+
+
+.level-label{
+
+  color:#9fc5df;
+
+  font-size:8px;
+
+  font-weight:bold;
+
+}
+
+
+.level-value{
+
+  margin-top:3px;
+
+  font-size:16px;
+
+  font-weight:900;
+
+}
+
+
+.level-easy .level-value{
+  color:#65ff9c;
+}
+
+.level-medium .level-value{
+  color:#ffd52b;
+}
+
+.level-hard .level-value{
+  color:#ff7583;
+}
+
+
+/* =====================================================
+   PROGRESSO
+===================================================== */
+
+.progress-card{
+
+  margin-top:12px;
+
+  padding:13px;
+
+  border-radius:16px;
+
+  background:
+    rgba(2,27,55,.86);
+
+}
+
+
+.progress-top{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  gap:10px;
+
+}
+
+
+.progress-title{
+
+  font-size:12px;
+
+  font-weight:900;
+
+}
+
+
+.progress-count{
+
+  color:#9fc5df;
+
+  font-size:11px;
+
+}
+
+
+.progress-bar{
+
+  height:8px;
+
+  margin-top:8px;
+
+  overflow:hidden;
+
+  border-radius:20px;
+
+  background:
+    rgba(255,255,255,.09);
+
+}
+
+
+.progress-fill{
+
+  height:100%;
+
+  width:0%;
+
+  border-radius:20px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #18bd68,
+      #ffd52b
+    );
+
+  transition:
+    width .3s ease;
+
+}
+
+
+/* =====================================================
+   ÁREA DA FORCA
+===================================================== */
+
+.game-card{
+
+  margin-top:13px;
+
+  padding:14px;
+
+  border-radius:21px;
+
+  background:
+    rgba(2,27,55,.95);
+
+  border:
+    1px solid
+    rgba(255,255,255,.1);
+
+  box-shadow:
+    0 10px 27px
+    rgba(0,0,0,.22);
+
+}
+
+
+.hangman-wrap{
+
+  position:relative;
+
+  width:100%;
+
+  aspect-ratio:1.15 / 1;
+
+  max-width:460px;
+
+  margin:0 auto;
+
+  overflow:hidden;
+
+  border-radius:18px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(9,55,86,.95),
+      rgba(3,27,52,.98)
+    );
+
+}
+
+
+.hangman-wrap img{
+
+  width:100%;
+
+  height:100%;
+
+  display:block;
+
+  object-fit:contain;
+
+}
+
+
+/* =====================================================
+   ERROS
+===================================================== */
+
+.errors-row{
+
+  display:flex;
+
+  justify-content:center;
+
+  gap:6px;
+
+  margin-top:11px;
+
+}
+
+
+.error-dot{
+
+  width:10px;
+
+  height:10px;
+
+  border-radius:50%;
+
+  background:
+    rgba(255,255,255,.14);
+
+  border:
+    1px solid
+    rgba(255,255,255,.1);
+
+}
+
+
+.error-dot.active{
+
+  background:#ff5365;
+
+  box-shadow:
+    0 0 8px
+    rgba(255,60,80,.5);
+
+}
+
+
+/* =====================================================
+   DICA
+===================================================== */
+
+.hint{
+
+  margin-top:13px;
+
+  padding:13px;
+
+  border-radius:15px;
+
+  text-align:center;
+
+  background:
+    rgba(25,170,255,.09);
+
+  border:
+    1px solid
+    rgba(25,170,255,.13);
+
+}
+
+
+.hint-label{
+
+  color:#76c9ff;
+
+  font-size:9px;
+
+  font-weight:900;
+
+  letter-spacing:1px;
+
+}
+
+
+.hint-text{
+
+  margin-top:4px;
+
+  color:#fff;
+
+  font-size:15px;
+
+  font-weight:bold;
+
+}
+
+
+/* =====================================================
+   PALAVRA
+===================================================== */
+
+.word{
+
+  display:flex;
+
+  flex-wrap:wrap;
+
+  justify-content:center;
+
+  gap:6px;
+
+  margin-top:18px;
+
+  min-height:48px;
+
+}
+
+
+.letter{
+
+  width:27px;
+
+  height:39px;
+
+  display:flex;
+
+  align-items:flex-end;
+
+  justify-content:center;
+
+  padding-bottom:5px;
+
+  border-bottom:
+    3px solid
+    #69cfff;
+
+  color:#fff;
+
+  font-size:24px;
+
+  font-weight:900;
+
+  text-transform:uppercase;
+
+}
+
+
+.letter.space{
+
+  width:13px;
+
+  border-bottom:0;
+
+}
+
+
+/* =====================================================
+   TECLADO
+===================================================== */
+
+.keyboard{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(7,1fr);
+
+  gap:6px;
+
+  margin-top:20px;
+
+}
+
+
+.key{
+
+  min-height:42px;
+
+  border:0;
+
+  border-radius:10px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #12679a,
+      #08476f
+    );
+
+  color:#fff;
+
+  font-size:15px;
+
+  font-weight:900;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 3px 0
+    rgba(0,0,0,.25);
+
+}
+
+
+.key:active{
+
+  transform:translateY(2px);
+
+}
+
+
+.key.used{
+
+  opacity:.28;
+
+  cursor:not-allowed;
+
+}
+
+
+.key.correct{
+
+  background:
+    linear-gradient(
+      145deg,
+      #16b866,
+      #087d45
+    );
+
+}
+
+
+.key.wrong{
+
+  background:
+    linear-gradient(
+      145deg,
+      #c72e45,
+      #8d182c
+    );
+
+}
+
+
+.key:disabled{
+
+  cursor:not-allowed;
+
+}
+
+
+/* =====================================================
+   MENSAGEM
+===================================================== */
+
+.message{
+
+  display:none;
+
+  margin-top:14px;
+
+  padding:15px;
+
+  border-radius:15px;
+
+  text-align:center;
+
+  font-size:14px;
+
+  font-weight:bold;
+
+}
+
+
+.message.show{
+  display:block;
+}
+
+
+.message.success{
+
+  background:
+    rgba(0,220,110,.12);
+
+  border:
+    1px solid
+    rgba(0,220,110,.2);
+
+  color:#72ffae;
+
+}
+
+
+.message.error{
+
+  background:
+    rgba(255,50,70,.12);
+
+  border:
+    1px solid
+    rgba(255,50,70,.2);
+
+  color:#ff9ca8;
+
+}
+
+
+/* =====================================================
+   BOTÃO CONTINUAR
+===================================================== */
+
+.next-button{
+
+  width:100%;
+
+  height:50px;
+
+  margin-top:13px;
+
+  border:0;
+
+  border-radius:14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #18bd68,
+      #087d45
+    );
+
+  color:#fff;
+
+  font-size:14px;
+
+  font-weight:900;
+
+  cursor:pointer;
+
+  display:none;
+
+}
+
+
+.next-button.show{
+
+  display:block;
+
+}
+
+
+/* =====================================================
+   RECOMPENSA
+===================================================== */
+
+.reward{
+
+  margin-top:12px;
+
+  padding:13px;
+
+  border-radius:15px;
+
+  text-align:center;
+
+  background:
+    rgba(255,213,43,.08);
+
+  border:
+    1px solid
+    rgba(255,213,43,.17);
+
+}
+
+
+.reward strong{
+
+  color:#ffd52b;
+
+  font-size:20px;
+
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+.modal{
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:100;
+
+  display:none;
+
+  align-items:center;
+
+  justify-content:center;
+
+  padding:20px;
+
+  background:
+    rgba(0,10,25,.84);
+
+  backdrop-filter:
+    blur(5px);
+
+}
+
+
+.modal.show{
+
+  display:flex;
+
+}
+
+
+.modal-card{
+
+  width:100%;
+
+  max-width:380px;
+
+  padding:25px 20px;
+
+  border-radius:23px;
+
+  text-align:center;
+
+  background:#082742;
+
+  border:
+    1px solid
+    rgba(255,255,255,.12);
+
+  box-shadow:
+    0 20px 50px
+    rgba(0,0,0,.45);
+
+}
+
+
+.modal-icon{
+
+  font-size:52px;
+
+}
+
+
+.modal-card h2{
+
+  margin-top:8px;
+
+  font-size:24px;
+
+}
+
+
+.modal-card p{
+
+  margin-top:8px;
+
+  color:#b9d5e8;
+
+  font-size:14px;
+
+  line-height:1.5;
+
+}
+
+
+.modal-coins{
+
+  margin-top:12px;
+
+  color:#ffd52b;
+
+  font-size:22px;
+
+  font-weight:900;
+
+}
+
+
+.modal-button{
+
+  width:100%;
+
+  height:48px;
+
+  margin-top:18px;
+
+  border:0;
+
+  border-radius:13px;
+
+  background:#18a85c;
+
+  color:#fff;
+
+  font-weight:900;
+
+  cursor:pointer;
+
+}
+
+
+/* =====================================================
+   RESPONSIVO
+===================================================== */
+
+@media(max-width:430px){
+
+  .keyboard{
+
+    grid-template-columns:
+      repeat(7,1fr);
+
+    gap:5px;
+
+  }
+
+  .key{
+
+    min-height:39px;
+
+    font-size:14px;
+
+  }
+
+  .letter{
+
+    width:24px;
+
+    font-size:21px;
+
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+  <!-- TOPO -->
+
+  <div class="top">
+
+    <button
+      class="back"
+      id="back"
+      type="button">
+
+      ←
+
+    </button>
+
+
+    <div class="title">
+
+      <small>
+        ADAM GAMES
+      </small>
+
+      <strong>
+        FORCA
+      </strong>
+
+    </div>
+
+
+    <div class="top-coins">
+
+      <div class="top-coins-label">
+        MOEDAS
+      </div>
+
+      <div
+        class="top-coins-value"
+        id="coins">
+
+        0
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- HERO -->
+
+  <div class="hero">
+
+    <div class="hero-icon">
+      🔤
+    </div>
+
+    <h1>
+      Forca
+    </h1>
+
+    <p>
+      Descubra a palavra antes que o personagem seja enforcado.
+    </p>
+
+  </div>
+
+
+  <!-- NÍVEIS -->
+
+  <div class="level-row">
+
+    <div class="level-box level-easy">
+
+      <div class="level-label">
+        NÍVEL
+      </div>
+
+      <div
+        class="level-value"
+        id="levelName">
+
+        FÁCIL
+
+      </div>
+
+    </div>
+
+
+    <div class="level-box">
+
+      <div class="level-label">
+        RODADA
+      </div>
+
+      <div
+        class="level-value"
+        id="roundNumber">
+
+        1
+
+      </div>
+
+    </div>
+
+
+    <div class="level-box">
+
+      <div class="level-label">
+        RECOMPENSA
+      </div>
+
+      <div
+        class="level-value"
+        id="roundReward">
+
+        🪙 20
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- PROGRESSO -->
+
+  <div class="progress-card">
+
+    <div class="progress-top">
+
+      <div class="progress-title">
+        PROGRESSO DA SEQUÊNCIA
+      </div>
+
+      <div
+        class="progress-count"
+        id="progressText">
+
+        1 / 5
+
+      </div>
+
+    </div>
+
+    <div class="progress-bar">
+
+      <div
+        class="progress-fill"
+        id="progressFill">
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- JOGO -->
+
+  <div class="game-card">
+
+
+    <div class="hangman-wrap">
+
+      <img
+        id="hangmanImage"
+        src="assets/forca/forca-0.png"
+        alt="Estágio da forca"
+      >
+
+    </div>
+
+
+    <div
+      class="errors-row"
+      id="errorsRow">
+
+      <span class="error-dot"></span>
+      <span class="error-dot"></span>
+      <span class="error-dot"></span>
+      <span class="error-dot"></span>
+      <span class="error-dot"></span>
+      <span class="error-dot"></span>
+      <span class="error-dot"></span>
+
+    </div>
+
+
+    <div class="hint">
+
+      <div class="hint-label">
+        💡 DICA
+      </div>
+
+      <div
+        class="hint-text"
+        id="hint">
+
+        —
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="word"
+      id="word">
+
+    </div>
+
+
+    <div
+      class="keyboard"
+      id="keyboard">
+
+    </div>
+
+
+    <div
+      class="message"
+      id="message">
+    </div>
+
+
+    <div
+      class="reward"
+      id="reward"
+      style="display:none;">
+
+      🪙 Você ganhou
+      <strong id="rewardValue">
+        20
+      </strong>
+      moedas!
+
+    </div>
+
+
+    <button
+      class="next-button"
+      id="nextButton"
+      type="button">
+
+      CONTINUAR ➜
+
+    </button>
+
+
+  </div>
+
+
+</div>
+
+
+<!-- MODAL FINAL -->
+
+<div
+  class="modal"
+  id="modal">
+
+  <div class="modal-card">
+
+    <div
+      class="modal-icon"
+      id="modalIcon">
+
+      🎉
+
+    </div>
+
+    <h2
+      id="modalTitle">
+
+      Parabéns!
+
+    </h2>
+
+    <p
+      id="modalText">
+
+      Você acertou a palavra.
+
+    </p>
+
+    <div
+      class="modal-coins"
+      id="modalCoins">
+
+      +20 🪙
+
+    </div>
+
+    <button
+      class="modal-button"
+      id="modalButton"
+      type="button">
+
+      CONTINUAR
+
+    </button>
+
+  </div>
+
+</div>
+
+
+<script type="module">
+
+
+/* =====================================================
+   FIREBASE
+===================================================== */
+
+import {
+  initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+import {
+  getAuth,
+  onAuthStateChanged
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+import {
+  getFirestore,
+  collection,
+  query,
+  where,
+  getDocs
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+/* =====================================================
+   CONFIGURAÇÃO
+===================================================== */
+
+const firebaseConfig = {
+
+  apiKey:
+    "AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",
+
+  authDomain:
+    "adam-games-21081.firebaseapp.com",
+
+  projectId:
+    "adam-games-21081",
+
+  storageBucket:
+    "adam-games-21081.firebasestorage.app",
+
+  messagingSenderId:
+    "1055528418738",
+
+  appId:
+    "1:1055528418738:web:5fafdf63424ba9744eb8ab"
+
+};
+
+
+const app =
+  initializeApp(
+    firebaseConfig
+  );
+
+
+const auth =
+  getAuth(app);
+
+
+const db =
+  getFirestore(app);
+
+
+/* =====================================================
+   ELEMENTOS
+===================================================== */
+
+const coinsEl =
+  document.getElementById("coins");
+
+const levelNameEl =
+  document.getElementById("levelName");
+
+const roundNumberEl =
+  document.getElementById("roundNumber");
+
+const roundRewardEl =
+  document.getElementById("roundReward");
+
+const progressTextEl =
+  document.getElementById("progressText");
+
+const progressFillEl =
+  document.getElementById("progressFill");
+
+const hangmanImage =
+  document.getElementById("hangmanImage");
+
+const errorsRow =
+  document.getElementById("errorsRow");
+
+const hintEl =
+  document.getElementById("hint");
+
+const wordEl =
+  document.getElementById("word");
+
+const keyboardEl =
+  document.getElementById("keyboard");
+
+const messageEl =
+  document.getElementById("message");
+
+const rewardEl =
+  document.getElementById("reward");
+
+const rewardValueEl =
+  document.getElementById("rewardValue");
+
+const nextButton =
+  document.getElementById("nextButton");
+
+const modal =
+  document.getElementById("modal");
+
+const modalIcon =
+  document.getElementById("modalIcon");
+
+const modalTitle =
+  document.getElementById("modalTitle");
+
+const modalText =
+  document.getElementById("modalText");
+
+const modalCoins =
+  document.getElementById("modalCoins");
+
+const modalButton =
+  document.getElementById("modalButton");
+
+
+/* =====================================================
+   ESTADO
+===================================================== */
+
+let firebaseUser =
+  null;
+
+let usuario =
+  null;
+
+let palavraAtual =
+  null;
+
+let letrasEscolhidas =
+  new Set();
+
+let erros =
+  0;
+
+let rodada =
+  1;
+
+let moedasLocais =
+  0;
+
+let partidaTerminou =
+  false;
+
+let palavraResolvida =
+  false;
+
+
+/* =====================================================
+   SEQUÊNCIA DE NÍVEIS
+=====================================================
+
+   Fácil   = 20
+   Médio   = 20
+   Difícil = 30
+
+   Sequência:
+
+   Fácil
+   Médio
+   Difícil
+   Difícil
+   Fácil
+   Médio
+   Difícil
+
+   Depois reinicia.
+
+===================================================== */
+
+const sequencia = [
+
+  {
+    nivel:"FÁCIL",
+    classe:"easy",
+    recompensa:20
+  },
+
+  {
+    nivel:"MÉDIO",
+    classe:"medium",
+    recompensa:20
+  },
+
+  {
+    nivel:"DIFÍCIL",
+    classe:"hard",
+    recompensa:30
+  },
+
+  {
+    nivel:"DIFÍCIL",
+    classe:"hard",
+    recompensa:30
+  },
+
+  {
+    nivel:"FÁCIL",
+    classe:"easy",
+    recompensa:20
+  },
+
+  {
+    nivel:"MÉDIO",
+    classe:"medium",
+    recompensa:20
+  },
+
+  {
+    nivel:"DIFÍCIL",
+    classe:"hard",
+    recompensa:30
+  }
+
+];
+
+
+/* =====================================================
+   400 PALAVRAS
+=====================================================
+
+   140 fáceis
+   140 médias
+   120 difíceis
+
+===================================================== */
+
+const palavras = {
+
+
+/* =====================================================
+   140 FÁCEIS
+===================================================== */
+
+facil:[
+
+["casa","Lugar onde moramos"],
+["gato","Animal doméstico que mia"],
+["cachorro","Animal doméstico conhecido como melhor amigo"],
+["bola","Objeto usado em vários esportes"],
+["mesa","Móvel onde podemos fazer refeições"],
+["cadeira","Móvel usado para sentar"],
+["livro","Objeto usado para ler"],
+["escola","Lugar onde estudamos"],
+["banana","Fruta amarela"],
+["laranja","Fruta cítrica de cor alaranjada"],
+["maçã","Fruta geralmente vermelha ou verde"],
+["uva","Fruta pequena que cresce em cachos"],
+["arroz","Alimento muito comum nas refeições"],
+["feijão","Grão muito usado na culinária brasileira"],
+["leite","Bebida branca produzida por mamíferos"],
+["água","Líquido essencial para a vida"],
+["fogo","Produz calor e luz"],
+["sol","Estrela que ilumina a Terra"],
+["lua","Astro que vemos no céu à noite"],
+["estrela","Astro que brilha no céu"],
+["nuvem","Forma-se no céu com vapor de água"],
+["chuva","Água que cai das nuvens"],
+["vento","Movimento do ar"],
+["mar","Grande extensão de água salgada"],
+["rio","Curso natural de água"],
+["praia","Lugar onde encontramos areia e mar"],
+["areia","Pequenos grãos encontrados nas praias"],
+["flor","Parte colorida de muitas plantas"],
+["árvore","Planta de grande porte"],
+["folha","Parte verde de uma planta"],
+["rosa","Flor muito conhecida"],
+["jardim","Lugar onde cultivamos plantas"],
+["carro","Veículo de quatro rodas"],
+["ônibus","Veículo coletivo"],
+["moto","Veículo de duas rodas"],
+["bicicleta","Veículo movido por pedais"],
+["avião","Veículo que voa"],
+["barco","Veículo usado na água"],
+["trem","Veículo que anda sobre trilhos"],
+["cama","Móvel usado para dormir"],
+["sofá","Móvel usado para sentar"],
+["porta","Permite entrar ou sair de um ambiente"],
+["janela","Abertura que permite luz e ventilação"],
+["parede","Estrutura que separa ambientes"],
+["telhado","Parte superior de uma casa"],
+["cozinha","Lugar onde preparamos alimentos"],
+["quarto","Cômodo usado principalmente para dormir"],
+["banheiro","Cômodo usado para higiene"],
+["espelho","Objeto que reflete nossa imagem"],
+["relógio","Objeto usado para marcar as horas"],
+["telefone","Aparelho usado para comunicação"],
+["celular","Telefone portátil"],
+["computador","Máquina usada para várias tarefas"],
+["teclado","Conjunto de teclas usado para digitar"],
+["mouse","Dispositivo usado no computador"],
+["tela","Superfície onde imagens são exibidas"],
+["caderno","Objeto usado para escrever"],
+["lápis","Objeto usado para escrever ou desenhar"],
+["caneta","Instrumento de escrita"],
+["borracha","Objeto usado para apagar"],
+["mochila","Bolsa usada para carregar materiais"],
+["sapato","Peça usada nos pés"],
+["camisa","Peça de roupa"],
+["calça","Peça de roupa usada nas pernas"],
+["vestido","Peça de roupa geralmente feminina"],
+["boné","Acessório usado na cabeça"],
+["chapéu","Acessório usado na cabeça"],
+["óculos","Objeto usado sobre os olhos"],
+["anel","Acessório usado no dedo"],
+["brinco","Acessório usado na orelha"],
+["colar","Acessório usado no pescoço"],
+["coração","Órgão responsável por bombear sangue"],
+["olho","Órgão usado para enxergar"],
+["boca","Parte usada para falar e comer"],
+["nariz","Órgão usado para sentir cheiros"],
+["orelha","Parte do corpo usada para ouvir"],
+["mão","Parte do corpo usada para tocar e segurar"],
+["dedo","Parte das mãos e dos pés"],
+["braço","Parte do corpo entre ombro e mão"],
+["perna","Parte do corpo usada para caminhar"],
+["pé","Parte do corpo que toca o chão"],
+["cabeça","Parte superior do corpo"],
+["cabelo","Fios que crescem na cabeça"],
+["dente","Estrutura usada para mastigar"],
+["sorriso","Expressão de alegria"],
+["amigo","Pessoa próxima e querida"],
+["família","Grupo formado por pessoas próximas"],
+["bebê","Criança muito pequena"],
+["criança","Pessoa que ainda não é adulta"],
+["jovem","Pessoa em fase entre infância e idade adulta"],
+["música","Arte feita com sons"],
+["dança","Movimento corporal acompanhado ou não por música"],
+["filme","Obra audiovisual"],
+["jogo","Atividade feita para diversão"],
+["festa","Evento de comemoração"],
+["presente","Algo dado a alguém"],
+["bolo","Doce comum em festas"],
+["doce","Alimento de sabor açucarado"],
+["pizza","Comida redonda coberta por ingredientes"],
+["hambúrguer","Sanduíche geralmente feito com carne"],
+["batata","Alimento muito consumido"],
+["tomate","Fruto usado em saladas e molhos"],
+["cenoura","Vegetal geralmente alaranjado"],
+["milho","Cereal usado em vários alimentos"],
+["ovo","Alimento produzido por aves"],
+["queijo","Alimento produzido a partir do leite"],
+["carne","Alimento de origem animal"],
+["peixe","Animal que vive na água"],
+["frango","Ave muito usada como alimento"],
+["vaca","Animal que produz leite"],
+["porco","Animal criado para produção de carne"],
+["cavalo","Animal usado para montaria"],
+["coelho","Pequeno mamífero de orelhas longas"],
+["macaco","Animal conhecido por sua agilidade"],
+["leão","Grande felino"],
+["tigre","Felino de listras"],
+["elefante","Grande animal de tromba"],
+["girafa","Animal conhecido pelo pescoço comprido"],
+["zebra","Animal com listras pretas e brancas"],
+["panda","Animal preto e branco que come bambu"],
+["urso","Grande mamífero"],
+["abelha","Inseto que produz mel"],
+["borboleta","Inseto de asas coloridas"],
+["formiga","Inseto que vive em colônias"],
+["aranha","Animal de oito patas"],
+["cobra","Réptil sem pernas"],
+["sapo","Animal que vive próximo à água"],
+["tartaruga","Animal protegido por casco"],
+["galinha","Ave doméstica"],
+["pato","Ave que gosta de água"],
+["papagaio","Ave conhecida por imitar sons"],
+["azul","Cor do céu em um dia limpo"],
+["verde","Cor comum nas folhas"],
+["amarelo","Cor do sol desenhado por crianças"],
+["vermelho","Cor associada ao coração"],
+["branco","Cor muito clara"],
+["preto","Cor muito escura"],
+["roxo","Cor entre azul e vermelho"],
+["rosa","Cor associada à flor de mesmo nome"],
+["luz","O que permite enxergar"],
+["noite","Período sem luz solar"],
+["dia","Período iluminado pelo sol"],
+["manhã","Primeiro período do dia"],
+["tarde","Período entre manhã e noite"],
+["frio","Sensação causada por baixa temperatura"],
+["calor","Sensação causada por alta temperatura"]
+
+],
+
+
+/* =====================================================
+   140 MÉDIAS
+===================================================== */
+
+medio:[
+
+["abacaxi","Fruta tropical com casca áspera"],
+["melancia","Fruta grande e cheia de água"],
+["morango","Fruta vermelha muito usada em sobremesas"],
+["maracujá","Fruta conhecida pelo sabor azedo"],
+["manga","Fruta tropical de polpa amarela"],
+["pêssego","Fruta macia de caroço grande"],
+["cereja","Pequena fruta geralmente vermelha"],
+["goiaba","Fruta tropical usada em doces"],
+["mamão","Fruta alaranjada com sementes pretas"],
+["coco","Fruto com casca dura e água no interior"],
+["limão","Fruta cítrica bastante azeda"],
+["melão","Fruta de polpa doce e aromática"],
+["castanha","Semente comestível encontrada em vários frutos"],
+["amêndoa","Semente muito usada em doces"],
+["chocolate","Alimento produzido a partir do cacau"],
+["pipoca","Milho estourado pelo calor"],
+["panqueca","Massa fina geralmente servida com recheio"],
+["lasanha","Massa em camadas com molho e recheio"],
+["espaguete","Massa longa e fina"],
+["sanduíche","Alimento feito entre fatias de pão"],
+["sorvete","Sobremesa gelada"],
+["brigadeiro","Doce brasileiro feito com leite condensado"],
+["pudim","Sobremesa cremosa"],
+["biscoito","Alimento assado geralmente crocante"],
+["geleia","Doce feito normalmente de frutas"],
+["farinha","Ingrediente usado para preparar massas"],
+["açúcar","Ingrediente usado para adoçar"],
+["canela","Especiaria aromática"],
+["baunilha","Ingrediente muito usado em doces"],
+["pimenta","Tempero que pode ser picante"],
+["alface","Folha muito usada em saladas"],
+["espinafre","Folha verde rica em nutrientes"],
+["brócolis","Vegetal verde formado por pequenas flores"],
+["abóbora","Vegetal grande de polpa alaranjada"],
+["berinjela","Vegetal de casca geralmente roxa"],
+["pepino","Vegetal usado frequentemente em saladas"],
+["cebola","Vegetal usado para temperar alimentos"],
+["alho","Tempero de sabor marcante"],
+["mandioca","Raiz muito consumida no Brasil"],
+["beterraba","Raiz de cor vermelha intensa"],
+["carambola","Fruta cujo corte lembra uma estrela"],
+["pitanga","Fruta pequena de sabor característico"],
+["acerola","Fruta pequena rica em vitamina C"],
+["caju","Fruta tropical com castanha"],
+["tucano","Ave de bico grande e colorido"],
+["flamingo","Ave conhecida pelas pernas longas"],
+["pinguim","Ave que não voa e vive em regiões frias"],
+["golfinho","Mamífero marinho muito inteligente"],
+["baleia","Grande mamífero que vive no oceano"],
+["tubarão","Peixe predador dos oceanos"],
+["polvo","Animal marinho com oito braços"],
+["lula","Animal marinho de corpo alongado"],
+["caranguejo","Crustáceo que anda de lado"],
+["lagosta","Crustáceo de grandes pinças"],
+["crocodilo","Grande réptil semiaquático"],
+["jacaré","Réptil encontrado em regiões tropicais"],
+["camaleão","Réptil conhecido por mudar de cor"],
+["iguana","Réptil herbívoro de aparência pré-histórica"],
+["dinossauro","Animal pré-histórico extinto"],
+["vulcão","Estrutura que pode liberar lava"],
+["planeta","Corpo celeste que orbita uma estrela"],
+["galáxia","Grande conjunto de estrelas"],
+["universo","Conjunto de tudo que existe"],
+["cometa","Corpo celeste que pode apresentar uma cauda"],
+["satélite","Corpo que orbita um planeta"],
+["astronauta","Pessoa treinada para viajar ao espaço"],
+["foguete","Veículo capaz de alcançar o espaço"],
+["telescópio","Instrumento usado para observar astros"],
+["bússola","Instrumento usado para orientação"],
+["mapa","Representação de uma região"],
+["oceano","Grande massa de água salgada"],
+["cachoeira","Queda natural de água"],
+["montanha","Grande elevação natural do terreno"],
+["deserto","Região com pouca chuva"],
+["floresta","Grande área coberta por árvores"],
+["vulcânico","Relacionado a vulcões"],
+["ilha","Porção de terra cercada por água"],
+["caverna","Abertura natural dentro de uma rocha"],
+["ponte","Estrutura usada para atravessar obstáculos"],
+["castelo","Construção fortificada antiga"],
+["palácio","Grande residência de governantes"],
+["pirata","Pessoa associada a ataques marítimos"],
+["tesouro","Conjunto de objetos valiosos"],
+["coroa","Objeto usado por reis e rainhas"],
+["espada","Arma antiga de lâmina longa"],
+["escudo","Objeto usado para proteção"],
+["armadura","Proteção usada por guerreiros"],
+["dragão","Criatura fantástica semelhante a um réptil"],
+["unicórnio","Criatura fantástica com um chifre"],
+["fada","Ser fantástico associado à magia"],
+["bruxa","Personagem tradicional associada à magia"],
+["mágico","Pessoa que realiza truques de ilusionismo"],
+["feiticeiro","Pessoa associada à magia em histórias"],
+["princesa","Filha de rei ou rainha"],
+["príncipe","Filho de rei ou rainha"],
+["rainha","Mulher que governa um reino"],
+["monarca","Pessoa que governa uma monarquia"],
+["palhaço","Artista conhecido por divertir o público"],
+["circo","Espetáculo com artistas e atrações"],
+["acrobata","Artista que realiza movimentos corporais difíceis"],
+["malabarista","Artista que manipula objetos no ar"],
+["fantasia","Roupa usada para representar um personagem"],
+["máscara","Objeto usado para cobrir o rosto"],
+["carnaval","Festa popular conhecida por fantasias"],
+["desfile","Evento em que pessoas caminham em apresentação"],
+["teatro","Lugar onde peças são apresentadas"],
+["palco","Espaço onde acontece uma apresentação"],
+["microfone","Equipamento usado para amplificar a voz"],
+["violão","Instrumento musical de cordas"],
+["bateria","Instrumento musical de percussão"],
+["piano","Instrumento musical com teclas"],
+["saxofone","Instrumento de sopro metálico"],
+["guitarra","Instrumento elétrico de cordas"],
+["melodia","Sequência de sons musicais"],
+["ritmo","Organização dos sons no tempo"],
+["cantor","Pessoa que canta"],
+["dançarino","Pessoa que dança profissionalmente"],
+["artista","Pessoa que produz arte"],
+["fotografia","Imagem registrada por câmera"],
+["câmera","Equipamento usado para fotografar ou filmar"],
+["internet","Rede mundial de computadores"],
+["aplicativo","Programa criado para uma função específica"],
+["senha","Código usado para acessar algo"],
+["arquivo","Conjunto de dados armazenados"],
+["programa","Conjunto de instruções para computador"],
+["robô","Máquina capaz de executar tarefas"],
+["máquina","Dispositivo criado para realizar trabalho"],
+["energia","Capacidade de realizar trabalho"],
+["bateria","Dispositivo que armazena energia"],
+["eletricidade","Forma de energia usada em equipamentos"],
+["motor","Máquina que produz movimento"],
+["engrenagem","Peça dentada usada em mecanismos"],
+["parafuso","Peça usada para fixar objetos"],
+["martelo","Ferramenta usada para bater"],
+["tesoura","Ferramenta usada para cortar"],
+["alicate","Ferramenta usada para segurar ou cortar"],
+["chaveiro","Objeto usado para organizar chaves"],
+["carteira","Objeto usado para guardar dinheiro e documentos"],
+["mochila","Bolsa carregada nas costas"],
+["jaqueta","Peça de roupa usada sobre outras roupas"],
+["casaco","Peça usada para proteger do frio"],
+["gravata","Acessório usado tradicionalmente no pescoço"],
+["pulseira","Acessório usado no pulso"],
+["brincadeira","Atividade feita por diversão"],
+["aventura","Experiência emocionante ou arriscada"],
+["mistério","Algo que ainda não foi explicado"],
+["segredo","Informação que deve ser mantida em sigilo"],
+["desafio","Situação que exige esforço para ser superada"],
+["vitória","Resultado de quem vence"],
+["derrota","Resultado de quem perde"]
+
+],
+
+
+/* =====================================================
+   120 DIFÍCEIS
+===================================================== */
+
+dificil:[
+
+["labirinto","Lugar cheio de caminhos onde é fácil se perder"],
+["arqueologia","Estudo de sociedades antigas por seus vestígios"],
+["astronomia","Ciência que estuda os corpos celestes"],
+["meteorologia","Ciência que estuda a atmosfera e o clima"],
+["geografia","Ciência que estuda o espaço terrestre"],
+["filosofia","Área que busca compreender questões fundamentais"],
+["psicologia","Ciência que estuda comportamento e mente"],
+["biologia","Ciência que estuda os seres vivos"],
+["química","Ciência que estuda a matéria e suas transformações"],
+["matemática","Ciência que trabalha com números e relações"],
+["engenharia","Área que aplica conhecimentos para criar soluções"],
+["arquitetura","Área relacionada ao planejamento de construções"],
+["fotossíntese","Processo pelo qual plantas produzem alimento"],
+["metamorfose","Transformação física de alguns animais"],
+["biodiversidade","Variedade de seres vivos de uma região"],
+["ecossistema","Conjunto de seres vivos e ambiente"],
+["sustentabilidade","Uso responsável dos recursos naturais"],
+["preservação","Ação de proteger algo contra danos"],
+["conservação","Manutenção e proteção de determinado recurso"],
+["reciclagem","Processo de reaproveitamento de materiais"],
+["poluição","Contaminação prejudicial ao ambiente"],
+["desmatamento","Retirada da vegetação de uma área"],
+["reflorestamento","Plantio de árvores em área desmatada"],
+["aquecimento","Aumento da temperatura"],
+["atmosfera","Camada de gases que envolve um planeta"],
+["gravidade","Força que atrai corpos para outros corpos"],
+["relatividade","Teoria física associada ao espaço e tempo"],
+["eletrônica","Área relacionada ao controle de elétrons"],
+["tecnologia","Aplicação de conhecimento para criar soluções"],
+["inteligência","Capacidade de aprender e resolver problemas"],
+["algoritmo","Sequência de instruções para solucionar um problema"],
+["criptografia","Técnica de proteção de informações"],
+["programação","Processo de criação de programas"],
+["servidor","Computador que fornece serviços a outros"],
+["interface","Meio pelo qual usuário interage com sistema"],
+["navegador","Programa usado para acessar a internet"],
+["conectividade","Capacidade de estabelecer conexões"],
+["automação","Uso de tecnologia para executar tarefas"],
+["inteligênciaartificial","Tecnologia capaz de realizar tarefas associadas à inteligência humana"],
+["realidadevirtual","Tecnologia que cria ambientes digitais imersivos"],
+["cibernética","Área relacionada ao controle e comunicação em sistemas"],
+["criptomoeda","Moeda digital baseada em criptografia"],
+["blockchain","Tecnologia de registro distribuído"],
+["economia","Área que estuda produção e consumo"],
+["democracia","Sistema político baseado na participação popular"],
+["constituição","Conjunto fundamental de leis de um país"],
+["legislação","Conjunto de leis de uma sociedade"],
+["jurisprudência","Conjunto de decisões judiciais"],
+["diplomacia","Prática de relações entre países"],
+["geopolítica","Estudo das relações de poder entre territórios"],
+["globalização","Integração crescente entre diferentes regiões"],
+["civilização","Sociedade organizada com cultura e instituições"],
+["revolução","Mudança profunda em uma sociedade"],
+["independência","Condição de quem não depende de outro poder"],
+["colonização","Processo de ocupação e controle de território"],
+["demografia","Estudo estatístico das populações"],
+["urbanização","Processo de crescimento das cidades"],
+["migração","Deslocamento de pessoas entre regiões"],
+["patrimônio","Conjunto de bens de valor histórico ou cultural"],
+["manuscrito","Documento escrito à mão"],
+["pergaminho","Material antigo usado para escrever"],
+["hieróglifo","Sistema de escrita usado no Egito antigo"],
+["mitologia","Conjunto de histórias e crenças tradicionais"],
+["arqueólogo","Profissional que pesquisa vestígios antigos"],
+["astronautica","Área relacionada à exploração espacial"],
+["cosmologia","Estudo da origem e evolução do universo"],
+["nebulosa","Nuvem de gás e poeira no espaço"],
+["supernova","Grande explosão de uma estrela"],
+["constelação","Conjunto aparente de estrelas"],
+["exoplaneta","Planeta localizado fora do Sistema Solar"],
+["asteroide","Corpo rochoso que orbita uma estrela"],
+["meteorito","Fragmento espacial que chega à superfície"],
+["eclipse","Fenômeno em que um astro encobre outro"],
+["solstício","Momento associado à maior diferença entre dia e noite"],
+["equinócio","Momento em que dia e noite têm duração semelhante"],
+["hemisfério","Metade de uma esfera ou planeta"],
+["longitude","Coordenada geográfica medida de leste a oeste"],
+["latitude","Coordenada geográfica medida de norte a sul"],
+["cartografia","Ciência de produzir e estudar mapas"],
+["topografia","Estudo detalhado das características de um terreno"],
+["hidrografia","Estudo das águas de uma região"],
+["vulcanologia","Estudo científico dos vulcões"],
+["oceanografia","Ciência que estuda os oceanos"],
+["climatologia","Estudo científico do clima"],
+["paleontologia","Estudo de seres vivos do passado por fósseis"],
+["evolução","Processo de mudança dos seres vivos ao longo do tempo"],
+["genética","Área que estuda hereditariedade"],
+["microbiologia","Estudo dos organismos microscópicos"],
+["imunologia","Estudo do sistema imunológico"],
+["neurologia","Área médica relacionada ao sistema nervoso"],
+["cardiologia","Área médica relacionada ao coração"],
+["oftalmologia","Área médica relacionada aos olhos"],
+["dermatologia","Área médica relacionada à pele"],
+["endocrinologia","Área médica relacionada aos hormônios"],
+["metabolismo","Conjunto de processos químicos do organismo"],
+["homeostase","Capacidade de manter equilíbrio interno"],
+["neurônio","Célula responsável pela transmissão de sinais nervosos"],
+["cromossomo","Estrutura que contém material genético"],
+["mitocôndria","Estrutura celular relacionada à produção de energia"],
+["ribossomo","Estrutura celular ligada à produção de proteínas"],
+["organismo","Ser vivo considerado individualmente"],
+["vertebrado","Animal que possui coluna vertebral"],
+["invertebrado","Animal que não possui coluna vertebral"],
+["anfíbio","Animal que pode viver em ambientes aquáticos e terrestres"],
+["aracnídeo","Animal pertencente ao grupo das aranhas e escorpiões"],
+["crustáceo","Animal do grupo dos caranguejos e camarões"],
+["molusco","Grupo que inclui animais como polvos e caracóis"],
+["polinização","Transferência de pólen entre estruturas florais"],
+["germinação","Processo de desenvolvimento inicial de uma planta"],
+["ecologia","Ciência que estuda as relações entre seres vivos e ambiente"],
+["fotovoltaico","Relacionado à transformação de luz em eletricidade"],
+["hidrelétrica","Usina que utiliza água para gerar eletricidade"],
+["termelétrica","Usina que gera energia a partir de calor"],
+["geotérmica","Energia relacionada ao calor interno da Terra"],
+["hidrogênio","Elemento químico muito leve"],
+["oxigênio","Gás essencial à respiração de muitos seres vivos"],
+["nitrogênio","Elemento muito abundante na atmosfera terrestre"],
+["carbono","Elemento presente em todos os seres vivos"],
+["molécula","Conjunto de átomos ligados entre si"],
+["átomo","Unidade básica da matéria"],
+["partícula","Pequena unidade de matéria ou energia"],
+["universidade","Instituição dedicada ao ensino superior"],
+["biblioteca","Local onde livros e outros materiais são armazenados"],
+["enciclopédia","Obra que reúne conhecimentos sobre diversos assuntos"],
+["literatura","Arte relacionada à linguagem escrita"],
+["metáfora","Figura de linguagem baseada em comparação implícita"],
+["paradoxo","Ideia que parece contraditória"],
+["hipótese","Possível explicação ainda não comprovada"],
+["experimento","Procedimento usado para testar uma hipótese"],
+["observação","Ato de analisar atentamente algo"],
+["conhecimento","Informação adquirida por estudo ou experiência"],
+["curiosidade","Desejo de conhecer ou descobrir algo"],
+["criatividade","Capacidade de criar ideias novas"],
+["imaginação","Capacidade de formar imagens ou ideias mentalmente"],
+["estratégia","Plano utilizado para alcançar um objetivo"],
+["persistência","Qualidade de continuar apesar das dificuldades"],
+["determinação","Firmeza para alcançar um objetivo"]
+
+]
+
+};
+
+
+/* =====================================================
+   NORMALIZAÇÃO
+===================================================== */
+
+function normalizarTexto(
+  texto
+){
+
+  return texto
+    .normalize("NFD")
+    .replace(
+      /[\u0300-\u036f]/g,
+      ""
+    )
+    .toLowerCase()
+    .replace(
+      /[^a-z]/g,
+      ""
+    );
+
+}
+
+
+/* =====================================================
+   CHAVE DE REPETIÇÃO
+===================================================== */
+
+function chavePalavrasUsadas(){
+
+  return (
+    "adamGames_forca_usadas_" +
+    (
+      firebaseUser?.uid ||
+      "visitante"
+    )
+  );
+
+}
+
+
+function carregarPalavrasUsadas(){
+
+  try{
+
+    const dados =
+      localStorage.getItem(
+        chavePalavrasUsadas()
+      );
+
+    if(!dados){
+      return [];
+    }
+
+    const lista =
+      JSON.parse(dados);
+
+    return Array.isArray(lista)
+      ?
+      lista
+      :
+      [];
+
+  }
+  catch(error){
+
+    return [];
+
+  }
+
+}
+
+
+function salvarPalavraUsada(
+  palavra
+){
+
+  try{
+
+    const usadas =
+      carregarPalavrasUsadas();
+
+    const chave =
+      normalizarTexto(
+        palavra
+      );
+
+    if(
+      !usadas.includes(chave)
+    ){
+
+      usadas.push(
+        chave
+      );
+
+    }
+
+    localStorage.setItem(
+      chavePalavrasUsadas(),
+      JSON.stringify(usadas)
+    );
+
+  }
+  catch(error){
+
+    console.error(
+      "Erro ao salvar palavra:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   ESCOLHER PALAVRA SEM REPETIR
+===================================================== */
+
+function escolherPalavra(
+  nivel
+){
+
+  const lista =
+    nivel === "FÁCIL"
+      ?
+      palavras.facil
+      :
+      nivel === "MÉDIO"
+        ?
+        palavras.medio
+        :
+        palavras.dificil;
+
+
+  const usadas =
+    carregarPalavrasUsadas();
+
+
+  const disponiveis =
+    lista.filter(
+      item =>
+        !usadas.includes(
+          normalizarTexto(
+            item[0]
+          )
+        )
+    );
+
+
+  /*
+    Se todas daquele nível já foram usadas,
+    limpa SOMENTE aquele nível.
+
+    Assim o jogador não recebe repetição
+    enquanto ainda existirem palavras novas.
+  */
+
+  let pool =
+    disponiveis;
+
+
+  if(!pool.length){
+
+    const prefixo =
+      nivel === "FÁCIL"
+        ?
+        palavras.facil
+        :
+        nivel === "MÉDIO"
+          ?
+          palavras.medio
+          :
+          palavras.dificil;
+
+    pool =
+      prefixo;
+
+  }
+
+
+  const indice =
+    Math.floor(
+      Math.random() *
+      pool.length
+    );
+
+
+  const escolhida =
+    pool[indice];
+
+
+  salvarPalavraUsada(
+    escolhida[0]
+  );
+
+
+  return {
+
+    palavra:
+      escolhida[0],
+
+    dica:
+      escolhida[1],
+
+    normalizada:
+      normalizarTexto(
+        escolhida[0]
+      )
+
+  };
+
+}
+
+
+/* =====================================================
+   RECOMPENSA
+===================================================== */
+
+function recompensaAtual(){
+
+  return sequencia[
+    (rodada - 1) %
+    sequencia.length
+  ].recompensa;
+
+}
+
+
+function nivelAtual(){
+
+  return sequencia[
+    (rodada - 1) %
+    sequencia.length
+  ];
+
+}
+
+
+/* =====================================================
+   ATUALIZAR INTERFACE DO NÍVEL
+===================================================== */
+
+function atualizarNivel(){
+
+  const nivel =
+    nivelAtual();
+
+
+  levelNameEl.textContent =
+    nivel.nivel;
+
+
+  levelNameEl.style.color =
+    nivel.nivel === "FÁCIL"
+      ?
+      "#65ff9c"
+      :
+      nivel.nivel === "MÉDIO"
+        ?
+        "#ffd52b"
+        :
+        "#ff7583";
+
+
+  roundNumberEl.textContent =
+    rodada;
+
+
+  roundRewardEl.textContent =
+    "🪙 " +
+    nivel.recompensa;
+
+
+  const posicao =
+    (
+      (rodada - 1) %
+      sequencia.length
+    ) + 1;
+
+
+  progressTextEl.textContent =
+    posicao +
+    " / " +
+    sequencia.length;
+
+
+  progressFillEl.style.width =
+    (
+      posicao /
+      sequencia.length *
+      100
+    ) +
+    "%";
+
+}
+
+
+/* =====================================================
+   MOEDAS
+===================================================== */
+
+function atualizarMoedas(){
+
+  coinsEl.textContent =
+    Number(
+      moedasLocais || 0
+    ).toLocaleString(
+      "pt-BR"
+    );
+
+}
+
+
+/* =====================================================
+   RESETAR ERROS
+===================================================== */
+
+function atualizarImagem(){
+
+  const numeroImagem =
+    Math.min(
+      erros,
+      7
+    );
+
+
+  hangmanImage.src =
+    "assets/forca/forca-" +
+    numeroImagem +
+    ".png";
+
+
+  const pontos =
+    errorsRow.querySelectorAll(
+      ".error-dot"
+    );
+
+
+  pontos.forEach(
+    (ponto,index) => {
+
+      ponto.classList.toggle(
+        "active",
+        index < erros
+      );
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   DESENHAR PALAVRA
+===================================================== */
+
+function desenharPalavra(){
+
+  wordEl.innerHTML =
+    "";
+
+
+  const palavra =
+    palavraAtual.normalizada;
+
+
+  const original =
+    palavraAtual.palavra;
+
+
+  /*
+    Mantém apenas letras no jogo.
+  */
+
+  for(
+    let i = 0;
+    i < palavra.length;
+    i++
+  ){
+
+    const letra =
+      palavra[i];
+
+
+    const span =
+      document.createElement(
+        "span"
+      );
+
+
+    span.className =
+      "letter";
+
+
+    if(
+      letrasEscolhidas.has(
+        letra
+      )
+    ){
+
+      span.textContent =
+        letra.toUpperCase();
+
+    }
+    else{
+
+      span.textContent =
+        "";
+
+    }
+
+
+    wordEl.appendChild(
+      span
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   CRIAR TECLADO
+===================================================== */
+
+const letras =
+  "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+
+function criarTeclado(){
+
+  keyboardEl.innerHTML =
+    "";
+
+
+  for(
+    const letra of letras
+  ){
+
+    const button =
+      document.createElement(
+        "button"
+      );
+
+
+    button.className =
+      "key";
+
+
+    button.type =
+      "button";
+
+
+    button.textContent =
+      letra;
+
+
+    button.dataset.letra =
+      letra.toLowerCase();
+
+
+    button.addEventListener(
+      "click",
+      () => {
+
+        escolherLetra(
+          letra.toLowerCase(),
+          button
+        );
+
+      }
+    );
+
+
+    keyboardEl.appendChild(
+      button
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   ESCOLHER LETRA
+===================================================== */
+
+function escolherLetra(
+  letra,
+  botao
+){
+
+  if(
+    partidaTerminou
+  ){
+
+    return;
+
+  }
+
+
+  if(
+    letrasEscolhidas.has(
+      letra
+    )
+  ){
+
+    return;
+
+  }
+
+
+  letrasEscolhidas.add(
+    letra
+  );
+
+
+  botao.disabled =
+    true;
+
+
+  botao.classList.add(
+    "used"
+  );
+
+
+  const acertou =
+    palavraAtual.normalizada
+      .includes(
+        letra
+      );
+
+
+  if(acertou){
+
+    botao.classList.add(
+      "correct"
+    );
+
+
+    desenharPalavra();
+
+
+    if(
+      palavraCompleta()
+    ){
+
+      ganhar();
+
+    }
+
+  }
+  else{
+
+    botao.classList.add(
+      "wrong"
+    );
+
+
+    erros++;
+
+
+    atualizarImagem();
+
+
+    if(
+      erros >= 7
+    ){
+
+      perder();
+
+    }
+
+  }
+
+}
+
+
+/* =====================================================
+   VERIFICAR PALAVRA COMPLETA
+===================================================== */
+
+function palavraCompleta(){
+
+  for(
+    const letra of palavraAtual.normalizada
+  ){
+
+    if(
+      !letrasEscolhidas.has(
+        letra
+      )
+    ){
+
+      return false;
+
+    }
+
+  }
+
+
+  return true;
+
+}
+
+
+/* =====================================================
+   MENSAGEM
+===================================================== */
+
+function mostrarMensagem(
+  texto,
+  tipo
+){
+
+  messageEl.textContent =
+    texto;
+
+  messageEl.className =
+    "message show " +
+    tipo;
+
+}
+
+
+/* =====================================================
+   GANHOU
+===================================================== */
+
+function ganhar(){
+
+  if(
+    partidaTerminou
+  ){
+
+    return;
+
+  }
+
+
+  partidaTerminou =
+    true;
+
+  palavraResolvida =
+    true;
+
+
+  const recompensa =
+    recompensaAtual();
+
+
+  moedasLocais +=
+    recompensa;
+
+
+  atualizarMoedas();
+
+
+  rewardValueEl.textContent =
+    recompensa;
+
+
+  rewardEl.style.display =
+    "block";
+
+
+  keyboardEl
+    .querySelectorAll("button")
+    .forEach(
+      button => {
+
+        button.disabled =
+          true;
+
+      }
+    );
+
+
+  mostrarMensagem(
+    "🎉 Você acertou!",
+    "success"
+  );
+
+
+  /*
+    A palavra fica totalmente revelada.
+  */
+
+  letrasEscolhidas =
+    new Set(
+      palavraAtual.normalizada
+        .split("")
+    );
+
+
+  desenharPalavra();
+
+
+  abrirModal(
+    true,
+    recompensa
+  );
+
+}
+
+
+/* =====================================================
+   PERDEU
+===================================================== */
+
+function perder(){
+
+  if(
+    partidaTerminou
+  ){
+
+    return;
+
+  }
+
+
+  partidaTerminou =
+    true;
+
+
+  palavraResolvida =
+    false;
+
+
+  keyboardEl
+    .querySelectorAll("button")
+    .forEach(
+      button => {
+
+        button.disabled =
+          true;
+
+      }
+    );
+
+
+  /*
+    Revela a palavra.
+  */
+
+  letrasEscolhidas =
+    new Set(
+      palavraAtual.normalizada
+        .split("")
+    );
+
+
+  desenharPalavra();
+
+
+  mostrarMensagem(
+    "💀 Você perdeu! A palavra era: " +
+    palavraAtual.palavra,
+    "error"
+  );
+
+
+  rewardEl.style.display =
+    "none";
+
+
+  abrirModal(
+    false,
+    0
+  );
+
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+function abrirModal(
+  ganhou,
+  recompensa
+){
+
+  if(ganhou){
+
+    modalIcon.textContent =
+      "🎉";
+
+    modalTitle.textContent =
+      "Parabéns!";
+
+    modalText.textContent =
+      "Você descobriu a palavra e avançou para a próxima rodada.";
+
+    modalCoins.textContent =
+      "+" +
+      recompensa +
+      " 🪙";
+
+    modalButton.textContent =
+      "PRÓXIMA PALAVRA";
+
+  }
+  else{
+
+    modalIcon.textContent =
+      "💀";
+
+    modalTitle.textContent =
+      "Você perdeu!";
+
+    modalText.textContent =
+      "O personagem chegou ao último estágio da forca.";
+
+    modalCoins.textContent =
+      "Sem recompensa nesta rodada";
+
+    modalButton.textContent =
+      "VOLTAR AOS JOGOS";
+
+  }
+
+
+  modal.classList.add(
+    "show"
+  );
+
+}
+
+
+/* =====================================================
+   FECHAR / CONTINUAR
+===================================================== */
+
+modalButton.addEventListener(
+  "click",
+  () => {
+
+    modal.classList.remove(
+      "show"
+    );
+
+
+    if(
+      palavraResolvida
+    ){
+
+      rodada++;
+
+      iniciarRodada();
+
+    }
+    else{
+
+      window.location.href =
+        "jogos.html";
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   PRÓXIMA RODADA
+===================================================== */
+
+nextButton.addEventListener(
+  "click",
+  () => {
+
+    rodada++;
+
+    iniciarRodada();
+
+  }
+);
+
+
+/* =====================================================
+   INICIAR RODADA
+===================================================== */
+
+function iniciarRodada(){
+
+  partidaTerminou =
+    false;
+
+  palavraResolvida =
+    false;
+
+  erros =
+    0;
+
+  letrasEscolhidas =
+    new Set();
+
+
+  const nivel =
+    nivelAtual();
+
+
+  palavraAtual =
+    escolherPalavra(
+      nivel.nivel
+    );
+
+
+  atualizarNivel();
+
+
+  hintEl.textContent =
+    palavraAtual.dica;
+
+
+  rewardEl.style.display =
+    "none";
+
+
+  nextButton.classList.remove(
+    "show"
+  );
+
+
+  messageEl.className =
+    "message";
+
+
+  hangmanImage.src =
+    "assets/forca/forca-0.png";
+
+
+  atualizarImagem();
+
+
+  criarTeclado();
+
+
+  desenharPalavra();
+
+}
+
+
+/* =====================================================
+   LOCALIZAR USUÁRIO
+===================================================== */
+
+async function localizarUsuario(
+  user
+){
+
+  let resultado;
+
+
+  resultado =
+    await getDocs(
+
+      query(
+
+        collection(
+          db,
+          "admins"
+        ),
+
+        where(
+          "uid",
+          "==",
+          user.uid
+        )
+
+      )
+
+    );
+
+
+  if(
+    !resultado.empty
+  ){
+
+    return resultado.docs[0];
+
+  }
+
+
+  if(
+    user.email
+  ){
+
+    resultado =
+      await getDocs(
+
+        query(
+
+          collection(
+            db,
+            "admins"
+          ),
+
+          where(
+            "email",
+            "==",
+            user.email
+          )
+
+        )
+
+      );
+
+
+    if(
+      !resultado.empty
+    ){
+
+      return resultado.docs[0];
+
+    }
+
+  }
+
+
+  return null;
+
+}
+
+
+/* =====================================================
+   VOLTAR
+===================================================== */
+
+document
+  .getElementById("back")
+  .addEventListener(
+    "click",
+    () => {
+
+      window.location.href =
+        "jogos.html";
+
+    }
+  );
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+onAuthStateChanged(
+
+  auth,
+
+  async user => {
+
+    if(
+      !user
+    ){
+
+      window.location.href =
+        "index.html";
+
+      return;
+
+    }
+
+
+    firebaseUser =
+      user;
+
+
+    try{
+
+      const documento =
+        await localizarUsuario(
+          user
+        );
+
+
+      if(
+        !documento
+      ){
+
+        alert(
+          "Cadastro Adam Games não encontrado."
+        );
+
+        window.location.href =
+          "jogos.html";
+
+        return;
+
+      }
+
+
+      usuario =
+        documento.data();
+
+
+      moedasLocais =
+        Number(
+          usuario.moedas || 0
+        );
+
+
+      atualizarMoedas();
+
+
+      /*
+        Começa a primeira rodada.
+      */
+
+      iniciarRodada();
+
+    }
+    catch(error){
+
+      console.error(
+        "Erro ao carregar Forca:",
+        error
+      );
+
+
+      alert(
+        "Não foi possível carregar seus dados."
+      );
+
+    }
+
+  }
+
+);
+
+</script>
+
+</body>
+
+</html>
