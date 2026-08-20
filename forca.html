@@ -130,7 +130,7 @@ body{min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:#fff;backgrou
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 import {getAuth,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-import {getFirestore,collection,query,where,getDocs,getDoc,runTransaction,doc} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+import {getFirestore,collection,query,where,getDocs,getDoc,runTransaction,doc,serverTimestamp} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 const firebaseConfig={
   apiKey:"AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",
@@ -1653,7 +1653,55 @@ function openModal(icon,title,coinsText,text,button,a){
 
 function loss(){
  stopTimer();
- openModal("💀","VOCÊ PERDEU","🪙 Sem recompensa final","A palavra era: "+current.palavra,"VOLTAR AOS JOGOS","exit");
+ $("lossContinueLevel").textContent =
+  "NÍVEL: " + (round===8 ? "HARD" : round===9 ? "FINAL" : round<=2 ? "FÁCIL" : round<=4 ? "MÉDIO" : "DIFÍCIL") +
+  " • RODADA " + round;
+ $("lossContinueText").textContent =
+  "Você perdeu esta tentativa. Use mais 1 chance para continuar no mesmo nível com uma nova palavra.";
+ $("lossContinueSame").disabled=false;
+ $("lossContinueSame").textContent="🔄 CONTINUAR • -1 CHANCE • +30 MOEDAS";
+ $("lossContinueModal").classList.add("show");
+ $("lossContinueModal").setAttribute("aria-hidden","false");
+}
+
+async function continueSameLevel(){
+ const btn=$("lossContinueSame");
+ if(!userRef || !user){
+  msg("⚠️ Usuário não encontrado.","error");
+  return;
+ }
+ btn.disabled=true;
+ btn.textContent="⏳ PROCESSANDO...";
+ try{
+  await runTransaction(db,async tx=>{
+   const snap=await tx.get(userRef);
+   if(!snap.exists())throw Error("Cadastro não encontrado.");
+   const data=snap.data();
+   const chances=Number(data.chances||0);
+   if(chances<=0)throw Error("Você não possui chances.");
+   const moedas=Number(data.moedas||0);
+   tx.update(userRef,{
+    chances:chances-1,
+    moedas:moedas+30,
+    ultimaPartidaForcaId:"continue_"+Date.now()+"_"+Math.random().toString(36).slice(2),
+    ultimaPartidaForcaEm:serverTimestamp()
+   });
+  });
+  coins+=30;
+  coinsUI();
+  $("lossContinueModal").classList.remove("show");
+  $("lossContinueModal").setAttribute("aria-hidden","true");
+  start();
+  msg("🪙 +30 Adam Coins! Você gastou 1 chance e continua no mesmo nível.","success");
+ }catch(e){
+  console.error("Erro ao continuar a Forca:",e);
+  btn.disabled=false;
+  btn.textContent="🔄 CONTINUAR • -1 CHANCE • +30 MOEDAS";
+  $("lossContinueText").textContent =
+   e.message==="Você não possui chances."
+   ? "Você não possui chances suficientes para continuar neste nível."
+   : "Não foi possível continuar agora. Tente novamente.";
+ }
 }
 
 function hardIntro(){
@@ -1807,6 +1855,8 @@ $("modalButton").onclick=()=>{
 
 $("back").onclick=()=>location.href="jogos.html";
 
+window.continueSameLevel=continueSameLevel;
+
 async function findUser(u){
  let s=await getDocs(query(collection(db,"admins"),where("uid","==",u.uid)));
  if(!s.empty)return s.docs[0].ref;
@@ -1852,84 +1902,18 @@ onAuthStateChanged(auth,async u=>{
 
 <script id="loss-continue-script">
 (function(){
-  const modal = document.getElementById("lossContinueModal");
-  const levelEl = document.getElementById("lossContinueLevel");
-  const textEl = document.getElementById("lossContinueText");
-  const sameBtn = document.getElementById("lossContinueSame");
-  const exitBtn = document.getElementById("lossContinueExit");
-
-  if(!modal || !sameBtn || !exitBtn) return;
-
-  function currentLevelText(){
-    const candidates = [
-      window.currentLevel,
-      window.nivelAtual,
-      window.level,
-      window.nivel,
-      window.currentRound,
-      window.rodadaAtual
-    ];
-    for(const value of candidates){
-      if(value !== undefined && value !== null && String(value).trim()){
-        return String(value);
-      }
-    }
-    return "MESMO NÍVEL";
-  }
-
-  window.showLossContinueModal = function(level){
-    const label = level || currentLevelText();
-    levelEl.textContent = "NÍVEL: " + label;
-    textEl.textContent =
-      "Você perdeu esta tentativa, mas pode continuar no mesmo nível e tentar novamente.";
-    modal.classList.add("show");
-    modal.setAttribute("aria-hidden","false");
-  };
-
-  window.hideLossContinueModal = function(){
-    modal.classList.remove("show");
-    modal.setAttribute("aria-hidden","true");
-  };
-
-  sameBtn.addEventListener("click", function(){
-    window.hideLossContinueModal();
-
-    // Try the game's existing retry/new-word functions first.
-    const retry =
-      window.retrySameLevel ||
-      window.reiniciarMesmoNivel ||
-      window.continuarMesmoNivel ||
-      window.retryLevel ||
-      window.novaPalavraMesmoNivel;
-
-    if(typeof retry === "function"){
-      retry();
-      return;
-    }
-
-    // If the original game exposes a start function, use it without changing level.
-    const start =
-      window.startRound ||
-      window.iniciarRodada ||
-      window.startGame ||
-      window.iniciarJogo;
-
-    if(typeof start === "function"){
-      start();
-      return;
-    }
-
-    // Fallback: reload the page while preserving a same-level retry marker.
-    sessionStorage.setItem("forcaContinuarMesmoNivel","1");
-    location.reload();
-  });
-
-  exitBtn.addEventListener("click", function(){
-    window.hideLossContinueModal();
-  });
-
-  // Other code can call this when the loss is finalized.
-  window.forcaMostrarPerdeu = window.showLossContinueModal;
+ const modal=document.getElementById("lossContinueModal");
+ const sameBtn=document.getElementById("lossContinueSame");
+ const exitBtn=document.getElementById("lossContinueExit");
+ if(!modal||!sameBtn||!exitBtn)return;
+ sameBtn.addEventListener("click",function(){
+  if(typeof window.continueSameLevel==="function")window.continueSameLevel();
+ });
+ exitBtn.addEventListener("click",function(){
+  modal.classList.remove("show");
+  modal.setAttribute("aria-hidden","true");
+  location.href="jogos.html";
+ });
 })();
 </script>
 
