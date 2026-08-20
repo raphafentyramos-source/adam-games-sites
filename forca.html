@@ -44,12 +44,12 @@ body{
 
   width:100%;
 
-  max-width:650px;
+  max-width:680px;
 
   margin:auto;
 
   padding:
-    16px
+    14px
     14px
     50px;
 
@@ -114,22 +114,97 @@ body{
 
 
 /* =====================================================
+   INFORMAÇÕES DO JOGO
+===================================================== */
+
+.game-info{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:10px;
+
+  margin-top:14px;
+
+}
+
+.info-card{
+
+  min-height:78px;
+
+  padding:12px 8px;
+
+  border-radius:18px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #123e59,
+      #0a304a
+    );
+
+  border:
+    1px solid
+    rgba(255,255,255,.10);
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  justify-content:center;
+
+  text-align:center;
+
+}
+
+.info-card small{
+
+  color:#91b2c8;
+
+  font-size:10px;
+
+  font-weight:900;
+
+  letter-spacing:.5px;
+
+}
+
+.info-card strong{
+
+  margin-top:5px;
+
+  font-size:22px;
+
+}
+
+.info-card.reward strong{
+
+  font-size:20px;
+
+}
+
+
+/* =====================================================
    PROGRESSO
 ===================================================== */
 
 .progress-card{
 
-  margin-top:15px;
+  margin-top:14px;
 
-  padding:16px;
+  padding:17px;
 
   border-radius:20px;
 
-  background:#082b48;
+  background:#061e34;
 
   border:
     1px solid
-    rgba(255,255,255,.08);
+    rgba(255,255,255,.06);
 
 }
 
@@ -137,19 +212,29 @@ body{
 
   display:flex;
 
+  align-items:center;
+
   justify-content:space-between;
 
-  font-size:13px;
+  font-size:14px;
 
   font-weight:900;
 
 }
 
+.progress-header span:last-child{
+
+  color:#9bb4c9;
+
+  font-weight:normal;
+
+}
+
 .progress-bar{
 
-  height:11px;
+  height:12px;
 
-  margin-top:10px;
+  margin-top:12px;
 
   overflow:hidden;
 
@@ -161,19 +246,21 @@ body{
 
 .progress-fill{
 
-  width:0%;
+  width:14.2857%;
 
   height:100%;
+
+  border-radius:20px;
 
   background:
     linear-gradient(
       90deg,
-      #19c968,
+      #18c866,
       #ffe000
     );
 
   transition:
-    width .3s ease;
+    width .35s ease;
 
 }
 
@@ -186,15 +273,17 @@ body{
 
   margin-top:16px;
 
+  padding:10px;
+
   overflow:hidden;
 
-  border-radius:22px;
+  border-radius:23px;
 
   background:#082b48;
 
   border:
     1px solid
-    rgba(255,255,255,.1);
+    rgba(255,255,255,.10);
 
 }
 
@@ -208,6 +297,51 @@ body{
 
   object-fit:cover;
 
+  border-radius:18px;
+
+}
+
+
+/* =====================================================
+   INDICADOR DE ERROS
+===================================================== */
+
+.errors{
+
+  display:flex;
+
+  justify-content:center;
+
+  gap:9px;
+
+  margin-top:12px;
+
+}
+
+.error-dot{
+
+  width:19px;
+
+  height:19px;
+
+  border-radius:50%;
+
+  background:#243e55;
+
+  box-shadow:
+    inset 0 0 0 1px
+    rgba(255,255,255,.03);
+
+}
+
+.error-dot.active{
+
+  background:#ff476b;
+
+  box-shadow:
+    0 0 12px
+    rgba(255,55,95,.55);
+
 }
 
 
@@ -219,13 +353,17 @@ body{
 
   margin-top:14px;
 
-  padding:15px;
+  padding:17px 14px;
 
-  border-radius:18px;
+  border-radius:19px;
 
   text-align:center;
 
   background:#082b48;
+
+  border:
+    1px solid
+    rgba(255,255,255,.07);
 
 }
 
@@ -235,15 +373,17 @@ body{
 
   font-weight:900;
 
+  letter-spacing:1px;
+
 }
 
 .dica strong{
 
   display:block;
 
-  margin-top:5px;
+  margin-top:7px;
 
-  font-size:17px;
+  font-size:18px;
 
 }
 
@@ -256,25 +396,44 @@ body{
 
   margin-top:25px;
 
+  min-height:62px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  flex-wrap:wrap;
+
+  gap:8px;
+
   text-align:center;
 
   font-size:
     clamp(
       25px,
-      8vw,
-      43px
+      7vw,
+      42px
     );
 
   font-weight:900;
 
-  letter-spacing:
-    clamp(
-      5px,
-      2vw,
-      12px
-    );
+}
 
-  color:#fff;
+.word-letter{
+
+  min-width:25px;
+
+  border-bottom:
+    4px solid
+    #63c9ff;
+
+  padding:
+    0 2px
+    5px;
+
+  line-height:1;
 
 }
 
@@ -292,13 +451,13 @@ body{
 
   gap:7px;
 
-  margin-top:25px;
+  margin-top:23px;
 
 }
 
 .key{
 
-  min-height:50px;
+  min-height:52px;
 
   border:0;
 
@@ -318,6 +477,10 @@ body{
   font-weight:900;
 
   cursor:pointer;
+
+  transition:
+    transform .1s ease,
+    opacity .15s ease;
 
 }
 
@@ -354,7 +517,7 @@ body{
 
 .status{
 
-  margin-top:18px;
+  margin-top:17px;
 
   padding:15px;
 
@@ -409,35 +572,6 @@ body{
 
 
 /* =====================================================
-   BOTÃO
-===================================================== */
-
-.action{
-
-  width:100%;
-
-  height:50px;
-
-  margin-top:15px;
-
-  border:0;
-
-  border-radius:14px;
-
-  background:#16a85b;
-
-  color:#fff;
-
-  font-size:15px;
-
-  font-weight:900;
-
-  cursor:pointer;
-
-}
-
-
-/* =====================================================
    MODAL
 ===================================================== */
 
@@ -458,7 +592,7 @@ body{
   padding:20px;
 
   background:
-    rgba(0,10,25,.85);
+    rgba(0,10,25,.88);
 
 }
 
@@ -472,7 +606,7 @@ body{
 
   width:100%;
 
-  max-width:380px;
+  max-width:390px;
 
   padding:28px 20px;
 
@@ -481,6 +615,10 @@ body{
   background:#082b48;
 
   text-align:center;
+
+  border:
+    1px solid
+    rgba(255,255,255,.10);
 
 }
 
@@ -517,6 +655,56 @@ body{
   color:#fff;
 
   font-weight:900;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:430px){
+
+  .page{
+
+    padding:
+      12px
+      10px
+      40px;
+
+  }
+
+  .info-card{
+
+    min-height:76px;
+
+  }
+
+  .info-card strong{
+
+    font-size:20px;
+
+  }
+
+  .info-card.reward strong{
+
+    font-size:18px;
+
+  }
+
+  .keyboard{
+
+    gap:6px;
+
+  }
+
+  .key{
+
+    min-height:50px;
+
+    font-size:15px;
+
+  }
 
 }
 
@@ -567,6 +755,55 @@ body{
 
 
   <!-- =================================================
+       NÍVEL / RODADA / RECOMPENSA
+  ================================================== -->
+
+  <div class="game-info">
+
+
+    <div class="info-card">
+
+      <small>
+        NÍVEL
+      </small>
+
+      <strong id="nivel">
+        FÁCIL
+      </strong>
+
+    </div>
+
+
+    <div class="info-card">
+
+      <small>
+        RODADA
+      </small>
+
+      <strong id="rodada">
+        1
+      </strong>
+
+    </div>
+
+
+    <div class="info-card reward">
+
+      <small>
+        RECOMPENSA
+      </small>
+
+      <strong>
+        🪙 <span id="recompensa">20</span>
+      </strong>
+
+    </div>
+
+
+  </div>
+
+
+  <!-- =================================================
        PROGRESSO
   ================================================== -->
 
@@ -612,6 +849,25 @@ body{
 
 
   <!-- =================================================
+       ERROS
+  ================================================== -->
+
+  <div
+    class="errors"
+    id="errors"
+  >
+
+    <span class="error-dot"></span>
+    <span class="error-dot"></span>
+    <span class="error-dot"></span>
+    <span class="error-dot"></span>
+    <span class="error-dot"></span>
+    <span class="error-dot"></span>
+
+  </div>
+
+
+  <!-- =================================================
        DICA
   ================================================== -->
 
@@ -622,7 +878,7 @@ body{
     </small>
 
     <strong id="dica">
-      Animal de grande porte e tromba
+      Preparando...
     </strong>
 
   </div>
@@ -657,21 +913,9 @@ body{
     id="status"
   >
 
-    🎟️ Preparando sua partida...
+    🎟️ Preparando sua sequência...
 
   </div>
-
-
-  <button
-    class="action"
-    id="voltar"
-    style="display:none"
-    type="button"
-  >
-
-    VOLTAR PARA OS JOGOS
-
-  </button>
 
 
 </div>
@@ -689,11 +933,11 @@ body{
   <div class="modal-card">
 
     <h2 id="modalTitle">
-      Você perdeu
+      Partida encerrada
     </h2>
 
     <p id="modalText">
-      A partida terminou.
+      Você completou a sequência.
     </p>
 
     <button
@@ -701,7 +945,7 @@ body{
       type="button"
     >
 
-      CONTINUAR
+      VOLTAR PARA OS JOGOS
 
     </button>
 
@@ -711,6 +955,7 @@ body{
 
 
 <script type="module">
+
 
 /* =====================================================
    FIREBASE
@@ -791,138 +1036,973 @@ const db =
    ELEMENTOS
 ===================================================== */
 
-const wordEl =
-  document.getElementById("word");
+const nivelEl =
+  document.getElementById("nivel");
 
+const rodadaEl =
+  document.getElementById("rodada");
 
-const keyboardEl =
-  document.getElementById("keyboard");
+const recompensaEl =
+  document.getElementById("recompensa");
 
-
-const statusEl =
-  document.getElementById("status");
-
+const faseEl =
+  document.getElementById("fase");
 
 const progressEl =
   document.getElementById("progress");
 
+const dicaEl =
+  document.getElementById("dica");
+
+const wordEl =
+  document.getElementById("word");
+
+const keyboardEl =
+  document.getElementById("keyboard");
+
+const statusEl =
+  document.getElementById("status");
+
+const errorsEl =
+  document.getElementById("errors");
 
 const modal =
   document.getElementById("modal");
 
-
 const modalTitle =
   document.getElementById("modalTitle");
 
-
 const modalText =
   document.getElementById("modalText");
-
 
 const modalButton =
   document.getElementById("modalButton");
 
 
-const voltar =
-  document.getElementById("voltar");
-
-
 /* =====================================================
-   JOGO
+   CONFIGURAÇÃO DO JOGO
 ===================================================== */
 
-const PALAVRA =
-  "ELEFANTE";
-
-
-const DICA =
-  "Animal de grande porte e tromba";
-
+const TOTAL_RODADAS =
+  7;
 
 const MAX_ERROS =
   6;
 
-
-/*
-  Recompensa inicial da partida.
-*/
-const MOEDAS_PARTIDA =
-  30;
-
-
-/*
-  Recompensa extra ao vencer.
-*/
-const MOEDAS_VITORIA =
+const RECOMPENSA_RODADA =
   20;
+
+
+/* =====================================================
+   NORMALIZAÇÃO
+===================================================== */
+
+function normalizar(texto){
+
+  return texto
+    .normalize("NFD")
+    .replace(
+      /[\u0300-\u036f]/g,
+      ""
+    )
+    .toUpperCase();
+
+}
+
+
+/* =====================================================
+   200 PALAVRAS FÁCEIS
+===================================================== */
+
+const FACIL = [
+
+  "ELEFANTE",
+  "MACACO",
+  "GIRAFA",
+  "CACHORRO",
+  "GATO",
+  "COELHO",
+  "CAVALO",
+  "VACA",
+  "PORCO",
+  "GALINHA",
+  "OVELHA",
+  "CABRA",
+  "PATO",
+  "PEIXE",
+  "TARTARUGA",
+  "LEAO",
+  "TIGRE",
+  "ZEBRA",
+  "URSO",
+  "PANDA",
+  "RAPOSA",
+  "LOBO",
+  "COBRA",
+  "JACARE",
+  "CAMELO",
+  "LHAMA",
+  "BURRO",
+  "RATO",
+  "SAPO",
+  "BALEIA",
+  "GOLFINHO",
+  "TUBARAO",
+  "POLVO",
+  "CARANGUEJO",
+  "BORBOLETA",
+  "ABELHA",
+  "FORMIGA",
+  "ARANHA",
+  "PASSARO",
+  "PAPAGAIO",
+  "PAVAO",
+  "FLAMINGO",
+  "AGUIA",
+  "CORUJA",
+  "POMBO",
+  "GALINHAO",
+  "HAMSTER",
+  "ESQUILO",
+  "MORCEGO",
+  "FOCA",
+  "PINGUIM",
+  "CANGURU",
+  "GORILA",
+  "HIPOPOTAMO",
+  "RINOCERONTE",
+  "AVESTRUZ",
+  "ONCA",
+  "ANTA",
+  "CAPIVARA",
+  "TAMANDUA",
+
+  "BANANA",
+  "MACA",
+  "PERA",
+  "UVA",
+  "MANGA",
+  "MAMAO",
+  "LARANJA",
+  "LIMAO",
+  "MELANCIA",
+  "MORANGO",
+  "ABACAXI",
+  "COCO",
+  "CEREJA",
+  "PESSEGO",
+  "AMEIXA",
+  "FIGO",
+  "GOIABA",
+  "MARACUJA",
+  "KIWI",
+  "TOMATE",
+  "BATATA",
+  "CENOURA",
+  "CEBOLA",
+  "ALHO",
+  "ARROZ",
+  "FEIJAO",
+  "MILHO",
+  "TRIGO",
+  "QUEIJO",
+  "LEITE",
+  "MANTEIGA",
+  "PAO",
+  "BOLO",
+  "BISCOITO",
+  "CHOCOLATE",
+  "PIPOCA",
+  "SORVETE",
+  "PIZZA",
+  "SANDUICHE",
+  "SALADA",
+
+  "SOPA",
+  "CASA",
+  "ESCOLA",
+  "PRAIA",
+  "ILHA",
+  "JARDIM",
+  "PARQUE",
+  "FAZENDA",
+  "FLORESTA",
+  "MONTANHA",
+  "CIDADE",
+  "PONTE",
+  "ESTRADA",
+  "BARCO",
+  "AVIAO",
+  "CARRO",
+  "BICICLETA",
+  "ONIBUS",
+  "TREM",
+  "NAVIO",
+  "FOGUETE",
+  "CASTELO",
+  "TORRE",
+  "MERCADO",
+  "HOSPITAL",
+  "IGREJA",
+  "MUSEU",
+  "CINEMA",
+  "TEATRO",
+  "CIRCO",
+  "ESTADIO",
+  "HOTEL",
+  "COZINHA",
+  "QUARTO",
+  "BANHEIRO",
+  "GARAGEM",
+  "VARANDA",
+  "PISCINA",
+
+  "BOLA",
+  "BONECA",
+  "CARRINHO",
+  "BRINQUEDO",
+  "LIVRO",
+  "LAPIS",
+  "CANETA",
+  "PAPEL",
+  "MOCHILA",
+  "CADERNO",
+  "TESOURA",
+  "REGUA",
+  "BORRACHA",
+  "RELOGIO",
+  "CELULAR",
+  "CAMERA",
+  "TELEVISAO",
+  "RADIO",
+  "COMPUTADOR",
+  "TECLADO",
+  "MOUSE",
+  "FONE",
+  "GUITARRA",
+  "VIOLAO",
+  "PIANO",
+  "TAMBOR",
+  "FLAUTA",
+  "APITO",
+  "SINO",
+  "MARTELO",
+  "SERROTE",
+  "CHAVE",
+  "PINCEL",
+  "TINTA",
+  "QUADRO",
+  "MESA",
+  "CADEIRA",
+  "CAMA",
+  "SOFA",
+  "LAMPADA",
+  "ESPELHO",
+  "CORTINA",
+  "TAPETE",
+  "SOL",
+  "LUA",
+  "ESTRELA",
+  "NUVEM",
+  "CHUVA",
+  "VENTO",
+  "FOGO",
+  "AGUA",
+  "TERRA",
+  "AREIA",
+  "PEDRA",
+  "MADEIRA",
+  "FOLHA",
+  "FLOR",
+  "ROSA",
+  "GIRASSOL",
+  "ARVORE",
+  "GRAMA"
+
+];
+
+
+/* =====================================================
+   100 PALAVRAS MÉDIAS
+===================================================== */
+
+const MEDIO = [
+
+  "AVENTURA",
+  "MISTERIO",
+  "SEGREDO",
+  "TESOURO",
+  "PIRATA",
+  "EXPLORADOR",
+  "NAVEGANTE",
+  "GUERREIRO",
+  "ARQUEIRO",
+  "CAVALEIRO",
+  "FEITICEIRO",
+  "MAGICO",
+  "DRAGAO",
+  "GIGANTE",
+  "VULCAO",
+  "DESERTO",
+  "PANTANO",
+  "DESFILADEIRO",
+  "CACHOEIRA",
+  "TEMPESTADE",
+  "FURACAO",
+  "TERREMOTO",
+  "RELAMPAGO",
+  "TROVAO",
+  "NEBLINA",
+  "ECLIPSE",
+  "COMETA",
+  "PLANETA",
+  "GALAXIA",
+  "UNIVERSO",
+  "ASTRONAUTA",
+  "SATELITE",
+  "LABORATORIO",
+  "CIENTISTA",
+  "INVENTOR",
+  "MAQUINA",
+  "ENGRENAGEM",
+  "MOTOR",
+  "ENERGIA",
+  "ELETRICIDADE",
+
+  "BIBLIOTECA",
+  "UNIVERSIDADE",
+  "FARMACIA",
+  "AEROPORTO",
+  "ESTACAO",
+  "RODOVIARIA",
+  "PREFEITURA",
+  "TRIBUNAL",
+  "DELEGACIA",
+  "QUARTEL",
+  "FABRICA",
+  "OFICINA",
+  "PADARIA",
+  "RESTAURANTE",
+  "SHOPPING",
+  "SUPERMERCADO",
+  "ARMAZEM",
+  "DEPOSITO",
+  "PORTO",
+  "FAROL",
+  "OBSERVATORIO",
+  "PLANETARIO",
+  "AQUARIO",
+  "ZOOLOGICO",
+  "SANTUARIO",
+  "PARQUEAQUATICO",
+  "ABOBORA",
+  "ESPINAFRE",
+  "BROCOLIS",
+  "BETERRABA",
+
+  "BERINJELA",
+  "PEPINO",
+  "ABOBRINHA",
+  "ERVILHA",
+  "LENTILHA",
+  "GRAODEBICO",
+  "AMENDOIM",
+  "CASTANHA",
+  "PISTACHE",
+  "NOZES",
+  "AVEIA",
+  "FARINHA",
+  "CANELA",
+  "BAUNILHA",
+  "GENGIBRE",
+  "PIMENTA",
+  "MOSTARDA",
+  "MEL",
+  "GELEIA",
+  "IOGURTE",
+  "PRESUNTO",
+  "SALAME",
+  "LINGUICA",
+  "LASANHA",
+  "RISOTO",
+  "PANQUECA",
+  "OMELETE",
+  "CROISSANT",
+  "CUPCAKE",
+  "PUDIM"
+
+];
+
+
+/* =====================================================
+   100 PALAVRAS DIFÍCEIS
+===================================================== */
+
+const DIFICIL = [
+
+  "LABIRINTO",
+  "ENIGMA",
+  "ESTRATEGIA",
+  "INTELIGENCIA",
+  "RACIOCINIO",
+  "OBSERVACAO",
+  "CRIATIVIDADE",
+  "CONHECIMENTO",
+  "SABEDORIA",
+  "EXPERIENCIA",
+  "SOBREVIVENCIA",
+  "DESCOBERTA",
+  "INVESTIGACAO",
+  "ARQUEOLOGIA",
+  "ASTRONOMIA",
+  "BIOLOGIA",
+  "QUIMICA",
+  "FISICA",
+  "MATEMATICA",
+  "TECNOLOGIA",
+  "ENGENHARIA",
+  "PROGRAMACAO",
+  "ALGORITMO",
+  "CRIPTOGRAFIA",
+  "CIRCUITO",
+  "MECANISMO",
+  "COMBUSTAO",
+  "GRAVIDADE",
+  "ATMOSFERA",
+  "MAGNETISMO",
+  "CIVILIZACAO",
+  "IMPERIO",
+  "DEMOCRACIA",
+  "MONARQUIA",
+  "REVOLUCAO",
+  "INDEPENDENCIA",
+  "DIPLOMACIA",
+  "CONSTITUICAO",
+  "TERRITORIO",
+  "FRONTEIRA",
+  "CONTINENTE",
+  "OCEANO",
+  "ARQUIPELAGO",
+  "PENINSULA",
+  "CORDILHEIRA",
+  "GELEIRA",
+  "PROFUNDIDADE",
+  "TORNADO",
+  "TSUNAMI",
+  "AVALANCHE",
+
+  "DINOSSAURO",
+  "VELOCIRAPTOR",
+  "TIRANOSSAURO",
+  "TRICERATOPS",
+  "ESTEGOSSAURO",
+  "BRAQUIOSSAURO",
+  "PTERODACTILO",
+  "MAMUTE",
+  "SMILODONTE",
+  "MEGALODONTE",
+  "CROCODILO",
+  "SALAMANDRA",
+  "ORNITORRINCO",
+  "CAMALEAO",
+  "ESCORPIAO",
+  "TARANTULA",
+  "CENTOPEIA",
+  "ESCARAVELHO",
+  "GAFANHOTO",
+  "LIBELULA",
+
+  "INSTRUMENTO",
+  "PERCUSSAO",
+  "VIOLONCELO",
+  "CONTRABAIXO",
+  "SAXOFONE",
+  "TROMPETE",
+  "CLARINETE",
+  "ACORDEAO",
+  "BANDOLIM",
+  "HARPA",
+  "BATERIA",
+  "MARIMBA",
+  "XILOFONE",
+  "COMPOSITOR",
+  "MAESTRO",
+  "SINFONIA",
+  "MELODIA",
+  "HARMONIA",
+  "RITMO",
+  "CONCERTO",
+  "ORQUESTRA",
+  "CARNAVAL",
+  "FESTIVAL",
+  "ESPETACULO",
+  "COREOGRAFIA",
+  "FIGURINO",
+  "CENOGRAFIA",
+  "ARQUITETURA",
+  "FOTOGRAFIA",
+  "LITERATURA"
+
+];
+
+
+/* =====================================================
+   VERIFICAÇÃO DAS 400 PALAVRAS
+===================================================== */
+
+const TODAS_AS_PALAVRAS = [
+
+  ...FACIL,
+
+  ...MEDIO,
+
+  ...DIFICIL
+
+];
+
+
+console.log(
+  "TOTAL DE PALAVRAS:",
+  TODAS_AS_PALAVRAS.length
+);
+
+
+/* =====================================================
+   DICAS
+===================================================== */
+
+function obterDica(
+  nivel,
+  palavra
+){
+
+  const animal = [
+    "ELEFANTE","MACACO","GIRAFA","CACHORRO",
+    "GATO","COELHO","CAVALO","VACA","PORCO",
+    "GALINHA","OVELHA","CABRA","PATO","PEIXE",
+    "TARTARUGA","LEAO","TIGRE","ZEBRA","URSO",
+    "PANDA","RAPOSA","LOBO","COBRA","JACARE",
+    "CAMELO","LHAMA","BURRO","RATO","SAPO",
+    "BALEIA","GOLFINHO","TUBARAO","POLVO",
+    "CARANGUEJO","BORBOLETA","ABELHA","FORMIGA",
+    "ARANHA","PASSARO","PAPAGAIO","PAVAO",
+    "FLAMINGO","AGUIA","CORUJA","POMBO",
+    "GALINHAO","HAMSTER","ESQUILO","MORCEGO",
+    "FOCA","PINGUIM","CANGURU","GORILA",
+    "HIPOPOTAMO","RINOCERONTE","AVESTRUZ",
+    "ONCA","ANTA","CAPIVARA","TAMANDUA"
+  ];
+
+
+  if(
+    animal.includes(palavra)
+  ){
+
+    return "Animal";
+
+  }
+
+
+  const alimentos = [
+
+    "BANANA","MACA","PERA","UVA","MANGA",
+    "MAMAO","LARANJA","LIMAO","MELANCIA",
+    "MORANGO","ABACAXI","COCO","CEREJA",
+    "PESSEGO","AMEIXA","FIGO","GOIABA",
+    "MARACUJA","KIWI","TOMATE","BATATA",
+    "CENOURA","CEBOLA","ALHO","ARROZ",
+    "FEIJAO","MILHO","TRIGO","QUEIJO",
+    "LEITE","MANTEIGA","PAO","BOLO",
+    "BISCOITO","CHOCOLATE","PIPOCA",
+    "SORVETE","PIZZA","SANDUICHE","SALADA",
+    "SOPA","ABOBORA","ESPINAFRE","BROCOLIS",
+    "BETERRABA","BERINJELA","PEPINO",
+    "ABOBRINHA","ERVILHA","LENTILHA",
+    "GRAODEBICO","AMENDOIM","CASTANHA",
+    "PISTACHE","NOZES","AVEIA","FARINHA",
+    "CANELA","BAUNILHA","GENGIBRE","PIMENTA",
+    "MOSTARDA","MEL","GELEIA","IOGURTE",
+    "PRESUNTO","SALAME","LINGUICA","LASANHA",
+    "RISOTO","PANQUECA","OMELETE",
+    "CROISSANT","CUPCAKE","PUDIM"
+  ];
+
+
+  if(
+    alimentos.includes(palavra)
+  ){
+
+    return "Alimento";
+
+  }
+
+
+  const musica = [
+
+    "INSTRUMENTO","PERCUSSAO","VIOLONCELO",
+    "CONTRABAIXO","SAXOFONE","TROMPETE",
+    "CLARINETE","ACORDEAO","BANDOLIM",
+    "HARPA","BATERIA","MARIMBA","XILOFONE",
+    "COMPOSITOR","MAESTRO","SINFONIA",
+    "MELODIA","HARMONIA","RITMO","CONCERTO",
+    "ORQUESTRA","CARNAVAL","FESTIVAL",
+    "ESPETACULO","COREOGRAFIA","FIGURINO",
+    "CENOGRAFIA"
+  ];
+
+
+  if(
+    musica.includes(palavra)
+  ){
+
+    return "Música e espetáculo";
+
+  }
+
+
+  const prehistorico = [
+
+    "DINOSSAURO","VELOCIRAPTOR","TIRANOSSAURO",
+    "TRICERATOPS","ESTEGOSSAURO",
+    "BRAQUIOSSAURO","PTERODACTILO",
+    "MAMUTE","SMILODONTE","MEGALODONTE"
+  ];
+
+
+  if(
+    prehistorico.includes(palavra)
+  ){
+
+    return "Animal pré-histórico";
+
+  }
+
+
+  if(
+    nivel === "FÁCIL"
+  ){
+
+    return "Objeto, lugar ou elemento do cotidiano";
+
+  }
+
+
+  if(
+    nivel === "MÉDIO"
+  ){
+
+    return "Uma palavra de dificuldade média";
+
+  }
+
+
+  return "Uma palavra de grande desafio";
+
+}
 
 
 /* =====================================================
    ESTADO
 ===================================================== */
 
+let usuario =
+  null;
+
+let usuarioRef =
+  null;
+
+let dadosUsuario =
+  null;
+
+let partidaId =
+  null;
+
+let palavrasDaPartida =
+  [];
+
+let rodadaAtual =
+  0;
+
 let letras =
   new Set();
-
 
 let erros =
   0;
 
-
-let usuario =
-  null;
-
-
-/*
-  Documento do usuário em /admins.
-*/
-let usuarioRef =
-  null;
-
-
-/*
-  Dados atuais do documento /admins.
-*/
-let dadosUsuario =
-  null;
-
-
-/*
-  ID da partida.
-*/
-let partidaId =
-  null;
-
-
-/*
-  Evita finalizar duas vezes.
-*/
-let partidaFinalizada =
+let finalizandoRodada =
   false;
 
-
-/*
-  Impede iniciar duas partidas ao mesmo tempo.
-*/
-let iniciandoPartida =
+let iniciando =
   false;
 
 
 /* =====================================================
-   STATUS
+   NÍVEL DA RODADA
 ===================================================== */
 
-function mostrarStatus(
-  texto,
-  tipo
+function nivelDaRodada(
+  numero
 ){
 
-  statusEl.textContent =
-    texto;
+  if(
+    numero <= 3
+  ){
 
-  statusEl.className =
-    "status " +
-    tipo;
+    return "FÁCIL";
+
+  }
+
+  if(
+    numero <= 5
+  ){
+
+    return "MÉDIO";
+
+  }
+
+  return "DIFÍCIL";
+
+}
+
+
+/* =====================================================
+   LISTA DO NÍVEL
+===================================================== */
+
+function listaDoNivel(
+  nivel
+){
+
+  if(
+    nivel === "FÁCIL"
+  ){
+
+    return FACIL;
+
+  }
+
+  if(
+    nivel === "MÉDIO"
+  ){
+
+    return MEDIO;
+
+  }
+
+  return DIFICIL;
+
+}
+
+
+/* =====================================================
+   EMBARALHAR
+===================================================== */
+
+function embaralhar(
+  lista
+){
+
+  const copia =
+    [...lista];
+
+
+  for(
+    let i =
+      copia.length - 1;
+
+    i > 0;
+
+    i--
+  ){
+
+    const j =
+      Math.floor(
+        Math.random() *
+        (i + 1)
+      );
+
+
+    [
+      copia[i],
+      copia[j]
+    ] =
+    [
+      copia[j],
+      copia[i]
+    ];
+
+  }
+
+
+  return copia;
+
+}
+
+
+/* =====================================================
+   CRIAR AS 7 PALAVRAS
+===================================================== */
+
+function criarSequencia(){
+
+  const facil =
+    embaralhar(
+      FACIL
+    ).slice(
+      0,
+      3
+    );
+
+
+  const medio =
+    embaralhar(
+      MEDIO
+    ).slice(
+      0,
+      2
+    );
+
+
+  const dificil =
+    embaralhar(
+      DIFICIL
+    ).slice(
+      0,
+      2
+    );
+
+
+  palavrasDaPartida = [
+
+    ...facil,
+
+    ...medio,
+
+    ...dificil
+
+  ];
+
+
+  console.log(
+    "SEQUÊNCIA:",
+    palavrasDaPartida
+  );
+
+}
+
+
+/* =====================================================
+   SALVAR ESTADO LOCAL
+===================================================== */
+
+function salvarEstado(){
+
+  sessionStorage.setItem(
+
+    "adamForcaEstado",
+
+    JSON.stringify({
+
+      partidaId:
+        partidaId,
+
+      palavras:
+        palavrasDaPartida,
+
+      rodada:
+        rodadaAtual
+
+    })
+
+  );
+
+}
+
+
+/* =====================================================
+   RECUPERAR ESTADO
+===================================================== */
+
+function recuperarEstado(){
+
+  try{
+
+    const salvo =
+      sessionStorage.getItem(
+        "adamForcaEstado"
+      );
+
+
+    if(
+      !salvo
+    ){
+
+      return false;
+
+    }
+
+
+    const dados =
+      JSON.parse(
+        salvo
+      );
+
+
+    if(
+      !dados ||
+      !dados.partidaId ||
+      !Array.isArray(
+        dados.palavras
+      ) ||
+      dados.palavras.length !==
+        TOTAL_RODADAS
+    ){
+
+      return false;
+
+    }
+
+
+    partidaId =
+      dados.partidaId;
+
+
+    palavrasDaPartida =
+      dados.palavras;
+
+
+    rodadaAtual =
+      Number(
+        dados.rodada || 0
+      );
+
+
+    return true;
+
+  }
+
+  catch(error){
+
+    console.error(
+      error
+    );
+
+    return false;
+
+  }
+
+}
+
+
+/* =====================================================
+   LIMPAR ESTADO
+===================================================== */
+
+function limparEstado(){
+
+  sessionStorage.removeItem(
+    "adamForcaEstado"
+  );
 
 }
 
@@ -933,65 +2013,160 @@ function mostrarStatus(
 
 function desenharPalavra(){
 
-  wordEl.textContent =
-    PALAVRA
-      .split("")
-      .map(
-        letra => {
+  const palavra =
+    palavrasDaPartida[
+      rodadaAtual
+    ];
 
-          if(
-            letras.has(letra)
-          ){
 
-            return letra;
+  if(
+    !palavra
+  ){
 
-          }
+    return;
 
-          return "_";
+  }
 
-        }
-      )
-      .join(" ");
+
+  wordEl.innerHTML =
+    "";
+
+
+  [...palavra].forEach(
+    letra => {
+
+      const span =
+        document.createElement(
+          "span"
+        );
+
+
+      span.className =
+        "word-letter";
+
+
+      if(
+        letras.has(
+          normalizar(letra)
+        )
+      ){
+
+        span.textContent =
+          normalizar(letra);
+
+      }
+      else{
+
+        span.textContent =
+          " ";
+
+      }
+
+
+      wordEl.appendChild(
+        span
+      );
+
+    }
+  );
 
 }
 
 
 /* =====================================================
-   PROGRESSO
+   ATUALIZAR ERROS
 ===================================================== */
 
-function atualizarProgresso(){
+function atualizarErros(){
 
-  const letrasUnicas =
-    new Set(
-      PALAVRA.split("")
+  const pontos =
+    errorsEl
+      .querySelectorAll(
+        ".error-dot"
+      );
+
+
+  pontos.forEach(
+    (ponto,index) => {
+
+      ponto.classList.toggle(
+        "active",
+        index < erros
+      );
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   ATUALIZAR INTERFACE
+===================================================== */
+
+function atualizarInterface(){
+
+  const numero =
+    rodadaAtual + 1;
+
+
+  const nivel =
+    nivelDaRodada(
+      numero
     );
 
 
-  const acertos =
-    [...letrasUnicas]
-      .filter(
-        letra =>
-          letras.has(letra)
-      )
-      .length;
+  nivelEl.textContent =
+    nivel;
+
+
+  rodadaEl.textContent =
+    numero;
+
+
+  faseEl.textContent =
+    numero +
+    " / " +
+    TOTAL_RODADAS;
+
+
+  recompensaEl.textContent =
+    RECOMPENSA_RODADA;
 
 
   const percentual =
     (
-      acertos /
-      letrasUnicas.size
+      numero /
+      TOTAL_RODADAS
     ) * 100;
 
 
   progressEl.style.width =
     percentual + "%";
 
+
+  const palavra =
+    palavrasDaPartida[
+      rodadaAtual
+    ];
+
+
+  dicaEl.textContent =
+    obterDica(
+      nivel,
+      palavra
+    );
+
+
+  desenharPalavra();
+
+  atualizarErros();
+
 }
 
 
 /* =====================================================
-   TECLADO
+   CRIAR TECLADO
 ===================================================== */
 
 function criarTeclado(){
@@ -1013,16 +2188,16 @@ function criarTeclado(){
         );
 
 
+      botao.type =
+        "button";
+
+
       botao.className =
         "key";
 
 
       botao.textContent =
         letra;
-
-
-      botao.type =
-        "button";
 
 
       botao.addEventListener(
@@ -1055,15 +2230,66 @@ function criarTeclado(){
 function bloquearTeclado(){
 
   keyboardEl
-    .querySelectorAll("button")
+    .querySelectorAll(
+      "button"
+    )
     .forEach(
-      button => {
+      botao => {
 
-        button.disabled =
+        botao.disabled =
           true;
 
       }
     );
+
+}
+
+
+/* =====================================================
+   LIBERAR TECLADO
+===================================================== */
+
+function liberarTeclado(){
+
+  keyboardEl
+    .querySelectorAll(
+      "button"
+    )
+    .forEach(
+      botao => {
+
+        botao.disabled =
+          false;
+
+      }
+    );
+
+}
+
+
+/* =====================================================
+   RESETAR RODADA
+===================================================== */
+
+function resetarRodada(){
+
+  letras =
+    new Set();
+
+
+  erros =
+    0;
+
+
+  finalizandoRodada =
+    false;
+
+
+  criarTeclado();
+
+  atualizarInterface();
+
+  liberarTeclado();
 
 }
 
@@ -1078,8 +2304,15 @@ function escolherLetra(
 ){
 
   if(
-    partidaFinalizada ||
-    !partidaId ||
+    finalizandoRodada
+  ){
+
+    return;
+
+  }
+
+
+  if(
     letras.has(letra)
   ){
 
@@ -1088,15 +2321,27 @@ function escolherLetra(
   }
 
 
-  letras.add(letra);
+  letras.add(
+    letra
+  );
 
 
   botao.disabled =
     true;
 
 
+  const palavra =
+    normalizar(
+      palavrasDaPartida[
+        rodadaAtual
+      ]
+    );
+
+
   if(
-    PALAVRA.includes(letra)
+    palavra.includes(
+      letra
+    )
   ){
 
     botao.classList.add(
@@ -1104,20 +2349,21 @@ function escolherLetra(
     );
 
 
-    mostrarStatus(
-      "✅ Boa! A letra está na palavra.",
-      "success"
-    );
+    statusEl.textContent =
+      "✅ Boa! A letra está na palavra.";
+
+
+    statusEl.className =
+      "status success";
 
 
     desenharPalavra();
-
-    atualizarProgresso();
 
 
     verificarVitoria();
 
   }
+
   else{
 
     botao.classList.add(
@@ -1128,20 +2374,25 @@ function escolherLetra(
     erros++;
 
 
-    mostrarStatus(
+    atualizarErros();
+
+
+    statusEl.textContent =
       "❌ Letra errada. Tentativas: " +
       erros +
       " / " +
-      MAX_ERROS,
-      "error"
-    );
+      MAX_ERROS;
+
+
+    statusEl.className =
+      "status error";
 
 
     if(
       erros >= MAX_ERROS
     ){
 
-      perder();
+      perderRodada();
 
     }
 
@@ -1154,22 +2405,33 @@ function escolherLetra(
    VERIFICAR VITÓRIA
 ===================================================== */
 
-async function verificarVitoria(){
+function verificarVitoria(){
+
+  const palavra =
+    normalizar(
+      palavrasDaPartida[
+        rodadaAtual
+      ]
+    );
+
 
   const venceu =
-    PALAVRA
-      .split("")
-      .every(
-        letra =>
-          letras.has(letra)
-      );
+    [...new Set(
+      palavra.split("")
+    )]
+    .every(
+      letra =>
+        letras.has(
+          letra
+        )
+    );
 
 
   if(
     venceu
   ){
 
-    await ganhar();
+    ganharRodada();
 
   }
 
@@ -1184,12 +2446,6 @@ async function localizarCadastro(
   user
 ){
 
-  /*
-    -----------------------------------------------------
-    1. PRIMEIRO: UID
-    -----------------------------------------------------
-  */
-
   let snapshot =
     await getDocs(
 
@@ -1198,11 +2454,13 @@ async function localizarCadastro(
           db,
           "admins"
         ),
+
         where(
           "uid",
           "==",
           user.uid
         )
+
       )
 
     );
@@ -1217,12 +2475,6 @@ async function localizarCadastro(
   }
 
 
-  /*
-    -----------------------------------------------------
-    2. SEGUNDO: E-MAIL
-    -----------------------------------------------------
-  */
-
   if(
     user.email
   ){
@@ -1235,11 +2487,13 @@ async function localizarCadastro(
             db,
             "admins"
           ),
+
           where(
             "email",
             "==",
             user.email
           )
+
         )
 
       );
@@ -1256,101 +2510,7 @@ async function localizarCadastro(
   }
 
 
-  /*
-    -----------------------------------------------------
-    3. NÃO EXISTE CADASTRO
-    -----------------------------------------------------
-
-    Criamos somente o cadastro básico do próprio
-    usuário autenticado.
-
-    Isso usa a mesma estrutura do index.html.
-  */
-
-  const caracteres =
-    "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-
-
-  let publicId =
-    "";
-
-
-  for(
-    let i = 0;
-    i < 7;
-    i++
-  ){
-
-    publicId +=
-      caracteres[
-        Math.floor(
-          Math.random() *
-          caracteres.length
-        )
-      ];
-
-  }
-
-
-  const novoCadastro =
-    await addDoc(
-
-      collection(
-        db,
-        "admins"
-      ),
-
-      {
-
-        uid:
-          user.uid,
-
-        nome:
-          user.displayName ||
-          "Usuário",
-
-        email:
-          user.email || "",
-
-        publicId:
-          publicId,
-
-        idade:
-          "",
-
-        telefone:
-          "",
-
-        avatar:
-          "🙂",
-
-        vip:
-          false,
-
-        caixaBox:
-          false,
-
-        chances:
-          0,
-
-        moedas:
-          0,
-
-        chaves:
-          0,
-
-        creditos:
-          0,
-
-        criadoEm:
-          new Date().toISOString()
-
-      }
-
-    );
-
-
-  return novoCadastro;
+  return null;
 
 }
 
@@ -1362,9 +2522,7 @@ async function localizarCadastro(
 async function iniciarPartida(){
 
   if(
-    iniciandoPartida ||
-    partidaId ||
-    !usuario
+    iniciando
   ){
 
     return;
@@ -1372,21 +2530,11 @@ async function iniciarPartida(){
   }
 
 
-  iniciandoPartida =
+  iniciando =
     true;
 
 
   try{
-
-    mostrarStatus(
-      "🎟️ Verificando seu cadastro...",
-      "info"
-    );
-
-
-    /*
-      Localiza o documento correto.
-    */
 
     const cadastro =
       await localizarCadastro(
@@ -1399,7 +2547,7 @@ async function iniciarPartida(){
     ){
 
       throw new Error(
-        "Não foi possível localizar seu cadastro."
+        "Cadastro não encontrado para esta conta."
       );
 
     }
@@ -1413,51 +2561,25 @@ async function iniciarPartida(){
       cadastro.data();
 
 
-    /*
-      Garante valores numéricos.
-    */
-
     const chances =
       Number(
         dadosUsuario.chances || 0
       );
 
 
-    const moedas =
-      Number(
-        dadosUsuario.moedas || 0
-      );
-
-
-    /*
-      Sem chance = não começa partida.
-    */
-
     if(
       chances <= 0
     ){
 
-      mostrarStatus(
-        "🎟️ Você não possui chances para jogar.",
-        "error"
+      throw new Error(
+        "Você não possui chances para jogar."
       );
-
-
-      bloquearTeclado();
-
-
-      iniciandoPartida =
-        false;
-
-
-      return;
 
     }
 
 
-    /*
-      Cria ID da partida.
-    */
+    criarSequencia();
+
 
     const novaPartida =
       doc(
@@ -1468,17 +2590,11 @@ async function iniciarPartida(){
       );
 
 
-    /*
-      Tudo será feito em uma única operação.
-    */
-
     const batch =
-      writeBatch(db);
+      writeBatch(
+        db
+      );
 
-
-    /*
-      Cria a sessão.
-    */
 
     batch.set(
       novaPartida,
@@ -1496,11 +2612,14 @@ async function iniciarPartida(){
         status:
           "ativa",
 
-        rewardBase:
-          MOEDAS_PARTIDA,
+        totalRodadas:
+          TOTAL_RODADAS,
 
-        rewardWin:
-          MOEDAS_VITORIA,
+        rodadaAtual:
+          1,
+
+        rewardPerRound:
+          RECOMPENSA_RODADA,
 
         chanceConsumed:
           true,
@@ -1516,7 +2635,10 @@ async function iniciarPartida(){
 
 
     /*
-      Consome 1 chance e adiciona 30 moedas.
+      UMA chance é consumida no começo da
+      sequência inteira.
+
+      Não é descontada novamente nas 7 rodadas.
     */
 
     batch.update(
@@ -1525,9 +2647,6 @@ async function iniciarPartida(){
 
         chances:
           chances - 1,
-
-        moedas:
-          moedas + MOEDAS_PARTIDA,
 
         ultimaPartidaForcaId:
           novaPartida.id,
@@ -1539,37 +2658,26 @@ async function iniciarPartida(){
     );
 
 
-    /*
-      Commit.
-    */
-
     await batch.commit();
 
-
-    /*
-      Só chegamos aqui se o Firebase aceitou
-      a operação inteira.
-    */
 
     partidaId =
       novaPartida.id;
 
 
-    dadosUsuario.chances =
-      chances - 1;
+    salvarEstado();
 
 
-    dadosUsuario.moedas =
-      moedas + MOEDAS_PARTIDA;
+    atualizarInterface();
 
 
     mostrarStatus(
-      "🪙 +30 moedas recebidas! Boa sorte!",
+      "🎟️ Partida iniciada! Complete as 7 rodadas.",
       "success"
     );
 
 
-    iniciandoPartida =
+    iniciando =
       false;
 
   }
@@ -1582,11 +2690,11 @@ async function iniciarPartida(){
     );
 
 
-    iniciandoPartida =
+    iniciando =
       false;
 
 
-    let mensagem =
+    let texto =
       "⚠️ Não foi possível iniciar a partida.";
 
 
@@ -1595,15 +2703,15 @@ async function iniciarPartida(){
       "permission-denied"
     ){
 
-      mensagem =
-        "⚠️ O Firebase recusou a gravação. As Rules precisam permitir a atualização das moedas, chances e da partida.";
+      texto =
+        "⚠️ O Firebase recusou o início da partida. As Rules precisam permitir a criação de gameSessions e o consumo da chance.";
 
     }
     else if(
       error.message
     ){
 
-      mensagem =
+      texto =
         "⚠️ " +
         error.message;
 
@@ -1611,7 +2719,7 @@ async function iniciarPartida(){
 
 
     mostrarStatus(
-      mensagem,
+      texto,
       "error"
     );
 
@@ -1624,16 +2732,16 @@ async function iniciarPartida(){
 
 
 /* =====================================================
-   GANHAR
+   REGISTRAR RESULTADO DA RODADA
 ===================================================== */
 
-async function ganhar(){
+async function registrarResultado(
+  ganhou
+){
 
   if(
-    partidaFinalizada ||
     !partidaId ||
-    !usuarioRef ||
-    !dadosUsuario
+    !usuario
   ){
 
     return;
@@ -1641,7 +2749,168 @@ async function ganhar(){
   }
 
 
-  partidaFinalizada =
+  try{
+
+    await addDoc(
+
+      collection(
+        db,
+        "resultadosJogos"
+      ),
+
+      {
+
+        uid:
+          usuario.uid,
+
+        jogoId:
+          partidaId,
+
+        rodada:
+          rodadaAtual + 1,
+
+        nivel:
+          nivelDaRodada(
+            rodadaAtual + 1
+          ),
+
+        palavra:
+          palavrasDaPartida[
+            rodadaAtual
+          ],
+
+        ganhou:
+          ganhou,
+
+        moedasGanhos:
+          ganhou
+            ? RECOMPENSA_RODADA
+            : 0,
+
+        criadoEm:
+          new Date().toISOString()
+
+      }
+
+    );
+
+  }
+
+  catch(error){
+
+    console.error(
+      "ERRO AO REGISTRAR RESULTADO:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   DAR MOEDAS
+===================================================== */
+
+async function darMoedas(){
+
+  if(
+    !usuarioRef ||
+    !dadosUsuario
+  ){
+
+    throw new Error(
+      "Cadastro do usuário não carregado."
+    );
+
+  }
+
+
+  const moedasAtuais =
+    Number(
+      dadosUsuario.moedas || 0
+    );
+
+
+  const novoSaldo =
+    moedasAtuais +
+    RECOMPENSA_RODADA;
+
+
+  const batch =
+    writeBatch(
+      db
+    );
+
+
+  /*
+    Adiciona as 20 moedas.
+  */
+
+  batch.update(
+    usuarioRef,
+    {
+
+      moedas:
+        novoSaldo
+
+    }
+  );
+
+
+  /*
+    Atualiza a rodada da sessão.
+  */
+
+  batch.update(
+
+    doc(
+      db,
+      "gameSessions",
+      partidaId
+    ),
+
+    {
+
+      rodadaAtual:
+        rodadaAtual + 1,
+
+      ultimaRecompensa:
+        RECOMPENSA_RODADA,
+
+      ultimaRecompensaEm:
+        serverTimestamp()
+
+    }
+
+  );
+
+
+  await batch.commit();
+
+
+  dadosUsuario.moedas =
+    novoSaldo;
+
+}
+
+
+/* =====================================================
+   GANHAR RODADA
+===================================================== */
+
+async function ganharRodada(){
+
+  if(
+    finalizandoRodada
+  ){
+
+    return;
+
+  }
+
+
+  finalizandoRodada =
     true;
 
 
@@ -1650,92 +2919,60 @@ async function ganhar(){
 
   try{
 
-    const saldoAtual =
-      Number(
-        dadosUsuario.moedas || 0
-      );
-
-
-    const novoSaldo =
-      saldoAtual +
-      MOEDAS_VITORIA;
-
-
-    const batch =
-      writeBatch(db);
-
-
     /*
-      Atualiza a sessão.
+      Primeiro registra o resultado.
     */
 
-    const sessionRef =
-      doc(
-        db,
-        "gameSessions",
-        partidaId
-      );
-
-
-    batch.update(
-      sessionRef,
-      {
-
-        status:
-          "won",
-
-        finalizadoEm:
-          serverTimestamp()
-
-      }
+    await registrarResultado(
+      true
     );
 
 
     /*
-      Adiciona +20 moedas.
+      Depois tenta adicionar 20 moedas.
     */
 
-    batch.update(
-      usuarioRef,
-      {
-
-        moedas:
-          novoSaldo,
-
-        ultimaPartidaForcaId:
-          partidaId,
-
-        ultimaPartidaForcaEm:
-          serverTimestamp()
-
-      }
-    );
+    await darMoedas();
 
 
-    await batch.commit();
+    statusEl.textContent =
+      "🎉 Acertou! +20 moedas";
 
 
-    dadosUsuario.moedas =
-      novoSaldo;
+    statusEl.className =
+      "status success";
 
 
-    mostrarStatus(
-      "🎉 Palavra correta! +20 moedas extras!",
-      "success"
-    );
+    if(
+      rodadaAtual >=
+      TOTAL_RODADAS - 1
+    ){
+
+      setTimeout(
+        finalizarPartida,
+        1200
+      );
+
+      return;
+
+    }
 
 
     setTimeout(
       () => {
 
-        abrirModal(
+        rodadaAtual++;
 
-          "🎉 VOCÊ ACERTOU!",
 
-          "Parabéns! Você ganhou +20 moedas extras.",
+        salvarEstado();
 
-          "CONTINUAR"
 
+        resetarRodada();
+
+
+        mostrarStatus(
+          "➡️ Próxima rodada!",
+          "success"
         );
 
       },
@@ -1747,36 +2984,48 @@ async function ganhar(){
   catch(error){
 
     console.error(
-      "ERRO AO REGISTRAR VITÓRIA:",
+      "ERRO AO DAR MOEDAS:",
       error
     );
 
 
     /*
-      Permite tentar novamente caso a escrita
-      tenha sido recusada.
+      Não avança a rodada se a recompensa
+      não foi registrada.
     */
 
-    partidaFinalizada =
+    finalizandoRodada =
       false;
 
 
-    mostrarStatus(
+    liberarTeclado();
 
+
+    if(
       error.code ===
       "permission-denied"
+    ){
 
-      ?
+      mostrarStatus(
 
-      "⚠️ A palavra foi acertada, mas o Firebase recusou o registro das 20 moedas. Precisamos ajustar a permissão de moedas."
+        "⚠️ A palavra foi acertada, mas o Firebase não permitiu registrar as 20 moedas. A partida ficou nesta rodada.",
 
-      :
+        "error"
 
-      "⚠️ A palavra foi acertada, mas não foi possível registrar as moedas. Tente novamente.",
+      );
 
-      "error"
+    }
+    else{
 
-    );
+      mostrarStatus(
+
+        "⚠️ Não foi possível registrar a recompensa. Tente novamente.",
+
+        "error"
+
+      );
+
+    }
 
   }
 
@@ -1784,14 +3033,13 @@ async function ganhar(){
 
 
 /* =====================================================
-   PERDER
+   PERDER RODADA
 ===================================================== */
 
-async function perder(){
+async function perderRodada(){
 
   if(
-    partidaFinalizada ||
-    !partidaId
+    finalizandoRodada
   ){
 
     return;
@@ -1799,101 +3047,173 @@ async function perder(){
   }
 
 
-  partidaFinalizada =
+  finalizandoRodada =
     true;
 
 
   bloquearTeclado();
 
 
-  try{
-
-    const sessionRef =
-      doc(
-        db,
-        "gameSessions",
-        partidaId
-      );
-
-
-    const batch =
-      writeBatch(db);
-
-
-    batch.update(
-      sessionRef,
-      {
-
-        status:
-          "lost",
-
-        finalizadoEm:
-          serverTimestamp()
-
-      }
-    );
-
-
-    await batch.commit();
-
-  }
-
-  catch(error){
-
-    console.error(
-      "ERRO AO FINALIZAR DERROTA:",
-      error
-    );
-
-  }
-
-
-  mostrarStatus(
-    "❌ Você perdeu a partida.",
-    "error"
+  await registrarResultado(
+    false
   );
+
+
+  const palavra =
+    palavrasDaPartida[
+      rodadaAtual
+    ];
+
+
+  if(
+    rodadaAtual >=
+    TOTAL_RODADAS - 1
+  ){
+
+    finalizarPartida();
+
+    return;
+
+  }
+
+
+  statusEl.textContent =
+    "❌ A palavra era " +
+    palavra +
+    ". Próxima rodada!";
+
+
+  statusEl.className =
+    "status error";
 
 
   setTimeout(
     () => {
 
-      abrirModal(
+      rodadaAtual++;
 
-        "😢 VOCÊ PERDEU",
 
-        "A palavra era ELEFANTE. As 30 moedas da partida continuam com você.",
+      salvarEstado();
 
-        "CONTINUAR"
 
+      resetarRodada();
+
+
+      mostrarStatus(
+        "➡️ Próxima rodada!",
+        "info"
       );
 
     },
-    1200
+    1600
   );
 
 }
 
 
 /* =====================================================
-   MODAL
+   FINALIZAR PARTIDA
 ===================================================== */
 
-function abrirModal(
-  titulo,
-  texto,
-  botao
-){
+async function finalizarPartida(){
+
+  bloquearTeclado();
+
+
+  try{
+
+    if(
+      partidaId
+    ){
+
+      await writeBatch(
+        db
+      ).update;
+
+    }
+
+  }
+  catch(error){
+
+    console.error(
+      error
+    );
+
+  }
+
+
+  /*
+    Tenta atualizar a sessão separadamente.
+  */
+
+  try{
+
+    if(
+      partidaId
+    ){
+
+      const batch =
+        writeBatch(
+          db
+        );
+
+
+      batch.update(
+
+        doc(
+          db,
+          "gameSessions",
+          partidaId
+        ),
+
+        {
+
+          status:
+            "completed",
+
+          rodadaAtual:
+            TOTAL_RODADAS,
+
+          totalRodadas:
+            TOTAL_RODADAS,
+
+          finalizadoEm:
+            serverTimestamp()
+
+        }
+
+      );
+
+
+      await batch.commit();
+
+    }
+
+  }
+
+  catch(error){
+
+    console.error(
+      "ERRO AO FINALIZAR PARTIDA:",
+      error
+    );
+
+  }
+
+
+  limparEstado();
+
 
   modalTitle.textContent =
-    titulo;
+    "🏆 SEQUÊNCIA COMPLETA!";
 
 
   modalText.textContent =
-    texto;
+    "Parabéns! Você completou as 7 rodadas da Forca.";
 
 
   modalButton.textContent =
-    botao;
+    "VOLTAR PARA OS JOGOS";
 
 
   modal.classList.add(
@@ -1904,7 +3224,7 @@ function abrirModal(
 
 
 /* =====================================================
-   MODAL CONTINUAR
+   MODAL
 ===================================================== */
 
 modalButton.addEventListener(
@@ -1935,17 +3255,6 @@ document
   );
 
 
-voltar.addEventListener(
-  "click",
-  () => {
-
-    window.location.href =
-      "jogos.html";
-
-  }
-);
-
-
 /* =====================================================
    AUTENTICAÇÃO
 ===================================================== */
@@ -1972,41 +3281,65 @@ onAuthStateChanged(
 
 
     /*
-      Não usamos o usuário do Authentication
-      como banco de moedas.
-
-      As moedas ficam no documento /admins.
+      Se a página foi recarregada durante uma partida,
+      recupera a mesma sequência em vez de começar
+      outra partida e gastar outra chance.
     */
 
-    try{
-
-      mostrarStatus(
-        "🎟️ Preparando sua partida...",
-        "info"
-      );
+    const recuperou =
+      recuperarEstado();
 
 
-      await iniciarPartida();
+    if(
+      recuperou
+    ){
+
+      try{
+
+        const cadastro =
+          await localizarCadastro(
+            usuario
+          );
+
+
+        if(
+          cadastro
+        ){
+
+          usuarioRef =
+            cadastro.ref;
+
+          dadosUsuario =
+            cadastro.data();
+
+        }
+
+
+        atualizarInterface();
+
+
+        mostrarStatus(
+          "🎮 Partida recuperada. Continue a sequência!",
+          "info"
+        );
+
+
+        return;
+
+      }
+
+      catch(error){
+
+        console.error(
+          error
+        );
+
+      }
 
     }
 
-    catch(error){
 
-      console.error(
-        "ERRO AUTH/FORCA:",
-        error
-      );
-
-
-      mostrarStatus(
-        "⚠️ Erro ao carregar sua partida.",
-        "error"
-      );
-
-
-      bloquearTeclado();
-
-    }
+    iniciarPartida();
 
   }
 );
@@ -2016,23 +3349,9 @@ onAuthStateChanged(
    INICIALIZAÇÃO VISUAL
 ===================================================== */
 
-document.getElementById(
-  "dica"
-).textContent =
-  DICA;
-
-
-document.getElementById(
-  "fase"
-).textContent =
-  "1 / 7";
-
-
-desenharPalavra();
-
 criarTeclado();
 
-atualizarProgresso();
+atualizarErros();
 
 </script>
 
