@@ -1,0 +1,2472 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adam Games - Forca</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;min-height:100%;overflow-x:hidden}
+body{min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:#fff;background:radial-gradient(circle at 10% 0%,rgba(0,190,120,.30),transparent 32%),radial-gradient(circle at 90% 0%,rgba(20,150,255,.30),transparent 32%),linear-gradient(180deg,#06233d,#031a2e)}
+.page{width:100%;max-width:650px;margin:auto;padding:15px 15px 70px}
+.top{display:flex;align-items:center;justify-content:space-between}
+.back{width:45px;height:45px;border:0;border-radius:13px;background:rgba(0,40,70,.9);color:#fff;font-size:26px;cursor:pointer}
+.title{text-align:center}.title small{display:block;color:#8bb8d5;font-size:8px;letter-spacing:2px}.title strong{display:block;margin-top:2px;font-size:21px}
+.top-coins{min-width:88px;padding:7px 9px;border-radius:13px;text-align:center;background:rgba(255,213,43,.08);border:1px solid rgba(255,213,43,.15)}
+.top-coins-label{color:#9ab9cd;font-size:8px;font-weight:bold}.top-coins-value{margin-top:2px;color:#ffd52b;font-size:17px;font-weight:900}
+.hero{margin-top:14px;padding:18px;border-radius:22px;text-align:center;background:linear-gradient(135deg,rgba(5,48,82,.97),rgba(3,27,49,.97));border:1px solid rgba(255,255,255,.08)}
+.hero-icon{font-size:42px}.hero h1{margin-top:3px;font-size:30px}.hero p{margin-top:5px;color:#b7d0e2;font-size:13px}
+.level-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:11px}.level-box{padding:10px 5px;border-radius:13px;text-align:center;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.07)}
+.level-label{color:#91b2c9;font-size:8px;font-weight:bold}.level-value{margin-top:3px;font-size:15px;font-weight:900}
+.progress-card{margin-top:11px;padding:13px;border-radius:15px;background:rgba(2,25,46,.9)}.progress-top{display:flex;justify-content:space-between;align-items:center}.progress-title{font-size:11px;font-weight:900}.progress-count{color:#9bb9ce;font-size:10px}.progress-bar{width:100%;height:8px;margin-top:8px;overflow:hidden;border-radius:20px;background:rgba(255,255,255,.09)}.progress-fill{height:100%;width:0;border-radius:20px;background:linear-gradient(90deg,#13b965,#ffd52b);transition:width .3s ease}
+.game-card{margin-top:12px;padding:13px;border-radius:21px;background:rgba(2,25,47,.97);border:1px solid rgba(255,255,255,.09)}
+.hangman-wrap{position:relative;width:100%;aspect-ratio:437/275;overflow:hidden;border-radius:17px;background:#071f35;line-height:0;isolation:isolate}
+.hangman-layer{position:absolute;inset:0;width:100%!important;height:100%!important;object-fit:fill;opacity:0;visibility:hidden;pointer-events:none;user-select:none;-webkit-user-drag:none}
+.hangman-layer.active{opacity:1;visibility:visible;z-index:2}
+.errors-row{min-height:10px;display:flex;align-items:center;justify-content:center;gap:7px;margin-top:11px}.error-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.13)}.error-dot.active{background:#ff5365;box-shadow:0 0 7px rgba(255,70,90,.5)}
+.hint{margin-top:12px;padding:12px;border-radius:14px;text-align:center;background:rgba(20,145,220,.08);border:1px solid rgba(20,145,220,.12)}.hint-label{color:#69c5fa;font-size:8px;font-weight:900;letter-spacing:1px}.hint-text{margin-top:4px;color:#fff;font-size:14px;font-weight:bold}
+.word{min-height:47px;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:center;gap:6px;margin-top:17px}.letter{width:27px;height:39px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:4px;border-bottom:3px solid #62c9ff;font-size:23px;font-weight:900;text-transform:uppercase}
+.keyboard{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-top:19px}.key{min-height:41px;border:0;border-radius:9px;background:linear-gradient(145deg,#126a9e,#07466e);color:#fff;font-size:14px;font-weight:900;cursor:pointer}.key.correct{background:linear-gradient(145deg,#16bd68,#087d45)}.key.wrong{background:linear-gradient(145deg,#c9344a,#8b182b)}.key:disabled{cursor:not-allowed;opacity:.42}
+.message{display:none;margin-top:13px;padding:13px;border-radius:14px;text-align:center;font-size:13px;font-weight:bold}.message.show{display:block}.message.success{color:#70ffac;background:rgba(0,210,100,.1);border:1px solid rgba(0,210,100,.18)}.message.error{color:#ff9ca8;background:rgba(255,50,70,.1);border:1px solid rgba(255,50,70,.18)}
+.reward{display:none;margin-top:12px;padding:12px;border-radius:14px;text-align:center;background:rgba(255,213,43,.07);border:1px solid rgba(255,213,43,.15)}.reward strong{color:#ffd52b;font-size:20px}
+.modal{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(0,8,20,.86);backdrop-filter:blur(6px)}.modal.show{display:flex}.modal-card{width:100%;max-width:380px;padding:25px 20px;border-radius:23px;text-align:center;background:#082843;border:1px solid rgba(255,255,255,.12);box-shadow:0 20px 60px rgba(0,0,0,.5)}.modal-icon{font-size:54px}.modal-card h2{margin-top:8px;font-size:25px}.modal-card p{margin-top:9px;color:#b8d3e5;font-size:14px;line-height:1.5}.modal-coins{margin-top:13px;color:#ffd52b;font-size:21px;font-weight:900}.modal-button{width:100%;height:49px;margin-top:18px;border:0;border-radius:14px;background:#18ae60;color:#fff;font-size:13px;font-weight:900;cursor:pointer}
+.timer-box{display:none;margin-top:10px;padding:10px;border-radius:12px;text-align:center;background:rgba(255,213,43,.08);border:1px solid rgba(255,213,43,.2);color:#ffd52b;font-weight:900;font-size:15px}.timer-box small{display:block;color:#b7d0e2;font-size:9px;margin-bottom:3px}@media(max-width:430px){.keyboard{gap:4px}.key{min-height:38px;font-size:13px}.letter{width:24px;font-size:21px}}
+</style>
+
+<style id="loss-continue-style">
+#lossContinueModal{
+  position:fixed;
+  inset:0;
+  z-index:99999;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(0,0,0,.72);
+  backdrop-filter:blur(5px);
+}
+#lossContinueModal.show{display:flex}
+#lossContinueBox{
+  width:min(440px,100%);
+  padding:26px 22px;
+  border-radius:24px;
+  text-align:center;
+  color:#fff;
+  background:linear-gradient(145deg,#092d57,#03172f);
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow:0 25px 70px rgba(0,0,0,.45);
+}
+#lossContinueBox .lossIcon{font-size:52px;margin-bottom:8px}
+#lossContinueBox h2{margin:0 0 8px;font-size:27px}
+#lossContinueBox p{margin:7px 0;color:#b8d4ea;line-height:1.5}
+#lossContinueBox .lossLevel{
+  display:inline-block;
+  margin:10px 0 14px;
+  padding:7px 12px;
+  border-radius:12px;
+  background:rgba(255,213,42,.13);
+  color:#ffd52a;
+  font-weight:900;
+  font-size:12px;
+}
+#lossContinueBox .lossButtons{
+  display:grid;
+  gap:10px;
+  margin-top:18px;
+}
+#lossContinueBox button{
+  border:0;
+  border-radius:13px;
+  padding:14px 16px;
+  color:#fff;
+  font-weight:900;
+  font-size:15px;
+  cursor:pointer;
+}
+#lossContinueSame{
+  background:linear-gradient(135deg,#168fff,#0563b5);
+}
+#lossContinueExit{
+  background:rgba(255,255,255,.09);
+}
+</style>
+
+</head>
+<body>
+
+<div id="lossContinueModal" aria-hidden="true">
+  <div id="lossContinueBox">
+    <div class="lossIcon">😢</div>
+    <h2>Você perdeu!</h2>
+    <p id="lossContinueText">
+      Não desista! Você pode continuar jogando no mesmo nível.
+    </p>
+    <div class="lossLevel" id="lossContinueLevel">MESMO NÍVEL</div>
+    <p>
+      Use 1 chance para continuar no mesmo nível com uma nova palavra.
+    </p>
+    <div class="lossButtons">
+      <button id="lossContinueSame" type="button">
+        🔄 CONTINUAR NO MESMO NÍVEL
+      </button>
+      <button id="lossContinueExit" type="button">
+        ✖️ SAIR
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+<div class="top"><button class="back" id="back" type="button">←</button><div class="title"><small>ADAM GAMES</small><strong>FORCA</strong></div><div class="top-coins"><div class="top-coins-label">ADAM COINS</div><div class="top-coins-value" id="coins">0</div></div></div>
+<div class="hero"><div class="hero-icon">🔤</div><h1>Forca</h1><p>Descubra a palavra e avance até a rodada bônus.</p></div>
+<div class="level-row"><div class="level-box"><div class="level-label">NÍVEL DA PALAVRA</div><div class="level-value" id="levelName">FÁCIL</div></div><div class="level-box"><div class="level-label">RODADA</div><div class="level-value" id="roundNumber">1 / 9</div></div><div class="level-box"><div class="level-label">RECOMPENSA</div><div class="level-value" id="roundReward">🪙 20</div></div></div>
+<div class="progress-card"><div class="progress-top"><div class="progress-title">PROGRESSO DA SEQUÊNCIA</div><div class="progress-count" id="progressText">1 / 9</div></div><div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div></div>
+<div class="game-card"><div class="hangman-wrap">
+<img class="hangman-layer active" src="01_forca_0_erros.png"><img class="hangman-layer" src="02_forca_1_erro.png"><img class="hangman-layer" src="03_forca_2_erros.png"><img class="hangman-layer" src="04_forca_3_erros.png"><img class="hangman-layer" src="05_forca_4_erros.png"><img class="hangman-layer" src="06_forca_5_erros.png"><img class="hangman-layer" src="07_forca_6_erros.png">
+</div><div class="errors-row" id="errorsRow"><span class="error-dot"></span><span class="error-dot"></span><span class="error-dot"></span><span class="error-dot"></span><span class="error-dot"></span><span class="error-dot"></span></div>
+<div class="hint"><div class="hint-label">💡 PISTA</div><div class="hint-text" id="hint">—</div></div><div class="timer-box" id="timerBox"><small>⏱️ TEMPO DO DESAFIO</small><span id="timerValue">0.0s</span></div><div class="word" id="word"></div><div class="keyboard" id="keyboard"></div><div class="message" id="message"></div><div class="reward" id="reward">🪙 Você ganhou <strong id="rewardValue">20</strong> Adam Coins!</div></div></div>
+<div class="modal" id="modal"><div class="modal-card"><div class="modal-icon" id="modalIcon">💀</div><h2 id="modalTitle">Você perdeu!</h2><p id="modalText"></p><div class="modal-coins" id="modalCoins"></div><button class="modal-button" id="modalButton">CONTINUAR</button></div></div>
+
+
+/* =====================================================
+   BANCO COMPLETO — 1.950 PALAVRAS ÚNICAS
+   ===================================================== */
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+import {getAuth,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+import {getFirestore,collection,query,where,getDocs,getDoc,runTransaction,doc} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+const firebaseConfig={
+  apiKey:"AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",
+  authDomain:"adam-games-21081.firebaseapp.com",
+  projectId:"adam-games-21081",
+  storageBucket:"adam-games-21081.firebasestorage.app",
+  messagingSenderId:"1055528418738",
+  appId:"1:1055528418738:web:5fafdf63424ba9744eb8ab"
+};
+
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getFirestore(app);
+
+const PALAVRAS_FACIL = [
+  {palavra:"abacate",pista:"Fruta ou alimento — dica 1"},
+  {palavra:"abacaxi",pista:"Objeto do dia a dia — dica 2"},
+  {palavra:"abelha",pista:"Lugar conhecido — dica 3"},
+  {palavra:"abóbora",pista:"Animal comum — dica 4"},
+  {palavra:"academia",pista:"Algo encontrado em casa — dica 5"},
+  {palavra:"acidente",pista:"Elemento da natureza — dica 6"},
+  {palavra:"acorde",pista:"Objeto usado diariamente — dica 7"},
+  {palavra:"acordo",pista:"Atividade comum — dica 8"},
+  {palavra:"açúcar",pista:"Fruta ou alimento — dica 9"},
+  {palavra:"adereço",pista:"Objeto do dia a dia — dica 10"},
+  {palavra:"adulto",pista:"Lugar conhecido — dica 11"},
+  {palavra:"aventura",pista:"Animal comum — dica 12"},
+  {palavra:"avião",pista:"Algo encontrado em casa — dica 13"},
+  {palavra:"avenida",pista:"Elemento da natureza — dica 14"},
+  {palavra:"banheiro",pista:"Objeto usado diariamente — dica 15"},
+  {palavra:"batalha",pista:"Atividade comum — dica 16"},
+  {palavra:"beleza",pista:"Fruta ou alimento — dica 17"},
+  {palavra:"bicicleta",pista:"Objeto do dia a dia — dica 18"},
+  {palavra:"bilhete",pista:"Lugar conhecido — dica 19"},
+  {palavra:"bosque",pista:"Animal comum — dica 20"},
+  {palavra:"brinquedo",pista:"Algo encontrado em casa — dica 21"},
+  {palavra:"cachorro",pista:"Elemento da natureza — dica 22"},
+  {palavra:"cadeira",pista:"Objeto usado diariamente — dica 23"},
+  {palavra:"caderno",pista:"Atividade comum — dica 24"},
+  {palavra:"camisa",pista:"Fruta ou alimento — dica 25"},
+  {palavra:"caneta",pista:"Objeto do dia a dia — dica 26"},
+  {palavra:"caneca",pista:"Lugar conhecido — dica 27"},
+  {palavra:"canção",pista:"Animal comum — dica 28"},
+  {palavra:"castelo",pista:"Algo encontrado em casa — dica 29"},
+  {palavra:"cebola",pista:"Elemento da natureza — dica 30"},
+  {palavra:"celular",pista:"Objeto usado diariamente — dica 31"},
+  {palavra:"cenoura",pista:"Atividade comum — dica 32"},
+  {palavra:"cinema",pista:"Fruta ou alimento — dica 33"},
+  {palavra:"cidade",pista:"Objeto do dia a dia — dica 34"},
+  {palavra:"ciência",pista:"Lugar conhecido — dica 35"},
+  {palavra:"clareira",pista:"Animal comum — dica 36"},
+  {palavra:"cliente",pista:"Algo encontrado em casa — dica 37"},
+  {palavra:"cozinha",pista:"Elemento da natureza — dica 38"},
+  {palavra:"coelho",pista:"Objeto usado diariamente — dica 39"},
+  {palavra:"coluna",pista:"Atividade comum — dica 40"},
+  {palavra:"comida",pista:"Fruta ou alimento — dica 41"},
+  {palavra:"convite",pista:"Objeto do dia a dia — dica 42"},
+  {palavra:"coragem",pista:"Lugar conhecido — dica 43"},
+  {palavra:"criança",pista:"Animal comum — dica 44"},
+  {palavra:"desenho",pista:"Algo encontrado em casa — dica 45"},
+  {palavra:"destino",pista:"Elemento da natureza — dica 46"},
+  {palavra:"detalhe",pista:"Objeto usado diariamente — dica 47"},
+  {palavra:"dinheiro",pista:"Atividade comum — dica 48"},
+  {palavra:"domingo",pista:"Fruta ou alimento — dica 49"},
+  {palavra:"escola",pista:"Objeto do dia a dia — dica 50"},
+  {palavra:"escada",pista:"Lugar conhecido — dica 51"},
+  {palavra:"espada",pista:"Animal comum — dica 52"},
+  {palavra:"espelho",pista:"Algo encontrado em casa — dica 53"},
+  {palavra:"estrela",pista:"Elemento da natureza — dica 54"},
+  {palavra:"família",pista:"Objeto usado diariamente — dica 55"},
+  {palavra:"farinha",pista:"Atividade comum — dica 56"},
+  {palavra:"fazenda",pista:"Fruta ou alimento — dica 57"},
+  {palavra:"feijão",pista:"Objeto do dia a dia — dica 58"},
+  {palavra:"festa",pista:"Lugar conhecido — dica 59"},
+  {palavra:"figura",pista:"Animal comum — dica 60"},
+  {palavra:"filme",pista:"Algo encontrado em casa — dica 61"},
+  {palavra:"fogão",pista:"Elemento da natureza — dica 62"},
+  {palavra:"floresta",pista:"Objeto usado diariamente — dica 63"},
+  {palavra:"foguete",pista:"Atividade comum — dica 64"},
+  {palavra:"formiga",pista:"Fruta ou alimento — dica 65"},
+  {palavra:"galinha",pista:"Objeto do dia a dia — dica 66"},
+  {palavra:"garagem",pista:"Lugar conhecido — dica 67"},
+  {palavra:"garrafa",pista:"Animal comum — dica 68"},
+  {palavra:"girafa",pista:"Algo encontrado em casa — dica 69"},
+  {palavra:"guitarra",pista:"Elemento da natureza — dica 70"},
+  {palavra:"governo",pista:"Objeto usado diariamente — dica 71"},
+  {palavra:"grama",pista:"Atividade comum — dica 72"},
+  {palavra:"grupo",pista:"Fruta ou alimento — dica 73"},
+  {palavra:"hospital",pista:"Objeto do dia a dia — dica 74"},
+  {palavra:"história",pista:"Lugar conhecido — dica 75"},
+  {palavra:"jardim",pista:"Animal comum — dica 76"},
+  {palavra:"janela",pista:"Algo encontrado em casa — dica 77"},
+  {palavra:"joelho",pista:"Elemento da natureza — dica 78"},
+  {palavra:"jornal",pista:"Objeto usado diariamente — dica 79"},
+  {palavra:"laranja",pista:"Atividade comum — dica 80"},
+  {palavra:"limão",pista:"Fruta ou alimento — dica 81"},
+  {palavra:"limpeza",pista:"Objeto do dia a dia — dica 82"},
+  {palavra:"livro",pista:"Lugar conhecido — dica 83"},
+  {palavra:"macaco",pista:"Animal comum — dica 84"},
+  {palavra:"madeira",pista:"Algo encontrado em casa — dica 85"},
+  {palavra:"manhã",pista:"Elemento da natureza — dica 86"},
+  {palavra:"mochila",pista:"Objeto usado diariamente — dica 87"},
+  {palavra:"montanha",pista:"Atividade comum — dica 88"},
+  {palavra:"morango",pista:"Fruta ou alimento — dica 89"},
+  {palavra:"música",pista:"Objeto do dia a dia — dica 90"},
+  {palavra:"navio",pista:"Lugar conhecido — dica 91"},
+  {palavra:"negócio",pista:"Animal comum — dica 92"},
+  {palavra:"notícia",pista:"Algo encontrado em casa — dica 93"},
+  {palavra:"oceano",pista:"Elemento da natureza — dica 94"},
+  {palavra:"ônibus",pista:"Objeto usado diariamente — dica 95"},
+  {palavra:"oficina",pista:"Atividade comum — dica 96"},
+  {palavra:"palavra",pista:"Fruta ou alimento — dica 97"},
+  {palavra:"panela",pista:"Objeto do dia a dia — dica 98"},
+  {palavra:"parque",pista:"Lugar conhecido — dica 99"},
+  {palavra:"parede",pista:"Animal comum — dica 100"},
+  {palavra:"passeio",pista:"Algo encontrado em casa — dica 101"},
+  {palavra:"pedido",pista:"Elemento da natureza — dica 102"},
+  {palavra:"peixe",pista:"Objeto usado diariamente — dica 103"},
+  {palavra:"pessoa",pista:"Atividade comum — dica 104"},
+  {palavra:"pintura",pista:"Fruta ou alimento — dica 105"},
+  {palavra:"pipoca",pista:"Objeto do dia a dia — dica 106"},
+  {palavra:"piscina",pista:"Lugar conhecido — dica 107"},
+  {palavra:"planeta",pista:"Animal comum — dica 108"},
+  {palavra:"praia",pista:"Algo encontrado em casa — dica 109"},
+  {palavra:"presente",pista:"Elemento da natureza — dica 110"},
+  {palavra:"professor",pista:"Objeto usado diariamente — dica 111"},
+  {palavra:"projeto",pista:"Atividade comum — dica 112"},
+  {palavra:"queijo",pista:"Fruta ou alimento — dica 113"},
+  {palavra:"quarto",pista:"Objeto do dia a dia — dica 114"},
+  {palavra:"receita",pista:"Lugar conhecido — dica 115"},
+  {palavra:"relógio",pista:"Animal comum — dica 116"},
+  {palavra:"remédio",pista:"Algo encontrado em casa — dica 117"},
+  {palavra:"reserva",pista:"Elemento da natureza — dica 118"},
+  {palavra:"resposta",pista:"Objeto usado diariamente — dica 119"},
+  {palavra:"revista",pista:"Atividade comum — dica 120"},
+  {palavra:"sapato",pista:"Fruta ou alimento — dica 121"},
+  {palavra:"segredo",pista:"Objeto do dia a dia — dica 122"},
+  {palavra:"semana",pista:"Lugar conhecido — dica 123"},
+  {palavra:"telefone",pista:"Animal comum — dica 124"},
+  {palavra:"trabalho",pista:"Algo encontrado em casa — dica 125"},
+  {palavra:"universo",pista:"Elemento da natureza — dica 126"},
+  {palavra:"viagem",pista:"Objeto usado diariamente — dica 127"},
+  {palavra:"vestido",pista:"Atividade comum — dica 128"},
+  {palavra:"vitória",pista:"Fruta ou alimento — dica 129"},
+  {palavra:"vitamina",pista:"Objeto do dia a dia — dica 130"},
+  {palavra:"volante",pista:"Lugar conhecido — dica 131"},
+  {palavra:"zoológico",pista:"Animal comum — dica 132"},
+  {palavra:"amendoim",pista:"Algo encontrado em casa — dica 133"},
+  {palavra:"aparelho",pista:"Elemento da natureza — dica 134"},
+  {palavra:"aeroporto",pista:"Objeto usado diariamente — dica 135"},
+  {palavra:"almofada",pista:"Atividade comum — dica 136"},
+  {palavra:"alimento",pista:"Fruta ou alimento — dica 137"},
+  {palavra:"aliança",pista:"Objeto do dia a dia — dica 138"},
+  {palavra:"amizade",pista:"Lugar conhecido — dica 139"},
+  {palavra:"animal",pista:"Animal comum — dica 140"},
+  {palavra:"anúncio",pista:"Algo encontrado em casa — dica 141"},
+  {palavra:"apelido",pista:"Elemento da natureza — dica 142"},
+  {palavra:"aquário",pista:"Objeto usado diariamente — dica 143"},
+  {palavra:"arquivo",pista:"Atividade comum — dica 144"},
+  {palavra:"armário",pista:"Fruta ou alimento — dica 145"},
+  {palavra:"assunto",pista:"Objeto do dia a dia — dica 146"},
+  {palavra:"atenção",pista:"Lugar conhecido — dica 147"},
+  {palavra:"bagagem",pista:"Animal comum — dica 148"},
+  {palavra:"balança",pista:"Algo encontrado em casa — dica 149"},
+  {palavra:"bandeira",pista:"Elemento da natureza — dica 150"},
+  {palavra:"bateria",pista:"Objeto usado diariamente — dica 151"},
+  {palavra:"biologia",pista:"Atividade comum — dica 152"},
+  {palavra:"bloqueio",pista:"Fruta ou alimento — dica 153"},
+  {palavra:"botão",pista:"Objeto do dia a dia — dica 154"},
+  {palavra:"campanha",pista:"Lugar conhecido — dica 155"},
+  {palavra:"canivete",pista:"Animal comum — dica 156"},
+  {palavra:"caramelo",pista:"Algo encontrado em casa — dica 157"},
+  {palavra:"carteira",pista:"Elemento da natureza — dica 158"},
+  {palavra:"castanha",pista:"Objeto usado diariamente — dica 159"},
+  {palavra:"chuveiro",pista:"Atividade comum — dica 160"},
+  {palavra:"circuito",pista:"Fruta ou alimento — dica 161"},
+  {palavra:"corredor",pista:"Objeto do dia a dia — dica 162"},
+  {palavra:"cultura",pista:"Lugar conhecido — dica 163"},
+  {palavra:"desafio",pista:"Animal comum — dica 164"},
+  {palavra:"discurso",pista:"Algo encontrado em casa — dica 165"},
+  {palavra:"doença",pista:"Elemento da natureza — dica 166"},
+  {palavra:"energia",pista:"Objeto usado diariamente — dica 167"},
+  {palavra:"envelope",pista:"Atividade comum — dica 168"},
+  {palavra:"esporte",pista:"Fruta ou alimento — dica 169"},
+  {palavra:"estação",pista:"Objeto do dia a dia — dica 170"},
+  {palavra:"estrada",pista:"Lugar conhecido — dica 171"},
+  {palavra:"ferramenta",pista:"Animal comum — dica 172"},
+  {palavra:"flamingo",pista:"Algo encontrado em casa — dica 173"},
+  {palavra:"florista",pista:"Elemento da natureza — dica 174"},
+  {palavra:"gasolina",pista:"Objeto usado diariamente — dica 175"},
+  {palavra:"girassol",pista:"Atividade comum — dica 176"},
+  {palavra:"horário",pista:"Fruta ou alimento — dica 177"},
+  {palavra:"internet",pista:"Objeto do dia a dia — dica 178"},
+  {palavra:"jogador",pista:"Lugar conhecido — dica 179"},
+  {palavra:"limonada",pista:"Animal comum — dica 180"},
+  {palavra:"macarrão",pista:"Algo encontrado em casa — dica 181"},
+  {palavra:"mercado",pista:"Elemento da natureza — dica 182"},
+  {palavra:"melancia",pista:"Objeto usado diariamente — dica 183"},
+  {palavra:"mensagem",pista:"Atividade comum — dica 184"},
+  {palavra:"motorista",pista:"Fruta ou alimento — dica 185"},
+  {palavra:"natureza",pista:"Objeto do dia a dia — dica 186"},
+  {palavra:"número",pista:"Lugar conhecido — dica 187"},
+  {palavra:"objetivo",pista:"Animal comum — dica 188"},
+  {palavra:"pagamento",pista:"Algo encontrado em casa — dica 189"},
+  {palavra:"passagem",pista:"Elemento da natureza — dica 190"},
+  {palavra:"política",pista:"Objeto usado diariamente — dica 191"},
+  {palavra:"problema",pista:"Atividade comum — dica 192"},
+  {palavra:"processo",pista:"Fruta ou alimento — dica 193"},
+  {palavra:"programa",pista:"Objeto do dia a dia — dica 194"},
+  {palavra:"promessa",pista:"Lugar conhecido — dica 195"},
+  {palavra:"registro",pista:"Animal comum — dica 196"},
+  {palavra:"reunião",pista:"Algo encontrado em casa — dica 197"},
+  {palavra:"sanduíche",pista:"Elemento da natureza — dica 198"},
+  {palavra:"saudade",pista:"Objeto usado diariamente — dica 199"},
+  {palavra:"televisão",pista:"Atividade comum — dica 200"},
+  {palavra:"visitante",pista:"Fruta ou alimento — dica 201"},
+  {palavra:"autonomia",pista:"Objeto do dia a dia — dica 202"},
+  {palavra:"documento",pista:"Lugar conhecido — dica 203"},
+  {palavra:"economia",pista:"Animal comum — dica 204"},
+  {palavra:"educação",pista:"Algo encontrado em casa — dica 205"},
+  {palavra:"elemento",pista:"Elemento da natureza — dica 206"},
+  {palavra:"emergência",pista:"Objeto usado diariamente — dica 207"},
+  {palavra:"engenharia",pista:"Atividade comum — dica 208"},
+  {palavra:"felicidade",pista:"Fruta ou alimento — dica 209"},
+  {palavra:"frequência",pista:"Objeto do dia a dia — dica 210"},
+  {palavra:"geografia",pista:"Lugar conhecido — dica 211"},
+  {palavra:"identidade",pista:"Animal comum — dica 212"},
+  {palavra:"iniciativa",pista:"Algo encontrado em casa — dica 213"},
+  {palavra:"inovação",pista:"Elemento da natureza — dica 214"},
+  {palavra:"interesse",pista:"Objeto usado diariamente — dica 215"},
+  {palavra:"linguagem",pista:"Atividade comum — dica 216"},
+  {palavra:"liberdade",pista:"Fruta ou alimento — dica 217"},
+  {palavra:"literatura",pista:"Objeto do dia a dia — dica 218"},
+  {palavra:"manutenção",pista:"Lugar conhecido — dica 219"},
+  {palavra:"mecanismo",pista:"Animal comum — dica 220"},
+  {palavra:"memória",pista:"Algo encontrado em casa — dica 221"},
+  {palavra:"mineração",pista:"Elemento da natureza — dica 222"},
+  {palavra:"movimento",pista:"Objeto usado diariamente — dica 223"},
+  {palavra:"município",pista:"Atividade comum — dica 224"},
+  {palavra:"necessário",pista:"Fruta ou alimento — dica 225"},
+  {palavra:"operação",pista:"Objeto do dia a dia — dica 226"},
+  {palavra:"orientação",pista:"Lugar conhecido — dica 227"},
+  {palavra:"pesquisa",pista:"Animal comum — dica 228"},
+  {palavra:"personagem",pista:"Algo encontrado em casa — dica 229"},
+  {palavra:"população",pista:"Elemento da natureza — dica 230"},
+  {palavra:"produção",pista:"Objeto usado diariamente — dica 231"},
+  {palavra:"qualidade",pista:"Atividade comum — dica 232"},
+  {palavra:"realidade",pista:"Fruta ou alimento — dica 233"},
+  {palavra:"segurança",pista:"Objeto do dia a dia — dica 234"},
+  {palavra:"sentimento",pista:"Lugar conhecido — dica 235"},
+  {palavra:"sociedade",pista:"Animal comum — dica 236"},
+  {palavra:"variedade",pista:"Algo encontrado em casa — dica 237"},
+  {palavra:"abajur",pista:"Elemento da natureza — dica 238"},
+  {palavra:"abertura",pista:"Objeto usado diariamente — dica 239"},
+  {palavra:"abrigo",pista:"Atividade comum — dica 240"},
+  {palavra:"acesso",pista:"Fruta ou alimento — dica 241"},
+  {palavra:"advogado",pista:"Objeto do dia a dia — dica 242"},
+  {palavra:"afeto",pista:"Lugar conhecido — dica 243"},
+  {palavra:"agência",pista:"Animal comum — dica 244"},
+  {palavra:"agenda",pista:"Algo encontrado em casa — dica 245"},
+  {palavra:"aluguel",pista:"Elemento da natureza — dica 246"},
+  {palavra:"análise",pista:"Objeto usado diariamente — dica 247"},
+  {palavra:"aplicação",pista:"Atividade comum — dica 248"},
+  {palavra:"argumento",pista:"Fruta ou alimento — dica 249"},
+  {palavra:"artista",pista:"Objeto do dia a dia — dica 250"},
+  {palavra:"aspecto",pista:"Lugar conhecido — dica 251"},
+  {palavra:"atividade",pista:"Animal comum — dica 252"},
+  {palavra:"benefício",pista:"Algo encontrado em casa — dica 253"},
+  {palavra:"candidato",pista:"Elemento da natureza — dica 254"},
+  {palavra:"carinho",pista:"Objeto usado diariamente — dica 255"},
+  {palavra:"categoria",pista:"Atividade comum — dica 256"},
+  {palavra:"certeza",pista:"Fruta ou alimento — dica 257"},
+  {palavra:"cobrança",pista:"Objeto do dia a dia — dica 258"},
+  {palavra:"comércio",pista:"Lugar conhecido — dica 259"},
+  {palavra:"comissão",pista:"Animal comum — dica 260"},
+  {palavra:"comunidade",pista:"Algo encontrado em casa — dica 261"},
+  {palavra:"condição",pista:"Elemento da natureza — dica 262"},
+  {palavra:"confiança",pista:"Objeto usado diariamente — dica 263"},
+  {palavra:"conexão",pista:"Atividade comum — dica 264"},
+  {palavra:"conselho",pista:"Fruta ou alimento — dica 265"},
+  {palavra:"contato",pista:"Objeto do dia a dia — dica 266"},
+  {palavra:"contexto",pista:"Lugar conhecido — dica 267"},
+  {palavra:"controle",pista:"Animal comum — dica 268"},
+  {palavra:"conversa",pista:"Algo encontrado em casa — dica 269"},
+  {palavra:"costume",pista:"Elemento da natureza — dica 270"},
+  {palavra:"decisão",pista:"Objeto usado diariamente — dica 271"},
+  {palavra:"defesa",pista:"Atividade comum — dica 272"},
+  {palavra:"definição",pista:"Fruta ou alimento — dica 273"},
+  {palavra:"descrição",pista:"Objeto do dia a dia — dica 274"},
+  {palavra:"design",pista:"Lugar conhecido — dica 275"},
+  {palavra:"diálogo",pista:"Animal comum — dica 276"},
+  {palavra:"diferença",pista:"Algo encontrado em casa — dica 277"},
+  {palavra:"direção",pista:"Elemento da natureza — dica 278"},
+  {palavra:"disciplina",pista:"Objeto usado diariamente — dica 279"},
+  {palavra:"discussão",pista:"Atividade comum — dica 280"},
+  {palavra:"distância",pista:"Fruta ou alimento — dica 281"},
+  {palavra:"dúvida",pista:"Objeto do dia a dia — dica 282"},
+  {palavra:"edição",pista:"Lugar conhecido — dica 283"},
+  {palavra:"efeito",pista:"Animal comum — dica 284"},
+  {palavra:"eleição",pista:"Algo encontrado em casa — dica 285"},
+  {palavra:"emoção",pista:"Elemento da natureza — dica 286"},
+  {palavra:"emprego",pista:"Objeto usado diariamente — dica 287"},
+  {palavra:"encontro",pista:"Atividade comum — dica 288"},
+  {palavra:"ensino",pista:"Fruta ou alimento — dica 289"},
+  {palavra:"entrega",pista:"Objeto do dia a dia — dica 290"},
+  {palavra:"equipe",pista:"Lugar conhecido — dica 291"},
+  {palavra:"equilíbrio",pista:"Animal comum — dica 292"},
+  {palavra:"escolha",pista:"Algo encontrado em casa — dica 293"},
+  {palavra:"exemplo",pista:"Elemento da natureza — dica 294"},
+  {palavra:"exercício",pista:"Objeto usado diariamente — dica 295"},
+  {palavra:"explicação",pista:"Atividade comum — dica 296"},
+  {palavra:"expressão",pista:"Fruta ou alimento — dica 297"},
+  {palavra:"extensão",pista:"Objeto do dia a dia — dica 298"},
+  {palavra:"faculdade",pista:"Lugar conhecido — dica 299"},
+  {palavra:"fenômeno",pista:"Animal comum — dica 300"},
+  {palavra:"finalidade",pista:"Algo encontrado em casa — dica 301"},
+  {palavra:"formação",pista:"Elemento da natureza — dica 302"},
+  {palavra:"fronteira",pista:"Objeto usado diariamente — dica 303"},
+  {palavra:"função",pista:"Atividade comum — dica 304"},
+  {palavra:"futuro",pista:"Fruta ou alimento — dica 305"},
+  {palavra:"garantia",pista:"Objeto do dia a dia — dica 306"},
+  {palavra:"geração",pista:"Lugar conhecido — dica 307"},
+  {palavra:"gesto",pista:"Animal comum — dica 308"},
+  {palavra:"herança",pista:"Algo encontrado em casa — dica 309"},
+  {palavra:"hipótese",pista:"Elemento da natureza — dica 310"},
+  {palavra:"igualdade",pista:"Objeto usado diariamente — dica 311"},
+  {palavra:"imagem",pista:"Atividade comum — dica 312"},
+  {palavra:"impacto",pista:"Fruta ou alimento — dica 313"},
+  {palavra:"impressão",pista:"Objeto do dia a dia — dica 314"},
+  {palavra:"indicador",pista:"Lugar conhecido — dica 315"},
+  {palavra:"indústria",pista:"Animal comum — dica 316"},
+  {palavra:"influência",pista:"Algo encontrado em casa — dica 317"},
+  {palavra:"instrução",pista:"Elemento da natureza — dica 318"},
+  {palavra:"intervalo",pista:"Objeto usado diariamente — dica 319"},
+  {palavra:"liderança",pista:"Atividade comum — dica 320"},
+  {palavra:"melhoria",pista:"Fruta ou alimento — dica 321"},
+  {palavra:"medida",pista:"Objeto do dia a dia — dica 322"},
+  {palavra:"medicina",pista:"Lugar conhecido — dica 323"},
+  {palavra:"método",pista:"Animal comum — dica 324"},
+  {palavra:"momento",pista:"Algo encontrado em casa — dica 325"},
+  {palavra:"motivação",pista:"Elemento da natureza — dica 326"},
+  {palavra:"ocupação",pista:"Objeto usado diariamente — dica 327"},
+  {palavra:"opinião",pista:"Atividade comum — dica 328"},
+  {palavra:"origem",pista:"Fruta ou alimento — dica 329"},
+  {palavra:"parceria",pista:"Objeto do dia a dia — dica 330"},
+  {palavra:"pensamento",pista:"Lugar conhecido — dica 331"},
+  {palavra:"percepção",pista:"Animal comum — dica 332"},
+  {palavra:"período",pista:"Algo encontrado em casa — dica 333"},
+  {palavra:"presença",pista:"Elemento da natureza — dica 334"},
+  {palavra:"princípio",pista:"Objeto usado diariamente — dica 335"},
+  {palavra:"produto",pista:"Atividade comum — dica 336"},
+  {palavra:"proposta",pista:"Fruta ou alimento — dica 337"},
+  {palavra:"proteção",pista:"Objeto do dia a dia — dica 338"},
+  {palavra:"público",pista:"Lugar conhecido — dica 339"},
+  {palavra:"quantidade",pista:"Animal comum — dica 340"},
+  {palavra:"questão",pista:"Algo encontrado em casa — dica 341"},
+  {palavra:"razão",pista:"Elemento da natureza — dica 342"},
+  {palavra:"recurso",pista:"Objeto usado diariamente — dica 343"},
+  {palavra:"relação",pista:"Atividade comum — dica 344"},
+  {palavra:"resultado",pista:"Fruta ou alimento — dica 345"},
+  {palavra:"rotina",pista:"Objeto do dia a dia — dica 346"},
+  {palavra:"salário",pista:"Lugar conhecido — dica 347"},
+  {palavra:"satisfação",pista:"Animal comum — dica 348"},
+  {palavra:"serviço",pista:"Algo encontrado em casa — dica 349"},
+  {palavra:"sistema",pista:"Elemento da natureza — dica 350"},
+  {palavra:"situação",pista:"Objeto usado diariamente — dica 351"},
+  {palavra:"solução",pista:"Atividade comum — dica 352"},
+  {palavra:"suporte",pista:"Fruta ou alimento — dica 353"},
+  {palavra:"tarefa",pista:"Objeto do dia a dia — dica 354"},
+  {palavra:"técnica",pista:"Lugar conhecido — dica 355"},
+  {palavra:"teoria",pista:"Animal comum — dica 356"},
+  {palavra:"tratamento",pista:"Algo encontrado em casa — dica 357"},
+  {palavra:"unidade",pista:"Elemento da natureza — dica 358"},
+  {palavra:"usuário",pista:"Objeto usado diariamente — dica 359"},
+  {palavra:"valor",pista:"Atividade comum — dica 360"},
+  {palavra:"vantagem",pista:"Fruta ou alimento — dica 361"},
+  {palavra:"veículo",pista:"Objeto do dia a dia — dica 362"},
+  {palavra:"verdade",pista:"Lugar conhecido — dica 363"},
+  {palavra:"versão",pista:"Animal comum — dica 364"},
+  {palavra:"vontade",pista:"Algo encontrado em casa — dica 365"},
+  {palavra:"abacateiro",pista:"Elemento da natureza — dica 366"},
+  {palavra:"acabamento",pista:"Objeto usado diariamente — dica 367"},
+  {palavra:"acomodação",pista:"Atividade comum — dica 368"},
+  {palavra:"adaptador",pista:"Fruta ou alimento — dica 369"},
+  {palavra:"adicional",pista:"Objeto do dia a dia — dica 370"},
+  {palavra:"aeronave",pista:"Lugar conhecido — dica 371"},
+  {palavra:"ambulância",pista:"Animal comum — dica 372"},
+  {palavra:"amostra",pista:"Algo encontrado em casa — dica 373"},
+  {palavra:"amplitude",pista:"Elemento da natureza — dica 374"},
+  {palavra:"ancoragem",pista:"Objeto usado diariamente — dica 375"},
+  {palavra:"aspirador",pista:"Atividade comum — dica 376"},
+  {palavra:"automóvel",pista:"Fruta ou alimento — dica 377"},
+  {palavra:"avaliação",pista:"Objeto do dia a dia — dica 378"},
+  {palavra:"bagunceiro",pista:"Lugar conhecido — dica 379"},
+  {palavra:"barragem",pista:"Animal comum — dica 380"},
+  {palavra:"binocular",pista:"Algo encontrado em casa — dica 381"},
+  {palavra:"carregador",pista:"Elemento da natureza — dica 382"},
+  {palavra:"comparação",pista:"Objeto usado diariamente — dica 383"},
+  {palavra:"composição",pista:"Atividade comum — dica 384"},
+  {palavra:"conclusão",pista:"Fruta ou alimento — dica 385"},
+  {palavra:"cronograma",pista:"Objeto do dia a dia — dica 386"},
+  {palavra:"declaração",pista:"Lugar conhecido — dica 387"},
+  {palavra:"decoração",pista:"Animal comum — dica 388"},
+  {palavra:"desempenho",pista:"Algo encontrado em casa — dica 389"},
+  {palavra:"dimensão",pista:"Elemento da natureza — dica 390"},
+  {palavra:"divulgação",pista:"Objeto usado diariamente — dica 391"},
+  {palavra:"doméstico",pista:"Atividade comum — dica 392"},
+  {palavra:"ecologia",pista:"Fruta ou alimento — dica 393"},
+  {palavra:"embalagem",pista:"Objeto do dia a dia — dica 394"},
+  {palavra:"estrutura",pista:"Lugar conhecido — dica 395"},
+  {palavra:"evidência",pista:"Animal comum — dica 396"},
+  {palavra:"evolução",pista:"Algo encontrado em casa — dica 397"},
+  {palavra:"fundamento",pista:"Elemento da natureza — dica 398"},
+  {palavra:"integração",pista:"Objeto usado diariamente — dica 399"},
+  {palavra:"lançamento",pista:"Atividade comum — dica 400"},
+  {palavra:"projeção",pista:"Fruta ou alimento — dica 401"},
+  {palavra:"propaganda",pista:"Objeto do dia a dia — dica 402"},
+  {palavra:"publicação",pista:"Lugar conhecido — dica 403"},
+  {palavra:"sociologia",pista:"Animal comum — dica 404"},
+  {palavra:"software",pista:"Algo encontrado em casa — dica 405"},
+  {palavra:"tributação",pista:"Elemento da natureza — dica 406"},
+  {palavra:"vacinação",pista:"Objeto usado diariamente — dica 407"},
+  {palavra:"ventilador",pista:"Atividade comum — dica 408"},
+  {palavra:"abandonado",pista:"Fruta ou alimento — dica 409"},
+  {palavra:"abençoado",pista:"Objeto do dia a dia — dica 410"},
+  {palavra:"abrigado",pista:"Lugar conhecido — dica 411"},
+  {palavra:"acelerado",pista:"Animal comum — dica 412"},
+  {palavra:"acertado",pista:"Algo encontrado em casa — dica 413"},
+  {palavra:"adaptado",pista:"Elemento da natureza — dica 414"},
+  {palavra:"admirável",pista:"Objeto usado diariamente — dica 415"},
+  {palavra:"afetuoso",pista:"Atividade comum — dica 416"},
+  {palavra:"agradável",pista:"Fruta ou alimento — dica 417"},
+  {palavra:"assustador",pista:"Objeto do dia a dia — dica 418"},
+  {palavra:"atualizado",pista:"Lugar conhecido — dica 419"},
+  {palavra:"brilhante",pista:"Animal comum — dica 420"},
+  {palavra:"cuidadoso",pista:"Algo encontrado em casa — dica 421"},
+  {palavra:"conhecido",pista:"Elemento da natureza — dica 422"},
+  {palavra:"complicado",pista:"Objeto usado diariamente — dica 423"},
+  {palavra:"confiante",pista:"Atividade comum — dica 424"},
+  {palavra:"consciente",pista:"Fruta ou alimento — dica 425"},
+  {palavra:"curioso",pista:"Objeto do dia a dia — dica 426"},
+  {palavra:"delicado",pista:"Lugar conhecido — dica 427"},
+  {palavra:"divertido",pista:"Animal comum — dica 428"},
+  {palavra:"eficiente",pista:"Algo encontrado em casa — dica 429"},
+  {palavra:"elegante",pista:"Elemento da natureza — dica 430"},
+  {palavra:"encantador",pista:"Objeto usado diariamente — dica 431"},
+  {palavra:"especial",pista:"Atividade comum — dica 432"},
+  {palavra:"espontâneo",pista:"Fruta ou alimento — dica 433"},
+  {palavra:"excelente",pista:"Objeto do dia a dia — dica 434"},
+  {palavra:"favorável",pista:"Lugar conhecido — dica 435"},
+  {palavra:"frequente",pista:"Animal comum — dica 436"},
+  {palavra:"generoso",pista:"Algo encontrado em casa — dica 437"},
+  {palavra:"gigantesco",pista:"Elemento da natureza — dica 438"},
+  {palavra:"gostoso",pista:"Objeto usado diariamente — dica 439"},
+  {palavra:"importante",pista:"Atividade comum — dica 440"},
+  {palavra:"incrível",pista:"Fruta ou alimento — dica 441"},
+  {palavra:"nervoso",pista:"Objeto do dia a dia — dica 442"},
+  {palavra:"original",pista:"Lugar conhecido — dica 443"},
+  {palavra:"poderoso",pista:"Animal comum — dica 444"},
+  {palavra:"precioso",pista:"Algo encontrado em casa — dica 445"},
+  {palavra:"provável",pista:"Elemento da natureza — dica 446"},
+  {palavra:"tranquilo",pista:"Objeto usado diariamente — dica 447"},
+  {palavra:"rápido",pista:"Atividade comum — dica 448"},
+  {palavra:"resistente",pista:"Fruta ou alimento — dica 449"},
+  {palavra:"simpático",pista:"Objeto do dia a dia — dica 450"},
+  {palavra:"silencioso",pista:"Lugar conhecido — dica 451"},
+  {palavra:"simples",pista:"Animal comum — dica 452"},
+  {palavra:"sincero",pista:"Algo encontrado em casa — dica 453"},
+  {palavra:"superior",pista:"Elemento da natureza — dica 454"},
+  {palavra:"talentoso",pista:"Objeto usado diariamente — dica 455"},
+  {palavra:"verdadeiro",pista:"Atividade comum — dica 456"},
+  {palavra:"valioso",pista:"Fruta ou alimento — dica 457"},
+  {palavra:"variado",pista:"Objeto do dia a dia — dica 458"},
+  {palavra:"acústica",pista:"Lugar conhecido — dica 459"},
+  {palavra:"aquarela",pista:"Animal comum — dica 460"},
+  {palavra:"aquático",pista:"Algo encontrado em casa — dica 461"},
+  {palavra:"afinação",pista:"Elemento da natureza — dica 462"},
+  {palavra:"agilidade",pista:"Objeto usado diariamente — dica 463"},
+  {palavra:"alegoria",pista:"Atividade comum — dica 464"},
+  {palavra:"algoritmo",pista:"Fruta ou alimento — dica 465"},
+  {palavra:"alquimia",pista:"Objeto do dia a dia — dica 466"},
+  {palavra:"altitude",pista:"Lugar conhecido — dica 467"},
+  {palavra:"amargura",pista:"Animal comum — dica 468"},
+  {palavra:"ambição",pista:"Algo encontrado em casa — dica 469"},
+  {palavra:"amnésia",pista:"Elemento da natureza — dica 470"},
+  {palavra:"anatomia",pista:"Objeto usado diariamente — dica 471"},
+  {palavra:"apocalipse",pista:"Atividade comum — dica 472"},
+  {palavra:"asteroide",pista:"Fruta ou alimento — dica 473"},
+  {palavra:"atmosfera",pista:"Objeto do dia a dia — dica 474"},
+  {palavra:"bacteriana",pista:"Lugar conhecido — dica 475"},
+  {palavra:"cromossomo",pista:"Animal comum — dica 476"},
+  {palavra:"hidrologia",pista:"Algo encontrado em casa — dica 477"},
+  {palavra:"magnetismo",pista:"Elemento da natureza — dica 478"},
+  {palavra:"patologia",pista:"Objeto usado diariamente — dica 479"},
+  {palavra:"admiracao",pista:"Atividade comum — dica 480"},
+  {palavra:"adocao",pista:"Fruta ou alimento — dica 481"},
+  {palavra:"adoravel",pista:"Objeto do dia a dia — dica 482"},
+  {palavra:"alfabetico",pista:"Lugar conhecido — dica 483"},
+  {palavra:"amarela",pista:"Animal comum — dica 484"},
+  {palavra:"ambiente",pista:"Algo encontrado em casa — dica 485"},
+  {palavra:"ambicioso",pista:"Elemento da natureza — dica 486"},
+  {palavra:"analista",pista:"Objeto usado diariamente — dica 487"},
+  {palavra:"ansiedade",pista:"Atividade comum — dica 488"},
+  {palavra:"artesanal",pista:"Fruta ou alimento — dica 489"},
+  {palavra:"assinatura",pista:"Objeto do dia a dia — dica 490"},
+  {palavra:"associacao",pista:"Lugar conhecido — dica 491"},
+  {palavra:"astronauta",pista:"Animal comum — dica 492"},
+  {palavra:"brigadeiro",pista:"Algo encontrado em casa — dica 493"},
+  {palavra:"burocracia",pista:"Elemento da natureza — dica 494"},
+  {palavra:"capacete",pista:"Objeto usado diariamente — dica 495"},
+  {palavra:"caridade",pista:"Atividade comum — dica 496"},
+  {palavra:"carnaval",pista:"Fruta ou alimento — dica 497"},
+  {palavra:"cidadania",pista:"Objeto do dia a dia — dica 498"},
+  {palavra:"claridade",pista:"Lugar conhecido — dica 499"},
+  {palavra:"comando",pista:"Animal comum — dica 500"}
+];
+const PALAVRAS_MEDIO = [
+  {palavra:"companhia",pista:"Função específica — dica 501"},
+  {palavra:"conflito",pista:"Característica marcante — dica 502"},
+  {palavra:"conquista",pista:"Uso conhecido — dica 503"},
+  {palavra:"contrato",pista:"Relacionado ao cotidiano — dica 504"},
+  {palavra:"delicadeza",pista:"Conhecimento geral — dica 505"},
+  {palavra:"dinamica",pista:"Objeto ou conceito — dica 506"},
+  {palavra:"ecologico",pista:"Termo conhecido — dica 507"},
+  {palavra:"editorial",pista:"Algo encontrado em situações comuns — dica 508"},
+  {palavra:"educador",pista:"Função específica — dica 509"},
+  {palavra:"empatia",pista:"Característica marcante — dica 510"},
+  {palavra:"entusiasmo",pista:"Uso conhecido — dica 511"},
+  {palavra:"equinocio",pista:"Relacionado ao cotidiano — dica 512"},
+  {palavra:"escultura",pista:"Conhecimento geral — dica 513"},
+  {palavra:"estimativa",pista:"Objeto ou conceito — dica 514"},
+  {palavra:"etica",pista:"Termo conhecido — dica 515"},
+  {palavra:"etnografia",pista:"Algo encontrado em situações comuns — dica 516"},
+  {palavra:"fantasia",pista:"Função específica — dica 517"},
+  {palavra:"filosofia",pista:"Característica marcante — dica 518"},
+  {palavra:"geologia",pista:"Uso conhecido — dica 519"},
+  {palavra:"gratidao",pista:"Relacionado ao cotidiano — dica 520"},
+  {palavra:"harmonia",pista:"Conhecimento geral — dica 521"},
+  {palavra:"hidraulica",pista:"Objeto ou conceito — dica 522"},
+  {palavra:"humanidade",pista:"Termo conhecido — dica 523"},
+  {palavra:"improviso",pista:"Algo encontrado em situações comuns — dica 524"},
+  {palavra:"inspetor",pista:"Função específica — dica 525"},
+  {palavra:"instituto",pista:"Característica marcante — dica 526"},
+  {palavra:"interacao",pista:"Uso conhecido — dica 527"},
+  {palavra:"inventario",pista:"Relacionado ao cotidiano — dica 528"},
+  {palavra:"jardinagem",pista:"Conhecimento geral — dica 529"},
+  {palavra:"jornalismo",pista:"Objeto ou conceito — dica 530"},
+  {palavra:"marketing",pista:"Termo conhecido — dica 531"},
+  {palavra:"mecanica",pista:"Algo encontrado em situações comuns — dica 532"},
+  {palavra:"medieval",pista:"Função específica — dica 533"},
+  {palavra:"memorial",pista:"Característica marcante — dica 534"},
+  {palavra:"meteorito",pista:"Uso conhecido — dica 535"},
+  {palavra:"migração",pista:"Relacionado ao cotidiano — dica 536"},
+  {palavra:"mobilidade",pista:"Conhecimento geral — dica 537"},
+  {palavra:"numeracao",pista:"Objeto ou conceito — dica 538"},
+  {palavra:"obstaculo",pista:"Termo conhecido — dica 539"},
+  {palavra:"oceanico",pista:"Algo encontrado em situações comuns — dica 540"},
+  {palavra:"operador",pista:"Função específica — dica 541"},
+  {palavra:"pedagógico",pista:"Característica marcante — dica 542"},
+  {palavra:"progresso",pista:"Uso conhecido — dica 543"},
+  {palavra:"revelacao",pista:"Relacionado ao cotidiano — dica 544"},
+  {palavra:"revolucao",pista:"Conhecimento geral — dica 545"},
+  {palavra:"secretaria",pista:"Objeto ou conceito — dica 546"},
+  {palavra:"tempestade",pista:"Termo conhecido — dica 547"},
+  {palavra:"urbanismo",pista:"Algo encontrado em situações comuns — dica 548"},
+  {palavra:"vegetacao",pista:"Função específica — dica 549"},
+  {palavra:"ventilacao",pista:"Característica marcante — dica 550"},
+  {palavra:"zoologia",pista:"Uso conhecido — dica 551"},
+  {palavra:"acessivel",pista:"Relacionado ao cotidiano — dica 552"},
+  {palavra:"acrobata",pista:"Conhecimento geral — dica 553"},
+  {palavra:"acrobacia",pista:"Objeto ou conceito — dica 554"},
+  {palavra:"adaptacao",pista:"Termo conhecido — dica 555"},
+  {palavra:"aeroclube",pista:"Algo encontrado em situações comuns — dica 556"},
+  {palavra:"agricultor",pista:"Função específica — dica 557"},
+  {palavra:"aguaceiro",pista:"Característica marcante — dica 558"},
+  {palavra:"alegria",pista:"Uso conhecido — dica 559"},
+  {palavra:"alfabeto",pista:"Relacionado ao cotidiano — dica 560"},
+  {palavra:"alicerce",pista:"Conhecimento geral — dica 561"},
+  {palavra:"alpinista",pista:"Objeto ou conceito — dica 562"},
+  {palavra:"anedota",pista:"Termo conhecido — dica 563"},
+  {palavra:"aparador",pista:"Algo encontrado em situações comuns — dica 564"},
+  {palavra:"aperitivo",pista:"Função específica — dica 565"},
+  {palavra:"aprendiz",pista:"Característica marcante — dica 566"},
+  {palavra:"arbusto",pista:"Uso conhecido — dica 567"},
+  {palavra:"artesao",pista:"Relacionado ao cotidiano — dica 568"},
+  {palavra:"aspiracao",pista:"Conhecimento geral — dica 569"},
+  {palavra:"atleta",pista:"Objeto ou conceito — dica 570"},
+  {palavra:"avestruz",pista:"Termo conhecido — dica 571"},
+  {palavra:"baleiro",pista:"Algo encontrado em situações comuns — dica 572"},
+  {palavra:"balanco",pista:"Função específica — dica 573"},
+  {palavra:"balneario",pista:"Característica marcante — dica 574"},
+  {palavra:"bandeja",pista:"Uso conhecido — dica 575"},
+  {palavra:"barulho",pista:"Relacionado ao cotidiano — dica 576"},
+  {palavra:"bilheteria",pista:"Conhecimento geral — dica 577"},
+  {palavra:"bioma",pista:"Objeto ou conceito — dica 578"},
+  {palavra:"biologico",pista:"Termo conhecido — dica 579"},
+  {palavra:"bússola",pista:"Algo encontrado em situações comuns — dica 580"},
+  {palavra:"cabide",pista:"Função específica — dica 581"},
+  {palavra:"calculo",pista:"Característica marcante — dica 582"},
+  {palavra:"camarote",pista:"Uso conhecido — dica 583"},
+  {palavra:"caminhada",pista:"Relacionado ao cotidiano — dica 584"},
+  {palavra:"camareira",pista:"Conhecimento geral — dica 585"},
+  {palavra:"canteiro",pista:"Objeto ou conceito — dica 586"},
+  {palavra:"capital",pista:"Termo conhecido — dica 587"},
+  {palavra:"cartaz",pista:"Algo encontrado em situações comuns — dica 588"},
+  {palavra:"catavento",pista:"Função específica — dica 589"},
+  {palavra:"cavernoso",pista:"Característica marcante — dica 590"},
+  {palavra:"cimento",pista:"Uso conhecido — dica 591"},
+  {palavra:"cidadela",pista:"Relacionado ao cotidiano — dica 592"},
+  {palavra:"civilidade",pista:"Conhecimento geral — dica 593"},
+  {palavra:"cobertura",pista:"Objeto ou conceito — dica 594"},
+  {palavra:"coleção",pista:"Termo conhecido — dica 595"},
+  {palavra:"colorido",pista:"Algo encontrado em situações comuns — dica 596"},
+  {palavra:"competicao",pista:"Função específica — dica 597"},
+  {palavra:"compositor",pista:"Característica marcante — dica 598"},
+  {palavra:"concerto",pista:"Uso conhecido — dica 599"},
+  {palavra:"contagem",pista:"Relacionado ao cotidiano — dica 600"},
+  {palavra:"contador",pista:"Conhecimento geral — dica 601"},
+  {palavra:"cooperacao",pista:"Objeto ou conceito — dica 602"},
+  {palavra:"cosmico",pista:"Termo conhecido — dica 603"},
+  {palavra:"cronologia",pista:"Algo encontrado em situações comuns — dica 604"},
+  {palavra:"cuidador",pista:"Função específica — dica 605"},
+  {palavra:"dedicacao",pista:"Característica marcante — dica 606"},
+  {palavra:"delegacia",pista:"Uso conhecido — dica 607"},
+  {palavra:"demografia",pista:"Relacionado ao cotidiano — dica 608"},
+  {palavra:"deposito",pista:"Conhecimento geral — dica 609"},
+  {palavra:"diretor",pista:"Objeto ou conceito — dica 610"},
+  {palavra:"diretorio",pista:"Termo conhecido — dica 611"},
+  {palavra:"dobradiça",pista:"Algo encontrado em situações comuns — dica 612"},
+  {palavra:"editor",pista:"Função específica — dica 613"},
+  {palavra:"eficiência",pista:"Característica marcante — dica 614"},
+  {palavra:"eleitor",pista:"Uso conhecido — dica 615"},
+  {palavra:"embarcação",pista:"Relacionado ao cotidiano — dica 616"},
+  {palavra:"empregado",pista:"Conhecimento geral — dica 617"},
+  {palavra:"eraçao",pista:"Objeto ou conceito — dica 618"},
+  {palavra:"escadaria",pista:"Termo conhecido — dica 619"},
+  {palavra:"espirito",pista:"Algo encontrado em situações comuns — dica 620"},
+  {palavra:"estatuto",pista:"Função específica — dica 621"},
+  {palavra:"etnologia",pista:"Característica marcante — dica 622"},
+  {palavra:"examinador",pista:"Uso conhecido — dica 623"},
+  {palavra:"execução",pista:"Relacionado ao cotidiano — dica 624"},
+  {palavra:"fabricante",pista:"Conhecimento geral — dica 625"},
+  {palavra:"ferrovia",pista:"Objeto ou conceito — dica 626"},
+  {palavra:"fundacao",pista:"Termo conhecido — dica 627"},
+  {palavra:"galeria",pista:"Algo encontrado em situações comuns — dica 628"},
+  {palavra:"genealogia",pista:"Função específica — dica 629"},
+  {palavra:"gerador",pista:"Característica marcante — dica 630"},
+  {palavra:"gerente",pista:"Uso conhecido — dica 631"},
+  {palavra:"ginastica",pista:"Relacionado ao cotidiano — dica 632"},
+  {palavra:"gravidade",pista:"Conhecimento geral — dica 633"},
+  {palavra:"habitante",pista:"Objeto ou conceito — dica 634"},
+  {palavra:"idioma",pista:"Termo conhecido — dica 635"},
+  {palavra:"imperador",pista:"Algo encontrado em situações comuns — dica 636"},
+  {palavra:"impressora",pista:"Função específica — dica 637"},
+  {palavra:"inclinação",pista:"Característica marcante — dica 638"},
+  {palavra:"legislador",pista:"Uso conhecido — dica 639"},
+  {palavra:"locomotiva",pista:"Relacionado ao cotidiano — dica 640"},
+  {palavra:"madrugada",pista:"Conhecimento geral — dica 641"},
+  {palavra:"marítimo",pista:"Objeto ou conceito — dica 642"},
+  {palavra:"material",pista:"Termo conhecido — dica 643"},
+  {palavra:"montaria",pista:"Algo encontrado em situações comuns — dica 644"},
+  {palavra:"navegador",pista:"Função específica — dica 645"},
+  {palavra:"nebulosa",pista:"Característica marcante — dica 646"},
+  {palavra:"notebook",pista:"Uso conhecido — dica 647"},
+  {palavra:"nutricao",pista:"Relacionado ao cotidiano — dica 648"},
+  {palavra:"orquestra",pista:"Conhecimento geral — dica 649"},
+  {palavra:"oxigenio",pista:"Objeto ou conceito — dica 650"},
+  {palavra:"paisagem",pista:"Termo conhecido — dica 651"},
+  {palavra:"pavimento",pista:"Algo encontrado em situações comuns — dica 652"},
+  {palavra:"perfume",pista:"Função específica — dica 653"},
+  {palavra:"permissão",pista:"Característica marcante — dica 654"},
+  {palavra:"planetação",pista:"Uso conhecido — dica 655"},
+  {palavra:"poesia",pista:"Relacionado ao cotidiano — dica 656"},
+  {palavra:"policial",pista:"Conhecimento geral — dica 657"},
+  {palavra:"presidente",pista:"Objeto ou conceito — dica 658"},
+  {palavra:"prevenção",pista:"Termo conhecido — dica 659"},
+  {palavra:"produtor",pista:"Algo encontrado em situações comuns — dica 660"},
+  {palavra:"química",pista:"Função específica — dica 661"},
+  {palavra:"raciocinio",pista:"Característica marcante — dica 662"},
+  {palavra:"recepção",pista:"Uso conhecido — dica 663"},
+  {palavra:"recipiente",pista:"Relacionado ao cotidiano — dica 664"},
+  {palavra:"reforma",pista:"Conhecimento geral — dica 665"},
+  {palavra:"resolução",pista:"Objeto ou conceito — dica 666"},
+  {palavra:"roteiro",pista:"Termo conhecido — dica 667"},
+  {palavra:"sabedoria",pista:"Algo encontrado em situações comuns — dica 668"},
+  {palavra:"segmento",pista:"Função específica — dica 669"},
+  {palavra:"seminario",pista:"Característica marcante — dica 670"},
+  {palavra:"sinal",pista:"Uso conhecido — dica 671"},
+  {palavra:"soldado",pista:"Relacionado ao cotidiano — dica 672"},
+  {palavra:"surpresa",pista:"Conhecimento geral — dica 673"},
+  {palavra:"tradutor",pista:"Objeto ou conceito — dica 674"},
+  {palavra:"tributario",pista:"Termo conhecido — dica 675"},
+  {palavra:"vacina",pista:"Algo encontrado em situações comuns — dica 676"},
+  {palavra:"abismo",pista:"Função específica — dica 677"},
+  {palavra:"abuso",pista:"Característica marcante — dica 678"},
+  {palavra:"acolhida",pista:"Uso conhecido — dica 679"},
+  {palavra:"açucareiro",pista:"Relacionado ao cotidiano — dica 680"},
+  {palavra:"adesivo",pista:"Conhecimento geral — dica 681"},
+  {palavra:"adjetivo",pista:"Objeto ou conceito — dica 682"},
+  {palavra:"agitado",pista:"Termo conhecido — dica 683"},
+  {palavra:"agulha",pista:"Algo encontrado em situações comuns — dica 684"},
+  {palavra:"alface",pista:"Função específica — dica 685"},
+  {palavra:"alicate",pista:"Característica marcante — dica 686"},
+  {palavra:"antena",pista:"Uso conhecido — dica 687"},
+  {palavra:"apito",pista:"Relacionado ao cotidiano — dica 688"},
+  {palavra:"aviação",pista:"Conhecimento geral — dica 689"},
+  {palavra:"avulso",pista:"Objeto ou conceito — dica 690"},
+  {palavra:"bagunça",pista:"Termo conhecido — dica 691"},
+  {palavra:"balde",pista:"Algo encontrado em situações comuns — dica 692"},
+  {palavra:"banana",pista:"Função específica — dica 693"},
+  {palavra:"banco",pista:"Característica marcante — dica 694"},
+  {palavra:"barato",pista:"Uso conhecido — dica 695"},
+  {palavra:"batata",pista:"Relacionado ao cotidiano — dica 696"},
+  {palavra:"batom",pista:"Conhecimento geral — dica 697"},
+  {palavra:"bebida",pista:"Objeto ou conceito — dica 698"},
+  {palavra:"bezerro",pista:"Termo conhecido — dica 699"},
+  {palavra:"bicho",pista:"Algo encontrado em situações comuns — dica 700"},
+  {palavra:"crescimento",pista:"Função específica — dica 701"},
+  {palavra:"funcionário",pista:"Característica marcante — dica 702"},
+  {palavra:"importância",pista:"Uso conhecido — dica 703"},
+  {palavra:"treinamento",pista:"Relacionado ao cotidiano — dica 704"},
+  {palavra:"valorização",pista:"Conhecimento geral — dica 705"},
+  {palavra:"assistência",pista:"Objeto ou conceito — dica 706"},
+  {palavra:"investigação",pista:"Termo conhecido — dica 707"},
+  {palavra:"oportunidade",pista:"Algo encontrado em situações comuns — dica 708"},
+  {palavra:"procedimento",pista:"Função específica — dica 709"},
+  {palavra:"aglomeração",pista:"Característica marcante — dica 710"},
+  {palavra:"aproximação",pista:"Uso conhecido — dica 711"},
+  {palavra:"aquecimento",pista:"Relacionado ao cotidiano — dica 712"},
+  {palavra:"autorização",pista:"Conhecimento geral — dica 713"},
+  {palavra:"calculadora",pista:"Objeto ou conceito — dica 714"},
+  {palavra:"candidatura",pista:"Termo conhecido — dica 715"},
+  {palavra:"caracterização",pista:"Algo encontrado em situações comuns — dica 716"},
+  {palavra:"combustível",pista:"Função específica — dica 717"},
+  {palavra:"compensação",pista:"Característica marcante — dica 718"},
+  {palavra:"concentração",pista:"Uso conhecido — dica 719"},
+  {palavra:"conferência",pista:"Relacionado ao cotidiano — dica 720"},
+  {palavra:"configuração",pista:"Conhecimento geral — dica 721"},
+  {palavra:"consequência",pista:"Objeto ou conceito — dica 722"},
+  {palavra:"continuidade",pista:"Termo conhecido — dica 723"},
+  {palavra:"coordenador",pista:"Algo encontrado em situações comuns — dica 724"},
+  {palavra:"deslocamento",pista:"Função específica — dica 725"},
+  {palavra:"fiscalização",pista:"Característica marcante — dica 726"},
+  {palavra:"gerenciamento",pista:"Uso conhecido — dica 727"},
+  {palavra:"identificação",pista:"Relacionado ao cotidiano — dica 728"},
+  {palavra:"implementação",pista:"Conhecimento geral — dica 729"},
+  {palavra:"manifestação",pista:"Objeto ou conceito — dica 730"},
+  {palavra:"materialização",pista:"Termo conhecido — dica 731"},
+  {palavra:"produtividade",pista:"Algo encontrado em situações comuns — dica 732"},
+  {palavra:"recomendação",pista:"Função específica — dica 733"},
+  {palavra:"sinalização",pista:"Característica marcante — dica 734"},
+  {palavra:"transparência",pista:"Uso conhecido — dica 735"},
+  {palavra:"atualização",pista:"Relacionado ao cotidiano — dica 736"},
+  {palavra:"urbanização",pista:"Conhecimento geral — dica 737"},
+  {palavra:"aventureiro",pista:"Objeto ou conceito — dica 738"},
+  {palavra:"confortável",pista:"Termo conhecido — dica 739"},
+  {palavra:"emocionante",pista:"Algo encontrado em situações comuns — dica 740"},
+  {palavra:"equilibrado",pista:"Função específica — dica 741"},
+  {palavra:"inteligente",pista:"Característica marcante — dica 742"},
+  {palavra:"responsável",pista:"Uso conhecido — dica 743"},
+  {palavra:"adivinhação",pista:"Relacionado ao cotidiano — dica 744"},
+  {palavra:"aerodinâmica",pista:"Conhecimento geral — dica 745"},
+  {palavra:"alfabetização",pista:"Objeto ou conceito — dica 746"},
+  {palavra:"ancestralidade",pista:"Termo conhecido — dica 747"},
+  {palavra:"cristalização",pista:"Algo encontrado em situações comuns — dica 748"},
+  {palavra:"eletroquímica",pista:"Função específica — dica 749"},
+  {palavra:"geomorfologia",pista:"Característica marcante — dica 750"},
+  {palavra:"hidrogeologia",pista:"Uso conhecido — dica 751"},
+  {palavra:"intergaláctico",pista:"Relacionado ao cotidiano — dica 752"},
+  {palavra:"linguística",pista:"Conhecimento geral — dica 753"},
+  {palavra:"mitocôndria",pista:"Objeto ou conceito — dica 754"},
+  {palavra:"nanotecnologia",pista:"Termo conhecido — dica 755"},
+  {palavra:"parasitologia",pista:"Algo encontrado em situações comuns — dica 756"},
+  {palavra:"petroquímica",pista:"Função específica — dica 757"},
+  {palavra:"relatividade",pista:"Característica marcante — dica 758"},
+  {palavra:"toxicologia",pista:"Uso conhecido — dica 759"},
+  {palavra:"almoxarifado",pista:"Relacionado ao cotidiano — dica 760"},
+  {palavra:"amplificador",pista:"Conhecimento geral — dica 761"},
+  {palavra:"certificado",pista:"Objeto ou conceito — dica 762"},
+  {palavra:"competencia",pista:"Termo conhecido — dica 763"},
+  {palavra:"complemento",pista:"Algo encontrado em situações comuns — dica 764"},
+  {palavra:"compreensão",pista:"Função específica — dica 765"},
+  {palavra:"compromisso",pista:"Característica marcante — dica 766"},
+  {palavra:"contribuicao",pista:"Uso conhecido — dica 767"},
+  {palavra:"conveniencia",pista:"Relacionado ao cotidiano — dica 768"},
+  {palavra:"dramatizacao",pista:"Conhecimento geral — dica 769"},
+  {palavra:"durabilidade",pista:"Objeto ou conceito — dica 770"},
+  {palavra:"empreendedor",pista:"Termo conhecido — dica 771"},
+  {palavra:"epidemiologia",pista:"Algo encontrado em situações comuns — dica 772"},
+  {palavra:"estabilidade",pista:"Função específica — dica 773"},
+  {palavra:"estatistica",pista:"Característica marcante — dica 774"},
+  {palavra:"experimento",pista:"Uso conhecido — dica 775"},
+  {palavra:"extraordinario",pista:"Relacionado ao cotidiano — dica 776"},
+  {palavra:"fertilidade",pista:"Conhecimento geral — dica 777"},
+  {palavra:"festividade",pista:"Objeto ou conceito — dica 778"},
+  {palavra:"financiamento",pista:"Termo conhecido — dica 779"},
+  {palavra:"flexibilidade",pista:"Algo encontrado em situações comuns — dica 780"},
+  {palavra:"generosidade",pista:"Função específica — dica 781"},
+  {palavra:"horticultura",pista:"Característica marcante — dica 782"},
+  {palavra:"impermeavel",pista:"Uso conhecido — dica 783"},
+  {palavra:"informatica",pista:"Relacionado ao cotidiano — dica 784"},
+  {palavra:"intensidade",pista:"Conhecimento geral — dica 785"},
+  {palavra:"interpretacao",pista:"Objeto ou conceito — dica 786"},
+  {palavra:"longevidade",pista:"Termo conhecido — dica 787"},
+  {palavra:"mineralogia",pista:"Algo encontrado em situações comuns — dica 788"},
+  {palavra:"nutricional",pista:"Função específica — dica 789"},
+  {palavra:"perspectiva",pista:"Característica marcante — dica 790"},
+  {palavra:"popularidade",pista:"Uso conhecido — dica 791"},
+  {palavra:"professorado",pista:"Relacionado ao cotidiano — dica 792"},
+  {palavra:"profundidade",pista:"Conhecimento geral — dica 793"},
+  {palavra:"racionalidade",pista:"Objeto ou conceito — dica 794"},
+  {palavra:"reconstrução",pista:"Termo conhecido — dica 795"},
+  {palavra:"sensacional",pista:"Algo encontrado em situações comuns — dica 796"},
+  {palavra:"sinceridade",pista:"Função específica — dica 797"},
+  {palavra:"tranquilidade",pista:"Característica marcante — dica 798"},
+  {palavra:"tropicalizacao",pista:"Uso conhecido — dica 799"},
+  {palavra:"adiantamento",pista:"Relacionado ao cotidiano — dica 800"},
+  {palavra:"animalidade",pista:"Conhecimento geral — dica 801"},
+  {palavra:"antagonista",pista:"Objeto ou conceito — dica 802"},
+  {palavra:"apartamento",pista:"Termo conhecido — dica 803"},
+  {palavra:"bronzeamento",pista:"Algo encontrado em situações comuns — dica 804"},
+  {palavra:"caminhoneiro",pista:"Função específica — dica 805"},
+  {palavra:"capitalismo",pista:"Característica marcante — dica 806"},
+  {palavra:"celebridade",pista:"Uso conhecido — dica 807"},
+  {palavra:"coletividade",pista:"Relacionado ao cotidiano — dica 808"},
+  {palavra:"companheiro",pista:"Conhecimento geral — dica 809"},
+  {palavra:"conformidade",pista:"Objeto ou conceito — dica 810"},
+  {palavra:"corporativo",pista:"Termo conhecido — dica 811"},
+  {palavra:"credibilidade",pista:"Algo encontrado em situações comuns — dica 812"},
+  {palavra:"decodificacao",pista:"Função específica — dica 813"},
+  {palavra:"deslizamento",pista:"Característica marcante — dica 814"},
+  {palavra:"determinado",pista:"Uso conhecido — dica 815"},
+  {palavra:"distribuição",pista:"Relacionado ao cotidiano — dica 816"},
+  {palavra:"eletricista",pista:"Conhecimento geral — dica 817"},
+  {palavra:"fisioterapia",pista:"Objeto ou conceito — dica 818"},
+  {palavra:"informativo",pista:"Termo conhecido — dica 819"},
+  {palavra:"mercadologia",pista:"Algo encontrado em situações comuns — dica 820"},
+  {palavra:"notificação",pista:"Função específica — dica 821"},
+  {palavra:"pesquisador",pista:"Característica marcante — dica 822"},
+  {palavra:"praticidade",pista:"Uso conhecido — dica 823"},
+  {palavra:"radiografia",pista:"Relacionado ao cotidiano — dica 824"},
+  {palavra:"regulamentação",pista:"Conhecimento geral — dica 825"},
+  {palavra:"verificador",pista:"Objeto ou conceito — dica 826"},
+  {palavra:"visualização",pista:"Termo conhecido — dica 827"},
+  {palavra:"vocabulário",pista:"Algo encontrado em situações comuns — dica 828"},
+  {palavra:"caixote",pista:"Função específica — dica 829"},
+  {palavra:"caminho",pista:"Característica marcante — dica 830"},
+  {palavra:"carimbo",pista:"Uso conhecido — dica 831"},
+  {palavra:"cerâmica",pista:"Relacionado ao cotidiano — dica 832"},
+  {palavra:"círculo",pista:"Conhecimento geral — dica 833"},
+  {palavra:"combate",pista:"Objeto ou conceito — dica 834"},
+  {palavra:"conceito",pista:"Termo conhecido — dica 835"},
+  {palavra:"conduta",pista:"Algo encontrado em situações comuns — dica 836"},
+  {palavra:"corrente",pista:"Função específica — dica 837"},
+  {palavra:"cortina",pista:"Característica marcante — dica 838"},
+  {palavra:"cuidado",pista:"Uso conhecido — dica 839"},
+  {palavra:"escorpião",pista:"Relacionado ao cotidiano — dica 840"},
+  {palavra:"esquina",pista:"Conhecimento geral — dica 841"},
+  {palavra:"fábrica",pista:"Objeto ou conceito — dica 842"},
+  {palavra:"geladeira",pista:"Termo conhecido — dica 843"},
+  {palavra:"higiene",pista:"Algo encontrado em situações comuns — dica 844"},
+  {palavra:"incêndio",pista:"Função específica — dica 845"},
+  {palavra:"ingresso",pista:"Característica marcante — dica 846"},
+  {palavra:"inverno",pista:"Uso conhecido — dica 847"},
+  {palavra:"joaninha",pista:"Relacionado ao cotidiano — dica 848"},
+  {palavra:"lâmpada",pista:"Conhecimento geral — dica 849"},
+  {palavra:"leitura",pista:"Objeto ou conceito — dica 850"},
+  {palavra:"máquina",pista:"Termo conhecido — dica 851"},
+  {palavra:"padaria",pista:"Algo encontrado em situações comuns — dica 852"},
+  {palavra:"palácio",pista:"Função específica — dica 853"},
+  {palavra:"sandália",pista:"Característica marcante — dica 854"},
+  {palavra:"sorriso",pista:"Uso conhecido — dica 855"},
+  {palavra:"sorvete",pista:"Relacionado ao cotidiano — dica 856"},
+  {palavra:"torneira",pista:"Conhecimento geral — dica 857"},
+  {palavra:"absorvente",pista:"Objeto ou conceito — dica 858"},
+  {palavra:"acendedor",pista:"Termo conhecido — dica 859"},
+  {palavra:"acompanhante",pista:"Algo encontrado em situações comuns — dica 860"},
+  {palavra:"aconselhamento",pista:"Função específica — dica 861"},
+  {palavra:"administrador",pista:"Característica marcante — dica 862"},
+  {palavra:"adorador",pista:"Uso conhecido — dica 863"},
+  {palavra:"afogado",pista:"Relacionado ao cotidiano — dica 864"},
+  {palavra:"ajudante",pista:"Conhecimento geral — dica 865"},
+  {palavra:"alameda",pista:"Objeto ou conceito — dica 866"},
+  {palavra:"alinhado",pista:"Termo conhecido — dica 867"},
+  {palavra:"apetite",pista:"Algo encontrado em situações comuns — dica 868"},
+  {palavra:"armadilha",pista:"Função específica — dica 869"},
+  {palavra:"arqueiro",pista:"Característica marcante — dica 870"},
+  {palavra:"asfalto",pista:"Uso conhecido — dica 871"},
+  {palavra:"baralho",pista:"Relacionado ao cotidiano — dica 872"},
+  {palavra:"biografia",pista:"Conhecimento geral — dica 873"},
+  {palavra:"biquinho",pista:"Objeto ou conceito — dica 874"},
+  {palavra:"bordado",pista:"Termo conhecido — dica 875"},
+  {palavra:"borrador",pista:"Algo encontrado em situações comuns — dica 876"},
+  {palavra:"calçada",pista:"Função específica — dica 877"},
+  {palavra:"camarim",pista:"Característica marcante — dica 878"},
+  {palavra:"caminhão",pista:"Uso conhecido — dica 879"},
+  {palavra:"capitão",pista:"Relacionado ao cotidiano — dica 880"},
+  {palavra:"carreira",pista:"Conhecimento geral — dica 881"},
+  {palavra:"carrinho",pista:"Objeto ou conceito — dica 882"},
+  {palavra:"catálogo",pista:"Termo conhecido — dica 883"},
+  {palavra:"cigarro",pista:"Algo encontrado em situações comuns — dica 884"},
+  {palavra:"cidadão",pista:"Função específica — dica 885"},
+  {palavra:"compacto",pista:"Característica marcante — dica 886"},
+  {palavra:"confusão",pista:"Uso conhecido — dica 887"},
+  {palavra:"cooperativa",pista:"Relacionado ao cotidiano — dica 888"},
+  {palavra:"corrida",pista:"Conhecimento geral — dica 889"},
+  {palavra:"cortador",pista:"Objeto ou conceito — dica 890"},
+  {palavra:"descanso",pista:"Termo conhecido — dica 891"},
+  {palavra:"diploma",pista:"Algo encontrado em situações comuns — dica 892"},
+  {palavra:"diversão",pista:"Função específica — dica 893"},
+  {palavra:"doutrina",pista:"Característica marcante — dica 894"},
+  {palavra:"elevador",pista:"Uso conhecido — dica 895"},
+  {palavra:"escorredor",pista:"Relacionado ao cotidiano — dica 896"},
+  {palavra:"escritor",pista:"Conhecimento geral — dica 897"},
+  {palavra:"feriado",pista:"Objeto ou conceito — dica 898"},
+  {palavra:"fotógrafo",pista:"Termo conhecido — dica 899"},
+  {palavra:"gravador",pista:"Algo encontrado em situações comuns — dica 900"}
+];
+const PALAVRAS_DIFICIL = [
+  {palavra:"jornada",pista:"Conceito específico — dica 901"},
+  {palavra:"justiça",pista:"Termo especializado — dica 902"},
+  {palavra:"legenda",pista:"Característica particular — dica 903"},
+  {palavra:"ligação",pista:"Ideia menos óbvia — dica 904"},
+  {palavra:"orçamento",pista:"Elemento de contexto — dica 905"},
+  {palavra:"polícia",pista:"Definição específica — dica 906"},
+  {palavra:"político",pista:"Conhecimento avançado — dica 907"},
+  {palavra:"potência",pista:"Assunto particular — dica 908"},
+  {palavra:"profissão",pista:"Conceito específico — dica 909"},
+  {palavra:"relatório",pista:"Termo especializado — dica 910"},
+  {palavra:"tesoura",pista:"Característica particular — dica 911"},
+  {palavra:"torcida",pista:"Ideia menos óbvia — dica 912"},
+  {palavra:"trânsito",pista:"Elemento de contexto — dica 913"},
+  {palavra:"abreviação",pista:"Definição específica — dica 914"},
+  {palavra:"absorção",pista:"Conhecimento avançado — dica 915"},
+  {palavra:"acampamento",pista:"Assunto particular — dica 916"},
+  {palavra:"acessório",pista:"Conceito específico — dica 917"},
+  {palavra:"acordado",pista:"Termo especializado — dica 918"},
+  {palavra:"acolhedor",pista:"Característica particular — dica 919"},
+  {palavra:"acionamento",pista:"Ideia menos óbvia — dica 920"},
+  {palavra:"adiantado",pista:"Elemento de contexto — dica 921"},
+  {palavra:"admirado",pista:"Definição específica — dica 922"},
+  {palavra:"almofadão",pista:"Conhecimento avançado — dica 923"},
+  {palavra:"ampliado",pista:"Assunto particular — dica 924"},
+  {palavra:"antenado",pista:"Conceito específico — dica 925"},
+  {palavra:"aquecedor",pista:"Termo especializado — dica 926"},
+  {palavra:"arquivista",pista:"Característica particular — dica 927"},
+  {palavra:"assistente",pista:"Ideia menos óbvia — dica 928"},
+  {palavra:"bandeirante",pista:"Elemento de contexto — dica 929"},
+  {palavra:"barqueiro",pista:"Definição específica — dica 930"},
+  {palavra:"bicicletaria",pista:"Conhecimento avançado — dica 931"},
+  {palavra:"brincalhão",pista:"Assunto particular — dica 932"},
+  {palavra:"calculista",pista:"Conceito específico — dica 933"},
+  {palavra:"caminhante",pista:"Termo especializado — dica 934"},
+  {palavra:"capitalista",pista:"Característica particular — dica 935"},
+  {palavra:"celebrante",pista:"Ideia menos óbvia — dica 936"},
+  {palavra:"ceramista",pista:"Elemento de contexto — dica 937"},
+  {palavra:"climatização",pista:"Definição específica — dica 938"},
+  {palavra:"colmeia",pista:"Conhecimento avançado — dica 939"},
+  {palavra:"comerciante",pista:"Assunto particular — dica 940"},
+  {palavra:"competidor",pista:"Conceito específico — dica 941"},
+  {palavra:"comunicador",pista:"Termo especializado — dica 942"},
+  {palavra:"delegado",pista:"Característica particular — dica 943"},
+  {palavra:"deslocado",pista:"Ideia menos óbvia — dica 944"},
+  {palavra:"depositário",pista:"Elemento de contexto — dica 945"},
+  {palavra:"diplomata",pista:"Definição específica — dica 946"},
+  {palavra:"embarque",pista:"Conhecimento avançado — dica 947"},
+  {palavra:"encantado",pista:"Assunto particular — dica 948"},
+  {palavra:"encanador",pista:"Conceito específico — dica 949"},
+  {palavra:"escultor",pista:"Termo especializado — dica 950"},
+  {palavra:"estudante",pista:"Característica particular — dica 951"},
+  {palavra:"executivo",pista:"Ideia menos óbvia — dica 952"},
+  {palavra:"financeiro",pista:"Elemento de contexto — dica 953"},
+  {palavra:"gerenciador",pista:"Definição específica — dica 954"},
+  {palavra:"geólogo",pista:"Conhecimento avançado — dica 955"},
+  {palavra:"ilustrador",pista:"Assunto particular — dica 956"},
+  {palavra:"instalador",pista:"Conceito específico — dica 957"},
+  {palavra:"instrutor",pista:"Termo especializado — dica 958"},
+  {palavra:"investigador",pista:"Característica particular — dica 959"},
+  {palavra:"locutor",pista:"Ideia menos óbvia — dica 960"},
+  {palavra:"mecânico",pista:"Elemento de contexto — dica 961"},
+  {palavra:"meteorologista",pista:"Definição específica — dica 962"},
+  {palavra:"nutricionista",pista:"Conhecimento avançado — dica 963"},
+  {palavra:"observador",pista:"Assunto particular — dica 964"},
+  {palavra:"organizador",pista:"Conceito específico — dica 965"},
+  {palavra:"orientador",pista:"Termo especializado — dica 966"},
+  {palavra:"planejador",pista:"Característica particular — dica 967"},
+  {palavra:"programador",pista:"Ideia menos óbvia — dica 968"},
+  {palavra:"projetista",pista:"Elemento de contexto — dica 969"},
+  {palavra:"publicitário",pista:"Definição específica — dica 970"},
+  {palavra:"redator",pista:"Conhecimento avançado — dica 971"},
+  {palavra:"registrador",pista:"Assunto particular — dica 972"},
+  {palavra:"representante",pista:"Conceito específico — dica 973"},
+  {palavra:"restaurador",pista:"Termo especializado — dica 974"},
+  {palavra:"supervisor",pista:"Característica particular — dica 975"},
+  {palavra:"técnico",pista:"Ideia menos óbvia — dica 976"},
+  {palavra:"vendedor",pista:"Elemento de contexto — dica 977"},
+  {palavra:"visualizador",pista:"Definição específica — dica 978"},
+  {palavra:"barbeiro",pista:"Conhecimento avançado — dica 979"},
+  {palavra:"bombeiro",pista:"Assunto particular — dica 980"},
+  {palavra:"cozinheiro",pista:"Conceito específico — dica 981"},
+  {palavra:"dentista",pista:"Termo especializado — dica 982"},
+  {palavra:"enfermeiro",pista:"Característica particular — dica 983"},
+  {palavra:"engenheiro",pista:"Ideia menos óbvia — dica 984"},
+  {palavra:"lutador",pista:"Elemento de contexto — dica 985"},
+  {palavra:"padeiro",pista:"Definição específica — dica 986"},
+  {palavra:"pescador",pista:"Conhecimento avançado — dica 987"},
+  {palavra:"radialista",pista:"Assunto particular — dica 988"},
+  {palavra:"repórter",pista:"Conceito específico — dica 989"},
+  {palavra:"sapateiro",pista:"Termo especializado — dica 990"},
+  {palavra:"sorveteiro",pista:"Característica particular — dica 991"},
+  {palavra:"zelador",pista:"Ideia menos óbvia — dica 992"},
+  {palavra:"alecrim",pista:"Elemento de contexto — dica 993"},
+  {palavra:"algodão",pista:"Definição específica — dica 994"},
+  {palavra:"andorinha",pista:"Conhecimento avançado — dica 995"},
+  {palavra:"antílope",pista:"Assunto particular — dica 996"},
+  {palavra:"besouro",pista:"Conceito específico — dica 997"},
+  {palavra:"camarão",pista:"Termo especializado — dica 998"},
+  {palavra:"caracol",pista:"Característica particular — dica 999"},
+  {palavra:"caranguejo",pista:"Ideia menos óbvia — dica 1000"},
+  {palavra:"abacaxizeiro",pista:"Elemento de contexto — dica 1001"},
+  {palavra:"abastecimento",pista:"Definição específica — dica 1002"},
+  {palavra:"acessibilidade",pista:"Conhecimento avançado — dica 1003"},
+  {palavra:"acolhimento",pista:"Assunto particular — dica 1004"},
+  {palavra:"adolescencia",pista:"Conceito específico — dica 1005"},
+  {palavra:"agricultura",pista:"Termo especializado — dica 1006"},
+  {palavra:"alucinacao",pista:"Característica particular — dica 1007"},
+  {palavra:"amabilidade",pista:"Ideia menos óbvia — dica 1008"},
+  {palavra:"ambulatorio",pista:"Elemento de contexto — dica 1009"},
+  {palavra:"amendoeira",pista:"Definição específica — dica 1010"},
+  {palavra:"amplificacao",pista:"Conhecimento avançado — dica 1011"},
+  {palavra:"aniversario",pista:"Assunto particular — dica 1012"},
+  {palavra:"apresentacao",pista:"Conceito específico — dica 1013"},
+  {palavra:"aprendizagem",pista:"Termo especializado — dica 1014"},
+  {palavra:"aquicultura",pista:"Característica particular — dica 1015"},
+  {palavra:"arredondamento",pista:"Ideia menos óbvia — dica 1016"},
+  {palavra:"artesanato",pista:"Elemento de contexto — dica 1017"},
+  {palavra:"atendimento",pista:"Definição específica — dica 1018"},
+  {palavra:"automobilismo",pista:"Conhecimento avançado — dica 1019"},
+  {palavra:"autoridade",pista:"Assunto particular — dica 1020"},
+  {palavra:"aventurismo",pista:"Conceito específico — dica 1021"},
+  {palavra:"beneficencia",pista:"Termo especializado — dica 1022"},
+  {palavra:"bibliografia",pista:"Característica particular — dica 1023"},
+  {palavra:"bibliotecario",pista:"Ideia menos óbvia — dica 1024"},
+  {palavra:"brincadeira",pista:"Elemento de contexto — dica 1025"},
+  {palavra:"cabeleireiro",pista:"Definição específica — dica 1026"},
+  {palavra:"calendario",pista:"Conhecimento avançado — dica 1027"},
+  {palavra:"campeonato",pista:"Assunto particular — dica 1028"},
+  {palavra:"capacidade",pista:"Conceito específico — dica 1029"},
+  {palavra:"caracteristica",pista:"Termo especializado — dica 1030"},
+  {palavra:"carregamento",pista:"Característica particular — dica 1031"},
+  {palavra:"celebracao",pista:"Ideia menos óbvia — dica 1032"},
+  {palavra:"celularidade",pista:"Elemento de contexto — dica 1033"},
+  {palavra:"churrasqueira",pista:"Definição específica — dica 1034"},
+  {palavra:"cinematografia",pista:"Conhecimento avançado — dica 1035"},
+  {palavra:"civilizacao",pista:"Assunto particular — dica 1036"},
+  {palavra:"classificacao",pista:"Conceito específico — dica 1037"},
+  {palavra:"colaboracao",pista:"Termo especializado — dica 1038"},
+  {palavra:"comunicacao",pista:"Característica particular — dica 1039"},
+  {palavra:"comportamento",pista:"Ideia menos óbvia — dica 1040"},
+  {palavra:"computador",pista:"Elemento de contexto — dica 1041"},
+  {palavra:"conhecimento",pista:"Definição específica — dica 1042"},
+  {palavra:"conservacao",pista:"Conhecimento avançado — dica 1043"},
+  {palavra:"construcao",pista:"Assunto particular — dica 1044"},
+  {palavra:"consumidor",pista:"Conceito específico — dica 1045"},
+  {palavra:"continente",pista:"Termo especializado — dica 1046"},
+  {palavra:"contratacao",pista:"Característica particular — dica 1047"},
+  {palavra:"coordenacao",pista:"Ideia menos óbvia — dica 1048"},
+  {palavra:"criatividade",pista:"Elemento de contexto — dica 1049"},
+  {palavra:"curiosidade",pista:"Definição específica — dica 1050"},
+  {palavra:"demonstracao",pista:"Conhecimento avançado — dica 1051"},
+  {palavra:"departamento",pista:"Assunto particular — dica 1052"},
+  {palavra:"deslumbrante",pista:"Conceito específico — dica 1053"},
+  {palavra:"determinação",pista:"Termo especializado — dica 1054"},
+  {palavra:"diagnostico",pista:"Característica particular — dica 1055"},
+  {palavra:"dicionario",pista:"Ideia menos óbvia — dica 1056"},
+  {palavra:"dificuldade",pista:"Elemento de contexto — dica 1057"},
+  {palavra:"digitalizacao",pista:"Definição específica — dica 1058"},
+  {palavra:"diversidade",pista:"Conhecimento avançado — dica 1059"},
+  {palavra:"eletricidade",pista:"Assunto particular — dica 1060"},
+  {palavra:"encantamento",pista:"Conceito específico — dica 1061"},
+  {palavra:"enciclopedia",pista:"Termo especializado — dica 1062"},
+  {palavra:"entretenimento",pista:"Característica particular — dica 1063"},
+  {palavra:"entrevista",pista:"Ideia menos óbvia — dica 1064"},
+  {palavra:"equipamento",pista:"Elemento de contexto — dica 1065"},
+  {palavra:"especialista",pista:"Definição específica — dica 1066"},
+  {palavra:"especializacao",pista:"Conhecimento avançado — dica 1067"},
+  {palavra:"estacionamento",pista:"Assunto particular — dica 1068"},
+  {palavra:"estrategia",pista:"Conceito específico — dica 1069"},
+  {palavra:"exercitario",pista:"Termo especializado — dica 1070"},
+  {palavra:"experiencia",pista:"Característica particular — dica 1071"},
+  {palavra:"exploracao",pista:"Ideia menos óbvia — dica 1072"},
+  {palavra:"fabricacao",pista:"Elemento de contexto — dica 1073"},
+  {palavra:"facilidade",pista:"Definição específica — dica 1074"},
+  {palavra:"farmaceutico",pista:"Conhecimento avançado — dica 1075"},
+  {palavra:"fermentacao",pista:"Assunto particular — dica 1076"},
+  {palavra:"ferramentaria",pista:"Conceito específico — dica 1077"},
+  {palavra:"filantropia",pista:"Termo especializado — dica 1078"},
+  {palavra:"fotografia",pista:"Característica particular — dica 1079"},
+  {palavra:"funcionamento",pista:"Ideia menos óbvia — dica 1080"},
+  {palavra:"gastronomia",pista:"Elemento de contexto — dica 1081"},
+  {palavra:"globalizacao",pista:"Definição específica — dica 1082"},
+  {palavra:"governador",pista:"Conhecimento avançado — dica 1083"},
+  {palavra:"habilidade",pista:"Assunto particular — dica 1084"},
+  {palavra:"hamburgueria",pista:"Conceito específico — dica 1085"},
+  {palavra:"historiador",pista:"Termo especializado — dica 1086"},
+  {palavra:"hospitalidade",pista:"Característica particular — dica 1087"},
+  {palavra:"ilustracao",pista:"Ideia menos óbvia — dica 1088"},
+  {palavra:"imaginação",pista:"Elemento de contexto — dica 1089"},
+  {palavra:"importacao",pista:"Definição específica — dica 1090"},
+  {palavra:"impressionante",pista:"Conhecimento avançado — dica 1091"},
+  {palavra:"inauguracao",pista:"Assunto particular — dica 1092"},
+  {palavra:"incorporacao",pista:"Conceito específico — dica 1093"},
+  {palavra:"independencia",pista:"Termo especializado — dica 1094"},
+  {palavra:"informacao",pista:"Característica particular — dica 1095"},
+  {palavra:"infraestrutura",pista:"Ideia menos óbvia — dica 1096"},
+  {palavra:"ingrediente",pista:"Elemento de contexto — dica 1097"},
+  {palavra:"instalacao",pista:"Definição específica — dica 1098"},
+  {palavra:"institucional",pista:"Conhecimento avançado — dica 1099"},
+  {palavra:"instrumento",pista:"Assunto particular — dica 1100"},
+  {palavra:"inteligencia",pista:"Conceito específico — dica 1101"},
+  {palavra:"interatividade",pista:"Termo especializado — dica 1102"},
+  {palavra:"interessante",pista:"Característica particular — dica 1103"},
+  {palavra:"internacional",pista:"Ideia menos óbvia — dica 1104"},
+  {palavra:"investimento",pista:"Elemento de contexto — dica 1105"},
+  {palavra:"laboratorio",pista:"Definição específica — dica 1106"},
+  {palavra:"legislacao",pista:"Conhecimento avançado — dica 1107"},
+  {palavra:"localizacao",pista:"Assunto particular — dica 1108"},
+  {palavra:"luminosidade",pista:"Conceito específico — dica 1109"},
+  {palavra:"manipulacao",pista:"Termo especializado — dica 1110"},
+  {palavra:"manufatura",pista:"Característica particular — dica 1111"},
+  {palavra:"matematica",pista:"Ideia menos óbvia — dica 1112"},
+  {palavra:"medicamento",pista:"Elemento de contexto — dica 1113"},
+  {palavra:"mediterraneo",pista:"Definição específica — dica 1114"},
+  {palavra:"mensageiro",pista:"Conhecimento avançado — dica 1115"},
+  {palavra:"mercadoria",pista:"Assunto particular — dica 1116"},
+  {palavra:"meteorologia",pista:"Conceito específico — dica 1117"},
+  {palavra:"metodologia",pista:"Termo especializado — dica 1118"},
+  {palavra:"microbiologia",pista:"Característica particular — dica 1119"},
+  {palavra:"modernizacao",pista:"Ideia menos óbvia — dica 1120"},
+  {palavra:"monitoramento",pista:"Elemento de contexto — dica 1121"},
+  {palavra:"movimentacao",pista:"Definição específica — dica 1122"},
+  {palavra:"musicalidade",pista:"Conhecimento avançado — dica 1123"},
+  {palavra:"necessidade",pista:"Assunto particular — dica 1124"},
+  {palavra:"negociacao",pista:"Conceito específico — dica 1125"},
+  {palavra:"observatorio",pista:"Termo especializado — dica 1126"},
+  {palavra:"organizacao",pista:"Característica particular — dica 1127"},
+  {palavra:"originalidade",pista:"Ideia menos óbvia — dica 1128"},
+  {palavra:"participacao",pista:"Elemento de contexto — dica 1129"},
+  {palavra:"patrimonio",pista:"Definição específica — dica 1130"},
+  {palavra:"personalidade",pista:"Conhecimento avançado — dica 1131"},
+  {palavra:"planejamento",pista:"Assunto particular — dica 1132"},
+  {palavra:"plataforma",pista:"Conceito específico — dica 1133"},
+  {palavra:"policromia",pista:"Termo especializado — dica 1134"},
+  {palavra:"possibilidade",pista:"Característica particular — dica 1135"},
+  {palavra:"preparacao",pista:"Ideia menos óbvia — dica 1136"},
+  {palavra:"preservacao",pista:"Elemento de contexto — dica 1137"},
+  {palavra:"prioridade",pista:"Definição específica — dica 1138"},
+  {palavra:"probabilidade",pista:"Conhecimento avançado — dica 1139"},
+  {palavra:"processamento",pista:"Assunto particular — dica 1140"},
+  {palavra:"profissional",pista:"Conceito específico — dica 1141"},
+  {palavra:"programacao",pista:"Termo especializado — dica 1142"},
+  {palavra:"propriedade",pista:"Característica particular — dica 1143"},
+  {palavra:"publicidade",pista:"Ideia menos óbvia — dica 1144"},
+  {palavra:"questionario",pista:"Elemento de contexto — dica 1145"},
+  {palavra:"realizacao",pista:"Definição específica — dica 1146"},
+  {palavra:"reconhecimento",pista:"Conhecimento avançado — dica 1147"},
+  {palavra:"recuperacao",pista:"Assunto particular — dica 1148"},
+  {palavra:"reciclagem",pista:"Conceito específico — dica 1149"},
+  {palavra:"regulamento",pista:"Termo especializado — dica 1150"},
+  {palavra:"relacionamento",pista:"Característica particular — dica 1151"},
+  {palavra:"representacao",pista:"Ideia menos óbvia — dica 1152"},
+  {palavra:"reproducao",pista:"Elemento de contexto — dica 1153"},
+  {palavra:"residencia",pista:"Definição específica — dica 1154"},
+  {palavra:"restaurante",pista:"Conhecimento avançado — dica 1155"},
+  {palavra:"restauracao",pista:"Assunto particular — dica 1156"},
+  {palavra:"sensibilidade",pista:"Conceito específico — dica 1157"},
+  {palavra:"significado",pista:"Termo especializado — dica 1158"},
+  {palavra:"simplicidade",pista:"Característica particular — dica 1159"},
+  {palavra:"sociabilidade",pista:"Ideia menos óbvia — dica 1160"},
+  {palavra:"solidariedade",pista:"Elemento de contexto — dica 1161"},
+  {palavra:"subterraneo",pista:"Definição específica — dica 1162"},
+  {palavra:"supermercado",pista:"Conhecimento avançado — dica 1163"},
+  {palavra:"surpreendente",pista:"Assunto particular — dica 1164"},
+  {palavra:"tecnologia",pista:"Conceito específico — dica 1165"},
+  {palavra:"telefonista",pista:"Termo especializado — dica 1166"},
+  {palavra:"temperatura",pista:"Característica particular — dica 1167"},
+  {palavra:"territorio",pista:"Ideia menos óbvia — dica 1168"},
+  {palavra:"tradicional",pista:"Elemento de contexto — dica 1169"},
+  {palavra:"transformacao",pista:"Definição específica — dica 1170"},
+  {palavra:"transporte",pista:"Conhecimento avançado — dica 1171"},
+  {palavra:"universidade",pista:"Assunto particular — dica 1172"},
+  {palavra:"utilizacao",pista:"Conceito específico — dica 1173"},
+  {palavra:"velocidade",pista:"Termo especializado — dica 1174"},
+  {palavra:"verificacao",pista:"Característica particular — dica 1175"},
+  {palavra:"vitaminado",pista:"Ideia menos óbvia — dica 1176"},
+  {palavra:"administracao",pista:"Elemento de contexto — dica 1177"},
+  {palavra:"agendamento",pista:"Definição específica — dica 1178"},
+  {palavra:"alinhamento",pista:"Conhecimento avançado — dica 1179"},
+  {palavra:"alimentacao",pista:"Assunto particular — dica 1180"},
+  {palavra:"alternativa",pista:"Conceito específico — dica 1181"},
+  {palavra:"amortizacao",pista:"Termo especializado — dica 1182"},
+  {palavra:"antecedente",pista:"Característica particular — dica 1183"},
+  {palavra:"antropologia",pista:"Ideia menos óbvia — dica 1184"},
+  {palavra:"aplicativo",pista:"Elemento de contexto — dica 1185"},
+  {palavra:"arquitetura",pista:"Definição específica — dica 1186"},
+  {palavra:"arqueologia",pista:"Conhecimento avançado — dica 1187"},
+  {palavra:"astronautica",pista:"Assunto particular — dica 1188"},
+  {palavra:"atmosferico",pista:"Conceito específico — dica 1189"},
+  {palavra:"biodiversidade",pista:"Termo especializado — dica 1190"},
+  {palavra:"biotecnologia",pista:"Característica particular — dica 1191"},
+  {palavra:"cartografia",pista:"Ideia menos óbvia — dica 1192"},
+  {palavra:"climatologia",pista:"Elemento de contexto — dica 1193"},
+  {palavra:"cosmologia",pista:"Definição específica — dica 1194"},
+  {palavra:"criptografia",pista:"Conhecimento avançado — dica 1195"},
+  {palavra:"democracia",pista:"Assunto particular — dica 1196"},
+  {palavra:"desmatamento",pista:"Conceito específico — dica 1197"},
+  {palavra:"diplomacia",pista:"Termo especializado — dica 1198"},
+  {palavra:"ecossistema",pista:"Característica particular — dica 1199"},
+  {palavra:"economista",pista:"Ideia menos óbvia — dica 1200"},
+  {palavra:"eletronica",pista:"Elemento de contexto — dica 1201"},
+  {palavra:"epistemologia",pista:"Definição específica — dica 1202"},
+  {palavra:"espectroscopia",pista:"Conhecimento avançado — dica 1203"},
+  {palavra:"fenomenologia",pista:"Assunto particular — dica 1204"},
+  {palavra:"fotossintese",pista:"Conceito específico — dica 1205"},
+  {palavra:"geopolitica",pista:"Termo especializado — dica 1206"},
+  {palavra:"hidrografia",pista:"Característica particular — dica 1207"},
+  {palavra:"imunologia",pista:"Ideia menos óbvia — dica 1208"},
+  {palavra:"jurisprudencia",pista:"Elemento de contexto — dica 1209"},
+  {palavra:"metamorfose",pista:"Definição específica — dica 1210"},
+  {palavra:"neurociencia",pista:"Conhecimento avançado — dica 1211"},
+  {palavra:"oceanografia",pista:"Assunto particular — dica 1212"},
+  {palavra:"paleontologia",pista:"Conceito específico — dica 1213"},
+  {palavra:"paralelepipedo",pista:"Termo especializado — dica 1214"},
+  {palavra:"psicologia",pista:"Característica particular — dica 1215"},
+  {palavra:"termodinamica",pista:"Ideia menos óbvia — dica 1216"},
+  {palavra:"topografia",pista:"Elemento de contexto — dica 1217"},
+  {palavra:"vulcanologia",pista:"Definição específica — dica 1218"},
+  {palavra:"astronomia",pista:"Conhecimento avançado — dica 1219"},
+  {palavra:"biomedicina",pista:"Assunto particular — dica 1220"},
+  {palavra:"bioquimica",pista:"Conceito específico — dica 1221"},
+  {palavra:"cardiologia",pista:"Termo especializado — dica 1222"},
+  {palavra:"dermatologia",pista:"Característica particular — dica 1223"},
+  {palavra:"endocrinologia",pista:"Ideia menos óbvia — dica 1224"},
+  {palavra:"farmacologia",pista:"Elemento de contexto — dica 1225"},
+  {palavra:"fisiologia",pista:"Definição específica — dica 1226"},
+  {palavra:"histologia",pista:"Conhecimento avançado — dica 1227"},
+  {palavra:"neurologia",pista:"Assunto particular — dica 1228"},
+  {palavra:"oftalmologia",pista:"Conceito específico — dica 1229"},
+  {palavra:"radioterapia",pista:"Termo especializado — dica 1230"},
+  {palavra:"reumatologia",pista:"Característica particular — dica 1231"},
+  {palavra:"veterinaria",pista:"Ideia menos óbvia — dica 1232"},
+  {palavra:"veterinario",pista:"Elemento de contexto — dica 1233"},
+  {palavra:"adrenalina",pista:"Definição específica — dica 1234"},
+  {palavra:"biblioteca",pista:"Conhecimento avançado — dica 1235"},
+  {palavra:"candelabro",pista:"Assunto particular — dica 1236"},
+  {palavra:"carpinteiro",pista:"Conceito específico — dica 1237"},
+  {palavra:"castanheira",pista:"Termo especializado — dica 1238"},
+  {palavra:"cavalheiro",pista:"Característica particular — dica 1239"},
+  {palavra:"chocolateiro",pista:"Ideia menos óbvia — dica 1240"},
+  {palavra:"colecionador",pista:"Elemento de contexto — dica 1241"},
+  {palavra:"confeitaria",pista:"Definição específica — dica 1242"},
+  {palavra:"confeiteiro",pista:"Conhecimento avançado — dica 1243"},
+  {palavra:"congelador",pista:"Assunto particular — dica 1244"},
+  {palavra:"corredores",pista:"Conceito específico — dica 1245"},
+  {palavra:"curandeiro",pista:"Termo especializado — dica 1246"},
+  {palavra:"desenhista",pista:"Característica particular — dica 1247"},
+  {palavra:"descoberta",pista:"Ideia menos óbvia — dica 1248"},
+  {palavra:"desfiladeiro",pista:"Elemento de contexto — dica 1249"},
+  {palavra:"diamantina",pista:"Definição específica — dica 1250"},
+  {palavra:"dinossauro",pista:"Conhecimento avançado — dica 1251"},
+  {palavra:"encanamento",pista:"Assunto particular — dica 1252"},
+  {palavra:"escritorio",pista:"Conceito específico — dica 1253"},
+  {palavra:"espantalho",pista:"Termo especializado — dica 1254"},
+  {palavra:"espetaculo",pista:"Característica particular — dica 1255"},
+  {palavra:"explorador",pista:"Ideia menos óbvia — dica 1256"},
+  {palavra:"fantastico",pista:"Elemento de contexto — dica 1257"},
+  {palavra:"fazendeiro",pista:"Definição específica — dica 1258"},
+  {palavra:"feiticeiro",pista:"Conhecimento avançado — dica 1259"},
+  {palavra:"floricultura",pista:"Assunto particular — dica 1260"},
+  {palavra:"garimpeiro",pista:"Conceito específico — dica 1261"},
+  {palavra:"hamburguer",pista:"Termo especializado — dica 1262"},
+  {palavra:"helicoptero",pista:"Característica particular — dica 1263"},
+  {palavra:"hipopotamo",pista:"Ideia menos óbvia — dica 1264"},
+  {palavra:"iluminacao",pista:"Elemento de contexto — dica 1265"},
+  {palavra:"jardineiro",pista:"Definição específica — dica 1266"},
+  {palavra:"jornalista",pista:"Conhecimento avançado — dica 1267"},
+  {palavra:"lanchonete",pista:"Assunto particular — dica 1268"},
+  {palavra:"lavanderia",pista:"Conceito específico — dica 1269"},
+  {palavra:"malabarista",pista:"Termo especializado — dica 1270"},
+  {palavra:"maravilhoso",pista:"Característica particular — dica 1271"},
+  {palavra:"marinheiro",pista:"Ideia menos óbvia — dica 1272"},
+  {palavra:"mercenario",pista:"Elemento de contexto — dica 1273"},
+  {palavra:"mergulhador",pista:"Definição específica — dica 1274"},
+  {palavra:"montanhoso",pista:"Conhecimento avançado — dica 1275"},
+  {palavra:"motocicleta",pista:"Assunto particular — dica 1276"},
+  {palavra:"museologia",pista:"Conceito específico — dica 1277"},
+  {palavra:"observacao",pista:"Termo especializado — dica 1278"},
+  {palavra:"orquestracao",pista:"Característica particular — dica 1279"},
+  {palavra:"passageiro",pista:"Ideia menos óbvia — dica 1280"},
+  {palavra:"passatempo",pista:"Elemento de contexto — dica 1281"},
+  {palavra:"planetario",pista:"Definição específica — dica 1282"},
+  {palavra:"policromatico",pista:"Conhecimento avançado — dica 1283"},
+  {palavra:"professora",pista:"Assunto particular — dica 1284"},
+  {palavra:"quadrilatero",pista:"Conceito específico — dica 1285"},
+  {palavra:"recepcionista",pista:"Termo especializado — dica 1286"},
+  {palavra:"refrigerante",pista:"Característica particular — dica 1287"},
+  {palavra:"romantismo",pista:"Ideia menos óbvia — dica 1288"},
+  {palavra:"salgadinho",pista:"Elemento de contexto — dica 1289"},
+  {palavra:"saxofonista",pista:"Definição específica — dica 1290"},
+  {palavra:"semelhante",pista:"Conhecimento avançado — dica 1291"},
+  {palavra:"sorveteria",pista:"Assunto particular — dica 1292"},
+  {palavra:"superioridade",pista:"Conceito específico — dica 1293"},
+  {palavra:"tecnologico",pista:"Termo especializado — dica 1294"},
+  {palavra:"travesseiro",pista:"Característica particular — dica 1295"},
+  {palavra:"trabalhador",pista:"Ideia menos óbvia — dica 1296"},
+  {palavra:"universitario",pista:"Elemento de contexto — dica 1297"},
+  {palavra:"violinista",pista:"Definição específica — dica 1298"},
+  {palavra:"voluntario",pista:"Conhecimento avançado — dica 1299"},
+  {palavra:"tristeza",pista:"Assunto particular — dica 1300"}
+];
+const PALAVRAS_HARD = [
+  {palavra:"mistério",pista:"Enigma 1301"},
+  {palavra:"férias",pista:"Raro 1302"},
+  {palavra:"segunda-feira",pista:"Obscuro 1303"},
+  {palavra:"terça-feira",pista:"Complexo 1304"},
+  {palavra:"quarta-feira",pista:"Intrigante 1305"},
+  {palavra:"quinta-feira",pista:"Incomum 1306"},
+  {palavra:"sexta-feira",pista:"Avançado 1307"},
+  {palavra:"sábado",pista:"Misterioso 1308"},
+  {palavra:"janeiro",pista:"Enigma 1309"},
+  {palavra:"fevereiro",pista:"Raro 1310"},
+  {palavra:"março",pista:"Obscuro 1311"},
+  {palavra:"abril",pista:"Complexo 1312"},
+  {palavra:"maio",pista:"Intrigante 1313"},
+  {palavra:"junho",pista:"Incomum 1314"},
+  {palavra:"julho",pista:"Avançado 1315"},
+  {palavra:"agosto",pista:"Misterioso 1316"},
+  {palavra:"setembro",pista:"Enigma 1317"},
+  {palavra:"outubro",pista:"Raro 1318"},
+  {palavra:"novembro",pista:"Obscuro 1319"},
+  {palavra:"dezembro",pista:"Complexo 1320"},
+  {palavra:"vermelho",pista:"Intrigante 1321"},
+  {palavra:"azul",pista:"Incomum 1322"},
+  {palavra:"verde",pista:"Avançado 1323"},
+  {palavra:"amarelo",pista:"Misterioso 1324"},
+  {palavra:"roxo",pista:"Enigma 1325"},
+  {palavra:"rosa",pista:"Raro 1326"},
+  {palavra:"branco",pista:"Obscuro 1327"},
+  {palavra:"preto",pista:"Complexo 1328"},
+  {palavra:"cinza",pista:"Intrigante 1329"},
+  {palavra:"dourado",pista:"Incomum 1330"},
+  {palavra:"prateado",pista:"Avançado 1331"},
+  {palavra:"escuro",pista:"Misterioso 1332"},
+  {palavra:"claro",pista:"Enigma 1333"},
+  {palavra:"redondo",pista:"Raro 1334"},
+  {palavra:"quadrado",pista:"Obscuro 1335"},
+  {palavra:"triângulo",pista:"Complexo 1336"},
+  {palavra:"retângulo",pista:"Intrigante 1337"},
+  {palavra:"coração",pista:"Incomum 1338"},
+  {palavra:"moeda",pista:"Avançado 1339"},
+  {palavra:"sala",pista:"Misterioso 1340"},
+  {palavra:"varanda",pista:"Enigma 1341"},
+  {palavra:"telhado",pista:"Raro 1342"},
+  {palavra:"porta",pista:"Obscuro 1343"},
+  {palavra:"chave",pista:"Complexo 1344"},
+  {palavra:"cadeado",pista:"Intrigante 1345"},
+  {palavra:"campainha",pista:"Incomum 1346"},
+  {palavra:"boneca",pista:"Avançado 1347"},
+  {palavra:"pipa",pista:"Misterioso 1348"},
+  {palavra:"balão",pista:"Enigma 1349"},
+  {palavra:"patinete",pista:"Raro 1350"},
+  {palavra:"skate",pista:"Obscuro 1351"},
+  {palavra:"patins",pista:"Complexo 1352"},
+  {palavra:"trenó",pista:"Intrigante 1353"},
+  {palavra:"casamento",pista:"Incomum 1354"},
+  {palavra:"bolo",pista:"Avançado 1355"},
+  {palavra:"chocolate",pista:"Misterioso 1356"},
+  {palavra:"pizza",pista:"Enigma 1357"},
+  {palavra:"lasanha",pista:"Raro 1358"},
+  {palavra:"salada",pista:"Obscuro 1359"},
+  {palavra:"sopa",pista:"Complexo 1360"},
+  {palavra:"farofa",pista:"Intrigante 1361"},
+  {palavra:"iogurte",pista:"Incomum 1362"},
+  {palavra:"manteiga",pista:"Avançado 1363"},
+  {palavra:"leite",pista:"Misterioso 1364"},
+  {palavra:"café",pista:"Enigma 1365"},
+  {palavra:"chá",pista:"Raro 1366"},
+  {palavra:"suco",pista:"Obscuro 1367"},
+  {palavra:"água-de-coco",pista:"Complexo 1368"},
+  {palavra:"minisol",pista:"Intrigante 1369"},
+  {palavra:"minilua",pista:"Incomum 1370"},
+  {palavra:"minivento",pista:"Avançado 1371"},
+  {palavra:"minichuva",pista:"Misterioso 1372"},
+  {palavra:"minimar",pista:"Enigma 1373"},
+  {palavra:"miniflor",pista:"Raro 1374"},
+  {palavra:"minicasa",pista:"Obscuro 1375"},
+  {palavra:"miniporta",pista:"Complexo 1376"},
+  {palavra:"minijanela",pista:"Intrigante 1377"},
+  {palavra:"minicampo",pista:"Incomum 1378"},
+  {palavra:"minirio",pista:"Avançado 1379"},
+  {palavra:"minilago",pista:"Misterioso 1380"},
+  {palavra:"minimontanha",pista:"Enigma 1381"},
+  {palavra:"minipraia",pista:"Raro 1382"},
+  {palavra:"minijardim",pista:"Obscuro 1383"},
+  {palavra:"minilivro",pista:"Complexo 1384"},
+  {palavra:"minijogo",pista:"Intrigante 1385"},
+  {palavra:"minimúsica",pista:"Incomum 1386"},
+  {palavra:"minidança",pista:"Avançado 1387"},
+  {palavra:"minifesta",pista:"Misterioso 1388"},
+  {palavra:"minibolo",pista:"Enigma 1389"},
+  {palavra:"minicafé",pista:"Raro 1390"},
+  {palavra:"minileite",pista:"Obscuro 1391"},
+  {palavra:"minipão",pista:"Complexo 1392"},
+  {palavra:"minifruta",pista:"Intrigante 1393"},
+  {palavra:"minianimal",pista:"Incomum 1394"},
+  {palavra:"minipeixe",pista:"Avançado 1395"},
+  {palavra:"minipássaro",pista:"Misterioso 1396"},
+  {palavra:"mininavio",pista:"Enigma 1397"},
+  {palavra:"minicarro",pista:"Raro 1398"},
+  {palavra:"minitrem",pista:"Obscuro 1399"},
+  {palavra:"miniavião",pista:"Complexo 1400"},
+  {palavra:"miniponte",pista:"Intrigante 1401"},
+  {palavra:"minitorre",pista:"Incomum 1402"},
+  {palavra:"minicastelo",pista:"Avançado 1403"},
+  {palavra:"miniescola",pista:"Misterioso 1404"},
+  {palavra:"minicidade",pista:"Enigma 1405"},
+  {palavra:"miniplaneta",pista:"Raro 1406"},
+  {palavra:"miniestrela",pista:"Obscuro 1407"},
+  {palavra:"mininuvem",pista:"Complexo 1408"},
+  {palavra:"minifogo",pista:"Intrigante 1409"},
+  {palavra:"minigelo",pista:"Incomum 1410"},
+  {palavra:"miniouro",pista:"Avançado 1411"},
+  {palavra:"miniprata",pista:"Misterioso 1412"},
+  {palavra:"minividro",pista:"Enigma 1413"},
+  {palavra:"minipapel",pista:"Raro 1414"},
+  {palavra:"minimadeira",pista:"Obscuro 1415"},
+  {palavra:"minipedra",pista:"Complexo 1416"},
+  {palavra:"minimetal",pista:"Intrigante 1417"},
+  {palavra:"minitecido",pista:"Incomum 1418"},
+  {palavra:"minibrilho",pista:"Avançado 1419"},
+  {palavra:"minisom",pista:"Misterioso 1420"},
+  {palavra:"minitempo",pista:"Enigma 1421"},
+  {palavra:"miniraio",pista:"Raro 1422"},
+  {palavra:"minifloresta",pista:"Obscuro 1423"},
+  {palavra:"minioceano",pista:"Complexo 1424"},
+  {palavra:"supersol",pista:"Intrigante 1425"},
+  {palavra:"superlua",pista:"Incomum 1426"},
+  {palavra:"supervento",pista:"Avançado 1427"},
+  {palavra:"superchuva",pista:"Misterioso 1428"},
+  {palavra:"supermar",pista:"Enigma 1429"},
+  {palavra:"superflor",pista:"Raro 1430"},
+  {palavra:"supercasa",pista:"Obscuro 1431"},
+  {palavra:"superporta",pista:"Complexo 1432"},
+  {palavra:"superjanela",pista:"Intrigante 1433"},
+  {palavra:"supercampo",pista:"Incomum 1434"},
+  {palavra:"superrio",pista:"Avançado 1435"},
+  {palavra:"superlago",pista:"Misterioso 1436"},
+  {palavra:"supermontanha",pista:"Enigma 1437"},
+  {palavra:"superpraia",pista:"Raro 1438"},
+  {palavra:"superjardim",pista:"Obscuro 1439"},
+  {palavra:"superlivro",pista:"Complexo 1440"},
+  {palavra:"superjogo",pista:"Intrigante 1441"},
+  {palavra:"supermúsica",pista:"Incomum 1442"},
+  {palavra:"superdança",pista:"Avançado 1443"},
+  {palavra:"superfesta",pista:"Misterioso 1444"},
+  {palavra:"superbolo",pista:"Enigma 1445"},
+  {palavra:"supercafé",pista:"Raro 1446"},
+  {palavra:"superleite",pista:"Obscuro 1447"},
+  {palavra:"superpão",pista:"Complexo 1448"},
+  {palavra:"superfruta",pista:"Intrigante 1449"},
+  {palavra:"superanimal",pista:"Incomum 1450"},
+  {palavra:"superpeixe",pista:"Avançado 1451"},
+  {palavra:"superpássaro",pista:"Misterioso 1452"},
+  {palavra:"supernavio",pista:"Enigma 1453"},
+  {palavra:"supercarro",pista:"Raro 1454"},
+  {palavra:"supertrem",pista:"Obscuro 1455"},
+  {palavra:"superavião",pista:"Complexo 1456"},
+  {palavra:"superponte",pista:"Intrigante 1457"},
+  {palavra:"supertorre",pista:"Incomum 1458"},
+  {palavra:"supercastelo",pista:"Avançado 1459"},
+  {palavra:"superescola",pista:"Misterioso 1460"},
+  {palavra:"supercidade",pista:"Enigma 1461"},
+  {palavra:"superplaneta",pista:"Raro 1462"},
+  {palavra:"superestrela",pista:"Obscuro 1463"},
+  {palavra:"supernuvem",pista:"Complexo 1464"},
+  {palavra:"superfogo",pista:"Intrigante 1465"},
+  {palavra:"supergelo",pista:"Incomum 1466"},
+  {palavra:"superouro",pista:"Avançado 1467"},
+  {palavra:"superprata",pista:"Misterioso 1468"},
+  {palavra:"supervidro",pista:"Enigma 1469"},
+  {palavra:"superpapel",pista:"Raro 1470"},
+  {palavra:"supermadeira",pista:"Obscuro 1471"},
+  {palavra:"superpedra",pista:"Complexo 1472"},
+  {palavra:"supermetal",pista:"Intrigante 1473"},
+  {palavra:"supertecido",pista:"Incomum 1474"},
+  {palavra:"superbrilho",pista:"Avançado 1475"},
+  {palavra:"supersom",pista:"Misterioso 1476"},
+  {palavra:"supertempo",pista:"Enigma 1477"},
+  {palavra:"superraio",pista:"Raro 1478"},
+  {palavra:"superfloresta",pista:"Obscuro 1479"},
+  {palavra:"superoceano",pista:"Complexo 1480"},
+  {palavra:"megasol",pista:"Intrigante 1481"},
+  {palavra:"megalua",pista:"Incomum 1482"},
+  {palavra:"megavento",pista:"Avançado 1483"},
+  {palavra:"megachuva",pista:"Misterioso 1484"},
+  {palavra:"megamar",pista:"Enigma 1485"},
+  {palavra:"megaflor",pista:"Raro 1486"},
+  {palavra:"megacasa",pista:"Obscuro 1487"},
+  {palavra:"megaporta",pista:"Complexo 1488"},
+  {palavra:"megajanela",pista:"Intrigante 1489"},
+  {palavra:"megacampo",pista:"Incomum 1490"},
+  {palavra:"megario",pista:"Avançado 1491"},
+  {palavra:"megalago",pista:"Misterioso 1492"},
+  {palavra:"megamontanha",pista:"Enigma 1493"},
+  {palavra:"megapraia",pista:"Raro 1494"},
+  {palavra:"megajardim",pista:"Obscuro 1495"},
+  {palavra:"megalivro",pista:"Complexo 1496"},
+  {palavra:"megajogo",pista:"Intrigante 1497"},
+  {palavra:"megamúsica",pista:"Incomum 1498"},
+  {palavra:"megadança",pista:"Avançado 1499"},
+  {palavra:"megafesta",pista:"Misterioso 1500"},
+  {palavra:"megabolo",pista:"Enigma 1501"},
+  {palavra:"megacafé",pista:"Raro 1502"},
+  {palavra:"megaleite",pista:"Obscuro 1503"},
+  {palavra:"megapão",pista:"Complexo 1504"},
+  {palavra:"megafruta",pista:"Intrigante 1505"},
+  {palavra:"megaanimal",pista:"Incomum 1506"},
+  {palavra:"megapeixe",pista:"Avançado 1507"},
+  {palavra:"megapássaro",pista:"Misterioso 1508"},
+  {palavra:"meganavio",pista:"Enigma 1509"},
+  {palavra:"megacarro",pista:"Raro 1510"},
+  {palavra:"megatrem",pista:"Obscuro 1511"},
+  {palavra:"megaavião",pista:"Complexo 1512"},
+  {palavra:"megaponte",pista:"Intrigante 1513"},
+  {palavra:"megatorre",pista:"Incomum 1514"},
+  {palavra:"megacastelo",pista:"Avançado 1515"},
+  {palavra:"megaescola",pista:"Misterioso 1516"},
+  {palavra:"megacidade",pista:"Enigma 1517"},
+  {palavra:"megaplaneta",pista:"Raro 1518"},
+  {palavra:"megaestrela",pista:"Obscuro 1519"},
+  {palavra:"meganuvem",pista:"Complexo 1520"},
+  {palavra:"megafogo",pista:"Intrigante 1521"},
+  {palavra:"megagelo",pista:"Incomum 1522"},
+  {palavra:"megaouro",pista:"Avançado 1523"},
+  {palavra:"megaprata",pista:"Misterioso 1524"},
+  {palavra:"megavidro",pista:"Enigma 1525"},
+  {palavra:"megapapel",pista:"Raro 1526"},
+  {palavra:"megamadeira",pista:"Obscuro 1527"},
+  {palavra:"megapedra",pista:"Complexo 1528"},
+  {palavra:"megametal",pista:"Intrigante 1529"},
+  {palavra:"megatecido",pista:"Incomum 1530"},
+  {palavra:"megabrilho",pista:"Avançado 1531"},
+  {palavra:"megasom",pista:"Misterioso 1532"},
+  {palavra:"megatempo",pista:"Enigma 1533"},
+  {palavra:"megaraio",pista:"Raro 1534"},
+  {palavra:"megafloresta",pista:"Obscuro 1535"},
+  {palavra:"megaoceano",pista:"Complexo 1536"},
+  {palavra:"extrasol",pista:"Intrigante 1537"},
+  {palavra:"extralua",pista:"Incomum 1538"},
+  {palavra:"extravento",pista:"Avançado 1539"},
+  {palavra:"extrachuva",pista:"Misterioso 1540"},
+  {palavra:"extramar",pista:"Enigma 1541"},
+  {palavra:"extraflor",pista:"Raro 1542"},
+  {palavra:"extracasa",pista:"Obscuro 1543"},
+  {palavra:"extraporta",pista:"Complexo 1544"},
+  {palavra:"extrajanela",pista:"Intrigante 1545"},
+  {palavra:"extracampo",pista:"Incomum 1546"},
+  {palavra:"extrario",pista:"Avançado 1547"},
+  {palavra:"extralago",pista:"Misterioso 1548"},
+  {palavra:"extramontanha",pista:"Enigma 1549"},
+  {palavra:"extrapraia",pista:"Raro 1550"}
+];
+const PALAVRAS_EXTRA = [
+  {palavra:"extrajardim",pista:"Erudito 1551"},
+  {palavra:"extralivro",pista:"Raríssimo 1552"},
+  {palavra:"extrajogo",pista:"Obscuro 1553"},
+  {palavra:"extramúsica",pista:"Intrincado 1554"},
+  {palavra:"extradança",pista:"Abstrato 1555"},
+  {palavra:"extrafesta",pista:"Científico 1556"},
+  {palavra:"extrabolo",pista:"Histórico 1557"},
+  {palavra:"extracafé",pista:"Enigmático 1558"},
+  {palavra:"extraleite",pista:"Erudito 1559"},
+  {palavra:"extrapão",pista:"Raríssimo 1560"},
+  {palavra:"extrafruta",pista:"Obscuro 1561"},
+  {palavra:"extraanimal",pista:"Intrincado 1562"},
+  {palavra:"extrapeixe",pista:"Abstrato 1563"},
+  {palavra:"extrapássaro",pista:"Científico 1564"},
+  {palavra:"extranavio",pista:"Histórico 1565"},
+  {palavra:"extracarro",pista:"Enigmático 1566"},
+  {palavra:"extratrem",pista:"Erudito 1567"},
+  {palavra:"extraavião",pista:"Raríssimo 1568"},
+  {palavra:"extraponte",pista:"Obscuro 1569"},
+  {palavra:"extratorre",pista:"Intrincado 1570"},
+  {palavra:"extracastelo",pista:"Abstrato 1571"},
+  {palavra:"extraescola",pista:"Científico 1572"},
+  {palavra:"extracidade",pista:"Histórico 1573"},
+  {palavra:"extraplaneta",pista:"Enigmático 1574"},
+  {palavra:"extraestrela",pista:"Erudito 1575"},
+  {palavra:"extranuvem",pista:"Raríssimo 1576"},
+  {palavra:"extrafogo",pista:"Obscuro 1577"},
+  {palavra:"extragelo",pista:"Intrincado 1578"},
+  {palavra:"extraouro",pista:"Abstrato 1579"},
+  {palavra:"extraprata",pista:"Científico 1580"},
+  {palavra:"extravidro",pista:"Histórico 1581"},
+  {palavra:"extrapapel",pista:"Enigmático 1582"},
+  {palavra:"extramadeira",pista:"Erudito 1583"},
+  {palavra:"extrapedra",pista:"Raríssimo 1584"},
+  {palavra:"extrametal",pista:"Obscuro 1585"},
+  {palavra:"extratecido",pista:"Intrincado 1586"},
+  {palavra:"extrabrilho",pista:"Abstrato 1587"},
+  {palavra:"extrasom",pista:"Científico 1588"},
+  {palavra:"extratempo",pista:"Histórico 1589"},
+  {palavra:"extraraio",pista:"Enigmático 1590"},
+  {palavra:"extrafloresta",pista:"Erudito 1591"},
+  {palavra:"extraoceano",pista:"Raríssimo 1592"},
+  {palavra:"multisol",pista:"Obscuro 1593"},
+  {palavra:"multilua",pista:"Intrincado 1594"},
+  {palavra:"multivento",pista:"Abstrato 1595"},
+  {palavra:"multichuva",pista:"Científico 1596"},
+  {palavra:"multimar",pista:"Histórico 1597"},
+  {palavra:"multiflor",pista:"Enigmático 1598"},
+  {palavra:"multicasa",pista:"Erudito 1599"},
+  {palavra:"multiporta",pista:"Raríssimo 1600"},
+  {palavra:"multijanela",pista:"Obscuro 1601"},
+  {palavra:"multicampo",pista:"Intrincado 1602"},
+  {palavra:"multirio",pista:"Abstrato 1603"},
+  {palavra:"multilago",pista:"Científico 1604"},
+  {palavra:"multimontanha",pista:"Histórico 1605"},
+  {palavra:"multipraia",pista:"Enigmático 1606"},
+  {palavra:"multijardim",pista:"Erudito 1607"},
+  {palavra:"multilivro",pista:"Raríssimo 1608"},
+  {palavra:"multijogo",pista:"Obscuro 1609"},
+  {palavra:"multimúsica",pista:"Intrincado 1610"},
+  {palavra:"multidança",pista:"Abstrato 1611"},
+  {palavra:"multifesta",pista:"Científico 1612"},
+  {palavra:"multibolo",pista:"Histórico 1613"},
+  {palavra:"multicafé",pista:"Enigmático 1614"},
+  {palavra:"multileite",pista:"Erudito 1615"},
+  {palavra:"multipão",pista:"Raríssimo 1616"},
+  {palavra:"multifruta",pista:"Obscuro 1617"},
+  {palavra:"multianimal",pista:"Intrincado 1618"},
+  {palavra:"multipeixe",pista:"Abstrato 1619"},
+  {palavra:"multipássaro",pista:"Científico 1620"},
+  {palavra:"multinavio",pista:"Histórico 1621"},
+  {palavra:"multicarro",pista:"Enigmático 1622"},
+  {palavra:"multitrem",pista:"Erudito 1623"},
+  {palavra:"multiavião",pista:"Raríssimo 1624"},
+  {palavra:"multiponte",pista:"Obscuro 1625"},
+  {palavra:"multitorre",pista:"Intrincado 1626"},
+  {palavra:"multicastelo",pista:"Abstrato 1627"},
+  {palavra:"multiescola",pista:"Científico 1628"},
+  {palavra:"multicidade",pista:"Histórico 1629"},
+  {palavra:"multiplaneta",pista:"Enigmático 1630"},
+  {palavra:"multiestrela",pista:"Erudito 1631"},
+  {palavra:"multinuvem",pista:"Raríssimo 1632"},
+  {palavra:"multifogo",pista:"Obscuro 1633"},
+  {palavra:"multigelo",pista:"Intrincado 1634"},
+  {palavra:"multiouro",pista:"Abstrato 1635"},
+  {palavra:"multiprata",pista:"Científico 1636"},
+  {palavra:"multividro",pista:"Histórico 1637"},
+  {palavra:"multipapel",pista:"Enigmático 1638"},
+  {palavra:"multimadeira",pista:"Erudito 1639"},
+  {palavra:"multipedra",pista:"Raríssimo 1640"},
+  {palavra:"multimetal",pista:"Obscuro 1641"},
+  {palavra:"multitecido",pista:"Intrincado 1642"},
+  {palavra:"multibrilho",pista:"Abstrato 1643"},
+  {palavra:"multisom",pista:"Científico 1644"},
+  {palavra:"multitempo",pista:"Histórico 1645"},
+  {palavra:"multiraio",pista:"Enigmático 1646"},
+  {palavra:"multifloresta",pista:"Erudito 1647"},
+  {palavra:"multioceano",pista:"Raríssimo 1648"},
+  {palavra:"portasol",pista:"Obscuro 1649"},
+  {palavra:"portalua",pista:"Intrincado 1650"},
+  {palavra:"portavento",pista:"Abstrato 1651"},
+  {palavra:"portachuva",pista:"Científico 1652"},
+  {palavra:"portamar",pista:"Histórico 1653"},
+  {palavra:"portaflor",pista:"Enigmático 1654"},
+  {palavra:"portacasa",pista:"Erudito 1655"},
+  {palavra:"portaporta",pista:"Raríssimo 1656"},
+  {palavra:"portajanela",pista:"Obscuro 1657"},
+  {palavra:"portacampo",pista:"Intrincado 1658"},
+  {palavra:"portario",pista:"Abstrato 1659"},
+  {palavra:"portalago",pista:"Científico 1660"},
+  {palavra:"portamontanha",pista:"Histórico 1661"},
+  {palavra:"portapraia",pista:"Enigmático 1662"},
+  {palavra:"portajardim",pista:"Erudito 1663"},
+  {palavra:"portalivro",pista:"Raríssimo 1664"},
+  {palavra:"portajogo",pista:"Obscuro 1665"},
+  {palavra:"portamúsica",pista:"Intrincado 1666"},
+  {palavra:"portadança",pista:"Abstrato 1667"},
+  {palavra:"portafesta",pista:"Científico 1668"},
+  {palavra:"portabolo",pista:"Histórico 1669"},
+  {palavra:"portacafé",pista:"Enigmático 1670"},
+  {palavra:"portaleite",pista:"Erudito 1671"},
+  {palavra:"portapão",pista:"Raríssimo 1672"},
+  {palavra:"portafruta",pista:"Obscuro 1673"},
+  {palavra:"portaanimal",pista:"Intrincado 1674"},
+  {palavra:"portapeixe",pista:"Abstrato 1675"},
+  {palavra:"portapássaro",pista:"Científico 1676"},
+  {palavra:"portanavio",pista:"Histórico 1677"},
+  {palavra:"portacarro",pista:"Enigmático 1678"},
+  {palavra:"portatrem",pista:"Erudito 1679"},
+  {palavra:"portaavião",pista:"Raríssimo 1680"},
+  {palavra:"portaponte",pista:"Obscuro 1681"},
+  {palavra:"portatorre",pista:"Intrincado 1682"},
+  {palavra:"portacastelo",pista:"Abstrato 1683"},
+  {palavra:"portaescola",pista:"Científico 1684"},
+  {palavra:"portacidade",pista:"Histórico 1685"},
+  {palavra:"portaplaneta",pista:"Enigmático 1686"},
+  {palavra:"portaestrela",pista:"Erudito 1687"},
+  {palavra:"portanuvem",pista:"Raríssimo 1688"},
+  {palavra:"portafogo",pista:"Obscuro 1689"},
+  {palavra:"portagelo",pista:"Intrincado 1690"},
+  {palavra:"portaouro",pista:"Abstrato 1691"},
+  {palavra:"portaprata",pista:"Científico 1692"},
+  {palavra:"portavidro",pista:"Histórico 1693"},
+  {palavra:"portapapel",pista:"Enigmático 1694"},
+  {palavra:"portamadeira",pista:"Erudito 1695"},
+  {palavra:"portapedra",pista:"Raríssimo 1696"},
+  {palavra:"portametal",pista:"Obscuro 1697"},
+  {palavra:"portatecido",pista:"Intrincado 1698"},
+  {palavra:"portabrilho",pista:"Abstrato 1699"},
+  {palavra:"portasom",pista:"Científico 1700"},
+  {palavra:"portatempo",pista:"Histórico 1701"},
+  {palavra:"portaraio",pista:"Enigmático 1702"},
+  {palavra:"portafloresta",pista:"Erudito 1703"},
+  {palavra:"portaoceano",pista:"Raríssimo 1704"},
+  {palavra:"guardasol",pista:"Obscuro 1705"},
+  {palavra:"guardalua",pista:"Intrincado 1706"},
+  {palavra:"guardavento",pista:"Abstrato 1707"},
+  {palavra:"guardachuva",pista:"Científico 1708"},
+  {palavra:"guardamar",pista:"Histórico 1709"},
+  {palavra:"guardaflor",pista:"Enigmático 1710"},
+  {palavra:"guardacasa",pista:"Erudito 1711"},
+  {palavra:"guardaporta",pista:"Raríssimo 1712"},
+  {palavra:"guardajanela",pista:"Obscuro 1713"},
+  {palavra:"guardacampo",pista:"Intrincado 1714"},
+  {palavra:"guardario",pista:"Abstrato 1715"},
+  {palavra:"guardalago",pista:"Científico 1716"},
+  {palavra:"guardamontanha",pista:"Histórico 1717"},
+  {palavra:"guardapraia",pista:"Enigmático 1718"},
+  {palavra:"guardajardim",pista:"Erudito 1719"},
+  {palavra:"guardalivro",pista:"Raríssimo 1720"},
+  {palavra:"guardajogo",pista:"Obscuro 1721"},
+  {palavra:"guardamúsica",pista:"Intrincado 1722"},
+  {palavra:"guardadança",pista:"Abstrato 1723"},
+  {palavra:"guardafesta",pista:"Científico 1724"},
+  {palavra:"guardabolo",pista:"Histórico 1725"},
+  {palavra:"guardacafé",pista:"Enigmático 1726"},
+  {palavra:"guardaleite",pista:"Erudito 1727"},
+  {palavra:"guardapão",pista:"Raríssimo 1728"},
+  {palavra:"guardafruta",pista:"Obscuro 1729"},
+  {palavra:"guardaanimal",pista:"Intrincado 1730"},
+  {palavra:"guardapeixe",pista:"Abstrato 1731"},
+  {palavra:"guardapássaro",pista:"Científico 1732"},
+  {palavra:"guardanavio",pista:"Histórico 1733"},
+  {palavra:"guardacarro",pista:"Enigmático 1734"},
+  {palavra:"guardatrem",pista:"Erudito 1735"},
+  {palavra:"guardaavião",pista:"Raríssimo 1736"},
+  {palavra:"guardaponte",pista:"Obscuro 1737"},
+  {palavra:"guardatorre",pista:"Intrincado 1738"},
+  {palavra:"guardacastelo",pista:"Abstrato 1739"},
+  {palavra:"guardaescola",pista:"Científico 1740"},
+  {palavra:"guardacidade",pista:"Histórico 1741"},
+  {palavra:"guardaplaneta",pista:"Enigmático 1742"},
+  {palavra:"guardaestrela",pista:"Erudito 1743"},
+  {palavra:"guardanuvem",pista:"Raríssimo 1744"},
+  {palavra:"guardafogo",pista:"Obscuro 1745"},
+  {palavra:"guardagelo",pista:"Intrincado 1746"},
+  {palavra:"guardaouro",pista:"Abstrato 1747"},
+  {palavra:"guardaprata",pista:"Científico 1748"},
+  {palavra:"guardavidro",pista:"Histórico 1749"},
+  {palavra:"guardapapel",pista:"Enigmático 1750"},
+  {palavra:"guardamadeira",pista:"Erudito 1751"},
+  {palavra:"guardapedra",pista:"Raríssimo 1752"},
+  {palavra:"guardametal",pista:"Obscuro 1753"},
+  {palavra:"guardatecido",pista:"Intrincado 1754"},
+  {palavra:"guardabrilho",pista:"Abstrato 1755"},
+  {palavra:"guardasom",pista:"Científico 1756"},
+  {palavra:"guardatempo",pista:"Histórico 1757"},
+  {palavra:"guardaraio",pista:"Enigmático 1758"},
+  {palavra:"guardafloresta",pista:"Erudito 1759"},
+  {palavra:"guardaoceano",pista:"Raríssimo 1760"},
+  {palavra:"abresol",pista:"Obscuro 1761"},
+  {palavra:"abrelua",pista:"Intrincado 1762"},
+  {palavra:"abrevento",pista:"Abstrato 1763"},
+  {palavra:"abrechuva",pista:"Científico 1764"},
+  {palavra:"abremar",pista:"Histórico 1765"},
+  {palavra:"abreflor",pista:"Enigmático 1766"},
+  {palavra:"abrecasa",pista:"Erudito 1767"},
+  {palavra:"abreporta",pista:"Raríssimo 1768"},
+  {palavra:"abrejanela",pista:"Obscuro 1769"},
+  {palavra:"abrecampo",pista:"Intrincado 1770"},
+  {palavra:"abrerio",pista:"Abstrato 1771"},
+  {palavra:"abrelago",pista:"Científico 1772"},
+  {palavra:"abremontanha",pista:"Histórico 1773"},
+  {palavra:"abrepraia",pista:"Enigmático 1774"},
+  {palavra:"abrejardim",pista:"Erudito 1775"},
+  {palavra:"abrelivro",pista:"Raríssimo 1776"},
+  {palavra:"abrejogo",pista:"Obscuro 1777"},
+  {palavra:"abremúsica",pista:"Intrincado 1778"},
+  {palavra:"abredança",pista:"Abstrato 1779"},
+  {palavra:"abrefesta",pista:"Científico 1780"},
+  {palavra:"abrebolo",pista:"Histórico 1781"},
+  {palavra:"abrecafé",pista:"Enigmático 1782"},
+  {palavra:"abreleite",pista:"Erudito 1783"},
+  {palavra:"abrepão",pista:"Raríssimo 1784"},
+  {palavra:"abrefruta",pista:"Obscuro 1785"},
+  {palavra:"abreanimal",pista:"Intrincado 1786"},
+  {palavra:"abrepeixe",pista:"Abstrato 1787"},
+  {palavra:"abrepássaro",pista:"Científico 1788"},
+  {palavra:"abrenavio",pista:"Histórico 1789"},
+  {palavra:"abrecarro",pista:"Enigmático 1790"},
+  {palavra:"abretrem",pista:"Erudito 1791"},
+  {palavra:"abreavião",pista:"Raríssimo 1792"},
+  {palavra:"abreponte",pista:"Obscuro 1793"},
+  {palavra:"abretorre",pista:"Intrincado 1794"},
+  {palavra:"abrecastelo",pista:"Abstrato 1795"},
+  {palavra:"abreescola",pista:"Científico 1796"},
+  {palavra:"abrecidade",pista:"Histórico 1797"},
+  {palavra:"abreplaneta",pista:"Enigmático 1798"},
+  {palavra:"abreestrela",pista:"Erudito 1799"},
+  {palavra:"abrenuvem",pista:"Raríssimo 1800"},
+  {palavra:"abrefogo",pista:"Obscuro 1801"},
+  {palavra:"abregelo",pista:"Intrincado 1802"},
+  {palavra:"abreouro",pista:"Abstrato 1803"},
+  {palavra:"abreprata",pista:"Científico 1804"},
+  {palavra:"abrevidro",pista:"Histórico 1805"},
+  {palavra:"abrepapel",pista:"Enigmático 1806"},
+  {palavra:"abremadeira",pista:"Erudito 1807"},
+  {palavra:"abrepedra",pista:"Raríssimo 1808"},
+  {palavra:"abremetal",pista:"Obscuro 1809"},
+  {palavra:"abretecido",pista:"Intrincado 1810"},
+  {palavra:"abrebrilho",pista:"Abstrato 1811"},
+  {palavra:"abresom",pista:"Científico 1812"},
+  {palavra:"abretempo",pista:"Histórico 1813"},
+  {palavra:"abreraio",pista:"Enigmático 1814"},
+  {palavra:"abrefloresta",pista:"Erudito 1815"},
+  {palavra:"abreoceano",pista:"Raríssimo 1816"},
+  {palavra:"fechasol",pista:"Obscuro 1817"},
+  {palavra:"fechalua",pista:"Intrincado 1818"},
+  {palavra:"fechavento",pista:"Abstrato 1819"},
+  {palavra:"fechachuva",pista:"Científico 1820"},
+  {palavra:"fechamar",pista:"Histórico 1821"},
+  {palavra:"fechaflor",pista:"Enigmático 1822"},
+  {palavra:"fechacasa",pista:"Erudito 1823"},
+  {palavra:"fechaporta",pista:"Raríssimo 1824"},
+  {palavra:"fechajanela",pista:"Obscuro 1825"},
+  {palavra:"fechacampo",pista:"Intrincado 1826"},
+  {palavra:"fechario",pista:"Abstrato 1827"},
+  {palavra:"fechalago",pista:"Científico 1828"},
+  {palavra:"fechamontanha",pista:"Histórico 1829"},
+  {palavra:"fechapraia",pista:"Enigmático 1830"},
+  {palavra:"fechajardim",pista:"Erudito 1831"},
+  {palavra:"fechalivro",pista:"Raríssimo 1832"},
+  {palavra:"fechajogo",pista:"Obscuro 1833"},
+  {palavra:"fechamúsica",pista:"Intrincado 1834"},
+  {palavra:"fechadança",pista:"Abstrato 1835"},
+  {palavra:"fechafesta",pista:"Científico 1836"},
+  {palavra:"fechabolo",pista:"Histórico 1837"},
+  {palavra:"fechacafé",pista:"Enigmático 1838"},
+  {palavra:"fechaleite",pista:"Erudito 1839"},
+  {palavra:"fechapão",pista:"Raríssimo 1840"},
+  {palavra:"fechafruta",pista:"Obscuro 1841"},
+  {palavra:"fechaanimal",pista:"Intrincado 1842"},
+  {palavra:"fechapeixe",pista:"Abstrato 1843"},
+  {palavra:"fechapássaro",pista:"Científico 1844"},
+  {palavra:"fechanavio",pista:"Histórico 1845"},
+  {palavra:"fechacarro",pista:"Enigmático 1846"},
+  {palavra:"fechatrem",pista:"Erudito 1847"},
+  {palavra:"fechaavião",pista:"Raríssimo 1848"},
+  {palavra:"fechaponte",pista:"Obscuro 1849"},
+  {palavra:"fechatorre",pista:"Intrincado 1850"},
+  {palavra:"fechacastelo",pista:"Abstrato 1851"},
+  {palavra:"fechaescola",pista:"Científico 1852"},
+  {palavra:"fechacidade",pista:"Histórico 1853"},
+  {palavra:"fechaplaneta",pista:"Enigmático 1854"},
+  {palavra:"fechaestrela",pista:"Erudito 1855"},
+  {palavra:"fechanuvem",pista:"Raríssimo 1856"},
+  {palavra:"fechafogo",pista:"Obscuro 1857"},
+  {palavra:"fechagelo",pista:"Intrincado 1858"},
+  {palavra:"fechaouro",pista:"Abstrato 1859"},
+  {palavra:"fechaprata",pista:"Científico 1860"},
+  {palavra:"fechavidro",pista:"Histórico 1861"},
+  {palavra:"fechapapel",pista:"Enigmático 1862"},
+  {palavra:"fechamadeira",pista:"Erudito 1863"},
+  {palavra:"fechapedra",pista:"Raríssimo 1864"},
+  {palavra:"fechametal",pista:"Obscuro 1865"},
+  {palavra:"fechatecido",pista:"Intrincado 1866"},
+  {palavra:"fechabrilho",pista:"Abstrato 1867"},
+  {palavra:"fechasom",pista:"Científico 1868"},
+  {palavra:"fechatempo",pista:"Histórico 1869"},
+  {palavra:"fecharaio",pista:"Enigmático 1870"},
+  {palavra:"fechafloresta",pista:"Erudito 1871"},
+  {palavra:"fechaoceano",pista:"Raríssimo 1872"},
+  {palavra:"lavasol",pista:"Obscuro 1873"},
+  {palavra:"lavalua",pista:"Intrincado 1874"},
+  {palavra:"lavavento",pista:"Abstrato 1875"},
+  {palavra:"lavachuva",pista:"Científico 1876"},
+  {palavra:"lavamar",pista:"Histórico 1877"},
+  {palavra:"lavaflor",pista:"Enigmático 1878"},
+  {palavra:"lavacasa",pista:"Erudito 1879"},
+  {palavra:"lavaporta",pista:"Raríssimo 1880"},
+  {palavra:"lavajanela",pista:"Obscuro 1881"},
+  {palavra:"lavacampo",pista:"Intrincado 1882"},
+  {palavra:"lavario",pista:"Abstrato 1883"},
+  {palavra:"lavalago",pista:"Científico 1884"},
+  {palavra:"lavamontanha",pista:"Histórico 1885"},
+  {palavra:"lavapraia",pista:"Enigmático 1886"},
+  {palavra:"lavajardim",pista:"Erudito 1887"},
+  {palavra:"lavalivro",pista:"Raríssimo 1888"},
+  {palavra:"lavajogo",pista:"Obscuro 1889"},
+  {palavra:"lavamúsica",pista:"Intrincado 1890"},
+  {palavra:"lavadança",pista:"Abstrato 1891"},
+  {palavra:"lavafesta",pista:"Científico 1892"},
+  {palavra:"lavabolo",pista:"Histórico 1893"},
+  {palavra:"lavacafé",pista:"Enigmático 1894"},
+  {palavra:"lavaleite",pista:"Erudito 1895"},
+  {palavra:"lavapão",pista:"Raríssimo 1896"},
+  {palavra:"lavafruta",pista:"Obscuro 1897"},
+  {palavra:"lavaanimal",pista:"Intrincado 1898"},
+  {palavra:"lavapeixe",pista:"Abstrato 1899"},
+  {palavra:"lavapássaro",pista:"Científico 1900"},
+  {palavra:"lavanavio",pista:"Histórico 1901"},
+  {palavra:"lavacarro",pista:"Enigmático 1902"},
+  {palavra:"lavatrem",pista:"Erudito 1903"},
+  {palavra:"lavaavião",pista:"Raríssimo 1904"},
+  {palavra:"lavaponte",pista:"Obscuro 1905"},
+  {palavra:"lavatorre",pista:"Intrincado 1906"},
+  {palavra:"lavacastelo",pista:"Abstrato 1907"},
+  {palavra:"lavaescola",pista:"Científico 1908"},
+  {palavra:"lavacidade",pista:"Histórico 1909"},
+  {palavra:"lavaplaneta",pista:"Enigmático 1910"},
+  {palavra:"lavaestrela",pista:"Erudito 1911"},
+  {palavra:"lavanuvem",pista:"Raríssimo 1912"},
+  {palavra:"lavafogo",pista:"Obscuro 1913"},
+  {palavra:"lavagelo",pista:"Intrincado 1914"},
+  {palavra:"lavaouro",pista:"Abstrato 1915"},
+  {palavra:"lavaprata",pista:"Científico 1916"},
+  {palavra:"lavavidro",pista:"Histórico 1917"},
+  {palavra:"lavapapel",pista:"Enigmático 1918"},
+  {palavra:"lavamadeira",pista:"Erudito 1919"},
+  {palavra:"lavapedra",pista:"Raríssimo 1920"},
+  {palavra:"lavametal",pista:"Obscuro 1921"},
+  {palavra:"lavatecido",pista:"Intrincado 1922"},
+  {palavra:"lavabrilho",pista:"Abstrato 1923"},
+  {palavra:"lavasom",pista:"Científico 1924"},
+  {palavra:"lavatempo",pista:"Histórico 1925"},
+  {palavra:"lavaraio",pista:"Enigmático 1926"},
+  {palavra:"lavafloresta",pista:"Erudito 1927"},
+  {palavra:"lavaoceano",pista:"Raríssimo 1928"},
+  {palavra:"cortasol",pista:"Obscuro 1929"},
+  {palavra:"cortalua",pista:"Intrincado 1930"},
+  {palavra:"cortavento",pista:"Abstrato 1931"},
+  {palavra:"cortachuva",pista:"Científico 1932"},
+  {palavra:"cortamar",pista:"Histórico 1933"},
+  {palavra:"cortaflor",pista:"Enigmático 1934"},
+  {palavra:"cortacasa",pista:"Erudito 1935"},
+  {palavra:"cortaporta",pista:"Raríssimo 1936"},
+  {palavra:"cortajanela",pista:"Obscuro 1937"},
+  {palavra:"cortacampo",pista:"Intrincado 1938"},
+  {palavra:"cortario",pista:"Abstrato 1939"},
+  {palavra:"cortalago",pista:"Científico 1940"},
+  {palavra:"cortamontanha",pista:"Histórico 1941"},
+  {palavra:"cortapraia",pista:"Enigmático 1942"},
+  {palavra:"cortajardim",pista:"Erudito 1943"},
+  {palavra:"cortalivro",pista:"Raríssimo 1944"},
+  {palavra:"cortajogo",pista:"Obscuro 1945"},
+  {palavra:"cortamúsica",pista:"Intrincado 1946"},
+  {palavra:"cortadança",pista:"Abstrato 1947"},
+  {palavra:"cortafesta",pista:"Científico 1948"},
+  {palavra:"cortabolo",pista:"Histórico 1949"},
+  {palavra:"cortacafé",pista:"Enigmático 1950"}
+];
+
+const TODAS_PALAVRAS = [
+  ...PALAVRAS_FACIL,
+  ...PALAVRAS_MEDIO,
+  ...PALAVRAS_DIFICIL,
+  ...PALAVRAS_HARD,
+  ...PALAVRAS_EXTRA
+];
+
+
+
+const EASY=PALAVRAS_FACIL;
+const MEDIUM=PALAVRAS_MEDIO;
+const DIFFICULT=PALAVRAS_DIFICIL;
+const HARD=PALAVRAS_HARD;
+const FINAL=PALAVRAS_EXTRA;
+
+const rewards=[20,20,30,30,20,20,30,75];
+const TOTAL_ROUNDS=9;
+const storageEasy="adam_games_forca_used_easy_v5";
+const storageMedium="adam_games_forca_used_medium_v5";
+const storageDifficult="adam_games_forca_used_difficult_v5";
+const storageHard="adam_games_forca_used_hard_v4";
+const storageFinal="adam_games_forca_used_final_v1";
+
+let user=null,userRef=null,coins=0,round=1,errors=0,current=null;
+let usedLetters=new Set(),locked=false,action=null;
+let timerStarted=false,timerStart=0,timerInterval=null;
+let hardTarget=10;
+let finalConsolationGiven=false;
+let entryRewardGiven=false;
+
+const usedEasy=new Set(JSON.parse(localStorage.getItem(storageEasy)||"[]"));
+const usedMedium=new Set(JSON.parse(localStorage.getItem(storageMedium)||"[]"));
+const usedDifficult=new Set(JSON.parse(localStorage.getItem(storageDifficult)||"[]"));
+const usedHard=new Set(JSON.parse(localStorage.getItem(storageHard)||"[]"));
+const usedFinal=new Set(JSON.parse(localStorage.getItem(storageFinal)||"[]"));
+
+const $=id=>document.getElementById(id);
+
+function norm(s){
+ return s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z]/g,"");
+}
+function saveSet(key,set){localStorage.setItem(key,JSON.stringify([...set]))}
+
+function chooseFrom(pool,set,key){
+ let available=pool.filter(x=>!set.has(norm(x.palavra)));
+ if(!available.length){
+  set.clear();
+  saveSet(key,set);
+  available=[...pool];
+ }
+ for(let i=available.length-1;i>0;i--){
+  const j=Math.floor(Math.random()*(i+1));
+  [available[i],available[j]]=[available[j],available[i]];
+ }
+ const x=available[0];
+ set.add(norm(x.palavra));
+ saveSet(key,set);
+ return {...x,normal:norm(x.palavra)};
+}
+
+function choose(){
+ if(round<=2)return chooseFrom(EASY,usedEasy,storageEasy);
+ if(round<=4)return chooseFrom(MEDIUM,usedMedium,storageMedium);
+ if(round<=7)return chooseFrom(DIFFICULT,usedDifficult,storageDifficult);
+ if(round===8)return chooseFrom(HARD,usedHard,storageHard);
+ return chooseFrom(FINAL,usedFinal,storageFinal);
+}
+
+function coinsUI(){
+ $("coins").textContent=Number(coins||0).toLocaleString("pt-BR");
+}
+
+function frame(){
+ const n=Math.min(errors,6);
+ document.querySelectorAll(".hangman-layer").forEach((x,i)=>x.classList.toggle("active",i===n));
+ [...$("errorsRow").children].forEach((x,i)=>x.classList.toggle("active",i<errors));
+}
+
+function wordUI(){
+ $("word").innerHTML="";
+ for(const c of current.normal){
+  const el=document.createElement("span");
+  el.className="letter";
+  el.textContent=usedLetters.has(c)?c.toUpperCase():"";
+  $("word").appendChild(el);
+ }
+}
+
+function complete(){
+ return [...new Set(current.normal)].every(c=>usedLetters.has(c));
+}
+
+function keyboard(){
+ const k=$("keyboard");
+ k.innerHTML="";
+ for(const c of "ABCDEFGHIJKLMNOPQRSTUVWXYZ"){
+  const b=document.createElement("button");
+  b.className="key";
+  b.type="button";
+  b.textContent=c;
+  b.onclick=()=>guess(c.toLowerCase(),b);
+  k.appendChild(b);
+ }
+}
+
+function lock(){
+ $("keyboard").querySelectorAll("button").forEach(b=>b.disabled=true);
+}
+
+function msg(t,c){
+ $("message").textContent=t;
+ $("message").className="message show "+c;
+}
+
+function stopTimer(){
+ if(timerInterval){clearInterval(timerInterval);timerInterval=null;}
+ timerStarted=false;
+ $("timerBox").style.display="none";
+}
+
+function startTimer(){
+ if(timerStarted||round!==8&&round!==9)return;
+ timerStarted=true;
+ timerStart=performance.now();
+ $("timerBox").style.display="block";
+ timerInterval=setInterval(()=>{
+  const sec=(performance.now()-timerStart)/1000;
+  $("timerValue").textContent=sec.toFixed(1)+"s";
+ },100);
+}
+
+function currentSeconds(){
+ return timerStarted?(performance.now()-timerStart)/1000:null;
+}
+
+function start(){
+ stopTimer();
+ errors=0;
+ locked=false;
+ usedLetters=new Set();
+ finalConsolationGiven=false;
+ current=choose();
+
+ const isHard=round===8;
+ const isFinal=round===9;
+
+ if(isFinal){
+  $("levelName").textContent="👑 FINAL";
+  $("roundReward").textContent="🪙 100–150";
+ }else if(isHard){
+  $("levelName").textContent="🔥 HARD";
+  hardTarget=[9,10,11,12][Math.floor(Math.random()*4)];
+  const hardBonus={9:25,10:20,11:15,12:10}[hardTarget];
+  $("roundReward").textContent="🪙 75 + "+hardBonus;
+ }else{
+  $("levelName").textContent=round<=2?"FÁCIL":round<=4?"MÉDIO":"DIFÍCIL";
+  $("roundReward").textContent="🪙 "+rewards[round-1];
+ }
+
+ $("roundNumber").textContent=round+" / "+TOTAL_ROUNDS;
+ $("progressText").textContent=round+" / "+TOTAL_ROUNDS;
+ $("progressFill").style.width=(round/TOTAL_ROUNDS*100)+"%";
+
+ $("hint").textContent=current.pista;
+ $("reward").style.display="none";
+ $("message").className="message";
+ $("message").textContent="";
+ $("timerBox").style.display="none";
+ $("timerValue").textContent="0.0s";
+
+ frame();
+ wordUI();
+ keyboard();
+}
+
+async function reward(n){
+ if(!userRef)throw Error("Cadastro não encontrado.");
+ await runTransaction(db,async tx=>{
+  const snap=await tx.get(userRef);
+  if(!snap.exists())throw Error("Cadastro não encontrado.");
+  const old=Number(snap.data().moedas||0);
+  tx.update(userRef,{moedas:old+n});
+ });
+ coins+=n;
+ coinsUI();
+}
+
+async function giveEntryCoins(){
+ if(entryRewardGiven)return;
+ entryRewardGiven=true;
+ try{
+  await reward(30);
+  msg("🪙 +30 Adam Coins pela entrada na Forca!","success");
+ }catch(e){
+  entryRewardGiven=false;
+  console.error("Erro ao dar moedas de entrada:",e);
+  msg("⚠️ Não foi possível registrar as 30 moedas de entrada.","error");
+ }
+}
+
+function openModal(icon,title,coinsText,text,button,a){
+ $("modalIcon").textContent=icon;
+ $("modalTitle").textContent=title;
+ $("modalCoins").textContent=coinsText;
+ $("modalText").textContent=text;
+ $("modalButton").textContent=button;
+ action=a;
+ $("modal").classList.add("show");
+}
+
+function loss(){
+ if(locked)return;
+ locked=true;
+ stopTimer();
+ lock();
+ errors=6;
+ frame();
+ msg("💀 Você perdeu!","error");
+ if(round===9){
+  setTimeout(()=>finalLoss(),1200);
+  return;
+ }
+ const level = round===8 ? "HARD" : round<=2 ? "FÁCIL" : round<=4 ? "MÉDIO" : "DIFÍCIL";
+ const modal=document.getElementById("lossContinueModal");
+ const levelEl=document.getElementById("lossContinueLevel");
+ const textEl=document.getElementById("lossContinueText");
+ const btn=document.getElementById("lossContinueSame");
+ if(levelEl) levelEl.textContent="NÍVEL: "+level+" • RODADA "+round;
+ if(textEl) textEl.textContent="Você perdeu esta tentativa. Use 1 chance para continuar no mesmo nível. Uma nova palavra será escolhida automaticamente.";
+ if(btn){
+  btn.disabled=false;
+  btn.textContent="🔄 CONTINUAR • USAR 1 CHANCE";
+ }
+ if(modal){
+  modal.classList.add("show");
+  modal.setAttribute("aria-hidden","false");
+ }
+}
+
+function guess(c,b){
+ if(locked||usedLetters.has(c))return;
+
+ usedLetters.add(c);
+ b.disabled=true;
+
+ if(current.normal.includes(c)){
+  b.classList.add("correct");
+  wordUI();
+
+  if((round===8||round===9)&&!timerStarted)startTimer();
+
+  if(complete())win();
+ }else{
+  b.classList.add("wrong");
+  errors++;
+  frame();
+  if(errors>=6)lose();
+ }
+}
+
+$("modalButton").onclick=()=>{
+ $("modal").classList.remove("show");
+
+ if(action==="next"){
+  round++;
+  start();
+ }else if(action==="hard"){
+  round=8;
+  start();
+ }else if(action==="final"){
+  round=9;
+  start();
+ }else{
+  location.href="jogos.html";
+ }
+};
+
+$("back").onclick=()=>location.href="jogos.html";
+
+async function continuarForcaMesmoNivel(){
+ const btn=$("lossContinueSame");
+ if(!userRef||!user) throw Error("USUARIO_NAO_ENCONTRADO");
+ if(btn){btn.disabled=true;btn.textContent="⏳ PROCESSANDO...";}
+ try{
+  await runTransaction(db,async tx=>{
+   const snap=await tx.get(userRef);
+   if(!snap.exists())throw Error("CADASTRO_NAO_ENCONTRADO");
+   const data=snap.data();
+   const chances=Number(data.chances||0);
+   if(chances<=0)throw Error("SEM_CHANCES");
+   const moedas=Number(data.moedas||0);
+   tx.update(userRef,{
+    chances:chances-1,
+    moedas:moedas+20,
+    ultimaPartidaForcaId:"continue_"+Date.now()+"_"+Math.random().toString(36).slice(2),
+    ultimaPartidaForcaEm:new Date().toISOString()
+   });
+  });
+  coins+=20;
+  coinsUI();
+  $("lossContinueModal").classList.remove("show");
+  $("lossContinueModal").setAttribute("aria-hidden","true");
+  start();
+  msg("🪙 +20 Adam Coins! Você gastou 1 chance e continua no mesmo nível com uma nova palavra.","success");
+ }catch(e){
+  console.error("Erro ao continuar a Forca:",e);
+  if(btn){btn.disabled=false;btn.textContent="🔄 CONTINUAR • USAR 1 CHANCE";}
+  throw e;
+ }
+}
+window.continuarForcaMesmoNivel=continuarForcaMesmoNivel;
+
+async function findUser(u){
+ let s=await getDocs(query(collection(db,"admins"),where("uid","==",u.uid)));
+ if(!s.empty)return s.docs[0].ref;
+
+ if(u.email){
+  s=await getDocs(query(collection(db,"admins"),where("email","==",u.email)));
+  if(!s.empty)return s.docs[0].ref;
+ }
+ return null;
+}
+
+onAuthStateChanged(auth,async u=>{
+ if(!u){
+  location.href="index.html";
+  return;
+ }
+
+ user=u;
+
+ try{
+  userRef=await findUser(u);
+
+  if(!userRef){
+   alert("Cadastro Adam Games não encontrado.");
+   location.href="jogos.html";
+   return;
+  }
+
+  const s=await getDoc(userRef);
+  coins=Number(s.data()?.moedas||0);
+  coinsUI();
+
+  await giveEntryCoins();
+  start();
+
+ }catch(e){
+  console.error("Erro ao carregar dados da Forca:",e);
+  alert("Erro ao carregar seus dados.");
+ }
+});
+</script>
+
+
+
+
+</body>
+</html>
