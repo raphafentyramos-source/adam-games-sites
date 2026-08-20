@@ -217,13 +217,6 @@ body{
 }
 
 
-.hero p b{
-
-  color:#ffd52b;
-
-}
-
-
 /* =====================================================
    SALDOS
 ===================================================== */
@@ -411,7 +404,7 @@ body{
 
   display:grid;
 
-  gap:14px;
+  gap:16px;
 
 }
 
@@ -426,24 +419,30 @@ body{
 
   overflow:hidden;
 
-  border-radius:20px;
+  border-radius:22px;
 
   background:
-    rgba(2,27,55,.96);
+    rgba(2,27,55,.97);
 
   border:
     1px solid
-    rgba(255,255,255,.1);
+    rgba(255,255,255,.12);
 
   box-shadow:
-    0 9px 24px
-    rgba(0,0,0,.22);
+    0 10px 28px
+    rgba(0,0,0,.28);
 
 }
 
 
 /* =====================================================
-   IMAGEM DO CARD
+   IMAGEM DO JOGO
+
+   IMPORTANTE:
+   NÃO usar height fixa.
+   NÃO usar object-fit: cover.
+
+   Assim a imagem aparece inteira.
 ===================================================== */
 
 .game-image{
@@ -454,38 +453,36 @@ body{
 
   height:auto;
 
-  aspect-ratio:16 / 9;
+  max-width:100%;
 
-  object-fit:cover;
+  object-fit:contain;
 
   object-position:center;
 
-  background:#06223b;
+  background:#061b2d;
 
 }
 
 
 /* =====================================================
-   CONTEÚDO
+   ÁREA DO TEXTO
 ===================================================== */
 
 .game-content{
 
   padding:
-    14px
-    15px
-    15px;
+    16px
+    17px
+    17px;
 
 }
 
 
 .game-name{
 
-  font-size:19px;
+  font-size:20px;
 
   font-weight:900;
-
-  line-height:1.2;
 
 }
 
@@ -496,7 +493,7 @@ body{
 
   color:#a9cce2;
 
-  font-size:12px;
+  font-size:13px;
 
   line-height:1.4;
 
@@ -513,7 +510,7 @@ body{
 
   gap:10px;
 
-  margin-top:13px;
+  margin-top:15px;
 
 }
 
@@ -522,7 +519,7 @@ body{
 
   color:#ffd52b;
 
-  font-size:12px;
+  font-size:13px;
 
   font-weight:bold;
 
@@ -533,11 +530,11 @@ body{
 
   min-width:105px;
 
-  height:43px;
+  height:45px;
 
   border:0;
 
-  border-radius:12px;
+  border-radius:13px;
 
   background:
     linear-gradient(
@@ -548,7 +545,7 @@ body{
 
   color:#fff;
 
-  font-size:13px;
+  font-size:14px;
 
   font-weight:900;
 
@@ -556,7 +553,7 @@ body{
 
   box-shadow:
     0 5px 12px
-    rgba(0,0,0,.25);
+    rgba(0,0,0,.2);
 
 }
 
@@ -574,14 +571,14 @@ body{
 
 .info-card{
 
-  margin-top:18px;
+  margin-top:20px;
 
-  padding:17px;
+  padding:18px;
 
-  border-radius:18px;
+  border-radius:20px;
 
   background:
-    rgba(2,27,55,.9);
+    rgba(2,27,55,.92);
 
   border:
     1px solid
@@ -592,20 +589,20 @@ body{
 
 .info-card h2{
 
-  font-size:17px;
+  font-size:18px;
 
 }
 
 
 .info-card p{
 
-  margin-top:8px;
+  margin-top:9px;
 
   color:#b5d2e5;
 
   font-size:13px;
 
-  line-height:1.5;
+  line-height:1.55;
 
 }
 
@@ -777,9 +774,24 @@ body{
 
 @media(max-width:430px){
 
+  .page{
+
+    padding-left:12px;
+
+    padding-right:12px;
+
+  }
+
+  .game-content{
+
+    padding:
+      15px;
+
+  }
+
   .game-name{
 
-    font-size:18px;
+    font-size:19px;
 
   }
 
@@ -789,11 +801,30 @@ body{
 
   }
 
-  .play{
+  .game-bottom{
 
-    min-width:100px;
+    align-items:center;
 
   }
+
+  .game-reward{
+
+    font-size:12px;
+
+  }
+
+}
+
+
+/* =====================================================
+   IMAGENS MUITO GRANDES
+
+   Nunca ultrapassam a largura do card.
+===================================================== */
+
+img{
+
+  max-width:100%;
 
 }
 
@@ -948,7 +979,7 @@ body{
 
 
   <!-- =================================================
-       TÍTULO
+       JOGOS
   ================================================== -->
 
   <div class="section-title">
@@ -958,14 +989,12 @@ body{
   </div>
 
 
-  <!-- =================================================
-       LISTA DE JOGOS
-  ================================================== -->
-
   <div class="games">
 
 
-    <!-- FORCA -->
+    <!-- =================================================
+         FORCA
+    ================================================== -->
 
     <div class="game">
 
@@ -982,8 +1011,7 @@ body{
         </div>
 
         <div class="game-description">
-          Descubra a palavra antes que
-          acabem suas tentativas.
+          Descubra a palavra antes que acabem suas tentativas.
         </div>
 
         <div class="game-bottom">
@@ -1008,7 +1036,9 @@ body{
     </div>
 
 
-    <!-- CHUVA DE SABORES -->
+    <!-- =================================================
+         CHUVA DE SABORES
+    ================================================== -->
 
     <div class="game">
 
@@ -1025,8 +1055,7 @@ body{
         </div>
 
         <div class="game-description">
-          Pegue os alimentos certos,
-          evite o lixo e faça muitos pontos.
+          Pegue os alimentos certos e evite o lixo que cai do céu.
         </div>
 
         <div class="game-bottom">
@@ -1051,7 +1080,9 @@ body{
     </div>
 
 
-    <!-- CAÇA AO TESOURO -->
+    <!-- =================================================
+         CAÇA AO TESOURO
+    ================================================== -->
 
     <div class="game">
 
@@ -1068,8 +1099,7 @@ body{
         </div>
 
         <div class="game-description">
-          Escolha os locais certos e
-          tente encontrar o tesouro escondido.
+          Escolha os locais certos e tente encontrar o tesouro escondido.
         </div>
 
         <div class="game-bottom">
@@ -1094,25 +1124,26 @@ body{
     </div>
 
 
-    <!-- ACERTE AO ALVO -->
+    <!-- =================================================
+         ACERTE O ALVO
+    ================================================== -->
 
     <div class="game">
 
       <img
         class="game-image"
         src="./card_acerte_ao_alvo.png"
-        alt="Acerte ao Alvo"
+        alt="Acerte o Alvo"
       >
 
       <div class="game-content">
 
         <div class="game-name">
-          Acerte ao Alvo
+          Acerte o Alvo
         </div>
 
         <div class="game-description">
-          Teste sua precisão, velocidade
-          e reflexos.
+          Teste sua precisão e velocidade.
         </div>
 
         <div class="game-bottom">
@@ -1137,7 +1168,9 @@ body{
     </div>
 
 
-    <!-- MEMÓRIA MALUCA -->
+    <!-- =================================================
+         MEMÓRIA MALUCA
+    ================================================== -->
 
     <div class="game">
 
@@ -1154,8 +1187,7 @@ body{
         </div>
 
         <div class="game-description">
-          Encontre os pares antes que
-          o tempo termine.
+          Encontre os pares antes que o tempo termine.
         </div>
 
         <div class="game-bottom">
@@ -1180,7 +1212,9 @@ body{
     </div>
 
 
-    <!-- REAÇÃO RELÂMPAGO -->
+    <!-- =================================================
+         REAÇÃO RELÂMPAGO
+    ================================================== -->
 
     <div class="game">
 
@@ -1197,8 +1231,7 @@ body{
         </div>
 
         <div class="game-description">
-          Reaja rapidamente aos comandos
-          que aparecem na tela.
+          Reaja rapidamente aos comandos da tela.
         </div>
 
         <div class="game-bottom">
@@ -1223,7 +1256,9 @@ body{
     </div>
 
 
-    <!-- SEQUÊNCIA DE SONS -->
+    <!-- =================================================
+         SEQUÊNCIA DE SONS
+    ================================================== -->
 
     <div class="game">
 
@@ -1240,8 +1275,7 @@ body{
         </div>
 
         <div class="game-description">
-          Memorize a sequência e
-          repita corretamente.
+          Memorize e repita a sequência correta de sons.
         </div>
 
         <div class="game-bottom">
@@ -1266,7 +1300,9 @@ body{
     </div>
 
 
-    <!-- PALAVRA EMBARALHADA -->
+    <!-- =================================================
+         PALAVRA EMBARALHADA
+    ================================================== -->
 
     <div class="game">
 
@@ -1283,8 +1319,7 @@ body{
         </div>
 
         <div class="game-description">
-          Desembaralhe as letras e
-          descubra a palavra.
+          Organize as letras e descubra a palavra escondida.
         </div>
 
         <div class="game-bottom">
@@ -1327,14 +1362,12 @@ body{
       Cada partida utiliza uma
       <b>chance</b>.
 
-      Ao entrar em qualquer jogo,
-      a chance é utilizada e você recebe
-      no mínimo <b>30 Adam Coins</b>,
-      mesmo que perca na primeira fase.
+      Mesmo que você perca na primeira fase,
+      você recebe no mínimo
+      <b>30 Adam Coins</b> pela partida.
 
       Quanto melhor seu desempenho,
-      maiores poderão ser suas
-      recompensas.
+      maiores poderão ser suas recompensas.
 
     </p>
 
@@ -1513,6 +1546,10 @@ let usuario = null;
    TEMPOS
 ===================================================== */
 
+const HORAS_VIP = 72;
+
+const HORAS_NAO_VIP = 120;
+
 const MS_HORA =
   60 * 60 * 1000;
 
@@ -1527,6 +1564,7 @@ async function localizarUsuario(user){
     await getDocs(
 
       query(
+
         collection(
           db,
           "admins"
@@ -1537,6 +1575,7 @@ async function localizarUsuario(user){
           "==",
           user.uid
         )
+
       )
 
     );
@@ -1555,6 +1594,7 @@ async function localizarUsuario(user){
       await getDocs(
 
         query(
+
           collection(
             db,
             "admins"
@@ -1565,6 +1605,7 @@ async function localizarUsuario(user){
             "==",
             user.email
           )
+
         )
 
       );
@@ -1580,71 +1621,6 @@ async function localizarUsuario(user){
 
 
   return null;
-
-}
-
-
-/* =====================================================
-   FORMATAR TEMPO
-===================================================== */
-
-function formatarTempo(ms){
-
-  const total =
-    Math.max(
-      0,
-      Math.floor(
-        ms / 1000
-      )
-    );
-
-
-  const horas =
-    Math.floor(
-      total / 3600
-    );
-
-
-  const minutos =
-    Math.floor(
-      (
-        total % 3600
-      ) / 60
-    );
-
-
-  const segundos =
-    total % 60;
-
-
-  return (
-
-    String(
-      horas
-    ).padStart(
-      2,
-      "0"
-    )
-
-    + ":" +
-
-    String(
-      minutos
-    ).padStart(
-      2,
-      "0"
-    )
-
-    + ":" +
-
-    String(
-      segundos
-    ).padStart(
-      2,
-      "0"
-    )
-
-  );
 
 }
 
@@ -1688,16 +1664,73 @@ function converterData(valor){
 
 
 /* =====================================================
-   ATUALIZAR SALDOS
+   FORMATAR TEMPO
+===================================================== */
+
+function formatarTempo(ms){
+
+  const total =
+    Math.max(
+      0,
+      Math.floor(
+        ms / 1000
+      )
+    );
+
+
+  const horas =
+    Math.floor(
+      total / 3600
+    );
+
+
+  const minutos =
+    Math.floor(
+      (total % 3600) / 60
+    );
+
+
+  const segundos =
+    total % 60;
+
+
+  return (
+
+    String(horas)
+      .padStart(2,"0")
+
+    + ":"
+
+    +
+
+    String(minutos)
+      .padStart(2,"0")
+
+    + ":"
+
+    +
+
+    String(segundos)
+      .padStart(2,"0")
+
+  );
+
+}
+
+
+/* =====================================================
+   SALDOS
 ===================================================== */
 
 function atualizarSaldos(){
 
   if(!usuario){
 
-    moedasEl.textContent = "0";
+    moedasEl.textContent =
+      "0";
 
-    chancesEl.textContent = "0";
+    chancesEl.textContent =
+      "0";
 
     return;
 
@@ -1723,7 +1756,7 @@ function atualizarSaldos(){
 
 
 /* =====================================================
-   CRONÔMETRO
+   CONTADOR
 ===================================================== */
 
 function iniciarContador(){
@@ -1771,16 +1804,13 @@ function iniciarContador(){
     proximaEl.innerHTML =
       "⏳ Próxima chance em " +
       "<strong>" +
-      formatarTempo(
-        restante
-      ) +
+      formatarTempo(restante) +
       "</strong>";
 
   }
 
 
   atualizar();
-
 
   setInterval(
     atualizar,
@@ -1834,22 +1864,18 @@ function verificarJogo(jogo){
       "reacao.html",
 
     sons:
-      "sons.html",
+      "sequencia-de-sons.html",
 
     palavra:
-      "palavra.html"
+      "palavra-embaralhada.html"
 
   };
 
 
-  const pagina =
-    paginas[jogo];
-
-
-  if(pagina){
+  if(paginas[jogo]){
 
     window.location.href =
-      pagina;
+      paginas[jogo];
 
   }
 
@@ -1861,25 +1887,21 @@ function verificarJogo(jogo){
 ===================================================== */
 
 document
-  .querySelectorAll(
-    ".play"
-  )
-  .forEach(
-    botao => {
+  .querySelectorAll(".play")
+  .forEach(botao => {
 
-      botao.addEventListener(
-        "click",
-        () => {
+    botao.addEventListener(
+      "click",
+      () => {
 
-          verificarJogo(
-            botao.dataset.game
-          );
+        verificarJogo(
+          botao.dataset.game
+        );
 
-        }
-      );
+      }
+    );
 
-    }
-  );
+  });
 
 
 /* =====================================================
@@ -1887,9 +1909,7 @@ document
 ===================================================== */
 
 document
-  .getElementById(
-    "lojaButton"
-  )
+  .getElementById("lojaButton")
   .addEventListener(
     "click",
     () => {
@@ -1902,13 +1922,11 @@ document
 
 
 /* =====================================================
-   RESGATAR CÓDIGO
+   CÓDIGO
 ===================================================== */
 
 document
-  .getElementById(
-    "codigoButton"
-  )
+  .getElementById("codigoButton")
   .addEventListener(
     "click",
     () => {
@@ -1925,9 +1943,7 @@ document
 ===================================================== */
 
 document
-  .getElementById(
-    "fecharModal"
-  )
+  .getElementById("fecharModal")
   .addEventListener(
     "click",
     () => {
@@ -1945,9 +1961,7 @@ document
 ===================================================== */
 
 document
-  .getElementById(
-    "back"
-  )
+  .getElementById("back")
   .addEventListener(
     "click",
     () => {
