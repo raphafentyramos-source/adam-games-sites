@@ -40,7 +40,6 @@ body{
 
 }
 
-
 .page{
 
   width:100%;
@@ -71,7 +70,6 @@ body{
 
 }
 
-
 .back{
 
   width:45px;
@@ -90,13 +88,11 @@ body{
 
 }
 
-
 .top-title{
 
   text-align:center;
 
 }
-
 
 .top-title small{
 
@@ -109,7 +105,6 @@ body{
   letter-spacing:2px;
 
 }
-
 
 .top-title strong{
 
@@ -138,7 +133,6 @@ body{
 
 }
 
-
 .progress-header{
 
   display:flex;
@@ -150,7 +144,6 @@ body{
   font-weight:900;
 
 }
-
 
 .progress-bar{
 
@@ -165,7 +158,6 @@ body{
   background:#163c57;
 
 }
-
 
 .progress-fill{
 
@@ -206,7 +198,6 @@ body{
 
 }
 
-
 .image-card img{
 
   width:100%;
@@ -238,7 +229,6 @@ body{
 
 }
 
-
 .dica small{
 
   color:#65d2ff;
@@ -246,7 +236,6 @@ body{
   font-weight:900;
 
 }
-
 
 .dica strong{
 
@@ -307,7 +296,6 @@ body{
 
 }
 
-
 .key{
 
   min-height:50px;
@@ -333,13 +321,11 @@ body{
 
 }
 
-
 .key:active{
 
   transform:scale(.95);
 
 }
-
 
 .key.correct{
 
@@ -347,13 +333,11 @@ body{
 
 }
 
-
 .key.wrong{
 
   background:#7c3151;
 
 }
-
 
 .key:disabled{
 
@@ -384,7 +368,6 @@ body{
 
 }
 
-
 .status.success{
 
   background:
@@ -397,7 +380,6 @@ body{
   color:#7cffb1;
 
 }
-
 
 .status.error{
 
@@ -412,7 +394,6 @@ body{
 
 }
 
-
 .status.info{
 
   background:
@@ -423,6 +404,35 @@ body{
     rgba(80,180,255,.25);
 
   color:#a9ddff;
+
+}
+
+
+/* =====================================================
+   BOTÃO
+===================================================== */
+
+.action{
+
+  width:100%;
+
+  height:50px;
+
+  margin-top:15px;
+
+  border:0;
+
+  border-radius:14px;
+
+  background:#16a85b;
+
+  color:#fff;
+
+  font-size:15px;
+
+  font-weight:900;
+
+  cursor:pointer;
 
 }
 
@@ -452,13 +462,11 @@ body{
 
 }
 
-
 .modal.show{
 
   display:flex;
 
 }
-
 
 .modal-card{
 
@@ -476,13 +484,11 @@ body{
 
 }
 
-
 .modal-card h2{
 
   font-size:25px;
 
 }
-
 
 .modal-card p{
 
@@ -493,7 +499,6 @@ body{
   line-height:1.5;
 
 }
-
 
 .modal-card button{
 
@@ -526,11 +531,17 @@ body{
 <div class="page">
 
 
+  <!-- =================================================
+       TOPO
+  ================================================== -->
+
   <div class="top">
 
     <button
       class="back"
-      id="back">
+      id="back"
+      type="button"
+    >
 
       ←
 
@@ -556,7 +567,7 @@ body{
 
 
   <!-- =================================================
-       PROGRESSO DA SEQUÊNCIA
+       PROGRESSO
   ================================================== -->
 
   <div class="progress-card">
@@ -578,9 +589,8 @@ body{
 
       <div
         class="progress-fill"
-        id="progress">
-
-      </div>
+        id="progress"
+      ></div>
 
     </div>
 
@@ -595,7 +605,8 @@ body{
 
     <img
       src="./card_forca.png"
-      alt="Forca">
+      alt="Forca"
+    >
 
   </div>
 
@@ -623,9 +634,8 @@ body{
 
   <div
     class="word"
-    id="word">
-
-  </div>
+    id="word"
+  ></div>
 
 
   <!-- =================================================
@@ -634,9 +644,8 @@ body{
 
   <div
     class="keyboard"
-    id="keyboard">
-
-  </div>
+    id="keyboard"
+  ></div>
 
 
   <!-- =================================================
@@ -645,11 +654,24 @@ body{
 
   <div
     class="status info"
-    id="status">
+    id="status"
+  >
 
     🎟️ Preparando sua partida...
 
   </div>
+
+
+  <button
+    class="action"
+    id="voltar"
+    style="display:none"
+    type="button"
+  >
+
+    VOLTAR PARA OS JOGOS
+
+  </button>
 
 
 </div>
@@ -661,7 +683,8 @@ body{
 
 <div
   class="modal"
-  id="modal">
+  id="modal"
+>
 
   <div class="modal-card">
 
@@ -674,7 +697,9 @@ body{
     </p>
 
     <button
-      id="modalButton">
+      id="modalButton"
+      type="button"
+    >
 
       CONTINUAR
 
@@ -686,7 +711,6 @@ body{
 
 
 <script type="module">
-
 
 /* =====================================================
    FIREBASE
@@ -713,14 +737,18 @@ import {
   query,
   where,
   getDocs,
-  getDoc,
+  addDoc,
   doc,
-  runTransaction,
+  writeBatch,
   serverTimestamp
 }
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
+
+/* =====================================================
+   CONFIGURAÇÃO
+===================================================== */
 
 const firebaseConfig = {
 
@@ -766,30 +794,41 @@ const db =
 const wordEl =
   document.getElementById("word");
 
+
 const keyboardEl =
   document.getElementById("keyboard");
+
 
 const statusEl =
   document.getElementById("status");
 
+
 const progressEl =
   document.getElementById("progress");
+
 
 const modal =
   document.getElementById("modal");
 
+
 const modalTitle =
   document.getElementById("modalTitle");
 
+
 const modalText =
   document.getElementById("modalText");
+
 
 const modalButton =
   document.getElementById("modalButton");
 
 
+const voltar =
+  document.getElementById("voltar");
+
+
 /* =====================================================
-   CONFIGURAÇÃO DA PARTIDA
+   JOGO
 ===================================================== */
 
 const PALAVRA =
@@ -804,11 +843,17 @@ const MAX_ERROS =
   6;
 
 
-const RECOMPENSA_INICIAL =
+/*
+  Recompensa inicial da partida.
+*/
+const MOEDAS_PARTIDA =
   30;
 
 
-const RECOMPENSA_VITORIA =
+/*
+  Recompensa extra ao vencer.
+*/
+const MOEDAS_VITORIA =
   20;
 
 
@@ -828,20 +873,62 @@ let usuario =
   null;
 
 
+/*
+  Documento do usuário em /admins.
+*/
 let usuarioRef =
   null;
 
 
+/*
+  Dados atuais do documento /admins.
+*/
+let dadosUsuario =
+  null;
+
+
+/*
+  ID da partida.
+*/
 let partidaId =
   null;
 
 
+/*
+  Evita finalizar duas vezes.
+*/
 let partidaFinalizada =
   false;
 
 
+/*
+  Impede iniciar duas partidas ao mesmo tempo.
+*/
+let iniciandoPartida =
+  false;
+
+
 /* =====================================================
-   PALAVRA
+   STATUS
+===================================================== */
+
+function mostrarStatus(
+  texto,
+  tipo
+){
+
+  statusEl.textContent =
+    texto;
+
+  statusEl.className =
+    "status " +
+    tipo;
+
+}
+
+
+/* =====================================================
+   DESENHAR PALAVRA
 ===================================================== */
 
 function desenharPalavra(){
@@ -850,10 +937,19 @@ function desenharPalavra(){
     PALAVRA
       .split("")
       .map(
-        letra =>
-          letras.has(letra)
-            ? letra
-            : "_"
+        letra => {
+
+          if(
+            letras.has(letra)
+          ){
+
+            return letra;
+
+          }
+
+          return "_";
+
+        }
       )
       .join(" ");
 
@@ -866,9 +962,14 @@ function desenharPalavra(){
 
 function atualizarProgresso(){
 
+  const letrasUnicas =
+    new Set(
+      PALAVRA.split("")
+    );
+
+
   const acertos =
-    PALAVRA
-      .split("")
+    [...letrasUnicas]
       .filter(
         letra =>
           letras.has(letra)
@@ -879,7 +980,7 @@ function atualizarProgresso(){
   const percentual =
     (
       acertos /
-      PALAVRA.length
+      letrasUnicas.size
     ) * 100;
 
 
@@ -916,12 +1017,12 @@ function criarTeclado(){
         "key";
 
 
-      botao.type =
-        "button";
-
-
       botao.textContent =
         letra;
+
+
+      botao.type =
+        "button";
 
 
       botao.addEventListener(
@@ -948,6 +1049,26 @@ function criarTeclado(){
 
 
 /* =====================================================
+   BLOQUEAR TECLADO
+===================================================== */
+
+function bloquearTeclado(){
+
+  keyboardEl
+    .querySelectorAll("button")
+    .forEach(
+      button => {
+
+        button.disabled =
+          true;
+
+      }
+    );
+
+}
+
+
+/* =====================================================
    ESCOLHER LETRA
 ===================================================== */
 
@@ -958,6 +1079,7 @@ function escolherLetra(
 
   if(
     partidaFinalizada ||
+    !partidaId ||
     letras.has(letra)
   ){
 
@@ -967,6 +1089,7 @@ function escolherLetra(
 
 
   letras.add(letra);
+
 
   botao.disabled =
     true;
@@ -981,21 +1104,20 @@ function escolherLetra(
     );
 
 
-    statusEl.textContent =
-      "✅ Boa! A letra está na palavra.";
-
-    statusEl.className =
-      "status success";
+    mostrarStatus(
+      "✅ Boa! A letra está na palavra.",
+      "success"
+    );
 
 
     desenharPalavra();
 
     atualizarProgresso();
 
+
     verificarVitoria();
 
   }
-
   else{
 
     botao.classList.add(
@@ -1006,14 +1128,13 @@ function escolherLetra(
     erros++;
 
 
-    statusEl.textContent =
+    mostrarStatus(
       "❌ Letra errada. Tentativas: " +
       erros +
       " / " +
-      MAX_ERROS;
-
-    statusEl.className =
-      "status error";
+      MAX_ERROS,
+      "error"
+    );
 
 
     if(
@@ -1030,7 +1151,7 @@ function escolherLetra(
 
 
 /* =====================================================
-   VITÓRIA
+   VERIFICAR VITÓRIA
 ===================================================== */
 
 async function verificarVitoria(){
@@ -1056,7 +1177,7 @@ async function verificarVitoria(){
 
 
 /* =====================================================
-   LOCALIZAR CADASTRO CORRETO
+   PROCURAR CADASTRO
 ===================================================== */
 
 async function localizarCadastro(
@@ -1064,62 +1185,14 @@ async function localizarCadastro(
 ){
 
   /*
-     PRIMEIRA TENTATIVA:
-
-     O documento possui o próprio UID.
+    -----------------------------------------------------
+    1. PRIMEIRO: UID
+    -----------------------------------------------------
   */
 
-  const refDireta =
-    doc(
-      db,
-      "admins",
-      user.uid
-    );
-
-
-  const direto =
-    await getDoc(
-      refDireta
-    );
-
-
-  if(
-    direto.exists()
-  ){
-
-    const dados =
-      direto.data();
-
-
-    /*
-       Se existir campo uid,
-       ele obrigatoriamente precisa
-       pertencer à conta autenticada.
-    */
-
-    if(
-      dados.uid &&
-      dados.uid !== user.uid
-    ){
-
-      return null;
-
-    }
-
-
-    return direto;
-
-  }
-
-
-  /*
-     SEGUNDA TENTATIVA:
-
-     procura exatamente pelo UID.
-  */
-
-  const resultadoUid =
+  let snapshot =
     await getDocs(
+
       query(
         collection(
           db,
@@ -1131,34 +1204,32 @@ async function localizarCadastro(
           user.uid
         )
       )
+
     );
 
 
   if(
-    !resultadoUid.empty
+    !snapshot.empty
   ){
 
-    return resultadoUid.docs[0];
+    return snapshot.docs[0];
 
   }
 
 
   /*
-     TERCEIRA TENTATIVA:
-
-     procura pelo e-mail.
-
-     MAS só aceita se o documento:
-     - tiver o mesmo e-mail
-     - e, se tiver uid, for o mesmo UID.
+    -----------------------------------------------------
+    2. SEGUNDO: E-MAIL
+    -----------------------------------------------------
   */
 
   if(
     user.email
   ){
 
-    const resultadoEmail =
+    snapshot =
       await getDocs(
+
         query(
           collection(
             db,
@@ -1170,33 +1241,116 @@ async function localizarCadastro(
             user.email
           )
         )
+
       );
 
 
-    for(
-      const documento
-      of resultadoEmail.docs
+    if(
+      !snapshot.empty
     ){
 
-      const dados =
-        documento.data();
-
-
-      if(
-        !dados.uid ||
-        dados.uid === user.uid
-      ){
-
-        return documento;
-
-      }
+      return snapshot.docs[0];
 
     }
 
   }
 
 
-  return null;
+  /*
+    -----------------------------------------------------
+    3. NÃO EXISTE CADASTRO
+    -----------------------------------------------------
+
+    Criamos somente o cadastro básico do próprio
+    usuário autenticado.
+
+    Isso usa a mesma estrutura do index.html.
+  */
+
+  const caracteres =
+    "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+
+  let publicId =
+    "";
+
+
+  for(
+    let i = 0;
+    i < 7;
+    i++
+  ){
+
+    publicId +=
+      caracteres[
+        Math.floor(
+          Math.random() *
+          caracteres.length
+        )
+      ];
+
+  }
+
+
+  const novoCadastro =
+    await addDoc(
+
+      collection(
+        db,
+        "admins"
+      ),
+
+      {
+
+        uid:
+          user.uid,
+
+        nome:
+          user.displayName ||
+          "Usuário",
+
+        email:
+          user.email || "",
+
+        publicId:
+          publicId,
+
+        idade:
+          "",
+
+        telefone:
+          "",
+
+        avatar:
+          "🙂",
+
+        vip:
+          false,
+
+        caixaBox:
+          false,
+
+        chances:
+          0,
+
+        moedas:
+          0,
+
+        chaves:
+          0,
+
+        creditos:
+          0,
+
+        criadoEm:
+          new Date().toISOString()
+
+      }
+
+    );
+
+
+  return novoCadastro;
 
 }
 
@@ -1208,7 +1362,9 @@ async function localizarCadastro(
 async function iniciarPartida(){
 
   if(
-    !usuarioRef
+    iniciandoPartida ||
+    partidaId ||
+    !usuario
   ){
 
     return;
@@ -1216,7 +1372,92 @@ async function iniciarPartida(){
   }
 
 
+  iniciandoPartida =
+    true;
+
+
   try{
+
+    mostrarStatus(
+      "🎟️ Verificando seu cadastro...",
+      "info"
+    );
+
+
+    /*
+      Localiza o documento correto.
+    */
+
+    const cadastro =
+      await localizarCadastro(
+        usuario
+      );
+
+
+    if(
+      !cadastro
+    ){
+
+      throw new Error(
+        "Não foi possível localizar seu cadastro."
+      );
+
+    }
+
+
+    usuarioRef =
+      cadastro.ref;
+
+
+    dadosUsuario =
+      cadastro.data();
+
+
+    /*
+      Garante valores numéricos.
+    */
+
+    const chances =
+      Number(
+        dadosUsuario.chances || 0
+      );
+
+
+    const moedas =
+      Number(
+        dadosUsuario.moedas || 0
+      );
+
+
+    /*
+      Sem chance = não começa partida.
+    */
+
+    if(
+      chances <= 0
+    ){
+
+      mostrarStatus(
+        "🎟️ Você não possui chances para jogar.",
+        "error"
+      );
+
+
+      bloquearTeclado();
+
+
+      iniciandoPartida =
+        false;
+
+
+      return;
+
+    }
+
+
+    /*
+      Cria ID da partida.
+    */
 
     const novaPartida =
       doc(
@@ -1227,162 +1468,126 @@ async function iniciarPartida(){
       );
 
 
-    let saldoFinal =
-      0;
+    /*
+      Tudo será feito em uma única operação.
+    */
+
+    const batch =
+      writeBatch(db);
 
 
-    let chancesFinais =
-      0;
+    /*
+      Cria a sessão.
+    */
 
+    batch.set(
+      novaPartida,
+      {
 
-    await runTransaction(
-      db,
-      async transaction => {
+        uid:
+          usuario.uid,
 
-        /*
-           SEMPRE LÊ PRIMEIRO.
-        */
+        email:
+          usuario.email || "",
 
-        const cadastroSnapshot =
-          await transaction.get(
-            usuarioRef
-          );
+        game:
+          "forca",
 
+        status:
+          "ativa",
 
-        if(
-          !cadastroSnapshot.exists()
-        ){
+        rewardBase:
+          MOEDAS_PARTIDA,
 
-          throw new Error(
-            "Cadastro não encontrado."
-          );
+        rewardWin:
+          MOEDAS_VITORIA,
 
-        }
+        chanceConsumed:
+          true,
 
+        createdAt:
+          serverTimestamp(),
 
-        const dados =
-          cadastroSnapshot.data();
-
-
-        const chances =
-          Number(
-            dados.chances || 0
-          );
-
-
-        const moedas =
-          Number(
-            dados.moedas || 0
-          );
-
-
-        if(
-          chances <= 0
-        ){
-
-          throw new Error(
-            "Você não possui chances para jogar."
-          );
-
-        }
-
-
-        saldoFinal =
-          moedas +
-          RECOMPENSA_INICIAL;
-
-
-        chancesFinais =
-          chances -
-          1;
-
-
-        /*
-           CRIA SESSÃO
-        */
-
-        transaction.set(
-          novaPartida,
-          {
-
-            uid:
-              usuario.uid,
-
-            game:
-              "forca",
-
-            status:
-              "ativa",
-
-            rewardBase:
-              RECOMPENSA_INICIAL,
-
-            rewardWin:
-              RECOMPENSA_VITORIA,
-
-            chanceConsumed:
-              true,
-
-            createdAt:
-              serverTimestamp(),
-
-            finalizadoEm:
-              null
-
-          }
-        );
-
-
-        /*
-           ATUALIZA USUÁRIO
-
-           -1 chance
-           +30 moedas
-        */
-
-        transaction.update(
-          usuarioRef,
-          {
-
-            chances:
-              chancesFinais,
-
-            moedas:
-              saldoFinal,
-
-            ultimaPartidaForcaId:
-              novaPartida.id,
-
-            ultimaPartidaForcaEm:
-              serverTimestamp()
-
-          }
-        );
+        finalizadoEm:
+          null
 
       }
     );
 
 
+    /*
+      Consome 1 chance e adiciona 30 moedas.
+    */
+
+    batch.update(
+      usuarioRef,
+      {
+
+        chances:
+          chances - 1,
+
+        moedas:
+          moedas + MOEDAS_PARTIDA,
+
+        ultimaPartidaForcaId:
+          novaPartida.id,
+
+        ultimaPartidaForcaEm:
+          serverTimestamp()
+
+      }
+    );
+
+
+    /*
+      Commit.
+    */
+
+    await batch.commit();
+
+
+    /*
+      Só chegamos aqui se o Firebase aceitou
+      a operação inteira.
+    */
+
     partidaId =
       novaPartida.id;
 
 
-    statusEl.textContent =
-      "🪙 +30 moedas recebidas! Boa sorte!";
+    dadosUsuario.chances =
+      chances - 1;
 
 
-    statusEl.className =
-      "status success";
+    dadosUsuario.moedas =
+      moedas + MOEDAS_PARTIDA;
 
+
+    mostrarStatus(
+      "🪙 +30 moedas recebidas! Boa sorte!",
+      "success"
+    );
+
+
+    iniciandoPartida =
+      false;
 
   }
 
   catch(error){
 
     console.error(
-      "ERRO AO INICIAR PARTIDA:",
+      "ERRO AO INICIAR FORCA:",
       error
     );
+
+
+    iniciandoPartida =
+      false;
+
+
+    let mensagem =
+      "⚠️ Não foi possível iniciar a partida.";
 
 
     if(
@@ -1390,25 +1595,25 @@ async function iniciarPartida(){
       "permission-denied"
     ){
 
-      statusEl.textContent =
-        "⚠️ O Firebase bloqueou o início da partida. Verifique as Rules.";
+      mensagem =
+        "⚠️ O Firebase recusou a gravação. As Rules precisam permitir a atualização das moedas, chances e da partida.";
 
     }
+    else if(
+      error.message
+    ){
 
-    else{
-
-      statusEl.textContent =
+      mensagem =
         "⚠️ " +
-        (
-          error.message ||
-          "Não foi possível iniciar a partida."
-        );
+        error.message;
 
     }
 
 
-    statusEl.className =
-      "status error";
+    mostrarStatus(
+      mensagem,
+      "error"
+    );
 
 
     bloquearTeclado();
@@ -1427,7 +1632,8 @@ async function ganhar(){
   if(
     partidaFinalizada ||
     !partidaId ||
-    !usuarioRef
+    !usuarioRef ||
+    !dadosUsuario
   ){
 
     return;
@@ -1439,155 +1645,101 @@ async function ganhar(){
     true;
 
 
+  bloquearTeclado();
+
+
   try{
 
-    await runTransaction(
-      db,
-      async transaction => {
-
-        /*
-           TODAS AS LEITURAS PRIMEIRO
-        */
-
-        const cadastroSnapshot =
-          await transaction.get(
-            usuarioRef
-          );
+    const saldoAtual =
+      Number(
+        dadosUsuario.moedas || 0
+      );
 
 
-        const sessionRef =
-          doc(
-            db,
-            "gameSessions",
-            partidaId
-          );
+    const novoSaldo =
+      saldoAtual +
+      MOEDAS_VITORIA;
 
 
-        const sessionSnapshot =
-          await transaction.get(
-            sessionRef
-          );
+    const batch =
+      writeBatch(db);
 
 
-        if(
-          !cadastroSnapshot.exists()
-        ){
+    /*
+      Atualiza a sessão.
+    */
 
-          throw new Error(
-            "Cadastro do jogador não encontrado."
-          );
-
-        }
-
-
-        if(
-          !sessionSnapshot.exists()
-        ){
-
-          throw new Error(
-            "Partida não encontrada."
-          );
-
-        }
+    const sessionRef =
+      doc(
+        db,
+        "gameSessions",
+        partidaId
+      );
 
 
-        const dados =
-          cadastroSnapshot.data();
+    batch.update(
+      sessionRef,
+      {
 
+        status:
+          "won",
 
-        const session =
-          sessionSnapshot.data();
-
-
-        if(
-          session.uid !==
-          usuario.uid
-        ){
-
-          throw new Error(
-            "Esta partida pertence a outro usuário."
-          );
-
-        }
-
-
-        if(
-          session.status !==
-          "ativa"
-        ){
-
-          throw new Error(
-            "Esta partida já foi finalizada."
-          );
-
-        }
-
-
-        const moedas =
-          Number(
-            dados.moedas || 0
-          );
-
-
-        /*
-           FINALIZA PARTIDA
-        */
-
-        transaction.update(
-          sessionRef,
-          {
-
-            status:
-              "won",
-
-            finalizadoEm:
-              serverTimestamp()
-
-          }
-        );
-
-
-        /*
-           +20 MOEDAS
-        */
-
-        transaction.update(
-          usuarioRef,
-          {
-
-            moedas:
-              moedas +
-              RECOMPENSA_VITORIA
-
-          }
-        );
+        finalizadoEm:
+          serverTimestamp()
 
       }
     );
 
 
-    statusEl.textContent =
-      "🎉 Palavra correta! +20 moedas extras!";
+    /*
+      Adiciona +20 moedas.
+    */
+
+    batch.update(
+      usuarioRef,
+      {
+
+        moedas:
+          novoSaldo,
+
+        ultimaPartidaForcaId:
+          partidaId,
+
+        ultimaPartidaForcaEm:
+          serverTimestamp()
+
+      }
+    );
 
 
-    statusEl.className =
-      "status success";
+    await batch.commit();
 
 
-    bloquearTeclado();
+    dadosUsuario.moedas =
+      novoSaldo;
+
+
+    mostrarStatus(
+      "🎉 Palavra correta! +20 moedas extras!",
+      "success"
+    );
 
 
     setTimeout(
       () => {
 
         abrirModal(
+
           "🎉 VOCÊ ACERTOU!",
+
           "Parabéns! Você ganhou +20 moedas extras.",
+
           "CONTINUAR"
+
         );
 
       },
-      1500
+      1200
     );
 
   }
@@ -1600,20 +1752,31 @@ async function ganhar(){
     );
 
 
+    /*
+      Permite tentar novamente caso a escrita
+      tenha sido recusada.
+    */
+
     partidaFinalizada =
       false;
 
 
-    statusEl.textContent =
-      "⚠️ Não foi possível registrar as moedas. " +
-      (
-        error.message ||
-        "Tente novamente."
-      );
+    mostrarStatus(
 
+      error.code ===
+      "permission-denied"
 
-    statusEl.className =
-      "status error";
+      ?
+
+      "⚠️ A palavra foi acertada, mas o Firebase recusou o registro das 20 moedas. Precisamos ajustar a permissão de moedas."
+
+      :
+
+      "⚠️ A palavra foi acertada, mas não foi possível registrar as moedas. Tente novamente.",
+
+      "error"
+
+    );
 
   }
 
@@ -1627,7 +1790,8 @@ async function ganhar(){
 async function perder(){
 
   if(
-    partidaFinalizada
+    partidaFinalizada ||
+    !partidaId
   ){
 
     return;
@@ -1652,55 +1816,25 @@ async function perder(){
       );
 
 
-    await runTransaction(
-      db,
-      async transaction => {
-
-        const sessionSnapshot =
-          await transaction.get(
-            sessionRef
-          );
+    const batch =
+      writeBatch(db);
 
 
-        if(
-          !sessionSnapshot.exists()
-        ){
+    batch.update(
+      sessionRef,
+      {
 
-          return;
+        status:
+          "lost",
 
-        }
-
-
-        const session =
-          sessionSnapshot.data();
-
-
-        if(
-          session.status !==
-          "ativa"
-        ){
-
-          return;
-
-        }
-
-
-        transaction.update(
-          sessionRef,
-          {
-
-            status:
-              "perdida",
-
-            finalizadoEm:
-              serverTimestamp()
-
-          }
-
-        );
+        finalizadoEm:
+          serverTimestamp()
 
       }
     );
+
+
+    await batch.commit();
 
   }
 
@@ -1714,45 +1848,28 @@ async function perder(){
   }
 
 
-  statusEl.textContent =
-    "❌ Você perdeu a partida.";
-
-  statusEl.className =
-    "status error";
+  mostrarStatus(
+    "❌ Você perdeu a partida.",
+    "error"
+  );
 
 
   setTimeout(
     () => {
 
       abrirModal(
+
         "😢 VOCÊ PERDEU",
-        "A palavra era ELEFANTE. As 30 moedas recebidas no início continuam com você.",
+
+        "A palavra era ELEFANTE. As 30 moedas da partida continuam com você.",
+
         "CONTINUAR"
+
       );
 
     },
-    1500
+    1200
   );
-
-}
-
-
-/* =====================================================
-   BLOQUEAR TECLADO
-===================================================== */
-
-function bloquearTeclado(){
-
-  keyboardEl
-    .querySelectorAll("button")
-    .forEach(
-      button => {
-
-        button.disabled =
-          true;
-
-      }
-    );
 
 }
 
@@ -1770,11 +1887,14 @@ function abrirModal(
   modalTitle.textContent =
     titulo;
 
+
   modalText.textContent =
     texto;
 
+
   modalButton.textContent =
     botao;
+
 
   modal.classList.add(
     "show"
@@ -1784,7 +1904,7 @@ function abrirModal(
 
 
 /* =====================================================
-   BOTÃO MODAL
+   MODAL CONTINUAR
 ===================================================== */
 
 modalButton.addEventListener(
@@ -1815,6 +1935,17 @@ document
   );
 
 
+voltar.addEventListener(
+  "click",
+  () => {
+
+    window.location.href =
+      "jogos.html";
+
+  }
+);
+
+
 /* =====================================================
    AUTENTICAÇÃO
 ===================================================== */
@@ -1840,115 +1971,19 @@ onAuthStateChanged(
       user;
 
 
-    console.log(
-      "USUÁRIO FIREBASE AUTENTICADO:",
-      {
-        uid: user.uid,
-        email: user.email
-      }
-    );
+    /*
+      Não usamos o usuário do Authentication
+      como banco de moedas.
 
+      As moedas ficam no documento /admins.
+    */
 
     try{
 
-      const cadastro =
-        await localizarCadastro(
-          user
-        );
-
-
-      if(
-        !cadastro
-      ){
-
-        statusEl.textContent =
-          "⚠️ Cadastro desta conta não foi encontrado.";
-
-        statusEl.className =
-          "status error";
-
-
-        bloquearTeclado();
-
-
-        console.error(
-          "NENHUM CADASTRO /admins ENCONTRADO PARA:",
-          user.uid,
-          user.email
-        );
-
-
-        return;
-
-      }
-
-
-      usuarioRef =
-        cadastro.ref;
-
-
-      const dados =
-        cadastro.data();
-
-
-      /*
-         SEGURANÇA EXTRA:
-
-         Se houver UID no cadastro,
-         ele precisa ser o usuário atual.
-      */
-
-      if(
-        dados.uid &&
-        dados.uid !== user.uid
-      ){
-
-        statusEl.textContent =
-          "⚠️ Este cadastro pertence a outra conta.";
-
-        statusEl.className =
-          "status error";
-
-        bloquearTeclado();
-
-        return;
-
-      }
-
-
-      /*
-         Mostra o nome correto no console,
-         sem usar cadastro de outra pessoa.
-      */
-
-      console.log(
-        "CADASTRO CORRETO ENCONTRADO:",
-        cadastro.id,
-        dados
+      mostrarStatus(
+        "🎟️ Preparando sua partida...",
+        "info"
       );
-
-
-      const chances =
-        Number(
-          dados.chances || 0
-        );
-
-
-      if(
-        chances <= 0
-      ){
-
-        statusEl.textContent =
-          "🎟️ Você não possui chances para jogar.";
-
-        statusEl.className =
-          "status error";
-
-        bloquearTeclado();
-
-        return;
-
-      }
 
 
       await iniciarPartida();
@@ -1958,21 +1993,15 @@ onAuthStateChanged(
     catch(error){
 
       console.error(
-        "ERRO AO CARREGAR FORCA:",
+        "ERRO AUTH/FORCA:",
         error
       );
 
 
-      statusEl.textContent =
-        "⚠️ " +
-        (
-          error.message ||
-          "Erro ao carregar sua partida."
-        );
-
-
-      statusEl.className =
-        "status error";
+      mostrarStatus(
+        "⚠️ Erro ao carregar sua partida.",
+        "error"
+      );
 
 
       bloquearTeclado();
