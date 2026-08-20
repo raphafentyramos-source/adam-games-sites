@@ -69,7 +69,6 @@ body{
 .page{
 
   width:100%;
-
   max-width:650px;
 
   margin:0 auto;
@@ -417,20 +416,21 @@ body{
 
 
 /* =====================================================
-   FRAME FIXO DA FORCA
+   FRAME DA FORCA
 ===================================================== */
 
 /*
-   ESTE É O PONTO PRINCIPAL DA CORREÇÃO.
+   IMPORTANTE:
 
-   Existe somente UMA área física para as imagens.
+   Existe APENAS UM elemento IMG.
 
-   O frame nunca muda de tamanho.
+   O frame nunca muda.
 
-   Todas as 7 imagens ficam exatamente sobrepostas
-   dentro desta mesma área.
+   Quando acontece um erro, somente o SRC
+   da imagem é alterado.
 
-   Nenhuma imagem participa do fluxo da página.
+   Isso impede o deslocamento causado pela
+   troca de elementos HTML.
 */
 
 .hangman-wrap{
@@ -451,109 +451,67 @@ body{
 
   isolation:isolate;
 
-  contain:layout paint size;
-
 }
 
 
 /* =====================================================
-   TODAS AS IMAGENS DA FORCA
+   ÚNICA IMAGEM DA FORCA
 ===================================================== */
 
-.hangman-layer{
+#hangmanImage{
 
-  position:absolute !important;
+  position:absolute;
 
-  top:0 !important;
+  top:0;
+  left:0;
 
-  right:0 !important;
+  display:block;
 
-  bottom:0 !important;
+  width:100%;
+  height:100%;
 
-  left:0 !important;
+  margin:0;
+  padding:0;
 
-  width:100% !important;
+  border:0;
 
-  height:100% !important;
-
-  min-width:0 !important;
-
-  min-height:0 !important;
-
-  max-width:none !important;
-
-  max-height:none !important;
-
-  margin:0 !important;
-
-  padding:0 !important;
-
-  border:0 !important;
-
-  outline:0 !important;
-
-  display:block !important;
-
-  box-sizing:border-box !important;
+  outline:0;
 
   /*
-     IMPORTANTE:
-
-     contain mantém o enquadramento inteiro
-     dentro do mesmo frame.
-
-     Todas ficam centralizadas.
+     As imagens já possuem o enquadramento.
+     Portanto não usamos cover, que poderia
+     cortar e alterar a posição visual.
   */
 
-  object-fit:cover !important;
+  object-fit:fill;
 
-  object-position:50% 50% !important;
+  object-position:center center;
 
   /*
-     Impede qualquer movimento provocado
-     por transformações anteriores.
+     ZERO transformação.
   */
 
   transform:none !important;
 
   translate:none !important;
 
-  rotate:none !important;
+  scale:1 !important;
 
-  scale:none !important;
+  rotate:0deg !important;
 
   animation:none !important;
 
   transition:none !important;
 
   /*
-     Todas ocupam exatamente a mesma posição.
+     Impede arrastar a imagem no celular.
   */
-
-  opacity:0;
-
-  visibility:hidden;
 
   pointer-events:none;
 
   user-select:none;
 
   -webkit-user-drag:none;
-
-}
-
-
-/* =====================================================
-   IMAGEM ATIVA
-===================================================== */
-
-.hangman-layer.active{
-
-  opacity:1 !important;
-
-  visibility:visible !important;
-
-  z-index:10 !important;
 
 }
 
@@ -786,16 +744,12 @@ body{
 
 
 .key.used{
-
   opacity:.28;
-
 }
 
 
 .key:disabled{
-
   cursor:not-allowed;
-
 }
 
 
@@ -1052,7 +1006,6 @@ body{
   .page{
 
     padding-left:10px;
-
     padding-right:10px;
 
   }
@@ -1078,7 +1031,6 @@ body{
     flex-basis:9px;
 
     width:9px;
-
     height:9px;
 
   }
@@ -1091,30 +1043,16 @@ body{
 ===================================================== */
 
 img{
-
   vertical-align:top;
-
 }
 
 
 /* =====================================================
-   EVITAR SHIFT HORIZONTAL
+   SEGURANÇA CONTRA SHIFT HORIZONTAL
 ===================================================== */
 
 html,
-body{
-
-  overflow-x:hidden;
-
-  width:100%;
-
-}
-
-
-/* =====================================================
-   EVITAR BARRA HORIZONTAL
-===================================================== */
-
+body,
 .page,
 .game-card,
 .hangman-wrap{
@@ -1305,66 +1243,17 @@ body{
 
 
     <!-- =================================================
-         FRAME ÚNICO E FIXO
+         UM ÚNICO FRAME
     ================================================== -->
 
     <div
       class="hangman-wrap"
       id="hangmanFrame">
 
-
       <img
-        class="hangman-layer active"
+        id="hangmanImage"
         src="01_forca_0_erros.png"
-        alt="Forca - 0 erros"
-        draggable="false"
-      >
-
-
-      <img
-        class="hangman-layer"
-        src="02_forca_1_erro.png"
-        alt="Forca - 1 erro"
-        draggable="false"
-      >
-
-
-      <img
-        class="hangman-layer"
-        src="03_forca_2_erros.png"
-        alt="Forca - 2 erros"
-        draggable="false"
-      >
-
-
-      <img
-        class="hangman-layer"
-        src="04_forca_3_erros.png"
-        alt="Forca - 3 erros"
-        draggable="false"
-      >
-
-
-      <img
-        class="hangman-layer"
-        src="05_forca_4_erros.png"
-        alt="Forca - 4 erros"
-        draggable="false"
-      >
-
-
-      <img
-        class="hangman-layer"
-        src="06_forca_5_erros.png"
-        alt="Forca - 5 erros"
-        draggable="false"
-      >
-
-
-      <img
-        class="hangman-layer"
-        src="07_forca_6_erros.png"
-        alt="Forca - 6 erros"
+        alt="Forca"
         draggable="false"
       >
 
@@ -1372,7 +1261,7 @@ body{
 
 
     <!-- =================================================
-         INDICADORES
+         ERROS
     ================================================== -->
 
     <div
@@ -1658,12 +1547,62 @@ const modalButton =
 
 
 /* =====================================================
-   IMAGENS
+   ÚNICA IMAGEM DA FORCA
 ===================================================== */
 
-const hangmanLayers =
-  document.querySelectorAll(
-    ".hangman-layer"
+const hangmanImage =
+  document.getElementById(
+    "hangmanImage"
+  );
+
+
+/* =====================================================
+   CAMINHOS DAS 7 IMAGENS
+===================================================== */
+
+const imagensForca = [
+
+  "01_forca_0_erros.png",
+
+  "02_forca_1_erro.png",
+
+  "03_forca_2_erros.png",
+
+  "04_forca_3_erros.png",
+
+  "05_forca_4_erros.png",
+
+  "06_forca_5_erros.png",
+
+  "07_forca_6_erros.png"
+
+];
+
+
+/* =====================================================
+   PRÉ-CARREGAR AS 7 IMAGENS
+===================================================== */
+
+/*
+   As imagens são carregadas antecipadamente.
+
+   Isso evita que o navegador fique redimensionando
+   ou reposicionando o frame enquanto espera o PNG.
+*/
+
+const imagensPreCarregadas =
+  imagensForca.map(
+    caminho => {
+
+      const imagem =
+        new Image();
+
+      imagem.src =
+        caminho;
+
+      return imagem;
+
+    }
   );
 
 
@@ -1710,7 +1649,7 @@ const recompensas = {
 
 
 /* =====================================================
-   PALAVRAS
+   BANCO DE PALAVRAS
 ===================================================== */
 
 const banco = [
@@ -2215,19 +2154,17 @@ async function adicionarMoedas(
 
 
 /* =====================================================
-   ATUALIZAR IMAGEM
+   ATUALIZAR IMAGEM DA FORCA
 ===================================================== */
 
 function atualizarImagem(){
 
   /*
-   * 0 erros = imagem 01
-   * 1 erro  = imagem 02
-   * 2 erros = imagem 03
-   * 3 erros = imagem 04
-   * 4 erros = imagem 05
-   * 5 erros = imagem 06
-   * 6 erros = imagem 07
+   * O frame NÃO é recriado.
+   *
+   * O elemento IMG também NÃO é recriado.
+   *
+   * Apenas trocamos o arquivo.
    */
 
   const indice =
@@ -2236,46 +2173,32 @@ function atualizarImagem(){
         erros,
         0
       ),
-      hangmanLayers.length - 1
+      imagensForca.length - 1
     );
 
 
-  /*
-   * Primeiro desligamos TODAS as imagens.
-   */
-
-  hangmanLayers.forEach(
-    imagem => {
-
-      imagem.classList.remove(
-        "active"
-      );
-
-    }
-  );
+  const novoSrc =
+    imagensForca[indice];
 
 
   /*
-   * Depois ativamos SOMENTE uma.
+   * Só troca o SRC.
    */
-
-  const imagemAtiva =
-    hangmanLayers[indice];
-
 
   if(
-    imagemAtiva
+    hangmanImage.getAttribute("src")
+    !==
+    novoSrc
   ){
 
-    imagemAtiva.classList.add(
-      "active"
-    );
+    hangmanImage.src =
+      novoSrc;
 
   }
 
 
   /*
-   * Indicadores de erro.
+   * Atualiza os indicadores.
    */
 
   const pontos =
@@ -2547,9 +2470,13 @@ function escolherLetra(
   atualizarImagem();
 
 
+  /*
+   * Última imagem = 6 erros.
+   */
+
   if(
     erros >=
-    hangmanLayers.length - 1
+    imagensForca.length - 1
   ){
 
     erroFinal();
@@ -2588,7 +2515,7 @@ function erroFinal(){
 
 
   erros =
-    hangmanLayers.length - 1;
+    imagensForca.length - 1;
 
 
   atualizarImagem();
@@ -2615,7 +2542,7 @@ function erroFinal(){
 
 
 /* =====================================================
-   DERROTA
+   MOSTRAR DERROTA
 ===================================================== */
 
 function mostrarDerrota(){
@@ -2869,24 +2796,13 @@ function iniciarRodada(){
 
 
   /*
-   * Sempre começa na primeira imagem.
+   * Começa SEMPRE na primeira imagem.
+   *
+   * É o mesmo elemento IMG.
    */
 
-  hangmanLayers.forEach(
-    imagem => {
-
-      imagem.classList.remove(
-        "active"
-      );
-
-    }
-  );
-
-
-  hangmanLayers[0]
-    .classList.add(
-      "active"
-    );
+  hangmanImage.src =
+    imagensForca[0];
 
 
   criarTeclado();
@@ -2970,6 +2886,10 @@ async function localizarUsuario(
   user
 ){
 
+  /*
+   * Primeiro procura pelo UID.
+   */
+
   let resultado =
     await getDocs(
 
@@ -2999,6 +2919,10 @@ async function localizarUsuario(
 
   }
 
+
+  /*
+   * Depois procura pelo e-mail.
+   */
 
   if(
     user.email
