@@ -145,7 +145,7 @@ body{
 
 
 /* =====================================================
-   CABEÇALHO
+   HERO
 ===================================================== */
 
 .hero{
@@ -213,6 +213,13 @@ body{
   font-size:14px;
 
   line-height:1.4;
+
+}
+
+
+.hero p b{
+
+  color:#ffd52b;
 
 }
 
@@ -380,7 +387,7 @@ body{
 
 
 /* =====================================================
-   TÍTULO JOGOS
+   TÍTULO
 ===================================================== */
 
 .section-title{
@@ -404,10 +411,14 @@ body{
 
   display:grid;
 
-  gap:12px;
+  gap:14px;
 
 }
 
+
+/* =====================================================
+   CARD
+===================================================== */
 
 .game{
 
@@ -415,12 +426,10 @@ body{
 
   overflow:hidden;
 
-  padding:17px;
-
   border-radius:20px;
 
   background:
-    rgba(2,27,55,.95);
+    rgba(2,27,55,.96);
 
   border:
     1px solid
@@ -433,70 +442,63 @@ body{
 }
 
 
-.game-top{
+/* =====================================================
+   IMAGEM DO CARD
+===================================================== */
 
-  display:flex;
+.game-image{
 
-  align-items:center;
+  display:block;
 
-  gap:14px;
+  width:100%;
 
-}
+  height:auto;
 
+  aspect-ratio:16 / 9;
 
-.game-icon{
+  object-fit:cover;
 
-  width:58px;
+  object-position:center;
 
-  height:58px;
-
-  flex-shrink:0;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  border-radius:16px;
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(25,180,255,.28),
-      rgba(0,180,100,.22)
-    );
-
-  font-size:31px;
+  background:#06223b;
 
 }
 
 
-.game-info{
+/* =====================================================
+   CONTEÚDO
+===================================================== */
 
-  flex:1;
+.game-content{
+
+  padding:
+    14px
+    15px
+    15px;
 
 }
 
 
 .game-name{
 
-  font-size:18px;
+  font-size:19px;
 
   font-weight:900;
+
+  line-height:1.2;
 
 }
 
 
 .game-description{
 
-  margin-top:4px;
+  margin-top:5px;
 
   color:#a9cce2;
 
   font-size:12px;
 
-  line-height:1.35;
+  line-height:1.4;
 
 }
 
@@ -511,7 +513,7 @@ body{
 
   gap:10px;
 
-  margin-top:14px;
+  margin-top:13px;
 
 }
 
@@ -552,14 +554,16 @@ body{
 
   cursor:pointer;
 
+  box-shadow:
+    0 5px 12px
+    rgba(0,0,0,.25);
+
 }
 
 
-.play:disabled{
+.play:active{
 
-  opacity:.55;
-
-  cursor:not-allowed;
+  transform:scale(.97);
 
 }
 
@@ -614,7 +618,7 @@ body{
 
 
 /* =====================================================
-   MODAL SEM CHANCE
+   MODAL
 ===================================================== */
 
 .modal{
@@ -661,8 +665,7 @@ body{
 
   text-align:center;
 
-  background:
-    #082742;
+  background:#082742;
 
   border:
     1px solid
@@ -774,16 +777,21 @@ body{
 
 @media(max-width:430px){
 
-  .menu{
+  .game-name{
 
-    grid-template-columns:
-      1fr;
+    font-size:18px;
 
   }
 
-  .game-name{
+  .game-description{
 
-    font-size:17px;
+    font-size:12px;
+
+  }
+
+  .play{
+
+    min-width:100px;
 
   }
 
@@ -940,7 +948,7 @@ body{
 
 
   <!-- =================================================
-       JOGOS
+       TÍTULO
   ================================================== -->
 
   <div class="section-title">
@@ -950,387 +958,351 @@ body{
   </div>
 
 
+  <!-- =================================================
+       LISTA DE JOGOS
+  ================================================== -->
+
   <div class="games">
 
 
-    <!-- =================================================
-         FORCA
-    ================================================== -->
+    <!-- FORCA -->
 
     <div class="game">
 
-      <div class="game-top">
+      <img
+        class="game-image"
+        src="./card_forca.png"
+        alt="Forca"
+      >
 
-        <div class="game-icon">
-          🔤
+      <div class="game-content">
+
+        <div class="game-name">
+          Forca
         </div>
 
-        <div class="game-info">
+        <div class="game-description">
+          Descubra a palavra antes que
+          acabem suas tentativas.
+        </div>
 
-          <div class="game-name">
-            Forca
+        <div class="game-bottom">
+
+          <div class="game-reward">
+            🪙 Moedas por jogar
           </div>
 
-          <div class="game-description">
-            Descubra a palavra antes que
-            acabem suas tentativas.
-          </div>
+          <button
+            class="play"
+            data-game="forca"
+            type="button">
+
+            JOGAR
+
+          </button>
 
         </div>
-
-      </div>
-
-
-      <div class="game-bottom">
-
-        <div class="game-reward">
-          🪙 +30 moedas garantidas
-        </div>
-
-        <button
-          class="play"
-          data-game="forca"
-          type="button">
-
-          JOGAR
-
-        </button>
 
       </div>
 
     </div>
 
 
-    <!-- =================================================
-         CHUVA DE SABORES
-    ================================================== -->
+    <!-- CHUVA DE SABORES -->
 
     <div class="game">
 
-      <div class="game-top">
+      <img
+        class="game-image"
+        src="./card_chuva_de_sabores.png"
+        alt="Chuva de Sabores"
+      >
 
-        <div class="game-icon">
-          🍕
+      <div class="game-content">
+
+        <div class="game-name">
+          Chuva de Sabores
         </div>
 
-        <div class="game-info">
+        <div class="game-description">
+          Pegue os alimentos certos,
+          evite o lixo e faça muitos pontos.
+        </div>
 
-          <div class="game-name">
-            Chuva de Sabores
+        <div class="game-bottom">
+
+          <div class="game-reward">
+            🪙 Moedas por jogar
           </div>
 
-          <div class="game-description">
-            Pegue os alimentos certos
-            e acumule pontos.
-          </div>
+          <button
+            class="play"
+            data-game="chuva"
+            type="button">
+
+            JOGAR
+
+          </button>
 
         </div>
-
-      </div>
-
-
-      <div class="game-bottom">
-
-        <div class="game-reward">
-          🪙 +30 moedas garantidas
-        </div>
-
-        <button
-          class="play"
-          data-game="chuva"
-          type="button">
-
-          JOGAR
-
-        </button>
 
       </div>
 
     </div>
 
 
-    <!-- =================================================
-         CAÇA AO TESOURO
-    ================================================== -->
+    <!-- CAÇA AO TESOURO -->
 
     <div class="game">
 
-      <div class="game-top">
+      <img
+        class="game-image"
+        src="./card_caca_ao_tesouro.png"
+        alt="Caça ao Tesouro"
+      >
 
-        <div class="game-icon">
-          🗺️
+      <div class="game-content">
+
+        <div class="game-name">
+          Caça ao Tesouro
         </div>
 
-        <div class="game-info">
+        <div class="game-description">
+          Escolha os locais certos e
+          tente encontrar o tesouro escondido.
+        </div>
 
-          <div class="game-name">
-            Caça ao Tesouro
+        <div class="game-bottom">
+
+          <div class="game-reward">
+            🪙 Moedas por jogar
           </div>
 
-          <div class="game-description">
-            Escolha os locais e tente
-            encontrar o tesouro escondido.
-          </div>
+          <button
+            class="play"
+            data-game="tesouro"
+            type="button">
+
+            JOGAR
+
+          </button>
 
         </div>
-
-      </div>
-
-
-      <div class="game-bottom">
-
-        <div class="game-reward">
-          🪙 +30 moedas garantidas
-        </div>
-
-        <button
-          class="play"
-          data-game="tesouro"
-          type="button">
-
-          JOGAR
-
-        </button>
 
       </div>
 
     </div>
 
 
-    <!-- =================================================
-         ACERTE O ALVO
-    ================================================== -->
+    <!-- ACERTE AO ALVO -->
 
     <div class="game">
 
-      <div class="game-top">
+      <img
+        class="game-image"
+        src="./card_acerte_ao_alvo.png"
+        alt="Acerte ao Alvo"
+      >
 
-        <div class="game-icon">
-          🎯
+      <div class="game-content">
+
+        <div class="game-name">
+          Acerte ao Alvo
         </div>
 
-        <div class="game-info">
+        <div class="game-description">
+          Teste sua precisão, velocidade
+          e reflexos.
+        </div>
 
-          <div class="game-name">
-            Acerte o Alvo
+        <div class="game-bottom">
+
+          <div class="game-reward">
+            🪙 Moedas por jogar
           </div>
 
-          <div class="game-description">
-            Teste sua precisão e
-            velocidade.
-          </div>
+          <button
+            class="play"
+            data-game="alvo"
+            type="button">
+
+            JOGAR
+
+          </button>
 
         </div>
-
-      </div>
-
-
-      <div class="game-bottom">
-
-        <div class="game-reward">
-          🪙 +30 moedas garantidas
-        </div>
-
-        <button
-          class="play"
-          data-game="alvo"
-          type="button">
-
-          JOGAR
-
-        </button>
 
       </div>
 
     </div>
 
 
-    <!-- =================================================
-         MEMÓRIA MALUCA
-    ================================================== -->
+    <!-- MEMÓRIA MALUCA -->
 
     <div class="game">
 
-      <div class="game-top">
+      <img
+        class="game-image"
+        src="./card_memoria_maluca.png"
+        alt="Memória Maluca"
+      >
 
-        <div class="game-icon">
-          🃏
+      <div class="game-content">
+
+        <div class="game-name">
+          Memória Maluca
         </div>
 
-        <div class="game-info">
+        <div class="game-description">
+          Encontre os pares antes que
+          o tempo termine.
+        </div>
 
-          <div class="game-name">
-            Memória Maluca
+        <div class="game-bottom">
+
+          <div class="game-reward">
+            🪙 Moedas por jogar
           </div>
 
-          <div class="game-description">
-            Encontre os pares antes
-            que o tempo termine.
-          </div>
+          <button
+            class="play"
+            data-game="memoria"
+            type="button">
+
+            JOGAR
+
+          </button>
 
         </div>
-
-      </div>
-
-
-      <div class="game-bottom">
-
-        <div class="game-reward">
-          🪙 +30 moedas garantidas
-        </div>
-
-        <button
-          class="play"
-          data-game="memoria"
-          type="button">
-
-          JOGAR
-
-        </button>
 
       </div>
 
     </div>
 
 
-    <!-- =================================================
-         REAÇÃO RELÂMPAGO
-    ================================================== -->
+    <!-- REAÇÃO RELÂMPAGO -->
 
     <div class="game">
 
-      <div class="game-top">
+      <img
+        class="game-image"
+        src="./card_reacao_relampago.png"
+        alt="Reação Relâmpago"
+      >
 
-        <div class="game-icon">
-          ⚡
+      <div class="game-content">
+
+        <div class="game-name">
+          Reação Relâmpago
         </div>
 
-        <div class="game-info">
+        <div class="game-description">
+          Reaja rapidamente aos comandos
+          que aparecem na tela.
+        </div>
 
-          <div class="game-name">
-            Reação Relâmpago
+        <div class="game-bottom">
+
+          <div class="game-reward">
+            🪙 Moedas por jogar
           </div>
 
-          <div class="game-description">
-            Reaja rapidamente aos
-            comandos da tela.
-          </div>
+          <button
+            class="play"
+            data-game="reacao"
+            type="button">
+
+            JOGAR
+
+          </button>
 
         </div>
-
-      </div>
-
-
-      <div class="game-bottom">
-
-        <div class="game-reward">
-          🪙 +30 moedas garantidas
-        </div>
-
-        <button
-          class="play"
-          data-game="reacao"
-          type="button">
-
-          JOGAR
-
-        </button>
 
       </div>
 
     </div>
 
 
-    <!-- =================================================
-         SEQUÊNCIA DE SONS
-    ================================================== -->
+    <!-- SEQUÊNCIA DE SONS -->
 
     <div class="game">
 
-      <div class="game-top">
+      <img
+        class="game-image"
+        src="./card_sequencia_de_sons.png"
+        alt="Sequência de Sons"
+      >
 
-        <div class="game-icon">
-          🎵
+      <div class="game-content">
+
+        <div class="game-name">
+          Sequência de Sons
         </div>
 
-        <div class="game-info">
+        <div class="game-description">
+          Memorize a sequência e
+          repita corretamente.
+        </div>
 
-          <div class="game-name">
-            Sequência de Sons
+        <div class="game-bottom">
+
+          <div class="game-reward">
+            🪙 Moedas por jogar
           </div>
 
-          <div class="game-description">
-            Memorize e repita a sequência
-            musical corretamente.
-          </div>
+          <button
+            class="play"
+            data-game="sons"
+            type="button">
+
+            JOGAR
+
+          </button>
 
         </div>
-
-      </div>
-
-
-      <div class="game-bottom">
-
-        <div class="game-reward">
-          🪙 +30 moedas garantidas
-        </div>
-
-        <button
-          class="play"
-          data-game="sons"
-          type="button">
-
-          JOGAR
-
-        </button>
 
       </div>
 
     </div>
 
 
-    <!-- =================================================
-         PALAVRA EMBARALHADA
-    ================================================== -->
+    <!-- PALAVRA EMBARALHADA -->
 
     <div class="game">
 
-      <div class="game-top">
+      <img
+        class="game-image"
+        src="./card_palavra_embaralhada.png"
+        alt="Palavra Embaralhada"
+      >
 
-        <div class="game-icon">
-          🔀
+      <div class="game-content">
+
+        <div class="game-name">
+          Palavra Embaralhada
         </div>
 
-        <div class="game-info">
+        <div class="game-description">
+          Desembaralhe as letras e
+          descubra a palavra.
+        </div>
 
-          <div class="game-name">
-            Palavra Embaralhada
+        <div class="game-bottom">
+
+          <div class="game-reward">
+            🪙 Moedas por jogar
           </div>
 
-          <div class="game-description">
-            Desembaralhe as letras e
-            descubra a palavra.
-          </div>
+          <button
+            class="play"
+            data-game="palavra"
+            type="button">
+
+            JOGAR
+
+          </button>
 
         </div>
-
-      </div>
-
-
-      <div class="game-bottom">
-
-        <div class="game-reward">
-          🪙 +30 moedas garantidas
-        </div>
-
-        <button
-          class="play"
-          data-game="palavra"
-          type="button">
-
-          JOGAR
-
-        </button>
 
       </div>
 
@@ -1352,18 +1324,17 @@ body{
 
     <p>
 
-      Cada partida utiliza
-      <b>1 chance</b>.
+      Cada partida utiliza uma
+      <b>chance</b>.
 
-      Assim que você entrar em um jogo,
-      <b>30 Adam Coins</b> são adicionados
-      automaticamente à sua conta.
+      Ao entrar em qualquer jogo,
+      a chance é utilizada e você recebe
+      no mínimo <b>30 Adam Coins</b>,
+      mesmo que perca na primeira fase.
 
-      Mesmo que você perca na primeira fase,
-      você mantém as 30 moedas.
-
-      A chance utilizada não é devolvida
-      se você perder, ganhar ou sair do jogo.
+      Quanto melhor seu desempenho,
+      maiores poderão ser suas
+      recompensas.
 
     </p>
 
@@ -1456,16 +1427,14 @@ import {
   collection,
   query,
   where,
-  getDocs,
-  updateDoc,
-  increment
+  getDocs
 }
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
 /* =====================================================
-   CONFIGURAÇÃO FIREBASE
+   CONFIGURAÇÃO
 ===================================================== */
 
 const firebaseConfig = {
@@ -1537,25 +1506,12 @@ const modalSemChance =
    ESTADO
 ===================================================== */
 
-let usuario =
-  null;
-
-let usuarioRef =
-  null;
-
-let carregandoJogo =
-  false;
+let usuario = null;
 
 
 /* =====================================================
    TEMPOS
 ===================================================== */
-
-const HORAS_VIP =
-  72;
-
-const HORAS_NAO_VIP =
-  120;
 
 const MS_HORA =
   60 * 60 * 1000;
@@ -1565,22 +1521,12 @@ const MS_HORA =
    LOCALIZAR USUÁRIO
 ===================================================== */
 
-async function localizarUsuario(
-  user
-){
+async function localizarUsuario(user){
 
-  let resultado;
-
-
-  /* -----------------------------------------------------
-     PROCURAR PELO UID
-  ----------------------------------------------------- */
-
-  resultado =
+  let resultado =
     await getDocs(
 
       query(
-
         collection(
           db,
           "admins"
@@ -1591,34 +1537,24 @@ async function localizarUsuario(
           "==",
           user.uid
         )
-
       )
 
     );
 
 
-  if(
-    !resultado.empty
-  ){
+  if(!resultado.empty){
 
     return resultado.docs[0];
 
   }
 
 
-  /* -----------------------------------------------------
-     PROCURAR PELO E-MAIL
-  ----------------------------------------------------- */
-
-  if(
-    user.email
-  ){
+  if(user.email){
 
     resultado =
       await getDocs(
 
         query(
-
           collection(
             db,
             "admins"
@@ -1629,15 +1565,12 @@ async function localizarUsuario(
             "==",
             user.email
           )
-
         )
 
       );
 
 
-    if(
-      !resultado.empty
-    ){
+    if(!resultado.empty){
 
       return resultado.docs[0];
 
@@ -1655,9 +1588,7 @@ async function localizarUsuario(
    FORMATAR TEMPO
 ===================================================== */
 
-function formatarTempo(
-  ms
-){
+function formatarTempo(ms){
 
   const total =
     Math.max(
@@ -1695,11 +1626,7 @@ function formatarTempo(
       "0"
     )
 
-    +
-
-    ":"
-
-    +
+    + ":" +
 
     String(
       minutos
@@ -1708,11 +1635,7 @@ function formatarTempo(
       "0"
     )
 
-    +
-
-    ":"
-
-    +
+    + ":" +
 
     String(
       segundos
@@ -1727,16 +1650,12 @@ function formatarTempo(
 
 
 /* =====================================================
-   DATA FIREBASE
+   CONVERTER DATA
 ===================================================== */
 
-function converterData(
-  valor
-){
+function converterData(valor){
 
-  if(
-    !valor
-  ){
+  if(!valor){
 
     return null;
 
@@ -1769,20 +1688,16 @@ function converterData(
 
 
 /* =====================================================
-   ATUALIZAR SALDOS NA TELA
+   ATUALIZAR SALDOS
 ===================================================== */
 
 function atualizarSaldos(){
 
-  if(
-    !usuario
-  ){
+  if(!usuario){
 
-    moedasEl.textContent =
-      "0";
+    moedasEl.textContent = "0";
 
-    chancesEl.textContent =
-      "0";
+    chancesEl.textContent = "0";
 
     return;
 
@@ -1808,14 +1723,12 @@ function atualizarSaldos(){
 
 
 /* =====================================================
-   CRONÔMETRO DA PRÓXIMA CHANCE
+   CRONÔMETRO
 ===================================================== */
 
 function iniciarContador(){
 
-  if(
-    !usuario
-  ){
+  if(!usuario){
 
     return;
 
@@ -1828,9 +1741,7 @@ function iniciarContador(){
     );
 
 
-  if(
-    !fim
-  ){
+  if(!fim){
 
     proximaEl.innerHTML =
       "⏳ Próxima chance ainda não foi iniciada.";
@@ -1847,9 +1758,7 @@ function iniciarContador(){
       Date.now();
 
 
-    if(
-      restante <= 0
-    ){
+    if(restante <= 0){
 
       proximaEl.innerHTML =
         "🎟️ <strong>Chance pronta para ser liberada!</strong>";
@@ -1860,15 +1769,11 @@ function iniciarContador(){
 
 
     proximaEl.innerHTML =
-
       "⏳ Próxima chance em " +
-
       "<strong>" +
-
       formatarTempo(
         restante
       ) +
-
       "</strong>";
 
   }
@@ -1886,195 +1791,18 @@ function iniciarContador(){
 
 
 /* =====================================================
-   DESABILITAR TODOS OS BOTÕES
-===================================================== */
-
-function bloquearBotoes(){
-
-  document
-    .querySelectorAll(
-      ".play"
-    )
-    .forEach(
-      botao => {
-
-        botao.disabled =
-          true;
-
-      }
-    );
-
-}
-
-
-/* =====================================================
-   REATIVAR TODOS OS BOTÕES
-===================================================== */
-
-function desbloquearBotoes(){
-
-  document
-    .querySelectorAll(
-      ".play"
-    )
-    .forEach(
-      botao => {
-
-        botao.disabled =
-          false;
-
-        botao.textContent =
-          "JOGAR";
-
-      }
-    );
-
-}
-
-
-/* =====================================================
-   CONSUMIR CHANCE + DAR 30 MOEDAS
-===================================================== */
-
-async function consumirChanceERecompensa(){
-
-  if(
-    !usuario ||
-    !usuarioRef
-  ){
-
-    throw new Error(
-      "Usuário não carregado."
-    );
-
-  }
-
-
-  const chancesAtuais =
-    Number(
-      usuario.chances || 0
-    );
-
-
-  /* -----------------------------------------------------
-     NÃO PERMITIR JOGAR SEM CHANCE
-  ----------------------------------------------------- */
-
-  if(
-    chancesAtuais <= 0
-  ){
-
-    modalSemChance.classList.add(
-      "show"
-    );
-
-    return false;
-
-  }
-
-
-  /*
-  -------------------------------------------------------
-  ATUALIZAÇÃO ATÔMICA:
-
-  chances - 1
-  moedas  + 30
-
-  -------------------------------------------------------
-
-  O Firestore só confirma quando a operação for aceita.
-
-  -------------------------------------------------------
-  */
-
-  await updateDoc(
-
-    usuarioRef,
-
-    {
-
-      chances:
-        increment(-1),
-
-      moedas:
-        increment(30)
-
-    }
-
-  );
-
-
-  /*
-  -------------------------------------------------------
-  ATUALIZAR O ESTADO LOCAL
-
-  Não precisamos buscar novamente o documento.
-  -------------------------------------------------------
-  */
-
-  usuario.chances =
-    chancesAtuais - 1;
-
-
-  usuario.moedas =
-    Number(
-      usuario.moedas || 0
-    ) + 30;
-
-
-  atualizarSaldos();
-
-
-  return true;
-
-}
-
-
-/* =====================================================
    ABRIR JOGO
 ===================================================== */
 
-async function verificarJogo(
-  jogo,
-  botao
-){
-
-  if(
-    carregandoJogo
-  ){
-
-    return;
-
-  }
-
-
-  if(
-    !usuario ||
-    !usuarioRef
-  ){
-
-    alert(
-      "Aguarde o carregamento da sua conta."
-    );
-
-    return;
-
-  }
-
+function verificarJogo(jogo){
 
   const chances =
     Number(
-      usuario.chances || 0
+      usuario?.chances || 0
     );
 
 
-  /* -----------------------------------------------------
-     VERIFICAR CHANCE
-  ----------------------------------------------------- */
-
-  if(
-    chances <= 0
-  ){
+  if(chances <= 0){
 
     modalSemChance.classList.add(
       "show"
@@ -2085,130 +1813,43 @@ async function verificarJogo(
   }
 
 
-  carregandoJogo =
-    true;
+  const paginas = {
+
+    forca:
+      "forca.html",
+
+    chuva:
+      "chuva.html",
+
+    tesouro:
+      "tesouro.html",
+
+    alvo:
+      "alvo.html",
+
+    memoria:
+      "memoria.html",
+
+    reacao:
+      "reacao.html",
+
+    sons:
+      "sons.html",
+
+    palavra:
+      "palavra.html"
+
+  };
 
 
-  bloquearBotoes();
+  const pagina =
+    paginas[jogo];
 
 
-  botao.textContent =
-    "AGUARDE...";
-
-
-  try{
-
-    /*
-    -----------------------------------------------------
-    PRIMEIRO:
-
-    -1 chance
-    +30 moedas
-    -----------------------------------------------------
-    */
-
-    const sucesso =
-      await consumirChanceERecompensa();
-
-
-    if(
-      !sucesso
-    ){
-
-      carregandoJogo =
-        false;
-
-      desbloquearBotoes();
-
-      return;
-
-    }
-
-
-    /*
-    -----------------------------------------------------
-    SEGUNDO:
-
-    SOMENTE AGORA ABRE O JOGO
-    -----------------------------------------------------
-    */
-
-    const paginas = {
-
-      forca:
-        "forca.html",
-
-      chuva:
-        "chuva.html",
-
-      tesouro:
-        "tesouro.html",
-
-      alvo:
-        "alvo.html",
-
-      memoria:
-        "memoria.html",
-
-      reacao:
-        "reacao.html",
-
-      sons:
-        "sons.html",
-
-      palavra:
-        "palavra.html"
-
-    };
-
-
-    const pagina =
-      paginas[jogo];
-
-
-    if(
-      !pagina
-    ){
-
-      throw new Error(
-        "Página do jogo não encontrada."
-      );
-
-    }
-
+  if(pagina){
 
     window.location.href =
       pagina;
-
-  }
-
-  catch(error){
-
-    console.error(
-      "Erro ao iniciar jogo:",
-      error
-    );
-
-
-    /*
-    -----------------------------------------------------
-    IMPORTANTE:
-
-    Se o Firebase rejeitar a operação,
-    NÃO abre o jogo.
-    -----------------------------------------------------
-    */
-
-    alert(
-      "Não foi possível iniciar o jogo. Sua chance não foi consumida."
-    );
-
-
-    carregandoJogo =
-      false;
-
-
-    desbloquearBotoes();
 
   }
 
@@ -2231,8 +1872,7 @@ document
         () => {
 
           verificarJogo(
-            botao.dataset.game,
-            botao
+            botao.dataset.game
           );
 
         }
@@ -2329,9 +1969,7 @@ onAuthStateChanged(
 
   async user => {
 
-    if(
-      !user
-    ){
+    if(!user){
 
       window.location.href =
         "index.html";
@@ -2349,9 +1987,7 @@ onAuthStateChanged(
         );
 
 
-      if(
-        !documento
-      ){
+      if(!documento){
 
         proximaEl.textContent =
           "⚠️ Cadastro não encontrado.";
@@ -2363,10 +1999,6 @@ onAuthStateChanged(
 
       usuario =
         documento.data();
-
-
-      usuarioRef =
-        documento.ref;
 
 
       atualizarSaldos();
