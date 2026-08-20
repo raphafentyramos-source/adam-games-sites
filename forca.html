@@ -423,26 +423,24 @@ body{
 
 /* =====================================================
    IMAGEM DA FORCA
+   CORREÇÃO DEFINITIVA
 
-   POSIÇÃO FIXA
+   TODAS AS IMAGENS FICAM EMPILHADAS
+   EXATAMENTE NO MESMO LUGAR.
 
-   Todas as imagens ocupam exatamente
-   o mesmo espaço.
+   NÃO USAMOS MAIS TROCA DE SRC.
 
-   Não usar flexbox para centralizar.
-   Não usar margin auto.
-   Não usar contain.
-   Não usar cover.
-
+   SOMENTE A OPACIDADE DA IMAGEM
+   CORRESPONDENTE AO ERRO É ALTERADA.
 ===================================================== */
 
 .hangman-wrap{
 
+  position:relative;
+
   width:100%;
 
   aspect-ratio:16 / 9;
-
-  position:relative;
 
   overflow:hidden;
 
@@ -455,7 +453,12 @@ body{
 }
 
 
-.hangman-wrap img{
+/*
+   TODAS AS IMAGENS OCUPAM EXATAMENTE
+   A MESMA ÁREA.
+*/
+
+.hangman-frame{
 
   position:absolute;
 
@@ -463,15 +466,11 @@ body{
 
   left:0;
 
-  display:block;
-
   width:100%;
 
   height:100%;
 
-  max-width:none;
-
-  max-height:none;
+  display:block;
 
   margin:0;
 
@@ -481,7 +480,24 @@ body{
 
   object-fit:fill;
 
-  object-position:0 0;
+  object-position:center center;
+
+  opacity:0;
+
+  pointer-events:none;
+
+  user-select:none;
+
+}
+
+
+/*
+   Somente a imagem ativa aparece.
+*/
+
+.hangman-frame.active{
+
+  opacity:1;
 
 }
 
@@ -1155,13 +1171,70 @@ body{
   <div class="game-card">
 
 
-    <div class="hangman-wrap">
+    <!-- =================================================
+         TODAS AS IMAGENS EMPILHADAS
+    ================================================== -->
+
+    <div
+      class="hangman-wrap"
+      id="hangmanWrap">
+
 
       <img
-        id="hangmanImage"
+        class="hangman-frame active"
+        data-stage="0"
         src="01_forca_0_erros.png"
-        alt="Forca"
+        alt="Forca - 0 erros"
       >
+
+
+      <img
+        class="hangman-frame"
+        data-stage="1"
+        src="02_forca_1_erro.png"
+        alt="Forca - 1 erro"
+      >
+
+
+      <img
+        class="hangman-frame"
+        data-stage="2"
+        src="03_forca_2_erros.png"
+        alt="Forca - 2 erros"
+      >
+
+
+      <img
+        class="hangman-frame"
+        data-stage="3"
+        src="04_forca_3_erros.png"
+        alt="Forca - 3 erros"
+      >
+
+
+      <img
+        class="hangman-frame"
+        data-stage="4"
+        src="05_forca_4_erros.png"
+        alt="Forca - 4 erros"
+      >
+
+
+      <img
+        class="hangman-frame"
+        data-stage="5"
+        src="06_forca_5_erros.png"
+        alt="Forca - 5 erros"
+      >
+
+
+      <img
+        class="hangman-frame"
+        data-stage="6"
+        src="07_forca_6_erros.png"
+        alt="Forca - 6 erros"
+      >
+
 
     </div>
 
@@ -1388,8 +1461,17 @@ const progressTextEl =
 const progressFillEl =
   document.getElementById("progressFill");
 
-const hangmanImage =
-  document.getElementById("hangmanImage");
+
+/*
+   NOVO:
+   pegamos TODAS as imagens.
+*/
+
+const hangmanImages =
+  document.querySelectorAll(
+    ".hangman-frame"
+  );
+
 
 const errorsRow =
   document.getElementById("errorsRow");
@@ -2009,6 +2091,11 @@ async function adicionarMoedas(
 
 /* =====================================================
    IMAGEM
+   CORREÇÃO:
+
+   NÃO TROCA MAIS O SRC.
+
+   Apenas ativa a camada correspondente.
 ===================================================== */
 
 function atualizarImagem(){
@@ -2027,8 +2114,38 @@ function atualizarImagem(){
     );
 
 
-  hangmanImage.src =
-    IMAGENS[indice];
+  /*
+   * DESLIGA TODAS.
+   */
+
+  hangmanImages.forEach(
+    imagem => {
+
+      imagem.classList.remove(
+        "active"
+      );
+
+    }
+  );
+
+
+  /*
+   * LIGA SOMENTE A CORRETA.
+   */
+
+  const imagemAtual =
+    hangmanImages[indice];
+
+
+  if(
+    imagemAtual
+  ){
+
+    imagemAtual.classList.add(
+      "active"
+    );
+
+  }
 
 
   const pontos =
@@ -2222,11 +2339,6 @@ function escolherLetra(
   botao
 ){
 
-  /*
-   * IMPORTANTE:
-   * se terminou, não aceita mais letras.
-   */
-
   if(
     terminou
   ){
@@ -2306,15 +2418,7 @@ function escolherLetra(
 
 
   /*
-   * =================================================
    * ÚLTIMO ERRO
-   * =================================================
-   *
-   * NÃO chama perder() imediatamente.
-   *
-   * Apenas mostra a imagem 07 e espera
-   * exatamente 3 segundos.
-   *
    */
 
   if(
@@ -2336,10 +2440,6 @@ function escolherLetra(
 
 function erroFinal(){
 
-  /*
-   * Evita executar duas vezes.
-   */
-
   if(
     processandoErroFinal
   ){
@@ -2357,33 +2457,20 @@ function erroFinal(){
     true;
 
 
-  /*
-   * NÃO ABRE O MODAL AQUI.
-   *
-   * Primeiro deixa o jogador ver a imagem.
-   */
-
   bloquearTeclado();
 
 
   /*
-   * FORÇA A IMAGEM FINAL.
+   * A IMAGEM 07 JÁ FOI ATIVADA POR
+   * atualizarImagem().
    *
-   * A posição da imagem agora é controlada
-   * somente pelo CSS fixo.
+   * Não mexemos mais nela.
+   *
+   * Isso é importante:
+   * não alteramos tamanho,
+   * posição ou SRC.
    */
 
-  hangmanImage.src =
-    "07_forca_6_erros.png";
-
-
-  hangmanImage.style.display =
-    "block";
-
-
-  /*
-   * NÃO mostrar "Você perdeu" ainda.
-   */
 
   messageEl.className =
     "message";
@@ -2394,9 +2481,7 @@ function erroFinal(){
 
 
   /*
-   * =================================================
    * ESPERA 3 SEGUNDOS
-   * =================================================
    */
 
   setTimeout(
@@ -2417,10 +2502,6 @@ function erroFinal(){
 
 function mostrarDerrota(){
 
-  /*
-   * Só aqui a caixa aparece.
-   */
-
   messageEl.textContent =
     "💀 Você perdeu! A palavra era: " +
     palavraAtual.original;
@@ -2429,10 +2510,6 @@ function mostrarDerrota(){
   messageEl.className =
     "message show error";
 
-
-  /*
-   * Modal de derrota.
-   */
 
   modalIcon.textContent =
     "💀";
@@ -2542,7 +2619,6 @@ async function ganhar(){
 
       modalButton.textContent =
         "VOLTAR AOS JOGOS";
-
 
     }
     else{
@@ -2679,15 +2755,31 @@ function iniciarRodada(){
   /*
    * PRIMEIRA IMAGEM.
    *
-   * A posição é controlada pelo CSS.
+   * Agora não usamos SRC.
+   *
+   * Apenas ativamos a primeira camada.
    */
 
-  hangmanImage.src =
-    "01_forca_0_erros.png";
+  hangmanImages.forEach(
+    imagem => {
+
+      imagem.classList.remove(
+        "active"
+      );
+
+    }
+  );
 
 
-  hangmanImage.style.display =
-    "block";
+  if(
+    hangmanImages[0]
+  ){
+
+    hangmanImages[0].classList.add(
+      "active"
+    );
+
+  }
 
 
   atualizarImagem();
