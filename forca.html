@@ -422,19 +422,21 @@ body{
 
 
 /* =====================================================
-   FORCA
-   FRAME ÚNICO
+   FRAME DA FORCA
+   =====================================================
 
-   TODOS OS PNGs FICAM UM SOBRE O OUTRO.
+   IMPORTANTE:
 
-   PROPORÇÃO:
-   437 x 275
+   O frame tem UMA proporção fixa.
 
-   NÃO USAMOS:
-   - object-fit: contain
-   - margin:auto
-   - troca de src
-   - altura automática
+   Todas as imagens ficam absolutamente
+   posicionadas dentro dele.
+
+   Nenhuma imagem participa do fluxo
+   normal da página.
+
+   Isso impede a página de "andar"
+   quando uma imagem é trocada.
 ===================================================== */
 
 .hangman-wrap{
@@ -445,6 +447,8 @@ body{
 
   aspect-ratio:437 / 275;
 
+  min-height:0;
+
   overflow:hidden;
 
   border-radius:17px;
@@ -453,34 +457,56 @@ body{
 
   line-height:0;
 
+  isolation:isolate;
+
 }
 
+
+/* =====================================================
+   CAMADAS DAS IMAGENS
+===================================================== */
 
 .hangman-layer{
 
   position:absolute;
 
-  top:0;
-
-  left:0;
-
-  width:100%;
-
-  height:100%;
-
-  margin:0;
-
-  padding:0;
+  inset:0;
 
   display:block;
+
+  width:100% !important;
+
+  height:100% !important;
+
+  min-width:100%;
+
+  min-height:100%;
+
+  max-width:none;
+
+  max-height:none;
+
+  margin:0 !important;
+
+  padding:0 !important;
 
   border:0;
 
   outline:0;
 
+  box-shadow:none;
+
   object-fit:fill;
 
-  object-position:0 0;
+  object-position:center center;
+
+  transform:none !important;
+
+  translate:none;
+
+  scale:1;
+
+  rotate:0deg;
 
   opacity:0;
 
@@ -488,14 +514,28 @@ body{
 
   pointer-events:none;
 
+  user-select:none;
+
+  -webkit-user-drag:none;
+
+  transition:none !important;
+
+  animation:none !important;
+
 }
 
+
+/* =====================================================
+   IMAGEM ATIVA
+===================================================== */
 
 .hangman-layer.active{
 
   opacity:1;
 
   visibility:visible;
+
+  z-index:2;
 
 }
 
@@ -505,6 +545,10 @@ body{
 ===================================================== */
 
 .errors-row{
+
+  width:100%;
+
+  min-height:10px;
 
   display:flex;
 
@@ -520,6 +564,8 @@ body{
 
 
 .error-dot{
+
+  flex:0 0 10px;
 
   width:10px;
 
@@ -988,6 +1034,76 @@ body{
 
 }
 
+
+/* =====================================================
+   CELULARES MUITO PEQUENOS
+===================================================== */
+
+@media(max-width:360px){
+
+  .page{
+
+    padding-left:10px;
+
+    padding-right:10px;
+
+  }
+
+  .game-card{
+
+    padding:10px;
+
+  }
+
+  .hangman-wrap{
+
+    width:100%;
+
+    aspect-ratio:437 / 275;
+
+  }
+
+  .errors-row{
+
+    gap:5px;
+
+  }
+
+  .error-dot{
+
+    flex-basis:9px;
+
+    width:9px;
+
+    height:9px;
+
+  }
+
+}
+
+
+/* =====================================================
+   EVITAR SHIFT POR IMAGENS
+===================================================== */
+
+img{
+
+  vertical-align:top;
+
+}
+
+
+/* =====================================================
+   EVITAR MOVIMENTO HORIZONTAL DA PÁGINA
+===================================================== */
+
+html,
+body{
+
+  overflow-x:hidden;
+
+}
+
 </style>
 
 </head>
@@ -1170,51 +1286,60 @@ body{
 
 
     <!-- =================================================
-         AS 7 IMAGENS FICAM NO MESMO FRAME
+         FRAME FIXO DAS 7 IMAGENS
     ================================================== -->
 
-    <div class="hangman-wrap">
+    <div
+      class="hangman-wrap"
+      id="hangmanFrame">
 
       <img
         class="hangman-layer active"
         src="01_forca_0_erros.png"
-        alt="Forca"
+        alt="Forca - 0 erros"
+        draggable="false"
       >
 
       <img
         class="hangman-layer"
         src="02_forca_1_erro.png"
-        alt="Forca"
+        alt="Forca - 1 erro"
+        draggable="false"
       >
 
       <img
         class="hangman-layer"
         src="03_forca_2_erros.png"
-        alt="Forca"
+        alt="Forca - 2 erros"
+        draggable="false"
       >
 
       <img
         class="hangman-layer"
         src="04_forca_3_erros.png"
-        alt="Forca"
+        alt="Forca - 3 erros"
+        draggable="false"
       >
 
       <img
         class="hangman-layer"
         src="05_forca_4_erros.png"
-        alt="Forca"
+        alt="Forca - 4 erros"
+        draggable="false"
       >
 
       <img
         class="hangman-layer"
         src="06_forca_5_erros.png"
-        alt="Forca"
+        alt="Forca - 5 erros"
+        draggable="false"
       >
 
       <img
         class="hangman-layer"
         src="07_forca_6_erros.png"
-        alt="Forca"
+        alt="Forca - 6 erros"
+        draggable="false"
       >
 
     </div>
@@ -1480,6 +1605,9 @@ const modalCoins =
 
 const modalButton =
   document.getElementById("modalButton");
+
+const hangmanFrame =
+  document.getElementById("hangmanFrame");
 
 
 /* =====================================================
@@ -2051,20 +2179,33 @@ async function adicionarMoedas(
 
 function atualizarImagem(){
 
+  /*
+   * Existem 7 imagens:
+   *
+   * índice 0 = 0 erros
+   * índice 1 = 1 erro
+   * índice 2 = 2 erros
+   * índice 3 = 3 erros
+   * índice 4 = 4 erros
+   * índice 5 = 5 erros
+   * índice 6 = 6 erros
+   *
+   * Portanto o índice máximo é 6.
+   */
+
   const indice =
     Math.min(
-      erros,
-      6
+      Math.max(
+        erros,
+        0
+      ),
+      hangmanLayers.length - 1
     );
 
 
   /*
-   * NÃO muda tamanho.
-   * NÃO muda posição.
-   * NÃO troca SRC.
-   *
-   * Apenas coloca a camada correspondente
-   * por cima das outras.
+   * Todas as camadas continuam
+   * absolutamente presas ao mesmo frame.
    */
 
   hangmanLayers.forEach(
@@ -2081,6 +2222,10 @@ function atualizarImagem(){
     }
   );
 
+
+  /*
+   * Atualiza os sete indicadores.
+   */
 
   const pontos =
     errorsRow.querySelectorAll(
@@ -2352,11 +2497,15 @@ function escolherLetra(
 
 
   /*
-   * ÚLTIMO ERRO
+   * ÚLTIMO ESTÁGIO.
+   *
+   * Como existem imagens de 0 até 6 erros,
+   * o sexto erro é o último desenho.
    */
 
   if(
-    erros >= 7
+    erros >=
+    hangmanLayers.length - 1
   ){
 
     erroFinal();
@@ -2369,7 +2518,7 @@ function escolherLetra(
 
 
 /* =====================================================
-   ÚLTIMO ERRO — 3 SEGUNDOS
+   ÚLTIMO ERRO
 ===================================================== */
 
 function erroFinal(){
@@ -2395,13 +2544,15 @@ function erroFinal(){
 
 
   /*
-   * A imagem 07 já foi ativada por
-   * atualizarImagem().
-   *
-   * NÃO fazemos src.
-   * NÃO fazemos margin.
-   * NÃO fazemos resize.
+   * Garante explicitamente que a última
+   * imagem seja a única visível.
    */
+
+  erros =
+    hangmanLayers.length - 1;
+
+
+  atualizarImagem();
 
 
   messageEl.className =
@@ -2413,7 +2564,7 @@ function erroFinal(){
 
 
   /*
-   * ESPERA 3 SEGUNDOS
+   * Aguarda 3 segundos antes da derrota.
    */
 
   setTimeout(
@@ -2685,9 +2836,10 @@ function iniciarRodada(){
 
 
   /*
-   * VOLTA PARA A PRIMEIRA CAMADA.
+   * Primeira imagem.
    *
-   * Não altera tamanho ou posição.
+   * Não alteramos largura,
+   * altura, margem ou posição.
    */
 
   hangmanLayers.forEach(
