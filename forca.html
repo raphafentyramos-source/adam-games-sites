@@ -3535,6 +3535,8 @@ function stopTimer(){
 }
 
 function startTimer(){
+  // Nunca iniciar o cronômetro antes da rodada bônus estar realmente ativa.
+  if(round!==9 || !currentWord || locked || loading) return;
  if(timerStarted||round!==8&&round!==9)return;
  timerStarted=true;
  timerStart=performance.now();
@@ -3840,7 +3842,7 @@ function guess(c,b){
   b.classList.add("correct");
   wordUI();
 
-  if((round===8||round===9)&&!timerStarted)startTimer();
+  if((round===8||round===9)&&!timerStarted)if(round===9 && currentWord && !locked && !loading) /* timer inicia somente quando a rodada 9 começa */
 
   if(complete())win();
  }else{
