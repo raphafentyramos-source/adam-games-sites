@@ -436,6 +436,15 @@ body{
 }
 
 
+.game:hover{
+
+  box-shadow:
+    0 12px 32px
+    rgba(0,0,0,.38);
+
+}
+
+
 .game:active{
 
   transform:scale(.985);
@@ -546,34 +555,6 @@ body{
 .play:active{
 
   transform:scale(.97);
-
-}
-
-
-/* =====================================================
-   CHUVA DE SABORES
-   BANNER INTEIRO CLICÁVEL
-===================================================== */
-
-.game[data-game="frutas"]{
-
-  cursor:pointer;
-
-}
-
-
-.game[data-game="frutas"] .game-image{
-
-  cursor:pointer;
-
-}
-
-
-.game[data-game="frutas"]:hover{
-
-  box-shadow:
-    0 12px 32px
-    rgba(0,0,0,.38);
 
 }
 
@@ -821,6 +802,10 @@ body{
 <div class="page">
 
 
+  <!-- =================================================
+       TOPO
+  ================================================== -->
+
   <div class="top">
 
     <button
@@ -851,6 +836,10 @@ body{
   </div>
 
 
+  <!-- =================================================
+       HERO
+  ================================================== -->
+
   <div class="hero">
 
     <div class="hero-icon">
@@ -869,8 +858,11 @@ body{
   </div>
 
 
-  <div class="saldos">
+  <!-- =================================================
+       SALDOS
+  ================================================== -->
 
+  <div class="saldos">
 
     <div class="saldo">
 
@@ -905,9 +897,12 @@ body{
 
     </div>
 
-
   </div>
 
+
+  <!-- =================================================
+       PRÓXIMA CHANCE
+  ================================================== -->
 
   <div
     class="proxima"
@@ -918,8 +913,11 @@ body{
   </div>
 
 
-  <div class="menu">
+  <!-- =================================================
+       MENU
+  ================================================== -->
 
+  <div class="menu">
 
     <button
       class="menu-button"
@@ -940,9 +938,12 @@ body{
 
     </button>
 
-
   </div>
 
+
+  <!-- =================================================
+       JOGOS
+  ================================================== -->
 
   <div class="section-title">
 
@@ -954,7 +955,9 @@ body{
   <div class="games">
 
 
-    <!-- FORCA -->
+    <!-- =================================================
+         FORCA
+    ================================================== -->
 
     <div
       class="game"
@@ -998,8 +1001,7 @@ body{
 
 
     <!-- =================================================
-         CHUVA DE SABORES / FRUTAS
-         BANNER + BOTÃO ABREM frutas.html
+         CHUVA DE SABORES
     ================================================== -->
 
     <div
@@ -1042,7 +1044,9 @@ body{
     </div>
 
 
-    <!-- CAÇA AO TESOURO -->
+    <!-- =================================================
+         CAÇA AO TESOURO
+    ================================================== -->
 
     <div
       class="game"
@@ -1084,7 +1088,9 @@ body{
     </div>
 
 
-    <!-- ALVO -->
+    <!-- =================================================
+         ACERTE AO ALVO
+    ================================================== -->
 
     <div
       class="game"
@@ -1126,7 +1132,9 @@ body{
     </div>
 
 
-    <!-- MEMÓRIA -->
+    <!-- =================================================
+         MEMÓRIA
+    ================================================== -->
 
     <div
       class="game"
@@ -1168,7 +1176,9 @@ body{
     </div>
 
 
-    <!-- REAÇÃO -->
+    <!-- =================================================
+         REAÇÃO
+    ================================================== -->
 
     <div
       class="game"
@@ -1210,7 +1220,15 @@ body{
     </div>
 
 
-    <!-- SEQUÊNCIA -->
+    <!-- =================================================
+         SEQUÊNCIA DE CORES
+         
+         ANTES:
+         Sequência de Sons
+
+         AGORA:
+         Sequência de Cores
+    ================================================== -->
 
     <div
       class="game"
@@ -1218,17 +1236,17 @@ body{
 
       <img
         class="game-image"
-        src="./card_sequencia_de_sons.png"
-        alt="Sequência de Sons">
+        src="./card_sequencia_de_cores.png"
+        alt="Sequência de Cores">
 
       <div class="game-content">
 
         <div class="game-name">
-          Sequência de Sons
+          Sequência de Cores
         </div>
 
         <div class="game-description">
-          Memorize a sequência e repita corretamente.
+          Memorize a sequência de cores e repita corretamente.
         </div>
 
         <div class="game-bottom">
@@ -1252,7 +1270,9 @@ body{
     </div>
 
 
-    <!-- PALAVRA -->
+    <!-- =================================================
+         PALAVRA EMBARALHADA
+    ================================================== -->
 
     <div
       class="game"
@@ -1294,8 +1314,100 @@ body{
     </div>
 
 
+    <!-- =================================================
+         NOVO — 21 BARALHO
+    ================================================== -->
+
+    <div
+      class="game"
+      data-game="baralho">
+
+      <img
+        class="game-image"
+        src="./card_21_baralho.png"
+        alt="21 Baralho">
+
+      <div class="game-content">
+
+        <div class="game-name">
+          21 — Baralho
+        </div>
+
+        <div class="game-description">
+          Jogue com as cartas, some os valores e tente chegar a 21.
+        </div>
+
+        <div class="game-bottom">
+
+          <div class="game-reward">
+            🪙 Moedas por jogar
+          </div>
+
+          <button
+            class="play"
+            type="button">
+
+            JOGAR
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =================================================
+         NOVO — SENHA
+    ================================================== -->
+
+    <div
+      class="game"
+      data-game="senha">
+
+      <img
+        class="game-image"
+        src="./card_senha.png"
+        alt="Senha">
+
+      <div class="game-content">
+
+        <div class="game-name">
+          Senha
+        </div>
+
+        <div class="game-description">
+          Descubra a combinação correta antes que suas tentativas acabem.
+        </div>
+
+        <div class="game-bottom">
+
+          <div class="game-reward">
+            🪙 Moedas por jogar
+          </div>
+
+          <button
+            class="play"
+            type="button">
+
+            JOGAR
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
   </div>
 
+
+  <!-- =================================================
+       INFORMAÇÃO
+  ================================================== -->
 
   <div class="info-card">
 
@@ -1313,6 +1425,9 @@ body{
       e mais
       <b>20 moedas se acertar a palavra</b>.
 
+      Os demais jogos possuem suas próprias
+      recompensas.
+
     </p>
 
   </div>
@@ -1320,6 +1435,10 @@ body{
 
 </div>
 
+
+<!-- =====================================================
+     MODAL SEM CHANCE
+===================================================== -->
 
 <div
   class="modal"
@@ -1353,6 +1472,10 @@ body{
 </div>
 
 
+<!-- =====================================================
+     WHATSAPP
+===================================================== -->
+
 <a
   class="whatsapp"
   href="https://wa.me/5531987350267"
@@ -1365,6 +1488,10 @@ body{
 
 
 <script type="module">
+
+/* =====================================================
+   FIREBASE
+===================================================== */
 
 import {
   initializeApp
@@ -1544,7 +1671,6 @@ const paginas = {
   forca:
     "forca.html",
 
-  /* NOVO JOGO */
   frutas:
     "frutas.html",
 
@@ -1564,7 +1690,15 @@ const paginas = {
     "sequencia.html",
 
   palavra:
-    "palavra.html"
+    "palavra.html",
+
+  /* NOVO */
+  baralho:
+    "Baralho.html",
+
+  /* NOVO */
+  senha:
+    "Senha.html"
 
 };
 
@@ -1625,14 +1759,18 @@ function verificarJogo(jogo){
 ===================================================== */
 
 /*
-   O CARD INTEIRO é clicável.
+   TODO O CARD É CLICÁVEL.
 
-   Isso significa que no Chuva de Sabores:
-   - clicar na imagem/banner abre frutas.html
-   - clicar no nome abre frutas.html
-   - clicar na descrição abre frutas.html
-   - clicar no espaço do card abre frutas.html
-   - clicar no botão JOGAR também abre frutas.html
+   Isso vale para:
+
+   - imagem
+   - nome
+   - descrição
+   - área do card
+   - botão JOGAR
+
+   Os novos jogos também usam exatamente
+   o mesmo sistema.
 */
 
 document
@@ -1643,48 +1781,12 @@ document
       "click",
       event => {
 
-        /*
-           Se clicou no botão, o próprio
-           evento do botão cuidará da abertura.
-        */
-
-        if(
-          event.target.closest(".play")
-        ){
-
-          return;
-
-        }
-
-
         verificarJogo(
           card.dataset.game
         );
 
       }
     );
-
-
-    const botao =
-      card.querySelector(".play");
-
-
-    if(botao){
-
-      botao.addEventListener(
-        "click",
-        event => {
-
-          event.stopPropagation();
-
-          verificarJogo(
-            card.dataset.game
-          );
-
-        }
-      );
-
-    }
 
   });
 
