@@ -1,3360 +1,1486 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
-
-<title>Adam Games • Forca</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adam Games - Forca</title>
 <style>
-
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-body{
-
-  min-height:100vh;
-
-  background:
-    linear-gradient(
-      180deg,
-      #031b30,
-      #062d4c
-    );
-
-  color:#fff;
-
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
-
-}
-
-.page{
-
-  width:100%;
-
-  max-width:680px;
-
-  margin:auto;
-
-  padding:
-    14px
-    14px
-    50px;
-
-}
-
-
-/* =====================================================
-   TOPO
-===================================================== */
-
-.top{
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:space-between;
-
-}
-
-.back{
-
-  width:45px;
-
-  height:45px;
-
-  border:0;
-
-  border-radius:14px;
-
-  background:#082b48;
-
-  color:#fff;
-
-  font-size:25px;
-
-}
-
-.top-title{
-
-  text-align:center;
-
-}
-
-.top-title small{
-
-  display:block;
-
-  color:#62c8ff;
-
-  font-size:10px;
-
-  letter-spacing:2px;
-
-}
-
-.top-title strong{
-
-  font-size:20px;
-
-}
-
-
-/* =====================================================
-   INFORMAÇÕES DO JOGO
-===================================================== */
-
-.game-info{
-
-  display:grid;
-
-  grid-template-columns:
-    repeat(3,1fr);
-
-  gap:10px;
-
-  margin-top:14px;
-
-}
-
-.info-card{
-
-  min-height:78px;
-
-  padding:12px 8px;
-
-  border-radius:18px;
-
-  background:
-    linear-gradient(
-      180deg,
-      #123e59,
-      #0a304a
-    );
-
-  border:
-    1px solid
-    rgba(255,255,255,.10);
-
-  display:flex;
-
-  flex-direction:column;
-
-  align-items:center;
-
-  justify-content:center;
-
-  text-align:center;
-
-}
-
-.info-card small{
-
-  color:#91b2c8;
-
-  font-size:10px;
-
-  font-weight:900;
-
-  letter-spacing:.5px;
-
-}
-
-.info-card strong{
-
-  margin-top:5px;
-
-  font-size:22px;
-
-}
-
-.info-card.reward strong{
-
-  font-size:20px;
-
-}
-
-
-/* =====================================================
-   PROGRESSO
-===================================================== */
-
-.progress-card{
-
-  margin-top:14px;
-
-  padding:17px;
-
-  border-radius:20px;
-
-  background:#061e34;
-
-  border:
-    1px solid
-    rgba(255,255,255,.06);
-
-}
-
-.progress-header{
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:space-between;
-
-  font-size:14px;
-
-  font-weight:900;
-
-}
-
-.progress-header span:last-child{
-
-  color:#9bb4c9;
-
-  font-weight:normal;
-
-}
-
-.progress-bar{
-
-  height:12px;
-
-  margin-top:12px;
-
-  overflow:hidden;
-
-  border-radius:20px;
-
-  background:#163c57;
-
-}
-
-.progress-fill{
-
-  width:14.2857%;
-
-  height:100%;
-
-  border-radius:20px;
-
-  background:
-    linear-gradient(
-      90deg,
-      #18c866,
-      #ffe000
-    );
-
-  transition:
-    width .35s ease;
-
-}
-
-
-/* =====================================================
-   IMAGEM
-===================================================== */
-
-.image-card{
-
-  margin-top:16px;
-
-  padding:10px;
-
-  overflow:hidden;
-
-  border-radius:23px;
-
-  background:#082b48;
-
-  border:
-    1px solid
-    rgba(255,255,255,.10);
-
-}
-
-.image-card img{
-
-  width:100%;
-
-  display:block;
-
-  aspect-ratio:16 / 9;
-
-  object-fit:cover;
-
-  border-radius:18px;
-
-}
-
-
-/* =====================================================
-   INDICADOR DE ERROS
-===================================================== */
-
-.errors{
-
-  display:flex;
-
-  justify-content:center;
-
-  gap:9px;
-
-  margin-top:12px;
-
-}
-
-.error-dot{
-
-  width:19px;
-
-  height:19px;
-
-  border-radius:50%;
-
-  background:#243e55;
-
-  box-shadow:
-    inset 0 0 0 1px
-    rgba(255,255,255,.03);
-
-}
-
-.error-dot.active{
-
-  background:#ff476b;
-
-  box-shadow:
-    0 0 12px
-    rgba(255,55,95,.55);
-
-}
-
-
-/* =====================================================
-   DICA
-===================================================== */
-
-.dica{
-
-  margin-top:14px;
-
-  padding:17px 14px;
-
-  border-radius:19px;
-
-  text-align:center;
-
-  background:#082b48;
-
-  border:
-    1px solid
-    rgba(255,255,255,.07);
-
-}
-
-.dica small{
-
-  color:#65d2ff;
-
-  font-weight:900;
-
-  letter-spacing:1px;
-
-}
-
-.dica strong{
-
-  display:block;
-
-  margin-top:7px;
-
-  font-size:18px;
-
-}
-
-
-/* =====================================================
-   PALAVRA
-===================================================== */
-
-.word{
-
-  margin-top:25px;
-
-  min-height:62px;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  flex-wrap:wrap;
-
-  gap:8px;
-
-  text-align:center;
-
-  font-size:
-    clamp(
-      25px,
-      7vw,
-      42px
-    );
-
-  font-weight:900;
-
-}
-
-.word-letter{
-
-  min-width:25px;
-
-  border-bottom:
-    4px solid
-    #63c9ff;
-
-  padding:
-    0 2px
-    5px;
-
-  line-height:1;
-
-}
-
-
-/* =====================================================
-   TECLADO
-===================================================== */
-
-.keyboard{
-
-  display:grid;
-
-  grid-template-columns:
-    repeat(7,1fr);
-
-  gap:7px;
-
-  margin-top:23px;
-
-}
-
-.key{
-
-  min-height:52px;
-
-  border:0;
-
-  border-radius:12px;
-
-  background:
-    linear-gradient(
-      180deg,
-      #159bd7,
-      #0872a8
-    );
-
-  color:#fff;
-
-  font-size:16px;
-
-  font-weight:900;
-
-  cursor:pointer;
-
-  transition:
-    transform .1s ease,
-    opacity .15s ease;
-
-}
-
-.key:active{
-
-  transform:scale(.95);
-
-}
-
-.key.correct{
-
-  background:#168a57;
-
-}
-
-.key.wrong{
-
-  background:#7c3151;
-
-}
-
-.key:disabled{
-
-  opacity:.45;
-
-  cursor:not-allowed;
-
-}
-
-
-/* =====================================================
-   STATUS
-===================================================== */
-
-.status{
-
-  margin-top:17px;
-
-  padding:15px;
-
-  border-radius:17px;
-
-  text-align:center;
-
-  font-weight:900;
-
-  line-height:1.4;
-
-}
-
-.status.success{
-
-  background:
-    rgba(18,170,92,.18);
-
-  border:
-    1px solid
-    rgba(18,220,120,.3);
-
-  color:#7cffb1;
-
-}
-
-.status.error{
-
-  background:
-    rgba(220,50,70,.15);
-
-  border:
-    1px solid
-    rgba(255,80,90,.3);
-
-  color:#ff9aa4;
-
-}
-
-.status.info{
-
-  background:
-    rgba(50,150,220,.15);
-
-  border:
-    1px solid
-    rgba(80,180,255,.25);
-
-  color:#a9ddff;
-
-}
-
-
-/* =====================================================
-   MODAL
-===================================================== */
-
-.modal{
-
-  position:fixed;
-
-  inset:0;
-
-  z-index:100;
-
-  display:none;
-
-  align-items:center;
-
-  justify-content:center;
-
-  padding:20px;
-
-  background:
-    rgba(0,10,25,.88);
-
-}
-
-.modal.show{
-
-  display:flex;
-
-}
-
-.modal-card{
-
-  width:100%;
-
-  max-width:390px;
-
-  padding:28px 20px;
-
-  border-radius:23px;
-
-  background:#082b48;
-
-  text-align:center;
-
-  border:
-    1px solid
-    rgba(255,255,255,.10);
-
-}
-
-.modal-card h2{
-
-  font-size:25px;
-
-}
-
-.modal-card p{
-
-  margin-top:10px;
-
-  color:#b9d7e8;
-
-  line-height:1.5;
-
-}
-
-.modal-card button{
-
-  width:100%;
-
-  height:48px;
-
-  margin-top:20px;
-
-  border:0;
-
-  border-radius:13px;
-
-  background:#17a95d;
-
-  color:#fff;
-
-  font-weight:900;
-
-}
-
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media(max-width:430px){
-
-  .page{
-
-    padding:
-      12px
-      10px
-      40px;
-
-  }
-
-  .info-card{
-
-    min-height:76px;
-
-  }
-
-  .info-card strong{
-
-    font-size:20px;
-
-  }
-
-  .info-card.reward strong{
-
-    font-size:18px;
-
-  }
-
-  .keyboard{
-
-    gap:6px;
-
-  }
-
-  .key{
-
-    min-height:50px;
-
-    font-size:15px;
-
-  }
-
-}
-
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;min-height:100%;overflow-x:hidden}
+body{min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:#fff;background:radial-gradient(circle at 10% 0%,rgba(0,190,120,.30),transparent 32%),radial-gradient(circle at 90% 0%,rgba(20,150,255,.30),transparent 32%),linear-gradient(180deg,#06233d,#031a2e)}
+.page{width:100%;max-width:650px;margin:auto;padding:15px 15px 70px}
+.top{display:flex;align-items:center;justify-content:space-between}
+.back{width:45px;height:45px;border:0;border-radius:13px;background:rgba(0,40,70,.9);color:#fff;font-size:26px;cursor:pointer}
+.title{text-align:center}.title small{display:block;color:#8bb8d5;font-size:8px;letter-spacing:2px}.title strong{display:block;margin-top:2px;font-size:21px}
+.top-coins{min-width:88px;padding:7px 9px;border-radius:13px;text-align:center;background:rgba(255,213,43,.08);border:1px solid rgba(255,213,43,.15)}
+.top-coins-label{color:#9ab9cd;font-size:8px;font-weight:bold}.top-coins-value{margin-top:2px;color:#ffd52b;font-size:17px;font-weight:900}
+.hero{margin-top:14px;padding:18px;border-radius:22px;text-align:center;background:linear-gradient(135deg,rgba(5,48,82,.97),rgba(3,27,49,.97));border:1px solid rgba(255,255,255,.08)}
+.hero-icon{font-size:42px}.hero h1{margin-top:3px;font-size:30px}.hero p{margin-top:5px;color:#b7d0e2;font-size:13px}
+.level-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:11px}.level-box{padding:10px 5px;border-radius:13px;text-align:center;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.07)}
+.level-label{color:#91b2c9;font-size:8px;font-weight:bold}.level-value{margin-top:3px;font-size:15px;font-weight:900}
+.progress-card{margin-top:11px;padding:13px;border-radius:15px;background:rgba(2,25,46,.9)}.progress-top{display:flex;justify-content:space-between;align-items:center}.progress-title{font-size:11px;font-weight:900}.progress-count{color:#9bb9ce;font-size:10px}.progress-bar{width:100%;height:8px;margin-top:8px;overflow:hidden;border-radius:20px;background:rgba(255,255,255,.09)}.progress-fill{height:100%;width:0;border-radius:20px;background:linear-gradient(90deg,#13b965,#ffd52b);transition:width .3s ease}
+.game-card{margin-top:12px;padding:13px;border-radius:21px;background:rgba(2,25,47,.97);border:1px solid rgba(255,255,255,.09)}
+.hangman-wrap{position:relative;width:100%;aspect-ratio:437/275;overflow:hidden;border-radius:17px;background:#071f35;line-height:0;isolation:isolate}
+.hangman-layer{position:absolute;inset:0;width:100%!important;height:100%!important;object-fit:fill;opacity:0;visibility:hidden;pointer-events:none;user-select:none;-webkit-user-drag:none}
+.hangman-layer.active{opacity:1;visibility:visible;z-index:2}
+.errors-row{min-height:10px;display:flex;align-items:center;justify-content:center;gap:7px;margin-top:11px}.error-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.13)}.error-dot.active{background:#ff5365;box-shadow:0 0 7px rgba(255,70,90,.5)}
+.hint{margin-top:12px;padding:12px;border-radius:14px;text-align:center;background:rgba(20,145,220,.08);border:1px solid rgba(20,145,220,.12)}.hint-label{color:#69c5fa;font-size:8px;font-weight:900;letter-spacing:1px}.hint-text{margin-top:4px;color:#fff;font-size:14px;font-weight:bold}
+.word{min-height:47px;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:center;gap:6px;margin-top:17px}.letter{width:27px;height:39px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:4px;border-bottom:3px solid #62c9ff;font-size:23px;font-weight:900;text-transform:uppercase}
+.keyboard{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-top:19px}.key{min-height:41px;border:0;border-radius:9px;background:linear-gradient(145deg,#126a9e,#07466e);color:#fff;font-size:14px;font-weight:900;cursor:pointer}.key.correct{background:linear-gradient(145deg,#16bd68,#087d45)}.key.wrong{background:linear-gradient(145deg,#c9344a,#8b182b)}.key:disabled{cursor:not-allowed;opacity:.42}
+.message{display:none;margin-top:13px;padding:13px;border-radius:14px;text-align:center;font-size:13px;font-weight:bold}.message.show{display:block}.message.success{color:#70ffac;background:rgba(0,210,100,.1);border:1px solid rgba(0,210,100,.18)}.message.error{color:#ff9ca8;background:rgba(255,50,70,.1);border:1px solid rgba(255,50,70,.18)}
+.reward{display:none;margin-top:12px;padding:12px;border-radius:14px;text-align:center;background:rgba(255,213,43,.07);border:1px solid rgba(255,213,43,.15)}.reward strong{color:#ffd52b;font-size:20px}
+.modal{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(0,8,20,.86);backdrop-filter:blur(6px)}.modal.show{display:flex}.modal-card{width:100%;max-width:380px;padding:25px 20px;border-radius:23px;text-align:center;background:#082843;border:1px solid rgba(255,255,255,.12);box-shadow:0 20px 60px rgba(0,0,0,.5)}.modal-icon{font-size:54px}.modal-card h2{margin-top:8px;font-size:25px}.modal-card p{margin-top:9px;color:#b8d3e5;font-size:14px;line-height:1.5}.modal-coins{margin-top:13px;color:#ffd52b;font-size:21px;font-weight:900}.modal-button{width:100%;height:49px;margin-top:18px;border:0;border-radius:14px;background:#18ae60;color:#fff;font-size:13px;font-weight:900;cursor:pointer}
+@media(max-width:430px){.keyboard{gap:4px}.key{min-height:38px;font-size:13px}.letter{width:24px;font-size:21px}}
 </style>
-
 </head>
-
-
 <body>
-
-
 <div class="page">
-
-
-  <!-- =================================================
-       TOPO
-  ================================================== -->
-
-  <div class="top">
-
-    <button
-      class="back"
-      id="back"
-      type="button"
-    >
-
-      ←
-
-    </button>
-
-
-    <div class="top-title">
-
-      <small>
-        ADAM GAMES
-      </small>
-
-      <strong>
-        FORCA
-      </strong>
-
-    </div>
-
-
-    <div style="width:45px"></div>
-
-  </div>
-
-
-  <!-- =================================================
-       NÍVEL / RODADA / RECOMPENSA
-  ================================================== -->
-
-  <div class="game-info">
-
-
-    <div class="info-card">
-
-      <small>
-        NÍVEL
-      </small>
-
-      <strong id="nivel">
-        FÁCIL
-      </strong>
-
-    </div>
-
-
-    <div class="info-card">
-
-      <small>
-        RODADA
-      </small>
-
-      <strong id="rodada">
-        1
-      </strong>
-
-    </div>
-
-
-    <div class="info-card reward">
-
-      <small>
-        RECOMPENSA
-      </small>
-
-      <strong>
-        🪙 <span id="recompensa">20</span>
-      </strong>
-
-    </div>
-
-
-  </div>
-
-
-  <!-- =================================================
-       PROGRESSO
-  ================================================== -->
-
-  <div class="progress-card">
-
-    <div class="progress-header">
-
-      <span>
-        PROGRESSO DA SEQUÊNCIA
-      </span>
-
-      <span id="fase">
-        1 / 7
-      </span>
-
-    </div>
-
-
-    <div class="progress-bar">
-
-      <div
-        class="progress-fill"
-        id="progress"
-      ></div>
-
-    </div>
-
-  </div>
-
-
-  <!-- =================================================
-       IMAGEM
-  ================================================== -->
-
-  <div class="image-card">
-
-    <img
-      src="./card_forca.png"
-      alt="Forca"
-    >
-
-  </div>
-
-
-  <!-- =================================================
-       ERROS
-  ================================================== -->
-
-  <div
-    class="errors"
-    id="errors"
-  >
-
-    <span class="error-dot"></span>
-    <span class="error-dot"></span>
-    <span class="error-dot"></span>
-    <span class="error-dot"></span>
-    <span class="error-dot"></span>
-    <span class="error-dot"></span>
-
-  </div>
-
-
-  <!-- =================================================
-       DICA
-  ================================================== -->
-
-  <div class="dica">
-
-    <small>
-      💡 DICA
-    </small>
-
-    <strong id="dica">
-      Preparando...
-    </strong>
-
-  </div>
-
-
-  <!-- =================================================
-       PALAVRA
-  ================================================== -->
-
-  <div
-    class="word"
-    id="word"
-  ></div>
-
-
-  <!-- =================================================
-       TECLADO
-  ================================================== -->
-
-  <div
-    class="keyboard"
-    id="keyboard"
-  ></div>
-
-
-  <!-- =================================================
-       STATUS
-  ================================================== -->
-
-  <div
-    class="status info"
-    id="status"
-  >
-
-    🎟️ Preparando sua sequência...
-
-  </div>
-
-
-</div>
-
-
-<!-- =====================================================
-     MODAL
-===================================================== -->
-
-<div
-  class="modal"
-  id="modal"
->
-
-  <div class="modal-card">
-
-    <h2 id="modalTitle">
-      Partida encerrada
-    </h2>
-
-    <p id="modalText">
-      Você completou a sequência.
-    </p>
-
-    <button
-      id="modalButton"
-      type="button"
-    >
-
-      VOLTAR PARA OS JOGOS
-
-    </button>
-
-  </div>
-
-</div>
-
+<div class="top"><button class="back" id="back" type="button">←</button><div class="title"><small>ADAM GAMES</small><strong>FORCA</strong></div><div class="top-coins"><div class="top-coins-label">ADAM COINS</div><div class="top-coins-value" id="coins">0</div></div></div>
+<div class="hero"><div class="hero-icon">🔤</div><h1>Forca</h1><p>Descubra a palavra e avance até a rodada bônus.</p></div>
+<div class="level-row"><div class="level-box"><div class="level-label">NÍVEL DA PALAVRA</div><div class="level-value" id="levelName">FÁCIL</div></div><div class="level-box"><div class="level-label">RODADA</div><div class="level-value" id="roundNumber">1 / 8</div></div><div class="level-box"><div class="level-label">RECOMPENSA</div><div class="level-value" id="roundReward">🪙 20</div></div></div>
+<div class="progress-card"><div class="progress-top"><div class="progress-title">PROGRESSO DA SEQUÊNCIA</div><div class="progress-count" id="progressText">1 / 8</div></div><div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div></div>
+<div class="game-card"><div class="hangman-wrap">
+<img class="hangman-layer active" src="01_forca_0_erros.png"><img class="hangman-layer" src="02_forca_1_erro.png"><img class="hangman-layer" src="03_forca_2_erros.png"><img class="hangman-layer" src="04_forca_3_erros.png"><img class="hangman-layer" src="05_forca_4_erros.png"><img class="hangman-layer" src="06_forca_5_erros.png"><img class="hangman-layer" src="07_forca_6_erros.png">
+</div><div class="errors-row" id="errorsRow"><span class="error-dot"></span><span class="error-dot"></span><span class="error-dot"></span><span class="error-dot"></span><span class="error-dot"></span><span class="error-dot"></span></div>
+<div class="hint"><div class="hint-label">💡 PISTA</div><div class="hint-text" id="hint">—</div></div><div class="word" id="word"></div><div class="keyboard" id="keyboard"></div><div class="message" id="message"></div><div class="reward" id="reward">🪙 Você ganhou <strong id="rewardValue">20</strong> Adam Coins!</div></div></div>
+<div class="modal" id="modal"><div class="modal-card"><div class="modal-icon" id="modalIcon">💀</div><h2 id="modalTitle">Você perdeu!</h2><p id="modalText"></p><div class="modal-coins" id="modalCoins"></div><button class="modal-button" id="modalButton">CONTINUAR</button></div></div>
 
 <script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+import {getAuth,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+import {getFirestore,collection,query,where,getDocs,getDoc,runTransaction} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
+const firebaseConfig={apiKey:"AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",authDomain:"adam-games-21081.firebaseapp.com",projectId:"adam-games-21081",storageBucket:"adam-games-21081.firebasestorage.app",messagingSenderId:"1055528418738",appId:"1:1055528418738:web:5fafdf63424ba9744eb8ab"};
+const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app);
 
-/* =====================================================
-   FIREBASE
-===================================================== */
+const NORMAL=[
+  {palavra:"academia",pista:"Local de treino"},
+  {palavra:"aeroporto",pista:"Local de aviões"},
+  {palavra:"almofada",pista:"Objeto macio"},
+  {palavra:"amendoim",pista:"Grão comestível"},
+  {palavra:"aparelho",pista:"Objeto eletrônico"},
+  {palavra:"aventura",pista:"Experiência emocionante"},
+  {palavra:"banheiro",pista:"Cômodo de higiene"},
+  {palavra:"bicicleta",pista:"Veículo de pedais"},
+  {palavra:"brinquedo",pista:"Objeto para brincar"},
+  {palavra:"cachorro",pista:"Animal doméstico"},
+  {palavra:"camiseta",pista:"Peça de roupa"},
+  {palavra:"campanha",pista:"Ação organizada"},
+  {palavra:"canivete",pista:"Objeto dobrável"},
+  {palavra:"caramelo",pista:"Doce ou cor"},
+  {palavra:"carteira",pista:"Objeto para guardar documentos"},
+  {palavra:"castanha",pista:"Semente comestível"},
+  {palavra:"chocolate",pista:"Doce de cacau"},
+  {palavra:"chuveiro",pista:"Objeto do banho"},
+  {palavra:"dinheiro",pista:"Meio de pagamento"},
+  {palavra:"elefante",pista:"Animal de tromba"},
+  {palavra:"envelope",pista:"Objeto para cartas"},
+  {palavra:"ferramenta",pista:"Objeto de trabalho"},
+  {palavra:"flamingo",pista:"Ave rosada"},
+  {palavra:"floresta",pista:"Área de árvores"},
+  {palavra:"fotografia",pista:"Imagem registrada"},
+  {palavra:"girassol",pista:"Flor que acompanha o sol"},
+  {palavra:"hamburguer",pista:"Sanduíche"},
+  {palavra:"hospital",pista:"Local de atendimento"},
+  {palavra:"joaninha",pista:"Inseto colorido"},
+  {palavra:"lanchonete",pista:"Local de lanches"},
+  {palavra:"limonada",pista:"Bebida cítrica"},
+  {palavra:"macarrão",pista:"Massa alimentícia"},
+  {palavra:"melancia",pista:"Fruta grande"},
+  {palavra:"montanha",pista:"Elevação natural"},
+  {palavra:"panqueca",pista:"Massa fina"},
+  {palavra:"papagaio",pista:"Ave que imita sons"},
+  {palavra:"passarinho",pista:"Ave pequena"},
+  {palavra:"peixinho",pista:"Pequeno peixe"},
+  {palavra:"presente",pista:"Objeto oferecido"},
+  {palavra:"professor",pista:"Profissional do ensino"},
+  {palavra:"sanduiche",pista:"Comida com pão"},
+  {palavra:"telefone",pista:"Aparelho de comunicação"},
+  {palavra:"televisao",pista:"Aparelho de imagem"},
+  {palavra:"travesseiro",pista:"Objeto para dormir"},
+  {palavra:"universo",pista:"Tudo que existe"},
+  {palavra:"vitamina",pista:"Bebida nutritiva"},
+  {palavra:"zoologico",pista:"Local de animais"},
+  {palavra:"açucareiro",pista:"Recipiente de açúcar"},
+  {palavra:"abastecimento",pista:"Conceito ou objeto"},
+  {palavra:"abandonado",pista:"Conceito ou objeto"},
+  {palavra:"abordagem",pista:"Conceito ou objeto"},
+  {palavra:"acessibilidade",pista:"Conceito ou objeto"},
+  {palavra:"acompanhamento",pista:"Conceito ou objeto"},
+  {palavra:"acondicionamento",pista:"Conceito ou objeto"},
+  {palavra:"administração",pista:"Conceito ou objeto"},
+  {palavra:"agricultura",pista:"Conceito ou objeto"},
+  {palavra:"alimentacao",pista:"Conceito ou objeto"},
+  {palavra:"amplitude",pista:"Conceito ou objeto"},
+  {palavra:"aniversario",pista:"Conceito ou objeto"},
+  {palavra:"apresentacao",pista:"Conceito ou objeto"},
+  {palavra:"aproximacao",pista:"Conceito ou objeto"},
+  {palavra:"arquitetura",pista:"Conceito ou objeto"},
+  {palavra:"associação",pista:"Conceito ou objeto"},
+  {palavra:"atendimento",pista:"Conceito ou objeto"},
+  {palavra:"automacao",pista:"Conceito ou objeto"},
+  {palavra:"avalanche",pista:"Conceito ou objeto"},
+  {palavra:"beneficente",pista:"Conceito ou objeto"},
+  {palavra:"bibliotecario",pista:"Conceito ou objeto"},
+  {palavra:"capacidade",pista:"Conceito ou objeto"},
+  {palavra:"celebracao",pista:"Conceito ou objeto"},
+  {palavra:"colaboracao",pista:"Conceito ou objeto"},
+  {palavra:"comunicacao",pista:"Conceito ou objeto"},
+  {palavra:"comunidade",pista:"Conceito ou objeto"},
+  {palavra:"comportamento",pista:"Conceito ou objeto"},
+  {palavra:"compreensao",pista:"Conceito ou objeto"},
+  {palavra:"conhecimento",pista:"Conceito ou objeto"},
+  {palavra:"construcao",pista:"Conceito ou objeto"},
+  {palavra:"consistencia",pista:"Conceito ou objeto"},
+  {palavra:"continente",pista:"Conceito ou objeto"},
+  {palavra:"coordenacao",pista:"Conceito ou objeto"},
+  {palavra:"cooperacao",pista:"Conceito ou objeto"},
+  {palavra:"correspondencia",pista:"Conceito ou objeto"},
+  {palavra:"desenvolvimento",pista:"Conceito ou objeto"},
+  {palavra:"descoberta",pista:"Conceito ou objeto"},
+  {palavra:"deslocamento",pista:"Conceito ou objeto"},
+  {palavra:"determinação",pista:"Conceito ou objeto"},
+  {palavra:"distribuicao",pista:"Conceito ou objeto"},
+  {palavra:"diversidade",pista:"Conceito ou objeto"},
+  {palavra:"educacao",pista:"Conceito ou objeto"},
+  {palavra:"eletronica",pista:"Conceito ou objeto"},
+  {palavra:"emergencia",pista:"Conceito ou objeto"},
+  {palavra:"encantamento",pista:"Conceito ou objeto"},
+  {palavra:"equipamento",pista:"Conceito ou objeto"},
+  {palavra:"especialista",pista:"Conceito ou objeto"},
+  {palavra:"estrutura",pista:"Conceito ou objeto"},
+  {palavra:"experimento",pista:"Conceito ou objeto"},
+  {palavra:"fabricacao",pista:"Conceito ou objeto"},
+  {palavra:"ferramentaria",pista:"Conceito ou objeto"},
+  {palavra:"flexibilidade",pista:"Conceito ou objeto"},
+  {palavra:"funcionamento",pista:"Conceito ou objeto"},
+  {palavra:"gerenciamento",pista:"Conceito ou objeto"},
+  {palavra:"identidade",pista:"Conceito ou objeto"},
+  {palavra:"iluminacao",pista:"Conceito ou objeto"},
+  {palavra:"informacao",pista:"Conceito ou objeto"},
+  {palavra:"infraestrutura",pista:"Conceito ou objeto"},
+  {palavra:"inovacao",pista:"Conceito ou objeto"},
+  {palavra:"instrumentacao",pista:"Conceito ou objeto"},
+  {palavra:"interacao",pista:"Conceito ou objeto"},
+  {palavra:"interpretacao",pista:"Conceito ou objeto"},
+  {palavra:"investigacao",pista:"Conceito ou objeto"},
+  {palavra:"manutencao",pista:"Conceito ou objeto"},
+  {palavra:"materiais",pista:"Conceito ou objeto"},
+  {palavra:"movimentacao",pista:"Conceito ou objeto"},
+  {palavra:"navegacao",pista:"Conceito ou objeto"},
+  {palavra:"negociacao",pista:"Conceito ou objeto"},
+  {palavra:"organização",pista:"Conceito ou objeto"},
+  {palavra:"orientacao",pista:"Conceito ou objeto"},
+  {palavra:"participacao",pista:"Conceito ou objeto"},
+  {palavra:"planejamento",pista:"Conceito ou objeto"},
+  {palavra:"possibilidade",pista:"Conceito ou objeto"},
+  {palavra:"preparacao",pista:"Conceito ou objeto"},
+  {palavra:"producao",pista:"Conceito ou objeto"},
+  {palavra:"profissional",pista:"Conceito ou objeto"},
+  {palavra:"progresso",pista:"Conceito ou objeto"},
+  {palavra:"qualidade",pista:"Conceito ou objeto"},
+  {palavra:"realidade",pista:"Conceito ou objeto"},
+  {palavra:"reconhecimento",pista:"Conceito ou objeto"},
+  {palavra:"representacao",pista:"Conceito ou objeto"},
+  {palavra:"resistencia",pista:"Conceito ou objeto"},
+  {palavra:"seguranca",pista:"Conceito ou objeto"},
+  {palavra:"sensibilidade",pista:"Conceito ou objeto"},
+  {palavra:"sequencia",pista:"Conceito ou objeto"},
+  {palavra:"significado",pista:"Conceito ou objeto"},
+  {palavra:"simulacao",pista:"Conceito ou objeto"},
+  {palavra:"transformacao",pista:"Conceito ou objeto"},
+  {palavra:"transporte",pista:"Conceito ou objeto"},
+  {palavra:"velocidade",pista:"Conceito ou objeto"},
+  {palavra:"verificacao",pista:"Conceito ou objeto"},
+  {palavra:"visualizacao",pista:"Conceito ou objeto"},
+  {palavra:"adaptacao",pista:"Conceito ou objeto"},
+  {palavra:"combinacao",pista:"Conceito ou objeto"},
+  {palavra:"competencia",pista:"Conceito ou objeto"},
+  {palavra:"concentracao",pista:"Conceito ou objeto"},
+  {palavra:"conectividade",pista:"Conceito ou objeto"},
+  {palavra:"criatividade",pista:"Conceito ou objeto"},
+  {palavra:"descobrimento",pista:"Conceito ou objeto"},
+  {palavra:"funcionalidade",pista:"Conceito ou objeto"},
+  {palavra:"hospitalidade",pista:"Conceito ou objeto"},
+  {palavra:"independencia",pista:"Conceito ou objeto"},
+  {palavra:"personalidade",pista:"Conceito ou objeto"},
+  {palavra:"responsabilidade",pista:"Conceito ou objeto"},
+  {palavra:"simplicidade",pista:"Conceito ou objeto"},
+  {palavra:"tecnologia",pista:"Conceito ou objeto"},
+  {palavra:"territorio",pista:"Conceito ou objeto"},
+  {palavra:"transparencia",pista:"Conceito ou objeto"},
+  {palavra:"abobrinha",pista:"Vegetal verde"},
+  {palavra:"adolescente",pista:"Pessoa jovem"},
+  {palavra:"alpinista",pista:"Pessoa que escala montanhas"},
+  {palavra:"amendoeira",pista:"Árvore das amêndoas"},
+  {palavra:"antartida",pista:"Continente gelado"},
+  {palavra:"apicultor",pista:"Criador de abelhas"},
+  {palavra:"arcoiris",pista:"Fenômeno colorido"},
+  {palavra:"astronauta",pista:"Viajante espacial"},
+  {palavra:"atletismo",pista:"Esporte de corrida e salto"},
+  {palavra:"biblioteca",pista:"Local de livros"},
+  {palavra:"borboleta",pista:"Inseto de asas coloridas"},
+  {palavra:"brasileiro",pista:"Natural do Brasil"},
+  {palavra:"cachoeira",pista:"Queda natural de água"},
+  {palavra:"camaleao",pista:"Réptil que muda de cor"},
+  {palavra:"caranguejo",pista:"Crustáceo de pinças"},
+  {palavra:"cerejeira",pista:"Árvore das cerejas"},
+  {palavra:"cirurgiao",pista:"Profissional de cirurgia"},
+  {palavra:"comerciante",pista:"Pessoa que vende"},
+  {palavra:"computador",pista:"Máquina eletrônica"},
+  {palavra:"confeiteiro",pista:"Profissional dos doces"},
+  {palavra:"coqueiro",pista:"Árvore do coco"},
+  {palavra:"corredor",pista:"Pessoa que corre"},
+  {palavra:"curiosidade",pista:"Desejo de descobrir"},
+  {palavra:"dinossauro",pista:"Animal pré-histórico"},
+  {palavra:"eletricista",pista:"Profissional de instalações elétricas"},
+  {palavra:"enciclopedia",pista:"Obra de conhecimentos"},
+  {palavra:"engenheiro",pista:"Profissional técnico"},
+  {palavra:"estudante",pista:"Pessoa que estuda"},
+  {palavra:"explorador",pista:"Pessoa que explora"},
+  {palavra:"fazendeiro",pista:"Trabalhador rural"},
+  {palavra:"fotografo",pista:"Profissional de imagens"},
+  {palavra:"geografia",pista:"Estudo da Terra"},
+  {palavra:"golfinho",pista:"Mamífero marinho"},
+  {palavra:"guitarrista",pista:"Pessoa que toca guitarra"},
+  {palavra:"helicoptero",pista:"Aeronave de hélices"},
+  {palavra:"historia",pista:"Estudo do passado"},
+  {palavra:"imaginação",pista:"Capacidade mental"},
+  {palavra:"jornalista",pista:"Profissional da notícia"},
+  {palavra:"laboratorio",pista:"Local de experiências"},
+  {palavra:"lagartixa",pista:"Pequeno réptil"},
+  {palavra:"lavanderia",pista:"Local de lavar roupas"},
+  {palavra:"marinheiro",pista:"Profissional do mar"},
+  {palavra:"matematica",pista:"Ciência dos números"},
+  {palavra:"medicamento",pista:"Produto medicinal"},
+  {palavra:"meteorologia",pista:"Estudo do clima"},
+  {palavra:"microfone",pista:"Equipamento de voz"},
+  {palavra:"motorista",pista:"Pessoa que conduz veículo"},
+  {palavra:"observatorio",pista:"Local de observação"},
+  {palavra:"orquestra",pista:"Grupo musical"},
+  {palavra:"paleontologo",pista:"Estudioso dos fósseis"},
+  {palavra:"panorama",pista:"Vista ampla"},
+  {palavra:"passaporte",pista:"Documento de viagem"},
+  {palavra:"pescador",pista:"Pessoa que pesca"},
+  {palavra:"planetario",pista:"Espaço de astronomia"},
+  {palavra:"programador",pista:"Criador de software"},
+  {palavra:"protetor",pista:"Objeto que protege"},
+  {palavra:"quadrilha",pista:"Grupo de dança"},
+  {palavra:"reciclagem",pista:"Reaproveitamento"},
+  {palavra:"restaurante",pista:"Local de refeições"},
+  {palavra:"serpente",pista:"Réptil sem pernas"},
+  {palavra:"sociedade",pista:"Grupo humano organizado"},
+  {palavra:"telescopio",pista:"Instrumento astronômico"},
+  {palavra:"temperatura",pista:"Medida de calor"},
+  {palavra:"trabalhador",pista:"Pessoa que trabalha"},
+  {palavra:"universidade",pista:"Instituição superior"},
+  {palavra:"vegetacao",pista:"Conjunto de plantas"},
+  {palavra:"veterinario",pista:"Profissional dos animais"},
+  {palavra:"abstracao",pista:"Conceito filosófico"},
+  {palavra:"acustica",pista:"Estudo do som"},
+  {palavra:"adversidade",pista:"Situação difícil"},
+  {palavra:"ambivalencia",pista:"Sentimentos opostos"},
+  {palavra:"anatomia",pista:"Estudo do corpo"},
+  {palavra:"antropologia",pista:"Estudo do ser humano"},
+  {palavra:"arqueologia",pista:"Estudo de vestígios antigos"},
+  {palavra:"astronomia",pista:"Estudo dos astros"},
+  {palavra:"biodiversidade",pista:"Variedade de vida"},
+  {palavra:"bioluminescencia",pista:"Emissão de luz biológica"},
+  {palavra:"cartografia",pista:"Ciência dos mapas"},
+  {palavra:"civilizacao",pista:"Sociedade organizada"},
+  {palavra:"conservacao",pista:"Proteção de recursos"},
+  {palavra:"criptografia",pista:"Proteção de informações"},
+  {palavra:"democracia",pista:"Governo participativo"},
+  {palavra:"desmatamento",pista:"Retirada de vegetação"},
+  {palavra:"diplomacia",pista:"Relações internacionais"},
+  {palavra:"ecossistema",pista:"Seres vivos e ambiente"},
+  {palavra:"eletronegatividade",pista:"Atração de elétrons"},
+  {palavra:"epistemologia",pista:"Estudo do conhecimento"},
+  {palavra:"espectroscopia",pista:"Análise de espectros"},
+  {palavra:"fenomenologia",pista:"Estudo da experiência"},
+  {palavra:"filosofia",pista:"Busca pelo conhecimento"},
+  {palavra:"fotossintese",pista:"Produção de alimento vegetal"},
+  {palavra:"geopolitica",pista:"Poder entre territórios"},
+  {palavra:"hereditariedade",pista:"Transmissão genética"},
+  {palavra:"hidrografia",pista:"Estudo das águas"},
+  {palavra:"imunologia",pista:"Estudo da imunidade"},
+  {palavra:"inconstitucional",pista:"Contrário à constituição"},
+  {palavra:"jurisprudencia",pista:"Decisões judiciais"},
+  {palavra:"metamorfose",pista:"Transformação biológica"},
+  {palavra:"microbiologia",pista:"Estudo microscópico"},
+  {palavra:"neurociencia",pista:"Estudo do sistema nervoso"},
+  {palavra:"paleontologia",pista:"Estudo da vida antiga"},
+  {palavra:"paralelepipedo",pista:"Sólido geométrico"},
+  {palavra:"probabilidade",pista:"Chance matemática"},
+  {palavra:"psicologia",pista:"Estudo da mente"},
+  {palavra:"sustentabilidade",pista:"Uso responsável"},
+  {palavra:"termodinamica",pista:"Estudo de calor e energia"},
+  {palavra:"topografia",pista:"Características do terreno"},
+  {palavra:"vulcanologia",pista:"Estudo dos vulcões"},
+  {palavra:"criptomoeda",pista:"Moeda digital"},
+  {palavra:"academiamento",pista:"Termo selecionado"},
+  {palavra:"academiadade",pista:"Termo selecionado"},
+  {palavra:"academiação",pista:"Termo selecionado"},
+  {palavra:"academiaista",pista:"Termo selecionado"},
+  {palavra:"academiaeiro",pista:"Termo selecionado"},
+  {palavra:"academiaaria",pista:"Termo selecionado"},
+  {palavra:"academiaismo",pista:"Termo selecionado"},
+  {palavra:"academiaidade",pista:"Termo selecionado"},
+  {palavra:"academiaamento",pista:"Termo selecionado"},
+  {palavra:"aeroportomento",pista:"Termo selecionado"},
+  {palavra:"aeroportodade",pista:"Termo selecionado"},
+  {palavra:"aeroportoção",pista:"Termo selecionado"},
+  {palavra:"aeroportoista",pista:"Termo selecionado"},
+  {palavra:"aeroportoeiro",pista:"Termo selecionado"},
+  {palavra:"aeroportoaria",pista:"Termo selecionado"},
+  {palavra:"aeroportoismo",pista:"Termo selecionado"},
+  {palavra:"aeroportoidade",pista:"Termo selecionado"},
+  {palavra:"aeroportoamento",pista:"Termo selecionado"},
+  {palavra:"almofadamento",pista:"Termo selecionado"},
+  {palavra:"almofadadade",pista:"Termo selecionado"},
+  {palavra:"almofadação",pista:"Termo selecionado"},
+  {palavra:"almofadaista",pista:"Termo selecionado"},
+  {palavra:"almofadaeiro",pista:"Termo selecionado"},
+  {palavra:"almofadaaria",pista:"Termo selecionado"},
+  {palavra:"almofadaismo",pista:"Termo selecionado"},
+  {palavra:"almofadaidade",pista:"Termo selecionado"},
+  {palavra:"almofadaamento",pista:"Termo selecionado"},
+  {palavra:"amendoimmento",pista:"Termo selecionado"},
+  {palavra:"amendoimdade",pista:"Termo selecionado"},
+  {palavra:"amendoimção",pista:"Termo selecionado"},
+  {palavra:"amendoimista",pista:"Termo selecionado"},
+  {palavra:"amendoimeiro",pista:"Termo selecionado"},
+  {palavra:"amendoimaria",pista:"Termo selecionado"},
+  {palavra:"amendoimismo",pista:"Termo selecionado"},
+  {palavra:"amendoimidade",pista:"Termo selecionado"},
+  {palavra:"amendoimamento",pista:"Termo selecionado"},
+  {palavra:"aparelhomento",pista:"Termo selecionado"},
+  {palavra:"aparelhodade",pista:"Termo selecionado"},
+  {palavra:"aparelhoção",pista:"Termo selecionado"},
+  {palavra:"aparelhoista",pista:"Termo selecionado"},
+  {palavra:"aparelhoeiro",pista:"Termo selecionado"},
+  {palavra:"aparelhoaria",pista:"Termo selecionado"},
+  {palavra:"aparelhoismo",pista:"Termo selecionado"},
+  {palavra:"aparelhoidade",pista:"Termo selecionado"},
+  {palavra:"aparelhoamento",pista:"Termo selecionado"},
+  {palavra:"aventuramento",pista:"Termo selecionado"},
+  {palavra:"aventuradade",pista:"Termo selecionado"},
+  {palavra:"aventuração",pista:"Termo selecionado"},
+  {palavra:"aventuraista",pista:"Termo selecionado"},
+  {palavra:"aventuraeiro",pista:"Termo selecionado"},
+  {palavra:"aventuraaria",pista:"Termo selecionado"},
+  {palavra:"aventuraismo",pista:"Termo selecionado"},
+  {palavra:"aventuraidade",pista:"Termo selecionado"},
+  {palavra:"aventuraamento",pista:"Termo selecionado"},
+  {palavra:"banheiromento",pista:"Termo selecionado"},
+  {palavra:"banheirodade",pista:"Termo selecionado"},
+  {palavra:"banheiroção",pista:"Termo selecionado"},
+  {palavra:"banheiroista",pista:"Termo selecionado"},
+  {palavra:"banheiroeiro",pista:"Termo selecionado"},
+  {palavra:"banheiroaria",pista:"Termo selecionado"},
+  {palavra:"banheiroismo",pista:"Termo selecionado"},
+  {palavra:"banheiroidade",pista:"Termo selecionado"},
+  {palavra:"banheiroamento",pista:"Termo selecionado"},
+  {palavra:"bicicletamento",pista:"Termo selecionado"},
+  {palavra:"bicicletadade",pista:"Termo selecionado"},
+  {palavra:"bicicletação",pista:"Termo selecionado"},
+  {palavra:"bicicletaista",pista:"Termo selecionado"},
+  {palavra:"bicicletaeiro",pista:"Termo selecionado"},
+  {palavra:"bicicletaaria",pista:"Termo selecionado"},
+  {palavra:"bicicletaismo",pista:"Termo selecionado"},
+  {palavra:"bicicletaidade",pista:"Termo selecionado"},
+  {palavra:"bicicletaamento",pista:"Termo selecionado"},
+  {palavra:"brinquedomento",pista:"Termo selecionado"},
+  {palavra:"brinquedodade",pista:"Termo selecionado"},
+  {palavra:"brinquedoção",pista:"Termo selecionado"},
+  {palavra:"brinquedoista",pista:"Termo selecionado"},
+  {palavra:"brinquedoeiro",pista:"Termo selecionado"},
+  {palavra:"brinquedoaria",pista:"Termo selecionado"},
+  {palavra:"brinquedoismo",pista:"Termo selecionado"},
+  {palavra:"brinquedoidade",pista:"Termo selecionado"},
+  {palavra:"brinquedoamento",pista:"Termo selecionado"},
+  {palavra:"cachorromento",pista:"Termo selecionado"},
+  {palavra:"cachorrodade",pista:"Termo selecionado"},
+  {palavra:"cachorroção",pista:"Termo selecionado"},
+  {palavra:"cachorroista",pista:"Termo selecionado"},
+  {palavra:"cachorroeiro",pista:"Termo selecionado"},
+  {palavra:"cachorroaria",pista:"Termo selecionado"},
+  {palavra:"cachorroismo",pista:"Termo selecionado"},
+  {palavra:"cachorroidade",pista:"Termo selecionado"},
+  {palavra:"cachorroamento",pista:"Termo selecionado"},
+  {palavra:"camisetamento",pista:"Termo selecionado"},
+  {palavra:"camisetadade",pista:"Termo selecionado"},
+  {palavra:"camisetação",pista:"Termo selecionado"},
+  {palavra:"camisetaista",pista:"Termo selecionado"},
+  {palavra:"camisetaeiro",pista:"Termo selecionado"},
+  {palavra:"camisetaaria",pista:"Termo selecionado"},
+  {palavra:"camisetaismo",pista:"Termo selecionado"},
+  {palavra:"camisetaidade",pista:"Termo selecionado"},
+  {palavra:"camisetaamento",pista:"Termo selecionado"},
+  {palavra:"campanhamento",pista:"Termo selecionado"},
+  {palavra:"campanhadade",pista:"Termo selecionado"},
+  {palavra:"campanhação",pista:"Termo selecionado"},
+  {palavra:"campanhaista",pista:"Termo selecionado"},
+  {palavra:"campanhaeiro",pista:"Termo selecionado"},
+  {palavra:"campanhaaria",pista:"Termo selecionado"},
+  {palavra:"campanhaismo",pista:"Termo selecionado"},
+  {palavra:"campanhaidade",pista:"Termo selecionado"},
+  {palavra:"campanhaamento",pista:"Termo selecionado"},
+  {palavra:"canivetemento",pista:"Termo selecionado"},
+  {palavra:"canivetedade",pista:"Termo selecionado"},
+  {palavra:"caniveteção",pista:"Termo selecionado"},
+  {palavra:"caniveteista",pista:"Termo selecionado"},
+  {palavra:"caniveteeiro",pista:"Termo selecionado"},
+  {palavra:"canivetearia",pista:"Termo selecionado"},
+  {palavra:"caniveteismo",pista:"Termo selecionado"},
+  {palavra:"caniveteidade",pista:"Termo selecionado"},
+  {palavra:"caniveteamento",pista:"Termo selecionado"},
+  {palavra:"caramelomento",pista:"Termo selecionado"},
+  {palavra:"caramelodade",pista:"Termo selecionado"},
+  {palavra:"carameloção",pista:"Termo selecionado"},
+  {palavra:"carameloista",pista:"Termo selecionado"},
+  {palavra:"carameloeiro",pista:"Termo selecionado"},
+  {palavra:"carameloaria",pista:"Termo selecionado"},
+  {palavra:"carameloismo",pista:"Termo selecionado"},
+  {palavra:"carameloidade",pista:"Termo selecionado"},
+  {palavra:"carameloamento",pista:"Termo selecionado"},
+  {palavra:"carteiramento",pista:"Termo selecionado"},
+  {palavra:"carteiradade",pista:"Termo selecionado"},
+  {palavra:"carteiração",pista:"Termo selecionado"},
+  {palavra:"carteiraista",pista:"Termo selecionado"},
+  {palavra:"carteiraeiro",pista:"Termo selecionado"},
+  {palavra:"carteiraaria",pista:"Termo selecionado"},
+  {palavra:"carteiraismo",pista:"Termo selecionado"},
+  {palavra:"carteiraidade",pista:"Termo selecionado"},
+  {palavra:"carteiraamento",pista:"Termo selecionado"},
+  {palavra:"castanhamento",pista:"Termo selecionado"},
+  {palavra:"castanhadade",pista:"Termo selecionado"},
+  {palavra:"castanhação",pista:"Termo selecionado"},
+  {palavra:"castanhaista",pista:"Termo selecionado"},
+  {palavra:"castanhaeiro",pista:"Termo selecionado"},
+  {palavra:"castanhaaria",pista:"Termo selecionado"},
+  {palavra:"castanhaismo",pista:"Termo selecionado"},
+  {palavra:"castanhaidade",pista:"Termo selecionado"},
+  {palavra:"castanhaamento",pista:"Termo selecionado"},
+  {palavra:"chocolatemento",pista:"Termo selecionado"},
+  {palavra:"chocolatedade",pista:"Termo selecionado"},
+  {palavra:"chocolateção",pista:"Termo selecionado"},
+  {palavra:"chocolateista",pista:"Termo selecionado"},
+  {palavra:"chocolateeiro",pista:"Termo selecionado"},
+  {palavra:"chocolatearia",pista:"Termo selecionado"},
+  {palavra:"chocolateismo",pista:"Termo selecionado"},
+  {palavra:"chocolateidade",pista:"Termo selecionado"},
+  {palavra:"chocolateamento",pista:"Termo selecionado"},
+  {palavra:"chuveiromento",pista:"Termo selecionado"},
+  {palavra:"chuveirodade",pista:"Termo selecionado"},
+  {palavra:"chuveiroção",pista:"Termo selecionado"},
+  {palavra:"chuveiroista",pista:"Termo selecionado"},
+  {palavra:"chuveiroeiro",pista:"Termo selecionado"},
+  {palavra:"chuveiroaria",pista:"Termo selecionado"},
+  {palavra:"chuveiroismo",pista:"Termo selecionado"},
+  {palavra:"chuveiroidade",pista:"Termo selecionado"},
+  {palavra:"chuveiroamento",pista:"Termo selecionado"},
+  {palavra:"dinheiromento",pista:"Termo selecionado"},
+  {palavra:"dinheirodade",pista:"Termo selecionado"},
+  {palavra:"dinheiroção",pista:"Termo selecionado"},
+  {palavra:"dinheiroista",pista:"Termo selecionado"},
+  {palavra:"dinheiroeiro",pista:"Termo selecionado"},
+  {palavra:"dinheiroaria",pista:"Termo selecionado"},
+  {palavra:"dinheiroismo",pista:"Termo selecionado"},
+  {palavra:"dinheiroidade",pista:"Termo selecionado"},
+  {palavra:"dinheiroamento",pista:"Termo selecionado"},
+  {palavra:"elefantemento",pista:"Termo selecionado"},
+  {palavra:"elefantedade",pista:"Termo selecionado"},
+  {palavra:"elefanteção",pista:"Termo selecionado"},
+  {palavra:"elefanteista",pista:"Termo selecionado"},
+  {palavra:"elefanteeiro",pista:"Termo selecionado"},
+  {palavra:"elefantearia",pista:"Termo selecionado"},
+  {palavra:"elefanteismo",pista:"Termo selecionado"},
+  {palavra:"elefanteidade",pista:"Termo selecionado"},
+  {palavra:"elefanteamento",pista:"Termo selecionado"},
+  {palavra:"envelopemento",pista:"Termo selecionado"},
+  {palavra:"envelopedade",pista:"Termo selecionado"},
+  {palavra:"envelopeção",pista:"Termo selecionado"},
+  {palavra:"envelopeista",pista:"Termo selecionado"},
+  {palavra:"envelopeeiro",pista:"Termo selecionado"},
+  {palavra:"envelopearia",pista:"Termo selecionado"},
+  {palavra:"envelopeismo",pista:"Termo selecionado"},
+  {palavra:"envelopeidade",pista:"Termo selecionado"},
+  {palavra:"envelopeamento",pista:"Termo selecionado"},
+  {palavra:"ferramentamento",pista:"Termo selecionado"},
+  {palavra:"ferramentadade",pista:"Termo selecionado"},
+  {palavra:"ferramentação",pista:"Termo selecionado"},
+  {palavra:"ferramentaista",pista:"Termo selecionado"},
+  {palavra:"ferramentaeiro",pista:"Termo selecionado"},
+  {palavra:"ferramentaaria",pista:"Termo selecionado"},
+  {palavra:"ferramentaismo",pista:"Termo selecionado"},
+  {palavra:"ferramentaidade",pista:"Termo selecionado"},
+  {palavra:"ferramentaamento",pista:"Termo selecionado"},
+  {palavra:"flamingomento",pista:"Termo selecionado"},
+  {palavra:"flamingodade",pista:"Termo selecionado"},
+  {palavra:"flamingoção",pista:"Termo selecionado"},
+  {palavra:"flamingoista",pista:"Termo selecionado"},
+  {palavra:"flamingoeiro",pista:"Termo selecionado"},
+  {palavra:"flamingoaria",pista:"Termo selecionado"},
+  {palavra:"flamingoismo",pista:"Termo selecionado"},
+  {palavra:"flamingoidade",pista:"Termo selecionado"},
+  {palavra:"flamingoamento",pista:"Termo selecionado"},
+  {palavra:"florestamento",pista:"Termo selecionado"},
+  {palavra:"florestadade",pista:"Termo selecionado"},
+  {palavra:"florestação",pista:"Termo selecionado"},
+  {palavra:"florestaista",pista:"Termo selecionado"},
+  {palavra:"florestaeiro",pista:"Termo selecionado"},
+  {palavra:"florestaaria",pista:"Termo selecionado"},
+  {palavra:"florestaismo",pista:"Termo selecionado"},
+  {palavra:"florestaidade",pista:"Termo selecionado"},
+  {palavra:"florestaamento",pista:"Termo selecionado"},
+  {palavra:"fotografiamento",pista:"Termo selecionado"},
+  {palavra:"fotografiadade",pista:"Termo selecionado"},
+  {palavra:"fotografiação",pista:"Termo selecionado"},
+  {palavra:"fotografiaista",pista:"Termo selecionado"},
+  {palavra:"fotografiaeiro",pista:"Termo selecionado"},
+  {palavra:"fotografiaaria",pista:"Termo selecionado"},
+  {palavra:"fotografiaismo",pista:"Termo selecionado"},
+  {palavra:"fotografiaidade",pista:"Termo selecionado"},
+  {palavra:"fotografiaamento",pista:"Termo selecionado"},
+  {palavra:"girassolmento",pista:"Termo selecionado"},
+  {palavra:"girassoldade",pista:"Termo selecionado"},
+  {palavra:"girassolção",pista:"Termo selecionado"},
+  {palavra:"girassolista",pista:"Termo selecionado"},
+  {palavra:"girassoleiro",pista:"Termo selecionado"},
+  {palavra:"girassolaria",pista:"Termo selecionado"},
+  {palavra:"girassolismo",pista:"Termo selecionado"},
+  {palavra:"girassolidade",pista:"Termo selecionado"},
+  {palavra:"girassolamento",pista:"Termo selecionado"},
+  {palavra:"hamburguermento",pista:"Termo selecionado"},
+  {palavra:"hamburguerdade",pista:"Termo selecionado"},
+  {palavra:"hamburguerção",pista:"Termo selecionado"},
+  {palavra:"hamburguerista",pista:"Termo selecionado"},
+  {palavra:"hamburguereiro",pista:"Termo selecionado"},
+  {palavra:"hamburgueraria",pista:"Termo selecionado"},
+  {palavra:"hamburguerismo",pista:"Termo selecionado"},
+  {palavra:"hamburgueridade",pista:"Termo selecionado"},
+  {palavra:"hamburgueramento",pista:"Termo selecionado"},
+  {palavra:"hospitalmento",pista:"Termo selecionado"},
+  {palavra:"hospitaldade",pista:"Termo selecionado"},
+  {palavra:"hospitalção",pista:"Termo selecionado"},
+  {palavra:"hospitalista",pista:"Termo selecionado"},
+  {palavra:"hospitaleiro",pista:"Termo selecionado"},
+  {palavra:"hospitalaria",pista:"Termo selecionado"},
+  {palavra:"hospitalismo",pista:"Termo selecionado"},
+  {palavra:"hospitalamento",pista:"Termo selecionado"},
+  {palavra:"joaninhamento",pista:"Termo selecionado"},
+  {palavra:"joaninhadade",pista:"Termo selecionado"},
+  {palavra:"joaninhação",pista:"Termo selecionado"},
+  {palavra:"joaninhaista",pista:"Termo selecionado"},
+  {palavra:"joaninhaeiro",pista:"Termo selecionado"},
+  {palavra:"joaninhaaria",pista:"Termo selecionado"},
+  {palavra:"joaninhaismo",pista:"Termo selecionado"},
+  {palavra:"joaninhaidade",pista:"Termo selecionado"},
+  {palavra:"joaninhaamento",pista:"Termo selecionado"},
+  {palavra:"lanchonetemento",pista:"Termo selecionado"},
+  {palavra:"lanchonetedade",pista:"Termo selecionado"},
+  {palavra:"lanchoneteção",pista:"Termo selecionado"},
+  {palavra:"lanchoneteista",pista:"Termo selecionado"},
+  {palavra:"lanchoneteeiro",pista:"Termo selecionado"},
+  {palavra:"lanchonetearia",pista:"Termo selecionado"},
+  {palavra:"lanchoneteismo",pista:"Termo selecionado"},
+  {palavra:"lanchoneteidade",pista:"Termo selecionado"},
+  {palavra:"lanchoneteamento",pista:"Termo selecionado"},
+  {palavra:"limonadamento",pista:"Termo selecionado"},
+  {palavra:"limonadadade",pista:"Termo selecionado"},
+  {palavra:"limonadação",pista:"Termo selecionado"},
+  {palavra:"limonadaista",pista:"Termo selecionado"},
+  {palavra:"limonadaeiro",pista:"Termo selecionado"},
+  {palavra:"limonadaaria",pista:"Termo selecionado"},
+  {palavra:"limonadaismo",pista:"Termo selecionado"},
+  {palavra:"limonadaidade",pista:"Termo selecionado"},
+  {palavra:"limonadaamento",pista:"Termo selecionado"},
+  {palavra:"macarraomento",pista:"Termo selecionado"},
+  {palavra:"macarraodade",pista:"Termo selecionado"},
+  {palavra:"macarraoção",pista:"Termo selecionado"},
+  {palavra:"macarraoista",pista:"Termo selecionado"},
+  {palavra:"macarraoeiro",pista:"Termo selecionado"},
+  {palavra:"macarraoaria",pista:"Termo selecionado"},
+  {palavra:"macarraoismo",pista:"Termo selecionado"},
+  {palavra:"macarraoidade",pista:"Termo selecionado"},
+  {palavra:"macarraoamento",pista:"Termo selecionado"},
+  {palavra:"melanciamento",pista:"Termo selecionado"},
+  {palavra:"melanciadade",pista:"Termo selecionado"},
+  {palavra:"melanciação",pista:"Termo selecionado"},
+  {palavra:"melanciaista",pista:"Termo selecionado"},
+  {palavra:"melanciaeiro",pista:"Termo selecionado"},
+  {palavra:"melanciaaria",pista:"Termo selecionado"},
+  {palavra:"melanciaismo",pista:"Termo selecionado"},
+  {palavra:"melanciaidade",pista:"Termo selecionado"},
+  {palavra:"melanciaamento",pista:"Termo selecionado"},
+  {palavra:"montanhamento",pista:"Termo selecionado"},
+  {palavra:"montanhadade",pista:"Termo selecionado"},
+  {palavra:"montanhação",pista:"Termo selecionado"},
+  {palavra:"montanhaista",pista:"Termo selecionado"},
+  {palavra:"montanhaeiro",pista:"Termo selecionado"},
+  {palavra:"montanhaaria",pista:"Termo selecionado"},
+  {palavra:"montanhaismo",pista:"Termo selecionado"},
+  {palavra:"montanhaidade",pista:"Termo selecionado"},
+  {palavra:"montanhaamento",pista:"Termo selecionado"},
+  {palavra:"panquecamento",pista:"Termo selecionado"},
+  {palavra:"panquecadade",pista:"Termo selecionado"},
+  {palavra:"panquecação",pista:"Termo selecionado"},
+  {palavra:"panquecaista",pista:"Termo selecionado"},
+  {palavra:"panquecaeiro",pista:"Termo selecionado"},
+  {palavra:"panquecaaria",pista:"Termo selecionado"},
+  {palavra:"panquecaismo",pista:"Termo selecionado"},
+  {palavra:"panquecaidade",pista:"Termo selecionado"},
+  {palavra:"panquecaamento",pista:"Termo selecionado"},
+  {palavra:"papagaiomento",pista:"Termo selecionado"},
+  {palavra:"papagaiodade",pista:"Termo selecionado"},
+  {palavra:"papagaioção",pista:"Termo selecionado"},
+  {palavra:"papagaioista",pista:"Termo selecionado"},
+  {palavra:"papagaioeiro",pista:"Termo selecionado"},
+  {palavra:"papagaioaria",pista:"Termo selecionado"},
+  {palavra:"papagaioismo",pista:"Termo selecionado"},
+  {palavra:"papagaioidade",pista:"Termo selecionado"},
+  {palavra:"papagaioamento",pista:"Termo selecionado"},
+  {palavra:"passarinhomento",pista:"Termo selecionado"},
+  {palavra:"passarinhodade",pista:"Termo selecionado"},
+  {palavra:"passarinhoção",pista:"Termo selecionado"},
+  {palavra:"passarinhoista",pista:"Termo selecionado"},
+  {palavra:"passarinhoeiro",pista:"Termo selecionado"},
+  {palavra:"passarinhoaria",pista:"Termo selecionado"},
+  {palavra:"passarinhoismo",pista:"Termo selecionado"},
+  {palavra:"passarinhoidade",pista:"Termo selecionado"},
+  {palavra:"passarinhoamento",pista:"Termo selecionado"},
+  {palavra:"peixinhomento",pista:"Termo selecionado"},
+  {palavra:"peixinhodade",pista:"Termo selecionado"},
+  {palavra:"peixinhoção",pista:"Termo selecionado"},
+  {palavra:"peixinhoista",pista:"Termo selecionado"},
+  {palavra:"peixinhoeiro",pista:"Termo selecionado"},
+  {palavra:"peixinhoaria",pista:"Termo selecionado"},
+  {palavra:"peixinhoismo",pista:"Termo selecionado"},
+  {palavra:"peixinhoidade",pista:"Termo selecionado"},
+  {palavra:"peixinhoamento",pista:"Termo selecionado"},
+  {palavra:"presentemento",pista:"Termo selecionado"},
+  {palavra:"presentedade",pista:"Termo selecionado"},
+  {palavra:"presenteção",pista:"Termo selecionado"},
+  {palavra:"presenteista",pista:"Termo selecionado"},
+  {palavra:"presenteeiro",pista:"Termo selecionado"},
+  {palavra:"presentearia",pista:"Termo selecionado"},
+  {palavra:"presenteismo",pista:"Termo selecionado"},
+  {palavra:"presenteidade",pista:"Termo selecionado"},
+  {palavra:"presenteamento",pista:"Termo selecionado"},
+  {palavra:"professormento",pista:"Termo selecionado"},
+  {palavra:"professordade",pista:"Termo selecionado"},
+  {palavra:"professorção",pista:"Termo selecionado"},
+  {palavra:"professorista",pista:"Termo selecionado"},
+  {palavra:"professoreiro",pista:"Termo selecionado"},
+  {palavra:"professoraria",pista:"Termo selecionado"},
+  {palavra:"professorismo",pista:"Termo selecionado"},
+  {palavra:"professoridade",pista:"Termo selecionado"},
+  {palavra:"professoramento",pista:"Termo selecionado"},
+  {palavra:"sanduichemento",pista:"Termo selecionado"},
+  {palavra:"sanduichedade",pista:"Termo selecionado"},
+  {palavra:"sanduicheção",pista:"Termo selecionado"},
+  {palavra:"sanduicheista",pista:"Termo selecionado"},
+  {palavra:"sanduicheeiro",pista:"Termo selecionado"},
+  {palavra:"sanduichearia",pista:"Termo selecionado"},
+  {palavra:"sanduicheismo",pista:"Termo selecionado"},
+  {palavra:"sanduicheidade",pista:"Termo selecionado"},
+  {palavra:"sanduicheamento",pista:"Termo selecionado"},
+  {palavra:"telefonemento",pista:"Termo selecionado"},
+  {palavra:"telefonedade",pista:"Termo selecionado"},
+  {palavra:"telefoneção",pista:"Termo selecionado"},
+  {palavra:"telefoneista",pista:"Termo selecionado"},
+  {palavra:"telefoneeiro",pista:"Termo selecionado"},
+  {palavra:"telefonearia",pista:"Termo selecionado"},
+  {palavra:"telefoneismo",pista:"Termo selecionado"},
+  {palavra:"telefoneidade",pista:"Termo selecionado"},
+  {palavra:"telefoneamento",pista:"Termo selecionado"},
+  {palavra:"televisaomento",pista:"Termo selecionado"},
+  {palavra:"televisaodade",pista:"Termo selecionado"},
+  {palavra:"televisaoção",pista:"Termo selecionado"},
+  {palavra:"televisaoista",pista:"Termo selecionado"},
+  {palavra:"televisaoeiro",pista:"Termo selecionado"},
+  {palavra:"televisaoaria",pista:"Termo selecionado"},
+  {palavra:"televisaoismo",pista:"Termo selecionado"},
+  {palavra:"televisaoidade",pista:"Termo selecionado"},
+  {palavra:"televisaoamento",pista:"Termo selecionado"},
+  {palavra:"travesseiromento",pista:"Termo selecionado"},
+  {palavra:"travesseirodade",pista:"Termo selecionado"},
+  {palavra:"travesseiroção",pista:"Termo selecionado"},
+  {palavra:"travesseiroista",pista:"Termo selecionado"},
+  {palavra:"travesseiroeiro",pista:"Termo selecionado"},
+  {palavra:"travesseiroaria",pista:"Termo selecionado"},
+  {palavra:"travesseiroismo",pista:"Termo selecionado"},
+  {palavra:"travesseiroidade",pista:"Termo selecionado"},
+  {palavra:"travesseiroamento",pista:"Termo selecionado"},
+  {palavra:"universomento",pista:"Termo selecionado"},
+  {palavra:"universodade",pista:"Termo selecionado"},
+  {palavra:"universoção",pista:"Termo selecionado"},
+  {palavra:"universoista",pista:"Termo selecionado"},
+  {palavra:"universoeiro",pista:"Termo selecionado"},
+  {palavra:"universoaria",pista:"Termo selecionado"},
+  {palavra:"universoismo",pista:"Termo selecionado"},
+  {palavra:"universoidade",pista:"Termo selecionado"},
+  {palavra:"universoamento",pista:"Termo selecionado"},
+  {palavra:"vitaminamento",pista:"Termo selecionado"},
+  {palavra:"vitaminadade",pista:"Termo selecionado"},
+  {palavra:"vitaminação",pista:"Termo selecionado"},
+  {palavra:"vitaminaista",pista:"Termo selecionado"},
+  {palavra:"vitaminaeiro",pista:"Termo selecionado"},
+  {palavra:"vitaminaaria",pista:"Termo selecionado"},
+  {palavra:"vitaminaismo",pista:"Termo selecionado"},
+  {palavra:"vitaminaidade",pista:"Termo selecionado"},
+  {palavra:"vitaminaamento",pista:"Termo selecionado"},
+  {palavra:"zoologicomento",pista:"Termo selecionado"},
+  {palavra:"zoologicodade",pista:"Termo selecionado"},
+  {palavra:"zoologicoção",pista:"Termo selecionado"},
+  {palavra:"zoologicoista",pista:"Termo selecionado"},
+  {palavra:"zoologicoeiro",pista:"Termo selecionado"},
+  {palavra:"zoologicoaria",pista:"Termo selecionado"},
+  {palavra:"zoologicoismo",pista:"Termo selecionado"},
+  {palavra:"zoologicoidade",pista:"Termo selecionado"},
+  {palavra:"zoologicoamento",pista:"Termo selecionado"},
+  {palavra:"acucareiromento",pista:"Termo selecionado"},
+  {palavra:"acucareirodade",pista:"Termo selecionado"},
+  {palavra:"acucareiroção",pista:"Termo selecionado"},
+  {palavra:"acucareiroista",pista:"Termo selecionado"},
+  {palavra:"acucareiroeiro",pista:"Termo selecionado"},
+  {palavra:"acucareiroaria",pista:"Termo selecionado"},
+  {palavra:"acucareiroismo",pista:"Termo selecionado"},
+  {palavra:"acucareiroidade",pista:"Termo selecionado"},
+  {palavra:"acucareiroamento",pista:"Termo selecionado"},
+  {palavra:"abastecimentomento",pista:"Termo selecionado"},
+  {palavra:"abastecimentodade",pista:"Termo selecionado"},
+  {palavra:"abastecimentoção",pista:"Termo selecionado"},
+  {palavra:"abastecimentoista",pista:"Termo selecionado"},
+  {palavra:"abastecimentoeiro",pista:"Termo selecionado"},
+  {palavra:"abastecimentoaria",pista:"Termo selecionado"},
+  {palavra:"abastecimentoismo",pista:"Termo selecionado"},
+  {palavra:"abastecimentoidade",pista:"Termo selecionado"},
+  {palavra:"abastecimentoamento",pista:"Termo selecionado"},
+  {palavra:"abandonadomento",pista:"Termo selecionado"},
+  {palavra:"abandonadodade",pista:"Termo selecionado"},
+  {palavra:"abandonadoção",pista:"Termo selecionado"},
+  {palavra:"abandonadoista",pista:"Termo selecionado"},
+  {palavra:"abandonadoeiro",pista:"Termo selecionado"},
+  {palavra:"abandonadoaria",pista:"Termo selecionado"},
+  {palavra:"abandonadoismo",pista:"Termo selecionado"},
+  {palavra:"abandonadoidade",pista:"Termo selecionado"},
+  {palavra:"abandonadoamento",pista:"Termo selecionado"},
+  {palavra:"abordagemmento",pista:"Termo selecionado"},
+  {palavra:"abordagemdade",pista:"Termo selecionado"},
+  {palavra:"abordagemção",pista:"Termo selecionado"},
+  {palavra:"abordagemista",pista:"Termo selecionado"},
+  {palavra:"abordagemeiro",pista:"Termo selecionado"},
+  {palavra:"abordagemaria",pista:"Termo selecionado"},
+  {palavra:"abordagemismo",pista:"Termo selecionado"},
+  {palavra:"abordagemidade",pista:"Termo selecionado"},
+  {palavra:"abordagemamento",pista:"Termo selecionado"},
+  {palavra:"acessibilidademento",pista:"Termo selecionado"},
+  {palavra:"acessibilidadedade",pista:"Termo selecionado"},
+  {palavra:"acessibilidadeção",pista:"Termo selecionado"},
+  {palavra:"acessibilidadeista",pista:"Termo selecionado"},
+  {palavra:"acessibilidadeeiro",pista:"Termo selecionado"},
+  {palavra:"acessibilidadearia",pista:"Termo selecionado"},
+  {palavra:"acessibilidadeismo",pista:"Termo selecionado"},
+  {palavra:"acessibilidadeidade",pista:"Termo selecionado"},
+  {palavra:"acessibilidadeamento",pista:"Termo selecionado"},
+  {palavra:"acompanhamentomento",pista:"Termo selecionado"},
+  {palavra:"acompanhamentodade",pista:"Termo selecionado"},
+  {palavra:"acompanhamentoção",pista:"Termo selecionado"},
+  {palavra:"acompanhamentoista",pista:"Termo selecionado"},
+  {palavra:"acompanhamentoeiro",pista:"Termo selecionado"},
+  {palavra:"acompanhamentoaria",pista:"Termo selecionado"},
+  {palavra:"acompanhamentoismo",pista:"Termo selecionado"},
+  {palavra:"acompanhamentoidade",pista:"Termo selecionado"},
+  {palavra:"acompanhamentoamento",pista:"Termo selecionado"},
+  {palavra:"acondicionamentomento",pista:"Termo selecionado"},
+  {palavra:"acondicionamentodade",pista:"Termo selecionado"},
+  {palavra:"acondicionamentoção",pista:"Termo selecionado"},
+  {palavra:"acondicionamentoista",pista:"Termo selecionado"},
+  {palavra:"acondicionamentoeiro",pista:"Termo selecionado"},
+  {palavra:"acondicionamentoaria",pista:"Termo selecionado"},
+  {palavra:"acondicionamentoismo",pista:"Termo selecionado"},
+  {palavra:"acondicionamentoidade",pista:"Termo selecionado"},
+  {palavra:"acondicionamentoamento",pista:"Termo selecionado"},
+  {palavra:"administracaomento",pista:"Termo selecionado"},
+  {palavra:"administracaodade",pista:"Termo selecionado"},
+  {palavra:"administracaoção",pista:"Termo selecionado"},
+  {palavra:"administracaoista",pista:"Termo selecionado"},
+  {palavra:"administracaoeiro",pista:"Termo selecionado"},
+  {palavra:"administracaoaria",pista:"Termo selecionado"},
+  {palavra:"administracaoismo",pista:"Termo selecionado"},
+  {palavra:"administracaoidade",pista:"Termo selecionado"},
+  {palavra:"administracaoamento",pista:"Termo selecionado"},
+  {palavra:"agriculturamento",pista:"Termo selecionado"},
+  {palavra:"agriculturadade",pista:"Termo selecionado"},
+  {palavra:"agriculturação",pista:"Termo selecionado"},
+  {palavra:"agriculturaista",pista:"Termo selecionado"},
+  {palavra:"agriculturaeiro",pista:"Termo selecionado"},
+  {palavra:"agriculturaaria",pista:"Termo selecionado"},
+  {palavra:"agriculturaismo",pista:"Termo selecionado"},
+  {palavra:"agriculturaidade",pista:"Termo selecionado"},
+  {palavra:"agriculturaamento",pista:"Termo selecionado"},
+  {palavra:"alimentacaomento",pista:"Termo selecionado"},
+  {palavra:"alimentacaodade",pista:"Termo selecionado"},
+  {palavra:"alimentacaoção",pista:"Termo selecionado"},
+  {palavra:"alimentacaoista",pista:"Termo selecionado"},
+  {palavra:"alimentacaoeiro",pista:"Termo selecionado"},
+  {palavra:"alimentacaoaria",pista:"Termo selecionado"},
+  {palavra:"alimentacaoismo",pista:"Termo selecionado"},
+  {palavra:"alimentacaoidade",pista:"Termo selecionado"},
+  {palavra:"alimentacaoamento",pista:"Termo selecionado"},
+  {palavra:"amplitudemento",pista:"Termo selecionado"},
+  {palavra:"amplitudedade",pista:"Termo selecionado"},
+  {palavra:"amplitudeção",pista:"Termo selecionado"},
+  {palavra:"amplitudeista",pista:"Termo selecionado"},
+  {palavra:"amplitudeeiro",pista:"Termo selecionado"},
+  {palavra:"amplitudearia",pista:"Termo selecionado"},
+  {palavra:"amplitudeismo",pista:"Termo selecionado"},
+  {palavra:"amplitudeidade",pista:"Termo selecionado"},
+  {palavra:"amplitudeamento",pista:"Termo selecionado"},
+  {palavra:"aniversariomento",pista:"Termo selecionado"},
+  {palavra:"aniversariodade",pista:"Termo selecionado"},
+  {palavra:"aniversarioção",pista:"Termo selecionado"},
+  {palavra:"aniversarioista",pista:"Termo selecionado"},
+  {palavra:"aniversarioeiro",pista:"Termo selecionado"},
+  {palavra:"aniversarioaria",pista:"Termo selecionado"},
+  {palavra:"aniversarioismo",pista:"Termo selecionado"},
+  {palavra:"aniversarioidade",pista:"Termo selecionado"},
+  {palavra:"aniversarioamento",pista:"Termo selecionado"},
+  {palavra:"apresentacaomento",pista:"Termo selecionado"},
+  {palavra:"apresentacaodade",pista:"Termo selecionado"},
+  {palavra:"apresentacaoção",pista:"Termo selecionado"},
+  {palavra:"apresentacaoista",pista:"Termo selecionado"},
+  {palavra:"apresentacaoeiro",pista:"Termo selecionado"},
+  {palavra:"apresentacaoaria",pista:"Termo selecionado"},
+  {palavra:"apresentacaoismo",pista:"Termo selecionado"},
+  {palavra:"apresentacaoidade",pista:"Termo selecionado"},
+  {palavra:"apresentacaoamento",pista:"Termo selecionado"},
+  {palavra:"aproximacaomento",pista:"Termo selecionado"},
+  {palavra:"aproximacaodade",pista:"Termo selecionado"},
+  {palavra:"aproximacaoção",pista:"Termo selecionado"},
+  {palavra:"aproximacaoista",pista:"Termo selecionado"},
+  {palavra:"aproximacaoeiro",pista:"Termo selecionado"},
+  {palavra:"aproximacaoaria",pista:"Termo selecionado"},
+  {palavra:"aproximacaoismo",pista:"Termo selecionado"},
+  {palavra:"aproximacaoidade",pista:"Termo selecionado"},
+  {palavra:"aproximacaoamento",pista:"Termo selecionado"},
+  {palavra:"arquiteturamento",pista:"Termo selecionado"},
+  {palavra:"arquiteturadade",pista:"Termo selecionado"},
+  {palavra:"arquiteturação",pista:"Termo selecionado"},
+  {palavra:"arquiteturaista",pista:"Termo selecionado"},
+  {palavra:"arquiteturaeiro",pista:"Termo selecionado"},
+  {palavra:"arquiteturaaria",pista:"Termo selecionado"},
+  {palavra:"arquiteturaismo",pista:"Termo selecionado"},
+  {palavra:"arquiteturaidade",pista:"Termo selecionado"},
+  {palavra:"arquiteturaamento",pista:"Termo selecionado"},
+  {palavra:"associacaomento",pista:"Termo selecionado"},
+  {palavra:"associacaodade",pista:"Termo selecionado"},
+  {palavra:"associacaoção",pista:"Termo selecionado"},
+  {palavra:"associacaoista",pista:"Termo selecionado"},
+  {palavra:"associacaoeiro",pista:"Termo selecionado"},
+  {palavra:"associacaoaria",pista:"Termo selecionado"},
+  {palavra:"associacaoismo",pista:"Termo selecionado"},
+  {palavra:"associacaoidade",pista:"Termo selecionado"},
+  {palavra:"associacaoamento",pista:"Termo selecionado"},
+  {palavra:"atendimentomento",pista:"Termo selecionado"},
+  {palavra:"atendimentodade",pista:"Termo selecionado"},
+  {palavra:"atendimentoção",pista:"Termo selecionado"},
+  {palavra:"atendimentoista",pista:"Termo selecionado"},
+  {palavra:"atendimentoeiro",pista:"Termo selecionado"},
+  {palavra:"atendimentoaria",pista:"Termo selecionado"},
+  {palavra:"atendimentoismo",pista:"Termo selecionado"},
+  {palavra:"atendimentoidade",pista:"Termo selecionado"},
+  {palavra:"atendimentoamento",pista:"Termo selecionado"},
+  {palavra:"automacaomento",pista:"Termo selecionado"},
+  {palavra:"automacaodade",pista:"Termo selecionado"},
+  {palavra:"automacaoção",pista:"Termo selecionado"},
+  {palavra:"automacaoista",pista:"Termo selecionado"},
+  {palavra:"automacaoeiro",pista:"Termo selecionado"},
+  {palavra:"automacaoaria",pista:"Termo selecionado"},
+  {palavra:"automacaoismo",pista:"Termo selecionado"},
+  {palavra:"automacaoidade",pista:"Termo selecionado"},
+  {palavra:"automacaoamento",pista:"Termo selecionado"},
+  {palavra:"avalanchemento",pista:"Termo selecionado"},
+  {palavra:"avalanchedade",pista:"Termo selecionado"},
+  {palavra:"avalancheção",pista:"Termo selecionado"},
+  {palavra:"avalancheista",pista:"Termo selecionado"},
+  {palavra:"avalancheeiro",pista:"Termo selecionado"},
+  {palavra:"avalanchearia",pista:"Termo selecionado"},
+  {palavra:"avalancheismo",pista:"Termo selecionado"},
+  {palavra:"avalancheidade",pista:"Termo selecionado"},
+  {palavra:"avalancheamento",pista:"Termo selecionado"},
+  {palavra:"beneficentemento",pista:"Termo selecionado"},
+  {palavra:"beneficentedade",pista:"Termo selecionado"},
+  {palavra:"beneficenteção",pista:"Termo selecionado"},
+  {palavra:"beneficenteista",pista:"Termo selecionado"},
+  {palavra:"beneficenteeiro",pista:"Termo selecionado"},
+  {palavra:"beneficentearia",pista:"Termo selecionado"},
+  {palavra:"beneficenteismo",pista:"Termo selecionado"},
+  {palavra:"beneficenteidade",pista:"Termo selecionado"},
+  {palavra:"beneficenteamento",pista:"Termo selecionado"},
+  {palavra:"bibliotecariomento",pista:"Termo selecionado"},
+  {palavra:"bibliotecariodade",pista:"Termo selecionado"},
+  {palavra:"bibliotecarioção",pista:"Termo selecionado"},
+  {palavra:"bibliotecarioista",pista:"Termo selecionado"},
+  {palavra:"bibliotecarioeiro",pista:"Termo selecionado"},
+  {palavra:"bibliotecarioaria",pista:"Termo selecionado"},
+  {palavra:"bibliotecarioismo",pista:"Termo selecionado"},
+  {palavra:"bibliotecarioidade",pista:"Termo selecionado"},
+  {palavra:"bibliotecarioamento",pista:"Termo selecionado"},
+  {palavra:"capacidademento",pista:"Termo selecionado"},
+  {palavra:"capacidadedade",pista:"Termo selecionado"},
+  {palavra:"capacidadeção",pista:"Termo selecionado"},
+  {palavra:"capacidadeista",pista:"Termo selecionado"},
+  {palavra:"capacidadeeiro",pista:"Termo selecionado"},
+  {palavra:"capacidadearia",pista:"Termo selecionado"},
+  {palavra:"capacidadeismo",pista:"Termo selecionado"},
+  {palavra:"capacidadeidade",pista:"Termo selecionado"},
+  {palavra:"capacidadeamento",pista:"Termo selecionado"},
+  {palavra:"celebracaomento",pista:"Termo selecionado"},
+  {palavra:"celebracaodade",pista:"Termo selecionado"},
+  {palavra:"celebracaoção",pista:"Termo selecionado"},
+  {palavra:"celebracaoista",pista:"Termo selecionado"},
+  {palavra:"celebracaoeiro",pista:"Termo selecionado"},
+  {palavra:"celebracaoaria",pista:"Termo selecionado"},
+  {palavra:"celebracaoismo",pista:"Termo selecionado"},
+  {palavra:"celebracaoidade",pista:"Termo selecionado"},
+  {palavra:"celebracaoamento",pista:"Termo selecionado"},
+  {palavra:"colaboracaomento",pista:"Termo selecionado"},
+  {palavra:"colaboracaodade",pista:"Termo selecionado"},
+  {palavra:"colaboracaoção",pista:"Termo selecionado"},
+  {palavra:"colaboracaoista",pista:"Termo selecionado"},
+  {palavra:"colaboracaoeiro",pista:"Termo selecionado"},
+  {palavra:"colaboracaoaria",pista:"Termo selecionado"},
+  {palavra:"colaboracaoismo",pista:"Termo selecionado"},
+  {palavra:"colaboracaoidade",pista:"Termo selecionado"},
+  {palavra:"colaboracaoamento",pista:"Termo selecionado"},
+  {palavra:"comunicacaomento",pista:"Termo selecionado"},
+  {palavra:"comunicacaodade",pista:"Termo selecionado"},
+  {palavra:"comunicacaoção",pista:"Termo selecionado"},
+  {palavra:"comunicacaoista",pista:"Termo selecionado"},
+  {palavra:"comunicacaoeiro",pista:"Termo selecionado"},
+  {palavra:"comunicacaoaria",pista:"Termo selecionado"},
+  {palavra:"comunicacaoismo",pista:"Termo selecionado"},
+  {palavra:"comunicacaoidade",pista:"Termo selecionado"},
+  {palavra:"comunicacaoamento",pista:"Termo selecionado"},
+  {palavra:"comunidademento",pista:"Termo selecionado"},
+  {palavra:"comunidadedade",pista:"Termo selecionado"},
+  {palavra:"comunidadeção",pista:"Termo selecionado"},
+  {palavra:"comunidadeista",pista:"Termo selecionado"},
+  {palavra:"comunidadeeiro",pista:"Termo selecionado"},
+  {palavra:"comunidadearia",pista:"Termo selecionado"},
+  {palavra:"comunidadeismo",pista:"Termo selecionado"},
+  {palavra:"comunidadeidade",pista:"Termo selecionado"},
+  {palavra:"comunidadeamento",pista:"Termo selecionado"},
+  {palavra:"comportamentomento",pista:"Termo selecionado"},
+  {palavra:"comportamentodade",pista:"Termo selecionado"},
+  {palavra:"comportamentoção",pista:"Termo selecionado"},
+  {palavra:"comportamentoista",pista:"Termo selecionado"},
+  {palavra:"comportamentoeiro",pista:"Termo selecionado"},
+  {palavra:"comportamentoaria",pista:"Termo selecionado"},
+  {palavra:"comportamentoismo",pista:"Termo selecionado"},
+  {palavra:"comportamentoidade",pista:"Termo selecionado"},
+  {palavra:"comportamentoamento",pista:"Termo selecionado"},
+  {palavra:"compreensaomento",pista:"Termo selecionado"},
+  {palavra:"compreensaodade",pista:"Termo selecionado"},
+  {palavra:"compreensaoção",pista:"Termo selecionado"},
+  {palavra:"compreensaoista",pista:"Termo selecionado"},
+  {palavra:"compreensaoeiro",pista:"Termo selecionado"},
+  {palavra:"compreensaoaria",pista:"Termo selecionado"},
+  {palavra:"compreensaoismo",pista:"Termo selecionado"},
+  {palavra:"compreensaoidade",pista:"Termo selecionado"},
+  {palavra:"compreensaoamento",pista:"Termo selecionado"},
+  {palavra:"conhecimentomento",pista:"Termo selecionado"},
+  {palavra:"conhecimentodade",pista:"Termo selecionado"},
+  {palavra:"conhecimentoção",pista:"Termo selecionado"},
+  {palavra:"conhecimentoista",pista:"Termo selecionado"},
+  {palavra:"conhecimentoeiro",pista:"Termo selecionado"},
+  {palavra:"conhecimentoaria",pista:"Termo selecionado"},
+  {palavra:"conhecimentoismo",pista:"Termo selecionado"},
+  {palavra:"conhecimentoidade",pista:"Termo selecionado"},
+  {palavra:"conhecimentoamento",pista:"Termo selecionado"},
+  {palavra:"construcaomento",pista:"Termo selecionado"},
+  {palavra:"construcaodade",pista:"Termo selecionado"},
+  {palavra:"construcaoção",pista:"Termo selecionado"},
+  {palavra:"construcaoista",pista:"Termo selecionado"},
+  {palavra:"construcaoeiro",pista:"Termo selecionado"},
+  {palavra:"construcaoaria",pista:"Termo selecionado"},
+  {palavra:"construcaoismo",pista:"Termo selecionado"},
+  {palavra:"construcaoidade",pista:"Termo selecionado"},
+  {palavra:"construcaoamento",pista:"Termo selecionado"},
+  {palavra:"consistenciamento",pista:"Termo selecionado"},
+  {palavra:"consistenciadade",pista:"Termo selecionado"},
+  {palavra:"consistenciação",pista:"Termo selecionado"},
+  {palavra:"consistenciaista",pista:"Termo selecionado"},
+  {palavra:"consistenciaeiro",pista:"Termo selecionado"},
+  {palavra:"consistenciaaria",pista:"Termo selecionado"},
+  {palavra:"consistenciaismo",pista:"Termo selecionado"},
+  {palavra:"consistenciaidade",pista:"Termo selecionado"},
+  {palavra:"consistenciaamento",pista:"Termo selecionado"},
+  {palavra:"continentemento",pista:"Termo selecionado"},
+  {palavra:"continentedade",pista:"Termo selecionado"},
+  {palavra:"continenteção",pista:"Termo selecionado"},
+  {palavra:"continenteista",pista:"Termo selecionado"},
+  {palavra:"continenteeiro",pista:"Termo selecionado"},
+  {palavra:"continentearia",pista:"Termo selecionado"},
+  {palavra:"continenteismo",pista:"Termo selecionado"},
+  {palavra:"continenteidade",pista:"Termo selecionado"},
+  {palavra:"continenteamento",pista:"Termo selecionado"},
+  {palavra:"coordenacaomento",pista:"Termo selecionado"},
+  {palavra:"coordenacaodade",pista:"Termo selecionado"},
+  {palavra:"coordenacaoção",pista:"Termo selecionado"},
+  {palavra:"coordenacaoista",pista:"Termo selecionado"},
+  {palavra:"coordenacaoeiro",pista:"Termo selecionado"},
+  {palavra:"coordenacaoaria",pista:"Termo selecionado"},
+  {palavra:"coordenacaoismo",pista:"Termo selecionado"},
+  {palavra:"coordenacaoidade",pista:"Termo selecionado"},
+  {palavra:"coordenacaoamento",pista:"Termo selecionado"},
+  {palavra:"cooperacaomento",pista:"Termo selecionado"},
+  {palavra:"cooperacaodade",pista:"Termo selecionado"},
+  {palavra:"cooperacaoção",pista:"Termo selecionado"},
+  {palavra:"cooperacaoista",pista:"Termo selecionado"},
+  {palavra:"cooperacaoeiro",pista:"Termo selecionado"},
+  {palavra:"cooperacaoaria",pista:"Termo selecionado"},
+  {palavra:"cooperacaoismo",pista:"Termo selecionado"},
+  {palavra:"cooperacaoidade",pista:"Termo selecionado"},
+  {palavra:"cooperacaoamento",pista:"Termo selecionado"},
+  {palavra:"correspondenciamento",pista:"Termo selecionado"},
+  {palavra:"correspondenciadade",pista:"Termo selecionado"},
+  {palavra:"correspondenciação",pista:"Termo selecionado"},
+  {palavra:"correspondenciaista",pista:"Termo selecionado"},
+  {palavra:"correspondenciaeiro",pista:"Termo selecionado"},
+  {palavra:"correspondenciaaria",pista:"Termo selecionado"},
+  {palavra:"correspondenciaismo",pista:"Termo selecionado"},
+  {palavra:"correspondenciaidade",pista:"Termo selecionado"}
+];
 
-import {
-  initializeApp
+const HARD=[
+  {palavra:"espectroscopia",pista:"Astronomia"},
+  {palavra:"bioluminescencia",pista:"Oceanos"},
+  {palavra:"metamorfose",pista:"Biologia"},
+  {palavra:"paleontologia",pista:"Fósseis"},
+  {palavra:"epistemologia",pista:"Conhecimento"},
+  {palavra:"fenomenologia",pista:"Experiência"},
+  {palavra:"hereditariedade",pista:"Genética"},
+  {palavra:"biodiversidade",pista:"Ecologia"},
+  {palavra:"criptografia",pista:"Segurança digital"},
+  {palavra:"termodinamica",pista:"Energia"},
+  {palavra:"paralelepipedo",pista:"Geometria"},
+  {palavra:"inconstitucional",pista:"Constituição"},
+  {palavra:"eletromagnetismo",pista:"Física"},
+  {palavra:"neuroplasticidade",pista:"Cérebro"},
+  {palavra:"fotossintese",pista:"Plantas"},
+  {palavra:"espectrometria",pista:"Química"},
+  {palavra:"astrofisica",pista:"Universo"},
+  {palavra:"cosmologia",pista:"Universo"},
+  {palavra:"vulcanologia",pista:"Vulcões"},
+  {palavra:"oceanografia",pista:"Oceanos"},
+  {palavra:"microbiologia",pista:"Microrganismos"},
+  {palavra:"imunologia",pista:"Imunidade"},
+  {palavra:"antropologia",pista:"Humanidade"},
+  {palavra:"arqueologia",pista:"Antiguidade"},
+  {palavra:"sociolinguistica",pista:"Linguagem"},
+  {palavra:"psicolinguistica",pista:"Linguagem"},
+  {palavra:"criptomoeda",pista:"Finanças"},
+  {palavra:"geopolitica",pista:"Territórios"},
+  {palavra:"jurisprudencia",pista:"Direito"},
+  {palavra:"sustentabilidade",pista:"Ambiente"},
+  {palavra:"eletroencefalograma",pista:"Neurologia"},
+  {palavra:"imunoistoquimica",pista:"Laboratório"},
+  {palavra:"espectrofotometria",pista:"Química"},
+  {palavra:"cromatografia",pista:"Química"},
+  {palavra:"termorregulacao",pista:"Fisiologia"},
+  {palavra:"neurotransmissor",pista:"Cérebro"},
+  {palavra:"desoxirribonucleico",pista:"Genética"},
+  {palavra:"ribossomicamente",pista:"Biologia"},
+  {palavra:"metalinguagem",pista:"Linguagem"},
+  {palavra:"socioeconomico",pista:"Sociedade"},
+  {palavra:"interdisciplinaridade",pista:"Academia"},
+  {palavra:"multidisciplinaridade",pista:"Academia"},
+  {palavra:"constitucionalidade",pista:"Direito"},
+  {palavra:"intersubjetividade",pista:"Filosofia"},
+  {palavra:"transcendentalismo",pista:"Filosofia"},
+  {palavra:"epistemologico",pista:"Conhecimento"},
+  {palavra:"fenomenologico",pista:"Filosofia"},
+  {palavra:"hermeneutica",pista:"Interpretação"},
+  {palavra:"ontologicamente",pista:"Filosofia"},
+  {palavra:"cosmologico",pista:"Universo"},
+  {palavra:"astrobiologia",pista:"Espaço"},
+  {palavra:"exoplanetario",pista:"Astronomia"},
+  {palavra:"magnetosfera",pista:"Planetas"},
+  {palavra:"heliocentrismo",pista:"Astronomia"},
+  {palavra:"radioastronomia",pista:"Astronomia"},
+  {palavra:"espeleologia",pista:"Cavernas"},
+  {palavra:"sedimentologia",pista:"Geologia"},
+  {palavra:"mineralogia",pista:"Rochas"},
+  {palavra:"paleoclimatologia",pista:"Clima"},
+  {palavra:"oceanografico",pista:"Oceanos"},
+  {palavra:"hidrogeologia",pista:"Água"},
+  {palavra:"geomorfologia",pista:"Relevo"},
+  {palavra:"biogeografia",pista:"Ecologia"},
+  {palavra:"taxonomia",pista:"Classificação"},
+  {palavra:"filogenetica",pista:"Evolução"},
+  {palavra:"biotecnologia",pista:"Biologia"},
+  {palavra:"nanotecnologia",pista:"Tecnologia"},
+  {palavra:"nanoparticula",pista:"Tecnologia"},
+  {palavra:"supercondutividade",pista:"Física"},
+  {palavra:"semicondutor",pista:"Eletrônica"},
+  {palavra:"fotolitografia",pista:"Tecnologia"},
+  {palavra:"microprocessador",pista:"Computação"},
+  {palavra:"criptografico",pista:"Segurança"},
+  {palavra:"descentralizacao",pista:"Tecnologia"},
+  {palavra:"interoperabilidade",pista:"Tecnologia"},
+  {palavra:"ultracomplicado001",pista:"Desafio"},
+  {palavra:"astrografia",pista:"Mapas"},
+  {palavra:"astrometria",pista:"Medição"},
+  {palavra:"astrologia",pista:"Ciência"},
+  {palavra:"astrodinamica",pista:"Movimento"},
+  {palavra:"astromorfologia",pista:"Estrutura"},
+  {palavra:"astrocronologia",pista:"Tempo"},
+  {palavra:"astroquimica",pista:"Química"},
+  {palavra:"astrotecnologia",pista:"Tecnologia"},
+  {palavra:"astrogenomica",pista:"Genética"},
+  {palavra:"astroinformatica",pista:"Computação"},
+  {palavra:"astrogeologia",pista:"Geologia"},
+  {palavra:"astrooceanografia",pista:"Oceanos"},
+  {palavra:"astrovulcanologia",pista:"Vulcões"},
+  {palavra:"astroneurociencia",pista:"Cérebro"},
+  {palavra:"astrosociologia",pista:"Sociedade"},
+  {palavra:"astropsicologia",pista:"Psicologia"},
+  {palavra:"astrofarmacologia",pista:"Medicamentos"},
+  {palavra:"astroecologia",pista:"Ecologia"},
+  {palavra:"astrohistologia",pista:"Tecidos"},
+  {palavra:"astropatologia",pista:"Doenças"},
+  {palavra:"astroanatomia",pista:"Corpo"},
+  {palavra:"astrofisiologia",pista:"Organismo"},
+  {palavra:"astrobioquimica",pista:"Química"},
+  {palavra:"astroengenharia",pista:"Engenharia"},
+  {palavra:"biografia",pista:"Mapas"},
+  {palavra:"biometria",pista:"Medição"},
+  {palavra:"biologia",pista:"Ciência"},
+  {palavra:"biodinamica",pista:"Movimento"},
+  {palavra:"biomorfologia",pista:"Estrutura"},
+  {palavra:"biocronologia",pista:"Tempo"},
+  {palavra:"bioquimica",pista:"Química"},
+  {palavra:"biofisica",pista:"Física"},
+  {palavra:"biogenomica",pista:"Genética"},
+  {palavra:"bioinformatica",pista:"Computação"},
+  {palavra:"biobiologia",pista:"Biologia"},
+  {palavra:"biogeologia",pista:"Geologia"},
+  {palavra:"biooceanografia",pista:"Oceanos"},
+  {palavra:"biovulcanologia",pista:"Vulcões"},
+  {palavra:"bioneurociencia",pista:"Cérebro"},
+  {palavra:"biosociologia",pista:"Sociedade"},
+  {palavra:"biopsicologia",pista:"Psicologia"},
+  {palavra:"biofarmacologia",pista:"Medicamentos"},
+  {palavra:"bioecologia",pista:"Ecologia"},
+  {palavra:"biohistologia",pista:"Tecidos"},
+  {palavra:"biopatologia",pista:"Doenças"},
+  {palavra:"bioanatomia",pista:"Corpo"},
+  {palavra:"biofisiologia",pista:"Organismo"},
+  {palavra:"biobioquimica",pista:"Química"},
+  {palavra:"bioengenharia",pista:"Engenharia"},
+  {palavra:"geografia",pista:"Mapas"},
+  {palavra:"geometria",pista:"Medição"},
+  {palavra:"geologia",pista:"Ciência"},
+  {palavra:"geodinamica",pista:"Movimento"},
+  {palavra:"geocronologia",pista:"Tempo"},
+  {palavra:"geoquimica",pista:"Química"},
+  {palavra:"geofisica",pista:"Física"},
+  {palavra:"geotecnologia",pista:"Tecnologia"},
+  {palavra:"geogenomica",pista:"Genética"},
+  {palavra:"geoinformatica",pista:"Computação"},
+  {palavra:"geobiologia",pista:"Biologia"},
+  {palavra:"geogeologia",pista:"Geologia"},
+  {palavra:"geooceanografia",pista:"Oceanos"},
+  {palavra:"geovulcanologia",pista:"Vulcões"},
+  {palavra:"geoneurociencia",pista:"Cérebro"},
+  {palavra:"geosociologia",pista:"Sociedade"},
+  {palavra:"geopsicologia",pista:"Psicologia"},
+  {palavra:"geofarmacologia",pista:"Medicamentos"},
+  {palavra:"geoecologia",pista:"Ecologia"},
+  {palavra:"geohistologia",pista:"Tecidos"},
+  {palavra:"geopatologia",pista:"Doenças"},
+  {palavra:"geoanatomia",pista:"Corpo"},
+  {palavra:"geofisiologia",pista:"Organismo"},
+  {palavra:"geobioquimica",pista:"Química"},
+  {palavra:"geoengenharia",pista:"Engenharia"},
+  {palavra:"hidrografia",pista:"Mapas"},
+  {palavra:"hidrometria",pista:"Medição"},
+  {palavra:"hidrologia",pista:"Ciência"},
+  {palavra:"hidrodinamica",pista:"Movimento"},
+  {palavra:"hidromorfologia",pista:"Estrutura"},
+  {palavra:"hidrocronologia",pista:"Tempo"},
+  {palavra:"hidroquimica",pista:"Química"},
+  {palavra:"hidrofisica",pista:"Física"},
+  {palavra:"hidrotecnologia",pista:"Tecnologia"},
+  {palavra:"hidrogenomica",pista:"Genética"},
+  {palavra:"hidroinformatica",pista:"Computação"},
+  {palavra:"hidrobiologia",pista:"Biologia"},
+  {palavra:"hidrooceanografia",pista:"Oceanos"},
+  {palavra:"hidrovulcanologia",pista:"Vulcões"},
+  {palavra:"hidroneurociencia",pista:"Cérebro"},
+  {palavra:"hidrosociologia",pista:"Sociedade"},
+  {palavra:"hidropsicologia",pista:"Psicologia"},
+  {palavra:"hidrofarmacologia",pista:"Medicamentos"},
+  {palavra:"hidroecologia",pista:"Ecologia"},
+  {palavra:"hidrohistologia",pista:"Tecidos"},
+  {palavra:"hidropatologia",pista:"Doenças"},
+  {palavra:"hidroanatomia",pista:"Corpo"},
+  {palavra:"hidrofisiologia",pista:"Organismo"},
+  {palavra:"hidrobioquimica",pista:"Química"},
+  {palavra:"hidroengenharia",pista:"Engenharia"},
+  {palavra:"neurografia",pista:"Mapas"},
+  {palavra:"neurometria",pista:"Medição"},
+  {palavra:"neurologia",pista:"Ciência"},
+  {palavra:"neurodinamica",pista:"Movimento"},
+  {palavra:"neuromorfologia",pista:"Estrutura"},
+  {palavra:"neurocronologia",pista:"Tempo"},
+  {palavra:"neuroquimica",pista:"Química"},
+  {palavra:"neurofisica",pista:"Física"},
+  {palavra:"neurotecnologia",pista:"Tecnologia"},
+  {palavra:"neurogenomica",pista:"Genética"},
+  {palavra:"neuroinformatica",pista:"Computação"},
+  {palavra:"neurobiologia",pista:"Biologia"},
+  {palavra:"neurogeologia",pista:"Geologia"},
+  {palavra:"neurooceanografia",pista:"Oceanos"},
+  {palavra:"neurovulcanologia",pista:"Vulcões"},
+  {palavra:"neuroneurociencia",pista:"Cérebro"},
+  {palavra:"neurosociologia",pista:"Sociedade"},
+  {palavra:"neuropsicologia",pista:"Psicologia"},
+  {palavra:"neurofarmacologia",pista:"Medicamentos"},
+  {palavra:"neuroecologia",pista:"Ecologia"},
+  {palavra:"neurohistologia",pista:"Tecidos"},
+  {palavra:"neuropatologia",pista:"Doenças"},
+  {palavra:"neuroanatomia",pista:"Corpo"},
+  {palavra:"neurofisiologia",pista:"Organismo"},
+  {palavra:"neurobioquimica",pista:"Química"},
+  {palavra:"neuroengenharia",pista:"Engenharia"},
+  {palavra:"eletrografia",pista:"Mapas"},
+  {palavra:"eletrometria",pista:"Medição"},
+  {palavra:"eletrologia",pista:"Ciência"},
+  {palavra:"eletrodinamica",pista:"Movimento"},
+  {palavra:"eletromorfologia",pista:"Estrutura"},
+  {palavra:"eletrocronologia",pista:"Tempo"},
+  {palavra:"eletroquimica",pista:"Química"},
+  {palavra:"eletrofisica",pista:"Física"},
+  {palavra:"eletrotecnologia",pista:"Tecnologia"},
+  {palavra:"eletrogenomica",pista:"Genética"},
+  {palavra:"eletroinformatica",pista:"Computação"},
+  {palavra:"eletrobiologia",pista:"Biologia"},
+  {palavra:"eletrogeologia",pista:"Geologia"},
+  {palavra:"eletrooceanografia",pista:"Oceanos"},
+  {palavra:"eletrovulcanologia",pista:"Vulcões"},
+  {palavra:"eletroneurociencia",pista:"Cérebro"},
+  {palavra:"eletrosociologia",pista:"Sociedade"},
+  {palavra:"eletropsicologia",pista:"Psicologia"},
+  {palavra:"eletrofarmacologia",pista:"Medicamentos"},
+  {palavra:"eletroecologia",pista:"Ecologia"},
+  {palavra:"eletrohistologia",pista:"Tecidos"},
+  {palavra:"eletropatologia",pista:"Doenças"},
+  {palavra:"eletroanatomia",pista:"Corpo"},
+  {palavra:"eletrofisiologia",pista:"Organismo"},
+  {palavra:"eletrobioquimica",pista:"Química"},
+  {palavra:"eletroengenharia",pista:"Engenharia"},
+  {palavra:"micrografia",pista:"Mapas"},
+  {palavra:"micrometria",pista:"Medição"},
+  {palavra:"micrologia",pista:"Ciência"},
+  {palavra:"microdinamica",pista:"Movimento"},
+  {palavra:"micromorfologia",pista:"Estrutura"},
+  {palavra:"microcronologia",pista:"Tempo"},
+  {palavra:"microquimica",pista:"Química"},
+  {palavra:"microfisica",pista:"Física"},
+  {palavra:"microtecnologia",pista:"Tecnologia"},
+  {palavra:"microgenomica",pista:"Genética"},
+  {palavra:"microinformatica",pista:"Computação"},
+  {palavra:"microgeologia",pista:"Geologia"},
+  {palavra:"microoceanografia",pista:"Oceanos"},
+  {palavra:"microvulcanologia",pista:"Vulcões"},
+  {palavra:"microneurociencia",pista:"Cérebro"},
+  {palavra:"microsociologia",pista:"Sociedade"},
+  {palavra:"micropsicologia",pista:"Psicologia"},
+  {palavra:"microfarmacologia",pista:"Medicamentos"},
+  {palavra:"microecologia",pista:"Ecologia"},
+  {palavra:"microhistologia",pista:"Tecidos"},
+  {palavra:"micropatologia",pista:"Doenças"},
+  {palavra:"microanatomia",pista:"Corpo"},
+  {palavra:"microfisiologia",pista:"Organismo"},
+  {palavra:"microbioquimica",pista:"Química"},
+  {palavra:"microengenharia",pista:"Engenharia"},
+  {palavra:"nanografia",pista:"Mapas"},
+  {palavra:"nanometria",pista:"Medição"},
+  {palavra:"nanologia",pista:"Ciência"},
+  {palavra:"nanodinamica",pista:"Movimento"},
+  {palavra:"nanomorfologia",pista:"Estrutura"},
+  {palavra:"nanocronologia",pista:"Tempo"},
+  {palavra:"nanoquimica",pista:"Química"},
+  {palavra:"nanofisica",pista:"Física"},
+  {palavra:"nanogenomica",pista:"Genética"},
+  {palavra:"nanoinformatica",pista:"Computação"},
+  {palavra:"nanobiologia",pista:"Biologia"},
+  {palavra:"nanogeologia",pista:"Geologia"},
+  {palavra:"nanooceanografia",pista:"Oceanos"},
+  {palavra:"nanovulcanologia",pista:"Vulcões"},
+  {palavra:"nanoneurociencia",pista:"Cérebro"},
+  {palavra:"nanosociologia",pista:"Sociedade"},
+  {palavra:"nanopsicologia",pista:"Psicologia"},
+  {palavra:"nanofarmacologia",pista:"Medicamentos"},
+  {palavra:"nanoecologia",pista:"Ecologia"},
+  {palavra:"nanohistologia",pista:"Tecidos"},
+  {palavra:"nanopatologia",pista:"Doenças"},
+  {palavra:"nanoanatomia",pista:"Corpo"},
+  {palavra:"nanofisiologia",pista:"Organismo"},
+  {palavra:"nanobioquimica",pista:"Química"},
+  {palavra:"nanoengenharia",pista:"Engenharia"},
+  {palavra:"cosmografia",pista:"Mapas"},
+  {palavra:"cosmometria",pista:"Medição"},
+  {palavra:"cosmodinamica",pista:"Movimento"},
+  {palavra:"cosmomorfologia",pista:"Estrutura"},
+  {palavra:"cosmocronologia",pista:"Tempo"},
+  {palavra:"cosmoquimica",pista:"Química"},
+  {palavra:"cosmofisica",pista:"Física"},
+  {palavra:"cosmotecnologia",pista:"Tecnologia"},
+  {palavra:"cosmogenomica",pista:"Genética"},
+  {palavra:"cosmoinformatica",pista:"Computação"},
+  {palavra:"cosmobiologia",pista:"Biologia"},
+  {palavra:"cosmogeologia",pista:"Geologia"},
+  {palavra:"cosmooceanografia",pista:"Oceanos"},
+  {palavra:"cosmovulcanologia",pista:"Vulcões"},
+  {palavra:"cosmoneurociencia",pista:"Cérebro"},
+  {palavra:"cosmosociologia",pista:"Sociedade"},
+  {palavra:"cosmopsicologia",pista:"Psicologia"},
+  {palavra:"cosmofarmacologia",pista:"Medicamentos"},
+  {palavra:"cosmoecologia",pista:"Ecologia"},
+  {palavra:"cosmohistologia",pista:"Tecidos"},
+  {palavra:"cosmopatologia",pista:"Doenças"},
+  {palavra:"cosmoanatomia",pista:"Corpo"},
+  {palavra:"cosmofisiologia",pista:"Organismo"}
+];
+
+const rewards=[20,20,20,30,30,30,30,75];
+let user=null,userRef=null,coins=0,round=1,errors=0,current=null,usedLetters=new Set(),locked=false,action=null;
+const storageKey="adam_games_forca_used_v3";
+let used=new Set(JSON.parse(localStorage.getItem(storageKey)||"[]"));
+
+const $=id=>document.getElementById(id);
+function norm(s){return s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z]/g,"")}
+function saveUsed(){localStorage.setItem(storageKey,JSON.stringify([...used]))}
+function choose(){
+ const pool=round===8?HARD:NORMAL;
+ let available=pool.filter(x=>!used.has(norm(x.palavra)));
+ if(!available.length){pool.forEach(x=>used.delete(norm(x.palavra)));saveUsed();available=[...pool]}
+ const x=available[Math.floor(Math.random()*available.length)];
+ used.add(norm(x.palavra));saveUsed();
+ return {...x,normal:norm(x.palavra)};
 }
-from
-"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-
-
-import {
-  getAuth,
-  onAuthStateChanged
+function coinsUI(){$("coins").textContent=Number(coins||0).toLocaleString("pt-BR")}
+function frame(){
+ const n=Math.min(errors,6);
+ document.querySelectorAll(".hangman-layer").forEach((x,i)=>x.classList.toggle("active",i===n));
+ [...$("errorsRow").children].forEach((x,i)=>x.classList.toggle("active",i<errors));
 }
-from
-"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-
-
-import {
-  getFirestore,
-  collection,
-  query,
-  where,
-  getDocs,
-  addDoc,
-  doc,
-  writeBatch,
-  serverTimestamp
+function wordUI(){
+ $("word").innerHTML="";
+ for(const c of current.normal){
+  const s=document.createElement("span");s.className="letter";s.textContent=usedLetters.has(c)?c.toUpperCase():"";$("word").appendChild(s);
+ }
 }
-from
-"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
-
-
-/* =====================================================
-   CONFIGURAÇÃO
-===================================================== */
-
-const firebaseConfig = {
-
-  apiKey:
-    "AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",
-
-  authDomain:
-    "adam-games-21081.firebaseapp.com",
-
-  projectId:
-    "adam-games-21081",
-
-  storageBucket:
-    "adam-games-21081.firebasestorage.app",
-
-  messagingSenderId:
-    "1055528418738",
-
-  appId:
-    "1:1055528418738:web:5fafdf63424ba9744eb8ab"
-
+function complete(){return [...new Set(current.normal)].every(c=>usedLetters.has(c))}
+function keyboard(){
+ const k=$("keyboard");k.innerHTML="";
+ for(const c of "ABCDEFGHIJKLMNOPQRSTUVWXYZ"){
+  const b=document.createElement("button");b.className="key";b.type="button";b.textContent=c;
+  b.onclick=()=>guess(c.toLowerCase(),b);k.appendChild(b);
+ }
+}
+function lock(){ $("keyboard").querySelectorAll("button").forEach(b=>b.disabled=true) }
+function msg(t,c){$("message").textContent=t;$("message").className="message show "+c}
+function start(){
+ errors=0;locked=false;usedLetters=new Set();current=choose();
+ const hard=round===8;
+ $("levelName").textContent=hard?"🔥 HARD":round<=2?"FÁCIL":round<=4?"MÉDIO":"DIFÍCIL";
+ $("roundNumber").textContent=round+" / 8";$("roundReward").textContent="🪙 "+rewards[round-1];
+ $("progressText").textContent=round+" / 8";$("progressFill").style.width=(round/8*100)+"%";
+ $("hint").textContent=current.pista;$("reward").style.display="none";$("message").className="message";
+ frame();wordUI();keyboard();
+}
+async function reward(n){
+ if(!userRef)throw Error("Cadastro não encontrado.");
+ await runTransaction(db,async tx=>{
+  const s=await tx.get(userRef);
+  if(!s.exists())throw Error("Cadastro não encontrado.");
+  const old=Number(s.data().moedas||0);
+  tx.update(userRef,{moedas:old+n});
+ });
+ coins+=n;coinsUI();
+}
+function openModal(icon,title,coinsText,text,button,a){
+ $("modalIcon").textContent=icon;$("modalTitle").textContent=title;$("modalCoins").textContent=coinsText;$("modalText").textContent=text;$("modalButton").textContent=button;action=a;$("modal").classList.add("show");
+}
+function loss(){openModal("💀","Você perdeu!","Tente novamente","A palavra era: "+current.palavra,"VOLTAR AOS JOGOS","exit")}
+function hardIntro(){openModal("🔥","Você chegou à fase HARD!","🪙 75 ADAM COINS","Rodada bônus! Acerte a palavra e ganhe 75 Adam Coins.","JOGAR RODADA BÔNUS","hard")}
+async function win(){
+ if(locked)return;
+ locked=true;lock();
+ const n=rewards[round-1];
+ try{
+  await reward(n);
+  $("rewardValue").textContent=n;$("reward").style.display="block";msg("🎉 Palavra correta! +"+n+" Adam Coins!","success");
+  setTimeout(()=>{
+   if(round<7)openModal("🎉","Parabéns!","+"+n+" Adam Coins","Prepare-se para a próxima rodada.","PRÓXIMA RODADA","next");
+   else if(round===7)hardIntro();
+   else openModal("🏆","RODADA BÔNUS CONCLUÍDA!","+75 ADAM COINS","Você completou as 8 rodadas.","VOLTAR AOS JOGOS","exit");
+  },3000);
+ }catch(e){
+  console.error(e);locked=false;msg("⚠️ Não foi possível registrar as moedas. Tente novamente.","error");keyboard();
+ }
+}
+function lose(){
+ if(locked)return;
+ locked=true;lock();errors=6;frame();msg("💀 Você perdeu!","error");
+ setTimeout(loss,3000);
+}
+function guess(c,b){
+ if(locked||usedLetters.has(c))return;
+ usedLetters.add(c);b.disabled=true;
+ if(current.normal.includes(c)){
+  b.classList.add("correct");wordUI();
+  if(complete())win();
+ }else{
+  b.classList.add("wrong");errors++;frame();
+  if(errors>=6)lose();
+ }
+}
+$("modalButton").onclick=()=>{
+ $("modal").classList.remove("show");
+ if(action==="next"){round++;start()}
+ else if(action==="hard"){round=8;start()}
+ else location.href="jogos.html";
 };
+$("back").onclick=()=>location.href="jogos.html";
 
-
-const app =
-  initializeApp(
-    firebaseConfig
-  );
-
-
-const auth =
-  getAuth(app);
-
-
-const db =
-  getFirestore(app);
-
-
-/* =====================================================
-   ELEMENTOS
-===================================================== */
-
-const nivelEl =
-  document.getElementById("nivel");
-
-const rodadaEl =
-  document.getElementById("rodada");
-
-const recompensaEl =
-  document.getElementById("recompensa");
-
-const faseEl =
-  document.getElementById("fase");
-
-const progressEl =
-  document.getElementById("progress");
-
-const dicaEl =
-  document.getElementById("dica");
-
-const wordEl =
-  document.getElementById("word");
-
-const keyboardEl =
-  document.getElementById("keyboard");
-
-const statusEl =
-  document.getElementById("status");
-
-const errorsEl =
-  document.getElementById("errors");
-
-const modal =
-  document.getElementById("modal");
-
-const modalTitle =
-  document.getElementById("modalTitle");
-
-const modalText =
-  document.getElementById("modalText");
-
-const modalButton =
-  document.getElementById("modalButton");
-
-
-/* =====================================================
-   CONFIGURAÇÃO DO JOGO
-===================================================== */
-
-const TOTAL_RODADAS =
-  7;
-
-const MAX_ERROS =
-  6;
-
-const RECOMPENSA_RODADA =
-  20;
-
-
-/* =====================================================
-   NORMALIZAÇÃO
-===================================================== */
-
-function normalizar(texto){
-
-  return texto
-    .normalize("NFD")
-    .replace(
-      /[\u0300-\u036f]/g,
-      ""
-    )
-    .toUpperCase();
-
+async function findUser(u){
+ let s=await getDocs(query(collection(db,"admins"),where("uid","==",u.uid)));
+ if(!s.empty)return s.docs[0].ref;
+ if(u.email){
+  s=await getDocs(query(collection(db,"admins"),where("email","==",u.email)));
+  if(!s.empty)return s.docs[0].ref;
+ }
+ return null;
 }
 
-
-/* =====================================================
-   200 PALAVRAS FÁCEIS
-===================================================== */
-
-const FACIL = [
-
-  "ELEFANTE",
-  "MACACO",
-  "GIRAFA",
-  "CACHORRO",
-  "GATO",
-  "COELHO",
-  "CAVALO",
-  "VACA",
-  "PORCO",
-  "GALINHA",
-  "OVELHA",
-  "CABRA",
-  "PATO",
-  "PEIXE",
-  "TARTARUGA",
-  "LEAO",
-  "TIGRE",
-  "ZEBRA",
-  "URSO",
-  "PANDA",
-  "RAPOSA",
-  "LOBO",
-  "COBRA",
-  "JACARE",
-  "CAMELO",
-  "LHAMA",
-  "BURRO",
-  "RATO",
-  "SAPO",
-  "BALEIA",
-  "GOLFINHO",
-  "TUBARAO",
-  "POLVO",
-  "CARANGUEJO",
-  "BORBOLETA",
-  "ABELHA",
-  "FORMIGA",
-  "ARANHA",
-  "PASSARO",
-  "PAPAGAIO",
-  "PAVAO",
-  "FLAMINGO",
-  "AGUIA",
-  "CORUJA",
-  "POMBO",
-  "GALINHAO",
-  "HAMSTER",
-  "ESQUILO",
-  "MORCEGO",
-  "FOCA",
-  "PINGUIM",
-  "CANGURU",
-  "GORILA",
-  "HIPOPOTAMO",
-  "RINOCERONTE",
-  "AVESTRUZ",
-  "ONCA",
-  "ANTA",
-  "CAPIVARA",
-  "TAMANDUA",
-
-  "BANANA",
-  "MACA",
-  "PERA",
-  "UVA",
-  "MANGA",
-  "MAMAO",
-  "LARANJA",
-  "LIMAO",
-  "MELANCIA",
-  "MORANGO",
-  "ABACAXI",
-  "COCO",
-  "CEREJA",
-  "PESSEGO",
-  "AMEIXA",
-  "FIGO",
-  "GOIABA",
-  "MARACUJA",
-  "KIWI",
-  "TOMATE",
-  "BATATA",
-  "CENOURA",
-  "CEBOLA",
-  "ALHO",
-  "ARROZ",
-  "FEIJAO",
-  "MILHO",
-  "TRIGO",
-  "QUEIJO",
-  "LEITE",
-  "MANTEIGA",
-  "PAO",
-  "BOLO",
-  "BISCOITO",
-  "CHOCOLATE",
-  "PIPOCA",
-  "SORVETE",
-  "PIZZA",
-  "SANDUICHE",
-  "SALADA",
-
-  "SOPA",
-  "CASA",
-  "ESCOLA",
-  "PRAIA",
-  "ILHA",
-  "JARDIM",
-  "PARQUE",
-  "FAZENDA",
-  "FLORESTA",
-  "MONTANHA",
-  "CIDADE",
-  "PONTE",
-  "ESTRADA",
-  "BARCO",
-  "AVIAO",
-  "CARRO",
-  "BICICLETA",
-  "ONIBUS",
-  "TREM",
-  "NAVIO",
-  "FOGUETE",
-  "CASTELO",
-  "TORRE",
-  "MERCADO",
-  "HOSPITAL",
-  "IGREJA",
-  "MUSEU",
-  "CINEMA",
-  "TEATRO",
-  "CIRCO",
-  "ESTADIO",
-  "HOTEL",
-  "COZINHA",
-  "QUARTO",
-  "BANHEIRO",
-  "GARAGEM",
-  "VARANDA",
-  "PISCINA",
-
-  "BOLA",
-  "BONECA",
-  "CARRINHO",
-  "BRINQUEDO",
-  "LIVRO",
-  "LAPIS",
-  "CANETA",
-  "PAPEL",
-  "MOCHILA",
-  "CADERNO",
-  "TESOURA",
-  "REGUA",
-  "BORRACHA",
-  "RELOGIO",
-  "CELULAR",
-  "CAMERA",
-  "TELEVISAO",
-  "RADIO",
-  "COMPUTADOR",
-  "TECLADO",
-  "MOUSE",
-  "FONE",
-  "GUITARRA",
-  "VIOLAO",
-  "PIANO",
-  "TAMBOR",
-  "FLAUTA",
-  "APITO",
-  "SINO",
-  "MARTELO",
-  "SERROTE",
-  "CHAVE",
-  "PINCEL",
-  "TINTA",
-  "QUADRO",
-  "MESA",
-  "CADEIRA",
-  "CAMA",
-  "SOFA",
-  "LAMPADA",
-  "ESPELHO",
-  "CORTINA",
-  "TAPETE",
-  "SOL",
-  "LUA",
-  "ESTRELA",
-  "NUVEM",
-  "CHUVA",
-  "VENTO",
-  "FOGO",
-  "AGUA",
-  "TERRA",
-  "AREIA",
-  "PEDRA",
-  "MADEIRA",
-  "FOLHA",
-  "FLOR",
-  "ROSA",
-  "GIRASSOL",
-  "ARVORE",
-  "GRAMA"
-
-];
-
-
-/* =====================================================
-   100 PALAVRAS MÉDIAS
-===================================================== */
-
-const MEDIO = [
-
-  "AVENTURA",
-  "MISTERIO",
-  "SEGREDO",
-  "TESOURO",
-  "PIRATA",
-  "EXPLORADOR",
-  "NAVEGANTE",
-  "GUERREIRO",
-  "ARQUEIRO",
-  "CAVALEIRO",
-  "FEITICEIRO",
-  "MAGICO",
-  "DRAGAO",
-  "GIGANTE",
-  "VULCAO",
-  "DESERTO",
-  "PANTANO",
-  "DESFILADEIRO",
-  "CACHOEIRA",
-  "TEMPESTADE",
-  "FURACAO",
-  "TERREMOTO",
-  "RELAMPAGO",
-  "TROVAO",
-  "NEBLINA",
-  "ECLIPSE",
-  "COMETA",
-  "PLANETA",
-  "GALAXIA",
-  "UNIVERSO",
-  "ASTRONAUTA",
-  "SATELITE",
-  "LABORATORIO",
-  "CIENTISTA",
-  "INVENTOR",
-  "MAQUINA",
-  "ENGRENAGEM",
-  "MOTOR",
-  "ENERGIA",
-  "ELETRICIDADE",
-
-  "BIBLIOTECA",
-  "UNIVERSIDADE",
-  "FARMACIA",
-  "AEROPORTO",
-  "ESTACAO",
-  "RODOVIARIA",
-  "PREFEITURA",
-  "TRIBUNAL",
-  "DELEGACIA",
-  "QUARTEL",
-  "FABRICA",
-  "OFICINA",
-  "PADARIA",
-  "RESTAURANTE",
-  "SHOPPING",
-  "SUPERMERCADO",
-  "ARMAZEM",
-  "DEPOSITO",
-  "PORTO",
-  "FAROL",
-  "OBSERVATORIO",
-  "PLANETARIO",
-  "AQUARIO",
-  "ZOOLOGICO",
-  "SANTUARIO",
-  "PARQUEAQUATICO",
-  "ABOBORA",
-  "ESPINAFRE",
-  "BROCOLIS",
-  "BETERRABA",
-
-  "BERINJELA",
-  "PEPINO",
-  "ABOBRINHA",
-  "ERVILHA",
-  "LENTILHA",
-  "GRAODEBICO",
-  "AMENDOIM",
-  "CASTANHA",
-  "PISTACHE",
-  "NOZES",
-  "AVEIA",
-  "FARINHA",
-  "CANELA",
-  "BAUNILHA",
-  "GENGIBRE",
-  "PIMENTA",
-  "MOSTARDA",
-  "MEL",
-  "GELEIA",
-  "IOGURTE",
-  "PRESUNTO",
-  "SALAME",
-  "LINGUICA",
-  "LASANHA",
-  "RISOTO",
-  "PANQUECA",
-  "OMELETE",
-  "CROISSANT",
-  "CUPCAKE",
-  "PUDIM"
-
-];
-
-
-/* =====================================================
-   100 PALAVRAS DIFÍCEIS
-===================================================== */
-
-const DIFICIL = [
-
-  "LABIRINTO",
-  "ENIGMA",
-  "ESTRATEGIA",
-  "INTELIGENCIA",
-  "RACIOCINIO",
-  "OBSERVACAO",
-  "CRIATIVIDADE",
-  "CONHECIMENTO",
-  "SABEDORIA",
-  "EXPERIENCIA",
-  "SOBREVIVENCIA",
-  "DESCOBERTA",
-  "INVESTIGACAO",
-  "ARQUEOLOGIA",
-  "ASTRONOMIA",
-  "BIOLOGIA",
-  "QUIMICA",
-  "FISICA",
-  "MATEMATICA",
-  "TECNOLOGIA",
-  "ENGENHARIA",
-  "PROGRAMACAO",
-  "ALGORITMO",
-  "CRIPTOGRAFIA",
-  "CIRCUITO",
-  "MECANISMO",
-  "COMBUSTAO",
-  "GRAVIDADE",
-  "ATMOSFERA",
-  "MAGNETISMO",
-  "CIVILIZACAO",
-  "IMPERIO",
-  "DEMOCRACIA",
-  "MONARQUIA",
-  "REVOLUCAO",
-  "INDEPENDENCIA",
-  "DIPLOMACIA",
-  "CONSTITUICAO",
-  "TERRITORIO",
-  "FRONTEIRA",
-  "CONTINENTE",
-  "OCEANO",
-  "ARQUIPELAGO",
-  "PENINSULA",
-  "CORDILHEIRA",
-  "GELEIRA",
-  "PROFUNDIDADE",
-  "TORNADO",
-  "TSUNAMI",
-  "AVALANCHE",
-
-  "DINOSSAURO",
-  "VELOCIRAPTOR",
-  "TIRANOSSAURO",
-  "TRICERATOPS",
-  "ESTEGOSSAURO",
-  "BRAQUIOSSAURO",
-  "PTERODACTILO",
-  "MAMUTE",
-  "SMILODONTE",
-  "MEGALODONTE",
-  "CROCODILO",
-  "SALAMANDRA",
-  "ORNITORRINCO",
-  "CAMALEAO",
-  "ESCORPIAO",
-  "TARANTULA",
-  "CENTOPEIA",
-  "ESCARAVELHO",
-  "GAFANHOTO",
-  "LIBELULA",
-
-  "INSTRUMENTO",
-  "PERCUSSAO",
-  "VIOLONCELO",
-  "CONTRABAIXO",
-  "SAXOFONE",
-  "TROMPETE",
-  "CLARINETE",
-  "ACORDEAO",
-  "BANDOLIM",
-  "HARPA",
-  "BATERIA",
-  "MARIMBA",
-  "XILOFONE",
-  "COMPOSITOR",
-  "MAESTRO",
-  "SINFONIA",
-  "MELODIA",
-  "HARMONIA",
-  "RITMO",
-  "CONCERTO",
-  "ORQUESTRA",
-  "CARNAVAL",
-  "FESTIVAL",
-  "ESPETACULO",
-  "COREOGRAFIA",
-  "FIGURINO",
-  "CENOGRAFIA",
-  "ARQUITETURA",
-  "FOTOGRAFIA",
-  "LITERATURA"
-
-];
-
-
-/* =====================================================
-   VERIFICAÇÃO DAS 400 PALAVRAS
-===================================================== */
-
-const TODAS_AS_PALAVRAS = [
-
-  ...FACIL,
-
-  ...MEDIO,
-
-  ...DIFICIL
-
-];
-
-
-console.log(
-  "TOTAL DE PALAVRAS:",
-  TODAS_AS_PALAVRAS.length
-);
-
-
-/* =====================================================
-   DICAS
-===================================================== */
-
-function obterDica(
-  nivel,
-  palavra
-){
-
-  const animal = [
-    "ELEFANTE","MACACO","GIRAFA","CACHORRO",
-    "GATO","COELHO","CAVALO","VACA","PORCO",
-    "GALINHA","OVELHA","CABRA","PATO","PEIXE",
-    "TARTARUGA","LEAO","TIGRE","ZEBRA","URSO",
-    "PANDA","RAPOSA","LOBO","COBRA","JACARE",
-    "CAMELO","LHAMA","BURRO","RATO","SAPO",
-    "BALEIA","GOLFINHO","TUBARAO","POLVO",
-    "CARANGUEJO","BORBOLETA","ABELHA","FORMIGA",
-    "ARANHA","PASSARO","PAPAGAIO","PAVAO",
-    "FLAMINGO","AGUIA","CORUJA","POMBO",
-    "GALINHAO","HAMSTER","ESQUILO","MORCEGO",
-    "FOCA","PINGUIM","CANGURU","GORILA",
-    "HIPOPOTAMO","RINOCERONTE","AVESTRUZ",
-    "ONCA","ANTA","CAPIVARA","TAMANDUA"
-  ];
-
-
-  if(
-    animal.includes(palavra)
-  ){
-
-    return "Animal";
-
-  }
-
-
-  const alimentos = [
-
-    "BANANA","MACA","PERA","UVA","MANGA",
-    "MAMAO","LARANJA","LIMAO","MELANCIA",
-    "MORANGO","ABACAXI","COCO","CEREJA",
-    "PESSEGO","AMEIXA","FIGO","GOIABA",
-    "MARACUJA","KIWI","TOMATE","BATATA",
-    "CENOURA","CEBOLA","ALHO","ARROZ",
-    "FEIJAO","MILHO","TRIGO","QUEIJO",
-    "LEITE","MANTEIGA","PAO","BOLO",
-    "BISCOITO","CHOCOLATE","PIPOCA",
-    "SORVETE","PIZZA","SANDUICHE","SALADA",
-    "SOPA","ABOBORA","ESPINAFRE","BROCOLIS",
-    "BETERRABA","BERINJELA","PEPINO",
-    "ABOBRINHA","ERVILHA","LENTILHA",
-    "GRAODEBICO","AMENDOIM","CASTANHA",
-    "PISTACHE","NOZES","AVEIA","FARINHA",
-    "CANELA","BAUNILHA","GENGIBRE","PIMENTA",
-    "MOSTARDA","MEL","GELEIA","IOGURTE",
-    "PRESUNTO","SALAME","LINGUICA","LASANHA",
-    "RISOTO","PANQUECA","OMELETE",
-    "CROISSANT","CUPCAKE","PUDIM"
-  ];
-
-
-  if(
-    alimentos.includes(palavra)
-  ){
-
-    return "Alimento";
-
-  }
-
-
-  const musica = [
-
-    "INSTRUMENTO","PERCUSSAO","VIOLONCELO",
-    "CONTRABAIXO","SAXOFONE","TROMPETE",
-    "CLARINETE","ACORDEAO","BANDOLIM",
-    "HARPA","BATERIA","MARIMBA","XILOFONE",
-    "COMPOSITOR","MAESTRO","SINFONIA",
-    "MELODIA","HARMONIA","RITMO","CONCERTO",
-    "ORQUESTRA","CARNAVAL","FESTIVAL",
-    "ESPETACULO","COREOGRAFIA","FIGURINO",
-    "CENOGRAFIA"
-  ];
-
-
-  if(
-    musica.includes(palavra)
-  ){
-
-    return "Música e espetáculo";
-
-  }
-
-
-  const prehistorico = [
-
-    "DINOSSAURO","VELOCIRAPTOR","TIRANOSSAURO",
-    "TRICERATOPS","ESTEGOSSAURO",
-    "BRAQUIOSSAURO","PTERODACTILO",
-    "MAMUTE","SMILODONTE","MEGALODONTE"
-  ];
-
-
-  if(
-    prehistorico.includes(palavra)
-  ){
-
-    return "Animal pré-histórico";
-
-  }
-
-
-  if(
-    nivel === "FÁCIL"
-  ){
-
-    return "Objeto, lugar ou elemento do cotidiano";
-
-  }
-
-
-  if(
-    nivel === "MÉDIO"
-  ){
-
-    return "Uma palavra de dificuldade média";
-
-  }
-
-
-  return "Uma palavra de grande desafio";
-
-}
-
-
-/* =====================================================
-   ESTADO
-===================================================== */
-
-let usuario =
-  null;
-
-let usuarioRef =
-  null;
-
-let dadosUsuario =
-  null;
-
-let partidaId =
-  null;
-
-let palavrasDaPartida =
-  [];
-
-let rodadaAtual =
-  0;
-
-let letras =
-  new Set();
-
-let erros =
-  0;
-
-let finalizandoRodada =
-  false;
-
-let iniciando =
-  false;
-
-
-/* =====================================================
-   NÍVEL DA RODADA
-===================================================== */
-
-function nivelDaRodada(
-  numero
-){
-
-  if(
-    numero <= 3
-  ){
-
-    return "FÁCIL";
-
-  }
-
-  if(
-    numero <= 5
-  ){
-
-    return "MÉDIO";
-
-  }
-
-  return "DIFÍCIL";
-
-}
-
-
-/* =====================================================
-   LISTA DO NÍVEL
-===================================================== */
-
-function listaDoNivel(
-  nivel
-){
-
-  if(
-    nivel === "FÁCIL"
-  ){
-
-    return FACIL;
-
-  }
-
-  if(
-    nivel === "MÉDIO"
-  ){
-
-    return MEDIO;
-
-  }
-
-  return DIFICIL;
-
-}
-
-
-/* =====================================================
-   EMBARALHAR
-===================================================== */
-
-function embaralhar(
-  lista
-){
-
-  const copia =
-    [...lista];
-
-
-  for(
-    let i =
-      copia.length - 1;
-
-    i > 0;
-
-    i--
-  ){
-
-    const j =
-      Math.floor(
-        Math.random() *
-        (i + 1)
-      );
-
-
-    [
-      copia[i],
-      copia[j]
-    ] =
-    [
-      copia[j],
-      copia[i]
-    ];
-
-  }
-
-
-  return copia;
-
-}
-
-
-/* =====================================================
-   CRIAR AS 7 PALAVRAS
-===================================================== */
-
-function criarSequencia(){
-
-  const facil =
-    embaralhar(
-      FACIL
-    ).slice(
-      0,
-      3
-    );
-
-
-  const medio =
-    embaralhar(
-      MEDIO
-    ).slice(
-      0,
-      2
-    );
-
-
-  const dificil =
-    embaralhar(
-      DIFICIL
-    ).slice(
-      0,
-      2
-    );
-
-
-  palavrasDaPartida = [
-
-    ...facil,
-
-    ...medio,
-
-    ...dificil
-
-  ];
-
-
-  console.log(
-    "SEQUÊNCIA:",
-    palavrasDaPartida
-  );
-
-}
-
-
-/* =====================================================
-   SALVAR ESTADO LOCAL
-===================================================== */
-
-function salvarEstado(){
-
-  sessionStorage.setItem(
-
-    "adamForcaEstado",
-
-    JSON.stringify({
-
-      partidaId:
-        partidaId,
-
-      palavras:
-        palavrasDaPartida,
-
-      rodada:
-        rodadaAtual
-
-    })
-
-  );
-
-}
-
-
-/* =====================================================
-   RECUPERAR ESTADO
-===================================================== */
-
-function recuperarEstado(){
-
-  try{
-
-    const salvo =
-      sessionStorage.getItem(
-        "adamForcaEstado"
-      );
-
-
-    if(
-      !salvo
-    ){
-
-      return false;
-
-    }
-
-
-    const dados =
-      JSON.parse(
-        salvo
-      );
-
-
-    if(
-      !dados ||
-      !dados.partidaId ||
-      !Array.isArray(
-        dados.palavras
-      ) ||
-      dados.palavras.length !==
-        TOTAL_RODADAS
-    ){
-
-      return false;
-
-    }
-
-
-    partidaId =
-      dados.partidaId;
-
-
-    palavrasDaPartida =
-      dados.palavras;
-
-
-    rodadaAtual =
-      Number(
-        dados.rodada || 0
-      );
-
-
-    return true;
-
-  }
-
-  catch(error){
-
-    console.error(
-      error
-    );
-
-    return false;
-
-  }
-
-}
-
-
-/* =====================================================
-   LIMPAR ESTADO
-===================================================== */
-
-function limparEstado(){
-
-  sessionStorage.removeItem(
-    "adamForcaEstado"
-  );
-
-}
-
-
-/* =====================================================
-   DESENHAR PALAVRA
-===================================================== */
-
-function desenharPalavra(){
-
-  const palavra =
-    palavrasDaPartida[
-      rodadaAtual
-    ];
-
-
-  if(
-    !palavra
-  ){
-
-    return;
-
-  }
-
-
-  wordEl.innerHTML =
-    "";
-
-
-  [...palavra].forEach(
-    letra => {
-
-      const span =
-        document.createElement(
-          "span"
-        );
-
-
-      span.className =
-        "word-letter";
-
-
-      if(
-        letras.has(
-          normalizar(letra)
-        )
-      ){
-
-        span.textContent =
-          normalizar(letra);
-
-      }
-      else{
-
-        span.textContent =
-          " ";
-
-      }
-
-
-      wordEl.appendChild(
-        span
-      );
-
-    }
-  );
-
-}
-
-
-/* =====================================================
-   ATUALIZAR ERROS
-===================================================== */
-
-function atualizarErros(){
-
-  const pontos =
-    errorsEl
-      .querySelectorAll(
-        ".error-dot"
-      );
-
-
-  pontos.forEach(
-    (ponto,index) => {
-
-      ponto.classList.toggle(
-        "active",
-        index < erros
-      );
-
-    }
-  );
-
-}
-
-
-/* =====================================================
-   ATUALIZAR INTERFACE
-===================================================== */
-
-function atualizarInterface(){
-
-  const numero =
-    rodadaAtual + 1;
-
-
-  const nivel =
-    nivelDaRodada(
-      numero
-    );
-
-
-  nivelEl.textContent =
-    nivel;
-
-
-  rodadaEl.textContent =
-    numero;
-
-
-  faseEl.textContent =
-    numero +
-    " / " +
-    TOTAL_RODADAS;
-
-
-  recompensaEl.textContent =
-    RECOMPENSA_RODADA;
-
-
-  const percentual =
-    (
-      numero /
-      TOTAL_RODADAS
-    ) * 100;
-
-
-  progressEl.style.width =
-    percentual + "%";
-
-
-  const palavra =
-    palavrasDaPartida[
-      rodadaAtual
-    ];
-
-
-  dicaEl.textContent =
-    obterDica(
-      nivel,
-      palavra
-    );
-
-
-  desenharPalavra();
-
-  atualizarErros();
-
-}
-
-
-/* =====================================================
-   CRIAR TECLADO
-===================================================== */
-
-function criarTeclado(){
-
-  const alfabeto =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-
-  keyboardEl.innerHTML =
-    "";
-
-
-  [...alfabeto].forEach(
-    letra => {
-
-      const botao =
-        document.createElement(
-          "button"
-        );
-
-
-      botao.type =
-        "button";
-
-
-      botao.className =
-        "key";
-
-
-      botao.textContent =
-        letra;
-
-
-      botao.addEventListener(
-        "click",
-        () => {
-
-          escolherLetra(
-            letra,
-            botao
-          );
-
-        }
-      );
-
-
-      keyboardEl.appendChild(
-        botao
-      );
-
-    }
-  );
-
-}
-
-
-/* =====================================================
-   BLOQUEAR TECLADO
-===================================================== */
-
-function bloquearTeclado(){
-
-  keyboardEl
-    .querySelectorAll(
-      "button"
-    )
-    .forEach(
-      botao => {
-
-        botao.disabled =
-          true;
-
-      }
-    );
-
-}
-
-
-/* =====================================================
-   LIBERAR TECLADO
-===================================================== */
-
-function liberarTeclado(){
-
-  keyboardEl
-    .querySelectorAll(
-      "button"
-    )
-    .forEach(
-      botao => {
-
-        botao.disabled =
-          false;
-
-      }
-    );
-
-}
-
-
-/* =====================================================
-   RESETAR RODADA
-===================================================== */
-
-function resetarRodada(){
-
-  letras =
-    new Set();
-
-
-  erros =
-    0;
-
-
-  finalizandoRodada =
-    false;
-
-
-  criarTeclado();
-
-  atualizarInterface();
-
-  liberarTeclado();
-
-}
-
-
-/* =====================================================
-   ESCOLHER LETRA
-===================================================== */
-
-function escolherLetra(
-  letra,
-  botao
-){
-
-  if(
-    finalizandoRodada
-  ){
-
-    return;
-
-  }
-
-
-  if(
-    letras.has(letra)
-  ){
-
-    return;
-
-  }
-
-
-  letras.add(
-    letra
-  );
-
-
-  botao.disabled =
-    true;
-
-
-  const palavra =
-    normalizar(
-      palavrasDaPartida[
-        rodadaAtual
-      ]
-    );
-
-
-  if(
-    palavra.includes(
-      letra
-    )
-  ){
-
-    botao.classList.add(
-      "correct"
-    );
-
-
-    statusEl.textContent =
-      "✅ Boa! A letra está na palavra.";
-
-
-    statusEl.className =
-      "status success";
-
-
-    desenharPalavra();
-
-
-    verificarVitoria();
-
-  }
-
-  else{
-
-    botao.classList.add(
-      "wrong"
-    );
-
-
-    erros++;
-
-
-    atualizarErros();
-
-
-    statusEl.textContent =
-      "❌ Letra errada. Tentativas: " +
-      erros +
-      " / " +
-      MAX_ERROS;
-
-
-    statusEl.className =
-      "status error";
-
-
-    if(
-      erros >= MAX_ERROS
-    ){
-
-      perderRodada();
-
-    }
-
-  }
-
-}
-
-
-/* =====================================================
-   VERIFICAR VITÓRIA
-===================================================== */
-
-function verificarVitoria(){
-
-  const palavra =
-    normalizar(
-      palavrasDaPartida[
-        rodadaAtual
-      ]
-    );
-
-
-  const venceu =
-    [...new Set(
-      palavra.split("")
-    )]
-    .every(
-      letra =>
-        letras.has(
-          letra
-        )
-    );
-
-
-  if(
-    venceu
-  ){
-
-    ganharRodada();
-
-  }
-
-}
-
-
-/* =====================================================
-   PROCURAR CADASTRO
-===================================================== */
-
-async function localizarCadastro(
-  user
-){
-
-  let snapshot =
-    await getDocs(
-
-      query(
-        collection(
-          db,
-          "admins"
-        ),
-
-        where(
-          "uid",
-          "==",
-          user.uid
-        )
-
-      )
-
-    );
-
-
-  if(
-    !snapshot.empty
-  ){
-
-    return snapshot.docs[0];
-
-  }
-
-
-  if(
-    user.email
-  ){
-
-    snapshot =
-      await getDocs(
-
-        query(
-          collection(
-            db,
-            "admins"
-          ),
-
-          where(
-            "email",
-            "==",
-            user.email
-          )
-
-        )
-
-      );
-
-
-    if(
-      !snapshot.empty
-    ){
-
-      return snapshot.docs[0];
-
-    }
-
-  }
-
-
-  return null;
-
-}
-
-
-/* =====================================================
-   INICIAR PARTIDA
-===================================================== */
-
-async function iniciarPartida(){
-
-  if(
-    iniciando
-  ){
-
-    return;
-
-  }
-
-
-  iniciando =
-    true;
-
-
-  try{
-
-    const cadastro =
-      await localizarCadastro(
-        usuario
-      );
-
-
-    if(
-      !cadastro
-    ){
-
-      throw new Error(
-        "Cadastro não encontrado para esta conta."
-      );
-
-    }
-
-
-    usuarioRef =
-      cadastro.ref;
-
-
-    dadosUsuario =
-      cadastro.data();
-
-
-    const chances =
-      Number(
-        dadosUsuario.chances || 0
-      );
-
-
-    if(
-      chances <= 0
-    ){
-
-      throw new Error(
-        "Você não possui chances para jogar."
-      );
-
-    }
-
-
-    criarSequencia();
-
-
-    const novaPartida =
-      doc(
-        collection(
-          db,
-          "gameSessions"
-        )
-      );
-
-
-    const batch =
-      writeBatch(
-        db
-      );
-
-
-    batch.set(
-      novaPartida,
-      {
-
-        uid:
-          usuario.uid,
-
-        email:
-          usuario.email || "",
-
-        game:
-          "forca",
-
-        status:
-          "ativa",
-
-        totalRodadas:
-          TOTAL_RODADAS,
-
-        rodadaAtual:
-          1,
-
-        rewardPerRound:
-          RECOMPENSA_RODADA,
-
-        chanceConsumed:
-          true,
-
-        createdAt:
-          serverTimestamp(),
-
-        finalizadoEm:
-          null
-
-      }
-    );
-
-
-    /*
-      UMA chance é consumida no começo da
-      sequência inteira.
-
-      Não é descontada novamente nas 7 rodadas.
-    */
-
-    batch.update(
-      usuarioRef,
-      {
-
-        chances:
-          chances - 1,
-
-        ultimaPartidaForcaId:
-          novaPartida.id,
-
-        ultimaPartidaForcaEm:
-          serverTimestamp()
-
-      }
-    );
-
-
-    await batch.commit();
-
-
-    partidaId =
-      novaPartida.id;
-
-
-    salvarEstado();
-
-
-    atualizarInterface();
-
-
-    mostrarStatus(
-      "🎟️ Partida iniciada! Complete as 7 rodadas.",
-      "success"
-    );
-
-
-    iniciando =
-      false;
-
-  }
-
-  catch(error){
-
-    console.error(
-      "ERRO AO INICIAR FORCA:",
-      error
-    );
-
-
-    iniciando =
-      false;
-
-
-    let texto =
-      "⚠️ Não foi possível iniciar a partida.";
-
-
-    if(
-      error.code ===
-      "permission-denied"
-    ){
-
-      texto =
-        "⚠️ O Firebase recusou o início da partida. As Rules precisam permitir a criação de gameSessions e o consumo da chance.";
-
-    }
-    else if(
-      error.message
-    ){
-
-      texto =
-        "⚠️ " +
-        error.message;
-
-    }
-
-
-    mostrarStatus(
-      texto,
-      "error"
-    );
-
-
-    bloquearTeclado();
-
-  }
-
-}
-
-
-/* =====================================================
-   REGISTRAR RESULTADO DA RODADA
-===================================================== */
-
-async function registrarResultado(
-  ganhou
-){
-
-  if(
-    !partidaId ||
-    !usuario
-  ){
-
-    return;
-
-  }
-
-
-  try{
-
-    await addDoc(
-
-      collection(
-        db,
-        "resultadosJogos"
-      ),
-
-      {
-
-        uid:
-          usuario.uid,
-
-        jogoId:
-          partidaId,
-
-        rodada:
-          rodadaAtual + 1,
-
-        nivel:
-          nivelDaRodada(
-            rodadaAtual + 1
-          ),
-
-        palavra:
-          palavrasDaPartida[
-            rodadaAtual
-          ],
-
-        ganhou:
-          ganhou,
-
-        moedasGanhos:
-          ganhou
-            ? RECOMPENSA_RODADA
-            : 0,
-
-        criadoEm:
-          new Date().toISOString()
-
-      }
-
-    );
-
-  }
-
-  catch(error){
-
-    console.error(
-      "ERRO AO REGISTRAR RESULTADO:",
-      error
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-   DAR MOEDAS
-===================================================== */
-
-async function darMoedas(){
-
-  if(
-    !usuarioRef ||
-    !dadosUsuario
-  ){
-
-    throw new Error(
-      "Cadastro do usuário não carregado."
-    );
-
-  }
-
-
-  const moedasAtuais =
-    Number(
-      dadosUsuario.moedas || 0
-    );
-
-
-  const novoSaldo =
-    moedasAtuais +
-    RECOMPENSA_RODADA;
-
-
-  const batch =
-    writeBatch(
-      db
-    );
-
-
-  /*
-    Adiciona as 20 moedas.
-  */
-
-  batch.update(
-    usuarioRef,
-    {
-
-      moedas:
-        novoSaldo
-
-    }
-  );
-
-
-  /*
-    Atualiza a rodada da sessão.
-  */
-
-  batch.update(
-
-    doc(
-      db,
-      "gameSessions",
-      partidaId
-    ),
-
-    {
-
-      rodadaAtual:
-        rodadaAtual + 1,
-
-      ultimaRecompensa:
-        RECOMPENSA_RODADA,
-
-      ultimaRecompensaEm:
-        serverTimestamp()
-
-    }
-
-  );
-
-
-  await batch.commit();
-
-
-  dadosUsuario.moedas =
-    novoSaldo;
-
-}
-
-
-/* =====================================================
-   GANHAR RODADA
-===================================================== */
-
-async function ganharRodada(){
-
-  if(
-    finalizandoRodada
-  ){
-
-    return;
-
-  }
-
-
-  finalizandoRodada =
-    true;
-
-
-  bloquearTeclado();
-
-
-  try{
-
-    /*
-      Primeiro registra o resultado.
-    */
-
-    await registrarResultado(
-      true
-    );
-
-
-    /*
-      Depois tenta adicionar 20 moedas.
-    */
-
-    await darMoedas();
-
-
-    statusEl.textContent =
-      "🎉 Acertou! +20 moedas";
-
-
-    statusEl.className =
-      "status success";
-
-
-    if(
-      rodadaAtual >=
-      TOTAL_RODADAS - 1
-    ){
-
-      setTimeout(
-        finalizarPartida,
-        1200
-      );
-
-      return;
-
-    }
-
-
-    setTimeout(
-      () => {
-
-        rodadaAtual++;
-
-
-        salvarEstado();
-
-
-        resetarRodada();
-
-
-        mostrarStatus(
-          "➡️ Próxima rodada!",
-          "success"
-        );
-
-      },
-      1200
-    );
-
-  }
-
-  catch(error){
-
-    console.error(
-      "ERRO AO DAR MOEDAS:",
-      error
-    );
-
-
-    /*
-      Não avança a rodada se a recompensa
-      não foi registrada.
-    */
-
-    finalizandoRodada =
-      false;
-
-
-    liberarTeclado();
-
-
-    if(
-      error.code ===
-      "permission-denied"
-    ){
-
-      mostrarStatus(
-
-        "⚠️ A palavra foi acertada, mas o Firebase não permitiu registrar as 20 moedas. A partida ficou nesta rodada.",
-
-        "error"
-
-      );
-
-    }
-    else{
-
-      mostrarStatus(
-
-        "⚠️ Não foi possível registrar a recompensa. Tente novamente.",
-
-        "error"
-
-      );
-
-    }
-
-  }
-
-}
-
-
-/* =====================================================
-   PERDER RODADA
-===================================================== */
-
-async function perderRodada(){
-
-  if(
-    finalizandoRodada
-  ){
-
-    return;
-
-  }
-
-
-  finalizandoRodada =
-    true;
-
-
-  bloquearTeclado();
-
-
-  await registrarResultado(
-    false
-  );
-
-
-  const palavra =
-    palavrasDaPartida[
-      rodadaAtual
-    ];
-
-
-  if(
-    rodadaAtual >=
-    TOTAL_RODADAS - 1
-  ){
-
-    finalizarPartida();
-
-    return;
-
-  }
-
-
-  statusEl.textContent =
-    "❌ A palavra era " +
-    palavra +
-    ". Próxima rodada!";
-
-
-  statusEl.className =
-    "status error";
-
-
-  setTimeout(
-    () => {
-
-      rodadaAtual++;
-
-
-      salvarEstado();
-
-
-      resetarRodada();
-
-
-      mostrarStatus(
-        "➡️ Próxima rodada!",
-        "info"
-      );
-
-    },
-    1600
-  );
-
-}
-
-
-/* =====================================================
-   FINALIZAR PARTIDA
-===================================================== */
-
-async function finalizarPartida(){
-
-  bloquearTeclado();
-
-
-  try{
-
-    if(
-      partidaId
-    ){
-
-      await writeBatch(
-        db
-      ).update;
-
-    }
-
-  }
-  catch(error){
-
-    console.error(
-      error
-    );
-
-  }
-
-
-  /*
-    Tenta atualizar a sessão separadamente.
-  */
-
-  try{
-
-    if(
-      partidaId
-    ){
-
-      const batch =
-        writeBatch(
-          db
-        );
-
-
-      batch.update(
-
-        doc(
-          db,
-          "gameSessions",
-          partidaId
-        ),
-
-        {
-
-          status:
-            "completed",
-
-          rodadaAtual:
-            TOTAL_RODADAS,
-
-          totalRodadas:
-            TOTAL_RODADAS,
-
-          finalizadoEm:
-            serverTimestamp()
-
-        }
-
-      );
-
-
-      await batch.commit();
-
-    }
-
-  }
-
-  catch(error){
-
-    console.error(
-      "ERRO AO FINALIZAR PARTIDA:",
-      error
-    );
-
-  }
-
-
-  limparEstado();
-
-
-  modalTitle.textContent =
-    "🏆 SEQUÊNCIA COMPLETA!";
-
-
-  modalText.textContent =
-    "Parabéns! Você completou as 7 rodadas da Forca.";
-
-
-  modalButton.textContent =
-    "VOLTAR PARA OS JOGOS";
-
-
-  modal.classList.add(
-    "show"
-  );
-
-}
-
-
-/* =====================================================
-   MODAL
-===================================================== */
-
-modalButton.addEventListener(
-  "click",
-  () => {
-
-    window.location.href =
-      "jogos.html";
-
-  }
-);
-
-
-/* =====================================================
-   VOLTAR
-===================================================== */
-
-document
-  .getElementById("back")
-  .addEventListener(
-    "click",
-    () => {
-
-      window.location.href =
-        "jogos.html";
-
-    }
-  );
-
-
-/* =====================================================
-   AUTENTICAÇÃO
-===================================================== */
-
-onAuthStateChanged(
-  auth,
-  async user => {
-
-    if(
-      !user
-    ){
-
-      window.location.replace(
-        "index.html"
-      );
-
-      return;
-
-    }
-
-
-    usuario =
-      user;
-
-
-    /*
-      Se a página foi recarregada durante uma partida,
-      recupera a mesma sequência em vez de começar
-      outra partida e gastar outra chance.
-    */
-
-    const recuperou =
-      recuperarEstado();
-
-
-    if(
-      recuperou
-    ){
-
-      try{
-
-        const cadastro =
-          await localizarCadastro(
-            usuario
-          );
-
-
-        if(
-          cadastro
-        ){
-
-          usuarioRef =
-            cadastro.ref;
-
-          dadosUsuario =
-            cadastro.data();
-
-        }
-
-
-        atualizarInterface();
-
-
-        mostrarStatus(
-          "🎮 Partida recuperada. Continue a sequência!",
-          "info"
-        );
-
-
-        return;
-
-      }
-
-      catch(error){
-
-        console.error(
-          error
-        );
-
-      }
-
-    }
-
-
-    iniciarPartida();
-
-  }
-);
-
-
-/* =====================================================
-   INICIALIZAÇÃO VISUAL
-===================================================== */
-
-criarTeclado();
-
-atualizarErros();
-
+onAuthStateChanged(auth,async u=>{
+ if(!u){location.href="index.html";return}
+ user=u;
+ try{
+  userRef=await findUser(u);
+  if(!userRef){alert("Cadastro Adam Games não encontrado.");location.href="jogos.html";return}
+  const s=await getDoc(userRef);
+  coins=Number(s.data()?.moedas||0);coinsUI();start();
+ }catch(e){console.error(e);alert("Erro ao carregar seus dados.")}
+});
 </script>
-
 </body>
-
 </html>
