@@ -14,10 +14,6 @@
 
 <style>
 
-/* =====================================================
-   RESET
-===================================================== */
-
 *{
   box-sizing:border-box;
   margin:0;
@@ -40,7 +36,6 @@ body{
   color:#fff;
 
   background:
-
     radial-gradient(
       circle at 10% 0%,
       rgba(0,205,120,.45),
@@ -149,7 +144,7 @@ body{
 
 
 /* =====================================================
-   CABEÇALHO
+   HERO
 ===================================================== */
 
 .hero{
@@ -384,7 +379,7 @@ body{
 
 
 /* =====================================================
-   TÍTULO JOGOS
+   TÍTULO
 ===================================================== */
 
 .section-title{
@@ -401,21 +396,17 @@ body{
 
 
 /* =====================================================
-   LISTA DE JOGOS
+   JOGOS
 ===================================================== */
 
 .games{
 
   display:grid;
 
-  gap:14px;
+  gap:16px;
 
 }
 
-
-/* =====================================================
-   CARD DO JOGO
-===================================================== */
 
 .game{
 
@@ -433,38 +424,41 @@ body{
     rgba(255,255,255,.12);
 
   box-shadow:
-    0 9px 24px
-    rgba(0,0,0,.25);
+    0 10px 28px
+    rgba(0,0,0,.28);
+
+  cursor:pointer;
+
+  transition:
+    transform .15s ease,
+    box-shadow .15s ease;
 
 }
 
 
-/* =====================================================
-   IMAGEM COMPLETA
-   NÃO CORTAR
-   NÃO FORÇAR ALTURA
-===================================================== */
+.game:active{
+
+  transform:scale(.985);
+
+}
+
 
 .game-image{
 
-  display:block;
-
   width:100%;
 
-  height:auto;
+  display:block;
 
-  max-width:100%;
+  aspect-ratio:16 / 9;
 
-  object-fit:initial;
+  object-fit:cover;
 
   object-position:center;
 
+  background:#082742;
+
 }
 
-
-/* =====================================================
-   CONTEÚDO DO CARD
-===================================================== */
 
 .game-content{
 
@@ -475,7 +469,7 @@ body{
 
 .game-name{
 
-  font-size:20px;
+  font-size:22px;
 
   font-weight:900;
 
@@ -503,7 +497,7 @@ body{
 
   justify-content:space-between;
 
-  gap:10px;
+  gap:12px;
 
   margin-top:15px;
 
@@ -514,7 +508,7 @@ body{
 
   color:#ffd52b;
 
-  font-size:13px;
+  font-size:12px;
 
   font-weight:bold;
 
@@ -523,13 +517,13 @@ body{
 
 .play{
 
-  min-width:105px;
+  min-width:110px;
 
-  height:43px;
+  height:45px;
 
   border:0;
 
-  border-radius:12px;
+  border-radius:13px;
 
   background:
     linear-gradient(
@@ -556,22 +550,13 @@ body{
 }
 
 
-.play:disabled{
-
-  opacity:.4;
-
-  cursor:not-allowed;
-
-}
-
-
 /* =====================================================
    INFORMAÇÃO
 ===================================================== */
 
 .info-card{
 
-  margin-top:18px;
+  margin-top:20px;
 
   padding:17px;
 
@@ -615,7 +600,7 @@ body{
 
 
 /* =====================================================
-   MODAL SEM CHANCE
+   MODAL
 ===================================================== */
 
 .modal{
@@ -667,10 +652,6 @@ body{
   border:
     1px solid
     rgba(255,255,255,.12);
-
-  box-shadow:
-    0 20px 50px
-    rgba(0,0,0,.4);
 
 }
 
@@ -783,35 +764,23 @@ body{
 
   .game-content{
 
-    padding:16px;
+    padding:15px;
 
   }
 
   .game-name{
 
-    font-size:18px;
+    font-size:20px;
 
   }
 
-  .game-description{
+  .game-bottom{
 
-    font-size:12px;
+    align-items:flex-end;
 
   }
 
 }
-
-
-/* =====================================================
-   EVITAR QUALQUER CORTE DA ARTE
-===================================================== */
-
-img{
-
-  max-width:100%;
-
-}
-
 
 </style>
 
@@ -823,10 +792,6 @@ img{
 
 <div class="page">
 
-
-  <!-- =================================================
-       TOPO
-  ================================================== -->
 
   <div class="top">
 
@@ -858,10 +823,6 @@ img{
   </div>
 
 
-  <!-- =================================================
-       HERO
-  ================================================== -->
-
   <div class="hero">
 
     <div class="hero-icon">
@@ -880,11 +841,8 @@ img{
   </div>
 
 
-  <!-- =================================================
-       SALDOS
-  ================================================== -->
-
   <div class="saldos">
+
 
     <div class="saldo">
 
@@ -919,12 +877,9 @@ img{
 
     </div>
 
+
   </div>
 
-
-  <!-- =================================================
-       PRÓXIMA CHANCE
-  ================================================== -->
 
   <div
     class="proxima"
@@ -935,11 +890,8 @@ img{
   </div>
 
 
-  <!-- =================================================
-       MENU
-  ================================================== -->
-
   <div class="menu">
+
 
     <button
       class="menu-button"
@@ -960,12 +912,9 @@ img{
 
     </button>
 
+
   </div>
 
-
-  <!-- =================================================
-       JOGOS
-  ================================================== -->
 
   <div class="section-title">
 
@@ -977,17 +926,16 @@ img{
   <div class="games">
 
 
-    <!-- =================================================
-         FORCA
-    ================================================== -->
+    <!-- FORCA -->
 
-    <div class="game">
+    <div
+      class="game"
+      data-game="forca">
 
       <img
         class="game-image"
         src="./card_forca.png"
-        alt="Forca"
-      >
+        alt="Forca">
 
       <div class="game-content">
 
@@ -996,19 +944,18 @@ img{
         </div>
 
         <div class="game-description">
-          Descubra a palavra antes que
-          acabem suas tentativas.
+          Descubra a palavra antes que acabem suas tentativas.
         </div>
 
         <div class="game-bottom">
 
           <div class="game-reward">
-            🪙 Moedas por jogar
+            🪙 +30 ao jogar<br>
+            ⭐ +20 se acertar
           </div>
 
           <button
             class="play"
-            data-game="forca"
             type="button">
 
             JOGAR
@@ -1022,17 +969,16 @@ img{
     </div>
 
 
-    <!-- =================================================
-         CHUVA DE SABORES
-    ================================================== -->
+    <!-- CHUVA -->
 
-    <div class="game">
+    <div
+      class="game"
+      data-game="chuva">
 
       <img
         class="game-image"
         src="./card_chuva_de_sabores.png"
-        alt="Chuva de Sabores"
-      >
+        alt="Chuva de Sabores">
 
       <div class="game-content">
 
@@ -1041,8 +987,7 @@ img{
         </div>
 
         <div class="game-description">
-          Pegue os alimentos certos,
-          evite o lixo e faça a maior pontuação.
+          Pegue as comidas e evite o lixo.
         </div>
 
         <div class="game-bottom">
@@ -1053,7 +998,6 @@ img{
 
           <button
             class="play"
-            data-game="chuva"
             type="button">
 
             JOGAR
@@ -1067,17 +1011,16 @@ img{
     </div>
 
 
-    <!-- =================================================
-         CAÇA AO TESOURO
-    ================================================== -->
+    <!-- CAÇA AO TESOURO -->
 
-    <div class="game">
+    <div
+      class="game"
+      data-game="tesouro">
 
       <img
         class="game-image"
         src="./card_caca_ao_tesouro.png"
-        alt="Caça ao Tesouro"
-      >
+        alt="Caça ao Tesouro">
 
       <div class="game-content">
 
@@ -1086,8 +1029,7 @@ img{
         </div>
 
         <div class="game-description">
-          Explore o mapa, escolha os locais
-          e tente encontrar o tesouro escondido.
+          Quebre os blocos e descubra o que está escondido.
         </div>
 
         <div class="game-bottom">
@@ -1098,7 +1040,6 @@ img{
 
           <button
             class="play"
-            data-game="tesouro"
             type="button">
 
             JOGAR
@@ -1112,17 +1053,16 @@ img{
     </div>
 
 
-    <!-- =================================================
-         ACERTE O ALVO
-    ================================================== -->
+    <!-- ALVO -->
 
-    <div class="game">
+    <div
+      class="game"
+      data-game="alvo">
 
       <img
         class="game-image"
         src="./card_acerte_ao_alvo.png"
-        alt="Acerte o Alvo"
-      >
+        alt="Acerte ao Alvo">
 
       <div class="game-content">
 
@@ -1131,8 +1071,7 @@ img{
         </div>
 
         <div class="game-description">
-          Teste sua precisão e velocidade
-          para acertar o alvo.
+          Teste sua precisão e velocidade.
         </div>
 
         <div class="game-bottom">
@@ -1143,7 +1082,6 @@ img{
 
           <button
             class="play"
-            data-game="alvo"
             type="button">
 
             JOGAR
@@ -1157,17 +1095,16 @@ img{
     </div>
 
 
-    <!-- =================================================
-         MEMÓRIA MALUCA
-    ================================================== -->
+    <!-- MEMÓRIA -->
 
-    <div class="game">
+    <div
+      class="game"
+      data-game="memoria">
 
       <img
         class="game-image"
         src="./card_memoria_maluca.png"
-        alt="Memória Maluca"
-      >
+        alt="Memória Maluca">
 
       <div class="game-content">
 
@@ -1176,8 +1113,7 @@ img{
         </div>
 
         <div class="game-description">
-          Encontre os pares antes que
-          o tempo termine.
+          Encontre os pares antes que o tempo termine.
         </div>
 
         <div class="game-bottom">
@@ -1188,7 +1124,6 @@ img{
 
           <button
             class="play"
-            data-game="memoria"
             type="button">
 
             JOGAR
@@ -1202,17 +1137,16 @@ img{
     </div>
 
 
-    <!-- =================================================
-         REAÇÃO RELÂMPAGO
-    ================================================== -->
+    <!-- REAÇÃO -->
 
-    <div class="game">
+    <div
+      class="game"
+      data-game="reacao">
 
       <img
         class="game-image"
         src="./card_reacao_relampago.png"
-        alt="Reação Relâmpago"
-      >
+        alt="Reação Relâmpago">
 
       <div class="game-content">
 
@@ -1221,8 +1155,7 @@ img{
         </div>
 
         <div class="game-description">
-          Reaja rapidamente aos comandos
-          e teste seus reflexos.
+          Reaja rapidamente aos comandos da tela.
         </div>
 
         <div class="game-bottom">
@@ -1233,7 +1166,6 @@ img{
 
           <button
             class="play"
-            data-game="reacao"
             type="button">
 
             JOGAR
@@ -1247,17 +1179,16 @@ img{
     </div>
 
 
-    <!-- =================================================
-         SEQUÊNCIA DE SONS
-    ================================================== -->
+    <!-- SEQUÊNCIA -->
 
-    <div class="game">
+    <div
+      class="game"
+      data-game="sequencia">
 
       <img
         class="game-image"
         src="./card_sequencia_de_sons.png"
-        alt="Sequência de Sons"
-      >
+        alt="Sequência de Sons">
 
       <div class="game-content">
 
@@ -1266,8 +1197,7 @@ img{
         </div>
 
         <div class="game-description">
-          Memorize a sequência e repita
-          corretamente para avançar.
+          Memorize a sequência e repita corretamente.
         </div>
 
         <div class="game-bottom">
@@ -1278,7 +1208,6 @@ img{
 
           <button
             class="play"
-            data-game="sons"
             type="button">
 
             JOGAR
@@ -1292,17 +1221,16 @@ img{
     </div>
 
 
-    <!-- =================================================
-         PALAVRA EMBARALHADA
-    ================================================== -->
+    <!-- PALAVRA -->
 
-    <div class="game">
+    <div
+      class="game"
+      data-game="palavra">
 
       <img
         class="game-image"
         src="./card_palavra_embaralhada.png"
-        alt="Palavra Embaralhada"
-      >
+        alt="Palavra Embaralhada">
 
       <div class="game-content">
 
@@ -1311,8 +1239,7 @@ img{
         </div>
 
         <div class="game-description">
-          Desembaralhe as letras e descubra
-          a palavra antes do tempo acabar.
+          Organize as letras e descubra a palavra.
         </div>
 
         <div class="game-bottom">
@@ -1323,7 +1250,6 @@ img{
 
           <button
             class="play"
-            data-game="palavra"
             type="button">
 
             JOGAR
@@ -1339,10 +1265,6 @@ img{
 
   </div>
 
-
-  <!-- =================================================
-       COMO FUNCIONA
-  ================================================== -->
 
   <div class="info-card">
 
@@ -1355,14 +1277,10 @@ img{
       Cada partida utiliza uma
       <b>chance</b>.
 
-      Mesmo que você perca na primeira
-      fase, você recebe automaticamente
-      <b>30 Adam Coins</b> por ter iniciado
-      a partida.
-
-      Quanto melhor seu desempenho,
-      maiores poderão ser suas
-      recompensas.
+      Na Forca, você recebe
+      <b>30 moedas ao iniciar</b>
+      e mais
+      <b>20 moedas se acertar a palavra</b>.
 
     </p>
 
@@ -1371,10 +1289,6 @@ img{
 
 </div>
 
-
-<!-- =====================================================
-     MODAL SEM CHANCE
-===================================================== -->
 
 <div
   class="modal"
@@ -1391,12 +1305,7 @@ img{
     </h2>
 
     <p>
-
-      Aguarde sua próxima chance
-      ou utilize uma recompensa
-      disponível para continuar
-      jogando.
-
+      Aguarde sua próxima chance para continuar jogando.
     </p>
 
     <button
@@ -1413,10 +1322,6 @@ img{
 </div>
 
 
-<!-- =====================================================
-     WHATSAPP
-===================================================== -->
-
 <a
   class="whatsapp"
   href="https://wa.me/5531987350267"
@@ -1429,11 +1334,6 @@ img{
 
 
 <script type="module">
-
-
-/* =====================================================
-   FIREBASE
-===================================================== */
 
 import {
   initializeApp
@@ -1460,10 +1360,6 @@ import {
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-
-/* =====================================================
-   CONFIGURAÇÃO
-===================================================== */
 
 const firebaseConfig = {
 
@@ -1502,103 +1398,70 @@ const db =
   getFirestore(app);
 
 
-/* =====================================================
-   ELEMENTOS
-===================================================== */
-
 const moedasEl =
-  document.getElementById(
-    "moedas"
-  );
+  document.getElementById("moedas");
 
 
 const chancesEl =
-  document.getElementById(
-    "chances"
-  );
+  document.getElementById("chances");
 
 
 const proximaEl =
-  document.getElementById(
-    "proxima"
-  );
+  document.getElementById("proxima");
 
 
 const modalSemChance =
-  document.getElementById(
-    "modalSemChance"
-  );
+  document.getElementById("modalSemChance");
 
-
-/* =====================================================
-   ESTADO
-===================================================== */
 
 let usuario =
   null;
 
-let usuarioRef =
-  null;
 
+const paginas = {
 
-/* =====================================================
-   TEMPOS
-===================================================== */
+  forca:
+    "forca.html",
 
-const HORAS_VIP =
-  72;
+  chuva:
+    "chuva.html",
 
-const HORAS_NAO_VIP =
-  120;
+  tesouro:
+    "tesouro.html",
 
-const MS_HORA =
-  60 * 60 * 1000;
+  alvo:
+    "alvo.html",
 
+  memoria:
+    "memoria.html",
 
-/* =====================================================
-   LOCALIZAR USUÁRIO
-===================================================== */
+  reacao:
+    "reacao.html",
+
+  sequencia:
+    "sequencia.html",
+
+  palavra:
+    "palavra.html"
+
+};
+
 
 async function localizarUsuario(user){
 
-  let resultado;
-
-
-  /* UID */
-
-  resultado =
+  let resultado =
     await getDocs(
 
       query(
-
-        collection(
-          db,
-          "admins"
-        ),
-
-        where(
-          "uid",
-          "==",
-          user.uid
-        )
-
+        collection(db,"admins"),
+        where("uid","==",user.uid)
       )
 
     );
 
 
   if(
-    !resultado.empty
-  ){
-
-    return resultado.docs[0];
-
-  }
-
-
-  /* E-MAIL */
-
-  if(
+    resultado.empty &&
     user.email
   ){
 
@@ -1606,120 +1469,21 @@ async function localizarUsuario(user){
       await getDocs(
 
         query(
-
-          collection(
-            db,
-            "admins"
-          ),
-
+          collection(db,"admins"),
           where(
             "email",
             "==",
-            user.email
+            user.email.toLowerCase()
           )
-
         )
 
       );
 
-
-    if(
-      !resultado.empty
-    ){
-
-      return resultado.docs[0];
-
-    }
-
   }
 
 
-  return null;
-
-}
-
-
-/* =====================================================
-   FORMATAR TEMPO
-===================================================== */
-
-function formatarTempo(ms){
-
-  const total =
-    Math.max(
-      0,
-      Math.floor(
-        ms / 1000
-      )
-    );
-
-
-  const horas =
-    Math.floor(
-      total / 3600
-    );
-
-
-  const minutos =
-    Math.floor(
-      (
-        total % 3600
-      ) / 60
-    );
-
-
-  const segundos =
-    total % 60;
-
-
-  return (
-
-    String(
-      horas
-    ).padStart(
-      2,
-      "0"
-    )
-
-    +
-
-    ":"
-
-    +
-
-    String(
-      minutos
-    ).padStart(
-      2,
-      "0"
-    )
-
-    +
-
-    ":"
-
-    +
-
-    String(
-      segundos
-    ).padStart(
-      2,
-      "0"
-    )
-
-  );
-
-}
-
-
-/* =====================================================
-   CONVERTER DATA FIREBASE
-===================================================== */
-
-function converterData(valor){
-
   if(
-    !valor
+    resultado.empty
   ){
 
     return null;
@@ -1727,40 +1491,14 @@ function converterData(valor){
   }
 
 
-  if(
-    typeof valor.toMillis ===
-    "function"
-  ){
-
-    return valor.toMillis();
-
-  }
-
-
-  if(
-    typeof valor.seconds ===
-    "number"
-  ){
-
-    return valor.seconds * 1000;
-
-  }
-
-
-  return null;
+  return resultado.docs[0];
 
 }
 
 
-/* =====================================================
-   ATUALIZAR SALDOS
-===================================================== */
-
 function atualizarSaldos(){
 
-  if(
-    !usuario
-  ){
+  if(!usuario){
 
     moedasEl.textContent =
       "0";
@@ -1776,26 +1514,18 @@ function atualizarSaldos(){
   moedasEl.textContent =
     Number(
       usuario.moedas || 0
-    ).toLocaleString(
-      "pt-BR"
-    );
+    ).toLocaleString("pt-BR");
 
 
   chancesEl.textContent =
     Number(
       usuario.chances || 0
-    ).toLocaleString(
-      "pt-BR"
-    );
+    ).toLocaleString("pt-BR");
 
 }
 
 
-/* =====================================================
-   CRONÔMETRO
-===================================================== */
-
-function iniciarContador(){
+function verificarJogo(jogo){
 
   if(
     !usuario
@@ -1806,78 +1536,9 @@ function iniciarContador(){
   }
 
 
-  const fim =
-    converterData(
-      usuario.proximaChance
-    );
-
-
-  if(
-    !fim
-  ){
-
-    proximaEl.innerHTML =
-      "⏳ Próxima chance ainda não foi iniciada.";
-
-    return;
-
-  }
-
-
-  function atualizar(){
-
-    const restante =
-      fim -
-      Date.now();
-
-
-    if(
-      restante <= 0
-    ){
-
-      proximaEl.innerHTML =
-        "🎟️ <strong>Chance pronta para ser liberada!</strong>";
-
-      return;
-
-    }
-
-
-    proximaEl.innerHTML =
-
-      "⏳ Próxima chance em " +
-
-      "<strong>" +
-
-      formatarTempo(
-        restante
-      ) +
-
-      "</strong>";
-
-  }
-
-
-  atualizar();
-
-
-  setInterval(
-    atualizar,
-    1000
-  );
-
-}
-
-
-/* =====================================================
-   ABRIR JOGO
-===================================================== */
-
-function verificarJogo(jogo){
-
   const chances =
     Number(
-      usuario?.chances || 0
+      usuario.chances || 0
     );
 
 
@@ -1885,42 +1546,11 @@ function verificarJogo(jogo){
     chances <= 0
   ){
 
-    modalSemChance.classList.add(
-      "show"
-    );
+    modalSemChance.classList.add("show");
 
     return;
 
   }
-
-
-  const paginas = {
-
-    forca:
-      "forca.html",
-
-    chuva:
-      "chuva.html",
-
-    tesouro:
-      "caca-ao-tesouro.html",
-
-    alvo:
-      "acerte-ao-alvo.html",
-
-    memoria:
-      "memoria-maluco.html",
-
-    reacao:
-      "reacao-relampago.html",
-
-    sons:
-      "sequencia-de-sons.html",
-
-    palavra:
-      "palavra-embaralhada.html"
-
-  };
 
 
   const pagina =
@@ -1928,51 +1558,67 @@ function verificarJogo(jogo){
 
 
   if(
-    pagina
+    !pagina
   ){
 
-    window.location.href =
-      pagina;
+    return;
 
   }
+
+
+  window.location.href =
+    pagina;
 
 }
 
 
-/* =====================================================
-   BOTÕES DOS JOGOS
-===================================================== */
-
 document
-  .querySelectorAll(
-    ".play"
-  )
-  .forEach(
-    botao => {
+  .querySelectorAll(".game")
+  .forEach(card => {
 
-      botao.addEventListener(
-        "click",
-        () => {
+    card.addEventListener(
+      "click",
+      event => {
 
-          verificarJogo(
-            botao.dataset.game
-          );
+        if(
+          event.target.closest(".play")
+        ){
+
+          return;
 
         }
-      );
-
-    }
-  );
 
 
-/* =====================================================
-   LOJA
-===================================================== */
+        verificarJogo(
+          card.dataset.game
+        );
+
+      }
+    );
+
+
+    const botao =
+      card.querySelector(".play");
+
+
+    botao.addEventListener(
+      "click",
+      event => {
+
+        event.stopPropagation();
+
+        verificarJogo(
+          card.dataset.game
+        );
+
+      }
+    );
+
+  });
+
 
 document
-  .getElementById(
-    "lojaButton"
-  )
+  .getElementById("lojaButton")
   .addEventListener(
     "click",
     () => {
@@ -1984,14 +1630,8 @@ document
   );
 
 
-/* =====================================================
-   CÓDIGO
-===================================================== */
-
 document
-  .getElementById(
-    "codigoButton"
-  )
+  .getElementById("codigoButton")
   .addEventListener(
     "click",
     () => {
@@ -2003,34 +1643,20 @@ document
   );
 
 
-/* =====================================================
-   FECHAR MODAL
-===================================================== */
-
 document
-  .getElementById(
-    "fecharModal"
-  )
+  .getElementById("fecharModal")
   .addEventListener(
     "click",
     () => {
 
-      modalSemChance.classList.remove(
-        "show"
-      );
+      modalSemChance.classList.remove("show");
 
     }
   );
 
 
-/* =====================================================
-   VOLTAR
-===================================================== */
-
 document
-  .getElementById(
-    "back"
-  )
+  .getElementById("back")
   .addEventListener(
     "click",
     () => {
@@ -2042,22 +1668,15 @@ document
   );
 
 
-/* =====================================================
-   LOGIN
-===================================================== */
-
 onAuthStateChanged(
-
   auth,
-
   async user => {
 
-    if(
-      !user
-    ){
+    if(!user){
 
-      window.location.href =
-        "index.html";
+      window.location.replace(
+        "index.html"
+      );
 
       return;
 
@@ -2067,14 +1686,10 @@ onAuthStateChanged(
     try{
 
       const documento =
-        await localizarUsuario(
-          user
-        );
+        await localizarUsuario(user);
 
 
-      if(
-        !documento
-      ){
+      if(!documento){
 
         proximaEl.textContent =
           "⚠️ Cadastro não encontrado.";
@@ -2088,23 +1703,19 @@ onAuthStateChanged(
         documento.data();
 
 
-      usuarioRef =
-        documento.ref;
-
-
       atualizarSaldos();
 
-      iniciarContador();
+
+      proximaEl.innerHTML =
+        "🎟️ Você possui <strong>" +
+        Number(usuario.chances || 0) +
+        "</strong> chance(s) para jogar.";
 
     }
 
     catch(error){
 
-      console.error(
-        "Erro ao carregar jogos:",
-        error
-      );
-
+      console.error(error);
 
       proximaEl.textContent =
         "⚠️ Não foi possível carregar seus dados.";
