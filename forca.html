@@ -443,7 +443,7 @@ body{
 
 
 /* =====================================================
-   ÚNICA IMAGEM DA FORCA
+   IMAGEM DA FORCA
 ===================================================== */
 
 #hangmanImage{
@@ -468,15 +468,6 @@ body{
 
   border:0;
   outline:0;
-
-  /*
-     TODAS AS IMAGENS CORRIGIDAS
-     POSSUEM O MESMO ENQUADRAMENTO.
-
-     NÃO USAMOS COVER.
-     NÃO USAMOS TRANSLATE.
-     NÃO USAMOS SCALE.
-  */
 
   object-fit:fill;
 
@@ -1025,7 +1016,7 @@ body{
 
 
 /* =====================================================
-   SEGURANÇA CONTRA SHIFT
+   SEGURANÇA
 ===================================================== */
 
 img{
@@ -1215,8 +1206,6 @@ img{
 
     <!-- =================================================
          FRAME FIXO
-
-         SOMENTE UMA IMAGEM
     ================================================== -->
 
     <div
@@ -1464,9 +1453,6 @@ const db =
 const coinsEl =
   document.getElementById("coins");
 
-const levelNameEl =
-  document.getElementById("levelName");
-
 const roundNumberEl =
   document.getElementById("roundNumber");
 
@@ -1518,11 +1504,6 @@ const modalCoins =
 const modalButton =
   document.getElementById("modalButton");
 
-
-/* =====================================================
-   IMAGEM DA FORCA
-===================================================== */
-
 const hangmanImage =
   document.getElementById(
     "hangmanImage"
@@ -1530,7 +1511,7 @@ const hangmanImage =
 
 
 /* =====================================================
-   NOMES EXATOS DAS 7 IMAGENS
+   IMAGENS
 ===================================================== */
 
 const imagensForca = [
@@ -1603,17 +1584,11 @@ let processandoErroFinal =
 const recompensas = {
 
   1:20,
-
   2:20,
-
   3:30,
-
   4:30,
-
   5:20,
-
   6:20,
-
   7:30
 
 };
@@ -2141,22 +2116,15 @@ function atualizarImagem(){
 
 
   /*
-   * IMPORTANTE:
+   * SOMENTE O SRC É ALTERADO.
    *
-   * O FRAME NÃO MUDA.
-   *
-   * O ELEMENTO IMG NÃO MUDA.
-   *
-   * SOMENTE O SRC É TROCADO.
+   * O FRAME CONTINUA EXATAMENTE
+   * NO MESMO TAMANHO E POSIÇÃO.
    */
 
   hangmanImage.src =
     imagensForca[indice];
 
-
-  /*
-   * Atualiza os pontos de erro.
-   */
 
   const pontos =
     errorsRow.querySelectorAll(
@@ -2383,9 +2351,9 @@ function escolherLetra(
   );
 
 
-  /*
-   * ACERTO
-   */
+  /* ===================================================
+     ACERTO
+  =================================================== */
 
   if(
     palavraAtual.normalizada
@@ -2416,9 +2384,9 @@ function escolherLetra(
   }
 
 
-  /*
-   * ERRO
-   */
+  /* ===================================================
+     ERRO
+  =================================================== */
 
   botao.classList.add(
     "wrong"
@@ -2431,9 +2399,11 @@ function escolherLetra(
   atualizarImagem();
 
 
-  /*
-   * 6 erros = última imagem.
-   */
+  /* ===================================================
+     ÚLTIMO ERRO
+     
+     6 ERROS = ÚLTIMA IMAGEM
+  =================================================== */
 
   if(
     erros >= 6
@@ -2441,16 +2411,23 @@ function escolherLetra(
 
     erroFinal();
 
+    return;
+
   }
 
 }
 
 
 /* =====================================================
-   ÚLTIMO ERRO
+   ÚLTIMO ERRO / ESPERA 3 SEGUNDOS
 ===================================================== */
 
 function erroFinal(){
+
+  /*
+   * Evita que essa função seja chamada
+   * duas vezes.
+   */
 
   if(
     processandoErroFinal
@@ -2465,12 +2442,25 @@ function erroFinal(){
     true;
 
 
+  /*
+   * O jogo termina imediatamente.
+   */
+
   terminou =
     true;
 
 
+  /*
+   * Bloqueia todas as letras.
+   */
+
   bloquearTeclado();
 
+
+  /*
+   * Garante que a última imagem
+   * permaneça na tela.
+   */
 
   erros =
     6;
@@ -2479,6 +2469,13 @@ function erroFinal(){
   atualizarImagem();
 
 
+  /*
+   * NÃO MOSTRA O MODAL AQUI.
+   *
+   * O jogador verá a última imagem
+   * durante 3 segundos.
+   */
+
   messageEl.className =
     "message";
 
@@ -2486,6 +2483,10 @@ function erroFinal(){
   messageEl.textContent =
     "";
 
+
+  /*
+   * ESPERA EXATAMENTE 3 SEGUNDOS.
+   */
 
   setTimeout(
     () => {
@@ -2504,6 +2505,11 @@ function erroFinal(){
 ===================================================== */
 
 function mostrarDerrota(){
+
+  /*
+   * Esta função só é chamada
+   * depois dos 3 segundos.
+   */
 
   messageEl.textContent =
     "💀 Você perdeu! A palavra era: " +
@@ -2533,6 +2539,10 @@ function mostrarDerrota(){
   modalButton.textContent =
     "VOLTAR AOS JOGOS";
 
+
+  /*
+   * AGORA SIM o modal aparece.
+   */
 
   modal.classList.add(
     "show"
@@ -2754,7 +2764,7 @@ function iniciarRodada(){
 
 
   /*
-   * VOLTA PARA A PRIMEIRA IMAGEM.
+   * Começa sempre na primeira imagem.
    */
 
   hangmanImage.src =
@@ -2854,10 +2864,6 @@ async function localizarUsuario(
   user
 ){
 
-  /*
-   * Procura pelo UID.
-   */
-
   let resultado =
     await getDocs(
 
@@ -2887,10 +2893,6 @@ async function localizarUsuario(
 
   }
 
-
-  /*
-   * Procura pelo e-mail.
-   */
 
   if(
     user.email
