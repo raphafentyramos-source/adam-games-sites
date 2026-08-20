@@ -422,16 +422,22 @@ body{
 
 
 /* =====================================================
-   IMAGEM DA FORCA
-   CORREÇÃO DEFINITIVA
+   FRAME FIXO DA FORCA
 
-   TODAS AS IMAGENS FICAM EMPILHADAS
-   EXATAMENTE NO MESMO LUGAR.
+   TODAS AS IMAGENS FICAM:
+   - NO MESMO FRAME
+   - NA MESMA POSIÇÃO
+   - UMA SOBRE A OUTRA
 
-   NÃO USAMOS MAIS TROCA DE SRC.
+   A imagem NÃO é mais trocada via SRC.
 
-   SOMENTE A OPACIDADE DA IMAGEM
-   CORRESPONDENTE AO ERRO É ALTERADA.
+   Apenas a OPACIDADE muda.
+
+   Isso elimina:
+   - deslocamento lateral
+   - mudança de tamanho
+   - borda branca
+   - "imagem andando"
 ===================================================== */
 
 .hangman-wrap{
@@ -453,12 +459,11 @@ body{
 }
 
 
-/*
-   TODAS AS IMAGENS OCUPAM EXATAMENTE
-   A MESMA ÁREA.
-*/
+/* =====================================================
+   TODAS AS IMAGENS OCUPAM EXATAMENTE O MESMO FRAME
+===================================================== */
 
-.hangman-frame{
+.hangman-layer{
 
   position:absolute;
 
@@ -466,23 +471,29 @@ body{
 
   left:0;
 
+  right:0;
+
+  bottom:0;
+
   width:100%;
 
   height:100%;
 
-  display:block;
+  max-width:none;
 
   margin:0;
 
   padding:0;
 
-  border:0;
+  display:block;
 
   object-fit:fill;
 
   object-position:center center;
 
   opacity:0;
+
+  visibility:hidden;
 
   pointer-events:none;
 
@@ -491,13 +502,15 @@ body{
 }
 
 
-/*
-   Somente a imagem ativa aparece.
-*/
+/* =====================================================
+   SOMENTE A IMAGEM ATUAL FICA VISÍVEL
+===================================================== */
 
-.hangman-frame.active{
+.hangman-layer.active{
 
   opacity:1;
+
+  visibility:visible;
 
 }
 
@@ -1172,69 +1185,57 @@ body{
 
 
     <!-- =================================================
-         TODAS AS IMAGENS EMPILHADAS
+         FRAME FIXO
+
+         TODAS AS IMAGENS ESTÃO EMPILHADAS AQUI.
+         NÃO EXISTE TROCA DE SRC.
     ================================================== -->
 
     <div
       class="hangman-wrap"
-      id="hangmanWrap">
-
+      id="hangmanFrame">
 
       <img
-        class="hangman-frame active"
-        data-stage="0"
+        class="hangman-layer active"
         src="01_forca_0_erros.png"
         alt="Forca - 0 erros"
       >
 
-
       <img
-        class="hangman-frame"
-        data-stage="1"
+        class="hangman-layer"
         src="02_forca_1_erro.png"
         alt="Forca - 1 erro"
       >
 
-
       <img
-        class="hangman-frame"
-        data-stage="2"
+        class="hangman-layer"
         src="03_forca_2_erros.png"
         alt="Forca - 2 erros"
       >
 
-
       <img
-        class="hangman-frame"
-        data-stage="3"
+        class="hangman-layer"
         src="04_forca_3_erros.png"
         alt="Forca - 3 erros"
       >
 
-
       <img
-        class="hangman-frame"
-        data-stage="4"
+        class="hangman-layer"
         src="05_forca_4_erros.png"
         alt="Forca - 4 erros"
       >
 
-
       <img
-        class="hangman-frame"
-        data-stage="5"
+        class="hangman-layer"
         src="06_forca_5_erros.png"
         alt="Forca - 5 erros"
       >
 
-
       <img
-        class="hangman-frame"
-        data-stage="6"
+        class="hangman-layer"
         src="07_forca_6_erros.png"
         alt="Forca - 6 erros"
       >
-
 
     </div>
 
@@ -1463,13 +1464,17 @@ const progressFillEl =
 
 
 /*
-   NOVO:
-   pegamos TODAS as imagens.
-*/
+ * IMPORTANTE:
+ * Agora não existe mais uma única hangmanImage.
+ *
+ * Todas as imagens já estão dentro do mesmo frame.
+ */
 
-const hangmanImages =
-  document.querySelectorAll(
-    ".hangman-frame"
+const hangmanLayers =
+  Array.from(
+    document.querySelectorAll(
+      ".hangman-layer"
+    )
   );
 
 
@@ -1511,29 +1516,6 @@ const modalCoins =
 
 const modalButton =
   document.getElementById("modalButton");
-
-
-/* =====================================================
-   IMAGENS — RAIZ DO SITE
-===================================================== */
-
-const IMAGENS = [
-
-  "01_forca_0_erros.png",
-
-  "02_forca_1_erro.png",
-
-  "03_forca_2_erros.png",
-
-  "04_forca_3_erros.png",
-
-  "05_forca_4_erros.png",
-
-  "06_forca_5_erros.png",
-
-  "07_forca_6_erros.png"
-
-];
 
 
 /* =====================================================
@@ -2090,22 +2072,17 @@ async function adicionarMoedas(
 
 
 /* =====================================================
-   IMAGEM
-   CORREÇÃO:
+   IMAGEM — CORREÇÃO DEFINITIVA
 
-   NÃO TROCA MAIS O SRC.
+   Não altera src.
 
-   Apenas ativa a camada correspondente.
+   Todas as imagens já estão carregadas no mesmo
+   frame e exatamente na mesma coordenada.
+
+   Só alternamos a classe "active".
 ===================================================== */
 
 function atualizarImagem(){
-
-  /*
-   * 0 erros = imagem 01
-   * 1 erro  = imagem 02
-   * ...
-   * 6 erros = imagem 07
-   */
 
   const indice =
     Math.min(
@@ -2115,37 +2092,23 @@ function atualizarImagem(){
 
 
   /*
-   * DESLIGA TODAS.
+   * Todas continuam no mesmo lugar.
+   * Apenas uma fica visível.
    */
 
-  hangmanImages.forEach(
-    imagem => {
+  hangmanLayers.forEach(
+    (
+      imagem,
+      index
+    ) => {
 
-      imagem.classList.remove(
-        "active"
+      imagem.classList.toggle(
+        "active",
+        index === indice
       );
 
     }
   );
-
-
-  /*
-   * LIGA SOMENTE A CORRETA.
-   */
-
-  const imagemAtual =
-    hangmanImages[indice];
-
-
-  if(
-    imagemAtual
-  ){
-
-    imagemAtual.classList.add(
-      "active"
-    );
-
-  }
 
 
   const pontos =
@@ -2461,14 +2424,12 @@ function erroFinal(){
 
 
   /*
-   * A IMAGEM 07 JÁ FOI ATIVADA POR
-   * atualizarImagem().
+   * A imagem 07 já foi ativada por atualizarImagem().
    *
-   * Não mexemos mais nela.
-   *
-   * Isso é importante:
-   * não alteramos tamanho,
+   * Não fazemos mais nenhuma alteração de tamanho,
    * posição ou SRC.
+   *
+   * Ela permanece exatamente no mesmo frame.
    */
 
 
@@ -2755,34 +2716,23 @@ function iniciarRodada(){
   /*
    * PRIMEIRA IMAGEM.
    *
-   * Agora não usamos SRC.
-   *
-   * Apenas ativamos a primeira camada.
+   * Não troca SRC.
+   * Apenas ativa a primeira camada.
    */
 
-  hangmanImages.forEach(
-    imagem => {
+  hangmanLayers.forEach(
+    (
+      imagem,
+      index
+    ) => {
 
-      imagem.classList.remove(
-        "active"
+      imagem.classList.toggle(
+        "active",
+        index === 0
       );
 
     }
   );
-
-
-  if(
-    hangmanImages[0]
-  ){
-
-    hangmanImages[0].classList.add(
-      "active"
-    );
-
-  }
-
-
-  atualizarImagem();
 
 
   criarTeclado();
