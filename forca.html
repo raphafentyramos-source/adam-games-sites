@@ -69,6 +69,7 @@ body{
 .page{
 
   width:100%;
+
   max-width:650px;
 
   margin:0 auto;
@@ -417,18 +418,8 @@ body{
 
 
 /* =====================================================
-   FRAME FIXO
+   FRAME FIXO DA FORCA
 ===================================================== */
-
-/*
-   AS 7 IMAGENS CORRIGIDAS POSSUEM 437 x 275 PX.
-
-   O FRAME MANTÉM EXATAMENTE ESSA PROPORÇÃO.
-
-   EXISTE APENAS UM <IMG>.
-
-   O JAVASCRIPT SOMENTE TROCA O SRC.
-*/
 
 .hangman-wrap{
 
@@ -452,38 +443,44 @@ body{
 
 
 /* =====================================================
-   IMAGEM DA FORCA
+   ÚNICA IMAGEM DA FORCA
 ===================================================== */
 
 #hangmanImage{
 
   position:absolute;
 
-  top:0;
-  left:0;
+  inset:0;
+
+  display:block;
 
   width:100%;
   height:100%;
 
-  display:block;
+  min-width:100%;
+  min-height:100%;
 
-  margin:0;
-  padding:0;
+  max-width:none;
+  max-height:none;
+
+  margin:0 !important;
+  padding:0 !important;
 
   border:0;
-
   outline:0;
 
   /*
-     NÃO USAR COVER.
+     TODAS AS IMAGENS CORRIGIDAS
+     POSSUEM O MESMO ENQUADRAMENTO.
 
-     As imagens já estão corrigidas para o mesmo
-     enquadramento.
+     NÃO USAMOS COVER.
+     NÃO USAMOS TRANSLATE.
+     NÃO USAMOS SCALE.
   */
 
   object-fit:fill;
 
-  object-position:50% 50%;
+  object-position:center center;
 
   transform:none !important;
 
@@ -493,9 +490,9 @@ body{
 
   rotate:0deg !important;
 
-  animation:none !important;
-
   transition:none !important;
+
+  animation:none !important;
 
   pointer-events:none;
 
@@ -987,7 +984,7 @@ body{
 
 
 /* =====================================================
-   CELULARES PEQUENOS
+   CELULARES MUITO PEQUENOS
 ===================================================== */
 
 @media(max-width:360px){
@@ -1028,16 +1025,11 @@ body{
 
 
 /* =====================================================
-   SEGURANÇA
+   SEGURANÇA CONTRA SHIFT
 ===================================================== */
 
 img{
   vertical-align:top;
-}
-
-html,
-body{
-  overflow-x:hidden;
 }
 
 </style>
@@ -1222,9 +1214,9 @@ body{
 
 
     <!-- =================================================
-         FRAME FIXO DA FORCA
+         FRAME FIXO
 
-         APENAS UMA IMAGEM
+         SOMENTE UMA IMAGEM
     ================================================== -->
 
     <div
@@ -1233,7 +1225,7 @@ body{
 
       <img
         id="hangmanImage"
-        src="01_forca_0_erros.png?v=2"
+        src="01_forca_0_erros.png"
         alt="Forca"
         draggable="false"
       >
@@ -1528,7 +1520,7 @@ const modalButton =
 
 
 /* =====================================================
-   IMAGEM ÚNICA
+   IMAGEM DA FORCA
 ===================================================== */
 
 const hangmanImage =
@@ -1538,30 +1530,30 @@ const hangmanImage =
 
 
 /* =====================================================
-   ARQUIVOS DAS IMAGENS
+   NOMES EXATOS DAS 7 IMAGENS
 ===================================================== */
 
 const imagensForca = [
 
-  "01_forca_0_erros.png?v=2",
+  "01_forca_0_erros.png",
 
-  "02_forca_1_erro.png?v=2",
+  "02_forca_1_erro.png",
 
-  "03_forca_2_erros.png?v=2",
+  "03_forca_2_erros.png",
 
-  "04_forca_3_erros.png?v=2",
+  "04_forca_3_erros.png",
 
-  "05_forca_4_erros.png?v=2",
+  "05_forca_4_erros.png",
 
-  "06_forca_5_erros.png?v=2",
+  "06_forca_5_erros.png",
 
-  "07_forca_6_erros.png?v=2"
+  "07_forca_6_erros.png"
 
 ];
 
 
 /* =====================================================
-   PRÉ-CARREGAMENTO
+   PRÉ-CARREGAR IMAGENS
 ===================================================== */
 
 imagensForca.forEach(
@@ -1611,11 +1603,17 @@ let processandoErroFinal =
 const recompensas = {
 
   1:20,
+
   2:20,
+
   3:30,
+
   4:30,
+
   5:20,
+
   6:20,
+
   7:30
 
 };
@@ -2127,7 +2125,7 @@ async function adicionarMoedas(
 
 
 /* =====================================================
-   TROCAR IMAGEM
+   ATUALIZAR IMAGEM
 ===================================================== */
 
 function atualizarImagem(){
@@ -2143,9 +2141,13 @@ function atualizarImagem(){
 
 
   /*
-   * O ELEMENTO <IMG> NÃO MUDA.
-
-   * SOMENTE O SRC MUDA.
+   * IMPORTANTE:
+   *
+   * O FRAME NÃO MUDA.
+   *
+   * O ELEMENTO IMG NÃO MUDA.
+   *
+   * SOMENTE O SRC É TROCADO.
    */
 
   hangmanImage.src =
@@ -2498,7 +2500,7 @@ function erroFinal(){
 
 
 /* =====================================================
-   DERROTA
+   MOSTRAR DERROTA
 ===================================================== */
 
 function mostrarDerrota(){
@@ -2752,9 +2754,7 @@ function iniciarRodada(){
 
 
   /*
-   * PRIMEIRO ESTÁGIO.
-
-   * O MESMO ELEMENTO <IMG>.
+   * VOLTA PARA A PRIMEIRA IMAGEM.
    */
 
   hangmanImage.src =
