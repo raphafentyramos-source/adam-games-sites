@@ -423,20 +423,16 @@ body{
 
 /* =====================================================
    IMAGEM DA FORCA
-=====================================================
 
-   CORREÇÃO:
+   POSIÇÃO FIXA
 
-   O espaço da imagem agora é FIXO.
+   Todas as imagens ocupam exatamente
+   o mesmo espaço.
 
-   Todas as imagens ocuparão exatamente o mesmo
-   espaço, independentemente do arquivo carregado.
-
-   Isso impede:
-   - a caixa de mudar de tamanho;
-   - a imagem "andar" para os lados;
-   - aparecer fundo branco entre as trocas;
-   - o conteúdo abaixo subir/descer.
+   Não usar flexbox para centralizar.
+   Não usar margin auto.
+   Não usar contain.
+   Não usar cover.
 
 ===================================================== */
 
@@ -446,11 +442,7 @@ body{
 
   aspect-ratio:16 / 9;
 
-  height:auto;
-
   position:relative;
-
-  display:block;
 
   overflow:hidden;
 
@@ -465,11 +457,13 @@ body{
 
 .hangman-wrap img{
 
-  display:block;
-
   position:absolute;
 
-  inset:0;
+  top:0;
+
+  left:0;
+
+  display:block;
 
   width:100%;
 
@@ -485,9 +479,9 @@ body{
 
   border:0;
 
-  object-fit:cover;
+  object-fit:fill;
 
-  object-position:center center;
+  object-position:0 0;
 
 }
 
@@ -2228,6 +2222,11 @@ function escolherLetra(
   botao
 ){
 
+  /*
+   * IMPORTANTE:
+   * se terminou, não aceita mais letras.
+   */
+
   if(
     terminou
   ){
@@ -2291,6 +2290,10 @@ function escolherLetra(
   }
 
 
+  /*
+   * ERRO
+   */
+
   botao.classList.add(
     "wrong"
   );
@@ -2301,6 +2304,18 @@ function escolherLetra(
 
   atualizarImagem();
 
+
+  /*
+   * =================================================
+   * ÚLTIMO ERRO
+   * =================================================
+   *
+   * NÃO chama perder() imediatamente.
+   *
+   * Apenas mostra a imagem 07 e espera
+   * exatamente 3 segundos.
+   *
+   */
 
   if(
     erros >= 7
@@ -2316,10 +2331,14 @@ function escolherLetra(
 
 
 /* =====================================================
-   ÚLTIMO ERRO — 4 SEGUNDOS
+   ÚLTIMO ERRO — 3 SEGUNDOS
 ===================================================== */
 
 function erroFinal(){
+
+  /*
+   * Evita executar duas vezes.
+   */
 
   if(
     processandoErroFinal
@@ -2338,8 +2357,21 @@ function erroFinal(){
     true;
 
 
+  /*
+   * NÃO ABRE O MODAL AQUI.
+   *
+   * Primeiro deixa o jogador ver a imagem.
+   */
+
   bloquearTeclado();
 
+
+  /*
+   * FORÇA A IMAGEM FINAL.
+   *
+   * A posição da imagem agora é controlada
+   * somente pelo CSS fixo.
+   */
 
   hangmanImage.src =
     "07_forca_6_erros.png";
@@ -2349,13 +2381,9 @@ function erroFinal(){
     "block";
 
 
-  hangmanImage.style.marginLeft =
-    "auto";
-
-
-  hangmanImage.style.marginRight =
-    "auto";
-
+  /*
+   * NÃO mostrar "Você perdeu" ainda.
+   */
 
   messageEl.className =
     "message";
@@ -2365,13 +2393,19 @@ function erroFinal(){
     "";
 
 
+  /*
+   * =================================================
+   * ESPERA 3 SEGUNDOS
+   * =================================================
+   */
+
   setTimeout(
     () => {
 
       mostrarDerrota();
 
     },
-    4000
+    3000
   );
 
 }
@@ -2383,6 +2417,10 @@ function erroFinal(){
 
 function mostrarDerrota(){
 
+  /*
+   * Só aqui a caixa aparece.
+   */
+
   messageEl.textContent =
     "💀 Você perdeu! A palavra era: " +
     palavraAtual.original;
@@ -2391,6 +2429,10 @@ function mostrarDerrota(){
   messageEl.className =
     "message show error";
 
+
+  /*
+   * Modal de derrota.
+   */
 
   modalIcon.textContent =
     "💀";
@@ -2451,6 +2493,10 @@ async function ganhar(){
 
   try{
 
+    /*
+     * ENVIA AS MOEDAS PARA O FIRESTORE.
+     */
+
     await adicionarMoedas(
       recompensa
     );
@@ -2496,6 +2542,7 @@ async function ganhar(){
 
       modalButton.textContent =
         "VOLTAR AOS JOGOS";
+
 
     }
     else{
@@ -2629,20 +2676,18 @@ function iniciarRodada(){
     "";
 
 
+  /*
+   * PRIMEIRA IMAGEM.
+   *
+   * A posição é controlada pelo CSS.
+   */
+
   hangmanImage.src =
     "01_forca_0_erros.png";
 
 
   hangmanImage.style.display =
     "block";
-
-
-  hangmanImage.style.marginLeft =
-    "auto";
-
-
-  hangmanImage.style.marginRight =
-    "auto";
 
 
   atualizarImagem();
@@ -2669,6 +2714,11 @@ modalButton.addEventListener(
     );
 
 
+    /*
+     * PERDEU:
+     * volta para jogos.
+     */
+
     if(
       !ganhouRodada
     ){
@@ -2681,6 +2731,10 @@ modalButton.addEventListener(
     }
 
 
+    /*
+     * COMPLETOU AS 7.
+     */
+
     if(
       rodada >= 7
     ){
@@ -2692,6 +2746,10 @@ modalButton.addEventListener(
 
     }
 
+
+    /*
+     * PRÓXIMA RODADA.
+     */
 
     rodada++;
 
@@ -2726,6 +2784,10 @@ async function localizarUsuario(
   user
 ){
 
+  /*
+   * Primeiro procura pelo UID.
+   */
+
   let resultado =
     await getDocs(
 
@@ -2755,6 +2817,11 @@ async function localizarUsuario(
 
   }
 
+
+  /*
+   * Se não encontrar pelo UID,
+   * procura pelo e-mail.
+   */
 
   if(
     user.email
@@ -2846,6 +2913,10 @@ onAuthStateChanged(
 
       }
 
+
+      /*
+       * Guarda a referência exata do documento.
+       */
 
       usuarioRef =
         documento.ref;
