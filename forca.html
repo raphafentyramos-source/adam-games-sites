@@ -3444,6 +3444,7 @@ const storageFinal="adam_games_forca_used_final_v1";
 let user=null,userRef=null,coins=0,round=1,errors=0,current=null;
 let usedLetters=new Set(),locked=false,action=null;
 let timerStarted=false,timerStart=0,timerInterval=null;
+let gameStarted=false;
 let hardTarget=10;
 let finalConsolationGiven=false;
 let entryRewardGiven=false;
@@ -3536,7 +3537,7 @@ function stopTimer(){
 
 function startTimer(){
   // Nunca iniciar o cronômetro antes da rodada bônus estar realmente ativa.
-  if(round!==9 || !currentWord || locked || loading) return;
+  if(round!==9 || !gameStarted || !current || locked) return;
  if(timerStarted||round!==8&&round!==9)return;
  timerStarted=true;
  timerStart=performance.now();
@@ -3553,11 +3554,16 @@ function currentSeconds(){
 
 function start(){
  stopTimer();
+ action=null;
+ document.getElementById("modal")?.classList.remove("show");
+ document.getElementById("lossContinueModal")?.classList.remove("show");
+
  errors=0;
  locked=false;
  usedLetters=new Set();
  finalConsolationGiven=false;
  current=choose();
+ gameStarted=true;
 
  const isHard=round===8;
  const isFinal=round===9;
@@ -3661,6 +3667,7 @@ function openModal(icon,title,coinsText,text,button,a){
 }
 
 function loss(){
+ if(!gameStarted || !current || !current.normal)return;
  stopTimer();
  const level = round===8 ? "HARD" : round===9 ? "EXTRA" : round<=2 ? "FÁCIL" : round<=4 ? "MÉDIO" : "DIFÍCIL";
  const levelEl=document.getElementById("lossContinueLevel");
@@ -3705,6 +3712,7 @@ function finalIntro(){
 }
 
 async function finalLoss(){
+ if(!gameStarted || !current || !current.normal)return;
  if(finalConsolationGiven)return;
  finalConsolationGiven=true;
  const distinct=[...new Set(current.normal)].filter(c=>usedLetters.has(c)).length;
@@ -3819,6 +3827,7 @@ window.continuarForcaMesmoNivel = async function(){
 };
 
 function lose(){
+ if(!gameStarted || !current)return;
  if(locked)return;
  locked=true;
  lock();
@@ -3842,7 +3851,9 @@ function guess(c,b){
   b.classList.add("correct");
   wordUI();
 
-  if((round===8||round===9)&&!timerStarted)if(round===9 && currentWord && !locked && !loading) /* timer inicia somente quando a rodada 9 começa */
+  if((round===8||round===9)&&!timerStarted && gameStarted && current && !locked){
+    startTimer();
+  }
 
   if(complete())win();
  }else{
@@ -3882,6 +3893,14 @@ async function findUser(u){
  }
  return null;
 }
+
+// Estado inicial: abrir a página nunca significa derrota.
+gameStarted=false;
+locked=false;
+errors=0;
+action=null;
+document.getElementById("modal")?.classList.remove("show");
+document.getElementById("lossContinueModal")?.classList.remove("show");
 
 onAuthStateChanged(auth,async u=>{
  if(!u){
