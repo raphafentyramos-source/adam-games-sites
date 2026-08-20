@@ -10,13 +10,9 @@
   content="width=device-width, initial-scale=1.0"
 >
 
-<title>Adam Games - Forca</title>
+<title>Adam Games • Forca</title>
 
 <style>
-
-/* =====================================================
-   RESET
-===================================================== */
 
 *{
   box-sizing:border-box;
@@ -24,47 +20,26 @@
   padding:0;
 }
 
-html,
-body{
-  width:100%;
-  min-height:100%;
-  overflow-x:hidden;
-}
-
 body{
 
   min-height:100vh;
+
+  background:
+    linear-gradient(
+      180deg,
+      #031b30,
+      #062d4c
+    );
+
+  color:#fff;
 
   font-family:
     Arial,
     Helvetica,
     sans-serif;
 
-  color:#fff;
-
-  background:
-    radial-gradient(
-      circle at 10% 0%,
-      rgba(0,190,120,.30),
-      transparent 32%
-    ),
-    radial-gradient(
-      circle at 90% 0%,
-      rgba(20,150,255,.30),
-      transparent 32%
-    ),
-    linear-gradient(
-      180deg,
-      #06233d 0%,
-      #031a2e 100%
-    );
-
 }
 
-
-/* =====================================================
-   CONTAINER
-===================================================== */
 
 .page{
 
@@ -72,12 +47,12 @@ body{
 
   max-width:650px;
 
-  margin:0 auto;
+  margin:auto;
 
   padding:
-    15px
-    15px
-    70px;
+    16px
+    14px
+    50px;
 
 }
 
@@ -87,8 +62,6 @@ body{
 ===================================================== */
 
 .top{
-
-  width:100%;
 
   display:flex;
 
@@ -107,209 +80,40 @@ body{
 
   border:0;
 
-  border-radius:13px;
+  border-radius:14px;
 
-  background:
-    rgba(0,40,70,.9);
+  background:#082b48;
 
   color:#fff;
 
-  font-size:26px;
-
-  cursor:pointer;
+  font-size:25px;
 
 }
 
 
-.title{
+.top-title{
 
   text-align:center;
 
 }
 
 
-.title small{
+.top-title small{
 
   display:block;
 
-  color:#8bb8d5;
+  color:#62c8ff;
 
-  font-size:8px;
+  font-size:10px;
 
   letter-spacing:2px;
 
 }
 
 
-.title strong{
+.top-title strong{
 
-  display:block;
-
-  margin-top:2px;
-
-  font-size:21px;
-
-  text-shadow:
-    0 2px 6px rgba(0,0,0,.5);
-
-}
-
-
-.top-coins{
-
-  min-width:88px;
-
-  padding:7px 9px;
-
-  border-radius:13px;
-
-  text-align:center;
-
-  background:
-    rgba(255,213,43,.08);
-
-  border:
-    1px solid
-    rgba(255,213,43,.15);
-
-}
-
-
-.top-coins-label{
-
-  color:#9ab9cd;
-
-  font-size:8px;
-
-  font-weight:bold;
-
-}
-
-
-.top-coins-value{
-
-  margin-top:2px;
-
-  color:#ffd52b;
-
-  font-size:17px;
-
-  font-weight:900;
-
-}
-
-
-/* =====================================================
-   HERO
-===================================================== */
-
-.hero{
-
-  margin-top:14px;
-
-  padding:18px;
-
-  border-radius:22px;
-
-  text-align:center;
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(5,48,82,.97),
-      rgba(3,27,49,.97)
-    );
-
-  border:
-    1px solid
-    rgba(255,255,255,.08);
-
-}
-
-
-.hero-icon{
-
-  font-size:42px;
-
-}
-
-
-.hero h1{
-
-  margin-top:3px;
-
-  font-size:30px;
-
-}
-
-
-.hero p{
-
-  margin-top:5px;
-
-  color:#b7d0e2;
-
-  font-size:13px;
-
-}
-
-
-/* =====================================================
-   INFORMAÇÕES
-===================================================== */
-
-.level-row{
-
-  display:grid;
-
-  grid-template-columns:
-    1fr
-    1fr
-    1fr;
-
-  gap:8px;
-
-  margin-top:11px;
-
-}
-
-
-.level-box{
-
-  padding:10px 5px;
-
-  border-radius:13px;
-
-  text-align:center;
-
-  background:
-    rgba(255,255,255,.055);
-
-  border:
-    1px solid
-    rgba(255,255,255,.07);
-
-}
-
-
-.level-label{
-
-  color:#91b2c9;
-
-  font-size:8px;
-
-  font-weight:bold;
-
-}
-
-
-.level-value{
-
-  margin-top:3px;
-
-  font-size:15px;
-
-  font-weight:900;
+  font-size:20px;
 
 }
 
@@ -320,78 +124,60 @@ body{
 
 .progress-card{
 
-  margin-top:11px;
+  margin-top:15px;
 
-  padding:13px;
+  padding:16px;
 
-  border-radius:15px;
+  border-radius:20px;
 
-  background:
-    rgba(2,25,46,.9);
+  background:#082b48;
+
+  border:
+    1px solid
+    rgba(255,255,255,.08);
 
 }
 
 
-.progress-top{
+.progress-header{
 
   display:flex;
 
   justify-content:space-between;
 
-  align-items:center;
-
-}
-
-
-.progress-title{
-
-  font-size:11px;
+  font-size:13px;
 
   font-weight:900;
 
 }
 
 
-.progress-count{
-
-  color:#9bb9ce;
-
-  font-size:10px;
-
-}
-
-
 .progress-bar{
 
-  width:100%;
+  height:11px;
 
-  height:8px;
-
-  margin-top:8px;
+  margin-top:10px;
 
   overflow:hidden;
 
   border-radius:20px;
 
-  background:
-    rgba(255,255,255,.09);
+  background:#163c57;
 
 }
 
 
 .progress-fill{
 
+  width:0%;
+
   height:100%;
-
-  width:0;
-
-  border-radius:20px;
 
   background:
     linear-gradient(
       90deg,
-      #13b965,
-      #ffd52b
+      #19c968,
+      #ffe000
     );
 
   transition:
@@ -401,145 +187,35 @@ body{
 
 
 /* =====================================================
-   CARTÃO
+   IMAGEM
 ===================================================== */
 
-.game-card{
+.image-card{
 
-  margin-top:12px;
-
-  padding:13px;
-
-  border-radius:21px;
-
-  background:
-    rgba(2,25,47,.97);
-
-  border:
-    1px solid
-    rgba(255,255,255,.09);
-
-}
-
-
-/* =====================================================
-   FRAME FIXO
-===================================================== */
-
-.hangman-wrap{
-
-  position:relative;
-
-  width:100%;
-
-  aspect-ratio:437 / 275;
+  margin-top:16px;
 
   overflow:hidden;
 
-  border-radius:17px;
+  border-radius:22px;
 
-  background:#071f35;
+  background:#082b48;
 
-  line-height:0;
-
-  isolation:isolate;
-
-}
-
-
-#hangmanImage{
-
-  position:absolute;
-
-  inset:0;
-
-  width:100% !important;
-
-  height:100% !important;
-
-  min-width:100%;
-
-  min-height:100%;
-
-  max-width:none;
-
-  max-height:none;
-
-  margin:0 !important;
-
-  padding:0 !important;
-
-  border:0;
-
-  outline:0;
-
-  box-shadow:none;
-
-  object-fit:fill;
-
-  object-position:center center;
-
-  transform:none !important;
-
-  transition:none !important;
-
-  animation:none !important;
-
-  pointer-events:none;
-
-  user-select:none;
-
-  -webkit-user-drag:none;
+  border:
+    1px solid
+    rgba(255,255,255,.1);
 
 }
 
 
-/* =====================================================
-   ERROS
-===================================================== */
-
-.errors-row{
+.image-card img{
 
   width:100%;
 
-  min-height:10px;
+  display:block;
 
-  display:flex;
+  aspect-ratio:16 / 9;
 
-  align-items:center;
-
-  justify-content:center;
-
-  gap:7px;
-
-  margin-top:11px;
-
-}
-
-
-.error-dot{
-
-  flex:0 0 10px;
-
-  width:10px;
-
-  height:10px;
-
-  border-radius:50%;
-
-  background:
-    rgba(255,255,255,.13);
-
-}
-
-
-.error-dot.active{
-
-  background:#ff5365;
-
-  box-shadow:
-    0 0 7px
-    rgba(255,70,90,.5);
+  object-fit:cover;
 
 }
 
@@ -548,48 +224,37 @@ body{
    DICA
 ===================================================== */
 
-.hint{
+.dica{
 
-  margin-top:12px;
+  margin-top:14px;
 
-  padding:12px;
+  padding:15px;
 
-  border-radius:14px;
+  border-radius:18px;
 
   text-align:center;
 
-  background:
-    rgba(20,145,220,.08);
-
-  border:
-    1px solid
-    rgba(20,145,220,.12);
+  background:#082b48;
 
 }
 
 
-.hint-label{
+.dica small{
 
-  color:#69c5fa;
-
-  font-size:8px;
+  color:#65d2ff;
 
   font-weight:900;
 
-  letter-spacing:1px;
-
 }
 
 
-.hint-text{
+.dica strong{
 
-  margin-top:4px;
+  display:block;
 
-  color:#fff;
+  margin-top:5px;
 
-  font-size:14px;
-
-  font-weight:bold;
+  font-size:17px;
 
 }
 
@@ -600,46 +265,27 @@ body{
 
 .word{
 
-  min-height:47px;
+  margin-top:25px;
 
-  display:flex;
+  text-align:center;
 
-  flex-wrap:wrap;
-
-  align-items:flex-end;
-
-  justify-content:center;
-
-  gap:6px;
-
-  margin-top:17px;
-
-}
-
-
-.letter{
-
-  width:27px;
-
-  height:39px;
-
-  display:flex;
-
-  align-items:flex-end;
-
-  justify-content:center;
-
-  padding-bottom:4px;
-
-  border-bottom:
-    3px solid
-    #62c9ff;
-
-  font-size:23px;
+  font-size:
+    clamp(
+      25px,
+      8vw,
+      43px
+    );
 
   font-weight:900;
 
-  text-transform:uppercase;
+  letter-spacing:
+    clamp(
+      5px,
+      2vw,
+      12px
+    );
+
+  color:#fff;
 
 }
 
@@ -655,31 +301,31 @@ body{
   grid-template-columns:
     repeat(7,1fr);
 
-  gap:5px;
+  gap:7px;
 
-  margin-top:19px;
+  margin-top:25px;
 
 }
 
 
 .key{
 
-  min-height:41px;
+  min-height:50px;
 
   border:0;
 
-  border-radius:9px;
+  border-radius:12px;
 
   background:
     linear-gradient(
-      145deg,
-      #126a9e,
-      #07466e
+      180deg,
+      #159bd7,
+      #0872a8
     );
 
   color:#fff;
 
-  font-size:14px;
+  font-size:16px;
 
   font-weight:900;
 
@@ -688,38 +334,30 @@ body{
 }
 
 
+.key:active{
+
+  transform:scale(.95);
+
+}
+
+
 .key.correct{
 
-  background:
-    linear-gradient(
-      145deg,
-      #16bd68,
-      #087d45
-    );
+  background:#168a57;
 
 }
 
 
 .key.wrong{
 
-  background:
-    linear-gradient(
-      145deg,
-      #c9344a,
-      #8b182b
-    );
-
-}
-
-
-.key.used{
-
-  opacity:.28;
+  background:#7c3151;
 
 }
 
 
 .key:disabled{
+
+  opacity:.45;
 
   cursor:not-allowed;
 
@@ -727,94 +365,93 @@ body{
 
 
 /* =====================================================
-   MENSAGEM
+   STATUS
 ===================================================== */
 
-.message{
+.status{
 
-  display:none;
+  margin-top:18px;
 
-  margin-top:13px;
+  padding:15px;
 
-  padding:13px;
-
-  border-radius:14px;
+  border-radius:17px;
 
   text-align:center;
 
-  font-size:13px;
+  font-weight:900;
 
-  font-weight:bold;
-
-}
-
-
-.message.show{
-
-  display:block;
+  line-height:1.4;
 
 }
 
 
-.message.success{
-
-  color:#70ffac;
+.status.success{
 
   background:
-    rgba(0,210,100,.1);
+    rgba(18,170,92,.18);
 
   border:
     1px solid
-    rgba(0,210,100,.18);
+    rgba(18,220,120,.3);
+
+  color:#7cffb1;
 
 }
 
 
-.message.error{
-
-  color:#ff9ca8;
+.status.error{
 
   background:
-    rgba(255,50,70,.1);
+    rgba(220,50,70,.15);
 
   border:
     1px solid
-    rgba(255,50,70,.18);
+    rgba(255,80,90,.3);
+
+  color:#ff9aa4;
+
+}
+
+
+.status.info{
+
+  background:
+    rgba(50,150,220,.15);
+
+  border:
+    1px solid
+    rgba(80,180,255,.25);
+
+  color:#a9ddff;
 
 }
 
 
 /* =====================================================
-   RECOMPENSA
+   BOTÃO
 ===================================================== */
 
-.reward{
+.action{
 
-  display:none;
+  width:100%;
 
-  margin-top:12px;
+  height:50px;
 
-  padding:12px;
+  margin-top:15px;
+
+  border:0;
 
   border-radius:14px;
 
-  text-align:center;
+  background:#16a85b;
 
-  background:
-    rgba(255,213,43,.07);
+  color:#fff;
 
-  border:
-    1px solid
-    rgba(255,213,43,.15);
+  font-size:15px;
 
-}
+  font-weight:900;
 
-
-.reward strong{
-
-  color:#ffd52b;
-
-  font-size:20px;
+  cursor:pointer;
 
 }
 
@@ -829,7 +466,7 @@ body{
 
   inset:0;
 
-  z-index:9999;
+  z-index:100;
 
   display:none;
 
@@ -840,10 +477,7 @@ body{
   padding:20px;
 
   background:
-    rgba(0,8,20,.86);
-
-  backdrop-filter:
-    blur(6px);
+    rgba(0,10,25,.85);
 
 }
 
@@ -861,35 +495,18 @@ body{
 
   max-width:380px;
 
-  padding:25px 20px;
+  padding:28px 20px;
 
   border-radius:23px;
 
+  background:#082b48;
+
   text-align:center;
-
-  background:#082843;
-
-  border:
-    1px solid
-    rgba(255,255,255,.12);
-
-  box-shadow:
-    0 20px 60px
-    rgba(0,0,0,.5);
-
-}
-
-
-.modal-icon{
-
-  font-size:54px;
 
 }
 
 
 .modal-card h2{
-
-  margin-top:8px;
 
   font-size:25px;
 
@@ -898,105 +515,33 @@ body{
 
 .modal-card p{
 
-  margin-top:9px;
+  margin-top:10px;
 
-  color:#b8d3e5;
-
-  font-size:14px;
+  color:#b9d7e8;
 
   line-height:1.5;
 
 }
 
 
-.modal-coins{
-
-  margin-top:13px;
-
-  color:#ffd52b;
-
-  font-size:21px;
-
-  font-weight:900;
-
-}
-
-
-.modal-button{
+.modal-card button{
 
   width:100%;
 
-  height:49px;
+  height:48px;
 
-  margin-top:18px;
+  margin-top:20px;
 
   border:0;
 
-  border-radius:14px;
+  border-radius:13px;
 
-  background:#18ae60;
+  background:#17a95d;
 
   color:#fff;
 
-  font-size:13px;
-
   font-weight:900;
 
-  cursor:pointer;
-
-}
-
-
-@media(max-width:430px){
-
-  .keyboard{
-    gap:4px;
-  }
-
-  .key{
-    min-height:38px;
-    font-size:13px;
-  }
-
-  .letter{
-    width:24px;
-    font-size:21px;
-  }
-
-}
-
-
-@media(max-width:360px){
-
-  .page{
-    padding-left:10px;
-    padding-right:10px;
-  }
-
-  .game-card{
-    padding:10px;
-  }
-
-  .hangman-wrap{
-    width:100%;
-    aspect-ratio:437 / 275;
-  }
-
-  .errors-row{
-    gap:5px;
-  }
-
-  .error-dot{
-    flex-basis:9px;
-    width:9px;
-    height:9px;
-  }
-
-}
-
-
-img{
-  vertical-align:top;
 }
 
 </style>
@@ -1014,15 +559,14 @@ img{
 
     <button
       class="back"
-      id="back"
-      type="button">
+      id="back">
 
       ←
 
     </button>
 
 
-    <div class="title">
+    <div class="top-title">
 
       <small>
         ADAM GAMES
@@ -1035,108 +579,22 @@ img{
     </div>
 
 
-    <div class="top-coins">
-
-      <div class="top-coins-label">
-        MOEDAS
-      </div>
-
-      <div
-        class="top-coins-value"
-        id="coins">
-
-        0
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <div class="hero">
-
-    <div class="hero-icon">
-      🔤
-    </div>
-
-    <h1>
-      Forca
-    </h1>
-
-    <p>
-      Descubra a palavra antes que a forca seja completada.
-    </p>
-
-  </div>
-
-
-  <div class="level-row">
-
-    <div class="level-box">
-
-      <div class="level-label">
-        NÍVEL
-      </div>
-
-      <div class="level-value">
-        FÁCIL
-      </div>
-
-    </div>
-
-
-    <div class="level-box">
-
-      <div class="level-label">
-        RODADA
-      </div>
-
-      <div
-        class="level-value"
-        id="roundNumber">
-
-        1
-
-      </div>
-
-    </div>
-
-
-    <div class="level-box">
-
-      <div class="level-label">
-        RECOMPENSA
-      </div>
-
-      <div
-        class="level-value"
-        id="roundReward">
-
-        🪙 20
-
-      </div>
-
-    </div>
+    <div style="width:45px"></div>
 
   </div>
 
 
   <div class="progress-card">
 
-    <div class="progress-top">
+    <div class="progress-header">
 
-      <div class="progress-title">
+      <span>
         PROGRESSO DA SEQUÊNCIA
-      </div>
+      </span>
 
-      <div
-        class="progress-count"
-        id="progressText">
-
+      <span id="fase">
         1 / 7
-
-      </div>
+      </span>
 
     </div>
 
@@ -1145,7 +603,8 @@ img{
 
       <div
         class="progress-fill"
-        id="progressFill">
+        id="progress">
+
       </div>
 
     </div>
@@ -1153,89 +612,60 @@ img{
   </div>
 
 
-  <div class="game-card">
+  <div class="image-card">
 
-
-    <div
-      class="hangman-wrap"
-      id="hangmanFrame">
-
-      <img
-        id="hangmanImage"
-        src="01_forca_0_erros.png"
-        alt="Forca"
-        draggable="false"
-      >
-
-    </div>
-
-
-    <div
-      class="errors-row"
-      id="errorsRow">
-
-      <span class="error-dot"></span>
-      <span class="error-dot"></span>
-      <span class="error-dot"></span>
-      <span class="error-dot"></span>
-      <span class="error-dot"></span>
-      <span class="error-dot"></span>
-      <span class="error-dot"></span>
-
-    </div>
-
-
-    <div class="hint">
-
-      <div class="hint-label">
-        💡 DICA
-      </div>
-
-      <div
-        class="hint-text"
-        id="hint">
-
-        —
-
-      </div>
-
-    </div>
-
-
-    <div
-      class="word"
-      id="word">
-    </div>
-
-
-    <div
-      class="keyboard"
-      id="keyboard">
-    </div>
-
-
-    <div
-      class="message"
-      id="message">
-    </div>
-
-
-    <div
-      class="reward"
-      id="reward">
-
-      🪙 Você ganhou
-
-      <strong id="rewardValue">
-        20
-      </strong>
-
-      moedas!
-
-    </div>
-
+    <img
+      src="./card_forca.png"
+      alt="Forca">
 
   </div>
+
+
+  <div class="dica">
+
+    <small>
+      💡 DICA
+    </small>
+
+    <strong id="dica">
+      Animal de grande porte e tromba
+    </strong>
+
+  </div>
+
+
+  <div
+    class="word"
+    id="word">
+
+  </div>
+
+
+  <div
+    class="keyboard"
+    id="keyboard">
+
+  </div>
+
+
+  <div
+    class="status info"
+    id="status">
+
+    🎟️ Preparando sua partida...
+
+  </div>
+
+
+  <button
+    class="action"
+    id="voltar"
+    style="display:none">
+
+    VOLTAR PARA OS JOGOS
+
+  </button>
+
 
 </div>
 
@@ -1246,46 +676,18 @@ img{
 
   <div class="modal-card">
 
-    <div
-      class="modal-icon"
-      id="modalIcon">
-
-      💀
-
-    </div>
-
-
-    <h2
-      id="modalTitle">
-
-      Você perdeu!
-
+    <h2 id="modalTitle">
+      Você perdeu
     </h2>
 
-
-    <p
-      id="modalText">
-
-      O personagem chegou ao último estágio da forca.
-
+    <p id="modalText">
+      A partida terminou.
     </p>
 
-
-    <div
-      class="modal-coins"
-      id="modalCoins">
-
-      Precisa de uma nova chance
-
-    </div>
-
-
     <button
-      class="modal-button"
-      id="modalButton"
-      type="button">
+      id="modalButton">
 
-      VOLTAR AOS JOGOS
+      CONTINUAR
 
     </button>
 
@@ -1295,11 +697,6 @@ img{
 
 
 <script type="module">
-
-
-/* =====================================================
-   FIREBASE
-===================================================== */
 
 import {
   initializeApp
@@ -1322,8 +719,9 @@ import {
   query,
   where,
   getDocs,
-  updateDoc,
-  increment
+  doc,
+  writeBatch,
+  serverTimestamp
 }
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
@@ -1370,534 +768,80 @@ const db =
    ELEMENTOS
 ===================================================== */
 
-const coinsEl =
-  document.getElementById("coins");
-
-const roundNumberEl =
-  document.getElementById("roundNumber");
-
-const roundRewardEl =
-  document.getElementById("roundReward");
-
-const progressTextEl =
-  document.getElementById("progressText");
-
-const progressFillEl =
-  document.getElementById("progressFill");
-
-const errorsRow =
-  document.getElementById("errorsRow");
-
-const hintEl =
-  document.getElementById("hint");
-
 const wordEl =
   document.getElementById("word");
+
 
 const keyboardEl =
   document.getElementById("keyboard");
 
-const messageEl =
-  document.getElementById("message");
 
-const rewardEl =
-  document.getElementById("reward");
+const statusEl =
+  document.getElementById("status");
 
-const rewardValueEl =
-  document.getElementById("rewardValue");
+
+const progressEl =
+  document.getElementById("progress");
+
 
 const modal =
   document.getElementById("modal");
 
-const modalIcon =
-  document.getElementById("modalIcon");
 
 const modalTitle =
   document.getElementById("modalTitle");
 
+
 const modalText =
   document.getElementById("modalText");
 
-const modalCoins =
-  document.getElementById("modalCoins");
 
 const modalButton =
   document.getElementById("modalButton");
 
-const hangmanImage =
-  document.getElementById("hangmanImage");
+
+const voltar =
+  document.getElementById("voltar");
 
 
 /* =====================================================
-   IMAGENS
+   PALAVRA
 ===================================================== */
 
-const imagensForca = [
-
-  "01_forca_0_erros.png",
-  "02_forca_1_erro.png",
-  "03_forca_2_erros.png",
-  "04_forca_3_erros.png",
-  "05_forca_4_erros.png",
-  "06_forca_5_erros.png",
-  "07_forca_6_erros.png"
-
-];
+const PALAVRA =
+  "ELEFANTE";
 
 
-imagensForca.forEach(
-  caminho => {
-
-    const imagem =
-      new Image();
-
-    imagem.src =
-      caminho;
-
-  }
-);
+const DICA =
+  "Animal de grande porte e tromba";
 
 
-/* =====================================================
-   ESTADO
-===================================================== */
+const MAX_ERROS =
+  6;
 
-let usuarioAtual = null;
 
-let usuarioRef = null;
-
-let moedas = 0;
-
-let chances = 0;
-
-let rodada = 1;
-
-let erros = 0;
-
-let palavraAtual = null;
-
-let letrasUsadas =
+let letras =
   new Set();
 
-let terminou = false;
 
-let ganhouRodada = false;
+let erros =
+  0;
 
-let processandoErroFinal =
+
+let usuario =
+  null;
+
+
+let usuarioRef =
+  null;
+
+
+let partidaId =
+  null;
+
+
+let partidaFinalizada =
   false;
-
-let chanceContabilizada =
-  false;
-
-
-/* =====================================================
-   RECOMPENSAS
-===================================================== */
-
-const recompensas = {
-
-  1:20,
-  2:20,
-  3:30,
-  4:30,
-  5:20,
-  6:20,
-  7:30
-
-};
-
-
-/* =====================================================
-   BANCO DE PALAVRAS
-===================================================== */
-
-/*
- * COLE AQUI EXATAMENTE O MESMO
- * BANCO DE PALAVRAS DO SEU HTML ATUAL.
- *
- * NÃO ALTERE AS PALAVRAS.
- */
-
-const banco = [
-
-  ["casa","Lugar onde moramos"],
-  ["gato","Animal doméstico que mia"],
-  ["cachorro","Animal conhecido como melhor amigo do homem"],
-  ["bola","Objeto usado em vários esportes"],
-  ["mesa","Móvel usado para apoiar objetos"],
-  ["cadeira","Móvel usado para sentar"],
-  ["livro","Objeto usado para ler"],
-  ["escola","Lugar onde estudamos"],
-  ["banana","Fruta amarela"],
-  ["laranja","Fruta cítrica"],
-  ["maçã","Fruta geralmente vermelha ou verde"],
-  ["uva","Fruta que cresce em cachos"],
-  ["arroz","Alimento muito consumido no Brasil"],
-  ["feijão","Grão muito usado na alimentação brasileira"],
-  ["leite","Bebida branca produzida por mamíferos"],
-  ["água","Líquido essencial à vida"],
-  ["fogo","Produz calor e luz"],
-  ["sol","Estrela que ilumina a Terra"],
-  ["lua","Astro visto no céu à noite"],
-  ["estrela","Astro que brilha no céu"],
-  ["nuvem","Forma-se no céu com vapor de água"],
-  ["chuva","Água que cai das nuvens"],
-  ["vento","Movimento do ar"],
-  ["mar","Grande extensão de água salgada"],
-  ["rio","Curso natural de água"],
-  ["praia","Lugar com areia e mar"],
-  ["areia","Pequenos grãos encontrados nas praias"],
-  ["flor","Parte colorida de muitas plantas"],
-  ["árvore","Planta de grande porte"],
-  ["folha","Parte verde de uma planta"],
-  ["rosa","Flor muito conhecida"],
-  ["jardim","Lugar onde existem plantas cultivadas"],
-  ["carro","Veículo de quatro rodas"],
-  ["ônibus","Veículo coletivo"],
-  ["moto","Veículo de duas rodas"],
-  ["bicicleta","Veículo movido por pedais"],
-  ["avião","Veículo que voa"],
-  ["barco","Veículo usado na água"],
-  ["trem","Veículo que anda sobre trilhos"],
-  ["cama","Móvel usado para dormir"],
-  ["sofá","Móvel usado para sentar"],
-  ["porta","Permite entrar ou sair"],
-  ["janela","Abertura para luz e ventilação"],
-  ["parede","Estrutura que separa ambientes"],
-  ["telhado","Parte superior de uma casa"],
-  ["cozinha","Lugar onde preparamos comida"],
-  ["quarto","Cômodo usado para dormir"],
-  ["banheiro","Cômodo usado para higiene"],
-  ["espelho","Objeto que reflete nossa imagem"],
-  ["relógio","Objeto que marca as horas"],
-  ["telefone","Aparelho usado para comunicação"],
-  ["celular","Telefone portátil"],
-  ["computador","Máquina eletrônica"],
-  ["teclado","Conjunto de teclas"],
-  ["mouse","Dispositivo usado no computador"],
-  ["tela","Superfície que mostra imagens"],
-  ["caderno","Objeto usado para escrever"],
-  ["lápis","Instrumento de escrita"],
-  ["caneta","Instrumento de escrita"],
-  ["borracha","Objeto usado para apagar"],
-  ["mochila","Bolsa usada nas costas"],
-  ["sapato","Peça usada nos pés"],
-  ["camisa","Peça de roupa"],
-  ["calça","Peça usada nas pernas"],
-  ["vestido","Peça de roupa"],
-  ["boné","Acessório usado na cabeça"],
-  ["chapéu","Acessório usado na cabeça"],
-  ["óculos","Objeto usado sobre os olhos"],
-  ["anel","Acessório usado no dedo"],
-  ["brinco","Acessório usado na orelha"],
-  ["colar","Acessório usado no pescoço"],
-  ["coração","Órgão que bombeia sangue"],
-  ["olho","Órgão usado para enxergar"],
-  ["boca","Parte usada para falar e comer"],
-  ["nariz","Órgão usado para sentir cheiros"],
-  ["orelha","Parte usada para ouvir"],
-  ["mão","Parte usada para tocar e segurar"],
-  ["dedo","Parte das mãos e pés"],
-  ["braço","Parte entre ombro e mão"],
-  ["perna","Parte usada para caminhar"],
-  ["pé","Parte que toca o chão"],
-  ["cabeça","Parte superior do corpo"],
-  ["cabelo","Fios que crescem na cabeça"],
-  ["dente","Estrutura usada para mastigar"],
-  ["sorriso","Expressão de alegria"],
-  ["amigo","Pessoa próxima e querida"],
-  ["família","Grupo de pessoas próximas"],
-  ["bebê","Criança muito pequena"],
-  ["criança","Pessoa que ainda não é adulta"],
-  ["jovem","Pessoa em fase de juventude"],
-  ["música","Arte feita com sons"],
-  ["dança","Movimento corporal acompanhado de música"],
-  ["filme","Obra audiovisual"],
-  ["jogo","Atividade feita para diversão"],
-  ["festa","Evento de comemoração"],
-  ["presente","Algo dado a alguém"],
-  ["bolo","Doce comum em festas"],
-  ["doce","Alimento de sabor açucarado"],
-  ["pizza","Comida redonda coberta de ingredientes"],
-  ["hambúrguer","Sanduíche geralmente feito com carne"],
-  ["batata","Alimento muito consumido"],
-  ["tomate","Fruto usado em saladas e molhos"],
-  ["cenoura","Vegetal alaranjado"],
-  ["milho","Cereal usado em vários alimentos"],
-  ["ovo","Alimento produzido por aves"],
-  ["queijo","Alimento produzido a partir do leite"],
-  ["carne","Alimento de origem animal"],
-  ["peixe","Animal que vive na água"],
-  ["frango","Ave usada como alimento"],
-  ["vaca","Animal que produz leite"],
-  ["porco","Animal criado para produção de carne"],
-  ["cavalo","Animal usado para montaria"],
-  ["coelho","Mamífero de orelhas longas"],
-  ["macaco","Animal conhecido pela agilidade"],
-  ["leão","Grande felino"],
-  ["tigre","Felino de listras"],
-  ["elefante","Animal de grande porte e tromba"],
-  ["girafa","Animal de pescoço comprido"],
-  ["zebra","Animal de listras pretas e brancas"],
-  ["panda","Animal preto e branco"],
-  ["urso","Grande mamífero"],
-  ["abelha","Inseto que produz mel"],
-  ["borboleta","Inseto de asas coloridas"],
-  ["formiga","Inseto que vive em colônias"],
-  ["aranha","Animal de oito patas"],
-  ["cobra","Réptil sem pernas"],
-  ["sapo","Animal que vive próximo da água"],
-  ["tartaruga","Animal protegido por casco"],
-  ["galinha","Ave doméstica"],
-  ["pato","Ave que gosta de água"],
-  ["papagaio","Ave conhecida por imitar sons"]
-
-];
-
-
-/* =====================================================
-   NORMALIZAR
-===================================================== */
-
-function normalizar(texto){
-
-  return texto
-    .normalize("NFD")
-    .replace(
-      /[\u0300-\u036f]/g,
-      ""
-    )
-    .toLowerCase()
-    .replace(
-      /[^a-z]/g,
-      ""
-    );
-
-}
-
-
-/* =====================================================
-   ESCOLHER PALAVRA
-===================================================== */
-
-function escolherPalavra(){
-
-  const indice =
-    Math.floor(
-      Math.random() *
-      banco.length
-    );
-
-  const item =
-    banco[indice];
-
-  return {
-
-    original:item[0],
-
-    dica:item[1],
-
-    normalizada:
-      normalizar(
-        item[0]
-      )
-
-  };
-
-}
-
-
-/* =====================================================
-   MOEDAS
-===================================================== */
-
-function atualizarMoedas(){
-
-  coinsEl.textContent =
-    Number(
-      moedas || 0
-    ).toLocaleString(
-      "pt-BR"
-    );
-
-}
-
-
-/* =====================================================
-   CONSUMIR CHANCE
-===================================================== */
-
-async function consumirChance(){
-
-  /*
-   * IMPORTANTE:
-   * esta função só pode executar uma vez
-   * durante esta entrada na Forca.
-   */
-
-  if(
-    chanceContabilizada
-  ){
-
-    return true;
-
-  }
-
-
-  if(
-    !usuarioRef
-  ){
-
-    throw new Error(
-      "Documento do usuário não encontrado."
-    );
-
-  }
-
-
-  const quantidade =
-    Number(
-      chances || 0
-    );
-
-
-  if(
-    quantidade <= 0
-  ){
-
-    return false;
-
-  }
-
-
-  /*
-   * O CAMPO CORRETO É:
-   *
-   * chances
-   *
-   * NÃO é giros.
-   * NÃO é girosRoleta.
-   */
-
-  await updateDoc(
-
-    usuarioRef,
-
-    {
-
-      chances:
-        increment(-1)
-
-    }
-
-  );
-
-
-  chances =
-    quantidade - 1;
-
-
-  chanceContabilizada =
-    true;
-
-
-  return true;
-
-}
-
-
-/* =====================================================
-   ADICIONAR MOEDAS
-===================================================== */
-
-async function adicionarMoedas(
-  quantidade
-){
-
-  if(
-    !usuarioRef
-  ){
-
-    throw new Error(
-      "Documento do usuário não encontrado."
-    );
-
-  }
-
-
-  await updateDoc(
-
-    usuarioRef,
-
-    {
-
-      moedas:
-        increment(
-          quantidade
-        )
-
-    }
-
-  );
-
-
-  moedas +=
-    quantidade;
-
-
-  atualizarMoedas();
-
-}
-
-
-/* =====================================================
-   ATUALIZAR IMAGEM
-===================================================== */
-
-function atualizarImagem(){
-
-  const indice =
-    Math.min(
-      Math.max(
-        erros,
-        0
-      ),
-      imagensForca.length - 1
-    );
-
-
-  /*
-   * Troca somente o SRC.
-   *
-   * O frame permanece exatamente
-   * no mesmo lugar.
-   */
-
-  hangmanImage.src =
-    imagensForca[indice];
-
-
-  const pontos =
-    errorsRow.querySelectorAll(
-      ".error-dot"
-    );
-
-
-  pontos.forEach(
-    (
-      ponto,
-      index
-    ) => {
-
-      ponto.classList.toggle(
-        "active",
-        index < erros
-      );
-
-    }
-  );
-
-}
 
 
 /* =====================================================
@@ -1906,71 +850,52 @@ function atualizarImagem(){
 
 function desenharPalavra(){
 
-  wordEl.innerHTML =
-    "";
+  wordEl.textContent =
+    PALAVRA
+      .split("")
+      .map(letra => {
 
+        if(
+          letras.has(letra)
+        ){
 
-  for(
-    const letra of
-    palavraAtual.normalizada
-  ){
+          return letra;
 
-    const span =
-      document.createElement(
-        "span"
-      );
+        }
 
+        return "_";
 
-    span.className =
-      "letter";
-
-
-    if(
-      letrasUsadas.has(
-        letra
-      )
-    ){
-
-      span.textContent =
-        letra.toUpperCase();
-
-    }
-
-
-    wordEl.appendChild(
-      span
-    );
-
-  }
+      })
+      .join(" ");
 
 }
 
 
 /* =====================================================
-   PALAVRA COMPLETA
+   PROGRESSO
 ===================================================== */
 
-function palavraCompleta(){
+function atualizarProgresso(){
 
-  for(
-    const letra of
-    palavraAtual.normalizada
-  ){
-
-    if(
-      !letrasUsadas.has(
-        letra
+  const acertos =
+    PALAVRA
+      .split("")
+      .filter(
+        letra =>
+          letras.has(letra)
       )
-    ){
-
-      return false;
-
-    }
-
-  }
+      .length;
 
 
-  return true;
+  const percentual =
+    (
+      acertos /
+      PALAVRA.length
+    ) * 100;
+
+
+  progressEl.style.width =
+    percentual + "%";
 
 }
 
@@ -1981,76 +906,52 @@ function palavraCompleta(){
 
 function criarTeclado(){
 
+  const alfabeto =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+
   keyboardEl.innerHTML =
     "";
 
 
-  const letras =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  [...alfabeto].forEach(
+    letra => {
+
+      const botao =
+        document.createElement("button");
 
 
-  for(
-    const letra of letras
-  ){
+      botao.className =
+        "key";
 
-    const botao =
-      document.createElement(
-        "button"
+
+      botao.textContent =
+        letra;
+
+
+      botao.type =
+        "button";
+
+
+      botao.addEventListener(
+        "click",
+        () => {
+
+          escolherLetra(
+            letra,
+            botao
+          );
+
+        }
       );
 
 
-    botao.type =
-      "button";
+      keyboardEl.appendChild(
+        botao
+      );
 
-
-    botao.className =
-      "key";
-
-
-    botao.textContent =
-      letra;
-
-
-    botao.addEventListener(
-      "click",
-      () => {
-
-        escolherLetra(
-          letra.toLowerCase(),
-          botao
-        );
-
-      }
-    );
-
-
-    keyboardEl.appendChild(
-      botao
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-   BLOQUEAR TECLADO
-===================================================== */
-
-function bloquearTeclado(){
-
-  keyboardEl
-    .querySelectorAll(
-      "button"
-    )
-    .forEach(
-      botao => {
-
-        botao.disabled =
-          true;
-
-      }
-    );
+    }
+  );
 
 }
 
@@ -2065,7 +966,8 @@ function escolherLetra(
 ){
 
   if(
-    terminou
+    partidaFinalizada ||
+    letras.has(letra)
   ){
 
     return;
@@ -2073,36 +975,14 @@ function escolherLetra(
   }
 
 
-  if(
-    letrasUsadas.has(
-      letra
-    )
-  ){
-
-    return;
-
-  }
-
-
-  letrasUsadas.add(
-    letra
-  );
-
+  letras.add(letra);
 
   botao.disabled =
     true;
 
 
-  botao.classList.add(
-    "used"
-  );
-
-
   if(
-    palavraAtual.normalizada
-      .includes(
-        letra
-      )
+    PALAVRA.includes(letra)
   ){
 
     botao.classList.add(
@@ -2110,47 +990,49 @@ function escolherLetra(
     );
 
 
+    statusEl.textContent =
+      "✅ Boa! A letra está na palavra.";
+
+    statusEl.className =
+      "status success";
+
+
     desenharPalavra();
 
-
-    if(
-      palavraCompleta()
-    ){
-
-      ganhar();
-
-    }
+    atualizarProgresso();
 
 
-    return;
+    verificarVitoria();
 
   }
 
+  else{
 
-  botao.classList.add(
-    "wrong"
-  );
-
-
-  erros++;
+    botao.classList.add(
+      "wrong"
+    );
 
 
-  /*
-   * PRIMEIRO troca para a imagem.
-   */
-
-  atualizarImagem();
+    erros++;
 
 
-  /*
-   * Só depois verifica o último erro.
-   */
+    statusEl.textContent =
+      "❌ Letra errada. Tentativas: " +
+      erros +
+      " / " +
+      MAX_ERROS;
 
-  if(
-    erros >= 6
-  ){
+    statusEl.className =
+      "status error";
 
-    erroFinal();
+
+    if(
+      erros >= MAX_ERROS
+    ){
+
+      perder();
+
+    }
 
   }
 
@@ -2158,13 +1040,39 @@ function escolherLetra(
 
 
 /* =====================================================
-   ÚLTIMO ERRO
+   VERIFICAR VITÓRIA
 ===================================================== */
 
-function erroFinal(){
+async function verificarVitoria(){
+
+  const venceu =
+    PALAVRA
+      .split("")
+      .every(
+        letra =>
+          letras.has(letra)
+      );
+
 
   if(
-    processandoErroFinal
+    venceu
+  ){
+
+    await ganhar();
+
+  }
+
+}
+
+
+/* =====================================================
+   COMEÇAR PARTIDA
+===================================================== */
+
+async function iniciarPartida(){
+
+  if(
+    !usuarioRef
   ){
 
     return;
@@ -2172,98 +1080,435 @@ function erroFinal(){
   }
 
 
-  processandoErroFinal =
+  try{
+
+    const snapshot =
+      await getDocs(
+        query(
+          collection(db,"admins"),
+          where(
+            "uid",
+            "==",
+            usuario.uid
+          )
+        )
+      );
+
+
+    if(
+      snapshot.empty
+    ){
+
+      throw new Error(
+        "Cadastro não encontrado."
+      );
+
+    }
+
+
+    const cadastro =
+      snapshot.docs[0];
+
+
+    usuarioRef =
+      cadastro.ref;
+
+
+    const dados =
+      cadastro.data();
+
+
+    const chances =
+      Number(
+        dados.chances || 0
+      );
+
+
+    if(
+      chances <= 0
+    ){
+
+      throw new Error(
+        "Você não possui chances."
+      );
+
+    }
+
+
+    const novaPartida =
+      doc(
+        collection(
+          db,
+          "gameSessions"
+        )
+      );
+
+
+    const batch =
+      writeBatch(db);
+
+
+    batch.set(
+      novaPartida,
+      {
+
+        uid:
+          usuario.uid,
+
+        game:
+          "forca",
+
+        status:
+          "ativa",
+
+        rewardBase:
+          30,
+
+        rewardWin:
+          20,
+
+        chanceConsumed:
+          true,
+
+        createdAt:
+          serverTimestamp(),
+
+        finalizadoEm:
+          null
+
+      }
+    );
+
+
+    batch.update(
+      usuarioRef,
+      {
+
+        chances:
+          chances - 1,
+
+        moedas:
+          Number(
+            dados.moedas || 0
+          ) + 30,
+
+        ultimaPartidaForcaId:
+          novaPartida.id,
+
+        ultimaPartidaForcaEm:
+          serverTimestamp()
+
+      }
+    );
+
+
+    await batch.commit();
+
+
+    partidaId =
+      novaPartida.id;
+
+
+    statusEl.textContent =
+      "🪙 +30 moedas recebidas! Boa sorte!";
+
+
+    statusEl.className =
+      "status success";
+
+
+  }
+
+  catch(error){
+
+    console.error(
+      "ERRO AO INICIAR FORCA:",
+      error
+    );
+
+
+    statusEl.textContent =
+      "⚠️ Não foi possível iniciar a partida. " +
+      (
+        error.code ===
+        "permission-denied"
+
+        ?
+
+        "Verifique as Rules do Firebase."
+
+        :
+
+        error.message
+      );
+
+
+    statusEl.className =
+      "status error";
+
+
+    keyboardEl
+      .querySelectorAll("button")
+      .forEach(
+        b =>
+          b.disabled = true
+      );
+
+  }
+
+}
+
+
+/* =====================================================
+   GANHAR
+===================================================== */
+
+async function ganhar(){
+
+  if(
+    partidaFinalizada
+  ){
+
+    return;
+
+  }
+
+
+  partidaFinalizada =
     true;
 
 
-  terminou =
+  try{
+
+    const batch =
+      writeBatch(db);
+
+
+    const sessionRef =
+      doc(
+        db,
+        "gameSessions",
+        partidaId
+      );
+
+
+    batch.update(
+      sessionRef,
+      {
+
+        status:
+          "won",
+
+        finalizadoEm:
+          serverTimestamp()
+
+      }
+    );
+
+
+    batch.update(
+      usuarioRef,
+      {
+
+        moedas:
+          Number(
+            usuario.moedas || 0
+          ) + 20,
+
+        ultimaPartidaForcaId:
+          partidaId,
+
+        ultimaPartidaForcaEm:
+          serverTimestamp()
+
+      }
+    );
+
+
+    await batch.commit();
+
+
+    usuario.moedas =
+      Number(
+        usuario.moedas || 0
+      ) + 20;
+
+
+    statusEl.textContent =
+      "🎉 Palavra correta! +20 moedas extras!";
+
+
+    statusEl.className =
+      "status success";
+
+
+    bloquearTeclado();
+
+
+    setTimeout(
+      () => {
+
+        abrirModal(
+          "🎉 VOCÊ ACERTOU!",
+          "Parabéns! Você ganhou +20 moedas extras.",
+          "CONTINUAR"
+        );
+
+      },
+      3000
+    );
+
+  }
+
+  catch(error){
+
+    console.error(
+      "ERRO AO REGISTRAR VITÓRIA:",
+      error
+    );
+
+
+    partidaFinalizada =
+      false;
+
+
+    statusEl.textContent =
+      "⚠️ A palavra foi acertada, mas não foi possível registrar as 20 moedas. Tente novamente.";
+
+    statusEl.className =
+      "status error";
+
+  }
+
+}
+
+
+/* =====================================================
+   PERDER
+===================================================== */
+
+async function perder(){
+
+  if(
+    partidaFinalizada
+  ){
+
+    return;
+
+  }
+
+
+  partidaFinalizada =
     true;
 
 
   bloquearTeclado();
 
 
-  erros =
-    6;
+  try{
+
+    const batch =
+      writeBatch(db);
 
 
-  /*
-   * GARANTE A IMAGEM 07.
-   */
+    batch.update(
 
-  atualizarImagem();
+      doc(
+        db,
+        "gameSessions",
+        partidaId
+      ),
+
+      {
+
+        status:
+          "perdida",
+
+        finalizadoEm:
+          serverTimestamp()
+
+      }
+
+    );
 
 
-  messageEl.className =
-    "message";
+    await batch.commit();
+
+  }
+
+  catch(error){
+
+    console.error(
+      "ERRO AO FINALIZAR DERROTA:",
+      error
+    );
+
+  }
 
 
-  messageEl.textContent =
-    "";
+  statusEl.textContent =
+    "❌ Você perdeu a partida.";
+
+  statusEl.className =
+    "status error";
 
 
-  /*
-   * Dois frames permitem que o navegador
-   * renderize a imagem 07 antes do timer.
-   */
-
-  requestAnimationFrame(
+  setTimeout(
     () => {
 
-      requestAnimationFrame(
-        () => {
-
-          setTimeout(
-            () => {
-
-              mostrarDerrota();
-
-            },
-            3000
-          );
-
-        }
+      abrirModal(
+        "😢 VOCÊ PERDEU",
+        "A palavra era ELEFANTE. As 30 moedas da partida continuam com você.",
+        "CONTINUAR"
       );
 
-    }
+    },
+    3000
   );
 
 }
 
 
 /* =====================================================
-   DERROTA
+   BLOQUEAR TECLADO
 ===================================================== */
 
-function mostrarDerrota(){
+function bloquearTeclado(){
 
-  messageEl.textContent =
-    "💀 Você perdeu! A palavra era: " +
-    palavraAtual.original;
+  keyboardEl
+    .querySelectorAll("button")
+    .forEach(
+      button => {
+
+        button.disabled =
+          true;
+
+      }
+    );
+
+}
 
 
-  messageEl.className =
-    "message show error";
+/* =====================================================
+   MODAL
+===================================================== */
 
-
-  modalIcon.textContent =
-    "💀";
-
+function abrirModal(
+  titulo,
+  texto,
+  botao
+){
 
   modalTitle.textContent =
-    "Você perdeu!";
+    titulo;
 
 
   modalText.textContent =
-    "O personagem chegou ao último estágio da forca. Você precisa de uma nova chance para jogar novamente.";
-
-
-  modalCoins.textContent =
-    "Precisa de uma nova chance";
+    texto;
 
 
   modalButton.textContent =
-    "VOLTAR AOS JOGOS";
+    botao;
 
 
   modal.classList.add(
@@ -2274,304 +1519,22 @@ function mostrarDerrota(){
 
 
 /* =====================================================
-   GANHOU
-===================================================== */
-
-async function ganhar(){
-
-  if(
-    terminou
-  ){
-
-    return;
-
-  }
-
-
-  terminou =
-    true;
-
-
-  ganhouRodada =
-    true;
-
-
-  bloquearTeclado();
-
-
-  const recompensa =
-    recompensas[rodada] ||
-    20;
-
-
-  try{
-
-    /*
-     * Salva a moeda imediatamente.
-     */
-
-    await adicionarMoedas(
-      recompensa
-    );
-
-
-    rewardValueEl.textContent =
-      recompensa;
-
-
-    rewardEl.style.display =
-      "block";
-
-
-    messageEl.textContent =
-      "🎉 Você acertou a palavra!";
-
-
-    messageEl.className =
-      "message show success";
-
-
-    if(
-      rodada >= 7
-    ){
-
-      modalIcon.textContent =
-        "🏆";
-
-
-      modalTitle.textContent =
-        "Você venceu!";
-
-
-      modalText.textContent =
-        "Você completou as 7 rodadas e recebeu sua recompensa.";
-
-
-      modalCoins.textContent =
-        "+" +
-        recompensa +
-        " 🪙";
-
-
-      modalButton.textContent =
-        "VOLTAR AOS JOGOS";
-
-    }
-    else{
-
-      modalIcon.textContent =
-        "🎉";
-
-
-      modalTitle.textContent =
-        "Parabéns!";
-
-
-      modalText.textContent =
-        "Você acertou a palavra e ganhou sua recompensa.";
-
-
-      modalCoins.textContent =
-        "+" +
-        recompensa +
-        " 🪙";
-
-
-      modalButton.textContent =
-        "PRÓXIMA RODADA";
-
-    }
-
-
-    modal.classList.add(
-      "show"
-    );
-
-  }
-  catch(error){
-
-    console.error(
-      error
-    );
-
-
-    terminou =
-      false;
-
-
-    ganhouRodada =
-      false;
-
-
-    messageEl.textContent =
-      "Não foi possível registrar as moedas. Tente novamente.";
-
-
-    messageEl.className =
-      "message show error";
-
-  }
-
-}
-
-
-/* =====================================================
-   NOVA RODADA
-===================================================== */
-
-function iniciarRodada(){
-
-  erros =
-    0;
-
-
-  terminou =
-    false;
-
-
-  ganhouRodada =
-    false;
-
-
-  processandoErroFinal =
-    false;
-
-
-  letrasUsadas =
-    new Set();
-
-
-  palavraAtual =
-    escolherPalavra();
-
-
-  const recompensa =
-    recompensas[rodada] ||
-    20;
-
-
-  roundNumberEl.textContent =
-    rodada;
-
-
-  roundRewardEl.textContent =
-    "🪙 " +
-    recompensa;
-
-
-  progressTextEl.textContent =
-    rodada +
-    " / 7";
-
-
-  progressFillEl.style.width =
-    (
-      rodada /
-      7 *
-      100
-    ) +
-    "%";
-
-
-  hintEl.textContent =
-    palavraAtual.dica;
-
-
-  rewardEl.style.display =
-    "none";
-
-
-  messageEl.className =
-    "message";
-
-
-  messageEl.textContent =
-    "";
-
-
-  /*
-   * Sempre começa na primeira imagem.
-   */
-
-  hangmanImage.src =
-    imagensForca[0];
-
-
-  criarTeclado();
-
-
-  desenharPalavra();
-
-
-  atualizarImagem();
-
-}
-
-
-/* =====================================================
-   BOTÃO DO MODAL
+   MODAL CONTINUAR
 ===================================================== */
 
 modalButton.addEventListener(
   "click",
   () => {
 
-    modal.classList.remove(
-      "show"
-    );
-
-
-    /*
-     * Perdeu.
-     *
-     * A chance já foi descontada
-     * na entrada.
-     */
-
-    if(
-      !ganhouRodada
-    ){
-
-      window.location.href =
-        "jogos.html";
-
-      return;
-
-    }
-
-
-    /*
-     * Terminou as 7 rodadas.
-     */
-
-    if(
-      rodada >= 7
-    ){
-
-      window.location.href =
-        "jogos.html";
-
-      return;
-
-    }
-
-
-    /*
-     * Próxima rodada.
-     *
-     * NÃO desconta outra chance.
-     */
-
-    rodada++;
-
-    iniciarRodada();
+    window.location.href =
+      "jogos.html";
 
   }
 );
 
 
 /* =====================================================
-   SETA VOLTAR
+   VOLTAR
 ===================================================== */
 
 document
@@ -2580,13 +1543,6 @@ document
     "click",
     () => {
 
-      /*
-       * NÃO desconta chance aqui.
-       *
-       * Ela já foi descontada quando
-       * a página da Forca foi aberta.
-       */
-
       window.location.href =
         "jogos.html";
 
@@ -2594,223 +1550,152 @@ document
   );
 
 
-/* =====================================================
-   LOCALIZAR USUÁRIO
-===================================================== */
+voltar.addEventListener(
+  "click",
+  () => {
 
-async function localizarUsuario(
-  user
-){
-
-  let resultado =
-    await getDocs(
-
-      query(
-
-        collection(
-          db,
-          "admins"
-        ),
-
-        where(
-          "uid",
-          "==",
-          user.uid
-        )
-
-      )
-
-    );
-
-
-  if(
-    !resultado.empty
-  ){
-
-    return resultado.docs[0];
+    window.location.href =
+      "jogos.html";
 
   }
-
-
-  if(
-    user.email
-  ){
-
-    resultado =
-      await getDocs(
-
-        query(
-
-          collection(
-            db,
-            "admins"
-          ),
-
-          where(
-            "email",
-            "==",
-            user.email
-          )
-
-        )
-
-      );
-
-
-    if(
-      !resultado.empty
-    ){
-
-      return resultado.docs[0];
-
-    }
-
-  }
-
-
-  return null;
-
-}
+);
 
 
 /* =====================================================
-   AUTENTICAÇÃO
+   LOGIN
 ===================================================== */
 
 onAuthStateChanged(
-
   auth,
-
   async user => {
 
-    if(
-      !user
-    ){
+    if(!user){
 
-      window.location.href =
-        "index.html";
+      window.location.replace(
+        "index.html"
+      );
 
       return;
 
     }
 
 
-    usuarioAtual =
+    usuario =
       user;
 
 
     try{
 
-      const documento =
-        await localizarUsuario(
-          user
+      const snapshot =
+        await getDocs(
+
+          query(
+            collection(db,"admins"),
+            where(
+              "uid",
+              "==",
+              user.uid
+            )
+          )
+
         );
 
 
       if(
-        !documento
+        snapshot.empty
       ){
 
-        alert(
-          "Cadastro Adam Games não encontrado."
-        );
+        statusEl.textContent =
+          "⚠️ Cadastro não encontrado.";
 
-
-        window.location.href =
-          "jogos.html";
-
+        statusEl.className =
+          "status error";
 
         return;
 
       }
 
 
+      const cadastro =
+        snapshot.docs[0];
+
+
       usuarioRef =
-        documento.ref;
+        cadastro.ref;
 
 
       const dados =
-        documento.data();
+        cadastro.data();
 
 
-      /*
-       * CARREGA MOEDAS.
-       */
-
-      moedas =
+      usuario.moedas =
         Number(
           dados.moedas || 0
         );
 
 
-      atualizarMoedas();
-
-
-      /*
-       * CARREGA CHANCES.
-       *
-       * ESTE É O CAMPO CORRETO.
-       */
-
-      chances =
+      usuario.chances =
         Number(
           dados.chances || 0
         );
 
 
-      /*
-       * CONSUME UMA CHANCE
-       * AO ENTRAR NA FORCA.
-       */
-
-      const podeJogar =
-        await consumirChance();
-
-
       if(
-        !podeJogar
+        usuario.chances <= 0
       ){
 
-        alert(
-          "Você não possui chances suficientes para jogar a Forca."
-        );
+        statusEl.textContent =
+          "🎟️ Você não possui chances para jogar.";
 
-
-        window.location.href =
-          "jogos.html";
-
+        statusEl.className =
+          "status error";
 
         return;
 
       }
 
 
-      /*
-       * Chance já foi descontada.
-       *
-       * Agora começa a primeira rodada.
-       */
-
-      iniciarRodada();
+      iniciarPartida();
 
     }
+
     catch(error){
 
-      console.error(
-        "Erro ao carregar usuário:",
-        error
-      );
+      console.error(error);
 
+      statusEl.textContent =
+        "⚠️ Erro ao carregar sua partida.";
 
-      alert(
-        "Erro ao carregar seus dados."
-      );
+      statusEl.className =
+        "status error";
 
     }
 
   }
-
 );
+
+
+/* =====================================================
+   INICIALIZAÇÃO VISUAL
+===================================================== */
+
+document.getElementById(
+  "dica"
+).textContent =
+  DICA;
+
+
+document.getElementById(
+  "fase"
+).textContent =
+  "1 / 7";
+
+
+desenharPalavra();
+
+criarTeclado();
+
+atualizarProgresso();
 
 </script>
 
