@@ -134,10 +134,20 @@ html,body{overflow-x:hidden!important;}
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 import {getAuth,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-import {getFirestore,collection,query,where,getDocs,getDoc,runTransaction,doc,addDoc,serverTimestamp} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+import {getFirestore,collection,query,where,getDocs,getDoc,runTransaction,doc} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-const firebaseConfig={apiKey:"AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",authDomain:"adam-games-21081.firebaseapp.com",projectId:"adam-games-21081",storageBucket:"adam-games-21081.firebasestorage.app",messagingSenderId:"1055528418738",appId:"1:1055528418738:web:5fafdf63424ba9744eb8ab"};
-const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app);
+const firebaseConfig={
+  apiKey:"AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",
+  authDomain:"adam-games-21081.firebaseapp.com",
+  projectId:"adam-games-21081",
+  storageBucket:"adam-games-21081.firebasestorage.app",
+  messagingSenderId:"1055528418738",
+  appId:"1:1055528418738:web:5fafdf63424ba9744eb8ab"
+};
+
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getFirestore(app);
 
 const EASY=[
   {palavra:"abacate",pista:"É um alimento que pode fazer parte de uma refeição ou lanche."},
@@ -1127,237 +1137,450 @@ const FINAL=[
  {palavra:"grafeno",pista:"Material avançado"}
 ];
 
-const EXTRA_EASY=[
- {palavra:"arco-íris",pista:"Tem várias cores no céu depois da chuva."},
- {palavra:"caixadagua",pista:"Fica no alto e armazena água em muitas casas."},
- {palavra:"melancia",pista:"Fruta grande e muito suculenta."},
- {palavra:"arroz",pista:"Acompanha muitos pratos brasileiros."},
- {palavra:"tomate",pista:"Pode ser vermelho e usado em saladas e molhos."},
- {palavra:"girassol",pista:"Flor grande que lembra o sol."},
- {palavra:"picolé",pista:"Doce gelado servido no palito."},
- {palavra:"sorvete",pista:"Sobremesa gelada."},
- {palavra:"pipoca",pista:"Estoura quando o milho é aquecido."},
- {palavra:"guarda-chuva",pista:"Usado para se proteger da chuva."},
- {palavra:"escova",pista:"Usada para limpar ou pentear."},
- {palavra:"travesseiro",pista:"Fica na cama e apoia a cabeça."},
- {palavra:"geladeira",pista:"Mantém alimentos e bebidas gelados."},
- {palavra:"televisao",pista:"Aparelho usado para assistir programas."},
- {palavra:"sapato",pista:"Usado nos pés."},
- {palavra:"camisa",pista:"Peça de roupa usada na parte de cima do corpo."},
- {palavra:"janela",pista:"Pode deixar luz e ar entrarem em uma casa."},
- {palavra:"porta",pista:"Pode abrir e fechar a entrada de um cômodo."},
- {palavra:"cama",pista:"Lugar onde dormimos."},
- {palavra:"chuva",pista:"Cai do céu e molha o chão."},
- {palavra:"sol",pista:"Estrela que ilumina nosso dia."},
- {palavra:"lua",pista:"Aparece no céu principalmente à noite."},
- {palavra:"estrela",pista:"Ponto brilhante visto no céu noturno."},
- {palavra:"banana",pista:"Fruta amarela muito comum."},
- {palavra:"morango",pista:"Fruta vermelha e pequena."}
-];
-
-const EXTRA_MEDIUM=[
- {palavra:"labirinto",pista:"Lugar cheio de caminhos onde é fácil se perder."},
- {palavra:"tempestade",pista:"Pode trazer chuva forte, vento e trovões."},
- {palavra:"cachoeira",pista:"Água que cai de uma altura natural."},
- {palavra:"vulcao",pista:"Pode expelir lava e cinzas."},
- {palavra:"telescopio",pista:"Ajuda a observar objetos muito distantes no céu."},
- {palavra:"biblioteca",pista:"Lugar onde muitos livros ficam guardados."},
- {palavra:"aeroporto",pista:"Local de chegada e partida de aviões."},
- {palavra:"laboratorio",pista:"Local usado para experiências e pesquisas."},
- {palavra:"fotografia",pista:"Imagem registrada por uma câmera."},
- {palavra:"aventura",pista:"Experiência emocionante ou inesperada."},
- {palavra:"montanha",pista:"Grande elevação natural do terreno."},
- {palavra:"oceano",pista:"Grande massa de água salgada."},
- {palavra:"castelo",pista:"Construção antiga que lembra reis e cavaleiros."},
- {palavra:"bússola",pista:"Instrumento usado para ajudar na orientação."},
- {palavra:"tesouro",pista:"Algo valioso que pode estar escondido."},
- {palavra:"pirata",pista:"Personagem ligado a navios e tesouros escondidos."},
- {palavra:"dinossauro",pista:"Animal pré-histórico que não vive mais hoje."},
- {palavra:"borboleta",pista:"Inseto com asas coloridas."},
- {palavra:"elefante",pista:"Grande animal com tromba."},
- {palavra:"girafa",pista:"Animal conhecido pelo pescoço muito comprido."}
-];
-
-const EXTRA_DIFFICULT=[
- {palavra:"arquitetura",pista:"Arte e técnica de projetar construções."},
- {palavra:"astronauta",pista:"Pessoa treinada para viajar ao espaço."},
- {palavra:"arqueologia",pista:"Estudo de vestígios deixados por povos antigos."},
- {palavra:"eletricidade",pista:"Forma de energia ligada ao movimento de cargas."},
- {palavra:"fotossintese",pista:"Processo pelo qual plantas produzem seu alimento usando luz."},
- {palavra:"biodiversidade",pista:"Variedade de formas de vida em uma região."},
- {palavra:"meteorologia",pista:"Ciência que estuda a atmosfera e o tempo."},
- {palavra:"cartografia",pista:"Área ligada à produção e estudo de mapas."},
- {palavra:"vulcanologia",pista:"Ciência que estuda vulcões."},
- {palavra:"hidrologia",pista:"Estudo da água na Terra."},
- {palavra:"geometria",pista:"Área da matemática que estuda formas e medidas."},
- {palavra:"psicologia",pista:"Área que estuda comportamento e processos mentais."},
- {palavra:"democracia",pista:"Sistema político baseado na participação dos cidadãos."},
- {palavra:"sustentabilidade",pista:"Busca atender necessidades sem prejudicar o futuro."},
- {palavra:"reciclagem",pista:"Transformação de materiais para reaproveitamento."}
-];
-
-const EXTRA_HARD=[
- {palavra:"espectrofotometro",pista:"Instrumento usado para medir características da luz."},
- {palavra:"termoeletricidade",pista:"Fenômeno relacionado a calor e eletricidade."},
- {palavra:"eletroquimica",pista:"Área que relaciona reações químicas e eletricidade."},
- {palavra:"microbiologia",pista:"Estudo de seres microscópicos."},
- {palavra:"neurotransmissor",pista:"Substância envolvida na comunicação entre neurônios."},
- {palavra:"criptografia",pista:"Técnica para proteger informações por códigos."},
- {palavra:"nanotecnologia",pista:"Tecnologia que trabalha em escala extremamente pequena."},
- {palavra:"paleontologia",pista:"Ciência que estuda fósseis e vida antiga."},
- {palavra:"oceanografia",pista:"Ciência que estuda os oceanos."},
- {palavra:"infraestrutura",pista:"Conjunto de estruturas que dá suporte a uma atividade ou cidade."}
-];
-
-const EXTRA_FINAL=[
- {palavra:"otorrinolaringologista",pista:"Médico especializado em ouvido, nariz e garganta."},
- {palavra:"gastroenterologia",pista:"Área médica ligada ao sistema digestivo."},
- {palavra:"eletroencefalograma",pista:"Exame que registra a atividade elétrica do cérebro."},
- {palavra:"eletrocardiograma",pista:"Exame que registra a atividade elétrica do coração."},
- {palavra:"evapotranspiracao",pista:"Processo que reúne evaporação e transpiração das plantas."},
- {palavra:"interdisciplinar",pista:"Que envolve diferentes áreas do conhecimento."},
- {palavra:"inconstitucional",pista:"Que está em desacordo com a Constituição."},
- {palavra:"idiossincrasia",pista:"Característica muito particular de uma pessoa ou grupo."},
- {palavra:"procrastinacao",pista:"Hábito de deixar tarefas para depois."},
- {palavra:"supercondutor",pista:"Material que pode conduzir eletricidade com resistência muito baixa."}
-];
-
-EASY.push(...EXTRA_EASY);
-MEDIUM.push(...EXTRA_MEDIUM);
-DIFFICULT.push(...EXTRA_DIFFICULT);
-HARD.push(...EXTRA_HARD);
-FINAL.push(...EXTRA_FINAL);
-
 
 const rewards=[20,20,30,30,20,20,30,75];
 const TOTAL_ROUNDS=9;
-const storageEasy="adam_games_forca_used_easy_v6";
-const storageMedium="adam_games_forca_used_medium_v6";
-const storageDifficult="adam_games_forca_used_difficult_v6";
-const storageHard="adam_games_forca_used_hard_v6";
-const storageFinal="adam_games_forca_used_final_v3";
-const stateKeyPrefix="adam_games_forca_state_v6_";
-const entryKeyPrefix="adam_games_forca_entry_v6_";
+const storageEasy="adam_games_forca_used_easy_v5";
+const storageMedium="adam_games_forca_used_medium_v5";
+const storageDifficult="adam_games_forca_used_difficult_v5";
+const storageHard="adam_games_forca_used_hard_v5";
+const storageFinal="adam_games_forca_used_final_v2";
 
 let user=null,userRef=null,coins=0,round=1,errors=0,current=null;
-let usedLetters=new Set(),locked=false,action=null,timerStarted=false,timerStart=0,timerInterval=null;
-let hardTarget=10, entryConsumed=false, loading=false;
+let usedLetters=new Set(),locked=false,action=null;
+let timerStarted=false,timerStart=0,timerInterval=null;
+let hardTarget=10;
+let finalConsolationGiven=false;
+let entryRewardGiven=false;
 
 const usedEasy=new Set(JSON.parse(localStorage.getItem(storageEasy)||"[]"));
 const usedMedium=new Set(JSON.parse(localStorage.getItem(storageMedium)||"[]"));
 const usedDifficult=new Set(JSON.parse(localStorage.getItem(storageDifficult)||"[]"));
 const usedHard=new Set(JSON.parse(localStorage.getItem(storageHard)||"[]"));
 const usedFinal=new Set(JSON.parse(localStorage.getItem(storageFinal)||"[]"));
+
 const $=id=>document.getElementById(id);
-function norm(s){return String(s).normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z]/g,"")}
+
+function norm(s){
+ return s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z]/g,"");
+}
 function saveSet(key,set){localStorage.setItem(key,JSON.stringify([...set]))}
-function chooseFrom(pool,set,key){let available=pool.filter(x=>!set.has(norm(x.palavra)));if(!available.length){set.clear();saveSet(key,set);available=[...pool]}const x=available[Math.floor(Math.random()*available.length)];set.add(norm(x.palavra));saveSet(key,set);return {...x,normal:norm(x.palavra)}}
-function choose(){if(round<=2)return chooseFrom(EASY,usedEasy,storageEasy);if(round<=4)return chooseFrom(MEDIUM,usedMedium,storageMedium);if(round<=7)return chooseFrom(DIFFICULT,usedDifficult,storageDifficult);if(round===8)return chooseFrom(HARD,usedHard,storageHard);return chooseFrom(FINAL,usedFinal,storageFinal)}
-function coinsUI(){$("coins").textContent=Number(coins||0).toLocaleString("pt-BR")}
-function frame(){const n=Math.min(errors,6);document.querySelectorAll(".hangman-layer").forEach((x,i)=>x.classList.toggle("active",i===n));[...$("errorsRow").children].forEach((x,i)=>x.classList.toggle("active",i<errors))}
-function wordUI(){const box=$("word");box.innerHTML="";box.classList.toggle("long-word",current.normal.length>=12);for(const c of current.normal){const el=document.createElement("span");el.className="letter";el.textContent=usedLetters.has(c)?c.toUpperCase():"";box.appendChild(el)}}
-function complete(){return [...new Set(current.normal)].every(c=>usedLetters.has(c))}
-function keyboard(){const k=$("keyboard");k.innerHTML="";for(const c of "ABCDEFGHIJKLMNOPQRSTUVWXYZ"){const b=document.createElement("button");b.className="key";b.type="button";b.textContent=c;b.onclick=()=>guess(c.toLowerCase(),b);k.appendChild(b)}}
+
+function chooseFrom(pool,set,key){
+ let available=pool.filter(x=>!set.has(norm(x.palavra)));
+ if(!available.length){
+  set.clear();
+  saveSet(key,set);
+  available=[...pool];
+ }
+ const x=available[Math.floor(Math.random()*available.length)];
+ set.add(norm(x.palavra));
+ saveSet(key,set);
+ return {...x,normal:norm(x.palavra)};
+}
+
+function choose(){
+ if(round<=2)return chooseFrom(EASY,usedEasy,storageEasy);
+ if(round<=4)return chooseFrom(MEDIUM,usedMedium,storageMedium);
+ if(round<=7)return chooseFrom(DIFFICULT,usedDifficult,storageDifficult);
+ if(round===8)return chooseFrom(HARD,usedHard,storageHard);
+ return chooseFrom(FINAL,usedFinal,storageFinal);
+}
+
+function coinsUI(){
+ $("coins").textContent=Number(coins||0).toLocaleString("pt-BR");
+}
+
+function frame(){
+ const n=Math.min(errors,6);
+ document.querySelectorAll(".hangman-layer").forEach((x,i)=>x.classList.toggle("active",i===n));
+ [...$("errorsRow").children].forEach((x,i)=>x.classList.toggle("active",i<errors));
+}
+
+function wordUI(){
+ const box=$("word");
+ box.innerHTML="";
+ box.classList.toggle("long-word", current.normal.length>=12);
+ for(const c of current.normal){
+  const el=document.createElement("span");
+  el.className="letter";
+  el.textContent=usedLetters.has(c)?c.toUpperCase():"";
+  box.appendChild(el);
+ }
+}
+
+function complete(){
+ return [...new Set(current.normal)].every(c=>usedLetters.has(c));
+}
+
+function keyboard(){
+ const k=$("keyboard");
+ k.innerHTML="";
+ for(const c of "ABCDEFGHIJKLMNOPQRSTUVWXYZ"){
+  const b=document.createElement("button");
+  b.className="key";
+  b.type="button";
+  b.textContent=c;
+  b.onclick=()=>guess(c.toLowerCase(),b);
+  k.appendChild(b);
+ }
+}
+
 function lock(){
-  $("keyboard").querySelectorAll("button").forEach(b=>b.disabled=true)
-}
-function msg(t,c){$("message").textContent=t;$("message").className="message show "+c}
-function stopTimer(){if(timerInterval){clearInterval(timerInterval);timerInterval=null}timerStarted=false;$("timerBox").style.display="none"}
-function startTimer(){if(timerStarted||(round!==8&&round!==9))return;timerStarted=true;timerStart=performance.now();$("timerBox").style.display="block";timerInterval=setInterval(()=>{$("timerValue").textContent=((performance.now()-timerStart)/1000).toFixed(1)+"s"},100)}
-function currentSeconds(){return timerStarted?(performance.now()-timerStart)/1000:null}
-function stateKey(){return user?stateKeyPrefix+user.uid:""}
-function saveState(){if(!user||!current)return;localStorage.setItem(stateKey(),JSON.stringify({round,current,usedLetters:[...usedLetters],errors,hardTarget,locked:false}))}
-function clearState(){if(user)localStorage.removeItem(stateKey())}
-function loadState(){if(!user)return false;try{const raw=localStorage.getItem(stateKey());if(!raw)return false;const st=JSON.parse(raw);if(!st||!st.current||!st.round)return false;round=Number(st.round);current=st.current;usedLetters=new Set(st.usedLetters||[]);errors=Number(st.errors||0);hardTarget=Number(st.hardTarget||10);locked=false;return true}catch(e){console.warn("Estado salvo inválido",e);return false}}
-function setUI(){const isHard=round===8,isFinal=round===9;if(isFinal){$("levelName").textContent="👑 FINAL";$("roundReward").textContent="🪙 100–150"}else if(isHard){$("levelName").textContent="🔥 HARD";const hardBonus={9:25,10:20,11:15,12:10}[hardTarget]||15;$("roundReward").textContent="🪙 75 + "+hardBonus}else{$("levelName").textContent=round<=2?"FÁCIL":round<=4?"MÉDIO":"DIFÍCIL";$("roundReward").textContent="🪙 "+rewards[round-1]}$("roundNumber").textContent=round+" / "+TOTAL_ROUNDS;$("progressText").textContent=round+" / "+TOTAL_ROUNDS;$("progressFill").style.width=(round/TOTAL_ROUNDS*100)+"%";const pista=String(current?.pista||"").replace(/\s*[—–-]\s*dica\s*\d+/gi,"").replace(/\bdica\s*\d+\b/gi,"").trim();$("hint").textContent=pista||"Descubra a palavra."}
-function render(){setUI();$("reward").style.display="none";$("message").className="message";$("message").textContent="";$("timerBox").style.display="none";$("timerValue").textContent="0.0s";frame();wordUI();keyboard();saveState()}
-function startNewRound(){stopTimer();errors=0;locked=false;usedLetters=new Set();current=choose();if(round===8)hardTarget=[9,10,11,12][Math.floor(Math.random()*4)];render()}
-function showModal(icon,title,coinsText,text,button,nextAction){$("modalIcon").textContent=icon;$("modalTitle").textContent=title;$("modalCoins").textContent=coinsText;$("modalText").textContent=text;$("modalButton").textContent=button;action=nextAction;$("modal").classList.add("show")}
-
-async function spendChanceAndGiveCoins(reason){
-  if(!userRef)throw new Error("Cadastro não encontrado.");
-  const resultRef=doc(collection(db,"resultadosJogos"));
-  await runTransaction(db,async tx=>{
-    const snap=await tx.get(userRef);
-    if(!snap.exists())throw new Error("Cadastro não encontrado.");
-    const data=snap.data();
-    const chances=Number(data.chances||0);
-    if(chances<=0)throw new Error("SEM_CHANCES");
-    const oldCoins=Number(data.moedas||0);
-    tx.update(userRef,{chances:chances-1,moedas:oldCoins+30});
-    tx.set(resultRef,{uid:user.uid,jogoId:"forca",moedasGanhos:30,motivo:reason,rodada:round,palavraId:norm(current?.palavra||""),dataHora:new Date().toISOString(),criadoEm:serverTimestamp()});
-  });
-  coins+=30;coinsUI();
+ $("keyboard").querySelectorAll("button").forEach(b=>b.disabled=true);
 }
 
-async function consumeEntryChance(){
-  const key=entryKeyPrefix+(user?.uid||"");
-  if(sessionStorage.getItem(key)==="1"){entryConsumed=true;return true}
-  if(!current) return false;
-  try{await spendChanceAndGiveCoins("entrada");sessionStorage.setItem(key,"1");entryConsumed=true;msg("🪙 +30 Adam Coins! Chance utilizada para iniciar a partida.","success");return true}catch(e){if(e.message==="SEM_CHANCES"){showModal("🎟️","Sem chances","","Você não tem chances disponíveis para iniciar a Forca.","VOLTAR AOS JOGOS","exit");return false}throw e}
+function msg(t,c){
+ $("message").textContent=t;
+ $("message").className="message show "+c;
 }
 
-async function continueSameLevel(){
-  if(loading)return;loading=true;
-  try{
-    await spendChanceAndGiveCoins("continuacao");
-    $("lossContinueModal").classList.remove("show");
-    clearState();
-    startNewRound();
-    msg("🪙 +30 Adam Coins! Nova tentativa iniciada.","success");
-  }catch(e){
-    console.error(e);
-    if(e.message==="SEM_CHANCES")throw e;
-    throw e;
-  }finally{loading=false}
+function stopTimer(){
+ if(timerInterval){clearInterval(timerInterval);timerInterval=null;}
+ timerStarted=false;
+ $("timerBox").style.display="none";
 }
-window.continuarForcaMesmoNivel=continueSameLevel;
 
-async function win(){
-  if(locked)return;locked=true;lock();const secs=currentSeconds();stopTimer();
-  let bonus=round===9?(secs!==null&&secs<=8?150:secs!==null&&secs<=15?125:100):(round===8?75:rewards[round-1]);
-  try{
-    if(userRef){
-      const resultRef=doc(collection(db,"resultadosJogos"));
-      await runTransaction(db,async tx=>{
-        const snap=await tx.get(userRef);if(!snap.exists())throw new Error("Cadastro não encontrado.");
-        const old=Number(snap.data().moedas||0);tx.update(userRef,{moedas:old+bonus});tx.set(resultRef,{uid:user.uid,jogoId:"forca",moedasGanhos:bonus,motivo:"acerto",rodada:round,palavraId:norm(current.palavra),tempoSegundos:secs,dataHora:new Date().toISOString(),criadoEm:serverTimestamp()});
-      });
-      coins+=bonus;coinsUI();
+function startTimer(){
+ if(timerStarted||round!==8&&round!==9)return;
+ timerStarted=true;
+ timerStart=performance.now();
+ $("timerBox").style.display="block";
+ timerInterval=setInterval(()=>{
+  const sec=(performance.now()-timerStart)/1000;
+  $("timerValue").textContent=sec.toFixed(1)+"s";
+ },100);
+}
+
+function currentSeconds(){
+ return timerStarted?(performance.now()-timerStart)/1000:null;
+}
+
+function start(){
+ stopTimer();
+ errors=0;
+ locked=false;
+ usedLetters=new Set();
+ finalConsolationGiven=false;
+ current=choose();
+
+ const isHard=round===8;
+ const isFinal=round===9;
+
+ if(isFinal){
+  $("levelName").textContent="👑 FINAL";
+  $("roundReward").textContent="🪙 100–150";
+ }else if(isHard){
+  $("levelName").textContent="🔥 HARD";
+  hardTarget=[9,10,11,12][Math.floor(Math.random()*4)];
+  const hardBonus={9:25,10:20,11:15,12:10}[hardTarget];
+  $("roundReward").textContent="🪙 75 + "+hardBonus;
+ }else{
+  $("levelName").textContent=round<=2?"FÁCIL":round<=4?"MÉDIO":"DIFÍCIL";
+  $("roundReward").textContent="🪙 "+rewards[round-1];
+ }
+
+ $("roundNumber").textContent=round+" / "+TOTAL_ROUNDS;
+ $("progressText").textContent=round+" / "+TOTAL_ROUNDS;
+ $("progressFill").style.width=(round/TOTAL_ROUNDS*100)+"%";
+
+ // Pista limpa: nunca mostrar "dica 348", banco de palavras ou a frase genérica antiga.
+ const mapaPistas={
+  abacate:"Fruta",abacaxi:"Fruta",abelha:"Animal",abóbora:"Alimento",academia:"Local de treino",
+  acidente:"Ocorrência",acorde:"Música",acordo:"Concordância",açúcar:"Alimento",adereço:"Acessório",
+  adulto:"Pessoa",aventura:"Experiência",avião:"Transporte",avenida:"Via urbana",banheiro:"Cômodo",
+  bicicleta:"Transporte",brinquedo:"Objeto infantil",cachorro:"Animal doméstico",cadeira:"Móvel",
+  caderno:"Material escolar",camisa:"Vestuário",caneta:"Material escolar",caneca:"Utensílio",canção:"Música",
+  castelo:"Construção",cebola:"Alimento",celular:"Tecnologia",cenoura:"Alimento",cinema:"Entretenimento",
+  cidade:"Área urbana",ciência:"Conhecimento",cozinha:"Cômodo",coelho:"Animal",comida:"Alimento",
+  dinheiro:"Moeda",escola:"Instituição",escada:"Estrutura",espada:"Arma",espelho:"Objeto",estrela:"Astro",
+  família:"Grupo familiar",farinha:"Ingrediente",fazenda:"Propriedade rural",feijão:"Alimento",festa:"Celebração",
+  filme:"Cinema",fogão:"Eletrodoméstico",floresta:"Área verde",foguete:"Veículo espacial",formiga:"Animal",
+  galinha:"Animal",garagem:"Espaço",garrafa:"Recipiente",girafa:"Animal",guitarra:"Instrumento",
+  hospital:"Saúde",jardim:"Área verde",janela:"Abertura",jornal:"Publicação",laranja:"Fruta",limão:"Fruta",
+  livro:"Leitura",macaco:"Animal",madeira:"Material",mochila:"Acessório",montanha:"Relevo",morango:"Fruta",
+  música:"Som",navio:"Transporte",oceano:"Mar",ônibus:"Transporte",oficina:"Local de trabalho",panela:"Utensílio",
+  parque:"Lazer",peixe:"Animal",piscina:"Lazer",planeta:"Astro",praia:"Litoral",professor:"Profissão",
+  queijo:"Alimento",quarto:"Cômodo",relógio:"Instrumento",sapato:"Calçado",telefone:"Comunicação",
+  trabalho:"Profissão",universo:"Espaço",viagem:"Deslocamento",vestido:"Vestuário",vitória:"Conquista",
+  zoológico:"Animais"
+ };
+ let pistaLimpa=String(current.pista||"")
+  .replace(/\s*[—–-]\s*dica\s*\d+/gi,"")
+  .replace(/\bdica\s*\d+\b/gi,"")
+  .replace(/[🪙💡🔥👑⭐✨🎯🚀🌌]/gu,"")
+  .replace(/\s+/g," ")
+  .trim();
+ if(/algo comum|dia a dia|cotidiano/i.test(pistaLimpa)){
+  pistaLimpa=mapaPistas[current.palavra] || (round<=2?"Objeto":round<=4?"Conceito":round<=7?"Termo":round===8?"Desafio":"Final");
+ }
+ if(round>=8) pistaLimpa=pistaLimpa.split(/\s+/).slice(0,2).join(" ");
+ $("hint").textContent=pistaLimpa||"Descubra.";
+ $("reward").style.display="none";
+ $("message").className="message";
+ $("message").textContent="";
+ $("timerBox").style.display="none";
+ $("timerValue").textContent="0.0s";
+
+ frame();
+ wordUI();
+ keyboard();
+}
+
+async function reward(n){
+ if(!userRef)throw Error("Cadastro não encontrado.");
+ await runTransaction(db,async tx=>{
+  const snap=await tx.get(userRef);
+  if(!snap.exists())throw Error("Cadastro não encontrado.");
+  const old=Number(snap.data().moedas||0);
+  tx.update(userRef,{moedas:old+n});
+ });
+ coins+=n;
+ coinsUI();
+}
+
+async function consumirChanceEEntrada(){
+ const sessionKey="adam_games_forca_chance_consumida_v2_"+(user?.uid||"");
+ if(sessionStorage.getItem(sessionKey)==="1") return true;
+ if(!userRef)throw Error("Cadastro não encontrado.");
+ await runTransaction(db,async tx=>{
+  const snap=await tx.get(userRef);
+  if(!snap.exists())throw Error("Cadastro não encontrado.");
+  const data=snap.data()||{};
+  const chances=Number(data.chances||0);
+  if(chances<=0)throw Error("SEM_CHANCES");
+  const oldCoins=Number(data.moedas||0);
+  tx.update(userRef,{chances:chances-1,moedas:oldCoins+30});
+ });
+ sessionStorage.setItem(sessionKey,"1");
+ coins+=30;
+ coinsUI();
+ return true;
+}
+
+async function continuarMesmoNivel(){
+ if(!userRef)throw Error("Cadastro não encontrado.");
+ await runTransaction(db,async tx=>{
+  const snap=await tx.get(userRef);
+  if(!snap.exists())throw Error("Cadastro não encontrado.");
+  const data=snap.data()||{};
+  const chances=Number(data.chances||0);
+  if(chances<=0)throw Error("SEM_CHANCES");
+  const oldCoins=Number(data.moedas||0);
+  tx.update(userRef,{chances:chances-1,moedas:oldCoins+20});
+ });
+ coins+=20;
+ coinsUI();
+ const modal=document.getElementById("lossContinueModal");
+ if(modal){modal.classList.remove("show");modal.setAttribute("aria-hidden","true");}
+ start();
+ msg("🪙 +20 moedas • 1 chance usada.","success");
+}
+
+window.continuarForcaMesmoNivel=continuarMesmoNivel;
+
+function openModal(icon,title,coinsText,text,button,a){
+ $("modalIcon").textContent=icon;
+ $("modalTitle").textContent=title;
+ $("modalCoins").textContent=coinsText;
+ $("modalText").textContent=text;
+ $("modalButton").textContent=button;
+ action=a;
+ $("modal").classList.add("show");
+}
+
+function loss(){
+  if(locked)return;
+  locked=true;
+  lock();
+  errors=6;
+  frame();
+  msg("💀 Você perdeu!","error");
+  if(round===9){
+   setTimeout(()=>finalLoss(),3000);
+   return;
+  }
+  setTimeout(()=>{
+    const level = round===8 ? "HARD" : round<=2 ? "FÁCIL" : round<=4 ? "MÉDIO" : "DIFÍCIL";
+    const modal=document.getElementById("lossContinueModal");
+    const levelEl=document.getElementById("lossContinueLevel");
+    const textEl=document.getElementById("lossContinueText");
+    const btn=document.getElementById("lossContinueSame");
+    if(levelEl) levelEl.textContent="NÍVEL: "+level+" • RODADA "+round;
+    if(textEl) textEl.textContent="Você perdeu esta tentativa. Para continuar no mesmo nível, use 1 chance. Uma nova palavra será escolhida.";
+    if(btn){
+      btn.disabled=false;
+      btn.textContent="🔄 CONTINUAR • USAR 1 CHANCE";
+      btn.onclick=async()=>{
+        btn.disabled=true;
+        btn.textContent="⏳ VERIFICANDO...";
+        try{
+          await window.continuarForcaMesmoNivel();
+        }catch(e){
+          console.error(e);
+          if(e?.message==="SEM_CHANCES"){
+            btn.textContent="🚫 SEM CHANCES";
+            if(textEl) textEl.textContent="Você não tem nenhuma chance disponível. Sem chance, não é possível continuar jogando.";
+          }else{
+            btn.disabled=false;
+            btn.textContent="🔄 CONTINUAR • USAR 1 CHANCE";
+            if(textEl) textEl.textContent="Não foi possível usar a chance agora. Tente novamente.";
+          }
+        }
+      };
     }
-    $("rewardValue").textContent=bonus;$("reward").style.display="block";msg("🎉 Palavra correta!","success");clearState();
-    setTimeout(()=>{
-      if(round<TOTAL_ROUNDS){showModal("🎉","Muito bem!","🪙 +"+bonus,"Você acertou a palavra e pode avançar para a próxima rodada.","PRÓXIMA RODADA","next")}
-      else{showModal("👑","Desafio concluído!","🪙 +"+bonus,"Você terminou todas as rodadas da Forca.","VOLTAR AOS JOGOS","exit")}
-    },700);
-  }catch(e){locked=false;console.error(e);msg("⚠️ Não foi possível registrar a recompensa. Tente novamente.","error")}
+    if(modal){
+      modal.classList.add("show");
+      modal.setAttribute("aria-hidden","false");
+    }
+  },3000);
 }
 
-function loss(){if(locked)return;locked=true;lock();errors=6;frame();msg("💀 Você perdeu!","error");saveState();if(round===9){setTimeout(()=>showModal("💀","Você perdeu!","","O desafio final terminou. Você pode voltar aos jogos e tentar novamente.","VOLTAR AOS JOGOS","exit"),3000);return}setTimeout(()=>{$("lossContinueLevel").textContent="NÍVEL: "+(round===8?"HARD":round<=2?"FÁCIL":round<=4?"MÉDIO":"DIFÍCIL")+" • RODADA "+round;$("lossContinueText").textContent="Você perdeu esta tentativa. Use 1 chance para continuar no mesmo nível com uma nova palavra.";$("lossContinueModal").classList.add("show")},3000)}
-function guess(c,b){if(locked||usedLetters.has(c))return;usedLetters.add(c);b.disabled=true;if(current.normal.includes(c)){b.classList.add("correct");wordUI();if((round===8||round===9)&&!timerStarted)startTimer();saveState();if(complete())win()}else{b.classList.add("wrong");errors++;frame();saveState();if(errors>=6)loss()}}
+function guess(c,b){
+ if(locked||usedLetters.has(c))return;
 
-$("modalButton").onclick=()=>{$("modal").classList.remove("show");if(action==="next"){round++;startNewRound()}else location.href="jogos.html"};
-$("back").onclick=()=>location.href="jogos.html";
+ usedLetters.add(c);
+ b.disabled=true;
 
-async function findUser(u){let s=await getDocs(query(collection(db,"admins"),where("uid","==",u.uid)));if(!s.empty)return s.docs[0].ref;if(u.email){s=await getDocs(query(collection(db,"admins"),where("email","==",u.email)));if(!s.empty)return s.docs[0].ref}return null}
+ if(current.normal.includes(c)){
+  b.classList.add("correct");
+  wordUI();
 
-$("lossContinueExit").onclick=()=>{$("lossContinueModal").classList.remove("show");location.href="jogos.html"};
-$("lossContinueSame").onclick=async()=>{const btn=$("lossContinueSame");const text=$("lossContinueText");if(loading)return;btn.disabled=true;btn.textContent="⏳ VERIFICANDO CHANCE...";try{await continueSameLevel()}catch(e){if(e.message==="SEM_CHANCES"){text.textContent="Você não tem chances disponíveis. Consiga 1 chance para continuar.";btn.textContent="🚫 SEM CHANCES"}else{console.error(e);text.textContent="Não foi possível usar a chance agora. Tente novamente.";btn.disabled=false;btn.textContent="🔄 CONTINUAR • USAR 1 CHANCE"}}};
+  if((round===8||round===9)&&!timerStarted)startTimer();
+
+  if(complete())win();
+ }else{
+  b.classList.add("wrong");
+  errors++;
+  frame();
+  if(errors>=6)lose();
+ }
+}
+
+$("modalButton").onclick=()=>{
+ $("modal").classList.remove("show");
+
+ if(action==="next"){
+  round++;
+  start();
+ }else if(action==="hard"){
+  round=8;
+  start();
+ }else if(action==="final"){
+  round=9;
+  start();
+ }else{
+  try{sessionStorage.removeItem("adam_games_forca_chance_consumida_v2_"+(user?.uid||""));}catch(e){}
+  location.href="jogos.html";
+ }
+};
+
+$("back").onclick=()=>{
+ try{sessionStorage.removeItem("adam_games_forca_chance_consumida_v2_"+(user?.uid||""));}catch(e){}
+ location.href="jogos.html";
+};
+
+async function findUser(u){
+ let s=await getDocs(query(collection(db,"admins"),where("uid","==",u.uid)));
+ if(!s.empty)return s.docs[0].ref;
+
+ if(u.email){
+  s=await getDocs(query(collection(db,"admins"),where("email","==",u.email)));
+  if(!s.empty)return s.docs[0].ref;
+ }
+ return null;
+}
 
 onAuthStateChanged(auth,async u=>{
-  if(!u){location.href="index.html";return}user=u;
+ if(!u){
+  location.href="index.html";
+  return;
+ }
+
+ user=u;
+
+ try{
+  userRef=await findUser(u);
+
+  if(!userRef){
+   alert("Cadastro Adam Games não encontrado.");
+   location.href="jogos.html";
+   return;
+  }
+
+  const s=await getDoc(userRef);
+  coins=Number(s.data()?.moedas||0);
+  coinsUI();
+
   try{
-    userRef=await findUser(u);if(!userRef){alert("Cadastro Adam Games não encontrado.");location.href="jogos.html";return}
-    const snap=await getDoc(userRef);coins=Number(snap.data()?.moedas||0);coinsUI();
-    const resumed=loadState();
-    if(resumed){render();msg("↩️ Partida recuperada de onde você parou.","success");}
-    else{startNewRound();await consumeEntryChance();}
-    const chancesNow=Number((await getDoc(userRef)).data()?.chances||0);if(chancesNow<=0&&resumed===false){/* modal já tratado */}
-  }catch(e){console.error("Erro ao carregar dados da Forca:",e);alert(e.message==="PERMISSION_DENIED"?"Permissão negada pelo Firebase. Atualize as Rules da Firestore para permitir a recompensa da Forca.":"Erro ao carregar seus dados.")}
+   await consumirChanceEEntrada();
+   start();
+  }catch(e){
+   if(e?.message==="SEM_CHANCES"){
+    alert("Você não tem chances disponíveis para jogar a Forca.");
+    location.href="jogos.html";
+    return;
+   }
+   throw e;
+  }
+
+ }catch(e){
+  console.error("Erro ao carregar dados da Forca:",e);
+  alert("Erro ao carregar seus dados.");
+ }
 });
 </script>
 
 
+<script id="loss-continue-script">
+(function(){
+  const modal = document.getElementById("lossContinueModal");
+  const levelEl = document.getElementById("lossContinueLevel");
+  const textEl = document.getElementById("lossContinueText");
+  const sameBtn = document.getElementById("lossContinueSame");
+  const exitBtn = document.getElementById("lossContinueExit");
+
+  if(!modal || !sameBtn || !exitBtn) return;
+
+  function currentLevelText(){
+    const candidates = [
+      window.currentLevel,
+      window.nivelAtual,
+      window.level,
+      window.nivel,
+      window.currentRound,
+      window.rodadaAtual
+    ];
+    for(const value of candidates){
+      if(value !== undefined && value !== null && String(value).trim()){
+        return String(value);
+      }
+    }
+    return "MESMO NÍVEL";
+  }
+
+  window.showLossContinueModal = function(level){
+    const label = level || currentLevelText();
+    levelEl.textContent = "NÍVEL: " + label;
+    textEl.textContent =
+      "Você perdeu esta tentativa, mas pode continuar no mesmo nível e tentar novamente.";
+    modal.classList.add("show");
+    modal.setAttribute("aria-hidden","false");
+  };
+
+  window.hideLossContinueModal = function(){
+    modal.classList.remove("show");
+    modal.setAttribute("aria-hidden","true");
+  };
+
+  exitBtn.addEventListener("click", function(){
+    window.hideLossContinueModal();
+  });
+
+  // Other code can call this when the loss is finalized.
+  window.forcaMostrarPerdeu = window.showLossContinueModal;
+})();
+</script>
 
 </body>
 </html>
