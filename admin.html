@@ -242,6 +242,87 @@ select:focus{
   color:#ff9ca8;
 }
 
+/* CLIENTES */
+
+.client-list{
+  display:grid;
+  gap:10px;
+  margin-top:15px;
+}
+
+.client-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:15px;
+  border-radius:15px;
+  background:rgba(255,255,255,.045);
+  border:1px solid rgba(255,255,255,.07);
+}
+
+.client-main{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-width:0;
+}
+
+.client-avatar{
+  width:48px;
+  height:48px;
+  flex-shrink:0;
+  border-radius:14px;
+  background:#ffd52b;
+  color:#111;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:23px;
+}
+
+.client-name{
+  font-size:15px;
+  font-weight:900;
+}
+
+.client-email{
+  margin-top:3px;
+  color:#8fb7d4;
+  font-size:11px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  max-width:450px;
+}
+
+.client-id{
+  margin-top:4px;
+  color:#63c7ff;
+  font-size:11px;
+  font-weight:bold;
+}
+
+.client-location{
+  margin-top:3px;
+  color:#9fc5df;
+  font-size:11px;
+}
+
+.client-open{
+  flex-shrink:0;
+  padding:11px 13px;
+  border-radius:10px;
+  background:linear-gradient(135deg,#168fff,#0563b5);
+}
+
+.empty{
+  padding:20px;
+  text-align:center;
+  color:#8daec7;
+  font-size:13px;
+}
+
 /* ENTREGAS */
 
 .delivery-summary{
@@ -704,7 +785,7 @@ select:focus{
   word-break:break-all;
 }
 
-/* VALE PRESENTE */
+/* VALE */
 
 .voucher-card{
   border:1px solid rgba(255,213,42,.3);
@@ -824,6 +905,10 @@ select:focus{
     grid-template-columns:repeat(2,1fr);
   }
 
+  .client-item{
+    align-items:flex-start;
+  }
+
 }
 
 @media(max-width:600px){
@@ -868,6 +953,22 @@ select:focus{
 
   .delivery-top{
     flex-direction:column;
+  }
+
+  .client-item{
+    flex-direction:column;
+  }
+
+  .client-main{
+    width:100%;
+  }
+
+  .client-open{
+    width:100%;
+  }
+
+  .client-email{
+    max-width:250px;
   }
 
 }
@@ -933,6 +1034,11 @@ select:focus{
 <p class="subtitle">
   Gerenciamento completo do Adam Games.
 </p>
+
+
+<!-- =====================================================
+     DASHBOARD
+===================================================== -->
 
 <div class="dashboard">
 
@@ -1018,6 +1124,11 @@ select:focus{
 
 </div>
 
+
+<!-- =====================================================
+     BUSCA
+===================================================== -->
+
 <div class="card">
 
   <h3>
@@ -1051,6 +1162,11 @@ select:focus{
     ou
     <strong>UID Firebase</strong>.
 
+    <br><br>
+
+    O ID Adam Games agora possui somente
+    <strong>6 ou 7 caracteres</strong>.
+
   </div>
 
   <div
@@ -1059,6 +1175,39 @@ select:focus{
   </div>
 
 </div>
+
+
+<!-- =====================================================
+     TODOS OS CLIENTES
+===================================================== -->
+
+<div class="card">
+
+  <h3>
+    👥 Todos os clientes cadastrados
+  </h3>
+
+  <div
+    id="clientList"
+    class="client-list">
+
+    <div class="empty">
+      🔄 Carregando clientes...
+    </div>
+
+  </div>
+
+  <div
+    id="clientMessage"
+    class="message">
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     ENTREGAS
+===================================================== -->
 
 <div
   class="card"
@@ -1149,6 +1298,11 @@ select:focus{
 
 </div>
 
+
+<!-- =====================================================
+     USUÁRIO SELECIONADO
+===================================================== -->
+
 <div id="userArea">
 
   <div class="card">
@@ -1221,6 +1375,7 @@ select:focus{
 
     </div>
 
+
     <div class="info-grid">
 
       <div class="info-item">
@@ -1239,6 +1394,7 @@ select:focus{
 
       </div>
 
+
       <div class="info-item">
 
         <div class="info-label">
@@ -1254,6 +1410,7 @@ select:focus{
         </div>
 
       </div>
+
 
       <div class="info-item">
 
@@ -1271,6 +1428,7 @@ select:focus{
 
       </div>
 
+
       <div class="info-item">
 
         <div class="info-label">
@@ -1286,6 +1444,7 @@ select:focus{
         </div>
 
       </div>
+
 
       <div class="info-item">
 
@@ -1303,6 +1462,7 @@ select:focus{
 
       </div>
 
+
       <div class="info-item">
 
         <div class="info-label">
@@ -1319,11 +1479,47 @@ select:focus{
 
       </div>
 
+
+      <div class="info-item">
+
+        <div class="info-label">
+          📍 Localização
+        </div>
+
+        <div
+          class="info-value"
+          id="infoLocalizacao">
+
+          Não informada
+
+        </div>
+
+      </div>
+
+
+      <div class="info-item">
+
+        <div class="info-label">
+          📍 Coordenadas
+        </div>
+
+        <div
+          class="info-value"
+          id="infoCoordenadas">
+
+          Não informadas
+
+        </div>
+
+      </div>
+
     </div>
+
 
     <h3>
       📊 Recursos atuais
     </h3>
+
 
     <div class="balances">
 
@@ -1347,6 +1543,7 @@ select:focus{
 
       </div>
 
+
       <div class="balance">
 
         <div class="balanceIcon">
@@ -1366,6 +1563,7 @@ select:focus{
         </div>
 
       </div>
+
 
       <div class="balance">
 
@@ -1387,6 +1585,7 @@ select:focus{
 
       </div>
 
+
       <div class="balance">
 
         <div class="balanceIcon">
@@ -1406,6 +1605,7 @@ select:focus{
         </div>
 
       </div>
+
 
       <div class="balance">
 
@@ -1430,6 +1630,9 @@ select:focus{
     </div>
 
   </div>
+
+
+  <!-- ROLETA -->
 
   <div class="card roleta-card">
 
@@ -1473,6 +1676,7 @@ select:focus{
 
     </div>
 
+
     <div class="roleta-form">
 
       <div class="roleta-field">
@@ -1491,6 +1695,7 @@ select:focus{
 
       </div>
 
+
       <div class="roleta-field">
 
         <label>
@@ -1507,6 +1712,7 @@ select:focus{
       </div>
 
     </div>
+
 
     <div class="roleta-actions">
 
@@ -1530,6 +1736,7 @@ select:focus{
 
     </div>
 
+
     <div
       id="roletaMessage"
       class="message">
@@ -1537,11 +1744,15 @@ select:focus{
 
   </div>
 
+
+  <!-- MOVIMENTAÇÃO -->
+
   <div class="card">
 
     <h3>
       🎁 Fazer movimentação
     </h3>
+
 
     <div class="form">
 
@@ -1573,6 +1784,7 @@ select:focus{
 
       </div>
 
+
       <div class="field">
 
         <label>
@@ -1588,6 +1800,7 @@ select:focus{
         >
 
       </div>
+
 
       <div class="field full">
 
@@ -1605,6 +1818,7 @@ select:focus{
       </div>
 
     </div>
+
 
     <div class="actions">
 
@@ -1628,6 +1842,7 @@ select:focus{
 
     </div>
 
+
     <div class="special">
 
       <button
@@ -1650,10 +1865,12 @@ select:focus{
 
     </div>
 
+
     <div
       id="operationMessage"
       class="message">
     </div>
+
 
     <div class="history">
 
@@ -1675,6 +1892,11 @@ select:focus{
 
 </div>
 
+
+<!-- =====================================================
+     VALE PRESENTE
+===================================================== -->
+
 <div class="card voucher-card">
 
   <div class="voucher-title">
@@ -1689,16 +1911,14 @@ select:focus{
         Vale Presente
       </h3>
 
-      <div
-        style="color:#9ec7e5;font-size:12px;">
-
+      <div style="color:#9ec7e5;font-size:12px;">
         Gere códigos para os clientes Adam Games.
-
       </div>
 
     </div>
 
   </div>
+
 
   <div class="voucher-form">
 
@@ -1718,6 +1938,7 @@ select:focus{
 
     </div>
 
+
     <div class="field">
 
       <label>
@@ -1735,6 +1956,7 @@ select:focus{
 
   </div>
 
+
   <button
     class="generateVoucher"
     id="generateVoucher"
@@ -1744,15 +1966,13 @@ select:focus{
 
   </button>
 
+
   <div
     class="voucher-result"
     id="voucherResult">
 
-    <div
-      style="color:#b8d2e6;font-size:11px;font-weight:bold;">
-
+    <div style="color:#b8d2e6;font-size:11px;font-weight:bold;">
       CÓDIGO GERADO
-
     </div>
 
     <div
@@ -1763,11 +1983,8 @@ select:focus{
 
     </div>
 
-    <div
-      style="margin-top:8px;color:#9dbbd3;font-size:11px;text-align:center;">
-
+    <div style="margin-top:8px;color:#9dbbd3;font-size:11px;text-align:center;">
       Exatamente 15 caracteres • letras + números
-
     </div>
 
     <div class="voucher-buttons">
@@ -1794,16 +2011,17 @@ select:focus{
 
   </div>
 
+
   <div
     id="voucherMessage"
     class="message">
   </div>
 
+
   <h3 style="margin-top:22px;">
-
     🎫 Vales gerados
-
   </h3>
+
 
   <div
     class="voucher-list"
@@ -1819,6 +2037,7 @@ select:focus{
 
 </div>
 
+
 <script type="module">
 
 import {
@@ -1826,6 +2045,7 @@ import {
 }
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
 
 import {
   getAuth,
@@ -1835,13 +2055,13 @@ import {
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
+
 import {
   getFirestore,
   collection,
   query,
   where,
   getDocs,
-  getCountFromServer,
   updateDoc,
   addDoc,
   doc,
@@ -1884,10 +2104,12 @@ const app =
     firebaseConfig
   );
 
+
 const auth =
   getAuth(
     app
   );
+
 
 const db =
   getFirestore(
@@ -1904,9 +2126,14 @@ const ADMIN_EMAIL =
 ===================================================== */
 
 let adminUsuario = null;
+
 let usuarioSelecionado = null;
+
 let todasEntregas = [];
+
 let todosVales = [];
+
+let todosUsuarios = [];
 
 let authResolvido = false;
 
@@ -1928,35 +2155,58 @@ const autenticacaoPronta =
 ===================================================== */
 
 const searchInput =
-  document.getElementById("searchInput");
+  document.getElementById(
+    "searchInput"
+  );
 
 const searchMessage =
-  document.getElementById("searchMessage");
+  document.getElementById(
+    "searchMessage"
+  );
 
 const operationMessage =
-  document.getElementById("operationMessage");
+  document.getElementById(
+    "operationMessage"
+  );
 
 const roletaMessage =
-  document.getElementById("roletaMessage");
+  document.getElementById(
+    "roletaMessage"
+  );
 
 const voucherMessage =
-  document.getElementById("voucherMessage");
+  document.getElementById(
+    "voucherMessage"
+  );
 
 const deliveryMessage =
-  document.getElementById("deliveryMessage");
+  document.getElementById(
+    "deliveryMessage"
+  );
+
+const clientMessage =
+  document.getElementById(
+    "clientMessage"
+  );
 
 const userArea =
-  document.getElementById("userArea");
+  document.getElementById(
+    "userArea"
+  );
 
 const refreshButton =
-  document.getElementById("refreshAll");
+  document.getElementById(
+    "refreshAll"
+  );
 
 const generateVoucherButton =
-  document.getElementById("generateVoucher");
+  document.getElementById(
+    "generateVoucher"
+  );
 
 
 /* =====================================================
-   FUNÇÕES AUXILIARES
+   AUXILIARES
 ===================================================== */
 
 function mostrarMensagem(
@@ -2093,6 +2343,405 @@ function formatarData(
 }
 
 
+/* =====================================================
+   ID ADAM GAMES
+   6 OU 7 CARACTERES
+===================================================== */
+
+function idCurtoValido(
+  valor
+){
+
+  return /^[A-Z0-9]{6,7}$/i.test(
+    String(
+      valor ||
+      ""
+    ).trim()
+  );
+
+}
+
+
+function gerarIdAdam(){
+
+  const caracteres =
+    "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+  let codigo = "";
+
+
+  if(
+    window.crypto &&
+    window.crypto.getRandomValues
+  ){
+
+    const valores =
+      new Uint32Array(7);
+
+    window.crypto.getRandomValues(
+      valores
+    );
+
+    for(
+      let i = 0;
+      i < 7;
+      i++
+    ){
+
+      codigo +=
+        caracteres[
+          valores[i] %
+          caracteres.length
+        ];
+
+    }
+
+  }
+  else{
+
+    for(
+      let i = 0;
+      i < 7;
+      i++
+    ){
+
+      codigo +=
+        caracteres[
+          Math.floor(
+            Math.random() *
+            caracteres.length
+          )
+        ];
+
+    }
+
+  }
+
+
+  return codigo;
+
+}
+
+
+/* =====================================================
+   GARANTE ID CURTO
+===================================================== */
+
+async function garantirIdCurto(
+  documento,
+  dados
+){
+
+  const idAtual =
+    String(
+      dados.publicId ||
+      ""
+    ).trim();
+
+
+  if(
+    idCurtoValido(
+      idAtual
+    )
+  ){
+
+    return idAtual.toUpperCase();
+
+  }
+
+
+  for(
+    let tentativa = 0;
+    tentativa < 10;
+    tentativa++
+  ){
+
+    const novoId =
+      gerarIdAdam();
+
+
+    const existe =
+      await getDocs(
+        query(
+          collection(
+            db,
+            "admins"
+          ),
+          where(
+            "publicId",
+            "==",
+            novoId
+          )
+        )
+      );
+
+
+    if(
+      !existe.empty
+    ){
+
+      continue;
+
+    }
+
+
+    await updateDoc(
+      documento.ref,
+      {
+        publicId:
+          novoId
+      }
+    );
+
+
+    dados.publicId =
+      novoId;
+
+
+    return novoId;
+
+  }
+
+
+  throw new Error(
+    "Não foi possível gerar um ID Adam Games único."
+  );
+
+}
+
+
+/* =====================================================
+   LOCALIZAÇÃO
+===================================================== */
+
+function obterLocalizacao(
+  dados
+){
+
+  const candidatos = [
+
+    dados.localizacao,
+
+    dados.location,
+
+    dados.localizacaoTexto,
+
+    dados.endereco,
+
+    dados.endereço
+
+  ];
+
+
+  for(
+    const valor of candidatos
+  ){
+
+    if(
+      typeof valor ===
+      "string" &&
+      valor.trim()
+    ){
+
+      return valor.trim();
+
+    }
+
+
+    if(
+      valor &&
+      typeof valor ===
+      "object"
+    ){
+
+      const cidade =
+        valor.cidade ||
+        valor.city ||
+        "";
+
+      const estado =
+        valor.estado ||
+        valor.state ||
+        valor.uf ||
+        "";
+
+      const pais =
+        valor.pais ||
+        valor.country ||
+        "";
+
+
+      const partes = [
+
+        cidade,
+        estado,
+        pais
+
+      ]
+      .filter(
+        item =>
+          String(item).trim()
+      );
+
+
+      if(
+        partes.length
+      ){
+
+        return partes.join(
+          ", "
+        );
+
+      }
+
+
+      if(
+        valor.latitude !== undefined &&
+        valor.longitude !== undefined
+      ){
+
+        return (
+          "📍 " +
+          Number(
+            valor.latitude
+          ).toFixed(5) +
+          ", " +
+          Number(
+            valor.longitude
+          ).toFixed(5)
+        );
+
+      }
+
+    }
+
+  }
+
+
+  const cidade =
+    dados.cidade ||
+    dados.city ||
+    "";
+
+  const estado =
+    dados.estado ||
+    dados.state ||
+    dados.uf ||
+    "";
+
+  const pais =
+    dados.pais ||
+    dados.country ||
+    "";
+
+
+  const partes = [
+
+    cidade,
+    estado,
+    pais
+
+  ]
+  .filter(
+    item =>
+      String(item).trim()
+  );
+
+
+  if(
+    partes.length
+  ){
+
+    return partes.join(
+      ", "
+    );
+
+  }
+
+
+  return "Não informada";
+
+}
+
+
+function obterCoordenadas(
+  dados
+){
+
+  let latitude =
+    dados.latitude;
+
+  let longitude =
+    dados.longitude;
+
+
+  const locais = [
+
+    dados.localizacao,
+    dados.location
+
+  ];
+
+
+  for(
+    const local of locais
+  ){
+
+    if(
+      local &&
+      typeof local ===
+      "object"
+    ){
+
+      if(
+        latitude === undefined &&
+        local.latitude !== undefined
+      ){
+
+        latitude =
+          local.latitude;
+
+      }
+
+
+      if(
+        longitude === undefined &&
+        local.longitude !== undefined
+      ){
+
+        longitude =
+          local.longitude;
+
+      }
+
+    }
+
+  }
+
+
+  if(
+    latitude === undefined ||
+    longitude === undefined
+  ){
+
+    return "Não informadas";
+
+  }
+
+
+  return (
+    Number(latitude).toFixed(6) +
+    ", " +
+    Number(longitude).toFixed(6)
+  );
+
+}
+
+
+/* =====================================================
+   ID DE OPERAÇÃO
+===================================================== */
+
 function gerarOperacaoId(){
 
   const agora =
@@ -2107,6 +2756,7 @@ function gerarOperacaoId(){
       agora.getDate()
     ).padStart(2,"0");
 
+
   const hora =
     String(
       agora.getHours()
@@ -2118,7 +2768,9 @@ function gerarOperacaoId(){
       agora.getSeconds()
     ).padStart(2,"0");
 
+
   let aleatorio;
+
 
   if(
     window.crypto &&
@@ -2142,6 +2794,7 @@ function gerarOperacaoId(){
 
   }
 
+
   return (
     "MOV-" +
     data +
@@ -2155,73 +2808,7 @@ function gerarOperacaoId(){
 
 
 /* =====================================================
-   GERADOR DO VALE
-   SEM TRANSACTION
-   ID DO DOCUMENTO = CÓDIGO
-   EXATAMENTE 15 CARACTERES
-===================================================== */
-
-function gerarVale15(){
-
-  const caracteres =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-
-  let codigo = "";
-
-  if(
-    window.crypto &&
-    window.crypto.getRandomValues
-  ){
-
-    const valores =
-      new Uint32Array(15);
-
-    window.crypto.getRandomValues(
-      valores
-    );
-
-    for(
-      let i = 0;
-      i < 15;
-      i++
-    ){
-
-      codigo +=
-        caracteres[
-          valores[i] %
-          caracteres.length
-        ];
-
-    }
-
-  }
-  else{
-
-    for(
-      let i = 0;
-      i < 15;
-      i++
-    ){
-
-      codigo +=
-        caracteres[
-          Math.floor(
-            Math.random() *
-            caracteres.length
-          )
-        ];
-
-    }
-
-  }
-
-  return codigo;
-
-}
-
-
-/* =====================================================
-   TIMEOUT PARA NÃO DEIXAR O BOTÃO TRAVADO
+   TIMEOUT
 ===================================================== */
 
 function comTimeout(
@@ -2264,30 +2851,24 @@ function comTimeout(
 
 
 /* =====================================================
-   DASHBOARD
+   CLIENTES
 ===================================================== */
 
-async function carregarDashboard(){
+async function carregarUsuarios(){
+
+  const lista =
+    document.getElementById(
+      "clientList"
+    );
+
+
+  lista.innerHTML =
+    "<div class='empty'>🔄 Carregando clientes...</div>";
+
 
   try{
 
-    const contagem =
-      await getCountFromServer(
-        collection(
-          db,
-          "admins"
-        )
-      );
-
-    document.getElementById(
-      "totalUsuarios"
-    ).textContent =
-      numero(
-        contagem.data().count
-      );
-
-
-    const usuarios =
+    const resultado =
       await getDocs(
         collection(
           db,
@@ -2296,25 +2877,356 @@ async function carregarDashboard(){
       );
 
 
-    let vip = 0;
+    todosUsuarios =
+      resultado.docs.map(
+        documento => ({
+
+          ref:
+            documento.ref,
+
+          docId:
+            documento.id,
+
+          data:
+            documento.data()
+
+        })
+      );
 
 
-    usuarios.forEach(
-      documento => {
+    /*
+      Corrige automaticamente IDs antigos
+      que não tenham 6 ou 7 caracteres.
+    */
 
-        const dados =
-          documento.data();
+    for(
+      const usuario of todosUsuarios
+    ){
 
-        if(
-          dados.vip === true
-        ){
+      const idAtual =
+        String(
+          usuario.data.publicId ||
+          ""
+        ).trim();
 
-          vip++;
+
+      if(
+        !idCurtoValido(
+          idAtual
+        )
+      ){
+
+        try{
+
+          await garantirIdCurto(
+            {
+              ref:
+                usuario.ref
+            },
+            usuario.data
+          );
+
+        }
+        catch(error){
+
+          console.error(
+            "Erro ao corrigir ID:",
+            usuario.docId,
+            error
+          );
 
         }
 
       }
+
+    }
+
+
+    todosUsuarios.sort(
+      (a,b) => {
+
+        const nomeA =
+          String(
+            a.data.nome ||
+            a.data.name ||
+            a.data.email ||
+            ""
+          ).toLowerCase();
+
+        const nomeB =
+          String(
+            b.data.nome ||
+            b.data.name ||
+            b.data.email ||
+            ""
+          ).toLowerCase();
+
+        return nomeA.localeCompare(
+          nomeB,
+          "pt-BR"
+        );
+
+      }
     );
+
+
+    renderizarClientes();
+
+
+    document.getElementById(
+      "totalUsuarios"
+    ).textContent =
+      numero(
+        todosUsuarios.length
+      );
+
+
+    const vip =
+      todosUsuarios.filter(
+        usuario =>
+          usuario.data.vip === true
+      ).length;
+
+
+    document.getElementById(
+      "totalVip"
+    ).textContent =
+      numero(vip);
+
+  }
+  catch(error){
+
+    console.error(
+      "ERRO AO CARREGAR CLIENTES:",
+      error
+    );
+
+
+    todosUsuarios = [];
+
+
+    lista.innerHTML =
+      `
+        <div class="empty">
+
+          ❌ Não foi possível carregar os clientes.
+
+          <br><br>
+
+          ${escapar(
+            error?.code ||
+            error?.message ||
+            "Erro desconhecido"
+          )}
+
+        </div>
+      `;
+
+
+    mostrarMensagem(
+      clientMessage,
+      "Erro ao carregar clientes. Se aparecer permission-denied, o problema está nas Rules do Firestore.",
+      "error"
+    );
+
+
+    document.getElementById(
+      "totalUsuarios"
+    ).textContent =
+      "—";
+
+  }
+
+}
+
+
+function renderizarClientes(){
+
+  const lista =
+    document.getElementById(
+      "clientList"
+    );
+
+
+  lista.innerHTML =
+    "";
+
+
+  if(
+    !todosUsuarios.length
+  ){
+
+    lista.innerHTML =
+      "<div class='empty'>Nenhum cliente cadastrado.</div>";
+
+    return;
+
+  }
+
+
+  todosUsuarios.forEach(
+    usuario => {
+
+      const dados =
+        usuario.data;
+
+
+      const nome =
+        dados.nome ||
+        dados.name ||
+        "Usuário";
+
+
+      const email =
+        dados.email ||
+        "Sem e-mail";
+
+
+      const id =
+        dados.publicId ||
+        "Pendente";
+
+
+      const localizacao =
+        obterLocalizacao(
+          dados
+        );
+
+
+      const avatar =
+        dados.avatar ||
+        "🙂";
+
+
+      const div =
+        document.createElement(
+          "div"
+        );
+
+
+      div.className =
+        "client-item";
+
+
+      div.innerHTML = `
+
+        <div class="client-main">
+
+          <div class="client-avatar">
+            ${escapar(avatar)}
+          </div>
+
+          <div>
+
+            <div class="client-name">
+              ${escapar(nome)}
+            </div>
+
+            <div class="client-email">
+              ${escapar(email)}
+            </div>
+
+            <div class="client-id">
+              🆔 ID: ${escapar(id)}
+            </div>
+
+            <div class="client-location">
+              📍 ${escapar(localizacao)}
+            </div>
+
+          </div>
+
+        </div>
+
+        <button
+          class="client-open"
+          type="button">
+
+          👤 ABRIR
+
+        </button>
+
+      `;
+
+
+      div
+        .querySelector(
+          ".client-open"
+        )
+        .addEventListener(
+          "click",
+          () => {
+
+            mostrarUsuario(
+              {
+                ref:
+                  usuario.ref,
+
+                id:
+                  usuario.docId,
+
+                data:
+                  usuario.data
+              }
+            );
+
+
+            window.scrollTo({
+              top:
+                userArea.offsetTop - 20,
+              behavior:
+                "smooth"
+            });
+
+          }
+        );
+
+
+      lista.appendChild(
+        div
+      );
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   DASHBOARD
+===================================================== */
+
+async function carregarDashboard(){
+
+  try{
+
+    /*
+      O dashboard usa a mesma lista real
+      carregada de admins.
+    */
+
+    if(
+      !todosUsuarios.length
+    ){
+
+      await carregarUsuarios();
+
+    }
+
+
+    document.getElementById(
+      "totalUsuarios"
+    ).textContent =
+      numero(
+        todosUsuarios.length
+      );
+
+
+    const vip =
+      todosUsuarios.filter(
+        usuario =>
+          usuario.data.vip === true
+      ).length;
 
 
     document.getElementById(
@@ -2329,16 +3241,6 @@ async function carregarDashboard(){
       "Dashboard:",
       error
     );
-
-    document.getElementById(
-      "totalUsuarios"
-    ).textContent =
-      "—";
-
-    document.getElementById(
-      "totalVip"
-    ).textContent =
-      "—";
 
   }
 
@@ -2356,8 +3258,10 @@ async function carregarEntregas(){
       "deliveryList"
     );
 
+
   lista.innerHTML =
     "<div class='empty'>🔄 Carregando prêmios...</div>";
+
 
   try{
 
@@ -2369,13 +3273,19 @@ async function carregarEntregas(){
         )
       );
 
+
     todasEntregas =
       resultado.docs.map(
         documento => ({
-          id:documento.id,
+
+          id:
+            documento.id,
+
           ...documento.data()
+
         })
       );
+
 
     renderizarEntregas();
 
@@ -2387,10 +3297,13 @@ async function carregarEntregas(){
       error
     );
 
+
     todasEntregas = [];
+
 
     lista.innerHTML =
       "<div class='empty'>⚠️ Não foi possível carregar os prêmios.</div>";
+
 
     mostrarMensagem(
       deliveryMessage,
@@ -2416,14 +3329,17 @@ function renderizarEntregas(
       :
       todasEntregas;
 
+
   const total =
     dados.length;
+
 
   const pendentes =
     dados.filter(
       item =>
         item.entregue !== true
     ).length;
+
 
   const entregues =
     dados.filter(
@@ -2474,7 +3390,9 @@ function renderizarEntregas(
       "deliveryList"
     );
 
-  lista.innerHTML = "";
+
+  lista.innerHTML =
+    "";
 
 
   const ordenadas =
@@ -2491,7 +3409,9 @@ function renderizarEntregas(
     );
 
 
-  if(!ordenadas.length){
+  if(
+    !ordenadas.length
+  ){
 
     lista.innerHTML =
       "<div class='empty'>🎉 Nenhum prêmio cadastrado.</div>";
@@ -2512,15 +3432,18 @@ function renderizarEntregas(
           pedido.usuarioId ||
           "";
 
+
         const titulo =
           pedido.premioNome ||
           pedido.nome ||
           pedido.titulo ||
           "Prêmio";
 
+
         const tipo =
           pedido.tipo ||
           "outro";
+
 
         const quantidade =
           pedido.quantidade !== undefined
@@ -2531,6 +3454,7 @@ function renderizarEntregas(
             :
             "—";
 
+
         const entregue =
           pedido.entregue === true;
 
@@ -2539,6 +3463,7 @@ function renderizarEntregas(
           document.createElement(
             "div"
           );
+
 
         div.className =
           "delivery-item";
@@ -2594,6 +3519,7 @@ function renderizarEntregas(
 
           </div>
 
+
           <div class="delivery-info">
 
             Tipo:
@@ -2628,6 +3554,7 @@ function renderizarEntregas(
 
           </div>
 
+
           <div class="delivery-actions">
 
             <button
@@ -2661,6 +3588,7 @@ function renderizarEntregas(
             </button>
 
           </div>
+
 
           <div class="delivery-id">
 
@@ -2710,6 +3638,7 @@ function renderizarEntregas(
                 return;
               }
 
+
               const cliente =
                 todasEntregas.filter(
                   item =>
@@ -2720,6 +3649,7 @@ function renderizarEntregas(
                       ""
                     ) === uid
                 );
+
 
               renderizarEntregas(
                 cliente
@@ -2838,6 +3768,7 @@ async function alterarEntrega(
 
     console.error(error);
 
+
     mostrarMensagem(
       deliveryMessage,
       "Não foi possível alterar a entrega.",
@@ -2907,6 +3838,7 @@ async function buscarUsuarioPorUid(
 
     console.error(error);
 
+
     mostrarMensagem(
       searchMessage,
       "Erro ao localizar usuário.",
@@ -2957,7 +3889,7 @@ async function buscarUsuario(){
           where(
             "publicId",
             "==",
-            valor
+            valor.toUpperCase()
           )
         )
       );
@@ -3047,6 +3979,7 @@ async function buscarUsuario(){
 
     console.error(error);
 
+
     mostrarMensagem(
       searchMessage,
       "Não foi possível consultar os usuários.",
@@ -3062,7 +3995,7 @@ async function buscarUsuario(){
    MOSTRAR USUÁRIO
 ===================================================== */
 
-function mostrarUsuario(
+async function mostrarUsuario(
   documento
 ){
 
@@ -3082,6 +4015,34 @@ function mostrarUsuario(
       dados
 
   };
+
+
+  /*
+    Se o usuário ainda tiver o UID gigante
+    como publicId, cria o novo ID curto.
+  */
+
+  try{
+
+    const id =
+      await garantirIdCurto(
+        documento,
+        dados
+      );
+
+
+    dados.publicId =
+      id;
+
+  }
+  catch(error){
+
+    console.error(
+      "Não foi possível corrigir ID:",
+      error
+    );
+
+  }
 
 
   userArea.style.display =
@@ -3178,6 +4139,22 @@ function mostrarUsuario(
     dados.telefone ||
     dados.phone ||
     "Não informado";
+
+
+  document.getElementById(
+    "infoLocalizacao"
+  ).textContent =
+    obterLocalizacao(
+      dados
+    );
+
+
+  document.getElementById(
+    "infoCoordenadas"
+  ).textContent =
+    obterCoordenadas(
+      dados
+    );
 
 
   atualizarSaldos();
@@ -3560,11 +4537,20 @@ async function alterarSaldo(
   }
   catch(error){
 
-    console.error(error);
+    console.error(
+      "ERRO MOVIMENTAÇÃO:",
+      error
+    );
+
 
     mostrarMensagem(
       operationMessage,
-      "Erro ao realizar movimentação.",
+      "Erro ao realizar movimentação: " +
+      (
+        error?.code ||
+        error?.message ||
+        "erro desconhecido"
+      ),
       "error"
     );
 
@@ -3574,7 +4560,7 @@ async function alterarSaldo(
 
 
 /* =====================================================
-   ALTERAR GIROS
+   GIROS
 ===================================================== */
 
 async function alterarGiros(
@@ -3797,9 +4783,15 @@ async function alterarGiros(
 
     console.error(error);
 
+
     mostrarMensagem(
       roletaMessage,
-      "Não foi possível alterar os giros.",
+      "Não foi possível alterar os giros: " +
+      (
+        error?.code ||
+        error?.message ||
+        ""
+      ),
       "error"
     );
 
@@ -3947,6 +4939,8 @@ async function alterarVIP(){
 
     atualizarStatus();
 
+    await carregarUsuarios();
+
 
     mostrarMensagem(
       operationMessage,
@@ -3959,9 +4953,6 @@ async function alterarVIP(){
     );
 
 
-    carregarDashboard();
-
-
     carregarExtrato(
       usuarioSelecionado.data.publicId ||
       usuarioSelecionado.docId
@@ -3971,6 +4962,7 @@ async function alterarVIP(){
   catch(error){
 
     console.error(error);
+
 
     mostrarMensagem(
       operationMessage,
@@ -4144,6 +5136,7 @@ async function alterarCaixa(){
 
     console.error(error);
 
+
     mostrarMensagem(
       operationMessage,
       "Não foi possível alterar a Caixa.",
@@ -4174,8 +5167,7 @@ async function carregarExtrato(
 
 
   if(
-    !publicId ||
-    publicId === "Pendente"
+    !publicId
   ){
 
     lista.innerHTML =
@@ -4204,7 +5196,9 @@ async function carregarExtrato(
       );
 
 
-    if(resultado.empty){
+    if(
+      resultado.empty
+    ){
 
       lista.innerHTML =
         "<div class='empty'>Nenhuma movimentação registrada.</div>";
@@ -4218,8 +5212,12 @@ async function carregarExtrato(
       resultado.docs
         .map(
           documento => ({
-            id:documento.id,
+
+            id:
+              documento.id,
+
             ...documento.data()
+
           })
         )
         .sort(
@@ -4309,6 +5307,7 @@ async function carregarExtrato(
 
           </div>
 
+
           <div class="historyInfo">
 
             Saldo anterior:
@@ -4341,6 +5340,7 @@ async function carregarExtrato(
 
           </div>
 
+
           <div class="operation-id">
 
             🆔
@@ -4366,6 +5366,7 @@ async function carregarExtrato(
 
     console.error(error);
 
+
     lista.innerHTML =
       "<div class='empty'>Não foi possível carregar o histórico.</div>";
 
@@ -4375,13 +5376,72 @@ async function carregarExtrato(
 
 
 /* =====================================================
-   GERAR VALE PRESENTE
-   CORREÇÃO:
-   1. ESPERA AUTENTICAÇÃO
-   2. NÃO USA TRANSACTION
-   3. CÓDIGO É ID DO DOCUMENTO
-   4. NÃO BLOQUEIA INDEFINIDAMENTE
+   VALE PRESENTE
 ===================================================== */
+
+function gerarVale15(){
+
+  const caracteres =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+
+  let codigo = "";
+
+
+  if(
+    window.crypto &&
+    window.crypto.getRandomValues
+  ){
+
+    const valores =
+      new Uint32Array(15);
+
+
+    window.crypto.getRandomValues(
+      valores
+    );
+
+
+    for(
+      let i = 0;
+      i < 15;
+      i++
+    ){
+
+      codigo +=
+        caracteres[
+          valores[i] %
+          caracteres.length
+        ];
+
+    }
+
+  }
+  else{
+
+    for(
+      let i = 0;
+      i < 15;
+      i++
+    ){
+
+      codigo +=
+        caracteres[
+          Math.floor(
+            Math.random() *
+            caracteres.length
+          )
+        ];
+
+    }
+
+  }
+
+
+  return codigo;
+
+}
+
 
 async function gerarNovoVale(){
 
@@ -4389,19 +5449,18 @@ async function gerarNovoVale(){
     generateVoucherButton;
 
 
-  if(botao.disabled){
+  if(
+    botao.disabled
+  ){
+
     return;
+
   }
 
 
-  /*
-    IMPORTANTE:
-    se o administrador ainda estiver sendo carregado,
-    aguardamos a autenticação em vez de mostrar
-    "Administrador ainda não autenticado".
-  */
-
-  if(!authResolvido){
+  if(
+    !authResolvido
+  ){
 
     botao.disabled =
       true;
@@ -4449,13 +5508,15 @@ async function gerarNovoVale(){
 
       mostrarMensagem(
         voucherMessage,
-        "❌ A autenticação do administrador não foi concluída. Atualize a página e tente novamente.",
+        "❌ A autenticação não foi concluída.",
         "error"
       );
+
 
       return;
 
     }
+
 
     botao.disabled =
       false;
@@ -4466,7 +5527,9 @@ async function gerarNovoVale(){
   }
 
 
-  if(!adminUsuario){
+  if(
+    !adminUsuario
+  ){
 
     mostrarMensagem(
       voucherMessage,
@@ -4500,7 +5563,7 @@ async function gerarNovoVale(){
 
     mostrarMensagem(
       voucherMessage,
-      "❌ Digite um valor válido para o vale.",
+      "❌ Digite um valor válido.",
       "error"
     );
 
@@ -4515,7 +5578,7 @@ async function gerarNovoVale(){
 
     mostrarMensagem(
       voucherMessage,
-      "❌ O valor máximo permitido é R$ 100.000,00.",
+      "❌ O valor máximo é R$ 100.000,00.",
       "error"
     );
 
@@ -4531,13 +5594,6 @@ async function gerarNovoVale(){
     "⏳ GERANDO...";
 
 
-  mostrarMensagem(
-    voucherMessage,
-    "",
-    ""
-  );
-
-
   try{
 
     let codigoFinal =
@@ -4546,17 +5602,6 @@ async function gerarNovoVale(){
     let criado =
       false;
 
-
-    /*
-      Não usamos runTransaction aqui.
-
-      O código possui 15 caracteres:
-      36^15 combinações possíveis.
-
-      A chance de colisão é extremamente pequena.
-
-      Usamos o próprio código como ID do documento.
-    */
 
     for(
       let tentativa = 0;
@@ -4654,11 +5699,6 @@ async function gerarNovoVale(){
       }
       catch(error){
 
-        /*
-          Se o erro for de permissão,
-          não adianta tentar outro código.
-        */
-
         if(
           error?.code ===
           "permission-denied"
@@ -4668,22 +5708,14 @@ async function gerarNovoVale(){
 
         }
 
-
-        /*
-          Em outros erros, tenta outro código.
-        */
-
-        console.warn(
-          "Tentativa de criação do vale falhou:",
-          error
-        );
-
       }
 
     }
 
 
-    if(!criado){
+    if(
+      !criado
+    ){
 
       throw new Error(
         "Não foi possível criar o vale."
@@ -4723,13 +5755,6 @@ async function gerarNovoVale(){
       "";
 
 
-    /*
-      Atualiza somente a lista dos vales.
-      Não mexe nos usuários.
-      Não mexe nos VIPs.
-      Não mexe nos prêmios.
-    */
-
     await carregarVales();
 
   }
@@ -4751,7 +5776,7 @@ async function gerarNovoVale(){
     ){
 
       mensagem =
-        "❌ O Firestore bloqueou a criação do vale. Verifique as Rules da coleção valesPresentes.";
+        "❌ Firestore bloqueou a criação do vale. Verifique as Rules.";
 
     }
     else if(
@@ -4760,16 +5785,7 @@ async function gerarNovoVale(){
     ){
 
       mensagem =
-        "❌ O Firebase demorou mais de 15 segundos para responder. Verifique a conexão e as Rules da coleção valesPresentes.";
-
-    }
-    else if(
-      error?.code ===
-      "unavailable"
-    ){
-
-      mensagem =
-        "❌ Firebase temporariamente indisponível. Tente novamente.";
+        "❌ Firebase demorou mais de 15 segundos para responder.";
 
     }
 
@@ -4919,6 +5935,7 @@ async function carregarVales(){
       resultado.docs
         .map(
           documento => ({
+
             id:
               documento.id,
 
@@ -4979,13 +5996,17 @@ async function carregarVales(){
           let status;
 
 
-          if(cancelado){
+          if(
+            cancelado
+          ){
 
             status =
               "⚫ CANCELADO";
 
           }
-          else if(usado){
+          else if(
+            usado
+          ){
 
             status =
               "🔴 UTILIZADO";
@@ -5010,6 +6031,7 @@ async function carregarVales(){
               )}
 
             </div>
+
 
             <div class="voucher-meta">
 
@@ -5059,23 +6081,6 @@ async function carregarVales(){
                   ""
               }
 
-              ${
-                vale.usadoEm
-                  ?
-                  `
-                    <br>
-
-                    Resgatado em:
-                    ${escapar(
-                      formatarData(
-                        vale.usadoEm
-                      )
-                    )}
-                  `
-                  :
-                  ""
-              }
-
             </div>
 
           `;
@@ -5100,18 +6105,6 @@ async function carregarVales(){
     lista.innerHTML =
       "<div class='empty'>❌ Não foi possível carregar os vales.</div>";
 
-
-    mostrarMensagem(
-      voucherMessage,
-      error?.code ===
-        "permission-denied"
-        ?
-        "Sem permissão para ler a coleção valesPresentes."
-        :
-        "Erro ao carregar os vales.",
-      "error"
-    );
-
   }
 
 }
@@ -5123,13 +6116,9 @@ async function carregarVales(){
 
 async function atualizarTudo(){
 
-  /*
-    NÃO permite atualização antes do login.
-    Isso evita que o painel tente carregar tudo
-    enquanto adminUsuario ainda está null.
-  */
-
-  if(!adminUsuario){
+  if(
+    !adminUsuario
+  ){
 
     return;
 
@@ -5151,20 +6140,13 @@ async function atualizarTudo(){
   try{
 
     /*
-      Cada função possui seu próprio try/catch.
-
-      Portanto, se os vales derem erro,
-      os usuários continuam carregando.
-
-      Se entregas derem erro,
-      os usuários continuam carregando.
-
-      Uma coleção não apaga a outra.
+      Primeiro carrega os usuários.
+      Depois as demais áreas.
     */
 
-    await Promise.all([
+    await carregarUsuarios();
 
-      carregarDashboard(),
+    await Promise.all([
 
       carregarEntregas(),
 
@@ -5176,7 +6158,7 @@ async function atualizarTudo(){
   catch(error){
 
     console.error(
-      "Erro geral ao atualizar:",
+      "Erro geral:",
       error
     );
 
@@ -5202,16 +6184,20 @@ onAuthStateChanged(
   auth,
   async usuario => {
 
-    if(!usuario){
+    if(
+      !usuario
+    ){
 
       authResolvido =
         true;
 
       resolverAutenticacao();
 
+
       window.location.replace(
         "index.html"
       );
+
 
       return;
 
@@ -5258,11 +6244,6 @@ onAuthStateChanged(
     }
 
 
-    /*
-      ADMIN DEFINIDO ANTES DE QUALQUER
-      CARREGAMENTO DO PAINEL.
-    */
-
     adminUsuario =
       usuario;
 
@@ -5273,16 +6254,6 @@ onAuthStateChanged(
 
     resolverAutenticacao();
 
-
-    console.log(
-      "Administrador autenticado:",
-      usuario.email
-    );
-
-
-    /*
-      Agora sim libera o botão.
-    */
 
     refreshButton.disabled =
       false;
@@ -5410,7 +6381,7 @@ document
 
 
 /* =====================================================
-   VALE PRESENTE
+   VALES
 ===================================================== */
 
 generateVoucherButton
@@ -5495,7 +6466,7 @@ document
 
 
 /* =====================================================
-   SEGURANÇA INICIAL DOS BOTÕES
+   SEGURANÇA INICIAL
 ===================================================== */
 
 refreshButton.disabled =
