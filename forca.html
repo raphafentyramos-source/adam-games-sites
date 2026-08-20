@@ -103,7 +103,7 @@ body{min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:#fff;backgrou
     </p>
     <div class="lossLevel" id="lossContinueLevel">MESMO NÍVEL</div>
     <p>
-      Use 1 chance para continuar no mesmo nível com uma nova palavra.
+      Use 1 chance para continuar no mesmo nível com uma nova palavra e ganhar 20 Adam Coins.
     </p>
     <div class="lossButtons">
       <button id="lossContinueSame" type="button">
@@ -3566,8 +3566,8 @@ function start(){
  }else if(isHard){
   $("levelName").textContent="🔥 HARD";
   hardTarget=[9,10,11,12][Math.floor(Math.random()*4)];
-  const hardBonus={9:25,10:20,11:15,12:10}[hardTarget];
-  $("roundReward").textContent="🪙 75 + "+hardBonus;
+  const hardBonus=10;
+  $("roundReward").textContent="🪙 75 + 10";
  }else{
   $("levelName").textContent=round<=2?"FÁCIL":round<=4?"MÉDIO":"DIFÍCIL";
   $("roundReward").textContent="🪙 "+rewards[round-1];
@@ -3666,7 +3666,7 @@ function loss(){
  const modal=document.getElementById("lossContinueModal");
  const btn=document.getElementById("lossContinueSame");
  if(levelEl) levelEl.textContent="NÍVEL: "+level+" • RODADA "+round;
- if(textEl) textEl.textContent="Você perdeu esta tentativa. Use 1 chance para receber uma nova palavra e continuar exatamente neste nível.";
+ if(textEl) textEl.textContent="Você perdeu esta tentativa. Use 1 chance para receber uma nova palavra, continuar exatamente neste nível e ganhar 20 Adam Coins.";
  if(btn){btn.disabled=false;btn.textContent="🔄 CONTINUAR • USAR 1 CHANCE";}
  if(modal){modal.classList.add("show");modal.setAttribute("aria-hidden","false");}
 }
@@ -3739,7 +3739,7 @@ async function win(){
   if(isHard){
    const sec=currentSeconds()??999;
    stopTimer();
-   const bonus={9:25,10:20,11:15,12:10}[hardTarget];
+   const bonus=10;
    const total=75+(sec<=hardTarget?bonus:0);
    await reward(total);
    $("rewardValue").textContent=total;
@@ -3777,13 +3777,13 @@ window.continuarForcaMesmoNivel = async function(){
   if(chances<=0) throw new Error("SEM_CHANCES");
   tx.update(userRef,{chances:chances-1});
  });
- await reward(30);
+ await reward(20);
  const snap=await getDoc(userRef);
  coins=Number(snap.data()?.moedas||0);
  coinsUI();
  const modal=document.getElementById("lossContinueModal");
  if(modal){modal.classList.remove("show");modal.setAttribute("aria-hidden","true");}
- msg("🪙 +30 Adam Coins • 1 chance utilizada!","success");
+ msg("❤️ 1 chance utilizada! Você continua no mesmo nível com uma nova palavra.","success");
  start();
 };
 
