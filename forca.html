@@ -28,6 +28,7 @@ html,
 body{
   width:100%;
   min-height:100%;
+  overflow-x:hidden;
 }
 
 body{
@@ -422,19 +423,7 @@ body{
 
 
 /* =====================================================
-   FORCA
-   FRAME ÚNICO
-
-   TODOS OS PNGs FICAM UM SOBRE O OUTRO.
-
-   PROPORÇÃO:
-   437 x 275
-
-   NÃO USAMOS:
-   - object-fit: contain
-   - margin:auto
-   - troca de src
-   - altura automática
+   FRAME FIXO DA FORCA
 ===================================================== */
 
 .hangman-wrap{
@@ -453,49 +442,62 @@ body{
 
   line-height:0;
 
+  isolation:isolate;
+
 }
 
 
-.hangman-layer{
+#hangmanImage{
 
   position:absolute;
 
-  top:0;
-
-  left:0;
-
-  width:100%;
-
-  height:100%;
-
-  margin:0;
-
-  padding:0;
+  inset:0;
 
   display:block;
+
+  width:100% !important;
+
+  height:100% !important;
+
+  min-width:100%;
+
+  min-height:100%;
+
+  max-width:none;
+
+  max-height:none;
+
+  margin:0 !important;
+
+  padding:0 !important;
 
   border:0;
 
   outline:0;
 
+  box-shadow:none;
+
   object-fit:fill;
 
-  object-position:0 0;
+  object-position:center center;
 
-  opacity:0;
+  transform:none !important;
 
-  visibility:hidden;
+  translate:none !important;
+
+  scale:1 !important;
+
+  rotate:0deg !important;
+
+  transition:none !important;
+
+  animation:none !important;
 
   pointer-events:none;
 
-}
+  user-select:none;
 
-
-.hangman-layer.active{
-
-  opacity:1;
-
-  visibility:visible;
+  -webkit-user-drag:none;
 
 }
 
@@ -505,6 +507,10 @@ body{
 ===================================================== */
 
 .errors-row{
+
+  width:100%;
+
+  min-height:10px;
 
   display:flex;
 
@@ -520,6 +526,8 @@ body{
 
 
 .error-dot{
+
+  flex:0 0 10px;
 
   width:10px;
 
@@ -876,8 +884,7 @@ body{
 
   text-align:center;
 
-  background:
-    #082843;
+  background:#082843;
 
   border:
     1px solid
@@ -944,8 +951,7 @@ body{
 
   border-radius:14px;
 
-  background:
-    #18ae60;
+  background:#18ae60;
 
   color:#fff;
 
@@ -988,6 +994,60 @@ body{
 
 }
 
+
+/* =====================================================
+   CELULARES MUITO PEQUENOS
+===================================================== */
+
+@media(max-width:360px){
+
+  .page{
+
+    padding-left:10px;
+
+    padding-right:10px;
+
+  }
+
+  .game-card{
+
+    padding:10px;
+
+  }
+
+  .hangman-wrap{
+
+    width:100%;
+
+    aspect-ratio:437 / 275;
+
+  }
+
+  .errors-row{
+
+    gap:5px;
+
+  }
+
+  .error-dot{
+
+    flex-basis:9px;
+
+    width:9px;
+
+    height:9px;
+
+  }
+
+}
+
+
+img{
+
+  vertical-align:top;
+
+}
+
 </style>
 
 </head>
@@ -998,10 +1058,6 @@ body{
 
 <div class="page">
 
-
-  <!-- =================================================
-       TOPO
-  ================================================== -->
 
   <div class="top">
 
@@ -1047,10 +1103,6 @@ body{
   </div>
 
 
-  <!-- =================================================
-       HERO
-  ================================================== -->
-
   <div class="hero">
 
     <div class="hero-icon">
@@ -1067,10 +1119,6 @@ body{
 
   </div>
 
-
-  <!-- =================================================
-       INFORMAÇÕES
-  ================================================== -->
 
   <div class="level-row">
 
@@ -1127,10 +1175,6 @@ body{
   </div>
 
 
-  <!-- =================================================
-       PROGRESSO
-  ================================================== -->
-
   <div class="progress-card">
 
     <div class="progress-top">
@@ -1162,59 +1206,18 @@ body{
   </div>
 
 
-  <!-- =================================================
-       JOGO
-  ================================================== -->
-
   <div class="game-card">
 
 
-    <!-- =================================================
-         AS 7 IMAGENS FICAM NO MESMO FRAME
-    ================================================== -->
-
-    <div class="hangman-wrap">
+    <div
+      class="hangman-wrap"
+      id="hangmanFrame">
 
       <img
-        class="hangman-layer active"
+        id="hangmanImage"
         src="01_forca_0_erros.png"
         alt="Forca"
-      >
-
-      <img
-        class="hangman-layer"
-        src="02_forca_1_erro.png"
-        alt="Forca"
-      >
-
-      <img
-        class="hangman-layer"
-        src="03_forca_2_erros.png"
-        alt="Forca"
-      >
-
-      <img
-        class="hangman-layer"
-        src="04_forca_3_erros.png"
-        alt="Forca"
-      >
-
-      <img
-        class="hangman-layer"
-        src="05_forca_4_erros.png"
-        alt="Forca"
-      >
-
-      <img
-        class="hangman-layer"
-        src="06_forca_5_erros.png"
-        alt="Forca"
-      >
-
-      <img
-        class="hangman-layer"
-        src="07_forca_6_erros.png"
-        alt="Forca"
+        draggable="false"
       >
 
     </div>
@@ -1289,10 +1292,6 @@ body{
 
 </div>
 
-
-<!-- =====================================================
-     MODAL
-===================================================== -->
 
 <div
   class="modal"
@@ -1427,9 +1426,6 @@ const db =
 const coinsEl =
   document.getElementById("coins");
 
-const levelNameEl =
-  document.getElementById("levelName");
-
 const roundNumberEl =
   document.getElementById("roundNumber");
 
@@ -1481,15 +1477,50 @@ const modalCoins =
 const modalButton =
   document.getElementById("modalButton");
 
+const hangmanImage =
+  document.getElementById(
+    "hangmanImage"
+  );
+
 
 /* =====================================================
-   FRAMES DA FORCA
+   IMAGENS DA FORCA
 ===================================================== */
 
-const hangmanLayers =
-  document.querySelectorAll(
-    ".hangman-layer"
-  );
+const imagensForca = [
+
+  "01_forca_0_erros.png",
+
+  "02_forca_1_erro.png",
+
+  "03_forca_2_erros.png",
+
+  "04_forca_3_erros.png",
+
+  "05_forca_4_erros.png",
+
+  "06_forca_5_erros.png",
+
+  "07_forca_6_erros.png"
+
+];
+
+
+/* =====================================================
+   PRÉ-CARREGAR IMAGENS
+===================================================== */
+
+imagensForca.forEach(
+  caminho => {
+
+    const imagem =
+      new Image();
+
+    imagem.src =
+      caminho;
+
+  }
+);
 
 
 /* =====================================================
@@ -1502,19 +1533,26 @@ let usuarioRef = null;
 
 let moedas = 0;
 
+let giros = 0;
+
 let rodada = 1;
 
 let erros = 0;
 
 let palavraAtual = null;
 
-let letrasUsadas = new Set();
+let letrasUsadas =
+  new Set();
 
 let terminou = false;
 
 let ganhouRodada = false;
 
-let processandoErroFinal = false;
+let processandoErroFinal =
+  false;
+
+let chanceContabilizada =
+  false;
 
 
 /* =====================================================
@@ -2002,6 +2040,119 @@ function atualizarMoedas(){
 
 
 /* =====================================================
+   ATUALIZAR GIROS
+===================================================== */
+
+function atualizarGiros(){
+
+  giros =
+    Math.max(
+      Number(
+        giros || 0
+      ),
+      0
+    );
+
+}
+
+
+/* =====================================================
+   CONSUMIR 1 GIRO
+===================================================== */
+
+async function consumirChance(){
+
+  /*
+   * Esta trava garante que a mesma entrada
+   * nunca desconte duas vezes.
+   */
+
+  if(
+    chanceContabilizada
+  ){
+
+    return true;
+
+  }
+
+
+  if(
+    !usuarioRef
+  ){
+
+    throw new Error(
+      "Documento do usuário não encontrado."
+    );
+
+  }
+
+
+  const quantidadeGiros =
+    Number(
+      giros || 0
+    );
+
+
+  /*
+   * Se não houver giros,
+   * não deixa iniciar.
+   */
+
+  if(
+    quantidadeGiros <= 0
+  ){
+
+    return false;
+
+  }
+
+
+  /*
+   * Desconta 1 giro diretamente
+   * no Firestore.
+   */
+
+  await updateDoc(
+
+    usuarioRef,
+
+    {
+
+      giros:
+        increment(-1)
+
+    }
+
+  );
+
+
+  /*
+   * Atualiza imediatamente
+   * o valor local.
+   */
+
+  giros =
+    quantidadeGiros - 1;
+
+
+  /*
+   * Marca esta entrada como
+   * já contabilizada.
+   */
+
+  chanceContabilizada =
+    true;
+
+
+  atualizarGiros();
+
+
+  return true;
+
+}
+
+
+/* =====================================================
    SALVAR MOEDAS
 ===================================================== */
 
@@ -2046,40 +2197,39 @@ async function adicionarMoedas(
 
 
 /* =====================================================
-   IMAGEM DA FORCA
+   ATUALIZAR IMAGEM
 ===================================================== */
 
 function atualizarImagem(){
 
+  /*
+   * 0 = imagem 01
+   * 1 = imagem 02
+   * 2 = imagem 03
+   * 3 = imagem 04
+   * 4 = imagem 05
+   * 5 = imagem 06
+   * 6 = imagem 07
+   */
+
   const indice =
     Math.min(
-      erros,
-      6
+      Math.max(
+        erros,
+        0
+      ),
+      imagensForca.length - 1
     );
 
 
   /*
-   * NÃO muda tamanho.
-   * NÃO muda posição.
-   * NÃO troca SRC.
+   * SOMENTE TROCA O SRC.
    *
-   * Apenas coloca a camada correspondente
-   * por cima das outras.
+   * O frame não muda de tamanho.
    */
 
-  hangmanLayers.forEach(
-    (
-      imagem,
-      index
-    ) => {
-
-      imagem.classList.toggle(
-        "active",
-        index === indice
-      );
-
-    }
-  );
+  hangmanImage.src =
+    imagensForca[indice];
 
 
   const pontos =
@@ -2348,15 +2498,20 @@ function escolherLetra(
   erros++;
 
 
+  /*
+   * PRIMEIRO mostra a última imagem.
+   */
+
   atualizarImagem();
 
 
   /*
-   * ÚLTIMO ERRO
+   * Depois verifica se chegou
+   * ao último erro.
    */
 
   if(
-    erros >= 7
+    erros >= 6
   ){
 
     erroFinal();
@@ -2369,7 +2524,17 @@ function escolherLetra(
 
 
 /* =====================================================
-   ÚLTIMO ERRO — 3 SEGUNDOS
+   ÚLTIMO ERRO
+   =====================================================
+
+   A ORDEM É OBRIGATORIAMENTE:
+
+   1. erro = 6
+   2. imagem 07 aparece
+   3. teclado é bloqueado
+   4. espera 3000 ms
+   5. modal aparece
+
 ===================================================== */
 
 function erroFinal(){
@@ -2395,14 +2560,26 @@ function erroFinal(){
 
 
   /*
-   * A imagem 07 já foi ativada por
-   * atualizarImagem().
-   *
-   * NÃO fazemos src.
-   * NÃO fazemos margin.
-   * NÃO fazemos resize.
+   * Garante o último estágio.
    */
 
+  erros =
+    6;
+
+
+  /*
+   * GARANTE QUE A IMAGEM 07
+   * SEJA COLOCADA NA TELA ANTES
+   * DO TIMER COMEÇAR.
+   */
+
+  atualizarImagem();
+
+
+  /*
+   * Não mostra nenhuma mensagem
+   * de derrota agora.
+   */
 
   messageEl.className =
     "message";
@@ -2413,16 +2590,31 @@ function erroFinal(){
 
 
   /*
-   * ESPERA 3 SEGUNDOS
+   * Pequeno processamento assíncrono
+   * para garantir que o navegador tenha
+   * oportunidade de renderizar a imagem
+   * final antes da contagem dos 3 segundos.
    */
 
-  setTimeout(
+  requestAnimationFrame(
     () => {
 
-      mostrarDerrota();
+      requestAnimationFrame(
+        () => {
 
-    },
-    3000
+          setTimeout(
+            () => {
+
+              mostrarDerrota();
+
+            },
+            3000
+          );
+
+        }
+      );
+
+    }
   );
 
 }
@@ -2433,6 +2625,10 @@ function erroFinal(){
 ===================================================== */
 
 function mostrarDerrota(){
+
+  /*
+   * Aqui já passaram os 3 segundos.
+   */
 
   messageEl.textContent =
     "💀 Você perdeu! A palavra era: " +
@@ -2488,6 +2684,7 @@ async function ganhar(){
   terminou =
     true;
 
+
   ganhouRodada =
     true;
 
@@ -2503,7 +2700,10 @@ async function ganhar(){
   try{
 
     /*
-     * ENVIA AS MOEDAS PARA O FIRESTORE.
+     * As moedas são salvas imediatamente.
+     *
+     * Se o usuário sair depois,
+     * elas continuam no Firestore.
      */
 
     await adicionarMoedas(
@@ -2593,6 +2793,7 @@ async function ganhar(){
 
     terminou =
       false;
+
 
     ganhouRodada =
       false;
@@ -2685,24 +2886,11 @@ function iniciarRodada(){
 
 
   /*
-   * VOLTA PARA A PRIMEIRA CAMADA.
-   *
-   * Não altera tamanho ou posição.
+   * Começa sempre na imagem 01.
    */
 
-  hangmanLayers.forEach(
-    (
-      imagem,
-      index
-    ) => {
-
-      imagem.classList.toggle(
-        "active",
-        index === 0
-      );
-
-    }
-  );
+  hangmanImage.src =
+    imagensForca[0];
 
 
   criarTeclado();
@@ -2730,8 +2918,8 @@ modalButton.addEventListener(
 
 
     /*
-     * PERDEU:
-     * volta para jogos.
+     * DERROTA:
+     * o giro já foi descontado quando entrou.
      */
 
     if(
@@ -2747,7 +2935,9 @@ modalButton.addEventListener(
 
 
     /*
-     * COMPLETOU AS 7.
+     * COMPLETOU AS 7 RODADAS.
+     *
+     * O mesmo giro continua sendo usado.
      */
 
     if(
@@ -2763,7 +2953,9 @@ modalButton.addEventListener(
 
 
     /*
-     * PRÓXIMA RODADA.
+     * Próxima rodada.
+     *
+     * NÃO desconta outro giro.
      */
 
     rodada++;
@@ -2783,6 +2975,15 @@ document
   .addEventListener(
     "click",
     () => {
+
+      /*
+       * NÃO desconta outro giro.
+       *
+       * O giro já foi descontado
+       * quando a pessoa entrou na Forca.
+       *
+       * Também não mexe nas moedas.
+       */
 
       window.location.href =
         "jogos.html";
@@ -2921,8 +3122,10 @@ onAuthStateChanged(
           "Cadastro Adam Games não encontrado."
         );
 
+
         window.location.href =
           "jogos.html";
+
 
         return;
 
@@ -2930,7 +3133,7 @@ onAuthStateChanged(
 
 
       /*
-       * Guarda a referência exata do documento.
+       * Guarda o documento do usuário.
        */
 
       usuarioRef =
@@ -2941,6 +3144,10 @@ onAuthStateChanged(
         documento.data();
 
 
+      /*
+       * Carrega moedas.
+       */
+
       moedas =
         Number(
           dados.moedas || 0
@@ -2949,6 +3156,67 @@ onAuthStateChanged(
 
       atualizarMoedas();
 
+
+      /*
+       * Carrega giros.
+       */
+
+      giros =
+        Number(
+          dados.giros || 0
+        );
+
+
+      atualizarGiros();
+
+
+      /*
+       * =================================================
+       * CONSUME A CHANCE AO ENTRAR
+       * =================================================
+       *
+       * Exemplo:
+       *
+       * 57 giros
+       * ↓
+       * entra na Forca
+       * ↓
+       * 56 giros
+       *
+       * Não importa se:
+       *
+       * - perder
+       * - ganhar
+       * - sair pela seta
+       *
+       * o giro já foi consumido.
+       */
+
+      const chanceDisponivel =
+        await consumirChance();
+
+
+      if(
+        !chanceDisponivel
+      ){
+
+        alert(
+          "Você não possui giros suficientes para jogar a Forca."
+        );
+
+
+        window.location.href =
+          "jogos.html";
+
+
+        return;
+
+      }
+
+
+      /*
+       * Agora sim inicia a primeira rodada.
+       */
 
       iniciarRodada();
 
