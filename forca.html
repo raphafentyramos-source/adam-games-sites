@@ -104,6 +104,7 @@ body{
   height:45px;
 
   border:0;
+
   border-radius:13px;
 
   background:
@@ -416,21 +417,17 @@ body{
 
 
 /* =====================================================
-   FRAME DA FORCA
+   FRAME FIXO
 ===================================================== */
 
 /*
-   IMPORTANTE:
+   AS 7 IMAGENS CORRIGIDAS POSSUEM 437 x 275 PX.
 
-   Existe APENAS UM elemento IMG.
+   O FRAME MANTÉM EXATAMENTE ESSA PROPORÇÃO.
 
-   O frame nunca muda.
+   EXISTE APENAS UM <IMG>.
 
-   Quando acontece um erro, somente o SRC
-   da imagem é alterado.
-
-   Isso impede o deslocamento causado pela
-   troca de elementos HTML.
+   O JAVASCRIPT SOMENTE TROCA O SRC.
 */
 
 .hangman-wrap{
@@ -455,7 +452,7 @@ body{
 
 
 /* =====================================================
-   ÚNICA IMAGEM DA FORCA
+   IMAGEM DA FORCA
 ===================================================== */
 
 #hangmanImage{
@@ -465,10 +462,10 @@ body{
   top:0;
   left:0;
 
-  display:block;
-
   width:100%;
   height:100%;
+
+  display:block;
 
   margin:0;
   padding:0;
@@ -478,18 +475,15 @@ body{
   outline:0;
 
   /*
-     As imagens já possuem o enquadramento.
-     Portanto não usamos cover, que poderia
-     cortar e alterar a posição visual.
+     NÃO USAR COVER.
+
+     As imagens já estão corrigidas para o mesmo
+     enquadramento.
   */
 
   object-fit:fill;
 
-  object-position:center center;
-
-  /*
-     ZERO transformação.
-  */
+  object-position:50% 50%;
 
   transform:none !important;
 
@@ -502,10 +496,6 @@ body{
   animation:none !important;
 
   transition:none !important;
-
-  /*
-     Impede arrastar a imagem no celular.
-  */
 
   pointer-events:none;
 
@@ -544,7 +534,6 @@ body{
   flex:0 0 10px;
 
   width:10px;
-
   height:10px;
 
   border-radius:50%;
@@ -998,7 +987,7 @@ body{
 
 
 /* =====================================================
-   CELULARES MUITO PEQUENOS
+   CELULARES PEQUENOS
 ===================================================== */
 
 @media(max-width:360px){
@@ -1039,26 +1028,16 @@ body{
 
 
 /* =====================================================
-   IMAGENS
+   SEGURANÇA
 ===================================================== */
 
 img{
   vertical-align:top;
 }
 
-
-/* =====================================================
-   SEGURANÇA CONTRA SHIFT HORIZONTAL
-===================================================== */
-
 html,
-body,
-.page,
-.game-card,
-.hangman-wrap{
-
-  max-width:100%;
-
+body{
+  overflow-x:hidden;
 }
 
 </style>
@@ -1243,7 +1222,9 @@ body,
 
 
     <!-- =================================================
-         UM ÚNICO FRAME
+         FRAME FIXO DA FORCA
+
+         APENAS UMA IMAGEM
     ================================================== -->
 
     <div
@@ -1252,7 +1233,7 @@ body,
 
       <img
         id="hangmanImage"
-        src="01_forca_0_erros.png"
+        src="01_forca_0_erros.png?v=2"
         alt="Forca"
         draggable="false"
       >
@@ -1547,7 +1528,7 @@ const modalButton =
 
 
 /* =====================================================
-   ÚNICA IMAGEM DA FORCA
+   IMAGEM ÚNICA
 ===================================================== */
 
 const hangmanImage =
@@ -1557,53 +1538,43 @@ const hangmanImage =
 
 
 /* =====================================================
-   CAMINHOS DAS 7 IMAGENS
+   ARQUIVOS DAS IMAGENS
 ===================================================== */
 
 const imagensForca = [
 
-  "01_forca_0_erros.png",
+  "01_forca_0_erros.png?v=2",
 
-  "02_forca_1_erro.png",
+  "02_forca_1_erro.png?v=2",
 
-  "03_forca_2_erros.png",
+  "03_forca_2_erros.png?v=2",
 
-  "04_forca_3_erros.png",
+  "04_forca_3_erros.png?v=2",
 
-  "05_forca_4_erros.png",
+  "05_forca_4_erros.png?v=2",
 
-  "06_forca_5_erros.png",
+  "06_forca_5_erros.png?v=2",
 
-  "07_forca_6_erros.png"
+  "07_forca_6_erros.png?v=2"
 
 ];
 
 
 /* =====================================================
-   PRÉ-CARREGAR AS 7 IMAGENS
+   PRÉ-CARREGAMENTO
 ===================================================== */
 
-/*
-   As imagens são carregadas antecipadamente.
+imagensForca.forEach(
+  caminho => {
 
-   Isso evita que o navegador fique redimensionando
-   ou reposicionando o frame enquanto espera o PNG.
-*/
+    const imagem =
+      new Image();
 
-const imagensPreCarregadas =
-  imagensForca.map(
-    caminho => {
+    imagem.src =
+      caminho;
 
-      const imagem =
-        new Image();
-
-      imagem.src =
-        caminho;
-
-      return imagem;
-
-    }
-  );
+  }
+);
 
 
 /* =====================================================
@@ -1622,13 +1593,15 @@ let erros = 0;
 
 let palavraAtual = null;
 
-let letrasUsadas = new Set();
+let letrasUsadas =
+  new Set();
 
 let terminou = false;
 
 let ganhouRodada = false;
 
-let processandoErroFinal = false;
+let processandoErroFinal =
+  false;
 
 
 /* =====================================================
@@ -2154,18 +2127,10 @@ async function adicionarMoedas(
 
 
 /* =====================================================
-   ATUALIZAR IMAGEM DA FORCA
+   TROCAR IMAGEM
 ===================================================== */
 
 function atualizarImagem(){
-
-  /*
-   * O frame NÃO é recriado.
-   *
-   * O elemento IMG também NÃO é recriado.
-   *
-   * Apenas trocamos o arquivo.
-   */
 
   const indice =
     Math.min(
@@ -2177,28 +2142,18 @@ function atualizarImagem(){
     );
 
 
-  const novoSrc =
+  /*
+   * O ELEMENTO <IMG> NÃO MUDA.
+
+   * SOMENTE O SRC MUDA.
+   */
+
+  hangmanImage.src =
     imagensForca[indice];
 
 
   /*
-   * Só troca o SRC.
-   */
-
-  if(
-    hangmanImage.getAttribute("src")
-    !==
-    novoSrc
-  ){
-
-    hangmanImage.src =
-      novoSrc;
-
-  }
-
-
-  /*
-   * Atualiza os indicadores.
+   * Atualiza os pontos de erro.
    */
 
   const pontos =
@@ -2426,6 +2381,10 @@ function escolherLetra(
   );
 
 
+  /*
+   * ACERTO
+   */
+
   if(
     palavraAtual.normalizada
       .includes(
@@ -2471,17 +2430,14 @@ function escolherLetra(
 
 
   /*
-   * Última imagem = 6 erros.
+   * 6 erros = última imagem.
    */
 
   if(
-    erros >=
-    imagensForca.length - 1
+    erros >= 6
   ){
 
     erroFinal();
-
-    return;
 
   }
 
@@ -2515,7 +2471,7 @@ function erroFinal(){
 
 
   erros =
-    imagensForca.length - 1;
+    6;
 
 
   atualizarImagem();
@@ -2542,7 +2498,7 @@ function erroFinal(){
 
 
 /* =====================================================
-   MOSTRAR DERROTA
+   DERROTA
 ===================================================== */
 
 function mostrarDerrota(){
@@ -2796,9 +2752,9 @@ function iniciarRodada(){
 
 
   /*
-   * Começa SEMPRE na primeira imagem.
-   *
-   * É o mesmo elemento IMG.
+   * PRIMEIRO ESTÁGIO.
+
+   * O MESMO ELEMENTO <IMG>.
    */
 
   hangmanImage.src =
@@ -2829,6 +2785,10 @@ modalButton.addEventListener(
     );
 
 
+    /*
+     * PERDEU
+     */
+
     if(
       !ganhouRodada
     ){
@@ -2841,6 +2801,10 @@ modalButton.addEventListener(
     }
 
 
+    /*
+     * TERMINOU AS 7 RODADAS
+     */
+
     if(
       rodada >= 7
     ){
@@ -2852,6 +2816,10 @@ modalButton.addEventListener(
 
     }
 
+
+    /*
+     * PRÓXIMA RODADA
+     */
 
     rodada++;
 
@@ -2887,7 +2855,7 @@ async function localizarUsuario(
 ){
 
   /*
-   * Primeiro procura pelo UID.
+   * Procura pelo UID.
    */
 
   let resultado =
@@ -2921,7 +2889,7 @@ async function localizarUsuario(
 
 
   /*
-   * Depois procura pelo e-mail.
+   * Procura pelo e-mail.
    */
 
   if(
