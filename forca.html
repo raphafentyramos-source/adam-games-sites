@@ -144,9 +144,13 @@ body{
 }
 
 
+/* =====================================================
+   SALDO
+===================================================== */
+
 .top-coins{
 
-  min-width:72px;
+  min-width:82px;
 
   padding:7px 9px;
 
@@ -250,7 +254,7 @@ body{
 
 
 /* =====================================================
-   NÍVEL
+   NÍVEIS
 ===================================================== */
 
 .level-row{
@@ -606,6 +610,15 @@ body{
 }
 
 
+.letter.space{
+
+  width:13px;
+
+  border-bottom:0;
+
+}
+
+
 /* =====================================================
    TECLADO
 ===================================================== */
@@ -725,7 +738,9 @@ body{
 
 
 .message.show{
+
   display:block;
+
 }
 
 
@@ -786,6 +801,49 @@ body{
   color:#ffd52b;
 
   font-size:20px;
+
+}
+
+
+/* =====================================================
+   BOTÃO CONTINUAR
+===================================================== */
+
+.next-button{
+
+  width:100%;
+
+  height:50px;
+
+  margin-top:13px;
+
+  border:0;
+
+  border-radius:14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #18bd68,
+      #087d45
+    );
+
+  color:#fff;
+
+  font-size:14px;
+
+  font-weight:900;
+
+  cursor:pointer;
+
+  display:none;
+
+}
+
+
+.next-button.show{
+
+  display:block;
 
 }
 
@@ -917,72 +975,6 @@ body{
 
 
 /* =====================================================
-   CONTAGEM REGRESSIVA FINAL
-===================================================== */
-
-.countdown-overlay{
-
-  position:fixed;
-
-  inset:0;
-
-  z-index:90;
-
-  display:none;
-
-  align-items:center;
-
-  justify-content:center;
-
-  flex-direction:column;
-
-  background:
-    rgba(0,10,25,.65);
-
-  backdrop-filter:
-    blur(4px);
-
-}
-
-
-.countdown-overlay.show{
-
-  display:flex;
-
-}
-
-
-.countdown-title{
-
-  font-size:20px;
-
-  font-weight:900;
-
-  text-shadow:
-    0 3px 10px #000;
-
-}
-
-
-.countdown-number{
-
-  margin-top:10px;
-
-  font-size:80px;
-
-  line-height:1;
-
-  font-weight:900;
-
-  color:#ff5365;
-
-  text-shadow:
-    0 5px 20px rgba(0,0,0,.6);
-
-}
-
-
-/* =====================================================
    RESPONSIVO
 ===================================================== */
 
@@ -1025,6 +1017,8 @@ body{
 
 <div class="page">
 
+
+  <!-- TOPO -->
 
   <div class="top">
 
@@ -1070,6 +1064,8 @@ body{
   </div>
 
 
+  <!-- HERO -->
+
   <div class="hero">
 
     <div class="hero-icon">
@@ -1087,8 +1083,9 @@ body{
   </div>
 
 
-  <div class="level-row">
+  <!-- NÍVEIS -->
 
+  <div class="level-row">
 
     <div class="level-box">
 
@@ -1140,9 +1137,10 @@ body{
 
     </div>
 
-
   </div>
 
+
+  <!-- PROGRESSO -->
 
   <div class="progress-card">
 
@@ -1162,7 +1160,6 @@ body{
 
     </div>
 
-
     <div class="progress-bar">
 
       <div
@@ -1175,10 +1172,14 @@ body{
   </div>
 
 
+  <!-- JOGO -->
+
   <div class="game-card">
 
 
     <div class="hangman-wrap">
+
+      <!-- AS IMAGENS ESTÃO NA RAIZ DO SITE -->
 
       <img
         id="hangmanImage"
@@ -1245,40 +1246,26 @@ body{
       style="display:none;">
 
       🪙 Você ganhou
-
       <strong id="rewardValue">
         20
       </strong>
-
       moedas!
 
     </div>
 
 
-  </div>
+    <button
+      class="next-button"
+      id="nextButton"
+      type="button">
 
-</div>
+      CONTINUAR ➜
 
+    </button>
 
-<!-- =====================================================
-     CONTAGEM FINAL
-===================================================== -->
-
-<div
-  class="countdown-overlay"
-  id="countdownOverlay">
-
-  <div class="countdown-title">
-    💀 ÚLTIMO ESTÁGIO
-  </div>
-
-  <div
-    class="countdown-number"
-    id="countdownNumber">
-
-    4
 
   </div>
+
 
 </div>
 
@@ -1292,7 +1279,6 @@ body{
   id="modal">
 
   <div class="modal-card">
-
 
     <div
       class="modal-icon"
@@ -1314,7 +1300,7 @@ body{
     <p
       id="modalText">
 
-      Você descobriu a palavra.
+      Você acertou a palavra.
 
     </p>
 
@@ -1336,7 +1322,6 @@ body{
       CONTINUAR
 
     </button>
-
 
   </div>
 
@@ -1371,7 +1356,8 @@ import {
   query,
   where,
   getDocs,
-  runTransaction
+  updateDoc,
+  increment
 }
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
@@ -1464,6 +1450,9 @@ const rewardEl =
 const rewardValueEl =
   document.getElementById("rewardValue");
 
+const nextButton =
+  document.getElementById("nextButton");
+
 const modal =
   document.getElementById("modal");
 
@@ -1481,12 +1470,6 @@ const modalCoins =
 
 const modalButton =
   document.getElementById("modalButton");
-
-const countdownOverlay =
-  document.getElementById("countdownOverlay");
-
-const countdownNumber =
-  document.getElementById("countdownNumber");
 
 
 /* =====================================================
@@ -1523,11 +1506,45 @@ let partidaTerminou =
 let palavraResolvida =
   false;
 
-let chanceConsumida =
+let salvandoRecompensa =
   false;
 
-let salvandoMoedas =
-  false;
+
+/* =====================================================
+   IMAGENS
+=====================================================
+
+   ATENÇÃO:
+
+   Os arquivos estão na raiz do projeto.
+
+   01_forca_0_erros.png
+   02_forca_1_erro.png
+   03_forca_2_erros.png
+   04_forca_3_erros.png
+   05_forca_4_erros.png
+   06_forca_5_erros.png
+   07_forca_6_erros.png
+
+===================================================== */
+
+const IMAGENS_FORCA = [
+
+  "01_forca_0_erros.png",
+
+  "02_forca_1_erro.png",
+
+  "03_forca_2_erros.png",
+
+  "04_forca_3_erros.png",
+
+  "05_forca_4_erros.png",
+
+  "06_forca_5_erros.png",
+
+  "07_forca_6_erros.png"
+
+];
 
 
 /* =====================================================
@@ -1575,7 +1592,7 @@ const sequencia = [
 
 
 /* =====================================================
-   BANCO DE PALAVRAS
+   400 PALAVRAS
 ===================================================== */
 
 const palavras = {
@@ -1721,6 +1738,7 @@ facil:[
 ["branco","Cor muito clara"],
 ["preto","Cor muito escura"],
 ["roxo","Cor entre azul e vermelho"],
+["rosa","Cor associada à flor de mesmo nome"],
 ["luz","O que permite enxergar"],
 ["noite","Período sem luz solar"],
 ["dia","Período iluminado pelo sol"],
@@ -1809,6 +1827,7 @@ medio:[
 ["montanha","Grande elevação natural do terreno"],
 ["deserto","Região com pouca chuva"],
 ["floresta","Grande área coberta por árvores"],
+["vulcânico","Relacionado a vulcões"],
 ["ilha","Porção de terra cercada por água"],
 ["caverna","Abertura natural dentro de uma rocha"],
 ["ponte","Estrutura usada para atravessar obstáculos"],
@@ -1868,7 +1887,9 @@ medio:[
 ["martelo","Ferramenta usada para bater"],
 ["tesoura","Ferramenta usada para cortar"],
 ["alicate","Ferramenta usada para segurar ou cortar"],
+["chaveiro","Objeto usado para organizar chaves"],
 ["carteira","Objeto usado para guardar dinheiro e documentos"],
+["mochila","Bolsa carregada nas costas"],
 ["jaqueta","Peça de roupa usada sobre outras roupas"],
 ["casaco","Peça usada para proteger do frio"],
 ["gravata","Acessório usado tradicionalmente no pescoço"],
@@ -2030,16 +2051,22 @@ dificil:[
 
 
 /* =====================================================
-   NORMALIZAR
+   NORMALIZAÇÃO
 ===================================================== */
 
 function normalizarTexto(texto){
 
   return texto
     .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g,"")
+    .replace(
+      /[\u0300-\u036f]/g,
+      ""
+    )
     .toLowerCase()
-    .replace(/[^a-z]/g,"");
+    .replace(
+      /[^a-z]/g,
+      ""
+    );
 
 }
 
@@ -2071,15 +2098,19 @@ function carregarPalavrasUsadas(){
       );
 
     if(!dados){
+
       return [];
+
     }
 
     const lista =
       JSON.parse(dados);
 
     return Array.isArray(lista)
-      ? lista
-      : [];
+      ?
+      lista
+      :
+      [];
 
   }
   catch(error){
@@ -2091,7 +2122,9 @@ function carregarPalavrasUsadas(){
 }
 
 
-function salvarPalavraUsada(palavra){
+function salvarPalavraUsada(
+  palavra
+){
 
   try{
 
@@ -2133,17 +2166,38 @@ function salvarPalavraUsada(palavra){
    ESCOLHER PALAVRA
 ===================================================== */
 
-function escolherPalavra(nivel){
+function escolherPalavra(
+  nivel
+){
 
-  const lista =
+  let lista;
+
+
+  if(
     nivel === "FÁCIL"
-      ? palavras.facil
-      : nivel === "MÉDIO"
-        ? palavras.medio
-        : palavras.dificil;
+  ){
+
+    lista =
+      palavras.facil;
+
+  }
+  else if(
+    nivel === "MÉDIO"
+  ){
+
+    lista =
+      palavras.medio;
+
+  }
+  else{
+
+    lista =
+      palavras.dificil;
+
+  }
 
 
-  const usadas =
+  let usadas =
     carregarPalavrasUsadas();
 
 
@@ -2159,28 +2213,69 @@ function escolherPalavra(nivel){
 
 
   /*
-   * Só reinicia aquele nível quando
-   * todas as palavras daquele nível
-   * tiverem sido utilizadas.
+   * Se todas as palavras daquele nível
+   * já foram usadas, procura qualquer
+   * palavra ainda não utilizada.
+   *
+   * Assim não repete enquanto ainda
+   * existir palavra inédita.
    */
 
   if(
     !disponiveis.length
   ){
 
+    const todas =
+      [
+        ...palavras.facil,
+        ...palavras.medio,
+        ...palavras.dificil
+      ];
+
+
     disponiveis =
-      [...lista];
+      todas.filter(
+        item =>
+          !usadas.includes(
+            normalizarTexto(
+              item[0]
+            )
+          )
+      );
 
   }
 
 
+  /*
+   * Se as 400 palavras já foram utilizadas,
+   * reinicia o ciclo.
+   */
+
+  if(
+    !disponiveis.length
+  ){
+
+    localStorage.removeItem(
+      chavePalavrasUsadas()
+    );
+
+    usadas = [];
+
+    disponiveis =
+      lista;
+
+  }
+
+
+  const indice =
+    Math.floor(
+      Math.random() *
+      disponiveis.length
+    );
+
+
   const escolhida =
-    disponiveis[
-      Math.floor(
-        Math.random() *
-        disponiveis.length
-      )
-    ];
+    disponiveis[indice];
 
 
   salvarPalavraUsada(
@@ -2207,7 +2302,7 @@ function escolherPalavra(nivel){
 
 
 /* =====================================================
-   NÍVEL
+   NÍVEL ATUAL
 ===================================================== */
 
 function nivelAtual(){
@@ -2227,6 +2322,10 @@ function recompensaAtual(){
 }
 
 
+/* =====================================================
+   ATUALIZAR NÍVEL
+===================================================== */
+
 function atualizarNivel(){
 
   const nivel =
@@ -2237,12 +2336,28 @@ function atualizarNivel(){
     nivel.nivel;
 
 
-  levelNameEl.style.color =
+  if(
     nivel.nivel === "FÁCIL"
-      ? "#65ff9c"
-      : nivel.nivel === "MÉDIO"
-        ? "#ffd52b"
-        : "#ff7583";
+  ){
+
+    levelNameEl.style.color =
+      "#65ff9c";
+
+  }
+  else if(
+    nivel.nivel === "MÉDIO"
+  ){
+
+    levelNameEl.style.color =
+      "#ffd52b";
+
+  }
+  else{
+
+    levelNameEl.style.color =
+      "#ff7583";
+
+  }
 
 
   roundNumberEl.textContent =
@@ -2263,13 +2378,14 @@ function atualizarNivel(){
 
   progressTextEl.textContent =
     posicao +
-    " / 7";
+    " / " +
+    sequencia.length;
 
 
   progressFillEl.style.width =
     (
       posicao /
-      7 *
+      sequencia.length *
       100
     ) +
     "%";
@@ -2297,294 +2413,63 @@ function atualizarMoedas(){
    SALVAR MOEDAS NO FIRESTORE
 ===================================================== */
 
-async function salvarMoedasNoFirestore(){
-
-  if(
-    !usuarioRef ||
-    !firebaseUser
-  ){
-
-    return false;
-
-  }
-
-
-  if(
-    salvandoMoedas
-  ){
-
-    return false;
-
-  }
-
-
-  salvandoMoedas =
-    true;
-
-
-  try{
-
-    const novoTotal =
-      Number(
-        moedasLocais || 0
-      );
-
-
-    await runTransaction(
-      db,
-      async transaction => {
-
-        const snapshot =
-          await transaction.get(
-            usuarioRef
-          );
-
-
-        if(
-          !snapshot.exists()
-        ){
-
-          throw new Error(
-            "Documento do jogador não existe."
-          );
-
-        }
-
-
-        const dados =
-          snapshot.data();
-
-
-        /*
-         * O valor local já contém a recompensa.
-         * Gravamos o novo total no campo moedas.
-         */
-
-        transaction.update(
-          usuarioRef,
-          {
-            moedas: novoTotal
-          }
-        );
-
-      }
-    );
-
-
-    usuario.moedas =
-      novoTotal;
-
-
-    return true;
-
-  }
-  catch(error){
-
-    console.error(
-      "Erro ao salvar moedas:",
-      error
-    );
-
-
-    return false;
-
-  }
-  finally{
-
-    salvandoMoedas =
-      false;
-
-  }
-
-}
-
-
-/* =====================================================
-   CONSUMIR CHANCE
-===================================================== */
-
-async function consumirChance(){
-
-  if(
-    chanceConsumida
-  ){
-
-    return true;
-
-  }
-
+async function adicionarMoedas(
+  quantidade
+){
 
   if(
     !usuarioRef
   ){
 
-    return false;
+    throw new Error(
+      "Referência do usuário não encontrada."
+    );
 
   }
 
 
-  try{
-
-    const sucesso =
-      await runTransaction(
-        db,
-        async transaction => {
-
-          const snapshot =
-            await transaction.get(
-              usuarioRef
-            );
-
-
-          if(
-            !snapshot.exists()
-          ){
-
-            throw new Error(
-              "Jogador não encontrado."
-            );
-
-          }
-
-
-          const dados =
-            snapshot.data();
-
-
-          const chances =
-            Number(
-              dados.chances || 0
-            );
-
-
-          if(
-            chances <= 0
-          ){
-
-            return false;
-
-          }
-
-
-          transaction.update(
-            usuarioRef,
-            {
-              chances:
-                chances - 1
-            }
-          );
-
-
-          return true;
-
-        }
-      );
-
-
-    if(
-      !sucesso
-    ){
-
-      alert(
-        "Você não possui chances para jogar."
-      );
-
-      window.location.href =
-        "jogos.html";
-
-      return false;
-
+  await updateDoc(
+    usuarioRef,
+    {
+      moedas:
+        increment(
+          quantidade
+        )
     }
+  );
 
 
-    chanceConsumida =
-      true;
+  moedasLocais +=
+    quantidade;
 
 
-    usuario.chances =
-      Number(
-        usuario.chances || 0
-      ) - 1;
-
-
-    return true;
-
-  }
-  catch(error){
-
-    console.error(
-      "Erro ao consumir chance:",
-      error
-    );
-
-
-    alert(
-      "Não foi possível iniciar a partida. Tente novamente."
-    );
-
-
-    window.location.href =
-      "jogos.html";
-
-
-    return false;
-
-  }
+  atualizarMoedas();
 
 }
 
 
 /* =====================================================
-   IMAGENS DA FORCA
-=====================================================
-
-   0 erros = 01
-   1 erro  = 02
-   2 erros = 03
-   3 erros = 04
-   4 erros = 05
-   5 erros = 06
-   6 erros = 07
-
-   No 7º erro permanece no estágio 6,
-   que é a última imagem disponível.
-
-===================================================== */
-
-const imagensForca = [
-
-  "01_forca_0_erros.png",
-
-  "02_forca_1_erro.png",
-
-  "03_forca_2_erros.png",
-
-  "04_forca_3_erros.png",
-
-  "05_forca_4_erros.png",
-
-  "06_forca_5_erros.png",
-
-  "07_forca_6_erros.png"
-
-];
-
-
-/* =====================================================
-   ATUALIZAR IMAGEM
+   IMAGEM DA FORCA
 ===================================================== */
 
 function atualizarImagem(){
 
   const indice =
     Math.min(
-      erros,
-      imagensForca.length - 1
+      Math.max(
+        erros,
+        0
+      ),
+      6
     );
 
 
+  const arquivo =
+    IMAGENS_FORCA[indice];
+
+
   hangmanImage.src =
-    imagensForca[indice];
+    arquivo;
 
 
   const pontos =
@@ -2627,6 +2512,10 @@ function desenharPalavra(){
     i++
   ){
 
+    const letra =
+      palavra[i];
+
+
     const span =
       document.createElement(
         "span"
@@ -2635,10 +2524,6 @@ function desenharPalavra(){
 
     span.className =
       "letter";
-
-
-    const letra =
-      palavra[i];
 
 
     if(
@@ -2731,6 +2616,26 @@ function criarTeclado(){
 
 
 /* =====================================================
+   BLOQUEAR TECLADO
+===================================================== */
+
+function bloquearTeclado(){
+
+  keyboardEl
+    .querySelectorAll("button")
+    .forEach(
+      button => {
+
+        button.disabled =
+          true;
+
+      }
+    );
+
+}
+
+
+/* =====================================================
    ESCOLHER LETRA
 ===================================================== */
 
@@ -2774,9 +2679,10 @@ function escolherLetra(
 
 
   const acertou =
-    palavraAtual.normalizada.includes(
-      letra
-    );
+    palavraAtual.normalizada
+      .includes(
+        letra
+      );
 
 
   if(
@@ -2827,7 +2733,7 @@ function escolherLetra(
 
 
 /* =====================================================
-   VERIFICAR PALAVRA
+   PALAVRA COMPLETA
 ===================================================== */
 
 function palavraCompleta(){
@@ -2874,26 +2780,6 @@ function mostrarMensagem(
 
 
 /* =====================================================
-   DESABILITAR TECLADO
-===================================================== */
-
-function bloquearTeclado(){
-
-  keyboardEl
-    .querySelectorAll("button")
-    .forEach(
-      button => {
-
-        button.disabled =
-          true;
-
-      }
-    );
-
-}
-
-
-/* =====================================================
    GANHOU
 ===================================================== */
 
@@ -2915,110 +2801,112 @@ async function ganhar(){
     true;
 
 
-  bloquearTeclado();
-
-
   const recompensa =
     recompensaAtual();
 
 
-  moedasLocais +=
-    recompensa;
+  try{
+
+    salvandoRecompensa =
+      true;
 
 
-  atualizarMoedas();
+    /*
+     * ENVIA A RECOMPENSA PARA O FIRESTORE.
+     */
 
-
-  rewardValueEl.textContent =
-    recompensa;
-
-
-  rewardEl.style.display =
-    "block";
-
-
-  letrasEscolhidas =
-    new Set(
-      palavraAtual.normalizada.split("")
+    await adicionarMoedas(
+      recompensa
     );
 
 
-  desenharPalavra();
+    salvandoRecompensa =
+      false;
 
 
-  mostrarMensagem(
-    "🎉 Você acertou!",
-    "success"
-  );
+    rewardValueEl.textContent =
+      recompensa;
 
 
-  /*
-   * GRAVA A RECOMPENSA NO FIRESTORE
-   * imediatamente após o acerto.
-   */
-
-  const salvo =
-    await salvarMoedasNoFirestore();
+    rewardEl.style.display =
+      "block";
 
 
-  if(
-    !salvo
-  ){
+    bloquearTeclado();
 
-    /*
-     * Não fingimos que salvou.
-     */
+
+    letrasEscolhidas =
+      new Set(
+        palavraAtual.normalizada
+          .split("")
+      );
+
+
+    desenharPalavra();
+
 
     mostrarMensagem(
-      "⚠️ Você acertou, mas não foi possível salvar as moedas. Tente novamente.",
+      "🎉 Você acertou!",
+      "success"
+    );
+
+
+    /*
+     * SE COMPLETOU AS 7 RODADAS,
+     * TERMINA A PARTIDA.
+     */
+
+    if(
+      rodada >=
+      sequencia.length
+    ){
+
+      abrirModal(
+        true,
+        recompensa,
+        true
+      );
+
+    }
+    else{
+
+      abrirModal(
+        true,
+        recompensa,
+        false
+      );
+
+    }
+
+  }
+  catch(error){
+
+    salvandoRecompensa =
+      false;
+
+
+    console.error(
+      "Erro ao salvar moedas:",
+      error
+    );
+
+
+    partidaTerminou =
+      false;
+
+
+    mostrarMensagem(
+      "⚠️ Não foi possível registrar as moedas. Tente novamente.",
       "error"
     );
 
-
-    modalIcon.textContent =
-      "⚠️";
-
-
-    modalTitle.textContent =
-      "Moedas não salvas";
-
-
-    modalText.textContent =
-      "A palavra foi acertada, mas houve um problema ao registrar suas moedas.";
-
-
-    modalCoins.textContent =
-      "Tente novamente";
-
-
-    modalButton.textContent =
-      "VOLTAR AOS JOGOS";
-
-
-    modalButton.dataset.acao =
-      "voltar";
-
-
-    modal.classList.add(
-      "show"
-    );
-
-
-    return;
-
   }
-
-
-  abrirModal(
-    true,
-    recompensa
-  );
 
 }
 
 
 /* =====================================================
-   PERDEU
+   PERDEU — COM 4 SEGUNDOS DE IMAGEM
 ===================================================== */
 
 function perderComAtraso(){
@@ -3039,68 +2927,72 @@ function perderComAtraso(){
     false;
 
 
+  /*
+   * BLOQUEIA O TECLADO.
+   */
+
   bloquearTeclado();
 
 
   /*
-   * Garante que a última imagem fique
-   * visível por 4 segundos.
+   * GARANTE O ÚLTIMO ESTÁGIO.
+   *
+   * A imagem 07 fica na tela.
    */
+
+  erros =
+    7;
+
+
+  hangmanImage.src =
+    "07_forca_6_erros.png";
+
 
   atualizarImagem();
 
 
-  let restante =
-    4;
+  /*
+   * REVELA A PALAVRA,
+   * mas NÃO abre o modal ainda.
+   */
 
-
-  countdownNumber.textContent =
-    restante;
-
-
-  countdownOverlay.classList.add(
-    "show"
-  );
-
-
-  const intervalo =
-    setInterval(
-      () => {
-
-        restante--;
-
-
-        if(
-          restante <= 0
-        ){
-
-          clearInterval(
-            intervalo
-          );
-
-
-          countdownOverlay.classList.remove(
-            "show"
-          );
-
-
-          abrirModal(
-            false,
-            0
-          );
-
-
-          return;
-
-        }
-
-
-        countdownNumber.textContent =
-          restante;
-
-      },
-      1000
+  letrasEscolhidas =
+    new Set(
+      palavraAtual.normalizada
+        .split("")
     );
+
+
+  desenharPalavra();
+
+
+  /*
+   * ===================================================
+   * AQUI ESTÁ A CORREÇÃO PRINCIPAL.
+   *
+   * 4 SEGUNDOS INTEIROS DE IMAGEM.
+   * ===================================================
+   */
+
+  setTimeout(
+    () => {
+
+      mostrarMensagem(
+        "💀 Você perdeu! A palavra era: " +
+        palavraAtual.palavra,
+        "error"
+      );
+
+
+      abrirModal(
+        false,
+        0,
+        false
+      );
+
+    },
+    4000
+  );
 
 }
 
@@ -3111,12 +3003,9 @@ function perderComAtraso(){
 
 function abrirModal(
   ganhou,
-  recompensa
+  recompensa,
+  finalDaSequencia = false
 ){
-
-  modalButton.dataset.acao =
-    "continuar";
-
 
   if(
     ganhou
@@ -3126,21 +3015,16 @@ function abrirModal(
       "🎉";
 
 
-    modalTitle.textContent =
-      "Parabéns!";
-
-
-    /*
-     * Se chegou à 7ª rodada,
-     * terminou a sequência.
-     */
-
     if(
-      rodada >= 7
+      finalDaSequencia
     ){
 
+      modalTitle.textContent =
+        "Você completou a sequência!";
+
+
       modalText.textContent =
-        "Você completou as 7 rodadas e terminou a sequência!";
+        "Parabéns! Você concluiu as 7 rodadas e recebeu todas as recompensas.";
 
 
       modalCoins.textContent =
@@ -3152,15 +3036,15 @@ function abrirModal(
       modalButton.textContent =
         "VOLTAR AOS JOGOS";
 
-
-      modalButton.dataset.acao =
-        "finalizar";
-
     }
     else{
 
+      modalTitle.textContent =
+        "Parabéns!";
+
+
       modalText.textContent =
-        "Você descobriu a palavra e avançou para a próxima rodada.";
+        "Você descobriu a palavra e recebeu sua recompensa.";
 
 
       modalCoins.textContent =
@@ -3196,10 +3080,6 @@ function abrirModal(
     modalButton.textContent =
       "VOLTAR AOS JOGOS";
 
-
-    modalButton.dataset.acao =
-      "voltar";
-
   }
 
 
@@ -3211,24 +3091,16 @@ function abrirModal(
 
 
 /* =====================================================
-   BOTÃO DO MODAL
+   MODAL — CONTINUAR
 ===================================================== */
 
 modalButton.addEventListener(
   "click",
-  async () => {
-
-    const acao =
-      modalButton.dataset.acao;
-
+  () => {
 
     if(
-      acao === "finalizar" ||
-      acao === "voltar"
+      salvandoRecompensa
     ){
-
-      window.location.href =
-        "jogos.html";
 
       return;
 
@@ -3240,10 +3112,72 @@ modalButton.addEventListener(
     );
 
 
-    rodada++;
+    /*
+     * SE GANHOU AS 7 RODADAS,
+     * VOLTA PARA OS JOGOS.
+     */
+
+    if(
+      palavraResolvida &&
+      rodada >= sequencia.length
+    ){
+
+      window.location.href =
+        "jogos.html";
+
+      return;
+
+    }
 
 
-    iniciarRodada();
+    /*
+     * SE GANHOU UMA RODADA,
+     * VAI PARA A PRÓXIMA.
+     */
+
+    if(
+      palavraResolvida
+    ){
+
+      rodada++;
+
+      iniciarRodada();
+
+      return;
+
+    }
+
+
+    /*
+     * SE PERDEU,
+     * VOLTA PARA JOGOS.
+     */
+
+    window.location.href =
+      "jogos.html";
+
+  }
+);
+
+
+/* =====================================================
+   BOTÃO CONTINUAR EXTRA
+===================================================== */
+
+nextButton.addEventListener(
+  "click",
+  () => {
+
+    if(
+      partidaTerminou &&
+      palavraResolvida
+    ){
+
+      rodada++;
+
+      iniciarRodada();
+
+    }
 
   }
 );
@@ -3259,6 +3193,9 @@ function iniciarRodada(){
     false;
 
   palavraResolvida =
+    false;
+
+  salvandoRecompensa =
     false;
 
   erros =
@@ -3289,12 +3226,21 @@ function iniciarRodada(){
     "none";
 
 
+  nextButton.classList.remove(
+    "show"
+  );
+
+
   messageEl.className =
     "message";
 
 
+  /*
+   * PRIMEIRA IMAGEM.
+   */
+
   hangmanImage.src =
-    imagensForca[0];
+    "01_forca_0_erros.png";
 
 
   atualizarImagem();
@@ -3449,15 +3395,20 @@ onAuthStateChanged(
           "Cadastro Adam Games não encontrado."
         );
 
-
         window.location.href =
           "jogos.html";
-
 
         return;
 
       }
 
+
+      /*
+       * GUARDA A REFERÊNCIA REAL DO DOCUMENTO.
+       *
+       * É essa referência que recebe
+       * as moedas conquistadas.
+       */
 
       usuarioRef =
         documento.ref;
@@ -3477,26 +3428,7 @@ onAuthStateChanged(
 
 
       /*
-       * A CHANCE É CONSUMIDA AQUI,
-       * UMA única vez ao entrar na partida.
-       */
-
-      const podeJogar =
-        await consumirChance();
-
-
-      if(
-        !podeJogar
-      ){
-
-        return;
-
-      }
-
-
-      /*
-       * Só depois de consumir a chance
-       * começa a primeira rodada.
+       * COMEÇA A PRIMEIRA RODADA.
        */
 
       iniciarRodada();
