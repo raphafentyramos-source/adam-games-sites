@@ -28,7 +28,6 @@ html,
 body{
   width:100%;
   min-height:100%;
-  overflow-x:hidden;
 }
 
 body{
@@ -102,6 +101,7 @@ body{
 .back{
 
   width:45px;
+
   height:45px;
 
   border:0;
@@ -121,7 +121,9 @@ body{
 
 
 .title{
+
   text-align:center;
+
 }
 
 
@@ -225,7 +227,9 @@ body{
 
 
 .hero-icon{
+
   font-size:42px;
+
 }
 
 
@@ -418,7 +422,19 @@ body{
 
 
 /* =====================================================
-   FRAME FIXO DA FORCA
+   FORCA
+   FRAME ÚNICO
+
+   TODOS OS PNGs FICAM UM SOBRE O OUTRO.
+
+   PROPORÇÃO:
+   437 x 275
+
+   NÃO USAMOS:
+   - object-fit: contain
+   - margin:auto
+   - troca de src
+   - altura automática
 ===================================================== */
 
 .hangman-wrap{
@@ -437,59 +453,49 @@ body{
 
   line-height:0;
 
-  isolation:isolate;
-
 }
 
 
-/* =====================================================
-   IMAGEM DA FORCA
-===================================================== */
-
-#hangmanImage{
+.hangman-layer{
 
   position:absolute;
 
-  inset:0;
+  top:0;
+
+  left:0;
+
+  width:100%;
+
+  height:100%;
+
+  margin:0;
+
+  padding:0;
 
   display:block;
 
-  width:100%;
-  height:100%;
-
-  min-width:100%;
-  min-height:100%;
-
-  max-width:none;
-  max-height:none;
-
-  margin:0 !important;
-  padding:0 !important;
-
   border:0;
+
   outline:0;
 
   object-fit:fill;
 
-  object-position:center center;
+  object-position:0 0;
 
-  transform:none !important;
+  opacity:0;
 
-  translate:none !important;
-
-  scale:1 !important;
-
-  rotate:0deg !important;
-
-  transition:none !important;
-
-  animation:none !important;
+  visibility:hidden;
 
   pointer-events:none;
 
-  user-select:none;
+}
 
-  -webkit-user-drag:none;
+
+.hangman-layer.active{
+
+  opacity:1;
+
+  visibility:visible;
 
 }
 
@@ -499,10 +505,6 @@ body{
 ===================================================== */
 
 .errors-row{
-
-  width:100%;
-
-  min-height:10px;
 
   display:flex;
 
@@ -519,9 +521,8 @@ body{
 
 .error-dot{
 
-  flex:0 0 10px;
-
   width:10px;
+
   height:10px;
 
   border-radius:50%;
@@ -721,12 +722,16 @@ body{
 
 
 .key.used{
+
   opacity:.28;
+
 }
 
 
 .key:disabled{
+
   cursor:not-allowed;
+
 }
 
 
@@ -754,7 +759,9 @@ body{
 
 
 .message.show{
+
   display:block;
+
 }
 
 
@@ -851,7 +858,9 @@ body{
 
 
 .modal.show{
+
   display:flex;
+
 }
 
 
@@ -867,7 +876,8 @@ body{
 
   text-align:center;
 
-  background:#082843;
+  background:
+    #082843;
 
   border:
     1px solid
@@ -881,7 +891,9 @@ body{
 
 
 .modal-icon{
+
   font-size:54px;
+
 }
 
 
@@ -932,7 +944,8 @@ body{
 
   border-radius:14px;
 
-  background:#18ae60;
+  background:
+    #18ae60;
 
   color:#fff;
 
@@ -952,7 +965,9 @@ body{
 @media(max-width:430px){
 
   .keyboard{
+
     gap:4px;
+
   }
 
   .key{
@@ -971,56 +986,6 @@ body{
 
   }
 
-}
-
-
-/* =====================================================
-   CELULARES MUITO PEQUENOS
-===================================================== */
-
-@media(max-width:360px){
-
-  .page{
-
-    padding-left:10px;
-    padding-right:10px;
-
-  }
-
-  .game-card{
-    padding:10px;
-  }
-
-  .hangman-wrap{
-
-    width:100%;
-
-    aspect-ratio:437 / 275;
-
-  }
-
-  .errors-row{
-    gap:5px;
-  }
-
-  .error-dot{
-
-    flex-basis:9px;
-
-    width:9px;
-    height:9px;
-
-  }
-
-}
-
-
-/* =====================================================
-   SEGURANÇA
-===================================================== */
-
-img{
-  vertical-align:top;
 }
 
 </style>
@@ -1205,26 +1170,55 @@ img{
 
 
     <!-- =================================================
-         FRAME FIXO
+         AS 7 IMAGENS FICAM NO MESMO FRAME
     ================================================== -->
 
-    <div
-      class="hangman-wrap"
-      id="hangmanFrame">
+    <div class="hangman-wrap">
 
       <img
-        id="hangmanImage"
+        class="hangman-layer active"
         src="01_forca_0_erros.png"
         alt="Forca"
-        draggable="false"
+      >
+
+      <img
+        class="hangman-layer"
+        src="02_forca_1_erro.png"
+        alt="Forca"
+      >
+
+      <img
+        class="hangman-layer"
+        src="03_forca_2_erros.png"
+        alt="Forca"
+      >
+
+      <img
+        class="hangman-layer"
+        src="04_forca_3_erros.png"
+        alt="Forca"
+      >
+
+      <img
+        class="hangman-layer"
+        src="05_forca_4_erros.png"
+        alt="Forca"
+      >
+
+      <img
+        class="hangman-layer"
+        src="06_forca_5_erros.png"
+        alt="Forca"
+      >
+
+      <img
+        class="hangman-layer"
+        src="07_forca_6_erros.png"
+        alt="Forca"
       >
 
     </div>
 
-
-    <!-- =================================================
-         ERROS
-    ================================================== -->
 
     <div
       class="errors-row"
@@ -1240,10 +1234,6 @@ img{
 
     </div>
 
-
-    <!-- =================================================
-         DICA
-    ================================================== -->
 
     <div class="hint">
 
@@ -1262,19 +1252,11 @@ img{
     </div>
 
 
-    <!-- =================================================
-         PALAVRA
-    ================================================== -->
-
     <div
       class="word"
       id="word">
     </div>
 
-
-    <!-- =================================================
-         TECLADO
-    ================================================== -->
 
     <div
       class="keyboard"
@@ -1282,19 +1264,11 @@ img{
     </div>
 
 
-    <!-- =================================================
-         MENSAGEM
-    ================================================== -->
-
     <div
       class="message"
       id="message">
     </div>
 
-
-    <!-- =================================================
-         RECOMPENSA
-    ================================================== -->
 
     <div
       class="reward"
@@ -1453,6 +1427,9 @@ const db =
 const coinsEl =
   document.getElementById("coins");
 
+const levelNameEl =
+  document.getElementById("levelName");
+
 const roundNumberEl =
   document.getElementById("roundNumber");
 
@@ -1504,50 +1481,15 @@ const modalCoins =
 const modalButton =
   document.getElementById("modalButton");
 
-const hangmanImage =
-  document.getElementById(
-    "hangmanImage"
+
+/* =====================================================
+   FRAMES DA FORCA
+===================================================== */
+
+const hangmanLayers =
+  document.querySelectorAll(
+    ".hangman-layer"
   );
-
-
-/* =====================================================
-   IMAGENS
-===================================================== */
-
-const imagensForca = [
-
-  "01_forca_0_erros.png",
-
-  "02_forca_1_erro.png",
-
-  "03_forca_2_erros.png",
-
-  "04_forca_3_erros.png",
-
-  "05_forca_4_erros.png",
-
-  "06_forca_5_erros.png",
-
-  "07_forca_6_erros.png"
-
-];
-
-
-/* =====================================================
-   PRÉ-CARREGAR IMAGENS
-===================================================== */
-
-imagensForca.forEach(
-  caminho => {
-
-    const imagem =
-      new Image();
-
-    imagem.src =
-      caminho;
-
-  }
-);
 
 
 /* =====================================================
@@ -1566,15 +1508,13 @@ let erros = 0;
 
 let palavraAtual = null;
 
-let letrasUsadas =
-  new Set();
+let letrasUsadas = new Set();
 
 let terminou = false;
 
 let ganhouRodada = false;
 
-let processandoErroFinal =
-  false;
+let processandoErroFinal = false;
 
 
 /* =====================================================
@@ -1584,18 +1524,24 @@ let processandoErroFinal =
 const recompensas = {
 
   1:20,
+
   2:20,
+
   3:30,
+
   4:30,
+
   5:20,
+
   6:20,
+
   7:30
 
 };
 
 
 /* =====================================================
-   BANCO DE PALAVRAS
+   PALAVRAS
 ===================================================== */
 
 const banco = [
@@ -2100,30 +2046,40 @@ async function adicionarMoedas(
 
 
 /* =====================================================
-   ATUALIZAR IMAGEM
+   IMAGEM DA FORCA
 ===================================================== */
 
 function atualizarImagem(){
 
   const indice =
     Math.min(
-      Math.max(
-        erros,
-        0
-      ),
-      imagensForca.length - 1
+      erros,
+      6
     );
 
 
   /*
-   * SOMENTE O SRC É ALTERADO.
+   * NÃO muda tamanho.
+   * NÃO muda posição.
+   * NÃO troca SRC.
    *
-   * O FRAME CONTINUA EXATAMENTE
-   * NO MESMO TAMANHO E POSIÇÃO.
+   * Apenas coloca a camada correspondente
+   * por cima das outras.
    */
 
-  hangmanImage.src =
-    imagensForca[indice];
+  hangmanLayers.forEach(
+    (
+      imagem,
+      index
+    ) => {
+
+      imagem.classList.toggle(
+        "active",
+        index === indice
+      );
+
+    }
+  );
 
 
   const pontos =
@@ -2351,10 +2307,6 @@ function escolherLetra(
   );
 
 
-  /* ===================================================
-     ACERTO
-  =================================================== */
-
   if(
     palavraAtual.normalizada
       .includes(
@@ -2384,9 +2336,9 @@ function escolherLetra(
   }
 
 
-  /* ===================================================
-     ERRO
-  =================================================== */
+  /*
+   * ERRO
+   */
 
   botao.classList.add(
     "wrong"
@@ -2399,14 +2351,12 @@ function escolherLetra(
   atualizarImagem();
 
 
-  /* ===================================================
-     ÚLTIMO ERRO
-     
-     6 ERROS = ÚLTIMA IMAGEM
-  =================================================== */
+  /*
+   * ÚLTIMO ERRO
+   */
 
   if(
-    erros >= 6
+    erros >= 7
   ){
 
     erroFinal();
@@ -2419,15 +2369,10 @@ function escolherLetra(
 
 
 /* =====================================================
-   ÚLTIMO ERRO / ESPERA 3 SEGUNDOS
+   ÚLTIMO ERRO — 3 SEGUNDOS
 ===================================================== */
 
 function erroFinal(){
-
-  /*
-   * Evita que essa função seja chamada
-   * duas vezes.
-   */
 
   if(
     processandoErroFinal
@@ -2442,39 +2387,22 @@ function erroFinal(){
     true;
 
 
-  /*
-   * O jogo termina imediatamente.
-   */
-
   terminou =
     true;
 
-
-  /*
-   * Bloqueia todas as letras.
-   */
 
   bloquearTeclado();
 
 
   /*
-   * Garante que a última imagem
-   * permaneça na tela.
-   */
-
-  erros =
-    6;
-
-
-  atualizarImagem();
-
-
-  /*
-   * NÃO MOSTRA O MODAL AQUI.
+   * A imagem 07 já foi ativada por
+   * atualizarImagem().
    *
-   * O jogador verá a última imagem
-   * durante 3 segundos.
+   * NÃO fazemos src.
+   * NÃO fazemos margin.
+   * NÃO fazemos resize.
    */
+
 
   messageEl.className =
     "message";
@@ -2485,7 +2413,7 @@ function erroFinal(){
 
 
   /*
-   * ESPERA EXATAMENTE 3 SEGUNDOS.
+   * ESPERA 3 SEGUNDOS
    */
 
   setTimeout(
@@ -2505,11 +2433,6 @@ function erroFinal(){
 ===================================================== */
 
 function mostrarDerrota(){
-
-  /*
-   * Esta função só é chamada
-   * depois dos 3 segundos.
-   */
 
   messageEl.textContent =
     "💀 Você perdeu! A palavra era: " +
@@ -2540,10 +2463,6 @@ function mostrarDerrota(){
     "VOLTAR AOS JOGOS";
 
 
-  /*
-   * AGORA SIM o modal aparece.
-   */
-
   modal.classList.add(
     "show"
   );
@@ -2569,7 +2488,6 @@ async function ganhar(){
   terminou =
     true;
 
-
   ganhouRodada =
     true;
 
@@ -2583,6 +2501,10 @@ async function ganhar(){
 
 
   try{
+
+    /*
+     * ENVIA AS MOEDAS PARA O FIRESTORE.
+     */
 
     await adicionarMoedas(
       recompensa
@@ -2671,7 +2593,6 @@ async function ganhar(){
 
     terminou =
       false;
-
 
     ganhouRodada =
       false;
@@ -2764,11 +2685,24 @@ function iniciarRodada(){
 
 
   /*
-   * Começa sempre na primeira imagem.
+   * VOLTA PARA A PRIMEIRA CAMADA.
+   *
+   * Não altera tamanho ou posição.
    */
 
-  hangmanImage.src =
-    imagensForca[0];
+  hangmanLayers.forEach(
+    (
+      imagem,
+      index
+    ) => {
+
+      imagem.classList.toggle(
+        "active",
+        index === 0
+      );
+
+    }
+  );
 
 
   criarTeclado();
@@ -2796,7 +2730,8 @@ modalButton.addEventListener(
 
 
     /*
-     * PERDEU
+     * PERDEU:
+     * volta para jogos.
      */
 
     if(
@@ -2812,7 +2747,7 @@ modalButton.addEventListener(
 
 
     /*
-     * TERMINOU AS 7 RODADAS
+     * COMPLETOU AS 7.
      */
 
     if(
@@ -2828,7 +2763,7 @@ modalButton.addEventListener(
 
 
     /*
-     * PRÓXIMA RODADA
+     * PRÓXIMA RODADA.
      */
 
     rodada++;
@@ -2864,6 +2799,10 @@ async function localizarUsuario(
   user
 ){
 
+  /*
+   * Primeiro procura pelo UID.
+   */
+
   let resultado =
     await getDocs(
 
@@ -2893,6 +2832,11 @@ async function localizarUsuario(
 
   }
 
+
+  /*
+   * Se não encontrar pelo UID,
+   * procura pelo e-mail.
+   */
 
   if(
     user.email
@@ -2977,15 +2921,17 @@ onAuthStateChanged(
           "Cadastro Adam Games não encontrado."
         );
 
-
         window.location.href =
           "jogos.html";
-
 
         return;
 
       }
 
+
+      /*
+       * Guarda a referência exata do documento.
+       */
 
       usuarioRef =
         documento.ref;
