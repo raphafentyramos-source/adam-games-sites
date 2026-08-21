@@ -1,602 +1,2789 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+>
+
 <title>Adam Games • Senha</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{min-height:100%;background:#061b2d}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html,
 body{
-  font-family:Arial,Helvetica,sans-serif;
+  min-height:100%;
+}
+
+body{
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
   color:#fff;
+
   background:
-    radial-gradient(circle at 15% 0%,rgba(46,183,255,.24),transparent 30%),
-    radial-gradient(circle at 85% 10%,rgba(118,55,255,.20),transparent 28%),
-    linear-gradient(180deg,#073a4a 0%,#06263d 50%,#031b2d 100%);
+    linear-gradient(
+      180deg,
+      #073454,
+      #021d32
+    );
+
+  overflow-x:hidden;
+
 }
-button{font:inherit;-webkit-tap-highlight-color:transparent}
-.page{width:100%;max-width:700px;margin:auto;padding:14px 10px 80px}
-.top{display:flex;align-items:center;justify-content:space-between}
+
+
+/* =====================================================
+   PÁGINA
+===================================================== */
+
+.page{
+
+  width:100%;
+
+  max-width:680px;
+
+  margin:0 auto;
+
+  padding:
+    14px
+    12px
+    70px;
+
+}
+
+
+/* =====================================================
+   TOPO
+===================================================== */
+
+.top{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  margin-bottom:12px;
+
+}
+
+
 .back{
- width:44px;height:44px;border:0;border-radius:14px;
- background:linear-gradient(145deg,#0c6fa5,#07436e);
- color:#fff;font-size:25px;cursor:pointer
-}
-.title{text-align:center;text-shadow:0 2px 6px #000}
-.title small{display:block;font-size:10px;letter-spacing:2px;color:#bcecff}
-.title strong{font-size:21px}
-.spacer{width:44px}
 
-.card{
- margin-top:12px;padding:12px;border-radius:22px;
- background:rgba(3,29,48,.84);border:1px solid #ffffff18;
- box-shadow:0 14px 35px #0006
-}
-.stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
-.stat{padding:9px 5px;border-radius:13px;background:#0000002b;text-align:center}
-.stat small{font-size:9px;font-weight:900;color:#a9d7eb}
-.stat b{display:block;margin-top:3px;font-size:19px}
-.coins{color:#ffd52b}.chances{color:#ff6670}.level{color:#72d7ff}
-.progress{height:8px;background:#17394e;border-radius:20px;overflow:hidden;margin-top:10px}
-.progress div{height:100%;width:11%;background:linear-gradient(90deg,#28d56c,#ffd52b)}
+  width:44px;
 
-.info{text-align:center;padding:12px 6px 5px}
-.info h1{font-size:20px}
-.info p{margin-top:5px;color:#b9d7e8;font-size:12px}
+  height:44px;
+
+  border:0;
+
+  border-radius:14px;
+
+  background:
+    rgba(4,38,65,.9);
+
+  color:#fff;
+
+  font-size:27px;
+
+  cursor:pointer;
+
+}
+
+
+.title{
+
+  text-align:center;
+
+}
+
+
+.title small{
+
+  display:block;
+
+  font-size:10px;
+
+  letter-spacing:3px;
+
+  color:#a8d7ee;
+
+}
+
+
+.title strong{
+
+  display:block;
+
+  margin-top:2px;
+
+  font-size:24px;
+
+  text-shadow:
+    0 3px 8px #000;
+
+}
+
+
+.top-space{
+
+  width:44px;
+
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.status{
+
+  display:grid;
+
+  grid-template-columns:
+    1fr
+    1fr
+    1fr;
+
+  gap:8px;
+
+}
+
+
+.status-box{
+
+  padding:10px 6px;
+
+  border-radius:15px;
+
+  text-align:center;
+
+  background:
+    rgba(3,34,57,.88);
+
+  border:
+    1px solid
+    rgba(255,255,255,.07);
+
+}
+
+
+.status-label{
+
+  font-size:9px;
+
+  font-weight:bold;
+
+  color:#9fc9df;
+
+  letter-spacing:.7px;
+
+}
+
+
+.status-value{
+
+  margin-top:3px;
+
+  font-size:21px;
+
+  font-weight:900;
+
+}
+
+
+.coins{
+
+  color:#ffd52b;
+
+}
+
+
+.level{
+
+  color:#62d9ff;
+
+}
+
+
+.chances{
+
+  color:#72ff9e;
+
+}
+
+
+/* =====================================================
+   PROGRESSO
+===================================================== */
+
+.progress{
+
+  height:8px;
+
+  margin:
+    12px
+    2px
+    12px;
+
+  border-radius:10px;
+
+  overflow:hidden;
+
+  background:
+    rgba(255,255,255,.12);
+
+}
+
+
+.progress-bar{
+
+  width:33.33%;
+
+  height:100%;
+
+  border-radius:10px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #23d86b,
+      #ffe01b
+    );
+
+  transition:
+    width .3s ease;
+
+}
+
+
+/* =====================================================
+   TÍTULO DA FASE
+===================================================== */
+
+.phase-info{
+
+  text-align:center;
+
+  margin-bottom:12px;
+
+}
+
+
+.phase-info h1{
+
+  font-size:
+    clamp(
+      22px,
+      6vw,
+      31px
+    );
+
+  text-shadow:
+    0 3px 8px #000;
+
+}
+
+
+.phase-info p{
+
+  margin-top:5px;
+
+  color:#b9d9e9;
+
+  font-size:13px;
+
+}
+
+
+/* =====================================================
+   ÁREA DO JOGO
+===================================================== */
 
 .game-area{
- margin-top:8px;padding:10px;border-radius:18px;
- background:
-   linear-gradient(rgba(0,0,0,.18),rgba(0,0,0,.18)),
-   url("./fundo_nivel_01_03.png") center/cover no-repeat;
+
+  position:relative;
+
+  width:100%;
+
+  max-width:620px;
+
+  margin:0 auto;
+
 }
 
-.board{
- position:relative;width:100%;max-width:430px;margin:auto;
- aspect-ratio:1024/1536;
- background:url("./C0A67B9D-67BE-49A6-8747-B5B2A32411C4.png") center/100% 100% no-repeat;
-}
-.rows{
- position:absolute;left:9.5%;right:9.5%;top:15%;bottom:15%;
- display:grid;grid-template-rows:repeat(10,1fr)
-}
-.row{display:flex;align-items:center}
-.row-number{width:9%}
-.guess-slots{
- width:60%;display:flex;gap:2.5%;padding-left:1%;align-items:center
-}
-.guess-slot{
- width:15.2%;aspect-ratio:1;border-radius:50%;
- display:flex;align-items:center;justify-content:center
-}
-.guess-slot .circle{width:100%;height:100%;font-size:clamp(20px,7vw,34px);line-height:1}
 
-.feedback{
- width:31%;display:grid;grid-template-columns:repeat(5,1fr);
- gap:4%;padding:0 4%;align-items:center
-}
-.feedback-dot{
- width:100%;aspect-ratio:1;border-radius:50%;
- display:flex;align-items:center;justify-content:center;
- font-size:clamp(9px,2.5vw,14px)
+/*
+   O FUNDO É SOMENTE A IMAGEM.
+
+   Não existe outro painel por cima.
+*/
+
+.board-background{
+
+  position:relative;
+
+  width:100%;
+
+  display:block;
+
+  user-select:none;
+
+  -webkit-user-drag:none;
+
 }
 
-.palette{
- margin:12px auto 0;max-width:430px;
- display:grid;grid-template-columns:repeat(6,1fr);gap:7px;
- padding:10px;border-radius:18px;
- background:rgba(35,18,8,.82);
- border:2px solid #9b6a32
-}
-.color-btn{
- appearance:none;-webkit-appearance:none;
- border:0;border-radius:14px;
- background:rgba(255,255,255,.08);
- min-height:58px;
- display:flex;align-items:center;justify-content:center;
- cursor:pointer;
- touch-action:manipulation;
- user-select:none;
- box-shadow:inset 0 1px 0 #fff2,0 3px 7px #0006;
-}
-.color-btn:active{transform:scale(.9)}
-.color-btn.selected{background:rgba(255,255,255,.22);box-shadow:0 0 0 3px #fff8,0 4px 10px #0008}
-.emoji{
- font-size:clamp(28px,8vw,42px);
- line-height:1;
- pointer-events:none;
+
+/* =====================================================
+   LINHAS SOBRE O TABULEIRO
+===================================================== */
+
+.board-overlay{
+
+  position:absolute;
+
+  inset:0;
+
+  pointer-events:none;
+
 }
 
-.secret-box{
-  width:min(100%,430px);
-  margin:10px auto 8px;
-  padding:12px 14px;
-  border-radius:18px;
-  text-align:center;
-  background:linear-gradient(145deg,rgba(38,20,8,.94),rgba(73,38,12,.94));
-  border:2px solid #b47a32;
-  box-shadow:0 7px 18px #0007,inset 0 1px 0 #fff2;
-  min-height:82px;
-  transition:opacity .2s,transform .2s;
-}
-.secret-box.hidden{
-  visibility:hidden;
-  opacity:0;
-  transform:translateY(-5px);
-}
-.secret-title{
-  color:#ffd45a;
-  font-size:12px;
-  font-weight:900;
-  letter-spacing:1px;
-}
-.secret-code{
-  min-height:39px;
-  margin-top:4px;
+
+/*
+   Cada linha ocupa a largura da área
+   das cinco bolas grandes.
+*/
+
+.row{
+
+  position:absolute;
+
+  left:20%;
+
+  width:60%;
+
+  height:6%;
+
   display:flex;
-  justify-content:center;
+
   align-items:center;
-  gap:7px;
-}
-.secret-dot{
-  font-size:34px;
-  line-height:1;
-}
-.secret-hint{
-  margin-top:3px;
-  color:#f1d9b0;
-  font-size:10px;
-  font-weight:800;
+
+  justify-content:flex-start;
+
+  gap:3.4%;
+
 }
 
-.selected-preview{
- min-height:48px;margin-top:8px;display:flex;
- justify-content:center;align-items:center;gap:6px
-}
-.preview-dot{font-size:32px;line-height:1}
 
-.controls{margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.control{
- height:48px;border:0;border-radius:14px;color:#fff;
- font-weight:900;cursor:pointer;touch-action:manipulation
-}
-.clear{background:linear-gradient(145deg,#315878,#183b57)}
-.confirm{background:linear-gradient(145deg,#28d86d,#08783e)}
-.control:disabled{opacity:.45}
+/*
+   As linhas do fundo possuem 10 posições.
+*/
 
-.message{text-align:center;min-height:22px;margin-top:7px;color:#bfe3f2;font-size:12px;font-weight:800}
+.row:nth-child(1){
+  top:9.8%;
+}
+
+.row:nth-child(2){
+  top:17.8%;
+}
+
+.row:nth-child(3){
+  top:25.8%;
+}
+
+.row:nth-child(4){
+  top:33.8%;
+}
+
+.row:nth-child(5){
+  top:41.8%;
+}
+
+.row:nth-child(6){
+  top:49.8%;
+}
+
+.row:nth-child(7){
+  top:57.8%;
+}
+
+.row:nth-child(8){
+  top:65.8%;
+}
+
+.row:nth-child(9){
+  top:73.8%;
+}
+
+.row:nth-child(10){
+  top:81.8%;
+}
+
+
+/* =====================================================
+   BOLINHAS ESCOLHIDAS
+===================================================== */
+
+.slot{
+
+  width:17%;
+
+  aspect-ratio:1;
+
+  border-radius:50%;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  overflow:hidden;
+
+}
+
+
+.slot img{
+
+  width:100%;
+
+  height:100%;
+
+  object-fit:contain;
+
+  display:block;
+
+}
+
+
+/*
+   Quando a posição ainda está vazia,
+   deixamos transparente.
+*/
+
+.slot.empty{
+
+  background:transparent;
+
+}
+
+
+/* =====================================================
+   HISTÓRICO PEQUENO
+===================================================== */
+
+.history{
+
+  position:absolute;
+
+  right:14%;
+
+  width:17%;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:flex-end;
+
+  gap:4px;
+
+}
+
+
+.history-dot{
+
+  width:11px;
+
+  height:11px;
+
+  border-radius:50%;
+
+  border:
+    1px solid
+    rgba(255,255,255,.35);
+
+  background:
+    rgba(0,0,0,.18);
+
+}
+
+
+.history-dot.black{
+
+  background:#111;
+
+}
+
+
+.history-dot.white{
+
+  background:#fff;
+
+}
+
+
+/* =====================================================
+   PAINEL DE CORES
+===================================================== */
+
+.color-panel{
+
+  margin-top:10px;
+
+  padding:10px;
+
+  border-radius:20px;
+
+  background:
+    rgba(24,13,8,.78);
+
+  border:
+    2px solid
+    rgba(190,125,45,.65);
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(6,1fr);
+
+  gap:8px;
+
+}
+
+
+/* =====================================================
+   BOTÕES DAS CORES
+===================================================== */
+
+.color-button{
+
+  min-width:0;
+
+  aspect-ratio:1;
+
+  border:0;
+
+  border-radius:15px;
+
+  background:
+    rgba(255,255,255,.07);
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  cursor:pointer;
+
+  touch-action:manipulation;
+
+  -webkit-tap-highlight-color:transparent;
+
+}
+
+
+.color-button:active{
+
+  transform:scale(.93);
+
+}
+
+
+.color-button img{
+
+  width:75%;
+
+  height:75%;
+
+  object-fit:contain;
+
+  pointer-events:none;
+
+}
+
+
+/* =====================================================
+   BOTÕES
+===================================================== */
+
+.actions{
+
+  display:grid;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
+  gap:12px;
+
+  margin-top:10px;
+
+}
+
+
+.action{
+
+  height:52px;
+
+  border:0;
+
+  border-radius:16px;
+
+  color:#fff;
+
+  font-size:16px;
+
+  font-weight:900;
+
+  cursor:pointer;
+
+  touch-action:manipulation;
+
+}
+
+
+.clear{
+
+  background:
+    linear-gradient(
+      135deg,
+      #315d83,
+      #183d5c
+    );
+
+}
+
+
+.confirm{
+
+  background:
+    linear-gradient(
+      135deg,
+      #22d66c,
+      #079044
+    );
+
+}
+
+
+.action:active{
+
+  transform:scale(.97);
+
+}
+
+
+/* =====================================================
+   TEXTO DE STATUS
+===================================================== */
+
+.message{
+
+  min-height:24px;
+
+  margin-top:9px;
+
+  text-align:center;
+
+  font-size:13px;
+
+  font-weight:bold;
+
+  color:#b8d9e9;
+
+}
+
+
+.message.success{
+
+  color:#6cff9d;
+
+}
+
+
+.message.error{
+
+  color:#ff8585;
+
+}
+
+
+.message.warning{
+
+  color:#ffd45c;
+
+}
+
+
+/* =====================================================
+   SENHA REVELADA
+===================================================== */
+
+.reveal{
+
+  display:none;
+
+  margin-top:10px;
+
+  padding:12px;
+
+  border-radius:15px;
+
+  text-align:center;
+
+  background:
+    rgba(12,55,35,.85);
+
+  border:
+    1px solid
+    rgba(91,255,145,.3);
+
+}
+
+
+.reveal.show{
+
+  display:block;
+
+}
+
+
+.reveal-title{
+
+  color:#76ff9f;
+
+  font-size:12px;
+
+  font-weight:bold;
+
+}
+
+
+.reveal-colors{
+
+  display:flex;
+
+  justify-content:center;
+
+  gap:8px;
+
+  margin-top:7px;
+
+}
+
+
+.reveal-colors img{
+
+  width:38px;
+
+  height:38px;
+
+  object-fit:contain;
+
+}
+
+
+/* =====================================================
+   CARREGANDO
+===================================================== */
+
+.loading{
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:1000;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  background:#031d31;
+
+  font-size:16px;
+
+  font-weight:bold;
+
+}
+
+
+.loading.hide{
+
+  display:none;
+
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
 
 .modal{
- position:fixed;inset:0;z-index:100;display:none;
- align-items:center;justify-content:center;padding:18px;
- background:#00101dcc;backdrop-filter:blur(6px)
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:500;
+
+  display:none;
+
+  align-items:center;
+
+  justify-content:center;
+
+  padding:20px;
+
+  background:
+    rgba(0,10,20,.82);
+
 }
-.modal.show{display:flex}
+
+
+.modal.show{
+
+  display:flex;
+
+}
+
+
 .modal-card{
- width:min(100%,390px);padding:22px 18px;border-radius:22px;
- text-align:center;background:linear-gradient(145deg,#0b3a52,#241044)
+
+  width:100%;
+
+  max-width:360px;
+
+  padding:25px;
+
+  border-radius:22px;
+
+  text-align:center;
+
+  background:#082d49;
+
+  border:
+    1px solid
+    rgba(255,255,255,.1);
+
 }
-.modal-card h2{font-size:22px}
-.modal-card p{margin-top:9px;color:#c3ddeb;font-size:14px;line-height:1.5}
-.modal-buttons{display:grid;gap:9px;margin-top:17px}
-.modal-buttons button{
- height:46px;border:0;border-radius:13px;color:#fff;font-weight:900;cursor:pointer
+
+
+.modal-card h2{
+
+  font-size:23px;
+
 }
-.primary{background:#19ae60}.secondary{background:#ffffff17}
+
+
+.modal-card p{
+
+  margin-top:8px;
+
+  color:#b9d6e5;
+
+  font-size:14px;
+
+  line-height:1.4;
+
+}
+
+
+.modal-button{
+
+  width:100%;
+
+  height:48px;
+
+  margin-top:18px;
+
+  border:0;
+
+  border-radius:14px;
+
+  background:#18bd68;
+
+  color:#fff;
+
+  font-weight:900;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
 
 @media(max-width:430px){
- .page{padding-left:6px;padding-right:6px}
- .card{padding:8px}
+
+  .page{
+
+    padding:
+      10px
+      8px
+      50px;
+
+  }
+
+  .status-box{
+
+    padding:9px 4px;
+
+  }
+
+  .status-value{
+
+    font-size:19px;
+
+  }
+
+  .phase-info h1{
+
+    font-size:24px;
+
+  }
+
+  .color-panel{
+
+    gap:5px;
+
+    padding:8px;
+
+  }
+
+  .color-button{
+
+    border-radius:12px;
+
+  }
+
+  .actions{
+
+    gap:8px;
+
+  }
+
+  .action{
+
+    height:50px;
+
+    font-size:15px;
+
+  }
+
 }
+
+
+/* =====================================================
+   TELAS MUITO PEQUENAS
+===================================================== */
+
+@media(max-width:360px){
+
+  .history-dot{
+
+    width:9px;
+
+    height:9px;
+
+  }
+
+  .history{
+
+    gap:2px;
+
+  }
+
+}
+
 </style>
+
 </head>
+
 
 <body>
 
+
+<!-- =====================================================
+     CARREGANDO
+===================================================== -->
+
+<div
+  class="loading"
+  id="loading">
+
+  Carregando jogo...
+
+</div>
+
+
 <div class="page">
 
-<div class="top">
-  <button class="back" id="back" type="button">←</button>
-  <div class="title"><small>ADAM GAMES</small><strong>SENHA</strong></div>
-  <div class="spacer"></div>
-</div>
 
-<div class="card">
+  <!-- =================================================
+       TOPO
+  ================================================== -->
 
-<div class="stats">
-  <div class="stat"><small>ADAM COINS</small><b class="coins" id="coins">30</b></div>
-  <div class="stat"><small>CHANCES</small><b class="chances" id="chances">—</b></div>
-  <div class="stat level"><small>FASE</small><b id="level">1 / 3</b></div>
-</div>
+  <div class="top">
 
-<div class="progress"><div id="progress"></div></div>
+    <button
+      class="back"
+      id="back"
+      type="button">
 
-<div class="info">
-  <h1 id="phaseTitle">NÍVEL 1 — DESCUBRA A SENHA</h1>
-  <p id="phaseText">Memorize as 3 cores. Depois reproduza a sequência.</p>
-</div>
+      ←
 
-<div class="selected-preview" id="preview"></div>
+    </button>
 
-<div class="secret-box" id="secretBox">
-  <div class="secret-title">🔐 SENHA SECRETA</div>
-  <div class="secret-code" id="secretCode"></div>
-  <div class="secret-hint" id="secretHint">Memorize a sequência...</div>
-</div>
 
-<div class="game-area">
-  <div class="board">
-    <div class="rows" id="rows"></div>
+    <div class="title">
+
+      <small>
+        ADAM GAMES
+      </small>
+
+      <strong>
+        SENHA
+      </strong>
+
+    </div>
+
+
+    <div class="top-space"></div>
+
   </div>
 
-  <div class="palette" id="palette">
-    <button class="color-btn" data-color="vermelho" type="button"><span class="emoji">🔴</span></button>
-    <button class="color-btn" data-color="azul" type="button"><span class="emoji">🔵</span></button>
-    <button class="color-btn" data-color="verde" type="button"><span class="emoji">🟢</span></button>
-    <button class="color-btn" data-color="amarelo" type="button"><span class="emoji">🟡</span></button>
-    <button class="color-btn" data-color="roxo" type="button"><span class="emoji">🟣</span></button>
-    <button class="color-btn" data-color="laranja" type="button"><span class="emoji">🟠</span></button>
+
+  <!-- =================================================
+       STATUS
+  ================================================== -->
+
+  <div class="status">
+
+    <div class="status-box">
+
+      <div class="status-label">
+        ADAM COINS
+      </div>
+
+      <div
+        class="status-value coins"
+        id="coins">
+
+        30
+
+      </div>
+
+    </div>
+
+
+    <div class="status-box">
+
+      <div class="status-label">
+        CHANCES
+      </div>
+
+      <div
+        class="status-value chances"
+        id="chances">
+
+        --
+
+      </div>
+
+    </div>
+
+
+    <div class="status-box">
+
+      <div class="status-label">
+        FASE
+      </div>
+
+      <div
+        class="status-value level"
+        id="level">
+
+        1 / 3
+
+      </div>
+
+    </div>
+
   </div>
+
+
+  <!-- =================================================
+       PROGRESSO
+  ================================================== -->
+
+  <div class="progress">
+
+    <div
+      class="progress-bar"
+      id="progressBar">
+
+    </div>
+
+  </div>
+
+
+  <!-- =================================================
+       INFORMAÇÃO
+  ================================================== -->
+
+  <div class="phase-info">
+
+    <h1 id="phaseTitle">
+      NÍVEL 1 — DESCUBRA A SENHA
+    </h1>
+
+    <p id="phaseDescription">
+      Memorize as 3 cores e reproduza a sequência.
+    </p>
+
+  </div>
+
+
+  <!-- =================================================
+       ÁREA DO TABULEIRO
+  ================================================== -->
+
+  <div class="game-area">
+
+
+    <!-- FUNDO ORIGINAL -->
+
+    <img
+      class="board-background"
+      id="boardBackground"
+      src="./fundo_nivel_01_03.png"
+      alt="Tabuleiro">
+
+
+    <!-- =================================================
+         CORES E HISTÓRICO
+    ================================================== -->
+
+    <div
+      class="board-overlay"
+      id="boardOverlay">
+
+
+      <div class="row">
+
+        <div class="slot empty"></div>
+        <div class="slot empty"></div>
+        <div class="slot empty"></div>
+
+      </div>
+
+
+      <div class="row">
+
+        <div class="slot empty"></div>
+        <div class="slot empty"></div>
+        <div class="slot empty"></div>
+
+      </div>
+
+
+      <div class="row">
+
+        <div class="slot empty"></div>
+        <div class="slot empty"></div>
+        <div class="slot empty"></div>
+
+      </div>
+
+
+      <div class="row">
+
+        <div class="slot empty"></div>
+        <div class="slot empty"></div>
+        <div class="slot empty"></div>
+
+      </div>
+
+
+      <div class="row">
+
+        <div class="slot empty"></div>
+        <div class="slot empty"></div>
+        <div class="slot empty"></div>
+
+      </div>
+
+
+      <div class="row">
+
+        <div class="slot empty"></div>
+        <div class="slot empty"></div>
+        <div class="slot empty"></div>
+
+      </div>
+
+
+      <div class="row">
+
+        <div class="slot empty"></div>
+        <div class="slot empty"></div>
+        <div class="slot empty"></div>
+
+      </div>
+
+
+      <div class="row">
+
+        <div class="slot empty"></div>
+        <div class="slot empty"></div>
+        <div class="slot empty"></div>
+
+      </div>
+
+
+      <div class="row">
+
+        <div class="slot empty"></div>
+        <div class="slot empty"></div>
+        <div class="slot empty"></div>
+
+      </div>
+
+
+      <div class="row">
+
+        <div class="slot empty"></div>
+        <div class="slot empty"></div>
+        <div class="slot empty"></div>
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+  <!-- =================================================
+       CORES
+  ================================================== -->
+
+  <div class="color-panel">
+
+
+    <button
+      class="color-button"
+      data-color="vermelho"
+      type="button">
+
+      <img
+        src="./vermelho.png"
+        alt="Vermelho">
+
+    </button>
+
+
+    <button
+      class="color-button"
+      data-color="azul"
+      type="button">
+
+      <img
+        src="./azul.png"
+        alt="Azul">
+
+    </button>
+
+
+    <button
+      class="color-button"
+      data-color="verde"
+      type="button">
+
+      <img
+        src="./verde.png"
+        alt="Verde">
+
+    </button>
+
+
+    <button
+      class="color-button"
+      data-color="amarelo"
+      type="button">
+
+      <img
+        src="./amarelo.png"
+        alt="Amarelo">
+
+    </button>
+
+
+    <button
+      class="color-button"
+      data-color="roxo"
+      type="button">
+
+      <img
+        src="./roxo.png"
+        alt="Roxo">
+
+    </button>
+
+
+    <button
+      class="color-button"
+      data-color="laranja"
+      type="button">
+
+      <img
+        src="./laranja.png"
+        alt="Laranja">
+
+    </button>
+
+
+  </div>
+
+
+  <!-- =================================================
+       AÇÕES
+  ================================================== -->
+
+  <div class="actions">
+
+    <button
+      class="action clear"
+      id="clearButton"
+      type="button">
+
+      LIMPAR
+
+    </button>
+
+
+    <button
+      class="action confirm"
+      id="confirmButton"
+      type="button">
+
+      CONFIRMAR
+
+    </button>
+
+  </div>
+
+
+  <!-- =================================================
+       MENSAGEM
+  ================================================== -->
+
+  <div
+    class="message"
+    id="message">
+
+    Escolha as 3 cores da senha.
+
+  </div>
+
+
+  <!-- =================================================
+       SENHA REVELADA
+       SOMENTE APÓS ACERTAR
+  ================================================== -->
+
+  <div
+    class="reveal"
+    id="reveal">
+
+    <div class="reveal-title">
+
+      🔓 SENHA DESCOBERTA!
+
+    </div>
+
+
+    <div
+      class="reveal-colors"
+      id="revealColors">
+
+    </div>
+
+  </div>
+
+
 </div>
 
-<div class="controls">
-  <button class="control clear" id="clearBtn" type="button">LIMPAR</button>
-  <button class="control confirm" id="confirmBtn" type="button">CONFIRMAR</button>
-</div>
 
-<div class="message" id="message"></div>
+<!-- =====================================================
+     MODAL SEM CHANCE
+===================================================== -->
 
-</div>
-</div>
+<div
+  class="modal"
+  id="noChanceModal">
 
-<div class="modal" id="modal">
   <div class="modal-card">
-    <h2 id="modalTitle"></h2>
-    <p id="modalText"></p>
-    <div class="modal-buttons" id="modalButtons"></div>
+
+    <h2>
+      🎟️ Sem chances
+    </h2>
+
+    <p>
+      Você não possui chances suficientes
+      para iniciar esta partida.
+    </p>
+
+    <button
+      class="modal-button"
+      id="modalClose"
+      type="button">
+
+      ENTENDI
+
+    </button>
+
   </div>
+
 </div>
 
-<script>
+
+<script type="module">
+
+
+/* =====================================================
+   FIREBASE
+===================================================== */
+
+import {
+  initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+import {
+  getAuth,
+  onAuthStateChanged
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+import {
+  getFirestore,
+  collection,
+  query,
+  where,
+  getDocs,
+  doc,
+  updateDoc
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+/* =====================================================
+   CONFIG
+===================================================== */
+
+const firebaseConfig = {
+
+  apiKey:
+    "AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",
+
+  authDomain:
+    "adam-games-21081.firebaseapp.com",
+
+  projectId:
+    "adam-games-21081",
+
+  storageBucket:
+    "adam-games-21081.firebasestorage.app",
+
+  messagingSenderId:
+    "1055528418738",
+
+  appId:
+    "1:1055528418738:web:5fafdf63424ba9744eb8ab"
+
+};
+
+
+const app =
+  initializeApp(
+    firebaseConfig
+  );
+
+
+const auth =
+  getAuth(app);
+
+
+const db =
+  getFirestore(app);
+
+
+/* =====================================================
+   ELEMENTOS
+===================================================== */
+
+const loading =
+  document.getElementById("loading");
+
+const coinsEl =
+  document.getElementById("coins");
+
+const chancesEl =
+  document.getElementById("chances");
+
+const levelEl =
+  document.getElementById("level");
+
+const progressBar =
+  document.getElementById("progressBar");
+
+const messageEl =
+  document.getElementById("message");
+
+const revealEl =
+  document.getElementById("reveal");
+
+const revealColorsEl =
+  document.getElementById("revealColors");
+
+const confirmButton =
+  document.getElementById("confirmButton");
+
+const clearButton =
+  document.getElementById("clearButton");
+
+const noChanceModal =
+  document.getElementById("noChanceModal");
+
+
+/* =====================================================
+   CONFIGURAÇÃO DO JOGO
+===================================================== */
+
+const COLORS = {
+
+  vermelho:
+    "./vermelho.png",
+
+  azul:
+    "./azul.png",
+
+  verde:
+    "./verde.png",
+
+  amarelo:
+    "./amarelo.png",
+
+  roxo:
+    "./roxo.png",
+
+  laranja:
+    "./laranja.png"
+
+};
+
+
+const COLOR_NAMES =
+  Object.keys(COLORS);
+
+
 /*
-  VERSÃO DE TESTE:
-  os botões usam círculos/emoji, sem PNG nas cores.
-  Isso elimina qualquer problema dos assets coloridos.
+   Por enquanto:
+
+   NÍVEL 1 = 3 cores
+   NÍVEL 2 = 3 cores
+   NÍVEL 3 = 3 cores
+
+   Depois adicionaremos:
+
+   4-6 = 4 cores
+   7 = 5 cores
+   8 = 6 cores
+   9 = especial
 */
 
-const COLORS = ["vermelho","azul","verde","amarelo","roxo","laranja"];
-
-const EMOJI = {
-  vermelho:"🔴",
-  azul:"🔵",
-  verde:"🟢",
-  amarelo:"🟡",
-  roxo:"🟣",
-  laranja:"🟠"
-};
-
 const LEVELS = {
-  1:{length:3,reward:20},
-  2:{length:3,reward:20},
-  3:{length:3,reward:20}
+
+  1:{
+    length:3,
+    reward:20
+  },
+
+  2:{
+    length:3,
+    reward:20
+  },
+
+  3:{
+    length:3,
+    reward:20
+  }
+
 };
+
+
+/* =====================================================
+   ESTADO
+===================================================== */
+
+let usuario = null;
+
+let usuarioDoc = null;
+
+let currentLevel = 1;
+
+let secret = [];
+
+let selected = [];
+
+let attempts = 0;
 
 const MAX_ATTEMPTS = 10;
 
-let level = 1;
-let secret = [];
-let current = [];
-let attempt = 0;
-let busy = true;
-let coins = 30;
+let gameStarted = false;
 
-const $ = id => document.getElementById(id);
+let gameFinished = false;
 
-function randomSecret(length){
-  const pool = [...COLORS];
-  const result = [];
 
-  while(result.length < length){
-    const index = Math.floor(Math.random()*pool.length);
-    result.push(pool.splice(index,1)[0]);
-  }
+/* =====================================================
+   GERAR SENHA
+===================================================== */
 
-  return result;
-}
+function generateSecret(){
 
-function renderPreview(){
-  const preview = $("preview");
-  preview.innerHTML = "";
+  const config =
+    LEVELS[currentLevel];
 
-  current.forEach(color=>{
-    const span = document.createElement("span");
-    span.className = "preview-dot";
-    span.textContent = EMOJI[color];
-    preview.appendChild(span);
-  });
-}
+  secret = [];
 
-function makeRows(){
-  const rows = $("rows");
-  rows.innerHTML = "";
+  for(
+    let i = 0;
+    i < config.length;
+    i++
+  ){
 
-  for(let r=0;r<MAX_ATTEMPTS;r++){
-    const row = document.createElement("div");
-    row.className = "row";
-    row.dataset.row = r;
-
-    const number = document.createElement("div");
-    number.className = "row-number";
-    number.textContent = r+1;
-
-    const slots = document.createElement("div");
-    slots.className = "guess-slots";
-
-    for(let i=0;i<3;i++){
-      const slot = document.createElement("div");
-      slot.className = "guess-slot";
-      slot.dataset.slot = i;
-      slots.appendChild(slot);
-    }
-
-    const feedback = document.createElement("div");
-    feedback.className = "feedback";
-
-    for(let i=0;i<5;i++){
-      const dot = document.createElement("div");
-      dot.className = "feedback-dot";
-      feedback.appendChild(dot);
-    }
-
-    row.append(number,slots,feedback);
-    rows.appendChild(row);
-  }
-}
-
-function renderCurrentRow(){
-  const row = document.querySelector(`.row[data-row="${attempt}"]`);
-  if(!row) return;
-
-  row.querySelectorAll(".guess-slot").forEach((slot,i)=>{
-    slot.innerHTML = "";
-
-    if(current[i]){
-      const span = document.createElement("span");
-      span.className = "circle";
-      span.textContent = EMOJI[current[i]];
-      slot.appendChild(span);
-    }
-  });
-}
-
-function calculateResult(guess,answer){
-  let exact = 0;
-  let misplaced = 0;
-
-  for(let i=0;i<answer.length;i++){
-    if(guess[i] === answer[i]) exact++;
-  }
-
-  for(let i=0;i<guess.length;i++){
-    if(guess[i] !== answer[i] && answer.includes(guess[i])){
-      misplaced++;
-    }
-  }
-
-  return {exact,misplaced};
-}
-
-function paintResult(result){
-  const row = document.querySelector(`.row[data-row="${attempt}"]`);
-  if(!row) return;
-
-  const dots = [...row.querySelectorAll(".feedback-dot")];
-
-  for(let i=0;i<result.exact;i++){
-    dots[i].textContent = "⚫";
-  }
-
-  for(let i=0;i<result.misplaced;i++){
-    dots[result.exact+i].textContent = "⚪";
-  }
-}
-
-function startLevel(){
-  const config = LEVELS[level];
-
-  secret = randomSecret(config.length);
-  current = [];
-  attempt = 0;
-  busy = true;
-
-  $("level").textContent = `${level} / 3`;
-  $("phaseTitle").textContent = `NÍVEL ${level} — DESCUBRA A SENHA`;
-  $("phaseText").textContent = "Memorize as 3 cores. Depois reproduza a sequência.";
-  $("message").textContent = "MEMORIZE A SENHA...";
-  $("progress").style.width = `${(level/3)*100}%`;
-
-  makeRows();
-  renderPreview();
-
-  const firstRow = document.querySelector('.row[data-row="0"]');
-
-  const secretCode = $("secretCode");
-  const secretBox = $("secretBox");
-  const secretHint = $("secretHint");
-
-  secretCode.innerHTML = "";
-  secret.forEach(color=>{
-    const span = document.createElement("span");
-    span.className = "secret-dot";
-    span.textContent = EMOJI[color];
-    secretCode.appendChild(span);
-  });
-
-  secretBox.classList.remove("hidden");
-  secretHint.textContent = "Memorize a sequência...";
-
-  setTimeout(()=>{
-    secretCode.innerHTML = "";
-    secretBox.classList.add("hidden");
-
-    busy = false;
-    current = [];
-    renderPreview();
-    $("message").textContent = "Sua vez! Escolha 3 cores.";
-  },2500);
-}
-
-function chooseColor(color){
-  if(busy) return;
-
-  if(current.length >= 3){
-    $("message").textContent = "Você já escolheu 3 cores.";
-    return;
-  }
-
-  current.push(color);
-  renderPreview();
-  renderCurrentRow();
-
-  $("message").textContent =
-    `${current.length}/3 cores escolhidas.`;
-}
-
-function clearCurrent(){
-  if(busy) return;
-
-  current = [];
-  renderPreview();
-  renderCurrentRow();
-
-  $("message").textContent = "Escolha novamente as 3 cores.";
-}
-
-function confirmGuess(){
-  if(busy) return;
-
-  if(current.length !== 3){
-    $("message").textContent = "Escolha exatamente 3 cores.";
-    return;
-  }
-
-  const result = calculateResult(current,secret);
-  paintResult(result);
-
-  if(result.exact === 3){
-    coins += LEVELS[level].reward;
-    $("coins").textContent = coins;
-
-    busy = true;
-
-    if(level < 3){
-      showModal(
-        `NÍVEL ${level} CONCLUÍDO!`,
-        `Você acertou a senha!<br><br><b>+${LEVELS[level].reward} Adam Coins</b>`,
-        [{
-          text:"PRÓXIMO NÍVEL",
-          cls:"primary",
-          fn:()=>{
-            closeModal();
-            level++;
-            startLevel();
-          }
-        }]
+    const randomIndex =
+      Math.floor(
+        Math.random() *
+        COLOR_NAMES.length
       );
-    }else{
-      showModal(
-        "PARABÉNS!",
-        `Você concluiu os 3 níveis de teste!<br><br><b>Total ganho nesta partida: ${coins} Adam Coins</b>`,
-        [{
-          text:"JOGAR NOVAMENTE",
-          cls:"primary",
-          fn:()=>{
-            closeModal();
-            level=1;
-            coins=30;
-            $("coins").textContent=coins;
-            startLevel();
-          }
-        }]
-      );
-    }
 
-    return;
-  }
-
-  attempt++;
-
-  if(attempt >= MAX_ATTEMPTS){
-    busy = true;
-
-    showModal(
-      "FIM DE JOGO",
-      `A senha era:<br><br><b>${secret.map(c=>EMOJI[c]).join(" ")}</b>`,
-      [{
-        text:"TENTAR NOVAMENTE",
-        cls:"primary",
-        fn:()=>{
-          closeModal();
-          startLevel();
-        }
-      }]
+    secret.push(
+      COLOR_NAMES[randomIndex]
     );
 
-    return;
   }
 
-  current = [];
-  renderPreview();
-  attempt = Math.min(attempt,MAX_ATTEMPTS-1);
-  renderCurrentRow();
+  /*
+     IMPORTANTE:
 
-  $("message").textContent =
-    `Tentativa ${attempt+1} de ${MAX_ATTEMPTS}.`;
+     A senha NÃO é mostrada
+     na tela.
+
+     Ela fica somente nesta
+     variável em memória.
+  */
+
+  console.log(
+    "Senha criada internamente:",
+    secret
+  );
+
 }
 
-function showModal(title,text,buttons){
-  $("modalTitle").textContent = title;
-  $("modalText").innerHTML = text;
-  $("modalButtons").innerHTML = "";
 
-  buttons.forEach(item=>{
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = item.cls || "secondary";
-    button.textContent = item.text;
-    button.addEventListener("click",item.fn);
-    $("modalButtons").appendChild(button);
-  });
+/* =====================================================
+   LOCALIZAR USUÁRIO
+===================================================== */
 
-  $("modal").classList.add("show");
+async function localizarUsuario(user){
+
+  let resultado =
+    await getDocs(
+
+      query(
+        collection(db,"admins"),
+        where(
+          "uid",
+          "==",
+          user.uid
+        )
+      )
+
+    );
+
+
+  if(
+    resultado.empty &&
+    user.email
+  ){
+
+    resultado =
+      await getDocs(
+
+        query(
+          collection(db,"admins"),
+          where(
+            "email",
+            "==",
+            user.email.toLowerCase()
+          )
+        )
+
+      );
+
+  }
+
+
+  if(
+    resultado.empty
+  ){
+
+    return null;
+
+  }
+
+
+  return resultado.docs[0];
+
 }
 
-function closeModal(){
-  $("modal").classList.remove("show");
+
+/* =====================================================
+   ATUALIZAR SALDO NA TELA
+===================================================== */
+
+function atualizarSaldo(){
+
+  if(!usuario){
+
+    coinsEl.textContent =
+      "0";
+
+    chancesEl.textContent =
+      "0";
+
+    return;
+
+  }
+
+
+  coinsEl.textContent =
+    Number(
+      usuario.moedas || 0
+    ).toLocaleString("pt-BR");
+
+
+  chancesEl.textContent =
+    Number(
+      usuario.chances || 0
+    ).toLocaleString("pt-BR");
+
 }
 
-/* Os próprios BUTTONS recebem o clique. */
-document.querySelectorAll(".color-btn").forEach(button=>{
-  button.addEventListener("click",()=>{
-    chooseColor(button.dataset.color);
-  });
-});
 
-$("clearBtn").addEventListener("click",clearCurrent);
-$("confirmBtn").addEventListener("click",confirmGuess);
+/* =====================================================
+   INICIAR PARTIDA
+===================================================== */
 
-$("back").addEventListener("click",()=>{
-  window.location.href = "jogos.html";
-});
+async function iniciarPartida(){
 
-/*
-  Começa o teste imediatamente.
-  Não depende de Firebase, autenticação ou banco.
-*/
-startLevel();
+  /*
+     Evita descontar outra chance
+     quando a pessoa simplesmente
+     recarrega a página.
+  */
+
+  const sessionKey =
+    "adam_senha_partida_iniciada";
+
+
+  if(
+    sessionStorage.getItem(
+      sessionKey
+    )
+  ){
+
+    gameStarted = true;
+
+    generateSecret();
+
+    return;
+
+  }
+
+
+  const chances =
+    Number(
+      usuario.chances || 0
+    );
+
+
+  if(
+    chances <= 0
+  ){
+
+    noChanceModal.classList.add(
+      "show"
+    );
+
+    messageEl.textContent =
+      "Você não possui chances.";
+
+    return;
+
+  }
+
+
+  /*
+     AO INICIAR:
+
+     -1 chance
+     +30 Adam Coins
+  */
+
+  const novasChances =
+    chances - 1;
+
+
+  const novasMoedas =
+    Number(
+      usuario.moedas || 0
+    ) + 30;
+
+
+  await updateDoc(
+
+    doc(
+      db,
+      "admins",
+      usuarioDoc.id
+    ),
+
+    {
+
+      chances:
+        novasChances,
+
+      moedas:
+        novasMoedas
+
+    }
+
+  );
+
+
+  usuario.chances =
+    novasChances;
+
+  usuario.moedas =
+    novasMoedas;
+
+
+  sessionStorage.setItem(
+    sessionKey,
+    "1"
+  );
+
+
+  gameStarted = true;
+
+  atualizarSaldo();
+
+  generateSecret();
+
+}
+
+
+/* =====================================================
+   MOSTRAR COR NA LINHA
+===================================================== */
+
+function renderSelected(){
+
+  const rows =
+    document.querySelectorAll(
+      ".row"
+    );
+
+
+  /*
+     Limpamos somente a linha atual.
+  */
+
+  const currentRow =
+    rows[attempts];
+
+
+  if(!currentRow){
+
+    return;
+
+  }
+
+
+  const slots =
+    currentRow.querySelectorAll(
+      ".slot"
+    );
+
+
+  slots.forEach(
+    (slot,index) => {
+
+      slot.innerHTML = "";
+
+      slot.classList.add(
+        "empty"
+      );
+
+
+      if(
+        selected[index]
+      ){
+
+        const img =
+          document.createElement(
+            "img"
+          );
+
+        img.src =
+          COLORS[
+            selected[index]
+          ];
+
+        img.alt =
+          selected[index];
+
+        slot.appendChild(
+          img
+        );
+
+        slot.classList.remove(
+          "empty"
+        );
+
+      }
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   ESCOLHER COR
+===================================================== */
+
+document
+  .querySelectorAll(
+    ".color-button"
+  )
+  .forEach(
+    button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          if(
+            !gameStarted ||
+            gameFinished
+          ){
+
+            return;
+
+          }
+
+
+          const max =
+            LEVELS[
+              currentLevel
+            ].length;
+
+
+          /*
+             Não permite colocar
+             mais cores que o tamanho
+             da senha.
+          */
+
+          if(
+            selected.length >= max
+          ){
+
+            return;
+
+          }
+
+
+          selected.push(
+            button.dataset.color
+          );
+
+
+          renderSelected();
+
+
+          messageEl.textContent =
+            `${selected.length}/${max} cores escolhidas.`;
+
+        }
+      );
+
+    }
+  );
+
+
+/* =====================================================
+   LIMPAR
+===================================================== */
+
+clearButton.addEventListener(
+  "click",
+  () => {
+
+    if(
+      !gameStarted ||
+      gameFinished
+    ){
+
+      return;
+
+    }
+
+
+    selected = [];
+
+
+    renderSelected();
+
+
+    const max =
+      LEVELS[
+        currentLevel
+      ].length;
+
+
+    messageEl.textContent =
+      `Escolha as ${max} cores da senha.`;
+
+    messageEl.className =
+      "message";
+
+  }
+);
+
+
+/* =====================================================
+   CALCULAR PISTAS
+===================================================== */
+
+function calculateHints(
+  guess,
+  answer
+){
+
+  let black = 0;
+
+  let white = 0;
+
+
+  const answerUsed =
+    new Array(
+      answer.length
+    ).fill(false);
+
+
+  const guessUsed =
+    new Array(
+      guess.length
+    ).fill(false);
+
+
+  /*
+     PRIMEIRO:
+
+     cor certa no lugar certo.
+  */
+
+  for(
+    let i = 0;
+    i < answer.length;
+    i++
+  ){
+
+    if(
+      guess[i] === answer[i]
+    ){
+
+      black++;
+
+      answerUsed[i] =
+        true;
+
+      guessUsed[i] =
+        true;
+
+    }
+
+  }
+
+
+  /*
+     SEGUNDO:
+
+     cor certa no lugar errado.
+  */
+
+  for(
+    let i = 0;
+    i < guess.length;
+    i++
+  ){
+
+    if(
+      guessUsed[i]
+    ){
+
+      continue;
+
+    }
+
+
+    for(
+      let j = 0;
+      j < answer.length;
+      j++
+    ){
+
+      if(
+        answerUsed[j]
+      ){
+
+        continue;
+
+      }
+
+
+      if(
+        guess[i] === answer[j]
+      ){
+
+        white++;
+
+        answerUsed[j] =
+          true;
+
+        break;
+
+      }
+
+    }
+
+  }
+
+
+  return {
+    black,
+    white
+  };
+
+}
+
+
+/* =====================================================
+   MOSTRAR HISTÓRICO
+===================================================== */
+
+function showHistory(
+  rowIndex,
+  black,
+  white
+){
+
+  const rows =
+    document.querySelectorAll(
+      ".row"
+    );
+
+
+  const row =
+    rows[rowIndex];
+
+
+  if(!row){
+
+    return;
+
+  }
+
+
+  /*
+     Histórico minúsculo.
+
+     Não colocamos nada grande
+     por cima do tabuleiro.
+  */
+
+  let history =
+    row.querySelector(
+      ".history"
+    );
+
+
+  if(!history){
+
+    history =
+      document.createElement(
+        "div"
+      );
+
+    history.className =
+      "history";
+
+    row.appendChild(
+      history
+    );
+
+  }
+
+
+  history.innerHTML = "";
+
+
+  for(
+    let i = 0;
+    i < black;
+    i++
+  ){
+
+    const dot =
+      document.createElement(
+        "div"
+      );
+
+    dot.className =
+      "history-dot black";
+
+    history.appendChild(
+      dot
+    );
+
+  }
+
+
+  for(
+    let i = 0;
+    i < white;
+    i++
+  ){
+
+    const dot =
+      document.createElement(
+        "div"
+      );
+
+    dot.className =
+      "history-dot white";
+
+    history.appendChild(
+      dot
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   CONFIRMAR
+===================================================== */
+
+confirmButton.addEventListener(
+  "click",
+  async () => {
+
+    if(
+      !gameStarted ||
+      gameFinished
+    ){
+
+      return;
+
+    }
+
+
+    const max =
+      LEVELS[
+        currentLevel
+      ].length;
+
+
+    if(
+      selected.length !== max
+    ){
+
+      messageEl.textContent =
+        `Escolha as ${max} cores antes de confirmar.`;
+
+      messageEl.className =
+        "message warning";
+
+      return;
+
+    }
+
+
+    const result =
+      calculateHints(
+        selected,
+        secret
+      );
+
+
+    showHistory(
+      attempts,
+      result.black,
+      result.white
+    );
+
+
+    /*
+       SENHA COMPLETAMENTE CERTA
+    */
+
+    if(
+      result.black === max
+    ){
+
+      await venceuNivel();
+
+      return;
+
+    }
+
+
+    /*
+       ERRO
+    */
+
+    attempts++;
+
+
+    selected = [];
+
+
+    if(
+      attempts >= MAX_ATTEMPTS
+    ){
+
+      perdeuNivel();
+
+      return;
+
+    }
+
+
+    messageEl.textContent =
+      `Senha incorreta. Tentativa ${attempts + 1} de ${MAX_ATTEMPTS}.`;
+
+    messageEl.className =
+      "message error";
+
+
+    renderSelected();
+
+  }
+);
+
+
+/* =====================================================
+   VENCEU
+===================================================== */
+
+async function venceuNivel(){
+
+  gameFinished = true;
+
+
+  const reward =
+    LEVELS[
+      currentLevel
+    ].reward;
+
+
+  const novasMoedas =
+    Number(
+      usuario.moedas || 0
+    ) + reward;
+
+
+  await updateDoc(
+
+    doc(
+      db,
+      "admins",
+      usuarioDoc.id
+    ),
+
+    {
+
+      moedas:
+        novasMoedas
+
+    }
+
+  );
+
+
+  usuario.moedas =
+    novasMoedas;
+
+
+  atualizarSaldo();
+
+
+  messageEl.textContent =
+    `🎉 ACERTOU! +${reward} Adam Coins`;
+
+  messageEl.className =
+    "message success";
+
+
+  /*
+     AGORA SIM:
+
+     mostramos a senha.
+  */
+
+  revealColorsEl.innerHTML = "";
+
+
+  secret.forEach(
+    color => {
+
+      const img =
+        document.createElement(
+          "img"
+        );
+
+      img.src =
+        COLORS[color];
+
+      img.alt =
+        color;
+
+      revealColorsEl.appendChild(
+        img
+      );
+
+    }
+  );
+
+
+  revealEl.classList.add(
+    "show"
+  );
+
+
+  if(
+    currentLevel < 3
+  ){
+
+    setTimeout(
+      () => {
+
+        currentLevel++;
+
+        iniciarNovoNivel();
+
+      },
+      1800
+    );
+
+  }
+  else{
+
+    messageEl.textContent =
+      `🏆 NÍVEIS 1 A 3 CONCLUÍDOS! +${reward} Adam Coins`;
+
+  }
+
+}
+
+
+/* =====================================================
+   NOVO NÍVEL
+===================================================== */
+
+function iniciarNovoNivel(){
+
+  gameFinished = false;
+
+  attempts = 0;
+
+  selected = [];
+
+  revealEl.classList.remove(
+    "show"
+  );
+
+
+  levelEl.textContent =
+    `${currentLevel} / 3`;
+
+
+  progressBar.style.width =
+    `${(currentLevel / 3) * 100}%`;
+
+
+  document
+    .querySelectorAll(
+      ".history"
+    )
+    .forEach(
+      el => el.remove()
+    );
+
+
+  document
+    .querySelectorAll(
+      ".slot"
+    )
+    .forEach(
+      slot => {
+
+        slot.innerHTML = "";
+
+        slot.classList.add(
+          "empty"
+        );
+
+      }
+    );
+
+
+  messageEl.className =
+    "message";
+
+
+  messageEl.textContent =
+    "Escolha as 3 cores da nova senha.";
+
+
+  generateSecret();
+
+}
+
+
+/* =====================================================
+   PERDEU
+===================================================== */
+
+function perdeuNivel(){
+
+  gameFinished = true;
+
+
+  messageEl.textContent =
+    "💔 Você esgotou as 10 tentativas.";
+
+  messageEl.className =
+    "message error";
+
+
+  /*
+     Mostramos a senha somente
+     depois que a pessoa perdeu.
+  */
+
+  revealColorsEl.innerHTML = "";
+
+
+  secret.forEach(
+    color => {
+
+      const img =
+        document.createElement(
+          "img"
+        );
+
+      img.src =
+        COLORS[color];
+
+      img.alt =
+        color;
+
+      revealColorsEl.appendChild(
+        img
+      );
+
+    }
+  );
+
+
+  revealEl.classList.add(
+    "show"
+  );
+
+}
+
+
+/* =====================================================
+   VOLTAR
+===================================================== */
+
+document
+  .getElementById("back")
+  .addEventListener(
+    "click",
+    () => {
+
+      sessionStorage.removeItem(
+        "adam_senha_partida_iniciada"
+      );
+
+      window.location.href =
+        "jogos.html";
+
+    }
+  );
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+document
+  .getElementById("modalClose")
+  .addEventListener(
+    "click",
+    () => {
+
+      noChanceModal.classList.remove(
+        "show"
+      );
+
+      window.location.href =
+        "jogos.html";
+
+    }
+  );
+
+
+/* =====================================================
+   FIREBASE / INICIALIZAÇÃO
+===================================================== */
+
+onAuthStateChanged(
+  auth,
+  async user => {
+
+    if(!user){
+
+      window.location.replace(
+        "index.html"
+      );
+
+      return;
+
+    }
+
+
+    try{
+
+      usuarioDoc =
+        await localizarUsuario(
+          user
+        );
+
+
+      if(!usuarioDoc){
+
+        loading.classList.add(
+          "hide"
+        );
+
+        messageEl.textContent =
+          "Não foi possível localizar seu cadastro.";
+
+        messageEl.className =
+          "message error";
+
+        return;
+
+      }
+
+
+      usuario =
+        usuarioDoc.data();
+
+
+      atualizarSaldo();
+
+
+      await iniciarPartida();
+
+
+      loading.classList.add(
+        "hide"
+      );
+
+    }
+
+    catch(error){
+
+      console.error(
+        "Erro no jogo Senha:",
+        error
+      );
+
+
+      loading.classList.add(
+        "hide"
+      );
+
+
+      messageEl.textContent =
+        "Erro ao carregar o jogo.";
+
+      messageEl.className =
+        "message error";
+
+    }
+
+  }
+);
+
 </script>
 
 </body>
+
 </html>
