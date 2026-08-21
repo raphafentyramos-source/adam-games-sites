@@ -45,7 +45,7 @@ button{font:inherit}
 .info p{margin-top:5px;color:#b9d7e8;font-size:12px;line-height:1.4}
 
 .game-wrap{
-  margin-top:8px;display:flex;justify-content:center;
+  position:relative;z-index:1;margin-top:8px;display:flex;justify-content:center;
   overflow:hidden;border-radius:18px;
   background-position:center;background-size:cover;background-repeat:no-repeat;
   transition:background-image .2s ease
@@ -56,7 +56,7 @@ button{font:inherit}
   background-size:100% 100%;background-repeat:no-repeat;
 }
 .palette{
-  margin:12px auto 0;width:min(100%,560px);display:grid;grid-template-columns:repeat(7,1fr);
+  position:relative;z-index:9999;pointer-events:auto;margin:12px auto 0;width:min(100%,560px);display:grid;grid-template-columns:repeat(7,1fr);
   gap:7px;padding:10px;border-radius:18px;background:rgba(35,18,8,.78);border:2px solid #9b6a32;box-shadow:0 8px 20px #0008;z-index:3
 }
 .color-btn{
@@ -65,6 +65,8 @@ button{font:inherit}
   justify-content:center;cursor:pointer;min-width:0;
   touch-action:manipulation;
   pointer-events:auto;
+  -webkit-user-select:none;user-select:none;
+  -webkit-touch-callout:none;
   -webkit-tap-highlight-color:transparent;
 }
 .color-btn img{width:100%;height:100%;max-height:58px;object-fit:contain;filter:drop-shadow(0 3px 3px #0008);pointer-events:none;user-select:none;-webkit-user-drag:none}
@@ -99,7 +101,7 @@ button{font:inherit}
 .feedback-dot.white{background-image:url("./branco.png");background-size:contain;background-position:center;background-repeat:no-repeat;border-color:transparent;box-shadow:none}
 
 .controls{
-  margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:9px
+  position:relative;z-index:9999;pointer-events:auto;margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:9px
 }
 .control{
   height:47px;border:0;border-radius:14px;color:#fff;font-weight:900;cursor:pointer;
@@ -306,14 +308,26 @@ function buildPalette(){
       setTimeout(()=>btn.classList.remove("selected"),180);
     };
 
-    btn.addEventListener("pointerdown",event=>{
+    let toqueProcessado=false;
+
+    btn.addEventListener("touchstart",event=>{
       event.preventDefault();
+      toqueProcessado=true;
       selecionarCor();
     },{passive:false});
 
+    btn.addEventListener("pointerdown",event=>{
+      event.preventDefault();
+      if(event.pointerType!=="touch") selecionarCor();
+    },{passive:false});
+
     btn.addEventListener("click",event=>{
-      // Fallback para navegadores que não disparam pointerdown como esperado.
-      if(event.detail===0) selecionarCor();
+      event.preventDefault();
+      if(toqueProcessado){
+        toqueProcessado=false;
+        return;
+      }
+      selecionarCor();
     });
 
     el.appendChild(btn);
@@ -611,7 +625,9 @@ async function lose(){
   );
 }
 
-$("confirmBtn").addEventListener("click",async()=>{
+let acaoProcessada=false;
+
+async function confirmar(){
   if(busy) return;
 
   if(current.length!==secret.length){
@@ -640,15 +656,46 @@ $("confirmBtn").addEventListener("click",async()=>{
 
   renderCurrentRow();
   $("message").textContent=`Senha incorreta. Tentativa ${attempt+1} de ${MAX_ATTEMPTS}.`;
+}
+
+function confirmarTouch(event){
+  event.preventDefault();
+  if(acaoProcessada) return;
+  acaoProcessada=true;
+  confirmar().finally(()=>setTimeout(()=>acaoProcessada=false,250));
+}
+
+$("confirmBtn").addEventListener("touchstart",confirmarTouch,{passive:false});
+$("confirmBtn").addEventListener("click",event=>{
+  if(acaoProcessada){event.preventDefault();return;}
+  confirmar();
 });
 
-$("clearBtn").addEventListener("click",()=>{
+function limpar(){
   if(busy) return;
   current=[];
   renderPreview();
   renderCurrentRow();
   $("message").textContent="";
+}
+
+$("clearBtn").addEventListener("touchstart",event=>{
+  event.preventDefault();
+  limpar();
+},{passive:false});
+$("clearBtn").addEventListener("click",event=>{
+  event.preventDefault();
+  limpar();
 });
+
+// Garante interação no Safari/iPhone mesmo quando alguma camada visual intercepta o toque.
+document.addEventListener("touchstart",event=>{
+  const btn=event.target.closest("button");
+  if(!btn) return;
+  if(btn.classList.contains("color-btn") || btn.id==="confirmBtn" || btn.id==="clearBtn" || btn.id==="back") {
+    btn.style.webkitTapHighlightColor="transparent";
+  }
+},{passive:true});
 
 $("back").addEventListener("click",()=>{
   window.location.href="jogos.html";
