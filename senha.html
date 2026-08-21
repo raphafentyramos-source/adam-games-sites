@@ -60,10 +60,14 @@ button{font:inherit}
   gap:7px;padding:10px;border-radius:18px;background:rgba(35,18,8,.78);border:2px solid #9b6a32;box-shadow:0 8px 20px #0008;z-index:3
 }
 .color-btn{
+  position:relative;z-index:20;
   border:0;background:transparent;display:flex;align-items:center;
-  justify-content:center;cursor:pointer;min-width:0
+  justify-content:center;cursor:pointer;min-width:0;
+  touch-action:manipulation;
+  pointer-events:auto;
+  -webkit-tap-highlight-color:transparent;
 }
-.color-btn img{width:100%;height:100%;max-height:58px;object-fit:contain;filter:drop-shadow(0 3px 3px #0008)}
+.color-btn img{width:100%;height:100%;max-height:58px;object-fit:contain;filter:drop-shadow(0 3px 3px #0008);pointer-events:none;user-select:none;-webkit-user-drag:none}
 .color-btn:active img{transform:scale(.88)}
 .color-btn.selected img{filter:drop-shadow(0 0 9px #fff) drop-shadow(0 3px 3px #0008)}
 
@@ -289,12 +293,27 @@ function buildPalette(){
 
     btn.appendChild(img);
 
-    btn.addEventListener("click",()=>{
-      if(busy || current.length>=secret.length) return;
+    // Seleção robusta para toque no iPhone/iPad e clique no computador.
+    // O botão recebe o evento diretamente e a imagem não captura o toque.
+    const selecionarCor=()=>{
+      if(busy || !secret.length || current.length>=secret.length) return;
 
       current.push(color);
+      btn.classList.add("selected");
       renderPreview();
       renderCurrentRow();
+
+      setTimeout(()=>btn.classList.remove("selected"),180);
+    };
+
+    btn.addEventListener("pointerdown",event=>{
+      event.preventDefault();
+      selecionarCor();
+    },{passive:false});
+
+    btn.addEventListener("click",event=>{
+      // Fallback para navegadores que não disparam pointerdown como esperado.
+      if(event.detail===0) selecionarCor();
     });
 
     el.appendChild(btn);
