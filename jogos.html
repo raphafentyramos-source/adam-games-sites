@@ -955,9 +955,7 @@ body{
   <div class="games">
 
 
-    <!-- =================================================
-         FORCA
-    ================================================== -->
+    <!-- FORCA -->
 
     <div
       class="game"
@@ -1000,9 +998,7 @@ body{
     </div>
 
 
-    <!-- =================================================
-         CHUVA DE SABORES
-    ================================================== -->
+    <!-- CHUVA DE SABORES -->
 
     <div
       class="game"
@@ -1044,9 +1040,7 @@ body{
     </div>
 
 
-    <!-- =================================================
-         CAÇA AO TESOURO
-    ================================================== -->
+    <!-- CAÇA AO TESOURO -->
 
     <div
       class="game"
@@ -1088,9 +1082,7 @@ body{
     </div>
 
 
-    <!-- =================================================
-         ACERTE AO ALVO
-    ================================================== -->
+    <!-- ACERTE AO ALVO -->
 
     <div
       class="game"
@@ -1132,9 +1124,7 @@ body{
     </div>
 
 
-    <!-- =================================================
-         MEMÓRIA
-    ================================================== -->
+    <!-- MEMÓRIA -->
 
     <div
       class="game"
@@ -1176,9 +1166,7 @@ body{
     </div>
 
 
-    <!-- =================================================
-         REAÇÃO
-    ================================================== -->
+    <!-- REAÇÃO -->
 
     <div
       class="game"
@@ -1220,15 +1208,7 @@ body{
     </div>
 
 
-    <!-- =================================================
-         SEQUÊNCIA DE CORES
-         
-         ANTES:
-         Sequência de Sons
-
-         AGORA:
-         Sequência de Cores
-    ================================================== -->
+    <!-- SEQUÊNCIA DE CORES -->
 
     <div
       class="game"
@@ -1270,9 +1250,7 @@ body{
     </div>
 
 
-    <!-- =================================================
-         PALAVRA EMBARALHADA
-    ================================================== -->
+    <!-- PALAVRA EMBARALHADA -->
 
     <div
       class="game"
@@ -1314,9 +1292,7 @@ body{
     </div>
 
 
-    <!-- =================================================
-         NOVO — 21 BARALHO
-    ================================================== -->
+    <!-- 21 BARALHO -->
 
     <div
       class="game"
@@ -1358,9 +1334,7 @@ body{
     </div>
 
 
-    <!-- =================================================
-         NOVO — SENHA
-    ================================================== -->
+    <!-- SENHA -->
 
     <div
       class="game"
@@ -1436,9 +1410,7 @@ body{
 </div>
 
 
-<!-- =====================================================
-     MODAL SEM CHANCE
-===================================================== -->
+<!-- MODAL SEM CHANCE -->
 
 <div
   class="modal"
@@ -1472,9 +1444,7 @@ body{
 </div>
 
 
-<!-- =====================================================
-     WHATSAPP
-===================================================== -->
+<!-- WHATSAPP -->
 
 <a
   class="whatsapp"
@@ -1692,13 +1662,20 @@ const paginas = {
   palavra:
     "palavra.html",
 
-  /* NOVO */
   baralho:
     "Baralho.html",
 
-  /* NOVO */
+  /*
+    CORREÇÃO:
+    O arquivo criado para o jogo é senha.html,
+    com "s" minúsculo.
+
+    GitHub Pages diferencia maiúsculas
+    de minúsculas no nome do arquivo.
+  */
+
   senha:
-    "Senha.html"
+    "senha.html"
 
 };
 
@@ -1743,6 +1720,11 @@ function verificarJogo(jogo){
     !pagina
   ){
 
+    console.error(
+      "Página do jogo não encontrada:",
+      jogo
+    );
+
     return;
 
   }
@@ -1758,28 +1740,13 @@ function verificarJogo(jogo){
    CLIQUE NOS CARDS
 ===================================================== */
 
-/*
-   TODO O CARD É CLICÁVEL.
-
-   Isso vale para:
-
-   - imagem
-   - nome
-   - descrição
-   - área do card
-   - botão JOGAR
-
-   Os novos jogos também usam exatamente
-   o mesmo sistema.
-*/
-
 document
   .querySelectorAll(".game")
   .forEach(card => {
 
     card.addEventListener(
       "click",
-      event => {
+      () => {
 
         verificarJogo(
           card.dataset.game
