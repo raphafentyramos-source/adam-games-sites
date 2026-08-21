@@ -14,6 +14,10 @@
 
 <style>
 
+/* =====================================================
+   RESET
+===================================================== */
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -37,8 +41,8 @@ body{
   background:
     linear-gradient(
       180deg,
-      #073454,
-      #021d32
+      #073754,
+      #021d31
     );
 
   overflow-x:hidden;
@@ -59,8 +63,8 @@ body{
   margin:0 auto;
 
   padding:
-    14px
-    12px
+    10px
+    9px
     70px;
 
 }
@@ -94,7 +98,7 @@ body{
   border-radius:14px;
 
   background:
-    rgba(4,38,65,.9);
+    rgba(2,38,64,.92);
 
   color:#fff;
 
@@ -116,11 +120,11 @@ body{
 
   display:block;
 
+  color:#a9d7eb;
+
   font-size:10px;
 
   letter-spacing:3px;
-
-  color:#a8d7ee;
 
 }
 
@@ -166,14 +170,14 @@ body{
 
 .status-box{
 
-  padding:10px 6px;
+  padding:10px 5px;
 
   border-radius:15px;
 
   text-align:center;
 
   background:
-    rgba(3,34,57,.88);
+    rgba(2,29,49,.9);
 
   border:
     1px solid
@@ -184,13 +188,13 @@ body{
 
 .status-label{
 
+  color:#9fc9df;
+
   font-size:9px;
 
   font-weight:bold;
 
-  color:#9fc9df;
-
-  letter-spacing:.7px;
+  letter-spacing:.6px;
 
 }
 
@@ -207,23 +211,15 @@ body{
 
 
 .coins{
-
   color:#ffd52b;
-
 }
-
-
-.level{
-
-  color:#62d9ff;
-
-}
-
 
 .chances{
+  color:#70ff9d;
+}
 
-  color:#72ff9e;
-
+.level{
+  color:#65d9ff;
 }
 
 
@@ -240,9 +236,9 @@ body{
     2px
     12px;
 
-  border-radius:10px;
-
   overflow:hidden;
+
+  border-radius:10px;
 
   background:
     rgba(255,255,255,.12);
@@ -261,25 +257,22 @@ body{
   background:
     linear-gradient(
       90deg,
-      #23d86b,
-      #ffe01b
+      #22d76a,
+      #ffe01c
     );
-
-  transition:
-    width .3s ease;
 
 }
 
 
 /* =====================================================
-   TÍTULO DA FASE
+   TÍTULO
 ===================================================== */
 
 .phase-info{
 
   text-align:center;
 
-  margin-bottom:12px;
+  margin-bottom:10px;
 
 }
 
@@ -290,7 +283,7 @@ body{
     clamp(
       22px,
       6vw,
-      31px
+      30px
     );
 
   text-shadow:
@@ -303,7 +296,7 @@ body{
 
   margin-top:5px;
 
-  color:#b9d9e9;
+  color:#c2deeb;
 
   font-size:13px;
 
@@ -314,69 +307,176 @@ body{
    ÁREA DO JOGO
 ===================================================== */
 
-.game-area{
+.game-background{
 
   position:relative;
 
   width:100%;
 
-  max-width:620px;
+  min-height:610px;
 
-  margin:0 auto;
+  padding:
+    12px;
 
-}
+  border-radius:21px;
 
+  overflow:hidden;
 
-/*
-   O FUNDO É SOMENTE A IMAGEM.
+  background-image:
+    url("./fundo_nivel_01_03.png");
 
-   Não existe outro painel por cima.
-*/
+  background-size:cover;
 
-.board-background{
+  background-position:center;
 
-  position:relative;
+  border:
+    1px solid
+    rgba(255,255,255,.12);
 
-  width:100%;
-
-  display:block;
-
-  user-select:none;
-
-  -webkit-user-drag:none;
+  box-shadow:
+    0 12px 35px
+    rgba(0,0,0,.32);
 
 }
 
 
 /* =====================================================
-   LINHAS SOBRE O TABULEIRO
+   QUADRO DE 10 TENTATIVAS
 ===================================================== */
 
-.board-overlay{
+.history{
 
   position:absolute;
 
-  inset:0;
+  left:10px;
 
-  pointer-events:none;
+  right:10px;
+
+  bottom:14px;
+
+  padding:
+    9px
+    8px;
+
+  border-radius:15px;
+
+  background:
+    rgba(9,29,39,.68);
+
+  border:
+    1px solid
+    rgba(255,255,255,.20);
+
+  backdrop-filter:
+    blur(3px);
 
 }
 
 
-/*
-   Cada linha ocupa a largura da área
-   das cinco bolas grandes.
-*/
+/* =====================================================
+   CABEÇALHO PEQUENO
+===================================================== */
 
-.row{
+.history-header{
 
-  position:absolute;
+  display:flex;
 
-  left:20%;
+  align-items:center;
 
-  width:60%;
+  justify-content:space-between;
 
-  height:6%;
+  margin:
+    0
+    4px
+    5px;
+
+}
+
+
+.history-title{
+
+  color:#fff;
+
+  font-size:10px;
+
+  font-weight:900;
+
+  letter-spacing:.7px;
+
+  text-transform:uppercase;
+
+}
+
+
+.history-counter{
+
+  color:#c9e2ec;
+
+  font-size:10px;
+
+  font-weight:bold;
+
+}
+
+
+/* =====================================================
+   FILEIRAS
+===================================================== */
+
+.attempt{
+
+  width:100%;
+
+  min-height:32px;
+
+  margin-top:3px;
+
+  display:flex;
+
+  align-items:center;
+
+  padding:
+    2px
+    4px;
+
+  border-radius:8px;
+
+  background:
+    rgba(255,255,255,.055);
+
+}
+
+
+/* =====================================================
+   NÚMERO
+===================================================== */
+
+.attempt-number{
+
+  width:21px;
+
+  flex-shrink:0;
+
+  color:#d9edf5;
+
+  font-size:9px;
+
+  font-weight:900;
+
+  text-align:center;
+
+}
+
+
+/* =====================================================
+   ÁREA DAS CORES
+===================================================== */
+
+.attempt-colors{
+
+  flex:1;
+
+  min-width:0;
 
   display:flex;
 
@@ -384,115 +484,61 @@ body{
 
   justify-content:flex-start;
 
-  gap:3.4%;
+  gap:4px;
 
-}
-
-
-/*
-   As linhas do fundo possuem 10 posições.
-*/
-
-.row:nth-child(1){
-  top:9.8%;
-}
-
-.row:nth-child(2){
-  top:17.8%;
-}
-
-.row:nth-child(3){
-  top:25.8%;
-}
-
-.row:nth-child(4){
-  top:33.8%;
-}
-
-.row:nth-child(5){
-  top:41.8%;
-}
-
-.row:nth-child(6){
-  top:49.8%;
-}
-
-.row:nth-child(7){
-  top:57.8%;
-}
-
-.row:nth-child(8){
-  top:65.8%;
-}
-
-.row:nth-child(9){
-  top:73.8%;
-}
-
-.row:nth-child(10){
-  top:81.8%;
 }
 
 
 /* =====================================================
-   BOLINHAS ESCOLHIDAS
+   BOLA COLORIDA
 ===================================================== */
 
-.slot{
+.attempt-color{
 
-  width:17%;
+  width:27px;
 
-  aspect-ratio:1;
-
-  border-radius:50%;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  overflow:hidden;
-
-}
-
-
-.slot img{
-
-  width:100%;
-
-  height:100%;
+  height:27px;
 
   object-fit:contain;
 
-  display:block;
-
-}
-
-
-/*
-   Quando a posição ainda está vazia,
-   deixamos transparente.
-*/
-
-.slot.empty{
-
-  background:transparent;
+  flex-shrink:0;
 
 }
 
 
 /* =====================================================
-   HISTÓRICO PEQUENO
+   ESPAÇO VAZIO
 ===================================================== */
 
-.history{
+.empty-slot{
 
-  position:absolute;
+  width:27px;
 
-  right:14%;
+  height:27px;
 
-  width:17%;
+  flex-shrink:0;
+
+  border-radius:50%;
+
+  background:
+    rgba(0,0,0,.12);
+
+  border:
+    1px solid
+    rgba(255,255,255,.13);
+
+}
+
+
+/* =====================================================
+   ÁREA PRETA / BRANCA
+===================================================== */
+
+.feedback{
+
+  width:61px;
+
+  flex-shrink:0;
 
   display:flex;
 
@@ -500,94 +546,166 @@ body{
 
   justify-content:flex-end;
 
-  gap:4px;
+  flex-wrap:wrap;
+
+  gap:3px;
+
+  padding-left:5px;
 
 }
 
 
-.history-dot{
+/* =====================================================
+   BOLINHA DE RESULTADO
+===================================================== */
 
-  width:11px;
+.feedback-dot{
 
-  height:11px;
+  width:8px;
+
+  height:8px;
 
   border-radius:50%;
 
+  flex-shrink:0;
+
+}
+
+
+.feedback-dot.black{
+
+  background:#000;
+
   border:
     1px solid
-    rgba(255,255,255,.35);
-
-  background:
-    rgba(0,0,0,.18);
+    rgba(255,255,255,.55);
 
 }
 
 
-.history-dot.black{
-
-  background:#111;
-
-}
-
-
-.history-dot.white{
+.feedback-dot.white{
 
   background:#fff;
 
+  border:
+    1px solid
+    #888;
+
 }
 
 
 /* =====================================================
-   PAINEL DE CORES
+   ÁREA DE ESCOLHA
 ===================================================== */
 
-.color-panel{
+.choice-area{
 
   margin-top:10px;
 
-  padding:10px;
+  padding:9px;
 
-  border-radius:20px;
+  border-radius:17px;
 
   background:
-    rgba(24,13,8,.78);
+    rgba(7,28,41,.88);
 
   border:
-    2px solid
-    rgba(190,125,45,.65);
-
-  display:grid;
-
-  grid-template-columns:
-    repeat(6,1fr);
-
-  gap:8px;
+    1px solid
+    rgba(255,255,255,.14);
 
 }
 
 
 /* =====================================================
-   BOTÕES DAS CORES
+   TENTATIVA ATUAL
 ===================================================== */
 
-.color-button{
+.current-label{
 
-  min-width:0;
+  text-align:center;
 
-  aspect-ratio:1;
+  color:#c6dfe9;
 
-  border:0;
+  font-size:11px;
 
-  border-radius:15px;
+  font-weight:bold;
 
-  background:
-    rgba(255,255,255,.07);
+}
+
+
+.current-selection{
+
+  min-height:42px;
+
+  margin-top:5px;
 
   display:flex;
 
   align-items:center;
 
   justify-content:center;
+
+  gap:5px;
+
+}
+
+
+.current-selection img{
+
+  width:39px;
+
+  height:39px;
+
+  object-fit:contain;
+
+}
+
+
+.current-empty{
+
+  color:#7693a4;
+
+  font-size:11px;
+
+}
+
+
+/* =====================================================
+   PALETA
+===================================================== */
+
+.colors{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(6,1fr);
+
+  gap:6px;
+
+  margin-top:6px;
+
+}
+
+
+.color-button{
+
+  width:100%;
+
+  aspect-ratio:1;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  border:0;
+
+  border-radius:12px;
+
+  background:
+    rgba(255,255,255,.07);
 
   cursor:pointer;
 
@@ -600,16 +718,16 @@ body{
 
 .color-button:active{
 
-  transform:scale(.93);
+  transform:scale(.92);
 
 }
 
 
 .color-button img{
 
-  width:75%;
+  width:80%;
 
-  height:75%;
+  height:80%;
 
   object-fit:contain;
 
@@ -630,24 +748,24 @@ body{
     1fr
     1fr;
 
-  gap:12px;
+  gap:8px;
 
-  margin-top:10px;
+  margin-top:8px;
 
 }
 
 
 .action{
 
-  height:52px;
+  height:48px;
 
   border:0;
 
-  border-radius:16px;
+  border-radius:14px;
 
   color:#fff;
 
-  font-size:16px;
+  font-size:14px;
 
   font-weight:900;
 
@@ -663,8 +781,8 @@ body{
   background:
     linear-gradient(
       135deg,
-      #315d83,
-      #183d5c
+      #315e84,
+      #193e5c
     );
 
 }
@@ -675,8 +793,8 @@ body{
   background:
     linear-gradient(
       135deg,
-      #22d66c,
-      #079044
+      #20d76b,
+      #078d43
     );
 
 }
@@ -690,29 +808,29 @@ body{
 
 
 /* =====================================================
-   TEXTO DE STATUS
+   MENSAGEM
 ===================================================== */
 
 .message{
 
-  min-height:24px;
+  min-height:19px;
 
-  margin-top:9px;
+  margin-top:7px;
 
   text-align:center;
 
-  font-size:13px;
+  color:#bfdbe7;
+
+  font-size:11px;
 
   font-weight:bold;
-
-  color:#b8d9e9;
 
 }
 
 
 .message.success{
 
-  color:#6cff9d;
+  color:#69ff9c;
 
 }
 
@@ -732,75 +850,96 @@ body{
 
 
 /* =====================================================
-   SENHA REVELADA
+   MODAL
 ===================================================== */
 
-.reveal{
+.modal{
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:1000;
 
   display:none;
 
-  margin-top:10px;
-
-  padding:12px;
-
-  border-radius:15px;
-
-  text-align:center;
-
-  background:
-    rgba(12,55,35,.85);
-
-  border:
-    1px solid
-    rgba(91,255,145,.3);
-
-}
-
-
-.reveal.show{
-
-  display:block;
-
-}
-
-
-.reveal-title{
-
-  color:#76ff9f;
-
-  font-size:12px;
-
-  font-weight:bold;
-
-}
-
-
-.reveal-colors{
-
-  display:flex;
+  align-items:center;
 
   justify-content:center;
 
-  gap:8px;
+  padding:20px;
 
-  margin-top:7px;
+  background:
+    rgba(0,10,20,.85);
 
 }
 
 
-.reveal-colors img{
+.modal.show{
 
-  width:38px;
+  display:flex;
 
-  height:38px;
+}
 
-  object-fit:contain;
+
+.modal-card{
+
+  width:100%;
+
+  max-width:350px;
+
+  padding:24px;
+
+  border-radius:21px;
+
+  text-align:center;
+
+  background:#082d49;
+
+}
+
+
+.modal-card h2{
+
+  font-size:22px;
+
+}
+
+
+.modal-card p{
+
+  margin-top:8px;
+
+  color:#b8d4e2;
+
+  font-size:14px;
+
+}
+
+
+.modal-button{
+
+  width:100%;
+
+  height:48px;
+
+  margin-top:17px;
+
+  border:0;
+
+  border-radius:14px;
+
+  background:#19b960;
+
+  color:#fff;
+
+  font-weight:900;
 
 }
 
 
 /* =====================================================
-   CARREGANDO
+   LOADING
 ===================================================== */
 
 .loading{
@@ -809,7 +948,7 @@ body{
 
   inset:0;
 
-  z-index:1000;
+  z-index:2000;
 
   display:flex;
 
@@ -818,6 +957,8 @@ body{
   justify-content:center;
 
   background:#031d31;
+
+  color:#fff;
 
   font-size:16px;
 
@@ -834,101 +975,6 @@ body{
 
 
 /* =====================================================
-   MODAL
-===================================================== */
-
-.modal{
-
-  position:fixed;
-
-  inset:0;
-
-  z-index:500;
-
-  display:none;
-
-  align-items:center;
-
-  justify-content:center;
-
-  padding:20px;
-
-  background:
-    rgba(0,10,20,.82);
-
-}
-
-
-.modal.show{
-
-  display:flex;
-
-}
-
-
-.modal-card{
-
-  width:100%;
-
-  max-width:360px;
-
-  padding:25px;
-
-  border-radius:22px;
-
-  text-align:center;
-
-  background:#082d49;
-
-  border:
-    1px solid
-    rgba(255,255,255,.1);
-
-}
-
-
-.modal-card h2{
-
-  font-size:23px;
-
-}
-
-
-.modal-card p{
-
-  margin-top:8px;
-
-  color:#b9d6e5;
-
-  font-size:14px;
-
-  line-height:1.4;
-
-}
-
-
-.modal-button{
-
-  width:100%;
-
-  height:48px;
-
-  margin-top:18px;
-
-  border:0;
-
-  border-radius:14px;
-
-  background:#18bd68;
-
-  color:#fff;
-
-  font-weight:900;
-
-}
-
-
-/* =====================================================
    MOBILE
 ===================================================== */
 
@@ -937,82 +983,87 @@ body{
   .page{
 
     padding:
-      10px
       8px
-      50px;
+      6px
+      55px;
 
   }
 
-  .status-box{
 
-    padding:9px 4px;
+  .game-background{
 
-  }
-
-  .status-value{
-
-    font-size:19px;
-
-  }
-
-  .phase-info h1{
-
-    font-size:24px;
-
-  }
-
-  .color-panel{
-
-    gap:5px;
+    min-height:610px;
 
     padding:8px;
 
   }
 
-  .color-button{
-
-    border-radius:12px;
-
-  }
-
-  .actions{
-
-    gap:8px;
-
-  }
-
-  .action{
-
-    height:50px;
-
-    font-size:15px;
-
-  }
-
-}
-
-
-/* =====================================================
-   TELAS MUITO PEQUENAS
-===================================================== */
-
-@media(max-width:360px){
-
-  .history-dot{
-
-    width:9px;
-
-    height:9px;
-
-  }
 
   .history{
 
-    gap:2px;
+    left:8px;
+
+    right:8px;
+
+    bottom:10px;
+
+    padding:7px 6px;
+
+  }
+
+
+  .attempt{
+
+    min-height:30px;
+
+  }
+
+
+  .attempt-number{
+
+    width:19px;
+
+    font-size:8px;
+
+  }
+
+
+  .attempt-color,
+  .empty-slot{
+
+    width:24px;
+
+    height:24px;
+
+  }
+
+
+  .feedback{
+
+    width:54px;
+
+  }
+
+
+  .feedback-dot{
+
+    width:7px;
+
+    height:7px;
+
+  }
+
+
+  .current-selection img{
+
+    width:36px;
+
+    height:36px;
 
   }
 
 }
+
 
 </style>
 
@@ -1021,10 +1072,6 @@ body{
 
 <body>
 
-
-<!-- =====================================================
-     CARREGANDO
-===================================================== -->
 
 <div
   class="loading"
@@ -1038,248 +1085,195 @@ body{
 <div class="page">
 
 
-  <!-- =================================================
-       TOPO
-  ================================================== -->
+<!-- =====================================================
+     TOPO
+===================================================== -->
 
-  <div class="top">
+<div class="top">
 
-    <button
-      class="back"
-      id="back"
-      type="button">
+  <button
+    class="back"
+    id="back"
+    type="button">
 
-      ←
+    ←
 
-    </button>
-
-
-    <div class="title">
-
-      <small>
-        ADAM GAMES
-      </small>
-
-      <strong>
-        SENHA
-      </strong>
-
-    </div>
+  </button>
 
 
-    <div class="top-space"></div>
+  <div class="title">
+
+    <small>
+      ADAM GAMES
+    </small>
+
+    <strong>
+      SENHA
+    </strong>
 
   </div>
 
 
-  <!-- =================================================
-       STATUS
-  ================================================== -->
+  <div class="top-space"></div>
 
-  <div class="status">
+</div>
 
-    <div class="status-box">
 
-      <div class="status-label">
-        ADAM COINS
-      </div>
+<!-- =====================================================
+     STATUS
+===================================================== -->
 
-      <div
-        class="status-value coins"
-        id="coins">
+<div class="status">
 
-        30
 
-      </div>
+  <div class="status-box">
 
+    <div class="status-label">
+      ADAM COINS
     </div>
-
-
-    <div class="status-box">
-
-      <div class="status-label">
-        CHANCES
-      </div>
-
-      <div
-        class="status-value chances"
-        id="chances">
-
-        --
-
-      </div>
-
-    </div>
-
-
-    <div class="status-box">
-
-      <div class="status-label">
-        FASE
-      </div>
-
-      <div
-        class="status-value level"
-        id="level">
-
-        1 / 3
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- =================================================
-       PROGRESSO
-  ================================================== -->
-
-  <div class="progress">
 
     <div
-      class="progress-bar"
-      id="progressBar">
+      class="status-value coins"
+      id="coins">
+
+      0
 
     </div>
 
   </div>
 
 
-  <!-- =================================================
-       INFORMAÇÃO
-  ================================================== -->
+  <div class="status-box">
 
-  <div class="phase-info">
-
-    <h1 id="phaseTitle">
-      NÍVEL 1 — DESCUBRA A SENHA
-    </h1>
-
-    <p id="phaseDescription">
-      Memorize as 3 cores e reproduza a sequência.
-    </p>
-
-  </div>
-
-
-  <!-- =================================================
-       ÁREA DO TABULEIRO
-  ================================================== -->
-
-  <div class="game-area">
-
-
-    <!-- FUNDO ORIGINAL -->
-
-    <img
-      class="board-background"
-      id="boardBackground"
-      src="./fundo_nivel_01_03.png"
-      alt="Tabuleiro">
-
-
-    <!-- =================================================
-         CORES E HISTÓRICO
-    ================================================== -->
+    <div class="status-label">
+      CHANCES
+    </div>
 
     <div
-      class="board-overlay"
-      id="boardOverlay">
+      class="status-value chances"
+      id="chances">
 
-
-      <div class="row">
-
-        <div class="slot empty"></div>
-        <div class="slot empty"></div>
-        <div class="slot empty"></div>
-
-      </div>
-
-
-      <div class="row">
-
-        <div class="slot empty"></div>
-        <div class="slot empty"></div>
-        <div class="slot empty"></div>
-
-      </div>
-
-
-      <div class="row">
-
-        <div class="slot empty"></div>
-        <div class="slot empty"></div>
-        <div class="slot empty"></div>
-
-      </div>
-
-
-      <div class="row">
-
-        <div class="slot empty"></div>
-        <div class="slot empty"></div>
-        <div class="slot empty"></div>
-
-      </div>
-
-
-      <div class="row">
-
-        <div class="slot empty"></div>
-        <div class="slot empty"></div>
-        <div class="slot empty"></div>
-
-      </div>
-
-
-      <div class="row">
-
-        <div class="slot empty"></div>
-        <div class="slot empty"></div>
-        <div class="slot empty"></div>
-
-      </div>
-
-
-      <div class="row">
-
-        <div class="slot empty"></div>
-        <div class="slot empty"></div>
-        <div class="slot empty"></div>
-
-      </div>
-
-
-      <div class="row">
-
-        <div class="slot empty"></div>
-        <div class="slot empty"></div>
-        <div class="slot empty"></div>
-
-      </div>
-
-
-      <div class="row">
-
-        <div class="slot empty"></div>
-        <div class="slot empty"></div>
-        <div class="slot empty"></div>
-
-      </div>
-
-
-      <div class="row">
-
-        <div class="slot empty"></div>
-        <div class="slot empty"></div>
-        <div class="slot empty"></div>
-
-      </div>
-
+      0
 
     </div>
 
+  </div>
+
+
+  <div class="status-box">
+
+    <div class="status-label">
+      FASE
+    </div>
+
+    <div
+      class="status-value level"
+      id="level">
+
+      1 / 3
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     PROGRESSO
+===================================================== -->
+
+<div class="progress">
+
+  <div
+    class="progress-bar"
+    id="progressBar">
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     TÍTULO
+===================================================== -->
+
+<div class="phase-info">
+
+  <h1 id="phaseTitle">
+    NÍVEL 1 — DESCUBRA A SENHA
+  </h1>
+
+  <p id="phaseDescription">
+    Descubra a sequência de 3 cores.
+  </p>
+
+</div>
+
+
+<!-- =====================================================
+     FUNDO
+===================================================== -->
+
+<div class="game-background">
+
+
+  <!-- =================================================
+       HISTÓRICO
+  ================================================== -->
+
+  <div class="history">
+
+
+    <div class="history-header">
+
+      <div class="history-title">
+        TENTATIVAS
+      </div>
+
+      <div
+        class="history-counter"
+        id="attemptCounter">
+
+        0 / 10
+
+      </div>
+
+    </div>
+
+
+    <div id="attemptsList"></div>
+
+
+  </div>
+
+
+</div>
+
+
+<!-- =====================================================
+     ESCOLHA ATUAL
+===================================================== -->
+
+<div class="choice-area">
+
+
+  <div class="current-label">
+
+    SUA TENTATIVA
+
+  </div>
+
+
+  <div
+    class="current-selection"
+    id="selected">
+
+    <div class="current-empty">
+
+      Escolha as cores
+
+    </div>
 
   </div>
 
@@ -1288,7 +1282,7 @@ body{
        CORES
   ================================================== -->
 
-  <div class="color-panel">
+  <div class="colors">
 
 
     <button
@@ -1367,10 +1361,11 @@ body{
 
 
   <!-- =================================================
-       AÇÕES
+       BOTÕES
   ================================================== -->
 
   <div class="actions">
+
 
     <button
       class="action clear"
@@ -1391,43 +1386,15 @@ body{
 
     </button>
 
+
   </div>
 
-
-  <!-- =================================================
-       MENSAGEM
-  ================================================== -->
 
   <div
     class="message"
     id="message">
 
-    Escolha as 3 cores da senha.
-
-  </div>
-
-
-  <!-- =================================================
-       SENHA REVELADA
-       SOMENTE APÓS ACERTAR
-  ================================================== -->
-
-  <div
-    class="reveal"
-    id="reveal">
-
-    <div class="reveal-title">
-
-      🔓 SENHA DESCOBERTA!
-
-    </div>
-
-
-    <div
-      class="reveal-colors"
-      id="revealColors">
-
-    </div>
+    Escolha as 3 cores.
 
   </div>
 
@@ -1435,8 +1402,11 @@ body{
 </div>
 
 
+</div>
+
+
 <!-- =====================================================
-     MODAL SEM CHANCE
+     MODAL
 ===================================================== -->
 
 <div
@@ -1451,7 +1421,7 @@ body{
 
     <p>
       Você não possui chances suficientes
-      para iniciar esta partida.
+      para jogar.
     </p>
 
     <button
@@ -1459,7 +1429,7 @@ body{
       id="modalClose"
       type="button">
 
-      ENTENDI
+      VOLTAR
 
     </button>
 
@@ -1502,10 +1472,6 @@ import {
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-
-/* =====================================================
-   CONFIG
-===================================================== */
 
 const firebaseConfig = {
 
@@ -1563,27 +1529,24 @@ const levelEl =
 const progressBar =
   document.getElementById("progressBar");
 
+const selectedEl =
+  document.getElementById("selected");
+
+const attemptsList =
+  document.getElementById("attemptsList");
+
+const attemptCounter =
+  document.getElementById("attemptCounter");
+
 const messageEl =
   document.getElementById("message");
-
-const revealEl =
-  document.getElementById("reveal");
-
-const revealColorsEl =
-  document.getElementById("revealColors");
-
-const confirmButton =
-  document.getElementById("confirmButton");
-
-const clearButton =
-  document.getElementById("clearButton");
 
 const noChanceModal =
   document.getElementById("noChanceModal");
 
 
 /* =====================================================
-   CONFIGURAÇÃO DO JOGO
+   CORES
 ===================================================== */
 
 const COLORS = {
@@ -1613,20 +1576,9 @@ const COLOR_NAMES =
   Object.keys(COLORS);
 
 
-/*
-   Por enquanto:
-
-   NÍVEL 1 = 3 cores
-   NÍVEL 2 = 3 cores
-   NÍVEL 3 = 3 cores
-
-   Depois adicionaremos:
-
-   4-6 = 4 cores
-   7 = 5 cores
-   8 = 6 cores
-   9 = especial
-*/
+/* =====================================================
+   NÍVEIS
+===================================================== */
 
 const LEVELS = {
 
@@ -1636,16 +1588,19 @@ const LEVELS = {
   },
 
   2:{
-    length:3,
-    reward:20
+    length:4,
+    reward:30
   },
 
   3:{
-    length:3,
-    reward:20
+    length:5,
+    reward:40
   }
 
 };
+
+
+const MAX_ATTEMPTS = 10;
 
 
 /* =====================================================
@@ -1664,8 +1619,6 @@ let selected = [];
 
 let attempts = 0;
 
-const MAX_ATTEMPTS = 10;
-
 let gameStarted = false;
 
 let gameFinished = false;
@@ -1677,43 +1630,199 @@ let gameFinished = false;
 
 function generateSecret(){
 
-  const config =
-    LEVELS[currentLevel];
+  const size =
+    LEVELS[currentLevel].length;
+
 
   secret = [];
 
+
   for(
     let i = 0;
-    i < config.length;
+    i < size;
     i++
   ){
 
-    const randomIndex =
+    const random =
       Math.floor(
         Math.random() *
         COLOR_NAMES.length
       );
 
+
     secret.push(
-      COLOR_NAMES[randomIndex]
+      COLOR_NAMES[random]
     );
 
   }
 
-  /*
-     IMPORTANTE:
+}
 
-     A senha NÃO é mostrada
-     na tela.
 
-     Ela fica somente nesta
-     variável em memória.
-  */
+/* =====================================================
+   CRIAR 10 FILEIRAS
+===================================================== */
 
-  console.log(
-    "Senha criada internamente:",
-    secret
+function createAttemptRows(){
+
+  attemptsList.innerHTML = "";
+
+
+  const size =
+    LEVELS[currentLevel].length;
+
+
+  for(
+    let i = 0;
+    i < MAX_ATTEMPTS;
+    i++
+  ){
+
+    const row =
+      document.createElement("div");
+
+    row.className =
+      "attempt";
+
+
+    const number =
+      document.createElement("div");
+
+    number.className =
+      "attempt-number";
+
+    number.textContent =
+      i + 1;
+
+
+    const colors =
+      document.createElement("div");
+
+    colors.className =
+      "attempt-colors";
+
+
+    for(
+      let c = 0;
+      c < size;
+      c++
+    ){
+
+      const empty =
+        document.createElement("div");
+
+      empty.className =
+        "empty-slot";
+
+      colors.appendChild(
+        empty
+      );
+
+    }
+
+
+    const feedback =
+      document.createElement("div");
+
+    feedback.className =
+      "feedback";
+
+
+    row.appendChild(number);
+
+    row.appendChild(colors);
+
+    row.appendChild(feedback);
+
+
+    attemptsList.appendChild(row);
+
+  }
+
+}
+
+
+/* =====================================================
+   MOSTRAR SELEÇÃO
+===================================================== */
+
+function renderSelected(){
+
+  selectedEl.innerHTML = "";
+
+
+  if(
+    selected.length === 0
+  ){
+
+    const empty =
+      document.createElement("div");
+
+    empty.className =
+      "current-empty";
+
+    empty.textContent =
+      "Escolha as cores";
+
+    selectedEl.appendChild(
+      empty
+    );
+
+    return;
+
+  }
+
+
+  selected.forEach(
+    color => {
+
+      const img =
+        document.createElement("img");
+
+      img.src =
+        COLORS[color];
+
+      img.alt =
+        color;
+
+      selectedEl.appendChild(
+        img
+      );
+
+    }
   );
+
+}
+
+
+/* =====================================================
+   ATUALIZAR CONTADOR
+===================================================== */
+
+function updateCounter(){
+
+  attemptCounter.textContent =
+    `${attempts} / ${MAX_ATTEMPTS}`;
+
+}
+
+
+/* =====================================================
+   SALDOS
+===================================================== */
+
+function atualizarSaldo(){
+
+  coinsEl.textContent =
+    Number(
+      usuario?.moedas || 0
+    ).toLocaleString("pt-BR");
+
+
+  chancesEl.textContent =
+    Number(
+      usuario?.chances || 0
+    ).toLocaleString("pt-BR");
 
 }
 
@@ -1729,11 +1838,7 @@ async function localizarUsuario(user){
 
       query(
         collection(db,"admins"),
-        where(
-          "uid",
-          "==",
-          user.uid
-        )
+        where("uid","==",user.uid)
       )
 
     );
@@ -1776,68 +1881,10 @@ async function localizarUsuario(user){
 
 
 /* =====================================================
-   ATUALIZAR SALDO NA TELA
-===================================================== */
-
-function atualizarSaldo(){
-
-  if(!usuario){
-
-    coinsEl.textContent =
-      "0";
-
-    chancesEl.textContent =
-      "0";
-
-    return;
-
-  }
-
-
-  coinsEl.textContent =
-    Number(
-      usuario.moedas || 0
-    ).toLocaleString("pt-BR");
-
-
-  chancesEl.textContent =
-    Number(
-      usuario.chances || 0
-    ).toLocaleString("pt-BR");
-
-}
-
-
-/* =====================================================
-   INICIAR PARTIDA
+   INICIAR
 ===================================================== */
 
 async function iniciarPartida(){
-
-  /*
-     Evita descontar outra chance
-     quando a pessoa simplesmente
-     recarrega a página.
-  */
-
-  const sessionKey =
-    "adam_senha_partida_iniciada";
-
-
-  if(
-    sessionStorage.getItem(
-      sessionKey
-    )
-  ){
-
-    gameStarted = true;
-
-    generateSecret();
-
-    return;
-
-  }
-
 
   const chances =
     Number(
@@ -1862,10 +1909,10 @@ async function iniciarPartida(){
 
 
   /*
-     AO INICIAR:
+     Consome 1 chance.
 
-     -1 chance
-     +30 Adam Coins
+     Também entrega 30 moedas
+     por iniciar a partida.
   */
 
   const novasChances =
@@ -1902,97 +1949,18 @@ async function iniciarPartida(){
   usuario.chances =
     novasChances;
 
+
   usuario.moedas =
     novasMoedas;
 
 
-  sessionStorage.setItem(
-    sessionKey,
-    "1"
-  );
+  atualizarSaldo();
 
 
   gameStarted = true;
 
-  atualizarSaldo();
 
   generateSecret();
-
-}
-
-
-/* =====================================================
-   MOSTRAR COR NA LINHA
-===================================================== */
-
-function renderSelected(){
-
-  const rows =
-    document.querySelectorAll(
-      ".row"
-    );
-
-
-  /*
-     Limpamos somente a linha atual.
-  */
-
-  const currentRow =
-    rows[attempts];
-
-
-  if(!currentRow){
-
-    return;
-
-  }
-
-
-  const slots =
-    currentRow.querySelectorAll(
-      ".slot"
-    );
-
-
-  slots.forEach(
-    (slot,index) => {
-
-      slot.innerHTML = "";
-
-      slot.classList.add(
-        "empty"
-      );
-
-
-      if(
-        selected[index]
-      ){
-
-        const img =
-          document.createElement(
-            "img"
-          );
-
-        img.src =
-          COLORS[
-            selected[index]
-          ];
-
-        img.alt =
-          selected[index];
-
-        slot.appendChild(
-          img
-        );
-
-        slot.classList.remove(
-          "empty"
-        );
-
-      }
-
-    }
-  );
 
 }
 
@@ -2002,9 +1970,7 @@ function renderSelected(){
 ===================================================== */
 
 document
-  .querySelectorAll(
-    ".color-button"
-  )
+  .querySelectorAll(".color-button")
   .forEach(
     button => {
 
@@ -2022,21 +1988,19 @@ document
           }
 
 
-          const max =
-            LEVELS[
-              currentLevel
-            ].length;
+          const size =
+            LEVELS[currentLevel].length;
 
-
-          /*
-             Não permite colocar
-             mais cores que o tamanho
-             da senha.
-          */
 
           if(
-            selected.length >= max
+            selected.length >= size
           ){
+
+            messageEl.textContent =
+              `A senha possui ${size} cores.`;
+
+            messageEl.className =
+              "message warning";
 
             return;
 
@@ -2052,7 +2016,10 @@ document
 
 
           messageEl.textContent =
-            `${selected.length}/${max} cores escolhidas.`;
+            `${selected.length}/${size} cores escolhidas.`;
+
+          messageEl.className =
+            "message";
 
         }
       );
@@ -2065,40 +2032,36 @@ document
    LIMPAR
 ===================================================== */
 
-clearButton.addEventListener(
-  "click",
-  () => {
+document
+  .getElementById("clearButton")
+  .addEventListener(
+    "click",
+    () => {
 
-    if(
-      !gameStarted ||
-      gameFinished
-    ){
+      if(
+        !gameStarted ||
+        gameFinished
+      ){
 
-      return;
+        return;
+
+      }
+
+
+      selected = [];
+
+
+      renderSelected();
+
+
+      messageEl.textContent =
+        `Escolha as ${LEVELS[currentLevel].length} cores.`;
+
+      messageEl.className =
+        "message";
 
     }
-
-
-    selected = [];
-
-
-    renderSelected();
-
-
-    const max =
-      LEVELS[
-        currentLevel
-      ].length;
-
-
-    messageEl.textContent =
-      `Escolha as ${max} cores da senha.`;
-
-    messageEl.className =
-      "message";
-
-  }
-);
+  );
 
 
 /* =====================================================
@@ -2128,9 +2091,8 @@ function calculateHints(
 
 
   /*
-     PRIMEIRO:
-
-     cor certa no lugar certo.
+     PRETO:
+     mesma cor e mesma posição.
   */
 
   for(
@@ -2145,11 +2107,9 @@ function calculateHints(
 
       black++;
 
-      answerUsed[i] =
-        true;
+      answerUsed[i] = true;
 
-      guessUsed[i] =
-        true;
+      guessUsed[i] = true;
 
     }
 
@@ -2157,9 +2117,8 @@ function calculateHints(
 
 
   /*
-     SEGUNDO:
-
-     cor certa no lugar errado.
+     BRANCO:
+     mesma cor, posição diferente.
   */
 
   for(
@@ -2198,8 +2157,7 @@ function calculateHints(
 
         white++;
 
-        answerUsed[j] =
-          true;
+        answerUsed[j] = true;
 
         break;
 
@@ -2219,23 +2177,23 @@ function calculateHints(
 
 
 /* =====================================================
-   MOSTRAR HISTÓRICO
+   COLOCAR TENTATIVA NA FILEIRA
 ===================================================== */
 
-function showHistory(
-  rowIndex,
+function showAttempt(
+  guess,
   black,
   white
 ){
 
   const rows =
-    document.querySelectorAll(
-      ".row"
+    attemptsList.querySelectorAll(
+      ".attempt"
     );
 
 
   const row =
-    rows[rowIndex];
+    rows[attempts];
 
 
   if(!row){
@@ -2245,38 +2203,50 @@ function showHistory(
   }
 
 
-  /*
-     Histórico minúsculo.
-
-     Não colocamos nada grande
-     por cima do tabuleiro.
-  */
-
-  let history =
+  const colors =
     row.querySelector(
-      ".history"
+      ".attempt-colors"
     );
 
 
-  if(!history){
+  const feedback =
+    row.querySelector(
+      ".feedback"
+    );
 
-    history =
-      document.createElement(
-        "div"
+
+  colors.innerHTML = "";
+
+
+  guess.forEach(
+    color => {
+
+      const img =
+        document.createElement("img");
+
+      img.className =
+        "attempt-color";
+
+      img.src =
+        COLORS[color];
+
+      img.alt =
+        color;
+
+      colors.appendChild(
+        img
       );
 
-    history.className =
-      "history";
-
-    row.appendChild(
-      history
-    );
-
-  }
+    }
+  );
 
 
-  history.innerHTML = "";
+  feedback.innerHTML = "";
 
+
+  /*
+     PRETAS
+  */
 
   for(
     let i = 0;
@@ -2285,19 +2255,21 @@ function showHistory(
   ){
 
     const dot =
-      document.createElement(
-        "div"
-      );
+      document.createElement("div");
 
     dot.className =
-      "history-dot black";
+      "feedback-dot black";
 
-    history.appendChild(
+    feedback.appendChild(
       dot
     );
 
   }
 
+
+  /*
+     BRANCAS
+  */
 
   for(
     let i = 0;
@@ -2306,14 +2278,12 @@ function showHistory(
   ){
 
     const dot =
-      document.createElement(
-        "div"
-      );
+      document.createElement("div");
 
     dot.className =
-      "history-dot white";
+      "feedback-dot white";
 
-    history.appendChild(
+    feedback.appendChild(
       dot
     );
 
@@ -2326,106 +2296,128 @@ function showHistory(
    CONFIRMAR
 ===================================================== */
 
-confirmButton.addEventListener(
-  "click",
-  async () => {
+document
+  .getElementById("confirmButton")
+  .addEventListener(
+    "click",
+    async () => {
 
-    if(
-      !gameStarted ||
-      gameFinished
-    ){
+      if(
+        !gameStarted ||
+        gameFinished
+      ){
 
-      return;
+        return;
 
-    }
-
-
-    const max =
-      LEVELS[
-        currentLevel
-      ].length;
+      }
 
 
-    if(
-      selected.length !== max
-    ){
-
-      messageEl.textContent =
-        `Escolha as ${max} cores antes de confirmar.`;
-
-      messageEl.className =
-        "message warning";
-
-      return;
-
-    }
+      const size =
+        LEVELS[currentLevel].length;
 
 
-    const result =
-      calculateHints(
-        selected,
-        secret
+      if(
+        selected.length !== size
+      ){
+
+        messageEl.textContent =
+          `Escolha exatamente ${size} cores.`;
+
+        messageEl.className =
+          "message warning";
+
+        return;
+
+      }
+
+
+      const guess =
+        [...selected];
+
+
+      const result =
+        calculateHints(
+          guess,
+          secret
+        );
+
+
+      /*
+         Coloca a tentativa
+         na fileira atual.
+      */
+
+      showAttempt(
+        guess,
+        result.black,
+        result.white
       );
 
 
-    showHistory(
-      attempts,
-      result.black,
-      result.white
-    );
+      attempts++;
 
 
-    /*
-       SENHA COMPLETAMENTE CERTA
-    */
+      updateCounter();
 
-    if(
-      result.black === max
-    ){
 
-      await venceuNivel();
+      /*
+         SENHA CORRETA
+      */
 
-      return;
+      if(
+        result.black === size
+      ){
+
+        await venceuNivel();
+
+        return;
+
+      }
+
+
+      /*
+         ACABARAM AS TENTATIVAS
+      */
+
+      if(
+        attempts >= MAX_ATTEMPTS
+      ){
+
+        gameFinished = true;
+
+
+        messageEl.textContent =
+          "❌ Você perdeu as 10 tentativas.";
+
+        messageEl.className =
+          "message error";
+
+        selected = [];
+
+        renderSelected();
+
+        return;
+
+      }
+
+
+      selected = [];
+
+      renderSelected();
+
+
+      messageEl.textContent =
+        "❌ Incorreto. Tente novamente.";
+
+      messageEl.className =
+        "message error";
 
     }
-
-
-    /*
-       ERRO
-    */
-
-    attempts++;
-
-
-    selected = [];
-
-
-    if(
-      attempts >= MAX_ATTEMPTS
-    ){
-
-      perdeuNivel();
-
-      return;
-
-    }
-
-
-    messageEl.textContent =
-      `Senha incorreta. Tentativa ${attempts + 1} de ${MAX_ATTEMPTS}.`;
-
-    messageEl.className =
-      "message error";
-
-
-    renderSelected();
-
-  }
-);
+  );
 
 
 /* =====================================================
-   VENCEU
+   VITÓRIA
 ===================================================== */
 
 async function venceuNivel(){
@@ -2434,9 +2426,7 @@ async function venceuNivel(){
 
 
   const reward =
-    LEVELS[
-      currentLevel
-    ].reward;
+    LEVELS[currentLevel].reward;
 
 
   const novasMoedas =
@@ -2470,47 +2460,15 @@ async function venceuNivel(){
   atualizarSaldo();
 
 
+  /*
+     NÃO MOSTRA A SENHA.
+  */
+
   messageEl.textContent =
-    `🎉 ACERTOU! +${reward} Adam Coins`;
+    `🎉 SENHA CORRETA! +${reward} Adam Coins`;
 
   messageEl.className =
     "message success";
-
-
-  /*
-     AGORA SIM:
-
-     mostramos a senha.
-  */
-
-  revealColorsEl.innerHTML = "";
-
-
-  secret.forEach(
-    color => {
-
-      const img =
-        document.createElement(
-          "img"
-        );
-
-      img.src =
-        COLORS[color];
-
-      img.alt =
-        color;
-
-      revealColorsEl.appendChild(
-        img
-      );
-
-    }
-  );
-
-
-  revealEl.classList.add(
-    "show"
-  );
 
 
   if(
@@ -2525,14 +2483,14 @@ async function venceuNivel(){
         iniciarNovoNivel();
 
       },
-      1800
+      1500
     );
 
   }
   else{
 
     messageEl.textContent =
-      `🏆 NÍVEIS 1 A 3 CONCLUÍDOS! +${reward} Adam Coins`;
+      "🏆 VOCÊ CONCLUIU OS 3 NÍVEIS!";
 
   }
 
@@ -2551,10 +2509,6 @@ function iniciarNovoNivel(){
 
   selected = [];
 
-  revealEl.classList.remove(
-    "show"
-  );
-
 
   levelEl.textContent =
     `${currentLevel} / 3`;
@@ -2564,94 +2518,35 @@ function iniciarNovoNivel(){
     `${(currentLevel / 3) * 100}%`;
 
 
-  document
-    .querySelectorAll(
-      ".history"
-    )
-    .forEach(
-      el => el.remove()
-    );
+  document.getElementById(
+    "phaseTitle"
+  ).textContent =
+    `NÍVEL ${currentLevel} — DESCUBRA A SENHA`;
 
 
-  document
-    .querySelectorAll(
-      ".slot"
-    )
-    .forEach(
-      slot => {
+  document.getElementById(
+    "phaseDescription"
+  ).textContent =
+    `Descubra a sequência de ${LEVELS[currentLevel].length} cores.`;
 
-        slot.innerHTML = "";
 
-        slot.classList.add(
-          "empty"
-        );
+  createAttemptRows();
 
-      }
-    );
 
+  updateCounter();
+
+
+  renderSelected();
+
+
+  messageEl.textContent =
+    `Escolha as ${LEVELS[currentLevel].length} cores.`;
 
   messageEl.className =
     "message";
 
 
-  messageEl.textContent =
-    "Escolha as 3 cores da nova senha.";
-
-
   generateSecret();
-
-}
-
-
-/* =====================================================
-   PERDEU
-===================================================== */
-
-function perdeuNivel(){
-
-  gameFinished = true;
-
-
-  messageEl.textContent =
-    "💔 Você esgotou as 10 tentativas.";
-
-  messageEl.className =
-    "message error";
-
-
-  /*
-     Mostramos a senha somente
-     depois que a pessoa perdeu.
-  */
-
-  revealColorsEl.innerHTML = "";
-
-
-  secret.forEach(
-    color => {
-
-      const img =
-        document.createElement(
-          "img"
-        );
-
-      img.src =
-        COLORS[color];
-
-      img.alt =
-        color;
-
-      revealColorsEl.appendChild(
-        img
-      );
-
-    }
-  );
-
-
-  revealEl.classList.add(
-    "show"
-  );
 
 }
 
@@ -2665,10 +2560,6 @@ document
   .addEventListener(
     "click",
     () => {
-
-      sessionStorage.removeItem(
-        "adam_senha_partida_iniciada"
-      );
 
       window.location.href =
         "jogos.html";
@@ -2691,6 +2582,7 @@ document
         "show"
       );
 
+
       window.location.href =
         "jogos.html";
 
@@ -2699,7 +2591,7 @@ document
 
 
 /* =====================================================
-   FIREBASE / INICIALIZAÇÃO
+   AUTENTICAÇÃO
 ===================================================== */
 
 onAuthStateChanged(
@@ -2749,6 +2641,12 @@ onAuthStateChanged(
       atualizarSaldo();
 
 
+      createAttemptRows();
+
+
+      updateCounter();
+
+
       await iniciarPartida();
 
 
@@ -2761,7 +2659,6 @@ onAuthStateChanged(
     catch(error){
 
       console.error(
-        "Erro no jogo Senha:",
         error
       );
 
