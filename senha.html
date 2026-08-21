@@ -352,7 +352,12 @@ body{
 
   border-radius:20px;
 
-  background:#164c62;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(9,52,74,.96),
+      rgba(4,34,51,.98)
+    );
 
   border:
     2px solid
@@ -366,30 +371,7 @@ body{
 
 
 /* =====================================================
-   FUNDO
-===================================================== */
-
-.game-background{
-
-  position:absolute;
-
-  inset:0;
-
-  width:100%;
-
-  height:100%;
-
-  object-fit:cover;
-
-  object-position:center;
-
-  opacity:.82;
-
-}
-
-
-/* =====================================================
-   CAMADA DE LEITURA
+   ÁREA INTERNA
 ===================================================== */
 
 .game-overlay{
@@ -400,13 +382,6 @@ body{
 
   padding:
     10px;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(4,34,49,.18),
-      rgba(4,30,43,.35)
-    );
 
 }
 
@@ -424,7 +399,7 @@ body{
   border-radius:15px;
 
   background:
-    rgba(3,27,39,.82);
+    rgba(3,27,39,.88);
 
   border:
     1px solid
@@ -493,7 +468,7 @@ body{
   border-radius:10px;
 
   background:
-    rgba(255,255,255,.12);
+    rgba(255,255,255,.10);
 
   border:
     1px solid
@@ -561,7 +536,7 @@ body{
 
 
 /* =====================================================
-   BOLAS
+   BOLAS COLORIDAS
 ===================================================== */
 
 .color-ball{
@@ -611,9 +586,9 @@ body{
 
 .result-ball{
 
-  width:17px;
+  width:19px;
 
-  height:17px;
+  height:19px;
 
   border-radius:50%;
 
@@ -1262,9 +1237,9 @@ body{
 
   .result-ball{
 
-    width:16px;
+    width:17px;
 
-    height:16px;
+    height:17px;
 
   }
 
@@ -1450,6 +1425,10 @@ body{
   </div>
 
 
+  <!-- =================================================
+       PROGRESSO
+  ================================================== -->
+
   <div class="progress">
 
     <div
@@ -1472,27 +1451,17 @@ body{
     </h1>
 
     <p id="descricaoFase">
-      Descubra as 3 cores da senha.
+      Descubra a senha escolhendo 3 cores.
     </p>
 
   </div>
 
 
   <!-- =================================================
-       ÁREA PRINCIPAL
+       ÁREA DO JOGO
   ================================================== -->
 
   <div class="game-area">
-
-
-    <!-- FUNDO -->
-
-    <img
-      class="game-background"
-      src="./fundo_nivel_01_03.png"
-      alt=""
-    >
-
 
     <div class="game-overlay">
 
@@ -1567,7 +1536,7 @@ body{
 
         <div class="current-title">
 
-          SUA TENTATIVA
+          🎯 SUA TENTATIVA
 
         </div>
 
@@ -1705,7 +1674,7 @@ body{
         class="status"
         id="status">
 
-        Escolha 3 cores.
+        Descubra a senha escolhendo 3 cores.
 
       </div>
 
@@ -1841,13 +1810,13 @@ body{
     <div class="help-section">
 
       <h3>
-        ❤️ 4. Você tem 10 tentativas
+        🔢 4. Você tem 10 tentativas
       </h3>
 
       <p>
         Cada tentativa aparece no histórico.
-        Tente usar as informações das bolas
-        pretas e brancas para descobrir a senha.
+        Use as bolas pretas e brancas para
+        descobrir a senha.
       </p>
 
     </div>
@@ -1926,7 +1895,9 @@ const firebaseConfig = {
 
 
 const app =
-  initializeApp(firebaseConfig);
+  initializeApp(
+    firebaseConfig
+  );
 
 
 const auth =
@@ -2205,7 +2176,7 @@ function iniciarFase(numero){
 
 
   descricaoFase.textContent =
-    "Descubra as 3 cores da senha.";
+    "Descubra a senha escolhendo 3 cores.";
 
 
   secretRevealed.classList.remove(
@@ -2223,7 +2194,7 @@ function iniciarFase(numero){
 
 
   statusEl.textContent =
-    "Escolha 3 cores.";
+    "Descubra a senha escolhendo 3 cores.";
 
 }
 
@@ -2523,7 +2494,7 @@ clearButton.addEventListener(
       "status";
 
     statusEl.textContent =
-      "Escolha 3 cores.";
+      "Descubra a senha escolhendo 3 cores.";
 
   }
 );
@@ -2575,11 +2546,6 @@ function conferirSenha(
     [false,false,false];
 
 
-  /* ===================================================
-     PRIMEIRO:
-     MESMA COR NO MESMO LUGAR
-  =================================================== */
-
   for(
     let i = 0;
     i < 3;
@@ -2603,11 +2569,6 @@ function conferirSenha(
 
   }
 
-
-  /* ===================================================
-     SEGUNDO:
-     COR CERTA NO LUGAR ERRADO
-  =================================================== */
 
   for(
     let i = 0;
@@ -2662,8 +2623,11 @@ function conferirSenha(
 
 
   return {
+
     pretas,
+
     brancas
+
   };
 
 }
@@ -2746,10 +2710,6 @@ confirmButton.addEventListener(
     renderizarHistorico();
 
 
-    /* =================================================
-       ACERTOU
-    ================================================= */
-
     if(
       resultado.pretas === 3
     ){
@@ -2811,12 +2771,9 @@ confirmButton.addEventListener(
     }
 
 
-    /* =================================================
-       AINDA NÃO ACERTOU
-    ================================================= */
-
     statusEl.className =
       "status";
+
 
     statusEl.textContent =
       "Tentativa registrada. Use as pistas para descobrir a senha.";
@@ -2929,8 +2886,10 @@ async function recompensarAcerto(){
         transaction.update(
           usuarioRef,
           {
+
             moedas:
               moedasAtuais + 20
+
           }
         );
 
@@ -3093,10 +3052,6 @@ onAuthStateChanged(
 
       atualizarSaldos();
 
-
-      /* =================================================
-         INICIA O JOGO SOMENTE UMA VEZ
-      ================================================= */
 
       iniciarFase(1);
 
