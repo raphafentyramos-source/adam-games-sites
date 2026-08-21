@@ -109,6 +109,48 @@ button{font:inherit;-webkit-tap-highlight-color:transparent}
  pointer-events:none;
 }
 
+.secret-box{
+  width:min(100%,430px);
+  margin:10px auto 8px;
+  padding:12px 14px;
+  border-radius:18px;
+  text-align:center;
+  background:linear-gradient(145deg,rgba(38,20,8,.94),rgba(73,38,12,.94));
+  border:2px solid #b47a32;
+  box-shadow:0 7px 18px #0007,inset 0 1px 0 #fff2;
+  min-height:82px;
+  transition:opacity .2s,transform .2s;
+}
+.secret-box.hidden{
+  visibility:hidden;
+  opacity:0;
+  transform:translateY(-5px);
+}
+.secret-title{
+  color:#ffd45a;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:1px;
+}
+.secret-code{
+  min-height:39px;
+  margin-top:4px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:7px;
+}
+.secret-dot{
+  font-size:34px;
+  line-height:1;
+}
+.secret-hint{
+  margin-top:3px;
+  color:#f1d9b0;
+  font-size:10px;
+  font-weight:800;
+}
+
 .selected-preview{
  min-height:48px;margin-top:8px;display:flex;
  justify-content:center;align-items:center;gap:6px
@@ -177,6 +219,12 @@ button{font:inherit;-webkit-tap-highlight-color:transparent}
 </div>
 
 <div class="selected-preview" id="preview"></div>
+
+<div class="secret-box" id="secretBox">
+  <div class="secret-title">🔐 SENHA SECRETA</div>
+  <div class="secret-code" id="secretCode"></div>
+  <div class="secret-hint" id="secretHint">Memorize a sequência...</div>
+</div>
 
 <div class="game-area">
   <div class="board">
@@ -374,17 +422,24 @@ function startLevel(){
 
   const firstRow = document.querySelector('.row[data-row="0"]');
 
-  secret.forEach((color,i)=>{
+  const secretCode = $("secretCode");
+  const secretBox = $("secretBox");
+  const secretHint = $("secretHint");
+
+  secretCode.innerHTML = "";
+  secret.forEach(color=>{
     const span = document.createElement("span");
-    span.className = "circle";
+    span.className = "secret-dot";
     span.textContent = EMOJI[color];
-    firstRow.querySelectorAll(".guess-slot")[i].appendChild(span);
+    secretCode.appendChild(span);
   });
 
+  secretBox.classList.remove("hidden");
+  secretHint.textContent = "Memorize a sequência...";
+
   setTimeout(()=>{
-    firstRow.querySelectorAll(".guess-slot").forEach(slot=>{
-      slot.innerHTML = "";
-    });
+    secretCode.innerHTML = "";
+    secretBox.classList.add("hidden");
 
     busy = false;
     current = [];
