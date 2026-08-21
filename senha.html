@@ -217,7 +217,6 @@ const FILES={
   amarelo:"./amarelo.png",
   roxo:"./roxo.png",
   laranja:"./laranja.png",
-  rosa:"./rosa.png",
 };
 
 const FEEDBACK={black:"./preto.png",white:"./branco.png"};
@@ -283,6 +282,10 @@ function buildPalette(){
     img.src=FILES[color];
     img.alt="";
     img.draggable=false;
+    img.addEventListener("error",()=>{
+      btn.dataset.imageError=color;
+      btn.title=`Imagem não encontrada: ${FILES[color]}`;
+    },{once:true});
 
     btn.appendChild(img);
 
@@ -490,7 +493,7 @@ function setLevelBackground(){
     : level === 7 ? "./fundo_nivel_07.png"
     : "./fundo_nivel_08_09.png";
 
-  const wrap=$(".game-wrap");
+  const wrap=document.querySelector(".game-wrap");
   wrap.style.backgroundImage=`url("${bg}")`;
   wrap.style.backgroundSize="cover";
   wrap.style.backgroundPosition="center";
