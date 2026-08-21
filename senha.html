@@ -299,11 +299,37 @@ function buildPalette(){
     // Clique/toque simples. O próprio <button> recebe o toque do Safari.
     btn.addEventListener("click", event=>{
       event.preventDefault();
-      selecionarCor();
+      event.stopPropagation();
+      selecionarCor(color, btn);
     });
 
     el.appendChild(btn);
   });
+}
+
+function selecionarCor(color, btn){
+  // Só permite escolher enquanto a rodada está aguardando a tentativa.
+  if(busy) return;
+
+  const config=LEVELS[level];
+  if(!config) return;
+
+  // A senha dos níveis 1–3 tem exatamente 3 cores.
+  if(current.length>=config.length){
+    $("message").textContent=`Você já escolheu ${config.length} cores. Clique em CONFIRMAR.`;
+    return;
+  }
+
+  current.push(color);
+
+  if(btn){
+    btn.classList.add("selected");
+    setTimeout(()=>btn.classList.remove("selected"),180);
+  }
+
+  renderPreview();
+  renderCurrentRow();
+  $("message").textContent=`${current.length}/${config.length} cores escolhidas.`;
 }
 
 function renderPreview(){
