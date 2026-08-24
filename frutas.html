@@ -42,7 +42,7 @@ body{
 }
 #playfield{
   position:absolute;
-  top:78px;
+  top:70px;
   bottom:0;
   left:0;
   right:0;
@@ -90,15 +90,22 @@ body{
 .falling{
   position:absolute;
   z-index:30;
-  width:clamp(38px,9vw,60px);
-  height:clamp(38px,9vw,60px);
+  width:clamp(36px,8.5vw,58px);
+  height:clamp(36px,8.5vw,58px);
   display:flex;
   align-items:center;
   justify-content:center;
+  padding:0;
+  margin:0;
+  border:0;
+  background:transparent;
+  appearance:none;
+  -webkit-appearance:none;
   will-change:transform;
   pointer-events:auto;
   cursor:pointer;
-  filter:drop-shadow(0 5px 5px rgba(0,0,0,.22));
+  touch-action:manipulation;
+  filter:drop-shadow(0 4px 5px rgba(0,0,0,.20));
 }
 .falling img{
   width:100%;height:100%;object-fit:contain;pointer-events:none;
@@ -106,18 +113,7 @@ body{
 .fallbackEmoji{font-size:clamp(32px,8vw,56px);line-height:1}
 .star{z-index:8}
 .coin{z-index:9}
-.trash{z-index:8}@keyframes idlePlayer{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-5px)}}
-#progressWrap{
-  position:absolute;
-  z-index:20;
-  left:15px;right:15px;
-  bottom:calc(max(10px,env(safe-area-inset-bottom)) + 4px);
-  height:7px;
-  border-radius:20px;
-  background:rgba(0,0,0,.35);
-  overflow:hidden;
-}
-#progress{height:100%;width:0;background:linear-gradient(90deg,#ffe047,#ff9f3d);transition:width .15s}
+.trash{z-index:8}50%{transform:translateX(-50%) translateY(-5px)}}
 .overlay{
   position:absolute;
   inset:0;
@@ -230,10 +226,6 @@ body{
 
   <div id="playfield">
     <div id="dropArea"></div>
-</div>
-</div>
-    </div>
-
   </div>
 
   <div id="toast"></div>
@@ -242,7 +234,7 @@ body{
     <div class="panel">
       <div class="bigEmoji">🍎🍌🍉</div>
       <h1>Frutas Caindo</h1>
-      <p>Clique nas frutas e comidas que caem. Se clicar no lixo, perde uma vida!</p>
+      <p>Toque nas frutas e comidas para pegar. Toque no lixo e perca uma ❤️!</p>
       <button class="action" id="startBtn">🍎 COMEÇAR</button>
     </div>
   </div>
@@ -265,7 +257,6 @@ body{
         <div><small>PONTOS</small><strong id="lossScore">0</strong></div>
       </div>
       <button class="action" id="continueBtn">❤️ CONTINUAR — 1 CHANCE +30 MOEDAS</button>
-      <button class="action secondary" id="lossRestartBtn">↻ TENTAR NOVAMENTE</button>
       <button class="action danger" id="exitLossBtn">SAIR</button>
     </div>
   </div>
@@ -435,7 +426,7 @@ function spawn(type){
   el.type="button";
   el.className=`falling ${type}`;
   el.style.left=(4+Math.random()*88)+"%";
-  el.style.top="-80px";
+  el.style.top="6px";
   el.style.padding="0";
   el.style.border="0";
   el.style.background="transparent";
@@ -467,7 +458,7 @@ function spawn(type){
     }
   };
   area.appendChild(el);
-  objetos.push({el,type,x:parseFloat(el.style.left)/100,y:-.1,vy:cfg.speed*(.85+Math.random()*.25)});
+  objetos.push({el,type,x:parseFloat(el.style.left)/100,y:.02,vy:cfg.speed*(.85+Math.random()*.25)});
 }
 function spawnLoop(){
   clearTimeout(spawnTimer);
@@ -518,7 +509,7 @@ function loop(now){
     for(let i=objetos.length-1;i>=0;i--){
       const o=objetos[i];
       o.y+=(o.vy*dt)/h;
-      o.el.style.transform=`translateY(${o.y*h}px) rotate(${o.y*120}deg)`;
+      o.el.style.transform=`translateY(${o.y*h}px)`;
       const r=objectRect(o.el);
       if(r.top>h+30){
         if(o.type==="fruit"){
@@ -666,19 +657,11 @@ function togglePause(){
     loop.last=performance.now();
   }
 }
-function moveBasket(clientX){
-  const g=$("game").getBoundingClientRect();
-  const b=$("basket");
-  const half=b.offsetWidth/2;
-  let x=clientX-g.left;
-  x=Math.max(half,Math.min(g.width-half,x));
-  b.style.left=x+"px";
-}
+
 
 $("startBtn").onclick=iniciarPartida;
 $("pauseBtn").onclick=togglePause;
 $("resumeBtn").onclick=togglePause;
-$("lossRestartBtn").onclick=()=>startLevel(level);
 $("continueBtn").onclick=consumeChanceAndContinue;
 $("exitLossBtn").onclick=()=>{hide("lossOverlay");show("startOverlay")};
 $("nextBtn").onclick=()=>startLevel(level+1);
@@ -718,20 +701,34 @@ auth.onAuthStateChanged(async u=>{
     }
 
     usuario=u;
-    userRef=db.collection("admins").doc(u.uid);
     entradaRegistrada=false;
 
     try{
-      const snap=await Promise.race([
-        userRef.get(),
-        new Promise((_,reject)=>setTimeout(()=>reject(new Error("timeout")),7000))
-      ]);
+      let resultado=await db.collection("admins")
+        .where("uid","==",u.uid)
+        .limit(1)
+        .get();
 
-      if(snap.exists()){
-        usuario={...u,...snap.data()};
+      if(resultado.empty && u.email){
+        resultado=await db.collection("admins")
+          .where("email","==",u.email.toLowerCase())
+          .limit(1)
+          .get();
+      }
+
+      if(!resultado.empty){
+        const doc=resultado.docs[0];
+        userRef=doc.ref;
+        usuario={...u,...doc.data()};
+      }else{
+        // Mantém o jogo acessível mesmo se o cadastro admin
+        // não for encontrado. As operações de moedas/chances
+        // pedirão um cadastro válido.
+        userRef=null;
       }
     }catch(e){
-      console.warn("Não foi possível carregar o perfil:",e);
+      console.error("Erro ao localizar perfil admin:",e);
+      userRef=null;
     }
 
     liberarTelaInicial();
@@ -745,6 +742,6 @@ auth.onAuthStateChanged(async u=>{
 setTimeout(()=>{
   if(!inicializado){
     liberarTelaInicial();
-    toast("⚠️ O Firebase demorou. O jogo foi iniciado.");
+    toast("⚠️ O jogo iniciou. Verifique sua conta para salvar moedas.");
   }
-},8000);
+},3000);
