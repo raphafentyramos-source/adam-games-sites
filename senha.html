@@ -79,7 +79,7 @@ button{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 .legend-dot.white{border:2px solid #eee;background:#fff;box-shadow:inset 0 0 3px #999}
 
 .history{
-  display:grid;gap:8px;max-height:660px;overflow:hidden
+  display:grid;gap:8px;max-height:900px;overflow-y:auto;overflow-x:hidden
 }
 .history-row{
   min-height:61px;border-radius:16px;background:linear-gradient(90deg,#183a4b,#123448);
@@ -230,6 +230,7 @@ button{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
   .feedback-dot{width:11px !important;height:11px !important;min-width:11px !important}
   .history-feedback{gap:3px !important}
 }
+.timer-box{margin:4px auto 9px;width:max-content;min-width:120px;padding:7px 14px;border:2px solid #ffd52b;border-radius:14px;background:#00131fe8;color:#ffd52b;font-weight:900;text-align:center}
 </style>
 
 </head>
@@ -302,7 +303,7 @@ button{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 import {getAuth,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-import {getFirestore,collection,query,where,getDocs,doc,updateDoc,increment} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+import {getFirestore,collection,query,where,getDocs,getDoc,doc,updateDoc,increment,runTransaction} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 const firebaseConfig={
   apiKey:"AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",
@@ -317,44 +318,13 @@ const app=initializeApp(firebaseConfig);
 const auth=getAuth(app);
 const db=getFirestore(app);
 const $=id=>document.getElementById(id);
-const qs=sel=>document.querySelector(sel);
 
 const COLORS=["vermelho","azul","verde","amarelo","roxo","laranja"];
 const FILES={
-  vermelho:"./vermelho.png",
-  azul:"./azul.png",
-  verde:"./verde.png",
-  amarelo:"./amarelo.png",
-  roxo:"./roxo.png",
-  laranja:"./laranja.png"
+  vermelho:"./vermelho.png", azul:"./azul.png", verde:"./verde.png",
+  amarelo:"./amarelo.png", roxo:"./roxo.png", laranja:"./laranja.png"
 };
 
-/*
-  REGRAS DA PARTIDA
-
-  Entrada:
-  -1 chance +30 Adam Coins.
-
-  Níveis:
-  1-3: 3 cores / +20
-  4-5: 4 cores / +30
-  6-7: 5 cores / +30
-  8: 6 cores / +75 (HARD)
-  9: 6 cores / bônus por tempo
-
-  Corações:
-  - 3 corações por partida.
-  - Só funcionam até o nível 7.
-  - Um coração pode ser usado para continuar no mesmo nível
-    com uma nova senha ou para pular a senha atual.
-  - Níveis 8 e 9 não possuem uso de coração/pulo.
-
-  Importante:
-  - Errar uma tentativa NÃO abre "você perdeu".
-  - A tentativa apenas entra no histórico.
-  - Os círculos de feedback só aparecem quando houver feedback.
-  - Círculos sem feedback permanecem vazios.
-*/
 const LEVELS={
   1:{length:3,reward:20},
   2:{length:3,reward:20},
@@ -364,796 +334,311 @@ const LEVELS={
   6:{length:5,reward:30},
   7:{length:5,reward:30},
   8:{length:6,reward:75},
-  9:{length:6,reward:100}
+  9:{length:6,reward:0}
 };
 
-const MAX_ATTEMPTS=10;
 const HEARTS_START=3;
-const SESSION_KEY="adam_senha_session_v4";
+const SESSION_KEY_BASE="adam_senha_session_v9";
+const SECRET_SHOW_MS=0; // A senha NUNCA é exibida.
 
-let userDoc=null;
-let userData=null;
-let level=1;
-let secret=[];
-let current=[];
-let attempt=0;
-let historyData=[];
-let busy=false;
-let hearts=HEARTS_START;
-let sessionStarted=false;
-let entryCharged=false;
+let userDoc=null,userData=null;
+let level=1,secret=[],current=[],attempt=0,hearts=HEARTS_START;
+let busy=false,sessionStarted=false,entryCharged=false;
+let timerId=null,timerStartedAt=0;
 
-function money(){
-  return Number(userData?.moedas||0).toLocaleString("pt-BR");
-}
-
+function maxAttempts(){return (level===7||level===8)?15:10;}
+function money(){return Number(userData?.moedas||0).toLocaleString("pt-BR");}
 function renderStats(){
   $("coins").textContent=money();
   $("chances").textContent=Number(userData?.chances||0).toLocaleString("pt-BR");
   $("level").textContent=`${level} / 9`;
   $("progress").style.width=`${(level/9)*100}%`;
 }
-
 function renderHearts(){
-  const el=$("hearts");
-  const skipBtn=$("skipBtn");
-  if(level>=8){
-    el.innerHTML="";
-    if(skipBtn)skipBtn.style.display="none";
-    return;
-  }
-
-  if(skipBtn){
-    skipBtn.style.display="block";
-    skipBtn.disabled=hearts<=0 || busy;
-    skipBtn.textContent=hearts>0
-      ? "⏭️ PULAR SENHA • -1 ❤️"
-      : "❤️ SEM CORAÇÕES PARA PULAR";
-  }
-
+  const el=$("hearts"), skip=$("skipBtn");
   el.innerHTML="";
   for(let i=0;i<3;i++){
     const s=document.createElement("span");
-    s.className="heart"+(i>=hearts?" off":"");
-    s.textContent="❤️";
-    el.appendChild(s);
+    s.className="heart"+(i>=hearts?" off":""); s.textContent="❤️"; el.appendChild(s);
   }
-
-  const label=document.createElement("span");
-  label.className="heart-label";
-  label.textContent=`${hearts} coração${hearts===1?"":"ões"} • use para continuar/pular`;
-  el.appendChild(label);
+  if(level<=7){
+    const label=document.createElement("span"); label.className="heart-label";
+    label.textContent=`${hearts} coração${hearts===1?"":"ões"} • usar para continuar/pular`;
+    el.appendChild(label);
+    skip.style.display="block";
+    skip.disabled=hearts<=0 || busy;
+    skip.textContent=hearts>0?"⏭️ PULAR SENHA • -1 ❤️":"❤️ SEM CORAÇÕES PARA PULAR";
+  }else{
+    skip.style.display="none";
+  }
 }
-
+function sessionKey(){return userDoc?.id ? `${SESSION_KEY_BASE}_${userDoc.id}` : SESSION_KEY_BASE;}
+function saveSession(){
+  if(!sessionStarted)return;
+  const data={
+    level,secret,current,attempt,hearts,entryCharged:true,sessionStarted:true,
+    timerStartedAt:timerStartedAt||0
+  };
+  localStorage.setItem(sessionKey(),JSON.stringify(data));
+}
+function clearSession(){localStorage.removeItem(sessionKey());}
+function loadSession(){
+  try{const raw=localStorage.getItem(sessionKey());return raw?JSON.parse(raw):null;}catch{return null;}
+}
 function randomSecret(length){
-  const pool=[...COLORS];
-  const result=[];
-  while(result.length<length){
-    const i=Math.floor(Math.random()*pool.length);
-    result.push(pool.splice(i,1)[0]);
-  }
-  return result;
+  const pool=[...COLORS],out=[];
+  while(out.length<length){const i=Math.floor(Math.random()*pool.length);out.push(pool.splice(i,1)[0]);}
+  return out;
 }
-
 function buildPalette(){
-  const el=$("palette");
-  el.innerHTML="";
+  const el=$("palette"); el.innerHTML="";
   COLORS.forEach(color=>{
-    const btn=document.createElement("button");
-    btn.className="color-btn";
-    btn.type="button";
-    btn.title=color;
-
-    const img=document.createElement("img");
-    img.src=FILES[color];
-    img.alt="";
-    img.draggable=false;
-
+    const btn=document.createElement("button"); btn.className="color-btn"; btn.type="button";
+    const img=document.createElement("img"); img.src=FILES[color]; img.alt=""; img.draggable=false;
     btn.appendChild(img);
-
-    btn.addEventListener("click",e=>{
-      e.preventDefault();
-      e.stopPropagation();
-      selectColor(color,btn);
-    });
-
+    btn.addEventListener("click",e=>{e.preventDefault();if(!busy)selectColor(color,btn);});
     el.appendChild(btn);
   });
 }
-
 function selectColor(color,btn){
-  if(busy)return;
-
-  const config=LEVELS[level];
-  if(!config)return;
-
-  if(current.length>=config.length){
-    $("message").textContent=`Você já escolheu ${config.length} cores. Clique em CONFIRMAR.`;
-    return;
-  }
-
-  current.push(color);
-
-  if(btn){
-    btn.classList.add("selected");
-    setTimeout(()=>btn.classList.remove("selected"),180);
-  }
-
-  renderCurrent();
+  const len=LEVELS[level].length;
+  if(busy||current.length>=len)return;
+  current.push(color); btn?.classList.add("selected");
+  setTimeout(()=>btn?.classList.remove("selected"),180);
+  renderCurrent(); saveSession();
   $("message").className="message";
-  $("message").textContent=`${current.length}/${config.length} cores escolhidas.`;
+  $("message").textContent=`${current.length}/${len} cores escolhidas.`;
 }
-
 function renderCurrent(){
-  const el=$("current");
-  el.innerHTML="";
-  const length=LEVELS[level].length;
-
-  for(let i=0;i<length;i++){
-    const slot=document.createElement("div");
-    slot.className="current-slot";
-
-    if(current[i]){
-      const img=document.createElement("img");
-      img.src=FILES[current[i]];
-      img.alt="";
-      slot.appendChild(img);
-    }
-
+  const el=$("current"); el.innerHTML="";
+  for(let i=0;i<LEVELS[level].length;i++){
+    const slot=document.createElement("div"); slot.className="current-slot";
+    if(current[i]){const img=document.createElement("img");img.src=FILES[current[i]];img.alt="";slot.appendChild(img);}
     el.appendChild(slot);
   }
 }
-
 function makeHistory(){
-  const el=$("history");
-  el.innerHTML="";
-
-  for(let r=0;r<MAX_ATTEMPTS;r++){
-    const row=document.createElement("div");
-    row.className="history-row";
-    row.dataset.row=r;
-
-    const num=document.createElement("div");
-    num.className="history-number";
-    num.textContent=r+1;
-
-    const slots=document.createElement("div");
-    slots.className="history-slots";
-
-    for(let i=0;i<LEVELS[level].length;i++){
-      const slot=document.createElement("div");
-      slot.className="h-slot";
-      slot.dataset.slot=i;
-      slots.appendChild(slot);
-    }
-
-    const feedback=document.createElement("div");
-    feedback.className="feedback";
-
-    for(let i=0;i<LEVELS[level].length;i++){
-      const dot=document.createElement("span");
-      dot.className="feedback-dot";
-      feedback.appendChild(dot);
-    }
-
-    row.append(num,slots,feedback);
-    el.appendChild(row);
+  const el=$("history"); el.innerHTML="";
+  const max=maxAttempts(),len=LEVELS[level].length;
+  for(let r=0;r<max;r++){
+    const row=document.createElement("div");row.className="history-row";row.dataset.row=r;
+    const num=document.createElement("div");num.className="history-number";num.textContent=r+1;
+    const slots=document.createElement("div");slots.className="history-slots";
+    for(let i=0;i<len;i++){const s=document.createElement("div");s.className="h-slot";s.dataset.slot=i;slots.appendChild(s);}
+    const feedback=document.createElement("div");feedback.className="feedback";
+    for(let i=0;i<len;i++){const d=document.createElement("span");d.className="feedback-dot";d.dataset.feedback=i;feedback.appendChild(d);}
+    row.append(num,slots,feedback);el.appendChild(row);
   }
-
-  historyData.forEach((item,index)=>renderHistoryRow(index,item.guess,item.result));
-  $("attemptCount").textContent=`${attempt} / ${MAX_ATTEMPTS}`;
+  $("attemptCount").textContent=`${attempt} / ${max}`;
 }
-
-function renderHistoryRow(index,guess,result){
-  const row=qs(`.history-row[data-row="${index}"]`);
-  if(!row || !Array.isArray(guess) || !result)return;
-
+function calculateFeedback(guess,answer){
+  const out=Array(guess.length).fill("");
+  const usedA=Array(answer.length).fill(false),usedG=Array(guess.length).fill(false);
+  for(let i=0;i<guess.length;i++){
+    if(guess[i]===answer[i]){out[i]="black";usedA[i]=true;usedG[i]=true;}
+  }
+  for(let i=0;i<guess.length;i++){
+    if(usedG[i])continue;
+    for(let j=0;j<answer.length;j++){
+      if(!usedA[j]&&guess[i]===answer[j]){out[i]="white";usedA[j]=true;break;}
+    }
+  }
+  return out;
+}
+function addHistory(guess,feedback){
+  const row=document.querySelector(`.history-row[data-row="${attempt}"]`);
+  if(!row)return;
   const slots=[...row.querySelectorAll(".h-slot")];
   guess.forEach((color,i)=>{
     if(!slots[i])return;
-    slots[i].innerHTML="";
-    const img=document.createElement("img");
-    img.src=FILES[color];
-    img.alt="";
-    img.draggable=false;
-    slots[i].appendChild(img);
+    const img=document.createElement("img");img.src=FILES[color];img.alt="";slots[i].appendChild(img);
   });
-
   const dots=[...row.querySelectorAll(".feedback-dot")];
-  const marks=Array.isArray(result.marks)?result.marks:[];
-  dots.forEach((dot,i)=>{
-    dot.className="feedback-dot";
-    if(marks[i]==="black")dot.classList.add("black");
-    else if(marks[i]==="white")dot.classList.add("white");
-  });
-}
-
-function addHistory(guess,result){
-  const index=attempt;
-  historyData[index]={guess:[...guess],result:{
-    exact:Number(result.exact||0),
-    misplaced:Number(result.misplaced||0),
-    marks:Array.isArray(result.marks)?[...result.marks]:[]
-  }};
-
-  renderHistoryRow(index,historyData[index].guess,historyData[index].result);
-  $("attemptCount").textContent=`${Math.min(index+1,MAX_ATTEMPTS)} / ${MAX_ATTEMPTS}`;
-  saveSession();
-}
-
-function calculateResult(guess,answer){
-  const marks=Array(guess.length).fill("");
-  const usedAnswer=Array(answer.length).fill(false);
-  const usedGuess=Array(guess.length).fill(false);
-
-  // 1) Primeiro marca os acertos exatos, mantendo a posição.
-  for(let i=0;i<guess.length;i++){
-    if(guess[i]===answer[i]){
-      marks[i]="black";
-      usedAnswer[i]=true;
-      usedGuess[i]=true;
-    }
-  }
-
-  // 2) Depois procura cores corretas em posição diferente.
-  for(let i=0;i<guess.length;i++){
-    if(usedGuess[i])continue;
-    for(let j=0;j<answer.length;j++){
-      if(usedAnswer[j])continue;
-      if(guess[i]===answer[j]){
-        marks[i]="white";
-        usedAnswer[j]=true;
-        break;
-      }
-    }
-  }
-
-  const exact=marks.filter(x=>x==="black").length;
-  const misplaced=marks.filter(x=>x==="white").length;
-  return {exact,misplaced,marks};
+  feedback.forEach((type,i)=>{if(dots[i]&&type)dots[i].classList.add(type);});
+  $("attemptCount").textContent=`${attempt+1} / ${maxAttempts()}`;
 }
 function openModal(title,text,buttons,icon="🎉"){
-  $("modalIcon").textContent=icon;
-  $("modalTitle").textContent=title;
-  $("modalText").innerHTML=text;
-  $("modalButtons").innerHTML="";
-
-  buttons.forEach(item=>{
-    const b=document.createElement("button");
-    b.type="button";
-    b.textContent=item.text;
-    b.className=item.cls||"secondary";
-    b.onclick=item.fn;
-    $("modalButtons").appendChild(b);
-  });
-
+  $("modalIcon").textContent=icon;$("modalTitle").textContent=title;$("modalText").innerHTML=text;$("modalButtons").innerHTML="";
+  buttons.forEach(item=>{const b=document.createElement("button");b.type="button";b.textContent=item.text;b.className=item.cls||"secondary";b.onclick=item.fn;$("modalButtons").appendChild(b);});
   $("modal").classList.add("show");
 }
-
-function closeModal(){
-  $("modal").classList.remove("show");
-}
-
+function closeModal(){$("modal").classList.remove("show");}
 async function updateAccount(deltaCoins=0,deltaChances=0){
   if(!userDoc)throw new Error("Cadastro não encontrado.");
+  const ref=userDoc.ref;
 
-  const ref=doc(db,"admins",userDoc.id);
-  const oldCoins=Number(userData?.moedas||0);
-  const oldChances=Number(userData?.chances||0);
-  const newCoins=oldCoins+Number(deltaCoins||0);
-  const newChances=oldChances+Number(deltaChances||0);
+  // O Firestore das contas do Adam Games aceita as alterações de
+  // moedas e chances separadamente. Não fazemos mais uma única
+  // transação alterando os dois campos ao mesmo tempo.
+  if(Number(deltaChances||0)!==0){
+    let newChances;
+    await runTransaction(db,async tx=>{
+      const snap=await tx.get(ref);
+      if(!snap.exists())throw new Error("Cadastro não encontrado.");
+      const chances=Number(snap.data().chances||0);
+      newChances=chances+Number(deltaChances);
+      if(newChances<0)throw new Error("Você não possui chances suficientes.");
+      tx.update(ref,{chances:newChances});
+    });
+    userData={...userData,chances:newChances};
+  }
 
-  if(newChances<0)throw new Error("Você não possui chances suficientes.");
+  if(Number(deltaCoins||0)!==0){
+    let newCoins;
+    await runTransaction(db,async tx=>{
+      const snap=await tx.get(ref);
+      if(!snap.exists())throw new Error("Cadastro não encontrado.");
+      const coins=Number(snap.data().moedas||0);
+      newCoins=coins+Number(deltaCoins);
+      tx.update(ref,{moedas:newCoins});
+    });
+    userData={...userData,moedas:newCoins};
+  }
 
-  await updateDoc(ref,{
-    moedas:increment(Number(deltaCoins||0)),
-    chances:increment(Number(deltaChances||0))
-  });
-
-  userData={...userData,moedas:newCoins,chances:newChances};
   renderStats();
 }
-
-function saveSession(){
-  if(!sessionStarted)return;
-  const state={
-    level,secret,current,attempt,history:historyData,hearts,entryCharged:true,startedAt:Date.now()
-  };
-  localStorage.setItem(SESSION_KEY,JSON.stringify(state));
-}
-
-function loadSession(){
-  const raw=localStorage.getItem(SESSION_KEY);
-  if(!raw)return false;
-  try{
-    const st=JSON.parse(raw);
-    if(!st || !Array.isArray(st.secret) || !st.level)return false;
-    level=Math.max(1,Math.min(9,Number(st.level)));
-    secret=[...st.secret];
-    current=Array.isArray(st.current)?[...st.current]:[];
-    const hasSavedHistory=Array.isArray(st.history);
-    attempt=Math.max(0,Math.min(MAX_ATTEMPTS,Number(st.attempt)||0));
-    historyData=hasSavedHistory?st.history.map(item=>({
-      guess:Array.isArray(item?.guess)?[...item.guess]:[],
-      result:{
-        exact:Number(item?.result?.exact||0),
-        misplaced:Number(item?.result?.misplaced||0),
-        marks:Array.isArray(item?.result?.marks)?[...item.result.marks]:[]
-      }
-    })).filter(item=>item.guess.length>0):[];
-    // Sessões criadas pela versão anterior não guardavam o histórico.
-    // Nesse caso, reiniciamos apenas o contador para não mostrar tentativas vazias.
-    if(!hasSavedHistory){
-      attempt=0;
-      historyData=[];
-    }
-    hearts=Math.max(0,Math.min(HEARTS_START,Number(st.hearts))); 
-    entryCharged=true;
-    sessionStarted=true;
-    return true;
-  }catch(e){
-    console.warn("Sessão inválida, iniciando nova partida.",e);
-    return false;
-  }
-}
-
 async function chargeEntry(){
-  if(entryCharged)return true;
-
-  const stored=localStorage.getItem(SESSION_KEY);
-  if(stored){
-    entryCharged=true;
-    sessionStarted=true;
-    return true;
+  const stored=loadSession();
+  if(stored?.sessionStarted){
+    entryCharged=true;sessionStarted=true;restoreSession(stored);return true;
   }
-
   if(Number(userData?.chances||0)<1){
-    openModal(
-      "SEM CHANCES",
-      "Você precisa ter pelo menos <b>1 chance</b> para iniciar o jogo.",
-      [{text:"VOLTAR",cls:"primary",fn:()=>location.href="jogos.html"}],
-      "❤️"
-    );
+    openModal("SEM CHANCES","Você precisa ter pelo menos <b>1 chance</b> para iniciar o jogo.",[{text:"VOLTAR",cls:"primary",fn:()=>location.href="jogos.html"}],"❤️");
     return false;
   }
 
+  // 1) Consome exatamente 1 chance. Se isso falhar, a partida não começa.
   try{
-    // Regra da entrada: apenas -1 chance. Os Adam Coins já pertencem ao cliente.
     await updateAccount(0,-1);
-
-    const sessionId="senha_"+Date.now()+"_"+Math.random().toString(36).slice(2);
-    localStorage.setItem(SESSION_KEY,sessionId);
-
-    entryCharged=true;
-    sessionStarted=true;
-
-    $("message").textContent="❤️ -1 chance • partida iniciada";
-    return true;
   }catch(error){
-    console.error(error);
-    openModal(
-      "ERRO",
-      "Não foi possível registrar a entrada da partida. <br><br>"+String(error?.message||"Tente novamente."),
-      [{text:"VOLTAR",cls:"primary",fn:()=>location.href="jogos.html"}],
-      "⚠️"
-    );
+    console.error("Erro ao consumir chance de entrada:",error);
+    openModal("ERRO AO INICIAR",String(error?.message||"Não foi possível usar a chance."),[{text:"VOLTAR",cls:"primary",fn:()=>location.href="jogos.html"}],"⚠️");
     return false;
   }
-}
 
-function setLevelText(){
-  const config=LEVELS[level];
-
-  let name="FÁCIL";
-  if(level>=4&&level<=5)name="MÉDIO";
-  if(level>=6&&level<=7)name="DIFÍCIL";
-  if(level===8)name="HARD";
-  if(level===9)name="BÔNUS";
-
-  $("phaseTitle").textContent=`NÍVEL ${level} — ${level===8?"HARD":level===9?"DESAFIO FINAL":"DESCUBRA A SENHA"}`;
-
-  if(level<=7){
-    $("phaseText").textContent=`${name} • Descubra a senha escolhendo ${config.length} cores.`;
-  }else if(level===8){
-    $("phaseText").textContent="🔥 HARD • A senha tem 6 cores. Sem pulos e sem corações.";
-  }else{
-    $("phaseText").textContent="👑 BÔNUS • A senha tem 6 cores. Cronômetro e recompensa especial.";
-  }
-}
-
-function startLevel(){
-  const config=LEVELS[level];
-
-  busy=false;
-  secret=randomSecret(config.length);
-  current=[];
-  attempt=0;
-  historyData=[];
-
-  setLevelText();
-  renderStats();
-  renderHearts();
-  makeHistory();
-  renderCurrent();
-
-  $("message").className="message";
-  $("message").textContent="Memorize a senha...";
-
-  saveSession();
-  showSecret();
-}
-
-function showSecret(){
-  const panel=$("current");
-  panel.innerHTML="";
-
-  secret.forEach(color=>{
-    const slot=document.createElement("div");
-    slot.className="current-slot";
-    const img=document.createElement("img");
-    img.src=FILES[color];
-    img.alt="";
-    slot.appendChild(img);
-    panel.appendChild(slot);
-  });
-
-  busy=true;
-  renderHearts();
-
-  setTimeout(()=>{
-    if(!sessionStarted)return;
-    renderCurrent();
-    busy=false;
-    renderHearts();
-    saveSession();
-    $("message").textContent="Sua vez! Monte a senha e confirme.";
-  },2600);
-}
-
-async function win(){
-  busy=true;
-  const reward=LEVELS[level].reward;
-
+  // 2) Dá as 30 moedas em uma atualização independente.
+  // Se uma regra antiga bloquear somente moedas, a partida continua funcionando.
   try{
-    await updateAccount(reward,0);
+    await updateAccount(30,0);
   }catch(error){
-    console.error(error);
-    $("message").textContent="Vitória registrada visualmente, mas houve erro ao registrar moedas.";
+    console.error("Erro ao registrar +30 Adam Coins:",error);
   }
 
-  if(level<8){
-    openModal(
-      "SENHA CORRETA!",
-      `Você descobriu a senha!<br><br><span class="gold"><b>+${reward} Adam Coins</b></span>`,
-      [{
-        text:"PRÓXIMO NÍVEL",
-        cls:"primary",
-        fn:()=>{
-          closeModal();
-          level++;
-          startLevel();
-        }
-      }],
-      "🎉"
-    );
-    return;
-  }
-
-  if(level===8){
-    openModal(
-      "HARD CONCLUÍDO!",
-      `<span class="gold"><b>+${reward} Adam Coins</b></span><br><br>Você venceu o Nível 8 e liberou o <b>Desafio Final — Nível 9</b>.`,
-      [{
-        text:"IR PARA O NÍVEL 9",
-        cls:"primary",
-        fn:()=>{
-          closeModal();
-          level=9;
-          startLevel();
-        }
-      }],
-      "🔥"
-    );
-    return;
-  }
-
-  openModal(
-    "PARTIDA CONCLUÍDA!",
-    `<span class="gold"><b>+${reward} Adam Coins</b></span><br><br>Você venceu o desafio final!`,
-    [{
-      text:"VOLTAR AOS JOGOS",
-      cls:"primary",
-      fn:()=>{localStorage.removeItem(SESSION_KEY);location.href="jogos.html"}
-    }],
-    "👑"
-  );
+  entryCharged=true;sessionStarted=true;
+  level=1;hearts=HEARTS_START;attempt=0;current=[];secret=randomSecret(LEVELS[1].length);
+  timerStartedAt=0;saveSession();
+  $("message").textContent="🪙 +30 Adam Coins • -1 chance";
+  return true;
 }
-
-function loseAttempt(){
-  // Não existe mais modal "você perdeu" a cada erro.
-  // A tentativa simplesmente termina e entra no histórico.
-  current=[];
-  renderCurrent();
-
-  if(attempt+1>=MAX_ATTEMPTS){
-    if(level<=7 && hearts>0){
-      openModal(
-        "FIM DAS TENTATIVAS",
-        `Você usou as <b>${MAX_ATTEMPTS} tentativas</b> desta senha.<br><br>Você ainda tem <b>${hearts} ❤️</b>.<br>Use um coração para receber uma nova senha e continuar no mesmo nível.`,
-        [
-          {
-            text:"❤️ CONTINUAR • -1 CORAÇÃO",
-            cls:"primary",
-            fn:()=>continueWithHeart()
-          },
-          {
-            text:"SAIR",
-            cls:"secondary",
-            fn:()=>location.href="jogos.html"
-          }
-        ],
-        "💔"
-      );
-    }else{
-      openModal(
-        level===8?"HARD PERDIDO":"DESAFIO FINAL ENCERRADO",
-        level===8
-          ?"Você não conseguiu completar o Nível 8. O desafio Hard foi perdido."
-          :"Você não conseguiu completar o desafio final.",
-        [{
-          text:"VOLTAR AOS JOGOS",
-          cls:"primary",
-          fn:()=>location.href="jogos.html"
-        }],
-        "💀"
-      );
-    }
-    return;
-  }
-
-  attempt++;
-  $("attemptCount").textContent=`${attempt} / ${MAX_ATTEMPTS}`;
-  saveSession();
-  $("message").className="message";
-  $("message").textContent=`Tentativa registrada • ${attempt+1}/${MAX_ATTEMPTS}`;
+function restoreSession(s){
+  level=Number(s.level)||1;secret=Array.isArray(s.secret)?s.secret:randomSecret(LEVELS[level].length);current=Array.isArray(s.current)?s.current:[];attempt=Number(s.attempt)||0;hearts=Number.isFinite(s.hearts)?s.hearts:HEARTS_START;timerStartedAt=Number(s.timerStartedAt)||0;
+}
+function setLevelText(){
+  const len=LEVELS[level].length;
+  let name=level<=3?"FÁCIL":level<=6?"MÉDIO":level===7?"DIFÍCIL":level===8?"HARD":"BÔNUS";
+  $("phaseTitle").textContent=`NÍVEL ${level} — ${level===8?"HARD":level===9?"BÔNUS":"DESCUBRA A SENHA"}`;
+  $("phaseText").textContent=`${name} • Descubra a senha escolhendo ${len} cores.`;
+}
+function stopTimer(){if(timerId){clearInterval(timerId);timerId=null;}}
+function elapsedSeconds(){return timerStartedAt?Math.floor((Date.now()-timerStartedAt)/1000):0;}
+function updateTimer(){
+  if(level!==9)return;
+  const sec=elapsedSeconds();
+  let label=document.getElementById("timerBox");
+  if(!label)return;
+  label.textContent=`⏱️ ${Math.max(0,120-sec)}s`;
+  if(sec>=120){stopTimer();busy=true;openModal("TEMPO ESGOTADO","O bônus terminou sem completar a senha.",[{text:"VOLTAR AOS JOGOS",cls:"primary",fn:()=>location.href="jogos.html"}],"⏰");}
+}
+function startTimerIfNeeded(){
+  stopTimer();
+  if(level!==9)return;
+  if(!timerStartedAt)timerStartedAt=Date.now();
+  let box=document.getElementById("timerBox");if(!box){box=document.createElement("div");box.id="timerBox";box.className="timer-box";$("hearts").after(box);}
+  updateTimer();timerId=setInterval(updateTimer,250);saveSession();
+}
+function startLevel({keepState=false}={}){
   busy=false;
+  if(!keepState){secret=randomSecret(LEVELS[level].length);current=[];attempt=0;timerStartedAt=0;}
+  setLevelText();renderStats();renderHearts();makeHistory();renderCurrent();
+  $("message").className="message";$("message").textContent="Sua vez! A senha não é exibida.";
+  // Recria o histórico já salvo quando a página foi atualizada.
+  const stored=loadSession();
+  if(keepState&&stored?.history){
+    stored.history.forEach(item=>{
+      const row=document.querySelector(`.history-row[data-row="${item.index}"]`);if(!row)return;
+      const slots=[...row.querySelectorAll(".h-slot")];(item.guess||[]).forEach((c,i)=>{if(slots[i]){const img=document.createElement("img");img.src=FILES[c];img.alt="";slots[i].appendChild(img);}});
+      const dots=[...row.querySelectorAll(".feedback-dot")];(item.feedback||[]).forEach((t,i)=>{if(dots[i]&&t)dots[i].classList.add(t);});
+    });
+    $("attemptCount").textContent=`${attempt} / ${maxAttempts()}`;
+  }
+  startTimerIfNeeded();saveSession();
 }
-
-function clearCurrent(){
-  if(busy)return;
-  current=[];
-  renderCurrent();
-  saveSession();
-  $("message").className="message";
-  $("message").textContent="";
+function saveHistoryEntry(index,guess,feedback){
+  const s=loadSession()||{};s.history=Array.isArray(s.history)?s.history:[];s.history.push({index,guess,feedback});s.history=s.history.slice(-maxAttempts());Object.assign(s,{level,secret,current,attempt,hearts,sessionStarted:true,entryCharged:true,timerStartedAt});localStorage.setItem(sessionKey(),JSON.stringify(s));
 }
-
+async function win(){
+  busy=true;stopTimer();
+  let reward=LEVELS[level].reward;
+  if(level===9){const sec=elapsedSeconds();reward=sec<=30?200:sec<=70?150:sec<=120?120:0;}
+  try{if(reward>0)await updateAccount(reward,0);}catch(e){console.error(e);}
+  if(level<8){openModal("SENHA CORRETA!",`Você descobriu a senha!<br><br><span class="gold"><b>+${reward} Adam Coins</b></span>`,[{text:"PRÓXIMO NÍVEL",cls:"primary",fn:()=>{closeModal();level++;attempt=0;current=[];timerStartedAt=0;const s=loadSession()||{};s.level=level;s.secret=randomSecret(LEVELS[level].length);s.current=[];s.attempt=0;s.history=[];s.timerStartedAt=0;localStorage.setItem(sessionKey(),JSON.stringify(s));startLevel({keepState:true});}}],"🎉");return;}
+  if(level===8){openModal("HARD CONCLUÍDO!",`+${reward} Adam Coins<br><br>Você venceu o Nível 8 e liberou o <b>BÔNUS — NÍVEL 9</b>.`,[{text:"IR PARA O NÍVEL 9",cls:"primary",fn:()=>{closeModal();level=9;attempt=0;current=[];hearts=0;secret=randomSecret(6);timerStartedAt=Date.now();const s=loadSession()||{};Object.assign(s,{level:9,secret,current:[],attempt:0,history:[],hearts:0,timerStartedAt});localStorage.setItem(sessionKey(),JSON.stringify(s));startLevel({keepState:true});}}],"🔥");return;}
+  const sec=elapsedSeconds();openModal("BÔNUS CONCLUÍDO!",`Tempo: <b>${sec}s</b><br><br><span class="gold"><b>+${reward} Adam Coins</b></span>`,[{text:"VOLTAR AOS JOGOS",cls:"primary",fn:()=>{clearSession();location.href="jogos.html"}}],"👑");
+}
+async function failRound(){
+  const max=maxAttempts();
+  if(attempt+1>=max){
+    if(level<=7&&hearts>0){
+      openModal("TENTATIVAS ESGOTADAS",`Você usou as <b>${max} tentativas</b>.<br><br>Você ainda tem <b>${hearts} ❤️</b>.`,[{text:"❤️ CONTINUAR • -1 ❤️",cls:"primary",fn:continueWithHeart},{text:"SAIR",cls:"secondary",fn:()=>location.href="jogos.html"}],"💔");
+    }else{openModal(level===8?"HARD PERDIDO":"PARTIDA ENCERRADA",`Você esgotou as <b>${max} tentativas</b>.`,[{text:"VOLTAR AOS JOGOS",cls:"primary",fn:()=>location.href="jogos.html"}],"💀");}
+    return;
+  }
+  attempt++;current=[];renderCurrent();busy=false;saveSession();$("attemptCount").textContent=`${attempt} / ${max}`;$("message").textContent=`Tentativa ${attempt} registrada.`;
+}
+async function clearCurrent(){if(busy)return;current=[];renderCurrent();saveSession();$("message").textContent="";}
 async function continueWithHeart(){
-  if(hearts<=0){
-    closeModal();
-    $("message").textContent="Você não possui mais corações.";
-    return;
-  }
-
-  hearts--;
-  closeModal();
-
-  // Nova senha, mesmo nível, sem cobrar nova entrada.
-  secret=randomSecret(LEVELS[level].length);
-  current=[];
-  attempt=0;
-  historyData=[];
-  makeHistory();
-  renderCurrent();
-  renderHearts();
-
-  $("message").textContent="❤️ Coração usado! Nova senha no mesmo nível.";
-  saveSession();
-  showSecret();
+  if(hearts<=0)return;
+  try{await updateAccount(30,-1);}catch(e){$("message").textContent=e.message;return;}
+  hearts--;attempt=0;current=[];secret=randomSecret(LEVELS[level].length);timerStartedAt=level===9?Date.now():0;const s=loadSession()||{};Object.assign(s,{level,secret,current:[],attempt:0,hearts,history:[],timerStartedAt,sessionStarted:true,entryCharged:true});localStorage.setItem(sessionKey(),JSON.stringify(s));closeModal();startLevel({keepState:true});$("message").textContent="❤️ Coração usado. Você continua no mesmo nível.";
 }
-
 async function skipWithHeart(){
-  if(level>=8)return;
-
-  if(hearts<=0){
-    $("message").textContent="Você não possui corações para pular.";
-    return;
-  }
-
-  hearts--;
-  closeModal();
-
-  // Pular a senha atual significa receber outra senha no mesmo nível.
-  secret=randomSecret(LEVELS[level].length);
-  current=[];
-  attempt=0;
-
-  makeHistory();
-  renderCurrent();
-  renderHearts();
-
-  $("message").textContent="⏭️ Senha pulada! -1 ❤️ • Nova senha.";
-  renderHearts();
-  saveSession();
-  showSecret();
+  if(level>=8||hearts<=0)return;
+  hearts--;attempt=0;current=[];secret=randomSecret(LEVELS[level].length);timerStartedAt=0;const s=loadSession()||{};Object.assign(s,{level,secret,current:[],attempt:0,hearts,history:[],timerStartedAt});localStorage.setItem(sessionKey(),JSON.stringify(s));startLevel({keepState:true});$("message").textContent="⏭️ Senha pulada. Nova senha no mesmo nível.";
 }
-
 async function confirmar(){
   if(busy)return;
-
-  const config=LEVELS[level];
-
-  if(current.length!==config.length){
-    $("message").className="message bad";
-    $("message").textContent=`Escolha ${config.length} cores antes de confirmar.`;
-    return;
-  }
-
-  const guess=[...current];
-  const result=calculateResult(guess,secret);
-
-  addHistory(guess,result);
-
-  const correct=result.exact===secret.length;
-
-  if(correct){
-    await win();
-    return;
-  }
-
-  // Tentativa errada: somente registra e libera a próxima.
-  loseAttempt();
+  if(level===9&&elapsedSeconds()>=120){updateTimer();return;}
+  const len=LEVELS[level].length;
+  if(current.length!==len){$("message").className="message bad";$("message").textContent=`Escolha ${len} cores antes de confirmar.`;return;}
+  const guess=[...current],feedback=calculateFeedback(guess,secret);addHistory(guess,feedback);saveHistoryEntry(attempt,guess,feedback);
+  const correct=feedback.every(x=>x==="black");
+  if(correct){await win();return;}
+  await failRound();
 }
-
-$("confirmBtn").addEventListener("click",e=>{
-  e.preventDefault();
-  confirmar();
-});
-
-$("clearBtn").addEventListener("click",e=>{
-  e.preventDefault();
-  clearCurrent();
-});
-
-$("skipBtn").addEventListener("click",e=>{
-  e.preventDefault();
-  skipWithHeart();
-});
-
-$("back").addEventListener("click",()=>{
-  location.href="jogos.html";
-});
-
+$("confirmBtn").addEventListener("click",e=>{e.preventDefault();confirmar();});
+$("clearBtn").addEventListener("click",e=>{e.preventDefault();clearCurrent();});
+$("skipBtn").addEventListener("click",e=>{e.preventDefault();skipWithHeart();});
+$("back").addEventListener("click",()=>location.href="jogos.html");
 async function localizarUsuario(user){
-  let result=await getDocs(
-    query(collection(db,"admins"),where("uid","==",user.uid))
-  );
-
-  if(result.empty && user.email){
-    result=await getDocs(
-      query(collection(db,"admins"),where("email","==",user.email.toLowerCase()))
-    );
-  }
-
+  let result=await getDocs(query(collection(db,"admins"),where("uid","==",user.uid)));
+  if(result.empty&&user.email)result=await getDocs(query(collection(db,"admins"),where("email","==",user.email.toLowerCase())));
   return result.empty?null:result.docs[0];
 }
-
 onAuthStateChanged(auth,async user=>{
-  if(!user){
-    location.replace("index.html");
-    return;
-  }
-
+  if(!user){location.replace("index.html");return;}
   try{
-    buildPalette();
-
-    userDoc=await localizarUsuario(user);
-
-    if(!userDoc){
-      $("message").textContent="Cadastro não encontrado.";
-      return;
-    }
-
-    userData=userDoc.data();
-    renderStats();
-    renderHearts();
-
-    // A cobrança da entrada acontece UMA vez por partida.
-    const ok=await chargeEntry();
-    if(!ok)return;
-
-    if(loadSession()){
-      setLevelText();
-      renderStats();
-      renderHearts();
-      makeHistory();
-      renderCurrent();
-      busy=false;
-      $("message").textContent="Partida retomada. Continue sua tentativa.";
-    }else{
-      startLevel();
-    }
-
-  }catch(error){
-    console.error("ERRO AO INICIAR SENHA:",error);
-    $("message").textContent="Erro ao iniciar o jogo: "+String(error?.message||"erro");
-  }
+    buildPalette();userDoc=await localizarUsuario(user);
+    if(!userDoc){$("message").textContent="Cadastro não encontrado.";return;}
+    userData=userDoc.data();renderStats();
+    const ok=await chargeEntry();if(!ok)return;
+    const stored=loadSession();
+    startLevel({keepState:!!stored?.sessionStarted});
+  }catch(error){console.error("ERRO AO INICIAR SENHA:",error);$("message").textContent="Erro ao iniciar o jogo: "+String(error?.message||"erro");}
 });
 </script>
 
-<script id="feedback-order-fix">
-(function(){
-  function makeFeedback(secret, guess){
-    const n = Math.min(secret.length, guess.length);
-    const result = Array(n).fill("");
-    const usedSecret = Array(secret.length).fill(false);
-    const usedGuess = Array(guess.length).fill(false);
 
-    // Primeiro: exatamente na mesma posição.
-    for(let i=0;i<n;i++){
-      if(guess[i] === secret[i]){
-        result[i] = "black";
-        usedSecret[i] = true;
-        usedGuess[i] = true;
-      }
-    }
 
-    // Depois: mesma cor, posição diferente.
-    for(let i=0;i<n;i++){
-      if(usedGuess[i]) continue;
-      for(let j=0;j<secret.length;j++){
-        if(usedSecret[j]) continue;
-        if(guess[i] === secret[j]){
-          result[i] = "white";
-          usedSecret[j] = true;
-          break;
-        }
-      }
-    }
-    return result;
-  }
-
-  // Exponibiliza para o jogo sem substituir a lógica de pontuação.
-  window.senhaFeedback = makeFeedback;
-
-  // Se o jogo tiver uma função global para desenhar uma tentativa,
-  // o helper abaixo pode ser usado diretamente.
-  window.renderSenhaFeedback = function(container, secret, guess){
-    if(!container) return;
-    container.innerHTML = "";
-    const fb = makeFeedback(secret, guess);
-
-    const row = document.createElement("div");
-    row.className = "history-row";
-
-    const number = document.createElement("div");
-    number.className = "history-number";
-    number.textContent = container.dataset.row || "";
-
-    const colors = document.createElement("div");
-    colors.className = "history-colors";
-
-    guess.forEach(c=>{
-      const d=document.createElement("span");
-      d.className="color-dot";
-      d.style.background=c;
-      colors.appendChild(d);
-    });
-
-    const marks=document.createElement("div");
-    marks.className="history-feedback";
-
-    fb.forEach(v=>{
-      const d=document.createElement("span");
-      d.className="feedback-dot"+(v ? " "+v : "");
-      marks.appendChild(d);
-    });
-
-    row.append(number, colors, marks);
-    container.appendChild(row);
-  };
-})();
-</script>
 
 </body>
 </html>
