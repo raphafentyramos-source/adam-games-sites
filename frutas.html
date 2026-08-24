@@ -42,7 +42,7 @@ body{
 }
 #playfield{
   position:absolute;
-  top:76px;
+  top:62px;
   left:0;
   right:0;
   bottom:0;
@@ -52,28 +52,28 @@ body{
 #hud{
   position:absolute;
   z-index:20;
-  top:max(10px,env(safe-area-inset-top));
-  left:10px;
-  right:10px;
+  top:max(6px,env(safe-area-inset-top));
+  left:7px;
+  right:7px;
   display:flex;
   justify-content:space-between;
   align-items:flex-start;
-  gap:8px;
+  gap:5px;
   pointer-events:none;
 }
 .hudBox{
-  min-width:74px;
-  padding:8px 10px;
-  border-radius:14px;
+  min-width:62px;
+  padding:5px 6px;
+  border-radius:11px;
   background:rgba(5,17,40,.72);
   border:1px solid rgba(255,255,255,.18);
   box-shadow:0 6px 18px rgba(0,0,0,.18);
   text-align:center;
   backdrop-filter:blur(5px);
 }
-.hudLabel{font-size:9px;color:#b9d4eb;font-weight:900}
-.hudValue{font-size:20px;font-weight:900;margin-top:2px}
-#lives{letter-spacing:1px;color:#ff6d7d}
+.hudLabel{font-size:8px;color:#b9d4eb;font-weight:900}
+.hudValue{font-size:16px;font-weight:900;margin-top:1px}
+#lives{letter-spacing:0;color:#ff6d7d;font-size:17px;white-space:nowrap}
 #levelText{color:#ffe064}
 #scoreText{color:#7de8ff}
 #coinsText{color:#ffd84d}
@@ -83,15 +83,15 @@ body{
   color:#fff;
   background:rgba(5,17,40,.72);
   border:1px solid rgba(255,255,255,.18);
-  width:43px;height:43px;border-radius:13px;
-  font-size:18px;font-weight:900;
+  width:38px;height:38px;border-radius:11px;
+  font-size:16px;font-weight:900;
 }
 #dropArea{position:absolute;inset:0}
 .falling{
   position:absolute;
   z-index:30;
-  width:clamp(38px,8.8vw,60px);
-  height:clamp(38px,8.8vw,60px);
+  width:clamp(52px,12vw,78px);
+  height:clamp(52px,12vw,78px);
   display:flex;
   align-items:center;
   justify-content:center;
@@ -108,7 +108,7 @@ body{
   filter:drop-shadow(0 5px 6px rgba(0,0,0,.22));
 }
 .falling img{width:100%;height:100%;object-fit:contain;pointer-events:none}
-.fallbackEmoji{font-size:clamp(32px,8vw,56px);line-height:1}
+.fallbackEmoji{font-size:clamp(46px,11vw,74px);line-height:1}
 
 .falling img{
   width:100%;height:100%;object-fit:contain;pointer-events:none;
@@ -381,7 +381,7 @@ function setLives(){
 }
 function updateHud(){
   $("levelText").textContent=level;
-  $("scoreText").textContent=`${comidasPegas} / ${LEVELS[level].target}`;
+  $("scoreText").textContent=`${comidasPegas}/${LEVELS[level].target}`;
   $("coinsText").textContent=totalMoedasSessao.toLocaleString("pt-BR");
   setLives();
 }
@@ -445,7 +445,6 @@ function spawn(type){
     if(type==="fruit"){
       comidasPegas++;
       score=comidasPegas;
-      toast("✨ +1 comida!");
       removeObject(idx);
       updateHud();
       if(comidasPegas>=LEVELS[level].target) finishLevel();
