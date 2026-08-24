@@ -7,26 +7,31 @@
 
 <meta
   name="viewport"
-  content="width=device-width,initial-scale=1.0,viewport-fit=cover"
+  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
 >
 
 <title>Adam Games • Senha</title>
 
 <style>
 
+/* =========================================================
+   RESET
+========================================================= */
+
 *{
   box-sizing:border-box;
   margin:0;
   padding:0;
+  -webkit-tap-highlight-color:transparent;
 }
 
-html,
-body{
-  min-height:100%;
-  background:#061b2d;
+html{
+  background:#061d30;
 }
 
 body{
+
+  min-height:100vh;
 
   font-family:
     Arial,
@@ -36,696 +41,156 @@ body{
   color:#fff;
 
   background:
-    radial-gradient(
-      circle at 15% 0%,
-      rgba(46,183,255,.24),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at 85% 10%,
-      rgba(118,55,255,.20),
-      transparent 28%
-    ),
     linear-gradient(
       180deg,
-      #073a4a 0%,
-      #06263d 50%,
-      #031b2d 100%
+      #0b4262 0%,
+      #082f49 48%,
+      #041d30 100%
     );
 
+  overflow-x:hidden;
 }
 
-button{
-  font:inherit;
-}
+
+/* =========================================================
+   PÁGINA
+========================================================= */
 
 .page{
 
   width:100%;
-  max-width:700px;
-  margin:auto;
+
+  max-width:900px;
+
+  margin:0 auto;
 
   padding:
-    14px
     12px
-    80px;
+    14px
+    70px;
 
 }
+
+
+/* =========================================================
+   TOPO
+========================================================= */
 
 .top{
 
   display:flex;
+
   align-items:center;
+
   justify-content:space-between;
-  gap:10px;
+
+  min-height:58px;
 
 }
 
+
 .back{
 
-  width:44px;
-  height:44px;
+  width:46px;
+  height:46px;
 
   border:0;
+
   border-radius:14px;
 
   background:
-    linear-gradient(
-      145deg,
-      #0c6fa5,
-      #07436e
-    );
+    rgba(0,31,52,.9);
 
   color:#fff;
 
-  font-size:25px;
-
-  box-shadow:
-    0 5px 12px #0006;
+  font-size:27px;
 
   cursor:pointer;
 
 }
+
 
 .title{
 
   text-align:center;
 
-  text-shadow:
-    0 2px 6px #000;
-
 }
+
 
 .title small{
 
   display:block;
 
+  color:#a9d9ec;
+
   font-size:10px;
 
-  letter-spacing:2px;
-
-  color:#bcecff;
+  letter-spacing:3px;
 
 }
+
 
 .title strong{
 
-  font-size:21px;
+  display:block;
+
+  margin-top:2px;
+
+  font-size:25px;
+
+  font-weight:900;
+
+  text-shadow:
+    0 3px 8px rgba(0,0,0,.5);
 
 }
 
-.spacer{
-  width:44px;
-}
 
-.card{
+/* =========================================================
+   SALDOS
+========================================================= */
 
-  margin-top:12px;
-
-  padding:13px;
-
-  border-radius:22px;
-
-  background:
-    rgba(3,29,48,.88);
-
-  border:
-    1px solid #ffffff18;
-
-  box-shadow:
-    0 14px 35px #0006;
-
-}
-
-.stats{
+.saldos{
 
   display:grid;
 
   grid-template-columns:
-    1fr 1fr 1fr;
+    1fr
+    1fr
+    1fr;
 
-  gap:8px;
+  gap:10px;
+
+  margin-top:10px;
 
 }
 
-.stat{
+
+.saldo{
+
+  min-height:102px;
 
   padding:
-    9px 6px;
-
-  border-radius:13px;
-
-  background:#0000002b;
-
-  text-align:center;
-
-}
-
-.stat small{
-
-  font-size:9px;
-
-  font-weight:900;
-
-  color:#a9d7eb;
-
-}
-
-.stat b{
-
-  display:block;
-
-  margin-top:3px;
-
-  font-size:19px;
-
-}
-
-.coins{
-  color:#ffd52b;
-}
-
-.chances{
-  color:#ff6670;
-}
-
-.level{
-  color:#72d7ff;
-}
-
-.progress{
-
-  height:8px;
-
-  background:#17394e;
+    15px
+    8px;
 
   border-radius:20px;
 
-  overflow:hidden;
-
-  margin-top:10px;
-
-}
-
-.progress div{
-
-  height:100%;
-
-  width:0;
+  text-align:center;
 
   background:
-    linear-gradient(
-      90deg,
-      #28d56c,
-      #ffd52b
-    );
-
-  transition:.3s;
-
-}
-
-.timer{
-
-  display:none;
-
-  margin-top:10px;
-
-  padding:9px;
-
-  border-radius:12px;
-
-  background:
-    rgba(255,193,7,.12);
+    #06263d;
 
   border:
     1px solid
-    rgba(255,210,60,.35);
-
-  text-align:center;
-
-  color:#ffd52b;
-
-  font-size:15px;
-
-  font-weight:900;
+    rgba(255,255,255,.06);
 
 }
 
-.timer.show{
-  display:block;
-}
 
-.timer.danger{
+.saldo-label{
 
-  color:#ff5964;
-
-  border-color:
-    rgba(255,80,90,.55);
-
-  animation:
-    pulse .8s infinite alternate;
-
-}
-
-@keyframes pulse{
-
-  from{
-    transform:scale(1);
-  }
-
-  to{
-    transform:scale(1.02);
-  }
-
-}
-
-.info{
-
-  text-align:center;
-
-  padding:
-    12px 6px 4px;
-
-}
-
-.info h1{
-  font-size:20px;
-}
-
-.info p{
-
-  margin-top:5px;
-
-  color:#b9d7e8;
-
-  font-size:12px;
-
-  line-height:1.4;
-
-}
-
-.game-wrap{
-
-  position:relative;
-
-  z-index:1;
-
-  margin-top:8px;
-
-  display:flex;
-
-  justify-content:center;
-
-  overflow:hidden;
-
-  border-radius:18px;
-
-  background-position:center;
-
-  background-size:cover;
-
-  background-repeat:no-repeat;
-
-}
-
-.board{
-
-  position:relative;
-
-  width:min(100%,720px);
-
-  aspect-ratio:1024/1536;
-
-  background-image:
-    url("./C0A67B9D-67BE-49A6-8747-B5B2A32411C4.png");
-
-  background-size:100% 100%;
-
-  background-repeat:no-repeat;
-
-}
-
-.rows{
-
-  position:absolute;
-
-  left:9.5%;
-
-  right:9.5%;
-
-  top:15%;
-
-  bottom:15%;
-
-  display:grid;
-
-  grid-template-rows:
-    repeat(10,1fr);
-
-  z-index:2;
-
-}
-
-.row{
-
-  position:relative;
-
-  display:flex;
-
-  align-items:center;
-
-}
-
-.row-number{
-
-  width:9%;
-
-  height:54%;
-
-  font-size:0;
-
-}
-
-.guess-slots{
-
-  width:60%;
-
-  display:flex;
-
-  gap:2.5%;
-
-  align-items:center;
-
-  justify-content:flex-start;
-
-  padding-left:1%;
-
-}
-
-.guess-slot{
-
-  width:15.2%;
-
-  aspect-ratio:1;
-
-  border-radius:50%;
-
-  background:transparent;
-
-  border:0;
-
-  overflow:hidden;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-}
-
-.guess-slot img{
-
-  width:100%;
-
-  height:100%;
-
-  object-fit:contain;
-
-}
-
-.feedback{
-
-  width:31%;
-
-  display:grid;
-
-  grid-template-columns:
-    repeat(5,1fr);
-
-  gap:4%;
-
-  padding:
-    0 4%;
-
-  align-items:center;
-
-}
-
-.feedback-dot{
-
-  width:100%;
-
-  aspect-ratio:1;
-
-  border-radius:50%;
-
-  background:transparent;
-
-  background-size:contain;
-
-  background-position:center;
-
-  background-repeat:no-repeat;
-
-}
-
-.feedback-dot.black{
-
-  background-image:
-    url("./preto.png");
-
-}
-
-.feedback-dot.white{
-
-  background-image:
-    url("./branco.png");
-
-}
-
-.palette{
-
-  position:relative;
-
-  z-index:9999;
-
-  pointer-events:auto;
-
-  margin:
-    12px auto 0;
-
-  width:min(100%,560px);
-
-  display:grid;
-
-  grid-template-columns:
-    repeat(6,1fr);
-
-  gap:7px;
-
-  padding:10px;
-
-  border-radius:18px;
-
-  background:
-    rgba(35,18,8,.78);
-
-  border:
-    2px solid #9b6a32;
-
-  box-shadow:
-    0 8px 20px #0008;
-
-}
-
-.color-btn{
-
-  position:relative;
-
-  z-index:20;
-
-  border:0;
-
-  background:transparent;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  cursor:pointer;
-
-  min-width:0;
-
-  touch-action:manipulation;
-
-  pointer-events:auto;
-
-  -webkit-user-select:none;
-
-  user-select:none;
-
-  -webkit-touch-callout:none;
-
-  -webkit-tap-highlight-color:transparent;
-
-}
-
-.color-btn img{
-
-  width:100%;
-
-  height:100%;
-
-  max-height:58px;
-
-  object-fit:contain;
-
-  filter:
-    drop-shadow(
-      0 3px 3px #0008
-    );
-
-  pointer-events:none;
-
-  user-select:none;
-
-  -webkit-user-drag:none;
-
-}
-
-.color-btn:active img{
-
-  transform:scale(.88);
-
-}
-
-.color-btn.selected img{
-
-  filter:
-    drop-shadow(
-      0 0 9px #fff
-    )
-    drop-shadow(
-      0 3px 3px #0008
-    );
-
-}
-
-.selected-preview{
-
-  min-height:44px;
-
-  margin-top:9px;
-
-  display:flex;
-
-  justify-content:center;
-
-  align-items:center;
-
-  gap:7px;
-
-}
-
-.preview-dot{
-
-  width:34px;
-
-  height:34px;
-
-  border-radius:50%;
-
-  overflow:hidden;
-
-  background:#1d140c;
-
-  border:
-    2px solid #7b542b;
-
-}
-
-.preview-dot img{
-
-  width:100%;
-
-  height:100%;
-
-  object-fit:contain;
-
-}
-
-.controls{
-
-  position:relative;
-
-  z-index:9999;
-
-  pointer-events:auto;
-
-  margin-top:10px;
-
-  display:grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
-  gap:9px;
-
-}
-
-.control{
-
-  height:47px;
-
-  border:0;
-
-  border-radius:14px;
-
-  color:#fff;
-
-  font-weight:900;
-
-  cursor:pointer;
-
-  box-shadow:
-    0 5px 10px #0005;
-
-}
-
-.clear{
-
-  background:
-    linear-gradient(
-      145deg,
-      #315878,
-      #183b57
-    );
-
-}
-
-.confirm{
-
-  background:
-    linear-gradient(
-      145deg,
-      #28d86d,
-      #08783e
-    );
-
-}
-
-.message{
-
-  text-align:center;
-
-  min-height:20px;
-
-  margin-top:7px;
-
-  color:#bfe3f2;
+  color:#a8d2e7;
 
   font-size:12px;
 
@@ -733,7 +198,834 @@ button{
 
 }
 
-.modal{
+
+.saldo-numero{
+
+  margin-top:8px;
+
+  font-size:34px;
+
+  line-height:1;
+
+  font-weight:900;
+
+}
+
+
+.moedas{
+  color:#ffd52a;
+}
+
+
+.chances{
+  color:#58f69a;
+}
+
+
+.fase-numero{
+  color:#63c9ff;
+}
+
+
+/* =========================================================
+   PROGRESSO
+========================================================= */
+
+.progress-wrap{
+
+  margin-top:10px;
+
+}
+
+
+.progress{
+
+  width:100%;
+
+  height:17px;
+
+  padding:3px;
+
+  border-radius:20px;
+
+  background:
+    rgba(255,255,255,.12);
+
+}
+
+
+.progress-bar{
+
+  width:11.11%;
+
+  height:100%;
+
+  border-radius:20px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #20d76b,
+      #dce326
+    );
+
+  transition:
+    width .25s ease;
+
+}
+
+
+/* =========================================================
+   TÍTULO DA FASE
+========================================================= */
+
+.level-title{
+
+  margin-top:27px;
+
+  text-align:center;
+
+  font-size:
+    clamp(
+      27px,
+      6vw,
+      43px
+    );
+
+  line-height:1.08;
+
+  font-weight:900;
+
+  text-shadow:
+    0 3px 7px rgba(0,0,0,.55);
+
+}
+
+
+.level-description{
+
+  margin-top:10px;
+
+  text-align:center;
+
+  color:#c4e2ef;
+
+  font-size:17px;
+
+  line-height:1.4;
+
+}
+
+
+/* =========================================================
+   CRONÔMETRO
+========================================================= */
+
+.timer{
+
+  display:none;
+
+  width:max-content;
+
+  margin:
+    13px
+    auto
+    0;
+
+  padding:
+    8px
+    18px;
+
+  border-radius:14px;
+
+  background:
+    #06243a;
+
+  border:
+    1px solid
+    #d7b12a;
+
+  color:#ffe14a;
+
+  font-size:18px;
+
+  font-weight:900;
+
+}
+
+
+.timer.show{
+
+  display:block;
+
+}
+
+
+.timer.danger{
+
+  color:#ff6868;
+
+  border-color:#ff6868;
+
+}
+
+
+/* =========================================================
+   ÁREA DO JOGO
+========================================================= */
+
+.game-box{
+
+  margin-top:22px;
+
+  padding:18px;
+
+  border-radius:26px;
+
+  background:
+    rgba(4,34,52,.97);
+
+  border:
+    2px solid
+    rgba(255,255,255,.08);
+
+  box-shadow:
+    0 12px 35px
+    rgba(0,0,0,.25);
+
+}
+
+
+/* =========================================================
+   HISTÓRICO
+========================================================= */
+
+.history-header{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:10px;
+
+  margin-bottom:10px;
+
+  padding:
+    14px
+    16px;
+
+  border-radius:16px;
+
+  background:
+    #062b3d;
+
+  border:
+    2px solid
+    #b89b25;
+
+}
+
+
+.history-title{
+
+  color:#ffd52a;
+
+  font-size:17px;
+
+  font-weight:900;
+
+}
+
+
+.history-count{
+
+  font-size:16px;
+
+  font-weight:900;
+
+}
+
+
+/* =========================================================
+   LEGENDA
+========================================================= */
+
+.legend{
+
+  display:flex;
+
+  flex-wrap:wrap;
+
+  align-items:center;
+
+  gap:18px;
+
+  padding:
+    12px
+    15px;
+
+  border-radius:13px;
+
+  background:
+    #031d2c;
+
+  color:#e8f4fa;
+
+  font-size:13px;
+
+  font-weight:800;
+
+}
+
+
+.legend-item{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:7px;
+
+}
+
+
+.mini-black,
+.mini-white{
+
+  width:17px;
+  height:17px;
+
+  flex:none;
+
+  border-radius:50%;
+
+}
+
+
+.mini-black{
+
+  background:#050505;
+
+  border:
+    2px solid
+    #777;
+
+}
+
+
+.mini-white{
+
+  background:#fff;
+
+  border:
+    2px solid
+    #c5c5c5;
+
+}
+
+
+/* =========================================================
+   10 LINHAS
+========================================================= */
+
+.history-list{
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:8px;
+
+  margin-top:12px;
+
+}
+
+
+.history-row{
+
+  min-height:61px;
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
+  padding:
+    8px
+    12px;
+
+  border-radius:15px;
+
+  background:
+    #173747;
+
+  border:
+    1px solid
+    rgba(255,255,255,.09);
+
+}
+
+
+.row-number{
+
+  width:28px;
+
+  flex:none;
+
+  text-align:center;
+
+  font-size:16px;
+
+  font-weight:900;
+
+}
+
+
+.row-colors{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:7px;
+
+  min-width:0;
+
+  flex:1;
+
+}
+
+
+.row-results{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:flex-end;
+
+  gap:5px;
+
+  min-width:70px;
+
+  padding-left:7px;
+
+  border-left:
+    1px solid
+    rgba(255,255,255,.15);
+
+}
+
+
+.empty-dot{
+
+  width:28px;
+  height:28px;
+
+  border-radius:50%;
+
+  border:
+    3px dashed
+    #687a84;
+
+}
+
+
+.result-dot{
+
+  width:19px;
+  height:19px;
+
+  border-radius:50%;
+
+  flex:none;
+
+}
+
+
+.result-black{
+
+  background:#050505;
+
+  border:
+    2px solid
+    #7b7b7b;
+
+  box-shadow:
+    inset 0 1px 2px rgba(255,255,255,.2);
+
+}
+
+
+.result-white{
+
+  background:#fff;
+
+  border:
+    2px solid
+    #c9c9c9;
+
+}
+
+
+/* =========================================================
+   BOLAS COLORIDAS
+========================================================= */
+
+.color-picker{
+
+  margin-top:18px;
+
+  padding:
+    12px;
+
+  border-radius:19px;
+
+  background:
+    #171313;
+
+  border:
+    2px solid
+    #b98b28;
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(6,1fr);
+
+  gap:9px;
+
+}
+
+
+.color-button{
+
+  min-height:78px;
+
+  border:0;
+
+  border-radius:14px;
+
+  background:
+    #211e1e;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  cursor:pointer;
+
+  touch-action:manipulation;
+
+}
+
+
+.color-button:active{
+
+  transform:scale(.94);
+
+}
+
+
+.color-ball{
+
+  width:54px;
+  height:54px;
+
+  border-radius:50%;
+
+  border:
+    3px solid
+    rgba(255,255,255,.25);
+
+  box-shadow:
+    inset 0 4px 8px rgba(255,255,255,.25),
+    0 3px 8px rgba(0,0,0,.45);
+
+}
+
+
+.red{
+  background:#ed1727;
+}
+
+.blue{
+  background:#1474e8;
+}
+
+.green{
+  background:#14c743;
+}
+
+.yellow{
+  background:#ffd21c;
+}
+
+.purple{
+  background:#8d20ed;
+}
+
+.orange{
+  background:#ff8610;
+}
+
+
+/* =========================================================
+   SUA TENTATIVA
+========================================================= */
+
+.current-area{
+
+  margin-top:15px;
+
+  padding:
+    15px;
+
+  border-radius:18px;
+
+  text-align:center;
+
+  background:
+    #062b3d;
+
+  border:
+    1px solid
+    rgba(255,255,255,.12);
+
+}
+
+
+.current-title{
+
+  color:#ffd52a;
+
+  font-size:14px;
+
+  font-weight:900;
+
+  letter-spacing:1px;
+
+}
+
+
+.current-balls{
+
+  min-height:72px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:12px;
+
+  margin-top:9px;
+
+}
+
+
+.current-empty{
+
+  width:52px;
+  height:52px;
+
+  border-radius:50%;
+
+  border:
+    3px dashed
+    #657681;
+
+}
+
+
+.current-ball{
+
+  width:54px;
+  height:54px;
+
+  border-radius:50%;
+
+  border:
+    3px solid
+    rgba(255,255,255,.3);
+
+  box-shadow:
+    inset 0 4px 8px rgba(255,255,255,.25),
+    0 3px 8px rgba(0,0,0,.45);
+
+}
+
+
+/* =========================================================
+   BOTÕES
+========================================================= */
+
+.actions{
+
+  display:grid;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
+  gap:12px;
+
+  margin-top:15px;
+
+}
+
+
+.action-button{
+
+  height:58px;
+
+  border:0;
+
+  border-radius:16px;
+
+  color:#fff;
+
+  font-size:17px;
+
+  font-weight:900;
+
+  cursor:pointer;
+
+  touch-action:manipulation;
+
+}
+
+
+.clear{
+
+  background:
+    linear-gradient(
+      135deg,
+      #376f9d,
+      #214b70
+    );
+
+}
+
+
+.confirm{
+
+  background:
+    linear-gradient(
+      135deg,
+      #22d76d,
+      #08a84e
+    );
+
+}
+
+
+.action-button:disabled{
+
+  opacity:.45;
+
+  cursor:not-allowed;
+
+}
+
+
+.selection-count{
+
+  margin-top:12px;
+
+  text-align:center;
+
+  color:#e5eef2;
+
+  font-size:15px;
+
+  font-weight:800;
+
+}
+
+
+/* =========================================================
+   MENSAGEM
+========================================================= */
+
+.message{
+
+  min-height:27px;
+
+  margin-top:13px;
+
+  text-align:center;
+
+  font-size:16px;
+
+  font-weight:900;
+
+}
+
+
+.message.success{
+
+  color:#54f69a;
+
+}
+
+
+.message.error{
+
+  color:#ff7777;
+
+}
+
+
+.message.info{
+
+  color:#a9d9ed;
+
+}
+
+
+/* =========================================================
+   MODAL DE COMO JOGAR
+========================================================= */
+
+.help-button{
+
+  position:fixed;
+
+  right:16px;
+
+  top:16px;
+
+  z-index:20;
+
+  width:43px;
+  height:43px;
+
+  border-radius:50%;
+
+  border:
+    2px solid
+    rgba(255,255,255,.55);
+
+  background:
+    #082b43;
+
+  color:#fff;
+
+  font-size:21px;
+
+  font-weight:900;
+
+}
+
+
+.help-modal{
 
   position:fixed;
 
@@ -747,120 +1039,304 @@ button{
 
   justify-content:center;
 
-  padding:18px;
+  padding:20px;
 
-  background:#00101dcc;
-
-  backdrop-filter:blur(6px);
+  background:
+    rgba(0,8,18,.86);
 
 }
 
-.modal.show{
+
+.help-modal.show{
+
   display:flex;
+
 }
 
-.modal-card{
 
-  width:min(100%,390px);
+.help-card{
 
-  padding:
-    22px 18px;
+  width:100%;
+
+  max-width:430px;
+
+  max-height:90vh;
+
+  overflow:auto;
+
+  padding:25px;
 
   border-radius:22px;
 
-  text-align:center;
-
   background:
-    linear-gradient(
-      145deg,
-      #0b3a52,
-      #241044
-    );
+    #082b42;
 
   border:
-    1px solid #ffffff1c;
-
-  box-shadow:
-    0 20px 50px #0009;
+    2px solid
+    #b89b25;
 
 }
 
-.modal-card h2{
-  font-size:22px;
-}
 
-.modal-card p{
+.help-card h2{
 
-  margin-top:9px;
+  color:#ffd52a;
 
-  color:#c3ddeb;
-
-  font-size:14px;
-
-  line-height:1.5;
+  font-size:23px;
 
 }
 
-.modal-buttons{
 
-  display:grid;
+.help-card p{
 
-  gap:9px;
+  margin-top:12px;
 
-  margin-top:17px;
+  color:#d3e8f2;
+
+  line-height:1.55;
+
+  font-size:15px;
 
 }
 
-.modal-buttons button{
 
-  height:46px;
+.help-close{
+
+  width:100%;
+
+  height:50px;
+
+  margin-top:20px;
 
   border:0;
 
-  border-radius:13px;
+  border-radius:14px;
+
+  background:#19b95f;
 
   color:#fff;
 
+  font-size:15px;
+
   font-weight:900;
 
-  cursor:pointer;
-
 }
 
-.primary{
-  background:#19ae60;
-}
 
-.secondary{
-  background:#ffffff17;
-}
-
-.gold{
-  color:#ffd52b;
-}
+/* =========================================================
+   RESPONSIVO
+========================================================= */
 
 @media(max-width:520px){
 
   .page{
 
-    padding-left:8px;
-    padding-right:8px;
+    padding:
+      8px
+      10px
+      55px;
 
   }
 
-  .card{
-    padding:9px;
+
+  .saldos{
+
+    gap:7px;
+
   }
 
-  .stat b{
-    font-size:17px;
+
+  .saldo{
+
+    min-height:88px;
+
+    padding:
+      12px
+      5px;
+
+    border-radius:16px;
+
   }
 
-  .info h1{
-    font-size:18px;
+
+  .saldo-label{
+
+    font-size:10px;
+
+  }
+
+
+  .saldo-numero{
+
+    font-size:27px;
+
+  }
+
+
+  .level-title{
+
+    font-size:29px;
+
+  }
+
+
+  .level-description{
+
+    font-size:15px;
+
+  }
+
+
+  .game-box{
+
+    padding:11px;
+
+    border-radius:20px;
+
+  }
+
+
+  .history-header{
+
+    padding:
+      12px;
+
+  }
+
+
+  .history-title{
+
+    font-size:14px;
+
+  }
+
+
+  .legend{
+
+    gap:9px;
+
+    font-size:11px;
+
+  }
+
+
+  .history-row{
+
+    min-height:55px;
+
+    padding:
+      6px
+      8px;
+
+  }
+
+
+  .row-number{
+
+    width:22px;
+
+    font-size:14px;
+
+  }
+
+
+  .row-colors{
+
+    gap:4px;
+
+  }
+
+
+  .row-results{
+
+    min-width:55px;
+
+  }
+
+
+  .empty-dot{
+
+    width:25px;
+    height:25px;
+
+  }
+
+
+  .color-picker{
+
+    gap:5px;
+
+    padding:8px;
+
+  }
+
+
+  .color-button{
+
+    min-height:65px;
+
+    border-radius:11px;
+
+  }
+
+
+  .color-ball{
+
+    width:46px;
+    height:46px;
+
+  }
+
+
+  .current-area{
+
+    padding:12px;
+
+  }
+
+
+  .current-balls{
+
+    min-height:63px;
+
+    gap:7px;
+
+  }
+
+
+  .current-ball{
+
+    width:47px;
+    height:47px;
+
+  }
+
+
+  .current-empty{
+
+    width:47px;
+    height:47px;
+
+  }
+
+
+  .actions{
+
+    gap:8px;
+
+  }
+
+
+  .action-button{
+
+    height:54px;
+
+    font-size:15px;
+
   }
 
 }
+
 
 </style>
 
@@ -870,18 +1346,30 @@ button{
 <body>
 
 
+<button
+  class="help-button"
+  id="helpButton"
+  type="button"
+>
+  ?
+</button>
+
+
 <div class="page">
 
+
+  <!-- =====================================================
+       TOPO
+  ====================================================== -->
 
   <div class="top">
 
     <button
       class="back"
-      id="back"
-      type="button">
-
+      id="backButton"
+      type="button"
+    >
       ←
-
     </button>
 
 
@@ -898,161 +1386,297 @@ button{
     </div>
 
 
-    <div class="spacer"></div>
+    <div style="width:46px"></div>
 
   </div>
 
 
-  <div class="card">
+  <!-- =====================================================
+       SALDOS
+  ====================================================== -->
+
+  <div class="saldos">
 
 
-    <div class="stats">
+    <div class="saldo">
 
-
-      <div class="stat">
-
-        <small>
-          ADAM COINS
-        </small>
-
-        <b
-          class="coins"
-          id="coins">
-
-          0
-
-        </b>
-
+      <div class="saldo-label">
+        ADAM COINS
       </div>
 
-
-      <div class="stat">
-
-        <small>
-          CHANCES
-        </small>
-
-        <b
-          class="chances"
-          id="chances">
-
-          0
-
-        </b>
-
+      <div
+        class="saldo-numero moedas"
+        id="moedas"
+      >
+        0
       </div>
-
-
-      <div class="stat level">
-
-        <small>
-          FASE
-        </small>
-
-        <b id="level">
-
-          1 / 9
-
-        </b>
-
-      </div>
-
 
     </div>
 
+
+    <div class="saldo">
+
+      <div class="saldo-label">
+        CHANCES
+      </div>
+
+      <div
+        class="saldo-numero chances"
+        id="chances"
+      >
+        0
+      </div>
+
+    </div>
+
+
+    <div class="saldo">
+
+      <div class="saldo-label">
+        FASE
+      </div>
+
+      <div
+        class="saldo-numero fase-numero"
+        id="faseNumero"
+      >
+        1 / 9
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       PROGRESSO
+  ====================================================== -->
+
+  <div class="progress-wrap">
 
     <div class="progress">
 
-      <div id="progress"></div>
+      <div
+        class="progress-bar"
+        id="progressBar"
+      ></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       TÍTULO
+  ====================================================== -->
+
+  <div
+    class="level-title"
+    id="levelTitle"
+  >
+    NÍVEL 1 — DESCUBRA A SENHA
+  </div>
+
+
+  <div
+    class="level-description"
+    id="levelDescription"
+  >
+    Descubra a senha escolhendo 3 cores.
+  </div>
+
+
+  <!-- =====================================================
+       CRONÔMETRO
+  ====================================================== -->
+
+  <div
+    class="timer"
+    id="timer"
+  >
+    ⏱️ <span id="timerValue">0</span>s
+  </div>
+
+
+  <!-- =====================================================
+       JOGO
+  ====================================================== -->
+
+  <div class="game-box">
+
+
+    <!-- HISTÓRICO -->
+
+    <div class="history-header">
+
+      <div class="history-title">
+        🎯 HISTÓRICO DE TENTATIVAS
+      </div>
+
+      <div
+        class="history-count"
+        id="historyCount"
+      >
+        0 / 10
+      </div>
 
     </div>
 
 
-    <div
-      class="timer"
-      id="timer">
+    <!-- LEGENDA -->
 
-      ⏱️ TEMPO:
-      <span id="timerValue">
-        30
-      </span>s
+    <div class="legend">
 
-    </div>
+      <div class="legend-item">
 
+        <span class="mini-black"></span>
 
-    <div class="info">
+        <span>
+          Cor certa + lugar certo
+        </span>
 
-      <h1 id="phaseTitle">
-        DESCUBRA A SENHA
-      </h1>
-
-      <p id="phaseText">
-        Descubra a combinação usando as cores.
-      </p>
-
-    </div>
+      </div>
 
 
-    <div
-      class="selected-preview"
-      id="preview">
-    </div>
+      <div class="legend-item">
 
+        <span class="mini-white"></span>
 
-    <div class="game-wrap">
-
-      <div>
-
-        <div class="board">
-
-          <div
-            class="rows"
-            id="rows">
-          </div>
-
-        </div>
-
-
-        <div
-          class="palette"
-          id="palette">
-        </div>
+        <span>
+          Cor certa + lugar errado
+        </span>
 
       </div>
 
     </div>
 
 
-    <div class="controls">
+    <!-- 10 LINHAS -->
+
+    <div
+      class="history-list"
+      id="historyList"
+    ></div>
+
+
+    <!-- SUA TENTATIVA -->
+
+    <div class="current-area">
+
+      <div class="current-title">
+        🎯 SUA TENTATIVA
+      </div>
+
+
+      <div
+        class="current-balls"
+        id="currentBalls"
+      ></div>
+
+    </div>
+
+
+    <!-- CORES -->
+
+    <div
+      class="color-picker"
+      id="colorPicker"
+    >
 
 
       <button
-        class="control clear"
-        id="clearBtn"
-        type="button">
+        class="color-button"
+        data-color="red"
+        type="button"
+      >
+        <span class="color-ball red"></span>
+      </button>
 
+
+      <button
+        class="color-button"
+        data-color="blue"
+        type="button"
+      >
+        <span class="color-ball blue"></span>
+      </button>
+
+
+      <button
+        class="color-button"
+        data-color="green"
+        type="button"
+      >
+        <span class="color-ball green"></span>
+      </button>
+
+
+      <button
+        class="color-button"
+        data-color="yellow"
+        type="button"
+      >
+        <span class="color-ball yellow"></span>
+      </button>
+
+
+      <button
+        class="color-button"
+        data-color="purple"
+        type="button"
+      >
+        <span class="color-ball purple"></span>
+      </button>
+
+
+      <button
+        class="color-button"
+        data-color="orange"
+        type="button"
+      >
+        <span class="color-ball orange"></span>
+      </button>
+
+
+    </div>
+
+
+    <!-- BOTÕES -->
+
+    <div class="actions">
+
+      <button
+        class="action-button clear"
+        id="clearButton"
+        type="button"
+      >
         LIMPAR
-
       </button>
 
 
       <button
-        class="control confirm"
-        id="confirmBtn"
-        type="button">
-
+        class="action-button confirm"
+        id="confirmButton"
+        type="button"
+      >
         CONFIRMAR
-
       </button>
-
 
     </div>
 
 
     <div
-      class="message"
-      id="message">
+      class="selection-count"
+      id="selectionCount"
+    >
+      0/3 cores escolhidas.
     </div>
+
+
+    <div
+      class="message info"
+      id="message"
+    ></div>
 
 
   </div>
@@ -1060,20 +1684,59 @@ button{
 </div>
 
 
+<!-- =======================================================
+     AJUDA
+======================================================== -->
+
 <div
-  class="modal"
-  id="modal">
+  class="help-modal"
+  id="helpModal"
+>
 
-  <div class="modal-card">
+  <div class="help-card">
 
-    <h2 id="modalTitle"></h2>
+    <h2>
+      ❓ Como jogar
+    </h2>
 
-    <p id="modalText"></p>
 
-    <div
-      class="modal-buttons"
-      id="modalButtons">
-    </div>
+    <p>
+
+      Escolha as cores para montar sua tentativa.
+
+      <br><br>
+
+      ⚫ <b>Preta</b> significa:
+      a cor está certa e está no lugar certo.
+
+      <br><br>
+
+      ⚪ <b>Branca</b> significa:
+      a cor está certa, mas está no lugar errado.
+
+      <br><br>
+
+      Você possui <b>10 tentativas</b> por fase.
+
+      <br><br>
+
+      A senha nunca é mostrada na tela.
+
+      <br><br>
+
+      Descubra a combinação usando as pistas
+      das tentativas anteriores.
+
+    </p>
+
+
+    <button
+      class="help-close"
+      id="helpClose"
+      type="button"
+    >
+      ENTENDI
+    </button>
 
   </div>
 
@@ -1082,6 +1745,9 @@ button{
 
 <script type="module">
 
+/* =========================================================
+   FIREBASE
+========================================================= */
 
 import {
   initializeApp
@@ -1104,15 +1770,13 @@ import {
   query,
   where,
   getDocs,
-  doc,
-  updateDoc,
-  increment
+  runTransaction
 }
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
-const firebaseConfig={
+const firebaseConfig = {
 
   apiKey:
     "AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",
@@ -1135,529 +1799,1011 @@ const firebaseConfig={
 };
 
 
-const app=
-  initializeApp(
-    firebaseConfig
-  );
+const app =
+  initializeApp(firebaseConfig);
 
-const auth=
+
+const auth =
   getAuth(app);
 
-const db=
+
+const db =
   getFirestore(app);
 
-const $=
-  id =>
-    document.getElementById(id);
+
+/* =========================================================
+   ELEMENTOS
+========================================================= */
+
+const moedasEl =
+  document.getElementById("moedas");
+
+const chancesEl =
+  document.getElementById("chances");
+
+const faseNumeroEl =
+  document.getElementById("faseNumero");
+
+const progressBar =
+  document.getElementById("progressBar");
+
+const levelTitle =
+  document.getElementById("levelTitle");
+
+const levelDescription =
+  document.getElementById("levelDescription");
+
+const historyList =
+  document.getElementById("historyList");
+
+const historyCount =
+  document.getElementById("historyCount");
+
+const currentBalls =
+  document.getElementById("currentBalls");
+
+const selectionCount =
+  document.getElementById("selectionCount");
+
+const messageEl =
+  document.getElementById("message");
+
+const clearButton =
+  document.getElementById("clearButton");
+
+const confirmButton =
+  document.getElementById("confirmButton");
+
+const timerEl =
+  document.getElementById("timer");
+
+const timerValue =
+  document.getElementById("timerValue");
+
+const helpButton =
+  document.getElementById("helpButton");
+
+const helpModal =
+  document.getElementById("helpModal");
+
+const helpClose =
+  document.getElementById("helpClose");
+
+const backButton =
+  document.getElementById("backButton");
 
 
-/* =====================================================
+/* =========================================================
    CORES
-===================================================== */
+========================================================= */
 
-const COLORS=[
-
-  "vermelho",
-  "azul",
-  "verde",
-  "amarelo",
-  "roxo",
-  "laranja"
-
+const COLORS = [
+  "red",
+  "blue",
+  "green",
+  "yellow",
+  "purple",
+  "orange"
 ];
 
 
-const FILES={
+/* =========================================================
+   CONFIGURAÇÃO DAS FASES
+========================================================= */
 
-  vermelho:"./vermelho.png",
-  azul:"./azul.png",
-  verde:"./verde.png",
-  amarelo:"./amarelo.png",
-  roxo:"./roxo.png",
-  laranja:"./laranja.png"
-
-};
-
-
-const FEEDBACK={
-
-  black:"./preto.png",
-  white:"./branco.png"
-
-};
-
-
-/* =====================================================
-   NÍVEIS
-===================================================== */
-
-const LEVELS={
+const LEVELS = {
 
   1:{
     length:3,
-    reward:20
+    reward:20,
+    timer:0,
+    name:"NÍVEL 1 — DESCUBRA A SENHA",
+    description:"Descubra a senha escolhendo 3 cores."
   },
 
   2:{
     length:3,
-    reward:20
+    reward:20,
+    timer:0,
+    name:"NÍVEL 2 — DESCUBRA A SENHA",
+    description:"A senha continua com 3 cores."
   },
 
   3:{
     length:3,
-    reward:20
+    reward:20,
+    timer:0,
+    name:"NÍVEL 3 — DESCUBRA A SENHA",
+    description:"Último nível fácil: descubra as 3 cores."
   },
 
   4:{
     length:4,
-    reward:30
+    reward:30,
+    timer:0,
+    name:"NÍVEL 4 — DESAFIO MÉDIO",
+    description:"Agora a senha possui 4 cores."
   },
 
   5:{
     length:4,
-    reward:30
+    reward:30,
+    timer:0,
+    name:"NÍVEL 5 — DESAFIO MÉDIO",
+    description:"Descubra a combinação de 4 cores."
   },
 
   6:{
     length:4,
-    reward:30
+    reward:30,
+    timer:0,
+    name:"NÍVEL 6 — DESAFIO MÉDIO",
+    description:"Mais um desafio com 4 cores."
   },
 
   7:{
     length:5,
-    reward:30
+    reward:30,
+    timer:0,
+    name:"NÍVEL 7 — DIFÍCIL",
+    description:"A senha agora possui 5 cores."
   },
 
   8:{
     length:6,
-    reward:75
+    reward:100,
+    timer:30,
+    name:"NÍVEL 8 — HARD",
+    description:"Descubra 6 cores. Até 30 segundos vale 100 moedas."
   },
 
   9:{
     length:6,
-    reward:100,
-    bonusReward:150
+    reward:200,
+    timer:45,
+    name:"NÍVEL 9 — BÔNUS • SUPER DIFÍCIL",
+    description:"6 cores. Seja rápido para ganhar a maior recompensa."
   }
 
 };
 
 
-const MAX_ATTEMPTS=10;
-
-const BONUS_TIME=30;
-
-
-/* =====================================================
+/* =========================================================
    ESTADO
-===================================================== */
+========================================================= */
 
-let userDoc=null;
+let usuario = null;
 
-let userData=null;
+let documentoUsuario = null;
 
-let level=1;
+let fase = 1;
 
-let secret=[];
+let tentativaAtual = [];
 
-let current=[];
+let historico = [];
 
-let attempt=0;
+let senha = [];
 
-let busy=false;
+let partidaInicializada = false;
 
-let timerInterval=null;
+let timerStart = null;
 
-let timerStart=0;
-
-
-/* =====================================================
-   SALDO
-===================================================== */
-
-function money(){
-
-  return Number(
-    userData?.moedas || 0
-  ).toLocaleString(
-    "pt-BR"
-  );
-
-}
+let timerInterval = null;
 
 
-function renderStats(){
+/*
+   sessionStorage é usado para que atualizar a página
+   não cobre outra chance nem dê mais 30 moedas.
+*/
+const SESSION_KEY =
+  "adam_senha_partida_v3";
 
-  $("coins").textContent=
-    money();
 
-  $("chances").textContent=
-    Number(
-      userData?.chances || 0
-    ).toLocaleString(
-      "pt-BR"
+/* =========================================================
+   FUNÇÕES DE STORAGE
+========================================================= */
+
+function carregarEstado(){
+
+  try{
+
+    const salvo =
+      sessionStorage.getItem(SESSION_KEY);
+
+    if(!salvo){
+
+      return false;
+
+    }
+
+    const estado =
+      JSON.parse(salvo);
+
+    if(
+      !estado ||
+      !Array.isArray(estado.senha)
+    ){
+
+      return false;
+
+    }
+
+    fase =
+      Number(estado.fase) || 1;
+
+    tentativaAtual =
+      Array.isArray(estado.tentativaAtual)
+        ? estado.tentativaAtual
+        : [];
+
+    historico =
+      Array.isArray(estado.historico)
+        ? estado.historico
+        : [];
+
+    senha =
+      estado.senha;
+
+    timerStart =
+      stateNumber(
+        estado.timerStart
+      );
+
+    partidaInicializada =
+      true;
+
+    return true;
+
+  }
+
+  catch(error){
+
+    console.error(
+      "Erro ao carregar partida:",
+      error
     );
 
-  $("level").textContent=
-    `${level} / 9`;
+    return false;
 
-  $("progress").style.width=
-    `${(level/9)*100}%`;
+  }
 
 }
 
 
-/* =====================================================
-   GERAR SENHA
-   A SENHA É CRIADA INTERNAMENTE.
-   NUNCA É MOSTRADA NA TELA.
-===================================================== */
+function salvarEstado(){
 
-function randomSecret(length){
+  try{
 
-  const pool=[
-    ...COLORS
-  ];
+    sessionStorage.setItem(
+      SESSION_KEY,
+      JSON.stringify({
 
-  const result=[];
+        fase,
+
+        tentativaAtual,
+
+        historico,
+
+        senha,
+
+        timerStart
+
+      })
+    );
+
+  }
+
+  catch(error){
+
+    console.error(
+      "Erro ao salvar partida:",
+      error
+    );
+
+  }
+
+}
+
+
+function limparEstado(){
+
+  try{
+
+    sessionStorage.removeItem(
+      SESSION_KEY
+    );
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+  }
+
+}
+
+
+/* =========================================================
+   UTILITÁRIO
+========================================================= */
+
+function stateNumber(value){
+
+  const n =
+    Number(value);
+
+  return Number.isFinite(n)
+    ? n
+    : null;
+
+}
+
+
+/* =========================================================
+   SENHA ALEATÓRIA
+========================================================= */
+
+function gerarSenha(tamanho){
+
+  /*
+    Não permitimos cores repetidas.
+
+    Isso deixa a lógica das bolas preta/branca
+    clara e evita ambiguidades para o jogador.
+  */
+
+  const disponiveis =
+    [...COLORS];
+
+  const resultado = [];
 
 
   while(
-    result.length < length
+    resultado.length < tamanho
   ){
 
-    const i=
+    const indice =
       Math.floor(
         Math.random() *
-        pool.length
+        disponiveis.length
       );
 
-    result.push(
-      pool.splice(i,1)[0]
+
+    resultado.push(
+      disponiveis[indice]
+    );
+
+
+    disponiveis.splice(
+      indice,
+      1
     );
 
   }
 
 
-  return result;
+  return resultado;
 
 }
 
 
-/* =====================================================
-   PALETA
-===================================================== */
+/* =========================================================
+   INICIAR NOVA FASE
+========================================================= */
 
-function buildPalette(){
+function prepararFase(){
 
-  const el=
-    $("palette");
-
-  el.innerHTML="";
+  const config =
+    LEVELS[fase];
 
 
-  COLORS.forEach(
-    color=>{
+  if(!config){
 
-      const btn=
-        document.createElement(
-          "button"
-        );
+    finalizarJogo();
 
-      btn.className=
-        "color-btn";
+    return;
 
-      btn.type="button";
+  }
 
 
-      const img=
-        document.createElement(
-          "img"
-        );
+  tentativaAtual = [];
 
-      img.src=
-        FILES[color];
-
-      img.alt="";
-
-      img.draggable=false;
+  historico = [];
 
 
-      btn.appendChild(
-        img
-      );
+  senha =
+    gerarSenha(
+      config.length
+    );
 
 
-      btn.addEventListener(
-        "click",
-        event=>{
+  /*
+    Para fases com cronômetro,
+    começa quando a fase é criada.
 
-          event.preventDefault();
+    Ao atualizar a página, o timerStart
+    é recuperado do sessionStorage.
+  */
 
-          event.stopPropagation();
+  if(config.timer > 0){
 
-          selecionarCor(
-            color,
-            btn
+    timerStart =
+      Date.now();
+
+  }
+
+  else{
+
+    timerStart =
+      null;
+
+  }
+
+
+  salvarEstado();
+
+  atualizarInterface();
+
+}
+
+
+/* =========================================================
+   INICIALIZAR PARTIDA
+========================================================= */
+
+async function iniciarPartida(){
+
+  /*
+    Se já existe uma partida nesta sessão,
+    não cobra novamente.
+  */
+
+  const jaExiste =
+    carregarEstado();
+
+
+  if(jaExiste){
+
+    partidaInicializada =
+      true;
+
+    atualizarInterface();
+
+    return;
+
+  }
+
+
+  /*
+    Nova partida.
+  */
+
+  partidaInicializada =
+    true;
+
+
+  fase = 1;
+
+  tentativaAtual = [];
+
+  historico = [];
+
+
+  prepararFase();
+
+
+  /*
+    O desconto da chance e os 30 coins
+    acontecem uma única vez.
+  */
+
+  if(usuario && documentoUsuario){
+
+    try{
+
+      await runTransaction(
+        db,
+        async transaction => {
+
+          const snap =
+            await transaction.get(
+              documentoUsuario.ref
+            );
+
+
+          if(!snap.exists()){
+
+            throw new Error(
+              "Cadastro não encontrado."
+            );
+
+          }
+
+
+          const dados =
+            snap.data();
+
+
+          const chancesAtuais =
+            Number(
+              dados.chances || 0
+            );
+
+
+          if(chancesAtuais <= 0){
+
+            throw new Error(
+              "SEM_CHANCE"
+            );
+
+          }
+
+
+          const moedasAtuais =
+            Number(
+              dados.moedas || 0
+            );
+
+
+          transaction.update(
+            documentoUsuario.ref,
+            {
+
+              chances:
+                chancesAtuais - 1,
+
+              moedas:
+                moedasAtuais + 30
+
+            }
           );
 
         }
       );
 
 
-      el.appendChild(
-        btn
+      /*
+        Atualiza o objeto local.
+      */
+
+      usuario.chances =
+        Number(usuario.chances || 0) - 1;
+
+      usuario.moedas =
+        Number(usuario.moedas || 0) + 30;
+
+
+      atualizarSaldos();
+
+      mostrarMensagem(
+        "+30 Adam Coins! Boa sorte!",
+        "success"
       );
 
     }
-  );
+
+    catch(error){
+
+      console.error(error);
+
+
+      if(
+        error.message ===
+        "SEM_CHANCE"
+      ){
+
+        mostrarMensagem(
+          "Você não possui chances suficientes.",
+          "error"
+        );
+
+        /*
+          Não deixa uma partida criada
+          quando não havia chance.
+        */
+
+        limparEstado();
+
+        partidaInicializada =
+          false;
+
+        return;
+
+      }
+
+
+      /*
+        Mesmo se houver problema momentâneo
+        no Firebase, a interface continua
+        funcionando.
+
+        Não adicionamos moedas localmente
+        para não duplicar saldo.
+      */
+
+      mostrarMensagem(
+        "Partida iniciada. Verificando seu saldo...",
+        "info"
+      );
+
+    }
+
+  }
 
 }
 
 
-/* =====================================================
-   ESCOLHER COR
-===================================================== */
+/* =========================================================
+   LOCALIZAR USUÁRIO
+========================================================= */
 
-function selecionarCor(
-  color,
-  btn
-){
+async function localizarUsuario(user){
 
-  if(busy)
-    return;
+  let resultado =
+    await getDocs(
 
+      query(
+        collection(db,"admins"),
+        where(
+          "uid",
+          "==",
+          user.uid
+        )
+      )
 
-  const config=
-    LEVELS[level];
-
-
-  if(!config)
-    return;
+    );
 
 
   if(
-    current.length >=
-    config.length
+    resultado.empty &&
+    user.email
   ){
 
-    $("message")
-      .textContent=
-        `Você já escolheu ${config.length} cores.`;
+    resultado =
+      await getDocs(
+
+        query(
+          collection(db,"admins"),
+          where(
+            "email",
+            "==",
+            user.email.toLowerCase()
+          )
+        )
+
+      );
+
+  }
+
+
+  if(resultado.empty){
+
+    return null;
+
+  }
+
+
+  return resultado.docs[0];
+
+}
+
+
+/* =========================================================
+   SALDOS
+========================================================= */
+
+function atualizarSaldos(){
+
+  if(!usuario){
+
+    moedasEl.textContent =
+      "0";
+
+    chancesEl.textContent =
+      "0";
 
     return;
 
   }
 
 
-  current.push(
-    color
-  );
+  moedasEl.textContent =
+    Number(
+      usuario.moedas || 0
+    ).toLocaleString("pt-BR");
 
 
-  btn.classList.add(
-    "selected"
-  );
-
-
-  setTimeout(
-    ()=>{
-      btn.classList.remove(
-        "selected"
-      );
-    },
-    180
-  );
-
-
-  renderPreview();
-
-  renderCurrentRow();
-
-
-  $("message")
-    .textContent=
-      `${current.length}/${config.length} cores escolhidas.`;
+  chancesEl.textContent =
+    Number(
+      usuario.chances || 0
+    ).toLocaleString("pt-BR");
 
 }
 
 
-/* =====================================================
-   PREVIEW DA ESCOLHA DO JOGADOR
-===================================================== */
+/* =========================================================
+   CONFIGURAÇÃO VISUAL
+========================================================= */
 
-function renderPreview(){
+function atualizarInterface(){
 
-  const p=
-    $("preview");
-
-  p.innerHTML="";
+  const config =
+    LEVELS[fase];
 
 
-  current.forEach(
-    color=>{
+  if(!config){
 
-      const d=
-        document.createElement(
-          "div"
-        );
+    return;
 
-      d.className=
-        "preview-dot";
+  }
 
 
-      const img=
-        document.createElement(
-          "img"
-        );
-
-      img.src=
-        FILES[color];
-
-      img.alt="";
+  faseNumeroEl.textContent =
+    fase + " / 9";
 
 
-      d.appendChild(
-        img
-      );
+  progressBar.style.width =
+    ((fase / 9) * 100) + "%";
 
 
-      p.appendChild(
-        d
-      );
+  levelTitle.textContent =
+    config.name;
 
-    }
-  );
+
+  levelDescription.textContent =
+    config.description;
+
+
+  selectionCount.textContent =
+    tentativaAtual.length +
+    "/" +
+    config.length +
+    " cores escolhidas.";
+
+
+  historyCount.textContent =
+    historico.length +
+    " / 10";
+
+
+  atualizarTentativa();
+
+  criarHistorico();
+
+
+  /*
+    Cronômetro
+  */
+
+  if(config.timer > 0){
+
+    timerEl.classList.add("show");
+
+    atualizarTimer();
+
+  }
+
+  else{
+
+    timerEl.classList.remove("show");
+
+  }
 
 }
 
 
-/* =====================================================
-   HISTÓRICO
-===================================================== */
+/* =========================================================
+   MOSTRAR TENTATIVA ATUAL
+========================================================= */
 
-function makeRows(){
+function atualizarTentativa(){
 
-  const rows=
-    $("rows");
+  const config =
+    LEVELS[fase];
 
-  rows.innerHTML="";
+
+  currentBalls.innerHTML =
+    "";
 
 
   for(
-    let r=0;
-    r<MAX_ATTEMPTS;
-    r++
+    let i = 0;
+    i < config.length;
+    i++
   ){
 
-    const row=
-      document.createElement(
-        "div"
-      );
-
-    row.className=
-      "row";
-
-    row.dataset.row=
-      r;
+    const div =
+      document.createElement("div");
 
 
-    const number=
-      document.createElement(
-        "div"
-      );
-
-    number.className=
-      "row-number";
-
-    number.textContent=
-      r+1;
-
-
-    const slots=
-      document.createElement(
-        "div"
-      );
-
-    slots.className=
-      "guess-slots";
-
-
-    for(
-      let i=0;
-      i<6;
-      i++
+    if(
+      tentativaAtual[i]
     ){
 
-      const slot=
-        document.createElement(
-          "div"
-        );
+      div.className =
+        "current-ball " +
+        tentativaAtual[i];
 
-      slot.className=
-        "guess-slot";
+    }
+
+    else{
+
+      div.className =
+        "current-empty";
+
+    }
 
 
-      slot.dataset.slot=
-        i;
+    currentBalls.appendChild(
+      div
+    );
+
+  }
 
 
-      if(
-        i >=
-        LEVELS[level].length
+  selectionCount.textContent =
+    tentativaAtual.length +
+    "/" +
+    config.length +
+    " cores escolhidas.";
+
+}
+
+
+/* =========================================================
+   HISTÓRICO
+========================================================= */
+
+function criarHistorico(){
+
+  historyList.innerHTML =
+    "";
+
+
+  for(
+    let i = 0;
+    i < 10;
+    i++
+  ){
+
+    const row =
+      document.createElement("div");
+
+    row.className =
+      "history-row";
+
+
+    const number =
+      document.createElement("div");
+
+    number.className =
+      "row-number";
+
+    number.textContent =
+      i + 1;
+
+
+    const colors =
+      document.createElement("div");
+
+    colors.className =
+      "row-colors";
+
+
+    const results =
+      document.createElement("div");
+
+    results.className =
+      "row-results";
+
+
+    const tentativa =
+      historico[i];
+
+
+    if(tentativa){
+
+      tentativa.guess.forEach(
+        cor => {
+
+          const ball =
+            document.createElement("div");
+
+          ball.className =
+            "current-ball " +
+            cor;
+
+          ball.style.width =
+            "38px";
+
+          ball.style.height =
+            "38px";
+
+          colors.appendChild(
+            ball
+          );
+
+        }
+      );
+
+
+      tentativa.black.forEach(
+        () => {
+
+          const dot =
+            document.createElement("span");
+
+          dot.className =
+            "result-dot result-black";
+
+          results.appendChild(
+            dot
+          );
+
+        }
+      );
+
+
+      tentativa.white.forEach(
+        () => {
+
+          const dot =
+            document.createElement("span");
+
+          dot.className =
+            "result-dot result-white";
+
+          results.appendChild(
+            dot
+          );
+
+        }
+      );
+
+    }
+
+    else{
+
+      const config =
+        LEVELS[fase];
+
+
+      for(
+        let j = 0;
+        j < config.length;
+        j++
       ){
 
-        slot.style.visibility=
-          "hidden";
+        const empty =
+          document.createElement("span");
+
+        empty.className =
+          "empty-dot";
+
+        colors.appendChild(
+          empty
+        );
 
       }
 
-
-      slots.appendChild(
-        slot
-      );
-
     }
 
 
-    const feedback=
-      document.createElement(
-        "div"
-      );
+    row.appendChild(
+      number
+    );
 
-    feedback.className=
-      "feedback";
+    row.appendChild(
+      colors
+    );
 
-
-    for(
-      let i=0;
-      i<5;
-      i++
-    ){
-
-      const dot=
-        document.createElement(
-          "span"
-        );
-
-      dot.className=
-        "feedback-dot";
-
-
-      feedback.appendChild(
-        dot
-      );
-
-    }
-
-
-    row.append(
-      number,
-      slots,
-      feedback
+    row.appendChild(
+      results
     );
 
 
-    rows.appendChild(
+    historyList.appendChild(
       row
     );
 
@@ -1666,110 +2812,175 @@ function makeRows(){
 }
 
 
-/* =====================================================
-   DESENHAR TENTATIVA
-===================================================== */
+/* =========================================================
+   CLICAR NA COR
+========================================================= */
 
-function renderCurrentRow(){
+document
+  .querySelectorAll(".color-button")
+  .forEach(button => {
 
-  const row=
-    document.querySelector(
-      `.row[data-row="${attempt}"]`
-    );
+    button.addEventListener(
+      "click",
+      () => {
 
+        if(!partidaInicializada){
 
-  if(!row)
-    return;
+          return;
 
-
-  [
-    ...row.querySelectorAll(
-      ".guess-slot"
-    )
-  ]
-  .forEach(
-    (slot,i)=>{
-
-      slot.innerHTML="";
+        }
 
 
-      if(
-        i <
-        current.length
-      ){
+        const config =
+          LEVELS[fase];
 
-        const img=
-          document.createElement(
-            "img"
+
+        if(
+          tentativaAtual.length >=
+          config.length
+        ){
+
+          mostrarMensagem(
+            "Essa tentativa já está completa.",
+            "info"
           );
 
-        img.src=
-          FILES[
-            current[i]
-          ];
+          return;
 
-        img.alt="";
+        }
 
 
-        slot.appendChild(
-          img
+        const cor =
+          button.dataset.color;
+
+
+        /*
+          Não permitimos repetir a mesma cor
+          na mesma tentativa.
+        */
+
+        if(
+          tentativaAtual.includes(cor)
+        ){
+
+          mostrarMensagem(
+            "Escolha outra cor.",
+            "info"
+          );
+
+          return;
+
+        }
+
+
+        tentativaAtual.push(
+          cor
+        );
+
+
+        salvarEstado();
+
+        atualizarTentativa();
+
+        mostrarMensagem(
+          "",
+          "info"
         );
 
       }
+    );
 
-    }
-  );
-
-}
+  });
 
 
-/* =====================================================
-   CALCULAR RESULTADO
-===================================================== */
+/* =========================================================
+   LIMPAR
+========================================================= */
 
-function calculateResult(
-  guess,
-  answer
+clearButton.addEventListener(
+  "click",
+  () => {
+
+    tentativaAtual = [];
+
+    salvarEstado();
+
+    atualizarTentativa();
+
+    mostrarMensagem(
+      "",
+      "info"
+    );
+
+  }
+);
+
+
+/* =========================================================
+   COMPARAR SENHA
+========================================================= */
+
+function conferirTentativa(
+  tentativa,
+  segredo
 ){
 
-  let exact=0;
+  let black = 0;
 
-  let misplaced=0;
+  let white = 0;
 
+
+  /*
+    PRIMEIRA PASSADA:
+    cor certa + lugar certo
+  */
 
   for(
-    let i=0;
-    i<answer.length;
+    let i = 0;
+    i < segredo.length;
     i++
   ){
 
     if(
-      guess[i] ===
-      answer[i]
+      tentativa[i] ===
+      segredo[i]
     ){
 
-      exact++;
+      black++;
 
     }
 
   }
 
 
+  /*
+    SEGUNDA PASSADA:
+    cor certa + lugar errado
+  */
+
   for(
-    let i=0;
-    i<guess.length;
+    let i = 0;
+    i < tentativa.length;
     i++
   ){
 
     if(
-      guess[i] !==
-      answer[i] &&
-      answer.includes(
-        guess[i]
+      tentativa[i] ===
+      segredo[i]
+    ){
+
+      continue;
+
+    }
+
+
+    if(
+      segredo.includes(
+        tentativa[i]
       )
     ){
 
-      misplaced++;
+      white++;
 
     }
 
@@ -1777,266 +2988,169 @@ function calculateResult(
 
 
   return {
-    exact,
-    misplaced
+    black,
+    white
   };
 
 }
 
 
-/* =====================================================
-   MOSTRAR RESULTADO
-===================================================== */
+/* =========================================================
+   RECOMPENSA
+========================================================= */
 
-function paintResult(
-  rowIndex,
-  result
-){
+function calcularRecompensa(){
 
-  const row=
-    document.querySelector(
-      `.row[data-row="${rowIndex}"]`
-    );
+  const config =
+    LEVELS[fase];
 
 
-  if(!row)
-    return;
+  /*
+    FASES 1-7
+  */
 
+  if(fase <= 7){
 
-  const dots=[
-    ...row.querySelectorAll(
-      ".feedback-dot"
-    )
-  ];
-
-
-  for(
-    let i=0;
-    i<result.exact;
-    i++
-  ){
-
-    dots[i]
-      .classList.add(
-        "black"
-      );
+    return config.reward;
 
   }
 
 
-  for(
-    let i=0;
-    i<result.misplaced;
-    i++
-  ){
+  /*
+    FASE 8
+  */
 
-    dots[
-      result.exact+i
-    ]
-    .classList.add(
-      "white"
-    );
+  if(fase === 8){
 
-  }
-
-}
+    const tempo =
+      obterTempoAtual();
 
 
-/* =====================================================
-   REGISTRAR TENTATIVA
-===================================================== */
+    if(
+      tempo <= 30
+    ){
 
-function addAttempt(){
-
-  const result=
-    calculateResult(
-      current,
-      secret
-    );
-
-
-  paintResult(
-    attempt,
-    result
-  );
-
-}
-
-
-/* =====================================================
-   MODAL
-===================================================== */
-
-function openModal(
-  title,
-  text,
-  buttons
-){
-
-  $("modalTitle")
-    .textContent=
-      title;
-
-
-  $("modalText")
-    .innerHTML=
-      text;
-
-
-  $("modalButtons")
-    .innerHTML="";
-
-
-  buttons.forEach(
-    item=>{
-
-      const b=
-        document.createElement(
-          "button"
-        );
-
-      b.type="button";
-
-      b.textContent=
-        item.text;
-
-      b.className=
-        item.cls ||
-        "secondary";
-
-      b.onclick=
-        item.fn;
-
-
-      $("modalButtons")
-        .appendChild(
-          b
-        );
+      return 100;
 
     }
-  );
 
 
-  $("modal")
-    .classList.add(
-      "show"
-    );
-
-}
-
-
-function closeModal(){
-
-  $("modal")
-    .classList.remove(
-      "show"
-    );
-
-}
-
-
-/* =====================================================
-   FIREBASE
-===================================================== */
-
-async function updateAccount(
-  deltaCoins=0,
-  deltaChances=0
-){
-
-  if(!userDoc){
-
-    throw new Error(
-      "Cadastro não encontrado."
-    );
+    return 75;
 
   }
 
 
-  const ref=
-    doc(
-      db,
-      "admins",
-      userDoc.id
-    );
+  /*
+    FASE 9
+  */
+
+  if(fase === 9){
+
+    const tempo =
+      obterTempoAtual();
 
 
-  const oldCoins=
-    Number(
-      userData?.moedas || 0
-    );
+    if(
+      tempo <= 30
+    ){
+
+      return 200;
+
+    }
 
 
-  const oldChances=
-    Number(
-      userData?.chances || 0
-    );
+    if(
+      tempo <= 45
+    ){
+
+      return 150;
+
+    }
 
 
-  const newCoins=
-    oldCoins +
-    Number(deltaCoins || 0);
+    return 100;
+
+  }
 
 
-  const newChances=
-    oldChances +
-    Number(deltaChances || 0);
+  return 0;
+
+}
+
+
+/* =========================================================
+   TEMPO
+========================================================= */
+
+function obterTempoAtual(){
+
+  if(!timerStart){
+
+    return 0;
+
+  }
+
+
+  return Math.floor(
+    (
+      Date.now() -
+      timerStart
+    ) / 1000
+  );
+
+}
+
+
+function atualizarTimer(){
+
+  const config =
+    LEVELS[fase];
 
 
   if(
-    newChances < 0
+    !config ||
+    config.timer <= 0
   ){
 
-    throw new Error(
-      "Você não possui chances suficientes."
+    timerEl.classList.remove(
+      "show"
     );
+
+    return;
 
   }
 
 
-  await updateDoc(
-    ref,
-    {
-
-      moedas:
-        increment(
-          Number(
-            deltaCoins || 0
-          )
-        ),
-
-      chances:
-        increment(
-          Number(
-            deltaChances || 0
-          )
-        )
-
-    }
-  );
+  const tempo =
+    obterTempoAtual();
 
 
-  userData={
-
-    ...userData,
-
-    moedas:newCoins,
-
-    chances:newChances
-
-  };
+  timerValue.textContent =
+    tempo;
 
 
-  renderStats();
+  if(
+    tempo >= 30
+  ){
+
+    timerEl.classList.add(
+      "danger"
+    );
+
+  }
+
+  else{
+
+    timerEl.classList.remove(
+      "danger"
+    );
+
+  }
 
 }
 
 
-/* =====================================================
-   CRONÔMETRO FASE 9
-===================================================== */
-
-function stopTimer(){
+function iniciarRelogio(){
 
   if(timerInterval){
 
@@ -2047,756 +3161,528 @@ function stopTimer(){
   }
 
 
-  timerInterval=null;
-
-}
-
-
-function startTimer(){
-
-  stopTimer();
-
-
-  if(
-    level !== 9
-  )
-    return;
-
-
-  const timer=
-    $("timer");
-
-  const value=
-    $("timerValue");
-
-
-  timer.classList.add(
-    "show"
-  );
-
-  timer.classList.remove(
-    "danger"
-  );
-
-
-  timerStart=
-    Date.now();
-
-
-  value.textContent=
-    "30";
-
-
-  timerInterval=
+  timerInterval =
     setInterval(
-      ()=>{
-
-        const elapsed=
-          Math.floor(
-            (
-              Date.now() -
-              timerStart
-            ) / 1000
-          );
-
-
-        const remaining=
-          Math.max(
-            0,
-            BONUS_TIME -
-            elapsed
-          );
-
-
-        value.textContent=
-          remaining;
-
+      () => {
 
         if(
-          remaining <= 10
+          partidaInicializada &&
+          LEVELS[fase] &&
+          LEVELS[fase].timer > 0
         ){
 
-          timer.classList.add(
-            "danger"
-          );
-
-        }
-
-
-        if(
-          remaining <= 0
-        ){
-
-          stopTimer();
-
-          value.textContent=
-            "0";
+          atualizarTimer();
 
         }
 
       },
-      200
+      250
     );
 
 }
 
 
-function hideTimer(){
-
-  stopTimer();
-
-  $("timer")
-    .classList.remove(
-      "show",
-      "danger"
-    );
-
-}
-
-
-/* =====================================================
-   FUNDO
-===================================================== */
-
-function setLevelBackground(){
-
-  const bg=
-    level <= 3
-      ? "./fundo_nivel_01_03.png"
-
-      : level <= 6
-      ? "./fundo_nivel_04_06.png"
-
-      : level === 7
-      ? "./fundo_nivel_07.png"
-
-      : "./fundo_nivel_08_09.png";
-
-
-  const wrap=
-    document.querySelector(
-      ".game-wrap"
-    );
-
-
-  if(!wrap)
-    return;
-
-
-  wrap.style.backgroundImage=
-    `url("${bg}")`;
-
-  wrap.style.backgroundSize=
-    "cover";
-
-  wrap.style.backgroundPosition=
-    "center";
-
-  wrap.style.backgroundRepeat=
-    "no-repeat";
-
-}
-
-
-/* =====================================================
-   INICIAR FASE
-===================================================== */
-
-function startLevel(){
-
-  stopTimer();
-
-  hideTimer();
-
-
-  const config=
-    LEVELS[level];
-
-
-  secret=
-    randomSecret(
-      config.length
-    );
-
-
-  /*
-    IMPORTANTE:
-    A senha é criada aqui,
-    mas NUNCA é colocada no HTML.
-  */
-
-
-  current=[];
-
-  attempt=0;
-
-  busy=false;
-
-
-  $("phaseTitle")
-    .textContent=
-      level === 8
-        ? "NÍVEL 8 — HARD"
-
-        : level === 9
-        ? "NÍVEL 9 — BÔNUS"
-
-        : `NÍVEL ${level} — DESCUBRA A SENHA`;
-
-
-  if(
-    level === 9
-  ){
-
-    $("phaseText")
-      .textContent=
-        "Descubra a combinação. Até 30 segundos: 150 Adam Coins.";
-
-  }else{
-
-    $("phaseText")
-      .textContent=
-        `A senha tem ${config.length} cores. Você tem ${MAX_ATTEMPTS} tentativas.`;
-
-  }
-
-
-  $("message")
-    .textContent=
-      "Sua vez! Monte a combinação e confirme.";
-
-
-  makeRows();
-
-  renderPreview();
-
-  renderStats();
-
-  setLevelBackground();
-
-
-  /*
-    FASE 9 começa o cronômetro
-    imediatamente.
-  */
-
-  if(
-    level === 9
-  ){
-
-    startTimer();
-
-  }
-
-}
-
-
-/* =====================================================
-   VITÓRIA
-===================================================== */
-
-async function win(){
-
-  busy=true;
-
-  stopTimer();
-
-
-  let reward=
-    LEVELS[level].reward;
-
-
-  let textExtra="";
-
-
-  if(
-    level === 9
-  ){
-
-    const elapsed=
-      Math.floor(
-        (
-          Date.now() -
-          timerStart
-        ) / 1000
+/* =========================================================
+   CONFIRMAR
+========================================================= */
+
+confirmButton.addEventListener(
+  "click",
+  async () => {
+
+    if(!partidaInicializada){
+
+      mostrarMensagem(
+        "Aguarde o jogo iniciar.",
+        "error"
       );
 
-
-    if(
-      elapsed <= BONUS_TIME
-    ){
-
-      reward=150;
-
-      textExtra=
-        `
-        <br>
-        ⏱️ Tempo: <b>${elapsed}s</b>
-
-        <br><br>
-
-        <span class="gold">
-          🏆 BÔNUS MÁXIMO
-          <br>
-          <b>+150 Adam Coins</b>
-        </span>
-        `;
-
-    }else{
-
-      reward=100;
-
-      textExtra=
-        `
-        <br>
-        ⏱️ Tempo: <b>${elapsed}s</b>
-
-        <br><br>
-
-        <span class="gold">
-          <b>+100 Adam Coins</b>
-        </span>
-        `;
+      return;
 
     }
 
+
+    const config =
+      LEVELS[fase];
+
+
+    if(
+      tentativaAtual.length !==
+      config.length
+    ){
+
+      mostrarMensagem(
+        "Escolha " +
+        config.length +
+        " cores antes de confirmar.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    if(
+      historico.length >= 10
+    ){
+
+      mostrarMensagem(
+        "Você já usou as 10 tentativas.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    const resultado =
+      conferirTentativa(
+        tentativaAtual,
+        senha
+      );
+
+
+    const registro = {
+
+      guess:
+        [...tentativaAtual],
+
+      black:
+        Array(resultado.black)
+          .fill(true),
+
+      white:
+        Array(resultado.white)
+          .fill(true)
+
+    };
+
+
+    historico.push(
+      registro
+    );
+
+
+    const acertou =
+      resultado.black ===
+      config.length;
+
+
+    /*
+      Guarda a tentativa
+      antes de qualquer transição.
+    */
+
+    tentativaAtual = [];
+
+
+    salvarEstado();
+
+    atualizarInterface();
+
+
+    /* =====================================================
+       ACERTO
+    ===================================================== */
+
+    if(acertou){
+
+      const recompensa =
+        calcularRecompensa();
+
+
+      await adicionarMoedas(
+        recompensa
+      );
+
+
+      mostrarMensagem(
+        "🎉 SENHA CORRETA! +" +
+        recompensa +
+        " Adam Coins",
+        "success"
+      );
+
+
+      /*
+        Se for a fase 9,
+        termina o jogo.
+      */
+
+      if(fase >= 9){
+
+        setTimeout(
+          () => {
+
+            finalizarJogo();
+
+          },
+          1800
+        );
+
+        return;
+
+      }
+
+
+      /*
+        Próxima fase.
+      */
+
+      setTimeout(
+        () => {
+
+          fase++;
+
+          prepararFase();
+
+          mostrarMensagem(
+            "🔥 Próxima fase!",
+            "success"
+          );
+
+        },
+        1800
+      );
+
+
+      return;
+
+    }
+
+
+    /* =====================================================
+       ERRO
+    ===================================================== */
+
+    if(
+      historico.length >= 10
+    ){
+
+      mostrarMensagem(
+        "❌ As 10 tentativas acabaram. Nova senha!",
+        "error"
+      );
+
+
+      setTimeout(
+        () => {
+
+          prepararFase();
+
+        },
+        1800
+      );
+
+
+      return;
+
+    }
+
+
+    mostrarMensagem(
+      "❌ Ainda não. Use as pistas pretas e brancas.",
+      "error"
+    );
+
+  }
+);
+
+
+/* =========================================================
+   ADICIONAR MOEDAS
+========================================================= */
+
+async function adicionarMoedas(valor){
+
+  if(!usuario || !documentoUsuario){
+
+    return;
+
   }
 
 
-  await updateAccount(
-    reward,
-    0
-  );
+  try{
+
+    await runTransaction(
+      db,
+      async transaction => {
+
+        const snap =
+          await transaction.get(
+            documentoUsuario.ref
+          );
 
 
-  if(
-    level < 9
-  ){
+        if(!snap.exists()){
 
-    openModal(
-
-      "🎉 SENHA CORRETA!",
-
-      `
-      Você descobriu a combinação!
-
-      <br><br>
-
-      <span class="gold">
-        <b>+${reward} Adam Coins</b>
-      </span>
-      `,
-
-      [
-
-        {
-
-          text:
-            "PRÓXIMO NÍVEL",
-
-          cls:
-            "primary",
-
-          fn:
-            ()=>{
-
-              closeModal();
-
-              level++;
-
-              startLevel();
-
-            }
+          throw new Error(
+            "Cadastro não encontrado."
+          );
 
         }
 
-      ]
 
-    );
+        const dados =
+          snap.data();
 
 
-    return;
+        const moedasAtuais =
+          Number(
+            dados.moedas || 0
+          );
 
-  }
 
+        transaction.update(
+          documentoUsuario.ref,
+          {
 
-  openModal(
-
-    "🏆 FASE BÔNUS CONCLUÍDA!",
-
-    `
-    Você completou a Fase 9!
-
-    ${textExtra}
-    `,
-
-    [
-
-      {
-
-        text:
-          "VOLTAR AOS JOGOS",
-
-        cls:
-          "primary",
-
-        fn:
-          ()=>{
-            window.location.href=
-              "jogos.html";
-          }
-
-      }
-
-    ]
-
-  );
-
-}
-
-
-/* =====================================================
-   DERROTA
-===================================================== */
-
-async function lose(){
-
-  busy=true;
-
-  stopTimer();
-
-
-  const correct=
-    secret
-      .map(
-        c =>
-          c.toUpperCase()
-      )
-      .join(" • ");
-
-
-  openModal(
-
-    "💥 VOCÊ PERDEU!",
-
-    `
-    A combinação correta era:
-
-    <br><br>
-
-    <b>${correct}</b>
-
-    <br><br>
-
-    Você pode reiniciar a fase
-    ou continuar usando uma chance.
-    `,
-
-    [
-
-      {
-
-        text:
-          "REINICIAR FASE",
-
-        cls:
-          "primary",
-
-        fn:
-          ()=>{
-
-            closeModal();
-
-            startLevel();
-
-          }
-
-      },
-
-      {
-
-        text:
-          "CONTINUAR NESTA FASE (-1 CHANCE)",
-
-        cls:
-          "secondary",
-
-        fn:
-          async()=>{
-
-            try{
-
-              await updateAccount(
-                0,
-                -1
-              );
-
-
-              closeModal();
-
-              startLevel();
-
-
-            }catch(error){
-
-              $("modalText")
-                .textContent=
-                  error.message;
-
-            }
-
-          }
-
-      }
-
-    ]
-
-  );
-
-}
-
-
-/* =====================================================
-   CONFIRMAR
-===================================================== */
-
-let acaoProcessada=false;
-
-
-async function confirmar(){
-
-  if(busy)
-    return;
-
-
-  if(
-    current.length !==
-    secret.length
-  ){
-
-    $("message")
-      .textContent=
-        `Escolha ${secret.length} cores antes de confirmar.`;
-
-    return;
-
-  }
-
-
-  addAttempt();
-
-
-  const guess=[
-    ...current
-  ];
-
-
-  const correct=
-    guess.every(
-      (color,i)=>
-        color ===
-        secret[i]
-    );
-
-
-  if(correct){
-
-    await win();
-
-    return;
-
-  }
-
-
-  attempt++;
-
-  current=[];
-
-  renderPreview();
-
-
-  if(
-    attempt >=
-    MAX_ATTEMPTS
-  ){
-
-    await lose();
-
-    return;
-
-  }
-
-
-  renderCurrentRow();
-
-
-  $("message")
-    .textContent=
-      `Senha incorreta. Tentativa ${attempt+1} de ${MAX_ATTEMPTS}.`;
-
-}
-
-
-/* =====================================================
-   BOTÃO CONFIRMAR
-===================================================== */
-
-$("confirmBtn")
-  .addEventListener(
-    "click",
-    event=>{
-
-      event.preventDefault();
-
-
-      if(
-        acaoProcessada
-      )
-        return;
-
-
-      acaoProcessada=true;
-
-
-      confirmar()
-        .finally(
-          ()=>{
-
-            setTimeout(
-              ()=>{
-                acaoProcessada=false;
-              },
-              250
-            );
+            moedas:
+              moedasAtuais + valor
 
           }
         );
 
-    }
-  );
-
-
-/* =====================================================
-   LIMPAR
-===================================================== */
-
-$("clearBtn")
-  .addEventListener(
-    "click",
-    event=>{
-
-      event.preventDefault();
-
-
-      if(busy)
-        return;
-
-
-      current=[];
-
-      renderPreview();
-
-      renderCurrentRow();
-
-      $("message")
-        .textContent="";
-
-    }
-  );
-
-
-/* =====================================================
-   VOLTAR
-===================================================== */
-
-$("back")
-  .addEventListener(
-    "click",
-    ()=>{
-
-      window.location.href=
-        "jogos.html";
-
-    }
-  );
-
-
-/* =====================================================
-   LOCALIZAR USUÁRIO
-===================================================== */
-
-async function localizarUsuario(
-  user
-){
-
-  let result=
-    await getDocs(
-
-      query(
-        collection(
-          db,
-          "admins"
-        ),
-
-        where(
-          "uid",
-          "==",
-          user.uid
-        )
-
-      )
-
+      }
     );
 
 
-  if(
-    result.empty &&
-    user.email
-  ){
+    usuario.moedas =
+      Number(usuario.moedas || 0) +
+      valor;
 
-    result=
-      await getDocs(
 
-        query(
-          collection(
-            db,
-            "admins"
-          ),
-
-          where(
-            "email",
-            "==",
-            user.email.toLowerCase()
-          )
-
-        )
-
-      );
+    atualizarSaldos();
 
   }
 
+  catch(error){
 
-  return result.empty
-    ? null
-    : result.docs[0];
+    console.error(
+      "Erro ao adicionar moedas:",
+      error
+    );
+
+    mostrarMensagem(
+      "Partida concluída, mas o saldo será atualizado pelo servidor.",
+      "info"
+    );
+
+  }
 
 }
 
 
-/* =====================================================
-   LOGIN
-===================================================== */
+/* =========================================================
+   FINALIZAR JOGO
+========================================================= */
+
+function finalizarJogo(){
+
+  if(timerInterval){
+
+    clearInterval(
+      timerInterval
+    );
+
+    timerInterval =
+      null;
+
+  }
+
+
+  limparEstado();
+
+
+  fase = 9;
+
+  atualizarInterface();
+
+
+  mostrarMensagem(
+    "🏆 PARABÉNS! Você completou as 9 fases!",
+    "success"
+  );
+
+
+  /*
+    Mantém o jogador na tela por alguns segundos.
+    Depois pode voltar para Jogos.
+  */
+
+  setTimeout(
+    () => {
+
+      window.location.href =
+        "jogos.html";
+
+    },
+    3000
+  );
+
+}
+
+
+/* =========================================================
+   MENSAGEM
+========================================================= */
+
+function mostrarMensagem(
+  texto,
+  tipo
+){
+
+  messageEl.textContent =
+    texto;
+
+
+  messageEl.className =
+    "message " +
+    (tipo || "info");
+
+}
+
+
+/* =========================================================
+   AJUDA
+========================================================= */
+
+helpButton.addEventListener(
+  "click",
+  () => {
+
+    helpModal.classList.add(
+      "show"
+    );
+
+  }
+);
+
+
+helpClose.addEventListener(
+  "click",
+  () => {
+
+    helpModal.classList.remove(
+      "show"
+    );
+
+  }
+);
+
+
+helpModal.addEventListener(
+  "click",
+  event => {
+
+    if(
+      event.target ===
+      helpModal
+    ){
+
+      helpModal.classList.remove(
+        "show"
+      );
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   VOLTAR
+========================================================= */
+
+backButton.addEventListener(
+  "click",
+  () => {
+
+    /*
+      Se sair voluntariamente,
+      encerra a sessão da partida.
+
+      Assim, quando entrar novamente
+      será uma nova partida e consumirá
+      uma nova chance.
+    */
+
+    limparEstado();
+
+
+    window.location.href =
+      "jogos.html";
+
+  }
+);
+
+
+/* =========================================================
+   INICIALIZAÇÃO
+========================================================= */
+
+async function iniciarPagina(){
+
+  /*
+    Primeiro montamos a interface.
+    NÃO dependemos do Firebase para desenhar
+    as bolas ou as 10 linhas.
+  */
+
+  const existe =
+    carregarEstado();
+
+
+  if(!existe){
+
+    /*
+      Ainda não temos usuário.
+      A interface aparece normalmente,
+      mas a partida só é cobrada depois
+      que o usuário for localizado.
+    */
+
+    fase = 1;
+
+    tentativaAtual = [];
+
+    historico = [];
+
+    senha =
+      gerarSenha(
+        LEVELS[1].length
+      );
+
+    salvarEstado();
+
+  }
+
+
+  atualizarInterface();
+
+  iniciarRelogio();
+
+}
+
+
+iniciarPagina();
+
+
+/* =========================================================
+   FIREBASE — AUTENTICAÇÃO
+========================================================= */
 
 onAuthStateChanged(
-
   auth,
-
-  async user=>{
+  async user => {
 
     if(!user){
 
-      window.location.replace(
-        "index.html"
+      mostrarMensagem(
+        "Faça login para jogar.",
+        "error"
       );
 
       return;
@@ -2806,118 +3692,72 @@ onAuthStateChanged(
 
     try{
 
-      buildPalette();
-
-      setLevelBackground();
-
-
-      userDoc=
+      const documento =
         await localizarUsuario(
           user
         );
 
 
-      if(!userDoc){
+      if(!documento){
 
-        $("message")
-          .textContent=
-            "Cadastro não encontrado.";
-
-        return;
-
-      }
-
-
-      userData=
-        userDoc.data();
-
-
-      renderStats();
-
-
-      if(
-        Number(
-          userData.chances || 0
-        ) <= 0
-      ){
-
-        openModal(
-
-          "SEM CHANCES",
-
-          "Você precisa ter pelo menos 1 chance para iniciar o jogo.",
-
-          [
-
-            {
-
-              text:
-                "VOLTAR",
-
-              cls:
-                "primary",
-
-              fn:
-                ()=>{
-                  window.location.href=
-                    "jogos.html";
-                }
-
-            }
-
-          ]
-
+        mostrarMensagem(
+          "Cadastro não encontrado.",
+          "error"
         );
 
-
         return;
 
       }
+
+
+      documentoUsuario =
+        documento;
+
+
+      usuario =
+        documento.data();
+
+
+      atualizarSaldos();
 
 
       /*
-        ENTRADA:
-        +30 Adam Coins
-        -1 chance
+        Só agora inicia/cobra a partida.
       */
 
-      try{
+      if(!partidaInicializada){
 
-        await updateAccount(
-          30,
-          -1
-        );
-
-
-      }catch(error){
-
-        console.error(
-          "ERRO AO ATUALIZAR SALDO:",
-          error
-        );
+        await iniciarPartida();
 
       }
 
 
-      startLevel();
+      atualizarInterface();
 
+    }
 
-    }catch(error){
+    catch(error){
 
       console.error(
-        "ERRO AO INICIAR:",
+        "Erro Firebase:",
         error
       );
 
 
-      $("message")
-        .textContent=
-          "Erro ao carregar o jogo.";
+      /*
+        Importante:
+        não destruímos a interface.
+        O jogo continua visível.
+      */
+
+      mostrarMensagem(
+        "Jogo carregado. Verifique sua conexão.",
+        "info"
+      );
 
     }
 
   }
-
 );
 
 </script>
