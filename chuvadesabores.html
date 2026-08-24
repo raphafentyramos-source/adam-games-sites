@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>Adam Games - Chuva de Sabores</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;min-height:100%;overflow:hidden}
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  color:#fff;
+  background:
+    radial-gradient(circle at 20% 0%,rgba(0,190,140,.30),transparent 35%),
+    radial-gradient(circle at 90% 0%,rgba(20,145,255,.30),transparent 35%),
+    linear-gradient(180deg,#062a48,#031a2d);
+}
+button{font-family:inherit}
+#app{width:100%;height:100dvh;display:flex;justify-content:center}
+.page{width:min(100%,760px);height:100%;padding:10px 12px 14px;display:flex;flex-direction:column;gap:8px}
+.top{height:48px;display:flex;align-items:center;justify-content:space-between;flex:0 0 auto}
+.back,.round-btn{
+  width:44px;height:44px;border:0;border-radius:13px;background:rgba(0,35,60,.9);
+  color:#fff;font-size:25px;font-weight:900;cursor:pointer
+}
+.title{text-align:center}.title small{display:block;color:#91b8d0;font-size:8px;letter-spacing:2px}.title strong{display:block;font-size:19px}
+.wallet{min-width:96px;padding:6px 8px;border-radius:13px;text-align:center;background:rgba(255,211,44,.08);border:1px solid rgba(255,211,44,.15)}
+.wallet .label{font-size:7px;color:#9bb7c9;font-weight:800}.wallet .coins{color:#ffd52b;font-size:16px;font-weight:900}.wallet .chances{color:#ffcc45;font-size:9px;font-weight:900}
+.status{
+  min-height:30px;padding:7px 10px;border-radius:11px;text-align:center;font-size:10px;font-weight:800;
+  background:rgba(255,255,255,.06);color:#b8d1e2;border:1px solid rgba(255,255,255,.08);flex:0 0 auto
+}
+.status.ok{color:#78ffb0}.status.err{color:#ff9eaa}.status.warn{color:#ffd76a}
+.hud{
+  display:grid;grid-template-columns:1fr 1fr 1fr 1.15fr 44px;gap:6px;flex:0 0 auto
+}
+.box{padding:7px 5px;border-radius:11px;text-align:center;background:rgba(2,27,48,.88);border:1px solid rgba(255,255,255,.07)}
+.box small{display:block;color:#8faec1;font-size:7px;font-weight:900}.box b{display:block;margin-top:2px;font-size:14px}
+#hearts{letter-spacing:1px;color:#ff5668;font-size:14px}
+#pauseBtn{border:0;border-radius:11px;background:#0877aa;color:#fff;font-size:18px;font-weight:900;cursor:pointer}
+.game-card{
+  position:relative;flex:1;min-height:0;border-radius:20px;overflow:hidden;
+  background:#75c9ed;border:1px solid rgba(255,255,255,.12);box-shadow:0 18px 50px rgba(0,0,0,.28)
+}
+canvas{display:block;width:100%;height:100%;touch-action:none}
+.bottom{display:flex;gap:7px;flex:0 0 auto}
+.action{
+  flex:1;height:45px;border:0;border-radius:13px;background:linear-gradient(135deg,#18b969,#087e4b);
+  color:#fff;font-size:12px;font-weight:900;cursor:pointer
+}
+.action.secondary{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1)}
+#loading{
+  position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(180deg,#062b49,#031a2d);padding:20px
+}
+.loadbox{width:min(390px,100%);padding:28px 20px;border-radius:24px;text-align:center;background:#082945;border:1px solid rgba(255,255,255,.12)}
+.spinner{width:42px;height:42px;margin:0 auto 13px;border:4px solid rgba(255,255,255,.15);border-top-color:#2ddc8a;border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loadbox h2{font-size:23px}.loadbox p{margin-top:8px;color:#aac7d9;font-size:12px;line-height:1.45}
+#loadError{display:none;margin-top:14px;color:#ffacb5;font-size:11px}
+#retryBtn{display:none;width:100%;height:44px;margin-top:14px;border:0;border-radius:12px;background:#159d5c;color:#fff;font-weight:900}
+.modal{
+ position:fixed;inset:0;z-index:10000;display:none;align-items:center;justify-content:center;padding:18px;
+ background:rgba(0,8,18,.82);backdrop-filter:blur(5px)
+}
+.modal.show{display:flex}
+.modal-card{width:min(400px,100%);padding:25px 20px;border-radius:23px;text-align:center;background:#082945;border:1px solid rgba(255,255,255,.12);box-shadow:0 25px 70px rgba(0,0,0,.5)}
+.modal-icon{font-size:48px}.modal-card h2{margin-top:7px;font-size:25px}.modal-card p{margin-top:9px;color:#b8d3e3;font-size:13px;line-height:1.5}
+.modal-reward{margin-top:12px;color:#ffd52b;font-size:20px;font-weight:900}
+.modal-actions{display:grid;gap:9px;margin-top:18px}
+.modal-actions button{height:47px;border:0;border-radius:13px;color:#fff;font-weight:900;cursor:pointer;background:#16a45f}
+.modal-actions .alt{background:rgba(255,255,255,.08)}
+@media(max-height:650px){
+ .page{gap:5px;padding-top:6px}.top{height:42px}.back,.round-btn{height:38px;width:38px}
+ .hud .box{padding:5px}.box b{font-size:12px}.status{min-height:26px;padding:5px}
+ .bottom .action{height:40px}
+}
+</style>
+</head>
+<body>
+<div id="loading">
+  <div class="loadbox">
+    <div class="spinner" id="spinner"></div>
+    <h2 id="loadTitle">Chuva de Sabores</h2>
+    <p id="loadText">Preparando o jogo...</p>
+    <div id="loadError"></div>
+    <button id="retryBtn">TENTAR NOVAMENTE</button>
+  </div>
+</div>
+
+<div id="app">
+<div class="page">
+  <div class="top">
+    <button class="back" id="back" type="button">←</button>
+    <div class="title"><small>ADAM GAMES</small><strong>CHUVA DE SABORES</strong></div>
+    <div class="wallet"><div class="label">ADAM COINS</div><div class="coins" id="coins">0</div><div class="chances" id="chances">🎟️ 0</div></div>
+  </div>
+
+  <div class="status" id="status">Conectando ao jogo...</div>
+
+  <div class="hud">
+    <div class="box"><small>PONTOS</small><b id="score">0</b></div>
+    <div class="box"><small>FASE</small><b id="level">1 / 7</b></div>
+    <div class="box"><small>TEMPO</small><b id="time">30</b></div>
+    <div class="box"><small>VIDAS</small><b id="hearts">♥ ♥ ♥</b></div>
+    <button id="pauseBtn" type="button">Ⅱ</button>
+  </div>
+
+  <div class="game-card"><canvas id="game"></canvas></div>
+
+  <div class="bottom">
+    <button class="action secondary" id="restartBtn" type="button">↻ RECOMEÇAR FASE</button>
+    <button class="action" id="soundBtn" type="button">🔊 SOM</button>
+  </div>
+</div>
+</div>
+
+<div class="modal" id="modal">
+  <div class="modal-card">
+    <div class="modal-icon" id="modalIcon">🍎</div>
+    <h2 id="modalTitle">Você venceu!</h2>
+    <p id="modalText"></p>
+    <div class="modal-reward" id="modalReward"></div>
+    <div class="modal-actions">
+      <button id="modalPrimary" type="button">CONTINUAR</button>
+      <button class="alt" id="modalSecondary" type="button">SAIR</button>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+import { getFirestore, collection, query, where, getDocs, getDoc, runTransaction, doc, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+const firebaseConfig={
+  apiKey:"AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",
+  authDomain:"adam-games-21081.firebaseapp.com",
+  projectId:"adam-games-21081",
+  storageBucket:"adam-games-21081.firebasestorage.app",
+  messagingSenderId:"1055528418738",
+  appId:"1:1055528418738:web:5fafdf63424ba9744eb8ab"
+};
+
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getFirestore(app);
+
+const $=id=>document.getElementById(id);
+const canvas=$("game"),ctx=canvas.getContext("2d");
+let user=null,userRef=null,coins=0,chances=0;
+let firebaseReady=false,gameStarted=false,paused=false,soundOn=true;
+let level=1,score=0,lives=3,timeLeft=30,items=[],lastTime=0,spawnTimer=0,raf=0;
+let phaseFinished=false,sessionEntryKey="adam_games_chuva_entry_v3";
+let entryConsumed=false;
+
+const phases=[
+  {time:30,need:180,speed:120,spawn:620,food:0.82,trash:0.18,reward:30},
+  {time:30,need:260,speed:145,spawn:570,food:0.78,trash:0.22,reward:40},
+  {time:32,need:350,speed:170,spawn:520,food:0.74,trash:0.26,reward:50},
+  {time:34,need:450,speed:195,spawn:470,food:0.70,trash:0.30,reward:65},
+  {time:36,need:570,speed:220,spawn:425,food:0.67,trash:0.33,reward:80},
+  {time:38,need:700,speed:250,spawn:385,food:0.64,trash:0.36,reward:100},
+  {time:40,need:850,speed:280,spawn:350,food:0.60,trash:0.40,reward:150}
+];
+
+const foods=[
+  {name:"Maçã",color:"#ef3f4f",accent:"#7fd64f",shape:"apple",points:10},
+  {name:"Banana",color:"#ffd52e",accent:"#8a5d24",shape:"banana",points:12},
+  {name:"Morango",color:"#f23b55",accent:"#4fcf68",shape:"strawberry",points:14},
+  {name:"Melancia",color:"#ee4054",accent:"#45b95a",shape:"watermelon",points:15},
+  {name:"Pizza",color:"#f6a32c",accent:"#e64b32",shape:"pizza",points:18},
+  {name:"Hambúrguer",color:"#c47a3b",accent:"#54b96b",shape:"burger",points:20},
+  {name:"Donut",color:"#f07aa9",accent:"#f6d66a",shape:"donut",points:22},
+  {name:"Cupcake",color:"#ff89bd",accent:"#7ad56a",shape:"cupcake",points:24}
+];
+const trash=[
+  {name:"Lata",color:"#e44b4b",shape:"can"},
+  {name:"Garrafa",color:"#45a9d9",shape:"bottle"},
+  {name:"Papel",color:"#e8e4d8",shape:"paper"},
+  {name:"Saco",color:"#343b42",shape:"bag"},
+  {name:"Caixa",color:"#ad7a42",shape:"box"}
+];
+
+let basket={x:0,targetX:0,w:118,h:42};
+let particles=[];
+
+function setStatus(text,type=""){const el=$("status");el.textContent=text;el.className="status "+type}
+function coinsUI(){$("coins").textContent=Number(coins||0).toLocaleString("pt-BR")}
+function chancesUI(){$("chances").textContent="🎟️ "+Number(chances||0)}
+function hud(){
+  const p=phases[level-1];
+  $("score").textContent=score.toLocaleString("pt-BR");
+  $("level").textContent=level+" / 7";
+  $("time").textContent=Math.max(0,Math.ceil(timeLeft));
+  $("hearts").textContent=[0,1,2].map(i=>i<lives?"♥":"♡").join(" ");
+}
+function resize(){
+  const r=canvas.getBoundingClientRect();
+  const d=Math.min(window.devicePixelRatio||1,2);
+  canvas.width=Math.max(1,Math.floor(r.width*d));
+  canvas.height=Math.max(1,Math.floor(r.height*d));
+  ctx.setTransform(d,0,0,d,0,0);
+  basket.x=r.width/2;
+  basket.targetX=basket.x;
+}
+window.addEventListener("resize",resize);
+resize();
+
+function norm(s){return String(s||"").toLowerCase().normalize("NFD").replace(/[\\u0300-\\u036f]/g,"")}
+async function findUser(u){
+  let result=await getDocs(query(collection(db,"admins"),where("uid","==",u.uid)));
+  if(result.empty && u.email){
+    result=await getDocs(query(collection(db,"admins"),where("email","==",u.email.toLowerCase())));
+  }
+  if(result.empty)return null;
+  return result.docs[0].ref;
+}
+
+async function consumeEntryChance(){
+  const saved=sessionStorage.getItem(sessionEntryKey);
+  if(saved===user.uid){entryConsumed=true;return true}
+  await runTransaction(db,async tx=>{
+    const snap=await tx.get(userRef);
+    if(!snap.exists())throw new Error("Cadastro não encontrado.");
+    const available=Number(snap.data().chances||0);
+    if(available<=0)throw new Error("SEM_CHANCES");
+    tx.update(userRef,{chances:available-1});
+  });
+  chances=Math.max(0,chances-1);
+  sessionStorage.setItem(sessionEntryKey,user.uid);
+  entryConsumed=true;
+  chancesUI();
+  return true;
+}
+
+async function addCoins(amount,reason){
+  if(!userRef)return;
+  try{
+    await runTransaction(db,async tx=>{
+      const snap=await tx.get(userRef);
+      if(!snap.exists())throw new Error("Cadastro não encontrado.");
+      const old=Number(snap.data().moedas||0);
+      tx.update(userRef,{moedas:old+amount});
+    });
+    coins+=amount;coinsUI();
+  }catch(e){
+    console.warn("Não foi possível registrar moedas:",e);
+  }
+  try{
+    await addDoc(collection(db,"resultadosJogos"),{
+      uid:user.uid,jogoId:"frutas",moedasGanhos:amount,motivo:reason,rodada:level,
+      pontos:score,dataHora:new Date().toISOString(),criadoEm:serverTimestamp()
+    });
+  }catch(e){console.warn("Log opcional não gravado:",e)}
+}
+
+function drawBackground(w,h){
+  const g=ctx.createLinearGradient(0,0,0,h);
+  g.addColorStop(0,"#6dd2f2");g.addColorStop(.62,"#bcecf5");g.addColorStop(.621,"#72c76b");g.addColorStop(1,"#45a95a");
+  ctx.fillStyle=g;ctx.fillRect(0,0,w,h);
+  ctx.fillStyle="rgba(255,255,255,.72)";
+  [[w*.16,h*.13,34],[w*.72,h*.18,42],[w*.45,h*.08,25]].forEach(c=>{
+    ctx.beginPath();ctx.arc(c[0],c[1],c[2],0,Math.PI*2);ctx.fill();
+    ctx.beginPath();ctx.arc(c[0]+c[2]*.65,c[1]+3,c[2]*.72,0,Math.PI*2);ctx.fill();
+  });
+  ctx.fillStyle="#4cae61";ctx.fillRect(0,h*.78,w,h*.22);
+  ctx.fillStyle="#3e9654";
+  for(let x=0;x<w;x+=42){ctx.beginPath();ctx.arc(x,h*.79,25,Math.PI,0);ctx.fill()}
+  ctx.fillStyle="#d6ad68";ctx.fillRect(0,h*.91,w,h*.09);
+}
+
+function drawFood(x,y,s,f){
+  ctx.save();ctx.translate(x,y);ctx.scale(s,s);
+  ctx.lineWidth=3;ctx.strokeStyle="rgba(0,0,0,.22)";
+  if(f.shape==="apple"){
+    ctx.fillStyle=f.color;ctx.beginPath();ctx.arc(-8,0,15,0,Math.PI*2);ctx.arc(8,0,15,0,Math.PI*2);ctx.fill();ctx.stroke();
+    ctx.fillStyle=f.accent;ctx.beginPath();ctx.ellipse(8,-17,8,4,.5,0,Math.PI*2);ctx.fill();
+    ctx.strokeStyle="#6c4825";ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(0,-12);ctx.lineTo(3,-20);ctx.stroke();
+  }else if(f.shape==="banana"){
+    ctx.strokeStyle="#8a6422";ctx.lineWidth=9;ctx.lineCap="round";ctx.beginPath();ctx.arc(0,0,18,.25,2.55);ctx.stroke();
+    ctx.strokeStyle=f.color;ctx.lineWidth=13;ctx.beginPath();ctx.arc(0,0,18,.25,2.55);ctx.stroke();
+  }else if(f.shape==="strawberry"){
+    ctx.fillStyle=f.color;ctx.beginPath();ctx.moveTo(0,20);ctx.bezierCurveTo(-25,3,-20,-16,0,-10);ctx.bezierCurveTo(20,-16,25,3,0,20);ctx.fill();ctx.stroke();
+    ctx.fillStyle=f.accent;ctx.beginPath();ctx.moveTo(0,-8);ctx.lineTo(-14,-19);ctx.lineTo(-4,-18);ctx.lineTo(0,-28);ctx.lineTo(5,-18);ctx.lineTo(16,-20);ctx.closePath();ctx.fill();
+    ctx.fillStyle="#ffd96b";for(let i=-8;i<=8;i+=8){ctx.beginPath();ctx.ellipse(i,2,2,4,0,0,Math.PI*2);ctx.fill()}
+  }else if(f.shape==="watermelon"){
+    ctx.fillStyle=f.accent;ctx.beginPath();ctx.arc(0,0,22,0,Math.PI);ctx.lineTo(-22,0);ctx.closePath();ctx.fill();ctx.stroke();
+    ctx.fillStyle=f.color;ctx.beginPath();ctx.arc(0,0,18,0,Math.PI);ctx.lineTo(-18,0);ctx.closePath();ctx.fill();
+    ctx.fillStyle="#222";[-9,0,9].forEach(xx=>{ctx.beginPath();ctx.ellipse(xx,-7,2,4,0,0,Math.PI*2);ctx.fill()})
+  }else if(f.shape==="pizza"){
+    ctx.fillStyle=f.color;ctx.beginPath();ctx.moveTo(-22,-16);ctx.lineTo(23,0);ctx.lineTo(-7,22);ctx.closePath();ctx.fill();ctx.stroke();
+    ctx.fillStyle="#e3423f";[2,9,-5].forEach((xx,i)=>{ctx.beginPath();ctx.arc(xx,i*6-5,4,0,Math.PI*2);ctx.fill()})
+  }else if(f.shape==="burger"){
+    ctx.fillStyle="#d48a45";roundRect(-28,-20,56,16,7);ctx.fill();ctx.stroke();
+    ctx.fillStyle="#57b95f";ctx.fillRect(-25,-4,50,7);ctx.fillStyle="#f5c542";ctx.fillRect(-24,3,48,6);
+    ctx.fillStyle="#7c4328";roundRect(-24,9,48,14,6);ctx.fill();ctx.stroke();ctx.fillStyle="#c87b3b";roundRect(-28,22,56,9,4);ctx.fill();ctx.stroke();
+  }else if(f.shape==="donut"){
+    ctx.fillStyle=f.color;ctx.beginPath();ctx.arc(0,0,23,0,Math.PI*2);ctx.fill();ctx.stroke();
+    ctx.fillStyle="#f6d66a";ctx.beginPath();ctx.arc(0,0,8,0,Math.PI*2);ctx.fill();ctx.stroke();
+    ctx.strokeStyle=f.accent;ctx.lineWidth=3;[[-9,-7],[8,-8],[10,8],[-8,9]].forEach(p=>{ctx.beginPath();ctx.moveTo(p[0]-2,p[1]-2);ctx.lineTo(p[0]+2,p[1]+2);ctx.stroke()})
+  }else{
+    ctx.fillStyle=f.color;roundRect(-22,-18,44,38,8);ctx.fill();ctx.stroke();ctx.fillStyle=f.accent;ctx.beginPath();ctx.arc(0,-18,8,Math.PI,0);ctx.fill();ctx.stroke();
+  }
+  ctx.restore();
+}
+function drawTrash(x,y,s,t){
+  ctx.save();ctx.translate(x,y);ctx.scale(s,s);ctx.lineWidth=3;ctx.strokeStyle="rgba(0,0,0,.25)";
+  if(t.shape==="can"){ctx.fillStyle=t.color;roundRect(-12,-22,24,44,5);ctx.fill();ctx.stroke();ctx.fillStyle="#f4d45a";ctx.fillRect(-8,-7,16,5)}
+  else if(t.shape==="bottle"){ctx.fillStyle=t.color;roundRect(-12,-17,24,35,5);ctx.fill();ctx.stroke();ctx.fillRect(-6,-28,12,11)}
+  else if(t.shape==="paper"){ctx.fillStyle=t.color;ctx.beginPath();ctx.moveTo(-22,-15);ctx.lineTo(12,-22);ctx.lineTo(22,10);ctx.lineTo(-12,21);ctx.closePath();ctx.fill();ctx.stroke();ctx.beginPath();ctx.moveTo(-8,-8);ctx.lineTo(10,10);ctx.stroke()}
+  else if(t.shape==="bag"){ctx.fillStyle=t.color;ctx.beginPath();ctx.moveTo(-19,-16);ctx.quadraticCurveTo(0,-24,19,-16);ctx.lineTo(15,21);ctx.lineTo(-15,21);ctx.closePath();ctx.fill();ctx.stroke();ctx.strokeStyle="#666";ctx.beginPath();ctx.arc(0,-17,9,Math.PI,0);ctx.stroke()}
+  else{ctx.fillStyle=t.color;roundRect(-23,-19,46,39,5);ctx.fill();ctx.stroke();ctx.fillStyle="#7c542f";ctx.fillRect(-16,-26,32,8)}
+  ctx.restore();
+}
+function roundRect(x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
+
+function spawn(){
+  const p=phases[level-1],w=canvas.clientWidth;
+  const good=Math.random()<p.food;
+  const base=good?foods[Math.floor(Math.random()*foods.length)]:trash[Math.floor(Math.random()*trash.length)];
+  items.push({x:25+Math.random()*(w-50),y:-40,vy:p.speed*(.8+Math.random()*.55),size:.72+Math.random()*.25,good,data:base,rot:(Math.random()-.5),dead:false});
+}
+function burst(x,y,good){
+  for(let i=0;i<12;i++)particles.push({x,y,vx:(Math.random()-.5)*110,vy:-Math.random()*100-20,life:.55,color:good?"#ffe15c":"#ff6677"})
+}
+function drawBasket(w,h){
+  const x=basket.x,y=h-58;
+  ctx.save();ctx.translate(x,y);
+  ctx.fillStyle="#9c6738";roundRect(-basket.w/2,0,basket.w,basket.h,12);ctx.fill();
+  ctx.strokeStyle="#5e3c23";ctx.lineWidth=4;ctx.stroke();
+  ctx.strokeStyle="#d6a05c";ctx.lineWidth=5;ctx.beginPath();ctx.arc(0,7,43,Math.PI,0);ctx.stroke();
+  ctx.strokeStyle="rgba(255,255,255,.22)";ctx.lineWidth=2;for(let i=-50;i<=50;i+=13){ctx.beginPath();ctx.moveTo(i,3);ctx.lineTo(i+8,38);ctx.stroke()}
+  ctx.restore();
+}
+function update(dt){
+  if(paused||phaseFinished)return;
+  const w=canvas.clientWidth,h=canvas.clientHeight;
+  basket.x+=(basket.targetX-basket.x)*Math.min(1,dt*12);
+  spawnTimer+=dt*1000;
+  if(spawnTimer>=phases[level-1].spawn){spawnTimer=0;spawn()}
+  for(const it of items){
+    it.y+=it.vy*dt;
+    if(it.y>h-83&&!it.dead){
+      if(Math.abs(it.x-basket.x)<basket.w*.55){
+        it.dead=true;burst(it.x,it.y,it.good);
+        if(it.good)score+=it.data.points;
+        else{lives--;setStatus("Cuidado! Você pegou lixo.","err");}
+      }
+    }
+    if(it.y>h+50)it.dead=true;
+  }
+  items=items.filter(x=>!x.dead);
+  for(const p of particles){p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=160*dt;p.life-=dt}
+  particles=particles.filter(p=>p.life>0);
+  timeLeft-=dt;
+  hud();
+  if(lives<=0){endPhase(false,"Você perdeu todas as vidas.");return}
+  if(score>=phases[level-1].need){endPhase(true,"Meta da fase alcançada!");return}
+  if(timeLeft<=0){endPhase(score>=phases[level-1].need,true?"Meta alcançada!":"O tempo acabou.");}
+}
+function render(){
+  const w=canvas.clientWidth,h=canvas.clientHeight;drawBackground(w,h);
+  ctx.fillStyle="rgba(255,255,255,.22)";for(let i=0;i<22;i++){const x=(i*83+(performance.now()/25)%90)%w;const y=(i*53)%Math.max(1,h*.7);ctx.fillRect(x,y,2,12)}
+  for(const it of items){if(it.good)drawFood(it.x,it.y,it.size,it.data);else drawTrash(it.x,it.y,it.size,it.data)}
+  for(const p of particles){ctx.globalAlpha=Math.max(0,p.life/.55);ctx.fillStyle=p.color;ctx.beginPath();ctx.arc(p.x,p.y,4,0,Math.PI*2);ctx.fill()}ctx.globalAlpha=1;
+  drawBasket(w,h);
+}
+function loop(t){const dt=Math.min(.04,(t-lastTime)/1000||0);lastTime=t;update(dt);render();raf=requestAnimationFrame(loop)}
+function resetPhase(){
+  const p=phases[level-1];score=0;lives=3;timeLeft=p.time;items=[];particles=[];spawnTimer=0;phaseFinished=false;paused=false;
+  $("pauseBtn").textContent="Ⅱ";setStatus("Pegue comidas e evite o lixo.","ok");hud();
+}
+function showModal(icon,title,text,reward,primary,secondary){
+  $("modalIcon").textContent=icon;$("modalTitle").textContent=title;$("modalText").textContent=text;$("modalReward").textContent=reward;
+  $("modalPrimary").textContent=primary;$("modalSecondary").textContent=secondary;$("modal").classList.add("show");
+}
+function hideModal(){$("modal").classList.remove("show")}
+async function endPhase(win,text){
+  if(phaseFinished)return;phaseFinished=true;paused=true;
+  const reward=win?phases[level-1].reward:10;
+  if(win)await addCoins(reward,level===7?"fase_7":"fase_"+level);
+  if(win && level<7){
+    showModal("★","Fase concluída!",text+" Prepare-se para a próxima.",`+${reward} Adam Coins`,"PRÓXIMA FASE","SAIR");
+  }else if(win){
+    showModal("★","VOCÊ VENCEU!", "Parabéns! Você concluiu as 7 fases do Chuva de Sabores.",`+${reward} Adam Coins`,"JOGAR NOVAMENTE","SAIR");
+  }else{
+    showModal("×","Fim de jogo",text,`+${reward} Adam Coins`,"TENTAR NOVAMENTE","SAIR");
+  }
+}
+$("modalPrimary").onclick=()=>{
+  hideModal();
+  if(lives<=0){level=1;resetPhase();return}
+  if(level>=7){level=1;resetPhase();return}
+  level++;resetPhase();
+};
+$("modalSecondary").onclick=()=>location.href="jogos.html";
+$("restartBtn").onclick=()=>{if(gameStarted){resetPhase()}};
+$("pauseBtn").onclick=()=>{
+  if(!gameStarted||phaseFinished)return;
+  paused=!paused;$("pauseBtn").textContent=paused?"▶":"Ⅱ";
+  setStatus(paused?"Jogo pausado.":"Jogo retomado.",paused?"warn":"ok");
+};
+$("soundBtn").onclick=()=>{soundOn=!soundOn;$("soundBtn").textContent=soundOn?"🔊 SOM":"🔇 SOM"};
+$("back").onclick=()=>location.href="jogos.html";
+canvas.addEventListener("pointermove",e=>{
+  if(!gameStarted)return;const r=canvas.getBoundingClientRect();basket.targetX=Math.max(65,Math.min(r.width-65,e.clientX-r.left));
+});
+canvas.addEventListener("pointerdown",e=>{
+  const r=canvas.getBoundingClientRect();basket.targetX=Math.max(65,Math.min(r.width-65,e.clientX-r.left));
+});
+window.addEventListener("keydown",e=>{
+  if(e.key==="ArrowLeft")basket.targetX-=55;
+  if(e.key==="ArrowRight")basket.targetX+=55;
+  basket.targetX=Math.max(65,Math.min(canvas.clientWidth-65,basket.targetX));
+  if(e.key===" "){e.preventDefault();$("pauseBtn").click()}
+});
+
+function failLoading(msg){
+  $("spinner").style.display="none";$("loadText").textContent="O jogo não conseguiu conectar ao Adam Games.";
+  $("loadError").style.display="block";$("loadError").textContent=msg;
+  $("retryBtn").style.display="block";
+}
+$("retryBtn").onclick=()=>location.reload();
+
+let authTimer=setTimeout(()=>{
+  if(!firebaseReady)failLoading("A conexão demorou demais. Isso evita a tela de carregamento infinita.");
+},8000);
+
+onAuthStateChanged(auth,async u=>{
+  if(!u){clearTimeout(authTimer);location.replace("index.html");return}
+  user=u;
+  try{
+    $("loadText").textContent="Carregando seu perfil...";
+    userRef=await findUser(u);
+    if(!userRef)throw new Error("Cadastro Adam Games não encontrado.");
+    const snap=await getDoc(userRef);
+    coins=Number(snap.data()?.moedas||0);chances=Number(snap.data()?.chances||0);
+    coinsUI();chancesUI();
+    firebaseReady=true;clearTimeout(authTimer);
+    try{
+      await consumeEntryChance();
+    }catch(e){
+      if(e.message==="SEM_CHANCES")throw new Error("Você não possui chances para jogar agora.");
+      throw e;
+    }
+    gameStarted=true;resetPhase();setStatus("Jogo pronto! Pegue as comidas e evite o lixo.","ok");
+    $("loading").style.display="none";
+    requestAnimationFrame(loop);
+  }catch(e){
+    clearTimeout(authTimer);console.error(e);
+    failLoading(e.message||"Erro ao carregar o perfil.");
+  }
+});
+</script>
+</body>
+</html>
