@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>Adam Games - Chuva de Sabores</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;min-height:100%;overflow:hidden}
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  color:#fff;
+  background:
+    radial-gradient(circle at 20% 0%,rgba(0,190,140,.30),transparent 35%),
+    radial-gradient(circle at 90% 0%,rgba(20,145,255,.30),transparent 35%),
+    linear-gradient(180deg,#062a48,#031a2d);
+}
+button{font-family:inherit}
+#app{width:100%;height:100dvh;display:flex;justify-content:center}
+.page{width:min(100%,760px);height:100%;padding:10px 12px 14px;display:flex;flex-direction:column;gap:8px}
+.top{height:48px;display:flex;align-items:center;justify-content:space-between;flex:0 0 auto}
+.back,.round-btn{
+  width:44px;height:44px;border:0;border-radius:13px;background:rgba(0,35,60,.9);
+  color:#fff;font-size:25px;font-weight:900;cursor:pointer
+}
+.title{text-align:center}.title small{display:block;color:#91b8d0;font-size:8px;letter-spacing:2px}.title strong{display:block;font-size:19px}
+.wallet{min-width:96px;padding:6px 8px;border-radius:13px;text-align:center;background:rgba(255,211,44,.08);border:1px solid rgba(255,211,44,.15)}
+.wallet .label{font-size:7px;color:#9bb7c9;font-weight:800}.wallet .coins{color:#ffd52b;font-size:16px;font-weight:900}.wallet .chances{color:#ffcc45;font-size:9px;font-weight:900}
+.status{
+  min-height:30px;padding:7px 10px;border-radius:11px;text-align:center;font-size:10px;font-weight:800;
+  background:rgba(255,255,255,.06);color:#b8d1e2;border:1px solid rgba(255,255,255,.08);flex:0 0 auto
+}
+.status.ok{color:#78ffb0}.status.err{color:#ff9eaa}.status.warn{color:#ffd76a}
+.hud{
+  display:grid;grid-template-columns:1fr 1fr 1fr 1.15fr 44px;gap:6px;flex:0 0 auto
+}
+.box{padding:7px 5px;border-radius:11px;text-align:center;background:rgba(2,27,48,.88);border:1px solid rgba(255,255,255,.07)}
+.box small{display:block;color:#8faec1;font-size:7px;font-weight:900}.box b{display:block;margin-top:2px;font-size:14px}
+#hearts{letter-spacing:1px;color:#ff5668;font-size:14px}
+#pauseBtn{border:0;border-radius:11px;background:#0877aa;color:#fff;font-size:18px;font-weight:900;cursor:pointer}
+.game-card{
+  position:relative;flex:1;min-height:0;border-radius:20px;overflow:hidden;
+  background:#75c9ed;border:1px solid rgba(255,255,255,.12);box-shadow:0 18px 50px rgba(0,0,0,.28)
+}
+canvas{display:block;width:100%;height:100%;touch-action:none}
+.bottom{display:flex;gap:7px;flex:0 0 auto}
+.action{
+  flex:1;height:45px;border:0;border-radius:13px;background:linear-gradient(135deg,#18b969,#087e4b);
+  color:#fff;font-size:12px;font-weight:900;cursor:pointer
+}
+.action.secondary{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1)}
+#loading{
+  position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(180deg,#062b49,#031a2d);padding:20px
+}
+.loadbox{width:min(390px,100%);padding:28px 20px;border-radius:24px;text-align:center;background:#082945;border:1px solid rgba(255,255,255,.12)}
+.spinner{width:42px;height:42px;margin:0 auto 13px;border:4px solid rgba(255,255,255,.15);border-top-color:#2ddc8a;border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loadbox h2{font-size:23px}.loadbox p{margin-top:8px;color:#aac7d9;font-size:12px;line-height:1.45}
+#loadError{display:none;margin-top:14px;color:#ffacb5;font-size:11px}
+#retryBtn{display:none;width:100%;height:44px;margin-top:14px;border:0;border-radius:12px;background:#159d5c;color:#fff;font-weight:900}
+.modal{
+ position:fixed;inset:0;z-index:10000;display:none;align-items:center;justify-content:center;padding:18px;
+ background:rgba(0,8,18,.82);backdrop-filter:blur(5px)
+}
+.modal.show{display:flex}
+.modal-card{width:min(400px,100%);padding:25px 20px;border-radius:23px;text-align:center;background:#082945;border:1px solid rgba(255,255,255,.12);box-shadow:0 25px 70px rgba(0,0,0,.5)}
+.modal-icon{font-size:48px}.modal-card h2{margin-top:7px;font-size:25px}.modal-card p{margin-top:9px;color:#b8d3e3;font-size:13px;line-height:1.5}
+.modal-reward{margin-top:12px;color:#ffd52b;font-size:20px;font-weight:900}
+.modal-actions{display:grid;gap:9px;margin-top:18px}
+.modal-actions button{height:47px;border:0;border-radius:13px;color:#fff;font-weight:900;cursor:pointer;background:#16a45f}
+.modal-actions .alt{background:rgba(255,255,255,.08)}
+@media(max-height:650px){
+ .page{gap:5px;padding-top:6px}.top{height:42px}.back,.round-btn{height:38px;width:38px}
+ .hud .box{padding:5px}.box b{font-size:12px}.status{min-height:26px;padding:5px}
+ .bottom .action{height:40px}
+}
+</style>
+</head>
+<body>
+<div id="loading">
+  <div class="loadbox">
+    <div class="spinner" id="spinner"></div>
+    <h2 id="loadTitle">Chuva de Sabores</h2>
+    <p id="loadText">Preparando o jogo...</p>
+    <div id="loadError"></div>
+    <button id="retryBtn">TENTAR NOVAMENTE</button>
+  </div>
+</div>
+
+<div id="app">
+<div class="page">
+  <div class="top">
+    <button class="back" id="back" type="button">←</button>
+    <div class="title"><small>ADAM GAMES</small><strong>CHUVA DE SABORES</strong></div>
+    <div class="wallet"><div class="label">ADAM COINS</div><div class="coins" id="coins">0</div><div class="chances" id="chances">🎟️ 0</div></div>
+  </div>
+
+  <div class="status" id="status">Conectando ao jogo...</div>
+
+  <div class="hud">
+    <div class="box"><small>PONTOS</small><b id="score">0</b></div>
+    <div class="box"><small>FASE</small><b id="level">1 / 9</b></div>
+    <div class="box"><small>TEMPO</small><b id="time">30</b></div>
+    <div class="box"><small>VIDAS</small><b id="hearts">♥ ♥ ♥</b></div>
+    <button id="pauseBtn" type="button">Ⅱ</button>
+  </div>
+
+  <div class="game-card"><canvas id="game"></canvas></div>
+
+  <div class="bottom">
+    <button class="action secondary" id="restartBtn" type="button">↻ RECOMEÇAR FASE</button>
+    <button class="action" id="soundBtn" type="button">🔊 SOM</button>
+  </div>
+</div>
+</div>
+
+<div class="modal" id="modal">
+  <div class="modal-card">
+    <div class="modal-icon" id="modalIcon">🍎</div>
+    <h2 id="modalTitle">Você venceu!</h2>
+    <p id="modalText"></p>
+    <div class="modal-reward" id="modalReward"></div>
+    <div class="modal-actions">
+      <button id="modalPrimary" type="button">CONTINUAR</button>
+      <button class="alt" id="modalSecondary" type="button">SAIR</button>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+import { getFirestore, collection, query, where, getDocs, getDoc, runTransaction, doc, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+const firebaseConfig={
+  apiKey:"AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",
+  authDomain:"adam-games-21081.firebaseapp.com",
+  projectId:"adam-games-21081",
+  storageBucket:"adam-games-21081.firebasestorage.app",
+  messagingSenderId:"1055528418738",
+  appId:"1:1055528418738:web:5fafdf63424ba9744eb8ab"
+};
+
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getFirestore(app);
+
+const $=id=>document.getElementById(id);
+const canvas=$("game"),ctx=canvas.getContext("2d");
+let user=null,userRef=null,coins=0,chances=0;
+let firebaseReady=false,gameStarted=false,paused=false,soundOn=true;
+let level=1,score=0,lives=3,timeLeft=45,items=[],lastTime=0,spawnTimer=0,raf=0;
+let phaseFinished=false,sessionEntryKey="adam_games_chuva_entry_v3";
+let entryConsumed=false;
+
+const phases=[
+ {time:45,need:20,speed:58,spawn:1350,food:.90,reward:20,maxItems:5},
+ {time:45,need:25,speed:65,spawn:1250,food:.88,reward:25,maxItems:5},
+ {time:50,need:30,speed:72,spawn:1150,food:.86,reward:30,maxItems:5},
+ {time:50,need:35,speed:92,spawn:900,food:.80,reward:40,maxItems:7},
+ {time:55,need:40,speed:105,spawn:820,food:.77,reward:50,maxItems:8},
+ {time:60,need:45,speed:125,spawn:720,food:.72,reward:65,maxItems:9},
+ {time:65,need:50,speed:145,spawn:650,food:.68,reward:80,maxItems:10},
+ {time:70,need:50,speed:165,spawn:600,food:.65,reward:100,maxItems:10},
+ {time:90,need:80,speed:180,spawn:560,food:.63,reward:0,maxItems:11}
+];
+
+const foods=[
+ {name:"Maçã",emoji:"🍎",points:10},{name:"Banana",emoji:"🍌",points:12},
+ {name:"Morango",emoji:"🍓",points:14},{name:"Melancia",emoji:"🍉",points:15},
+ {name:"Laranja",emoji:"🍊",points:16},{name:"Uva",emoji:"🍇",points:18},
+ {name:"Pizza",emoji:"🍕",points:20},{name:"Hambúrguer",emoji:"🍔",points:22},
+ {name:"Donut",emoji:"🍩",points:24},{name:"Cupcake",emoji:"🧁",points:26}
+];
+const trash=[
+ {name:"Lata",emoji:"🥫"},{name:"Garrafa",emoji:"🧴"},{name:"Papel",emoji:"🧻"},
+ {name:"Saco",emoji:"🛍️"},{name:"Caixa",emoji:"📦"},{name:"Lixo",emoji:"🗑️"}
+];
+
+let basket={x:0,targetX:0,w:118,h:42};
+let particles=[];
+
+function setStatus(text,type=""){const el=$("status");el.textContent=text;el.className="status "+type}
+function coinsUI(){$("coins").textContent=Number(coins||0).toLocaleString("pt-BR")}
+function chancesUI(){$("chances").textContent="🎟️ "+Number(chances||0)}
+function hud(){
+  const p=phases[level-1];
+  $("score").textContent=score.toLocaleString("pt-BR");
+  $("level").textContent=level+" / 9";
+  $("time").textContent=Math.max(0,Math.ceil(timeLeft));
+  $("hearts").textContent=[0,1,2].map(i=>i<lives?"♥":"♡").join(" ");
+}
+function resize(){
+  const r=canvas.getBoundingClientRect();
+  const d=Math.min(window.devicePixelRatio||1,2);
+  canvas.width=Math.max(1,Math.floor(r.width*d));
+  canvas.height=Math.max(1,Math.floor(r.height*d));
+  ctx.setTransform(d,0,0,d,0,0);
+  basket.x=r.width/2;
+  basket.targetX=basket.x;
+}
+window.addEventListener("resize",resize);
+resize();
+
+function norm(s){return String(s||"").toLowerCase().normalize("NFD").replace(/[\\u0300-\\u036f]/g,"")}
+async function findUser(u){
+  let result=await getDocs(query(collection(db,"admins"),where("uid","==",u.uid)));
+  if(result.empty && u.email){
+    result=await getDocs(query(collection(db,"admins"),where("email","==",u.email.toLowerCase())));
+  }
+  if(result.empty)return null;
+  return result.docs[0].ref;
+}
+
+async function consumeEntryChance(){
+  const saved=sessionStorage.getItem(sessionEntryKey);
+  if(saved===user.uid){entryConsumed=true;return false}
+  await runTransaction(db,async tx=>{
+    const snap=await tx.get(userRef);
+    if(!snap.exists())throw new Error("Cadastro não encontrado.");
+    const available=Number(snap.data().chances||0);
+    if(available<=0)throw new Error("SEM_CHANCES");
+    tx.update(userRef,{chances:available-1});
+  });
+  chances=Math.max(0,chances-1);
+  sessionStorage.setItem(sessionEntryKey,user.uid);
+  entryConsumed=true;
+  chancesUI();
+  return true;
+}
+
+async function addCoins(amount,reason){
+  if(!userRef)return;
+  try{
+    await runTransaction(db,async tx=>{
+      const snap=await tx.get(userRef);
+      if(!snap.exists())throw new Error("Cadastro não encontrado.");
+      const old=Number(snap.data().moedas||0);
+      tx.update(userRef,{moedas:old+amount});
+    });
+    coins+=amount;coinsUI();
+  }catch(e){
+    console.warn("Não foi possível registrar moedas:",e);
+  }
+  try{
+    await addDoc(collection(db,"resultadosJogos"),{
+      uid:user.uid,jogoId:"frutas",moedasGanhos:amount,motivo:reason,rodada:level,
+      pontos:score,dataHora:new Date().toISOString(),criadoEm:serverTimestamp()
+    });
+  }catch(e){console.warn("Log opcional não gravado:",e)}
+}
+
+function drawBackground(w,h){
+  const g=ctx.createLinearGradient(0,0,0,h);
+  g.addColorStop(0,"#6dd2f2");g.addColorStop(.62,"#bcecf5");g.addColorStop(.621,"#72c76b");g.addColorStop(1,"#45a95a");
+  ctx.fillStyle=g;ctx.fillRect(0,0,w,h);
+  ctx.fillStyle="rgba(255,255,255,.72)";
+  [[w*.16,h*.13,34],[w*.72,h*.18,42],[w*.45,h*.08,25]].forEach(c=>{
+    ctx.beginPath();ctx.arc(c[0],c[1],c[2],0,Math.PI*2);ctx.fill();
+    ctx.beginPath();ctx.arc(c[0]+c[2]*.65,c[1]+3,c[2]*.72,0,Math.PI*2);ctx.fill();
+  });
+  ctx.fillStyle="#4cae61";ctx.fillRect(0,h*.78,w,h*.22);
+  ctx.fillStyle="#3e9654";
+  for(let x=0;x<w;x+=42){ctx.beginPath();ctx.arc(x,h*.79,25,Math.PI,0);ctx.fill()}
+  ctx.fillStyle="#d6ad68";ctx.fillRect(0,h*.91,w,h*.09);
+}
+
+function drawEmoji(x,y,s,data){
+ ctx.save();ctx.translate(x,y);
+ const size=Math.round(46*s);
+ ctx.font=`${size}px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif`;
+ ctx.textAlign="center";ctx.textBaseline="middle";
+ ctx.shadowColor="rgba(0,0,0,.25)";ctx.shadowBlur=5;
+ ctx.fillText(data.emoji,0,0);ctx.restore();
+}
+function spawn(){
+ const p=phases[level-1],w=canvas.clientWidth;
+ if(items.length>=p.maxItems)return;
+ const good=Math.random()<p.food;
+ const base=good?foods[Math.floor(Math.random()*foods.length)]:trash[Math.floor(Math.random()*trash.length)];
+ items.push({x:30+Math.random()*(w-60),y:-45,vy:p.speed*(.82+Math.random()*.28),
+ size:.82+Math.random()*.16,good,data:base,dead:false});
+}
+function burst(x,y,good){
+  for(let i=0;i<12;i++)particles.push({x,y,vx:(Math.random()-.5)*110,vy:-Math.random()*100-20,life:.55,color:good?"#ffe15c":"#ff6677"})
+}
+function drawBasket(w,h){
+ const x=basket.x,y=h-62;ctx.save();ctx.translate(x,y);
+ const g=ctx.createLinearGradient(0,0,0,50);
+ g.addColorStop(0,"#f3b968");g.addColorStop(.5,"#c87936");g.addColorStop(1,"#783d22");
+ ctx.fillStyle=g;ctx.beginPath();ctx.moveTo(-basket.w/2,3);
+ ctx.quadraticCurveTo(-basket.w*.43,48,0,51);
+ ctx.quadraticCurveTo(basket.w*.43,48,basket.w/2,3);
+ ctx.quadraticCurveTo(0,15,-basket.w/2,3);ctx.closePath();ctx.fill();
+ ctx.strokeStyle="#60341f";ctx.lineWidth=4;ctx.stroke();
+ ctx.fillStyle="#efaa57";ctx.beginPath();ctx.ellipse(0,5,basket.w/2+3,12,0,0,Math.PI*2);ctx.fill();
+ ctx.strokeStyle="#62341f";ctx.lineWidth=3;ctx.stroke();
+ ctx.fillStyle="#63351f";ctx.beginPath();ctx.ellipse(0,5,basket.w/2-9,7,0,0,Math.PI*2);ctx.fill();
+ ctx.strokeStyle="#8a4a25";ctx.lineWidth=7;
+ ctx.beginPath();ctx.arc(-basket.w/2+5,2,14,Math.PI/2,Math.PI*1.55);ctx.stroke();
+ ctx.beginPath();ctx.arc(basket.w/2-5,2,14,-.55,Math.PI/2);ctx.stroke();
+ ctx.restore();
+}
+function update(dt){
+  if(paused||phaseFinished)return;
+  const w=canvas.clientWidth,h=canvas.clientHeight;
+  basket.x+=(basket.targetX-basket.x)*Math.min(1,dt*12);
+  spawnTimer+=dt*1000;
+  if(spawnTimer>=phases[level-1].spawn){spawnTimer=0;spawn()}
+  for(const it of items){
+    it.y+=it.vy*dt;
+    if(it.y>h-83&&!it.dead){
+      if(Math.abs(it.x-basket.x)<basket.w*.55){
+        it.dead=true;burst(it.x,it.y,it.good);
+        if(it.good)score+=it.data.points;
+        else{lives--;setStatus("Cuidado! Você pegou lixo.","err");}
+      }
+    }
+    if(it.y>h+50)it.dead=true;
+  }
+  items=items.filter(x=>!x.dead);
+  for(const p of particles){p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=160*dt;p.life-=dt}
+  particles=particles.filter(p=>p.life>0);
+  timeLeft-=dt;
+  hud();
+  if(lives<=0){endPhase(false,"Você perdeu todas as vidas.");return}
+  if(score>=phases[level-1].need){endPhase(true,"Meta da fase alcançada!");return}
+  if(timeLeft<=0){endPhase(score>=phases[level-1].need,true?"Meta alcançada!":"O tempo acabou.");}
+}
+function render(){
+  const w=canvas.clientWidth,h=canvas.clientHeight;drawBackground(w,h);
+  ctx.fillStyle="rgba(255,255,255,.22)";for(let i=0;i<22;i++){const x=(i*83+(performance.now()/25)%90)%w;const y=(i*53)%Math.max(1,h*.7);ctx.fillRect(x,y,2,12)}
+  for(const it of items){drawEmoji(it.x,it.y,it.size,it.data)}
+  for(const p of particles){ctx.globalAlpha=Math.max(0,p.life/.55);ctx.fillStyle=p.color;ctx.beginPath();ctx.arc(p.x,p.y,4,0,Math.PI*2);ctx.fill()}ctx.globalAlpha=1;
+  drawBasket(w,h);
+}
+function loop(t){const dt=Math.min(.04,(t-lastTime)/1000||0);lastTime=t;update(dt);render();raf=requestAnimationFrame(loop)}
+function resetPhase(){
+  const p=phases[level-1];score=0;lives=3;timeLeft=p.time;items=[];particles=[];spawnTimer=0;phaseFinished=false;paused=false;
+  $("pauseBtn").textContent="Ⅱ";setStatus("Pegue comidas e evite o lixo.","ok");hud();
+}
+function showModal(icon,title,text,reward,primary,secondary){
+  $("modalIcon").textContent=icon;$("modalTitle").textContent=title;$("modalText").textContent=text;$("modalReward").textContent=reward;
+  $("modalPrimary").textContent=primary;$("modalSecondary").textContent=secondary;$("modal").classList.add("show");
+}
+function hideModal(){$("modal").classList.remove("show")}
+async function endPhase(win,text){
+ if(phaseFinished)return;phaseFinished=true;paused=true;
+ if(win){
+  if(level===9){
+   const reward=score>=80?200:(score>=60?150:(score>=40?100:0));
+   if(reward)await addCoins(reward,"fase_9");
+   showModal("🏆","VOCÊ VENCEU!","Você concluiu a fase 9.",reward?`+${reward} Adam Coins`:"Meta concluída","JOGAR NOVAMENTE","SAIR");
+   return;
+  }
+  const reward=phases[level-1].reward;await addCoins(reward,`fase_${level}`);
+  showModal("🎉","Fase concluída!",`${text} Você pegou ${score} itens.`,`+${reward} Adam Coins`,"PRÓXIMA FASE","SAIR");
+ }else{
+  showModal("💔","Você perdeu!",`Você pegou ${score} itens. Continue para o próximo nível.`,"Continuar: -1 chance +30 Adam Coins","CONTINUAR","SAIR");
+ }
+}
+$("modalPrimary").onclick=async()=>{
+ hideModal();
+ if(phaseFinished && lives<=0){
+  if(chances<=0){
+   showModal("🎟️","Sem chances!","Você não possui chances para continuar.","","VOLTAR","SAIR");
+   $("modalPrimary").onclick=()=>location.href="jogos.html";
+   $("modalSecondary").onclick=()=>location.href="jogos.html";return;
+  }
+  try{
+   await runTransaction(db,async tx=>{
+    const snap=await tx.get(userRef);if(!snap.exists())throw new Error("Cadastro não encontrado.");
+    const available=Number(snap.data().chances||0);if(available<=0)throw new Error("SEM_CHANCES");
+    tx.update(userRef,{chances:available-1});
+   });
+   chances=Math.max(0,chances-1);chancesUI();await addCoins(30,"continuar_apos_derrota");
+  }catch(e){location.reload();return}
+  if(level<9)level++;else level=1;resetPhase();return;
+ }
+ if(level<9){level++;resetPhase()}else{level=1;resetPhase()}
+};
+$("modalSecondary").onclick=()=>location.href="jogos.html";
+$("restartBtn").onclick=()=>{if(gameStarted){resetPhase()}};
+$("pauseBtn").onclick=()=>{
+  if(!gameStarted||phaseFinished)return;
+  paused=!paused;$("pauseBtn").textContent=paused?"▶":"Ⅱ";
+  setStatus(paused?"Jogo pausado.":"Jogo retomado.",paused?"warn":"ok");
+};
+$("soundBtn").onclick=()=>{soundOn=!soundOn;$("soundBtn").textContent=soundOn?"🔊 SOM":"🔇 SOM"};
+$("back").onclick=()=>location.href="jogos.html";
+canvas.addEventListener("pointermove",e=>{
+  if(!gameStarted)return;const r=canvas.getBoundingClientRect();basket.targetX=Math.max(65,Math.min(r.width-65,e.clientX-r.left));
+});
+canvas.addEventListener("pointerdown",e=>{
+  const r=canvas.getBoundingClientRect();basket.targetX=Math.max(65,Math.min(r.width-65,e.clientX-r.left));
+});
+window.addEventListener("keydown",e=>{
+  if(e.key==="ArrowLeft")basket.targetX-=55;
+  if(e.key==="ArrowRight")basket.targetX+=55;
+  basket.targetX=Math.max(65,Math.min(canvas.clientWidth-65,basket.targetX));
+  if(e.key===" "){e.preventDefault();$("pauseBtn").click()}
+});
+
+function failLoading(msg){
+  $("spinner").style.display="none";$("loadText").textContent="O jogo não conseguiu conectar ao Adam Games.";
+  $("loadError").style.display="block";$("loadError").textContent=msg;
+  $("retryBtn").style.display="block";
+}
+$("retryBtn").onclick=()=>location.reload();
+
+let authTimer=setTimeout(()=>{
+  if(!firebaseReady)failLoading("A conexão demorou demais. Isso evita a tela de carregamento infinita.");
+},8000);
+
+onAuthStateChanged(auth,async u=>{
+  if(!u){clearTimeout(authTimer);location.replace("index.html");return}
+  user=u;
+  try{
+    $("loadText").textContent="Carregando seu perfil...";
+    userRef=await findUser(u);
+    if(!userRef)throw new Error("Cadastro Adam Games não encontrado.");
+    const snap=await getDoc(userRef);
+    coins=Number(snap.data()?.moedas||0);chances=Number(snap.data()?.chances||0);
+    coinsUI();chancesUI();
+    firebaseReady=true;clearTimeout(authTimer);
+    try{
+      const firstEntry=await consumeEntryChance();
+      if(firstEntry)await addCoins(30,"entrada_jogo");
+    }catch(e){
+      if(e.message==="SEM_CHANCES")throw new Error("Você não possui chances para jogar agora.");
+      throw e;
+    }
+    gameStarted=true;resetPhase();setStatus("Jogo pronto! Pegue as comidas e evite o lixo.","ok");
+    $("loading").style.display="none";
+    requestAnimationFrame(loop);
+  }catch(e){
+    clearTimeout(authTimer);console.error(e);
+    failLoading(e.message||"Erro ao carregar o perfil.");
+  }
+});
+</script>
+</body>
+</html>
