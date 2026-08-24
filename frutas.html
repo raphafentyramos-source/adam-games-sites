@@ -567,41 +567,74 @@ async function addCoins(amount,motivo){
 }
 
 async function consumirChanceEReceber30(motivo){
-  if(!userRef||!usuario){
-    toast("⚠️ Conta não carregada. Tente novamente.");
+  if(!userRef || !usuario){
+    toast("⚠️ Usuário não encontrado.");
     return false;
   }
-  const chances=num(usuario.chances);
-  if(chances<=0){
-    toast("❌ Você não tem chances.");
-    return false;
-  }
+
   try{
-    await userRef.update({
-      chances:chances-1,
-      moedas:num(usuario.moedas)+30
+    let resultado=null;
+
+    await db.runTransaction(async tx=>{
+      const snap=await tx.get(userRef);
+
+      if(!snap.exists){
+        throw new Error("Cadastro não encontrado.");
+      }
+
+      const data=snap.data()||{};
+      const chances=Number(data.chances||0);
+      const moedas=Number(data.moedas||0);
+
+      if(chances<=0){
+        throw new Error("SEM_CHANCES");
+      }
+
+      resultado={
+        chances:chances-1,
+        moedas:moedas+30,
+        saldoAnterior:moedas
+      };
+
+      tx.update(userRef,{
+        chances:chances-1,
+        moedas:moedas+30,
+        ultimaPartidaChuvaId:motivo+"_"+Date.now()+"_"+Math.random().toString(36).slice(2),
+        ultimaPartidaChuvaEm:firebase.firestore.FieldValue.serverTimestamp()
+      });
     });
-    usuario.chances=chances-1;
-    usuario.moedas=num(usuario.moedas)+30;
-    if(db){
-      try{
-        await db.collection("historico").add({
-          usuarioUid:usuario.uid||"",
-          usuarioId:userRef.id,
-          item:"moedas",
-          operacao:"adicionar",
-          quantidade:30,
-          saldoAnterior:num(usuario.moedas)-30,
-          saldoFinal:num(usuario.moedas),
-          motivo,
-          criadoEm:new Date().toISOString()
-        });
-      }catch(e){console.warn("Histórico:",e)}
+
+    usuario.chances=resultado.chances;
+    usuario.moedas=resultado.moedas;
+
+    // O histórico não pode impedir a partida.
+    try{
+      await db.collection("historico").add({
+        usuarioUid:usuario.uid||"",
+        usuarioId:userRef.id,
+        item:"moedas",
+        operacao:"adicionar",
+        quantidade:30,
+        saldoAnterior:resultado.saldoAnterior,
+        saldoFinal:resultado.moedas,
+        motivo,
+        criadoEm:new Date().toISOString()
+      });
+    }catch(e){
+      console.warn("Histórico não gravado:",e);
     }
+
     return true;
+
   }catch(e){
-    console.error(e);
-    toast("⚠️ Não foi possível usar a chance.");
+    console.error("Erro ao consumir chance Chuva de Sabores:",e);
+
+    if(e.message==="SEM_CHANCES"){
+      toast("❌ Você não possui chances.");
+      return false;
+    }
+
+    toast("⚠️ Não foi possível usar a chance. Tente novamente.");
     return false;
   }
 }
@@ -734,13 +767,19 @@ if(firebaseOK && auth){
     }
 
     usuario=u;
-    userRef=null;
 
     try{
       let resultado=await db.collection("admins")
         .where("uid","==",u.uid)
         .limit(1)
         .get();
+
+      if(resultado.empty && u.email){
+        resultado=await db.collection("admins")
+          .where("email","==",u.email)
+          .limit(1)
+          .get();
+      }
 
       if(resultado.empty && u.email){
         resultado=await db.collection("admins")
@@ -753,11 +792,14 @@ if(firebaseOK && auth){
         userRef=resultado.docs[0].ref;
         usuario={...u,...resultado.docs[0].data()};
       }else{
-        toast("⚠️ Cadastro do jogador não encontrado.");
+        userRef=null;
+        toast("⚠️ Cadastro Adam Games não encontrado.");
       }
+
     }catch(e){
-      console.error("Perfil:",e);
-      toast("⚠️ Não foi possível carregar o perfil.");
+      console.error("Erro ao localizar cadastro:",e);
+      userRef=null;
+      toast("⚠️ Não foi possível carregar seus dados.");
     }
   });
 }else{
