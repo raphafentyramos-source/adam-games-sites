@@ -6,20 +6,21 @@
 <title>Adam Games • Senha</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{min-height:100%;background:#061b2d}
+html,body{min-height:100%;background:#031c2e}
 body{
   font-family:Arial,Helvetica,sans-serif;color:#fff;
   background:
-    radial-gradient(circle at 15% 0%,rgba(46,183,255,.24),transparent 30%),
-    radial-gradient(circle at 85% 10%,rgba(118,55,255,.20),transparent 28%),
-    linear-gradient(180deg,#073a4a 0%,#06263d 50%,#031b2d 100%);
+    radial-gradient(circle at 15% 0%,rgba(37,166,235,.20),transparent 28%),
+    radial-gradient(circle at 85% 10%,rgba(80,45,170,.16),transparent 28%),
+    linear-gradient(180deg,#084763 0%,#06334b 45%,#031c2e 100%);
 }
-button{font:inherit}
-.page{width:100%;max-width:700px;margin:auto;padding:14px 12px 80px}
-.top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+button,input{font:inherit}
+button{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.page{width:100%;max-width:760px;margin:auto;padding:12px 14px 80px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
 .back{
   width:44px;height:44px;border:0;border-radius:14px;
-  background:linear-gradient(145deg,#0c6fa5,#07436e);
+  background:linear-gradient(145deg,#0c78ad,#06456c);
   color:#fff;font-size:25px;box-shadow:0 5px 12px #0006;cursor:pointer
 }
 .title{text-align:center;text-shadow:0 2px 6px #000}
@@ -28,123 +29,209 @@ button{font:inherit}
 .spacer{width:44px}
 
 .card{
-  margin-top:12px;padding:13px;border-radius:22px;
-  background:rgba(3,29,48,.82);border:1px solid #ffffff18;
-  box-shadow:0 14px 35px #0006;backdrop-filter:blur(5px)
+  padding:13px;border-radius:24px;
+  background:rgba(2,29,46,.80);
+  border:1px solid #ffffff16;
+  box-shadow:0 14px 35px #0007;
+  backdrop-filter:blur(6px)
 }
-.stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
-.stat{padding:9px 6px;border-radius:13px;background:#0000002b;text-align:center}
-.stat small{font-size:9px;font-weight:900;color:#a9d7eb}
-.stat b{display:block;margin-top:3px;font-size:19px}
-.coins{color:#ffd52b}.chances{color:#ff6670}.level{color:#72d7ff}
-.progress{height:8px;background:#17394e;border-radius:20px;overflow:hidden;margin-top:10px}
-.progress div{height:100%;width:0;background:linear-gradient(90deg,#28d56c,#ffd52b);transition:.3s}
+.stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px}
+.stat{padding:11px 6px;border-radius:16px;background:#001a2bd9;text-align:center}
+.stat small{font-size:10px;font-weight:900;color:#a8d5e8;letter-spacing:.5px}
+.stat b{display:block;margin-top:3px;font-size:21px}
+.coins{color:#ffd42a}.chances{color:#55ef91}.level{color:#66cfff}
+.progress{height:8px;background:#214b60;border-radius:20px;overflow:hidden;margin-top:10px}
+.progress div{height:100%;width:0;background:linear-gradient(90deg,#28dc72,#ffd52b);transition:.3s}
 
-.info{text-align:center;padding:12px 6px 4px}
-.info h1{font-size:20px}
-.info p{margin-top:5px;color:#b9d7e8;font-size:12px;line-height:1.4}
+.info{text-align:center;padding:15px 4px 10px}
+.info h1{font-size:25px;line-height:1.1;text-shadow:0 3px 7px #000}
+.info p{margin-top:7px;color:#c2dce8;font-size:15px;line-height:1.4}
 
-.game-wrap{
-  position:relative;z-index:1;margin-top:8px;display:flex;justify-content:center;
-  overflow:hidden;border-radius:18px;
-  background-position:center;background-size:cover;background-repeat:no-repeat;
-  transition:background-image .2s ease
+.hearts{
+  display:flex;justify-content:center;align-items:center;gap:7px;
+  min-height:32px;margin:2px 0 9px
 }
-.board{
-  position:relative;width:min(100%,720px);aspect-ratio:1024/1536;
-  background-image:url("./C0A67B9D-67BE-49A6-8747-B5B2A32411C4.png");
-  background-size:100% 100%;background-repeat:no-repeat;
-}
-.palette{
-  position:relative;
-  pointer-events:auto;z-index:9999;pointer-events:auto;margin:12px auto 0;width:min(100%,560px);display:grid;grid-template-columns:repeat(7,1fr);
-  gap:7px;padding:10px;border-radius:18px;background:rgba(35,18,8,.78);border:2px solid #9b6a32;box-shadow:0 8px 20px #0008;z-index:3
-}
-.color-btn{
-  position:relative;z-index:20;
-  border:0;background:transparent;display:flex;align-items:center;
-  justify-content:center;cursor:pointer;min-width:0;
-  touch-action:manipulation;
-  pointer-events:auto;
-  -webkit-user-select:none;user-select:none;
-  -webkit-touch-callout:none;
-  -webkit-tap-highlight-color:transparent;
-}
-.color-btn img{width:100%;height:100%;max-height:58px;object-fit:contain;filter:drop-shadow(0 3px 3px #0008);pointer-events:none;user-select:none;-webkit-user-drag:none}
-.color-btn:active img{transform:scale(.88)}
-.color-btn.selected img{filter:drop-shadow(0 0 9px #fff) drop-shadow(0 3px 3px #0008)}
+.heart{font-size:25px;filter:drop-shadow(0 2px 3px #0008)}
+.heart.off{filter:grayscale(1);opacity:.28}
+.heart-label{font-size:11px;font-weight:900;color:#ff8b9a;margin-left:4px}
 
-.rows{
-  position:absolute;left:9.5%;right:9.5%;top:15.0%;bottom:15.0%;
-  display:grid;grid-template-rows:repeat(10,1fr);z-index:2
+.panel{
+  margin-top:9px;padding:14px;border-radius:24px;
+  background:rgba(0,27,41,.78);
+  border:2px solid #8f6b16;
+  box-shadow:0 8px 22px #0005
 }
-.row{
-  position:relative;display:flex;align-items:center;
+.panel-title{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:8px;color:#ffd52b;font-weight:900;font-size:17px;
+  letter-spacing:.5px;margin-bottom:11px
 }
-.row-number{width:9%;height:54%;font-size:0}
-.guess-slots{
-  width:60%;display:flex;gap:2.5%;align-items:center;justify-content:flex-start;padding-left:1%
+.panel-title .count{color:#fff;font-size:17px}
+
+.legend{
+  display:flex;align-items:center;justify-content:center;gap:13px;flex-wrap:wrap;
+  padding:9px 8px;border-radius:16px;background:#00131fe8;
+  color:#dceaf0;font-size:12px;font-weight:800
 }
-.guess-slot{
-  width:15.2%;aspect-ratio:1;border-radius:50%;background:transparent;
-  border:0;box-shadow:none;overflow:hidden;display:flex;align-items:center;justify-content:center
+.legend-item{display:flex;align-items:center;gap:6px}
+.legend-dot{width:19px;height:19px;border-radius:50%;border:2px dashed #77838a;background:transparent}
+.legend-dot.black{border:2px solid #101010;background:#050505;box-shadow:inset 0 0 3px #777}
+.legend-dot.white{border:2px solid #eee;background:#fff;box-shadow:inset 0 0 3px #999}
+
+.history{
+  display:grid;gap:8px;max-height:660px;overflow:hidden
 }
-.guess-slot img{width:100%;height:100%;object-fit:contain}
+.history-row{
+  min-height:61px;border-radius:16px;background:linear-gradient(90deg,#183a4b,#123448);
+  border:1px solid #ffffff12;display:flex;align-items:center;padding:8px 10px;gap:10px
+}
+.history-number{width:28px;text-align:center;font-size:16px;font-weight:900}
+.history-slots{display:flex;gap:8px;align-items:center;flex:1}
+.h-slot{
+  width:38px;height:38px;border-radius:50%;border:3px dashed #677982;
+  background:transparent;display:flex;align-items:center;justify-content:center;overflow:hidden
+}
+.h-slot img{width:100%;height:100%;object-fit:contain}
 .feedback{
-  width:31%;display:grid;grid-template-columns:repeat(5,1fr);
-  gap:4%;padding:0 4%;align-items:center
+  display:flex;gap:5px;align-items:center;justify-content:flex-end;
+  min-width:70px
 }
 .feedback-dot{
-  width:100%;aspect-ratio:1;border-radius:50%;
-  background:#4a2b16;border:0;box-shadow:none;background-size:contain;background-position:center;background-repeat:no-repeat
+  width:15px;height:15px;border-radius:50%;
+  border:2px dashed #66757c;background:transparent
 }
-.feedback-dot.black{background:#171717 url("./preto.png") center/contain no-repeat;border-color:transparent;box-shadow:none}
-.feedback-dot.white{background-image:url("./branco.png");background-size:contain;background-position:center;background-repeat:no-repeat;border-color:transparent;box-shadow:none}
+.feedback-dot.black{border:2px solid #111;background:#080808}
+.feedback-dot.white{border:2px solid #f2f2f2;background:#fff}
 
-.controls{
-  position:relative;z-index:9999;pointer-events:auto;margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:9px
+.current-title{
+  display:flex;justify-content:center;align-items:center;
+  color:#ffd52b;font-weight:900;font-size:17px;letter-spacing:.7px
 }
+.current{
+  min-height:74px;display:flex;justify-content:center;align-items:center;gap:12px;
+  padding:9px 4px 4px
+}
+.current-slot{
+  width:48px;height:48px;border-radius:50%;
+  border:3px dashed #6c7b82;background:transparent;
+  display:flex;align-items:center;justify-content:center;overflow:hidden
+}
+.current-slot img{width:100%;height:100%;object-fit:contain}
+
+.palette{
+  margin-top:12px;padding:9px;border-radius:18px;
+  background:#090b10;border:3px solid #a6751c;
+  display:grid;grid-template-columns:repeat(6,1fr);gap:7px
+}
+.color-btn{
+  min-width:0;height:64px;border:0;border-radius:13px;background:#15161a;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  box-shadow:inset 0 0 0 1px #ffffff0c
+}
+.color-btn img{width:51px;height:51px;object-fit:contain;filter:drop-shadow(0 3px 3px #0008)}
+.color-btn:active img{transform:scale(.88)}
+.color-btn.selected{outline:2px solid #ffd52b;box-shadow:0 0 10px #ffd52b66}
+
+.controls{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
 .control{
-  height:47px;border:0;border-radius:14px;color:#fff;font-weight:900;cursor:pointer;
-  box-shadow:0 5px 10px #0005
+  height:55px;border:0;border-radius:17px;color:#fff;font-weight:900;
+  cursor:pointer;box-shadow:0 6px 12px #0005
 }
-.clear{background:linear-gradient(145deg,#315878,#183b57)}
-.confirm{background:linear-gradient(145deg,#28d86d,#08783e)}
+.clear{background:linear-gradient(145deg,#356b9c,#1e517f)}
+.confirm{background:linear-gradient(145deg,#27df73,#06a54d)}
 .control:disabled{opacity:.45;cursor:not-allowed}
-.message{text-align:center;min-height:20px;margin-top:7px;color:#bfe3f2;font-size:12px;font-weight:800}
-
-.selected-preview{
-  min-height:44px;margin-top:9px;display:flex;justify-content:center;align-items:center;gap:7px
+.skip{
+  width:100%;height:44px;margin-top:9px;
+  background:linear-gradient(145deg,#7655a8,#51347c);
+  font-size:13px
 }
-.preview-dot{width:34px;height:34px;border-radius:50%;overflow:hidden;background:#1d140c;border:2px solid #7b542b}
-.preview-dot img{width:100%;height:100%;object-fit:contain}
+.message{text-align:center;min-height:24px;margin-top:9px;color:#d5e8ef;font-size:13px;font-weight:900}
+.message.ok{color:#58f39a}.message.bad{color:#ff8790}
 
 .modal{
   position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;
-  padding:18px;background:#00101dcc;backdrop-filter:blur(6px)
+  padding:18px;background:#00101dcc;backdrop-filter:blur(7px)
 }
 .modal.show{display:flex}
 .modal-card{
-  width:min(100%,390px);padding:22px 18px;border-radius:22px;text-align:center;
-  background:linear-gradient(145deg,#0b3a52,#241044);
+  width:min(100%,410px);padding:23px 18px;border-radius:23px;text-align:center;
+  background:linear-gradient(145deg,#0b4057,#251044);
   border:1px solid #ffffff1c;box-shadow:0 20px 50px #0009
 }
-.modal-card h2{font-size:22px}
-.modal-card p{margin-top:9px;color:#c3ddeb;font-size:14px;line-height:1.5}
+.modal-card .icon{font-size:42px;margin-bottom:5px}
+.modal-card h2{font-size:23px}
+.modal-card p{margin-top:10px;color:#c9dfe9;font-size:14px;line-height:1.5}
 .modal-buttons{display:grid;gap:9px;margin-top:17px}
 .modal-buttons button{
-  height:46px;border:0;border-radius:13px;color:#fff;font-weight:900;cursor:pointer
+  height:47px;border:0;border-radius:14px;color:#fff;font-weight:900;cursor:pointer
 }
-.primary{background:#19ae60}.secondary{background:#ffffff17}
+.primary{background:#18ae60}.secondary{background:#ffffff18}
 .gold{color:#ffd52b}
 
 @media(max-width:520px){
-  .page{padding-left:8px;padding-right:8px}
-  .card{padding:9px}
-  .stat b{font-size:17px}
-  .info h1{font-size:18px}
+  .page{padding-left:9px;padding-right:9px}
+  .card{padding:10px}
+  .info h1{font-size:22px}
+  .info p{font-size:14px}
+  .history-row{min-height:56px;padding:7px 8px}
+  .h-slot{width:34px;height:34px}
+  .history-slots{gap:6px}
+  .feedback{min-width:62px}
+  .feedback-dot{width:14px;height:14px}
+  .current-slot{width:43px;height:43px}
+  .palette{gap:5px}
+  .color-btn{height:58px}
+  .color-btn img{width:46px;height:46px}
 }
 </style>
+
+<style id="feedback-fix">
+.history-row{
+  display:grid !important;
+  grid-template-columns:32px minmax(0,1fr) auto !important;
+  align-items:center !important;
+  gap:8px !important;
+}
+.history-colors{
+  display:flex !important;
+  align-items:center !important;
+  gap:5px !important;
+  min-width:0 !important;
+}
+.history-feedback{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-end !important;
+  gap:4px !important;
+  min-width:42px !important;
+}
+.feedback-dot{
+  width:12px !important;
+  height:12px !important;
+  min-width:12px !important;
+  border-radius:50% !important;
+  border:2px solid rgba(255,255,255,.45) !important;
+  box-sizing:border-box !important;
+  background:transparent !important;
+  box-shadow:none !important;
+}
+.feedback-dot.black{
+  background:#050505 !important;
+  border-color:#777 !important;
+  box-shadow:0 0 2px #000 !important;
+}
+.feedback-dot.white{
+  background:#fff !important;
+  border-color:#ddd !important;
+  box-shadow:0 0 2px rgba(255,255,255,.7) !important;
+}
+@media(max-width:480px){
+  .history-row{grid-template-columns:25px minmax(0,1fr) auto !important;gap:5px !important}
+  .feedback-dot{width:11px !important;height:11px !important;min-width:11px !important}
+  .history-feedback{gap:3px !important}
+}
+</style>
+
 </head>
 
 <body>
@@ -165,31 +252,47 @@ button{font:inherit}
     <div class="progress"><div id="progress"></div></div>
 
     <div class="info">
-      <h1 id="phaseTitle">DESCUBRA A SENHA</h1>
-      <p id="phaseText">Observe a sequência. Ela desaparece e você precisa reproduzi-la.</p>
+      <h1 id="phaseTitle">NÍVEL 1 — DESCUBRA A SENHA</h1>
+      <p id="phaseText">Descubra a senha escolhendo 3 cores.</p>
     </div>
 
-    <div class="selected-preview" id="preview"></div>
+    <div class="hearts" id="hearts"></div>
 
-    <div class="game-wrap">
-      <div>
-        <div class="board">
-          <div class="rows" id="rows"></div>
-        </div>
-        <div class="palette" id="palette"></div>
+    <div class="panel">
+      <div class="panel-title">
+        <span>🎯 HISTÓRICO DE TENTATIVAS</span>
+        <span class="count" id="attemptCount">0 / 10</span>
+      </div>
+
+      <div class="history" id="history"></div>
+
+      <div class="legend" style="margin-top:10px">
+        <div class="legend-item"><span class="legend-dot black"></span> Cor certa + lugar certo</div>
+        <div class="legend-item"><span class="legend-dot white"></span> Cor certa + lugar errado</div>
       </div>
     </div>
 
-    <div class="controls">
-      <button class="control clear" id="clearBtn">LIMPAR</button>
-      <button class="control confirm" id="confirmBtn">CONFIRMAR</button>
+    <div class="panel">
+      <div class="current-title">🎯 SUA TENTATIVA</div>
+      <div class="current" id="current"></div>
+
+      <div class="palette" id="palette"></div>
+
+      <div class="controls">
+        <button class="control clear" id="clearBtn">LIMPAR</button>
+        <button class="control confirm" id="confirmBtn">CONFIRMAR</button>
+      </div>
+
+      <button class="control skip" id="skipBtn">⏭️ PULAR SENHA • -1 ❤️</button>
+
+      <div class="message" id="message"></div>
     </div>
-    <div class="message" id="message"></div>
   </div>
 </div>
 
 <div class="modal" id="modal">
   <div class="modal-card">
+    <div class="icon" id="modalIcon">🎉</div>
     <h2 id="modalTitle"></h2>
     <p id="modalText"></p>
     <div class="modal-buttons" id="modalButtons"></div>
@@ -199,7 +302,7 @@ button{font:inherit}
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 import {getAuth,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-import {getFirestore,collection,query,where,getDocs,doc,updateDoc,increment,runTransaction} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+import {getFirestore,collection,query,where,getDocs,doc,updateDoc,increment} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 const firebaseConfig={
   apiKey:"AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",
@@ -216,34 +319,56 @@ const db=getFirestore(app);
 const $=id=>document.getElementById(id);
 
 const COLORS=["vermelho","azul","verde","amarelo","roxo","laranja"];
-
 const FILES={
   vermelho:"./vermelho.png",
   azul:"./azul.png",
   verde:"./verde.png",
   amarelo:"./amarelo.png",
   roxo:"./roxo.png",
-  laranja:"./laranja.png",
+  laranja:"./laranja.png"
 };
 
-const FEEDBACK={black:"./preto.png",white:"./branco.png"};
-
 /*
-  ESTRUTURA DOS NÍVEIS
-  Agora ativados: 1, 2 e 3.
-  A estrutura já está preparada para os demais:
-  1-3 = 3 cores | +20 moedas
-  4-7 = 4/5 cores | +30 moedas
-  8   = 6 cores   | +75 moedas
-  9   = senha dupla | +150 / +100
+  REGRAS DA PARTIDA
+
+  Entrada:
+  -1 chance +30 Adam Coins.
+
+  Níveis:
+  1-3: 3 cores / +20
+  4-5: 4 cores / +30
+  6-7: 5 cores / +30
+  8: 6 cores / +75 (HARD)
+  9: 6 cores / bônus por tempo
+
+  Corações:
+  - 3 corações por partida.
+  - Só funcionam até o nível 7.
+  - Um coração pode ser usado para continuar no mesmo nível
+    com uma nova senha ou para pular a senha atual.
+  - Níveis 8 e 9 não possuem uso de coração/pulo.
+
+  Importante:
+  - Errar uma tentativa NÃO abre "você perdeu".
+  - A tentativa apenas entra no histórico.
+  - Os círculos de feedback só aparecem quando houver feedback.
+  - Círculos sem feedback permanecem vazios.
 */
 const LEVELS={
   1:{length:3,reward:20},
   2:{length:3,reward:20},
-  3:{length:3,reward:20}
+  3:{length:3,reward:20},
+  4:{length:4,reward:30},
+  5:{length:4,reward:30},
+  6:{length:5,reward:30},
+  7:{length:5,reward:30},
+  8:{length:6,reward:75},
+  9:{length:6,reward:100}
 };
 
 const MAX_ATTEMPTS=10;
+const HEARTS_START=3;
+const SESSION_KEY="adam_senha_session_v4";
 
 let userDoc=null;
 let userData=null;
@@ -252,7 +377,9 @@ let secret=[];
 let current=[];
 let attempt=0;
 let busy=false;
-let gameStarted=false;
+let hearts=HEARTS_START;
+let sessionStarted=false;
+let entryCharged=false;
 
 function money(){
   return Number(userData?.moedas||0).toLocaleString("pt-BR");
@@ -265,8 +392,38 @@ function renderStats(){
   $("progress").style.width=`${(level/9)*100}%`;
 }
 
+function renderHearts(){
+  const el=$("hearts");
+  const skipBtn=$("skipBtn");
+  if(level>=8){
+    el.innerHTML="";
+    if(skipBtn)skipBtn.style.display="none";
+    return;
+  }
+
+  if(skipBtn){
+    skipBtn.style.display="block";
+    skipBtn.disabled=hearts<=0 || busy;
+    skipBtn.textContent=hearts>0
+      ? "⏭️ PULAR SENHA • -1 ❤️"
+      : "❤️ SEM CORAÇÕES PARA PULAR";
+  }
+
+  el.innerHTML="";
+  for(let i=0;i<3;i++){
+    const s=document.createElement("span");
+    s.className="heart"+(i>=hearts?" off":"");
+    s.textContent="❤️";
+    el.appendChild(s);
+  }
+
+  const label=document.createElement("span");
+  label.className="heart-label";
+  label.textContent=`${hearts} coração${hearts===1?"":"ões"} • usar para continuar/pular`;
+  el.appendChild(label);
+}
+
 function randomSecret(length){
-  // Sem cores repetidas dentro da senha.
   const pool=[...COLORS];
   const result=[];
   while(result.length<length){
@@ -289,32 +446,25 @@ function buildPalette(){
     img.src=FILES[color];
     img.alt="";
     img.draggable=false;
-    img.addEventListener("error",()=>{
-      btn.dataset.imageError=color;
-      btn.title=`Imagem não encontrada: ${FILES[color]}`;
-    },{once:true});
 
     btn.appendChild(img);
 
-    // Clique/toque simples. O próprio <button> recebe o toque do Safari.
-    btn.addEventListener("click", event=>{
-      event.preventDefault();
-      event.stopPropagation();
-      selecionarCor(color, btn);
+    btn.addEventListener("click",e=>{
+      e.preventDefault();
+      e.stopPropagation();
+      selectColor(color,btn);
     });
 
     el.appendChild(btn);
   });
 }
 
-function selecionarCor(color, btn){
-  // Só permite escolher enquanto a rodada está aguardando a tentativa.
-  if(busy) return;
+function selectColor(color,btn){
+  if(busy)return;
 
   const config=LEVELS[level];
-  if(!config) return;
+  if(!config)return;
 
-  // A senha dos níveis 1–3 tem exatamente 3 cores.
   if(current.length>=config.length){
     $("message").textContent=`Você já escolheu ${config.length} cores. Clique em CONFIRMAR.`;
     return;
@@ -327,121 +477,121 @@ function selecionarCor(color, btn){
     setTimeout(()=>btn.classList.remove("selected"),180);
   }
 
-  renderPreview();
-  renderCurrentRow();
+  renderCurrent();
+  $("message").className="message";
   $("message").textContent=`${current.length}/${config.length} cores escolhidas.`;
 }
 
-function renderPreview(){
-  const p=$("preview");
-  p.innerHTML="";
-  current.forEach(color=>{
-    const d=document.createElement("div");
-    d.className="preview-dot";
-    const img=document.createElement("img");
-    img.src=FILES[color];
-    img.alt="";
-    d.appendChild(img);
-    p.appendChild(d);
-  });
-}
+function renderCurrent(){
+  const el=$("current");
+  el.innerHTML="";
+  const length=LEVELS[level].length;
 
-function makeRows(){
-  const rows=$("rows");
-  rows.innerHTML="";
+  for(let i=0;i<length;i++){
+    const slot=document.createElement("div");
+    slot.className="current-slot";
 
-  for(let r=0;r<MAX_ATTEMPTS;r++){
-    const row=document.createElement("div");
-    row.className="row";
-    row.dataset.row=r;
-
-    const number=document.createElement("div");
-    number.className="row-number";
-    number.textContent=r+1;
-
-    const slots=document.createElement("div");
-    slots.className="guess-slots";
-
-    // O tabuleiro tem 6 espaços grandes. Nos níveis 1-3,
-    // somente os 3 primeiros serão usados.
-    for(let i=0;i<6;i++){
-      const slot=document.createElement("div");
-      slot.className="guess-slot";
-      slot.dataset.slot=i;
-      if(i>=secret.length) slot.style.visibility="hidden";
-      slots.appendChild(slot);
-    }
-
-    const feedback=document.createElement("div");
-    feedback.className="feedback";
-    for(let i=0;i<5;i++){
-      const dot=document.createElement("span");
-      dot.className="feedback-dot";
-      feedback.appendChild(dot);
-    }
-
-    row.append(number,slots,feedback);
-    rows.appendChild(row);
-  }
-}
-
-function renderCurrentRow(){
-  const row=$(`.row[data-row="${attempt}"]`);
-  if(!row) return;
-
-  [...row.querySelectorAll(".guess-slot")].forEach((slot,i)=>{
-    slot.innerHTML="";
-    if(i<current.length){
+    if(current[i]){
       const img=document.createElement("img");
       img.src=FILES[current[i]];
       img.alt="";
       slot.appendChild(img);
     }
-  });
+
+    el.appendChild(slot);
+  }
 }
 
-function calculateResult(guess, answer){
-  // Como a senha é criada sem repetição, a contagem fica simples.
+function makeHistory(){
+  const el=$("history");
+  el.innerHTML="";
+
+  for(let r=0;r<MAX_ATTEMPTS;r++){
+    const row=document.createElement("div");
+    row.className="history-row";
+    row.dataset.row=r;
+
+    const num=document.createElement("div");
+    num.className="history-number";
+    num.textContent=r+1;
+
+    const slots=document.createElement("div");
+    slots.className="history-slots";
+
+    for(let i=0;i<LEVELS[level].length;i++){
+      const slot=document.createElement("div");
+      slot.className="h-slot";
+      slot.dataset.slot=i;
+      slots.appendChild(slot);
+    }
+
+    const feedback=document.createElement("div");
+    feedback.className="feedback";
+
+    for(let i=0;i<LEVELS[level].length;i++){
+      const dot=document.createElement("span");
+      dot.className="feedback-dot";
+      feedback.appendChild(dot);
+    }
+
+    row.append(num,slots,feedback);
+    el.appendChild(row);
+  }
+
+  $("attemptCount").textContent=`0 / ${MAX_ATTEMPTS}`;
+}
+
+function addHistory(guess,result){
+  const row=$(`.history-row[data-row="${attempt}"]`);
+  if(!row)return;
+
+  const slots=[...row.querySelectorAll(".h-slot")];
+  guess.forEach((color,i)=>{
+    const img=document.createElement("img");
+    img.src=FILES[color];
+    img.alt="";
+    slots[i].appendChild(img);
+  });
+
+  const dots=[...row.querySelectorAll(".feedback-dot")];
+
+  // Preto: certa + lugar certo.
+  // Branco: certa + lugar errado.
+  // O restante permanece completamente vazio.
+  let pos=0;
+  for(let i=0;i<result.exact;i++){
+    if(dots[pos]){
+      dots[pos].classList.add("black");
+    }
+    pos++;
+  }
+  for(let i=0;i<result.misplaced;i++){
+    if(dots[pos]){
+      dots[pos].classList.add("white");
+    }
+    pos++;
+  }
+
+  $("attemptCount").textContent=`${attempt+1} / ${MAX_ATTEMPTS}`;
+}
+
+function calculateResult(guess,answer){
   let exact=0;
   let misplaced=0;
 
   for(let i=0;i<answer.length;i++){
-    if(guess[i]===answer[i]) exact++;
+    if(guess[i]===answer[i])exact++;
   }
 
   for(let i=0;i<guess.length;i++){
-    if(guess[i]!==answer[i] && answer.includes(guess[i])) misplaced++;
+    if(guess[i]!==answer[i] && answer.includes(guess[i]))misplaced++;
   }
 
   return {exact,misplaced};
 }
 
-function paintResult(rowIndex,result){
-  const row=$(`.row[data-row="${rowIndex}"]`);
-  if(!row) return;
-
-  const dots=[...row.querySelectorAll(".feedback-dot")];
-
-  // Preto = cor certa no lugar certo.
-  for(let i=0;i<result.exact;i++){ dots[i].classList.add("black"); dots[i].style.backgroundImage=`url("${FEEDBACK.black}")`; }
-
-  // Branco = cor certa no lugar errado.
-  for(let i=0;i<result.misplaced;i++){ dots[result.exact+i].classList.add("white"); dots[result.exact+i].style.backgroundImage=`url("${FEEDBACK.white}")`; }
-}
-
-function addAttempt(){
-  const row=$(`.row[data-row="${attempt}"]`);
-  if(!row) return;
-
-  const result=calculateResult(current,secret);
-  paintResult(attempt,result);
-
-  [...row.querySelectorAll(".guess-slot")].forEach((slot,i)=>{
-    slot.style.visibility=i<secret.length?"visible":"hidden";
-  });
-}
-
-function openModal(title,text,buttons){
+function openModal(title,text,buttons,icon="🎉"){
+  $("modalIcon").textContent=icon;
   $("modalTitle").textContent=title;
   $("modalText").innerHTML=text;
   $("modalButtons").innerHTML="";
@@ -463,152 +613,149 @@ function closeModal(){
 }
 
 async function updateAccount(deltaCoins=0,deltaChances=0){
-  if(!userDoc) throw new Error("Cadastro não encontrado.");
+  if(!userDoc)throw new Error("Cadastro não encontrado.");
 
   const ref=doc(db,"admins",userDoc.id);
+  const oldCoins=Number(userData?.moedas||0);
+  const oldChances=Number(userData?.chances||0);
+  const newCoins=oldCoins+Number(deltaCoins||0);
+  const newChances=oldChances+Number(deltaChances||0);
 
-  await runTransaction(db,async transaction=>{
-    const snap=await transaction.get(ref);
-    if(!snap.exists()) throw new Error("Cadastro não encontrado.");
+  if(newChances<0)throw new Error("Você não possui chances suficientes.");
 
-    const data=snap.data();
-    const oldCoins=Number(data.moedas||0);
-    const oldChances=Number(data.chances||0);
-    const newCoins=oldCoins+Number(deltaCoins||0);
-    const newChances=oldChances+Number(deltaChances||0);
-
-    if(newChances<0) throw new Error("Você não possui chances suficientes.");
-
-    transaction.update(ref,{
-      moedas:newCoins,
-      chances:newChances
-    });
-
-    userData={...data,moedas:newCoins,chances:newChances};
+  await updateDoc(ref,{
+    moedas:increment(Number(deltaCoins||0)),
+    chances:increment(Number(deltaChances||0))
   });
 
+  userData={...userData,moedas:newCoins,chances:newChances};
   renderStats();
 }
 
-/* =====================================================
-   PARTIDA PERSISTENTE
-   A entrada (-1 chance / +30 moedas) é cobrada UMA vez
-   por partida. Atualizar a página não cria outra cobrança.
-===================================================== */
-function sessionKey(){
-  return `adam_senha_partida_${auth.currentUser?.uid||"anon"}`;
-}
+async function chargeEntry(){
+  if(entryCharged)return true;
 
-function readGameSession(){
+  const stored=localStorage.getItem(SESSION_KEY);
+  if(stored){
+    entryCharged=true;
+    sessionStarted=true;
+    return true;
+  }
+
+  if(Number(userData?.chances||0)<1){
+    openModal(
+      "SEM CHANCES",
+      "Você precisa ter pelo menos <b>1 chance</b> para iniciar o jogo.",
+      [{text:"VOLTAR",cls:"primary",fn:()=>location.href="jogos.html"}],
+      "❤️"
+    );
+    return false;
+  }
+
   try{
-    const raw=localStorage.getItem(sessionKey());
-    return raw?JSON.parse(raw):null;
-  }catch(e){
-    console.error("Erro ao ler partida salva:",e);
-    return null;
+    // Regra da entrada: -1 chance e +30 Adam Coins.
+    await updateAccount(30,-1);
+
+    const sessionId="senha_"+Date.now()+"_"+Math.random().toString(36).slice(2);
+    localStorage.setItem(SESSION_KEY,sessionId);
+
+    entryCharged=true;
+    sessionStarted=true;
+
+    $("message").textContent="🪙 +30 Adam Coins • ❤️ -1 chance";
+    return true;
+  }catch(error){
+    console.error(error);
+    openModal(
+      "ERRO",
+      "Não foi possível registrar a entrada da partida. <br><br>"+String(error?.message||"Tente novamente."),
+      [{text:"VOLTAR",cls:"primary",fn:()=>location.href="jogos.html"}],
+      "⚠️"
+    );
+    return false;
   }
 }
 
-function saveGameSession(){
-  try{
-    localStorage.setItem(sessionKey(),JSON.stringify({
-      active:true,
-      entryCharged:true,
-      level,
-      secret,
-      current,
-      attempt,
-      savedAt:Date.now()
-    }));
-  }catch(e){
-    console.error("Erro ao salvar partida:",e);
+function setLevelText(){
+  const config=LEVELS[level];
+
+  let name="FÁCIL";
+  if(level>=4&&level<=5)name="MÉDIO";
+  if(level>=6&&level<=7)name="DIFÍCIL";
+  if(level===8)name="HARD";
+  if(level===9)name="BÔNUS";
+
+  $("phaseTitle").textContent=`NÍVEL ${level} — ${level===8?"HARD":level===9?"DESAFIO FINAL":"DESCUBRA A SENHA"}`;
+
+  if(level<=7){
+    $("phaseText").textContent=`${name} • Descubra a senha escolhendo ${config.length} cores.`;
+  }else if(level===8){
+    $("phaseText").textContent="🔥 HARD • A senha tem 6 cores. Sem pulos e sem corações.";
+  }else{
+    $("phaseText").textContent="👑 BÔNUS • A senha tem 6 cores. Cronômetro e recompensa especial.";
   }
-}
-
-function clearGameSession(){
-  try{localStorage.removeItem(sessionKey());}catch(e){}
-}
-
-function showSecret(){
-  const row=$(`.row[data-row="0"]`);
-  // A combinação é mostrada no topo do tabuleiro usando o próprio espaço visual.
-  // Durante a memorização, os pinos da senha aparecem temporariamente.
-  if(!row) return;
-
-  [...row.querySelectorAll(".guess-slot")].forEach((slot,i)=>{
-    slot.innerHTML="";
-    if(i<secret.length){
-      const img=document.createElement("img");
-      img.src=FILES[secret[i]];
-      img.alt="";
-      slot.appendChild(img);
-      slot.style.visibility="visible";
-    }else{
-      slot.style.visibility="hidden";
-    }
-  });
-
-  $("message").textContent="MEMORIZE A SENHA...";
-
-  setTimeout(()=>{
-    [...row.querySelectorAll(".guess-slot")].forEach(slot=>{
-      slot.innerHTML="";
-    });
-    current=[];
-    renderPreview();
-    renderCurrentRow();
-    busy=false;
-    $("message").textContent="Sua vez! Monte a senha e confirme.";
-  },2600);
-}
-
-function setLevelBackground(){
-  const bg = level <= 3 ? "./fundo_nivel_01_03.png"
-    : level <= 6 ? "./fundo_nivel_04_06.png"
-    : level === 7 ? "./fundo_nivel_07.png"
-    : "./fundo_nivel_08_09.png";
-
-  const wrap=document.querySelector(".game-wrap");
-  wrap.style.backgroundImage=`url("${bg}")`;
-  wrap.style.backgroundSize="cover";
-  wrap.style.backgroundPosition="center";
-  wrap.style.backgroundRepeat="no-repeat";
-
-  document.body.style.backgroundImage=`url("${bg}")`;
-  document.body.style.backgroundSize="cover";
-  document.body.style.backgroundAttachment="fixed";
-  document.body.style.backgroundPosition="center";
-  document.body.style.backgroundRepeat="no-repeat";
 }
 
 function startLevel(){
   const config=LEVELS[level];
-  setLevelBackground();
+
+  busy=false;
   secret=randomSecret(config.length);
   current=[];
   attempt=0;
-  busy=true;
 
-  $("phaseTitle").textContent=`NÍVEL ${level} — DESCUBRA A SENHA`;
-  $("phaseText").textContent=`A senha tem ${config.length} cores. Você tem ${MAX_ATTEMPTS} tentativas.`;
-  $("message").textContent="";
-
-  makeRows();
-  renderPreview();
+  setLevelText();
   renderStats();
-  saveGameSession();
+  renderHearts();
+  makeHistory();
+  renderCurrent();
+
+  $("message").className="message";
+  $("message").textContent="Memorize a senha...";
+
   showSecret();
+}
+
+function showSecret(){
+  const panel=$("current");
+  panel.innerHTML="";
+
+  secret.forEach(color=>{
+    const slot=document.createElement("div");
+    slot.className="current-slot";
+    const img=document.createElement("img");
+    img.src=FILES[color];
+    img.alt="";
+    slot.appendChild(img);
+    panel.appendChild(slot);
+  });
+
+  busy=true;
+  renderHearts();
+
+  setTimeout(()=>{
+    if(!sessionStarted)return;
+    renderCurrent();
+    busy=false;
+    renderHearts();
+    $("message").textContent="Sua vez! Monte a senha e confirme.";
+  },2600);
 }
 
 async function win(){
   busy=true;
-
   const reward=LEVELS[level].reward;
-  await updateAccount(reward,0);
 
-  if(level<3){
+  try{
+    await updateAccount(reward,0);
+  }catch(error){
+    console.error(error);
+    $("message").textContent="Vitória registrada visualmente, mas houve erro ao registrar moedas.";
+  }
+
+  if(level<8){
     openModal(
-      "🎉 SENHA CORRETA!",
+      "SENHA CORRETA!",
       `Você descobriu a senha!<br><br><span class="gold"><b>+${reward} Adam Coins</b></span>`,
       [{
         text:"PRÓXIMO NÍVEL",
@@ -616,116 +763,192 @@ async function win(){
         fn:()=>{
           closeModal();
           level++;
-          secret=[];
-          saveGameSession();
           startLevel();
         }
-      }]
+      }],
+      "🎉"
     );
     return;
   }
 
-  clearGameSession();
-  openModal(
-    "🏆 NÍVEIS 1–3 CONCLUÍDOS!",
-    `Você completou os três primeiros níveis da <b>Senha</b>.<br><br><span class="gold"><b>+${reward} Adam Coins</b></span>`,
-    [{
-      text:"VOLTAR AOS JOGOS",
-      cls:"primary",
-      fn:()=>window.location.href="jogos.html"
-    }]
-  );
-}
-
-async function lose(){
-  busy=true;
-
-  const correct=secret.map(c=>c.toUpperCase()).join(" • ");
-
-  openModal(
-    "💥 VOCÊ PERDEU!",
-    `A senha correta era:<br><br><b>${correct}</b><br><br>Você pode reiniciar a fase ou usar uma nova chance.`,
-    [
-      {
-        text:"REINICIAR FASE",
+  if(level===8){
+    openModal(
+      "HARD CONCLUÍDO!",
+      `<span class="gold"><b>+${reward} Adam Coins</b></span><br><br>Você venceu o Nível 8 e liberou o <b>Desafio Final — Nível 9</b>.`,
+      [{
+        text:"IR PARA O NÍVEL 9",
         cls:"primary",
         fn:()=>{
           closeModal();
+          level=9;
           startLevel();
         }
-      },
-      {
-        text:"CONTINUAR NESTA FASE (+20)",
-        cls:"secondary",
-        fn:async()=>{
-          try{
-            await updateAccount(20,-1);
-            closeModal();
-            saveGameSession();
-            startLevel();
-          }catch(error){
-            $("modalText").textContent=error.message;
-          }
-        }
-      }
-    ]
-  );
-}
-
-let acaoProcessada=false;
-
-async function confirmar(){
-  if(busy) return;
-
-  if(current.length!==secret.length){
-    $("message").textContent=`Escolha ${secret.length} cores antes de confirmar.`;
+      }],
+      "🔥"
+    );
     return;
   }
 
-  addAttempt();
+  openModal(
+    "PARTIDA CONCLUÍDA!",
+    `<span class="gold"><b>+${reward} Adam Coins</b></span><br><br>Você venceu o desafio final!`,
+    [{
+      text:"VOLTAR AOS JOGOS",
+      cls:"primary",
+      fn:()=>location.href="jogos.html"
+    }],
+    "👑"
+  );
+}
+
+function loseAttempt(){
+  // Não existe mais modal "você perdeu" a cada erro.
+  // A tentativa simplesmente termina e entra no histórico.
+  current=[];
+  renderCurrent();
+
+  if(attempt+1>=MAX_ATTEMPTS){
+    if(level<=7 && hearts>0){
+      openModal(
+        "FIM DAS TENTATIVAS",
+        `Você usou as <b>${MAX_ATTEMPTS} tentativas</b> desta senha.<br><br>Você ainda tem <b>${hearts} ❤️</b>.<br>Use um coração para receber uma nova senha e continuar no mesmo nível.`,
+        [
+          {
+            text:"❤️ CONTINUAR • -1 CORAÇÃO",
+            cls:"primary",
+            fn:()=>continueWithHeart()
+          },
+          {
+            text:"SAIR",
+            cls:"secondary",
+            fn:()=>location.href="jogos.html"
+          }
+        ],
+        "💔"
+      );
+    }else{
+      openModal(
+        level===8?"HARD PERDIDO":"DESAFIO FINAL ENCERRADO",
+        level===8
+          ?"Você não conseguiu completar o Nível 8. O desafio Hard foi perdido."
+          :"Você não conseguiu completar o desafio final.",
+        [{
+          text:"VOLTAR AOS JOGOS",
+          cls:"primary",
+          fn:()=>location.href="jogos.html"
+        }],
+        "💀"
+      );
+    }
+    return;
+  }
+
+  attempt++;
+  $("attemptCount").textContent=`${attempt} / ${MAX_ATTEMPTS}`;
+  $("message").className="message";
+  $("message").textContent=`Tentativa registrada • ${attempt+1}/${MAX_ATTEMPTS}`;
+  busy=false;
+}
+
+function clearCurrent(){
+  if(busy)return;
+  current=[];
+  renderCurrent();
+  $("message").className="message";
+  $("message").textContent="";
+}
+
+async function continueWithHeart(){
+  if(hearts<=0){
+    closeModal();
+    $("message").textContent="Você não possui mais corações.";
+    return;
+  }
+
+  hearts--;
+  closeModal();
+
+  // Nova senha, mesmo nível, sem cobrar nova entrada.
+  secret=randomSecret(LEVELS[level].length);
+  current=[];
+  attempt=0;
+  makeHistory();
+  renderCurrent();
+  renderHearts();
+
+  $("message").textContent="❤️ Coração usado! Nova senha no mesmo nível.";
+  showSecret();
+}
+
+async function skipWithHeart(){
+  if(level>=8)return;
+
+  if(hearts<=0){
+    $("message").textContent="Você não possui corações para pular.";
+    return;
+  }
+
+  hearts--;
+  closeModal();
+
+  // Pular a senha atual significa receber outra senha no mesmo nível.
+  secret=randomSecret(LEVELS[level].length);
+  current=[];
+  attempt=0;
+
+  makeHistory();
+  renderCurrent();
+  renderHearts();
+
+  $("message").textContent="⏭️ Senha pulada! -1 ❤️ • Nova senha.";
+  renderHearts();
+  showSecret();
+}
+
+async function confirmar(){
+  if(busy)return;
+
+  const config=LEVELS[level];
+
+  if(current.length!==config.length){
+    $("message").className="message bad";
+    $("message").textContent=`Escolha ${config.length} cores antes de confirmar.`;
+    return;
+  }
 
   const guess=[...current];
-  const correct=guess.every((color,i)=>color===secret[i]);
+  const result=calculateResult(guess,secret);
+
+  addHistory(guess,result);
+
+  const correct=result.exact===secret.length;
 
   if(correct){
     await win();
     return;
   }
 
-  attempt++;
-  current=[];
-  renderPreview();
-  saveGameSession();
-
-  if(attempt>=MAX_ATTEMPTS){
-    await lose();
-    return;
-  }
-
-  renderCurrentRow();
-  $("message").textContent=`Senha incorreta. Tentativa ${attempt+1} de ${MAX_ATTEMPTS}.`;
+  // Tentativa errada: somente registra e libera a próxima.
+  loseAttempt();
 }
 
-$("confirmBtn").addEventListener("click",event=>{
-  event.preventDefault();
+$("confirmBtn").addEventListener("click",e=>{
+  e.preventDefault();
   confirmar();
 });
 
-function limpar(){
-  if(busy) return;
-  current=[];
-  renderPreview();
-  renderCurrentRow();
-  $("message").textContent="";
-}
+$("clearBtn").addEventListener("click",e=>{
+  e.preventDefault();
+  clearCurrent();
+});
 
-$("clearBtn").addEventListener("click",event=>{
-  event.preventDefault();
-  limpar();
+$("skipBtn").addEventListener("click",e=>{
+  e.preventDefault();
+  skipWithHeart();
 });
 
 $("back").addEventListener("click",()=>{
-  window.location.href="jogos.html";
+  location.href="jogos.html";
 });
 
 async function localizarUsuario(user){
@@ -744,13 +967,12 @@ async function localizarUsuario(user){
 
 onAuthStateChanged(auth,async user=>{
   if(!user){
-    window.location.replace("index.html");
+    location.replace("index.html");
     return;
   }
 
   try{
     buildPalette();
-    setLevelBackground();
 
     userDoc=await localizarUsuario(user);
 
@@ -761,66 +983,94 @@ onAuthStateChanged(auth,async user=>{
 
     userData=userDoc.data();
     renderStats();
+    renderHearts();
 
-    const saved=readGameSession();
+    // A cobrança da entrada acontece UMA vez por partida.
+    const ok=await chargeEntry();
+    if(!ok)return;
 
-    /*
-       SE JÁ EXISTE UMA PARTIDA, RETOMA EXATAMENTE ELA.
-       NÃO cobra novamente a entrada.
-    */
-    if(saved?.active && saved.entryCharged){
-      level=Math.min(9,Math.max(1,Number(saved.level||1)));
-      secret=Array.isArray(saved.secret)?saved.secret:[];
-      current=Array.isArray(saved.current)?saved.current:[];
-      attempt=Math.max(0,Number(saved.attempt||0));
-
-      if(!secret.length){
-        secret=randomSecret(LEVELS[level].length);
-      }
-
-      gameStarted=true;
-      makeRows();
-      renderPreview();
-      renderCurrentRow();
-      renderStats();
-      $("message").textContent="Partida retomada. Você não perdeu seu progresso.";
-      busy=false;
-      return;
-    }
-
-    /*
-       PARTIDA NOVA:
-       1 chance é consumida e 30 moedas são dadas ATOMICAMENTE.
-       Só depois do Firebase confirmar a operação marcamos a partida
-       como iniciada. Assim um erro de rede não cobra duas vezes.
-    */
-    if(Number(userData.chances||0)<=0){
-      openModal(
-        "SEM CHANCES",
-        "Você precisa ter pelo menos 1 chance para iniciar o jogo.",
-        [{text:"VOLTAR",cls:"primary",fn:()=>window.location.href="jogos.html"}]
-      );
-      return;
-    }
-
-    await updateAccount(30,-1);
-
-    gameStarted=true;
-    level=1;
-    secret=[];
-    current=[];
-    attempt=0;
-
-    saveGameSession();
     startLevel();
-
-    $("message").textContent="🪙 +30 Adam Coins • ❤️ -1 chance";
 
   }catch(error){
     console.error("ERRO AO INICIAR SENHA:",error);
-    $("message").textContent="Não foi possível iniciar a partida. Nenhuma cobrança foi confirmada.";
+    $("message").textContent="Erro ao iniciar o jogo: "+String(error?.message||"erro");
   }
 });
 </script>
+
+<script id="feedback-order-fix">
+(function(){
+  function makeFeedback(secret, guess){
+    const n = Math.min(secret.length, guess.length);
+    const result = Array(n).fill("");
+    const usedSecret = Array(secret.length).fill(false);
+    const usedGuess = Array(guess.length).fill(false);
+
+    // Primeiro: exatamente na mesma posição.
+    for(let i=0;i<n;i++){
+      if(guess[i] === secret[i]){
+        result[i] = "black";
+        usedSecret[i] = true;
+        usedGuess[i] = true;
+      }
+    }
+
+    // Depois: mesma cor, posição diferente.
+    for(let i=0;i<n;i++){
+      if(usedGuess[i]) continue;
+      for(let j=0;j<secret.length;j++){
+        if(usedSecret[j]) continue;
+        if(guess[i] === secret[j]){
+          result[i] = "white";
+          usedSecret[j] = true;
+          break;
+        }
+      }
+    }
+    return result;
+  }
+
+  // Exponibiliza para o jogo sem substituir a lógica de pontuação.
+  window.senhaFeedback = makeFeedback;
+
+  // Se o jogo tiver uma função global para desenhar uma tentativa,
+  // o helper abaixo pode ser usado diretamente.
+  window.renderSenhaFeedback = function(container, secret, guess){
+    if(!container) return;
+    container.innerHTML = "";
+    const fb = makeFeedback(secret, guess);
+
+    const row = document.createElement("div");
+    row.className = "history-row";
+
+    const number = document.createElement("div");
+    number.className = "history-number";
+    number.textContent = container.dataset.row || "";
+
+    const colors = document.createElement("div");
+    colors.className = "history-colors";
+
+    guess.forEach(c=>{
+      const d=document.createElement("span");
+      d.className="color-dot";
+      d.style.background=c;
+      colors.appendChild(d);
+    });
+
+    const marks=document.createElement("div");
+    marks.className="history-feedback";
+
+    fb.forEach(v=>{
+      const d=document.createElement("span");
+      d.className="feedback-dot"+(v ? " "+v : "");
+      marks.appendChild(d);
+    });
+
+    row.append(number, colors, marks);
+    container.appendChild(row);
+  };
+})();
+</script>
+
 </body>
 </html>
