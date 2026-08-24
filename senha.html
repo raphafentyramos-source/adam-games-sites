@@ -38,20 +38,18 @@ body{
   background:
     radial-gradient(
       circle at 15% 0%,
-      rgba(40,190,255,.25),
-      transparent 32%
-    ),
-
-    radial-gradient(
-      circle at 85% 10%,
-      rgba(120,60,255,.18),
+      rgba(46,183,255,.24),
       transparent 30%
     ),
-
+    radial-gradient(
+      circle at 85% 10%,
+      rgba(118,55,255,.20),
+      transparent 28%
+    ),
     linear-gradient(
       180deg,
-      #07506c 0%,
-      #073653 48%,
+      #073a4a 0%,
+      #06263d 50%,
       #031b2d 100%
     );
 
@@ -59,19 +57,18 @@ body{
 
 button{
   font:inherit;
-  -webkit-tap-highlight-color:transparent;
 }
 
 .page{
 
   width:100%;
-  max-width:720px;
+  max-width:700px;
   margin:auto;
 
   padding:
     14px
-    10px
-    70px;
+    12px
+    80px;
 
 }
 
@@ -80,22 +77,31 @@ button{
   display:flex;
   align-items:center;
   justify-content:space-between;
+  gap:10px;
 
 }
 
 .back{
 
-  width:45px;
-  height:45px;
+  width:44px;
+  height:44px;
 
   border:0;
   border-radius:14px;
 
-  background:#073d60;
+  background:
+    linear-gradient(
+      145deg,
+      #0c6fa5,
+      #07436e
+    );
 
   color:#fff;
 
-  font-size:26px;
+  font-size:25px;
+
+  box-shadow:
+    0 5px 12px #0006;
 
   cursor:pointer;
 
@@ -114,42 +120,40 @@ button{
 
   display:block;
 
-  color:#bcecff;
-
   font-size:10px;
 
   letter-spacing:2px;
+
+  color:#bcecff;
 
 }
 
 .title strong{
 
-  font-size:22px;
+  font-size:21px;
 
 }
 
 .spacer{
-  width:45px;
+  width:44px;
 }
 
 .card{
 
-  margin-top:13px;
+  margin-top:12px;
 
-  padding:12px;
+  padding:13px;
 
-  border-radius:23px;
+  border-radius:22px;
 
   background:
-    rgba(2,28,47,.88);
+    rgba(3,29,48,.88);
 
   border:
-    1px solid
-    rgba(255,255,255,.12);
+    1px solid #ffffff18;
 
   box-shadow:
-    0 15px 35px
-    rgba(0,0,0,.35);
+    0 14px 35px #0006;
 
 }
 
@@ -167,26 +171,23 @@ button{
 .stat{
 
   padding:
-    9px 5px;
+    9px 6px;
 
-  border-radius:14px;
+  border-radius:13px;
+
+  background:#0000002b;
 
   text-align:center;
-
-  background:
-    rgba(0,0,0,.22);
 
 }
 
 .stat small{
 
-  display:block;
-
-  color:#a9d7eb;
-
   font-size:9px;
 
   font-weight:900;
+
+  color:#a9d7eb;
 
 }
 
@@ -194,9 +195,9 @@ button{
 
   display:block;
 
-  margin-top:4px;
+  margin-top:3px;
 
-  font-size:20px;
+  font-size:19px;
 
 }
 
@@ -205,28 +206,28 @@ button{
 }
 
 .chances{
-  color:#58ff9b;
+  color:#ff6670;
 }
 
 .level{
-  color:#6fd5ff;
+  color:#72d7ff;
 }
 
 .progress{
 
   height:8px;
 
-  margin-top:10px;
+  background:#17394e;
 
   border-radius:20px;
 
   overflow:hidden;
 
-  background:#16394e;
+  margin-top:10px;
 
 }
 
-.progress-bar{
+.progress div{
 
   height:100%;
 
@@ -235,7 +236,7 @@ button{
   background:
     linear-gradient(
       90deg,
-      #18d66b,
+      #28d56c,
       #ffd52b
     );
 
@@ -251,18 +252,20 @@ button{
 
   padding:9px;
 
-  border-radius:13px;
-
-  text-align:center;
+  border-radius:12px;
 
   background:
-    rgba(255,205,40,.12);
+    rgba(255,193,7,.12);
 
   border:
     1px solid
-    rgba(255,210,40,.4);
+    rgba(255,210,60,.35);
+
+  text-align:center;
 
   color:#ffd52b;
+
+  font-size:15px;
 
   font-weight:900;
 
@@ -274,53 +277,74 @@ button{
 
 .timer.danger{
 
-  color:#ff555f;
+  color:#ff5964;
 
-  border-color:#ff555f;
+  border-color:
+    rgba(255,80,90,.55);
+
+  animation:
+    pulse .8s infinite alternate;
+
+}
+
+@keyframes pulse{
+
+  from{
+    transform:scale(1);
+  }
+
+  to{
+    transform:scale(1.02);
+  }
 
 }
 
 .info{
 
-  padding:
-    13px
-    5px
-    6px;
-
   text-align:center;
+
+  padding:
+    12px 6px 4px;
 
 }
 
 .info h1{
-
-  font-size:21px;
-
-  font-weight:900;
-
+  font-size:20px;
 }
 
 .info p{
 
   margin-top:5px;
 
-  color:#c3dfea;
+  color:#b9d7e8;
 
-  font-size:13px;
+  font-size:12px;
+
+  line-height:1.4;
 
 }
 
-.board-area{
+.game-wrap{
 
   position:relative;
 
-  width:100%;
+  z-index:1;
+
+  margin-top:8px;
+
+  display:flex;
+
+  justify-content:center;
 
   overflow:hidden;
 
   border-radius:18px;
 
-  background:
-    rgba(255,255,255,.035);
+  background-position:center;
+
+  background-size:cover;
+
+  background-repeat:no-repeat;
 
 }
 
@@ -328,14 +352,16 @@ button{
 
   position:relative;
 
-  width:100%;
+  width:min(100%,720px);
 
   aspect-ratio:1024/1536;
 
-  background:
-    url("./C0A67B9D-67BE-49A6-8747-B5B2A32411C4.png")
-    center/100% 100%
-    no-repeat;
+  background-image:
+    url("./C0A67B9D-67BE-49A6-8747-B5B2A32411C4.png");
+
+  background-size:100% 100%;
+
+  background-repeat:no-repeat;
 
 }
 
@@ -343,11 +369,12 @@ button{
 
   position:absolute;
 
-  z-index:2;
-
   left:9.5%;
+
   right:9.5%;
+
   top:15%;
+
   bottom:15%;
 
   display:grid;
@@ -355,35 +382,57 @@ button{
   grid-template-rows:
     repeat(10,1fr);
 
+  z-index:2;
+
 }
 
 .row{
 
+  position:relative;
+
   display:flex;
 
   align-items:center;
 
 }
 
-.guesses{
+.row-number{
 
-  width:62%;
+  width:9%;
+
+  height:54%;
+
+  font-size:0;
+
+}
+
+.guess-slots{
+
+  width:60%;
 
   display:flex;
-
-  align-items:center;
 
   gap:2.5%;
 
+  align-items:center;
+
+  justify-content:flex-start;
+
+  padding-left:1%;
+
 }
 
-.slot{
+.guess-slot{
 
-  width:15%;
+  width:15.2%;
 
   aspect-ratio:1;
 
   border-radius:50%;
+
+  background:transparent;
+
+  border:0;
 
   overflow:hidden;
 
@@ -395,9 +444,10 @@ button{
 
 }
 
-.slot img{
+.guess-slot img{
 
   width:100%;
+
   height:100%;
 
   object-fit:contain;
@@ -413,9 +463,12 @@ button{
   grid-template-columns:
     repeat(5,1fr);
 
-  gap:5%;
+  gap:4%;
 
-  padding:0 4%;
+  padding:
+    0 4%;
+
+  align-items:center;
 
 }
 
@@ -427,8 +480,9 @@ button{
 
   border-radius:50%;
 
-  background-size:
-    contain;
+  background:transparent;
+
+  background-size:contain;
 
   background-position:center;
 
@@ -454,7 +508,14 @@ button{
 
   position:relative;
 
-  z-index:50;
+  z-index:9999;
+
+  pointer-events:auto;
+
+  margin:
+    12px auto 0;
+
+  width:min(100%,560px);
 
   display:grid;
 
@@ -463,75 +524,30 @@ button{
 
   gap:7px;
 
-  margin-top:12px;
-
   padding:10px;
 
   border-radius:18px;
 
   background:
-    rgba(38,20,8,.82);
+    rgba(35,18,8,.78);
 
   border:
-    2px solid
-    #9b6a32;
+    2px solid #9b6a32;
+
+  box-shadow:
+    0 8px 20px #0008;
 
 }
 
-.color-button{
+.color-btn{
 
-  height:62px;
+  position:relative;
 
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
+  z-index:20;
 
   border:0;
 
-  border-radius:13px;
-
-  background:
-    rgba(255,255,255,.04);
-
-  cursor:pointer;
-
-}
-
-.color-button:active{
-
-  transform:scale(.92);
-
-}
-
-.color-button.selected{
-
-  background:
-    rgba(255,255,255,.2);
-
-  box-shadow:
-    inset 0 0 0 2px
-    #fff8;
-
-}
-
-.color-button img{
-
-  width:100%;
-  height:100%;
-
-  max-height:55px;
-
-  object-fit:contain;
-
-  pointer-events:none;
-
-}
-
-.current{
-
-  min-height:48px;
+  background:transparent;
 
   display:flex;
 
@@ -539,33 +555,102 @@ button{
 
   justify-content:center;
 
-  gap:7px;
+  cursor:pointer;
 
-  margin-top:8px;
+  min-width:0;
+
+  touch-action:manipulation;
+
+  pointer-events:auto;
+
+  -webkit-user-select:none;
+
+  user-select:none;
+
+  -webkit-touch-callout:none;
+
+  -webkit-tap-highlight-color:transparent;
 
 }
 
-.current-ball{
+.color-btn img{
 
-  width:35px;
+  width:100%;
 
-  height:35px;
+  height:100%;
+
+  max-height:58px;
+
+  object-fit:contain;
+
+  filter:
+    drop-shadow(
+      0 3px 3px #0008
+    );
+
+  pointer-events:none;
+
+  user-select:none;
+
+  -webkit-user-drag:none;
+
+}
+
+.color-btn:active img{
+
+  transform:scale(.88);
+
+}
+
+.color-btn.selected img{
+
+  filter:
+    drop-shadow(
+      0 0 9px #fff
+    )
+    drop-shadow(
+      0 3px 3px #0008
+    );
+
+}
+
+.selected-preview{
+
+  min-height:44px;
+
+  margin-top:9px;
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  gap:7px;
+
+}
+
+.preview-dot{
+
+  width:34px;
+
+  height:34px;
 
   border-radius:50%;
 
   overflow:hidden;
 
-  background:#130d08;
+  background:#1d140c;
 
   border:
-    2px solid
-    #8d6337;
+    2px solid #7b542b;
 
 }
 
-.current-ball img{
+.preview-dot img{
 
   width:100%;
+
   height:100%;
 
   object-fit:contain;
@@ -574,6 +659,14 @@ button{
 
 .controls{
 
+  position:relative;
+
+  z-index:9999;
+
+  pointer-events:auto;
+
+  margin-top:10px;
+
   display:grid;
 
   grid-template-columns:
@@ -581,143 +674,9 @@ button{
 
   gap:9px;
 
-  margin-top:9px;
-
 }
 
 .control{
-
-  height:48px;
-
-  border:0;
-
-  border-radius:14px;
-
-  color:#fff;
-
-  font-weight:900;
-
-  cursor:pointer;
-
-}
-
-.clear{
-
-  background:
-    linear-gradient(
-      145deg,
-      #315b79,
-      #183c58
-    );
-
-}
-
-.confirm{
-
-  background:
-    linear-gradient(
-      145deg,
-      #25d86d,
-      #087d42
-    );
-
-}
-
-.message{
-
-  min-height:22px;
-
-  margin-top:8px;
-
-  text-align:center;
-
-  color:#c5e1ed;
-
-  font-size:12px;
-
-  font-weight:800;
-
-}
-
-.modal{
-
-  position:fixed;
-
-  inset:0;
-
-  z-index:999;
-
-  display:none;
-
-  align-items:center;
-
-  justify-content:center;
-
-  padding:18px;
-
-  background:
-    rgba(0,10,22,.86);
-
-  backdrop-filter:
-    blur(6px);
-
-}
-
-.modal.show{
-  display:flex;
-}
-
-.modal-card{
-
-  width:100%;
-  max-width:390px;
-
-  padding:24px 18px;
-
-  border-radius:23px;
-
-  text-align:center;
-
-  background:
-    linear-gradient(
-      145deg,
-      #0a3c55,
-      #251044
-    );
-
-  border:
-    1px solid
-    rgba(255,255,255,.15);
-
-}
-
-.modal-card h2{
-  font-size:23px;
-}
-
-.modal-card p{
-
-  margin-top:10px;
-
-  color:#c5dce9;
-
-  font-size:14px;
-
-  line-height:1.5;
-
-}
-
-.modal-buttons{
-
-  display:grid;
-
-  gap:9px;
-
-  margin-top:18px;
-
-}
-
-.modal-buttons button{
 
   height:47px;
 
@@ -731,36 +690,174 @@ button{
 
   cursor:pointer;
 
+  box-shadow:
+    0 5px 10px #0005;
+
+}
+
+.clear{
+
+  background:
+    linear-gradient(
+      145deg,
+      #315878,
+      #183b57
+    );
+
+}
+
+.confirm{
+
+  background:
+    linear-gradient(
+      145deg,
+      #28d86d,
+      #08783e
+    );
+
+}
+
+.message{
+
+  text-align:center;
+
+  min-height:20px;
+
+  margin-top:7px;
+
+  color:#bfe3f2;
+
+  font-size:12px;
+
+  font-weight:800;
+
+}
+
+.modal{
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:100;
+
+  display:none;
+
+  align-items:center;
+
+  justify-content:center;
+
+  padding:18px;
+
+  background:#00101dcc;
+
+  backdrop-filter:blur(6px);
+
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-card{
+
+  width:min(100%,390px);
+
+  padding:
+    22px 18px;
+
+  border-radius:22px;
+
+  text-align:center;
+
+  background:
+    linear-gradient(
+      145deg,
+      #0b3a52,
+      #241044
+    );
+
+  border:
+    1px solid #ffffff1c;
+
+  box-shadow:
+    0 20px 50px #0009;
+
+}
+
+.modal-card h2{
+  font-size:22px;
+}
+
+.modal-card p{
+
+  margin-top:9px;
+
+  color:#c3ddeb;
+
+  font-size:14px;
+
+  line-height:1.5;
+
+}
+
+.modal-buttons{
+
+  display:grid;
+
+  gap:9px;
+
+  margin-top:17px;
+
+}
+
+.modal-buttons button{
+
+  height:46px;
+
+  border:0;
+
+  border-radius:13px;
+
+  color:#fff;
+
+  font-weight:900;
+
+  cursor:pointer;
+
 }
 
 .primary{
-  background:#19b760;
+  background:#19ae60;
 }
 
 .secondary{
-  background:#ffffff18;
+  background:#ffffff17;
 }
 
 .gold{
   color:#ffd52b;
 }
 
-@media(max-width:500px){
+@media(max-width:520px){
+
+  .page{
+
+    padding-left:8px;
+    padding-right:8px;
+
+  }
 
   .card{
     padding:9px;
   }
 
-  .color-button{
-    height:55px;
-  }
-
-  .color-button img{
-    max-height:48px;
-  }
-
   .stat b{
     font-size:17px;
+  }
+
+  .info h1{
+    font-size:18px;
   }
 
 }
@@ -846,15 +943,13 @@ button{
       </div>
 
 
-      <div class="stat">
+      <div class="stat level">
 
         <small>
           FASE
         </small>
 
-        <b
-          class="level"
-          id="level">
+        <b id="level">
 
           1 / 9
 
@@ -868,11 +963,7 @@ button{
 
     <div class="progress">
 
-      <div
-        class="progress-bar"
-        id="progress">
-
-      </div>
+      <div id="progress"></div>
 
     </div>
 
@@ -881,7 +972,7 @@ button{
       class="timer"
       id="timer">
 
-      ⏱️ FASE BÔNUS:
+      ⏱️ TEMPO:
       <span id="timerValue">
         30
       </span>s
@@ -892,57 +983,42 @@ button{
     <div class="info">
 
       <h1 id="phaseTitle">
-
-        NÍVEL 1 — DESCUBRA A SENHA
-
+        DESCUBRA A SENHA
       </h1>
 
-
       <p id="phaseText">
-
-        Escolha 3 cores e descubra a combinação.
-
+        Descubra a combinação usando as cores.
       </p>
 
     </div>
 
 
-    <!--
-      IMPORTANTE:
-      A SENHA SECRETA NÃO É COLOCADA
-      EM NENHUM LUGAR DA TELA.
-    -->
-
     <div
-      class="board-area">
+      class="selected-preview"
+      id="preview">
+    </div>
 
 
-      <div class="board">
+    <div class="game-wrap">
 
+      <div>
 
-        <div
-          class="rows"
-          id="rows">
+        <div class="board">
+
+          <div
+            class="rows"
+            id="rows">
+          </div>
 
         </div>
 
 
+        <div
+          class="palette"
+          id="palette">
+        </div>
+
       </div>
-
-
-    </div>
-
-
-    <div
-      class="current"
-      id="current">
-
-    </div>
-
-
-    <div
-      class="palette"
-      id="palette">
 
     </div>
 
@@ -952,7 +1028,7 @@ button{
 
       <button
         class="control clear"
-        id="clear"
+        id="clearBtn"
         type="button">
 
         LIMPAR
@@ -962,7 +1038,7 @@ button{
 
       <button
         class="control confirm"
-        id="confirm"
+        id="confirmBtn"
         type="button">
 
         CONFIRMAR
@@ -976,9 +1052,6 @@ button{
     <div
       class="message"
       id="message">
-
-      Escolha as cores da sua tentativa.
-
     </div>
 
 
@@ -1000,7 +1073,6 @@ button{
     <div
       class="modal-buttons"
       id="modalButtons">
-
     </div>
 
   </div>
@@ -1010,10 +1082,6 @@ button{
 
 <script type="module">
 
-
-/* =====================================================
-   FIREBASE
-===================================================== */
 
 import {
   initializeApp
@@ -1078,18 +1146,13 @@ const auth=
 const db=
   getFirestore(app);
 
-
-/* =====================================================
-   ELEMENTOS
-===================================================== */
-
 const $=
   id =>
     document.getElementById(id);
 
 
 /* =====================================================
-   ASSETS
+   CORES
 ===================================================== */
 
 const COLORS=[
@@ -1106,79 +1169,74 @@ const COLORS=[
 
 const FILES={
 
-  vermelho:
-    "./vermelho.png",
+  vermelho:"./vermelho.png",
+  azul:"./azul.png",
+  verde:"./verde.png",
+  amarelo:"./amarelo.png",
+  roxo:"./roxo.png",
+  laranja:"./laranja.png"
 
-  azul:
-    "./azul.png",
+};
 
-  verde:
-    "./verde.png",
 
-  amarelo:
-    "./amarelo.png",
+const FEEDBACK={
 
-  roxo:
-    "./roxo.png",
-
-  laranja:
-    "./laranja.png"
+  black:"./preto.png",
+  white:"./branco.png"
 
 };
 
 
 /* =====================================================
-   CONFIGURAÇÃO DAS 9 FASES
+   NÍVEIS
 ===================================================== */
 
 const LEVELS={
 
   1:{
-    colors:3,
+    length:3,
     reward:20
   },
 
   2:{
-    colors:3,
+    length:3,
     reward:20
   },
 
   3:{
-    colors:3,
+    length:3,
     reward:20
   },
 
   4:{
-    colors:4,
+    length:4,
     reward:30
   },
 
   5:{
-    colors:4,
+    length:4,
     reward:30
   },
 
   6:{
-    colors:4,
+    length:4,
     reward:30
   },
 
   7:{
-    colors:5,
+    length:5,
     reward:30
   },
 
   8:{
-    colors:6,
-    reward:75,
-    hard:true
+    length:6,
+    reward:75
   },
 
   9:{
-    colors:6,
-    rewardNormal:100,
-    rewardFast:150,
-    bonus:true
+    length:6,
+    reward:100,
+    bonusReward:150
   }
 
 };
@@ -1186,127 +1244,1492 @@ const LEVELS={
 
 const MAX_ATTEMPTS=10;
 
-const BONUS_SECONDS=30;
+const BONUS_TIME=30;
 
 
 /* =====================================================
    ESTADO
 ===================================================== */
 
-let usuario=null;
+let userDoc=null;
 
-let usuarioDoc=null;
+let userData=null;
 
-let nivel=1;
+let level=1;
 
-let senha=[];
+let secret=[];
 
-let tentativa=[];
+let current=[];
 
-let tentativaNumero=0;
+let attempt=0;
 
-let bloqueado=false;
+let busy=false;
 
 let timerInterval=null;
 
 let timerStart=0;
 
-let entradaProcessada=false;
-
 
 /* =====================================================
-   SESSION KEY
+   SALDO
 ===================================================== */
 
-function sessionKey(){
+function money(){
 
-  if(!usuario){
-    return null;
-  }
-
-  return:
-    "adam_senha_entrada_" +
-    usuario.uid;
+  return Number(
+    userData?.moedas || 0
+  ).toLocaleString(
+    "pt-BR"
+  );
 
 }
 
 
-/* =====================================================
-   VERIFICAR SE JÁ ENTROU
-===================================================== */
-
-function jaEntrouNestaSessao(){
-
-  const key=
-    sessionKey();
-
-  if(!key){
-    return false;
-  }
-
-  return sessionStorage.getItem(
-    key
-  ) === "1";
-
-}
-
-
-function marcarEntrada(){
-
-  const key=
-    sessionKey();
-
-  if(key){
-
-    sessionStorage.setItem(
-      key,
-      "1"
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-   SALDOS
-===================================================== */
-
-function renderSaldo(){
+function renderStats(){
 
   $("coins").textContent=
-    Number(
-      usuario?.moedas || 0
-    ).toLocaleString(
-      "pt-BR"
-    );
-
+    money();
 
   $("chances").textContent=
     Number(
-      usuario?.chances || 0
+      userData?.chances || 0
     ).toLocaleString(
       "pt-BR"
     );
 
-
   $("level").textContent=
-    `${nivel} / 9`;
-
+    `${level} / 9`;
 
   $("progress").style.width=
-    `${nivel/9*100}%`;
+    `${(level/9)*100}%`;
 
 }
+
+
+/* =====================================================
+   GERAR SENHA
+   A SENHA É CRIADA INTERNAMENTE.
+   NUNCA É MOSTRADA NA TELA.
+===================================================== */
+
+function randomSecret(length){
+
+  const pool=[
+    ...COLORS
+  ];
+
+  const result=[];
+
+
+  while(
+    result.length < length
+  ){
+
+    const i=
+      Math.floor(
+        Math.random() *
+        pool.length
+      );
+
+    result.push(
+      pool.splice(i,1)[0]
+    );
+
+  }
+
+
+  return result;
+
+}
+
+
+/* =====================================================
+   PALETA
+===================================================== */
+
+function buildPalette(){
+
+  const el=
+    $("palette");
+
+  el.innerHTML="";
+
+
+  COLORS.forEach(
+    color=>{
+
+      const btn=
+        document.createElement(
+          "button"
+        );
+
+      btn.className=
+        "color-btn";
+
+      btn.type="button";
+
+
+      const img=
+        document.createElement(
+          "img"
+        );
+
+      img.src=
+        FILES[color];
+
+      img.alt="";
+
+      img.draggable=false;
+
+
+      btn.appendChild(
+        img
+      );
+
+
+      btn.addEventListener(
+        "click",
+        event=>{
+
+          event.preventDefault();
+
+          event.stopPropagation();
+
+          selecionarCor(
+            color,
+            btn
+          );
+
+        }
+      );
+
+
+      el.appendChild(
+        btn
+      );
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   ESCOLHER COR
+===================================================== */
+
+function selecionarCor(
+  color,
+  btn
+){
+
+  if(busy)
+    return;
+
+
+  const config=
+    LEVELS[level];
+
+
+  if(!config)
+    return;
+
+
+  if(
+    current.length >=
+    config.length
+  ){
+
+    $("message")
+      .textContent=
+        `Você já escolheu ${config.length} cores.`;
+
+    return;
+
+  }
+
+
+  current.push(
+    color
+  );
+
+
+  btn.classList.add(
+    "selected"
+  );
+
+
+  setTimeout(
+    ()=>{
+      btn.classList.remove(
+        "selected"
+      );
+    },
+    180
+  );
+
+
+  renderPreview();
+
+  renderCurrentRow();
+
+
+  $("message")
+    .textContent=
+      `${current.length}/${config.length} cores escolhidas.`;
+
+}
+
+
+/* =====================================================
+   PREVIEW DA ESCOLHA DO JOGADOR
+===================================================== */
+
+function renderPreview(){
+
+  const p=
+    $("preview");
+
+  p.innerHTML="";
+
+
+  current.forEach(
+    color=>{
+
+      const d=
+        document.createElement(
+          "div"
+        );
+
+      d.className=
+        "preview-dot";
+
+
+      const img=
+        document.createElement(
+          "img"
+        );
+
+      img.src=
+        FILES[color];
+
+      img.alt="";
+
+
+      d.appendChild(
+        img
+      );
+
+
+      p.appendChild(
+        d
+      );
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   HISTÓRICO
+===================================================== */
+
+function makeRows(){
+
+  const rows=
+    $("rows");
+
+  rows.innerHTML="";
+
+
+  for(
+    let r=0;
+    r<MAX_ATTEMPTS;
+    r++
+  ){
+
+    const row=
+      document.createElement(
+        "div"
+      );
+
+    row.className=
+      "row";
+
+    row.dataset.row=
+      r;
+
+
+    const number=
+      document.createElement(
+        "div"
+      );
+
+    number.className=
+      "row-number";
+
+    number.textContent=
+      r+1;
+
+
+    const slots=
+      document.createElement(
+        "div"
+      );
+
+    slots.className=
+      "guess-slots";
+
+
+    for(
+      let i=0;
+      i<6;
+      i++
+    ){
+
+      const slot=
+        document.createElement(
+          "div"
+        );
+
+      slot.className=
+        "guess-slot";
+
+
+      slot.dataset.slot=
+        i;
+
+
+      if(
+        i >=
+        LEVELS[level].length
+      ){
+
+        slot.style.visibility=
+          "hidden";
+
+      }
+
+
+      slots.appendChild(
+        slot
+      );
+
+    }
+
+
+    const feedback=
+      document.createElement(
+        "div"
+      );
+
+    feedback.className=
+      "feedback";
+
+
+    for(
+      let i=0;
+      i<5;
+      i++
+    ){
+
+      const dot=
+        document.createElement(
+          "span"
+        );
+
+      dot.className=
+        "feedback-dot";
+
+
+      feedback.appendChild(
+        dot
+      );
+
+    }
+
+
+    row.append(
+      number,
+      slots,
+      feedback
+    );
+
+
+    rows.appendChild(
+      row
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   DESENHAR TENTATIVA
+===================================================== */
+
+function renderCurrentRow(){
+
+  const row=
+    document.querySelector(
+      `.row[data-row="${attempt}"]`
+    );
+
+
+  if(!row)
+    return;
+
+
+  [
+    ...row.querySelectorAll(
+      ".guess-slot"
+    )
+  ]
+  .forEach(
+    (slot,i)=>{
+
+      slot.innerHTML="";
+
+
+      if(
+        i <
+        current.length
+      ){
+
+        const img=
+          document.createElement(
+            "img"
+          );
+
+        img.src=
+          FILES[
+            current[i]
+          ];
+
+        img.alt="";
+
+
+        slot.appendChild(
+          img
+        );
+
+      }
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   CALCULAR RESULTADO
+===================================================== */
+
+function calculateResult(
+  guess,
+  answer
+){
+
+  let exact=0;
+
+  let misplaced=0;
+
+
+  for(
+    let i=0;
+    i<answer.length;
+    i++
+  ){
+
+    if(
+      guess[i] ===
+      answer[i]
+    ){
+
+      exact++;
+
+    }
+
+  }
+
+
+  for(
+    let i=0;
+    i<guess.length;
+    i++
+  ){
+
+    if(
+      guess[i] !==
+      answer[i] &&
+      answer.includes(
+        guess[i]
+      )
+    ){
+
+      misplaced++;
+
+    }
+
+  }
+
+
+  return {
+    exact,
+    misplaced
+  };
+
+}
+
+
+/* =====================================================
+   MOSTRAR RESULTADO
+===================================================== */
+
+function paintResult(
+  rowIndex,
+  result
+){
+
+  const row=
+    document.querySelector(
+      `.row[data-row="${rowIndex}"]`
+    );
+
+
+  if(!row)
+    return;
+
+
+  const dots=[
+    ...row.querySelectorAll(
+      ".feedback-dot"
+    )
+  ];
+
+
+  for(
+    let i=0;
+    i<result.exact;
+    i++
+  ){
+
+    dots[i]
+      .classList.add(
+        "black"
+      );
+
+  }
+
+
+  for(
+    let i=0;
+    i<result.misplaced;
+    i++
+  ){
+
+    dots[
+      result.exact+i
+    ]
+    .classList.add(
+      "white"
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   REGISTRAR TENTATIVA
+===================================================== */
+
+function addAttempt(){
+
+  const result=
+    calculateResult(
+      current,
+      secret
+    );
+
+
+  paintResult(
+    attempt,
+    result
+  );
+
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+function openModal(
+  title,
+  text,
+  buttons
+){
+
+  $("modalTitle")
+    .textContent=
+      title;
+
+
+  $("modalText")
+    .innerHTML=
+      text;
+
+
+  $("modalButtons")
+    .innerHTML="";
+
+
+  buttons.forEach(
+    item=>{
+
+      const b=
+        document.createElement(
+          "button"
+        );
+
+      b.type="button";
+
+      b.textContent=
+        item.text;
+
+      b.className=
+        item.cls ||
+        "secondary";
+
+      b.onclick=
+        item.fn;
+
+
+      $("modalButtons")
+        .appendChild(
+          b
+        );
+
+    }
+  );
+
+
+  $("modal")
+    .classList.add(
+      "show"
+    );
+
+}
+
+
+function closeModal(){
+
+  $("modal")
+    .classList.remove(
+      "show"
+    );
+
+}
+
+
+/* =====================================================
+   FIREBASE
+===================================================== */
+
+async function updateAccount(
+  deltaCoins=0,
+  deltaChances=0
+){
+
+  if(!userDoc){
+
+    throw new Error(
+      "Cadastro não encontrado."
+    );
+
+  }
+
+
+  const ref=
+    doc(
+      db,
+      "admins",
+      userDoc.id
+    );
+
+
+  const oldCoins=
+    Number(
+      userData?.moedas || 0
+    );
+
+
+  const oldChances=
+    Number(
+      userData?.chances || 0
+    );
+
+
+  const newCoins=
+    oldCoins +
+    Number(deltaCoins || 0);
+
+
+  const newChances=
+    oldChances +
+    Number(deltaChances || 0);
+
+
+  if(
+    newChances < 0
+  ){
+
+    throw new Error(
+      "Você não possui chances suficientes."
+    );
+
+  }
+
+
+  await updateDoc(
+    ref,
+    {
+
+      moedas:
+        increment(
+          Number(
+            deltaCoins || 0
+          )
+        ),
+
+      chances:
+        increment(
+          Number(
+            deltaChances || 0
+          )
+        )
+
+    }
+  );
+
+
+  userData={
+
+    ...userData,
+
+    moedas:newCoins,
+
+    chances:newChances
+
+  };
+
+
+  renderStats();
+
+}
+
+
+/* =====================================================
+   CRONÔMETRO FASE 9
+===================================================== */
+
+function stopTimer(){
+
+  if(timerInterval){
+
+    clearInterval(
+      timerInterval
+    );
+
+  }
+
+
+  timerInterval=null;
+
+}
+
+
+function startTimer(){
+
+  stopTimer();
+
+
+  if(
+    level !== 9
+  )
+    return;
+
+
+  const timer=
+    $("timer");
+
+  const value=
+    $("timerValue");
+
+
+  timer.classList.add(
+    "show"
+  );
+
+  timer.classList.remove(
+    "danger"
+  );
+
+
+  timerStart=
+    Date.now();
+
+
+  value.textContent=
+    "30";
+
+
+  timerInterval=
+    setInterval(
+      ()=>{
+
+        const elapsed=
+          Math.floor(
+            (
+              Date.now() -
+              timerStart
+            ) / 1000
+          );
+
+
+        const remaining=
+          Math.max(
+            0,
+            BONUS_TIME -
+            elapsed
+          );
+
+
+        value.textContent=
+          remaining;
+
+
+        if(
+          remaining <= 10
+        ){
+
+          timer.classList.add(
+            "danger"
+          );
+
+        }
+
+
+        if(
+          remaining <= 0
+        ){
+
+          stopTimer();
+
+          value.textContent=
+            "0";
+
+        }
+
+      },
+      200
+    );
+
+}
+
+
+function hideTimer(){
+
+  stopTimer();
+
+  $("timer")
+    .classList.remove(
+      "show",
+      "danger"
+    );
+
+}
+
+
+/* =====================================================
+   FUNDO
+===================================================== */
+
+function setLevelBackground(){
+
+  const bg=
+    level <= 3
+      ? "./fundo_nivel_01_03.png"
+
+      : level <= 6
+      ? "./fundo_nivel_04_06.png"
+
+      : level === 7
+      ? "./fundo_nivel_07.png"
+
+      : "./fundo_nivel_08_09.png";
+
+
+  const wrap=
+    document.querySelector(
+      ".game-wrap"
+    );
+
+
+  if(!wrap)
+    return;
+
+
+  wrap.style.backgroundImage=
+    `url("${bg}")`;
+
+  wrap.style.backgroundSize=
+    "cover";
+
+  wrap.style.backgroundPosition=
+    "center";
+
+  wrap.style.backgroundRepeat=
+    "no-repeat";
+
+}
+
+
+/* =====================================================
+   INICIAR FASE
+===================================================== */
+
+function startLevel(){
+
+  stopTimer();
+
+  hideTimer();
+
+
+  const config=
+    LEVELS[level];
+
+
+  secret=
+    randomSecret(
+      config.length
+    );
+
+
+  /*
+    IMPORTANTE:
+    A senha é criada aqui,
+    mas NUNCA é colocada no HTML.
+  */
+
+
+  current=[];
+
+  attempt=0;
+
+  busy=false;
+
+
+  $("phaseTitle")
+    .textContent=
+      level === 8
+        ? "NÍVEL 8 — HARD"
+
+        : level === 9
+        ? "NÍVEL 9 — BÔNUS"
+
+        : `NÍVEL ${level} — DESCUBRA A SENHA`;
+
+
+  if(
+    level === 9
+  ){
+
+    $("phaseText")
+      .textContent=
+        "Descubra a combinação. Até 30 segundos: 150 Adam Coins.";
+
+  }else{
+
+    $("phaseText")
+      .textContent=
+        `A senha tem ${config.length} cores. Você tem ${MAX_ATTEMPTS} tentativas.`;
+
+  }
+
+
+  $("message")
+    .textContent=
+      "Sua vez! Monte a combinação e confirme.";
+
+
+  makeRows();
+
+  renderPreview();
+
+  renderStats();
+
+  setLevelBackground();
+
+
+  /*
+    FASE 9 começa o cronômetro
+    imediatamente.
+  */
+
+  if(
+    level === 9
+  ){
+
+    startTimer();
+
+  }
+
+}
+
+
+/* =====================================================
+   VITÓRIA
+===================================================== */
+
+async function win(){
+
+  busy=true;
+
+  stopTimer();
+
+
+  let reward=
+    LEVELS[level].reward;
+
+
+  let textExtra="";
+
+
+  if(
+    level === 9
+  ){
+
+    const elapsed=
+      Math.floor(
+        (
+          Date.now() -
+          timerStart
+        ) / 1000
+      );
+
+
+    if(
+      elapsed <= BONUS_TIME
+    ){
+
+      reward=150;
+
+      textExtra=
+        `
+        <br>
+        ⏱️ Tempo: <b>${elapsed}s</b>
+
+        <br><br>
+
+        <span class="gold">
+          🏆 BÔNUS MÁXIMO
+          <br>
+          <b>+150 Adam Coins</b>
+        </span>
+        `;
+
+    }else{
+
+      reward=100;
+
+      textExtra=
+        `
+        <br>
+        ⏱️ Tempo: <b>${elapsed}s</b>
+
+        <br><br>
+
+        <span class="gold">
+          <b>+100 Adam Coins</b>
+        </span>
+        `;
+
+    }
+
+  }
+
+
+  await updateAccount(
+    reward,
+    0
+  );
+
+
+  if(
+    level < 9
+  ){
+
+    openModal(
+
+      "🎉 SENHA CORRETA!",
+
+      `
+      Você descobriu a combinação!
+
+      <br><br>
+
+      <span class="gold">
+        <b>+${reward} Adam Coins</b>
+      </span>
+      `,
+
+      [
+
+        {
+
+          text:
+            "PRÓXIMO NÍVEL",
+
+          cls:
+            "primary",
+
+          fn:
+            ()=>{
+
+              closeModal();
+
+              level++;
+
+              startLevel();
+
+            }
+
+        }
+
+      ]
+
+    );
+
+
+    return;
+
+  }
+
+
+  openModal(
+
+    "🏆 FASE BÔNUS CONCLUÍDA!",
+
+    `
+    Você completou a Fase 9!
+
+    ${textExtra}
+    `,
+
+    [
+
+      {
+
+        text:
+          "VOLTAR AOS JOGOS",
+
+        cls:
+          "primary",
+
+        fn:
+          ()=>{
+            window.location.href=
+              "jogos.html";
+          }
+
+      }
+
+    ]
+
+  );
+
+}
+
+
+/* =====================================================
+   DERROTA
+===================================================== */
+
+async function lose(){
+
+  busy=true;
+
+  stopTimer();
+
+
+  const correct=
+    secret
+      .map(
+        c =>
+          c.toUpperCase()
+      )
+      .join(" • ");
+
+
+  openModal(
+
+    "💥 VOCÊ PERDEU!",
+
+    `
+    A combinação correta era:
+
+    <br><br>
+
+    <b>${correct}</b>
+
+    <br><br>
+
+    Você pode reiniciar a fase
+    ou continuar usando uma chance.
+    `,
+
+    [
+
+      {
+
+        text:
+          "REINICIAR FASE",
+
+        cls:
+          "primary",
+
+        fn:
+          ()=>{
+
+            closeModal();
+
+            startLevel();
+
+          }
+
+      },
+
+      {
+
+        text:
+          "CONTINUAR NESTA FASE (-1 CHANCE)",
+
+        cls:
+          "secondary",
+
+        fn:
+          async()=>{
+
+            try{
+
+              await updateAccount(
+                0,
+                -1
+              );
+
+
+              closeModal();
+
+              startLevel();
+
+
+            }catch(error){
+
+              $("modalText")
+                .textContent=
+                  error.message;
+
+            }
+
+          }
+
+      }
+
+    ]
+
+  );
+
+}
+
+
+/* =====================================================
+   CONFIRMAR
+===================================================== */
+
+let acaoProcessada=false;
+
+
+async function confirmar(){
+
+  if(busy)
+    return;
+
+
+  if(
+    current.length !==
+    secret.length
+  ){
+
+    $("message")
+      .textContent=
+        `Escolha ${secret.length} cores antes de confirmar.`;
+
+    return;
+
+  }
+
+
+  addAttempt();
+
+
+  const guess=[
+    ...current
+  ];
+
+
+  const correct=
+    guess.every(
+      (color,i)=>
+        color ===
+        secret[i]
+    );
+
+
+  if(correct){
+
+    await win();
+
+    return;
+
+  }
+
+
+  attempt++;
+
+  current=[];
+
+  renderPreview();
+
+
+  if(
+    attempt >=
+    MAX_ATTEMPTS
+  ){
+
+    await lose();
+
+    return;
+
+  }
+
+
+  renderCurrentRow();
+
+
+  $("message")
+    .textContent=
+      `Senha incorreta. Tentativa ${attempt+1} de ${MAX_ATTEMPTS}.`;
+
+}
+
+
+/* =====================================================
+   BOTÃO CONFIRMAR
+===================================================== */
+
+$("confirmBtn")
+  .addEventListener(
+    "click",
+    event=>{
+
+      event.preventDefault();
+
+
+      if(
+        acaoProcessada
+      )
+        return;
+
+
+      acaoProcessada=true;
+
+
+      confirmar()
+        .finally(
+          ()=>{
+
+            setTimeout(
+              ()=>{
+                acaoProcessada=false;
+              },
+              250
+            );
+
+          }
+        );
+
+    }
+  );
+
+
+/* =====================================================
+   LIMPAR
+===================================================== */
+
+$("clearBtn")
+  .addEventListener(
+    "click",
+    event=>{
+
+      event.preventDefault();
+
+
+      if(busy)
+        return;
+
+
+      current=[];
+
+      renderPreview();
+
+      renderCurrentRow();
+
+      $("message")
+        .textContent="";
+
+    }
+  );
+
+
+/* =====================================================
+   VOLTAR
+===================================================== */
+
+$("back")
+  .addEventListener(
+    "click",
+    ()=>{
+
+      window.location.href=
+        "jogos.html";
+
+    }
+  );
 
 
 /* =====================================================
    LOCALIZAR USUÁRIO
 ===================================================== */
 
-async function localizarUsuario(user){
+async function localizarUsuario(
+  user
+){
 
-  let resultado=
+  let result=
     await getDocs(
 
       query(
@@ -1327,11 +2750,11 @@ async function localizarUsuario(user){
 
 
   if(
-    resultado.empty &&
+    result.empty &&
     user.email
   ){
 
-    resultado=
+    result=
       await getDocs(
 
         query(
@@ -1353,1601 +2776,21 @@ async function localizarUsuario(user){
   }
 
 
-  if(resultado.empty){
-
-    return null;
-
-  }
-
-
-  return resultado.docs[0];
+  return result.empty
+    ? null
+    : result.docs[0];
 
 }
 
 
 /* =====================================================
-   ALTERAR SALDO
-===================================================== */
-
-async function alterarSaldo(
-  moedas,
-  chances
-){
-
-  const ref=
-    doc(
-      db,
-      "admins",
-      usuarioDoc.id
-    );
-
-
-  const moedasAtual=
-    Number(
-      usuario.moedas || 0
-    );
-
-
-  const chancesAtual=
-    Number(
-      usuario.chances || 0
-    );
-
-
-  const novasMoedas=
-    moedasAtual +
-    moedas;
-
-
-  const novasChances=
-    chancesAtual +
-    chances;
-
-
-  if(
-    novasChances < 0
-  ){
-
-    throw new Error(
-      "Você não possui chances suficientes."
-    );
-
-  }
-
-
-  await updateDoc(
-    ref,
-    {
-
-      moedas:
-        increment(moedas),
-
-      chances:
-        increment(chances)
-
-    }
-  );
-
-
-  usuario.moedas=
-    novasMoedas;
-
-
-  usuario.chances=
-    novasChances;
-
-
-  renderSaldo();
-
-}
-
-
-/* =====================================================
-   GERAR SENHA
-===================================================== */
-
-function gerarSenha(tamanho){
-
-  /*
-    A senha existe SOMENTE nesta variável.
-    Não é inserida no HTML.
-  */
-
-  const disponiveis=
-    [
-      ...COLORS
-    ];
-
-
-  const resultado=[];
-
-
-  while(
-    resultado.length <
-    tamanho
-  ){
-
-    const indice=
-      Math.floor(
-        Math.random() *
-        disponiveis.length
-      );
-
-
-    resultado.push(
-      disponiveis[indice]
-    );
-
-
-    disponiveis.splice(
-      indice,
-      1
-    );
-
-  }
-
-
-  return resultado;
-
-}
-
-
-/* =====================================================
-   PALETA
-===================================================== */
-
-function montarPaleta(){
-
-  const palette=
-    $("palette");
-
-
-  palette.innerHTML="";
-
-
-  COLORS.forEach(
-    cor=>{
-
-      const button=
-        document.createElement(
-          "button"
-        );
-
-
-      button.type="button";
-
-      button.className=
-        "color-button";
-
-
-      const img=
-        document.createElement(
-          "img"
-        );
-
-
-      img.src=
-        FILES[cor];
-
-      img.alt="";
-
-
-      button.appendChild(
-        img
-      );
-
-
-      button.addEventListener(
-        "click",
-        ()=>{
-
-          escolherCor(
-            cor,
-            button
-          );
-
-        }
-      );
-
-
-      palette.appendChild(
-        button
-      );
-
-    }
-  );
-
-}
-
-
-/* =====================================================
-   ESCOLHER COR
-===================================================== */
-
-function escolherCor(
-  cor,
-  button
-){
-
-  if(
-    bloqueado
-  ){
-
-    return;
-
-  }
-
-
-  const quantidade=
-    LEVELS[nivel].colors;
-
-
-  if(
-    tentativa.length >=
-    quantidade
-  ){
-
-    $("message").textContent=
-      "Você já escolheu todas as cores.";
-
-    return;
-
-  }
-
-
-  tentativa.push(
-    cor
-  );
-
-
-  button.classList.add(
-    "selected"
-  );
-
-
-  setTimeout(
-    ()=>{
-      button.classList.remove(
-        "selected"
-      );
-    },
-    200
-  );
-
-
-  renderTentativa();
-
-
-  $("message").textContent=
-    `${tentativa.length}/${quantidade} cores escolhidas.`;
-
-}
-
-
-/* =====================================================
-   MOSTRAR ESCOLHA ATUAL
-===================================================== */
-
-function renderTentativa(){
-
-  const current=
-    $("current");
-
-
-  current.innerHTML="";
-
-
-  tentativa.forEach(
-    cor=>{
-
-      const bola=
-        document.createElement(
-          "div"
-        );
-
-
-      bola.className=
-        "current-ball";
-
-
-      const img=
-        document.createElement(
-          "img"
-        );
-
-
-      img.src=
-        FILES[cor];
-
-      img.alt="";
-
-
-      bola.appendChild(
-        img
-      );
-
-
-      current.appendChild(
-        bola
-      );
-
-    }
-  );
-
-
-  renderLinhaAtual();
-
-}
-
-
-/* =====================================================
-   CRIAR 10 LINHAS
-===================================================== */
-
-function criarTabuleiro(){
-
-  const rows=
-    $("rows");
-
-
-  rows.innerHTML="";
-
-
-  for(
-    let linha=0;
-    linha<MAX_ATTEMPTS;
-    linha++
-  ){
-
-    const row=
-      document.createElement(
-        "div"
-      );
-
-
-    row.className=
-      "row";
-
-
-    row.dataset.row=
-      linha;
-
-
-    const guesses=
-      document.createElement(
-        "div"
-      );
-
-
-    guesses.className=
-      "guesses";
-
-
-    for(
-      let i=0;
-      i<6;
-      i++
-    ){
-
-      const slot=
-        document.createElement(
-          "div"
-        );
-
-
-      slot.className=
-        "slot";
-
-
-      slot.dataset.slot=
-        i;
-
-
-      guesses.appendChild(
-        slot
-      );
-
-    }
-
-
-    const feedback=
-      document.createElement(
-        "div"
-      );
-
-
-    feedback.className=
-      "feedback";
-
-
-    for(
-      let i=0;
-      i<5;
-      i++
-    ){
-
-      const dot=
-        document.createElement(
-          "span"
-        );
-
-
-      dot.className=
-        "feedback-dot";
-
-
-      feedback.appendChild(
-        dot
-      );
-
-    }
-
-
-    row.append(
-      guesses,
-      feedback
-    );
-
-
-    rows.appendChild(
-      row
-    );
-
-  }
-
-
-  ajustarQuantidadeSlots();
-
-}
-
-
-/* =====================================================
-   OCULTAR SLOTS QUE NÃO SÃO USADOS
-===================================================== */
-
-function ajustarQuantidadeSlots(){
-
-  const quantidade=
-    LEVELS[nivel].colors;
-
-
-  document
-    .querySelectorAll(
-      ".row"
-    )
-    .forEach(
-      row=>{
-
-        [
-          ...row.querySelectorAll(
-            ".slot"
-          )
-        ]
-        .forEach(
-          (slot,index)=>{
-
-            slot.style.visibility=
-              index <
-              quantidade
-                ? "visible"
-                : "hidden";
-
-          }
-        );
-
-      }
-    );
-
-}
-
-
-/* =====================================================
-   LINHA ATUAL
-===================================================== */
-
-function renderLinhaAtual(){
-
-  const row=
-    document.querySelector(
-      `.row[data-row="${tentativaNumero}"]`
-    );
-
-
-  if(!row){
-    return;
-  }
-
-
-  const slots=
-    [
-      ...row.querySelectorAll(
-        ".slot"
-      )
-    ];
-
-
-  slots.forEach(
-    (slot,index)=>{
-
-      slot.innerHTML="";
-
-
-      if(
-        tentativa[index]
-      ){
-
-        const img=
-          document.createElement(
-            "img"
-          );
-
-
-        img.src=
-          FILES[
-            tentativa[index]
-          ];
-
-
-        img.alt="";
-
-
-        slot.appendChild(
-          img
-        );
-
-      }
-
-    }
-  );
-
-}
-
-
-/* =====================================================
-   COMPARAR
-===================================================== */
-
-function comparar(
-  palpite,
-  resposta
-){
-
-  let pretas=0;
-
-  let brancas=0;
-
-
-  const respostaUsada=
-    new Array(
-      resposta.length
-    )
-    .fill(false);
-
-
-  const palpiteUsado=
-    new Array(
-      palpite.length
-    )
-    .fill(false);
-
-
-  /*
-    Primeiro:
-    posição correta.
-  */
-
-  for(
-    let i=0;
-    i<resposta.length;
-    i++
-  ){
-
-    if(
-      palpite[i] ===
-      resposta[i]
-    ){
-
-      pretas++;
-
-      respostaUsada[i]=true;
-
-      palpiteUsado[i]=true;
-
-    }
-
-  }
-
-
-  /*
-    Segundo:
-    cor correta em
-    posição errada.
-  */
-
-  for(
-    let i=0;
-    i<palpite.length;
-    i++
-  ){
-
-    if(
-      palpiteUsado[i]
-    ){
-
-      continue;
-
-    }
-
-
-    for(
-      let j=0;
-      j<resposta.length;
-      j++
-    ){
-
-      if(
-        respostaUsada[j]
-      ){
-
-        continue;
-
-      }
-
-
-      if(
-        palpite[i] ===
-        resposta[j]
-      ){
-
-        brancas++;
-
-        respostaUsada[j]=true;
-
-        palpiteUsado[i]=true;
-
-        break;
-
-      }
-
-    }
-
-  }
-
-
-  return {
-    pretas,
-    brancas
-  };
-
-}
-
-
-/* =====================================================
-   MOSTRAR RESULTADO
-===================================================== */
-
-function mostrarResultado(
-  resultado
-){
-
-  const row=
-    document.querySelector(
-      `.row[data-row="${tentativaNumero}"]`
-    );
-
-
-  if(!row){
-    return;
-  }
-
-
-  const dots=
-    [
-      ...row.querySelectorAll(
-        ".feedback-dot"
-      )
-    ];
-
-
-  for(
-    let i=0;
-    i<resultado.pretas;
-    i++
-  ){
-
-    dots[i].classList.add(
-      "black"
-    );
-
-  }
-
-
-  for(
-    let i=0;
-    i<resultado.brancas;
-    i++
-  ){
-
-    dots[
-      resultado.pretas+i
-    ]
-    .classList.add(
-      "white"
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-   CRONÔMETRO
-===================================================== */
-
-function pararCronometro(){
-
-  if(timerInterval){
-
-    clearInterval(
-      timerInterval
-    );
-
-  }
-
-
-  timerInterval=null;
-
-}
-
-
-function iniciarCronometro(){
-
-  pararCronometro();
-
-
-  if(
-    nivel !== 9
-  ){
-
-    return;
-
-  }
-
-
-  $("timer")
-    .classList.add(
-      "show"
-    );
-
-
-  $("timer")
-    .classList.remove(
-      "danger"
-    );
-
-
-  timerStart=
-    Date.now();
-
-
-  $("timerValue")
-    .textContent=
-      BONUS_SECONDS;
-
-
-  timerInterval=
-    setInterval(
-      ()=>{
-
-        const segundos=
-          Math.floor(
-            (
-              Date.now() -
-              timerStart
-            ) / 1000
-          );
-
-
-        const restante=
-          Math.max(
-            0,
-            BONUS_SECONDS -
-            segundos
-          );
-
-
-        $("timerValue")
-          .textContent=
-            restante;
-
-
-        if(
-          restante <= 10
-        ){
-
-          $("timer")
-            .classList.add(
-              "danger"
-            );
-
-        }
-
-
-        if(
-          restante <= 0
-        ){
-
-          pararCronometro();
-
-        }
-
-      },
-      200
-    );
-
-}
-
-
-/* =====================================================
-   INICIAR FASE
-===================================================== */
-
-function iniciarFase(){
-
-  pararCronometro();
-
-
-  $("timer")
-    .classList.remove(
-      "show",
-      "danger"
-    );
-
-
-  const config=
-    LEVELS[nivel];
-
-
-  /*
-    NOVA SENHA.
-    NUNCA É EXIBIDA.
-  */
-
-  senha=
-    gerarSenha(
-      config.colors
-    );
-
-
-  tentativa=[];
-
-  tentativaNumero=0;
-
-  bloqueado=false;
-
-
-  $("phaseTitle")
-    .textContent=
-
-      nivel === 8
-
-        ? "NÍVEL 8 — HARD"
-
-        : nivel === 9
-
-        ? "NÍVEL 9 — FASE BÔNUS"
-
-        : `NÍVEL ${nivel} — DESCUBRA A SENHA`;
-
-
-  $("phaseText")
-    .textContent=
-
-      nivel === 9
-
-        ? "Descubra a combinação em até 30 segundos."
-
-        : `Descubra a senha de ${config.colors} cores. Você tem 10 tentativas.`;
-
-
-  $("message")
-    .textContent=
-      "Escolha as cores da sua tentativa.";
-
-
-  criarTabuleiro();
-
-  renderTentativa();
-
-  renderSaldo();
-
-
-  /*
-    NÍVEL 9:
-    cronômetro começa imediatamente.
-  */
-
-  if(
-    nivel === 9
-  ){
-
-    iniciarCronometro();
-
-  }
-
-}
-
-
-/* =====================================================
-   CONFIRMAR
-===================================================== */
-
-async function confirmar(){
-
-  if(
-    bloqueado
-  ){
-
-    return;
-
-  }
-
-
-  const tamanho=
-    LEVELS[nivel].colors;
-
-
-  if(
-    tentativa.length !==
-    tamanho
-  ){
-
-    $("message")
-      .textContent=
-        `Escolha ${tamanho} cores antes de confirmar.`;
-
-    return;
-
-  }
-
-
-  const palpite=[
-    ...tentativa
-  ];
-
-
-  const resultado=
-    comparar(
-      palpite,
-      senha
-    );
-
-
-  mostrarResultado(
-    resultado
-  );
-
-
-  const acertou=
-    resultado.pretas ===
-    tamanho;
-
-
-  if(
-    acertou
-  ){
-
-    await acertar();
-
-    return;
-
-  }
-
-
-  tentativaNumero++;
-
-  tentativa=[];
-
-  renderTentativa();
-
-
-  if(
-    tentativaNumero >=
-    MAX_ATTEMPTS
-  ){
-
-    await perdeu();
-
-    return;
-
-  }
-
-
-  $("message")
-    .textContent=
-      `Não foi dessa vez. Tentativa ${tentativaNumero+1} de ${MAX_ATTEMPTS}.`;
-
-}
-
-
-/* =====================================================
-   ACERTO
-===================================================== */
-
-async function acertar(){
-
-  bloqueado=true;
-
-  pararCronometro();
-
-
-  let recompensa=
-    LEVELS[nivel].reward;
-
-
-  let texto="";
-
-
-  if(
-    nivel === 9
-  ){
-
-    const tempo=
-      Math.floor(
-        (
-          Date.now() -
-          timerStart
-        ) / 1000
-      );
-
-
-    if(
-      tempo <= BONUS_SECONDS
-    ){
-
-      recompensa=150;
-
-      texto=
-        `
-        ⏱️ Você fez em
-        <b>${tempo} segundos</b>.
-
-        <br><br>
-
-        <span class="gold">
-        🏆 +150 ADAM COINS
-        </span>
-        `;
-
-    }
-    else{
-
-      recompensa=100;
-
-      texto=
-        `
-        ⏱️ Você fez em
-        <b>${tempo} segundos</b>.
-
-        <br><br>
-
-        <span class="gold">
-        +100 ADAM COINS
-        </span>
-        `;
-
-    }
-
-  }
-  else{
-
-    texto=
-      `
-      <span class="gold">
-      +${recompensa} ADAM COINS
-      </span>
-      `;
-
-  }
-
-
-  try{
-
-    await alterarSaldo(
-      recompensa,
-      0
-    );
-
-  }
-  catch(error){
-
-    console.error(error);
-
-    $("message")
-      .textContent=
-        "Erro ao registrar a recompensa.";
-
-    bloqueado=false;
-
-    return;
-
-  }
-
-
-  /*
-    A senha só é revelada AGORA,
-    depois do acerto.
-  */
-
-  const senhaRevelada=
-    senha
-      .map(
-        cor =>
-          cor
-            .charAt(0)
-            .toUpperCase() +
-          cor.slice(1)
-      )
-      .join(" • ");
-
-
-  if(
-    nivel < 9
-  ){
-
-    abrirModal(
-
-      "🎉 SENHA CORRETA!",
-
-      `
-      Você descobriu a combinação!
-
-      <br><br>
-
-      <b>
-        ${senhaRevelada}
-      </b>
-
-      <br><br>
-
-      ${texto}
-      `,
-
-      [
-
-        {
-
-          texto:
-            "PRÓXIMO NÍVEL",
-
-          classe:
-            "primary",
-
-          funcao:
-            ()=>{
-
-              fecharModal();
-
-              nivel++;
-
-              iniciarFase();
-
-            }
-
-        }
-
-      ]
-
-    );
-
-  }
-  else{
-
-    abrirModal(
-
-      "🏆 FASE BÔNUS CONCLUÍDA!",
-
-      `
-      Você descobriu a senha!
-
-      <br><br>
-
-      <b>
-        ${senhaRevelada}
-      </b>
-
-      <br><br>
-
-      ${texto}
-      `,
-
-      [
-
-        {
-
-          texto:
-            "VOLTAR AOS JOGOS",
-
-          classe:
-            "primary",
-
-          funcao:
-            ()=>{
-
-              window.location.href=
-                "jogos.html";
-
-            }
-
-        }
-
-      ]
-
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-   PERDEU
-===================================================== */
-
-async function perdeu(){
-
-  bloqueado=true;
-
-  pararCronometro();
-
-
-  const senhaTexto=
-    senha
-      .map(
-        cor =>
-          cor
-            .charAt(0)
-            .toUpperCase() +
-          cor.slice(1)
-      )
-      .join(" • ");
-
-
-  abrirModal(
-
-    "💥 TENTATIVAS ESGOTADAS",
-
-    `
-    A senha correta era:
-
-    <br><br>
-
-    <b>
-      ${senhaTexto}
-    </b>
-
-    <br><br>
-
-    Você utilizou as 10 tentativas.
-    `,
-
-    [
-
-      {
-
-        texto:
-          "JOGAR NOVAMENTE",
-
-        classe:
-          "primary",
-
-        funcao:
-          ()=>{
-
-            fecharModal();
-
-            iniciarFase();
-
-          }
-
-      },
-
-      {
-
-        texto:
-          "VOLTAR AOS JOGOS",
-
-        classe:
-          "secondary",
-
-        funcao:
-          ()=>{
-
-            window.location.href=
-              "jogos.html";
-
-          }
-
-      }
-
-    ]
-
-  );
-
-}
-
-
-/* =====================================================
-   MODAL
-===================================================== */
-
-function abrirModal(
-  titulo,
-  texto,
-  botoes
-){
-
-  $("modalTitle")
-    .textContent=
-      titulo;
-
-
-  $("modalText")
-    .innerHTML=
-      texto;
-
-
-  $("modalButtons")
-    .innerHTML="";
-
-
-  botoes.forEach(
-    botao=>{
-
-      const b=
-        document.createElement(
-          "button"
-        );
-
-
-      b.type=
-        "button";
-
-
-      b.textContent=
-        botao.texto;
-
-
-      b.className=
-        botao.classe ||
-        "secondary";
-
-
-      b.addEventListener(
-        "click",
-        botao.funcao
-      );
-
-
-      $("modalButtons")
-        .appendChild(
-          b
-        );
-
-    }
-  );
-
-
-  $("modal")
-    .classList.add(
-      "show"
-    );
-
-}
-
-
-function fecharModal(){
-
-  $("modal")
-    .classList.remove(
-      "show"
-    );
-
-}
-
-
-/* =====================================================
-   LIMPAR
-===================================================== */
-
-$("clear")
-  .addEventListener(
-    "click",
-    ()=>{
-
-      if(
-        bloqueado
-      ){
-
-        return;
-
-      }
-
-
-      tentativa=[];
-
-      renderTentativa();
-
-
-      $("message")
-        .textContent=
-          "Escolha novamente as cores.";
-
-    }
-  );
-
-
-/* =====================================================
-   CONFIRMAR
-===================================================== */
-
-$("confirm")
-  .addEventListener(
-    "click",
-    ()=>{
-
-      confirmar();
-
-    }
-  );
-
-
-/* =====================================================
-   VOLTAR
-===================================================== */
-
-$("back")
-  .addEventListener(
-    "click",
-    ()=>{
-
-      pararCronometro();
-
-      window.location.href=
-        "jogos.html";
-
-    }
-  );
-
-
-/* =====================================================
-   INICIAR JOGO
-===================================================== */
-
-async function iniciarJogo(){
-
-  /*
-    ESSA PARTE É EXECUTADA
-    UMA ÚNICA VEZ POR SESSÃO.
-  */
-
-  if(
-    entradaProcessada
-  ){
-
-    return;
-
-  }
-
-
-  entradaProcessada=true;
-
-
-  if(
-    jaEntrouNestaSessao()
-  ){
-
-    /*
-      Não cobra chance novamente.
-      Não dá +30 novamente.
-    */
-
-    iniciarFase();
-
-    return;
-
-  }
-
-
-  if(
-    Number(
-      usuario.chances || 0
-    ) <= 0
-  ){
-
-    abrirModal(
-
-      "🎟️ SEM CHANCES",
-
-      `
-      Você não possui chances
-      para iniciar uma partida.
-      `,
-
-      [
-
-        {
-
-          texto:
-            "VOLTAR",
-
-          classe:
-            "primary",
-
-          funcao:
-            ()=>{
-              window.location.href=
-                "jogos.html";
-            }
-
-        }
-
-      ]
-
-    );
-
-
-    return;
-
-  }
-
-
-  try{
-
-    /*
-      ENTRADA:
-      -1 CHANCE
-      +30 MOEDAS
-    */
-
-    await alterarSaldo(
-      30,
-      -1
-    );
-
-
-    marcarEntrada();
-
-
-    iniciarFase();
-
-
-  }
-  catch(error){
-
-    console.error(
-      error
-    );
-
-
-    entradaProcessada=false;
-
-
-    $("message")
-      .textContent=
-        error.message;
-
-  }
-
-}
-
-
-/* =====================================================
-   AUTENTICAÇÃO
+   LOGIN
 ===================================================== */
 
 onAuthStateChanged(
+
   auth,
+
   async user=>{
 
     if(!user){
@@ -2963,13 +2806,18 @@ onAuthStateChanged(
 
     try{
 
-      usuarioDoc=
+      buildPalette();
+
+      setLevelBackground();
+
+
+      userDoc=
         await localizarUsuario(
           user
         );
 
 
-      if(!usuarioDoc){
+      if(!userDoc){
 
         $("message")
           .textContent=
@@ -2980,20 +2828,84 @@ onAuthStateChanged(
       }
 
 
-      usuario=
-        usuarioDoc.data();
+      userData=
+        userDoc.data();
 
 
-      montarPaleta();
+      renderStats();
 
-      renderSaldo();
 
-      iniciarJogo();
+      if(
+        Number(
+          userData.chances || 0
+        ) <= 0
+      ){
 
-    }
-    catch(error){
+        openModal(
+
+          "SEM CHANCES",
+
+          "Você precisa ter pelo menos 1 chance para iniciar o jogo.",
+
+          [
+
+            {
+
+              text:
+                "VOLTAR",
+
+              cls:
+                "primary",
+
+              fn:
+                ()=>{
+                  window.location.href=
+                    "jogos.html";
+                }
+
+            }
+
+          ]
+
+        );
+
+
+        return;
+
+      }
+
+
+      /*
+        ENTRADA:
+        +30 Adam Coins
+        -1 chance
+      */
+
+      try{
+
+        await updateAccount(
+          30,
+          -1
+        );
+
+
+      }catch(error){
+
+        console.error(
+          "ERRO AO ATUALIZAR SALDO:",
+          error
+        );
+
+      }
+
+
+      startLevel();
+
+
+    }catch(error){
 
       console.error(
+        "ERRO AO INICIAR:",
         error
       );
 
@@ -3005,6 +2917,7 @@ onAuthStateChanged(
     }
 
   }
+
 );
 
 </script>
