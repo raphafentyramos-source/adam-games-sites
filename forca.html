@@ -135,7 +135,7 @@ body{min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:#fff;backgrou
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 import {getAuth,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-import {getFirestore,collection,query,where,getDocs,getDoc,runTransaction,doc,serverTimestamp} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+import {getFirestore,collection,query,where,getDocs,getDoc,runTransaction,updateDoc,increment,doc,serverTimestamp} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 const firebaseConfig={
   apiKey:"AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",
@@ -1742,37 +1742,54 @@ async function continueSameLevel(){
   msg("⚠️ Usuário não encontrado.","error");
   return;
  }
+
  btn.disabled=true;
  btn.textContent="⏳ PROCESSANDO...";
+
  try{
-  await runTransaction(db,async tx=>{
-   const snap=await tx.get(userRef);
-   if(!snap.exists())throw Error("Cadastro não encontrado.");
-   const data=snap.data();
-   const chances=Number(data.chances||0);
-   if(chances<=0)throw Error("Você não possui chances.");
-   const moedas=Number(data.moedas||0);
-   tx.update(userRef,{
-    chances:chances-1,
-    moedas:moedas+20,
-    ultimaPartidaForcaId:"continue_"+Date.now()+"_"+Math.random().toString(36).slice(2),
-    ultimaPartidaForcaEm:serverTimestamp()
-   });
+  // Primeiro verifica a chance atual sem abrir uma transação.
+  const snap=await getDoc(userRef);
+  if(!snap.exists()) throw Error("Cadastro não encontrado.");
+
+  const data=snap.data();
+  const chances=Number(data.chances||0);
+
+  if(chances<=0){
+   throw Error("Você não possui chances.");
+  }
+
+  // Usa increment() para evitar o travamento que acontecia na transação.
+  await updateDoc(userRef,{
+   chances:increment(-1),
+   moedas:increment(20),
+   ultimaPartidaForcaId:"continue_"+Date.now()+"_"+Math.random().toString(36).slice(2),
+   ultimaPartidaForcaEm:serverTimestamp()
   });
+
+  // Atualiza a interface local somente depois que o Firebase confirmou.
   coins+=20;
   coinsUI();
+
   $("lossContinueModal").classList.remove("show");
   $("lossContinueModal").setAttribute("aria-hidden","true");
+
+  // Mantém exatamente o mesmo nível, mas cria uma palavra nova.
+  locked=false;
+  errors=0;
   start();
+
   msg("🪙 +20 Adam Coins! Você gastou 1 chance e continua no mesmo nível.","success");
+
  }catch(e){
   console.error("Erro ao continuar a Forca:",e);
+
   btn.disabled=false;
   btn.textContent="🔄 CONTINUAR • -1 CHANCE • +20 MOEDAS";
+
   $("lossContinueText").textContent =
    e.message==="Você não possui chances."
    ? "Você não possui chances suficientes para continuar neste nível."
-   : "Não foi possível continuar agora. Tente novamente.";
+   : "Não foi possível continuar agora. Verifique sua conexão e tente novamente.";
  }
 }
 
