@@ -42,10 +42,10 @@ body{
 }
 #playfield{
   position:absolute;
-  top:70px;
-  bottom:0;
+  top:76px;
   left:0;
   right:0;
+  bottom:0;
   z-index:2;
   overflow:hidden;
 }
@@ -90,14 +90,14 @@ body{
 .falling{
   position:absolute;
   z-index:30;
-  width:clamp(36px,8.5vw,58px);
-  height:clamp(36px,8.5vw,58px);
+  width:clamp(38px,8.8vw,60px);
+  height:clamp(38px,8.8vw,60px);
   display:flex;
   align-items:center;
   justify-content:center;
+  border:0;
   padding:0;
   margin:0;
-  border:0;
   background:transparent;
   appearance:none;
   -webkit-appearance:none;
@@ -105,15 +105,18 @@ body{
   pointer-events:auto;
   cursor:pointer;
   touch-action:manipulation;
-  filter:drop-shadow(0 4px 5px rgba(0,0,0,.20));
+  filter:drop-shadow(0 5px 6px rgba(0,0,0,.22));
 }
+.falling img{width:100%;height:100%;object-fit:contain;pointer-events:none}
+.fallbackEmoji{font-size:clamp(32px,8vw,56px);line-height:1}
+
 .falling img{
   width:100%;height:100%;object-fit:contain;pointer-events:none;
 }
-.fallbackEmoji{font-size:clamp(32px,8vw,56px);line-height:1}
+.fallbackEmoji{font-size:clamp(34px,10vw,62px);line-height:1}
 .star{z-index:8}
 .coin{z-index:9}
-.trash{z-index:8}50%{transform:translateX(-50%) translateY(-5px)}}
+.trash{z-index:8}
 .overlay{
   position:absolute;
   inset:0;
@@ -226,6 +229,10 @@ body{
 
   <div id="playfield">
     <div id="dropArea"></div>
+</div>
+</div>
+    </div>
+</div>
   </div>
 
   <div id="toast"></div>
@@ -244,14 +251,14 @@ body{
       <div class="bigEmoji">⏸️</div>
       <h1>Jogo pausado</h1>
       <button class="action" id="resumeBtn">▶️ CONTINUAR</button>
-          </div>
+    </div>
   </div>
 
   <div class="overlay" id="lossOverlay">
     <div class="panel">
       <div class="bigEmoji">💔</div>
-      <h1>Você perdeu! 💔</h1>
-      <p id="lossText">Suas vidas acabaram. Você pode continuar no mesmo nível usando uma chance.</p>
+      <h1>Você perdeu!</h1>
+      <p id="lossText">Suas 3 vidas acabaram.</p>
       <div class="result">
         <div><small>FASE</small><strong id="lossLevel">1</strong></div>
         <div><small>PONTOS</small><strong id="lossScore">0</strong></div>
@@ -289,7 +296,476 @@ body{
   </div>
 </div>
 
+
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script>
+/* =====================================================
+   CHUVA DE SABORES — VERSÃO CLICÁVEL
+   Firebase fica em segundo plano: a tela nunca depende
+   do carregamento do Firebase para aparecer.
+===================================================== */
+
+const firebaseConfig={
+  apiKey:"AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",
+  authDomain:"adam-games-21081.firebaseapp.com",
+  projectId:"adam-games-21081",
+  storageBucket:"adam-games-21081.firebasestorage.app",
+  messagingSenderId:"1055528418738",
+  appId:"1:1055528418738:web:5fafdf63424ba9744eb8ab"
+};
+
+let firebaseOK=false, auth=null, db=null;
+try{
+  if(window.firebase){
+    firebase.initializeApp(firebaseConfig);
+    auth=firebase.auth();
+    db=firebase.firestore();
+    firebaseOK=true;
+  }
+}catch(e){
+  console.error("Firebase:",e);
+}
+
+let usuario=null;
+let userRef=null;
+let jogoAtivo=false;
+let pausado=false;
+let animationId=null;
+let spawnTimer=null;
+let level=1;
+let score=0;
+let comidasPegas=0;
+let vidas=3;
+let totalMoedasSessao=0;
+let objetos=[];
+let entradaRegistrada=false;
+let recompensaRegistrada=false;
+
+const $=id=>document.getElementById(id);
+const num=v=>Number(v||0);
+function show(id){const e=$(id);if(e)e.style.display="flex"}
+function hide(id){const e=$(id);if(e)e.style.display="none"}
+
+const LEVELS={
+  1:{target:40,spawn:1150,speed:72,trash:.08},
+  2:{target:40,spawn:1080,speed:80,trash:.10},
+  3:{target:40,spawn:1000,speed:88,trash:.12},
+  4:{target:60,spawn:900,speed:102,trash:.16},
+  5:{target:60,spawn:850,speed:116,trash:.19},
+  6:{target:60,spawn:800,speed:130,trash:.23},
+  7:{target:75,spawn:740,speed:148,trash:.27},
+  8:{target:100,spawn:600,speed:180,trash:.32,duration:60},
+  9:{target:150,spawn:500,speed:205,trash:.38,duration:60}
+};
+
+const FRUITS=[
+  ["🫐","blueberry"],["🍅","tomato"],["🍓","strawberry"],["🍑","peach"],
+  ["🍌","banana"],["🍐","pear"],["🍒","cherry"],["🥨","pretzel"],
+  ["🥐","croissant"],["🍔","burger"],["🍟","fries"],["🍕","pizza"],
+  ["🥓","bacon"],["🍝","pasta"],["🍭","lollipop"],["🍼","milk"],
+  ["🫘","beans"]
+];
+const TRASH=["🛝","🥎","🎽","🎤","♟️","🎰","🎭","🏓","🥊","🎨","🎲"];
+
+function maxLives(){
+  if(level<=3)return 3;
+  if(level<=6)return 4;
+  if(level===7)return 5;
+  return 6;
+}
+function setLives(){
+  const max=maxLives();
+  $("lives").textContent="❤️".repeat(vidas)+"🖤".repeat(max-vidas);
+}
+function updateHud(){
+  $("levelText").textContent=level;
+  $("scoreText").textContent=`${comidasPegas} / ${LEVELS[level].target}`;
+  $("coinsText").textContent=totalMoedasSessao.toLocaleString("pt-BR");
+  setLives();
+}
+function toast(t){
+  $("toast").textContent=t;
+  $("toast").classList.add("show");
+  clearTimeout(toast.timer);
+  toast.timer=setTimeout(()=>$("toast").classList.remove("show"),1300);
+}
+
+function setBackground(n){
+  const img=$("background");
+  const names=n<=7?"fase_1_7.png":n===8?"fase_8.png":"fase_9.png";
+  const candidates=[
+    names,
+    "assets/"+names,
+    "fundos/"+names,
+    "assets/fundos/"+names
+  ];
+  let i=0;
+  img.style.display="none";
+  $("fallbackBg").style.display="block";
+  img.onload=()=>{
+    img.style.display="block";
+    $("fallbackBg").style.display="none";
+  };
+  img.onerror=()=>{
+    i++;
+    if(i<candidates.length) img.src=candidates[i];
+  };
+  img.src=candidates[0];
+}
+
+function clearObjects(){
+  objetos.forEach(o=>o.el.remove());
+  objetos=[];
+}
+
+function spawn(type){
+  if(!jogoAtivo||pausado)return;
+  const el=document.createElement("button");
+  el.type="button";
+  el.className=`falling ${type}`;
+  el.style.left=(4+Math.random()*88)+"%";
+  el.style.top="6px";
+  el.setAttribute("aria-label",type==="fruit"?"comida":"lixo");
+
+  if(type==="fruit"){
+    el.textContent=FRUITS[Math.floor(Math.random()*FRUITS.length)][0];
+  }else{
+    el.textContent=TRASH[Math.floor(Math.random()*TRASH.length)];
+  }
+
+  el.addEventListener("click",e=>{
+    e.preventDefault();
+    e.stopPropagation();
+    if(!jogoAtivo||pausado)return;
+    const idx=objetos.findIndex(o=>o.el===el);
+    if(idx<0)return;
+
+    if(type==="fruit"){
+      comidasPegas++;
+      score=comidasPegas;
+      toast("✨ +1 comida!");
+      removeObject(idx);
+      updateHud();
+      if(comidasPegas>=LEVELS[level].target) finishLevel();
+    }else{
+      removeObject(idx);
+      loseLife();
+    }
+  });
+
+  $("dropArea").appendChild(el);
+  objetos.push({
+    el,type,
+    y:.02,
+    vy:LEVELS[level].speed*(.88+Math.random()*.24)
+  });
+}
+
+function spawnLoop(){
+  clearTimeout(spawnTimer);
+  if(!jogoAtivo||pausado)return;
+  const cfg=LEVELS[level];
+  spawn(Math.random()<cfg.trash?"trash":"fruit");
+  spawnTimer=setTimeout(spawnLoop,cfg.spawn);
+}
+
+function removeObject(i){
+  if(!objetos[i])return;
+  objetos[i].el.remove();
+  objetos.splice(i,1);
+}
+
+function loseLife(){
+  vidas--;
+  updateHud();
+  if(vidas<=0)endLoss();
+  else toast(`💔 Perdeu uma vida! ${vidas} restante(s)`);
+}
+
+function loop(now){
+  if(!jogoAtivo){animationId=null;return;}
+  if(!pausado){
+    const dt=Math.min(.035,(now-(loop.last||now))/1000);
+    loop.last=now;
+    const h=$("playfield").clientHeight;
+
+    for(let i=objetos.length-1;i>=0;i--){
+      const o=objetos[i];
+      o.y+=(o.vy*dt)/Math.max(h,1);
+      o.el.style.transform=`translateY(${o.y*h}px)`;
+
+      if(o.el.getBoundingClientRect().top>window.innerHeight+30){
+        if(o.type==="fruit"){
+          removeObject(i);
+          loseLife();
+          if(!jogoAtivo)break;
+        }else{
+          removeObject(i);
+        }
+      }
+    }
+
+    if((level===8||level===9) && jogoAtivo){
+      if(!loop.deadline)loop.deadline=now+LEVELS[level].duration*1000;
+      const left=Math.max(0,Math.ceil((loop.deadline-now)/1000));
+      $("coinsText").textContent=`⏱️ ${left}s`;
+      if(left<=0){
+        endLoss();
+        return;
+      }
+    }
+  }
+  animationId=requestAnimationFrame(loop);
+}
+
+function startAnimation(){
+  cancelAnimationFrame(animationId);
+  loop.last=performance.now();
+  loop.deadline=(level===8||level===9)?performance.now()+LEVELS[level].duration*1000:0;
+  animationId=requestAnimationFrame(loop);
+}
+
+function startLevel(newLevel=level){
+  level=newLevel;
+  score=0;
+  comidasPegas=0;
+  vidas=maxLives();
+  recompensaRegistrada=false;
+  clearObjects();
+  setBackground(level);
+  updateHud();
+  hide("startOverlay");hide("pauseOverlay");hide("lossOverlay");hide("levelOverlay");hide("winOverlay");
+  jogoAtivo=true;
+  pausado=false;
+  spawnLoop();
+  startAnimation();
+}
+
+async function addCoins(amount,motivo){
+  if(!userRef||!usuario)return false;
+  const antes=num(usuario.moedas);
+  const novo=antes+amount;
+  await userRef.update({moedas:novo});
+  usuario.moedas=novo;
+  if(db){
+    try{
+      await db.collection("historico").add({
+        usuarioUid:usuario.uid||"",
+        usuarioId:userRef.id,
+        item:"moedas",
+        operacao:"adicionar",
+        quantidade:amount,
+        saldoAnterior:antes,
+        saldoFinal:novo,
+        motivo,
+        criadoEm:new Date().toISOString()
+      });
+    }catch(e){console.warn("Histórico:",e)}
+  }
+  return true;
+}
+
+async function consumirChanceEReceber30(motivo){
+  if(!userRef||!usuario){
+    toast("⚠️ Conta não carregada. Tente novamente.");
+    return false;
+  }
+  const chances=num(usuario.chances);
+  if(chances<=0){
+    toast("❌ Você não tem chances.");
+    return false;
+  }
+  try{
+    await userRef.update({
+      chances:chances-1,
+      moedas:num(usuario.moedas)+30
+    });
+    usuario.chances=chances-1;
+    usuario.moedas=num(usuario.moedas)+30;
+    if(db){
+      try{
+        await db.collection("historico").add({
+          usuarioUid:usuario.uid||"",
+          usuarioId:userRef.id,
+          item:"moedas",
+          operacao:"adicionar",
+          quantidade:30,
+          saldoAnterior:num(usuario.moedas)-30,
+          saldoFinal:num(usuario.moedas),
+          motivo,
+          criadoEm:new Date().toISOString()
+        });
+      }catch(e){console.warn("Histórico:",e)}
+    }
+    return true;
+  }catch(e){
+    console.error(e);
+    toast("⚠️ Não foi possível usar a chance.");
+    return false;
+  }
+}
+
+async function iniciarPartida(){
+  if(entradaRegistrada){
+    startLevel(1);
+    return;
+  }
+  const ok=await consumirChanceEReceber30("Entrada Chuva de Sabores");
+  if(!ok)return;
+  entradaRegistrada=true;
+  startLevel(1);
+  toast("🎟️ -1 chance • 🪙 +30 moedas");
+}
+
+async function consumeChanceAndContinue(){
+  const ok=await consumirChanceEReceber30(`Continuar Chuva de Sabores no nível ${level}`);
+  if(!ok)return;
+  hide("lossOverlay");
+  startLevel(level);
+  toast("🎟️ -1 chance • 🪙 +30 moedas");
+}
+
+async function registerReward(){
+  if(recompensaRegistrada||!userRef||!usuario)return;
+  recompensaRegistrada=true;
+  let ganho=0;
+  if(level===9){
+    if(comidasPegas>=150)ganho=200;
+    else if(comidasPegas>=131)ganho=150;
+    else if(comidasPegas>=101)ganho=120;
+    else if(comidasPegas>=80)ganho=100;
+  }else{
+    ganho=level<=3?30:level<=6?45:level===7?60:65;
+  }
+  if(ganho<=0)return;
+  try{
+    await addCoins(ganho,`Recompensa Chuva de Sabores - nível ${level}`);
+    totalMoedasSessao+=ganho;
+  }catch(e){
+    recompensaRegistrada=false;
+    console.error(e);
+  }
+}
+
+async function finishLevel(){
+  if(!jogoAtivo)return;
+  jogoAtivo=false;
+  clearTimeout(spawnTimer);
+  cancelAnimationFrame(animationId);
+  clearObjects();
+  await registerReward();
+
+  $("levelScore").textContent=`${comidasPegas}/${LEVELS[level].target}`;
+  $("levelCoins").textContent=level===9?
+    (comidasPegas>=150?200:comidasPegas>=131?150:comidasPegas>=101?120:comidasPegas>=80?100:0):
+    (level<=3?30:level<=6?45:level===7?60:65);
+
+  if(level>=9){
+    $("finalScore").textContent=`${comidasPegas}/150`;
+    $("finalCoins").textContent=totalMoedasSessao.toLocaleString("pt-BR");
+    show("winOverlay");
+  }else{
+    $("levelTitle").textContent=`Fase ${level} concluída! 🎉`;
+    $("levelDesc").textContent=`Você pegou ${comidasPegas} comidas. Prepare-se para a fase ${level+1}.`;
+    show("levelOverlay");
+  }
+}
+
+function endLoss(){
+  jogoAtivo=false;
+  clearTimeout(spawnTimer);
+  cancelAnimationFrame(animationId);
+  clearObjects();
+  $("lossLevel").textContent=level;
+  $("lossScore").textContent=`${comidasPegas}/${LEVELS[level].target}`;
+  $("lossText").textContent="Suas vidas acabaram. Você pode continuar no mesmo nível usando 1 chance.";
+  $("continueBtn").disabled=false;
+  $("continueBtn").textContent="❤️ CONTINUAR — 1 CHANCE +30 MOEDAS";
+  show("lossOverlay");
+}
+
+function togglePause(){
+  if(!jogoAtivo)return;
+  pausado=!pausado;
+  if(pausado){
+    clearTimeout(spawnTimer);
+    show("pauseOverlay");
+  }else{
+    hide("pauseOverlay");
+    loop.deadline=(level===8||level===9)?performance.now()+LEVELS[level].duration*1000:0;
+    spawnLoop();
+    loop.last=performance.now();
+  }
+}
+
+$("startBtn").onclick=iniciarPartida;
+$("pauseBtn").onclick=togglePause;
+$("resumeBtn").onclick=togglePause;
+$("continueBtn").onclick=consumeChanceAndContinue;
+$("exitLossBtn").onclick=()=>{hide("lossOverlay");show("startOverlay")};
+$("nextBtn").onclick=()=>startLevel(level+1);
+$("levelExitBtn").onclick=()=>{hide("levelOverlay");show("startOverlay")};
+$("playAgainBtn").onclick=async()=>{
+  entradaRegistrada=false;
+  await iniciarPartida();
+};
+
+/* =====================================================
+   TELA INICIAL — NÃO DEPENDE DO FIREBASE
+===================================================== */
+function liberarTelaInicial(){
+  $("loading").style.display="none";
+  show("startOverlay");
+  setBackground(1);
+  updateHud();
+}
+liberarTelaInicial();
+
+/* =====================================================
+   FIREBASE EM SEGUNDO PLANO
+===================================================== */
+if(firebaseOK && auth){
+  auth.onAuthStateChanged(async u=>{
+    if(!u){
+      usuario=null;
+      userRef=null;
+      return;
+    }
+
+    usuario=u;
+    userRef=null;
+
+    try{
+      let resultado=await db.collection("admins")
+        .where("uid","==",u.uid)
+        .limit(1)
+        .get();
+
+      if(resultado.empty && u.email){
+        resultado=await db.collection("admins")
+          .where("email","==",u.email.toLowerCase())
+          .limit(1)
+          .get();
+      }
+
+      if(!resultado.empty){
+        userRef=resultado.docs[0].ref;
+        usuario={...u,...resultado.docs[0].data()};
+      }else{
+        toast("⚠️ Cadastro do jogador não encontrado.");
+      }
+    }catch(e){
+      console.error("Perfil:",e);
+      toast("⚠️ Não foi possível carregar o perfil.");
+    }
+  });
+}else{
+  console.warn("Firebase não carregou. O jogo visual continuará disponível.");
+}
+</script>
+
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 <script>
@@ -323,21 +799,19 @@ let objetos=[];
 let chanceConsumidaNestaFase=false;
 let recompensaRegistrada=false;
 let inicioRegistrado=false;
-let comidasPegas=0;
-let entradaRegistrada=false;
 
 const $=id=>document.getElementById(id);
 
 const LEVELS={
-  1:{target:40,spawn:1050,speed:92,baseCoins:30,trash:.10},
-  2:{target:40,spawn:1000,speed:100,baseCoins:35,trash:.12},
-  3:{target:40,spawn:940,speed:110,baseCoins:40,trash:.14},
-  4:{target:60,spawn:850,speed:125,baseCoins:45,trash:.18},
-  5:{target:60,spawn:800,speed:140,baseCoins:50,trash:.22},
-  6:{target:60,spawn:750,speed:155,baseCoins:55,trash:.26},
-  7:{target:75,spawn:690,speed:175,baseCoins:60,trash:.30},
-  8:{target:100,spawn:560,speed:205,baseCoins:65,trash:.36},
-  9:{target:150,spawn:470,speed:235,baseCoins:0,trash:.42}
+  1:{duration:30,spawn:900,speed:115,target:900,baseCoins:30,trash:0,starWeight:2,coinWeight:1},
+  2:{duration:30,spawn:820,speed:130,target:1200,baseCoins:35,trash:0,starWeight:2,coinWeight:1},
+  3:{duration:32,spawn:750,speed:145,target:1500,baseCoins:40,trash:.08,starWeight:2,coinWeight:1},
+  4:{duration:33,spawn:680,speed:160,target:1900,baseCoins:45,trash:.13,starWeight:2,coinWeight:1},
+  5:{duration:34,spawn:620,speed:175,target:2300,baseCoins:50,trash:.18,starWeight:2,coinWeight:1},
+  6:{duration:35,spawn:570,speed:195,target:2700,baseCoins:55,trash:.24,starWeight:3,coinWeight:2},
+  7:{duration:36,spawn:520,speed:215,target:3200,baseCoins:60,trash:.30,starWeight:3,coinWeight:2},
+  8:{duration:37,spawn:470,speed:235,target:3700,baseCoins:65,trash:.36,starWeight:3,coinWeight:2},
+  9:{duration:40,spawn:430,speed:255,target:4300,baseCoins:75,trash:.43,starWeight:3,coinWeight:2}
 };
 
 const FRUITS=[
@@ -356,25 +830,24 @@ function toast(t){
   clearTimeout(toast.timer);
   toast.timer=setTimeout(()=>$("toast").classList.remove("show"),1300);
 }
-function maxLives(){
-  if(level<=3)return 3;
-  if(level<=6)return 4;
-  if(level===7)return 5;
-  return 6;
-}
 function setLives(){
-  const max=maxLives();
-  $("lives").textContent="❤️".repeat(vidas)+"🖤".repeat(max-vidas);
+  $("lives").textContent="❤️".repeat(vidas)+"🖤".repeat(3-vidas);
 }
 function updateHud(){
   $("levelText").textContent=level;
-  $("scoreText").textContent=`${comidasPegas} / ${LEVELS[level].target}`;
+  $("scoreText").textContent=Math.floor(score).toLocaleString("pt-BR");
   $("coinsText").textContent=totalMoedasSessao.toLocaleString("pt-BR");
   setLives();
 }
 function setBackground(n){
   const img=$("background");
-  const candidates=[n<=7?"fase_1_7.png":n===8?"fase_8.png":"fase_9.png",n<=7?"assets/fase_1_7.png":n===8?"assets/fase_8.png":"assets/fase_9.png"];
+  const candidates=[
+    `assets/fundos/fase${n}.png`,
+    `assets/fundos/fase${n}.webp`,
+    `fundos/fase${n}.png`,
+    `fundos/fase${n}.webp`,
+    `fase${n}.png`
+  ];
   let i=0;
   img.style.display="none";
   img.onerror=()=>{
@@ -421,57 +894,58 @@ function randomFruit(){
 }
 function spawn(type){
   if(!jogoAtivo||pausado)return;
-  const area=$("dropArea"), cfg=LEVELS[level];
-  const el=document.createElement("button");
-  el.type="button";
+  const area=$("dropArea");
+  const cfg=LEVELS[level];
+  const el=document.createElement("div");
   el.className=`falling ${type}`;
-  el.style.left=(4+Math.random()*88)+"%";
-  el.style.top="6px";
-  el.style.padding="0";
-  el.style.border="0";
-  el.style.background="transparent";
-  el.setAttribute("aria-label",type==="fruit"?"comida":"lixo");
+  const x=4+Math.random()*88;
+  el.style.left=x+"%";
+  el.style.top="-80px";
+
   if(type==="fruit"){
     const f=randomFruit();
-    el.textContent=f[0];
-    el.dataset.good="1";
+    putImageOrEmoji(el,"frutas",f[1],f[0]);
+    el.dataset.value="1";
+  }else if(type==="star"){
+    putImageOrEmoji(el,"estrelas","estrela","⭐");
+    el.dataset.value=String(cfg.starWeight);
+  }else if(type==="coin"){
+    putImageOrEmoji(el,"moedas","moeda","🪙");
+    el.dataset.value=String(cfg.coinWeight);
   }else{
-    const trash=["🛝","🥎","🎽","🎤","♟️","🎰","🎭","🏓","🥊","🎨","🎲"];
-    el.textContent=trash[Math.floor(Math.random()*trash.length)];
-    el.dataset.good="0";
+    const trash=[
+      ["lata","🥫"],["garrafa","🧴"],["lixo","🗑️"],["papel","📄"]
+    ][Math.floor(Math.random()*4)];
+    putImageOrEmoji(el,"lixo",trash[0],trash[1]);
+    el.dataset.value="1";
   }
-  el.onclick=(e)=>{
-    e.stopPropagation();
-    if(!jogoAtivo||pausado)return;
-    const idx=objetos.findIndex(o=>o.el===el);
-    if(idx<0)return;
-    if(type==="fruit"){
-      comidasPegas++;
-      score=comidasPegas;
-      toast("✨ +1 comida!");
-      removeObject(idx);
-      updateHud();
-      if(comidasPegas>=cfg.target) finishLevel();
-    }else{
-      loseLife();
-      removeObject(idx);
-    }
-  };
   area.appendChild(el);
-  objetos.push({el,type,x:parseFloat(el.style.left)/100,y:.02,vy:cfg.speed*(.85+Math.random()*.25)});
+  objetos.push({el,type,x:x/100,y:-.1,vy:cfg.speed*(.82+Math.random()*.36)});
 }
 function spawnLoop(){
   clearTimeout(spawnTimer);
   if(!jogoAtivo||pausado)return;
   const cfg=LEVELS[level];
-  const type=Math.random()<cfg.trash?"trash":"fruit";
+  const r=Math.random();
+  let type="fruit";
+  if(level>=3 && r<cfg.trash) type="trash";
+  else if(r<cfg.trash+0.10) type="star";
+  else if(r<cfg.trash+0.15) type="coin";
   spawn(type);
   spawnTimer=setTimeout(spawnLoop,cfg.spawn);
+}
+function basketRect(){
+  const b=$("basket").getBoundingClientRect();
+  const g=$("game").getBoundingClientRect();
+  return {left:b.left-g.left,right:b.right-g.left,top:b.top-g.top,bottom:b.bottom-g.top};
 }
 function objectRect(el){
   const b=el.getBoundingClientRect();
   const g=$("game").getBoundingClientRect();
   return {left:b.left-g.left,right:b.right-g.left,top:b.top-g.top,bottom:b.bottom-g.top};
+}
+function hit(a,b){
+  return a.left<b.right && a.right>b.left && a.top<b.bottom && a.bottom>b.top;
 }
 function removeObject(index){
   objetos[index].el.remove();
@@ -501,23 +975,40 @@ function loseLife(){
   }
 }
 function loop(now){
-  if(!jogoAtivo){animationId=null;return;}
+  if(!jogoAtivo){
+    animationId=null;
+    return;
+  }
   if(!pausado){
     const dt=Math.min(.035,(now-(loop.last||now))/1000);
     loop.last=now;
     const h=$("game").clientHeight;
+    const g=$("game").clientWidth;
+    const br=basketRect();
+
     for(let i=objetos.length-1;i>=0;i--){
       const o=objetos[i];
       o.y+=(o.vy*dt)/h;
-      o.el.style.transform=`translateY(${o.y*h}px)`;
+      o.el.style.transform=`translateY(${o.y*h}px) rotate(${o.y*180}deg)`;
       const r=objectRect(o.el);
+      if(hit(r,br)){
+        if(o.type==="trash") loseLife();
+        else collect(o.type,num(o.el.dataset.value));
+        removeObject(i);
+        continue;
+      }
       if(r.top>h+30){
-        if(o.type==="fruit"){
-          loseLife();
-          if(!jogoAtivo) return;
-        }
+        if(o.type==="fruit"){}
         removeObject(i);
       }
+    }
+    const cfg=LEVELS[level];
+    const elapsed=(now-levelStartTime)/1000;
+    $("progress").style.width=Math.min(100,(elapsed/cfg.duration)*100)+"%";
+    if(elapsed>=cfg.duration){
+      finishLevel();
+      animationId=null;
+      return;
     }
   }
   animationId=requestAnimationFrame(loop);
@@ -529,36 +1020,57 @@ function startAnimation(){
 }
 function startLevel(newLevel=level){
   level=newLevel;
-  score=0; comidasPegas=0; moedasDaFase=0;
-  vidas=maxLives();
+  score=0;
+  moedasDaFase=0;
+  vidas=3;
+  chanceConsumidaNestaFase=false;
   recompensaRegistrada=false;
+  inicioRegistrado=false;
   clearObjects();
   setBackground(level);
   updateHud();
+  $("progress").style.width="0%";
   hide("startOverlay");hide("pauseOverlay");hide("lossOverlay");hide("levelOverlay");hide("winOverlay");
-  jogoAtivo=true; pausado=false;
-  spawnLoop(); startAnimation();
+  jogoAtivo=true;
+  pausado=false;
+  levelStartTime=performance.now();
+  spawnLoop();
+  startAnimation();
 }
 async function consumeChanceAndContinue(){
-  if(!userRef||!usuario){toast("⚠️ Faça login para usar uma chance.");return;}
+  if(!userRef||!usuario){
+    toast("⚠️ Faça login para usar uma chance.");
+    return;
+  }
   const atual=num(usuario.chances);
-  if(atual<=0){$("continueBtn").disabled=true;$("continueBtn").textContent="❌ SEM CHANCES";return;}
+  if(atual<=0){
+    $("continueBtn").disabled=true;
+    $("continueBtn").textContent="❌ SEM CHANCES";
+    $("lossText").textContent="Você não possui nenhuma chance para continuar.";
+    return;
+  }
   try{
     $("continueBtn").disabled=true;
-    const novoSaldo=num(usuario.moedas)+30;
-    await userRef.update({chances:atual-1,moedas:novoSaldo});
-    usuario.chances=atual-1; usuario.moedas=novoSaldo;
+    await userRef.update({chances:atual-1,moedas:num(usuario.moedas)+20});
+    usuario.chances=atual-1;
+    usuario.moedas=num(usuario.moedas)+20;
     await db.collection("historico").add({
-      usuarioUid:usuario.uid||"",usuarioId:userRef.id,item:"moedas",
-      operacao:"adicionar",quantidade:30,saldoAnterior:novoSaldo-30,
-      saldoFinal:novoSaldo,motivo:`Continuar Chuva de Sabores no nível ${level}`,
+      usuarioUid:usuario.uid||"",
+      usuarioId:userRef.id,
+      item:"moedas",
+      operacao:"adicionar",
+      quantidade:20,
+      saldoAnterior:num(usuario.moedas)-20,
+      saldoFinal:num(usuario.moedas),
+      motivo:`Continuar Frutas no nível ${level}`,
       criadoEm:new Date().toISOString()
     });
-    toast("🪙 +30 moedas • 🎟️ 1 chance usada");
-    hide("lossOverlay");
+    toast("🪙 +20 moedas • ❤️ 1 chance usada");
     startLevel(level);
   }catch(e){
-    console.error(e);$("continueBtn").disabled=false;toast("⚠️ Não foi possível continuar.");
+    console.error(e);
+    $("continueBtn").disabled=false;
+    toast("⚠️ Não foi possível continuar.");
   }
 }
 async function registerReward(){
@@ -567,28 +1079,20 @@ async function registerReward(){
     return;
   }
   recompensaRegistrada=true;
-  let ganho=LEVELS[level].baseCoins;
-if(level===9){
-  if(comidasPegas>=150) ganho=200;
-  else if(comidasPegas>=131) ganho=150;
-  else if(comidasPegas>=101) ganho=120;
-  else if(comidasPegas>=80) ganho=100;
-  else ganho=0;
-}
-const ganhoFinal=ganho;
+  const ganho=moedasDaFase+LEVELS[level].baseCoins;
   const antes=num(usuario.moedas);
   try{
-    await userRef.update({moedas:antes+ganhoFinal});
-    usuario.moedas=antes+ganhoFinal;
-    totalMoedasSessao+=ganhoFinal;
+    await userRef.update({moedas:antes+ganho});
+    usuario.moedas=antes+ganho;
+    totalMoedasSessao+=LEVELS[level].baseCoins;
     await db.collection("historico").add({
       usuarioUid:usuario.uid||"",
       usuarioId:userRef.id,
       item:"moedas",
       operacao:"adicionar",
-      quantidade:ganhoFinal,
+      quantidade:ganho,
       saldoAnterior:antes,
-      saldoFinal:antes+ganhoFinal,
+      saldoFinal:antes+ganho,
       motivo:`Recompensa Frutas - nível ${level}`,
       criadoEm:new Date().toISOString()
     });
@@ -604,14 +1108,14 @@ async function finishLevel(){
   clearObjects();
   await registerReward();
   $("levelScore").textContent=Math.floor(score).toLocaleString("pt-BR");
-  $("levelCoins").textContent=(level===9?ganhoFinal:LEVELS[level].baseCoins).toLocaleString("pt-BR");
+  $("levelCoins").textContent=(LEVELS[level].baseCoins+moedasDaFase).toLocaleString("pt-BR");
   if(level>=9){
     $("finalScore").textContent=Math.floor(score).toLocaleString("pt-BR");
     $("finalCoins").textContent=totalMoedasSessao.toLocaleString("pt-BR");
     show("winOverlay");
   }else{
     $("levelTitle").textContent=`Fase ${level} concluída! 🎉`;
-    $("levelDesc").textContent=`Você ganhou ${level===9?ganhoFinal:LEVELS[level].baseCoins} moedas. Prepare-se para a fase ${level+1}.`;
+    $("levelDesc").textContent=`Você ganhou ${LEVELS[level].baseCoins + moedasDaFase} moedas. Prepare-se para a fase ${level+1}.`;
     show("levelOverlay");
   }
 }
@@ -625,26 +1129,6 @@ function endLoss(){
   $("continueBtn").textContent="❤️ CONTINUAR — 1 CHANCE +30 MOEDAS +20 MOEDAS";
   show("lossOverlay");
 }
-async function iniciarPartida(){
-  if(!userRef||!usuario){toast("⚠️ Faça login para jogar.");return;}
-  if(entradaRegistrada){startLevel(1);return;}
-  const chances=num(usuario.chances);
-  if(chances<=0){toast("❌ Você não tem chances.");return;}
-  try{
-    const novoSaldo=num(usuario.moedas)+30;
-    await userRef.update({chances:chances-1,moedas:novoSaldo});
-    usuario.chances=chances-1; usuario.moedas=novoSaldo;
-    entradaRegistrada=true;
-    await db.collection("historico").add({
-      usuarioUid:usuario.uid||"",usuarioId:userRef.id,item:"moedas",
-      operacao:"adicionar",quantidade:30,saldoAnterior:novoSaldo-30,
-      saldoFinal:novoSaldo,motivo:"Entrada Chuva de Sabores",
-      criadoEm:new Date().toISOString()
-    });
-    toast("🪙 +30 moedas • 🎟️ 1 chance usada");
-    startLevel(1);
-  }catch(e){console.error(e);toast("⚠️ Não foi possível iniciar.");}
-}
 function togglePause(){
   if(!jogoAtivo)return;
   pausado=!pausado;
@@ -657,11 +1141,25 @@ function togglePause(){
     loop.last=performance.now();
   }
 }
-
-
-$("startBtn").onclick=iniciarPartida;
+function moveBasket(clientX){
+  const g=$("game").getBoundingClientRect();
+  const b=$("basket");
+  const half=b.offsetWidth/2;
+  let x=clientX-g.left;
+  x=Math.max(half,Math.min(g.width-half,x));
+  b.style.left=x+"px";
+}
+$("game").addEventListener("pointermove",e=>{
+  if(jogoAtivo&&!pausado)moveBasket(e.clientX);
+});
+$("game").addEventListener("pointerdown",e=>{
+  if(jogoAtivo&&!pausado)moveBasket(e.clientX);
+});
+$("startBtn").onclick=()=>startLevel(1);
 $("pauseBtn").onclick=togglePause;
 $("resumeBtn").onclick=togglePause;
+$("restartBtn").onclick=()=>startLevel(level);
+$("lossRestartBtn").onclick=()=>startLevel(level);
 $("continueBtn").onclick=consumeChanceAndContinue;
 $("exitLossBtn").onclick=()=>{hide("lossOverlay");show("startOverlay")};
 $("nextBtn").onclick=()=>startLevel(level+1);
@@ -684,7 +1182,7 @@ function mostrarErroInicial(mensagem){
       <div style="font-size:45px">⚠️</div>
       <div style="font-size:18px;margin-top:10px">${mensagem}</div>
       <button id="reloadGame" style="margin-top:18px;padding:13px 18px;border:0;border-radius:12px;font-weight:900;background:#ffd84d;color:#111">
-        ↻ TENTAR NOVAMENTE
+        🔄 TENTAR NOVAMENTE
       </button>
     </div>`;
   $("reloadGame").onclick=()=>location.reload();
@@ -701,34 +1199,19 @@ auth.onAuthStateChanged(async u=>{
     }
 
     usuario=u;
-    entradaRegistrada=false;
+    userRef=db.collection("admins").doc(u.uid);
 
     try{
-      let resultado=await db.collection("admins")
-        .where("uid","==",u.uid)
-        .limit(1)
-        .get();
+      const snap=await Promise.race([
+        userRef.get(),
+        new Promise((_,reject)=>setTimeout(()=>reject(new Error("timeout")),7000))
+      ]);
 
-      if(resultado.empty && u.email){
-        resultado=await db.collection("admins")
-          .where("email","==",u.email.toLowerCase())
-          .limit(1)
-          .get();
-      }
-
-      if(!resultado.empty){
-        const doc=resultado.docs[0];
-        userRef=doc.ref;
-        usuario={...u,...doc.data()};
-      }else{
-        // Mantém o jogo acessível mesmo se o cadastro admin
-        // não for encontrado. As operações de moedas/chances
-        // pedirão um cadastro válido.
-        userRef=null;
+      if(snap.exists()){
+        usuario={...u,...snap.data()};
       }
     }catch(e){
-      console.error("Erro ao localizar perfil admin:",e);
-      userRef=null;
+      console.warn("Não foi possível carregar o perfil:",e);
     }
 
     liberarTelaInicial();
@@ -742,6 +1225,6 @@ auth.onAuthStateChanged(async u=>{
 setTimeout(()=>{
   if(!inicializado){
     liberarTelaInicial();
-    toast("⚠️ O jogo iniciou. Verifique sua conta para salvar moedas.");
+    toast("⚠️ O Firebase demorou. O jogo foi iniciado.");
   }
-},3000);
+},8000);
