@@ -6,67 +6,121 @@
 <title>Adam Games • Palavra Embaralhada</title>
 <style>
 :root{
-  --bg:#071827;--card:#0d263a;--card2:#12334b;--line:#234862;
-  --text:#f5fbff;--muted:#9eb6c8;--gold:#ffc83d;--green:#43e19a;
-  --red:#ff5d6c;--blue:#43b8ff;--shadow:0 18px 50px rgba(0,0,0,.35)
+  --bg1:#030b18;--bg2:#08233b;--card:rgba(10,31,49,.90);--card2:rgba(14,48,72,.92);
+  --line:#28516c;--text:#f5fbff;--muted:#9db8ca;--gold:#ffc83d;
+  --blue:#48bfff;--green:#45e19b;--red:#ff5c6b;--shadow:0 22px 70px rgba(0,0,0,.48)
 }
 *{box-sizing:border-box}
-html,body{margin:0;min-height:100%;background:radial-gradient(circle at 50% -10%,#174665 0,#071827 45%,#04111c 100%);color:var(--text);font-family:Arial,Helvetica,sans-serif}
-body{min-height:100vh}
-button,input{font:inherit}
-button{border:0;cursor:pointer}
-.app{width:min(760px,100%);margin:auto;padding:14px 14px 30px}
-.topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
-.brand{font-weight:900;font-size:20px;letter-spacing:.2px}
+html,body{margin:0;min-height:100%;color:var(--text);font-family:Arial,Helvetica,sans-serif}
+body{
+  min-height:100vh;overflow-x:hidden;
+  background:
+    radial-gradient(circle at 15% 10%,rgba(57,179,255,.18),transparent 25%),
+    radial-gradient(circle at 85% 18%,rgba(135,72,255,.16),transparent 28%),
+    radial-gradient(circle at 50% 100%,rgba(0,230,170,.10),transparent 32%),
+    linear-gradient(145deg,var(--bg2),var(--bg1) 58%,#020812);
+  position:relative;
+}
+body:before{
+  content:"";position:fixed;inset:0;pointer-events:none;opacity:.65;
+  background-image:
+    radial-gradient(circle at 8% 22%,#fff 0 1px,transparent 1.5px),
+    radial-gradient(circle at 22% 72%,#fff 0 1px,transparent 1.5px),
+    radial-gradient(circle at 38% 14%,#fff 0 1px,transparent 1.5px),
+    radial-gradient(circle at 57% 31%,#fff 0 1px,transparent 1.5px),
+    radial-gradient(circle at 73% 11%,#fff 0 1px,transparent 1.5px),
+    radial-gradient(circle at 91% 48%,#fff 0 1px,transparent 1.5px),
+    radial-gradient(circle at 82% 82%,#fff 0 1px,transparent 1.5px),
+    radial-gradient(circle at 48% 88%,#fff 0 1px,transparent 1.5px),
+    radial-gradient(circle at 13% 91%,#fff 0 1px,transparent 1.5px);
+}
+.app{width:min(760px,100%);margin:auto;padding:14px 14px 34px;position:relative;z-index:1}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.brand{font-weight:1000;font-size:21px}
 .sub{color:var(--muted);font-size:12px;margin-top:3px}
 .stats{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
-.pill{background:rgba(13,38,58,.9);border:1px solid var(--line);padding:8px 10px;border-radius:13px;font-weight:800;font-size:13px}
+.pill{
+  background:rgba(8,27,43,.88);border:1px solid var(--line);
+  padding:8px 11px;border-radius:13px;font-weight:900;font-size:13px;
+  box-shadow:0 7px 25px rgba(0,0,0,.2)
+}
 .pill b{color:var(--gold)}
-.card{background:linear-gradient(180deg,rgba(18,51,75,.98),rgba(9,31,47,.98));border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:20px}
-.levelhead{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.level{font-size:14px;color:var(--blue);font-weight:900;text-transform:uppercase;letter-spacing:1px}
-.points{color:var(--gold);font-weight:900}
-.progress{height:8px;background:#061522;border-radius:99px;overflow:hidden;margin:12px 0 20px}
+.card{
+  background:linear-gradient(180deg,var(--card2),var(--card));
+  border:1px solid rgba(70,130,160,.42);border-radius:25px;
+  box-shadow:var(--shadow);padding:20px;backdrop-filter:blur(9px)
+}
+.levelhead{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.level{font-size:14px;color:var(--blue);font-weight:1000;letter-spacing:1px;text-transform:uppercase}
+.points{color:var(--gold);font-weight:1000}
+.progress{height:8px;background:#03101b;border-radius:99px;overflow:hidden;margin:12px 0 18px}
 .progress i{display:block;height:100%;background:linear-gradient(90deg,var(--blue),var(--green));border-radius:99px;transition:width .35s}
-.hint{color:var(--muted);font-size:14px;text-align:center}
-.scramble{min-height:145px;display:flex;align-items:center;justify-content:center;text-align:center;padding:15px 5px;font-weight:1000;font-size:clamp(29px,9vw,58px);letter-spacing:clamp(3px,1vw,8px);text-transform:uppercase;word-break:break-word;text-shadow:0 4px 22px rgba(67,184,255,.22)}
-.answer{width:100%;padding:16px;border-radius:16px;background:#061522;color:white;border:2px solid #2a5069;outline:none;text-align:center;text-transform:uppercase;font-weight:900;font-size:22px;letter-spacing:1px}
-.answer:focus{border-color:var(--blue)}
-.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
-.btn{padding:15px 16px;border-radius:15px;font-weight:900;color:#071827;background:#dff5ff}
-.btn.primary{background:linear-gradient(135deg,#43b8ff,#43e19a)}
-.btn.gold{background:linear-gradient(135deg,#ffc83d,#ff9f2e)}
-.btn.dark{background:#16384e;color:#eaf8ff;border:1px solid #2a5069}
-.btn:disabled{opacity:.45;cursor:not-allowed}
-.feedback{min-height:26px;text-align:center;font-weight:900;margin-top:12px}
-.feedback.ok{color:var(--green)}.feedback.bad{color:var(--red)}
-.timer{display:none;text-align:center;margin:4px auto 14px;font-size:25px;font-weight:1000;color:var(--gold)}
-.timer.show{display:block}
-.timer.danger{color:var(--red);animation:pulse .55s infinite alternate}
+.details{
+  display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px
+}
+.detail{
+  background:rgba(3,16,27,.55);border:1px solid #1d4057;border-radius:13px;
+  padding:9px;text-align:center
+}
+.detail span{display:block;color:var(--muted);font-size:11px;text-transform:uppercase;font-weight:800}
+.detail strong{display:block;margin-top:3px;font-size:15px}
+.timer{display:none;text-align:center;margin:4px auto 12px;font-size:28px;font-weight:1000;color:var(--gold)}
+.timer.show{display:block}.timer.danger{color:var(--red);animation:pulse .55s infinite alternate}
 @keyframes pulse{to{transform:scale(1.08)}}
-.info{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:15px}
+.hint{
+  color:var(--muted);font-size:14px;text-align:center;min-height:21px
+}
+.scramble{
+  min-height:145px;display:flex;align-items:center;justify-content:center;text-align:center;
+  padding:12px 4px;font-weight:1000;font-size:clamp(29px,8.8vw,58px);
+  letter-spacing:clamp(3px,1vw,8px);text-transform:uppercase;word-break:break-word;
+  text-shadow:0 4px 24px rgba(72,191,255,.25)
+}
+.answer{
+  width:100%;padding:16px;border-radius:16px;background:#03131f;color:white;
+  border:2px solid #2a526b;outline:none;text-align:center;text-transform:uppercase;
+  font-weight:1000;font-size:22px;letter-spacing:1px
+}
+.answer:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(72,191,255,.10)}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.btn{padding:15px 16px;border-radius:15px;font-weight:1000;color:#06131d;background:#e0f6ff}
+.btn.primary{background:linear-gradient(135deg,#48bfff,#45e19b)}
+.btn.gold{background:linear-gradient(135deg,#ffc83d,#ff9c2f)}
+.btn.dark{background:#163b52;color:#eaf8ff;border:1px solid #2b5a73}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.feedback{min-height:26px;text-align:center;font-weight:1000;margin-top:12px}
+.feedback.ok{color:var(--green)}.feedback.bad{color:var(--red)}
+.skipInfo{text-align:center;color:var(--muted);font-size:12px;margin-top:9px}
+.tags{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:13px}
 .tag{font-size:12px;color:#cfe5f2;background:#0a2031;border:1px solid #21445c;padding:7px 9px;border-radius:99px}
-.overlay{position:fixed;inset:0;background:rgba(2,10,17,.82);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:18px;z-index:20}
+.overlay{
+  position:fixed;inset:0;background:rgba(2,10,17,.84);backdrop-filter:blur(9px);
+  display:none;align-items:center;justify-content:center;padding:18px;z-index:20
+}
 .overlay.show{display:flex}
-.modal{width:min(520px,100%);background:linear-gradient(180deg,#143d59,#092437);border:1px solid #31617e;border-radius:26px;padding:25px;box-shadow:0 25px 90px rgba(0,0,0,.55);text-align:center}
-.modal .icon{font-size:52px;margin-bottom:8px}
-.modal h2{margin:5px 0 10px;font-size:27px}
-.modal p{color:#c1d5e2;line-height:1.55;margin:9px 0}
-.modal strong{color:white}
+.modal{
+  width:min(520px,100%);background:linear-gradient(180deg,#143d59,#092437);
+  border:1px solid #31617e;border-radius:26px;padding:25px;box-shadow:0 25px 90px rgba(0,0,0,.58);
+  text-align:center
+}
+.modal .icon{font-size:52px;margin-bottom:7px}.modal h2{margin:5px 0 10px;font-size:27px}
+.modal p{color:#c1d5e2;line-height:1.55;margin:9px 0}.modal strong{color:white}
 .modal .reward{font-size:25px;color:var(--gold);font-weight:1000;margin:16px 0}
-.modal .btn{width:100%;margin-top:10px}
+.modal .btn{width:100%;margin-top:10px}.small{font-size:12px;color:var(--muted)}
 .hidden{display:none!important}
-.toast{position:fixed;left:50%;bottom:20px;transform:translate(-50%,120px);background:#0e2c40;border:1px solid #35617a;color:white;padding:12px 16px;border-radius:13px;font-weight:800;z-index:40;transition:.3s;box-shadow:var(--shadow)}
+.toast{
+  position:fixed;left:50%;bottom:20px;transform:translate(-50%,120px);
+  background:#0e2c40;border:1px solid #35617a;color:white;padding:12px 16px;
+  border-radius:13px;font-weight:800;z-index:40;transition:.3s;box-shadow:var(--shadow);
+  text-align:center;max-width:90%
+}
 .toast.show{transform:translate(-50%,0)}
-.end{text-align:center;padding:20px 4px}
-.end h2{font-size:30px;margin:8px}
+.end{text-align:center;padding:24px 5px}.end h2{font-size:30px;margin:8px}
 .end .big{font-size:42px;color:var(--gold);font-weight:1000}
-.small{font-size:12px;color:var(--muted)}
 @media(max-width:520px){
  .app{padding:10px 10px 24px}.card{padding:16px;border-radius:20px}
- .stats{gap:5px}.pill{font-size:12px;padding:7px 8px}
- .actions{grid-template-columns:1fr}
- .scramble{min-height:125px}
+ .pill{font-size:12px;padding:7px 8px}.actions{grid-template-columns:1fr}
+ .scramble{min-height:125px}.details{gap:6px}
 }
 </style>
 </head>
@@ -85,36 +139,43 @@ button{border:0;cursor:pointer}
 
   <main class="card" id="gameCard">
     <div class="levelhead">
-      <div class="level" id="levelName">FASE 1 • FÁCIL</div>
+      <div class="level" id="levelName">NÍVEL 1 • FÁCIL</div>
       <div class="points" id="pointsLabel">+20 moedas</div>
     </div>
+
     <div class="progress"><i id="progress" style="width:11.11%"></i></div>
+
+    <div class="details">
+      <div class="detail"><span>Nível</span><strong id="levelNumber">1 / 9</strong></div>
+      <div class="detail"><span>Letras</span><strong id="letterCount">0</strong></div>
+    </div>
 
     <div class="timer" id="timer">⏱️ <span id="time">60</span>s</div>
 
-    <div class="hint" id="category">Descubra a palavra</div>
-    <div class="scramble" id="scramble">CARREGANDO...</div>
+    <div class="hint" id="hint">Descubra a palavra</div>
+    <div class="scramble" id="scramble">COMEÇAR</div>
 
     <input id="answer" class="answer" type="text" autocomplete="off" autocapitalize="characters"
-           placeholder="Digite a palavra aqui" aria-label="Resposta">
+      placeholder="Digite a palavra aqui" aria-label="Resposta">
 
     <div class="actions">
       <button class="btn primary" id="checkBtn">CONFIRMAR</button>
-      <button class="btn dark" id="skipBtn">PULAR PALAVRA</button>
+      <button class="btn dark" id="skipBtn">PULAR PALAVRA ❤️</button>
     </div>
-    <div class="feedback" id="feedback"></div>
 
-    <div class="info">
+    <div class="feedback" id="feedback"></div>
+    <div class="skipInfo" id="skipInfo">Você tem 2 pulos nesta tentativa. Disponíveis somente nos níveis 1 a 7.</div>
+
+    <div class="tags">
       <span class="tag" id="difficultyTag">Fácil</span>
       <span class="tag" id="ruleTag">Mínimo 7 letras</span>
-      <span class="tag">Acertou = avança</span>
     </div>
   </main>
 
   <div class="card end hidden" id="endCard">
     <div style="font-size:58px">🏆</div>
-    <h2>Parabéns!</h2>
-    <p>Você concluiu as 9 fases da Palavra Embaralhada.</p>
+    <h2 id="endTitle">Parabéns!</h2>
+    <p id="endText">Você concluiu as 9 fases da Palavra Embaralhada.</p>
     <div class="big" id="finalScore">0</div>
     <div>moedas conquistadas nesta partida</div>
     <br>
@@ -126,10 +187,11 @@ button{border:0;cursor:pointer}
   <div class="modal">
     <div class="icon">🧩</div>
     <h2>Palavra Embaralhada</h2>
-    <p>Você vai enfrentar <strong>9 níveis</strong>. As palavras ficam cada vez maiores e mais difíceis.</p>
-    <p>Para começar uma partida, você usa <strong>1 chance</strong> e recebe <strong>+30 moedas</strong>.</p>
+    <p>São <strong>9 níveis</strong>. As palavras ficam maiores e mais difíceis.</p>
+    <p>Para começar uma partida você usa <strong>1 coração</strong> e recebe <strong>+30 moedas</strong>.</p>
     <div class="reward">🎁 +30 moedas ao iniciar</div>
-    <p class="small">A partida fica salva no aparelho. Atualizar a página não dá moedas ou chances extras.</p>
+    <p>Em cada tentativa você tem <strong>2 pulos</strong>, disponíveis somente nos níveis <strong>1 a 7</strong>. Cada pulo custa <strong>1 coração</strong>. Nos níveis 8 e 9 não é permitido pular.</p>
+    <p class="small">Os níveis têm começo, meio e fim. Ao acertar a palavra, você avança automaticamente.</p>
     <button class="btn primary" id="startBtn">COMEÇAR PARTIDA</button>
   </div>
 </div>
@@ -137,23 +199,31 @@ button{border:0;cursor:pointer}
 <div class="overlay" id="phase8Overlay">
   <div class="modal">
     <div class="icon">🔥</div>
-    <h2>Você chegou ao HARD!</h2>
-    <p>Agora começa a <strong>Fase 8</strong>. As palavras têm <strong>mais de 10 letras</strong> e o cronômetro entra em ação.</p>
-    <p>Você ganha <strong>100 moedas</strong> se acertar em até <strong>20 segundos</strong>. Depois disso, a recompensa passa para <strong>75 moedas</strong>.</p>
-    <div class="reward">⚡ O tempo começa ao iniciar a fase</div>
-    <button class="btn gold" id="start8Btn">COMEÇAR FASE 8</button>
+    <h2>VOCÊ CHEGOU AO NÍVEL HARD!</h2>
+    <p>Você concluiu os <strong>7 primeiros níveis</strong>. Agora começa o desafio especial.</p>
+    <p>No <strong>Nível 8</strong>, a palavra terá <strong>mais de 10 letras</strong> e você terá <strong>60 segundos</strong> para descobrir.</p>
+    <p>⚠️ <strong>Não é possível pular a palavra.</strong></p>
+    <p>⚠️ Se você <strong>errar a resposta</strong> ou o tempo acabar, você perde o Nível 8 e não chega ao bônus.</p>
+    <div class="reward">🏆 Até +100 moedas</div>
+    <p><strong>Até 20 segundos:</strong> +100 moedas<br>
+    <strong>21 segundos ou mais:</strong> +75 moedas</p>
+    <p>Se acertar, você ganha o direito de entrar no <strong>Nível 9 — FASE BÔNUS</strong>.</p>
+    <button class="btn gold" id="start8Btn">🔥 JOGAR NÍVEL HARD</button>
   </div>
 </div>
 
 <div class="overlay" id="phase9Overlay">
   <div class="modal">
     <div class="icon">💎</div>
-    <h2>FASE BÔNUS!</h2>
-    <p>Você chegou à fase bônus e pode ganhar <strong>até 200 moedas</strong>.</p>
-    <p>O cronômetro é decisivo: <strong>até 20s = 200</strong>, <strong>até 35s = 150</strong> e <strong>acima de 36s = 120</strong>.</p>
-    <p><strong>Atenção:</strong> se não acertar antes de completar <strong>1 minuto</strong>, você perde a fase bônus.</p>
-    <div class="reward">🏆 Até +200 moedas</div>
-    <button class="btn gold" id="start9Btn">ENTRAR NA FASE BÔNUS</button>
+    <h2>NÍVEL 9 • FASE BÔNUS!</h2>
+    <p>🔥 Você venceu o Hard! Agora tem direito ao <strong>último desafio</strong>.</p>
+    <p>A palavra será <strong>enorme e super difícil</strong>. Você terá até <strong>1 minuto</strong> e <strong>não poderá pular</strong>.</p>
+    <div class="reward">🏆 ATÉ +200 MOEDAS</div>
+    <p><strong>Até 20 segundos:</strong> +200 moedas<br>
+    <strong>21 a 35 segundos:</strong> +150 moedas<br>
+    <strong>36 a 60 segundos:</strong> +120 moedas</p>
+    <p>⚠️ Se errar ou deixar o cronômetro chegar a <strong>0</strong>, você perde o bônus.</p>
+    <button class="btn gold" id="start9Btn">💎 IR PARA O NÍVEL BÔNUS</button>
   </div>
 </div>
 
@@ -162,422 +232,322 @@ button{border:0;cursor:pointer}
 <script>
 'use strict';
 
-/*
-  PALAVRA EMBARALHADA — ADAM GAMES
-  - 9 fases
-  - Fases 1–3: mínimo 7 letras / +20 moedas
-  - Fases 4–7: mínimo 10 letras / +30 moedas
-  - Fase 8: >10 letras / 100 até 20s, 75 depois
-  - Fase 9: bônus / 200 até 20s, 150 até 35s, 120 acima de 36s
-  - Fase 9: limite absoluto de 60s; se não acertar, perde
-  - 1 chance ao iniciar uma nova partida +30 moedas
-  - Persistência local para evitar ganhar repetidamente por atualizar a página
-*/
+const KEY='adam_games_palavra_embaralhada_v2';
+const SKIPS_PER_ATTEMPT=2;
 
-const KEY = 'adam_games_palavra_embaralhada_v1';
-
-const LEVELS = [
-  {name:'FASE 1 • FÁCIL', diff:'Fácil', min:7, points:20, time:null},
-  {name:'FASE 2 • FÁCIL', diff:'Fácil', min:7, points:20, time:null},
-  {name:'FASE 3 • FÁCIL', diff:'Fácil', min:7, points:20, time:null},
-  {name:'FASE 4 • MÉDIO', diff:'Médio', min:10, points:30, time:null},
-  {name:'FASE 5 • MÉDIO', diff:'Médio', min:10, points:30, time:null},
-  {name:'FASE 6 • MÉDIO', diff:'Médio', min:10, points:30, time:null},
-  {name:'FASE 7 • DIFÍCIL', diff:'Difícil', min:10, points:30, time:null},
-  {name:'FASE 8 • HARD', diff:'Hard', min:11, points:100, time:60},
-  {name:'FASE 9 • BÔNUS', diff:'Bônus', min:13, points:200, time:60}
+const LEVELS=[
+ {name:'NÍVEL 1 • FÁCIL',diff:'Fácil',min:7,points:20,time:null},
+ {name:'NÍVEL 2 • FÁCIL',diff:'Fácil',min:7,points:20,time:null},
+ {name:'NÍVEL 3 • FÁCIL',diff:'Fácil',min:7,points:20,time:null},
+ {name:'NÍVEL 4 • MÉDIO',diff:'Médio',min:10,points:30,time:null},
+ {name:'NÍVEL 5 • MÉDIO',diff:'Médio',min:10,points:30,time:null},
+ {name:'NÍVEL 6 • MÉDIO',diff:'Médio',min:10,points:30,time:null},
+ {name:'NÍVEL 7 • DIFÍCIL',diff:'Difícil',min:10,points:30,time:null},
+ {name:'NÍVEL 8 • HARD',diff:'Hard',min:11,points:100,time:60},
+ {name:'NÍVEL 9 • BÔNUS',diff:'Bônus',min:13,points:200,time:60}
 ];
 
-/* Banco interno: palavras sem acentos para facilitar a digitação.
-   O jogo aceita a resposta com ou sem acentos. */
-const WORDS = {
-  1:[
-    'abacaxi','amizade','amarelo','animais','arcoiris','aventureiro','baleias','banana',
-    'belezas','bicicleta','brincadeira','cachorro','campeao','castelo','chocolate',
-    'coelho','comida','coracao','desenho','dinheiro','domingo','elefante','escola',
-    'estrela','familia','fantasia','fazenda','felicidade','florista','galinha',
-    'girassol','janela','jardim','laranja','melancia','montanha','morango','musica',
-    'nuvem','oceano','palhaco','passeio','pequeno','pimenta','pipoca','planeta',
-    'presente','princesa','sorvete','telefone','tesouro','tomate','universo'
-  ],
-  2:[
-    'aventura','borboleta','caminhada','carinho','carnaval','cavalo','cidade',
-    'comercio','coragem','crianca','descoberta','diversao','espelho','familia',
-    'fantasia','fazendeiro','floresta','foguete','formiga','fortaleza','geleira',
-    'hospital','jogador','lagosta','lareira','livraria','macarrao','maquina',
-    'mercado','mistura','navio','noticia','oceania','parque','passarinho','pintura',
-    'planeta','rainha','relogio','salgado','sanduiche','sereia','sorvete','sorveteria',
-    'travesseiro','viagem','vitoria','vulcao'
-  ],
-  3:[
-    'acampamento','aeroporto','alimentacao','biblioteca','cachoeira','calendario',
-    'carteira','celebracao','computador','conquista','construcao','corredor',
-    'criatividade','descanso','dinamite','documento','elevador','envelope',
-    'escorregador','estacao','experiencia','fotografia','garrafa','historias',
-    'inverno','instrumento','jornalista','maravilha','medicina','mercadinho',
-    'nascimento','passaporte','pescaria','pintor','professor','receita','restaurante',
-    'segredo','serenata','sobremesa','telefone','trabalho','travesseiro','turismo'
-  ],
-  4:[
-    'abastecimento','adolescente','aquecimento','bibliotecario','caracteristica',
-    'colaboracao','comunicacao','comportamento','conhecimento','coordenacao',
-    'criatividade','desenvolvimento','equipamento','especialista','estacionamento',
-    'experimento','fotografia','funcionamento','gerenciamento','importante',
-    'independencia','informacao','ingrediente','inteligencia','investimento',
-    'laboratorio','localizacao','manutencao','movimento','organizacao','personalidade',
-    'planejamento','possibilidade','preparacao','profissional','programacao',
-    'responsabilidade','restaurante','tecnologia','temperatura','universidade'
-  ],
-  5:[
-    'administracao','agricultura','apresentacao','aproximadamente','atendimento',
-    'atmosfera','atualizacao','bibliografia','classificacao','combinacao',
-    'competencia','concentracao','configuracao','consideracao','constelacao',
-    'criatividade','demonstracao','distribuicao','eletricidade','especialidade',
-    'estabelecimento','estrategia','estrutura','exposicao','funcionario',
-    'identificacao','imaginacao','impressionante','industrializacao','investigacao',
-    'manipulacao','matematica','modernizacao','multiplicacao','necessidade',
-    'observacao','participacao','personalizacao','possibilidade','qualidade'
-  ],
-  6:[
-    'acessibilidade','acontecimento','aperfeicoamento','aprendizagem','atendimento',
-    'autenticidade','beneficiamento','conhecimento','conscientizacao','criatividade',
-    'descentralizacao','determinado','documentacao','empreendimento','especializacao',
-    'experimentacao','funcionalidade','gerenciamento','identidade','implementacao',
-    'indispensavel','infraestrutura','interpretacao','investigacao','legislacao',
-    'monitoramento','organizador','planejamento','processamento','produtividade',
-    'reconhecimento','relacionamento','representacao','transformacao','transparencia'
-  ],
-  7:[
-    'acompanhamento','aperfeicoamento','arrecadacao','caracterizacao','comercializacao',
-    'compartilhamento','complexidade','complementacao','comportamento','conectividade',
-    'conscientizacao','desenvolvimento','disponibilidade','especializacao',
-    'experimentacao','funcionamento','individualidade','interatividade','investimento',
-    'modernizacao','operacionalidade','personalizacao','planejamento','possibilidade',
-    'profissionalizacao','reorganizacao','responsabilidade','sustentabilidade',
-    'transformacao','versatilidade'
-  ],
-  8:[
-    'extraordinariamente','desenvolvimento','responsabilidade','sustentabilidade',
-    'internacionalizacao','profissionalizacao','representatividade','empreendedorismo',
-    'incompatibilidade','descentralizacao','individualizacao','compartilhamento',
-    'reconhecimento','aperfeicoamento','comercializacao','especializadissimo',
-    'impressionantemente','conscientizacao','interdisciplinaridade','disponibilidade',
-    'operacionalizacao','multidisciplinaridade','caracterizacao','aprofundamento',
-    'desburocratizacao','democratizacao','industrializacao','personalizacao',
-    'funcionalidades','extraordinario'
-  ],
-  9:[
-    'inconstitucionalidade','hiperresponsabilidade','extraordinariamente',
-    'internacionalizacoes','desproporcionalidade','interdisciplinaridade',
-    'multidisciplinaridade','incompreensivelmente','caracteristicamente',
-    'desenvolvimentismo','representatividade','profissionalizacoes',
-    'sustentabilidades','descentralizadamente','comercializabilidade',
-    'individualizadamente','extraordinarios','aperfeicoamentos',
-    'recontextualizacao','institucionalizacao'
-  ]
+const WORDS={
+1:['abacaxi','amizade','amarelo','animais','arcoiris','aventura','baleias','banana','belezas','bicicleta','brincadeira','cachorro','campeao','castelo','chocolate','coelho','comida','coracao','desenho','dinheiro','domingo','elefante','escola','estrela','familia','fantasia','fazenda','felicidade','florista','galinha','girassol','janela','jardim','laranja','melancia','montanha','morango','musica','oceano','palhaco','passeio','pequeno','pimenta','pipoca','planeta','presente','princesa','sorvete','telefone','tesouro','tomate','universo'],
+2:['aventura','borboleta','caminhada','carinho','carnaval','cavalo','cidade','comercio','coragem','crianca','descoberta','diversao','espelho','familia','fantasia','fazendeiro','floresta','foguete','formiga','fortaleza','geleira','hospital','jogador','lagosta','lareira','livraria','macarrao','maquina','mercado','mistura','navio','noticia','oceania','parque','passarinho','pintura','planeta','rainha','relogio','salgado','sanduiche','sereia','sorvete','sorveteria','travesseiro','viagem','vitoria','vulcao'],
+3:['acampamento','aeroporto','alimentacao','biblioteca','cachoeira','calendario','carteira','celebracao','computador','conquista','construcao','corredor','criatividade','descanso','dinamite','documento','elevador','envelope','escorregador','estacao','experiencia','fotografia','garrafa','historias','inverno','instrumento','jornalista','maravilha','medicina','mercadinho','nascimento','passaporte','pescaria','pintor','professor','receita','restaurante','segredo','serenata','sobremesa','telefone','trabalho','travesseiro','turismo'],
+4:['abastecimento','adolescente','aquecimento','bibliotecario','caracteristica','colaboracao','comunicacao','comportamento','conhecimento','coordenacao','criatividade','desenvolvimento','equipamento','especialista','estacionamento','experimento','fotografia','funcionamento','gerenciamento','importante','independencia','informacao','ingrediente','inteligencia','investimento','laboratorio','localizacao','manutencao','movimento','organizacao','personalidade','planejamento','possibilidade','preparacao','profissional','programacao','responsabilidade','restaurante','tecnologia','temperatura','universidade'],
+5:['administracao','agricultura','apresentacao','aproximadamente','atendimento','atmosfera','atualizacao','bibliografia','classificacao','combinacao','competencia','concentracao','configuracao','consideracao','constelacao','criatividade','demonstracao','distribuicao','eletricidade','especialidade','estabelecimento','estrategia','estrutura','exposicao','funcionario','identificacao','imaginacao','impressionante','industrializacao','investigacao','manipulacao','matematica','modernizacao','multiplicacao','necessidade','observacao','participacao','personalizacao','possibilidade','qualidade'],
+6:['acessibilidade','acontecimento','aperfeicoamento','aprendizagem','atendimento','autenticidade','beneficiamento','conhecimento','conscientizacao','criatividade','descentralizacao','determinado','documentacao','empreendimento','especializacao','experimentacao','funcionalidade','gerenciamento','identidade','implementacao','indispensavel','infraestrutura','interpretacao','investigacao','legislacao','monitoramento','organizador','planejamento','processamento','produtividade','reconhecimento','relacionamento','representacao','transformacao','transparencia'],
+7:['acompanhamento','aperfeicoamento','arrecadacao','caracterizacao','comercializacao','compartilhamento','complexidade','complementacao','comportamento','conectividade','conscientizacao','desenvolvimento','disponibilidade','especializacao','experimentacao','funcionamento','individualidade','interatividade','investimento','modernizacao','operacionalidade','personalizacao','planejamento','possibilidade','profissionalizacao','reorganizacao','responsabilidade','sustentabilidade','transformacao','versatilidade'],
+8:['extraordinariamente','desenvolvimento','responsabilidade','sustentabilidade','internacionalizacao','profissionalizacao','representatividade','empreendedorismo','incompatibilidade','descentralizacao','individualizacao','compartilhamento','reconhecimento','aperfeicoamento','comercializacao','especializadissimo','impressionantemente','conscientizacao','interdisciplinaridade','disponibilidade','operacionalizacao','multidisciplinaridade','caracterizacao','aprofundamento','desburocratizacao','democratizacao','industrializacao','personalizacao','funcionalidades','extraordinario'],
+9:['inconstitucionalidade','hiperresponsabilidade','extraordinariamente','internacionalizacoes','desproporcionalidade','interdisciplinaridade','multidisciplinaridade','incompreensivelmente','caracteristicamente','desenvolvimentismo','representatividade','profissionalizacoes','sustentabilidades','descentralizadamente','comercializabilidade','individualizadamente','extraordinarios','aperfeicoamentos','recontextualizacao','institucionalizacao']
 };
 
-const $ = id => document.getElementById(id);
-let state = loadState();
-let currentWord = '';
-let timerId = null;
-let elapsed = 0;
-let accepting = false;
-let phaseStarted = false;
+const HINTS={
+  extraordinariamente:'intensidade',
+  desenvolvimento:'progresso',
+  responsabilidade:'dever',
+  sustentabilidade:'ambiente',
+  internacionalizacao:'global',
+  profissionalizacao:'carreira',
+  representatividade:'presenca',
+  empreendedorismo:'negocio',
+  incompatibilidade:'conflito',
+  descentralizacao:'distribuicao',
+  individualizacao:'personalizacao',
+  compartilhamento:'divisao',
+  reconhecimento:'premio',
+  aperfeicoamento:'melhoria',
+  comercializacao:'vendas',
+  especializadissimo:'experiencia',
+  impressionantemente:'impacto',
+  conscientizacao:'alerta',
+  interdisciplinaridade:'conhecimento',
+  disponibilidade:'acesso',
+  operacionalizacao:'execucao',
+  multidisciplinaridade:'areas',
+  caracterizacao:'descricao',
+  aprofundamento:'estudo',
+  desburocratizacao:'simplificacao',
+  democratizacao:'igualdade',
+  industrializacao:'industria',
+  personalizacao:'individual',
+  funcionalidades:'recursos',
+  extraordinario:'excepcional'
+};
 
-function defaultState(){
+function freshState(){
   return {
-    coins: Number(localStorage.getItem('adam_games_coins') || 0),
-    chances: Number(localStorage.getItem('adam_games_chances') || 3),
-    level: 1,
-    totalEarned: 0,
-    active: false,
-    startedAt: null,
-    usedWords: [],
-    sessionAwarded: false
+    coins:Number(localStorage.getItem('adam_games_coins')||0),
+    chances:Number(localStorage.getItem('adam_games_chances')||3),
+    level:1,
+    totalEarned:0,
+    active:false,
+    skipsLeft:SKIPS_PER_ATTEMPT,
+    usedWords:[],
+    sessionStarted:false
   };
 }
-
-function loadState(){
+function load(){
   try{
-    const saved = JSON.parse(localStorage.getItem(KEY));
-    return saved ? {...defaultState(),...saved} : defaultState();
-  }catch(e){ return defaultState(); }
+    const s=JSON.parse(localStorage.getItem(KEY));
+    return s?{...freshState(),...s}:freshState();
+  }catch(e){return freshState()}
 }
+let state=load(), currentWord='', elapsed=0, timerId=null, accepting=false;
 
-function saveState(){
-  localStorage.setItem(KEY, JSON.stringify(state));
-  localStorage.setItem('adam_games_coins', String(state.coins));
-  localStorage.setItem('adam_games_chances', String(state.chances));
+const $=id=>document.getElementById(id);
+function save(){
+  localStorage.setItem(KEY,JSON.stringify(state));
+  localStorage.setItem('adam_games_coins',String(state.coins));
+  localStorage.setItem('adam_games_chances',String(state.chances));
 }
-
-function normalize(s){
-  return String(s||'').toLowerCase()
-    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
-    .replace(/[^a-z]/g,'');
+function norm(v){
+  return String(v||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z]/g,'');
 }
-
-function shuffleWord(word){
-  let arr = [...word.toUpperCase()], out = word.toUpperCase();
-  for(let attempt=0;attempt<20 && out===word.toUpperCase();attempt++){
-    for(let i=arr.length-1;i>0;i--){
-      const j=Math.floor(Math.random()*(i+1));
-      [arr[i],arr[j]]=[arr[j],arr[i]];
-    }
+function shuffle(word){
+  const original=word.toUpperCase();let arr=[...original],out=original;
+  for(let a=0;a<40 && out===original;a++){
+    for(let i=arr.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}
     out=arr.join('');
   }
   return out;
 }
-
 function chooseWord(level){
-  const list = WORDS[level] || WORDS[1];
-  const available = list.filter(w => !state.usedWords.includes(w));
-  const pool = available.length ? available : list;
-  const word = pool[Math.floor(Math.random()*pool.length)];
+  const list=(WORDS[level]||[]).filter(w=>w.length>=LEVELS[level-1].min);
+  const unused=list.filter(w=>!state.usedWords.includes(w));
+  // Em cada nível, palavras usadas anteriormente não voltam.
+  // O banco é grande o suficiente para a partida.
+  const pool=unused.length?unused:list;
+  const word=pool[Math.floor(Math.random()*pool.length)];
   state.usedWords.push(word);
-  if(state.usedWords.length>100) state.usedWords.shift();
   return word;
 }
+function toast(msg){
+  const t=$('toast');t.textContent=msg;t.classList.add('show');
+  clearTimeout(toast.x);toast.x=setTimeout(()=>t.classList.remove('show'),2300);
+}
+function overlay(id,on){$(id).classList.toggle('show',on)}
 
-function updateHUD(){
-  $('chances').textContent = Math.max(0,state.chances);
-  $('coins').textContent = Math.max(0,state.coins);
+function update(){
   const lv=LEVELS[state.level-1];
+  $('chances').textContent=Math.max(0,state.chances);
+  $('coins').textContent=Math.max(0,state.coins);
   $('levelName').textContent=lv.name;
-  $('pointsLabel').textContent=state.level<=7?`+${lv.points} moedas`:'Até +'+lv.points+' moedas';
+  $('levelNumber').textContent=`${state.level} / 9`;
+  $('pointsLabel').textContent=state.level<=7?`+${lv.points} moedas`:`Até +${lv.points} moedas`;
   $('progress').style.width=(state.level/9*100)+'%';
   $('difficultyTag').textContent=lv.diff;
   $('ruleTag').textContent=state.level<=3?'Mínimo 7 letras':state.level<=7?'Mínimo 10 letras':state.level===8?'Mais de 10 letras':'Palavras enormes';
-  $('category').textContent=state.level>=8?'Desafio cronometrado':'Descubra a palavra';
-  $('answer').placeholder=state.level>=8?'Digite antes do tempo acabar':'Digite a palavra aqui';
-}
-
-function showToast(msg){
-  const t=$('toast'); t.textContent=msg; t.classList.add('show');
-  clearTimeout(showToast._t); showToast._t=setTimeout(()=>t.classList.remove('show'),2300);
-}
-
-function showOverlay(id){ $(id).classList.add('show'); }
-function hideOverlay(id){ $(id).classList.remove('show'); }
-
-function startNewGame(){
-  if(state.active){
-    showToast('Você já tem uma partida em andamento.');
-    return;
+  if(state.level>=8){
+    $('skipInfo').textContent='🚫 Nesta fase não é permitido pular.';
+    $('skipBtn').textContent='PULAR INDISPONÍVEL';
+    $('skipBtn').disabled=true;
+  }else{
+    $('skipInfo').textContent=state.skipsLeft>0?`Pulos restantes nesta tentativa: ${state.skipsLeft}`:'Sem pulos restantes nesta tentativa';
+    $('skipBtn').textContent=state.skipsLeft>0?`PULAR PALAVRA ❤️`:'SEM PULOS';
+    $('skipBtn').disabled=state.skipsLeft<=0;
   }
-  if(state.chances<1){
-    showToast('Você não tem chances disponíveis.');
-    return;
-  }
-  state.chances--;
-  state.coins+=30;
-  state.totalEarned=30;
-  state.level=1;
-  state.active=true;
-  state.startedAt=Date.now();
-  state.sessionAwarded=true;
-  state.usedWords=[];
-  saveState();
-  hideOverlay('introOverlay');
-  $('endCard').classList.add('hidden');
-  $('gameCard').classList.remove('hidden');
-  updateHUD();
-  loadLevel();
-  showToast('Partida iniciada! +30 moedas 🪙');
 }
 
-function loadLevel(){
-  stopTimer();
-  phaseStarted=false;
-  accepting=true;
-  currentWord=chooseWord(state.level);
-  $('scramble').textContent=shuffleWord(currentWord);
-  $('answer').value='';
-  $('feedback').textContent='';
-  $('feedback').className='feedback';
-  $('answer').disabled=false;
-  $('checkBtn').disabled=false;
-  $('skipBtn').disabled=false;
-  updateHUD();
-  $('answer').focus();
-  if(state.level>=8) startTimer(state.level===9?60:60);
+function stopTimer(){
+  if(timerId){clearInterval(timerId);timerId=null}
+  $('timer').classList.remove('show','danger');
 }
-
-function startTimer(limit){
-  stopTimer();
-  elapsed=0; phaseStarted=true;
-  $('timer').classList.add('show');
-  $('time').textContent=limit;
-  $('timer').classList.remove('danger');
+function startTimer(){
+  stopTimer();elapsed=0;$('timer').classList.add('show');$('time').textContent='60';
   timerId=setInterval(()=>{
     elapsed++;
-    const remaining=Math.max(0,limit-elapsed);
-    $('time').textContent=remaining;
-    if(remaining<=10) $('timer').classList.add('danger');
-    if(elapsed>=limit){
-      stopTimer();
-      accepting=false;
-      $('answer').disabled=true;
-      $('checkBtn').disabled=true;
-      $('skipBtn').disabled=true;
+    const left=Math.max(0,60-elapsed);
+    $('time').textContent=left;
+    if(left<=10)$('timer').classList.add('danger');
+    if(elapsed>=60){
+      stopTimer();accepting=false;
+      $('answer').disabled=true;$('checkBtn').disabled=true;$('skipBtn').disabled=true;
       if(state.level===9){
-        $('feedback').textContent='⏰ Tempo esgotado! Você perdeu a fase bônus.';
+        $('feedback').textContent='⏰ Tempo esgotado! Você perdeu o bônus.';
         $('feedback').className='feedback bad';
-        state.active=false;
-        saveState();
-        setTimeout(endBonusLost,1000);
+        state.active=false;save();
+        setTimeout(()=>endGame(false),1000);
       }else{
-        $('feedback').textContent='⏰ Tempo encerrado! Tente novamente usando outra chance.';
+        $('feedback').textContent='⏰ Tempo esgotado! A partida terminou.';
         $('feedback').className='feedback bad';
-        setTimeout(()=>finishNormalTimeout(),1000);
+        state.active=false;save();
       }
     }
   },1000);
 }
 
-function stopTimer(){
-  if(timerId){clearInterval(timerId);timerId=null;}
-  $('timer').classList.remove('show','danger');
+function loadLevel(){
+  stopTimer();
+  const lv=LEVELS[state.level-1];
+  currentWord=chooseWord(state.level);
+  accepting=true;
+  $('scramble').textContent=shuffle(currentWord);
+  $('letterCount').textContent=currentWord.length;
+  $('answer').value='';$('answer').disabled=false;
+  $('checkBtn').disabled=false;
+  $('feedback').textContent='';$('feedback').className='feedback';
+  update();
+
+  // A pista aparece SOMENTE no nível 8. No 9 não há pista.
+  if(state.level===8){
+    $('hint').textContent='Pista: '+(HINTS[currentWord]||'ideia');
+  }else{
+    $('hint').textContent=state.level===9?'':'Descubra a palavra';
+  }
+
+  $('answer').focus();
+  if(state.level>=8)startTimer();
+  save();
 }
 
-function finishNormalTimeout(){
-  state.active=false;
-  saveState();
-  showToast('A partida terminou. Você pode iniciar outra com uma chance.');
-  $('answer').disabled=true;
-  $('checkBtn').disabled=true;
-  $('skipBtn').disabled=true;
+function startGame(){
+  if(state.active){toast('Você já está em uma partida.');return}
+  if(state.chances<1){toast('Você não tem corações suficientes.');return}
+  state.chances--;
+  state.coins+=30;
+  state.totalEarned=30;
+  state.level=1;
+  state.active=true;
+  state.usedWords=[];
+  state.skipsLeft=SKIPS_PER_ATTEMPT;
+  state.sessionStarted=true;
+  save();
+  overlay('introOverlay',false);
+  $('gameCard').classList.remove('hidden');
+  $('endCard').classList.add('hidden');
+  loadLevel();
+  toast('Partida iniciada! +30 moedas 🪙');
 }
 
-function endBonusLost(){
-  state.active=false;
-  saveState();
-  $('gameCard').classList.add('hidden');
-  $('endCard').classList.remove('hidden');
-  $('finalScore').textContent='0';
-}
-
-function rewardForLevel(){
-  if(state.level<=7) return LEVELS[state.level-1].points;
-  if(state.level===8) return elapsed<=20?100:75;
-  if(elapsed<=20) return 200;
-  if(elapsed<=35) return 150;
-  return 120;
-}
-
-function checkAnswer(){
-  if(!accepting) return;
-  const answer=normalize($('answer').value);
-  const correct=normalize(currentWord);
+function check(){
+  if(!accepting)return;
+  const answer=norm($('answer').value),correct=norm(currentWord);
   if(!answer){
     $('feedback').textContent='Digite uma resposta.';
+    $('feedback').className='feedback bad';return;
+  }
+  if(answer!==correct){
+    $('feedback').textContent=state.level>=8
+      ? '❌ Resposta errada! Você perdeu esta fase.'
+      : '❌ Palavra incorreta. Tente novamente!';
     $('feedback').className='feedback bad';
+    if(state.level>=8){
+      accepting=false;stopTimer();
+      $('answer').disabled=true;$('checkBtn').disabled=true;$('skipBtn').disabled=true;
+      state.active=false;save();
+      setTimeout(()=>endGame(false),1000);
+    }else{
+      $('answer').select();
+    }
     return;
   }
-  if(answer===correct){
-    accepting=false;
-    stopTimer();
-    const reward=rewardForLevel();
-    state.coins+=reward;
-    state.totalEarned+=reward;
-    saveState();
-    $('feedback').textContent=`✅ Acertou! +${reward} moedas`;
-    $('feedback').className='feedback ok';
-    $('answer').disabled=true;
-    $('checkBtn').disabled=true;
-    $('skipBtn').disabled=true;
-    updateHUD();
-    setTimeout(nextLevel,900);
-  }else{
-    $('feedback').textContent='❌ Não foi dessa vez. Tente novamente!';
-    $('feedback').className='feedback bad';
-    $('answer').select();
-  }
+
+  accepting=false;stopTimer();
+  let reward;
+  if(state.level<=7)reward=LEVELS[state.level-1].points;
+  else if(state.level===8)reward=elapsed<=20?100:75;
+  else reward=elapsed<=20?200:(elapsed<=35?150:120);
+
+  state.coins+=reward;state.totalEarned+=reward;save();
+  $('feedback').textContent=`✅ Acertou! +${reward} moedas`;
+  $('feedback').className='feedback ok';
+  $('answer').disabled=true;$('checkBtn').disabled=true;$('skipBtn').disabled=true;
+  setTimeout(next,850);
 }
 
-function skipWord(){
-  if(!accepting) return;
+function skip(){
+  if(!accepting||state.level>=8||state.skipsLeft<=0)return;
+  if(state.chances<1){
+    toast('Você não tem coração para pular.');
+    return;
+  }
+  // Cada pulo consome 1 coração e 1 dos 2 pulos permitidos no nível.
+  state.chances--;
+  state.skipsLeft--;
+  save();
   currentWord=chooseWord(state.level);
-  $('scramble').textContent=shuffleWord(currentWord);
-  $('answer').value='';
-  $('feedback').textContent='Nova palavra! A pontuação só vem com o acerto.';
-  $('feedback').className='feedback';
+  $('scramble').textContent=shuffle(currentWord);
+  $('letterCount').textContent=currentWord.length;
+  $('answer').value='';$('feedback').textContent='Palavra pulada! -1 ❤️';
+  $('feedback').className='feedback bad';
+
+  if(state.level===8){
+    $('hint').textContent='Pista: '+(HINTS[currentWord]||'ideia');
+  }else if(state.level!==9){
+    $('hint').textContent='Descubra a palavra';
+  }
+  update();
   $('answer').focus();
+  toast('Você gastou 1 coração.');
 }
 
-function nextLevel(){
+function next(){
   if(state.level===7){
-    state.level=8; saveState(); updateHUD();
-    showOverlay('phase8Overlay');
-    return;
+    state.level=8;save();update();overlay('phase8Overlay',true);return;
   }
   if(state.level===8){
-    state.level=9; saveState(); updateHUD();
-    showOverlay('phase9Overlay');
-    return;
+    state.level=9;save();update();overlay('phase9Overlay',true);return;
   }
   if(state.level===9){
-    finishGame();
-    return;
+    endGame(true);return;
   }
   state.level++;
-  saveState();
+  save();
   loadLevel();
 }
 
-function beginPhase8(){
-  hideOverlay('phase8Overlay');
-  loadLevel();
-}
-
-function beginPhase9(){
-  hideOverlay('phase9Overlay');
-  loadLevel();
-}
-
-function finishGame(){
-  stopTimer();
-  state.active=false;
-  saveState();
+function endGame(won){
+  stopTimer();state.active=false;save();
   $('gameCard').classList.add('hidden');
   $('endCard').classList.remove('hidden');
+  $('endTitle').textContent=won?'🏆 PARABÉNS!':'⏰ FIM DE JOGO';
+  $('endText').textContent=won?'Você completou os 9 níveis da Palavra Embaralhada!':'Você não conseguiu concluir a fase bônus dentro do tempo.';
   $('finalScore').textContent=state.totalEarned;
 }
 
-function restart(){
-  $('endCard').classList.add('hidden');
-  $('gameCard').classList.remove('hidden');
-  $('introOverlay').classList.add('show');
-}
+function continue8(){overlay('phase8Overlay',false);loadLevel()}
+function continue9(){overlay('phase9Overlay',false);loadLevel()}
+function restart(){ $('endCard').classList.add('hidden');$('gameCard').classList.remove('hidden');overlay('introOverlay',true) }
 
-$('startBtn').addEventListener('click',startNewGame);
-$('start8Btn').addEventListener('click',beginPhase8);
-$('start9Btn').addEventListener('click',beginPhase9);
-$('checkBtn').addEventListener('click',checkAnswer);
-$('skipBtn').addEventListener('click',skipWord);
-$('restartBtn').addEventListener('click',restart);
-$('answer').addEventListener('keydown',e=>{if(e.key==='Enter')checkAnswer();});
+$('startBtn').onclick=startGame;
+$('start8Btn').onclick=continue8;
+$('start9Btn').onclick=continue9;
+$('checkBtn').onclick=check;
+$('skipBtn').onclick=skip;
+$('restartBtn').onclick=restart;
+$('answer').addEventListener('keydown',e=>{if(e.key==='Enter')check()});
 
-window.addEventListener('beforeunload',saveState);
+update();
 
-updateHUD();
-
-(function resume(){
-  if(state.active){
-    hideOverlay('introOverlay');
-    if(state.level>=8){
-      // Para não deixar o jogador contornar o cronômetro fechando/abrindo a página,
-      // a fase cronometrada é encerrada ao recarregar.
-      state.active=false;
-      saveState();
-      showToast('A partida cronometrada foi encerrada ao recarregar.');
-      return;
-    }
-    loadLevel();
+// Se houver partida normal salva, ela pode continuar.
+// Partidas das fases cronometradas não continuam após recarregar.
+if(state.active){
+  if(state.level>=8){
+    state.active=false;save();
+    toast('A partida cronometrada foi encerrada ao recarregar.');
   }else{
-    $('gameCard').classList.remove('hidden');
+    overlay('introOverlay',false);
+    loadLevel();
   }
-})();
+}
 </script>
 </body>
 </html>
