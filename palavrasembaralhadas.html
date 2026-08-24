@@ -35,10 +35,11 @@ body:before{
     radial-gradient(circle at 13% 91%,#fff 0 1px,transparent 1.5px);
 }
 .app{width:min(760px,100%);margin:auto;padding:14px 14px 34px;position:relative;z-index:1}
-.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.topbar{display:flex;align-items:center;justify-content:flex-start;gap:12px;margin-bottom:14px}
+.backBtn{background:rgba(8,27,43,.88);color:#eaf8ff;border:1px solid var(--line);padding:9px 12px;border-radius:12px;font-weight:900;white-space:nowrap}
 .brand{font-weight:1000;font-size:21px}
 .sub{color:var(--muted);font-size:12px;margin-top:3px}
-.stats{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+.stats{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end;margin-left:auto}
 .pill{
   background:rgba(8,27,43,.88);border:1px solid var(--line);
   padding:8px 11px;border-radius:13px;font-weight:900;font-size:13px;
@@ -127,6 +128,7 @@ body:before{
 <body>
 <div class="app">
   <div class="topbar">
+    <button class="backBtn" id="backBtn">← VOLTAR</button>
     <div>
       <div class="brand">🎯 Adam Games</div>
       <div class="sub">Palavra Embaralhada</div>
@@ -188,9 +190,10 @@ body:before{
     <div class="icon">🧩</div>
     <h2>Palavra Embaralhada</h2>
     <p>São <strong>9 níveis</strong>. As palavras ficam maiores e mais difíceis.</p>
-    <p>Para começar uma partida você usa <strong>1 coração</strong> e recebe <strong>+30 moedas</strong>.</p>
-    <div class="reward">🎁 +30 moedas ao iniciar</div>
-    <p>Em cada tentativa você tem <strong>2 pulos</strong>, disponíveis somente nos níveis <strong>1 a 7</strong>. Cada pulo custa <strong>1 coração</strong>. Nos níveis 8 e 9 não é permitido pular.</p>
+    <p>Para começar uma partida você usa <strong>1 coração</strong> e começa a partida com <strong>2 ❤️ disponíveis</strong>. Você recebe <strong>+30 moedas</strong>.</p>
+    <div class="reward">🎁 +30 moedas ao iniciar • ❤️❤️ 2 chances</div>
+    <p>Nos níveis <strong>1 a 7</strong> você terá uma dica. Cada tentativa tem <strong>2 pulos</strong>, disponíveis somente nesses níveis. Cada pulo custa <strong>1 coração</strong>. Nos níveis 8 e 9 não é permitido pular.</p>
+    <p>Se você errar a palavra, a tentativa termina. Você poderá <strong>continuar no mesmo nível</strong> gastando 1 coração e recebendo +30 moedas.</p>
     <p class="small">Os níveis têm começo, meio e fim. Ao acertar a palavra, você avança automaticamente.</p>
     <button class="btn primary" id="startBtn">COMEÇAR PARTIDA</button>
   </div>
@@ -224,6 +227,19 @@ body:before{
     <strong>36 a 60 segundos:</strong> +120 moedas</p>
     <p>⚠️ Se errar ou deixar o cronômetro chegar a <strong>0</strong>, você perde o bônus.</p>
     <button class="btn gold" id="start9Btn">💎 IR PARA O NÍVEL BÔNUS</button>
+  </div>
+</div>
+
+<div class="overlay" id="lostOverlay">
+  <div class="modal">
+    <div class="icon">💔</div>
+    <h2>VOCÊ PERDEU!</h2>
+    <p id="lostMessage">Você errou a palavra.</p>
+    <p>Quer continuar <strong>no mesmo nível</strong>?</p>
+    <div class="reward">❤️ -1 coração &nbsp; • &nbsp; 🪙 +30 moedas</div>
+    <p class="small">A palavra será trocada e você continuará no mesmo nível.</p>
+    <button class="btn primary" id="continueBtn">CONTINUAR NO MESMO NÍVEL</button>
+    <button class="btn dark" id="quitBtn">SAIR DA TENTATIVA</button>
   </div>
 </div>
 
@@ -295,7 +311,7 @@ const HINTS={
 function freshState(){
   return {
     coins:Number(localStorage.getItem('adam_games_coins')||0),
-    chances:Number(localStorage.getItem('adam_games_chances')||3),
+    chances:Number(localStorage.getItem('adam_games_chances')||2),
     level:1,
     totalEarned:0,
     active:false,
@@ -329,6 +345,54 @@ function shuffle(word){
   }
   return out;
 }
+function getHint(word){
+  const hints={
+    abacaxi:'Uma fruta tropical',
+    amizade:'Um laço entre pessoas',
+    amarelo:'Uma cor',
+    animais:'Seres que vivem e se movimentam',
+    arcoiris:'Aparece depois da chuva',
+    aventura:'Uma experiência emocionante',
+    baleias:'Grandes animais do oceano',
+    banana:'Uma fruta amarela',
+    cachorro:'Um animal de estimação',
+    castelo:'Uma grande construção de reis',
+    chocolate:'Um doce muito querido',
+    elefante:'Um animal muito grande',
+    escola:'Lugar de aprendizado',
+    estrela:'Brilha no céu',
+    familia:'Pessoas que formam um lar',
+    fazenda:'Lugar com animais e plantações',
+    felicidade:'Um sentimento bom',
+    galinha:'Uma ave que bota ovos',
+    girassol:'Uma flor que acompanha o sol',
+    jardim:'Lugar cheio de plantas',
+    laranja:'Uma fruta e também uma cor',
+    melancia:'Uma fruta grande e refrescante',
+    montanha:'Uma elevação muito alta',
+    morango:'Uma fruta vermelha',
+    musica:'Tem ritmo e melodia',
+    oceano:'Uma enorme extensão de água',
+    princesa:'Uma personagem da realeza',
+    sorvete:'Uma sobremesa gelada',
+    tesouro:'Algo valioso que se procura',
+    telefone:'Usado para falar com alguém',
+    universo:'Tudo que existe no espaço',
+    aeroporto:'Lugar onde aviões chegam e partem',
+    biblioteca:'Lugar cheio de livros',
+    cachoeira:'Água que cai de uma altura',
+    computador:'Máquina usada para tecnologia',
+    fotografia:'Uma imagem registrada',
+    professor:'Pessoa que ensina',
+    restaurante:'Lugar onde se come',
+    turismo:'Viagem para conhecer lugares',
+    conhecimento:'Aquilo que aprendemos',
+    tecnologia:'Recursos criados pela ciência',
+    universidade:'Lugar de ensino superior'
+  };
+  return hints[word]||'Pense no significado da palavra';
+}
+
 function chooseWord(level){
   const list=(WORDS[level]||[]).filter(w=>w.length>=LEVELS[level-1].min);
   const unused=list.filter(w=>!state.usedWords.includes(w));
@@ -409,8 +473,10 @@ function loadLevel(){
   // A pista aparece SOMENTE no nível 8. No 9 não há pista.
   if(state.level===8){
     $('hint').textContent='Pista: '+(HINTS[currentWord]||'ideia');
+  }else if(state.level===9){
+    $('hint').textContent='';
   }else{
-    $('hint').textContent=state.level===9?'':'Descubra a palavra';
+    $('hint').textContent='Dica: '+getHint(currentWord);
   }
 
   $('answer').focus();
@@ -421,7 +487,7 @@ function loadLevel(){
 function startGame(){
   if(state.active){toast('Você já está em uma partida.');return}
   if(state.chances<1){toast('Você não tem corações suficientes.');return}
-  state.chances--;
+  state.chances=2;
   state.coins+=30;
   state.totalEarned=30;
   state.level=1;
@@ -445,18 +511,18 @@ function check(){
     $('feedback').className='feedback bad';return;
   }
   if(answer!==correct){
-    $('feedback').textContent=state.level>=8
-      ? '❌ Resposta errada! Você perdeu esta fase.'
-      : '❌ Palavra incorreta. Tente novamente!';
+    accepting=false;
+    stopTimer();
+    $('answer').disabled=true;
+    $('checkBtn').disabled=true;
+    $('skipBtn').disabled=true;
+    $('feedback').textContent='❌ Você perdeu!';
     $('feedback').className='feedback bad';
-    if(state.level>=8){
-      accepting=false;stopTimer();
-      $('answer').disabled=true;$('checkBtn').disabled=true;$('skipBtn').disabled=true;
-      state.active=false;save();
-      setTimeout(()=>endGame(false),1000);
-    }else{
-      $('answer').select();
-    }
+    $('lostMessage').textContent=state.level>=8
+      ? 'Você errou a palavra do desafio. O nível foi perdido.'
+      : 'Você errou a palavra. Você pode continuar no mesmo nível.';
+    overlay('lostOverlay',true);
+    save();
     return;
   }
 
@@ -514,6 +580,51 @@ function next(){
   loadLevel();
 }
 
+function continueSameLevel(){
+  if(state.chances<1){
+    toast('Você não tem corações disponíveis.');
+    return;
+  }
+  state.chances--;
+  state.coins+=30;
+  state.totalEarned+=30;
+  state.active=true;
+  save();
+  overlay('lostOverlay',false);
+  currentWord=chooseWord(state.level);
+  accepting=true;
+  $('scramble').textContent=shuffle(currentWord);
+  $('letterCount').textContent=currentWord.length;
+  $('answer').value='';
+  $('answer').disabled=false;
+  $('checkBtn').disabled=false;
+  $('feedback').textContent='Nova palavra! Tente novamente.';
+  $('feedback').className='feedback ok';
+  if(state.level===8){
+    $('hint').textContent='Pista: '+(HINTS[currentWord]||'ideia');
+    startTimer();
+  }else if(state.level===9){
+    $('hint').textContent='';
+    startTimer();
+  }else{
+    $('hint').textContent='Dica: '+getHint(currentWord);
+  }
+  update();
+  $('answer').focus();
+  toast('+30 moedas e -1 ❤️');
+}
+
+function quitAfterLoss(){
+  overlay('lostOverlay',false);
+  state.active=false;
+  save();
+  $('gameCard').classList.add('hidden');
+  $('endCard').classList.remove('hidden');
+  $('endTitle').textContent='💔 TENTATIVA ENCERRADA';
+  $('endText').textContent='Você pode começar uma nova tentativa quando tiver um coração disponível.';
+  $('finalScore').textContent=state.totalEarned;
+}
+
 function endGame(won){
   stopTimer();state.active=false;save();
   $('gameCard').classList.add('hidden');
@@ -533,6 +644,9 @@ $('start9Btn').onclick=continue9;
 $('checkBtn').onclick=check;
 $('skipBtn').onclick=skip;
 $('restartBtn').onclick=restart;
+$('continueBtn').onclick=continueSameLevel;
+$('quitBtn').onclick=quitAfterLoss;
+$('backBtn').onclick=()=>{ window.history.back(); };
 $('answer').addEventListener('keydown',e=>{if(e.key==='Enter')check()});
 
 update();
