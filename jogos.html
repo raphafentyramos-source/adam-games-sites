@@ -452,6 +452,11 @@ body{
 }
 
 
+/* =====================================================
+   IMAGEM DOS JOGOS
+   MOSTRA A IMAGEM INTEIRA
+===================================================== */
+
 .game-image{
 
   width:100%;
@@ -460,14 +465,20 @@ body{
 
   aspect-ratio:16 / 9;
 
-  object-fit:cover;
+  object-fit:contain;
 
   object-position:center;
 
   background:#082742;
 
+  cursor:pointer;
+
 }
 
+
+/* =====================================================
+   CONTEÚDO DO JOGO
+===================================================== */
 
 .game-content{
 
@@ -1166,7 +1177,7 @@ body{
     </div>
 
 
-    <!-- REAÇÃO -->
+    <!-- REAÇÃO RELÂMPAGO -->
 
     <div
       class="game"
@@ -1653,26 +1664,19 @@ const paginas = {
   memoria:
     "memoria.html",
 
+  /* NOVO LINK */
   reacao:
-    "reacao.html",
+    "vocepiscou.html",
 
   sequencia:
     "sequencia.html",
 
+  /* NOVO LINK */
   palavra:
-    "palavra.html",
+    "palavrasembaralhadas.html",
 
   baralho:
     "Baralho.html",
-
-  /*
-    CORREÇÃO:
-    O arquivo criado para o jogo é senha.html,
-    com "s" minúsculo.
-
-    GitHub Pages diferencia maiúsculas
-    de minúsculas no nome do arquivo.
-  */
 
   senha:
     "senha.html"
@@ -1751,6 +1755,38 @@ document
         verificarJogo(
           card.dataset.game
         );
+
+      }
+    );
+
+  });
+
+
+/* =====================================================
+   CLIQUE DIRETO NAS IMAGENS
+===================================================== */
+
+document
+  .querySelectorAll(".game-image")
+  .forEach(image => {
+
+    image.addEventListener(
+      "click",
+      event => {
+
+        event.stopPropagation();
+
+        const card =
+          image.closest(".game");
+
+
+        if(card){
+
+          verificarJogo(
+            card.dataset.game
+          );
+
+        }
 
       }
     );
