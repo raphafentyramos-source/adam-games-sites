@@ -42,7 +42,10 @@ body{
 }
 #playfield{
   position:absolute;
-  inset:0;
+  top:78px;
+  bottom:0;
+  left:0;
+  right:0;
   z-index:2;
   overflow:hidden;
 }
@@ -86,34 +89,24 @@ body{
 #dropArea{position:absolute;inset:0}
 .falling{
   position:absolute;
-  z-index:7;
-  width:clamp(42px,11vw,72px);
-  height:clamp(42px,11vw,72px);
+  z-index:30;
+  width:clamp(38px,9vw,60px);
+  height:clamp(38px,9vw,60px);
   display:flex;
   align-items:center;
   justify-content:center;
   will-change:transform;
+  pointer-events:auto;
+  cursor:pointer;
   filter:drop-shadow(0 5px 5px rgba(0,0,0,.22));
 }
 .falling img{
   width:100%;height:100%;object-fit:contain;pointer-events:none;
 }
-.fallbackEmoji{font-size:clamp(34px,10vw,62px);line-height:1}
+.fallbackEmoji{font-size:clamp(32px,8vw,56px);line-height:1}
 .star{z-index:8}
 .coin{z-index:9}
-.trash{z-index:8}
-#player{
-  position:absolute;
-  z-index:14;animation:idlePlayer 2.8s ease-in-out infinite;
-  bottom:calc(max(10px,env(safe-area-inset-bottom)) + clamp(65px,16vw,105px));
-  left:50%;
-  transform:translateX(-50%);
-  width:clamp(75px,20vw,120px);
-  height:clamp(95px,25vw,150px);
-  pointer-events:none;
-}
-#player img{width:100%;height:100%;object-fit:contain}
-#playerFallback{font-size:clamp(60px,18vw,100px);text-align:center}@keyframes idlePlayer{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-5px)}}
+.trash{z-index:8}@keyframes idlePlayer{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-5px)}}
 #progressWrap{
   position:absolute;
   z-index:20;
@@ -237,15 +230,8 @@ body{
 
   <div id="playfield">
     <div id="dropArea"></div>
-
-    <div id="player">
-      <img id="playerImg" alt="" style="display:none">
-      <div id="playerFallback">🧑</div>
-    </div>
-
-    <div id="basket">
-      <img id="basketImg" alt="" style="display:none">
-      <div id="basketFallback"><div class="basketEmoji">🧺</div></div>
+</div>
+</div>
     </div>
 
   </div>
@@ -256,7 +242,7 @@ body{
     <div class="panel">
       <div class="bigEmoji">🍎🍌🍉</div>
       <h1>Frutas Caindo</h1>
-      <p>Clique nas frutas e comidas corretas. Clique no lixo e você perde uma vida!</p>
+      <p>Clique nas frutas e comidas que caem. Se clicar no lixo, perde uma vida!</p>
       <button class="action" id="startBtn">🍎 COMEÇAR</button>
     </div>
   </div>
@@ -435,17 +421,6 @@ function putImageOrEmoji(el,type,name,emoji){
   };
   img.src=assetCandidates(type,name)[0];
 }
-function setPlayerForLevel(n){
-  const img=$("playerImg"), fallback=$("playerFallback");
-  const name=n<=7?"personagem_fases_1_a_7.png":n===8?"personagem_fase_8_princesa.png":"personagem_fase_9_chefao.png";
-  const candidates=[name,"assets/"+name,"personagens/"+name,"assets/personagens/"+name];
-  let i=0;
-  img.style.display="none";
-  fallback.style.display="block";
-  img.onload=()=>{img.style.display="block";fallback.style.display="none"};
-  img.onerror=()=>{i++; if(i<candidates.length) img.src=candidates[i];};
-  img.src=candidates[0];
-}
 function clearObjects(){
   objetos.forEach(o=>o.el?.remove());
   objetos=[];
@@ -502,14 +477,10 @@ function spawnLoop(){
   spawn(type);
   spawnTimer=setTimeout(spawnLoop,cfg.spawn);
 }
-function basketRect(){return null}
 function objectRect(el){
   const b=el.getBoundingClientRect();
   const g=$("game").getBoundingClientRect();
   return {left:b.left-g.left,right:b.right-g.left,top:b.top-g.top,bottom:b.bottom-g.top};
-}
-function hit(a,b){
-  return a.left<b.right && a.right>b.left && a.top<b.bottom && a.bottom>b.top;
 }
 function removeObject(index){
   objetos[index].el.remove();
@@ -572,7 +543,6 @@ function startLevel(newLevel=level){
   recompensaRegistrada=false;
   clearObjects();
   setBackground(level);
-  setPlayerForLevel(level);
   updateHud();
   hide("startOverlay");hide("pauseOverlay");hide("lossOverlay");hide("levelOverlay");hide("winOverlay");
   jogoAtivo=true; pausado=false;
@@ -722,7 +692,7 @@ function liberarTelaInicial(){
   inicializado=true;
   $("loading").style.display="none";
   show("startOverlay");
-  setBackground(1);setPlayerForLevel(1);
+  setBackground(1);
 }
 
 function mostrarErroInicial(mensagem){
