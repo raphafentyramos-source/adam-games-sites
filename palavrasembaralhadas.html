@@ -134,7 +134,8 @@ body:before{
       <div class="sub">Palavra Embaralhada</div>
     </div>
     <div class="stats">
-      <div class="pill">❤️ <b id="chances">0</b></div>
+      <div class="pill">🎟️ <b id="attempts">0</b></div>
+      <div class="pill">❤️ <b id="hearts">2</b></div>
       <div class="pill">🪙 <b id="coins">0</b></div>
     </div>
   </div>
@@ -190,10 +191,10 @@ body:before{
     <div class="icon">🧩</div>
     <h2>Palavra Embaralhada</h2>
     <p>São <strong>9 níveis</strong>. As palavras ficam maiores e mais difíceis.</p>
-    <p>Para começar uma partida você usa <strong>1 coração</strong> e começa a partida com <strong>2 ❤️ disponíveis</strong>. Você recebe <strong>+30 moedas</strong>.</p>
-    <div class="reward">🎁 +30 moedas ao iniciar • ❤️❤️ 2 chances</div>
-    <p>Nos níveis <strong>1 a 7</strong> você terá uma dica. Cada tentativa tem <strong>2 pulos</strong>, disponíveis somente nesses níveis. Cada pulo custa <strong>1 coração</strong>. Nos níveis 8 e 9 não é permitido pular.</p>
-    <p>Se você errar a palavra, a tentativa termina. Você poderá <strong>continuar no mesmo nível</strong> gastando 1 coração e recebendo +30 moedas.</p>
+    <p>Para iniciar, você usa <strong>1 chance 🎟️</strong> e recebe <strong>🪙 +30 moedas</strong>. Os <strong>❤️ corações são separados</strong> e servem somente para pular palavras.</p>
+    <div class="reward">🪙 +30 moedas ao iniciar • ❤️❤️ 2 pulos</div>
+    <p>Nos níveis <strong>1 a 8</strong> você terá uma dica. Em cada partida você recebe <strong>2 ❤️</strong> para pular palavras, e eles só podem ser usados nos níveis <strong>1 a 7</strong>. Cada pulo custa <strong>1 ❤️</strong>. Nos níveis 8 e 9 não é permitido pular.</p>
+    <p>Se você errar a palavra, a tentativa termina. Você poderá <strong>continuar no mesmo nível</strong> gastando <strong>1 chance 🎟️</strong> e recebendo <strong>🪙 +30 moedas</strong>. O ❤️ não é gasto para continuar.</p>
     <p class="small">Os níveis têm começo, meio e fim. Ao acertar a palavra, você avança automaticamente.</p>
     <button class="btn primary" id="startBtn">COMEÇAR PARTIDA</button>
   </div>
@@ -236,8 +237,8 @@ body:before{
     <h2>VOCÊ PERDEU!</h2>
     <p id="lostMessage">Você errou a palavra.</p>
     <p>Quer continuar <strong>no mesmo nível</strong>?</p>
-    <div class="reward">❤️ -1 coração &nbsp; • &nbsp; 🪙 +30 moedas</div>
-    <p class="small">A palavra será trocada e você continuará no mesmo nível.</p>
+    <div class="reward">🎟️ -1 chance &nbsp; • &nbsp; 🪙 +30 moedas</div>
+    <p class="small">A palavra será trocada e você continuará no mesmo nível. O ❤️ não é usado para continuar.</p>
     <button class="btn primary" id="continueBtn">CONTINUAR NO MESMO NÍVEL</button>
     <button class="btn dark" id="quitBtn">SAIR DA TENTATIVA</button>
   </div>
@@ -281,11 +282,12 @@ const HARD_HINTS={"arquivamento":"desafio","classificacao":"desafio","operaciona
 function freshState(){
   return {
     coins:Number(localStorage.getItem('adam_games_coins')||0),
-    chances:Number(localStorage.getItem('adam_games_chances')||2),
+    chances:Number(localStorage.getItem('adam_games_chances')||0),
+    hearts:2,
     level:1,
     totalEarned:0,
     active:false,
-    skipsLeft:SKIPS_PER_ATTEMPT,
+    skipsLeft:2,
     usedWords:[],
     sessionStarted:false
   };
@@ -293,7 +295,12 @@ function freshState(){
 function load(){
   try{
     const s=JSON.parse(localStorage.getItem(KEY));
-    return s?{...freshState(),...s}:freshState();
+    if(s){
+      const merged={...freshState(),...s};
+      merged.hearts=Number(s.hearts ?? 2);
+      return merged;
+    }
+    return freshState();
   }catch(e){return freshState()}
 }
 let state=load(), currentWord='', elapsed=0, timerId=null, accepting=false;
@@ -303,6 +310,7 @@ function save(){
   localStorage.setItem(KEY,JSON.stringify(state));
   localStorage.setItem('adam_games_coins',String(state.coins));
   localStorage.setItem('adam_games_chances',String(state.chances));
+  localStorage.setItem('adam_games_hearts',String(state.hearts));
 }
 function norm(v){
   return String(v||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z]/g,'');
@@ -349,7 +357,8 @@ function overlay(id,on){$(id).classList.toggle('show',on)}
 
 function update(){
   const lv=LEVELS[state.level-1];
-  $('chances').textContent=Math.max(0,state.chances);
+  $('attempts').textContent=Math.max(0,state.chances);
+  $('hearts').textContent=Math.max(0,state.hearts);
   $('coins').textContent=Math.max(0,state.coins);
   $('levelName').textContent=lv.name;
   $('levelNumber').textContent=`${state.level} / 9`;
@@ -362,9 +371,9 @@ function update(){
     $('skipBtn').textContent='PULAR INDISPONÍVEL';
     $('skipBtn').disabled=true;
   }else{
-    $('skipInfo').textContent=state.skipsLeft>0?`Pulos restantes nesta tentativa: ${state.skipsLeft}`:'Sem pulos restantes nesta tentativa';
-    $('skipBtn').textContent=state.skipsLeft>0?`PULAR PALAVRA ❤️`:'SEM PULOS';
-    $('skipBtn').disabled=state.skipsLeft<=0;
+    $('skipInfo').textContent=state.hearts>0?`❤️ Pulos restantes: ${state.hearts}`:'Sem ❤️ para pular';
+    $('skipBtn').textContent=state.hearts>0?`PULAR PALAVRA ❤️`:'SEM PULOS';
+    $('skipBtn').disabled=state.hearts<=0;
   }
   if(currentWord) renderHint();
 }
@@ -418,14 +427,18 @@ function loadLevel(){
 
 function startGame(){
   if(state.active){toast('Você já está em uma partida.');return}
-  if(state.chances<1){toast('Você não tem corações suficientes.');return}
-  state.chances=2;
+  if(state.chances<1){toast('Você não tem chances disponíveis.');return}
+  // INICIAR PARTIDA: -1 chance +30 moedas.
+  // Os corações são independentes e servem apenas para pular.
+  state.chances--;
+  state.hearts=2;
+  state.skipsLeft=2;
   state.coins+=30;
   state.totalEarned=30;
   state.level=1;
   state.active=true;
   state.usedWords=[];
-  state.skipsLeft=SKIPS_PER_ATTEMPT;
+  state.skipsLeft=state.hearts;
   state.sessionStarted=true;
   save();
   overlay('introOverlay',false);
@@ -472,14 +485,11 @@ function check(){
 }
 
 function skip(){
-  if(!accepting||state.level>=8||state.skipsLeft<=0)return;
-  if(state.chances<1){
-    toast('Você não tem coração para pular.');
-    return;
-  }
-  // Cada pulo consome 1 coração e 1 dos 2 pulos permitidos no nível.
-  state.chances--;
-  state.skipsLeft--;
+  if(!accepting||state.level>=8||state.hearts<=0)return;
+  // ❤️ serve SOMENTE para pular a palavra.
+  // Não consome chance e não dá moedas.
+  state.hearts--;
+  state.skipsLeft=state.hearts;
   save();
   currentWord=chooseWord(state.level);
   $('scramble').textContent=shuffle(currentWord);
@@ -490,7 +500,7 @@ function skip(){
   renderHint();
   update();
   $('answer').focus();
-  toast('Você gastou 1 coração.');
+  toast('Você gastou 1 ❤️.');
 }
 
 function next(){
@@ -510,9 +520,11 @@ function next(){
 
 function continueSameLevel(){
   if(state.chances<1){
-    toast('Você não tem corações disponíveis.');
+    toast('Você não tem chances disponíveis.');
     return;
   }
+  // CONTINUAR APÓS PERDER: -1 chance +30 moedas.
+  // NÃO consome ❤️ e não repõe ❤️.
   state.chances--;
   state.coins+=30;
   state.totalEarned+=30;
@@ -542,7 +554,7 @@ function quitAfterLoss(){
   $('gameCard').classList.add('hidden');
   $('endCard').classList.remove('hidden');
   $('endTitle').textContent='💔 TENTATIVA ENCERRADA';
-  $('endText').textContent='Você pode começar uma nova tentativa quando tiver um coração disponível.';
+  $('endText').textContent='Você pode começar uma nova tentativa quando quiser. Uma nova tentativa começa com 2 chances.';
   $('finalScore').textContent=state.totalEarned;
 }
 
