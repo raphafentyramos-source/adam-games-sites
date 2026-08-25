@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>Adam Games • Acerte o Alvo</title>
+<script src="https://cdn.jsdelivr.net/npm/phaser@3.90.0/dist/phaser.min.js"></script>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#07111f;font-family:Arial,sans-serif}
+body{display:flex;align-items:center;justify-content:center}
+#game{width:100%;height:100%;touch-action:none}
+canvas{display:block!important}
+</style>
+</head>
+<body>
+<div id="game"></div>
+
+<script>
+/*
+  ACERTE O ALVO
+  Adam Games
+
+  Regras:
+  - 9 níveis
+  - 1 a 7 normais
+  - 8 = HARD
+  - 9 = BÔNUS e só desbloqueia ao vencer o 8
+  - 3 alvos até o nível 3
+  - 4 alvos até o nível 6
+  - 5 alvos no 7 e 8
+  - 6 alvos no 9
+  - 2 corações por partida, exclusivamente para pular alvo
+  - 1 chance consumida ao iniciar uma partida válida
+  - nova tentativa consome outra chance
+  - pontuação maior no centro do alvo
+  - integração Firebase feita pelo adaptador abaixo, sem saldo fixo
+*/
+
+const LEVELS = {
+  1:{targets:3, required:180, radius:88, speed:115, moving:false, hard:false, bonus:false},
+  2:{targets:3, required:240, radius:82, speed:135, moving:false, hard:false, bonus:false},
+  3:{targets:3, required:300, radius:76, speed:155, moving:true,  hard:false, bonus:false},
+  4:{targets:4, required:400, radius:72, speed:175, moving:true,  hard:false, bonus:false},
+  5:{targets:4, required:520, radius:67, speed:195, moving:true,  hard:false, bonus:false},
+  6:{targets:4, required:650, radius:62, speed:220, moving:true,  hard:false, bonus:false},
+  7:{targets:5, required:800, radius:58, speed:245, moving:true,  hard:false, bonus:false},
+  8:{targets:5, required:1000,radius:52, speed:300, moving:true,  hard:true,  bonus:false},
+  9:{targets:6, required:1200,radius:48, speed:340, moving:true,  hard:true,  bonus:true}
+};
+
+const POINTS = [
+  {ratio:.22, points:100, name:"CENTRO"},
+  {ratio:.48, points:75,  name:"INTERNO"},
+  {ratio:.72, points:50,  name:"MÉDIO"},
+  {ratio:1.00, points:25,  name:"EXTERNO"}
+];
+
+/*
+  ADAPTADOR FIREBASE
+  --------------------------------------------------
+  O jogo procura window.AdamGameFirebase.
+
+  Se o seu sistema já expõe esse objeto, use:
+    getGameData() -> { chances:number, coins:number }
+    spendChance() -> Promise<boolean>
+    addCoins(amount) -> Promise<void>
+    saveScore(score, level) -> Promise<void>
+
+  O jogo NÃO cria nem sobrescreve saldo.
+  Sem o adaptador, ele entra em modo de teste local para permitir testar
+  a mecânica. No site real, conecte o adaptador do Firebase do seu projeto.
+*/
+const FirebaseAdapter = {
+  demoKey:"adam_games_acerte_alvo_demo",
+
+  async getGameData(){
+    if(window.AdamGameFirebase && typeof window.AdamGameFirebase.getGameData==="function"){
+      return await window.AdamGameFirebase.getGameData();
+    }
+    let d=JSON.parse(localStorage.getItem(this.demoKey)||"null");
+    if(!d)d={chances:999,coins:0};
+    return d;
+  },
+
+  async spendChance(){
+    if(window.AdamGameFirebase && typeof window.AdamGameFirebase.spendChance==="function"){
+      return await window.AdamGameFirebase.spendChance();
+    }
+    let d=await this.getGameData();
+    if((d.chances||0)<=0)return false;
+    d.chances--;
+    localStorage.setItem(this.demoKey,JSON.stringify(d));
+    return true;
+  },
+
+  async addCoins(amount){
+    if(window.AdamGameFirebase && typeof window.AdamGameFirebase.addCoins==="function"){
+      return await window.AdamGameFirebase.addCoins(amount);
+    }
+    let d=await this.getGameData();
+    d.coins=(d.coins||0)+amount;
+    localStorage.setItem(this.demoKey,JSON.stringify(d));
+  },
+
+  async saveScore(score,level){
+    if(window.AdamGameFirebase && typeof window.AdamGameFirebase.saveScore==="function"){
+      await window.AdamGameFirebase.saveScore(score,level);
+    }
+  }
+};
+
+class Target {
+  constructor(scene,x,y,radius,index,level){
+    this.scene=scene;
+    this.x=x; this.y=y; this.baseY=y;
+    this.radius=radius;
+    this.index=index;
+    this.level=level;
+    this.alive=true;
+    this.g=this.scene.add.graphics();
+    this.draw();
+    this.pulse=0;
+    this.phase=Math.random()*Math.PI*2;
+  }
+
+  draw(){
+    const r=this.radius;
+    this.g.clear();
+
+    // sombra
+    this.g.fillStyle(0x000000,.22);
+    this.g.fillCircle(5,7,r+4);
+
+    // anéis: externo -> centro
+    this.g.fillStyle(0xf5f5f5,1); this.g.fillCircle(0,0,r);
+    this.g.fillStyle(0x1d72d8,1); this.g.fillCircle(0,0,r*.76);
+    this.g.fillStyle(0xe53935,1); this.g.fillCircle(0,0,r*.54);
+    this.g.fillStyle(0xf7c948,1); this.g.fillCircle(0,0,r*.34);
+    this.g.fillStyle(0x111827,1); this.g.fillCircle(0,0,r*.18);
+
+    this.g.lineStyle(2,0xffffff,.7); this.g.strokeCircle(0,0,r);
+    this.g.x=this.x; this.g.y=this.y;
+  }
+
+  update(time){
+    if(!this.alive)return;
+    const cfg=LEVELS[this.level];
+    if(cfg.moving){
+      const amp=this.level>=8?38:24;
+      this.y=this.baseY+Math.sin(time*.0018+this.phase)*amp;
+      this.g.y=this.y;
+    }
+  }
+
+  hitDistance(px,py){
+    return Phaser.Math.Distance.Between(px,py,this.x,this.y);
+  }
+
+  scoreForDistance(d){
+    if(d>this.radius)return 0;
+    const ratio=d/this.radius;
+    for(const zone of POINTS){
+      if(ratio<=zone.ratio)return zone;
+    }
+    return {points:0,name:"ERRO"};
+  }
+
+  destroy(){
+    this.alive=false;
+    this.g.destroy();
+  }
+}
+
+class Arrow {
+  constructor(scene){
+    this.scene=scene;
+    this.g=scene.add.graphics();
+    this.active=false;
+  }
+
+  draw(x,y,angle){
+    this.g.clear();
+    this.g.lineStyle(6,0x7b4b25,1);
+    this.g.beginPath();
+    this.g.moveTo(x,y);
+    this.g.lineTo(x+52*Math.cos(angle),y+52*Math.sin(angle));
+    this.g.strokePath();
+
+    const ex=x+52*Math.cos(angle), ey=y+52*Math.sin(angle);
+    this.g.fillStyle(0xd9d9d9,1);
+    this.g.fillTriangle(
+      ex+12*Math.cos(angle),ey+12*Math.sin(angle),
+      ex+12*Math.cos(angle+2.5),ey+12*Math.sin(angle+2.5),
+      ex+12*Math.cos(angle-2.5),ey+12*Math.sin(angle-2.5)
+    );
+  }
+
+  fly(fromX,fromY,toX,toY,duration,onComplete){
+    const obj={x:fromX,y:fromY};
+    this.active=true;
+    const angle=Math.atan2(toY-fromY,toX-fromX);
+    this.scene.tweens.add({
+      targets:obj,x:toX,y:toY,duration,ease:"Quad.easeOut",
+      onUpdate:()=>this.draw(obj.x,obj.y,angle),
+      onComplete:()=>{
+        this.active=false;
+        if(onComplete)onComplete();
+      }
+    });
+  }
+
+  hide(){this.g.clear()}
+}
+
+class Aim {
+  constructor(scene){
+    this.scene=scene;
+    this.angle=-Math.PI*.75;
+    this.direction=1;
+  }
+
+  update(dt,speed){
+    this.angle += this.direction*speed*dt/1000;
+    const min=-Math.PI*.92,max=-Math.PI*.08;
+    if(this.angle>=max){this.angle=max;this.direction=-1}
+    if(this.angle<=min){this.angle=min;this.direction=1}
+  }
+}
+
+class GameScene extends Phaser.Scene {
+  constructor(){super("GameScene")}
+
+  create(){
+    this.W=this.scale.width; this.H=this.scale.height;
+    this.state="MENU";
+    this.level=1;
+    this.score=0;
+    this.targetIndex=0;
+    this.hearts=2;
+    this.targets=[];
+    this.arrow=new Arrow(this);
+    this.aim=new Aim(this);
+    this.busy=false;
+    this.sessionStarted=false;
+    this.buildBackground();
+    this.buildUI();
+    this.showMenu();
+  }
+
+  buildBackground(){
+    this.bg=this.add.graphics();
+    this.bg.fillGradientStyle(0x081426,0x0d2139,0x102d48,0x07111f,1);
+    this.bg.fillRect(0,0,this.W,this.H);
+
+    this.add.circle(this.W*.5,this.H*.82,this.W*.55,0x123a50,.35);
+    this.add.rectangle(this.W*.5,this.H*.91,this.W,Math.max(90,this.H*.18),0x07111f,.8);
+  }
+
+  text(x,y,text,size=20,color="#fff",origin=.5){
+    return this.add.text(x,y,text,{
+      fontFamily:"Arial",fontSize:size+"px",fontStyle:"bold",
+      color,align:"center",stroke:"#000",strokeThickness:4
+    }).setOrigin(origin);
+  }
+
+  button(x,y,w,h,label,onClick,fill=0x1d72d8){
+    const bg=this.add.rectangle(x,y,w,h,fill,1).setInteractive({useHandCursor:true});
+    bg.setStrokeStyle(3,0xffffff,.22);
+    const t=this.text(x,y,label,20,"#fff");
+    bg.on("pointerdown",()=>{if(!this.busy)onClick()});
+    bg.on("pointerover",()=>bg.setAlpha(.86));
+    bg.on("pointerout",()=>bg.setAlpha(1));
+    return {bg,t};
+  }
+
+  buildUI(){
+    this.top=this.add.rectangle(this.W/2,42,this.W-20,64,0x06101d,.88).setOrigin(.5);
+    this.levelText=this.text(28,26,"NÍVEL 1",18,"#fff",0);
+    this.typeText=this.text(this.W-28,26,"",16,"#f7c948",1);
+    this.scoreText=this.text(28,56,"0 PONTOS",16,"#bfe7ff",0);
+    this.reqText=this.text(this.W-28,56,"META: 0",16,"#fff",1);
+
+    this.heartText=this.text(this.W/2,82,"❤️ ❤️",18,"#fff");
+    this.targetCountText=this.text(this.W/2,112,"ALVO 1/3",15,"#d7e9f7");
+
+    this.message=this.text(this.W/2,this.H*.69,"",24,"#fff");
+    this.message.setDepth(20);
+
+    this.shootHint=this.text(this.W/2,this.H*.94,"TOQUE PARA ATIRAR",16,"#d7e9f7");
+    this.shootHint.setDepth(20);
+  }
+
+  showMenu(){
+    this.clearGameObjects();
+    this.menuTitle=this.text(this.W/2,this.H*.23,"ACERTE O ALVO",34,"#fff");
+    this.menuSub=this.text(this.W/2,this.H*.30,"Acerte o centro e faça mais pontos!",17,"#bfe7ff");
+
+    this.menuInfo=this.text(this.W/2,this.H*.42,
+      "9 NÍVEIS • 8 HARD • 9 BÔNUS\n❤️ ❤️  = 2 PULOS POR PARTIDA",
+      18,"#fff");
+    this.menuInfo.setLineSpacing(10);
+
+    this.startButton=this.button(this.W/2,this.H*.56,240,62,"INICIAR",()=>this.startGame(),0x16a34a);
+    this.statusText=this.text(this.W/2,this.H*.64,"Carregando chances...",15,"#9fb8ca");
+
+    this.refreshData();
+  }
+
+  async refreshData(){
+    try{
+      const d=await FirebaseAdapter.getGameData();
+      this.statusText.setText(`CHANCES: ${Number(d.chances||0).toLocaleString("pt-BR")}`);
+    }catch(e){
+      this.statusText.setText("Não foi possível ler as chances.");
+    }
+  }
+
+  async startGame(){
+    if(this.busy)return;
+    this.busy=true;
+
+    try{
+      const data=await FirebaseAdapter.getGameData();
+      if(!data || Number(data.chances||0)<=0){
+        this.showNotice("SEM CHANCES","Você não possui chances suficientes.");
+        this.busy=false;
+        return;
+      }
+
+      const ok=await FirebaseAdapter.spendChance();
+      if(!ok){
+        this.showNotice("SEM CHANCES","Não foi possível consumir uma chance.");
+        this.busy=false;
+        return;
+      }
+
+      this.sessionStarted=true;
+      this.level=1;
+      this.score=0;
+      this.hearts=2;
+      this.beginLevel();
+    }catch(e){
+      console.error(e);
+      this.showNotice("ERRO","Não foi possível iniciar a partida.");
+    }
+    this.busy=false;
+  }
+
+  beginLevel(){
+    this.clearGameObjects();
+    this.busy=false;
+    this.state="PLAY";
+    const cfg=LEVELS[this.level];
+
+    this.levelText.setText(`NÍVEL ${this.level}`);
+    this.typeText.setText(cfg.hard ? (cfg.bonus?"BÔNUS":"HARD") : "");
+    this.scoreText.setText(`${this.score} PONTOS`);
+    this.reqText.setText(`META: ${cfg.required}`);
+    this.heartText.setText(this.hearts===2?"❤️ ❤️":this.hearts===1?"❤️ 🖤":"🖤 🖤");
+    this.targetCountText.setText(`ALVO 1/${cfg.targets}`);
+    this.message.setText("");
+
+    this.createTargets(cfg);
+    this.prepareAim();
+  }
+
+  createTargets(cfg){
+    const minX=this.W*.57, maxX=this.W*.88;
+    const minY=this.H*.23, maxY=this.H*.58;
+
+    for(let i=0;i<cfg.targets;i++){
+      let tries=0,x,y,valid=false;
+      while(!valid && tries<100){
+        x=Phaser.Math.Between(minX,maxX);
+        y=Phaser.Math.Between(minY,maxY);
+        valid=this.targets.every(t=>Phaser.Math.Distance.Between(x,y,t.x,t.y)>cfg.radius*2.4);
+        tries++;
+      }
+      const t=new Target(this,x,y,cfg.radius,i,this.level);
+      this.targets.push(t);
+    }
+  }
+
+  prepareAim(){
+    this.aim.angle=Phaser.Math.FloatBetween(-Math.PI*.86,-Math.PI*.14);
+    this.aim.direction=Math.random()>.5?1:-1;
+    this.arrow.hide();
+    this.busy=false;
+    this.shootHint.setText("TOQUE PARA ATIRAR");
+  }
+
+  currentTarget(){
+    return this.targets[this.targetIndex];
+  }
+
+  fire(){
+    if(this.state!=="PLAY" || this.busy)return;
+    const target=this.currentTarget();
+    if(!target || !target.alive)return;
+
+    this.busy=true;
+    this.shootHint.setText("");
+
+    const startX=this.W*.17, startY=this.H*.69;
+    const maxDist=this.W*.9;
+    const angle=this.aim.angle;
+    const endX=startX+maxDist*Math.cos(angle);
+    const endY=startY+maxDist*Math.sin(angle);
+
+    // Interseção do raio com o alvo.
+    const dx=Math.cos(angle),dy=Math.sin(angle);
+    const vx=target.x-startX,vy=target.y-startY;
+    const proj=vx*dx+vy*dy;
+    let hitX=startX+dx*Math.max(0,proj);
+    let hitY=startY+dy*Math.max(0,proj);
+    const distLine=Math.abs(vx*dy-vy*dx);
+
+    let hit=distLine<=target.radius && proj>0;
+    let zone={points:0,name:"ERRO"};
+
+    if(hit){
+      const d=Phaser.Math.Distance.Between(hitX,hitY,target.x,target.y);
+      zone=target.scoreForDistance(d);
+    }
+
+    const flightX=hit ? hitX : endX;
+    const flightY=hit ? hitY : endY;
+
+    this.arrow.fly(startX,startY,flightX,flightY,Math.min(650,Math.max(280,maxDist/2)),()=>{
+      if(hit){
+        this.score+=zone.points;
+        this.scoreText.setText(`${this.score} PONTOS`);
+        this.flashResult(zone.points,zone.name);
+        this.popTarget(target,zone.points);
+      }else{
+        this.flashResult(0,"ERRO");
+        this.advanceTarget();
+      }
+    });
+  }
+
+  flashResult(points,name){
+    const color=points>=100?"#ffe66d":points>0?"#fff":"#ff7b7b";
+    const t=this.text(this.W*.5,this.H*.60,
+      points>0?`+${points} ${name}`:"ERROU!",
+      25,color);
+    t.setDepth(30);
+    this.tweens.add({targets:t,y:t.y-35,alpha:0,duration:750,onComplete:()=>t.destroy()});
+  }
+
+  popTarget(target,points){
+    this.tweens.add({
+      targets:target.g,scaleX:1.18,scaleY:1.18,duration:90,yoyo:true,
+      onComplete:()=>this.advanceTarget()
+    });
+  }
+
+  advanceTarget(){
+    this.targetIndex++;
+    if(this.targetIndex>=this.targets.length){
+      this.finishLevel();
+      return;
+    }
+    this.targetCountText.setText(`ALVO ${this.targetIndex+1}/${this.targets.length}`);
+    this.prepareAim();
+  }
+
+  jumpTarget(){
+    if(this.state!=="PLAY" || this.busy)return;
+    if(this.hearts<=0){
+      this.message.setText("VOCÊ JÁ USOU OS 2 PULOS");
+      return;
+    }
+    this.hearts--;
+    this.heartText.setText(this.hearts===1?"❤️ 🖤":"🖤 🖤");
+    this.message.setText("ALVO PULADO!");
+    this.advanceTarget();
+  }
+
+  async finishLevel(){
+    this.busy=true;
+    const cfg=LEVELS[this.level];
+    this.state="RESULT";
+
+    if(this.score<cfg.required){
+      await this.defeat();
+      return;
+    }
+
+    try{await FirebaseAdapter.saveScore(this.score,this.level)}catch(e){console.warn(e)}
+
+    if(this.level===8){
+      this.showLevelWin(
+        "HARD SUPERADO!",
+        "Você venceu o nível 8.\nO NÍVEL 9 BÔNUS foi desbloqueado!",
+        "IR PARA O BÔNUS",
+        ()=>{this.level=9;this.beginLevel()}
+      );
+      return;
+    }
+
+    if(this.level===9){
+      // Bônus concluído. A pontuação é mantida.
+      const reward=30;
+      try{await FirebaseAdapter.addCoins(reward)}catch(e){console.warn(e)}
+      this.showLevelWin(
+        "BÔNUS CONCLUÍDO!",
+        `Você acertou o nível 9!\nPontuação final: ${this.score}\n+${reward} moedas`,
+        "FINALIZAR",
+        ()=>this.endToMenu()
+      );
+      return;
+    }
+
+    this.showLevelWin(
+      `NÍVEL ${this.level} VENCIDO!`,
+      `Pontuação: ${this.score}\nMeta: ${cfg.required}`,
+      "PRÓXIMO NÍVEL",
+      ()=>{this.level++;this.beginLevel()}
+    );
+  }
+
+  async defeat(){
+    this.state="RESULT";
+    this.busy=true;
+    const cfg=LEVELS[this.level];
+
+    this.showLevelWin(
+      this.level===8?"HARD PERDIDO":"VOCÊ PERDEU",
+      `Pontuação: ${this.score}\nMeta: ${cfg.required}\n\nO nível 9 só é liberado vencendo o nível 8 HARD.`,
+      "TENTAR NOVAMENTE",
+      ()=>this.retry()
+    );
+  }
+
+  async retry(){
+    // Uma nova tentativa consome outra chance.
+    this.busy=true;
+    try{
+      const d=await FirebaseAdapter.getGameData();
+      if(!d || Number(d.chances||0)<=0){
+        this.showNotice("SEM CHANCES","Você não possui chances para tentar novamente.");
+        this.busy=false;
+        return;
+      }
+      const ok=await FirebaseAdapter.spendChance();
+      if(!ok){
+        this.showNotice("SEM CHANCES","Não foi possível consumir uma chance.");
+        this.busy=false;
+        return;
+      }
+
+      this.score=0;
+      this.hearts=2;
+      this.level=1;
+      this.beginLevel();
+    }catch(e){
+      console.error(e);
+      this.showNotice("ERRO","Não foi possível iniciar a nova tentativa.");
+    }
+    this.busy=false;
+  }
+
+  showLevelWin(title,sub,label,callback){
+    this.clearGameObjects();
+
+    const panel=this.add.rectangle(this.W/2,this.H*.47,this.W*.84,310,0x06101d,.96);
+    panel.setStrokeStyle(3,0x3b82f6,.65);
+    panel.setDepth(40);
+
+    const t=this.text(this.W/2,this.H*.34,title,28,"#fff");
+    t.setDepth(41);
+    const s=this.text(this.W/2,this.H*.47,sub,18,"#cfe8f7");
+    s.setLineSpacing(10);s.setDepth(41);
+
+    const b=this.button(this.W/2,this.H*.66,250,58,label,callback,0x16a34a);
+    b.bg.setDepth(41);b.t.setDepth(42);
+  }
+
+  showNotice(title,sub){
+    this.clearGameObjects();
+    const panel=this.add.rectangle(this.W/2,this.H*.47,this.W*.84,270,0x06101d,.97);
+    panel.setStrokeStyle(3,0xef4444,.65);
+
+    this.text(this.W/2,this.H*.36,title,28,"#fff");
+    const s=this.text(this.W/2,this.H*.47,sub,17,"#dbeafe");
+    s.setLineSpacing(8);
+
+    this.button(this.W/2,this.H*.63,220,55,"VOLTAR",()=>this.endToMenu(),0x1d72d8);
+  }
+
+  endToMenu(){
+    this.clearGameObjects();
+    this.state="MENU";
+    this.busy=false;
+    this.showMenu();
+  }
+
+  clearGameObjects(){
+    if(this.targets){
+      this.targets.forEach(t=>{try{t.g.destroy()}catch(e){}});
+    }
+    this.targets=[];
+    this.targetIndex=0;
+    if(this.arrow)this.arrow.hide();
+
+    // Remove overlays/menu objects, preservando HUD e fundo.
+    const keep=new Set([
+      this.bg,this.top,this.levelText,this.typeText,this.scoreText,
+      this.reqText,this.heartText,this.targetCountText,this.message,
+      this.shootHint
+    ]);
+    this.children.list.slice().forEach(o=>{
+      if(!keep.has(o) && o !== this.arrow?.g){
+        // objetos de menu/resultados
+        if(o.getData && o.getData("persistent"))return;
+        try{o.destroy()}catch(e){}
+      }
+    });
+  }
+
+  update(time,delta){
+    if(this.state==="PLAY" && !this.busy){
+      const cfg=LEVELS[this.level];
+      this.aim.update(delta,cfg.speed);
+
+      const sx=this.W*.17,sy=this.H*.69;
+      const len=70;
+      this.arrow.draw(sx,sy,this.aim.angle);
+
+      this.targets.forEach(t=>t.update(time));
+
+      // Indicador visual da linha de tiro.
+      if(!this.guide){
+        this.guide=this.add.graphics();
+        this.guide.setDepth(2);
+      }
+      this.guide.clear();
+      this.guide.lineStyle(2,0xffffff,.16);
+      this.guide.beginPath();
+      this.guide.moveTo(sx,sy);
+      this.guide.lineTo(sx+this.W*.75*Math.cos(this.aim.angle),sy+this.W*.75*Math.sin(this.aim.angle));
+      this.guide.strokePath();
+    }
+  }
+}
+
+// Input fora da cena para manter toque simples.
+const config={
+  type:Phaser.AUTO,
+  parent:"game",
+  width:540,
+  height:960,
+  backgroundColor:"#07111f",
+  scale:{mode:Phaser.Scale.RESIZE,autoCenter:Phaser.Scale.CENTER_BOTH},
+  render:{antialias:true,pixelArt:false},
+  scene:[GameScene]
+};
+
+const game=new Phaser.Game(config);
+
+game.events.on("ready",()=>{});
+
+window.addEventListener("pointerdown",e=>{
+  const scene=game.scene.getScene("GameScene");
+  if(!scene)return;
+
+  // Evita clicar em botões e disparar junto.
+  const target=e.target;
+  if(target && target.closest && target.closest("button"))return;
+
+  if(scene.state==="PLAY" && !scene.busy){
+    // Toque no lado esquerdo inferior = pulo; qualquer outro toque = tiro.
+    const rect=document.querySelector("canvas").getBoundingClientRect();
+    const x=e.clientX-rect.left;
+    const y=e.clientY-rect.top;
+    const sx=rect.width/scene.W, sy=rect.height/scene.H;
+    const gx=x/sx, gy=y/sy;
+
+    if(gy>scene.H*.84 && gx<scene.W*.38){
+      scene.jumpTarget();
+    }else{
+      scene.fire();
+    }
+  }
+});
+</script>
+</body>
+</html>
