@@ -287,7 +287,7 @@ class GameScene extends Phaser.Scene {
     this.message=this.text(this.W/2,this.H*.69,"",24,"#fff");
     this.message.setDepth(20);
 
-    this.shootHint=this.text(this.W/2,this.H*.94,"TOQUE PARA ATIRAR",16,"#d7e9f7");
+    this.shootHint=this.text(this.W/2,this.H*.91,"TOQUE PARA ATIRAR  •  ❤️ = PULAR",15,"#d7e9f7");
     this.shootHint.setDepth(20);
   }
 
@@ -366,22 +366,18 @@ class GameScene extends Phaser.Scene {
   }
 
   createTargets(cfg){
-    const minX=this.W*.57, maxX=this.W*.88;
-    const minY=this.H*.23, maxY=this.H*.58;
-
-    for(let i=0;i<cfg.targets;i++){
-      let tries=0,x,y,valid=false;
-      while(!valid && tries<100){
-        x=Phaser.Math.Between(minX,maxX);
-        y=Phaser.Math.Between(minY,maxY);
-        valid=this.targets.every(t=>Phaser.Math.Distance.Between(x,y,t.x,t.y)>cfg.radius*2.4);
-        tries++;
-      }
-      const t=new Target(this,x,y,cfg.radius,i,this.level);
-      this.targets.push(t);
-    }
+    const layouts={
+      3:[[.64,.31],[.82,.45],[.64,.58]],
+      4:[[.60,.27],[.82,.32],[.82,.55],[.60,.62]],
+      5:[[.58,.25],[.82,.28],[.88,.47],[.76,.64],[.55,.55]],
+      6:[[.57,.23],[.79,.25],[.89,.40],[.84,.60],[.67,.67],[.52,.49]]
+    };
+    const positions=layouts[cfg.targets]||layouts[3];
+    const radius=Math.min(this.W,this.H)*(this.level>=8?.052:this.level>=6?.058:.064);
+    positions.forEach((pos,i)=>{
+      this.targets.push(new Target(this,this.W*pos[0],this.H*pos[1],radius,i,this.level));
+    });
   }
-
   prepareAim(){
     this.aim.angle=Phaser.Math.FloatBetween(-Math.PI*.86,-Math.PI*.14);
     this.aim.direction=Math.random()>.5?1:-1;
@@ -523,12 +519,12 @@ class GameScene extends Phaser.Scene {
 
   async defeat(){
     this.state="RESULT";
-    this.busy=true;
+    this.busy=false;
     const cfg=LEVELS[this.level];
 
     this.showLevelWin(
       this.level===8?"HARD PERDIDO":"VOCÊ PERDEU",
-      `Pontuação: ${this.score}\nMeta: ${cfg.required}\n\nO nível 9 só é liberado vencendo o nível 8 HARD.`,
+      `Pontuação: ${this.score}\nMeta: ${cfg.required}\n\nTente novamente para buscar a meta.`,
       "TENTAR NOVAMENTE",
       ()=>this.retry()
     );
@@ -553,7 +549,6 @@ class GameScene extends Phaser.Scene {
 
       this.score=0;
       this.hearts=2;
-      this.level=1;
       this.beginLevel();
     }catch(e){
       console.error(e);
@@ -574,6 +569,7 @@ class GameScene extends Phaser.Scene {
     const s=this.text(this.W/2,this.H*.47,sub,18,"#cfe8f7");
     s.setLineSpacing(10);s.setDepth(41);
 
+    this.busy=false;
     const b=this.button(this.W/2,this.H*.66,250,58,label,callback,0x16a34a);
     b.bg.setDepth(41);b.t.setDepth(42);
   }
