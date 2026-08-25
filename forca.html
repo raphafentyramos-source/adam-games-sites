@@ -1742,43 +1742,49 @@ async function continueSameLevel(){
   msg("⚠️ Usuário não encontrado.","error");
   return;
  }
+ if(btn.disabled)return;
 
  btn.disabled=true;
  btn.textContent="⏳ PROCESSANDO...";
 
  try{
-  // Primeiro verifica a chance atual sem abrir uma transação.
-  const snap=await getDoc(userRef);
+  if(!navigator.onLine) throw Error("SEM_CONEXAO");
+
+  // Confirma a chance antes de fazer a atualização.
+  const snap=await Promise.race([
+   getDoc(userRef),
+   new Promise((_,reject)=>setTimeout(()=>reject(Error("TIMEOUT")),8000))
+  ]);
+
   if(!snap.exists()) throw Error("Cadastro não encontrado.");
 
-  const data=snap.data();
-  const chances=Number(data.chances||0);
+  const chances=Number(snap.data().chances||0);
+  if(chances<=0) throw Error("Você não possui chances.");
 
-  if(chances<=0){
-   throw Error("Você não possui chances.");
-  }
+  // Desconta 1 chance e adiciona 20 moedas em uma única atualização.
+  await Promise.race([
+   updateDoc(userRef,{
+    chances:increment(-1),
+    moedas:increment(20),
+    ultimaPartidaForcaId:"continue_"+Date.now()+"_"+Math.random().toString(36).slice(2),
+    ultimaPartidaForcaEm:serverTimestamp()
+   }),
+   new Promise((_,reject)=>setTimeout(()=>reject(Error("TIMEOUT")),8000))
+  ]);
 
-  // Usa increment() para evitar o travamento que acontecia na transação.
-  await updateDoc(userRef,{
-   chances:increment(-1),
-   moedas:increment(20),
-   ultimaPartidaForcaId:"continue_"+Date.now()+"_"+Math.random().toString(36).slice(2),
-   ultimaPartidaForcaEm:serverTimestamp()
-  });
-
-  // Atualiza a interface local somente depois que o Firebase confirmou.
+  // Firebase confirmou: agora reinicia a partida imediatamente.
   coins+=20;
   coinsUI();
 
   $("lossContinueModal").classList.remove("show");
   $("lossContinueModal").setAttribute("aria-hidden","true");
 
-  // Mantém exatamente o mesmo nível, mas cria uma palavra nova.
   locked=false;
   errors=0;
+  gameReady=true;
   start();
 
-  msg("🪙 +20 Adam Coins! Você gastou 1 chance e continua no mesmo nível.","success");
+  msg("🪙 +20 Adam Coins! Você gastou 1 chance e ganhou uma nova palavra no mesmo nível.","success");
 
  }catch(e){
   console.error("Erro ao continuar a Forca:",e);
@@ -1786,10 +1792,15 @@ async function continueSameLevel(){
   btn.disabled=false;
   btn.textContent="🔄 CONTINUAR • -1 CHANCE • +20 MOEDAS";
 
-  $("lossContinueText").textContent =
-   e.message==="Você não possui chances."
-   ? "Você não possui chances suficientes para continuar neste nível."
-   : "Não foi possível continuar agora. Verifique sua conexão e tente novamente.";
+  if(e.message==="Você não possui chances."){
+   $("lossContinueText").textContent="Você não possui chances suficientes para continuar neste nível.";
+  }else if(e.message==="SEM_CONEXAO"){
+   $("lossContinueText").textContent="Sem conexão com a internet. Conecte-se e tente novamente.";
+  }else if(e.message==="TIMEOUT"){
+   $("lossContinueText").textContent="A conexão com o Firebase demorou demais. Nada foi reiniciado. Tente novamente.";
+  }else{
+   $("lossContinueText").textContent="Não foi possível continuar agora. Tente novamente.";
+  }
  }
 }
 
