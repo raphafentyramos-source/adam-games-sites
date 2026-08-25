@@ -233,6 +233,14 @@ button{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 .timer-box{margin:4px auto 9px;width:max-content;min-width:120px;padding:7px 14px;border:2px solid #ffd52b;border-radius:14px;background:#00131fe8;color:#ffd52b;font-weight:900;text-align:center}
 </style>
 
+
+<style id="history-v6-fix">
+.history-color{width:34px;height:34px;border-radius:50%;display:block;flex:0 0 34px;border:2px solid rgba(255,255,255,.45);box-shadow:inset 0 3px 5px rgba(255,255,255,.35),0 2px 4px rgba(0,0,0,.45)}
+.feedback-dot{width:17px!important;height:17px!important;min-width:17px!important;border:2px solid rgba(255,255,255,.45)!important;background:transparent!important;border-radius:50%!important;display:block!important;box-sizing:border-box!important}
+.feedback-dot.black{background:#050505!important;border-color:#777!important}
+.feedback-dot.white{background:#fff!important;border-color:#ddd!important}
+@media(max-width:480px){.history-color{width:30px;height:30px;flex-basis:30px}.feedback-dot{width:15px!important;height:15px!important;min-width:15px!important}}
+</style>
 </head>
 
 <body>
@@ -338,10 +346,10 @@ const LEVELS={
 };
 
 const HEARTS_START=3;
-const SESSION_KEY_BASE="adam_senha_session_v9";
+const SESSION_KEY_BASE="adam_senha_session_v10";
 const SECRET_SHOW_MS=0; // A senha NUNCA é exibida.
 
-let userDoc=null,userData=null;
+let userRef=null,userData=null,user=null;
 let level=1,secret=[],current=[],attempt=0,hearts=HEARTS_START;
 let busy=false,sessionStarted=false,entryCharged=false;
 let timerId=null,timerStartedAt=0;
@@ -372,7 +380,7 @@ function renderHearts(){
     skip.style.display="none";
   }
 }
-function sessionKey(){return userDoc?.id ? `${SESSION_KEY_BASE}_${userDoc.id}` : SESSION_KEY_BASE;}
+function sessionKey(){return user?.uid ? `${SESSION_KEY_BASE}_${user.uid}` : SESSION_KEY_BASE;}
 function saveSession(){
   if(!sessionStarted)return;
   const data={
@@ -445,18 +453,35 @@ function calculateFeedback(guess,answer){
   }
   return out;
 }
+function colorCss(color){
+  return ({
+    vermelho:"linear-gradient(145deg,#ff5a61,#e40012)",
+    azul:"linear-gradient(145deg,#55a7ff,#0565db)",
+    verde:"linear-gradient(145deg,#62e87a,#08ad35)",
+    amarelo:"linear-gradient(145deg,#fff36a,#ffc400)",
+    roxo:"linear-gradient(145deg,#c36cff,#8015e9)",
+    laranja:"linear-gradient(145deg,#ffbd69,#ff7900)"
+  })[color]||"#536b78";
+}
 function addHistory(guess,feedback){
   const row=document.querySelector(`.history-row[data-row="${attempt}"]`);
   if(!row)return;
   const slots=[...row.querySelectorAll(".h-slot")];
   guess.forEach((color,i)=>{
     if(!slots[i])return;
-    const img=document.createElement("img");img.src=FILES[color];img.alt="";slots[i].appendChild(img);
+    slots[i].innerHTML="";
+    const ball=document.createElement("span");
+    ball.className="history-color";
+    ball.style.background=colorCss(color);
+    slots[i].appendChild(ball);
   });
   const dots=[...row.querySelectorAll(".feedback-dot")];
-  feedback.forEach((type,i)=>{if(dots[i]&&type)dots[i].classList.add(type);});
+  feedback.forEach((type,i)=>{
+    if(dots[i]){dots[i].classList.remove("black","white");if(type)dots[i].classList.add(type);}
+  });
   $("attemptCount").textContent=`${attempt+1} / ${maxAttempts()}`;
 }
+
 function openModal(title,text,buttons,icon="🎉"){
   $("modalIcon").textContent=icon;$("modalTitle").textContent=title;$("modalText").innerHTML=text;$("modalButtons").innerHTML="";
   buttons.forEach(item=>{const b=document.createElement("button");b.type="button";b.textContent=item.text;b.className=item.cls||"secondary";b.onclick=item.fn;$("modalButtons").appendChild(b);});
@@ -464,72 +489,68 @@ function openModal(title,text,buttons,icon="🎉"){
 }
 function closeModal(){$("modal").classList.remove("show");}
 async function updateAccount(deltaCoins=0,deltaChances=0){
-  if(!userDoc)throw new Error("Cadastro não encontrado.");
-  const ref=userDoc.ref;
-
-  // O Firestore das contas do Adam Games aceita as alterações de
-  // moedas e chances separadamente. Não fazemos mais uma única
-  // transação alterando os dois campos ao mesmo tempo.
-  if(Number(deltaChances||0)!==0){
-    let newChances;
-    await runTransaction(db,async tx=>{
-      const snap=await tx.get(ref);
-      if(!snap.exists())throw new Error("Cadastro não encontrado.");
-      const chances=Number(snap.data().chances||0);
-      newChances=chances+Number(deltaChances);
-      if(newChances<0)throw new Error("Você não possui chances suficientes.");
-      tx.update(ref,{chances:newChances});
-    });
-    userData={...userData,chances:newChances};
-  }
-
-  if(Number(deltaCoins||0)!==0){
-    let newCoins;
-    await runTransaction(db,async tx=>{
-      const snap=await tx.get(ref);
-      if(!snap.exists())throw new Error("Cadastro não encontrado.");
-      const coins=Number(snap.data().moedas||0);
-      newCoins=coins+Number(deltaCoins);
-      tx.update(ref,{moedas:newCoins});
-    });
-    userData={...userData,moedas:newCoins};
-  }
-
+  if(!userRef)throw new Error("Cadastro não encontrado.");
+  let nextCoins,nextChances;
+  await runTransaction(db,async tx=>{
+    const snap=await tx.get(userRef);
+    if(!snap.exists())throw new Error("Cadastro não encontrado.");
+    const data=snap.data();
+    const chances=Number(data.chances||0);
+    const moedas=Number(data.moedas||0);
+    nextChances=chances+Number(deltaChances||0);
+    nextCoins=moedas+Number(deltaCoins||0);
+    if(nextChances<0)throw new Error("SEM_CHANCES");
+    const changes={};
+    if(Number(deltaChances||0)!==0)changes.chances=nextChances;
+    if(Number(deltaCoins||0)!==0)changes.moedas=nextCoins;
+    if(Object.keys(changes).length)tx.update(userRef,changes);
+  });
+  userData={...userData};
+  if(Number(deltaChances||0)!==0)userData.chances=nextChances;
+  if(Number(deltaCoins||0)!==0)userData.moedas=nextCoins;
   renderStats();
 }
+
 async function chargeEntry(){
+  const key=`adam_senha_entry_v10_${user?.uid||""}`;
   const stored=loadSession();
   if(stored?.sessionStarted){
     entryCharged=true;sessionStarted=true;restoreSession(stored);return true;
   }
-  if(Number(userData?.chances||0)<1){
-    openModal("SEM CHANCES","Você precisa ter pelo menos <b>1 chance</b> para iniciar o jogo.",[{text:"VOLTAR",cls:"primary",fn:()=>location.href="jogos.html"}],"❤️");
+  if(sessionStorage.getItem(key)==="1"){
+    entryCharged=true;sessionStarted=true;return true;
+  }
+  try{
+    // Exatamente como no jogo da Forca: uma transação lê a conta e grava
+    // chance -1 e moedas +30 na mesma atualização autorizada.
+    await runTransaction(db,async tx=>{
+      const snap=await tx.get(userRef);
+      if(!snap.exists())throw new Error("CADASTRO_NAO_ENCONTRADO");
+      const data=snap.data();
+      const chances=Number(data.chances||0);
+      if(chances<=0)throw new Error("SEM_CHANCES");
+      const moedas=Number(data.moedas||0);
+      tx.update(userRef,{chances:chances-1,moedas:moedas+30});
+    });
+    const fresh=await getDoc(userRef);
+    userData=fresh.data();
+    entryCharged=true;sessionStarted=true;
+    sessionStorage.setItem(key,"1");
+    level=1;hearts=HEARTS_START;attempt=0;current=[];secret=randomSecret(LEVELS[1].length);timerStartedAt=0;saveSession();renderStats();
+    $("message").textContent="🪙 +30 Adam Coins • -1 chance";
+    return true;
+  }catch(error){
+    console.error("Erro ao iniciar SENHA:",error);
+    const msg=error?.message||"Não foi possível iniciar a partida.";
+    if(msg==="SEM_CHANCES"){
+      openModal("SEM CHANCES","Você precisa ter pelo menos <b>1 chance</b> para iniciar o jogo.",[{text:"VOLTAR",cls:"primary",fn:()=>location.href="jogos.html"}],"❤️");
+    }else{
+      openModal("ERRO AO INICIAR","O jogo não conseguiu atualizar sua conta.<br><br><small>Verifique se você está logado e tente novamente.</small>",[{text:"VOLTAR",cls:"primary",fn:()=>location.href="jogos.html"}],"⚠️");
+    }
     return false;
   }
-
-  // 1) Consome exatamente 1 chance. Se isso falhar, a partida não começa.
-  try{
-    await updateAccount(0,-1);
-  }catch(error){
-    console.error("Erro ao consumir chance de entrada:",error);
-    openModal("ERRO AO INICIAR",String(error?.message||"Não foi possível usar a chance."),[{text:"VOLTAR",cls:"primary",fn:()=>location.href="jogos.html"}],"⚠️");
-    return false;
-  }
-
-  // 2) Dá as 30 moedas em uma atualização independente.
-  // Se uma regra antiga bloquear somente moedas, a partida continua funcionando.
-  try{
-    await updateAccount(30,0);
-  }catch(error){
-    console.error("Erro ao registrar +30 Adam Coins:",error);
-  }
-
-  entryCharged=true;sessionStarted=true;
-  level=1;hearts=HEARTS_START;attempt=0;current=[];secret=randomSecret(LEVELS[1].length);
-  timerStartedAt=0;saveSession();
-  $("message").textContent="🪙 +30 Adam Coins • -1 chance";
-  return true;
 }
+
 function restoreSession(s){
   level=Number(s.level)||1;secret=Array.isArray(s.secret)?s.secret:randomSecret(LEVELS[level].length);current=Array.isArray(s.current)?s.current:[];attempt=Number(s.attempt)||0;hearts=Number.isFinite(s.hearts)?s.hearts:HEARTS_START;timerStartedAt=Number(s.timerStartedAt)||0;
 }
@@ -566,7 +587,7 @@ function startLevel({keepState=false}={}){
   if(keepState&&stored?.history){
     stored.history.forEach(item=>{
       const row=document.querySelector(`.history-row[data-row="${item.index}"]`);if(!row)return;
-      const slots=[...row.querySelectorAll(".h-slot")];(item.guess||[]).forEach((c,i)=>{if(slots[i]){const img=document.createElement("img");img.src=FILES[c];img.alt="";slots[i].appendChild(img);}});
+      const slots=[...row.querySelectorAll(".h-slot")];(item.guess||[]).forEach((c,i)=>{if(slots[i]){slots[i].innerHTML="";const ball=document.createElement("span");ball.className="history-color";ball.style.background=colorCss(c);slots[i].appendChild(ball);}});
       const dots=[...row.querySelectorAll(".feedback-dot")];(item.feedback||[]).forEach((t,i)=>{if(dots[i]&&t)dots[i].classList.add(t);});
     });
     $("attemptCount").textContent=`${attempt} / ${maxAttempts()}`;
@@ -619,17 +640,25 @@ $("confirmBtn").addEventListener("click",e=>{e.preventDefault();confirmar();});
 $("clearBtn").addEventListener("click",e=>{e.preventDefault();clearCurrent();});
 $("skipBtn").addEventListener("click",e=>{e.preventDefault();skipWithHeart();});
 $("back").addEventListener("click",()=>location.href="jogos.html");
-async function localizarUsuario(user){
-  let result=await getDocs(query(collection(db,"admins"),where("uid","==",user.uid)));
-  if(result.empty&&user.email)result=await getDocs(query(collection(db,"admins"),where("email","==",user.email.toLowerCase())));
-  return result.empty?null:result.docs[0];
+async function localizarUsuarioRef(u){
+  let s=await getDocs(query(collection(db,"admins"),where("uid","==",u.uid)));
+  if(!s.empty)return s.docs[0].ref;
+  if(u.email){
+    s=await getDocs(query(collection(db,"admins"),where("email","==",u.email)));
+    if(!s.empty)return s.docs[0].ref;
+  }
+  return null;
 }
-onAuthStateChanged(auth,async user=>{
+
+onAuthStateChanged(auth,async authUser=>{
+  user=authUser;
   if(!user){location.replace("index.html");return;}
   try{
-    buildPalette();userDoc=await localizarUsuario(user);
-    if(!userDoc){$("message").textContent="Cadastro não encontrado.";return;}
-    userData=userDoc.data();renderStats();
+    buildPalette();userRef=await localizarUsuarioRef(user);
+    if(!userRef){$("message").textContent="Cadastro não encontrado.";return;}
+    const initialSnap=await getDoc(userRef);
+    if(!initialSnap.exists())throw new Error("Cadastro não encontrado.");
+    userData=initialSnap.data();renderStats();
     const ok=await chargeEntry();if(!ok)return;
     const stored=loadSession();
     startLevel({keepState:!!stored?.sessionStarted});

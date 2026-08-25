@@ -679,38 +679,155 @@ function liberarTelaInicial(){
 }
 
 function mostrarErroInicial(mensagem){
-  $("loading").innerHTML=`
-    <div style="padding:25px;text-align:center;max-width:360px">
-      <div style="font-size:45px">⚠️</div>
-      <div style="font-size:18px;margin-top:10px">${mensagem}</div>
-      <button id="reloadGame" style="margin-top:18px;padding:13px 18px;border:0;border-radius:12px;font-weight:900;background:#ffd84d;color:#111">
-        🔄 TENTAR NOVAMENTE
-      </button>
-    </div>`;
+  $("loading").innerHTML=`<div style="padding:25px;text-align:center;max-width:360px"><div style="font-size:45px">⚠️</div><div style="font-size:18px;margin-top:10px">${mensagem}</div><button id="reloadGame" style="margin-top:18px;padding:13px 18px;border:0;border-radius:12px;font-weight:900;background:#ffd84d;color:#111">🔄 TENTAR NOVAMENTE</button></div>`;
   $("reloadGame").onclick=()=>location.reload();
 }
 
-if(firebaseReady && auth){
-  auth.onAuthStateChanged(async u=>{
-    try{
-      if(!u){ liberarTelaInicial(); return; }
-      usuario=u;
-      userRef=db.collection("admins").doc(u.uid);
-      try{
-        const snap=await Promise.race([userRef.get(),new Promise((_,reject)=>setTimeout(()=>reject(new Error("timeout")),5000))]);
-        if(snap.exists()) usuario={...u,...snap.data()};
-      }catch(e){ console.warn("Perfil não carregado:",e); }
-      liberarTelaInicial();
-    }catch(e){ console.error(e); liberarTelaInicial(); }
-  });
-}else{
-  liberarTelaInicial();
+
+/* =====================================================
+   CONTROLES E INICIALIZAÇÃO FINAL
+===================================================== */
+
+function bindButton(id, fn){
+  const el=$(id);
+  if(el) el.addEventListener('click', fn);
 }
 
-// Segurança: nunca deixar "Carregando jogo..." preso para sempre.
-setTimeout(()=>{
-  if(!inicializado){
-    liberarTelaInicial();
-    toast("⚠️ O Firebase demorou. O jogo foi iniciado.");
+bindButton('startBtn', async ()=>{
+  if(!auth || !auth.currentUser){
+    toast('⚠️ Faça login para jogar.');
+    return;
   }
-},1500);
+  await consumirEntrada();
+});
+
+bindButton('pauseBtn', togglePause);
+bindButton('resumeBtn', togglePause);
+bindButton('restartBtn', ()=>startLevel(level));
+bindButton('lossRestartBtn', ()=>startLevel(level));
+bindButton('continueBtn', async ()=>{
+  await consumirEntrada();
+});
+bindButton('exitLossBtn', ()=>{
+  hide('lossOverlay');
+  show('startOverlay');
+});
+bindButton('nextBtn', ()=>startLevel(level+1));
+bindButton('levelExitBtn', ()=>{
+  hide('levelOverlay');
+  show('startOverlay');
+});
+bindButton('playAgainBtn', async ()=>{
+  level=1;
+  totalMoedasSessao=0;
+  totalPontosSessao=0;
+  await consumirEntrada();
+});
+
+async function garantirPerfil(){
+  const u=auth && auth.currentUser;
+  if(!u) return false;
+
+  usuario=usuario || u;
+
+  if(!db) return true;
+
+  if(!userRef){
+    userRef=db.collection('admins').doc(u.uid);
+  }
+
+  try{
+    const snap=await userRef.get();
+    if(snap.exists){
+      usuario={...u,...snap.data()};
+    }
+    return true;
+  }catch(e){
+    console.warn('Não foi possível atualizar perfil:',e);
+    return true;
+  }
+}
+
+async function consumirEntrada(){
+  if(!auth || !auth.currentUser){
+    toast('⚠️ Faça login para jogar.');
+    return;
+  }
+
+  if(!db){
+    toast('⚠️ Firebase indisponível.');
+    return;
+  }
+
+  const ok=await garantirPerfil();
+  if(!ok) return;
+
+  const atual=num(usuario && usuario.chances);
+
+  if(atual<=0){
+    toast('🎟️ Você não tem chances.');
+    return;
+  }
+
+  try{
+    const moedasAntes=num(usuario.moedas);
+    await userRef.update({
+      chances:atual-1,
+      moedas:moedasAntes+30
+    });
+
+    usuario.chances=atual-1;
+    usuario.moedas=moedasAntes+30;
+
+    totalMoedasSessao+=30;
+
+    try{
+      await db.collection('historico').add({
+        usuarioUid:auth.currentUser.uid,
+        usuarioId:userRef.id,
+        item:'moedas',
+        operacao:'adicionar',
+        quantidade:30,
+        saldoAnterior:moedasAntes,
+        saldoFinal:moedasAntes+30,
+        motivo:`Chuva de Sabores - entrada/continuação fase ${level}`,
+        criadoEm:new Date().toISOString()
+      });
+    }catch(e){
+      console.warn('Histórico não registrado:',e);
+    }
+
+    hide('lossOverlay');
+    startLevel(level);
+  }catch(e){
+    console.error(e);
+    toast('⚠️ Não foi possível usar a chance.');
+  }
+}
+
+// Inicializa imediatamente a interface do jogo.
+// O Firebase é carregado em segundo plano e não bloqueia a tela.
+liberarTelaInicial();
+
+if(firebaseReady && auth){
+  auth.onAuthStateChanged(async u=>{
+    if(!u) return;
+    try{
+      usuario=u;
+      userRef=db.collection('admins').doc(u.uid);
+      const snap=await Promise.race([
+        userRef.get(),
+        new Promise((_,reject)=>setTimeout(()=>reject(new Error('timeout')),4000))
+      ]);
+      if(snap && snap.exists){
+        usuario={...u,...snap.data()};
+      }
+    }catch(e){
+      console.warn('Perfil Firebase:',e);
+    }
+  });
+}
+
+</script>
+</body>
+</html>

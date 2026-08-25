@@ -246,6 +246,26 @@ body:before{
 
 <div class="toast" id="toast"></div>
 
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script>
+const firebaseConfig={
+  apiKey:"AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",
+  authDomain:"adam-games-21081.firebaseapp.com",
+  projectId:"adam-games-21081",
+  storageBucket:"adam-games-21081.firebasestorage.app",
+  messagingSenderId:"1055528418738",
+  appId:"1:1055528418738:web:5fafdf63424ba9744eb8ab"
+};
+let firebaseOK=false, auth=null, db=null, usuario=null, userRef=null, contaCarregada=false;
+try{
+  firebase.initializeApp(firebaseConfig);
+  auth=firebase.auth();
+  db=firebase.firestore();
+  firebaseOK=true;
+}catch(e){ console.error("Firebase:",e); }
+</script>
 <script>
 'use strict';
 
@@ -281,8 +301,8 @@ const HARD_HINTS={"arquivamento":"desafio","classificacao":"desafio","operaciona
 
 function freshState(){
   return {
-    coins:Number(localStorage.getItem('adam_games_coins')||0),
-    chances:Number(localStorage.getItem('adam_games_chances') ?? 0),
+    coins:0,
+    chances:0,
     hearts:2,
     level:1,
     totalEarned:0,
@@ -305,25 +325,112 @@ function load(){
 }
 let state=load(), currentWord='', elapsed=0, timerId=null, accepting=false;
 
-// Use the player's existing Adam Games chance balance when available.
-// This game never resets that balance to 1, 2, or any other invented amount.
-(function syncInitialBalance(){
-  const existing = localStorage.getItem('adam_games_chances');
-  if(existing !== null && existing !== ''){
-    const n = Number(existing);
-    if(Number.isFinite(n) && n >= 0) state.chances=Math.floor(n);
-  }
-  save();
-})();
 
 
 const $=id=>document.getElementById(id);
 function save(){
+  // Somente o progresso da partida fica no aparelho.
+  // Chances e moedas pertencem à conta Firebase.
   localStorage.setItem(KEY,JSON.stringify(state));
-  localStorage.setItem('adam_games_coins',String(state.coins));
-  localStorage.setItem('adam_games_chances',String(Math.max(0, Number(state.chances) || 0)));
-  localStorage.setItem('adam_games_hearts',String(state.hearts));
 }
+
+async function localizarUsuario(user){
+  if(!db || !user) return null;
+  let snap=await db.collection("admins").where("uid","==",user.uid).limit(1).get();
+  if(snap.empty && user.email){
+    snap=await db.collection("admins").where("email","==",user.email.toLowerCase()).limit(1).get();
+  }
+  return snap.empty ? null : snap.docs[0];
+}
+
+function syncAccountToHUD(){
+  if(usuario){
+    state.chances=Number(usuario.chances||0);
+    state.coins=Number(usuario.moedas||0);
+  }
+}
+
+async function alterarSaldo(deltaChance,deltaMoedas,motivo){
+  if(!userRef || !usuario){
+    toast("⚠️ Conta não carregada. Faça login novamente.");
+    return false;
+  }
+
+  const chances=Number(usuario.chances||0);
+  const moedas=Number(usuario.moedas||0);
+
+  if(chances + deltaChance < 0){
+    toast("❌ Você não tem chances disponíveis.");
+    return false;
+  }
+
+  try{
+    await userRef.update({
+      chances:firebase.firestore.FieldValue.increment(deltaChance),
+      moedas:firebase.firestore.FieldValue.increment(deltaMoedas)
+    });
+
+    usuario.chances=chances+deltaChance;
+    usuario.moedas=moedas+deltaMoedas;
+    syncAccountToHUD();
+    update();
+
+    try{
+      await db.collection("historico").add({
+        usuarioUid:usuario.uid||"",
+        usuarioId:userRef.id,
+        item:"moedas",
+        operacao:deltaMoedas>=0?"adicionar":"remover",
+        quantidade:deltaMoedas,
+        saldoAnterior:moedas,
+        saldoFinal:moedas+deltaMoedas,
+        motivo:motivo||"Palavra Embaralhada",
+        criadoEm:new Date().toISOString()
+      });
+    }catch(e){ console.warn("Histórico:",e); }
+
+    return true;
+  }catch(e){
+    console.error("Erro ao alterar saldo:",e);
+    toast("⚠️ Não foi possível atualizar seu saldo.");
+    return false;
+  }
+}
+
+function iniciarMonitorConta(){
+  if(!firebaseOK) return;
+  auth.onAuthStateChanged(async user=>{
+    contaCarregada=false;
+    userRef=null;
+    usuario=null;
+
+    if(!user){
+      update();
+      toast("⚠️ Faça login para jogar.");
+      return;
+    }
+
+    try{
+      const docUser=await localizarUsuario(user);
+      if(!docUser){
+        toast("⚠️ Cadastro do jogador não encontrado.");
+        return;
+      }
+
+      userRef=docUser.ref;
+      usuario={uid:user.uid,email:user.email||"",...docUser.data()};
+      contaCarregada=true;
+      syncAccountToHUD();
+      update();
+    }catch(e){
+      console.error("Erro ao carregar conta:",e);
+      toast("⚠️ Não foi possível carregar suas chances.");
+    }
+  });
+}
+
+iniciarMonitorConta();
+
 function norm(v){
   return String(v||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z]/g,'');
 }
@@ -368,11 +475,7 @@ function toast(msg){
 function overlay(id,on){$(id).classList.toggle('show',on)}
 
 function refreshPlayerBalance(){
-  const stored = localStorage.getItem('adam_games_chances');
-  if(stored !== null && stored !== ''){
-    const n = Number(stored);
-    if(Number.isFinite(n) && n >= 0) state.chances = Math.floor(n);
-  }
+  syncAccountToHUD();
 }
 function update(){
   refreshPlayerBalance();
@@ -445,32 +548,34 @@ function loadLevel(){
   save();
 }
 
-function startGame(){
+async function startGame(){
   if(state.active){toast('Você já está em uma partida.');return}
-  // Lê o saldo atual do jogador antes de consumir a chance.
-  state.chances = Number(localStorage.getItem('adam_games_chances') ?? state.chances ?? 0);
-  if(state.chances<1){toast('Você não tem chances disponíveis.');return}
-  // INICIAR PARTIDA: -1 chance +30 moedas.
-  // ❤️ é separado e serve somente para pular.
-  state.chances--;
+  if(!contaCarregada || !userRef || !usuario){
+    toast('⚠️ Aguarde o carregamento da sua conta.');
+    return;
+  }
+
+  // INICIAR PARTIDA: -1 chance do jogador +30 moedas.
+  const ok=await alterarSaldo(-1,30,"Entrada Palavra Embaralhada");
+  if(!ok)return;
+
   state.hearts=2;
   state.skipsLeft=2;
-  state.coins+=30;
   state.totalEarned=30;
   state.level=1;
   state.active=true;
   state.usedWords=[];
-  state.skipsLeft=state.hearts;
   state.sessionStarted=true;
   save();
+
   overlay('introOverlay',false);
   $('gameCard').classList.remove('hidden');
   $('endCard').classList.add('hidden');
   loadLevel();
-  toast('Partida iniciada! +30 moedas 🪙');
+  toast('🎟️ -1 chance • 🪙 +30 moedas');
 }
 
-function check(){
+async function check(){
   if(!accepting)return;
   const answer=norm($('answer').value),correct=norm(currentWord);
   if(!answer){
@@ -499,7 +604,16 @@ function check(){
   else if(state.level===8)reward=elapsed<=20?100:75;
   else reward=elapsed<=20?200:(elapsed<=35?150:120);
 
-  state.coins+=reward;state.totalEarned+=reward;save();
+  const rewardOK=await alterarSaldo(0,reward,`Recompensa Palavra Embaralhada - nível ${state.level}`);
+  if(!rewardOK){
+    accepting=true;
+    $('answer').disabled=false;
+    $('checkBtn').disabled=false;
+    update();
+    return;
+  }
+  state.totalEarned+=reward;
+  save();
   $('feedback').textContent=`✅ Acertou! +${reward} moedas`;
   $('feedback').className='feedback ok';
   $('answer').disabled=true;$('checkBtn').disabled=true;$('skipBtn').disabled=true;
@@ -540,20 +654,33 @@ function next(){
   loadLevel();
 }
 
-function continueSameLevel(){
-  // Lê o saldo atual do jogador antes de consumir a chance.
-  state.chances = Number(localStorage.getItem('adam_games_chances') ?? state.chances ?? 0);
-  if(state.chances<1){
-    toast('Você não tem chances disponíveis.');
+async function continueSameLevel(){
+  if(!contaCarregada || !userRef || !usuario){
+    toast('⚠️ Conta não carregada. Tente novamente.');
     return;
   }
+
+  if(Number(usuario.chances||0)<1){
+    $('continueBtn').disabled=true;
+    $('continueBtn').textContent='❌ SEM CHANCES';
+    $('lostMessage').textContent='Você não possui nenhuma chance para continuar.';
+    return;
+  }
+
+  $('continueBtn').disabled=true;
+
   // CONTINUAR APÓS PERDER: -1 chance +30 moedas.
-  // NÃO consome ❤️ e não repõe ❤️.
-  state.chances--;
-  state.coins+=30;
+  // ❤️ não é consumido e não é reposto.
+  const ok=await alterarSaldo(-1,30,`Continuar Palavra Embaralhada no nível ${state.level}`);
+  if(!ok){
+    $('continueBtn').disabled=false;
+    return;
+  }
+
   state.totalEarned+=30;
   state.active=true;
   save();
+
   overlay('lostOverlay',false);
   currentWord=chooseWord(state.level);
   accepting=true;
@@ -562,13 +689,15 @@ function continueSameLevel(){
   $('answer').value='';
   $('answer').disabled=false;
   $('checkBtn').disabled=false;
+  $('skipBtn').disabled=state.level>=8 || state.hearts<=0;
   $('feedback').textContent='Nova palavra! Tente novamente.';
   $('feedback').className='feedback ok';
   renderHint();
+
   if(state.level>=8)startTimer();
   update();
   $('answer').focus();
-  toast('+30 moedas e -1 ❤️');
+  toast('🎟️ -1 chance • 🪙 +30 moedas');
 }
 
 function quitAfterLoss(){
