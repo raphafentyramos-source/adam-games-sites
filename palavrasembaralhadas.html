@@ -351,48 +351,78 @@ function syncAccountToHUD(){
 }
 
 async function alterarSaldo(deltaChance,deltaMoedas,motivo){
-  if(!userRef || !usuario){
-    toast("⚠️ Conta não carregada. Faça login novamente.");
+  if(!firebaseOK || !db || !userRef || !usuario){
+    toast("⚠️ Sua conta ainda não foi carregada. Aguarde e tente novamente.");
     return false;
   }
 
-  const chances=Number(usuario.chances||0);
-  const moedas=Number(usuario.moedas||0);
+  // Usa o mesmo formato de atualização dos outros jogos:
+  // lê o saldo atual e grava os novos valores diretamente no documento.
+  const chances=Number(usuario.chances ?? 0);
+  const moedas=Number(usuario.moedas ?? 0);
 
-  if(chances + deltaChance < 0){
+  if(!Number.isFinite(chances) || chances < 0){
+    toast("⚠️ Não foi possível ler suas chances.");
+    return false;
+  }
+
+  const novasChances=chances + Number(deltaChance || 0);
+  const novasMoedas=moedas + Number(deltaMoedas || 0);
+
+  if(novasChances < 0){
     toast("❌ Você não tem chances disponíveis.");
     return false;
   }
 
   try{
     await userRef.update({
-      chances:firebase.firestore.FieldValue.increment(deltaChance),
-      moedas:firebase.firestore.FieldValue.increment(deltaMoedas)
+      chances:novasChances,
+      moedas:novasMoedas
     });
 
-    usuario.chances=chances+deltaChance;
-    usuario.moedas=moedas+deltaMoedas;
+    // Só altera o estado local depois da confirmação do Firebase.
+    usuario.chances=novasChances;
+    usuario.moedas=novasMoedas;
     syncAccountToHUD();
     update();
 
     try{
       await db.collection("historico").add({
-        usuarioUid:usuario.uid||"",
+        usuarioUid:usuario.uid || "",
         usuarioId:userRef.id,
         item:"moedas",
-        operacao:deltaMoedas>=0?"adicionar":"remover",
-        quantidade:deltaMoedas,
+        operacao:deltaMoedas>=0 ? "adicionar" : "remover",
+        quantidade:Number(deltaMoedas || 0),
         saldoAnterior:moedas,
-        saldoFinal:moedas+deltaMoedas,
-        motivo:motivo||"Palavra Embaralhada",
+        saldoFinal:novasMoedas,
+        motivo:motivo || "Palavra Embaralhada",
         criadoEm:new Date().toISOString()
       });
-    }catch(e){ console.warn("Histórico:",e); }
+    }catch(e){
+      // Histórico não pode impedir o jogo.
+      console.warn("Histórico:",e);
+    }
 
     return true;
+
   }catch(e){
-    console.error("Erro ao alterar saldo:",e);
-    toast("⚠️ Não foi possível atualizar seu saldo.");
+    console.error("ERRO FIREBASE AO ATUALIZAR CONTA:",e);
+    console.error("Documento:",userRef ? userRef.path : "sem documento");
+    console.error("Usuário:",usuario ? usuario.uid : "sem usuário");
+
+    // Recarrega o documento para não deixar o HUD com saldo falso.
+    try{
+      const atual=await userRef.get();
+      if(atual.exists){
+        usuario={...usuario,...atual.data()};
+        syncAccountToHUD();
+        update();
+      }
+    }catch(reloadError){
+      console.error("Erro ao recarregar conta:",reloadError);
+    }
+
+    toast("⚠️ O jogo não conseguiu atualizar sua conta. Verifique se você está logado e tente novamente.");
     return false;
   }
 }
