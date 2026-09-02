@@ -546,6 +546,80 @@ button{
 
 }
 
+
+/* =====================================================
+   RASPADINHA ESPECIAL
+===================================================== */
+
+.card-special{
+
+  background:
+    radial-gradient(
+      circle at 80% 15%,
+      rgba(255,255,255,.20),
+      transparent 28%
+    ),
+    linear-gradient(
+      145deg,
+      #0c8b68,
+      #064c65
+    );
+
+  border-color:
+    rgba(255,218,69,.45);
+
+}
+
+.special-tag{
+
+  position:absolute;
+
+  top:12px;
+  right:12px;
+
+  padding:5px 9px;
+
+  border-radius:10px;
+
+  background:
+    rgba(255,213,43,.18);
+
+  border:
+    1px solid
+    rgba(255,213,43,.35);
+
+  color:#ffe16a;
+
+  font-size:9px;
+  font-weight:900;
+
+}
+
+.special-key-count{
+
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:5px;
+
+  margin-top:13px;
+
+  padding:7px 10px;
+
+  border-radius:12px;
+
+  background:
+    rgba(0,0,0,.20);
+
+  color:#ffe46b;
+
+  font-size:12px;
+
+  font-weight:900;
+
+}
+
 .card-gift{
 
   background:
@@ -627,6 +701,195 @@ button{
   background:rgba(255,255,255,.15);
 
   font-size:23px;
+
+}
+
+
+/* =====================================================
+   RASPADINHA MODAL
+===================================================== */
+
+.scratch-modal-box{
+
+  max-width:470px;
+
+  text-align:center;
+
+  background:
+
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(255,213,43,.18),
+      transparent 35%
+    ),
+
+    linear-gradient(
+      145deg,
+      #063f5b,
+      #021a38
+    );
+
+}
+
+.scratch-event{
+
+  display:inline-block;
+
+  margin-bottom:9px;
+
+  padding:7px 12px;
+
+  border-radius:14px;
+
+  background:rgba(255,255,255,.09);
+
+  color:#ffe36b;
+
+  font-size:11px;
+
+  font-weight:900;
+
+}
+
+.scratch-area{
+
+  position:relative;
+
+  width:100%;
+
+  max-width:390px;
+
+  height:210px;
+
+  margin:18px auto;
+
+  border-radius:22px;
+
+  overflow:hidden;
+
+  box-shadow:
+    0 15px 35px
+    rgba(0,0,0,.35);
+
+  user-select:none;
+
+  -webkit-user-select:none;
+
+  touch-action:none;
+
+}
+
+.scratch-prize{
+
+  position:absolute;
+
+  inset:0;
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  justify-content:center;
+
+  padding:20px;
+
+  background:
+
+    radial-gradient(
+      circle at 50% 30%,
+      rgba(255,213,43,.22),
+      transparent 45%
+    ),
+
+    linear-gradient(
+      145deg,
+      #092e52,
+      #071b35
+    );
+
+}
+
+.scratch-prize-icon{
+
+  font-size:54px;
+
+  margin-bottom:8px;
+
+}
+
+.scratch-prize-label{
+
+  color:#9dbdd7;
+
+  font-size:11px;
+
+  font-weight:900;
+
+  text-transform:uppercase;
+
+}
+
+.scratch-prize-text{
+
+  margin-top:7px;
+
+  color:#ffd52b;
+
+  font-size:21px;
+
+  line-height:1.15;
+
+  font-weight:900;
+
+}
+
+.scratch-canvas{
+
+  position:absolute;
+
+  inset:0;
+
+  width:100%;
+
+  height:100%;
+
+  cursor:crosshair;
+
+}
+
+.scratch-hint{
+
+  color:#8db4d1;
+
+  font-size:12px;
+
+  line-height:1.4;
+
+}
+
+.scratch-key-info{
+
+  margin-top:10px;
+
+  color:#ffd52b;
+
+  font-size:13px;
+
+  font-weight:900;
+
+}
+
+.scratch-result{
+
+  min-height:20px;
+
+  margin-top:10px;
+
+  font-size:13px;
+
+  font-weight:bold;
 
 }
 
@@ -1650,6 +1913,10 @@ button{
     padding:18px;
   }
 
+  .scratch-area{
+    height:190px;
+  }
+
 }
 
 </style>
@@ -1825,7 +2092,9 @@ button{
 
 <section class="hero">
 
-  <div class="season">
+  <div
+    class="season"
+    id="seasonBadge">
 
     🇧🇷 SETEMBRO • INDEPENDÊNCIA
 
@@ -1885,6 +2154,49 @@ button{
     <p>
       Gire a roleta e descubra seu prêmio.
     </p>
+
+    <div class="card-arrow">
+      →
+    </div>
+
+  </div>
+
+
+  <!-- =================================================
+       RASPADINHA ESPECIAL
+  ================================================== -->
+
+  <div
+    class="card card-special"
+    id="specialScratchCard">
+
+    <div class="special-tag">
+      VIP
+    </div>
+
+    <div
+      class="card-icon"
+      id="specialCardIcon">
+
+      🇧🇷
+
+    </div>
+
+    <h3 id="specialCardTitle">
+      CHAVE DA INDEPENDÊNCIA
+    </h3>
+
+    <p id="specialCardText">
+      Use sua chave especial e raspe para descobrir seu prêmio.
+    </p>
+
+    <div
+      class="special-key-count"
+      id="specialKeyCount">
+
+      🔑 0 chaves
+
+    </div>
 
     <div class="card-arrow">
       →
@@ -2351,6 +2663,126 @@ button{
 </nav>
 
 
+<!-- =====================================================
+     MODAL RASPADINHA
+===================================================== -->
+
+<div
+  class="modal"
+  id="specialScratchModal">
+
+  <div class="modal-box scratch-modal-box">
+
+    <div
+      class="scratch-event"
+      id="scratchEvent">
+
+      🇧🇷 SETEMBRO • INDEPENDÊNCIA
+
+    </div>
+
+    <h3 id="scratchTitle">
+      🔑 Chave da Independência
+    </h3>
+
+    <div class="modal-subtitle">
+
+      Use 1 Chave Especial para ganhar
+      uma raspadinha exclusiva.
+
+    </div>
+
+
+    <div class="scratch-area" id="scratchArea">
+
+      <div
+        class="scratch-prize"
+        id="scratchPrize">
+
+        <div
+          class="scratch-prize-icon"
+          id="scratchPrizeIcon">
+
+          🎁
+
+        </div>
+
+        <div class="scratch-prize-label">
+          SEU PRÊMIO
+        </div>
+
+        <div
+          class="scratch-prize-text"
+          id="scratchPrizeText">
+
+          Raspe para descobrir!
+
+        </div>
+
+      </div>
+
+
+      <canvas
+        class="scratch-canvas"
+        id="scratchCanvas">
+      </canvas>
+
+    </div>
+
+
+    <div
+      class="scratch-hint"
+      id="scratchHint">
+
+      Primeiro use sua Chave Especial.
+      Depois raspe a área acima com o dedo ou mouse.
+
+    </div>
+
+
+    <div
+      class="scratch-key-info"
+      id="scratchKeyInfo">
+
+      🔑 Chaves Especiais: 0
+
+    </div>
+
+
+    <div
+      class="scratch-result"
+      id="scratchResult">
+    </div>
+
+
+    <button
+      class="primary-button"
+      id="useSpecialKeyButton"
+      type="button">
+
+      🔑 USAR CHAVE ESPECIAL
+
+    </button>
+
+
+    <button
+      class="close-button"
+      id="closeScratchButton"
+      type="button">
+
+      FECHAR
+
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     MODAL VIP
+===================================================== -->
+
 <div
   class="modal"
   id="vipModal">
@@ -2416,6 +2848,10 @@ button{
 </div>
 
 
+<!-- =====================================================
+     VALE
+===================================================== -->
+
 <div
   class="modal"
   id="giftModal">
@@ -2478,6 +2914,10 @@ button{
 
 </div>
 
+
+<!-- =====================================================
+     EDITAR DADOS
+===================================================== -->
 
 <div
   class="modal"
@@ -2641,6 +3081,10 @@ button{
 </div>
 
 
+<!-- =====================================================
+     NOTIFICAÇÕES
+===================================================== -->
+
 <div
   class="notifications-modal"
   id="notificationsModal">
@@ -2677,6 +3121,10 @@ button{
 
 </div>
 
+
+<!-- =====================================================
+     LOGOUT
+===================================================== -->
 
 <div
   class="modal"
@@ -2829,6 +3277,188 @@ let cadastroId = null;
 
 
 /* =====================================================
+   TEMA MENSAL
+===================================================== */
+
+const TEMA_MENSAL = {
+
+  1:{
+    evento:"ANO NOVO",
+    icone:"✨",
+    chave:"Chave da Renovação"
+  },
+
+  2:{
+    evento:"AMOR",
+    icone:"💖",
+    chave:"Chave do Amor"
+  },
+
+  3:{
+    evento:"CARNAVAL",
+    icone:"🎭",
+    chave:"Chave da Folia"
+  },
+
+  4:{
+    evento:"PÁSCOA",
+    icone:"🐰",
+    chave:"Chave de Páscoa"
+  },
+
+  5:{
+    evento:"DIA DAS MÃES",
+    icone:"🌷",
+    chave:"Chave do Carinho"
+  },
+
+  6:{
+    evento:"ARRAIÁ",
+    icone:"🌽",
+    chave:"Chave do Arraiá"
+  },
+
+  7:{
+    evento:"FÉRIAS",
+    icone:"🏝️",
+    chave:"Chave das Férias"
+  },
+
+  8:{
+    evento:"AVENTURA",
+    icone:"🗺️",
+    chave:"Chave da Aventura"
+  },
+
+  9:{
+    evento:"INDEPENDÊNCIA",
+    icone:"🇧🇷",
+    chave:"Chave da Independência"
+  },
+
+  10:{
+    evento:"HALLOWEEN",
+    icone:"🎃",
+    chave:"Chave do Terror"
+  },
+
+  11:{
+    evento:"CONSCIÊNCIA NEGRA",
+    icone:"✊🏿",
+    chave:"Chave da Consciência Negra"
+  },
+
+  12:{
+    evento:"NATAL",
+    icone:"🎄",
+    chave:"Chave de Natal"
+  }
+
+};
+
+
+const mesAtual =
+  new Date().getMonth() + 1;
+
+
+const TEMA_ATUAL =
+  TEMA_MENSAL[mesAtual];
+
+
+/* =====================================================
+   PRÊMIOS DA RASPADINHA
+===================================================== */
+
+const PREMIOS_RASPADINHA = [
+
+  {
+    id:"itens2500",
+    icone:"📦",
+    premio:"2.500 itens",
+    chance:20
+  },
+
+  {
+    id:"chaves2000",
+    icone:"🔑",
+    premio:"2.000 chaves",
+    chance:18
+  },
+
+  {
+    id:"comidas7500",
+    icone:"🦫",
+    premio:"7.500 comidas do castor",
+    chance:16
+  },
+
+  {
+    id:"itens3000",
+    icone:"📦",
+    premio:"3.000 itens",
+    chance:14
+  },
+
+  {
+    id:"itens4500",
+    icone:"📦",
+    premio:"4.500 itens",
+    chance:9
+  },
+
+  {
+    id:"ferramentasRubi3000",
+    icone:"🔴",
+    premio:"3.000 ferramentas de rubi",
+    chance:8
+  },
+
+  {
+    id:"itens5000",
+    icone:"📦",
+    premio:"5.000 itens",
+    chance:6
+  },
+
+  {
+    id:"ferramentasRubi4000",
+    icone:"🔴",
+    premio:"4.000 ferramentas de rubi",
+    chance:4
+  },
+
+  {
+    id:"ferramentasRubi8000",
+    icone:"🔴",
+    premio:"8.000 ferramentas de rubi",
+    chance:2.5
+  },
+
+  {
+    id:"ferramentasRubi12000",
+    icone:"🔴",
+    premio:"12.000 ferramentas de rubi",
+    chance:1.5
+  },
+
+  {
+    id:"adamFamily15",
+    icone:"👑",
+    premio:"R$15,00 em compras com Adam Family",
+    chance:.5
+  },
+
+  {
+    id:"adamGames10",
+    icone:"👑",
+    premio:"R$10,00 em compras na Adam Games",
+    chance:.5
+  }
+
+];
+
+
+/* =====================================================
    ELEMENTOS
 ===================================================== */
 
@@ -2871,6 +3501,100 @@ const logoutModal =
   document.getElementById(
     "logoutModal"
   );
+
+const specialScratchModal =
+  document.getElementById(
+    "specialScratchModal"
+  );
+
+const specialScratchCard =
+  document.getElementById(
+    "specialScratchCard"
+  );
+
+const specialKeyCount =
+  document.getElementById(
+    "specialKeyCount"
+  );
+
+const scratchCanvas =
+  document.getElementById(
+    "scratchCanvas"
+  );
+
+const scratchArea =
+  document.getElementById(
+    "scratchArea"
+  );
+
+const scratchPrizeText =
+  document.getElementById(
+    "scratchPrizeText"
+  );
+
+const scratchPrizeIcon =
+  document.getElementById(
+    "scratchPrizeIcon"
+  );
+
+const scratchResult =
+  document.getElementById(
+    "scratchResult"
+  );
+
+const scratchHint =
+  document.getElementById(
+    "scratchHint"
+  );
+
+const scratchKeyInfo =
+  document.getElementById(
+    "scratchKeyInfo"
+  );
+
+const useSpecialKeyButton =
+  document.getElementById(
+    "useSpecialKeyButton"
+  );
+
+
+/* =====================================================
+   APLICAR TEMA
+===================================================== */
+
+document.getElementById(
+  "seasonBadge"
+).textContent =
+  TEMA_ATUAL.icone +
+  " " +
+  TEMA_ATUAL.evento;
+
+
+document.getElementById(
+  "specialCardIcon"
+).textContent =
+  TEMA_ATUAL.icone;
+
+
+document.getElementById(
+  "specialCardTitle"
+).textContent =
+  TEMA_ATUAL.chave.toUpperCase();
+
+
+document.getElementById(
+  "scratchEvent"
+).textContent =
+  TEMA_ATUAL.icone +
+  " " +
+  TEMA_ATUAL.evento;
+
+
+document.getElementById(
+  "scratchTitle"
+).textContent =
+  "🔑 " +
+  TEMA_ATUAL.chave;
 
 
 /* =====================================================
@@ -3043,6 +3767,9 @@ async function carregarCadastro(
         0,
 
       chaves:
+        0,
+
+      chavesEspeciais:
         0,
 
       creditos:
@@ -3301,7 +4028,1219 @@ function mostrarDados(
             : "Área VIP"
         );
 
+
+  atualizarQuantidadeChavesEspeciais();
+
 }
+
+
+/* =====================================================
+   CHAVES ESPECIAIS
+===================================================== */
+
+function quantidadeChavesEspeciais(){
+
+  if(
+    !cadastroAtual ||
+    !cadastroAtual.data
+  ){
+
+    return 0;
+
+  }
+
+
+  return Math.max(
+    0,
+    Math.floor(
+      valorNumerico(
+        cadastroAtual.data.chavesEspeciais
+      )
+    )
+  );
+
+}
+
+
+function atualizarQuantidadeChavesEspeciais(){
+
+  const quantidade =
+    quantidadeChavesEspeciais();
+
+
+  specialKeyCount.textContent =
+    "🔑 " +
+    quantidade.toLocaleString(
+      "pt-BR"
+    ) +
+    (
+      quantidade === 1
+        ? " chave"
+        : " chaves"
+    );
+
+
+  scratchKeyInfo.textContent =
+    "🔑 Chaves Especiais: " +
+    quantidade.toLocaleString(
+      "pt-BR"
+    );
+
+}
+
+
+/* =====================================================
+   ESCOLHER PRÊMIO
+===================================================== */
+
+function escolherPremio(){
+
+  const total =
+    PREMIOS_RASPADINHA.reduce(
+      (
+        soma,
+        premio
+      ) =>
+        soma +
+        premio.chance,
+      0
+    );
+
+
+  let sorteio =
+    Math.random() *
+    total;
+
+
+  for(
+    const premio
+    of PREMIOS_RASPADINHA
+  ){
+
+    sorteio -=
+      premio.chance;
+
+
+    if(
+      sorteio < 0
+    ){
+
+      return premio;
+
+    }
+
+  }
+
+
+  return PREMIOS_RASPADINHA[
+    PREMIOS_RASPADINHA.length - 1
+  ];
+
+}
+
+
+/* =====================================================
+   RASPADINHA
+===================================================== */
+
+let premioAtual = null;
+
+let raspadinhaAtiva = false;
+
+let raspadinhaRevelada = false;
+
+let scratching = false;
+
+let scratchPixels = 0;
+
+
+/* =====================================================
+   PREPARAR CANVAS
+===================================================== */
+
+function prepararRaspadinha(){
+
+  const rect =
+    scratchArea.getBoundingClientRect();
+
+
+  const dpr =
+    window.devicePixelRatio ||
+    1;
+
+
+  scratchCanvas.width =
+    Math.floor(
+      rect.width * dpr
+    );
+
+
+  scratchCanvas.height =
+    Math.floor(
+      rect.height * dpr
+    );
+
+
+  scratchCanvas.style.width =
+    rect.width + "px";
+
+
+  scratchCanvas.style.height =
+    rect.height + "px";
+
+
+  const ctx =
+    scratchCanvas.getContext(
+      "2d"
+    );
+
+
+  ctx.setTransform(
+    dpr,
+    0,
+    0,
+    dpr,
+    0,
+    0
+  );
+
+
+  ctx.globalCompositeOperation =
+    "source-over";
+
+
+  const grad =
+    ctx.createLinearGradient(
+      0,
+      0,
+      rect.width,
+      rect.height
+    );
+
+
+  grad.addColorStop(
+    0,
+    "#d9b23b"
+  );
+
+  grad.addColorStop(
+    .5,
+    "#f3d45d"
+  );
+
+  grad.addColorStop(
+    1,
+    "#a87512"
+  );
+
+
+  ctx.fillStyle =
+    grad;
+
+
+  ctx.fillRect(
+    0,
+    0,
+    rect.width,
+    rect.height
+  );
+
+
+  ctx.fillStyle =
+    "rgba(255,255,255,.20)";
+
+
+  for(
+    let x = -rect.height;
+    x < rect.width + rect.height;
+    x += 26
+  ){
+
+    ctx.save();
+
+    ctx.translate(
+      x,
+      0
+    );
+
+    ctx.rotate(
+      -0.55
+    );
+
+    ctx.fillRect(
+      0,
+      0,
+      8,
+      rect.height * 2
+    );
+
+    ctx.restore();
+
+  }
+
+
+  ctx.fillStyle =
+    "rgba(45,30,0,.65)";
+
+
+  ctx.font =
+    "900 22px Arial";
+
+
+  ctx.textAlign =
+    "center";
+
+
+  ctx.textBaseline =
+    "middle";
+
+
+  ctx.fillText(
+    "RASPE AQUI",
+    rect.width / 2,
+    rect.height / 2
+  );
+
+
+  scratchPixels =
+    rect.width *
+    rect.height;
+
+
+  raspadinhaRevelada =
+    false;
+
+}
+
+
+/* =====================================================
+   POSIÇÃO DO TOQUE
+===================================================== */
+
+function obterPosicao(
+  evento
+){
+
+  const rect =
+    scratchCanvas.getBoundingClientRect();
+
+
+  let clientX;
+  let clientY;
+
+
+  if(
+    evento.touches &&
+    evento.touches.length
+  ){
+
+    clientX =
+      evento.touches[0].clientX;
+
+    clientY =
+      evento.touches[0].clientY;
+
+  }
+  else if(
+    evento.changedTouches &&
+    evento.changedTouches.length
+  ){
+
+    clientX =
+      evento.changedTouches[0].clientX;
+
+    clientY =
+      evento.changedTouches[0].clientY;
+
+  }
+  else{
+
+    clientX =
+      evento.clientX;
+
+    clientY =
+      evento.clientY;
+
+  }
+
+
+  return {
+
+    x:
+      clientX -
+      rect.left,
+
+    y:
+      clientY -
+      rect.top
+
+  };
+
+}
+
+
+/* =====================================================
+   RASPAR
+===================================================== */
+
+function raspar(
+  evento
+){
+
+  if(
+    !raspadinhaAtiva ||
+    raspadinhaRevelada
+  ){
+
+    return;
+
+  }
+
+
+  if(
+    evento.cancelable
+  ){
+
+    evento.preventDefault();
+
+  }
+
+
+  const posicao =
+    obterPosicao(
+      evento
+    );
+
+
+  const rect =
+    scratchCanvas.getBoundingClientRect();
+
+
+  const ctx =
+    scratchCanvas.getContext(
+      "2d"
+    );
+
+
+  ctx.save();
+
+
+  ctx.globalCompositeOperation =
+    "destination-out";
+
+
+  ctx.beginPath();
+
+  ctx.arc(
+    posicao.x,
+    posicao.y,
+    24,
+    0,
+    Math.PI * 2
+  );
+
+  ctx.fill();
+
+
+  ctx.restore();
+
+
+  verificarRevelacao(
+    rect
+  );
+
+}
+
+
+/* =====================================================
+   VERIFICAR REVELAÇÃO
+===================================================== */
+
+function verificarRevelacao(
+  rect
+){
+
+  if(
+    raspadinhaRevelada
+  ){
+
+    return;
+
+  }
+
+
+  const ctx =
+    scratchCanvas.getContext(
+      "2d"
+    );
+
+
+  const largura =
+    scratchCanvas.width;
+
+
+  const altura =
+    scratchCanvas.height;
+
+
+  /*
+   A leitura usa uma pequena amostra
+   para não pesar no celular.
+  */
+
+  const sampleWidth =
+    Math.min(
+      180,
+      largura
+    );
+
+
+  const sampleHeight =
+    Math.min(
+      100,
+      altura
+    );
+
+
+  const image =
+    ctx.getImageData(
+      0,
+      0,
+      sampleWidth,
+      sampleHeight
+    );
+
+
+  let transparentes = 0;
+
+  const total =
+    image.data.length / 4;
+
+
+  for(
+    let i = 3;
+    i < image.data.length;
+    i += 4
+  ){
+
+    if(
+      image.data[i] < 80
+    ){
+
+      transparentes++;
+
+    }
+
+  }
+
+
+  const percentual =
+    transparentes /
+    total;
+
+
+  if(
+    percentual >= .52
+  ){
+
+    revelarPremio();
+
+  }
+
+}
+
+
+/* =====================================================
+   REVELAR PRÊMIO
+===================================================== */
+
+function revelarPremio(){
+
+  if(
+    raspadinhaRevelada
+  ){
+
+    return;
+
+  }
+
+
+  raspadinhaRevelada =
+    true;
+
+
+  raspadinhaAtiva =
+    false;
+
+
+  const ctx =
+    scratchCanvas.getContext(
+      "2d"
+    );
+
+
+  ctx.clearRect(
+    0,
+    0,
+    scratchCanvas.width,
+    scratchCanvas.height
+  );
+
+
+  scratchPrizeIcon.textContent =
+    premioAtual.icone;
+
+
+  scratchPrizeText.textContent =
+    premioAtual.premio;
+
+
+  scratchHint.textContent =
+    "🎉 Parabéns! Você encontrou seu prêmio.";
+
+
+  scratchResult.style.color =
+    "#62ff9e";
+
+
+  scratchResult.textContent =
+    "✅ Prêmio revelado com sucesso!";
+
+
+  useSpecialKeyButton.style.display =
+    "none";
+
+}
+
+
+/* =====================================================
+   ABRIR RASPADINHA
+===================================================== */
+
+function abrirRaspadinha(){
+
+  if(
+    !usuarioAtual ||
+    !cadastroAtual
+  ){
+
+    return;
+
+  }
+
+
+  const vip =
+    cadastroAtual.data.vip === true;
+
+
+  if(
+    !vip
+  ){
+
+    specialScratchModal.style.display =
+      "flex";
+
+
+    scratchResult.style.color =
+      "#ff9ca9";
+
+
+    scratchResult.textContent =
+      "👑 A Raspadinha Especial é exclusiva para membros VIP.";
+
+
+    useSpecialKeyButton.style.display =
+      "block";
+
+
+    useSpecialKeyButton.disabled =
+      true;
+
+
+    return;
+
+  }
+
+
+  const quantidade =
+    quantidadeChavesEspeciais();
+
+
+  specialScratchModal.style.display =
+    "flex";
+
+
+  scratchResult.textContent =
+    "";
+
+
+  scratchResult.style.color =
+    "#fff";
+
+
+  scratchPrizeIcon.textContent =
+    "🎁";
+
+
+  scratchPrizeText.textContent =
+    "Raspe para descobrir!";
+
+
+  scratchHint.textContent =
+    "Primeiro use sua Chave Especial. Depois raspe a área acima com o dedo ou mouse.";
+
+
+  useSpecialKeyButton.style.display =
+    "block";
+
+
+  useSpecialKeyButton.disabled =
+    quantidade < 1;
+
+
+  if(
+    quantidade < 1
+  ){
+
+    scratchResult.style.color =
+      "#ffd37a";
+
+    scratchResult.textContent =
+      "🔒 Você não possui Chaves Especiais.";
+
+  }
+
+
+  raspadinhaAtiva =
+    false;
+
+
+  raspadinhaRevelada =
+    false;
+
+
+  premioAtual =
+    null;
+
+
+  prepararRaspadinha();
+
+}
+
+
+/* =====================================================
+   FECHAR RASPADINHA
+===================================================== */
+
+function fecharRaspadinha(){
+
+  specialScratchModal.style.display =
+    "none";
+
+
+  raspadinhaAtiva =
+    false;
+
+}
+
+
+specialScratchCard.addEventListener(
+  "click",
+  abrirRaspadinha
+);
+
+
+document.getElementById(
+  "closeScratchButton"
+).addEventListener(
+  "click",
+  fecharRaspadinha
+);
+
+
+specialScratchModal.addEventListener(
+  "click",
+  event => {
+
+    if(
+      event.target ===
+      specialScratchModal
+    ){
+
+      fecharRaspadinha();
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   USAR CHAVE ESPECIAL
+===================================================== */
+
+async function usarChaveEspecial(){
+
+  if(
+    !usuarioAtual ||
+    !cadastroAtual ||
+    !cadastroId
+  ){
+
+    scratchResult.style.color =
+      "#ff9ca9";
+
+    scratchResult.textContent =
+      "❌ Usuário não carregado.";
+
+    return;
+
+  }
+
+
+  if(
+    cadastroAtual.data.vip !== true
+  ){
+
+    scratchResult.style.color =
+      "#ff9ca9";
+
+    scratchResult.textContent =
+      "👑 Esta raspadinha é exclusiva para VIP.";
+
+    return;
+
+  }
+
+
+  if(
+    quantidadeChavesEspeciais() < 1
+  ){
+
+    scratchResult.style.color =
+      "#ff9ca9";
+
+    scratchResult.textContent =
+      "🔒 Você não possui Chaves Especiais.";
+
+    return;
+
+  }
+
+
+  const botao =
+    useSpecialKeyButton;
+
+
+  botao.disabled =
+    true;
+
+
+  botao.textContent =
+    "⏳ USANDO CHAVE...";
+
+
+  scratchResult.style.color =
+    "#a9c9e4";
+
+  scratchResult.textContent =
+    "🎲 Sorteando seu prêmio...";
+
+
+  const premio =
+    escolherPremio();
+
+
+  try{
+
+    const usuarioRef =
+      doc(
+        db,
+        "admins",
+        cadastroId
+      );
+
+
+    const resultadoRef =
+      doc(
+        collection(
+          db,
+          "raspadinhasResultados"
+        )
+      );
+
+
+    await runTransaction(
+
+      db,
+
+      async transaction => {
+
+        const usuarioSnap =
+          await transaction.get(
+            usuarioRef
+          );
+
+
+        if(
+          !usuarioSnap.exists()
+        ){
+
+          throw new Error(
+            "USUARIO_NAO_ENCONTRADO"
+          );
+
+        }
+
+
+        const dados =
+          usuarioSnap.data();
+
+
+        if(
+          dados.vip !== true
+        ){
+
+          throw new Error(
+            "VIP_NAO_ATIVO"
+          );
+
+        }
+
+
+        const chaves =
+          valorNumerico(
+            dados.chavesEspeciais
+          );
+
+
+        if(
+          chaves < 1
+        ){
+
+          throw new Error(
+            "SEM_CHAVE"
+          );
+
+        }
+
+
+        transaction.update(
+
+          usuarioRef,
+
+          {
+
+            chavesEspeciais:
+              Math.floor(
+                chaves - 1
+              ),
+
+            atualizadoEm:
+              Timestamp.now()
+
+          }
+
+        );
+
+
+        transaction.set(
+
+          resultadoRef,
+
+          {
+
+            uid:
+              usuarioAtual.uid,
+
+            cadastroId:
+              cadastroId,
+
+            tema:
+              TEMA_ATUAL.evento,
+
+            chave:
+              TEMA_ATUAL.chave,
+
+            mes:
+              mesAtual,
+
+            premioId:
+              premio.id,
+
+            premio:
+              premio.premio,
+
+            icone:
+              premio.icone,
+
+            chance:
+              premio.chance,
+
+            criadoEm:
+              Timestamp.now()
+
+          }
+
+        );
+
+      }
+
+    );
+
+
+    cadastroAtual.data.chavesEspeciais =
+      Math.max(
+        0,
+        Math.floor(
+          valorNumerico(
+            cadastroAtual.data.chavesEspeciais
+          ) - 1
+        )
+      );
+
+
+    atualizarQuantidadeChavesEspeciais();
+
+
+    premioAtual =
+      premio;
+
+
+    raspadinhaAtiva =
+      true;
+
+
+    raspadinhaRevelada =
+      false;
+
+
+    scratchResult.style.color =
+      "#62ff9e";
+
+    scratchResult.textContent =
+      "🔑 Chave usada! Agora raspe para descobrir.";
+
+
+    scratchHint.textContent =
+      "👆 Arraste o dedo sobre a área dourada para revelar seu prêmio.";
+
+
+    botao.style.display =
+      "none";
+
+
+  }
+  catch(error){
+
+    console.error(
+      "Erro usando Chave Especial:",
+      error
+    );
+
+
+    scratchResult.style.color =
+      "#ff9ca9";
+
+
+    if(
+      error.message ===
+      "SEM_CHAVE"
+    ){
+
+      scratchResult.textContent =
+        "🔒 Você não possui Chaves Especiais.";
+
+    }
+    else if(
+      error.message ===
+      "VIP_NAO_ATIVO"
+    ){
+
+      scratchResult.textContent =
+        "👑 Sua conta não possui VIP ativo.";
+
+    }
+    else if(
+      error.message ===
+      "USUARIO_NAO_ENCONTRADO"
+    ){
+
+      scratchResult.textContent =
+        "❌ Cadastro não encontrado.";
+
+    }
+    else if(
+      error.code ===
+      "permission-denied"
+    ){
+
+      scratchResult.textContent =
+        "❌ O Firebase bloqueou esta operação. É necessário ajustar as permissões.";
+
+    }
+    else{
+
+      scratchResult.textContent =
+        "❌ Não foi possível usar a Chave Especial.";
+
+    }
+
+
+    botao.disabled =
+      false;
+
+    botao.textContent =
+      "🔑 USAR CHAVE ESPECIAL";
+
+  }
+
+}
+
+
+useSpecialKeyButton.addEventListener(
+  "click",
+  usarChaveEspecial
+);
+
+
+/* =====================================================
+   EVENTOS DO CANVAS
+===================================================== */
+
+scratchCanvas.addEventListener(
+  "mousedown",
+  event => {
+
+    if(
+      !raspadinhaAtiva
+    ){
+
+      return;
+
+    }
+
+    scratching =
+      true;
+
+    raspar(
+      event
+    );
+
+  }
+);
+
+
+window.addEventListener(
+  "mousemove",
+  event => {
+
+    if(
+      !scratching
+    ){
+
+      return;
+
+    }
+
+    raspar(
+      event
+    );
+
+  }
+);
+
+
+window.addEventListener(
+  "mouseup",
+  () => {
+
+    scratching =
+      false;
+
+  }
+);
+
+
+scratchCanvas.addEventListener(
+  "touchstart",
+  event => {
+
+    if(
+      !raspadinhaAtiva
+    ){
+
+      return;
+
+    }
+
+    scratching =
+      true;
+
+    raspar(
+      event
+    );
+
+  },
+  {
+    passive:false
+  }
+);
+
+
+scratchCanvas.addEventListener(
+  "touchmove",
+  event => {
+
+    if(
+      !scratching
+    ){
+
+      return;
+
+    }
+
+    raspar(
+      event
+    );
+
+  },
+  {
+    passive:false
+  }
+);
+
+
+scratchCanvas.addEventListener(
+  "touchend",
+  () => {
+
+    scratching =
+      false;
+
+  },
+  {
+    passive:true
+  }
+);
+
+
+window.addEventListener(
+  "resize",
+  () => {
+
+    if(
+      specialScratchModal.style.display ===
+      "flex" &&
+      !raspadinhaAtiva
+    ){
+
+      prepararRaspadinha();
+
+    }
+
+  }
+);
 
 
 /* =====================================================
@@ -3812,12 +5751,6 @@ document.getElementById(
 
 
     try{
-
-      /*
-      ----------------------------------------------------
-      A COLEÇÃO CORRETA É codigosPresente
-      ----------------------------------------------------
-      */
 
       const snapshot =
         await getDocs(
@@ -4777,6 +6710,9 @@ onAuthStateChanged(
         user,
         cadastroAtual
       );
+
+
+      atualizarQuantidadeChavesEspeciais();
 
 
       await verificarNotificacaoCaixa();
