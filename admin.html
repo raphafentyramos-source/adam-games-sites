@@ -29,6 +29,11 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
 .empty{padding:18px;text-align:center;color:#9dbbd3}.client-list{display:grid;gap:10px;margin-top:15px}.client-item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px;border-radius:15px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07)}.client-main{display:flex;align-items:center;gap:12px;min-width:0}.client-avatar{width:48px;height:48px;flex-shrink:0;border-radius:14px;background:#ffd52b;color:#111;display:flex;align-items:center;justify-content:center;font-size:23px}.client-name{font-size:15px;font-weight:900}.client-email{margin-top:3px;color:#8fb7d4;font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:450px}.client-id{margin-top:4px;color:#63c7ff;font-size:11px;font-weight:bold}.client-open{flex-shrink:0;padding:11px 13px;border-radius:10px;background:linear-gradient(135deg,#168fff,#0563b5)}
 @media(max-width:800px){.dashboard{grid-template-columns:1fr 1fr}.balances{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:600px){.client-item{flex-direction:column;align-items:stretch}.client-open{width:100%}.client-main{width:100%}.client-email{max-width:250px}header{align-items:flex-start}.headerButtons{flex-direction:column}h2{font-size:32px}.search{grid-template-columns:1fr}.form,.roleta-form,.voucher-form,.info-grid,.special-key-form{grid-template-columns:1fr}.full,.special-key-form .full{grid-column:auto}.actions,.special,.roleta-actions,.voucher-buttons,.special-key-actions{grid-template-columns:1fr}.delivery-actions{grid-template-columns:1fr}.delivery-top{flex-direction:column}.special-key-head{align-items:flex-start;flex-direction:column;width:100%}.special-key-saldo{width:100%}.balances{grid-template-columns:repeat(2,1fr)}}
+
+/* BINGO - CARTELAS */
+.bingo-admin-card{border:1px solid rgba(255,211,61,.35);background:radial-gradient(circle at 100% 0%,rgba(255,211,61,.14),transparent 38%),linear-gradient(145deg,rgba(8,61,104,.98),rgba(2,30,62,.98))}.bingo-admin-head{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:18px}.bingo-admin-title{display:flex;align-items:center;gap:12px}.bingo-admin-icon{width:55px;height:55px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:29px;background:linear-gradient(135deg,#ffd52a,#d48b00)}.bingo-admin-title p{margin-top:4px;color:#9ec7e5;font-size:12px}.bingo-admin-stat{min-width:105px;padding:10px 14px;text-align:center;border-radius:15px;background:rgba(255,213,42,.1)}.bingo-admin-stat-label{color:#b8d2e6;font-size:9px;font-weight:bold}.bingo-admin-stat-value{margin-top:2px;color:#ffd52a;font-size:24px;font-weight:900}.bingo-form{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}.bingo-form .full{grid-column:1/-1}.bingo-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.bingo-generate,.bingo-send{padding:15px;border-radius:12px}.bingo-generate{background:linear-gradient(135deg,#168fff,#0563b5)}.bingo-send{background:linear-gradient(135deg,#ffd52a,#d88b00);color:#111}.bingo-manual{margin-top:18px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08)}.bingo-list{display:grid;gap:9px;margin-top:12px;max-height:500px;overflow:auto}.bingo-item{padding:13px;border-radius:13px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07)}.bingo-item-top{display:flex;justify-content:space-between;gap:10px}.bingo-code{font-weight:900;color:#ffd52a}.bingo-status{font-size:10px;font-weight:900}.bingo-status.available{color:#67ffad}.bingo-status.assigned{color:#75c9ff}.bingo-meta{margin-top:7px;color:#9dbbd3;font-size:11px;line-height:1.55}.bingo-card-mini{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;margin-top:9px;max-width:260px}.bingo-mini-cell{font-size:9px;text-align:center;padding:5px 1px;border-radius:4px;background:#123a63}.bingo-mini-cell.free{background:#7a49d4}.bingo-note{margin-top:10px;padding:11px;border-radius:11px;background:rgba(255,193,7,.08);border:1px solid rgba(255,193,7,.18);color:#e8cf8a;font-size:12px;line-height:1.5}
+@media(max-width:760px){.bingo-form{grid-template-columns:1fr 1fr}.bingo-form .full{grid-column:1/-1}}
+@media(max-width:500px){.bingo-form{grid-template-columns:1fr}.bingo-actions{grid-template-columns:1fr}.bingo-admin-head{align-items:flex-start}.bingo-admin-stat{min-width:88px}}
 </style>
 </head>
 <body>
@@ -46,6 +51,37 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
 <div class="dash"><div class="dashIcon">🎁</div><div class="dashNumber" id="totalPremios">0</div><div class="dashLabel">PRÊMIOS</div></div>
 <div class="dash pending"><div class="dashIcon">⏳</div><div class="dashNumber" id="totalPendentes">0</div><div class="dashLabel">PENDENTES</div></div>
 <div class="dash vip"><div class="dashIcon">👑</div><div class="dashNumber" id="totalVip">0</div><div class="dashLabel">USUÁRIOS VIP</div></div>
+</div>
+
+
+
+<div class="card bingo-admin-card">
+<div class="bingo-admin-head">
+<div class="bingo-admin-title"><div class="bingo-admin-icon">🎱</div><div><h3>Cartelas Bingo</h3><p>Gere cartelas automaticamente e envie para os jogadores.</p></div></div>
+<div class="bingo-admin-stat"><div class="bingo-admin-stat-label">CARTELAS</div><div class="bingo-admin-stat-value" id="bingoCardsCount">0</div></div>
+</div>
+<div class="bingo-form">
+<div class="field"><label>QUANTIDADE</label><input id="bingoCardQuantity" type="number" min="1" max="100" step="1" value="1" placeholder="Ex.: 20"></div>
+<div class="field"><label>👑 CARTELAS VIP AUTOMÁTICAS</label><input id="bingoVipQuantity" type="number" min="0" max="20" step="1" value="1" placeholder="Ex.: 3"></div>
+<div class="field"><label>RODADA</label><input id="bingoCardRound" type="number" min="1" step="1" value="1" placeholder="Ex.: 1"></div>
+<div class="field"><label>ID DO JOGADOR — OPCIONAL</label><input id="bingoCardUserId" type="text" maxlength="80" placeholder="Ex.: AG12345"></div>
+</div>
+<div class="bingo-actions">
+<button class="bingo-generate" id="generateBingoCards" type="button">🎟️ GERAR CARTELAS</button>
+<button class="bingo-send" id="generateSendBingoCards" type="button">📨 GERAR E ENVIAR</button>
+</div>
+<div class="bingo-actions"><button class="bingo-send" id="saveBingoVipQuantity" type="button">👑 SALVAR QUANTIDADE VIP</button></div>
+<div class="bingo-note">💡 Cartelas VIP automáticas: escolha 3, 5, 10 etc. Quando um VIP entrar/logar no Bingo de uma partida, o sistema entrega automaticamente essa quantidade de cartelas para a rodada. Não gera cartelas automáticas para não-VIPs.</div>
+<div id="bingoCardsMessage" class="message"></div>
+<div class="bingo-manual">
+<h3 style="margin-bottom:10px;">📨 Enviar cartela existente</h3>
+<div class="bingo-form">
+<div class="field"><label>CÓDIGO DA CARTELA</label><input id="bingoExistingCode" type="text" maxlength="40" placeholder="Ex.: BG-ABC123"></div>
+<div class="field"><label>ID DO JOGADOR</label><input id="bingoExistingUserId" type="text" maxlength="80" placeholder="ID Adam Games"></div>
+</div>
+<div class="bingo-actions"><button class="bingo-send" id="sendExistingBingoCard" type="button">📨 ENVIAR CARTELA</button><button class="bingo-generate" id="refreshBingoCards" type="button">🔄 ATUALIZAR LISTA</button></div>
+</div>
+<div class="bingo-manual"><h3 style="margin-bottom:10px;">🎟️ Últimas cartelas</h3><div class="bingo-list" id="bingoCardsList"><div class="empty">🔄 Carregando cartelas...</div></div></div>
 </div>
 
 <div class="card special-key-card">
@@ -381,6 +417,85 @@ async function carregarExtrato(pid){
   catch(e){console.error(e);lista.innerHTML="<div class='empty'>Não foi possível carregar o histórico.</div>"}
 }
 
+
+/* BINGO - CARTELAS */
+function gerarCodigoCartela(){
+  const chars="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";let out="BG-";
+  for(let i=0;i<8;i++)out+=chars[Math.floor(Math.random()*chars.length)];
+  return out;
+}
+function gerarCartelaBingo(){
+  const ranges=[[1,15],[16,30],[31,45],[46,60],[61,75]],nums=[];
+  for(const [min,max] of ranges){const a=[];for(let n=min;n<=max;n++)a.push(n);for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}nums.push(a.slice(0,5))}
+  const card=[];for(let r=0;r<5;r++)for(let c=0;c<5;c++)card.push(r===2&&c===2?0:nums[c][r]);return card;
+}
+function mostrarMensagemBingo(texto,tipo){const el=document.getElementById("bingoCardsMessage");if(!el)return;el.textContent=texto||"";el.className="message"+(tipo?" "+tipo:"")}
+async function localizarUsuarioBingo(valor){
+  const v=(valor||"").trim();if(!v)return null;
+  let r=await getDocs(query(collection(db,"admins"),where("publicId","==",v.toUpperCase())));
+  if(r.empty&&v.includes("@"))r=await getDocs(query(collection(db,"admins"),where("email","==",v.toLowerCase())));
+  if(r.empty)r=await getDocs(query(collection(db,"admins"),where("uid","==",v)));
+  if(r.empty){try{const d=await getDoc(doc(db,"admins",v));if(d.exists())return {ref:d.ref,docId:d.id,data:d.data()}}catch(e){}}
+  if(r.empty)return null;const d=r.docs[0];return {ref:d.ref,docId:d.id,data:d.data()};
+}
+async function gerarCartelasBingo(enviar){
+  if(!adminUsuario){mostrarMensagemBingo("❌ Administrador não autenticado.","error");return}
+  const qtd=Math.min(100,Math.max(1,Number(document.getElementById("bingoCardQuantity").value||1)));
+  const rodada=Math.max(1,Number(document.getElementById("bingoCardRound").value||1));
+  const userId=document.getElementById("bingoCardUserId").value.trim();
+  let alvo=null;
+  if(enviar){if(!userId){mostrarMensagemBingo("Digite o ID do jogador para enviar as cartelas.","error");return}try{alvo=await localizarUsuarioBingo(userId)}catch(e){console.error(e)}if(!alvo){mostrarMensagemBingo("❌ Jogador não encontrado pelo ID informado.","error");return}}
+  const botoes=[document.getElementById("generateBingoCards"),document.getElementById("generateSendBingoCards")];botoes.forEach(b=>b.disabled=true);
+  mostrarMensagemBingo("⏳ Gerando cartelas...","");
+  try{
+    const criadas=[],assinaturas=new Set();
+    for(let i=0;i<qtd;i++){
+      let card,sig,tries=0;do{card=gerarCartelaBingo();sig=card.join("-");tries++}while(assinaturas.has(sig)&&tries<30);assinaturas.add(sig);
+      let codigo="",ref=null;
+      for(let tentativa=0;tentativa<8;tentativa++){codigo=gerarCodigoCartela();ref=doc(db,"bingoCartelas",codigo);const existente=await getDoc(ref);if(!existente.exists())break;if(tentativa===7)throw new Error("Não foi possível gerar um código único.")}
+      const dados={codigo,card,round:rodada,status:alvo?"assigned":"available",usuarioUid:alvo?.data?.uid||"",usuarioId:alvo?.data?.publicId||alvo?.docId||"",usuarioNome:alvo?.data?.nome||alvo?.data?.name||"",usuarioEmail:alvo?.data?.email||"",createdAt:serverTimestamp(),createdAtTexto:new Date().toISOString(),createdBy:adminUsuario.email||""};
+      await setDoc(ref,dados);criadas.push({codigo,card});
+    }
+    document.getElementById("bingoCardQuantity").value="1";
+    mostrarMensagemBingo(`✅ ${criadas.length} cartela${criadas.length===1?"":"s"} ${alvo?"gerada(s) e enviada(s) para "+(alvo.data.nome||alvo.data.publicId||"o jogador"):"gerada(s) com sucesso."}`,"success");
+    await carregarBingoCartelas();
+  }catch(e){console.error("ERRO CARTELAS BINGO:",e);mostrarMensagemBingo("❌ Não foi possível gerar as cartelas. "+(e?.code==="permission-denied"?"Verifique a Rule da coleção bingoCartelas.":(e?.message||"")),"error")}
+  finally{botoes.forEach(b=>b.disabled=false)}
+}
+async function enviarCartelaBingoExistente(){
+  const codigo=document.getElementById("bingoExistingCode").value.trim().toUpperCase();const userId=document.getElementById("bingoExistingUserId").value.trim();
+  if(!codigo||!userId){mostrarMensagemBingo("Digite o código da cartela e o ID do jogador.","error");return}
+  try{
+    const alvo=await localizarUsuarioBingo(userId);if(!alvo){mostrarMensagemBingo("❌ Jogador não encontrado.","error");return}
+    const ref=doc(db,"bingoCartelas",codigo),snap=await getDoc(ref);if(!snap.exists()){mostrarMensagemBingo("❌ Cartela não encontrada.","error");return}
+    const d=snap.data();if(d.usuarioUid){mostrarMensagemBingo("❌ Esta cartela já está enviada para um jogador.","error");return}
+    await updateDoc(ref,{status:"assigned",usuarioUid:alvo.data.uid||"",usuarioId:alvo.data.publicId||alvo.docId,usuarioNome:alvo.data.nome||alvo.data.name||"",usuarioEmail:alvo.data.email||"",assignedAt:serverTimestamp(),assignedBy:adminUsuario.email||""});
+    document.getElementById("bingoExistingCode").value="";document.getElementById("bingoExistingUserId").value="";mostrarMensagemBingo("✅ Cartela enviada para "+(alvo.data.nome||alvo.data.publicId||"o jogador")+".","success");await carregarBingoCartelas();
+  }catch(e){console.error(e);mostrarMensagemBingo("❌ Não foi possível enviar a cartela. "+(e?.code||e?.message||""),"error")}
+}
+function miniCartela(card){const arr=["B","I","N","G","O",...(card||[])];return `<div class="bingo-card-mini">${arr.map((v,i)=>`<span class="bingo-mini-cell ${i===17?"free":""}">${i<5?v:(v===0?"★":v)}</span>`).join("")}</div>`}
+async function carregarBingoCartelas(){
+  const lista=document.getElementById("bingoCardsList");if(!lista)return;
+  try{
+    const r=await getDocs(collection(db,"bingoCartelas"));const regs=r.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>String(b.createdAtTexto||"").localeCompare(String(a.createdAtTexto||""))).slice(0,100);
+    document.getElementById("bingoCardsCount").textContent=String(r.size);lista.innerHTML="";
+    if(!regs.length){lista.innerHTML="<div class='empty'>Nenhuma cartela gerada ainda.</div>";return}
+    regs.forEach(x=>{const el=document.createElement("div");el.className="bingo-item";const assigned=!!x.usuarioUid;el.innerHTML=`<div class="bingo-item-top"><span class="bingo-code">🎟️ ${escapar(x.codigo||x.id)}</span><span class="bingo-status ${assigned?"assigned":"available"}">${assigned?"📨 ENVIADA":"🟢 DISPONÍVEL"}</span></div><div class="bingo-meta">Rodada: <strong>${numero(x.round||1)}</strong>${assigned?`<br>Jogador: <strong>${escapar(x.usuarioNome||x.usuarioId||x.usuarioUid)}</strong><br>ID: <strong>${escapar(x.usuarioId||"—")}</strong>`:""}</div>${miniCartela(x.card)}</div>`;lista.appendChild(el)})
+  }catch(e){console.error("CARTELAS BINGO:",e);lista.innerHTML="<div class='empty'>❌ Não foi possível carregar as cartelas. Verifique a Rule da coleção bingoCartelas.</div>"}
+}
+
+async function carregarConfigBingoVip(){
+  try{const ref=doc(db,"bingo","configuracoes");const s=await getDoc(ref);const qtd=s.exists()?Number(s.data().vipCartelasPorPartida??1):1;document.getElementById("bingoVipQuantity").value=Math.min(20,Math.max(0,Number.isFinite(qtd)?qtd:1));}
+  catch(e){console.error("CONFIG VIP BINGO:",e)}
+}
+async function salvarConfigBingoVip(){
+  if(!adminUsuario)return mostrarMensagemBingo("❌ Administrador não autenticado.","error");
+  const input=document.getElementById("bingoVipQuantity"),qtd=Math.min(20,Math.max(0,Math.floor(Number(input.value||0))));
+  input.value=qtd;
+  try{await setDoc(doc(db,"bingo","configuracoes"),{vipCartelasPorPartida:qtd,atualizadoEm:serverTimestamp(),atualizadoPor:adminUsuario.email||""},{merge:true});mostrarMensagemBingo(`✅ VIPs receberão ${qtd} cartela${qtd===1?"":"s"} automaticamente por partida.`,"success");}
+  catch(e){console.error(e);mostrarMensagemBingo("❌ Não foi possível salvar a quantidade VIP. "+(e?.code||e?.message||""),"error")}
+}
+
 /* VALE PRESENTE */
 async function gerarNovoVale(){
   const botao=generateVoucherButton;if(botao.disabled)return;
@@ -404,7 +519,7 @@ async function carregarVales(){
 
 async function atualizarTudo(){
   if(!adminUsuario)return;const b=refreshButton;b.disabled=true;b.textContent="🔄 Atualizando...";
-  try{await Promise.all([carregarUsuarios(),carregarEntregas(),carregarVales(),carregarHistoricoDistribuicoes()])}catch(e){console.error(e)}finally{b.disabled=false;b.textContent="🔄 Atualizar"}
+  try{await Promise.all([carregarUsuarios(),carregarEntregas(),carregarVales(),carregarHistoricoDistribuicoes(),carregarBingoCartelas(),carregarConfigBingoVip()])}catch(e){console.error(e)}finally{b.disabled=false;b.textContent="🔄 Atualizar"}
 }
 
 onAuthStateChanged(auth,async usuario=>{
@@ -417,6 +532,7 @@ onAuthStateChanged(auth,async usuario=>{
 document.getElementById("buscar").onclick=buscarUsuario;
 searchInput.onkeydown=e=>{if(e.key==="Enter")buscarUsuario()};
 refreshButton.onclick=atualizarTudo;
+document.getElementById("saveBingoVipQuantity").onclick=()=>salvarConfigBingoVip();
 document.getElementById("adicionar").onclick=()=>alterarSaldo("adicionar");
 document.getElementById("remover").onclick=()=>alterarSaldo("remover");
 document.getElementById("adicionarGiros").onclick=()=>alterarGiros("adicionar");
@@ -425,6 +541,10 @@ document.getElementById("vip").onclick=alterarVIP;
 document.getElementById("box").onclick=alterarCaixa;
 document.getElementById("sendSpecialKeysAll").onclick=()=>distribuirChavesEspeciais("todos");
 document.getElementById("sendSpecialKeysOne").onclick=()=>distribuirChavesEspeciais("um");
+document.getElementById("generateBingoCards").onclick=()=>gerarCartelasBingo(false);
+document.getElementById("generateSendBingoCards").onclick=()=>gerarCartelasBingo(true);
+document.getElementById("sendExistingBingoCard").onclick=enviarCartelaBingoExistente;
+document.getElementById("refreshBingoCards").onclick=carregarBingoCartelas;
 generateVoucherButton.onclick=gerarNovoVale;
 document.getElementById("copyVoucher").onclick=copiarVale;
 document.getElementById("newVoucher").onclick=()=>{document.getElementById("voucherResult").style.display="none";document.getElementById("voucherMessage").className="message";document.getElementById("voucherValor").focus()};
