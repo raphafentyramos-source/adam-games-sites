@@ -1198,7 +1198,7 @@ button{
   display:grid;
 
   grid-template-columns:
-    repeat(5,1fr);
+    repeat(7,1fr);
 
   background:rgba(4,25,52,.96);
 
@@ -1240,6 +1240,15 @@ button{
 
 .nav-button.active{
   color:#1fa2ff;
+}
+
+.nav-button.nav-empty{
+  pointer-events:none;
+  opacity:0;
+}
+
+.nav-button.nav-chat span{
+  font-size:24px;
 }
 
 .diamond{
@@ -2605,7 +2614,6 @@ button{
     type="button">
 
     <span>🏠</span>
-
     Início
 
   </button>
@@ -2617,8 +2625,18 @@ button{
     type="button">
 
     <span>👑</span>
-
     VIP
+
+  </button>
+
+
+  <button
+    class="nav-button nav-chat"
+    id="chatNav"
+    type="button">
+
+    <span>💬</span>
+    Chat
 
   </button>
 
@@ -2643,7 +2661,6 @@ button{
     type="button">
 
     <span>🎟️</span>
-
     Vale
 
   </button>
@@ -2655,8 +2672,18 @@ button{
     type="button">
 
     <span>🎮</span>
-
     Jogos
+
+  </button>
+
+
+  <button
+    class="nav-button nav-empty"
+    id="futureNav"
+    type="button"
+    aria-label="Em breve">
+
+    <span></span>
 
   </button>
 
