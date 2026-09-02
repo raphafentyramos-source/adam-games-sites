@@ -918,6 +918,17 @@ button{
 .chat-panel-card p{margin:4px 0 0;color:#c4d8ec;font-size:13px;line-height:1.35}
 .chat-panel-arrow{width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(22,143,255,.22);font-size:34px;flex:0 0 58px}
 
+
+
+.bingo-panel-card{
+  background:radial-gradient(circle at 90% 10%,rgba(255,211,61,.20),transparent 30%),linear-gradient(135deg,#123e68,#071d39);
+  border-color:rgba(255,211,61,.50);
+}
+.bingo-panel-card .chat-panel-icon{
+  background:rgba(255,211,61,.16);
+  border-color:rgba(255,211,61,.65);
+}
+
 /* =====================================================
    VIP
 ===================================================== */
@@ -2358,6 +2369,20 @@ button{
     <div>
       <h3>CHAT ADAM GAMES</h3>
       <p>Chat Geral, conversas privadas e futuras salas.</p>
+    </div>
+  </div>
+  <div class="chat-panel-arrow">→</div>
+</section>
+
+<!-- =====================================================
+     BINGO ADAM GAMES
+===================================================== -->
+<section class="chat-panel-card bingo-panel-card" id="bingoPanelCard" role="button" tabindex="0">
+  <div class="chat-panel-info">
+    <div class="chat-panel-icon">🎱</div>
+    <div>
+      <h3>BINGO ADAM GAMES</h3>
+      <p>Partidas ao vivo com todos acompanhando o mesmo sorteio.</p>
     </div>
   </div>
   <div class="chat-panel-arrow">→</div>
@@ -6203,6 +6228,19 @@ document.getElementById("chatPanelCard")?.addEventListener("keydown",event=>{
   if(event.key==="Enter" || event.key===" ") abrirChatPagina();
 });
 
+
+
+
+/* =====================================================
+   BINGO
+===================================================== */
+function abrirBingo(){
+  window.location.href="bingo.html";
+}
+document.getElementById("bingoPanelCard")?.addEventListener("click",abrirBingo);
+document.getElementById("bingoPanelCard")?.addEventListener("keydown",event=>{
+  if(event.key==="Enter" || event.key===" ") abrirBingo();
+});
 
 /* =====================================================
    EDITOR

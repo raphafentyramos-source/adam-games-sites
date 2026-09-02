@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Adam Games • Bingo</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;font-family:Arial,Helvetica,sans-serif;background:#061a33;color:#fff}
+body{background:radial-gradient(circle at 50% 0%,#12457d 0,#061a33 55%,#03101f 100%);padding-bottom:30px}
+button,input{font:inherit}
+.page{width:100%;max-width:760px;margin:auto;padding:14px 14px 30px}
+.top{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.back,.min{width:50px;height:50px;border:0;border-radius:17px;background:rgba(18,56,96,.9);color:#fff;font-size:27px;cursor:pointer}
+.title{flex:1}.title h1{font-size:22px}.title p{font-size:12px;color:#91b5d5;margin-top:3px}
+.status{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:15px 16px;border-radius:23px;background:rgba(4,35,69,.9);border:1px solid rgba(72,170,255,.3);box-shadow:0 12px 28px rgba(0,0,0,.22)}
+.live{display:flex;align-items:center;gap:8px;font-weight:900}.dot{width:12px;height:12px;border-radius:50%;background:#28df72;box-shadow:0 0 14px #28df72}.off .dot{background:#7b8a99;box-shadow:none}
+.players{color:#9ec5e4;font-size:13px;text-align:right}
+.hero{margin-top:14px;padding:22px;border-radius:28px;background:linear-gradient(145deg,#0b3769,#08264a);border:1px solid rgba(69,171,255,.35);text-align:center}
+.hero small{color:#9ec7e6;font-weight:700}.number{font-size:76px;line-height:1;font-weight:1000;margin:8px 0;color:#ffd33d;text-shadow:0 5px 18px rgba(0,0,0,.35)}
+.number.wait{font-size:28px;color:#8fb2d0;margin:28px 0}
+.history{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;margin-top:13px}.ball{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#143e68;border:1px solid rgba(255,255,255,.12);font-weight:900;font-size:12px}.ball.last{background:#ffd33d;color:#17314c}
+.cardbox{margin-top:14px;padding:17px;border-radius:26px;background:rgba(4,30,59,.92);border:1px solid rgba(255,255,255,.1)}
+.cardhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px}.cardhead h2{font-size:18px}.cardhead span{font-size:12px;color:#9ec5e4}
+.bingo-card{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}.cell{aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;border-radius:12px;background:#123a63;border:1px solid rgba(255,255,255,.08);font-size:17px;font-weight:900;color:#e8f4ff}.cell.head{background:#1b76ba;color:#fff;font-size:13px}.cell.marked{background:#ffd33d;color:#10253d;border-color:#ffe88a;box-shadow:0 0 15px rgba(255,211,61,.25)}.cell.free{background:#7a49d4;color:#fff}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}.action{min-height:52px;border:0;border-radius:16px;color:#fff;font-weight:900;cursor:pointer;background:#14508a}.action.primary{background:linear-gradient(135deg,#ffcf31,#e69709)}.action.danger{background:linear-gradient(135deg,#e64c62,#a92139)}.action:disabled{opacity:.45;cursor:not-allowed}
+.info{margin-top:14px;padding:15px 16px;border-radius:20px;background:rgba(7,38,70,.8);border:1px solid rgba(255,255,255,.08);color:#b8d0e6;font-size:13px;line-height:1.5}.info strong{color:#fff}
+.admin{display:none;margin-top:14px;padding:16px;border-radius:23px;background:rgba(52,28,5,.92);border:1px solid rgba(255,204,51,.45)}.admin.show{display:block}.admin h3{color:#ffd33d;margin-bottom:11px}.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.admin button{width:100%;min-height:48px;border:0;border-radius:14px;color:#fff;font-weight:900;cursor:pointer;background:#24547c}.admin button.start{background:linear-gradient(135deg,#25b866,#0f7c42)}.admin button.draw{background:linear-gradient(135deg,#ffd43a,#d98a08)}.admin button.finish{background:linear-gradient(135deg,#e74f62,#a6233a)}
+.winner{display:none;margin-top:14px;padding:20px;border-radius:24px;text-align:center;background:linear-gradient(145deg,#51318e,#241648);border:1px solid rgba(207,174,255,.45)}.winner.show{display:block}.winner .trophy{font-size:44px}.winner h2{color:#ffd33d;margin:5px 0}.winner p{color:#d6c8ed}
+.message{margin-top:12px;text-align:center;color:#ffb7b7;font-size:13px;min-height:18px}
+@media(max-width:430px){.page{padding:10px}.number{font-size:68px}.cell{border-radius:9px;font-size:15px}.actions{grid-template-columns:1fr}.admin-grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="top">
+    <button class="back" id="backBtn">←</button>
+    <div class="title"><h1>🎱 Bingo Adam Games</h1><p>Todos acompanham a mesma partida ao vivo</p></div>
+    <button class="min" id="minBtn">—</button>
+  </div>
+
+  <div class="status">
+    <div class="live" id="liveStatus"><span class="dot"></span><span>AGUARDANDO</span></div>
+    <div class="players" id="playersCount">0 jogadores</div>
+  </div>
+
+  <section class="hero">
+    <small id="roundText">PRÓXIMA PARTIDA</small>
+    <div class="number wait" id="number">Aguardando o início...</div>
+    <div class="history" id="history"></div>
+  </section>
+
+  <section class="cardbox">
+    <div class="cardhead"><h2>🎟️ Minha cartela</h2><span id="cardStatus">Entre na partida</span></div>
+    <div class="bingo-card" id="card"></div>
+    <div class="actions">
+      <button class="action primary" id="joinBtn">🎟️ ENTRAR NA PARTIDA</button>
+      <button class="action" id="leaveBtn">Sair da partida</button>
+    </div>
+  </section>
+
+  <div class="winner" id="winner"><div class="trophy">🏆</div><h2>BINGO!</h2><p id="winnerText"></p></div>
+  <div class="message" id="message"></div>
+
+  <section class="info">
+    <strong>Como funciona:</strong><br>
+    Entre na partida e sua cartela é criada automaticamente. Os números são sorteados para todos ao mesmo tempo e sua cartela é marcada automaticamente. Quando completar uma linha ou a cartela, o sistema registra o vencedor.
+  </section>
+
+  <section class="admin" id="adminBox">
+    <h3>👑 Controle do Bingo</h3>
+    <div class="admin-grid">
+      <button class="start" id="startBtn">▶️ NOVA PARTIDA</button>
+      <button class="draw" id="drawBtn">🎱 SORTEAR</button>
+      <button class="finish" id="finishBtn">⏹️ ENCERRAR</button>
+      <button id="clearBtn">🧹 LIMPAR SALA</button>
+    </div>
+  </section>
+</div>
+
+<script type="module">
+import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc, updateDoc, deleteDoc, collection, query, onSnapshot, runTransaction, serverTimestamp, getDocs } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+const firebaseConfig={apiKey:"AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",authDomain:"adam-games-21081.firebaseapp.com",projectId:"adam-games-21081",storageBucket:"adam-games-21081.firebasestorage.app",messagingSenderId:"1055528418738",appId:"1:1055528418738:web:5fafdf63424ba9744eb8ab",measurementId:"G-KVFSF864GE"};
+const ADMIN_EMAIL="raphafentyramos@gmail.com";
+const app=getApps().length?getApp():initializeApp(firebaseConfig);
+const auth=getAuth(app), db=getFirestore(app);
+const salaRef=doc(db,"bingo","salaPrincipal");
+const playersRef=collection(db,"bingo","salaPrincipal","jogadores");
+let user=null, playerRef=null, playerData=null, gameData=null, unsubGame=null, unsubPlayers=null;
+
+const $=id=>document.getElementById(id);
+const msg=t=>{$("message").textContent=t||""};
+function back(){window.location.href="painel.html"}
+$("backBtn").onclick=back; $("minBtn").onclick=back;
+
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function makeCard(){
+  const ranges=[[1,15],[16,30],[31,45],[46,60],[61,75]], nums=[];
+  for(const [min,max] of ranges){const a=[];for(let n=min;n<=max;n++)a.push(n);nums.push(shuffle(a).slice(0,5))}
+  const grid=[]; for(let r=0;r<5;r++){for(let c=0;c<5;c++){grid.push(r===2&&c===2?0:nums[c][r])}}
+  return grid;
+}
+function markedNumbers(){return new Set(gameData?.drawn||[])}
+function hasLine(card,set){
+  for(let r=0;r<5;r++){let ok=true;for(let c=0;c<5;c++){const v=card[r*5+c];if(v!==0&&!set.has(v))ok=false}if(ok)return true}
+  for(let c=0;c<5;c++){let ok=true;for(let r=0;r<5;r++){const v=card[r*5+c];if(v!==0&&!set.has(v))ok=false}if(ok)return true}
+  return false;
+}
+function hasFull(card,set){return card.every(v=>v===0||set.has(v))}
+function renderCard(){
+  const root=$("card"); root.innerHTML="";
+  ["B","I","N","G","O"].forEach(x=>{const d=document.createElement("div");d.className="cell head";d.textContent=x;root.appendChild(d)});
+  const set=markedNumbers(); const card=playerData?.card||[];
+  for(let i=0;i<25;i++){const d=document.createElement("div");const v=card[i];d.className="cell";d.textContent=v===0?"★":v;if(v===0)d.classList.add("free");if(v!==0&&set.has(v))d.classList.add("marked");root.appendChild(d)}
+  $("cardStatus").textContent=playerData?`Rodada ${playerData.round||1}`:"Entre na partida";
+}
+function renderGame(){
+  const g=gameData||{status:"waiting",drawn:[],round:1};
+  const active=g.status==="playing";
+  $("liveStatus").className="live"+(active?"":" off"); $("liveStatus").innerHTML=`<span class="dot"></span><span>${active?"AO VIVO":g.status==="finished"?"ENCERRADO":"AGUARDANDO"}</span>`;
+  $("roundText").textContent=active?`RODADA ${g.round||1}`:g.status==="finished"?"PARTIDA ENCERRADA":"PRÓXIMA PARTIDA";
+  const n=g.drawn?.length?g.drawn[g.drawn.length-1]:null; const ne=$("number"); ne.textContent=n||"Aguardando o início..."; ne.className="number"+(n?"":" wait");
+  const hist=$("history");hist.innerHTML="";(g.drawn||[]).slice(-12).reverse().forEach((x,i)=>{const d=document.createElement("div");d.className="ball"+(i===0?" last":"");d.textContent=x;hist.appendChild(d)});
+  $("winner").classList.toggle("show",!!g.winner); if(g.winner)$("winnerText").textContent=`Vencedor: ${g.winner.nome||g.winner.uid||"Jogador"}`+(g.winner.premio?` • ${g.winner.premio}`:"");
+  $("joinBtn").disabled=!user||g.status==="finished"; $("leaveBtn").disabled=!playerData;
+  if(g.status==="waiting")msg("Aguarde o administrador iniciar a partida.");else if(g.status==="finished")msg("Esta partida terminou. Aguarde a próxima.");else msg("");
+  renderCard();
+}
+
+async function ensureGame(){const s=await getDoc(salaRef);if(!s.exists())await setDoc(salaRef,{status:"waiting",round:1,drawn:[],winner:null,prize:"",createdAt:serverTimestamp()})}
+async function join(){
+  if(!user)return msg("Faça login para participar."); if(gameData?.status==="finished")return msg("A partida já terminou.");
+  playerRef=doc(db,"bingo","salaPrincipal","jogadores",user.uid);
+  const snap=await getDoc(playerRef); const current=snap.exists()?snap.data():null; const round=gameData?.round||1;
+  if(current?.round===round){playerData=current;renderGame();return}
+  const card=makeCard(); playerData={uid:user.uid,nome:user.displayName||user.email?.split("@")[0]||"Jogador",email:user.email||"",card,round,joinedAt:serverTimestamp()};
+  await setDoc(playerRef,playerData); msg("Você entrou na partida!");
+}
+async function leave(){if(!playerRef)return;await deleteDoc(playerRef);playerRef=null;playerData=null;renderGame();msg("Você saiu da partida.")}
+
+async function startGame(){
+  await runTransaction(db,async tx=>{const s=await tx.get(salaRef);const old=s.exists()?s.data():{};tx.set(salaRef,{status:"playing",round:(old.round||0)+1,drawn:[],winner:null,prize:"",startedAt:serverTimestamp(),createdAt:old.createdAt||serverTimestamp()})});
+  msg("Nova partida iniciada.");
+}
+async function drawNumber(){
+  await runTransaction(db,async tx=>{
+    const s=await tx.get(salaRef); if(!s.exists())throw new Error("Sala não criada."); const g=s.data(); if(g.status!=="playing")throw new Error("A partida não está ativa."); if(g.winner)throw new Error("Já existe vencedor.");
+    const drawn=g.drawn||[]; const available=[];for(let n=1;n<=75;n++)if(!drawn.includes(n))available.push(n);if(!available.length)throw new Error("Todos os números foram sorteados.");const n=available[Math.floor(Math.random()*available.length)];tx.update(salaRef,{drawn:[...drawn,n],lastDraw:n,lastDrawAt:serverTimestamp()});
+  });
+}
+async function finish(){await updateDoc(salaRef,{status:"finished",finishedAt:serverTimestamp()})}
+async function clearRoom(){const snaps=await getDocs(playersRef);for(const d of snaps.docs)await deleteDoc(d.ref);await setDoc(salaRef,{status:"waiting",round:0,drawn:[],winner:null,prize:"",createdAt:serverTimestamp()});msg("Sala limpa.")}
+
+async function checkWinner(){
+  if(!playerData||!gameData||gameData.status!=="playing"||gameData.winner)return;
+  const set=markedNumbers(); if(!hasLine(playerData.card,set))return;
+  try{await runTransaction(db,async tx=>{const s=await tx.get(salaRef);if(!s.exists())return;const g=s.data();if(g.status!=="playing"||g.winner)return;tx.update(salaRef,{winner:{uid:user.uid,nome:playerData.nome,premio:g.prize||"Bingo"},status:"finished",finishedAt:serverTimestamp()})})}catch(e){console.error(e)}
+}
+
+function setupListeners(){
+  unsubGame?.();unsubPlayers?.();
+  unsubGame=onSnapshot(salaRef,s=>{gameData=s.exists()?s.data():{status:"waiting",round:0,drawn:[]};renderGame();checkWinner()});
+  unsubPlayers=onSnapshot(playersRef,s=>{$("playersCount").textContent=`${s.size} jogador${s.size===1?"":"es"}`});
+}
+
+onAuthStateChanged(auth,async u=>{
+  user=u; if(!u){msg("Faça login para participar do Bingo.");renderGame();return}
+  await ensureGame(); setupListeners(); playerRef=doc(db,"bingo","salaPrincipal","jogadores",u.uid); const p=await getDoc(playerRef); playerData=p.exists()?p.data():null;
+  if(u.email===ADMIN_EMAIL){$("adminBox").classList.add("show")}
+  renderGame();
+});
+
+$("joinBtn").onclick=()=>join().catch(e=>msg(e.message));
+$("leaveBtn").onclick=()=>leave().catch(e=>msg(e.message));
+$("startBtn").onclick=()=>startGame().catch(e=>msg(e.message));
+$("drawBtn").onclick=()=>drawNumber().catch(e=>msg(e.message));
+$("finishBtn").onclick=()=>finish().catch(e=>msg(e.message));
+$("clearBtn").onclick=()=>clearRoom().catch(e=>msg(e.message));
+</script>
+</body>
+</html>
