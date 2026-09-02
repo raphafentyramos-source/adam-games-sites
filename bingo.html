@@ -17,18 +17,19 @@ button,input{font:inherit}
 .live{display:flex;align-items:center;gap:8px;font-weight:900}.dot{width:12px;height:12px;border-radius:50%;background:#28df72;box-shadow:0 0 14px #28df72}.off .dot{background:#7b8a99;box-shadow:none}
 .players{color:#9ec5e4;font-size:13px;text-align:right}
 .hero{margin-top:14px;padding:22px;border-radius:28px;background:linear-gradient(145deg,#0b3769,#08264a);border:1px solid rgba(69,171,255,.35);text-align:center}
-.hero small{color:#9ec7e6;font-weight:700}.number{font-size:76px;line-height:1;font-weight:1000;margin:8px 0;color:#ffd33d;text-shadow:0 5px 18px rgba(0,0,0,.35)}
-.number.wait{font-size:28px;color:#8fb2d0;margin:28px 0}
+.hero small{color:#9ec7e6;font-weight:700}.number{font-size:76px;line-height:1;font-weight:1000;margin:8px 0;color:#ffd33d;text-shadow:0 5px 18px rgba(0,0,0,.35)}.number.wait{font-size:28px;color:#8fb2d0;margin:28px 0}
 .history{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;margin-top:13px}.ball{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#143e68;border:1px solid rgba(255,255,255,.12);font-weight:900;font-size:12px}.ball.last{background:#ffd33d;color:#17314c}
-.cardbox{margin-top:14px;padding:17px;border-radius:26px;background:rgba(4,30,59,.92);border:1px solid rgba(255,255,255,.1)}
-.cardhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px}.cardhead h2{font-size:18px}.cardhead span{font-size:12px;color:#9ec5e4}
-.bingo-card{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}.cell{aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;border-radius:12px;background:#123a63;border:1px solid rgba(255,255,255,.08);font-size:17px;font-weight:900;color:#e8f4ff}.cell.head{background:#1b76ba;color:#fff;font-size:13px}.cell.marked{background:#ffd33d;color:#10253d;border-color:#ffe88a;box-shadow:0 0 15px rgba(255,211,61,.25)}.cell.free{background:#7a49d4;color:#fff}
-.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}.action{min-height:52px;border:0;border-radius:16px;color:#fff;font-weight:900;cursor:pointer;background:#14508a}.action.primary{background:linear-gradient(135deg,#ffcf31,#e69709)}.action.danger{background:linear-gradient(135deg,#e64c62,#a92139)}.action:disabled{opacity:.45;cursor:not-allowed}
+.cards-box{margin-top:14px;padding:17px;border-radius:26px;background:rgba(4,30,59,.92);border:1px solid rgba(255,255,255,.1)}
+.cards-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:13px}.cards-head h2{font-size:18px}.cards-head p{font-size:12px;color:#8fb5d2;margin-top:4px}.cards-count{padding:8px 11px;border-radius:13px;background:rgba(255,211,61,.12);color:#ffd33d;font-weight:900;font-size:12px;white-space:nowrap}
+.my-cards{display:grid;gap:14px}.my-card{padding:13px;border-radius:20px;background:rgba(8,46,82,.9);border:1px solid rgba(255,255,255,.08)}.my-card-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}.card-code{font-size:12px;font-weight:900;color:#ffd33d}.card-round{font-size:10px;color:#8fb5d2}
+.bingo-card{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}.cell{aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;border-radius:10px;background:#123a63;border:1px solid rgba(255,255,255,.08);font-size:16px;font-weight:900;color:#e8f4ff}.cell.head{background:#1b76ba;color:#fff;font-size:12px}.cell.marked{background:#ffd33d;color:#10253d;border-color:#ffe88a;box-shadow:0 0 15px rgba(255,211,61,.25)}.cell.free{background:#7a49d4;color:#fff}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}.action{min-height:52px;border:0;border-radius:16px;color:#fff;font-weight:900;cursor:pointer;background:#14508a}.action.primary{background:linear-gradient(135deg,#ffcf31,#e69709);color:#13243a}.action.danger{background:linear-gradient(135deg,#e64c62,#a92139)}.action:disabled{opacity:.45;cursor:not-allowed}
 .info{margin-top:14px;padding:15px 16px;border-radius:20px;background:rgba(7,38,70,.8);border:1px solid rgba(255,255,255,.08);color:#b8d0e6;font-size:13px;line-height:1.5}.info strong{color:#fff}
-.admin{display:none;margin-top:14px;padding:16px;border-radius:23px;background:rgba(52,28,5,.92);border:1px solid rgba(255,204,51,.45)}.admin.show{display:block}.admin h3{color:#ffd33d;margin-bottom:11px}.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.admin button{width:100%;min-height:48px;border:0;border-radius:14px;color:#fff;font-weight:900;cursor:pointer;background:#24547c}.admin button.start{background:linear-gradient(135deg,#25b866,#0f7c42)}.admin button.draw{background:linear-gradient(135deg,#ffd43a,#d98a08)}.admin button.finish{background:linear-gradient(135deg,#e74f62,#a6233a)}
-.winner{display:none;margin-top:14px;padding:20px;border-radius:24px;text-align:center;background:linear-gradient(145deg,#51318e,#241648);border:1px solid rgba(207,174,255,.45)}.winner.show{display:block}.winner .trophy{font-size:44px}.winner h2{color:#ffd33d;margin:5px 0}.winner p{color:#d6c8ed}
+.admin{display:none;margin-top:14px;padding:16px;border-radius:23px;background:rgba(52,28,5,.92);border:1px solid rgba(255,204,51,.45)}.admin.show{display:block}.admin h3{color:#ffd33d;margin-bottom:11px}.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.admin button{width:100%;min-height:48px;border:0;border-radius:14px;color:#fff;font-weight:900;cursor:pointer;background:#24547c}.admin button.start{background:linear-gradient(135deg,#25b866,#0f7c42)}.admin button.draw{background:linear-gradient(135deg,#ffd43a,#d98a08);color:#13243a}.admin button.finish{background:linear-gradient(135deg,#e74f62,#a6233a)}
+.config{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:12px 0}.config label{font-size:11px;color:#a9c7df;font-weight:800}.config input,.config select{width:100%;margin-top:5px;min-height:44px;border:1px solid rgba(255,255,255,.14);border-radius:12px;background:#082746;color:#fff;padding:9px 10px}.config .full{grid-column:1/-1}.match-info{margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px}.match-pill{padding:10px;border-radius:13px;background:rgba(255,211,61,.08);border:1px solid rgba(255,211,61,.18);font-size:11px;color:#b9d2e7}.match-pill strong{display:block;color:#ffd33d;margin-top:3px;font-size:13px}.bingo-chat{margin-top:14px;padding:16px;border-radius:24px;background:rgba(4,30,59,.92);border:1px solid rgba(255,255,255,.1)}.chat-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.chat-head h2{font-size:18px}.chat-head span{font-size:11px;color:#8fb5d2}.chat-log{height:210px;overflow:auto;margin-top:12px;padding:10px;border-radius:15px;background:#061b32}.chat-msg{padding:7px 4px;border-bottom:1px solid rgba(255,255,255,.05);font-size:12px}.chat-msg b{color:#ffd33d}.chat-msg small{color:#6f91ad;margin-left:5px}.chat-form{display:flex;gap:8px;margin-top:9px}.chat-form input{flex:1;min-width:0;border:1px solid rgba(255,255,255,.14);border-radius:13px;background:#082746;color:#fff;padding:11px}.chat-form button{width:52px;border:0;border-radius:13px;background:#1c72b5;color:#fff;font-weight:900}.chat-off{padding:12px;text-align:center;color:#8fb5d2;font-size:12px}.winner{display:none;margin-top:14px;padding:20px;border-radius:24px;text-align:center;background:linear-gradient(145deg,#51318e,#241648);border:1px solid rgba(207,174,255,.45)}.winner.show{display:block}.winner .trophy{font-size:44px}.winner h2{color:#ffd33d;margin:5px 0}.winner p{color:#d6c8ed}
 .message{margin-top:12px;text-align:center;color:#ffb7b7;font-size:13px;min-height:18px}
-@media(max-width:430px){.page{padding:10px}.number{font-size:68px}.cell{border-radius:9px;font-size:15px}.actions{grid-template-columns:1fr}.admin-grid{grid-template-columns:1fr 1fr}}
+.empty{padding:18px;text-align:center;color:#8eafc9;border:1px dashed rgba(255,255,255,.12);border-radius:16px}
+@media(max-width:430px){.page{padding:10px}.number{font-size:68px}.cell{border-radius:8px;font-size:14px}.actions{grid-template-columns:1fr}.admin-grid{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
@@ -50,9 +51,12 @@ button,input{font:inherit}
     <div class="history" id="history"></div>
   </section>
 
-  <section class="cardbox">
-    <div class="cardhead"><h2>🎟️ Minha cartela</h2><span id="cardStatus">Entre na partida</span></div>
-    <div class="bingo-card" id="card"></div>
+  <section class="cards-box">
+    <div class="cards-head">
+      <div><h2>🎟️ Minhas cartelas</h2><p>As cartelas enviadas pelo ADM aparecem aqui.</p></div>
+      <div class="cards-count" id="cardsCount">0 cartelas</div>
+    </div>
+    <div class="my-cards" id="myCards"><div class="empty">Entre na partida para receber uma cartela.</div></div>
     <div class="actions">
       <button class="action primary" id="joinBtn">🎟️ ENTRAR NA PARTIDA</button>
       <button class="action" id="leaveBtn">Sair da partida</button>
@@ -61,19 +65,30 @@ button,input{font:inherit}
 
   <div class="winner" id="winner"><div class="trophy">🏆</div><h2>BINGO!</h2><p id="winnerText"></p></div>
   <div class="message" id="message"></div>
+  <div class="match-info"><div class="match-pill">🏆 Vitória<strong id="winTypeText">1 linha</strong></div><div class="match-pill">🎁 Prêmio<strong id="prizeText">A definir</strong></div></div>
+  <section class="bingo-chat" id="bingoChat"><div class="chat-head"><h2>💬 Chat da partida</h2><span id="chatStatus">Ao vivo</span></div><div class="chat-log" id="chatLog"><div class="chat-off">O chat aparecerá quando a partida estiver disponível.</div></div><div class="chat-form"><input id="chatInput" maxlength="180" placeholder="Escreva uma mensagem..."><button id="chatSend">➤</button></div></section>
 
   <section class="info">
     <strong>Como funciona:</strong><br>
-    Entre na partida e sua cartela é criada automaticamente. Os números são sorteados para todos ao mesmo tempo e sua cartela é marcada automaticamente. Quando completar uma linha ou a cartela, o sistema registra o vencedor.
+    O ADM pode enviar cartelas prontas ou gerar automaticamente. Quando você entra na partida, suas cartelas da rodada ficam disponíveis aqui. Os números são sorteados para todos ao mesmo tempo e são marcados automaticamente. Se qualquer uma das suas cartelas completar o objetivo, o sistema registra o vencedor.
   </section>
 
   <section class="admin" id="adminBox">
     <h3>👑 Controle do Bingo</h3>
+    <div class="config">
+      <label>Tipo de vitória
+        <select id="winType"><option value="1linha">1 linha</option><option value="2linhas">2 linhas</option><option value="cheia">Cartela cheia</option></select>
+      </label>
+      <label>Chat da partida
+        <select id="chatEnabled"><option value="sim">Ativado</option><option value="nao">Desativado</option></select>
+      </label>
+      <label class="full">🎁 Prêmio da partida
+        <input id="prizeInput" maxlength="120" placeholder="Ex.: R$ 50 em compras na Adam Games">
+      </label>
+    </div>
     <div class="admin-grid">
-      <button class="start" id="startBtn">▶️ NOVA PARTIDA</button>
-      <button class="draw" id="drawBtn">🎱 SORTEAR</button>
-      <button class="finish" id="finishBtn">⏹️ ENCERRAR</button>
-      <button id="clearBtn">🧹 LIMPAR SALA</button>
+      <button class="start" id="startBtn">▶️ NOVA PARTIDA</button><button class="draw" id="drawBtn">🎱 SORTEAR</button>
+      <button class="finish" id="finishBtn">⏹️ ENCERRAR</button><button id="clearBtn">🧹 LIMPAR SALA</button><button id="clearChatBtn">🧹 LIMPAR CHAT</button>
     </div>
   </section>
 </div>
@@ -81,7 +96,7 @@ button,input{font:inherit}
 <script type="module">
 import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-import { getFirestore, doc, getDoc, setDoc, updateDoc, deleteDoc, collection, query, onSnapshot, runTransaction, serverTimestamp, getDocs } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+import { getFirestore, doc, getDoc, setDoc, updateDoc, deleteDoc, collection, query, where, onSnapshot, runTransaction, serverTimestamp, getDocs } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 const firebaseConfig={apiKey:"AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",authDomain:"adam-games-21081.firebaseapp.com",projectId:"adam-games-21081",storageBucket:"adam-games-21081.firebasestorage.app",messagingSenderId:"1055528418738",appId:"1:1055528418738:web:5fafdf63424ba9744eb8ab",measurementId:"G-KVFSF864GE"};
 const ADMIN_EMAIL="raphafentyramos@gmail.com";
@@ -89,7 +104,8 @@ const app=getApps().length?getApp():initializeApp(firebaseConfig);
 const auth=getAuth(app), db=getFirestore(app);
 const salaRef=doc(db,"bingo","salaPrincipal");
 const playersRef=collection(db,"bingo","salaPrincipal","jogadores");
-let user=null, playerRef=null, playerData=null, gameData=null, unsubGame=null, unsubPlayers=null;
+const cardsRef=collection(db,"bingoCartelas");
+let user=null, playerRef=null, playerData=null, gameData=null, myCards=[], unsubGame=null, unsubPlayers=null, unsubCards=null, perfilUsuario=null;
 
 const $=id=>document.getElementById(id);
 const msg=t=>{$("message").textContent=t||""};
@@ -100,9 +116,10 @@ function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random
 function makeCard(){
   const ranges=[[1,15],[16,30],[31,45],[46,60],[61,75]], nums=[];
   for(const [min,max] of ranges){const a=[];for(let n=min;n<=max;n++)a.push(n);nums.push(shuffle(a).slice(0,5))}
-  const grid=[]; for(let r=0;r<5;r++){for(let c=0;c<5;c++){grid.push(r===2&&c===2?0:nums[c][r])}}
+  const grid=[];for(let r=0;r<5;r++){for(let c=0;c<5;c++){grid.push(r===2&&c===2?0:nums[c][r])}}
   return grid;
 }
+function cardSignature(card){return card.join("-")}
 function markedNumbers(){return new Set(gameData?.drawn||[])}
 function hasLine(card,set){
   for(let r=0;r<5;r++){let ok=true;for(let c=0;c<5;c++){const v=card[r*5+c];if(v!==0&&!set.has(v))ok=false}if(ok)return true}
@@ -110,75 +127,120 @@ function hasLine(card,set){
   return false;
 }
 function hasFull(card,set){return card.every(v=>v===0||set.has(v))}
-function renderCard(){
-  const root=$("card"); root.innerHTML="";
-  ["B","I","N","G","O"].forEach(x=>{const d=document.createElement("div");d.className="cell head";d.textContent=x;root.appendChild(d)});
-  const set=markedNumbers(); const card=playerData?.card||[];
-  for(let i=0;i<25;i++){const d=document.createElement("div");const v=card[i];d.className="cell";d.textContent=v===0?"★":v;if(v===0)d.classList.add("free");if(v!==0&&set.has(v))d.classList.add("marked");root.appendChild(d)}
-  $("cardStatus").textContent=playerData?`Rodada ${playerData.round||1}`:"Entre na partida";
+function renderOneCard(root,card){
+  root.innerHTML="";["B","I","N","G","O"].forEach(x=>{const d=document.createElement("div");d.className="cell head";d.textContent=x;root.appendChild(d)});
+  const set=markedNumbers();
+  for(let i=0;i<25;i++){const d=document.createElement("div"),v=card[i];d.className="cell";d.textContent=v===0?"★":v;if(v===0)d.classList.add("free");if(v!==0&&set.has(v))d.classList.add("marked");root.appendChild(d)}
+}
+function renderCards(){
+  const root=$("myCards");
+  const round=gameData?.round||0;
+  const visible=myCards.filter(c=>Number(c.round)===Number(round));
+  $("cardsCount").textContent=`${visible.length} cartela${visible.length===1?"":"s"}`;
+  root.innerHTML="";
+  if(!visible.length){root.innerHTML=`<div class="empty">${gameData?.status==="playing"?(perfilUsuario?.vip===true?"Nenhuma cartela enviada para esta rodada. Ao entrar, sua cartela será gerada automaticamente por ser VIP.":"Você não possui cartela nesta rodada. A geração automática é exclusiva para VIPs."):"Nenhuma cartela desta rodada ainda."}</div>`;return}
+  visible.forEach((c,i)=>{
+    const box=document.createElement("div");box.className="my-card";
+    box.innerHTML=`<div class="my-card-top"><span class="card-code">🎟️ ${c.codigo||"Cartela "+(i+1)}</span><span class="card-round">Rodada ${c.round}</span></div><div class="bingo-card" id="card_${i}"></div>`;
+    root.appendChild(box);renderOneCard(box.querySelector(".bingo-card"),c.card||[]);
+  });
 }
 function renderGame(){
-  const g=gameData||{status:"waiting",drawn:[],round:1};
-  const active=g.status==="playing";
-  $("liveStatus").className="live"+(active?"":" off"); $("liveStatus").innerHTML=`<span class="dot"></span><span>${active?"AO VIVO":g.status==="finished"?"ENCERRADO":"AGUARDANDO"}</span>`;
-  $("roundText").textContent=active?`RODADA ${g.round||1}`:g.status==="finished"?"PARTIDA ENCERRADA":"PRÓXIMA PARTIDA";
-  const n=g.drawn?.length?g.drawn[g.drawn.length-1]:null; const ne=$("number"); ne.textContent=n||"Aguardando o início..."; ne.className="number"+(n?"":" wait");
+  const g=gameData||{status:"waiting",drawn:[],round:0};const active=g.status==="playing";
+  $("liveStatus").className="live"+(active?"":" off");$("liveStatus").innerHTML=`<span class="dot"></span><span>${active?"AO VIVO":g.status==="finished"?"ENCERRADO":"AGUARDANDO"}</span>`;
+  $("roundText").textContent=active?`RODADA ${g.round||1}`:g.status==="finished"?"PARTIDA ENCERRADA":`PRÓXIMA PARTIDA • RODADA ${Number(g.round||0)+1}`;
+  const n=g.drawn?.length?g.drawn[g.drawn.length-1]:null,ne=$("number");ne.textContent=n||"Aguardando o início...";ne.className="number"+(n?"":" wait");
   const hist=$("history");hist.innerHTML="";(g.drawn||[]).slice(-12).reverse().forEach((x,i)=>{const d=document.createElement("div");d.className="ball"+(i===0?" last":"");d.textContent=x;hist.appendChild(d)});
-  $("winner").classList.toggle("show",!!g.winner); if(g.winner)$("winnerText").textContent=`Vencedor: ${g.winner.nome||g.winner.uid||"Jogador"}`+(g.winner.premio?` • ${g.winner.premio}`:"");
-  $("joinBtn").disabled=!user||g.status==="finished"; $("leaveBtn").disabled=!playerData;
+  $("winner").classList.toggle("show",!!g.winner);if(g.winner)$("winnerText").textContent=`Vencedor: ${g.winner.nome||g.winner.uid||"Jogador"}`+(g.winner.cartela?` • Cartela ${g.winner.cartela}`:"")+(g.winner.premio?` • Prêmio: ${g.winner.premio}`:"");
+  const wt={"1linha":"1 linha","2linhas":"2 linhas","cheia":"Cartela cheia"}[g.winType||"1linha"]||"1 linha";$("winTypeText").textContent=wt;$("prizeText").textContent=g.prize||"A definir";$("bingoChat").style.display=g.chatEnabled===false?"none":"block";
+  if(user&&user.email===ADMIN_EMAIL){$("winType").value=g.winType||"1linha";$("prizeInput").value=g.prize||"";$("chatEnabled").value=g.chatEnabled===false?"nao":"sim";}
+  $("joinBtn").disabled=!user||g.status!=="playing";$("leaveBtn").disabled=!playerData;
   if(g.status==="waiting")msg("Aguarde o administrador iniciar a partida.");else if(g.status==="finished")msg("Esta partida terminou. Aguarde a próxima.");else msg("");
-  renderCard();
+  renderCards();
+}
+async function ensureGame(){const s=await getDoc(salaRef);if(!s.exists())await setDoc(salaRef,{status:"waiting",round:0,drawn:[],winner:null,prize:"",winType:"1linha",chatEnabled:true,createdAt:serverTimestamp()})}
+async function loadMyCards(){
+  if(!user)return;try{
+    const r=await getDocs(query(cardsRef,where("usuarioUid","==",user.uid)));
+    myCards=r.docs.map(d=>({id:d.id,...d.data()}));renderCards();
+  }catch(e){console.error("CARTELAS:",e);myCards=[];renderCards();msg(e?.code==="permission-denied"?"Sem permissão para carregar suas cartelas. Verifique as Rules do Firestore.":"Não foi possível carregar suas cartelas.")}
+}
+async function carregarPerfilUsuario(){
+  if(!user)return null;
+  try{
+    let snap=await getDoc(doc(db,"admins",user.uid));
+    if(snap.exists()) return {ref:snap.ref,...snap.data()};
+    const r=await getDocs(query(collection(db,"admins"),where("uid","==",user.uid)));
+    if(!r.empty) return {ref:r.docs[0].ref,...r.docs[0].data()};
+  }catch(e){console.error("PERFIL BINGO:",e)}
+  return null;
 }
 
-async function ensureGame(){const s=await getDoc(salaRef);if(!s.exists())await setDoc(salaRef,{status:"waiting",round:1,drawn:[],winner:null,prize:"",createdAt:serverTimestamp()})}
+async function autoCreateCardForUser(round){
+  if(perfilUsuario?.vip!==true) throw new Error("A cartela automática é exclusiva para usuários VIP.");
+  const card=makeCard(),codigo="BG-"+Date.now().toString(36).toUpperCase()+"-"+Math.floor(Math.random()*1000).toString().padStart(3,"0");
+  const ref=doc(cardsRef,codigo);
+  await setDoc(ref,{codigo,card,round,status:"assigned",usuarioUid:user.uid,usuarioId:perfilUsuario?.publicId||"",usuarioNome:perfilUsuario?.nome||user.displayName||"Jogador",createdAt:serverTimestamp(),createdBy:"automatico_vip"});
+  return {id:codigo,codigo,card,round,status:"assigned",usuarioUid:user.uid};
+}
 async function join(){
-  if(!user)return msg("Faça login para participar."); if(gameData?.status==="finished")return msg("A partida já terminou.");
-  playerRef=doc(db,"bingo","salaPrincipal","jogadores",user.uid);
-  const snap=await getDoc(playerRef); const current=snap.exists()?snap.data():null; const round=gameData?.round||1;
-  if(current?.round===round){playerData=current;renderGame();return}
-  const card=makeCard(); playerData={uid:user.uid,nome:user.displayName||user.email?.split("@")[0]||"Jogador",email:user.email||"",card,round,joinedAt:serverTimestamp()};
-  await setDoc(playerRef,playerData); msg("Você entrou na partida!");
+  if(!user)return msg("Faça login para participar.");if(gameData?.status!=="playing")return msg("Aguarde o administrador iniciar a partida.");
+  perfilUsuario=perfilUsuario||await carregarPerfilUsuario();
+  playerRef=doc(db,"bingo","salaPrincipal","jogadores",user.uid);const snap=await getDoc(playerRef),current=snap.exists()?snap.data():null,round=gameData.round||1;
+  await loadMyCards();let cards=myCards.filter(c=>Number(c.round)===Number(round));
+  if(!cards.length){
+    if(perfilUsuario?.vip!==true){
+      playerData=null;
+      return msg("🔒 Você não possui cartela nesta rodada. A cartela automática é exclusiva para VIPs.");
+    }
+    const generated=await autoCreateCardForUser(round);cards=[generated];myCards=[...myCards,generated];
+  }
+  playerData={uid:user.uid,nome:perfilUsuario?.nome||user.displayName||user.email?.split("@")[0]||"Jogador",email:user.email||perfilUsuario?.email||"",publicId:perfilUsuario?.publicId||current?.publicId||"",vip:perfilUsuario?.vip===true,cards:cards.map(c=>({codigo:c.codigo,card:c.card,round:c.round})),round,joinedAt:serverTimestamp()};
+  await setDoc(playerRef,playerData);renderGame();msg("Você entrou na partida!");
 }
 async function leave(){if(!playerRef)return;await deleteDoc(playerRef);playerRef=null;playerData=null;renderGame();msg("Você saiu da partida.")}
-
 async function startGame(){
-  await runTransaction(db,async tx=>{const s=await tx.get(salaRef);const old=s.exists()?s.data():{};tx.set(salaRef,{status:"playing",round:(old.round||0)+1,drawn:[],winner:null,prize:"",startedAt:serverTimestamp(),createdAt:old.createdAt||serverTimestamp()})});
+  const winType=$("winType").value||"1linha",prize=$("prizeInput").value.trim(),chatEnabled=$("chatEnabled").value!=="nao";
+  await runTransaction(db,async tx=>{const s=await tx.get(salaRef);const old=s.exists()?s.data():{};tx.set(salaRef,{status:"playing",round:(old.round||0)+1,drawn:[],winner:null,prize,winType,chatEnabled,startedAt:serverTimestamp(),createdAt:old.createdAt||serverTimestamp()})});
   msg("Nova partida iniciada.");
 }
 async function drawNumber(){
-  await runTransaction(db,async tx=>{
-    const s=await tx.get(salaRef); if(!s.exists())throw new Error("Sala não criada."); const g=s.data(); if(g.status!=="playing")throw new Error("A partida não está ativa."); if(g.winner)throw new Error("Já existe vencedor.");
-    const drawn=g.drawn||[]; const available=[];for(let n=1;n<=75;n++)if(!drawn.includes(n))available.push(n);if(!available.length)throw new Error("Todos os números foram sorteados.");const n=available[Math.floor(Math.random()*available.length)];tx.update(salaRef,{drawn:[...drawn,n],lastDraw:n,lastDrawAt:serverTimestamp()});
-  });
+  await runTransaction(db,async tx=>{const s=await tx.get(salaRef);if(!s.exists())throw new Error("Sala não criada.");const g=s.data();if(g.status!=="playing")throw new Error("A partida não está ativa.");if(g.winner)throw new Error("Já existe vencedor.");const drawn=g.drawn||[],available=[];for(let n=1;n<=75;n++)if(!drawn.includes(n))available.push(n);if(!available.length)throw new Error("Todos os números foram sorteados.");const n=available[Math.floor(Math.random()*available.length)];tx.update(salaRef,{drawn:[...drawn,n],lastDraw:n,lastDrawAt:serverTimestamp()})});
 }
 async function finish(){await updateDoc(salaRef,{status:"finished",finishedAt:serverTimestamp()})}
-async function clearRoom(){const snaps=await getDocs(playersRef);for(const d of snaps.docs)await deleteDoc(d.ref);await setDoc(salaRef,{status:"waiting",round:0,drawn:[],winner:null,prize:"",createdAt:serverTimestamp()});msg("Sala limpa.")}
-
+async function clearRoom(){const snaps=await getDocs(playersRef);for(const d of snaps.docs)await deleteDoc(d.ref);await setDoc(salaRef,{status:"waiting",round:gameData?.round||0,drawn:[],winner:null,prize:"",createdAt:serverTimestamp()});msg("Sala limpa.")}
+function countCompletedLines(card,set){let count=0;for(let r=0;r<5;r++){let ok=true;for(let c=0;c<5;c++){const v=card[r*5+c];if(v!==0&&!set.has(v))ok=false}if(ok)count++}for(let c=0;c<5;c++){let ok=true;for(let r=0;r<5;r++){const v=card[r*5+c];if(v!==0&&!set.has(v))ok=false}if(ok)count++}return count;}
 async function checkWinner(){
-  if(!playerData||!gameData||gameData.status!=="playing"||gameData.winner)return;
-  const set=markedNumbers(); if(!hasLine(playerData.card,set))return;
-  try{await runTransaction(db,async tx=>{const s=await tx.get(salaRef);if(!s.exists())return;const g=s.data();if(g.status!=="playing"||g.winner)return;tx.update(salaRef,{winner:{uid:user.uid,nome:playerData.nome,premio:g.prize||"Bingo"},status:"finished",finishedAt:serverTimestamp()})})}catch(e){console.error(e)}
+  if(!playerData||!gameData||gameData.status!=="playing"||gameData.winner)return;const set=markedNumbers(),type=gameData.winType||"1linha";
+  for(const c of playerData.cards||[]){if(!c.card)continue;const lines=countCompletedLines(c.card,set);const ok=type==="cheia"?hasFull(c.card,set):type==="2linhas"?lines>=2:lines>=1;if(!ok)continue;try{await runTransaction(db,async tx=>{const s=await tx.get(salaRef);if(!s.exists())return;const g=s.data();if(g.status!=="playing"||g.winner)return;tx.update(salaRef,{winner:{uid:user.uid,nome:playerData.nome,cartela:c.codigo,premio:g.prize||"Prêmio da partida",tipoVitoria:g.winType||"1linha"},status:"finished",finishedAt:serverTimestamp()})});}catch(e){console.error(e)}return;}
 }
+async function sendChat(){const text=$("chatInput").value.trim();if(!text||!user||gameData?.chatEnabled===false)return;const nome=playerData?.nome||perfilUsuario?.nome||user.displayName||user.email?.split("@")[0]||"Jogador";await setDoc(doc(collection(db,"bingo","salaPrincipal","mensagens")),{uid:user.uid,nome,text,createdAt:serverTimestamp()});$("chatInput").value="";}
+function renderChat(snap){const log=$("chatLog");log.innerHTML="";if(gameData?.chatEnabled===false){log.innerHTML='<div class="chat-off">Chat desativado pelo ADM.</div>';return}if(!snap.size){log.innerHTML='<div class="chat-off">Nenhuma mensagem ainda.</div>';return}snap.docs.forEach(d=>{const x=d.data(),el=document.createElement("div");el.className="chat-msg";const time=x.createdAt?.toDate?x.createdAt.toDate().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"}):"";el.innerHTML=`<b>${String(x.nome||"Jogador").replace(/[<>&]/g,"")}</b><small>${time}</small><div>${String(x.text||"").replace(/[<>&]/g,"")}</div>`;log.appendChild(el)});log.scrollTop=log.scrollHeight;}
+async function clearChat(){if(user?.email!==ADMIN_EMAIL)return;const snap=await getDocs(collection(db,"bingo","salaPrincipal","mensagens"));for(const d of snap.docs)await deleteDoc(d.ref);msg("Chat limpo.");}
 
 function setupListeners(){
-  unsubGame?.();unsubPlayers?.();
+  unsubGame?.();unsubPlayers?.();unsubCards?.();
   unsubGame=onSnapshot(salaRef,s=>{gameData=s.exists()?s.data():{status:"waiting",round:0,drawn:[]};renderGame();checkWinner()});
   unsubPlayers=onSnapshot(playersRef,s=>{$("playersCount").textContent=`${s.size} jogador${s.size===1?"":"es"}`});
+  onSnapshot(query(collection(db,"bingo","salaPrincipal","mensagens")),s=>renderChat(s),e=>console.error("CHAT BINGO:",e));
+  if(user)unsubCards=onSnapshot(query(cardsRef,where("usuarioUid","==",user.uid)),s=>{myCards=s.docs.map(d=>({id:d.id,...d.data()}));renderCards()},e=>{console.error(e);msg(e?.code==="permission-denied"?"Sem permissão para carregar suas cartelas.":"")});
 }
 
 onAuthStateChanged(auth,async u=>{
-  user=u; if(!u){msg("Faça login para participar do Bingo.");renderGame();return}
-  await ensureGame(); setupListeners(); playerRef=doc(db,"bingo","salaPrincipal","jogadores",u.uid); const p=await getDoc(playerRef); playerData=p.exists()?p.data():null;
-  if(u.email===ADMIN_EMAIL){$("adminBox").classList.add("show")}
-  renderGame();
+  user=u;if(!u){msg("Faça login para participar do Bingo.");renderGame();return}
+  try{await ensureGame();perfilUsuario=await carregarPerfilUsuario();await loadMyCards();setupListeners();playerRef=doc(db,"bingo","salaPrincipal","jogadores",u.uid);const p=await getDoc(playerRef);playerData=p.exists()?p.data():null;if(u.email===ADMIN_EMAIL)$("adminBox").classList.add("show");renderGame();}
+  catch(e){console.error(e);msg(e?.code==="permission-denied"?"Firebase bloqueou o acesso ao Bingo. Verifique as Rules.":"Não foi possível carregar o Bingo.")}
 });
 
-$("joinBtn").onclick=()=>join().catch(e=>msg(e.message));
-$("leaveBtn").onclick=()=>leave().catch(e=>msg(e.message));
-$("startBtn").onclick=()=>startGame().catch(e=>msg(e.message));
-$("drawBtn").onclick=()=>drawNumber().catch(e=>msg(e.message));
-$("finishBtn").onclick=()=>finish().catch(e=>msg(e.message));
-$("clearBtn").onclick=()=>clearRoom().catch(e=>msg(e.message));
+$("joinBtn").onclick=()=>join().catch(e=>msg(e?.message||"Não foi possível entrar."));
+$("leaveBtn").onclick=()=>leave().catch(e=>msg(e?.message||"Não foi possível sair."));
+$("startBtn").onclick=()=>startGame().catch(e=>msg(e?.message||"Não foi possível iniciar."));
+$("drawBtn").onclick=()=>drawNumber().catch(e=>msg(e?.message||"Não foi possível sortear."));
+$("finishBtn").onclick=()=>finish().catch(e=>msg(e?.message||"Não foi possível encerrar."));
+$("clearBtn").onclick=()=>clearRoom().catch(e=>msg(e?.message||"Não foi possível limpar."));
+$("clearChatBtn").onclick=()=>clearChat().catch(e=>msg(e?.message||"Não foi possível limpar o chat."));
+$("chatSend").onclick=()=>sendChat().catch(e=>msg(e?.message||"Não foi possível enviar."));
+$("chatInput").addEventListener("keydown",e=>{if(e.key==="Enter")sendChat().catch(x=>msg(x?.message||"Não foi possível enviar."));});
 </script>
 </body>
 </html>
