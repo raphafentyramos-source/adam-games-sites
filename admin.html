@@ -8,11 +8,8 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:Arial,Helvetica,sans-serif;color:#fff;min-height:100vh;background:radial-gradient(circle at 15% 5%,#43aaff 0%,transparent 30%),radial-gradient(circle at 90% 10%,#079b63 0%,transparent 25%),linear-gradient(145deg,#087fe0,#031b3d 75%);padding:20px 12px 70px}
 .container{width:100%;max-width:1100px;margin:auto}
-button{border:0;cursor:pointer;color:#fff;font-weight:bold}
-button:disabled{opacity:.55;cursor:not-allowed}
-header{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:25px}
-.logo{display:flex;align-items:center;gap:12px}.logoIcon{width:62px;height:62px;border-radius:19px;display:flex;align-items:center;justify-content:center;font-size:31px;background:linear-gradient(145deg,#168eff,#064b99);box-shadow:0 10px 25px rgba(0,0,0,.18)}.logo h1{font-size:22px}.logo span{color:#ffd32a}.badge{display:inline-block;margin-top:5px;padding:5px 9px;border-radius:8px;background:#d99b12;font-size:11px;font-weight:bold}
-.logout,.refresh{padding:12px 17px;border-radius:12px}.logout{background:#17395f}.refresh{background:linear-gradient(135deg,#168fff,#0563b5)}.headerButtons{display:flex;gap:8px}
+button{border:0;cursor:pointer;color:#fff;font-weight:bold}button:disabled{opacity:.55;cursor:not-allowed}
+header{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:25px}.logo{display:flex;align-items:center;gap:12px}.logoIcon{width:62px;height:62px;border-radius:19px;display:flex;align-items:center;justify-content:center;font-size:31px;background:linear-gradient(145deg,#168eff,#064b99);box-shadow:0 10px 25px rgba(0,0,0,.18)}.logo h1{font-size:22px}.logo span{color:#ffd32a}.badge{display:inline-block;margin-top:5px;padding:5px 9px;border-radius:8px;background:#d99b12;font-size:11px;font-weight:bold}.logout,.refresh{padding:12px 17px;border-radius:12px}.logout{background:#17395f}.refresh{background:linear-gradient(135deg,#168fff,#0563b5)}.headerButtons{display:flex;gap:8px}
 h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
 .card{background:rgba(2,30,62,.94);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:20px;margin-bottom:18px;box-shadow:0 15px 35px rgba(0,0,0,.18)}.card h3{margin-bottom:15px;font-size:20px}
 .dashboard{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}.dash{min-height:145px;padding:20px 10px;border-radius:20px;text-align:center;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.08)}.dashIcon{font-size:32px}.dashNumber{margin-top:8px;font-size:34px;font-weight:900}.dashLabel{margin-top:5px;color:#9fc2dc;font-size:11px;font-weight:bold}.dash.pending .dashNumber,.dash.vip .dashNumber{color:#ffd52b}.dash.success .dashNumber{color:#67ffad}
@@ -23,15 +20,15 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
 .delivery-list{display:grid;gap:10px;margin-top:18px}.delivery-item{padding:16px;border-radius:15px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07)}.delivery-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.delivery-title{font-size:16px;font-weight:900}.delivery-user{margin-top:5px;color:#8fb7d4;font-size:12px}.delivery-status{flex-shrink:0;padding:6px 10px;border-radius:20px;font-size:10px;font-weight:900}.delivery-status.pending{background:rgba(255,190,0,.15);color:#ffe27a}.delivery-status.done{background:rgba(0,220,100,.14);color:#6dffae}.delivery-info{margin-top:10px;color:#a8c6dd;font-size:12px;line-height:1.6}.delivery-info b{color:#e9f5ff}.delivery-actions{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin-top:12px}.delivery-profile,.delivery-open,.delivery-complete{padding:12px;border-radius:11px}.delivery-profile{background:linear-gradient(135deg,#168fff,#0563b5)}.delivery-open{background:linear-gradient(135deg,#16bb69,#087b45)}.delivery-complete{background:linear-gradient(135deg,#d29a16,#9d6800)}.delivery-id{margin-top:9px;padding:7px;border-radius:8px;background:rgba(0,0,0,.2);color:#72c9ff;font-size:10px;word-break:break-all}
 #userArea{display:none}.user{display:flex;align-items:center;gap:15px;margin-bottom:20px}.avatar{width:68px;height:68px;border-radius:19px;background:#ffd52b;color:#111;display:flex;align-items:center;justify-content:center;font-size:33px;flex-shrink:0}.userName{font-size:22px;font-weight:bold}.userEmail,.userId,.userUid{margin-top:4px;color:#a9c8e5;font-size:13px;word-break:break-all}.status-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.status{padding:6px 9px;border-radius:9px;font-size:11px;font-weight:bold;background:rgba(255,255,255,.08)}.status.vip{background:rgba(255,193,7,.2);color:#ffd84c}
 .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}.info-item{padding:12px;border-radius:13px;background:rgba(255,255,255,.045)}.info-label{color:#77a9cf;font-size:10px;font-weight:bold;text-transform:uppercase}.info-value{margin-top:5px;font-size:14px;word-break:break-word}
-.balances{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.balance{text-align:center;padding:15px 8px;border-radius:15px;background:rgba(255,255,255,.05)}.balanceIcon{font-size:26px}.balanceName{color:#91b2cf;font-size:10px;font-weight:bold;margin-top:5px}.balanceValue{font-size:18px;font-weight:bold;margin-top:5px}
-.form,.roleta-form,.voucher-form{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field label,.roleta-field label{display:block;color:#a9c8e5;font-size:11px;font-weight:bold;margin-bottom:6px}.full{grid-column:1/-1}.actions,.special,.roleta-actions,.voucher-buttons{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.add,.remove,.vipButton,.boxButton,.roleta-add,.roleta-remove{padding:14px;border-radius:12px}.add{background:linear-gradient(135deg,#0ba85a,#087a42)}.remove,.roleta-remove{background:linear-gradient(135deg,#d72d47,#a8172d)}.vipButton{background:linear-gradient(135deg,#d29a16,#9d6800)}.boxButton,.roleta-add{background:linear-gradient(135deg,#118eea,#0562ad)}
+.balances{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}.balance{text-align:center;padding:15px 8px;border-radius:15px;background:rgba(255,255,255,.05)}.balanceIcon{font-size:26px}.balanceName{color:#91b2cf;font-size:10px;font-weight:bold;margin-top:5px}.balanceValue{font-size:18px;font-weight:bold;margin-top:5px}
+.form,.roleta-form,.voucher-form,.special-key-form{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field label,.roleta-field label{display:block;color:#a9c8e5;font-size:11px;font-weight:bold;margin-bottom:6px}.full{grid-column:1/-1}.actions,.special,.roleta-actions,.voucher-buttons{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.add,.remove,.vipButton,.boxButton,.roleta-add,.roleta-remove{padding:14px;border-radius:12px}.add{background:linear-gradient(135deg,#0ba85a,#087a42)}.remove,.roleta-remove{background:linear-gradient(135deg,#d72d47,#a8172d)}.vipButton{background:linear-gradient(135deg,#d29a16,#9d6800)}.boxButton,.roleta-add{background:linear-gradient(135deg,#118eea,#0562ad)}
+.special-key-card{border:1px solid rgba(255,213,42,.35);background:radial-gradient(circle at 100% 0%,rgba(255,213,42,.16),transparent 38%),linear-gradient(145deg,rgba(8,61,104,.98),rgba(2,30,62,.98))}.special-key-head{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:18px}.special-key-title{display:flex;align-items:center;gap:12px}.special-key-icon{width:55px;height:55px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:29px;background:linear-gradient(135deg,#ffd52a,#d48b00)}.special-key-title p{margin-top:4px;color:#9ec7e5;font-size:12px}.special-key-saldo{min-width:120px;padding:10px 14px;text-align:center;border-radius:15px;background:rgba(255,213,42,.1)}.special-key-saldo-label{color:#b8d2e6;font-size:9px;font-weight:bold}.special-key-saldo-value{margin-top:2px;color:#ffd52a;font-size:24px;font-weight:900}.special-key-form{margin-top:4px}.special-key-form .full{grid-column:1/-1}.special-key-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.send-all{padding:15px;border-radius:12px;background:linear-gradient(135deg,#ffd52a,#d88b00);color:#111}.send-one{padding:15px;border-radius:12px;background:linear-gradient(135deg,#168fff,#0563b5)}.special-key-vips{margin-top:18px}.special-key-vips h4{font-size:13px;color:#a9c8e5;margin-bottom:10px}.vip-list{display:grid;gap:8px;max-height:320px;overflow:auto}.vip-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px;border-radius:12px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07)}.vip-row-main{min-width:0}.vip-row-name{font-weight:900;font-size:13px}.vip-row-email{margin-top:3px;color:#8fb7d4;font-size:10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.vip-row-key{flex-shrink:0;color:#ffd52a;font-weight:900;font-size:13px}.distribution-history{margin-top:18px;display:grid;gap:8px}.distribution-item{padding:12px;border-radius:12px;background:rgba(255,255,255,.04);color:#a8c6dd;font-size:11px;line-height:1.55}.distribution-item strong{color:#fff}
 .roleta-card{border:1px solid rgba(255,213,42,.32);background:radial-gradient(circle at 100% 0%,rgba(255,213,42,.16),transparent 35%),linear-gradient(145deg,rgba(8,61,104,.98),rgba(2,30,62,.98))}.roleta-header{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:18px}.roleta-title{display:flex;align-items:center;gap:12px}.roleta-icon{width:52px;height:52px;display:flex;align-items:center;justify-content:center;border-radius:15px;background:linear-gradient(135deg,#ffd52a,#e78a00);font-size:27px}.roleta-title h3{margin:0}.roleta-title p{margin-top:4px;color:#9ec7e5;font-size:12px}.roleta-saldo{min-width:105px;padding:10px 14px;text-align:center;border-radius:15px;background:rgba(255,213,42,.1)}.roleta-saldo-label{color:#b8d2e6;font-size:9px;font-weight:bold}.roleta-saldo-value{margin-top:2px;color:#ffd52a;font-size:24px;font-weight:900}
 .history{margin-top:22px}.historyItem{padding:15px;margin-top:9px;border-radius:14px;background:rgba(255,255,255,.05)}.historyTop{display:flex;justify-content:space-between;gap:10px;font-weight:bold}.historyDate{color:#75d4ff;font-size:12px;text-align:right}.plus{color:#65ff9c}.minus{color:#ff7382}.historyInfo{color:#9dbbd3;font-size:12px;margin-top:8px;line-height:1.6}.operation-id{margin-top:8px;padding:7px 9px;border-radius:8px;background:rgba(0,0,0,.2);color:#7fc9ff;font-size:11px;word-break:break-all}
 .voucher-card{border:1px solid rgba(255,213,42,.3);background:radial-gradient(circle at 100% 0%,rgba(255,213,42,.15),transparent 40%),rgba(2,30,62,.95)}.voucher-title{display:flex;align-items:center;gap:12px;margin-bottom:16px}.voucher-icon{width:55px;height:55px;display:flex;align-items:center;justify-content:center;border-radius:16px;font-size:28px;background:linear-gradient(135deg,#ffd52a,#d48b00)}.generateVoucher{width:100%;margin-top:12px;padding:15px;border-radius:13px;background:linear-gradient(135deg,#ffd52a,#d88b00);color:#111}.voucher-result{display:none;margin-top:16px;padding:17px;border-radius:16px;background:rgba(255,213,42,.08);border:1px solid rgba(255,213,42,.2)}.voucher-code{margin-top:8px;padding:15px;border-radius:12px;background:#061a34;color:#ffd52a;font-size:24px;font-weight:900;letter-spacing:3px;text-align:center;word-break:break-all}.copyVoucher{padding:13px;border-radius:11px;background:linear-gradient(135deg,#168fff,#0563b5)}.newVoucher{padding:13px;border-radius:11px;background:linear-gradient(135deg,#16bb69,#087b45)}.voucher-list{margin-top:18px;display:grid;gap:9px}.voucher-item{padding:14px;border-radius:13px;background:rgba(255,255,255,.045)}.voucher-code-small{color:#ffd52a;font-weight:900;letter-spacing:1px}.voucher-meta{margin-top:5px;color:#9dbbd3;font-size:11px;line-height:1.5}
-.empty{padding:18px;text-align:center;color:#9dbbd3}
-.client-list{display:grid;gap:10px;margin-top:15px}.client-item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px;border-radius:15px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07)}.client-main{display:flex;align-items:center;gap:12px;min-width:0}.client-avatar{width:48px;height:48px;flex-shrink:0;border-radius:14px;background:#ffd52b;color:#111;display:flex;align-items:center;justify-content:center;font-size:23px}.client-name{font-size:15px;font-weight:900}.client-email{margin-top:3px;color:#8fb7d4;font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:450px}.client-id{margin-top:4px;color:#63c7ff;font-size:11px;font-weight:bold}.client-open{flex-shrink:0;padding:11px 13px;border-radius:10px;background:linear-gradient(135deg,#168fff,#0563b5)}
-@media(max-width:800px){.dashboard{grid-template-columns:1fr 1fr}.balances{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:600px){.client-item{flex-direction:column;align-items:stretch}.client-open{width:100%}.client-main{width:100%}.client-email{max-width:250px}header{align-items:flex-start}.headerButtons{flex-direction:column}h2{font-size:32px}.search{grid-template-columns:1fr}.form,.roleta-form,.voucher-form,.info-grid{grid-template-columns:1fr}.full{grid-column:auto}.actions,.special,.roleta-actions,.voucher-buttons{grid-template-columns:1fr}.delivery-actions{grid-template-columns:1fr}.delivery-top{flex-direction:column}}
+.empty{padding:18px;text-align:center;color:#9dbbd3}.client-list{display:grid;gap:10px;margin-top:15px}.client-item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px;border-radius:15px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07)}.client-main{display:flex;align-items:center;gap:12px;min-width:0}.client-avatar{width:48px;height:48px;flex-shrink:0;border-radius:14px;background:#ffd52b;color:#111;display:flex;align-items:center;justify-content:center;font-size:23px}.client-name{font-size:15px;font-weight:900}.client-email{margin-top:3px;color:#8fb7d4;font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:450px}.client-id{margin-top:4px;color:#63c7ff;font-size:11px;font-weight:bold}.client-open{flex-shrink:0;padding:11px 13px;border-radius:10px;background:linear-gradient(135deg,#168fff,#0563b5)}
+@media(max-width:800px){.dashboard{grid-template-columns:1fr 1fr}.balances{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:600px){.client-item{flex-direction:column;align-items:stretch}.client-open{width:100%}.client-main{width:100%}.client-email{max-width:250px}header{align-items:flex-start}.headerButtons{flex-direction:column}h2{font-size:32px}.search{grid-template-columns:1fr}.form,.roleta-form,.voucher-form,.info-grid,.special-key-form{grid-template-columns:1fr}.full,.special-key-form .full{grid-column:auto}.actions,.special,.roleta-actions,.voucher-buttons,.special-key-actions{grid-template-columns:1fr}.delivery-actions{grid-template-columns:1fr}.delivery-top{flex-direction:column}.special-key-head{align-items:flex-start;flex-direction:column;width:100%}.special-key-saldo{width:100%}.balances{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
@@ -49,6 +46,26 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
 <div class="dash"><div class="dashIcon">🎁</div><div class="dashNumber" id="totalPremios">0</div><div class="dashLabel">PRÊMIOS</div></div>
 <div class="dash pending"><div class="dashIcon">⏳</div><div class="dashNumber" id="totalPendentes">0</div><div class="dashLabel">PENDENTES</div></div>
 <div class="dash vip"><div class="dashIcon">👑</div><div class="dashNumber" id="totalVip">0</div><div class="dashLabel">USUÁRIOS VIP</div></div>
+</div>
+
+<div class="card special-key-card">
+<div class="special-key-head">
+<div class="special-key-title"><div class="special-key-icon">🔑</div><div><h3>Chaves Especiais</h3><p>Envie chaves exclusivas para usuários VIP.</p></div></div>
+<div class="special-key-saldo"><div class="special-key-saldo-label">VIPs ATIVOS</div><div class="special-key-saldo-value" id="specialVipCount">0</div></div>
+</div>
+<div class="special-key-form">
+<div class="field"><label>QUANTIDADE DE CHAVES</label><input id="specialKeyQuantity" type="number" min="1" step="1" placeholder="Ex.: 5"></div>
+<div class="field"><label>REFERÊNCIA / MOTIVO</label><input id="specialKeyReason" type="text" maxlength="150" placeholder="Ex.: Chaves de setembro"></div>
+<div class="field full"><label>VIP ESPECÍFICO — OPCIONAL</label><select id="specialKeyVip"><option value="">👑 Todos os VIPs</option></select></div>
+</div>
+<div class="special-key-actions">
+<button class="send-all" id="sendSpecialKeysAll" type="button">👑 ENVIAR PARA TODOS OS VIPs</button>
+<button class="send-one" id="sendSpecialKeysOne" type="button">🔑 ENVIAR PARA VIP SELECIONADO</button>
+</div>
+<div class="warning">⚠️ As chaves serão somadas ao campo <strong>chavesEspeciais</strong>. As <strong>chaves normais</strong> dos clientes não serão alteradas.</div>
+<div id="specialKeyMessage" class="message"></div>
+<div class="special-key-vips"><h4>👑 VIPs e saldo de Chaves Especiais</h4><div id="specialVipList" class="vip-list"><div class="empty">🔄 Carregando VIPs...</div></div></div>
+<div><h4 style="margin-top:18px;color:#a9c8e5;font-size:13px;">📜 Últimas distribuições</h4><div id="specialDistributionHistory" class="distribution-history"><div class="empty">Nenhuma distribuição registrada.</div></div></div>
 </div>
 
 <div class="card">
@@ -92,6 +109,7 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
 <div class="balance"><div class="balanceIcon">🎰</div><div class="balanceName">GIROS ROLETA</div><div class="balanceValue" id="girosRoleta">0</div></div>
 <div class="balance"><div class="balanceIcon">🪙</div><div class="balanceName">MOEDAS</div><div class="balanceValue" id="moedas">0</div></div>
 <div class="balance"><div class="balanceIcon">🔑</div><div class="balanceName">CHAVES</div><div class="balanceValue" id="chaves">0</div></div>
+<div class="balance"><div class="balanceIcon">🔐</div><div class="balanceName">CHAVES ESPECIAIS</div><div class="balanceValue" id="chavesEspeciais">0</div></div>
 <div class="balance"><div class="balanceIcon">💎</div><div class="balanceName">CRÉDITOS</div><div class="balanceValue" id="creditos">R$ 0,00</div></div>
 </div>
 </div>
@@ -139,7 +157,7 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 import{getAuth,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-import{getFirestore,collection,query,where,getDocs,getCountFromServer,getDoc,updateDoc,addDoc,doc,setDoc,serverTimestamp}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+import{getFirestore,collection,query,where,getDocs,getDoc,updateDoc,addDoc,doc,setDoc,serverTimestamp,runTransaction}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 const firebaseConfig={apiKey:"AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",authDomain:"adam-games-21081.firebaseapp.com",projectId:"adam-games-21081",storageBucket:"adam-games-21081.firebasestorage.app",messagingSenderId:"1055528418738",appId:"1:1055528418738:web:5fafdf63424ba9744eb8ab"};
 const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app);
@@ -147,7 +165,7 @@ const ADMIN_EMAIL="raphafentyramos@gmail.com";
 let adminUsuario=null,usuarioSelecionado=null,todasEntregas=[],todosVales=[],todosUsuarios=[],authResolvido=false,resolverAutenticacao;
 const autenticacaoPronta=new Promise(resolve=>resolverAutenticacao=resolve);
 
-const searchInput=document.getElementById("searchInput"),searchMessage=document.getElementById("searchMessage"),operationMessage=document.getElementById("operationMessage"),roletaMessage=document.getElementById("roletaMessage"),voucherMessage=document.getElementById("voucherMessage"),deliveryMessage=document.getElementById("deliveryMessage"),userArea=document.getElementById("userArea"),refreshButton=document.getElementById("refreshAll"),generateVoucherButton=document.getElementById("generateVoucher");
+const searchInput=document.getElementById("searchInput"),searchMessage=document.getElementById("searchMessage"),operationMessage=document.getElementById("operationMessage"),roletaMessage=document.getElementById("roletaMessage"),voucherMessage=document.getElementById("voucherMessage"),deliveryMessage=document.getElementById("deliveryMessage"),specialKeyMessage=document.getElementById("specialKeyMessage"),userArea=document.getElementById("userArea"),refreshButton=document.getElementById("refreshAll"),generateVoucherButton=document.getElementById("generateVoucher");
 
 function mostrarMensagem(el,texto,tipo){el.textContent=texto;el.className=tipo?"message "+tipo:"message"}
 function numero(v){return Number(v||0).toLocaleString("pt-BR")}
@@ -160,10 +178,8 @@ function gerarVale15(){const chars="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";let co
 function comTimeout(p,tempo=15000){return Promise.race([p,new Promise((_,reject)=>setTimeout(()=>{const e=new Error("Tempo limite excedido.");e.code="timeout";reject(e)},tempo))])}
 
 async function carregarUsuarios(){
-  const lista=document.getElementById("clientList");
-  const msg=document.getElementById("clientMessage");
-  lista.innerHTML="<div class='empty'>🔄 Carregando clientes...</div>";
-  mostrarMensagem(msg,"","");
+  const lista=document.getElementById("clientList"),msg=document.getElementById("clientMessage");
+  lista.innerHTML="<div class='empty'>🔄 Carregando clientes...</div>";mostrarMensagem(msg,"","");
   try{
     const r=await getDocs(collection(db,"admins"));
     todosUsuarios=r.docs.map(d=>({ref:d.ref,docId:d.id,data:d.data()}));
@@ -171,22 +187,20 @@ async function carregarUsuarios(){
     renderizarClientes();
     document.getElementById("totalUsuarios").textContent=numero(todosUsuarios.length);
     document.getElementById("totalVip").textContent=numero(todosUsuarios.filter(u=>u.data.vip===true).length);
+    renderizarListaEspecial();
   }catch(e){
-    console.error("ERRO AO CARREGAR CLIENTES:",e);
-    todosUsuarios=[];
-    lista.innerHTML=`<div class="empty">❌ Não foi possível carregar os cadastros.<br><br>${escapar(e?.code||e?.message||"Erro desconhecido")}</div>`;
+    console.error("ERRO AO CARREGAR CLIENTES:",e);todosUsuarios=[];
+    lista.innerHTML=`<div class='empty'>❌ Não foi possível carregar os cadastros.<br><br>${escapar(e?.code||e?.message||"Erro desconhecido")}</div>`;
     mostrarMensagem(msg,"Erro ao carregar cadastros. Se aparecer permission-denied, o problema está nas Rules do Firestore.","error");
-    document.getElementById("totalUsuarios").textContent="—";
-    document.getElementById("totalVip").textContent="—";
+    document.getElementById("totalUsuarios").textContent="—";document.getElementById("totalVip").textContent="—";renderizarListaEspecial();
   }
 }
 
 function renderizarClientes(){
-  const lista=document.getElementById("clientList");
-  lista.innerHTML="";
+  const lista=document.getElementById("clientList");lista.innerHTML="";
   if(!todosUsuarios.length){lista.innerHTML="<div class='empty'>Nenhum cliente cadastrado.</div>";return}
   todosUsuarios.forEach(u=>{
-    const d=u.data,nome=d.nome||d.name||"Usuário",email=d.email||"Sem e-mail",pid=d.publicId||"Sem ID",uid=d.uid||"",avatar=d.avatar||"🙂";
+    const d=u.data,nome=d.nome||d.name||"Usuário",email=d.email||"Sem e-mail",pid=d.publicId||"Sem ID",avatar=d.avatar||"🙂";
     const el=document.createElement("div");el.className="client-item";
     el.innerHTML=`<div class="client-main"><div class="client-avatar">${escapar(avatar)}</div><div><div class="client-name">${escapar(nome)}</div><div class="client-email">${escapar(email)}</div><div class="client-id">🆔 ID: ${escapar(pid)}</div></div></div><button class="client-open" type="button">👤 ABRIR</button>`;
     el.querySelector(".client-open").onclick=async()=>{try{await mostrarUsuario({ref:u.ref,id:u.docId,data:u.data});window.scrollTo({top:userArea.offsetTop-20,behavior:"smooth"})}catch(e){console.error(e);mostrarMensagem(document.getElementById("clientMessage"),"Não foi possível abrir este cadastro: "+(e?.code||e?.message||"erro"),"error")}};
@@ -196,26 +210,127 @@ function renderizarClientes(){
 
 async function carregarDashboard(){await carregarUsuarios()}
 
-async function carregarEntregas(){const lista=document.getElementById("deliveryList");lista.innerHTML="<div class='empty'>🔄 Carregando prêmios...</div>";try{const r=await getDocs(collection(db,"entregas"));todasEntregas=r.docs.map(d=>({id:d.id,...d.data()}));renderizarEntregas()}catch(e){console.error(e);todasEntregas=[];lista.innerHTML="<div class='empty'>⚠️ Não foi possível carregar os prêmios.</div>";mostrarMensagem(deliveryMessage,"Verifique as Rules da coleção entregas.","error")}}
-function renderizarEntregas(filtro=null){const dados=Array.isArray(filtro)?filtro:todasEntregas,total=dados.length,pend=dados.filter(x=>x.entregue!==true).length,done=dados.filter(x=>x.entregue===true).length;document.getElementById("totalPremios").textContent=numero(todasEntregas.length);document.getElementById("totalPendentes").textContent=numero(todasEntregas.filter(x=>x.entregue!==true).length);document.getElementById("entregaTotal").textContent=numero(total);document.getElementById("entregaPendente").textContent=numero(pend);document.getElementById("entregaEntregue").textContent=numero(done);const lista=document.getElementById("deliveryList");lista.innerHTML="";const ord=[...dados].sort((a,b)=>obterMillis(b.criadoEm||b.dataHora)-obterMillis(a.criadoEm||a.dataHora));if(!ord.length){lista.innerHTML="<div class='empty'>🎉 Nenhum prêmio cadastrado.</div>";return}ord.slice(0,100).forEach(p=>{const uid=p.uid||p.usuarioUid||p.usuarioId||"",titulo=p.premioNome||p.nome||p.titulo||"Prêmio",tipo=p.tipo||"outro",q=p.quantidade!==undefined?numero(p.quantidade):"—",ent=p.entregue===true,d=document.createElement("div");d.className="delivery-item";d.innerHTML=`<div class="delivery-top"><div><div class="delivery-title">🎁 ${escapar(titulo)}</div><div class="delivery-user">👤 ${escapar(p.usuarioNome||"Cliente não identificado")}${p.usuarioEmail?" • "+escapar(p.usuarioEmail):""}</div></div><div class="delivery-status ${ent?"done":"pending"}">${ent?"✅ ENTREGUE":"⏳ PENDENTE"}</div></div><div class="delivery-info">Tipo: <b>${escapar(tipo)}</b><br>Quantidade: <b>${q}</b><br>Data: <b>${escapar(formatarData(p.criadoEm||p.dataHora))}</b><br>UID: <b>${escapar(uid||"Não informado")}</b></div><div class="delivery-actions"><button class="delivery-profile" type="button">👤 PERFIL</button><button class="delivery-open" type="button">🔎 FILTRAR CLIENTE</button><button class="delivery-complete" type="button">${ent?"↩️ DESFAZER":"✅ ENTREGAR"}</button></div><div class="delivery-id">🆔 ID: ${escapar(p.id)}</div>`;d.querySelector(".delivery-profile").onclick=()=>uid?buscarUsuarioPorUid(uid):alert("Este prêmio não possui UID.");d.querySelector(".delivery-open").onclick=()=>{if(uid)renderizarEntregas(todasEntregas.filter(x=>(x.uid||x.usuarioUid||x.usuarioId||"")===uid))};d.querySelector(".delivery-complete").onclick=()=>alterarEntrega(p);lista.appendChild(d)})}
-async function alterarEntrega(p){const n=p.entregue!==true;if(!confirm(n?"Marcar este prêmio como ENTREGUE?":"Desfazer o status de entregue?"))return;try{await updateDoc(doc(db,"entregas",p.id),{entregue:n,entregueEm:n?serverTimestamp():null,entreguePor:n?(adminUsuario?.email||""):""});p.entregue=n;renderizarEntregas();mostrarMensagem(deliveryMessage,n?"✅ Prêmio marcado como entregue.":"↩️ Prêmio voltou para pendente.","success")}catch(e){console.error(e);mostrarMensagem(deliveryMessage,"Não foi possível alterar a entrega.","error")}}
+async function carregarEntregas(){
+  const lista=document.getElementById("deliveryList");lista.innerHTML="<div class='empty'>🔄 Carregando prêmios...</div>";
+  try{const r=await getDocs(collection(db,"entregas"));todasEntregas=r.docs.map(d=>({id:d.id,...d.data()}));renderizarEntregas()}
+  catch(e){console.error(e);todasEntregas=[];lista.innerHTML="<div class='empty'>⚠️ Não foi possível carregar os prêmios.</div>";mostrarMensagem(deliveryMessage,"Verifique as Rules da coleção entregas.","error")}
+}
+function renderizarEntregas(filtro=null){
+  const dados=Array.isArray(filtro)?filtro:todasEntregas,total=dados.length,pend=dados.filter(x=>x.entregue!==true).length,done=dados.filter(x=>x.entregue===true).length;
+  document.getElementById("totalPremios").textContent=numero(todasEntregas.length);document.getElementById("totalPendentes").textContent=numero(todasEntregas.filter(x=>x.entregue!==true).length);
+  document.getElementById("entregaTotal").textContent=numero(total);document.getElementById("entregaPendente").textContent=numero(pend);document.getElementById("entregaEntregue").textContent=numero(done);
+  const lista=document.getElementById("deliveryList");lista.innerHTML="";const ord=[...dados].sort((a,b)=>obterMillis(b.criadoEm||b.dataHora)-obterMillis(a.criadoEm||a.dataHora));
+  if(!ord.length){lista.innerHTML="<div class='empty'>🎉 Nenhum prêmio cadastrado.</div>";return}
+  ord.slice(0,100).forEach(p=>{
+    const uid=p.uid||p.usuarioUid||p.usuarioId||"",titulo=p.premioNome||p.nome||p.titulo||"Prêmio",tipo=p.tipo||"outro",q=p.quantidade!==undefined?numero(p.quantidade):"—",ent=p.entregue===true,d=document.createElement("div");d.className="delivery-item";
+    d.innerHTML=`<div class="delivery-top"><div><div class="delivery-title">🎁 ${escapar(titulo)}</div><div class="delivery-user">👤 ${escapar(p.usuarioNome||"Cliente não identificado")}${p.usuarioEmail?" • "+escapar(p.usuarioEmail):""}</div></div><div class="delivery-status ${ent?"done":"pending"}">${ent?"✅ ENTREGUE":"⏳ PENDENTE"}</div></div><div class="delivery-info">Tipo: <b>${escapar(tipo)}</b><br>Quantidade: <b>${q}</b><br>Data: <b>${escapar(formatarData(p.criadoEm||p.dataHora))}</b><br>UID: <b>${escapar(uid||"Não informado")}</b></div><div class="delivery-actions"><button class="delivery-profile" type="button">👤 PERFIL</button><button class="delivery-open" type="button">🔎 FILTRAR CLIENTE</button><button class="delivery-complete" type="button">${ent?"↩️ DESFAZER":"✅ ENTREGAR"}</button></div><div class="delivery-id">🆔 ID: ${escapar(p.id)}</div>`;
+    d.querySelector(".delivery-profile").onclick=()=>uid?buscarUsuarioPorUid(uid):alert("Este prêmio não possui UID.");
+    d.querySelector(".delivery-open").onclick=()=>{if(uid)renderizarEntregas(todasEntregas.filter(x=>(x.uid||x.usuarioUid||x.usuarioId||"")===uid))};
+    d.querySelector(".delivery-complete").onclick=()=>alterarEntrega(p);lista.appendChild(d)
+  })
+}
+async function alterarEntrega(p){
+  const n=p.entregue!==true;if(!confirm(n?"Marcar este prêmio como ENTREGUE?":"Desfazer o status de entregue?"))return;
+  try{await updateDoc(doc(db,"entregas",p.id),{entregue:n,entregueEm:n?serverTimestamp():null,entreguePor:n?(adminUsuario?.email||""):""});p.entregue=n;renderizarEntregas();mostrarMensagem(deliveryMessage,n?"✅ Prêmio marcado como entregue.":"↩️ Prêmio voltou para pendente.","success")}
+  catch(e){console.error(e);mostrarMensagem(deliveryMessage,"Não foi possível alterar a entrega.","error")}
+}
+
+function renderizarListaEspecial(){
+  const lista=document.getElementById("specialVipList"),select=document.getElementById("specialKeyVip");
+  if(!lista||!select)return;
+  const vips=todosUsuarios.filter(u=>u.data.vip===true);
+  document.getElementById("specialVipCount").textContent=numero(vips.length);
+  select.innerHTML='<option value="">👑 Todos os VIPs</option>';
+  vips.forEach(u=>{const d=u.data,opt=document.createElement("option");opt.value=u.docId;opt.textContent="👑 "+(d.nome||d.name||"Usuário")+" • "+(d.email||d.publicId||u.docId);select.appendChild(opt)});
+  lista.innerHTML="";
+  if(!vips.length){lista.innerHTML="<div class='empty'>Nenhum usuário VIP ativo.</div>";return}
+  vips.forEach(u=>{
+    const d=u.data,el=document.createElement("div");el.className="vip-row";
+    el.innerHTML=`<div class="vip-row-main"><div class="vip-row-name">👑 ${escapar(d.nome||d.name||"Usuário")}</div><div class="vip-row-email">${escapar(d.email||d.publicId||u.docId)}</div></div><div class="vip-row-key">🔐 ${numero(d.chavesEspeciais)}</div>`;
+    lista.appendChild(el)
+  });
+}
+
+async function distribuirChavesEspeciais(destino="todos"){
+  const quantidade=Number(document.getElementById("specialKeyQuantity").value),motivo=document.getElementById("specialKeyReason").value.trim(),select=document.getElementById("specialKeyVip").value;
+  if(!Number.isInteger(quantidade)||quantidade<=0){mostrarMensagem(specialKeyMessage,"Digite uma quantidade inteira maior que zero.","error");return}
+  if(!motivo){mostrarMensagem(specialKeyMessage,"Informe o motivo da distribuição.","error");return}
+  if(destino==="um"&&!select){mostrarMensagem(specialKeyMessage,"Selecione um VIP.","error");return}
+  const vips=todosUsuarios.filter(u=>u.data.vip===true),alvos=destino==="um"?vips.filter(u=>u.docId===select):vips;
+  if(!alvos.length){mostrarMensagem(specialKeyMessage,"Não há VIPs para receber as chaves.","error");return}
+  const total=quantidade*alvos.length;
+  const confirmacao=destino==="um"
+    ? `Enviar ${numero(quantidade)} Chave(s) Especial(is) para ${alvos[0].data.nome||alvos[0].data.email||"este VIP"}?`
+    : `Enviar ${numero(quantidade)} Chave(s) Especiais para TODOS os ${numero(alvos.length)} VIPs?\n\nTotal distribuído: ${numero(total)} chaves.`;
+  if(!confirm(confirmacao))return;
+  const botoes=[document.getElementById("sendSpecialKeysAll"),document.getElementById("sendSpecialKeysOne")];botoes.forEach(b=>b.disabled=true);
+  mostrarMensagem(specialKeyMessage,"⏳ Distribuindo chaves...","");
+  try{
+    const resultados=[];
+    for(const u of alvos){
+      const novoSaldo=await runTransaction(db,async tx=>{
+        const snap=await tx.get(u.ref);
+        if(!snap.exists())throw new Error("Cadastro não encontrado: "+u.docId);
+        const d=snap.data(),atual=Number(d.chavesEspeciais||0),novo=atual+quantidade;
+        tx.update(u.ref,{chavesEspeciais:novo});
+        return {anterior:atual,novo};
+      });
+      u.data.chavesEspeciais=novoSaldo.novo;
+      resultados.push({u,anterior:novoSaldo.anterior,novo:novoSaldo.novo});
+    }
+    const distribuicaoId=gerarOperacaoId();
+    await addDoc(collection(db,"distribuicoesChavesEspeciais"),{
+      distribuicaoId,
+      quantidadePorVip:quantidade,
+      totalChaves:total,
+      totalVips:alvos.length,
+      destino:destino==="um"?"vip_especifico":"todos_vips",
+      motivo,
+      adminEmail:adminUsuario?.email||"",
+      adminUid:adminUsuario?.uid||"",
+      criadoEm:serverTimestamp(),
+      criadoEmTexto:new Date().toISOString(),
+      usuarios:alvos.map(u=>({usuarioId:u.docId,publicId:u.data.publicId||"",uid:u.data.uid||"",nome:u.data.nome||u.data.name||"",email:u.data.email||"",chavesEspeciaisAdicionadas:quantidade,saldoAnterior:Number(u.data.chavesEspeciais||0),saldoFinal:Number(u.data.chavesEspeciais||0)+quantidade}))
+    });
+    document.getElementById("specialKeyQuantity").value="";document.getElementById("specialKeyReason").value="";
+    renderizarListaEspecial();await carregarHistoricoDistribuicoes();
+    mostrarMensagem(specialKeyMessage,`✅ ${numero(total)} Chave(s) Especial(is) distribuída(s) para ${numero(alvos.length)} VIP(s). ID: ${distribuicaoId}`,"success");
+    if(usuarioSelecionado&&alvos.some(u=>u.docId===usuarioSelecionado.docId)){usuarioSelecionado.data.chavesEspeciais=Number(usuarioSelecionado.data.chavesEspeciais||0)+quantidade;atualizarSaldos()}
+  }catch(e){
+    console.error("ERRO AO DISTRIBUIR CHAVES ESPECIAIS:",e);
+    let msg="❌ Não foi possível distribuir as Chaves Especiais.";
+    if(e?.code==="permission-denied")msg="❌ O Firestore bloqueou a alteração. Verifique as Rules da coleção admins.";
+    else if(e?.code==="failed-precondition")msg="❌ O Firebase informou uma condição inválida. Tente novamente.";
+    else if(e?.message)msg+=" "+e.message;
+    mostrarMensagem(specialKeyMessage,msg,"error");
+  }finally{botoes.forEach(b=>b.disabled=false)}
+}
+
+async function carregarHistoricoDistribuicoes(){
+  const lista=document.getElementById("specialDistributionHistory");if(!lista)return;
+  try{
+    const r=await getDocs(collection(db,"distribuicoesChavesEspeciais"));
+    const regs=r.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>obterMillis(b.criadoEm||b.criadoEmTexto)-obterMillis(a.criadoEm||a.criadoEmTexto)).slice(0,10);
+    lista.innerHTML="";
+    if(!regs.length){lista.innerHTML="<div class='empty'>Nenhuma distribuição registrada.</div>";return}
+    regs.forEach(x=>{
+      const destino=x.destino==="todos_vips"?"todos os VIPs":"VIP específico",el=document.createElement("div");el.className="distribution-item";
+      el.innerHTML=`🔑 <strong>${numero(x.quantidadePorVip||0)}</strong> por VIP • <strong>${numero(x.totalVips||0)}</strong> VIP(s) • Total <strong>${numero(x.totalChaves||0)}</strong><br>Destino: <strong>${destino}</strong><br>Motivo: <strong>${escapar(x.motivo||"—")}</strong><br>Data: <strong>${escapar(formatarData(x.criadoEm||x.criadoEmTexto))}</strong><br>Administrador: <strong>${escapar(x.adminEmail||"—")}</strong>`;
+      lista.appendChild(el)
+    })
+  }catch(e){console.error("HISTÓRICO CHAVES:",e);lista.innerHTML="<div class='empty'>⚠️ Histórico indisponível. Verifique as Rules da coleção distribuicoesChavesEspeciais.</div>"}
+}
 
 async function buscarUsuarioPorUid(uid){try{const r=await getDocs(query(collection(db,"admins"),where("uid","==",uid)));if(r.empty){mostrarMensagem(searchMessage,"Usuário não encontrado pelo UID.","error");return}mostrarUsuario(r.docs[0]);window.scrollTo({top:userArea.offsetTop-20,behavior:"smooth"})}catch(e){console.error(e);mostrarMensagem(searchMessage,"Erro ao localizar usuário.","error")}}
 async function buscarUsuario(){
-  const v=searchInput.value.trim();
-  if(!v){mostrarMensagem(searchMessage,"Digite um ID, e-mail ou UID.","error");return}
-  userArea.style.display="none";
+  const v=searchInput.value.trim();if(!v){mostrarMensagem(searchMessage,"Digite um ID, e-mail ou UID.","error");return}userArea.style.display="none";
   try{
     let r=await getDocs(query(collection(db,"admins"),where("publicId","==",v.toUpperCase())));
     if(r.empty&&v.includes("@"))r=await getDocs(query(collection(db,"admins"),where("email","==",v.toLowerCase())));
     if(r.empty)r=await getDocs(query(collection(db,"admins"),where("uid","==",v)));
-    if(r.empty){
-      try{const d=await getDoc(doc(db,"admins",v));if(d.exists())r={empty:false,docs:[d]}}catch(e){console.warn("Busca por ID do documento:",e)}
-    }
+    if(r.empty){try{const d=await getDoc(doc(db,"admins",v));if(d.exists())r={empty:false,docs:[d]}}catch(e){console.warn("Busca por ID do documento:",e)}}
     if(!r||r.empty){mostrarMensagem(searchMessage,"Usuário não encontrado.","error");return}
-    await mostrarUsuario(r.docs[0]);
-    mostrarMensagem(searchMessage,"✅ Usuário encontrado.","success");
-    window.scrollTo({top:userArea.offsetTop-20,behavior:"smooth"});
+    await mostrarUsuario(r.docs[0]);mostrarMensagem(searchMessage,"✅ Usuário encontrado.","success");window.scrollTo({top:userArea.offsetTop-20,behavior:"smooth"});
   }catch(e){console.error("ERRO AO BUSCAR USUÁRIO:",e);mostrarMensagem(searchMessage,"Não foi possível consultar os usuários: "+(e?.code||e?.message||"erro desconhecido"),"error")}
 }
 
@@ -224,105 +339,79 @@ async function mostrarUsuario(docu){
   if(docu&&typeof docu.data==="function"){ref=docu.ref;id=docu.id;d=docu.data()}
   else if(docu&&docu.ref&&docu.data){ref=docu.ref;id=docu.id||docu.docId;d=docu.data}
   else throw new Error("Cadastro inválido.");
-  usuarioSelecionado={ref:ref,docId:id,data:d};
-  userArea.style.display="block";
+  usuarioSelecionado={ref:ref,docId:id,data:d};userArea.style.display="block";
   const nome=d.nome||d.name||"Usuário",email=d.email||"Sem e-mail",pid=d.publicId||"Pendente";
   document.getElementById("nome").textContent=nome;document.getElementById("email").textContent=email;document.getElementById("id").textContent="ID: "+pid;document.getElementById("uid").textContent="UID: "+(d.uid||"Não informado");document.getElementById("avatar").textContent=d.avatar||"🙂";
   document.getElementById("infoNome").textContent=nome;document.getElementById("infoEmail").textContent=email;document.getElementById("infoId").textContent=pid;document.getElementById("infoUid").textContent=d.uid||"Não informado";document.getElementById("infoIdade").textContent=d.idade||"Não informado";document.getElementById("infoTelefone").textContent=d.telefone||d.phone||"Não informado";
   atualizarSaldos();atualizarStatus();atualizarGiros();carregarExtrato(pid);
 }
-
-function atualizarSaldos(){if(!usuarioSelecionado)return;const d=usuarioSelecionado.data;document.getElementById("chances").textContent=numero(d.chances);document.getElementById("moedas").textContent=numero(d.moedas);document.getElementById("chaves").textContent=numero(d.chaves);document.getElementById("creditos").textContent=dinheiro(d.creditos)}
+function atualizarSaldos(){if(!usuarioSelecionado)return;const d=usuarioSelecionado.data;document.getElementById("chances").textContent=numero(d.chances);document.getElementById("moedas").textContent=numero(d.moedas);document.getElementById("chaves").textContent=numero(d.chaves);document.getElementById("chavesEspeciais").textContent=numero(d.chavesEspeciais);document.getElementById("creditos").textContent=dinheiro(d.creditos)}
 function atualizarGiros(){const v=Number(usuarioSelecionado?.data?.girosRoleta||0);document.getElementById("girosRoleta").textContent=numero(v);document.getElementById("roletaSaldo").textContent=numero(v)}
 function atualizarStatus(){if(!usuarioSelecionado)return;const d=usuarioSelecionado.data,v=d.vip===true,c=d.caixaBox===true,s=document.getElementById("vipStatus");s.textContent=v?"👑 VIP ATIVO":"⭐ NÃO VIP";s.className=v?"status vip":"status";document.getElementById("boxStatus").textContent=c?"🎁 CAIXA UTILIZADA":"🎁 CAIXA DISPONÍVEL"}
 
-async function alterarSaldo(op){if(!usuarioSelecionado){mostrarMensagem(operationMessage,"Selecione um usuário.","error");return}const item=document.getElementById("item").value,q=Number(document.getElementById("quantidade").value),mot=document.getElementById("motivo").value.trim();if(!Number.isFinite(q)||q<=0){mostrarMensagem(operationMessage,"Digite uma quantidade válida.","error");return}if(!mot){mostrarMensagem(operationMessage,"Informe o motivo.","error");return}const atual=Number(usuarioSelecionado.data[item]||0),novo=op==="adicionar"?atual+q:atual-q;if(novo<0){mostrarMensagem(operationMessage,"O saldo não pode ficar negativo.","error");return}if(!confirm((op==="adicionar"?"Adicionar ":"Remover ")+q+" de "+item+"?"))return;const id=gerarOperacaoId();try{await updateDoc(usuarioSelecionado.ref,{[item]:novo});await addDoc(collection(db,"historico"),{movimentacaoId:id,usuarioId:usuarioSelecionado.docId,publicId:usuarioSelecionado.data.publicId||usuarioSelecionado.docId,usuarioUid:usuarioSelecionado.data.uid||"",usuarioEmail:usuarioSelecionado.data.email||"",usuarioNome:usuarioSelecionado.data.nome||usuarioSelecionado.data.name||"",adminEmail:adminUsuario.email,adminUid:adminUsuario.uid,item,operacao:op,quantidade:q,saldoAnterior:atual,saldoFinal:novo,motivo:mot,criadoEm:new Date().toISOString()});usuarioSelecionado.data[item]=novo;atualizarSaldos();document.getElementById("quantidade").value="";document.getElementById("motivo").value="";mostrarMensagem(operationMessage,"✅ Movimentação realizada. ID: "+id,"success");carregarExtrato(usuarioSelecionado.data.publicId||usuarioSelecionado.docId)}catch(e){console.error(e);mostrarMensagem(operationMessage,"Erro ao realizar movimentação.","error")}}
-async function alterarGiros(op){if(!usuarioSelecionado){mostrarMensagem(roletaMessage,"Selecione um usuário.","error");return}const q=Number(document.getElementById("quantidadeGiros").value),mot=document.getElementById("motivoGiros").value.trim();if(!Number.isInteger(q)||q<=0){mostrarMensagem(roletaMessage,"A quantidade precisa ser um número inteiro.","error");return}if(!mot){mostrarMensagem(roletaMessage,"Informe o motivo.","error");return}const atual=Number(usuarioSelecionado.data.girosRoleta||0),novo=op==="adicionar"?atual+q:atual-q;if(novo<0){mostrarMensagem(roletaMessage,"Os giros não podem ficar negativos.","error");return}if(!confirm((op==="adicionar"?"Adicionar ":"Remover ")+q+" giro(s)?"))return;const id=gerarOperacaoId();try{await updateDoc(usuarioSelecionado.ref,{girosRoleta:novo});await addDoc(collection(db,"historico"),{movimentacaoId:id,usuarioId:usuarioSelecionado.docId,publicId:usuarioSelecionado.data.publicId||usuarioSelecionado.docId,usuarioUid:usuarioSelecionado.data.uid||"",usuarioEmail:usuarioSelecionado.data.email||"",usuarioNome:usuarioSelecionado.data.nome||"",adminEmail:adminUsuario.email,adminUid:adminUsuario.uid,item:"girosRoleta",nomeExibicao:"Giros da Roleta",operacao:op,quantidade:q,saldoAnterior:atual,saldoFinal:novo,motivo:mot,criadoEm:new Date().toISOString()});usuarioSelecionado.data.girosRoleta=novo;atualizarGiros();document.getElementById("quantidadeGiros").value="";document.getElementById("motivoGiros").value="";mostrarMensagem(roletaMessage,"🎰 Operação realizada. Novo saldo: "+novo,"success");carregarExtrato(usuarioSelecionado.data.publicId||usuarioSelecionado.docId)}catch(e){console.error(e);mostrarMensagem(roletaMessage,"Não foi possível alterar os giros.","error")}}
-async function alterarVIP(){if(!usuarioSelecionado){mostrarMensagem(operationMessage,"Selecione um usuário.","error");return}const atual=usuarioSelecionado.data.vip===true,novo=!atual;if(!confirm(novo?"Ativar VIP?":"Desativar VIP?"))return;const id=gerarOperacaoId();try{await updateDoc(usuarioSelecionado.ref,{vip:novo});await addDoc(collection(db,"historico"),{movimentacaoId:id,usuarioId:usuarioSelecionado.docId,publicId:usuarioSelecionado.data.publicId||usuarioSelecionado.docId,usuarioUid:usuarioSelecionado.data.uid||"",usuarioEmail:usuarioSelecionado.data.email||"",usuarioNome:usuarioSelecionado.data.nome||"",adminEmail:adminUsuario.email,adminUid:adminUsuario.uid,item:"VIP",operacao:novo?"adicionar":"remover",quantidade:1,saldoAnterior:atual?1:0,saldoFinal:novo?1:0,motivo:novo?"VIP ativado pelo administrador":"VIP desativado pelo administrador",criadoEm:new Date().toISOString()});usuarioSelecionado.data.vip=novo;atualizarStatus();mostrarMensagem(operationMessage,novo?"👑 VIP ativado.":"⭐ VIP desativado.","success");carregarDashboard();carregarExtrato(usuarioSelecionado.data.publicId||usuarioSelecionado.docId)}catch(e){console.error(e);mostrarMensagem(operationMessage,"Não foi possível alterar o VIP.","error")}}
-async function alterarCaixa(){if(!usuarioSelecionado){mostrarMensagem(operationMessage,"Selecione um usuário.","error");return}const atual=usuarioSelecionado.data.caixaBox===true,novo=!atual;if(!confirm(novo?"Marcar Caixa como utilizada?":"Liberar Caixa novamente?"))return;const id=gerarOperacaoId();try{await updateDoc(usuarioSelecionado.ref,{caixaBox:novo});await addDoc(collection(db,"historico"),{movimentacaoId:id,usuarioId:usuarioSelecionado.docId,publicId:usuarioSelecionado.data.publicId||usuarioSelecionado.docId,usuarioUid:usuarioSelecionado.data.uid||"",usuarioEmail:usuarioSelecionado.data.email||"",usuarioNome:usuarioSelecionado.data.nome||"",adminEmail:adminUsuario.email,adminUid:adminUsuario.uid,item:"Caixa Box",operacao:novo?"remover":"adicionar",quantidade:1,saldoAnterior:atual?1:0,saldoFinal:novo?1:0,motivo:novo?"Caixa Box utilizada":"Caixa Box liberada",criadoEm:new Date().toISOString()});usuarioSelecionado.data.caixaBox=novo;atualizarStatus();mostrarMensagem(operationMessage,novo?"🎁 Caixa marcada como utilizada.":"🎁 Caixa liberada.","success");carregarExtrato(usuarioSelecionado.data.publicId||usuarioSelecionado.docId)}catch(e){console.error(e);mostrarMensagem(operationMessage,"Não foi possível alterar a Caixa.","error")}}
+async function alterarSaldo(op){
+  if(!usuarioSelecionado){mostrarMensagem(operationMessage,"Selecione um usuário.","error");return}
+  const item=document.getElementById("item").value,q=Number(document.getElementById("quantidade").value),mot=document.getElementById("motivo").value.trim();
+  if(!Number.isFinite(q)||q<=0){mostrarMensagem(operationMessage,"Digite uma quantidade válida.","error");return}if(!mot){mostrarMensagem(operationMessage,"Informe o motivo.","error");return}
+  const atual=Number(usuarioSelecionado.data[item]||0),novo=op==="adicionar"?atual+q:atual-q;if(novo<0){mostrarMensagem(operationMessage,"O saldo não pode ficar negativo.","error");return}
+  if(!confirm((op==="adicionar"?"Adicionar ":"Remover ")+q+" de "+item+"?"))return;const id=gerarOperacaoId();
+  try{await updateDoc(usuarioSelecionado.ref,{[item]:novo});await addDoc(collection(db,"historico"),{movimentacaoId:id,usuarioId:usuarioSelecionado.docId,publicId:usuarioSelecionado.data.publicId||usuarioSelecionado.docId,usuarioUid:usuarioSelecionado.data.uid||"",usuarioEmail:usuarioSelecionado.data.email||"",usuarioNome:usuarioSelecionado.data.nome||usuarioSelecionado.data.name||"",adminEmail:adminUsuario.email,adminUid:adminUsuario.uid,item,operacao:op,quantidade:q,saldoAnterior:atual,saldoFinal:novo,motivo:mot,criadoEm:new Date().toISOString()});usuarioSelecionado.data[item]=novo;atualizarSaldos();document.getElementById("quantidade").value="";document.getElementById("motivo").value="";mostrarMensagem(operationMessage,"✅ Movimentação realizada. ID: "+id,"success");carregarExtrato(usuarioSelecionado.data.publicId||usuarioSelecionado.docId)}
+  catch(e){console.error(e);mostrarMensagem(operationMessage,"Erro ao realizar movimentação.","error")}
+}
+async function alterarGiros(op){
+  if(!usuarioSelecionado){mostrarMensagem(roletaMessage,"Selecione um usuário.","error");return}
+  const q=Number(document.getElementById("quantidadeGiros").value),mot=document.getElementById("motivoGiros").value.trim();if(!Number.isInteger(q)||q<=0){mostrarMensagem(roletaMessage,"A quantidade precisa ser um número inteiro.","error");return}if(!mot){mostrarMensagem(roletaMessage,"Informe o motivo.","error");return}
+  const atual=Number(usuarioSelecionado.data.girosRoleta||0),novo=op==="adicionar"?atual+q:atual-q;if(novo<0){mostrarMensagem(roletaMessage,"Os giros não podem ficar negativos.","error");return}if(!confirm((op==="adicionar"?"Adicionar ":"Remover ")+q+" giro(s)?"))return;const id=gerarOperacaoId();
+  try{await updateDoc(usuarioSelecionado.ref,{girosRoleta:novo});await addDoc(collection(db,"historico"),{movimentacaoId:id,usuarioId:usuarioSelecionado.docId,publicId:usuarioSelecionado.data.publicId||usuarioSelecionado.docId,usuarioUid:usuarioSelecionado.data.uid||"",usuarioEmail:usuarioSelecionado.data.email||"",usuarioNome:usuarioSelecionado.data.nome||"",adminEmail:adminUsuario.email,adminUid:adminUsuario.uid,item:"girosRoleta",nomeExibicao:"Giros da Roleta",operacao:op,quantidade:q,saldoAnterior:atual,saldoFinal:novo,motivo:mot,criadoEm:new Date().toISOString()});usuarioSelecionado.data.girosRoleta=novo;atualizarGiros();document.getElementById("quantidadeGiros").value="";document.getElementById("motivoGiros").value="";mostrarMensagem(roletaMessage,"🎰 Operação realizada. Novo saldo: "+novo,"success");carregarExtrato(usuarioSelecionado.data.publicId||usuarioSelecionado.docId)}
+  catch(e){console.error(e);mostrarMensagem(roletaMessage,"Não foi possível alterar os giros.","error")}
+}
+async function alterarVIP(){
+  if(!usuarioSelecionado){mostrarMensagem(operationMessage,"Selecione um usuário.","error");return}const atual=usuarioSelecionado.data.vip===true,novo=!atual;if(!confirm(novo?"Ativar VIP?":"Desativar VIP?"))return;const id=gerarOperacaoId();
+  try{await updateDoc(usuarioSelecionado.ref,{vip:novo});await addDoc(collection(db,"historico"),{movimentacaoId:id,usuarioId:usuarioSelecionado.docId,publicId:usuarioSelecionado.data.publicId||usuarioSelecionado.docId,usuarioUid:usuarioSelecionado.data.uid||"",usuarioEmail:usuarioSelecionado.data.email||"",usuarioNome:usuarioSelecionado.data.nome||"",adminEmail:adminUsuario.email,adminUid:adminUsuario.uid,item:"VIP",operacao:novo?"adicionar":"remover",quantidade:1,saldoAnterior:atual?1:0,saldoFinal:novo?1:0,motivo:novo?"VIP ativado pelo administrador":"VIP desativado pelo administrador",criadoEm:new Date().toISOString()});usuarioSelecionado.data.vip=novo;atualizarStatus();mostrarMensagem(operationMessage,novo?"👑 VIP ativado.":"⭐ VIP desativado.","success");carregarDashboard();carregarExtrato(usuarioSelecionado.data.publicId||usuarioSelecionado.docId)}
+  catch(e){console.error(e);mostrarMensagem(operationMessage,"Não foi possível alterar o VIP.","error")}
+}
+async function alterarCaixa(){
+  if(!usuarioSelecionado){mostrarMensagem(operationMessage,"Selecione um usuário.","error");return}const atual=usuarioSelecionado.data.caixaBox===true,novo=!atual;if(!confirm(novo?"Marcar Caixa como utilizada?":"Liberar Caixa novamente?"))return;const id=gerarOperacaoId();
+  try{await updateDoc(usuarioSelecionado.ref,{caixaBox:novo});await addDoc(collection(db,"historico"),{movimentacaoId:id,usuarioId:usuarioSelecionado.docId,publicId:usuarioSelecionado.data.publicId||usuarioSelecionado.docId,usuarioUid:usuarioSelecionado.data.uid||"",usuarioEmail:usuarioSelecionado.data.email||"",usuarioNome:usuarioSelecionado.data.nome||"",adminEmail:adminUsuario.email,adminUid:adminUsuario.uid,item:"Caixa Box",operacao:novo?"remover":"adicionar",quantidade:1,saldoAnterior:atual?1:0,saldoFinal:novo?1:0,motivo:novo?"Caixa Box utilizada":"Caixa Box liberada",criadoEm:new Date().toISOString()});usuarioSelecionado.data.caixaBox=novo;atualizarStatus();mostrarMensagem(operationMessage,novo?"🎁 Caixa marcada como utilizada.":"🎁 Caixa liberada.","success");carregarExtrato(usuarioSelecionado.data.publicId||usuarioSelecionado.docId)}
+  catch(e){console.error(e);mostrarMensagem(operationMessage,"Não foi possível alterar a Caixa.","error")}
+}
+async function carregarExtrato(pid){
+  const lista=document.getElementById("historyList");lista.innerHTML="<div class='empty'>🔄 Carregando histórico...</div>";if(!pid||pid==="Pendente"){lista.innerHTML="<div class='empty'>Este usuário ainda não possui ID público.</div>";return}
+  try{const r=await getDocs(query(collection(db,"historico"),where("publicId","==",pid)));if(r.empty){lista.innerHTML="<div class='empty'>Nenhuma movimentação registrada.</div>";return}const regs=r.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>obterMillis(b.criadoEm)-obterMillis(a.criadoEm));lista.innerHTML="";regs.forEach(x=>{const el=document.createElement("div");el.className="historyItem";const pos=x.operacao==="adicionar",s=pos?"+":"-",cl=pos?"plus":"minus",ni=x.item==="girosRoleta"?"🎰 Giros da Roleta":x.item||"";el.innerHTML=`<div class="historyTop"><span class="${cl}">${s}${numero(x.quantidade)} ${escapar(ni)}</span><span class="historyDate">${escapar(formatarData(x.criadoEm))}</span></div><div class="historyInfo">Saldo anterior: ${numero(x.saldoAnterior)}<br>Saldo final: ${numero(x.saldoFinal)}<br>Motivo: ${escapar(x.motivo||"—")}<br>Administrador: ${escapar(x.adminEmail||"—")}</div><div class="operation-id">🆔 ${escapar(x.movimentacaoId||"Sem ID")}</div>`;lista.appendChild(el)})}
+  catch(e){console.error(e);lista.innerHTML="<div class='empty'>Não foi possível carregar o histórico.</div>"}
+}
 
-async function carregarExtrato(pid){const lista=document.getElementById("historyList");lista.innerHTML="<div class='empty'>🔄 Carregando histórico...</div>";if(!pid||pid==="Pendente"){lista.innerHTML="<div class='empty'>Este usuário ainda não possui ID público.</div>";return}try{const r=await getDocs(query(collection(db,"historico"),where("publicId","==",pid)));if(r.empty){lista.innerHTML="<div class='empty'>Nenhuma movimentação registrada.</div>";return}const regs=r.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>obterMillis(b.criadoEm)-obterMillis(a.criadoEm));lista.innerHTML="";regs.forEach(x=>{const el=document.createElement("div");el.className="historyItem";const pos=x.operacao==="adicionar",s=pos?"+":"-",cl=pos?"plus":"minus",ni=x.item==="girosRoleta"?"🎰 Giros da Roleta":x.item||"";el.innerHTML=`<div class="historyTop"><span class="${cl}">${s}${numero(x.quantidade)} ${escapar(ni)}</span><span class="historyDate">${escapar(formatarData(x.criadoEm))}</span></div><div class="historyInfo">Saldo anterior: ${numero(x.saldoAnterior)}<br>Saldo final: ${numero(x.saldoFinal)}<br>Motivo: ${escapar(x.motivo||"—")}<br>Administrador: ${escapar(x.adminEmail||"—")}</div><div class="operation-id">🆔 ${escapar(x.movimentacaoId||"Sem ID")}</div>`;lista.appendChild(el)})}catch(e){console.error(e);lista.innerHTML="<div class='empty'>Não foi possível carregar o histórico.</div>"}}
-
-/* =====================================================
-   VALE PRESENTE — CORRIGIDO
-   O painel e o resgate usam a MESMA coleção:
-   codigosPresente
-   ===================================================== */
+/* VALE PRESENTE */
 async function gerarNovoVale(){
-const botao=generateVoucherButton;if(botao.disabled)return;
-if(!authResolvido){botao.disabled=true;botao.textContent="⏳ AGUARDANDO LOGIN...";try{await Promise.race([autenticacaoPronta,new Promise((_,rej)=>setTimeout(()=>rej(new Error("A autenticação demorou demais.")),10000))])}catch(e){botao.disabled=false;botao.textContent="🎫 GERAR VALE PRESENTE";mostrarMensagem(voucherMessage,"❌ A autenticação do administrador não foi concluída. Atualize a página e tente novamente.","error");return}botao.disabled=false;botao.textContent="🎫 GERAR VALE PRESENTE"}
-if(!adminUsuario){mostrarMensagem(voucherMessage,"❌ Administrador não autenticado.","error");return}
-const valor=Number(document.getElementById("voucherValor").value),descricao=document.getElementById("voucherDescricao").value.trim();
-if(!Number.isFinite(valor)||valor<=0){mostrarMensagem(voucherMessage,"❌ Digite um valor válido para o vale.","error");return}
-if(valor>100000){mostrarMensagem(voucherMessage,"❌ O valor máximo permitido é R$ 100.000,00.","error");return}
-botao.disabled=true;botao.textContent="⏳ GERANDO...";mostrarMensagem(voucherMessage,"","");
-try{
-let codigoFinal="",criado=false;
-for(let tentativa=0;tentativa<5;tentativa++){
-const codigo=gerarVale15();
-/* IMPORTANTE: usa a coleção reconhecida pelo sistema de resgate */
-const referencia=doc(db,"codigosPresente",codigo);
-try{
-await comTimeout(setDoc(referencia,{
-codigo:codigo,
-tipo:"creditos",
-quantidade:valor,
-valor:valor,
-descricao:descricao||"Vale Presente Adam Games",
-ativo:true,
-usado:false,
-criadoPor:adminUsuario.email||"",
-criadoPorUid:adminUsuario.uid||"",
-criadoEm:serverTimestamp(),
-usadoPor:"",
-usadoPorUid:"",
-usadoPorEmail:"",
-usadoEm:null
-}),15000);
-codigoFinal=codigo;criado=true;break;
-}catch(error){
-if(error?.code==="permission-denied")throw error;
-console.warn("Tentativa de criação do vale falhou:",error);
-}}
-if(!criado)throw new Error("Não foi possível criar o vale.");
-document.getElementById("voucherCode").textContent=codigoFinal;
-document.getElementById("voucherResult").style.display="block";
-mostrarMensagem(voucherMessage,"🎫 Vale criado com sucesso! Código: "+codigoFinal,"success");
-document.getElementById("voucherValor").value="";
-document.getElementById("voucherDescricao").value="";
-await carregarVales();
-}catch(error){
-console.error("ERRO AO GERAR VALE:",error);
-let msg="❌ Não foi possível criar o Vale Presente.";
-if(error?.code==="permission-denied")msg="❌ O Firestore bloqueou a criação. Verifique a Rule da coleção codigosPresente.";
-else if(error?.code==="timeout")msg="❌ O Firebase demorou mais de 15 segundos para responder. Verifique a conexão e as Rules.";
-else if(error?.code==="unavailable")msg="❌ Firebase temporariamente indisponível. Tente novamente.";
-mostrarMensagem(voucherMessage,msg,"error");
-}finally{botao.disabled=false;botao.textContent="🎫 GERAR VALE PRESENTE"}}
-
+  const botao=generateVoucherButton;if(botao.disabled)return;
+  if(!authResolvido){botao.disabled=true;botao.textContent="⏳ AGUARDANDO LOGIN...";try{await Promise.race([autenticacaoPronta,new Promise((_,rej)=>setTimeout(()=>rej(new Error("A autenticação demorou demais.")),10000))])}catch(e){botao.disabled=false;botao.textContent="🎫 GERAR VALE PRESENTE";mostrarMensagem(voucherMessage,"❌ A autenticação do administrador não foi concluída. Atualize a página e tente novamente.","error");return}botao.disabled=false;botao.textContent="🎫 GERAR VALE PRESENTE"}
+  if(!adminUsuario){mostrarMensagem(voucherMessage,"❌ Administrador não autenticado.","error");return}
+  const valor=Number(document.getElementById("voucherValor").value),descricao=document.getElementById("voucherDescricao").value.trim();if(!Number.isFinite(valor)||valor<=0){mostrarMensagem(voucherMessage,"❌ Digite um valor válido para o vale.","error");return}if(valor>100000){mostrarMensagem(voucherMessage,"❌ O valor máximo permitido é R$ 100.000,00.","error");return}
+  botao.disabled=true;botao.textContent="⏳ GERANDO...";mostrarMensagem(voucherMessage,"","");
+  try{
+    let codigoFinal="",criado=false;
+    for(let tentativa=0;tentativa<5;tentativa++){const codigo=gerarVale15(),referencia=doc(db,"codigosPresente",codigo);try{await comTimeout(setDoc(referencia,{codigo,tipo:"creditos",quantidade:valor,valor,descricao:descricao||"Vale Presente Adam Games",ativo:true,usado:false,criadoPor:adminUsuario.email||"",criadoPorUid:adminUsuario.uid||"",criadoEm:serverTimestamp(),usadoPor:"",usadoPorUid:"",usadoPorEmail:"",usadoEm:null}),15000);codigoFinal=codigo;criado=true;break}catch(error){if(error?.code==="permission-denied")throw error;console.warn("Tentativa de criação do vale falhou:",error)}}
+    if(!criado)throw new Error("Não foi possível criar o vale.");document.getElementById("voucherCode").textContent=codigoFinal;document.getElementById("voucherResult").style.display="block";mostrarMensagem(voucherMessage,"🎫 Vale criado com sucesso! Código: "+codigoFinal,"success");document.getElementById("voucherValor").value="";document.getElementById("voucherDescricao").value="";await carregarVales();
+  }catch(error){console.error("ERRO AO GERAR VALE:",error);let msg="❌ Não foi possível criar o Vale Presente.";if(error?.code==="permission-denied")msg="❌ O Firestore bloqueou a criação. Verifique a Rule da coleção codigosPresente.";else if(error?.code==="timeout")msg="❌ O Firebase demorou mais de 15 segundos para responder. Verifique a conexão e as Rules.";else if(error?.code==="unavailable")msg="❌ Firebase temporariamente indisponível. Tente novamente.";mostrarMensagem(voucherMessage,msg,"error")}
+  finally{botao.disabled=false;botao.textContent="🎫 GERAR VALE PRESENTE"}
+}
 async function copiarVale(){const c=document.getElementById("voucherCode").textContent.trim();if(!c||c==="---------------"){mostrarMensagem(voucherMessage,"Nenhum código para copiar.","error");return}try{await navigator.clipboard.writeText(c);mostrarMensagem(voucherMessage,"📋 Código copiado com sucesso!","success")}catch(e){const t=document.createElement("textarea");t.value=c;document.body.appendChild(t);t.select();try{document.execCommand("copy");mostrarMensagem(voucherMessage,"📋 Código copiado!","success")}catch(x){prompt("Copie o código:",c)}t.remove()}}
-
 async function carregarVales(){
-const lista=document.getElementById("voucherList");lista.innerHTML="<div class='empty'>🔄 Carregando vales...</div>";
-try{
-const r=await getDocs(collection(db,"codigosPresente"));
-todosVales=r.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>obterMillis(b.criadoEm)-obterMillis(a.criadoEm));
-lista.innerHTML="";
-if(!todosVales.length){lista.innerHTML="<div class='empty'>Nenhum vale gerado.</div>";return}
-todosVales.slice(0,100).forEach(v=>{
-const div=document.createElement("div");div.className="voucher-item";const cancelado=v.cancelado===true,usado=v.usado===true;const status=cancelado?"⚫ CANCELADO":usado?"🔴 UTILIZADO":"🟢 DISPONÍVEL";
-div.innerHTML=`<div class="voucher-code-small">🎫 ${escapar(v.codigo||v.id)}</div><div class="voucher-meta">Valor: <strong>${dinheiro(v.valor!==undefined?v.valor:v.quantidade)}</strong><br>Status: ${status}<br>${escapar(v.descricao||"Vale Presente Adam Games")}<br>Tipo: ${escapar(v.tipo||"creditos")}<br>Criado em: ${escapar(formatarData(v.criadoEm))}${v.usadoPor?`<br>Resgatado por: <strong>${escapar(v.usadoPorEmail||v.usadoPor)}</strong>`:""}${v.usadoEm?`<br>Resgatado em: ${escapar(formatarData(v.usadoEm))}`:""}</div>`;
-lista.appendChild(div);
-});
-}catch(e){console.error("ERRO VALES:",e);lista.innerHTML="<div class='empty'>❌ Não foi possível carregar os vales.</div>";mostrarMensagem(voucherMessage,e?.code==="permission-denied"?"Sem permissão para ler a coleção codigosPresente.":"Erro ao carregar os vales.","error")}}
+  const lista=document.getElementById("voucherList");lista.innerHTML="<div class='empty'>🔄 Carregando vales...</div>";
+  try{const r=await getDocs(collection(db,"codigosPresente"));todosVales=r.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>obterMillis(b.criadoEm)-obterMillis(a.criadoEm));lista.innerHTML="";if(!todosVales.length){lista.innerHTML="<div class='empty'>Nenhum vale gerado.</div>";return}todosVales.slice(0,100).forEach(v=>{const div=document.createElement("div");div.className="voucher-item";const cancelado=v.cancelado===true,usado=v.usado===true,status=cancelado?"⚫ CANCELADO":usado?"🔴 UTILIZADO":"🟢 DISPONÍVEL";div.innerHTML=`<div class="voucher-code-small">🎫 ${escapar(v.codigo||v.id)}</div><div class="voucher-meta">Valor: <strong>${dinheiro(v.valor!==undefined?v.valor:v.quantidade)}</strong><br>Status: ${status}<br>${escapar(v.descricao||"Vale Presente Adam Games")}<br>Tipo: ${escapar(v.tipo||"creditos")}<br>Criado em: ${escapar(formatarData(v.criadoEm))}${v.usadoPor?`<br>Resgatado por: <strong>${escapar(v.usadoPorEmail||v.usadoPor)}</strong>`:""}${v.usadoEm?`<br>Resgatado em: ${escapar(formatarData(v.usadoEm))}`:""}</div>`;lista.appendChild(div)})}
+  catch(e){console.error("ERRO VALES:",e);lista.innerHTML="<div class='empty'>❌ Não foi possível carregar os vales.</div>";mostrarMensagem(voucherMessage,e?.code==="permission-denied"?"Sem permissão para ler a coleção codigosPresente.":"Erro ao carregar os vales.","error")}
+}
 
-async function atualizarTudo(){if(!adminUsuario)return;const b=refreshButton;b.disabled=true;b.textContent="🔄 Atualizando...";try{await Promise.all([carregarUsuarios(),carregarEntregas(),carregarVales()])}catch(e){console.error(e)}finally{b.disabled=false;b.textContent="🔄 Atualizar"}}
+async function atualizarTudo(){
+  if(!adminUsuario)return;const b=refreshButton;b.disabled=true;b.textContent="🔄 Atualizando...";
+  try{await Promise.all([carregarUsuarios(),carregarEntregas(),carregarVales(),carregarHistoricoDistribuicoes()])}catch(e){console.error(e)}finally{b.disabled=false;b.textContent="🔄 Atualizar"}
+}
 
 onAuthStateChanged(auth,async usuario=>{
-if(!usuario){authResolvido=true;resolverAutenticacao();window.location.replace("index.html");return}
-const email=(usuario.email||"").trim().toLowerCase();
-if(email!==ADMIN_EMAIL.toLowerCase()){authResolvido=true;resolverAutenticacao();alert("⛔ Acesso negado. Área exclusiva do administrador.");await signOut(auth);window.location.replace("index.html");return}
-adminUsuario=usuario;authResolvido=true;resolverAutenticacao();refreshButton.disabled=false;generateVoucherButton.disabled=false;await atualizarTudo();
+  if(!usuario){authResolvido=true;resolverAutenticacao();window.location.replace("index.html");return}
+  const email=(usuario.email||"").trim().toLowerCase();
+  if(email!==ADMIN_EMAIL.toLowerCase()){authResolvido=true;resolverAutenticacao();alert("⛔ Acesso negado. Área exclusiva do administrador.");await signOut(auth);window.location.replace("index.html");return}
+  adminUsuario=usuario;authResolvido=true;resolverAutenticacao();refreshButton.disabled=false;generateVoucherButton.disabled=false;await atualizarTudo();
 });
 
 document.getElementById("buscar").onclick=buscarUsuario;
@@ -334,12 +423,13 @@ document.getElementById("adicionarGiros").onclick=()=>alterarGiros("adicionar");
 document.getElementById("removerGiros").onclick=()=>alterarGiros("remover");
 document.getElementById("vip").onclick=alterarVIP;
 document.getElementById("box").onclick=alterarCaixa;
+document.getElementById("sendSpecialKeysAll").onclick=()=>distribuirChavesEspeciais("todos");
+document.getElementById("sendSpecialKeysOne").onclick=()=>distribuirChavesEspeciais("um");
 generateVoucherButton.onclick=gerarNovoVale;
 document.getElementById("copyVoucher").onclick=copiarVale;
 document.getElementById("newVoucher").onclick=()=>{document.getElementById("voucherResult").style.display="none";document.getElementById("voucherMessage").className="message";document.getElementById("voucherValor").focus()};
 document.getElementById("logout").onclick=async()=>{try{await signOut(auth)}catch(e){console.error(e)}window.location.replace("index.html")};
-refreshButton.disabled=true;
-generateVoucherButton.disabled=true;
+refreshButton.disabled=true;generateVoucherButton.disabled=true;
 </script>
 </body>
 </html>
