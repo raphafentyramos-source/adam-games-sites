@@ -757,9 +757,11 @@ button{
 
   width:100%;
 
-  max-width:390px;
+  max-width:430px;
 
-  height:210px;
+  aspect-ratio:1.5 / 1;
+
+  height:auto;
 
   margin:18px auto;
 
@@ -769,13 +771,15 @@ button{
 
   box-shadow:
     0 15px 35px
-    rgba(0,0,0,.35);
+    rgba(0,0,0,.45);
 
   user-select:none;
 
   -webkit-user-select:none;
 
   touch-action:none;
+
+  background:#0b261a;
 
 }
 
@@ -795,19 +799,13 @@ button{
 
   padding:20px;
 
-  background:
+  background-image:url("raspadinha-independencia.png");
 
-    radial-gradient(
-      circle at 50% 30%,
-      rgba(255,213,43,.22),
-      transparent 45%
-    ),
+  background-size:cover;
 
-    linear-gradient(
-      145deg,
-      #092e52,
-      #071b35
-    );
+  background-position:center;
+
+  background-repeat:no-repeat;
 
 }
 
@@ -816,6 +814,8 @@ button{
   font-size:54px;
 
   margin-bottom:8px;
+
+  filter:drop-shadow(0 4px 8px rgba(0,0,0,.45));
 
 }
 
@@ -1958,7 +1958,8 @@ button{
   }
 
   .scratch-area{
-    height:190px;
+    height:auto;
+    aspect-ratio:1.5 / 1;
   }
 
 }
@@ -4305,7 +4306,7 @@ function prepararRaspadinha(){
   ctx.globalCompositeOperation =
     "source-over";
 
-
+  /* Camada prateada que será raspada */
   const grad =
     ctx.createLinearGradient(
       0,
@@ -4314,89 +4315,47 @@ function prepararRaspadinha(){
       rect.height
     );
 
+  grad.addColorStop(0, "#9b9b9b");
+  grad.addColorStop(.22, "#d8d8d8");
+  grad.addColorStop(.5, "#a7a7a7");
+  grad.addColorStop(.78, "#e0e0e0");
+  grad.addColorStop(1, "#8b8b8b");
 
-  grad.addColorStop(
-    0,
-    "#d9b23b"
-  );
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, rect.width, rect.height);
 
-  grad.addColorStop(
-    .5,
-    "#f3d45d"
-  );
-
-  grad.addColorStop(
-    1,
-    "#a87512"
-  );
-
-
-  ctx.fillStyle =
-    grad;
-
-
-  ctx.fillRect(
-    0,
-    0,
-    rect.width,
-    rect.height
-  );
-
-
-  ctx.fillStyle =
-    "rgba(255,255,255,.20)";
-
+  /* Textura metálica */
+  ctx.strokeStyle = "rgba(255,255,255,.20)";
+  ctx.lineWidth = 2;
 
   for(
     let x = -rect.height;
     x < rect.width + rect.height;
-    x += 26
+    x += 11
   ){
-
-    ctx.save();
-
-    ctx.translate(
-      x,
-      0
-    );
-
-    ctx.rotate(
-      -0.55
-    );
-
-    ctx.fillRect(
-      0,
-      0,
-      8,
-      rect.height * 2
-    );
-
-    ctx.restore();
-
+    ctx.beginPath();
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x + rect.height, rect.height);
+    ctx.stroke();
   }
 
+  /* Moldura interna */
+  ctx.strokeStyle = "rgba(35,24,0,.38)";
+  ctx.lineWidth = 3;
+  ctx.strokeRect(7, 7, rect.width - 14, rect.height - 14);
 
-  ctx.fillStyle =
-    "rgba(45,30,0,.65)";
+  ctx.fillStyle = "#1f3b25";
+  ctx.font = "900 25px Arial";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.shadowColor = "rgba(0,0,0,.35)";
+  ctx.shadowBlur = 5;
+  ctx.fillText("RASPE AQUI", rect.width / 2, rect.height / 2 - 5);
 
-
-  ctx.font =
-    "900 22px Arial";
-
-
-  ctx.textAlign =
-    "center";
-
-
-  ctx.textBaseline =
-    "middle";
-
-
-  ctx.fillText(
-    "RASPE AQUI",
-    rect.width / 2,
-    rect.height / 2
-  );
+  ctx.shadowBlur = 0;
+  ctx.font = "900 12px Arial";
+  ctx.fillStyle = "#284b2f";
+  ctx.fillText("🇧🇷  1 CHAVE DA INDEPENDÊNCIA  🇧🇷", rect.width / 2, rect.height / 2 + 24);
 
 
   scratchPixels =
