@@ -3242,7 +3242,11 @@ import {
   doc,
   setDoc,
   runTransaction,
-  Timestamp
+  Timestamp,
+  onSnapshot,
+  orderBy,
+  limit,
+  serverTimestamp
 }
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
@@ -6769,9 +6773,389 @@ onAuthStateChanged(
 
 );
 
+
+
+/* =====================================================
+   CHAT ADAM GAMES — INTEGRADO NO PAINEL
+   ===================================================== */
+let usuario = null;
+let cadastro = null;
+let unsubscribeGeral = null;
+let unsubscribePrivados = null;
+let unsubscribeMensagens = null;
+let conversaAtual = null;
+let salaAtual = "geral";
+let usuariosCache = [];
+
+const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+}[c]));
+
+function avatar(v){
+  return String(v || "🙂");
+}
+
+function dataHora(ts){
+  if(!ts) return "";
+  const d = ts.toDate ? ts.toDate() : new Date(ts);
+  return d.toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"});
+}
+
+function chatId(a,b){
+  return [a,b].sort().join("_");
+}
+
+function montar(){
+  if(document.getElementById("adamChatRoot")) return;
+
+  const style=document.createElement("style");
+  style.id="adamChatStyle";
+  style.textContent=`
+  #adamChatRoot{position:relative;z-index:50;margin:18px 0 120px}
+  .ag-chat-card{min-height:126px;padding:18px 24px;border-radius:30px;background:linear-gradient(145deg,#087eea,#064aaf);border:1px solid rgba(255,255,255,.16);box-shadow:0 15px 35px rgba(0,0,0,.28);cursor:pointer;display:flex;align-items:center;gap:18px}
+  .ag-chat-card-icon{width:74px;height:74px;flex:0 0 74px;border-radius:22px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.13);font-size:46px}
+  .ag-chat-card-copy{flex:1;min-width:0}.ag-chat-card h3{font-size:24px;margin:0 0 5px}.ag-chat-card p{color:rgba(255,255,255,.9);font-size:14px;line-height:1.4;margin:0}
+  .ag-chat-card-arrow{width:58px;height:58px;flex:0 0 58px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.14);font-size:34px;color:#fff}
+  .ag-chat-badge{display:inline-flex;min-width:24px;height:24px;padding:0 7px;align-items:center;justify-content:center;border-radius:20px;background:#ff3048;font-size:12px;font-weight:900;margin-left:6px}
+  #agChatModal{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;padding:12px;background:rgba(0,8,22,.78);backdrop-filter:blur(8px)}
+  .ag-chat-box{width:min(980px,100%);height:min(760px,92vh);display:flex;overflow:hidden;border-radius:26px;background:#061d3b;border:1px solid rgba(255,255,255,.13);box-shadow:0 25px 80px rgba(0,0,0,.55)}
+  .ag-chat-side{width:280px;background:#04172f;border-right:1px solid rgba(255,255,255,.08);display:flex;flex-direction:column}
+  .ag-chat-side-head{padding:18px;border-bottom:1px solid rgba(255,255,255,.08);font-weight:900}
+  .ag-chat-tabs{display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:10px}
+  .ag-chat-tab{border:0;border-radius:12px;padding:11px 5px;background:rgba(255,255,255,.06);color:#b9d3eb;font-weight:900;cursor:pointer}
+  .ag-chat-tab.active{background:#168fff;color:#fff}
+  .ag-chat-search{margin:0 10px 10px;padding:11px;border:1px solid rgba(255,255,255,.12);border-radius:12px;background:#08284e;color:#fff;outline:0;width:calc(100% - 20px)}
+  .ag-chat-list{flex:1;overflow:auto;padding:0 10px 10px}
+  .ag-chat-item{display:flex;align-items:center;gap:10px;padding:11px;border-radius:14px;cursor:pointer;margin-bottom:5px}
+  .ag-chat-item:hover,.ag-chat-item.active{background:rgba(22,143,255,.18)}
+  .ag-chat-avatar{width:43px;height:43px;flex:0 0 43px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,#ffd347,#f4a800);font-size:24px}
+  .ag-chat-item-text{min-width:0;flex:1}.ag-chat-item-name{font-weight:900;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ag-chat-item-last{font-size:11px;color:#8fb1cf;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:3px}
+  .ag-vip{color:#ffd52b}.ag-unread{background:#ff3048;color:#fff;border-radius:15px;padding:3px 7px;font-size:10px;font-weight:900}
+  .ag-chat-main{flex:1;min-width:0;display:flex;flex-direction:column}
+  .ag-chat-head{padding:15px 18px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(255,255,255,.08);background:#07254a}
+  .ag-chat-title{font-weight:900;font-size:16px;flex:1}.ag-chat-sub{font-size:10px;color:#8fb1cf;margin-top:3px}
+  .ag-chat-close{width:42px;height:42px;border:0;border-radius:14px;background:rgba(255,255,255,.08);color:#fff;font-size:20px;cursor:pointer}
+  .ag-chat-messages{flex:1;overflow:auto;padding:18px;background:radial-gradient(circle at 50% 0%,rgba(22,143,255,.10),transparent 40%)}
+  .ag-msg{display:flex;margin:8px 0}.ag-msg.me{justify-content:flex-end}.ag-msg-wrap{max-width:min(78%,600px)}.ag-msg-name{font-size:10px;color:#8fb1cf;margin:0 7px 4px}.ag-msg.me .ag-msg-name{text-align:right}
+  .ag-msg-bubble{padding:10px 13px;border-radius:17px 17px 17px 5px;background:#0b315e;color:#fff;line-height:1.4;font-size:13px;word-break:break-word}.ag-msg.me .ag-msg-bubble{background:linear-gradient(135deg,#168fff,#0766c9);border-radius:17px 17px 5px 17px}
+  .ag-msg-time{font-size:9px;color:#7898b5;margin:4px 7px}.ag-msg.me .ag-msg-time{text-align:right}
+  .ag-chat-compose{display:flex;gap:8px;padding:11px;border-top:1px solid rgba(255,255,255,.08);background:#04172f}.ag-chat-input{flex:1;min-width:0;resize:none;height:46px;padding:12px;border:1px solid rgba(255,255,255,.12);border-radius:14px;background:#08284e;color:#fff;outline:0;font-family:inherit}.ag-chat-send{width:52px;border:0;border-radius:14px;background:#168fff;color:#fff;font-size:21px;font-weight:900;cursor:pointer}.ag-chat-empty{text-align:center;color:#7898b5;padding:35px 15px;font-size:13px}
+  .ag-room-create{margin:0 10px 10px;border:1px dashed rgba(255,213,43,.45);background:rgba(255,213,43,.08);color:#ffd52b;border-radius:12px;padding:10px;font-weight:900;cursor:pointer;width:calc(100% - 20px)}
+  @media(max-width:700px){#adamChatRoot{margin:18px 0 120px}.ag-chat-card{min-height:112px;padding:15px 14px;gap:11px}.ag-chat-card-icon{width:58px;height:58px;flex-basis:58px;border-radius:18px;font-size:36px}.ag-chat-card h3{font-size:18px}.ag-chat-card p{font-size:12px}.ag-chat-card-arrow{width:46px;height:46px;flex-basis:46px;font-size:28px}#agChatModal{padding:0}.ag-chat-box{height:100vh;border-radius:0}.ag-chat-side{width:108px}.ag-chat-side-head{font-size:13px;padding:13px 9px}.ag-chat-tabs{grid-template-columns:1fr;padding:7px}.ag-chat-search{font-size:11px;padding:9px}.ag-chat-item{padding:8px;justify-content:center}.ag-chat-item-text,.ag-unread{display:none}.ag-chat-avatar{width:43px;height:43px}.ag-chat-wrap{max-width:86%}}
+  `;
+  document.head.appendChild(style);
+
+  const root=document.createElement("div");
+  root.id="adamChatRoot";
+  root.innerHTML=`
+    <div class="ag-chat-card" id="agOpenChat">
+      <div class="ag-chat-card-icon">💬</div>
+      <div class="ag-chat-card-copy">
+        <h3>CHAT ADAM GAMES <span class="ag-chat-badge" id="agChatBadge" style="display:none">0</span></h3>
+        <p>Converse no chat geral, chame usuários no privado e participe das futuras salas.</p>
+      </div>
+      <div class="ag-chat-card-arrow">→</div>
+    </div>
+    <div id="agChatModal">
+      <div class="ag-chat-box">
+        <aside class="ag-chat-side">
+          <div class="ag-chat-side-head">💬 CHAT ADAM GAMES</div>
+          <div class="ag-chat-tabs">
+            <button class="ag-chat-tab active" id="agTabRooms">🏠 Salas</button>
+            <button class="ag-chat-tab" id="agTabPrivate">🔒 Privados</button>
+          </div>
+          <input class="ag-chat-search" id="agUserSearch" placeholder="🔎 Procurar usuário">
+          <button class="ag-room-create" id="agCreateRoom" style="display:none">➕ Criar sala</button>
+          <div class="ag-chat-list" id="agChatList"></div>
+        </aside>
+        <main class="ag-chat-main">
+          <div class="ag-chat-head">
+            <div class="ag-chat-avatar" id="agHeadAvatar">🌎</div>
+            <div>
+              <div class="ag-chat-title" id="agChatTitle">Chat Geral</div>
+              <div class="ag-chat-sub" id="agChatSub">Todos os usuários</div>
+            </div>
+            <button class="ag-chat-close" id="agCloseChat">×</button>
+          </div>
+          <div class="ag-chat-messages" id="agChatMessages"><div class="ag-chat-empty">Carregando chat...</div></div>
+          <form class="ag-chat-compose" id="agChatForm">
+            <textarea class="ag-chat-input" id="agChatInput" maxlength="1000" placeholder="Digite sua mensagem..."></textarea>
+            <button class="ag-chat-send" type="submit">➤</button>
+          </form>
+        </main>
+      </div>
+    </div>
+  `;
+
+  const page=document.querySelector(".page");
+  const vipPanel=document.querySelector(".vip-panel");
+  const cards=document.querySelector(".cards");
+  if(vipPanel) vipPanel.insertAdjacentElement("afterend",root);
+  else if(cards) cards.insertAdjacentElement("afterend",root);
+  else if(page) page.appendChild(root);
+  else document.body.appendChild(root);
+
+  document.getElementById("agOpenChat").onclick=()=>abrirChat();
+  const chatNav=document.getElementById("chatNav");
+  if(chatNav) chatNav.onclick=()=>abrirChat();
+  document.getElementById("agCloseChat").onclick=fecharChat;
+  document.getElementById("agTabRooms").onclick=()=>mostrarAba("salas");
+  document.getElementById("agTabPrivate").onclick=()=>mostrarAba("privados");
+  document.getElementById("agChatForm").onsubmit=e=>{e.preventDefault();enviarMensagem();};
+  document.getElementById("agUserSearch").oninput=e=>filtrarUsuarios(e.target.value);
+  document.getElementById("agCreateRoom").onclick=criarSala;
+}
+
+async function carregarCadastroChat(user){
+  const q=query(collection(db,"admins"),where("uid","==",user.uid));
+  const snap=await getDocs(q);
+  if(snap.empty) return {id:null,nome:user.displayName||"Usuário",avatar:"🙂",vip:false};
+  return {id:snap.docs[0].id,...snap.docs[0].data()};
+}
+
+function abrirChat(){
+  document.getElementById("agChatModal").style.display="flex";
+  mostrarAba("salas");
+}
+
+function fecharChat(){
+  document.getElementById("agChatModal").style.display="none";
+  if(unsubscribeMensagens){unsubscribeMensagens();unsubscribeMensagens=null;}
+}
+
+function mostrarAba(tipo){
+  const rooms=document.getElementById("agTabRooms"), priv=document.getElementById("agTabPrivate");
+  rooms.classList.toggle("active",tipo==="salas");
+  priv.classList.toggle("active",tipo==="privados");
+  document.getElementById("agCreateRoom").style.display="none";
+  document.getElementById("agUserSearch").value="";
+  if(tipo==="salas") carregarSalas();
+  else carregarPrivados();
+}
+
+async function garantirGeral(){
+  const ref=doc(db,"salas","geral");
+  const snap=await getDoc(ref);
+  if(!snap.exists()){
+    await setDoc(ref,{nome:"Chat Geral",descricao:"Sala geral Adam Games",icone:"🌎",publica:true,criadoEm:serverTimestamp()});
+  }
+}
+
+function carregarSalas(){
+  const lista=document.getElementById("agChatList");
+  lista.innerHTML=`<div class="ag-chat-empty">Carregando salas...</div>`;
+  garantirGeral().then(async()=>{
+    const snap=await getDocs(collection(db,"salas"));
+    const salas=snap.docs.map(d=>({id:d.id,...d.data()}));
+    if(!salas.some(s=>s.id==="geral")) salas.unshift({id:"geral",nome:"Chat Geral",icone:"🌎"});
+    lista.innerHTML="";
+    salas.sort((a,b)=>a.id==="geral"?-1:b.id==="geral"?1:String(a.nome||"").localeCompare(String(b.nome||"")));
+    salas.forEach(s=>{
+      const el=document.createElement("div");
+      el.className="ag-chat-item";
+      el.innerHTML=`<div class="ag-chat-avatar">${esc(s.icone||"🏠")}</div><div class="ag-chat-item-text"><div class="ag-chat-item-name">${esc(s.nome||s.id)}</div><div class="ag-chat-item-last">${esc(s.descricao||"Sala Adam Games")}</div></div>`;
+      el.onclick=()=>abrirSala(s);
+      lista.appendChild(el);
+    });
+    abrirSala(salas.find(s=>s.id==="geral")||salas[0]);
+  }).catch(e=>{
+    lista.innerHTML=`<div class="ag-chat-empty">Não foi possível carregar as salas.<br><small>${esc(e.message)}</small></div>`;
+  });
+}
+
+function abrirSala(sala){
+  salaAtual=sala.id;
+  conversaAtual=null;
+  document.getElementById("agChatTitle").textContent=sala.nome||"Chat";
+  document.getElementById("agChatSub").textContent=sala.descricao||"Sala Adam Games";
+  document.getElementById("agHeadAvatar").textContent=sala.icone||"🏠";
+  ouvirMensagens(collection(db,"salas",sala.id,"mensagens"),false);
+}
+
+async function carregarPrivados(){
+  const lista=document.getElementById("agChatList");
+  lista.innerHTML=`<div class="ag-chat-empty">Carregando conversas...</div>`;
+  document.getElementById("agUserSearch").placeholder="🔎 Procurar usuário para chamar no privado";
+  try{
+    const snap=await getDocs(query(collection(db,"conversas"),where("participantes","array-contains",usuario.uid)));
+    const convs=snap.docs.map(d=>({id:d.id,...d.data()}));
+    lista.innerHTML="";
+    convs.sort((a,b)=>(b.ultimaMensagemEm?.seconds||0)-(a.ultimaMensagemEm?.seconds||0));
+    convs.forEach(c=>{
+      const outro=c.participantes.find(x=>x!==usuario.uid);
+      const nome=c.nomes?.[outro]||"Usuário";
+      const av=c.avatars?.[outro]||"🙂";
+      const el=document.createElement("div");
+      el.className="ag-chat-item";
+      el.innerHTML=`<div class="ag-chat-avatar">${esc(av)}</div><div class="ag-chat-item-text"><div class="ag-chat-item-name">${esc(nome)} ${c.ultimaMensagemLida===false&&c.ultimoRemetenteUid!==usuario.uid?'<span class="ag-unread">NOVA</span>':''}</div><div class="ag-chat-item-last">${esc(c.ultimaMensagem||"Sem mensagens")}</div></div>`;
+      el.onclick=()=>abrirPrivado(c,outro,nome,av);
+      lista.appendChild(el);
+    });
+    usuariosCache=[];
+    const usersSnap=await getDocs(collection(db,"admins"));
+    usuariosCache=usersSnap.docs.map(d=>({id:d.id,...d.data()})).filter(u=>u.uid&&u.uid!==usuario.uid);
+    if(!convs.length) lista.innerHTML=`<div class="ag-chat-empty">Nenhum privado ainda.<br><br>Use a busca acima para chamar alguém.</div>`;
+  }catch(e){
+    lista.innerHTML=`<div class="ag-chat-empty">Não foi possível carregar os privados.<br><small>${esc(e.message)}</small></div>`;
+  }
+}
+
+function filtrarUsuarios(texto){
+  if(!document.getElementById("agTabPrivate").classList.contains("active")) return;
+  const t=texto.trim().toLowerCase();
+  const lista=document.getElementById("agChatList");
+  if(!t){carregarPrivados();return;}
+  const encontrados=usuariosCache.filter(u=>
+    String(u.nome||"").toLowerCase().includes(t) ||
+    String(u.publicId||"").toLowerCase().includes(t) ||
+    String(u.email||"").toLowerCase().includes(t)
+  ).slice(0,30);
+  lista.innerHTML="";
+  if(!encontrados.length){
+    lista.innerHTML=`<div class="ag-chat-empty">Nenhum usuário encontrado.</div>`;
+    return;
+  }
+  encontrados.forEach(u=>{
+    const el=document.createElement("div");
+    el.className="ag-chat-item";
+    el.innerHTML=`<div class="ag-chat-avatar">${esc(avatar(u.avatar))}</div><div class="ag-chat-item-text"><div class="ag-chat-item-name">${esc(u.nome||"Usuário")} ${u.vip===true?'<span class="ag-vip">👑</span>':''}</div><div class="ag-chat-item-last">ID: ${esc(u.publicId||u.uid)}</div></div>`;
+    el.onclick=()=>iniciarPrivado(u);
+    lista.appendChild(el);
+  });
+}
+
+async function iniciarPrivado(u){
+  const id=chatId(usuario.uid,u.uid);
+  const ref=doc(db,"conversas",id);
+  const snap=await getDoc(ref);
+  if(!snap.exists()){
+    await setDoc(ref,{
+      participantes:[usuario.uid,u.uid],
+      nomes:{[usuario.uid]:cadastro.nome||usuario.displayName||"Usuário",[u.uid]:u.nome||"Usuário"},
+      avatars:{[usuario.uid]:avatar(cadastro.avatar),[u.uid]:avatar(u.avatar)},
+      vips:{[usuario.uid]:cadastro.vip===true,[u.uid]:u.vip===true},
+      ultimaMensagem:"",
+      ultimaMensagemLida:true,
+      criadoEm:serverTimestamp()
+    });
+  }
+  abrirPrivado((await getDoc(ref)).data(),u.uid,u.nome||"Usuário",avatar(u.avatar));
+}
+
+function abrirPrivado(c,outroUid,nome,av){
+  conversaAtual={id:c.id||chatId(usuario.uid,outroUid),outroUid};
+  salaAtual=null;
+  document.getElementById("agChatTitle").textContent=nome||"Privado";
+  document.getElementById("agChatSub").textContent="🔒 Conversa privada";
+  document.getElementById("agHeadAvatar").textContent=av||"🙂";
+  const ref=collection(db,"conversas",conversaAtual.id,"mensagens");
+  ouvirMensagens(ref,true);
+  updateDoc(doc(db,"conversas",conversaAtual.id),{ultimaMensagemLida:true}).catch(()=>{});
+}
+
+function ouvirMensagens(ref,privado){
+  if(unsubscribeMensagens) unsubscribeMensagens();
+  const q=query(ref,orderBy("criadoEm","asc"),limit(300));
+  unsubscribeMensagens=onSnapshot(q,snap=>{
+    const area=document.getElementById("agChatMessages");
+    area.innerHTML="";
+    if(snap.empty){
+      area.innerHTML=`<div class="ag-chat-empty">Ainda não há mensagens. Seja o primeiro a falar! 👋</div>`;
+      return;
+    }
+    snap.forEach(d=>{
+      const m=d.data();
+      const me=m.remetenteUid===usuario.uid;
+      const el=document.createElement("div");
+      el.className="ag-msg"+(me?" me":"");
+      el.innerHTML=`<div class="ag-msg-wrap"><div class="ag-msg-name">${me?"Você":esc(m.remetenteNome||"Usuário")} ${m.remetenteVip===true?"👑":""}</div><div class="ag-msg-bubble">${esc(m.texto||"")}</div><div class="ag-msg-time">${dataHora(m.criadoEm)}</div></div>`;
+      area.appendChild(el);
+    });
+    area.scrollTop=area.scrollHeight;
+    if(privado) updateDoc(doc(db,"conversas",conversaAtual.id),{ultimaMensagemLida:true}).catch(()=>{});
+  },e=>{
+    document.getElementById("agChatMessages").innerHTML=`<div class="ag-chat-empty">Erro ao carregar mensagens.<br><small>${esc(e.message)}</small></div>`;
+  });
+}
+
+async function enviarMensagem(){
+  if(!usuario) return;
+  const input=document.getElementById("agChatInput");
+  const texto=input.value.trim();
+  if(!texto) return;
+
+  try{
+    let ref;
+    if(conversaAtual){
+      ref=collection(db,"conversas",conversaAtual.id,"mensagens");
+      await addDoc(ref,{
+        texto,
+        remetenteUid:usuario.uid,
+        remetenteNome:cadastro.nome||usuario.displayName||"Usuário",
+        remetenteAvatar:avatar(cadastro.avatar),
+        remetenteVip:cadastro.vip===true,
+        destinatarioUid:conversaAtual.outroUid,
+        criadoEm:serverTimestamp(),
+        lida:false
+      });
+      await updateDoc(doc(db,"conversas",conversaAtual.id),{
+        ultimaMensagem:texto,
+        ultimaMensagemEm:serverTimestamp(),
+        ultimoRemetenteUid:usuario.uid,
+        ultimaMensagemLida:false
+      });
+    }else if(salaAtual){
+      ref=collection(db,"salas",salaAtual,"mensagens");
+      await addDoc(ref,{
+        texto,
+        remetenteUid:usuario.uid,
+        remetenteNome:cadastro.nome||usuario.displayName||"Usuário",
+        remetenteAvatar:avatar(cadastro.avatar),
+        remetenteVip:cadastro.vip===true,
+        criadoEm:serverTimestamp()
+      });
+      await updateDoc(doc(db,"salas",salaAtual),{
+        ultimaMensagem:texto,
+        ultimaMensagemEm:serverTimestamp(),
+        ultimoRemetenteUid:usuario.uid
+      }).catch(()=>{});
+    }
+    input.value="";
+  }catch(e){
+    alert("Não foi possível enviar a mensagem.\n\n"+e.message);
+  }
+}
+
+async function criarSala(){
+  if(usuario.email!=="raphafentyramos@gmail.com"){
+    alert("Somente o ADM poderá criar salas.");
+    return;
+  }
+  const nome=prompt("Nome da nova sala:");
+  if(!nome?.trim()) return;
+  const descricao=prompt("Descrição da sala:")||"Sala Adam Games";
+  const icone=prompt("Ícone da sala:","🏠")||"🏠";
+  const id=nome.trim().toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,40)||("sala-"+Date.now());
+  await setDoc(doc(db,"salas",id),{
+    nome:nome.trim(),descricao,icone,publica:true,criadoEm:serverTimestamp(),criadoPor:usuario.uid
+  });
+  alert("Sala criada!");
+  mostrarAba("salas");
+}
+
+onAuthStateChanged(auth,async user=>{
+  if(!user) return;
+  usuario=user;
+  try{
+    cadastro=await carregarCadastroChat(user);
+    montar();
+  }catch(e){
+    console.error("ADAM GAMES CHAT",e);
+  }
+});
+
 </script>
 
-  <script type="module" src="chat-adam.js"></script>
 
 </body>
 </html>
