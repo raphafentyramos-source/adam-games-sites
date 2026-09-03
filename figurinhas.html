@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adam Games • Figurinhas Halloween 2026</title>
+
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;background:#09030f;color:#fff}
+button{font:inherit}
+
+:root{
+  --purple:#6f1bb1;
+  --purple2:#32104e;
+  --gold:#e9b83f;
+  --gold2:#ffdc75;
+  --panel:rgba(20,7,31,.92);
+  --line:rgba(255,216,117,.30);
+  --muted:#cdb9d6;
+}
+
+.screen{
+  min-height:100vh;
+  padding:16px;
+}
+
+.container{
+  width:min(1180px,100%);
+  margin:auto;
+}
+
+/* =========================
+   TELA 1 — RESUMO
+========================= */
+
+#home{
+  background:
+    radial-gradient(circle at 50% 0%,rgba(130,30,190,.35),transparent 35%),
+    linear-gradient(180deg,#160522,#08020d);
+}
+
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:18px;
+}
+
+.logo{
+  font-size:21px;
+  font-weight:1000;
+  letter-spacing:.5px;
+}
+
+.logo span{color:var(--gold)}
+
+.top-button{
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.07);
+  color:#fff;
+  border-radius:12px;
+  padding:10px 14px;
+  cursor:pointer;
+}
+
+.hero{
+  border:1px solid var(--line);
+  border-radius:26px;
+  background:linear-gradient(135deg,rgba(52,13,76,.95),rgba(15,4,25,.96));
+  padding:25px;
+  display:grid;
+  grid-template-columns:1fr 360px;
+  gap:25px;
+  align-items:center;
+}
+
+.kicker{
+  color:#d79aff;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:2px;
+}
+
+h1{
+  margin:8px 0;
+  font-size:clamp(40px,7vw,72px);
+  line-height:.88;
+  color:#fff;
+}
+
+.subtitle{
+  color:var(--muted);
+  font-size:14px;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:9px;
+  margin-top:20px;
+}
+
+.stat{
+  padding:13px;
+  background:rgba(0,0,0,.30);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:15px;
+}
+
+.stat strong{
+  display:block;
+  font-size:24px;
+  color:var(--gold2);
+}
+
+.stat span{
+  color:#c6b2ce;
+  font-size:10px;
+}
+
+.pack-placeholder{
+  width:100%;
+  min-height:360px;
+  border:2px dashed rgba(255,255,255,.25);
+  border-radius:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:#a995b3;
+  background:rgba(0,0,0,.15);
+}
+
+.pack-placeholder div{
+  padding:20px;
+}
+
+.primary{
+  margin-top:16px;
+  border:0;
+  border-radius:13px;
+  padding:12px 18px;
+  background:linear-gradient(135deg,var(--gold2),#c9861c);
+  color:#19091f;
+  font-weight:1000;
+  cursor:pointer;
+}
+
+.quick{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  margin-top:15px;
+}
+
+.panel{
+  background:var(--panel);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:20px;
+  padding:16px;
+}
+
+.panel h2{
+  margin:0 0 12px;
+  font-size:18px;
+}
+
+.image-placeholder{
+  background:rgba(0,0,0,.25);
+  border:1px dashed rgba(255,255,255,.20);
+  border-radius:10px;
+  min-height:110px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#8f7b99;
+  font-size:11px;
+  text-align:center;
+}
+
+/* =========================
+   TELA 2 — ÁLBUNS
+========================= */
+
+#albums{
+  display:none;
+  position:relative;
+  background:#09030d;
+  overflow:hidden;
+}
+
+.album-background{
+  position:absolute;
+  inset:0;
+  background-image:var(--album-background);
+  background-position:center top;
+  background-size:cover;
+  background-repeat:no-repeat;
+}
+
+.album-overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(8,2,14,.28);
+}
+
+.album-content{
+  position:relative;
+  z-index:2;
+  width:min(1200px,100%);
+  margin:auto;
+}
+
+.album-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:10px;
+}
+
+.album-title{
+  text-align:center;
+  flex:1;
+}
+
+.album-title h2{
+  margin:0;
+  color:var(--gold2);
+  font-family:Georgia,serif;
+  font-size:clamp(25px,4vw,42px);
+}
+
+.album-title span{
+  font-size:10px;
+  color:#ddd;
+}
+
+.album-art{
+  position:relative;
+  width:100%;
+  min-height:900px;
+}
+
+/*
+  AQUI FICARÃO AS IMAGENS DOS ÁLBUNS.
+
+  Não coloquei nenhuma imagem ainda.
+  Quando você mandar os nomes, substituímos:
+  data-image="album1"
+  data-image="album2"
+  etc.
+
+  As áreas abaixo são somente zonas clicáveis.
+*/
+
+.album-slot{
+  position:absolute;
+  width:30%;
+  height:31%;
+  border:2px dashed rgba(255,255,255,.0);
+  background:transparent;
+  cursor:pointer;
+}
+
+/* Posições provisórias — ajustaremos quando você mostrar
+   a imagem/fundo definitivo e os nomes dos arquivos. */
+
+.slot1{left:13%;top:17%}
+.slot2{right:13%;top:17%}
+.slot3{left:13%;top:51%}
+.slot4{right:13%;top:51%}
+
+.album-slot:hover{
+  border-color:rgba(255,220,117,.65);
+  background:rgba(255,220,117,.05);
+}
+
+.legendary-area{
+  position:absolute;
+  left:12%;
+  right:12%;
+  bottom:3%;
+  min-height:130px;
+  border:2px dashed rgba(255,255,255,0);
+  cursor:pointer;
+}
+
+/* =========================
+   MODAIS
+========================= */
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:50;
+  background:rgba(0,0,0,.82);
+  padding:15px;
+  align-items:center;
+  justify-content:center;
+}
+
+.modal.open{display:flex}
+
+.modal-box{
+  width:min(1050px,100%);
+  max-height:92vh;
+  overflow:auto;
+  background:#180821;
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:17px;
+}
+
+.close{
+  float:right;
+  width:42px;
+  height:42px;
+  border:0;
+  border-radius:10px;
+  background:rgba(255,255,255,.10);
+  color:#fff;
+  font-size:24px;
+  cursor:pointer;
+}
+
+.modal-title{
+  padding-right:50px;
+}
+
+.modal-title h2{
+  margin:5px 0;
+  color:var(--gold2);
+  font-family:Georgia,serif;
+}
+
+.cards-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px;
+  margin-top:15px;
+}
+
+.card-empty{
+  aspect-ratio:2/3;
+  border:2px dashed rgba(255,255,255,.18);
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#8e7a99;
+  font-size:10px;
+  text-align:center;
+  padding:8px;
+  background:rgba(0,0,0,.20);
+}
+
+.card-empty button{
+  border:0;
+  background:transparent;
+  color:inherit;
+  cursor:pointer;
+}
+
+@media(max-width:850px){
+  .hero{grid-template-columns:1fr}
+  .quick{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .album-art{min-height:720px}
+}
+
+@media(max-width:520px){
+  .screen{padding:9px}
+  .album-art{min-height:620px}
+  .album-slot{width:39%;height:24%}
+  .slot1{left:3%;top:14%}
+  .slot2{right:3%;top:14%}
+  .slot3{left:3%;top:43%}
+  .slot4{right:3%;top:43%}
+  .legendary-area{left:3%;right:3%;bottom:2%}
+  .cards-grid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+
+<body>
+
+<!-- =====================================================
+     TELA 1
+===================================================== -->
+
+<section id="home" class="screen">
+  <div class="container">
+
+    <header class="topbar">
+      <div class="logo">ADAM <span>GAMES</span> 🎃</div>
+      <button class="top-button" id="openAlbumsTop">📚 ÁLBUNS</button>
+    </header>
+
+    <main class="hero">
+
+      <div>
+        <div class="kicker">HALLOWEEN 2026</div>
+
+        <h1>MINHAS<br>FIGURINHAS</h1>
+
+        <div class="subtitle">
+          Colecione • Troque • Complete
+        </div>
+
+        <div class="stats">
+
+          <div class="stat">
+            <strong id="uniqueCount">0/25</strong>
+            <span>cartas diferentes</span>
+          </div>
+
+          <div class="stat">
+            <strong id="totalCount">0</strong>
+            <span>cartas totais</span>
+          </div>
+
+          <div class="stat">
+            <strong id="albumsComplete">0/4</strong>
+            <span>álbuns completos</span>
+          </div>
+
+          <div class="stat">
+            <strong id="jokerCount">0</strong>
+            <span>coringas</span>
+          </div>
+
+        </div>
+
+        <button class="primary" id="openAlbums">
+          VER MEUS ÁLBUNS
+        </button>
+      </div>
+
+      <!-- IMAGEM DO PACOTE: DEIXADA EM BRANCO -->
+      <div class="pack-placeholder">
+        <div>
+          <b>ÁREA DO PACOTE</b><br><br>
+          Aqui entra:<br>
+          pacote fechado.png
+        </div>
+      </div>
+
+    </main>
+
+    <section class="quick">
+
+      <div class="panel">
+        <h2>🃏 CORINGAS</h2>
+
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+
+          <div class="image-placeholder">CORINGA<br>COMUM</div>
+          <div class="image-placeholder">CORINGA<br>ÉPICO</div>
+          <div class="image-placeholder">CORINGA<br>LENDÁRIO</div>
+          <div class="image-placeholder">CORINGA<br>UNIVERSAL</div>
+
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>🏆 RANKING</h2>
+
+        <div style="display:grid;gap:8px">
+
+          <div style="display:grid;grid-template-columns:30px 42px 1fr auto;align-items:center;gap:8px">
+            <b>🥇</b>
+            <div class="image-placeholder" style="min-height:42px;border-radius:50%">AVATAR</div>
+            <div>
+              <b>Nome do jogador</b>
+              <small style="display:block;color:#bca7c8">VIP • 25/25 • 4 álbuns</small>
+            </div>
+            <b>103</b>
+          </div>
+
+          <div style="display:grid;grid-template-columns:30px 42px 1fr auto;align-items:center;gap:8px">
+            <b>🥈</b>
+            <div class="image-placeholder" style="min-height:42px;border-radius:50%">AVATAR</div>
+            <div>
+              <b>Nome do jogador</b>
+              <small style="display:block;color:#bca7c8">NÃO VIP • 24/25 • 3 álbuns</small>
+            </div>
+            <b>97</b>
+          </div>
+
+          <div style="display:grid;grid-template-columns:30px 42px 1fr auto;align-items:center;gap:8px">
+            <b>🥉</b>
+            <div class="image-placeholder" style="min-height:42px;border-radius:50%">AVATAR</div>
+            <div>
+              <b>Nome do jogador</b>
+              <small style="display:block;color:#bca7c8">VIP • 23/25 • 3 álbuns</small>
+            </div>
+            <b>89</b>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+</section>
+
+
+<!-- =====================================================
+     TELA 2 — ARTE DO ÁLBUM
+===================================================== -->
+
+<section id="albums" class="screen">
+
+  <!-- IMAGEM DE FUNDO DEIXADA EM BRANCO -->
+  <div class="album-background"></div>
+  <div class="album-overlay"></div>
+
+  <div class="album-content">
+
+    <header class="album-top">
+
+      <button class="top-button" id="backHome">
+        ‹ VOLTAR
+      </button>
+
+      <div class="album-title">
+        <h2>ÁLBUM DE CARTAS</h2>
+        <span>HALLOWEEN 2026</span>
+      </div>
+
+      <button class="top-button" id="albumInfo">?</button>
+
+    </header>
+
+    <div class="album-art">
+
+      <!-- ÁLBUM 1 — IMAGEM DEIXADA EM BRANCO -->
+      <button class="album-slot slot1" data-album="1" aria-label="Álbum 1"></button>
+
+      <!-- ÁLBUM 2 — IMAGEM DEIXADA EM BRANCO -->
+      <button class="album-slot slot2" data-album="2" aria-label="Álbum 2"></button>
+
+      <!-- ÁLBUM 3 — IMAGEM DEIXADA EM BRANCO -->
+      <button class="album-slot slot3" data-album="3" aria-label="Álbum 3"></button>
+
+      <!-- ÁLBUM 4 — IMAGEM DEIXADA EM BRANCO -->
+      <button class="album-slot slot4" data-album="4" aria-label="Álbum 4"></button>
+
+      <!-- LENDÁRIAS — IMAGEM DEIXADA EM BRANCO -->
+      <button class="legendary-area" data-album="legendary" aria-label="Cartas lendárias"></button>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- =====================================================
+     MODAIS DOS ÁLBUNS
+===================================================== -->
+
+<div class="modal" id="albumModal">
+
+  <div class="modal-box">
+
+    <button class="close" id="closeAlbum">×</button>
+
+    <div class="modal-title">
+      <h2 id="modalAlbumName">ÁLBUM</h2>
+      <span id="modalAlbumProgress">0/5</span>
+    </div>
+
+    <div class="cards-grid" id="cardsGrid"></div>
+
+  </div>
+
+</div>
+
+
+<div class="modal" id="infoModal">
+
+  <div class="modal-box">
+
+    <button class="close" id="closeInfo">×</button>
+
+    <div class="modal-title">
+      <h2>🎃 Halloween 2026</h2>
+    </div>
+
+    <p style="color:#cdb9d6">
+      Aqui ficará a explicação curta da coleção.
+    </p>
+
+  </div>
+
+</div>
+
+
+<script>
+/*
+=========================================================
+ADAM GAMES — BASE DA PÁGINA DE FIGURINHAS
+
+IMPORTANTE:
+As imagens foram propositalmente deixadas SEM nome/caminho.
+
+Quando você me passar os nomes dos arquivos, vamos
+preencher somente os caminhos das imagens.
+
+Estrutura planejada:
+
+assets/
+  fundo-album.ext
+  pacote-fechado.ext
+  pacote-aberto.ext
+  verso-carta.ext
+
+  cartas-halloween/
+    01.ext
+    02.ext
+    ...
+    25.ext
+
+  coringas/
+    coringa-comum.ext
+    coringa-epico.ext
+    coringa-lendario.ext
+    coringa-universal.ext
+=========================================================
+*/
+
+
+const albumNames = {
+  1: "NOITE ASSOMBRADA",
+  2: "BRUXARIA & MAGIA",
+  3: "CRIATURAS DAS TREVAS",
+  4: "REINO DAS ABÓBORAS",
+  legendary: "LENDÁRIAS DOURADAS"
+};
+
+const albumCards = {
+  1: [1,2,3,4,5],
+  2: [6,7,8,9,10],
+  3: [11,12,13,14,15],
+  4: [16,17,18,19,20],
+  legendary: [21,22,23,24,25]
+};
+
+const cardNames = [
+  "Abóbora Macabra",
+  "Fantasma Travesso",
+  "Gato Preto",
+  "Poção Misteriosa",
+  "Vampiro da Meia-Noite",
+  "Chapéu da Bruxa",
+  "Vassoura Encantada",
+  "Bola de Cristal",
+  "Livro de Feitiços",
+  "Bruxa Suprema",
+  "Morcego da Lua",
+  "Aranha Gigante",
+  "Zumbi Perdido",
+  "Noiva Fantasma",
+  "Senhor das Trevas",
+  "Balde de Doces",
+  "Lanterna Assombrada",
+  "Mansão Assombrada",
+  "Castelo Sombrio",
+  "Rei Abóbora",
+  "Ceifador Dourado",
+  "Cavaleiro Sem Cabeça Dourado",
+  "Entidade Ancestral Dourada",
+  "Rainha das Sombras Dourada",
+  "Árvore Maldita Dourada"
+];
+
+const home = document.getElementById("home");
+const albums = document.getElementById("albums");
+const albumModal = document.getElementById("albumModal");
+const infoModal = document.getElementById("infoModal");
+
+function showAlbums(){
+  home.style.display = "none";
+  albums.style.display = "block";
+  window.scrollTo(0,0);
+}
+
+function showHome(){
+  albums.style.display = "none";
+  home.style.display = "block";
+  window.scrollTo(0,0);
+}
+
+document.getElementById("openAlbums").addEventListener("click",showAlbums);
+document.getElementById("openAlbumsTop").addEventListener("click",showAlbums);
+document.getElementById("backHome").addEventListener("click",showHome);
+
+document.querySelectorAll("[data-album]").forEach(button=>{
+  button.addEventListener("click",()=>{
+    const id = button.dataset.album;
+    openAlbum(id);
+  });
+});
+
+function openAlbum(id){
+
+  document.getElementById("modalAlbumName").textContent =
+    albumNames[id] || "ÁLBUM";
+
+  const ids = albumCards[id] || [];
+
+  document.getElementById("modalAlbumProgress").textContent =
+    "0/" + ids.length;
+
+  const grid = document.getElementById("cardsGrid");
+  grid.innerHTML = "";
+
+  ids.forEach(cardId=>{
+    const box = document.createElement("div");
+    box.className = "card-empty";
+
+    /*
+      IMAGEM DA CARTA FICARÁ AQUI.
+      Ainda não coloquei caminho nenhum.
+    */
+
+    box.innerHTML =
+      "<button type='button'>" +
+      "CARTA " + String(cardId).padStart(2,"0") +
+      "<br><br>" +
+      cardNames[cardId-1] +
+      "<br><br>" +
+      "[ IMAGEM ]" +
+      "</button>";
+
+    box.querySelector("button").addEventListener("click",()=>{
+      alert("Aqui abriremos a carta " + cardNames[cardId-1]);
+    });
+
+    grid.appendChild(box);
+  });
+
+  albumModal.classList.add("open");
+}
+
+document.getElementById("closeAlbum").addEventListener("click",()=>{
+  albumModal.classList.remove("open");
+});
+
+document.getElementById("closeInfo").addEventListener("click",()=>{
+  infoModal.classList.remove("open");
+});
+
+document.getElementById("albumInfo").addEventListener("click",()=>{
+  infoModal.classList.add("open");
+});
+
+[albumModal,infoModal].forEach(modal=>{
+  modal.addEventListener("click",e=>{
+    if(e.target === modal){
+      modal.classList.remove("open");
+    }
+  });
+});
+</script>
+
+</body>
+</html>
