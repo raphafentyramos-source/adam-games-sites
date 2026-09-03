@@ -45,6 +45,24 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
 .empty{padding:18px;text-align:center;color:#9dbbd3}
 @media(max-width:800px){.dashboard{grid-template-columns:1fr 1fr}.balances{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){header{align-items:flex-start}.headerButtons{flex-direction:column}h2{font-size:32px}.search{grid-template-columns:1fr}.form,.roleta-form,.voucher-form,.info-grid{grid-template-columns:1fr}.full{grid-column:auto}.actions,.special,.roleta-actions,.voucher-buttons{grid-template-columns:1fr}.delivery-actions{grid-template-columns:1fr}.delivery-top{flex-direction:column}}
+
+/* =========================================================
+   FIGURINHAS HALLOWEEN 2026 — ADMIN
+   ========================================================= */
+.fig-card{border:1px solid rgba(190,80,255,.38);background:radial-gradient(circle at 100% 0%,rgba(177,55,255,.16),transparent 38%),linear-gradient(145deg,rgba(25,8,54,.98),rgba(4,20,48,.98))}
+.fig-head{display:flex;align-items:center;gap:14px;margin-bottom:18px}.fig-icon{width:58px;height:58px;border-radius:17px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#a83cff,#5b16a8);font-size:30px;box-shadow:0 8px 22px rgba(100,0,180,.25)}.fig-head h3{margin:0}.fig-head p{margin-top:4px;color:#c4a7e8;font-size:12px;line-height:1.45}
+.fig-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:15px}.fig-tab{padding:12px 8px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:#d9c5f5}.fig-tab.active{background:linear-gradient(135deg,#9c35ed,#5f1a9f);border-color:#c36aff;color:#fff}
+.fig-panel{display:none}.fig-panel.active{display:block}
+.fig-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.fig-grid .full{grid-column:1/-1}.fig-field label{display:block;color:#c4addf;font-size:11px;font-weight:bold;margin-bottom:6px}
+.fig-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.fig-btn{padding:14px;border-radius:12px}.fig-send{background:linear-gradient(135deg,#a63cf2,#6418a8)}.fig-green{background:linear-gradient(135deg,#16bb69,#087b45)}.fig-gold{background:linear-gradient(135deg,#ffd52a,#d88b00);color:#111}.fig-red{background:linear-gradient(135deg,#d72d47,#a8172d)}
+.fig-note{margin-top:10px;padding:10px;border-radius:10px;background:rgba(255,193,7,.07);border:1px solid rgba(255,193,7,.16);color:#e8cf8a;font-size:11px;line-height:1.45}
+.fig-selected{margin-top:14px;padding:14px;border-radius:14px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07);display:none}.fig-selected.show{display:block}.fig-selected-title{font-weight:900}.fig-selected-meta{margin-top:5px;color:#a98bc8;font-size:11px}
+.fig-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:15px}.fig-stat{padding:14px 8px;border-radius:14px;text-align:center;background:rgba(255,255,255,.045)}.fig-stat-number{font-size:25px;font-weight:900}.fig-stat-label{margin-top:3px;color:#a98fbe;font-size:9px;font-weight:bold}
+.fig-list{display:grid;gap:8px;margin-top:15px;max-height:520px;overflow:auto}.fig-item{padding:12px;border-radius:12px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.06)}.fig-item-top{display:flex;justify-content:space-between;gap:10px}.fig-item-name{font-weight:900}.fig-item-qty{color:#ffd52a;font-weight:900}.fig-item-meta{margin-top:4px;color:#a98fbe;font-size:10px;line-height:1.45}
+.fig-ranking{display:grid;gap:8px;margin-top:14px}.fig-rank{display:grid;grid-template-columns:42px 48px 1fr auto;align-items:center;gap:10px;padding:11px;border-radius:13px;background:rgba(255,255,255,.045)}.fig-rank-pos{font-size:20px;font-weight:900;text-align:center}.fig-rank-avatar{width:42px;height:42px;border-radius:13px;background:#241039;display:flex;align-items:center;justify-content:center;font-size:23px;overflow:hidden}.fig-rank-avatar img{width:100%;height:100%;object-fit:cover}.fig-rank-name{font-weight:900}.fig-rank-meta{margin-top:3px;color:#a98fbe;font-size:10px}.fig-rank-points{text-align:right}.fig-rank-total{font-size:18px;font-weight:900;color:#ffd52a}.fig-rank-diff{margin-top:2px;color:#a98fbe;font-size:9px}
+.fig-history{display:grid;gap:8px;margin-top:14px}.fig-history-item{padding:12px;border-radius:12px;background:rgba(255,255,255,.045)}.fig-history-top{display:flex;justify-content:space-between;gap:10px}.fig-history-title{font-weight:900}.fig-history-date{color:#75d4ff;font-size:10px;text-align:right}.fig-history-info{margin-top:6px;color:#a98fbe;font-size:10px;line-height:1.55}
+@media(max-width:760px){.fig-tabs{grid-template-columns:1fr 1fr}.fig-grid{grid-template-columns:1fr}.fig-grid .full{grid-column:auto}.fig-summary{grid-template-columns:1fr 1fr}.fig-rank{grid-template-columns:34px 42px 1fr auto}}
+
 </style>
 </head>
 <body>
@@ -167,6 +185,109 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
 <div class="ach-box"><h3>📚 Catálogo de conquistas</h3><div class="ach-list" id="achList"><div class="empty">🔄 Carregando catálogo...</div></div></div>
 </div>
 
+
+<!-- =========================================================
+     FIGURINHAS HALLOWEEN 2026 — ADMIN
+     ========================================================= -->
+<div class="card fig-card" id="figurinhaAdminSection">
+  <div class="fig-head">
+    <div class="fig-icon">🎴</div>
+    <div>
+      <h3>Figurinhas • Halloween 2026</h3>
+      <p>Envie pacotes, cartas específicas e Coringas. Consulte a coleção e o ranking dos jogadores.</p>
+    </div>
+  </div>
+
+  <div class="fig-tabs">
+    <button class="fig-tab active" data-fig-tab="envio" type="button">🎁 ENVIAR</button>
+    <button class="fig-tab" data-fig-tab="colecao" type="button">📖 COLEÇÃO</button>
+    <button class="fig-tab" data-fig-tab="ranking" type="button">🏆 RANKING</button>
+    <button class="fig-tab" data-fig-tab="historico" type="button">📜 HISTÓRICO</button>
+  </div>
+
+  <div class="fig-panel active" id="figPanel-envio">
+    <div class="fig-grid">
+      <div class="field full">
+        <label>CLIENTE — ID ADAM GAMES, E-MAIL OU UID</label>
+        <input id="figUser" type="text" placeholder="Ex.: ADAM-0001 ou cliente@email.com" autocomplete="off">
+      </div>
+      <div class="fig-field">
+        <label>TIPO DE ENVIO</label>
+        <select id="figSendType">
+          <option value="pacote">🎁 Pacote aleatório</option>
+          <option value="carta">🎴 Carta específica</option>
+          <option value="coringa">🃏 Coringa</option>
+        </select>
+      </div>
+      <div class="fig-field">
+        <label>QUANTIDADE</label>
+        <input id="figQuantity" type="number" min="1" max="100" step="1" value="1">
+      </div>
+      <div class="fig-field full" id="figCardField" style="display:none">
+        <label>CARTA ESPECÍFICA</label>
+        <select id="figCardSelect"></select>
+      </div>
+      <div class="fig-field full" id="figJokerField" style="display:none">
+        <label>CORINGA</label>
+        <select id="figJokerSelect"></select>
+      </div>
+      <div class="field full">
+        <label>MOTIVO — OBRIGATÓRIO</label>
+        <input id="figReason" type="text" maxlength="150" placeholder="Ex.: Prêmio do evento Halloween 2026">
+      </div>
+    </div>
+    <div class="fig-actions">
+      <button class="fig-btn fig-send" id="figSendButton" type="button">🎁 ENVIAR FIGURINHAS</button>
+      <button class="fig-btn fig-green" id="figFindButton" type="button">🔎 CONSULTAR CLIENTE</button>
+    </div>
+    <div class="fig-note">📌 Pacote aleatório: o ADM escolhe a quantidade. A distribuição é feita entre as 25 cartas. Repetidas são permitidas. Cartas e Coringas enviados diretamente pelo ADM ficam registrados no histórico.</div>
+    <div id="figSendMessage" class="message"></div>
+    <div class="fig-selected" id="figSelectedBox">
+      <div class="fig-selected-title" id="figSelectedTitle">Cliente selecionado</div>
+      <div class="fig-selected-meta" id="figSelectedMeta">—</div>
+    </div>
+  </div>
+
+  <div class="fig-panel" id="figPanel-colecao">
+    <div class="fig-grid">
+      <div class="field full">
+        <label>CLIENTE — ID ADAM GAMES, E-MAIL OU UID</label>
+        <input id="figCollectionUser" type="text" placeholder="Digite o cliente e consulte a coleção">
+      </div>
+    </div>
+    <div class="fig-actions">
+      <button class="fig-btn fig-green" id="figCollectionButton" type="button">📖 CONSULTAR COLEÇÃO</button>
+      <button class="fig-btn fig-gold" id="figRefreshCollection" type="button">🔄 ATUALIZAR</button>
+    </div>
+    <div id="figCollectionMessage" class="message"></div>
+    <div class="fig-summary">
+      <div class="fig-stat"><div class="fig-stat-number" id="figDifferent">0</div><div class="fig-stat-label">DIFERENTES</div></div>
+      <div class="fig-stat"><div class="fig-stat-number" id="figTotal">0</div><div class="fig-stat-label">TOTAL COM REPETIDAS</div></div>
+      <div class="fig-stat"><div class="fig-stat-number" id="figAlbums">0</div><div class="fig-stat-label">ÁLBUNS COMPLETOS</div></div>
+      <div class="fig-stat"><div class="fig-stat-number" id="figJokers">0</div><div class="fig-stat-label">CORINGAS</div></div>
+    </div>
+    <div class="fig-list" id="figCollectionList"><div class="empty">Consulte um cliente para ver as cartas.</div></div>
+  </div>
+
+  <div class="fig-panel" id="figPanel-ranking">
+    <div class="fig-actions">
+      <button class="fig-btn fig-green" id="figLoadRanking" type="button">🏆 CARREGAR RANKING</button>
+      <button class="fig-btn fig-gold" id="figLoadRanking2" type="button">🔄 ATUALIZAR</button>
+    </div>
+    <div id="figRankingMessage" class="message"></div>
+    <div class="fig-ranking" id="figRankingList"><div class="empty">Clique para carregar o ranking.</div></div>
+  </div>
+
+  <div class="fig-panel" id="figPanel-historico">
+    <div class="fig-actions">
+      <button class="fig-btn fig-green" id="figLoadHistory" type="button">📜 CARREGAR HISTÓRICO</button>
+      <button class="fig-btn fig-gold" id="figLoadHistory2" type="button">🔄 ATUALIZAR</button>
+    </div>
+    <div id="figHistoryMessage" class="message"></div>
+    <div class="fig-history" id="figHistoryList"><div class="empty">Clique para carregar o histórico.</div></div>
+  </div>
+</div>
+
 <div class="card voucher-card">
 <div class="voucher-title"><div class="voucher-icon">🎫</div><div><h3>Vale Presente</h3><div style="color:#9ec7e5;font-size:12px;">Gere códigos para os clientes Adam Games.</div></div></div>
 <div class="voucher-form">
@@ -189,7 +310,7 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 import{getAuth,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-import{getFirestore,collection,query,where,getDocs,getCountFromServer,updateDoc,addDoc,doc,setDoc,serverTimestamp,arrayUnion}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+import{getFirestore,collection,query,where,getDocs,getCountFromServer,updateDoc,addDoc,doc,setDoc,serverTimestamp,arrayUnion,runTransaction}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 const firebaseConfig={apiKey:"AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",authDomain:"adam-games-21081.firebaseapp.com",projectId:"adam-games-21081",storageBucket:"adam-games-21081.firebasestorage.app",messagingSenderId:"1055528418738",appId:"1:1055528418738:web:5fafdf63424ba9744eb8ab"};
 const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app);
@@ -405,6 +526,197 @@ async function cadastrarConquistaAdmin(){
 document.getElementById("sendSpecialKeys").onclick=enviarChavesEspeciais;specialKeyUser.onkeydown=e=>{if(e.key==="Enter")enviarChavesEspeciais()};renderizarTemasChaves();atualizarResumoChaveSelecionada();
 
 achSend.onclick=enviarConquistaAdmin;achCreate.onclick=cadastrarConquistaAdmin;achReload.onclick=carregarConquistasAdmin;
+
+
+/* =========================================================
+   FIGURINHAS HALLOWEEN 2026 — ADMIN
+   ========================================================= */
+const FIGURINHAS_HALLOWEEN=[
+ {id:"01",nome:"Abóbora Macabra",raridade:"COMUM"},
+ {id:"02",nome:"Fantasma Travesso",raridade:"COMUM"},
+ {id:"03",nome:"Gato Preto",raridade:"COMUM"},
+ {id:"04",nome:"Poção Misteriosa",raridade:"COMUM"},
+ {id:"05",nome:"Vampiro da Meia-Noite",raridade:"ÉPICA"},
+ {id:"06",nome:"Chapéu da Bruxa",raridade:"COMUM"},
+ {id:"07",nome:"Vassoura Encantada",raridade:"COMUM"},
+ {id:"08",nome:"Bola de Cristal",raridade:"COMUM"},
+ {id:"09",nome:"Livro de Feitiços",raridade:"COMUM"},
+ {id:"10",nome:"Bruxa Suprema",raridade:"ÉPICA"},
+ {id:"11",nome:"Morcego da Lua",raridade:"COMUM"},
+ {id:"12",nome:"Aranha Gigante",raridade:"COMUM"},
+ {id:"13",nome:"Zumbi Perdido",raridade:"COMUM"},
+ {id:"14",nome:"Noiva Fantasma",raridade:"COMUM"},
+ {id:"15",nome:"Senhor das Trevas",raridade:"ÉPICA"},
+ {id:"16",nome:"Balde de Doces",raridade:"COMUM"},
+ {id:"17",nome:"Lanterna Assombrada",raridade:"COMUM"},
+ {id:"18",nome:"Mansão Assombrada",raridade:"COMUM"},
+ {id:"19",nome:"Castelo Sombrio",raridade:"COMUM"},
+ {id:"20",nome:"Rei Abóbora",raridade:"ÉPICA"},
+ {id:"21",nome:"Ceifador Dourado",raridade:"LENDÁRIA"},
+ {id:"22",nome:"Cavaleiro Sem Cabeça Dourado",raridade:"LENDÁRIA"},
+ {id:"23",nome:"Entidade Ancestral Dourada",raridade:"LENDÁRIA"},
+ {id:"24",nome:"Rainha das Sombras Dourada",raridade:"LENDÁRIA"},
+ {id:"25",nome:"Árvore Maldita Dourada",raridade:"LENDÁRIA"}
+];
+const CORINGAS_HALLOWEEN=[
+ {id:"comum",nome:"Coringa Comum",icone:"🃏"},
+ {id:"epico",nome:"Coringa Épico",icone:"🃏"},
+ {id:"lendario",nome:"Coringa Lendário",icone:"🃏"},
+ {id:"universal",nome:"Coringa Universal",icone:"🃏"}
+];
+const FIG_ALBUNS=[
+ {id:"noiteAssombrada",nome:"NOITE ASSOMBRADA",cards:["01","02","03","04","05"]},
+ {id:"bruxariaMagia",nome:"BRUXARIA & MAGIA",cards:["06","07","08","09","10"]},
+ {id:"criaturasTrevas",nome:"CRIATURAS DAS TREVAS",cards:["11","12","13","14","15"]},
+ {id:"reinoAboboras",nome:"REINO DAS ABÓBORAS",cards:["16","17","18","19","20"]},
+ {id:"lendariasDouradas",nome:"COLEÇÃO LENDÁRIA DOURADA",cards:["21","22","23","24","25"]}
+];
+let figUsuarioAtual=null,figHistoricoCache=[];
+
+function figCard(id){return FIGURINHAS_HALLOWEEN.find(x=>x.id===String(id));}
+function figJoker(id){return CORINGAS_HALLOWEEN.find(x=>x.id===id);}
+function figCartasMap(d){return (d&&typeof d.cartasHalloween==="object"&&d.cartasHalloween)?d.cartasHalloween:{};}
+function figQuantidadeCartas(d){return Object.values(figCartasMap(d)).reduce((s,v)=>s+Math.max(0,Number(v)||0),0);}
+function figDiferentes(d){return FIGURINHAS_HALLOWEEN.filter(x=>Number(figCartasMap(d)[x.id]||0)>0).length;}
+function figCoringasTotal(d){const c=d?.coringasHalloween||{};return Object.values(c).reduce((s,v)=>s+Math.max(0,Number(v)||0),0);}
+function figAlbunsCompletos(d){const m=figCartasMap(d);return FIG_ALBUNS.filter(a=>a.cards.every(id=>Number(m[id]||0)>0)).length;}
+function figEscape(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));}
+function figAtualizarCampos(d){
+ const m=figCartasMap(d);
+ document.getElementById("figDifferent").textContent=figDiferentes(d);
+ document.getElementById("figTotal").textContent=figQuantidadeCartas(d);
+ document.getElementById("figAlbums").textContent=figAlbunsCompletos(d);
+ document.getElementById("figJokers").textContent=figCoringasTotal(d);
+ const list=document.getElementById("figCollectionList");list.innerHTML="";
+ FIGURINHAS_HALLOWEEN.forEach(c=>{
+  const q=Math.max(0,Number(m[c.id]||0));const el=document.createElement("div");el.className="fig-item";
+  el.innerHTML=`<div class="fig-item-top"><div class="fig-item-name">${c.id} • ${figEscape(c.nome)}</div><div class="fig-item-qty">${q}x</div></div><div class="fig-item-meta">${c.raridade} • ${q>0?"NA COLEÇÃO":"AINDA NÃO POSSUI"}</div>`;
+  list.appendChild(el);
+ });
+ const jok=d?.coringasHalloween||{};
+ Object.entries(jok).forEach(([id,q])=>{const j=figJoker(id);if(!j)return;const el=document.createElement("div");el.className="fig-item";el.innerHTML=`<div class="fig-item-top"><div class="fig-item-name">🃏 ${figEscape(j.nome)}</div><div class="fig-item-qty">${Math.max(0,Number(q)||0)}x</div></div><div class="fig-item-meta">Coringa disponível para substituição de carta.</div>`;list.appendChild(el)});
+}
+async function figLocalizar(alvo){
+ let r=await getDocs(query(collection(db,"admins"),where("publicId","==",alvo)));
+ if(r.empty&&alvo.includes("@"))r=await getDocs(query(collection(db,"admins"),where("email","==",alvo.toLowerCase())));
+ if(r.empty)r=await getDocs(query(collection(db,"admins"),where("uid","==",alvo)));
+ return r;
+}
+async function figSelecionarUsuario(alvo,mostrarMsg=true){
+ if(!alvo){if(mostrarMsg)mostrarMensagem(document.getElementById("figSendMessage"),"❌ Informe o cliente.","error");return null}
+ try{
+  const r=await figLocalizar(alvo);if(r.empty){if(mostrarMsg)mostrarMensagem(document.getElementById("figSendMessage"),"❌ Cliente não encontrado.","error");return null}
+  const u=r.docs[0];figUsuarioAtual={ref:u.ref,docId:u.id,data:u.data()};
+  const d=figUsuarioAtual.data;
+  document.getElementById("figSelectedBox").classList.add("show");
+  document.getElementById("figSelectedTitle").textContent=`👤 ${d.nome||d.name||d.email||d.publicId||u.id}`;
+  document.getElementById("figSelectedMeta").textContent=`${d.publicId||u.id} • ${d.vip===true?"👑 VIP":"⭐ NÃO VIP"} • ${figDiferentes(d)} diferentes • ${figQuantidadeCartas(d)} total`;
+  return figUsuarioAtual;
+ }catch(e){console.error("FIG LOCALIZAR:",e);if(mostrarMsg)mostrarMensagem(document.getElementById("figSendMessage"),"❌ Não foi possível consultar o cliente.","error");return null}
+}
+function figPreencherSelects(){
+ const cs=document.getElementById("figCardSelect"),js=document.getElementById("figJokerSelect");
+ cs.innerHTML=FIGURINHAS_HALLOWEEN.map(c=>`<option value="${c.id}">${c.id} • ${figEscape(c.nome)} — ${c.raridade}</option>`).join("");
+ js.innerHTML=CORINGAS_HALLOWEEN.map(j=>`<option value="${j.id}">${j.icone} ${figEscape(j.nome)}</option>`).join("");
+}
+function figAtualizarTipo(){
+ const t=document.getElementById("figSendType").value;
+ document.getElementById("figCardField").style.display=t==="carta"?"block":"none";
+ document.getElementById("figJokerField").style.display=t==="coringa"?"block":"none";
+ const q=document.getElementById("figQuantity");q.max=t==="pacote"?"100":"1000";
+}
+async function figEnviar(){
+ const msg=document.getElementById("figSendMessage");
+ if(!adminUsuario){mostrarMensagem(msg,"❌ Administrador não autenticado.","error");return}
+ const alvo=document.getElementById("figUser").value.trim(),tipo=document.getElementById("figSendType").value,q=Number(document.getElementById("figQuantity").value),motivo=document.getElementById("figReason").value.trim();
+ if(!alvo){mostrarMensagem(msg,"❌ Informe o cliente.","error");return}
+ if(!Number.isInteger(q)||q<=0){mostrarMensagem(msg,"❌ A quantidade precisa ser um número inteiro positivo.","error");return}
+ if(!motivo){mostrarMensagem(msg,"❌ Informe o motivo.","error");return}
+ if(tipo==="pacote"&&q>6){mostrarMensagem(msg,"❌ O pacote administrativo pode ter no máximo 6 cartas.","error");return}
+ if(tipo!=="pacote"&&q>1000){mostrarMensagem(msg,"❌ A quantidade máxima é 1000.","error");return}
+ const u=await figSelecionarUsuario(alvo);if(!u)return;
+ const d=u.data;
+ if(tipo==="pacote"){
+  const minimo=d.vip===true?4:1,maximo=d.vip===true?6:3;
+  if(q<minimo||q>maximo){mostrarMensagem(msg,`❌ Para este cliente, o pacote deve ter ${minimo} a ${maximo} figurinha(s). ${d.vip===true?"Cliente VIP.":"Cliente não VIP."}`,"error");return}
+ }
+ let cartas={},coringas={},descricao="";
+ if(tipo==="pacote"){
+   for(let i=0;i<q;i++){const c=FIGURINHAS_HALLOWEEN[Math.floor(Math.random()*FIGURINHAS_HALLOWEEN.length)];cartas[c.id]=(cartas[c.id]||0)+1}
+   descricao=`Pacote ADM • ${q} figurinha(s) aleatória(s)`;
+ }else if(tipo==="carta"){
+   const id=document.getElementById("figCardSelect").value;cartas[id]=q;descricao=`Carta específica • ${id} • ${figCard(id)?.nome||""}`;
+ }else{
+   const id=document.getElementById("figJokerSelect").value;coringas[id]=q;descricao=`Coringa • ${figJoker(id)?.nome||id}`;
+ }
+ if(!confirm(`Enviar ${q} item(ns) para ${d.nome||d.email||d.publicId||u.docId}?`))return;
+ const operacaoId="FIG-"+new Date().toISOString().replace(/\D/g,"").slice(0,14)+"-"+Math.random().toString(36).slice(2,8).toUpperCase();
+ try{
+  await runTransaction(db,async tx=>{
+   const snap=await tx.get(u.ref);if(!snap.exists())throw new Error("Usuário não existe.");
+   const atual=snap.data(),novoCartas={...figCartasMap(atual)},novoCoringas={...(atual.coringasHalloween||{})};
+   Object.entries(cartas).forEach(([id,n])=>novoCartas[id]=Number(novoCartas[id]||0)+Number(n));
+   Object.entries(coringas).forEach(([id,n])=>novoCoringas[id]=Number(novoCoringas[id]||0)+Number(n));
+   const patch={cartasHalloween:novoCartas};
+   if(Object.keys(coringas).length)patch.coringasHalloween=novoCoringas;
+   tx.update(u.ref,patch);
+   tx.set(doc(db,"historicoFigurinhas",operacaoId),{
+    operacaoId,usuarioId:u.docId,publicId:atual.publicId||u.docId,usuarioUid:atual.uid||"",usuarioEmail:atual.email||"",usuarioNome:atual.nome||atual.name||"",
+    origem:"ADM",tipo,quantidade:q,cartas,coringas,descricao,motivo,adminEmail:adminUsuario.email||"",adminUid:adminUsuario.uid||"",criadoEm:serverTimestamp()
+   });
+  });
+  const cartasAtualizadas={...figCartasMap(d)};
+  Object.entries(cartas).forEach(([id,n])=>cartasAtualizadas[id]=Number(cartasAtualizadas[id]||0)+Number(n));
+  const coringasAtualizados={...(d.coringasHalloween||{})};
+  Object.entries(coringas).forEach(([id,n])=>coringasAtualizados[id]=Number(coringasAtualizados[id]||0)+Number(n));
+  figUsuarioAtual.data={...d,cartasHalloween:cartasAtualizadas,coringasHalloween:coringasAtualizados};
+  document.getElementById("figSelectedMeta").textContent=`${figUsuarioAtual.data.publicId||u.docId} • ${figUsuarioAtual.data.vip===true?"👑 VIP":"⭐ NÃO VIP"} • ${figDiferentes(figUsuarioAtual.data)} diferentes • ${figQuantidadeCartas(figUsuarioAtual.data)} total`;
+  document.getElementById("figReason").value="";
+  mostrarMensagem(msg,`✅ ${descricao} enviado com sucesso. ID: ${operacaoId}`,"success");
+ }catch(e){console.error("FIG ENVIO:",e);mostrarMensagem(msg,e?.code==="permission-denied"?"❌ Firestore bloqueou o envio. Verifique as Rules de admins e historicoFigurinhas.":"❌ Não foi possível enviar as figurinhas.","error")}
+}
+async function figConsultarColecao(){
+ const msg=document.getElementById("figCollectionMessage"),alvo=document.getElementById("figCollectionUser").value.trim();
+ if(!alvo){mostrarMensagem(msg,"❌ Informe o cliente.","error");return}
+ const u=await figSelecionarUsuario(alvo,false);if(!u){mostrarMensagem(msg,"❌ Cliente não encontrado.","error");return}
+ figAtualizarCampos(u.data);
+ mostrarMensagem(msg,`✅ Coleção de ${u.data.nome||u.data.email||u.data.publicId||u.docId} carregada.`,"success");
+}
+async function figCarregarRanking(){
+ const lista=document.getElementById("figRankingList"),msg=document.getElementById("figRankingMessage");lista.innerHTML="<div class='empty'>🔄 Carregando ranking...</div>";
+ try{
+  const r=await getDocs(collection(db,"admins"));
+  const dados=r.docs.map(x=>({id:x.id,...x.data()})).map(d=>({d,diff:figDiferentes(d),total:figQuantidadeCartas(d),albums:figAlbunsCompletos(d),jokers:figCoringasTotal(d)})).sort((a,b)=>b.diff-a.diff||b.albums-a.albums||b.total-a.total);
+  lista.innerHTML="";dados.forEach((x,i)=>{const d=x.d,avatar=d.avatar||"🙂";const avatarHtml=String(avatar).startsWith("http")?`<img src="${figEscape(avatar)}" alt="">`:figEscape(avatar);const el=document.createElement("div");el.className="fig-rank";el.innerHTML=`<div class="fig-rank-pos">#${i+1}</div><div class="fig-rank-avatar">${avatarHtml}</div><div><div class="fig-rank-name">${figEscape(d.nome||d.name||d.email||d.publicId||x.d.id)}</div><div class="fig-rank-meta">${d.vip===true?"👑 VIP":"⭐ NÃO VIP"} • ${x.albums}/5 álbuns • ${x.jokers} coringa(s)</div></div><div class="fig-rank-points"><div class="fig-rank-total">${x.diff}/25</div><div class="fig-rank-diff">${x.total} total</div></div>`;lista.appendChild(el)});
+  mostrarMensagem(msg,`✅ ${dados.length} jogador(es) no ranking.`,"success");
+ }catch(e){console.error("FIG RANKING:",e);lista.innerHTML="<div class='empty'>❌ Não foi possível carregar o ranking.</div>";mostrarMensagem(msg,"Verifique as Rules da coleção admins.","error")}
+}
+async function figCarregarHistorico(){
+ const lista=document.getElementById("figHistoryList"),msg=document.getElementById("figHistoryMessage");lista.innerHTML="<div class='empty'>🔄 Carregando histórico...</div>";
+ try{
+  const r=await getDocs(collection(db,"historicoFigurinhas"));figHistoricoCache=r.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>obterMillis(b.criadoEm)-obterMillis(a.criadoEm));
+  if(!figHistoricoCache.length){lista.innerHTML="<div class='empty'>Nenhum envio de figurinha registrado.</div>";return}
+  lista.innerHTML="";figHistoricoCache.slice(0,150).forEach(x=>{const el=document.createElement("div");el.className="fig-history-item";const itens=[...Object.entries(x.cartas||{}).map(([id,q])=>`${id} ${figCard(id)?.nome||""} (${q}x)`),...Object.entries(x.coringas||{}).map(([id,q])=>`${figJoker(id)?.nome||id} (${q}x)`)];el.innerHTML=`<div class="fig-history-top"><div class="fig-history-title">🎴 ${figEscape(x.descricao||x.tipo||"Envio")}</div><div class="fig-history-date">${figEscape(formatarData(x.criadoEm))}</div></div><div class="fig-history-info">👤 ${figEscape(x.usuarioNome||x.publicId||x.usuarioEmail||"Cliente")}<br>📦 ${figEscape(itens.join(" • ")||"—")}<br>💬 Motivo: ${figEscape(x.motivo||"—")}<br>👑 ADM: ${figEscape(x.adminEmail||"—")}<br>🆔 ${figEscape(x.operacaoId||x.id)}</div>`;lista.appendChild(el)});
+  mostrarMensagem(msg,`✅ ${figHistoricoCache.length} registro(s) carregado(s).`,"success");
+ }catch(e){console.error("FIG HIST:",e);lista.innerHTML="<div class='empty'>❌ Não foi possível carregar o histórico.</div>";mostrarMensagem(msg,e?.code==="permission-denied"?"Sem permissão para ler historicoFigurinhas.":"Erro ao carregar histórico.","error")}
+}
+function figTrocarAba(nome){
+ document.querySelectorAll(".fig-tab").forEach(b=>b.classList.toggle("active",b.dataset.figTab===nome));
+ document.querySelectorAll(".fig-panel").forEach(p=>p.classList.toggle("active",p.id==="figPanel-"+nome));
+}
+document.querySelectorAll(".fig-tab").forEach(b=>b.onclick=()=>figTrocarAba(b.dataset.figTab));
+document.getElementById("figSendType").onchange=figAtualizarTipo;
+document.getElementById("figSendButton").onclick=figEnviar;
+document.getElementById("figFindButton").onclick=()=>figSelecionarUsuario(document.getElementById("figUser").value.trim());
+document.getElementById("figCollectionButton").onclick=figConsultarColecao;
+document.getElementById("figRefreshCollection").onclick=figConsultarColecao;
+document.getElementById("figLoadRanking").onclick=figCarregarRanking;
+document.getElementById("figLoadRanking2").onclick=figCarregarRanking;
+document.getElementById("figLoadHistory").onclick=figCarregarHistorico;
+document.getElementById("figLoadHistory2").onclick=figCarregarHistorico;
+document.getElementById("figUser").onkeydown=e=>{if(e.key==="Enter")figSelecionarUsuario(document.getElementById("figUser").value.trim())};
+document.getElementById("figCollectionUser").onkeydown=e=>{if(e.key==="Enter")figConsultarColecao()};
+figPreencherSelects();figAtualizarTipo();
 
 </script>
 </body>
