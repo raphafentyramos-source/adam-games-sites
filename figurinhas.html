@@ -1,773 +1,92 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Adam Games • Figurinhas Halloween 2026</title>
-
 <style>
-*{box-sizing:border-box}
-html,body{margin:0;padding:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;background:#09030f;color:#fff}
-button{font:inherit}
-
-:root{
-  --purple:#6f1bb1;
-  --purple2:#32104e;
-  --gold:#e9b83f;
-  --gold2:#ffdc75;
-  --panel:rgba(20,7,31,.92);
-  --line:rgba(255,216,117,.30);
-  --muted:#cdb9d6;
-}
-
-.screen{
-  min-height:100vh;
-  padding:16px;
-}
-
-.container{
-  width:min(1180px,100%);
-  margin:auto;
-}
-
-/* =========================
-   TELA 1 — RESUMO
-========================= */
-
-#home{
-  background:
-    radial-gradient(circle at 50% 0%,rgba(130,30,190,.35),transparent 35%),
-    linear-gradient(180deg,#160522,#08020d);
-}
-
-.topbar{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  margin-bottom:18px;
-}
-
-.logo{
-  font-size:21px;
-  font-weight:1000;
-  letter-spacing:.5px;
-}
-
-.logo span{color:var(--gold)}
-
-.top-button{
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.07);
-  color:#fff;
-  border-radius:12px;
-  padding:10px 14px;
-  cursor:pointer;
-}
-
-.hero{
-  border:1px solid var(--line);
-  border-radius:26px;
-  background:linear-gradient(135deg,rgba(52,13,76,.95),rgba(15,4,25,.96));
-  padding:25px;
-  display:grid;
-  grid-template-columns:1fr 360px;
-  gap:25px;
-  align-items:center;
-}
-
-.kicker{
-  color:#d79aff;
-  font-size:11px;
-  font-weight:900;
-  letter-spacing:2px;
-}
-
-h1{
-  margin:8px 0;
-  font-size:clamp(40px,7vw,72px);
-  line-height:.88;
-  color:#fff;
-}
-
-.subtitle{
-  color:var(--muted);
-  font-size:14px;
-}
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:9px;
-  margin-top:20px;
-}
-
-.stat{
-  padding:13px;
-  background:rgba(0,0,0,.30);
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:15px;
-}
-
-.stat strong{
-  display:block;
-  font-size:24px;
-  color:var(--gold2);
-}
-
-.stat span{
-  color:#c6b2ce;
-  font-size:10px;
-}
-
-.pack-placeholder{
-  width:100%;
-  min-height:360px;
-  border:2px dashed rgba(255,255,255,.25);
-  border-radius:18px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  color:#a995b3;
-  background:rgba(0,0,0,.15);
-}
-
-.pack-placeholder div{
-  padding:20px;
-}
-
-.primary{
-  margin-top:16px;
-  border:0;
-  border-radius:13px;
-  padding:12px 18px;
-  background:linear-gradient(135deg,var(--gold2),#c9861c);
-  color:#19091f;
-  font-weight:1000;
-  cursor:pointer;
-}
-
-.quick{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:14px;
-  margin-top:15px;
-}
-
-.panel{
-  background:var(--panel);
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:20px;
-  padding:16px;
-}
-
-.panel h2{
-  margin:0 0 12px;
-  font-size:18px;
-}
-
-.image-placeholder{
-  background:rgba(0,0,0,.25);
-  border:1px dashed rgba(255,255,255,.20);
-  border-radius:10px;
-  min-height:110px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#8f7b99;
-  font-size:11px;
-  text-align:center;
-}
-
-/* =========================
-   TELA 2 — ÁLBUNS
-========================= */
-
-#albums{
-  display:none;
-  position:relative;
-  background:#09030d;
-  overflow:hidden;
-}
-
-.album-background{
-  position:absolute;
-  inset:0;
-  background-image:var(--album-background);
-  background-position:center top;
-  background-size:cover;
-  background-repeat:no-repeat;
-}
-
-.album-overlay{
-  position:absolute;
-  inset:0;
-  background:rgba(8,2,14,.28);
-}
-
-.album-content{
-  position:relative;
-  z-index:2;
-  width:min(1200px,100%);
-  margin:auto;
-}
-
-.album-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  margin-bottom:10px;
-}
-
-.album-title{
-  text-align:center;
-  flex:1;
-}
-
-.album-title h2{
-  margin:0;
-  color:var(--gold2);
-  font-family:Georgia,serif;
-  font-size:clamp(25px,4vw,42px);
-}
-
-.album-title span{
-  font-size:10px;
-  color:#ddd;
-}
-
-.album-art{
-  position:relative;
-  width:100%;
-  min-height:900px;
-}
-
-/*
-  AQUI FICARÃO AS IMAGENS DOS ÁLBUNS.
-
-  Não coloquei nenhuma imagem ainda.
-  Quando você mandar os nomes, substituímos:
-  data-image="album1"
-  data-image="album2"
-  etc.
-
-  As áreas abaixo são somente zonas clicáveis.
-*/
-
-.album-slot{
-  position:absolute;
-  width:30%;
-  height:31%;
-  border:2px dashed rgba(255,255,255,.0);
-  background:transparent;
-  cursor:pointer;
-}
-
-/* Posições provisórias — ajustaremos quando você mostrar
-   a imagem/fundo definitivo e os nomes dos arquivos. */
-
-.slot1{left:13%;top:17%}
-.slot2{right:13%;top:17%}
-.slot3{left:13%;top:51%}
-.slot4{right:13%;top:51%}
-
-.album-slot:hover{
-  border-color:rgba(255,220,117,.65);
-  background:rgba(255,220,117,.05);
-}
-
-.legendary-area{
-  position:absolute;
-  left:12%;
-  right:12%;
-  bottom:3%;
-  min-height:130px;
-  border:2px dashed rgba(255,255,255,0);
-  cursor:pointer;
-}
-
-/* =========================
-   MODAIS
-========================= */
-
-.modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  z-index:50;
-  background:rgba(0,0,0,.82);
-  padding:15px;
-  align-items:center;
-  justify-content:center;
-}
-
-.modal.open{display:flex}
-
-.modal-box{
-  width:min(1050px,100%);
-  max-height:92vh;
-  overflow:auto;
-  background:#180821;
-  border:1px solid var(--line);
-  border-radius:20px;
-  padding:17px;
-}
-
-.close{
-  float:right;
-  width:42px;
-  height:42px;
-  border:0;
-  border-radius:10px;
-  background:rgba(255,255,255,.10);
-  color:#fff;
-  font-size:24px;
-  cursor:pointer;
-}
-
-.modal-title{
-  padding-right:50px;
-}
-
-.modal-title h2{
-  margin:5px 0;
-  color:var(--gold2);
-  font-family:Georgia,serif;
-}
-
-.cards-grid{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:10px;
-  margin-top:15px;
-}
-
-.card-empty{
-  aspect-ratio:2/3;
-  border:2px dashed rgba(255,255,255,.18);
-  border-radius:12px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#8e7a99;
-  font-size:10px;
-  text-align:center;
-  padding:8px;
-  background:rgba(0,0,0,.20);
-}
-
-.card-empty button{
-  border:0;
-  background:transparent;
-  color:inherit;
-  cursor:pointer;
-}
-
-@media(max-width:850px){
-  .hero{grid-template-columns:1fr}
-  .quick{grid-template-columns:1fr}
-  .stats{grid-template-columns:repeat(2,1fr)}
-  .album-art{min-height:720px}
-}
-
-@media(max-width:520px){
-  .screen{padding:9px}
-  .album-art{min-height:620px}
-  .album-slot{width:39%;height:24%}
-  .slot1{left:3%;top:14%}
-  .slot2{right:3%;top:14%}
-  .slot3{left:3%;top:43%}
-  .slot4{right:3%;top:43%}
-  .legendary-area{left:3%;right:3%;bottom:2%}
-  .cards-grid{grid-template-columns:repeat(2,1fr)}
-}
+:root{--bg:#08030f;--panel:#14091f;--panel2:#1b0d29;--purple:#9b3bd0;--purple2:#5d1685;--gold:#f4c44f;--gold2:#ffdf7a;--text:#fff;--muted:#bca9c8;--green:#38d889;--red:#ff657f;--blue:#56a9ff}
+*{box-sizing:border-box}html,body{margin:0;background:radial-gradient(circle at 50% -10%,#4a0d70 0,#180720 30%,#07020d 75%);color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}button,input,select{font:inherit}button{cursor:pointer}body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 15% 25%,#9d38d50d,transparent 24%),radial-gradient(circle at 85% 60%,#f4c44f08,transparent 26%)}
+.wrap{width:min(1120px,100%);margin:auto;padding:10px 12px 40px}.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 0 12px;background:linear-gradient(#0b0314f5,#0b0314d8,transparent)}.brand{font-weight:1000;letter-spacing:.7px}.brand b{color:var(--gold)}.btn{border:1px solid #ffffff1c;background:#ffffff0a;color:#fff;border-radius:13px;padding:10px 13px;font-weight:900}.btn.primary{background:linear-gradient(135deg,#a83de0,#5b147e);border-color:#d88cff66;box-shadow:0 7px 20px #7c1cad33}.btn.gold{background:linear-gradient(135deg,#ffd85c,#e39a17);color:#1b0b20;border:0}.btn.green{background:linear-gradient(135deg,#35d985,#149b55);border:0}.btn:disabled{opacity:.45;cursor:not-allowed}.hero{display:grid;grid-template-columns:1fr 290px;gap:16px;padding:18px;border:1px solid #d28aff38;border-radius:25px;background:linear-gradient(135deg,#321047e8,#12051de8);box-shadow:0 18px 50px #0007}.kicker{font-size:10px;letter-spacing:2px;color:#dc9dff;font-weight:1000}.hero h1{font-family:Georgia,serif;font-size:clamp(38px,7vw,68px);line-height:.88;margin:8px 0}.hero p{color:var(--muted);margin:0}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:18px}.stat{background:#0005;border:1px solid #ffffff12;border-radius:14px;padding:10px}.stat b{display:block;color:var(--gold2);font-size:22px}.stat small{font-size:9px;color:#bca9c8}.packHero{border:1px solid #e2b94855;border-radius:18px;background:#0004;overflow:hidden;text-align:center}.packHero img{width:100%;height:270px;object-fit:contain;display:block}.packHero .ready{padding:9px;color:#e9d8ef;font-size:11px;font-weight:900}.tabs{display:flex;gap:7px;overflow:auto;padding:13px 0 4px;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.tab{white-space:nowrap}.tab.active{background:linear-gradient(135deg,#9c3cd1,#511373);border-color:#cf7cff66}.section{margin-top:12px;border:1px solid #ffffff13;border-radius:20px;background:linear-gradient(145deg,#180a25f2,#0e0615f2);padding:15px}.sectionHead{display:flex;justify-content:space-between;align-items:end;gap:12px}.section h2{font:1000 24px Georgia,serif;color:#e8b8ff;margin:0}.section p{font-size:11px;color:var(--muted);margin:5px 0 0}.hidden{display:none!important}
+/* collection */.filterbar{display:flex;gap:7px;overflow:auto;margin-top:12px}.filterbar button{font-size:10px;padding:8px 10px}.filterbar .sel{background:#8e2fc2}.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin-top:12px}.sticker{position:relative;aspect-ratio:2/3;border-radius:12px;overflow:hidden;background:#170a20;border:1px solid #6f3d91;cursor:pointer;box-shadow:0 5px 15px #0005}.sticker img{width:100%;height:100%;object-fit:cover;display:block}.sticker.missing img{filter:brightness(.8)}.sticker .shade{position:absolute;inset:0;background:linear-gradient(#0002,#0007)}.sticker .num{position:absolute;left:5px;top:5px;padding:3px 5px;border-radius:6px;background:#08020dcc;font-size:8px;font-weight:1000}.sticker .rarity{position:absolute;right:5px;top:5px;padding:3px 5px;border-radius:6px;background:#08020dcc;font-size:7px;font-weight:1000}.sticker .qty{position:absolute;right:5px;bottom:5px;padding:4px 7px;border-radius:8px;background:#08020ddd;font-size:9px;font-weight:1000}.sticker .missingText{position:absolute;left:5px;right:5px;bottom:28px;text-align:center;font-size:8px;font-weight:1000;color:#fff;text-shadow:0 2px 5px #000}.common{border-color:#7183b5}.epica{border-color:#ad4be4;box-shadow:0 0 15px #8d2dc533}.legendaria{border-color:#e9bd45;box-shadow:0 0 18px #d69a2638}
+/* albums */.albumBoard{position:relative;width:min(864px,100%);aspect-ratio:864/1536;margin:14px auto 0;border-radius:18px;overflow:hidden;background:url("assets/album/fundo-album-halloween-2026.jpeg") center/100% 100% no-repeat;box-shadow:0 20px 55px #0009}.hot{position:absolute;border:0;background:#ffffff00;border-radius:15px}.hot:hover{background:#fff1}.hot.a1{left:17%;top:23%;width:31%;height:27%}.hot.a2{left:53%;top:23%;width:31%;height:27%}.hot.a3{left:17%;top:53%;width:31%;height:27%}.hot.a4{left:53%;top:53%;width:31%;height:27%}.hot.leg{left:31%;top:78%;width:38%;height:19%}.albumCovers{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:13px}.albumCover{min-height:190px;border-radius:16px;border:1px solid #9e45d766;padding:12px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;background:radial-gradient(circle at 50% 25%,#6d1d91,#1a0827 55%,#09030e)}.albumCover:nth-child(2){background:radial-gradient(circle at 50% 25%,#234d7d,#0e1b31 55%,#07030d);border-color:#4f9bd966}.albumCover:nth-child(3){background:radial-gradient(circle at 50% 25%,#9b4a10,#341206 55%,#0b0307);border-color:#e6a03d88}.albumCover:nth-child(4){background:radial-gradient(circle at 50% 25%,#3d0d65,#13051e 55%,#07020b);border-color:#d5a73f88}.albumCover .orb{font-size:46px;text-align:center;margin:auto auto 8px;filter:drop-shadow(0 8px 15px #0008)}.albumCover h3{margin:0;color:#fff;font:1000 16px Georgia,serif}.albumCover small{color:#d8c5df;margin-top:6px}.coverProgress{height:6px;background:#0008;border-radius:99px;margin-top:9px;overflow:hidden}.coverProgress i{display:block;height:100%;background:linear-gradient(90deg,#9b39db,#f5c24b)}
+/* jokers */.jokerGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:13px}.joker{border:1px solid #ffffff19;border-radius:16px;padding:10px;background:linear-gradient(145deg,#1d0c2b,#0c0412);text-align:center}.joker img{width:100%;height:230px;object-fit:contain;display:block}.joker h3{margin:4px 0;color:#f2dcff;font-size:12px}.joker .jq{font-size:20px;font-weight:1000;color:var(--gold)}.notice{padding:10px;border:1px solid #d5a73f33;background:#f4c44f0b;border-radius:12px;color:#dfcedf;font-size:11px;margin-top:10px}
+/* trades */.tradeLayout{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:13px}.box{border:1px solid #ffffff12;background:#0b0411aa;border-radius:16px;padding:12px}.box h3{margin:0;color:#e6b6ff;font-size:14px}.cardSelectGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:10px}.selectCard{aspect-ratio:2/3;border:1px solid #ffffff12;border-radius:8px;overflow:hidden;background:#17091f;cursor:pointer;position:relative}.selectCard img{width:100%;height:100%;object-fit:cover}.selectCard.sel{border:2px solid var(--gold);box-shadow:0 0 14px #f4c44f55}.selectCard .q{position:absolute;right:2px;bottom:2px;background:#000d;padding:2px 4px;border-radius:5px;font-size:7px}.offer{display:flex;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid #ffffff0e}.offer:last-child{border-bottom:0}.offer img{width:44px;height:64px;object-fit:cover;border-radius:6px}.offer .arrow{color:var(--gold);font-weight:1000}.offer small{display:block;color:#9e8ba8}.empty{padding:20px;text-align:center;color:#8f7e99;font-size:11px}
+/* pack */.packStage{border:1px solid #d38eff33;border-radius:18px;background:radial-gradient(circle at 50% 45%,#42126366,#09030fcc 60%);padding:18px;min-height:420px;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}.packVisual{width:min(250px,70vw);height:300px;position:relative;display:flex;align-items:center;justify-content:center}.packVisual img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 20px 25px #0009)}.packVisual.opening img{animation:packShake .7s ease-in-out infinite alternate}.packVisual.opening:after{content:"✦ ✧ ✦";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:42px;color:#ffe77d;text-shadow:0 0 20px #fff;animation:spark .5s infinite alternate}.resultCards{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;width:100%;margin-top:15px}.reveal{animation:reveal .55s cubic-bezier(.2,1.5,.3,1) both}.reveal:nth-child(2){animation-delay:.08s}.reveal:nth-child(3){animation-delay:.16s}.reveal:nth-child(4){animation-delay:.24s}.reveal:nth-child(5){animation-delay:.32s}.resultCards .sticker{cursor:default}.packStatus{font-size:12px;color:#dbcbe4;text-align:center;margin-top:10px}.timer{font-weight:1000;color:var(--gold);font-size:18px}.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.summary div{padding:10px;border-radius:12px;background:#0004;border:1px solid #ffffff0d;text-align:center}.summary b{display:block;font-size:18px;color:var(--gold2)}.summary small{color:#aa97b5;font-size:9px}
+.modal{position:fixed;inset:0;background:#000d;z-index:100;display:none;align-items:center;justify-content:center;padding:12px}.modal.open{display:flex}.modalBox{width:min(760px,100%);max-height:92vh;overflow:auto;background:#16071f;border:1px solid #d6a64a55;border-radius:20px;padding:16px}.modalBox h2{font:1000 24px Georgia,serif;color:#ffd86a}.close{float:right;width:38px;height:38px;border:0;border-radius:10px;background:#fff1;color:#fff;font-size:23px}.detailImg{width:min(260px,75vw);display:block;margin:12px auto;border-radius:13px}.toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%) translateY(30px);opacity:0;z-index:150;background:#1b0a27;border:1px solid #d98cff55;color:#fff;padding:12px 15px;border-radius:12px;font-size:11px;font-weight:900;transition:.25s;max-width:90%;text-align:center}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@keyframes packShake{from{transform:rotate(-3deg) scale(1)}to{transform:rotate(3deg) scale(1.03)}}@keyframes spark{from{transform:scale(.8);opacity:.5}to{transform:scale(1.2);opacity:1}}@keyframes reveal{from{opacity:0;transform:translateY(30px) rotateY(90deg) scale(.7)}to{opacity:1;transform:none}}
+@media(max-width:780px){.hero{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:repeat(4,1fr)}.jokerGrid{grid-template-columns:repeat(2,1fr)}.albumCovers{grid-template-columns:repeat(2,1fr)}.tradeLayout{grid-template-columns:1fr}.resultCards{grid-template-columns:repeat(5,1fr)}}@media(max-width:470px){.wrap{padding:8px 8px 30px}.grid{grid-template-columns:repeat(3,1fr);gap:7px}.hero{padding:14px}.section{padding:12px}.albumCovers{gap:7px}.albumCover{min-height:165px;padding:9px}.joker img{height:190px}.packVisual{height:270px}.resultCards{gap:5px}}
 </style>
 </head>
-
 <body>
-
-<!-- =====================================================
-     TELA 1
-===================================================== -->
-
-<section id="home" class="screen">
-  <div class="container">
-
-    <header class="topbar">
-      <div class="logo">ADAM <span>GAMES</span> 🎃</div>
-      <button class="top-button" id="openAlbumsTop">📚 ÁLBUNS</button>
-    </header>
-
-    <main class="hero">
-
-      <div>
-        <div class="kicker">HALLOWEEN 2026</div>
-
-        <h1>MINHAS<br>FIGURINHAS</h1>
-
-        <div class="subtitle">
-          Colecione • Troque • Complete
-        </div>
-
-        <div class="stats">
-
-          <div class="stat">
-            <strong id="uniqueCount">0/25</strong>
-            <span>cartas diferentes</span>
-          </div>
-
-          <div class="stat">
-            <strong id="totalCount">0</strong>
-            <span>cartas totais</span>
-          </div>
-
-          <div class="stat">
-            <strong id="albumsComplete">0/4</strong>
-            <span>álbuns completos</span>
-          </div>
-
-          <div class="stat">
-            <strong id="jokerCount">0</strong>
-            <span>coringas</span>
-          </div>
-
-        </div>
-
-        <button class="primary" id="openAlbums">
-          VER MEUS ÁLBUNS
-        </button>
-      </div>
-
-      <!-- IMAGEM DO PACOTE: DEIXADA EM BRANCO -->
-      <div class="pack-placeholder">
-        <div>
-          <b>ÁREA DO PACOTE</b><br><br>
-          Aqui entra:<br>
-          pacote fechado.png
-        </div>
-      </div>
-
-    </main>
-
-    <section class="quick">
-
-      <div class="panel">
-        <h2>🃏 CORINGAS</h2>
-
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
-
-          <div class="image-placeholder">CORINGA<br>COMUM</div>
-          <div class="image-placeholder">CORINGA<br>ÉPICO</div>
-          <div class="image-placeholder">CORINGA<br>LENDÁRIO</div>
-          <div class="image-placeholder">CORINGA<br>UNIVERSAL</div>
-
-        </div>
-      </div>
-
-      <div class="panel">
-        <h2>🏆 RANKING</h2>
-
-        <div style="display:grid;gap:8px">
-
-          <div style="display:grid;grid-template-columns:30px 42px 1fr auto;align-items:center;gap:8px">
-            <b>🥇</b>
-            <div class="image-placeholder" style="min-height:42px;border-radius:50%">AVATAR</div>
-            <div>
-              <b>Nome do jogador</b>
-              <small style="display:block;color:#bca7c8">VIP • 25/25 • 4 álbuns</small>
-            </div>
-            <b>103</b>
-          </div>
-
-          <div style="display:grid;grid-template-columns:30px 42px 1fr auto;align-items:center;gap:8px">
-            <b>🥈</b>
-            <div class="image-placeholder" style="min-height:42px;border-radius:50%">AVATAR</div>
-            <div>
-              <b>Nome do jogador</b>
-              <small style="display:block;color:#bca7c8">NÃO VIP • 24/25 • 3 álbuns</small>
-            </div>
-            <b>97</b>
-          </div>
-
-          <div style="display:grid;grid-template-columns:30px 42px 1fr auto;align-items:center;gap:8px">
-            <b>🥉</b>
-            <div class="image-placeholder" style="min-height:42px;border-radius:50%">AVATAR</div>
-            <div>
-              <b>Nome do jogador</b>
-              <small style="display:block;color:#bca7c8">VIP • 23/25 • 3 álbuns</small>
-            </div>
-            <b>89</b>
-          </div>
-
-        </div>
-      </div>
-
-    </section>
-
-  </div>
+<div class="wrap">
+<header class="top"><button class="btn" onclick="history.back()">‹ VOLTAR</button><div class="brand">ADAM <b>GAMES</b> 🎃</div><button class="btn" id="rewardBtn">🎁 RECOMPENSAS</button></header>
+<section class="hero">
+<div><div class="kicker">COLEÇÃO OFICIAL • HALLOWEEN 2026</div><h1>MINHAS<br>FIGURINHAS</h1><p>Complete os álbuns, troque cartas e abra seus pacotes.</p><div class="stats"><div class="stat"><b id="unique">0/25</b><small>diferentes</small></div><div class="stat"><b id="total">0</b><small>cartas totais</small></div><div class="stat"><b id="complete">0/4</b><small>álbuns completos</small></div><div class="stat"><b id="jokerTotal">0</b><small>coringas</small></div></div></div>
+<div class="packHero"><img id="heroPack" src="assets/pacotes/pacote-fechado.jpeg" alt="Pacote fechado"><div class="ready" id="packHeroText">🎁 Pacote de Halloween</div><button class="btn gold" id="heroOpenBtn">ABRIR PACOTE</button></div>
 </section>
+<div class="tabs"><button class="btn tab active" data-tab="collection">🎴 CARTAS</button><button class="btn tab" data-tab="albums">📚 ÁLBUNS</button><button class="btn tab" data-tab="jokers">🃏 CORINGAS</button><button class="btn tab" data-tab="trades">🔄 TROCAS</button><button class="btn tab" data-tab="pack">🎁 PACOTE</button></div>
 
+<section class="section" id="collectionSection"><div class="sectionHead"><div><h2>🦇 Minha coleção</h2><p>As 25 figurinhas do Halloween 2026 estão cadastradas.</p></div><span id="vipBadge"></span></div><div class="filterbar"><button class="btn sel" data-filter="all">TODAS</button><button class="btn" data-filter="common">COMUNS</button><button class="btn" data-filter="epica">ÉPICAS</button><button class="btn" data-filter="legendaria">LENDÁRIAS</button><button class="btn" data-filter="missing">FALTANTES</button><button class="btn" data-filter="duplicates">REPETIDAS</button></div><div class="grid" id="cardsGrid"></div></section>
 
-<!-- =====================================================
-     TELA 2 — ARTE DO ÁLBUM
-===================================================== -->
+<section class="section hidden" id="albumsSection"><div class="sectionHead"><div><h2>📚 Álbuns Halloween 2026</h2><p>Complete cada conjunto de 5 cartas para liberar a recompensa.</p></div></div><div class="albumBoard"><button class="hot a1" data-album="1" aria-label="Álbum 1"></button><button class="hot a2" data-album="2" aria-label="Álbum 2"></button><button class="hot a3" data-album="3" aria-label="Álbum 3"></button><button class="hot a4" data-album="4" aria-label="Álbum 4"></button><button class="hot leg" data-legendary="1" aria-label="Coleção lendária"></button></div><div class="albumCovers" id="albumCovers"></div></section>
 
-<section id="albums" class="screen">
+<section class="section hidden" id="jokersSection"><div class="sectionHead"><div><h2>🃏 Meus Coringas</h2><p>Use um Coringa para completar uma figurinha que falta. Coringas não podem ser trocados ou doados entre jogadores.</p></div></div><div class="jokerGrid" id="jokerGrid"></div><div class="notice">🟡 <b>Coringa Universal:</b> ficará disponível somente para venda na Loja e não participa dos sorteios de pacotes.</div></section>
 
-  <!-- IMAGEM DE FUNDO DEIXADA EM BRANCO -->
-  <div class="album-background"></div>
-  <div class="album-overlay"></div>
+<section class="section hidden" id="tradesSection"><div class="sectionHead"><div><h2>🔄 Trocar cartas</h2><p>Você pode trocar somente figurinhas repetidas. Coringas não entram em trocas.</p></div><div id="tradeLimit" class="timer"></div></div><div class="tradeLayout"><div class="box"><h3>MINHAS CARTAS — escolha uma repetida</h3><div class="cardSelectGrid" id="giveGrid"></div><p id="giveInfo">Selecione uma carta que você possui em duplicata.</p><select id="wantSelect" style="width:100%;margin-top:8px;padding:10px;border-radius:10px;background:#100619;color:#fff;border:1px solid #ffffff1a"><option value="">Quero receber...</option></select><button class="btn primary" id="createTradeBtn" style="width:100%;margin-top:9px">CRIAR OFERTA</button></div><div class="box"><h3>OFERTAS DE OUTROS JOGADORES</h3><div id="offers"><div class="empty">Carregando ofertas...</div></div></div></div></section>
 
-  <div class="album-content">
-
-    <header class="album-top">
-
-      <button class="top-button" id="backHome">
-        ‹ VOLTAR
-      </button>
-
-      <div class="album-title">
-        <h2>ÁLBUM DE CARTAS</h2>
-        <span>HALLOWEEN 2026</span>
-      </div>
-
-      <button class="top-button" id="albumInfo">?</button>
-
-    </header>
-
-    <div class="album-art">
-
-      <!-- ÁLBUM 1 — IMAGEM DEIXADA EM BRANCO -->
-      <button class="album-slot slot1" data-album="1" aria-label="Álbum 1"></button>
-
-      <!-- ÁLBUM 2 — IMAGEM DEIXADA EM BRANCO -->
-      <button class="album-slot slot2" data-album="2" aria-label="Álbum 2"></button>
-
-      <!-- ÁLBUM 3 — IMAGEM DEIXADA EM BRANCO -->
-      <button class="album-slot slot3" data-album="3" aria-label="Álbum 3"></button>
-
-      <!-- ÁLBUM 4 — IMAGEM DEIXADA EM BRANCO -->
-      <button class="album-slot slot4" data-album="4" aria-label="Álbum 4"></button>
-
-      <!-- LENDÁRIAS — IMAGEM DEIXADA EM BRANCO -->
-      <button class="legendary-area" data-album="legendary" aria-label="Cartas lendárias"></button>
-
-    </div>
-
-  </div>
-</section>
-
-
-<!-- =====================================================
-     MODAIS DOS ÁLBUNS
-===================================================== -->
-
-<div class="modal" id="albumModal">
-
-  <div class="modal-box">
-
-    <button class="close" id="closeAlbum">×</button>
-
-    <div class="modal-title">
-      <h2 id="modalAlbumName">ÁLBUM</h2>
-      <span id="modalAlbumProgress">0/5</span>
-    </div>
-
-    <div class="cards-grid" id="cardsGrid"></div>
-
-  </div>
-
+<section class="section hidden" id="packSection"><div class="sectionHead"><div><h2>🎁 Abrir pacote</h2><p>Normal: 1–3 cartas a cada 72h • VIP: 4–6 cartas a cada 50h.</p></div></div><div class="packStage"><div class="packVisual" id="packVisual"><img id="packStageImg" src="assets/pacotes/pacote-fechado.jpeg" alt="Pacote"></div><div class="packStatus" id="packStatus">Verificando seu próximo pacote...</div><button class="btn gold" id="claimBtn" style="margin-top:12px">🎁 PEGAR PACOTE</button><div id="packResults" class="resultCards"></div><div id="packSummary" class="summary hidden"></div></div></section>
 </div>
-
-
-<div class="modal" id="infoModal">
-
-  <div class="modal-box">
-
-    <button class="close" id="closeInfo">×</button>
-
-    <div class="modal-title">
-      <h2>🎃 Halloween 2026</h2>
-    </div>
-
-    <p style="color:#cdb9d6">
-      Aqui ficará a explicação curta da coleção.
-    </p>
-
-  </div>
-
-</div>
-
-
-<script>
-/*
-=========================================================
-ADAM GAMES — BASE DA PÁGINA DE FIGURINHAS
-
-IMPORTANTE:
-As imagens foram propositalmente deixadas SEM nome/caminho.
-
-Quando você me passar os nomes dos arquivos, vamos
-preencher somente os caminhos das imagens.
-
-Estrutura planejada:
-
-assets/
-  fundo-album.ext
-  pacote-fechado.ext
-  pacote-aberto.ext
-  verso-carta.ext
-
-  cartas-halloween/
-    01.ext
-    02.ext
-    ...
-    25.ext
-
-  coringas/
-    coringa-comum.ext
-    coringa-epico.ext
-    coringa-lendario.ext
-    coringa-universal.ext
-=========================================================
-*/
-
-
-const albumNames = {
-  1: "NOITE ASSOMBRADA",
-  2: "BRUXARIA & MAGIA",
-  3: "CRIATURAS DAS TREVAS",
-  4: "REINO DAS ABÓBORAS",
-  legendary: "LENDÁRIAS DOURADAS"
-};
-
-const albumCards = {
-  1: [1,2,3,4,5],
-  2: [6,7,8,9,10],
-  3: [11,12,13,14,15],
-  4: [16,17,18,19,20],
-  legendary: [21,22,23,24,25]
-};
-
-const cardNames = [
-  "Abóbora Macabra",
-  "Fantasma Travesso",
-  "Gato Preto",
-  "Poção Misteriosa",
-  "Vampiro da Meia-Noite",
-  "Chapéu da Bruxa",
-  "Vassoura Encantada",
-  "Bola de Cristal",
-  "Livro de Feitiços",
-  "Bruxa Suprema",
-  "Morcego da Lua",
-  "Aranha Gigante",
-  "Zumbi Perdido",
-  "Noiva Fantasma",
-  "Senhor das Trevas",
-  "Balde de Doces",
-  "Lanterna Assombrada",
-  "Mansão Assombrada",
-  "Castelo Sombrio",
-  "Rei Abóbora",
-  "Ceifador Dourado",
-  "Cavaleiro Sem Cabeça Dourado",
-  "Entidade Ancestral Dourada",
-  "Rainha das Sombras Dourada",
-  "Árvore Maldita Dourada"
+<div class="modal" id="modal"><div class="modalBox"><button class="close" id="closeModal">×</button><div id="modalContent"></div></div></div><div class="toast" id="toast"></div>
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+import {getAuth,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+import {getFirestore,collection,query,where,getDocs,getDoc,doc,setDoc,updateDoc,addDoc,runTransaction,serverTimestamp,orderBy,limit} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+const firebaseConfig={apiKey:"AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",authDomain:"adam-games-21081.firebaseapp.com",projectId:"adam-games-21081",storageBucket:"adam-games-21081.firebasestorage.app",messagingSenderId:"1055528418738",appId:"1:1055528418738:web:5fafdf63424ba9744eb8ab",measurementId:"G-KVFSF864GE"};
+const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app);
+const cards=[
+{id:1,name:"Abóbora Macabra",rarity:"COMUM",file:"01_Abobora_Macabra.png",album:1},{id:2,name:"Fantasma Travesso",rarity:"COMUM",file:"02_Fantasma_Travesso.png",album:1},{id:3,name:"Gato Preto",rarity:"COMUM",file:"03_Gato_Preto.png",album:1},{id:4,name:"Poção Misteriosa",rarity:"COMUM",file:"04_Pocao_Misteriosa.png",album:1},{id:5,name:"Vampiro da Meia-Noite",rarity:"EPICA",file:"05_Vampiro_da_Meia_Noite.png",album:1},
+{id:6,name:"Chapéu da Bruxa",rarity:"COMUM",file:"06_Chapeu_da_Bruxa.png",album:2},{id:7,name:"Vassoura Encantada",rarity:"COMUM",file:"07_Vassoura_Encantada.png",album:2},{id:8,name:"Bola de Cristal",rarity:"COMUM",file:"08_Bola_de_Cristal.png",album:2},{id:9,name:"Livro de Feitiços",rarity:"COMUM",file:"09_Livro_de_Feiticos.png",album:2},{id:10,name:"Bruxa Suprema",rarity:"EPICA",file:"10_Bruxa_Suprema.png",album:2},
+{id:11,name:"Morcego da Lua",rarity:"COMUM",file:"11_Morcego_da_Lua.png",album:3},{id:12,name:"Aranha Gigante",rarity:"COMUM",file:"12_Aranha_Gigante.png",album:3},{id:13,name:"Zumbi Perdido",rarity:"COMUM",file:"13_Zumbi_Perdido.png",album:3},{id:14,name:"Noiva Fantasma",rarity:"COMUM",file:"14_Noiva_Fantasma.png",album:3},{id:15,name:"Senhor das Trevas",rarity:"EPICA",file:"15_Senhor_das_Trevas.png",album:3},
+{id:16,name:"Balde de Doces",rarity:"COMUM",file:"16_Balde_de_Doces.png",album:4},{id:17,name:"Lanterna Assombrada",rarity:"COMUM",file:"17_Lanterna_Assombrada.png",album:4},{id:18,name:"Mansão Assombrada",rarity:"COMUM",file:"18_Mansao_Assombrada.png",album:4},{id:19,name:"Castelo Sombrio",rarity:"COMUM",file:"19_Castelo_Sombrio.png",album:4},{id:20,name:"Rei Abóbora",rarity:"EPICA",file:"20_Rei_Abobora.png",album:4},
+{id:21,name:"Ceifador Dourado",rarity:"LENDARIA",file:"21_Ceifador_Lendario.png",album:"legendary"},{id:22,name:"Cavaleiro Sem Cabeça Dourado",rarity:"LENDARIA",file:"22_Cavaleiro_Sem_Cabeca_Lendario.png",album:"legendary"},{id:23,name:"Entidade Ancestral Dourada",rarity:"LENDARIA",file:"23_Entidade_Ancestral_Lendaria.png",album:"legendary"},{id:24,name:"Rainha das Sombras Dourada",rarity:"LENDARIA",file:"24_Rainha_das_Sombras_Lendaria.png",album:"legendary"},{id:25,name:"Árvore Maldita Dourada",rarity:"LENDARIA",file:"25_Arvore_Maldita_Lendaria.png",album:"legendary"}
 ];
+const albums=[{id:1,name:"NOITE ASSOMBRADA",ids:[1,2,3,4,5],icon:"🏰"},{id:2,name:"BRUXARIA & MAGIA",ids:[6,7,8,9,10],icon:"🔮"},{id:3,name:"CRIATURAS DAS TREVAS",ids:[11,12,13,14,15],icon:"🦇"},{id:4,name:"REINO DAS ABÓBORAS",ids:[16,17,18,19,20],icon:"🎃"}];
+const jokers=[{id:"comum",name:"Coringa Comum",file:"01_Coringa_Comum.png",rarity:"COMUM"},{id:"epico",name:"Coringa Épico",file:"02_Coringa_Epico.png",rarity:"EPICO"},{id:"lendario",name:"Coringa Lendário",file:"03_Coringa_Lendario.png",rarity:"LENDARIO"},{id:"universal",name:"Coringa Universal",file:"04_Coringa_Universal.png",rarity:"UNIVERSAL"}];
+const base="assets/cartas-halloween/",jokerBase="assets/coringas/";
+let owned={},jokerOwned={},userDocId=null,currentUser=null,isVip=false,nextPack=0,currentFilter="all",selectedGive=null,tradeUsed=0,config={coringasPacotesAtivos:true,probabilidadesCoringas:{comum:70,epico:20,lendario:10}};
+const $=id=>document.getElementById(id), pad=n=>String(n).padStart(2,"0"), esc=s=>String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));
+function toast(t){$("toast").textContent=t;$("toast").classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>$("toast").classList.remove("show"),2600)}
+function card(id){return cards.find(c=>c.id===id)}
+function qty(id){return Number(owned[id]||0)}
+function cardHTML(c){const q=qty(c.id), cls=c.rarity.toLowerCase();return `<div class="sticker ${cls} ${q?"":"missing"}" data-id="${c.id}">${q?`<img src="${base+c.file}" alt="${esc(c.name)}">`:`<img src="assets/album/carta-faltante.jpeg" alt="Carta ${pad(c.id)} faltante"><div class="shade"></div><div class="missingText">AINDA NÃO ENCONTRADA</div>`}<span class="num">${pad(c.id)}</span><span class="rarity">${c.rarity}</span><span class="qty">x${q}</span></div>`}
+function renderCollection(){let list=cards.filter(c=>{const q=qty(c.id);if(currentFilter==="common")return c.rarity==="COMUM";if(currentFilter==="epica")return c.rarity==="EPICA";if(currentFilter==="legendaria")return c.rarity==="LENDARIA";if(currentFilter==="missing")return q===0; if(currentFilter==="duplicates")return q>1;return true});$("cardsGrid").innerHTML=list.map(cardHTML).join("");document.querySelectorAll(".sticker[data-id]").forEach(x=>x.onclick=()=>showCard(+x.dataset.id));}
+function renderAlbums(){ $("albumCovers").innerHTML=albums.map(a=>{const n=a.ids.filter(qty).length;return `<article class="albumCover" data-album="${a.id}"><div class="orb">${a.icon}</div><h3>ÁLBUM ${a.id}<br>${a.name}</h3><small>${n}/5 cartas</small><div class="coverProgress"><i style="width:${n*20}%"></i></div></article>`}).join("")+`<article class="albumCover" data-legendary="1"><div class="orb">👑</div><h3>COLEÇÃO LENDÁRIA</h3><small>${cards.filter(c=>c.id>=21&&qty(c.id)>0).length}/5 cartas</small><div class="coverProgress"><i style="width:${cards.filter(c=>c.id>=21&&qty(c.id)>0).length*20}%"></i></div></article>`;document.querySelectorAll("[data-album]").forEach(x=>x.onclick=()=>showAlbum(+x.dataset.album));document.querySelector("[data-legendary]")?.addEventListener("click",showLegendary)}
+function renderJokers(){ $("jokerGrid").innerHTML=jokers.map(j=>`<div class="joker"><img src="${jokerBase+j.file}" alt="${esc(j.name)}"><h3>${j.name}</h3><div class="jq">x${Number(jokerOwned[j.id]||0)}</div><button class="btn primary" style="margin-top:7px;width:100%" ${Number(jokerOwned[j.id]||0)?"":"disabled"} data-usejoker="${j.id}">USAR CORINGA</button></div>`).join("");document.querySelectorAll("[data-usejoker]").forEach(b=>b.onclick=()=>useJoker(b.dataset.usejoker))}
+function render(){const unique=cards.filter(c=>qty(c.id)>0).length,total=cards.reduce((s,c)=>s+qty(c.id),0),complete=albums.filter(a=>a.ids.every(id=>qty(id)>0)).length,jtot=Object.values(jokerOwned).reduce((s,v)=>s+Number(v||0),0);$("unique").textContent=unique+"/25";$("total").textContent=total;$("complete").textContent=complete+"/4";$("jokerTotal").textContent=jtot;$("vipBadge").innerHTML=isVip?`<span class="btn" style="padding:6px 9px;color:#ffd75f">👑 VIP • 4–6</span>`:`<span class="btn" style="padding:6px 9px">NORMAL • 1–3</span>`;renderCollection();renderAlbums();renderJokers();renderTradeGive();updatePackUI()}
+function showCard(id){const c=card(id),q=qty(id);$("modalContent").innerHTML=`<h2>${esc(c.name)}</h2><img class="detailImg" src="${q?base+c.file:"assets/album/carta-faltante.jpeg"}"><p style="text-align:center;color:#cbb8d6">Carta ${pad(id)} • ${c.rarity}<br><b style="color:#ffd76a">Quantidade: x${q}</b></p>`;$("modal").classList.add("open")}
+function showAlbum(id){const a=albums.find(x=>x.id===id);$("modalContent").innerHTML=`<h2>ÁLBUM ${id} — ${a.name}</h2><p>Progresso: ${a.ids.filter(qty).length}/5</p><div class="grid">${a.ids.map(i=>cardHTML(card(i))).join("")}</div>`;$("modal").classList.add("open")}
+function showLegendary(){const list=cards.filter(c=>c.id>=21);$("modalContent").innerHTML=`<h2>👑 COLEÇÃO LENDÁRIA</h2><p>Cartas 21–25 • ${list.filter(c=>qty(c.id)>0).length}/5</p><div class="grid">${list.map(cardHTML).join("")}</div>`;$("modal").classList.add("open")}
+$("closeModal").onclick=()=>$("modal").classList.remove("open");$("modal").onclick=e=>{if(e.target===$("modal"))$("modal").classList.remove("open")};
+function tab(name){const map={collection:"collectionSection",albums:"albumsSection",jokers:"jokersSection",trades:"tradesSection",pack:"packSection"};Object.entries(map).forEach(([k,id])=>$(id).classList.toggle("hidden",k!==name));document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.tab===name));if(name==="trades")loadOffers()}
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>tab(b.dataset.tab));$("rewardBtn").onclick=()=>tab("albums");
+document.querySelectorAll("[data-filter]").forEach(b=>b.onclick=()=>{currentFilter=b.dataset.filter;document.querySelectorAll("[data-filter]").forEach(x=>x.classList.toggle("sel",x===b));renderCollection()});
+async function findUserDoc(user){let r=await getDocs(query(collection(db,"admins"),where("uid","==",user.uid)));if(r.empty&&user.email)r=await getDocs(query(collection(db,"admins"),where("email","==",user.email)));return r.empty?null:r.docs[0]}
+async function loadUser(user){currentUser=user;try{const snap=await findUserDoc(user);if(!snap){render();return}userDocId=snap.id;const d=snap.data();isVip=d.vip===true;owned=d.cartasHalloween||{};jokerOwned=d.coringasHalloween||{};nextPack=Number(d.proximaCartaHalloweenEmMs||0);tradeUsed=Number(d.cartasHalloweenTrocasHoje||0);const c=await getDoc(doc(db,"config","halloween2026"));if(c.exists())config={...config,...c.data()};render()}catch(e){console.error(e);toast("Não foi possível carregar sua coleção.")}}
+function updatePackUI(){const ready=Date.now()>=nextPack;const wait=Math.max(0,nextPack-Date.now());$("claimBtn").disabled=!currentUser||!ready;$("heroOpenBtn").disabled=!currentUser||!ready;$("packStatus").innerHTML=currentUser?(ready?`<b style="color:#5be397">✨ Seu pacote está disponível!</b>`:`Próximo pacote em <span class="timer">${formatMs(wait)}</span>`):"Entre na sua conta para abrir seu pacote.";$("packHeroText").textContent=ready?"✨ PACOTE DISPONÍVEL":"🎁 Pacote de Halloween"}
+function formatMs(ms){let s=Math.ceil(ms/1000),h=Math.floor(s/3600);s%=3600;let m=Math.floor(s/60);s%=60;return `${String(h).padStart(2,"0")}h ${String(m).padStart(2,"0")}m ${String(s).padStart(2,"0")}s`}
+setInterval(updatePackUI,1000);
+async function claimPack(){if(!currentUser||!userDocId)return toast("Faça login para abrir o pacote.");if(Date.now()<nextPack)return toast("Seu próximo pacote ainda não está disponível.");const n=isVip?(4+Math.floor(Math.random()*3)):(1+Math.floor(Math.random()*3));let drawn=[];for(let i=0;i<n;i++)drawn.push(cards[Math.floor(Math.random()*cards.length)].id);let joker=null;if(config.coringasPacotesAtivos){const p=config.probabilidadesCoringas||{comum:70,epico:20,lendario:10};const r=Math.random()*100;if(r<p.comum)joker="comum";else if(r<p.comum+p.epico)joker="epico";else if(r<p.comum+p.epico+p.lendario)joker="lendario";}
+const cooldown=isVip?50*3600*1000:72*3600*1000;const next=Date.now()+cooldown;try{await runTransaction(db,async tx=>{const ref=doc(db,"admins",userDocId),snap=await tx.get(ref);if(!snap.exists())throw new Error("USER_NOT_FOUND");const d=snap.data();const current={...(d.cartasHalloween||{})};drawn.forEach(id=>current[id]=(Number(current[id])||0)+1);const jo={...(d.coringasHalloween||{})};if(joker)jo[joker]=(Number(jo[joker])||0)+1;tx.update(ref,{cartasHalloween:current,coringasHalloween:jo,proximaCartaHalloweenEmMs:next,ultimaCartaHalloweenEm:serverTimestamp(),cartasHalloweenHistorico:[...(d.cartasHalloweenHistorico||[]),{tipo:"PACOTE",quantidade:drawn.length,cartas:drawn,coringa:joker||null,data:Date.now()}]})});owned={...owned};drawn.forEach(id=>owned[id]=qty(id)+1);if(joker)jokerOwned[joker]=Number(jokerOwned[joker]||0)+1;nextPack=next;animatePack(drawn,joker)}catch(e){console.error(e);toast("Não foi possível abrir o pacote. Verifique as regras do Firebase.")}}
+function animatePack(ids,joker){tab("pack");$("packResults").innerHTML="";$("packSummary").classList.add("hidden");$("claimBtn").disabled=true;const v=$("packVisual");v.classList.add("opening");$("packStageImg").src="assets/pacotes/pacote-fechado.jpeg";$("packStatus").textContent="Abrindo seu pacote...";setTimeout(()=>{$("packStageImg").src="assets/pacotes/pacote-aberto.jpeg";v.classList.remove("opening");$("packStatus").textContent="✨ Revelando suas figurinhas..."},1200);setTimeout(()=>{const newCount=ids.filter(id=>qty(id)===1).length;const rep=ids.length-newCount;$("packResults").innerHTML=ids.map(id=>`<div class="sticker reveal ${card(id).rarity.toLowerCase()}"><img src="${base+card(id).file}" alt="${esc(card(id).name)}"><span class="num">${pad(id)}</span><span class="qty">${newCount&&qty(id)===1?"NOVA":"REPETIDA"}</span></div>`).join("");$("packSummary").classList.remove("hidden");$("packSummary").innerHTML=`<div><b>${newCount}</b><small>🆕 Novas</small></div><div><b>${rep}</b><small>🔁 Repetidas</small></div><div><b>${joker?"1":"0"}</b><small>🃏 Coringas</small></div>`;$("packStatus").textContent=`Você ganhou ${ids.length} figurinha(s)!${joker?" + 1 Coringa "+joker:""}`;render()},1700)}
+$("claimBtn").onclick=claimPack;$("heroOpenBtn").onclick=()=>{tab("pack");claimPack()};
+function renderTradeGive(){const repeated=cards.filter(c=>qty(c.id)>1);$("giveGrid").innerHTML=repeated.length?repeated.map(c=>`<div class="selectCard ${selectedGive===c.id?"sel":""}" data-give="${c.id}"><img src="${base+c.file}" alt=""><span class="q">x${qty(c.id)}</span></div>`).join(""):"<div class=empty style='grid-column:1/-1'>Você ainda não possui cartas repetidas para trocar.</div>";document.querySelectorAll("[data-give]").forEach(x=>x.onclick=()=>{selectedGive=+x.dataset.give;renderTradeGive();$("giveInfo").textContent=`Você escolheu: ${card(selectedGive).name} • x${qty(selectedGive)}`});$("wantSelect").innerHTML=`<option value="">Quero receber...</option>`+cards.filter(c=>c.id!==selectedGive).map(c=>`<option value="${c.id}">${pad(c.id)} — ${c.name}</option>`).join("");$("tradeLimit").textContent=`${isVip?2:1-tradeUsed>0?1:0}/dia`}
+async function loadOffers(){try{const q=query(collection(db,"trocasHalloween"),where("status","==","ABERTA"),limit(20));const s=await getDocs(q);const arr=s.docs.map(d=>({id:d.id,...d.data()})).filter(x=>x.fromUid!==currentUser?.uid);$("offers").innerHTML=arr.length?arr.map(o=>`<div class="offer"><div><b>${esc(o.fromName||"Jogador")}</b><small>quer receber ${esc(card(o.wantCardId)?.name||"carta")}</small></div><img src="${base+card(o.giveCardId).file}"><span class="arrow">⇄</span><img src="${base+card(o.wantCardId).file}"><button class="btn green" style="margin-left:auto;padding:7px" data-accept="${o.id}">ACEITAR</button></div>`).join(""):"<div class=empty>Nenhuma oferta disponível no momento.</div>";document.querySelectorAll("[data-accept]").forEach(b=>b.onclick=()=>acceptTrade(b.dataset.accept))}catch(e){$("offers").innerHTML="<div class=empty>As ofertas dependem das regras de leitura do Firestore.</div>"}}
+$("createTradeBtn").onclick=async()=>{const want=Number($("wantSelect").value);if(!selectedGive||!want)return toast("Escolha a carta que dará e a que deseja receber.");if(qty(selectedGive)<2)return toast("Só é possível oferecer cartas repetidas.");const limit=isVip?2:1;if(tradeUsed>=limit)return toast("Seu limite diário de trocas foi atingido.");try{await addDoc(collection(db,"trocasHalloween"),{fromUid:currentUser.uid,fromName:currentUser.displayName||currentUser.email||"Jogador",giveCardId:selectedGive,wantCardId:want,status:"ABERTA",createdAt:serverTimestamp()});tradeUsed++;toast("Oferta criada!");loadOffers();render()}catch(e){console.error(e);toast("Não foi possível criar a oferta. Verifique as regras do Firebase.")}};
+async function acceptTrade(id){toast("A aceitação precisa ser confirmada pelas regras/transaction do Firestore.");}
+async function useJoker(type){if(!currentUser||!userDocId||Number(jokerOwned[type]||0)<1)return;const missing=cards.filter(c=>qty(c.id)===0);if(!missing.length)return toast("Você já possui as 25 cartas!");const options=missing.map(c=>`<option value="${c.id}">${pad(c.id)} — ${c.name}</option>`).join("");$("modalContent").innerHTML=`<h2>🃏 ${esc(jokers.find(j=>j.id===type).name)}</h2><p>Escolha qual figurinha faltante deseja completar.</p><select id="jokerTarget" style="width:100%;padding:11px;background:#100619;color:#fff;border:1px solid #ffffff22;border-radius:10px;margin-top:10px">${options}</select><button class="btn gold" id="confirmJoker" style="width:100%;margin-top:10px">USAR CORINGA</button>`;$("modal").classList.add("open");$("confirmJoker").onclick=async()=>{const target=Number($("jokerTarget").value);try{await runTransaction(db,async tx=>{const ref=doc(db,"admins",userDocId),s=await tx.get(ref),d=s.data(),jo={...(d.coringasHalloween||{})},co={...(d.cartasHalloween||{})};if(Number(jo[type]||0)<1)throw new Error("NO_JOKER");jo[type]--;co[target]=(Number(co[target])||0)+1;tx.update(ref,{coringasHalloween:jo,cartasHalloween:co})});jokerOwned[type]--;owned[target]=qty(target)+1;$("modal").classList.remove("open");toast(`Coringa usado! ${card(target).name} foi adicionada.`);render()}catch(e){toast("Não foi possível usar o Coringa.")}}}
 
-const home = document.getElementById("home");
-const albums = document.getElementById("albums");
-const albumModal = document.getElementById("albumModal");
-const infoModal = document.getElementById("infoModal");
-
-function showAlbums(){
-  home.style.display = "none";
-  albums.style.display = "block";
-  window.scrollTo(0,0);
-}
-
-function showHome(){
-  albums.style.display = "none";
-  home.style.display = "block";
-  window.scrollTo(0,0);
-}
-
-document.getElementById("openAlbums").addEventListener("click",showAlbums);
-document.getElementById("openAlbumsTop").addEventListener("click",showAlbums);
-document.getElementById("backHome").addEventListener("click",showHome);
-
-document.querySelectorAll("[data-album]").forEach(button=>{
-  button.addEventListener("click",()=>{
-    const id = button.dataset.album;
-    openAlbum(id);
-  });
-});
-
-function openAlbum(id){
-
-  document.getElementById("modalAlbumName").textContent =
-    albumNames[id] || "ÁLBUM";
-
-  const ids = albumCards[id] || [];
-
-  document.getElementById("modalAlbumProgress").textContent =
-    "0/" + ids.length;
-
-  const grid = document.getElementById("cardsGrid");
-  grid.innerHTML = "";
-
-  ids.forEach(cardId=>{
-    const box = document.createElement("div");
-    box.className = "card-empty";
-
-    /*
-      IMAGEM DA CARTA FICARÁ AQUI.
-      Ainda não coloquei caminho nenhum.
-    */
-
-    box.innerHTML =
-      "<button type='button'>" +
-      "CARTA " + String(cardId).padStart(2,"0") +
-      "<br><br>" +
-      cardNames[cardId-1] +
-      "<br><br>" +
-      "[ IMAGEM ]" +
-      "</button>";
-
-    box.querySelector("button").addEventListener("click",()=>{
-      alert("Aqui abriremos a carta " + cardNames[cardId-1]);
-    });
-
-    grid.appendChild(box);
-  });
-
-  albumModal.classList.add("open");
-}
-
-document.getElementById("closeAlbum").addEventListener("click",()=>{
-  albumModal.classList.remove("open");
-});
-
-document.getElementById("closeInfo").addEventListener("click",()=>{
-  infoModal.classList.remove("open");
-});
-
-document.getElementById("albumInfo").addEventListener("click",()=>{
-  infoModal.classList.add("open");
-});
-
-[albumModal,infoModal].forEach(modal=>{
-  modal.addEventListener("click",e=>{
-    if(e.target === modal){
-      modal.classList.remove("open");
-    }
-  });
-});
+onAuthStateChanged(auth,user=>{if(user)loadUser(user);else{currentUser=null;render();updatePackUI()}});render();
 </script>
-
 </body>
 </html>
