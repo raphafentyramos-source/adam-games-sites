@@ -28,98 +28,17 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
 .roleta-card{border:1px solid rgba(255,213,42,.32);background:radial-gradient(circle at 100% 0%,rgba(255,213,42,.16),transparent 35%),linear-gradient(145deg,rgba(8,61,104,.98),rgba(2,30,62,.98))}.roleta-header{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:18px}.roleta-title{display:flex;align-items:center;gap:12px}.roleta-icon{width:52px;height:52px;display:flex;align-items:center;justify-content:center;border-radius:15px;background:linear-gradient(135deg,#ffd52a,#e78a00);font-size:27px}.roleta-title h3{margin:0}.roleta-title p{margin-top:4px;color:#9ec7e5;font-size:12px}.roleta-saldo{min-width:105px;padding:10px 14px;text-align:center;border-radius:15px;background:rgba(255,213,42,.1)}.roleta-saldo-label{color:#b8d2e6;font-size:9px;font-weight:bold}.roleta-saldo-value{margin-top:2px;color:#ffd52a;font-size:24px;font-weight:900}
 .history{margin-top:22px}.historyItem{padding:15px;margin-top:9px;border-radius:14px;background:rgba(255,255,255,.05)}.historyTop{display:flex;justify-content:space-between;gap:10px;font-weight:bold}.historyDate{color:#75d4ff;font-size:12px;text-align:right}.plus{color:#65ff9c}.minus{color:#ff7382}.historyInfo{color:#9dbbd3;font-size:12px;margin-top:8px;line-height:1.6}.operation-id{margin-top:8px;padding:7px 9px;border-radius:8px;background:rgba(0,0,0,.2);color:#7fc9ff;font-size:11px;word-break:break-all}
 .voucher-card{border:1px solid rgba(255,213,42,.3);background:radial-gradient(circle at 100% 0%,rgba(255,213,42,.15),transparent 40%),rgba(2,30,62,.95)}.voucher-title{display:flex;align-items:center;gap:12px;margin-bottom:16px}.voucher-icon{width:55px;height:55px;display:flex;align-items:center;justify-content:center;border-radius:16px;font-size:28px;background:linear-gradient(135deg,#ffd52a,#d48b00)}.generateVoucher{width:100%;margin-top:12px;padding:15px;border-radius:13px;background:linear-gradient(135deg,#ffd52a,#d88b00);color:#111}.voucher-result{display:none;margin-top:16px;padding:17px;border-radius:16px;background:rgba(255,213,42,.08);border:1px solid rgba(255,213,42,.2)}.voucher-code{margin-top:8px;padding:15px;border-radius:12px;background:#061a34;color:#ffd52a;font-size:24px;font-weight:900;letter-spacing:3px;text-align:center;word-break:break-all}.copyVoucher{padding:13px;border-radius:11px;background:linear-gradient(135deg,#168fff,#0563b5)}.newVoucher{padding:13px;border-radius:11px;background:linear-gradient(135deg,#16bb69,#087b45)}.voucher-list{margin-top:18px;display:grid;gap:9px}.voucher-item{padding:14px;border-radius:13px;background:rgba(255,255,255,.045)}.voucher-code-small{color:#ffd52a;font-weight:900;letter-spacing:1px}.voucher-meta{margin-top:5px;color:#9dbbd3;font-size:11px;line-height:1.5}
+
+/* SELOS & TROFEUS */
+.achievements-card{border:1px solid rgba(255,213,42,.32);background:radial-gradient(circle at 100% 0%,rgba(255,213,42,.12),transparent 38%),rgba(2,30,62,.96)}
+.achievements-head{display:flex;align-items:center;gap:14px;margin-bottom:16px}.achievements-icon{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#ffd52a,#d48b00);font-size:30px}.achievements-head h3{margin:0}.achievements-head p{margin-top:4px;color:#9ec7e5;font-size:12px;line-height:1.45}
+.ach-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.ach-grid .full{grid-column:1/-1}.ach-buttons{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.ach-buttons button{padding:14px;border-radius:12px}.ach-send{background:linear-gradient(135deg,#168fff,#0563b5)}.ach-create{background:linear-gradient(135deg,#16bb69,#087b45)}
+.ach-box{margin-top:18px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08)}.ach-list{display:grid;gap:8px;max-height:360px;overflow:auto}.ach-item{display:flex;align-items:center;gap:11px;padding:12px;border-radius:12px;background:rgba(255,255,255,.045)}.ach-item-icon{font-size:28px;width:42px;text-align:center;flex-shrink:0}.ach-item-main{min-width:0;flex:1}.ach-item-name{font-weight:900}.ach-item-meta{margin-top:3px;color:#8fb7d4;font-size:10px;line-height:1.45}.ach-tip{margin-top:10px;padding:10px;border-radius:10px;background:rgba(255,193,7,.07);border:1px solid rgba(255,193,7,.16);color:#e8cf8a;font-size:11px;line-height:1.45}
+@media(max-width:600px){.ach-grid{grid-template-columns:1fr}.ach-grid .full{grid-column:auto}.ach-buttons{grid-template-columns:1fr}}
+
 .empty{padding:18px;text-align:center;color:#9dbbd3}
 @media(max-width:800px){.dashboard{grid-template-columns:1fr 1fr}.balances{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){header{align-items:flex-start}.headerButtons{flex-direction:column}h2{font-size:32px}.search{grid-template-columns:1fr}.form,.roleta-form,.voucher-form,.info-grid{grid-template-columns:1fr}.full{grid-column:auto}.actions,.special,.roleta-actions,.voucher-buttons{grid-template-columns:1fr}.delivery-actions{grid-template-columns:1fr}.delivery-top{flex-direction:column}}
-/* =========================================================
-   CONQUISTAS — SELOS E TROFÉUS
-   ========================================================= */
-.achievements-card{
-  border:1px solid rgba(255,213,42,.35);
-  background:
-    radial-gradient(circle at 100% 0%,rgba(255,213,42,.14),transparent 38%),
-    linear-gradient(145deg,rgba(8,61,104,.98),rgba(2,30,62,.98));
-}
-.achievements-head{
-  display:flex;align-items:center;justify-content:space-between;
-  gap:15px;margin-bottom:18px
-}
-.achievements-title{display:flex;align-items:center;gap:12px}
-.achievements-icon{
-  width:55px;height:55px;border-radius:16px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:29px;background:linear-gradient(135deg,#ffd52a,#d48b00)
-}
-.achievements-title p{margin-top:4px;color:#9ec7e5;font-size:12px}
-.achievement-admin-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:12px
-}
-.achievement-admin-grid .full{grid-column:1/-1}
-.achievement-actions{
-  display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px
-}
-.achievement-btn{
-  padding:15px;border-radius:12px
-}
-.achievement-send{background:linear-gradient(135deg,#168fff,#0563b5)}
-.achievement-create{background:linear-gradient(135deg,#16bb69,#087b45)}
-.achievement-preview{
-  margin-top:16px;padding:15px;border-radius:15px;
-  background:rgba(255,255,255,.045);
-  border:1px solid rgba(255,255,255,.07)
-}
-.achievement-preview-title{
-  color:#a9c8e5;font-size:11px;font-weight:bold;margin-bottom:10px
-}
-.achievement-preview-card{
-  display:flex;align-items:center;gap:12px;
-  padding:13px;border-radius:13px;background:rgba(0,0,0,.16)
-}
-.achievement-preview-icon{font-size:36px}
-.achievement-preview-name{font-weight:900}
-.achievement-preview-meta{margin-top:4px;color:#8fb7d4;font-size:11px}
-.achievement-catalog{
-  margin-top:18px;padding-top:18px;
-  border-top:1px solid rgba(255,255,255,.08)
-}
-.achievement-catalog h4{font-size:13px;color:#a9c8e5;margin-bottom:10px}
-.achievement-list{display:grid;gap:9px;max-height:420px;overflow:auto}
-.achievement-item{
-  display:flex;align-items:center;justify-content:space-between;
-  gap:12px;padding:13px;border-radius:13px;
-  background:rgba(255,255,255,.045);
-  border:1px solid rgba(255,255,255,.07)
-}
-.achievement-item-main{display:flex;align-items:center;gap:11px;min-width:0}
-.achievement-item-icon{font-size:30px;flex-shrink:0}
-.achievement-item-name{font-weight:900;font-size:13px}
-.achievement-item-meta{margin-top:3px;color:#8fb7d4;font-size:10px}
-.achievement-item-id{
-  margin-top:4px;color:#63c7ff;font-size:9px;word-break:break-all
-}
-.achievement-type{
-  flex-shrink:0;padding:6px 9px;border-radius:20px;
-  font-size:9px;font-weight:900
-}
-.achievement-type.selo{background:rgba(0,190,255,.13);color:#75d8ff}
-.achievement-type.trofeu{background:rgba(255,213,42,.13);color:#ffd52a}
-.achievement-delivery-history{
-  margin-top:18px;padding-top:18px;
-  border-top:1px solid rgba(255,255,255,.08)
-}
-.achievement-delivery-history h4{font-size:13px;color:#a9c8e5;margin-bottom:10px}
-.achievement-history-list{display:grid;gap:8px;max-height:300px;overflow:auto}
-.achievement-history-item{
-  padding:12px;border-radius:12px;background:rgba(255,255,255,.04);
-  color:#a8c6dd;font-size:11px;line-height:1.55
-}
-.achievement-history-item strong{color:#fff}
-@media(max-width:600px){
-  .achievement-admin-grid{grid-template-columns:1fr}
-  .achievement-admin-grid .full{grid-column:auto}
-  .achievement-actions{grid-template-columns:1fr}
-  .achievements-head{align-items:flex-start;flex-direction:column}
-}
 </style>
 </head>
 <body>
@@ -199,29 +118,32 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
 </div>
 </div>
 
-<div class="card ach-card">
-<div class="ach-head"><div class="ach-icon">🏆</div><div><h3>Selos & Troféus</h3><p>Cadastre conquistas e entregue selos ou troféus diretamente para qualquer cliente pelo ID Adam Games ou e-mail.</p></div></div>
-<div class="ach-form">
-<div class="ach-field"><label>LOCALIZAR CLIENTE</label><input id="achUser" type="text" placeholder="ID Adam Games ou e-mail" autocomplete="off"></div>
-<div class="ach-field"><label>CONQUISTA</label><select id="achSelect"><option value="">Selecione uma conquista...</option></select></div>
-<div class="ach-field full"><label>OBSERVAÇÃO — OPCIONAL</label><input id="achNote" type="text" maxlength="150" placeholder="Ex.: Prêmio do evento Independência 2026"></div>
+
+<div class="card achievements-card">
+<div class="achievements-head"><div class="achievements-icon">🏆</div><div><h3>Selos & Troféus</h3><p>Cadastre conquistas e entregue diretamente para qualquer cliente pelo ID Adam Games ou e-mail.</p></div></div>
+<div class="ach-grid">
+<div class="field"><label>CLIENTE — ID ADAM GAMES OU E-MAIL</label><input id="achUser" type="text" placeholder="Ex.: ADAM-0001 ou cliente@email.com" autocomplete="off"></div>
+<div class="field"><label>CONQUISTA</label><select id="achSelect"><option value="">Selecione uma conquista...</option></select></div>
+<div class="field full"><label>OBSERVAÇÃO — OPCIONAL</label><input id="achNote" type="text" maxlength="150" placeholder="Ex.: Prêmio do evento Independência 2026"></div>
 </div>
-<div class="ach-actions"><button class="ach-send" id="achSend" type="button">🎁 ENVIAR CONQUISTA</button><button class="ach-save" id="achReload" type="button">🔄 ATUALIZAR CATÁLOGO</button></div>
+<div class="ach-buttons"><button class="ach-send" id="achSend" type="button">🎁 ENVIAR CONQUISTA</button><button class="ach-create" id="achReload" type="button">🔄 ATUALIZAR CATÁLOGO</button></div>
 <div id="achMessage" class="message"></div>
-<div class="ach-note">💡 O envio fica registrado no cadastro do cliente. Selos vão para <strong>selos</strong> e troféus para <strong>trofeus</strong>. O administrador também fica registrado no histórico.</div>
-<h3 style="margin-top:22px;">🛠️ Cadastrar nova conquista</h3>
-<div class="ach-form">
-<div class="ach-field"><label>ID ÚNICO</label><input id="newAchId" type="text" maxlength="50" placeholder="Ex.: independencia2026"></div>
-<div class="ach-field"><label>TIPO</label><select id="newAchType"><option value="selo">🏵️ Selo</option><option value="trofeu">🏆 Troféu</option></select></div>
-<div class="ach-field"><label>ÍCONE</label><input id="newAchIcon" type="text" maxlength="8" value="🏆" placeholder="🏆"></div>
-<div class="ach-field"><label>NOME</label><input id="newAchName" type="text" maxlength="80" placeholder="Ex.: Independência 2026"></div>
-<div class="ach-field full"><label>DESCRIÇÃO</label><input id="newAchDescription" type="text" maxlength="200" placeholder="Explique o motivo da conquista"></div>
-<div class="ach-field"><label>PERÍODO / TEMPORADA</label><input id="newAchPeriod" type="text" maxlength="80" placeholder="Ex.: Setembro de 2026"></div>
-<div class="ach-field"><label>ORDEM</label><input id="newAchOrder" type="number" value="0" min="0" step="1"></div>
+<div class="ach-tip">💡 O envio grava o ID da conquista no campo <strong>selos</strong> ou <strong>trofeus</strong> do cliente e registra quem fez o envio.</div>
+<div class="ach-box">
+<h3>🛠️ Cadastrar nova conquista</h3>
+<div class="ach-grid">
+<div class="field"><label>ID ÚNICO</label><input id="newAchId" type="text" maxlength="50" placeholder="ex.: independencia2026"></div>
+<div class="field"><label>TIPO</label><select id="newAchType"><option value="selo">🏵️ Selo</option><option value="trofeu">🏆 Troféu</option></select></div>
+<div class="field"><label>ÍCONE</label><input id="newAchIcon" type="text" maxlength="8" value="🏆" placeholder="🏆"></div>
+<div class="field"><label>NOME</label><input id="newAchName" type="text" maxlength="80" placeholder="Ex.: Independência 2026"></div>
+<div class="field full"><label>DESCRIÇÃO</label><input id="newAchDescription" type="text" maxlength="200" placeholder="Explique o motivo da conquista"></div>
+<div class="field"><label>PERÍODO / TEMPORADA</label><input id="newAchPeriod" type="text" maxlength="80" placeholder="Ex.: Setembro de 2026"></div>
+<div class="field"><label>ORDEM</label><input id="newAchOrder" type="number" min="0" step="1" value="0"></div>
 </div>
-<button class="ach-save" id="achCreate" type="button" style="width:100%;margin-top:12px;">➕ CADASTRAR CONQUISTA</button>
-<h3 style="margin-top:22px;">📚 Catálogo cadastrado</h3>
-<div class="ach-list" id="achList"><div class="empty">🔄 Carregando conquistas...</div></div>
+<button class="ach-create" id="achCreate" type="button" style="width:100%;margin-top:12px">➕ CADASTRAR CONQUISTA</button>
+<div id="achCreateMessage" class="message"></div>
+</div>
+<div class="ach-box"><h3>📚 Catálogo de conquistas</h3><div class="ach-list" id="achList"><div class="empty">🔄 Carregando catálogo...</div></div></div>
 </div>
 
 <div class="card voucher-card">
@@ -285,83 +207,6 @@ async function alterarVIP(){if(!usuarioSelecionado){mostrarMensagem(operationMes
 async function alterarCaixa(){if(!usuarioSelecionado){mostrarMensagem(operationMessage,"Selecione um usuário.","error");return}const atual=usuarioSelecionado.data.caixaBox===true,novo=!atual;if(!confirm(novo?"Marcar Caixa como utilizada?":"Liberar Caixa novamente?"))return;const id=gerarOperacaoId();try{await updateDoc(usuarioSelecionado.ref,{caixaBox:novo});await addDoc(collection(db,"historico"),{movimentacaoId:id,usuarioId:usuarioSelecionado.docId,publicId:usuarioSelecionado.data.publicId||usuarioSelecionado.docId,usuarioUid:usuarioSelecionado.data.uid||"",usuarioEmail:usuarioSelecionado.data.email||"",usuarioNome:usuarioSelecionado.data.nome||"",adminEmail:adminUsuario.email,adminUid:adminUsuario.uid,item:"Caixa Box",operacao:novo?"remover":"adicionar",quantidade:1,saldoAnterior:atual?1:0,saldoFinal:novo?1:0,motivo:novo?"Caixa Box utilizada":"Caixa Box liberada",criadoEm:new Date().toISOString()});usuarioSelecionado.data.caixaBox=novo;atualizarStatus();mostrarMensagem(operationMessage,novo?"🎁 Caixa marcada como utilizada.":"🎁 Caixa liberada.","success");carregarExtrato(usuarioSelecionado.data.publicId||usuarioSelecionado.docId)}catch(e){console.error(e);mostrarMensagem(operationMessage,"Não foi possível alterar a Caixa.","error")}}
 
 async function carregarExtrato(pid){const lista=document.getElementById("historyList");lista.innerHTML="<div class='empty'>🔄 Carregando histórico...</div>";if(!pid||pid==="Pendente"){lista.innerHTML="<div class='empty'>Este usuário ainda não possui ID público.</div>";return}try{const r=await getDocs(query(collection(db,"historico"),where("publicId","==",pid)));if(r.empty){lista.innerHTML="<div class='empty'>Nenhuma movimentação registrada.</div>";return}const regs=r.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>obterMillis(b.criadoEm)-obterMillis(a.criadoEm));lista.innerHTML="";regs.forEach(x=>{const el=document.createElement("div");el.className="historyItem";const pos=x.operacao==="adicionar",s=pos?"+":"-",cl=pos?"plus":"minus",ni=x.item==="girosRoleta"?"🎰 Giros da Roleta":x.item||"";el.innerHTML=`<div class="historyTop"><span class="${cl}">${s}${numero(x.quantidade)} ${escapar(ni)}</span><span class="historyDate">${escapar(formatarData(x.criadoEm))}</span></div><div class="historyInfo">Saldo anterior: ${numero(x.saldoAnterior)}<br>Saldo final: ${numero(x.saldoFinal)}<br>Motivo: ${escapar(x.motivo||"—")}<br>Administrador: ${escapar(x.adminEmail||"—")}</div><div class="operation-id">🆔 ${escapar(x.movimentacaoId||"Sem ID")}</div>`;lista.appendChild(el)})}catch(e){console.error(e);lista.innerHTML="<div class='empty'>Não foi possível carregar o histórico.</div>"}}
-
-/* =====================================================
-   SELOS & TROFÉUS — ADMIN
-===================================================== */
-const CONQUISTAS_PADRAO=[
-{id:"independencia2026",tipo:"selo",icone:"🇧🇷",nome:"Independência 2026",descricao:"Selo especial da temporada de Independência do Adam Games.",periodo:"Setembro de 2026",ordem:1},
-{id:"primeiroAcesso",tipo:"trofeu",icone:"🏆",nome:"Primeiro Acesso",descricao:"Reconhece a entrada do jogador no universo Adam Games.",periodo:"Conquista permanente",ordem:2},
-{id:"vip",tipo:"trofeu",icone:"👑",nome:"Membro VIP",descricao:"Troféu reservado aos jogadores com acesso VIP.",periodo:"Conquista permanente",ordem:3},
-{id:"colecionador",tipo:"selo",icone:"💎",nome:"Colecionador",descricao:"Conquista para quem começa a montar sua coleção.",periodo:"Conquista permanente",ordem:4},
-{id:"mestreBingo",tipo:"trofeu",icone:"🎱",nome:"Mestre do Bingo",descricao:"Troféu especial relacionado ao Bingo Adam Games.",periodo:"Conquista permanente",ordem:5},
-{id:"chaveEspecial",tipo:"selo",icone:"🔑",nome:"Chave Especial",descricao:"Selo relacionado às temporadas de Chaves Especiais.",periodo:"Conquista sazonal",ordem:6}
-];
-
-async function carregarConquistasAdmin(){
-  const lista=document.getElementById("achList");
-  if(!lista)return;
-  lista.innerHTML="<div class='empty'>🔄 Carregando conquistas...</div>";
-  try{
-    const r=await getDocs(collection(db,"conquistas"));
-    const mapa=new Map(CONQUISTAS_PADRAO.map(x=>[x.id,x]));
-    r.docs.forEach(d=>mapa.set(d.id,{id:d.id,...d.data()}));
-    todasConquistas=Array.from(mapa.values()).sort((a,b)=>(Number(a.ordem)||0)-(Number(b.ordem)||0));
-    achSelect.innerHTML='<option value="">Selecione uma conquista...</option>'+todasConquistas.map(x=>`<option value="${escapar(x.id)}">${x.tipo==="selo"?"🏵️":"🏆"} ${escapar(x.nome)} — ${x.id}</option>`).join("");
-    lista.innerHTML="";
-    todasConquistas.forEach(x=>{
-      const div=document.createElement("div");div.className="ach-item";
-      div.innerHTML=`<div class="ach-item-icon">${escapar(x.icone||"🏆")}</div><div class="ach-item-main"><div class="ach-item-name">${escapar(x.nome||x.id)}</div><div class="ach-item-meta">${x.tipo==="selo"?"SELO":"TROFÉU"} • ID: ${escapar(x.id)}<br>${escapar(x.descricao||"")} • ${escapar(x.periodo||"")}</div></div>`;
-      lista.appendChild(div);
-    });
-  }catch(e){
-    console.error("ERRO CONQUISTAS:",e);
-    lista.innerHTML="<div class='empty'>❌ Não foi possível carregar o catálogo.</div>";
-  }
-}
-
-async function cadastrarConquista(){
-  if(!adminUsuario)return;
-  const id=document.getElementById("newAchId").value.trim().replace(/\\s+/g,"_").toLowerCase();
-  const tipo=document.getElementById("newAchType").value;
-  const icone=document.getElementById("newAchIcon").value.trim()||"🏆";
-  const nome=document.getElementById("newAchName").value.trim();
-  const descricao=document.getElementById("newAchDescription").value.trim();
-  const periodo=document.getElementById("newAchPeriod").value.trim()||"Conquista permanente";
-  const ordem=Number(document.getElementById("newAchOrder").value)||0;
-  if(!id||!nome||!descricao){mostrarMensagem(achMessage,"❌ Preencha ID, nome e descrição.","error");return}
-  if(!/^[a-z0-9_-]+$/.test(id)){mostrarMensagem(achMessage,"❌ O ID deve usar apenas letras minúsculas, números, _ ou -.","error");return}
-  try{
-    await setDoc(doc(db,"conquistas",id),{id,tipo,icone,nome,descricao,periodo,ordem,criadoPor:adminUsuario.email||"",criadoPorUid:adminUsuario.uid||"",criadoEm:serverTimestamp()});
-    mostrarMensagem(achMessage,"✅ Conquista cadastrada com sucesso.","success");
-    document.getElementById("newAchId").value="";document.getElementById("newAchName").value="";document.getElementById("newAchDescription").value="";
-    await carregarConquistasAdmin();
-  }catch(e){console.error(e);mostrarMensagem(achMessage,e?.code==="permission-denied"?"❌ Sem permissão para cadastrar conquistas. Ajuste as Rules do Firestore.":"❌ Não foi possível cadastrar a conquista.","error")}
-}
-
-async function enviarConquista(){
-  if(!adminUsuario){mostrarMensagem(achMessage,"❌ Administrador não autenticado.","error");return}
-  const alvo=achUser.value.trim();const id=achSelect.value;
-  if(!alvo){mostrarMensagem(achMessage,"❌ Informe o ID Adam Games ou e-mail do cliente.","error");return}
-  if(!id){mostrarMensagem(achMessage,"❌ Selecione uma conquista.","error");return}
-  achSend.disabled=true;achSend.textContent="⏳ ENVIANDO...";
-  try{
-    let r=await getDocs(query(collection(db,"admins"),where("publicId","==",alvo)));
-    if(r.empty)r=await getDocs(query(collection(db,"admins"),where("email","==",alvo.toLowerCase())));
-    if(r.empty){mostrarMensagem(achMessage,"❌ Cliente não encontrado pelo ID ou e-mail.","error");return}
-    const u=r.docs[0],d=u.data(),conq=todasConquistas.find(x=>x.id===id)||CONQUISTAS_PADRAO.find(x=>x.id===id);
-    if(!conq){mostrarMensagem(achMessage,"❌ Conquista não encontrada.","error");return}
-    const campo=conq.tipo==="selo"?"selos":"trofeus";
-    await updateDoc(u.ref,{[campo]:arrayUnion(id)});
-    await addDoc(collection(db,"historicoConquistas"),{usuarioId:u.id,publicId:d.publicId||u.id,usuarioUid:d.uid||"",usuarioEmail:d.email||"",usuarioNome:d.nome||"",conquistaId:id,conquistaNome:conq.nome,conquistaTipo:conq.tipo,observacao:document.getElementById("achNote").value.trim(),adminEmail:adminUsuario.email||"",adminUid:adminUsuario.uid||"",criadoEm:serverTimestamp()});
-    if(usuarioSelecionado?.docId===u.id){usuarioSelecionado.data[campo]=Array.from(new Set([...(usuarioSelecionado.data[campo]||[]),id]));atualizarStatus()}
-    mostrarMensagem(achMessage,`✅ ${conq.tipo==="selo"?"Selo":"Troféu"} “${conq.nome}” enviado para ${d.nome||d.email||d.publicId||u.id}.`,"success");
-    document.getElementById("achNote").value="";
-  }catch(e){console.error("ERRO ENVIAR CONQUISTA:",e);mostrarMensagem(achMessage,e?.code==="permission-denied"?"❌ O Firestore bloqueou o envio. Ajuste as Rules das coleções conquistas, admins e historicoConquistas.":"❌ Não foi possível enviar a conquista.","error")}
-  finally{achSend.disabled=false;achSend.textContent="🎁 ENVIAR CONQUISTA"}
-}
-
-
 
 /* =====================================================
    VALE PRESENTE — CORRIGIDO
@@ -436,7 +281,7 @@ lista.appendChild(div);
 });
 }catch(e){console.error("ERRO VALES:",e);lista.innerHTML="<div class='empty'>❌ Não foi possível carregar os vales.</div>";mostrarMensagem(voucherMessage,e?.code==="permission-denied"?"Sem permissão para ler a coleção codigosPresente.":"Erro ao carregar os vales.","error")}}
 
-async function atualizarTudo(){if(!adminUsuario)return;const b=refreshButton;b.disabled=true;b.textContent="🔄 Atualizando...";try{await Promise.all([carregarDashboard(),carregarEntregas(),carregarVales()])}catch(e){console.error(e)}finally{b.disabled=false;b.textContent="🔄 Atualizar"}}
+async function atualizarTudo(){if(!adminUsuario)return;const b=refreshButton;b.disabled=true;b.textContent="🔄 Atualizando...";try{await Promise.all([carregarDashboard(),carregarEntregas(),carregarVales(),carregarConquistasAdmin()])}catch(e){console.error(e)}finally{b.disabled=false;b.textContent="🔄 Atualizar"}}
 
 onAuthStateChanged(auth,async usuario=>{
 if(!usuario){authResolvido=true;resolverAutenticacao();window.location.replace("index.html");return}
@@ -460,6 +305,52 @@ document.getElementById("newVoucher").onclick=()=>{document.getElementById("vouc
 document.getElementById("logout").onclick=async()=>{try{await signOut(auth)}catch(e){console.error(e)}window.location.replace("index.html")};
 refreshButton.disabled=true;
 generateVoucherButton.disabled=true;
+
+
+/* =========================================================
+   SELOS & TROFEUS — integrado ao admin original
+   ========================================================= */
+const CONQUISTAS_PADRAO=[
+{id:"independencia2026",tipo:"selo",icone:"🇧🇷",nome:"Independência 2026",descricao:"Selo especial da temporada de Independência do Adam Games.",periodo:"Setembro de 2026",ordem:1},
+{id:"primeiroAcesso",tipo:"trofeu",icone:"🏆",nome:"Primeiro Acesso",descricao:"Reconhece a entrada do jogador no universo Adam Games.",periodo:"Conquista permanente",ordem:2},
+{id:"vip",tipo:"trofeu",icone:"👑",nome:"Membro VIP",descricao:"Troféu reservado aos jogadores VIP.",periodo:"Conquista permanente",ordem:3},
+{id:"colecionador",tipo:"selo",icone:"💎",nome:"Colecionador",descricao:"Conquista para quem começa a montar sua coleção.",periodo:"Conquista permanente",ordem:4},
+{id:"mestreBingo",tipo:"trofeu",icone:"🎱",nome:"Mestre do Bingo",descricao:"Troféu especial relacionado ao Bingo Adam Games.",periodo:"Conquista permanente",ordem:5},
+{id:"chaveEspecial",tipo:"selo",icone:"🔑",nome:"Chave Especial",descricao:"Selo relacionado às temporadas de Chaves Especiais.",periodo:"Conquista sazonal",ordem:6}
+];
+let todasConquistasAdmin=[];
+const achUser=document.getElementById("achUser"),achSelect=document.getElementById("achSelect"),achNote=document.getElementById("achNote"),achMessage=document.getElementById("achMessage"),achCreateMessage=document.getElementById("achCreateMessage");
+function escaparAch(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));}
+async function carregarConquistasAdmin(){
+ const lista=document.getElementById("achList"); if(!lista)return; lista.innerHTML='<div class="empty">🔄 Carregando catálogo...</div>';
+ try{
+  const mapa=new Map(CONQUISTAS_PADRAO.map(x=>[x.id,x]));
+  const r=await getDocs(collection(db,"conquistas")); r.docs.forEach(d=>mapa.set(d.id,{id:d.id,...d.data()}));
+  todasConquistasAdmin=Array.from(mapa.values()).sort((a,b)=>(Number(a.ordem)||0)-(Number(b.ordem)||0));
+  achSelect.innerHTML='<option value="">Selecione uma conquista...</option>'+todasConquistasAdmin.map(x=>`<option value="${escaparAch(x.id)}">${x.tipo==="selo"?"🏵️":"🏆"} ${escaparAch(x.nome)} — ${escaparAch(x.id)}</option>`).join("");
+  lista.innerHTML="";
+  todasConquistasAdmin.forEach(x=>{const el=document.createElement("div");el.className="ach-item";el.innerHTML=`<div class="ach-item-icon">${escaparAch(x.icone||"🏆")}</div><div class="ach-item-main"><div class="ach-item-name">${escaparAch(x.nome||x.id)}</div><div class="ach-item-meta">${x.tipo==="selo"?"SELO":"TROFÉU"} • ID: ${escaparAch(x.id)}<br>${escaparAch(x.descricao||"")} • ${escaparAch(x.periodo||"")}</div></div>`;lista.appendChild(el);});
+ }catch(e){console.error("CONQUISTAS:",e);todasConquistasAdmin=CONQUISTAS_PADRAO;achSelect.innerHTML='<option value="">Selecione uma conquista...</option>'+todasConquistasAdmin.map(x=>`<option value="${escaparAch(x.id)}">${x.tipo==="selo"?"🏵️":"🏆"} ${escaparAch(x.nome)}</option>`).join("");lista.innerHTML='<div class="empty">⚠️ Catálogo personalizado indisponível. As conquistas padrão continuam disponíveis.</div>'; }
+}
+async function localizarClienteAch(alvo){
+ let r=await getDocs(query(collection(db,"admins"),where("publicId","==",alvo)));
+ if(r.empty && alvo.includes("@")) r=await getDocs(query(collection(db,"admins"),where("email","==",alvo.toLowerCase())));
+ if(r.empty) r=await getDocs(query(collection(db,"admins"),where("uid","==",alvo)));
+ return r;
+}
+async function enviarConquistaAdmin(){
+ if(!adminUsuario){mostrarMensagem(achMessage,"❌ Administrador não autenticado.","error");return}
+ const alvo=achUser.value.trim(),id=achSelect.value;if(!alvo){mostrarMensagem(achMessage,"❌ Informe o ID Adam Games ou e-mail do cliente.","error");return}if(!id){mostrarMensagem(achMessage,"❌ Selecione uma conquista.","error");return}
+ const conq=todasConquistasAdmin.find(x=>x.id===id);if(!conq){mostrarMensagem(achMessage,"❌ Conquista não encontrada.","error");return}
+ try{const r=await localizarClienteAch(alvo);if(r.empty){mostrarMensagem(achMessage,"❌ Cliente não encontrado.","error");return}const u=r.docs[0],d=u.data(),campo=conq.tipo==="selo"?"selos":"trofeus";await updateDoc(u.ref,{[campo]:arrayUnion(id)});await addDoc(collection(db,"historicoConquistas"),{usuarioId:u.id,publicId:d.publicId||u.id,usuarioUid:d.uid||"",usuarioEmail:d.email||"",usuarioNome:d.nome||d.name||"",conquistaId:id,conquistaNome:conq.nome,conquistaTipo:conq.tipo,conquistaIcon:conq.icone||"🏆",observacao:achNote.value.trim(),adminEmail:adminUsuario.email||"",adminUid:adminUsuario.uid||"",criadoEm:serverTimestamp()});mostrarMensagem(achMessage,`✅ ${conq.tipo==="selo"?"Selo":"Troféu"} “${conq.nome}” enviado para ${d.nome||d.email||d.publicId||u.id}.`,"success");achNote.value="";}catch(e){console.error("ENVIAR CONQUISTA:",e);mostrarMensagem(achMessage,e?.code==="permission-denied"?"❌ Firestore bloqueou o envio. Verifique as Rules de admins e historicoConquistas.":"❌ Não foi possível enviar a conquista.","error");}}
+async function cadastrarConquistaAdmin(){
+ if(!adminUsuario){mostrarMensagem(achCreateMessage,"❌ Administrador não autenticado.","error");return}
+ let id=document.getElementById("newAchId").value.trim().toLowerCase().replace(/\s+/g,"_");const tipo=document.getElementById("newAchType").value,icone=document.getElementById("newAchIcon").value.trim()||"🏆",nome=document.getElementById("newAchName").value.trim(),descricao=document.getElementById("newAchDescription").value.trim(),periodo=document.getElementById("newAchPeriod").value.trim()||"Conquista permanente",ordem=Number(document.getElementById("newAchOrder").value)||0;
+ if(!id||!nome||!descricao){mostrarMensagem(achCreateMessage,"❌ Preencha ID, nome e descrição.","error");return}if(!/^[a-z0-9_-]+$/.test(id)){mostrarMensagem(achCreateMessage,"❌ O ID usa apenas letras minúsculas, números, _ ou -.","error");return}
+ try{await setDoc(doc(db,"conquistas",id),{id,tipo,icone,nome,descricao,periodo,ordem,criadoPor:adminUsuario.email||"",criadoPorUid:adminUsuario.uid||"",criadoEm:serverTimestamp()});mostrarMensagem(achCreateMessage,"✅ Conquista cadastrada com sucesso.","success");["newAchId","newAchName","newAchDescription"].forEach(x=>document.getElementById(x).value="");await carregarConquistasAdmin();}catch(e){console.error("CADASTRAR CONQUISTA:",e);mostrarMensagem(achCreateMessage,e?.code==="permission-denied"?"❌ Firestore bloqueou o cadastro. Verifique a Rule de conquistas.":"❌ Não foi possível cadastrar a conquista.","error");}}
+
+achSend.onclick=enviarConquistaAdmin;achCreate.onclick=cadastrarConquistaAdmin;achReload.onclick=carregarConquistasAdmin;
+
 </script>
 </body>
 </html>
