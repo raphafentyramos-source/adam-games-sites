@@ -12,9 +12,9 @@ main{position:relative;z-index:1;width:min(100%,540px);margin:auto;padding:12px 
 .levels{display:flex;align-items:center;gap:4px;margin:8px 0 12px;overflow-x:auto;padding:3px 1px 7px;scrollbar-width:none}.levels::-webkit-scrollbar{display:none}.level{flex:0 0 55px;text-align:center;color:#9ea0ae;font-size:9px}.case{height:52px;position:relative;border:1px solid #4f5260;border-radius:8px;background:linear-gradient(145deg,#222533,#090a12);box-shadow:inset 0 0 0 2px #12131d,0 4px 9px #0008;padding-top:12px}.case:before{content:"";position:absolute;left:15px;right:15px;top:5px;height:8px;border:2px solid #858895;border-bottom:0;border-radius:5px 5px 0 0}.case b{font-size:16px;color:#fff}.level .value{display:block;margin-top:3px;font-size:9px;font-weight:900;color:#d6d6df}.level.done .case{border-color:#46d478;background:linear-gradient(145deg,#123c25,#08140d)}.level.done .case:after{content:"✓";position:absolute;right:3px;top:1px;color:#5cff91;font-size:11px;font-weight:1000}.level.active .case{border-color:#ffd448;background:linear-gradient(145deg,#6b4b08,#181207);box-shadow:0 0 18px #ffd44866}.level.active .case b,.level.active .value{color:#ffd84a}.level.locked .case{opacity:.55}.level.final .case{border-color:#e6bf48;background:linear-gradient(145deg,#76540a,#211708)}.level.final .case:before{border-color:#e6bf48}
 .difficulty{text-align:center;font-size:10px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:#e4e4ed;margin-bottom:8px}.difficulty span{color:#ffd64c}
 .panel{background:rgba(5,7,18,.91);border:1px solid #d0a83e;border-radius:20px;padding:15px;box-shadow:0 14px 35px #000b}.tag{text-align:center;color:#e4c455;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.8px}.timer{height:6px;background:#252636;border-radius:99px;overflow:hidden;margin:8px 0 11px}.timer i{display:block;width:100%;height:100%;background:#ffd448;transition:width 1s linear}.question{font-size:19px;line-height:1.3;font-weight:850;text-align:center;margin:8px 2px 14px}.answers{display:grid;gap:8px}.answer{width:100%;min-height:53px;border:1px solid #555767;border-radius:13px;background:linear-gradient(180deg,#151722,#080910);color:#fff;padding:10px 11px;text-align:left;font-size:14px;cursor:pointer}.answer:focus{outline:2px solid #ffd448;outline-offset:1px}.answer span{display:inline-grid;place-items:center;width:29px;height:29px;border-radius:50%;margin-right:8px;background:#26283a;border:1px solid #c09632;color:#ffd64a;font-weight:950}.answer.correct{border-color:#40d477;background:#0b321d}.answer.wrong{border-color:#ff4f58;background:#3b0c12}.answer:disabled{cursor:default}
-.tools{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:12px}.tool{min-height:66px;border:1px solid #555767;border-radius:12px;background:rgba(10,11,22,.96);color:#fff;cursor:pointer;padding:5px 2px}.tool strong{display:block;font-size:18px;color:#ffd84b}.tool em{font-style:normal;font-size:9px;color:#b8bac6}.tool:disabled{opacity:.35;cursor:not-allowed}
+.tools{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:12px}.tool{min-height:66px;border:1px solid #555767;border-radius:12px;background:rgba(10,11,22,.96);color:#fff;cursor:pointer;padding:5px 2px}.tool strong{display:block;font-size:18px;color:#ffd84b}.tool em{font-style:normal;font-size:9px;color:#b8bac6}.tool:disabled{opacity:.35;cursor:not-allowed}
 .actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px}.action{min-height:48px;border-radius:12px;border:1px solid #b98f2d;background:#18131a;color:#fff;font-weight:900;cursor:pointer}.action.stop{background:linear-gradient(180deg,#5c4710,#241907)}.action.quit{border-color:#8e333a;background:#3a0c11}.status{text-align:center;min-height:21px;margin-top:9px;color:#ddd;font-size:11px}
-.reward{margin-top:12px;border:1px solid #705f2b;background:rgba(13,12,19,.82);border-radius:14px;padding:10px;text-align:center}.reward strong{color:#ffd84b}.reward small{display:block;color:#aaaebb;margin-top:2px}
+.helpnote{margin-top:7px;text-align:center;color:#8f92a2;font-size:9px;line-height:1.35}.helpnote b{color:#ffd84b}.answer.eliminated{opacity:.45;text-decoration:line-through}.reward{margin-top:12px;border:1px solid #705f2b;background:rgba(13,12,19,.82);border-radius:14px;padding:10px;text-align:center}.reward strong{color:#ffd84b}.reward small{display:block;color:#aaaebb;margin-top:2px}
 .modal{position:fixed;inset:0;background:#000c;display:none;align-items:center;justify-content:center;padding:16px;z-index:30}.modal.show{display:flex}.card{width:min(100%,430px);background:#0a0b16;border:1px solid #d7ad3c;border-radius:20px;padding:20px;box-shadow:0 25px 70px #000}.card h2{text-align:center;color:#ffd84b;margin:0 0 8px}.card p{text-align:center;color:#ddd;line-height:1.45}.card button{width:100%;padding:12px;border-radius:12px;border:1px solid #6a6877;background:#171827;color:#fff;font-weight:900}
 @media(max-width:390px){main{padding:9px 7px 22px}.logo{font-size:17px}.coinbox{padding:5px 7px}.levels{gap:3px}.level{flex-basis:51px}.case{height:48px}.question{font-size:17px}.tool{min-height:61px}.tool strong{font-size:16px}}
 </style>
@@ -36,13 +36,12 @@ main{position:relative;z-index:1;width:min(100%,540px);margin:auto;padding:12px 
     <div class="question" id="question">Carregando...</div>
     <div class="answers" id="answers"></div>
 
-    <div class="tools">
-      <button class="tool" id="fifty"><strong>50/50</strong><em>1 disponível</em></button>
-      <button class="tool" id="audience"><strong>👥</strong><em>Plateia · 1</em></button>
-      <button class="tool" id="skip"><strong>↪</strong><em>Pular · 1</em></button>
-      <button class="tool" id="protect"><strong>🛡️</strong><em>Proteger · 1</em></button>
-      <button class="tool" id="phone"><strong>☎️</strong><em>Ligar · 1</em></button>
+    <div class="tools" aria-label="Ajudas da partida">
+      <button class="tool" id="help"><strong>💡</strong><em>Ajuda · 1</em></button>
+      <button class="tool" id="skip"><strong>⏭️</strong><em>Pular · 1</em></button>
+      <button class="tool" id="eliminate"><strong>❌</strong><em>Eliminar · 1</em></button>
     </div>
+    <div class="helpnote">As ajudas ficam disponíveis somente até a <b>Rodada 7</b>. Nas rodadas 8 e 9, elas ficam bloqueadas.</div>
 
     <div class="actions">
       <button class="action stop" id="stop">🛑 Parar e garantir</button>
@@ -74,8 +73,8 @@ const rounds=[
  {p:600,d:"Difícil",pool:"Difícil"},{p:800,d:"Difícil",pool:"Difícil"},
  {p:900,d:"SUPER DIFÍCIL",pool:"Super difícil / HARD"},{p:1000,d:"BÔNUS — MEGA DIFÍCIL",pool:"Bônus / Mega difícil"}
 ];
-let round=0,points=0,current=null,locked=false,timerId=null,seconds=20,protectedPoints=0;
-const used={fifty:false,audience:false,skip:false,protect:false,phone:false};
+let round=0,points=0,current=null,locked=false,timerId=null,seconds=20;
+const used={help:false,skip:false,eliminate:false};
 const $=id=>document.getElementById(id);
 
 function renderLevels(){
@@ -91,7 +90,11 @@ function choose(){
 }
 function startTimer(){
   clearInterval(timerId);seconds=20;$("timer").style.width="100%";
-  timerId=setInterval(()=>{seconds--;$("timer").style.width=(seconds/20*100)+"%";if(seconds<=0){clearInterval(timerId);finish("⏰ Tempo esgotado!",`Você garantiu ${protectedPoints.toLocaleString("pt-BR")} pontos.`)}},1000);
+  timerId=setInterval(()=>{seconds--;$("timer").style.width=(seconds/20*100)+"%";if(seconds<=0){clearInterval(timerId);finish("⏰ Tempo esgotado!",`A partida terminou na Rodada ${round+1}.`)}},1000);
+}
+function helpAvailable(){return round<=6 && !locked;}
+function refreshToolStates(){
+  ["help","skip","eliminate"].forEach(id=>$(id).disabled=used[id]||!helpAvailable());
 }
 function loadRound(){
   locked=false;current=choose();renderLevels();
@@ -101,7 +104,10 @@ function loadRound(){
   $("question").textContent=current.question;
   $("answers").innerHTML=current.options.map((o,i)=>`<button class="answer" data-letter="${"ABCD"[i]}"><span>${"ABCD"[i]}</span>${o}</button>`).join("");
   document.querySelectorAll(".answer").forEach(b=>b.addEventListener("click",()=>answer(b)));
-  $("coins").textContent=points.toLocaleString("pt-BR");$("status").textContent="";startTimer();
+  $("coins").textContent=points.toLocaleString("pt-BR");
+  $("status").textContent="";
+  refreshToolStates();
+  startTimer();
 }
 function answer(btn){
   if(locked)return;locked=true;clearInterval(timerId);
@@ -109,19 +115,38 @@ function answer(btn){
   if(btn.dataset.letter===current.answer){
     btn.classList.add("correct");points=rounds[round].p;$("coins").textContent=points.toLocaleString("pt-BR");$("status").textContent="✅ Resposta correta!";
     setTimeout(()=>{if(round===8)finishMillion();else{round++;loadRound()}},750);
-  }else{btn.classList.add("wrong");finish("❌ Resposta incorreta!",`Pontos garantidos: ${protectedPoints.toLocaleString("pt-BR")}.`)}
+  }else{btn.classList.add("wrong");finish("❌ Resposta incorreta!",`A partida terminou na Rodada ${round+1}. Pontuação da partida: ${points.toLocaleString("pt-BR")} moedas.`)}
 }
-function disable(id){$(id).disabled=true}
-function useFifty(){if(used.fifty||locked)return;used.fifty=true;disable("fifty");const wrong=[...document.querySelectorAll(".answer")].filter(b=>b.dataset.letter!==current.answer);wrong.sort(()=>Math.random()-.5).slice(0,2).forEach(b=>b.style.visibility="hidden");$("status").textContent="50/50 usado."}
-function useAudience(){if(used.audience||locked)return;used.audience=true;disable("audience");const vals=[0,0,0,0],ci="ABCD".indexOf(current.answer);vals[ci]=Math.floor(55+Math.random()*26);let rest=100-vals[ci];for(let i=0;i<4;i++)if(i!==ci){let v=i===3?rest:Math.floor(Math.random()*(rest+1));vals[i]=v;rest-=v}$("status").textContent=`Plateia: A ${vals[0]}% · B ${vals[1]}% · C ${vals[2]}% · D ${vals[3]}%`}
-function useSkip(){if(used.skip||locked)return;used.skip=true;disable("skip");$("status").textContent="↪ Pergunta pulada.";setTimeout(loadRound,500)}
-function useProtect(){if(used.protect||locked)return;used.protect=true;disable("protect");protectedPoints=points;$("status").textContent=`🛡️ Protegidos: ${protectedPoints.toLocaleString("pt-BR")} pontos.`}
-function usePhone(){if(used.phone||locked)return;used.phone=true;disable("phone");const a=current.options["ABCD".indexOf(current.answer)];$("status").textContent=`☎️ Especialista: minha aposta é “${a}”.`}
-function finish(title,text){locked=true;clearInterval(timerId);$("modalTitle").textContent=title;$("modalText").textContent=text;$("modal").classList.add("show")}
-function finishMillion(){finish("👑 VOCÊ CHEGOU AO MILHÃO!","1.000 pontos + pacote com 10 figurinhas. O Coringa será sorteado dentro do pacote conforme a probabilidade configurada no ADM.")}
-$("fifty").onclick=useFifty;$("audience").onclick=useAudience;$("skip").onclick=useSkip;$("protect").onclick=useProtect;$("phone").onclick=usePhone;
-$("stop").onclick=()=>{if(!locked)finish("🛑 Você parou!",`Pontos garantidos: ${Math.max(points,protectedPoints).toLocaleString("pt-BR")}.`)};
-$("quit").onclick=()=>{if(!locked)finish("Você desistiu",`Pontos garantidos: ${protectedPoints.toLocaleString("pt-BR")}.`)};
+function useHelp(){
+  if(!helpAvailable()||used.help)return;
+  used.help=true;refreshToolStates();
+  const idx="ABCD".indexOf(current.answer);
+  const hints=[
+    `💡 Dica: a resposta correta é a alternativa ${current.answer}.`,
+    `💡 Dica: procure a alternativa que corresponde ao tema “${current.category}”. A melhor aposta é ${current.options[idx]}.`
+  ];
+  $("status").textContent=hints[Math.floor(Math.random()*hints.length)];
+}
+function useSkip(){
+  if(!helpAvailable()||used.skip)return;
+  used.skip=true;refreshToolStates();clearInterval(timerId);locked=true;
+  $("status").textContent="⏭️ Pergunta pulada. Você permanece na mesma rodada.";
+  setTimeout(loadRound,500);
+}
+function useEliminate(){
+  if(!helpAvailable()||used.eliminate)return;
+  used.eliminate=true;refreshToolStates();
+  const wrong=[...document.querySelectorAll(".answer")].filter(b=>b.dataset.letter!==current.answer);
+  const roll=Math.random();
+  const count=roll<0.60?1:roll<0.90?2:3;
+  wrong.sort(()=>Math.random()-.5).slice(0,count).forEach(b=>{b.disabled=true;b.classList.add("eliminated");b.innerHTML=`<span>${b.dataset.letter}</span>❌ Eliminada`});
+  $("status").textContent=`❌ Eliminar usado: ${count} alternativa${count>1?"s":""} eliminada${count>1?"s":""}.`;
+}
+function finish(title,text){locked=true;clearInterval(timerId);["help","skip","eliminate"].forEach(id=>$(id).disabled=true);$("modalTitle").textContent=title;$("modalText").textContent=text;$("modal").classList.add("show")}
+function finishMillion(){finish("👑 VOCÊ CHEGOU AO MILHÃO!","1.000 moedas + pacote com 10 figurinhas. O Coringa será sorteado dentro do pacote conforme a probabilidade configurada no ADM.");}
+$("help").onclick=useHelp;$("skip").onclick=useSkip;$("eliminate").onclick=useEliminate;
+$("stop").onclick=()=>{if(!locked)finish("🛑 Você parou!",`Pontuação da partida: ${points.toLocaleString("pt-BR")} moedas.`)};
+$("quit").onclick=()=>{if(!locked)finish("Você desistiu",`Pontuação da partida: ${points.toLocaleString("pt-BR")} moedas.`)};
 $("restart").onclick=()=>location.reload();
 renderLevels();loadRound();
 </script>
