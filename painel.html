@@ -3900,7 +3900,20 @@ let CONQUISTAS = [
 
 ];
 
-\nasync function carregarCatalogoConquistas(){\n  try{\n    const r=await getDocs(collection(db,"conquistas"));\n    if(r.empty)return;\n    const mapa=new Map(CONQUISTAS.map(x=>[x.id,x]));\n    r.docs.forEach(d=>{mapa.set(d.id,{id:d.id,...d.data()})});\n    CONQUISTAS=Array.from(mapa.values()).sort((a,b)=>(Number(a.ordem)||0)-(Number(b.ordem)||0));\n  }catch(e){\n    console.warn("Não foi possível carregar o catálogo de conquistas; usando catálogo padrão.",e);\n  }\n}\n\nfunction listaConquistasDoJogador(){
+
+async function carregarCatalogoConquistas(){
+  try{
+    const r=await getDocs(collection(db,"conquistas"));
+    if(r.empty)return;
+    const mapa=new Map(CONQUISTAS.map(x=>[x.id,x]));
+    r.docs.forEach(d=>{mapa.set(d.id,{id:d.id,...d.data()})});
+    CONQUISTAS=Array.from(mapa.values()).sort((a,b)=>(Number(a.ordem)||0)-(Number(b.ordem)||0));
+  }catch(e){
+    console.warn("Não foi possível carregar o catálogo de conquistas; usando catálogo padrão.",e);
+  }
+}
+
+function listaConquistasDoJogador(){
 
   const dados =
     cadastroAtual?.data || {};
