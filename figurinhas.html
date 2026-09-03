@@ -16,49 +16,9 @@
 .modal{position:fixed;inset:0;background:#000d;z-index:100;display:none;align-items:center;justify-content:center;padding:12px}.modal.open{display:flex}.modalBox{width:min(760px,100%);max-height:92vh;overflow:auto;background:#16071f;border:1px solid #d6a64a55;border-radius:20px;padding:16px}.modalBox h2{font:1000 24px Georgia,serif;color:#ffd86a}.close{float:right;width:38px;height:38px;border:0;border-radius:10px;background:#fff1;color:#fff;font-size:23px}.detailImg{width:min(260px,75vw);display:block;margin:12px auto;border-radius:13px}.toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%) translateY(30px);opacity:0;z-index:150;background:#1b0a27;border:1px solid #d98cff55;color:#fff;padding:12px 15px;border-radius:12px;font-size:11px;font-weight:900;transition:.25s;max-width:90%;text-align:center}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 @keyframes packShake{from{transform:rotate(-3deg) scale(1)}to{transform:rotate(3deg) scale(1.03)}}@keyframes spark{from{transform:scale(.8);opacity:.5}to{transform:scale(1.2);opacity:1}}@keyframes reveal{from{opacity:0;transform:translateY(30px) rotateY(90deg) scale(.7)}to{opacity:1;transform:none}}
 @media(max-width:780px){.hero{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:repeat(4,1fr)}.jokerGrid{grid-template-columns:repeat(2,1fr)}.albumCovers{grid-template-columns:repeat(2,1fr)}.tradeLayout{grid-template-columns:1fr}.resultCards{grid-template-columns:repeat(5,1fr)}}@media(max-width:470px){.wrap{padding:8px 8px 30px}.grid{grid-template-columns:repeat(3,1fr);gap:7px}.hero{padding:14px}.section{padding:12px}.albumCovers{gap:7px}.albumCover{min-height:165px;padding:9px}.joker img{height:190px}.packVisual{height:270px}.resultCards{gap:5px}}
-</style>
 
-<style id="pack-opening-css">
-.pack-opening-section{margin:28px auto;max-width:1100px}
-.pack-opening-card{position:relative;overflow:hidden;border:1px solid rgba(214,165,255,.24);border-radius:28px;padding:24px;background:radial-gradient(circle at 50% 35%,rgba(145,67,218,.18),transparent 34%),linear-gradient(145deg,#160d27,#0b0711 78%);box-shadow:0 24px 70px rgba(0,0,0,.35)}
-.pack-opening-header{display:flex;justify-content:space-between;align-items:flex-start;gap:15px}
-.pack-kicker{color:#d7a8ff;font-size:10px;font-weight:900;letter-spacing:2px}
-.pack-opening-header h2{margin:5px 0;color:#fff}
-.pack-opening-header p{margin:0;color:#bda9ca;font-size:13px}
-.pack-status{padding:8px 11px;border-radius:12px;background:rgba(109,255,165,.08);border:1px solid rgba(109,255,165,.24);color:#79ffb0;font-size:10px;font-weight:900}
-.pack-stage{position:relative;min-height:380px;display:flex;justify-content:center;align-items:center;margin:18px 0 8px;perspective:900px}
-.pack-art{position:absolute;max-width:min(330px,76vw);max-height:350px;object-fit:contain;user-select:none;-webkit-user-drag:none;filter:drop-shadow(0 25px 35px rgba(0,0,0,.55))}
-.pack-closed{opacity:1;transform:scale(1) rotate(0)}
-.pack-open{opacity:0;transform:scale(.7) rotate(-4deg)}
-.pack-stage.shaking .pack-closed{animation:packShake .12s linear 9}
-.pack-stage.opening .pack-closed{animation:packDisappear .55s forwards}
-.pack-stage.opening .pack-open{animation:packReveal .75s .28s forwards}
-@keyframes packShake{0%{transform:translateX(0) rotate(0)}25%{transform:translateX(-7px) rotate(-2deg)}50%{transform:translateX(7px) rotate(2deg)}75%{transform:translateX(-5px) rotate(-1deg)}100%{transform:translateX(0) rotate(0)}}
-@keyframes packDisappear{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.15) rotate(3deg)}}
-@keyframes packReveal{0%{opacity:0;transform:scale(.72) rotate(-5deg)}65%{opacity:1;transform:scale(1.07) rotate(2deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
-.pack-aura{width:250px;height:250px;border-radius:50%;background:radial-gradient(circle,rgba(193,110,255,.28),transparent 67%);filter:blur(3px)}
-.pack-sparks{position:absolute;inset:0;pointer-events:none}
-.pack-spark{position:absolute;width:6px;height:6px;border-radius:50%;background:#ffd96a;box-shadow:0 0 14px #ffd96a;animation:sparkFly .8s ease-out forwards}
-@keyframes sparkFly{from{opacity:1;transform:translate(0,0) scale(1)}to{opacity:0;transform:translate(var(--x),var(--y)) scale(.15)}}
-.pack-action-area{text-align:center}
-.pack-hint{color:#aa98b8;font-size:12px;margin-bottom:12px}
-.pack-open-button,.pack-continue{border:0;border-radius:15px;padding:13px 20px;font-weight:1000;cursor:pointer}
-.pack-open-button{color:#160d27;background:linear-gradient(135deg,#ffd85d,#ffad32);box-shadow:0 9px 25px rgba(255,183,60,.22)}
-.pack-open-button:disabled{opacity:.55;cursor:not-allowed}
-.pack-results{display:none;margin-top:20px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08)}
-.pack-results.show{display:block}
-.pack-results-title{text-align:center;color:#f1d37b;font-weight:1000;letter-spacing:1px;margin-bottom:13px}
-.revealed-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(125px,1fr));gap:12px}
-.revealed-card{padding:8px;border-radius:17px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08);text-align:center;animation:cardReveal .55s cubic-bezier(.2,.9,.2,1) both}
-.revealed-card img{width:100%;max-height:210px;object-fit:contain;border-radius:11px}
-.revealed-card small{display:block;margin-top:5px;color:#d7c5df;font-size:10px;font-weight:900}
-.revealed-card.new{border-color:rgba(105,255,164,.45);box-shadow:0 0 22px rgba(105,255,164,.08)}
-.revealed-card.repeat{border-color:rgba(255,210,93,.35)}
-@keyframes cardReveal{0%{opacity:0;transform:rotateY(90deg) scale(.75)}70%{opacity:1;transform:rotateY(-8deg) scale(1.04)}100%{opacity:1;transform:rotateY(0) scale(1)}}
-.pack-continue{display:block;margin:16px auto 0;color:#fff;background:linear-gradient(135deg,#7e31b7,#4a1b75)}
-@media(max-width:650px){.pack-opening-card{padding:18px}.pack-opening-header{display:block}.pack-status{display:inline-block;margin-top:10px}.pack-stage{min-height:320px}}
+.jokerReward{grid-column:1/-1;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:14px;padding:12px;border:1px solid #f4c44f55;border-radius:15px;background:linear-gradient(135deg,#f4c44f0d,#8e2fc20d)}.jokerReward img{width:82px;height:112px;object-fit:contain}.jokerReward b{display:block;color:#ffd76a;font-size:13px}.jokerReward small{display:block;color:#cdbbd7;margin-top:4px}.packVisual.burst:after{content:"✦ ✧ ✦ ✧ ✦";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#ffe77d;font-size:42px;text-shadow:0 0 25px #fff;animation:spark .55s ease-out 2}.packVisual.opening img{animation:packShake .12s linear 8}.packVisual.burst img{animation:packPop .65s cubic-bezier(.2,1.5,.3,1)}@keyframes packPop{0%{transform:scale(.75);filter:brightness(1)}60%{transform:scale(1.08);filter:brightness(1.45)}100%{transform:scale(1);filter:brightness(1)}}
 </style>
-
 </head>
 <body>
 <div class="wrap">
@@ -96,7 +56,8 @@ const cards=[
 const albums=[{id:1,name:"NOITE ASSOMBRADA",ids:[1,2,3,4,5],icon:"🏰"},{id:2,name:"BRUXARIA & MAGIA",ids:[6,7,8,9,10],icon:"🔮"},{id:3,name:"CRIATURAS DAS TREVAS",ids:[11,12,13,14,15],icon:"🦇"},{id:4,name:"REINO DAS ABÓBORAS",ids:[16,17,18,19,20],icon:"🎃"}];
 const jokers=[{id:"comum",name:"Coringa Comum",file:"01_Coringa_Comum.png",rarity:"COMUM"},{id:"epico",name:"Coringa Épico",file:"02_Coringa_Epico.png",rarity:"EPICO"},{id:"lendario",name:"Coringa Lendário",file:"03_Coringa_Lendario.png",rarity:"LENDARIO"},{id:"universal",name:"Coringa Universal",file:"04_Coringa_Universal.png",rarity:"UNIVERSAL"}];
 const base="assets/cartas-halloween/",jokerBase="assets/coringas/";
-let owned={},jokerOwned={},userDocId=null,currentUser=null,isVip=false,nextPack=0,currentFilter="all",selectedGive=null,tradeUsed=0,config={coringasPacotesAtivos:true,probabilidadesCoringas:{comum:70,epico:20,lendario:10}};
+let owned={},jokerOwned={},userDocId=null,currentUser=null,isVip=false,nextPack=0,currentFilter="all",selectedGive=null,tradeUsed=0,tradeDay="",config={coringasPacotesAtivos:true,probabilidadesCoringas:{comum:70,epico:20,lendario:10}};
+const todayKey=()=>new Date().toISOString().slice(0,10);
 const $=id=>document.getElementById(id), pad=n=>String(n).padStart(2,"0"), esc=s=>String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));
 function toast(t){$("toast").textContent=t;$("toast").classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>$("toast").classList.remove("show"),2600)}
 function card(id){return cards.find(c=>c.id===id)}
@@ -114,134 +75,67 @@ function tab(name){const map={collection:"collectionSection",albums:"albumsSecti
 document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>tab(b.dataset.tab));$("rewardBtn").onclick=()=>tab("albums");
 document.querySelectorAll("[data-filter]").forEach(b=>b.onclick=()=>{currentFilter=b.dataset.filter;document.querySelectorAll("[data-filter]").forEach(x=>x.classList.toggle("sel",x===b));renderCollection()});
 async function findUserDoc(user){let r=await getDocs(query(collection(db,"admins"),where("uid","==",user.uid)));if(r.empty&&user.email)r=await getDocs(query(collection(db,"admins"),where("email","==",user.email)));return r.empty?null:r.docs[0]}
-async function loadUser(user){currentUser=user;try{const snap=await findUserDoc(user);if(!snap){render();return}userDocId=snap.id;const d=snap.data();isVip=d.vip===true;owned=d.cartasHalloween||{};jokerOwned=d.coringasHalloween||{};nextPack=Number(d.proximaCartaHalloweenEmMs||0);tradeUsed=Number(d.cartasHalloweenTrocasHoje||0);const c=await getDoc(doc(db,"config","halloween2026"));if(c.exists())config={...config,...c.data()};render()}catch(e){console.error(e);toast("Não foi possível carregar sua coleção.")}}
+async function loadUser(user){currentUser=user;try{const snap=await findUserDoc(user);if(!snap){render();return}userDocId=snap.id;const d=snap.data();isVip=d.vip===true;owned=d.cartasHalloween||{};jokerOwned=d.coringasHalloween||{};nextPack=Number(d.proximaCartaHalloweenEmMs||0);tradeDay=d.cartasHalloweenTrocasData||todayKey();tradeUsed=tradeDay===todayKey()?Number(d.cartasHalloweenTrocasHoje||0):0;const c=await getDoc(doc(db,"config","halloween2026"));if(c.exists())config={...config,...c.data()};render()}catch(e){console.error(e);toast("Não foi possível carregar sua coleção.")}}
 function updatePackUI(){const ready=Date.now()>=nextPack;const wait=Math.max(0,nextPack-Date.now());$("claimBtn").disabled=!currentUser||!ready;$("heroOpenBtn").disabled=!currentUser||!ready;$("packStatus").innerHTML=currentUser?(ready?`<b style="color:#5be397">✨ Seu pacote está disponível!</b>`:`Próximo pacote em <span class="timer">${formatMs(wait)}</span>`):"Entre na sua conta para abrir seu pacote.";$("packHeroText").textContent=ready?"✨ PACOTE DISPONÍVEL":"🎁 Pacote de Halloween"}
 function formatMs(ms){let s=Math.ceil(ms/1000),h=Math.floor(s/3600);s%=3600;let m=Math.floor(s/60);s%=60;return `${String(h).padStart(2,"0")}h ${String(m).padStart(2,"0")}m ${String(s).padStart(2,"0")}s`}
 setInterval(updatePackUI,1000);
 async function claimPack(){if(!currentUser||!userDocId)return toast("Faça login para abrir o pacote.");if(Date.now()<nextPack)return toast("Seu próximo pacote ainda não está disponível.");const n=isVip?(4+Math.floor(Math.random()*3)):(1+Math.floor(Math.random()*3));let drawn=[];for(let i=0;i<n;i++)drawn.push(cards[Math.floor(Math.random()*cards.length)].id);let joker=null;if(config.coringasPacotesAtivos){const p=config.probabilidadesCoringas||{comum:70,epico:20,lendario:10};const r=Math.random()*100;if(r<p.comum)joker="comum";else if(r<p.comum+p.epico)joker="epico";else if(r<p.comum+p.epico+p.lendario)joker="lendario";}
 const cooldown=isVip?50*3600*1000:72*3600*1000;const next=Date.now()+cooldown;try{await runTransaction(db,async tx=>{const ref=doc(db,"admins",userDocId),snap=await tx.get(ref);if(!snap.exists())throw new Error("USER_NOT_FOUND");const d=snap.data();const current={...(d.cartasHalloween||{})};drawn.forEach(id=>current[id]=(Number(current[id])||0)+1);const jo={...(d.coringasHalloween||{})};if(joker)jo[joker]=(Number(jo[joker])||0)+1;tx.update(ref,{cartasHalloween:current,coringasHalloween:jo,proximaCartaHalloweenEmMs:next,ultimaCartaHalloweenEm:serverTimestamp(),cartasHalloweenHistorico:[...(d.cartasHalloweenHistorico||[]),{tipo:"PACOTE",quantidade:drawn.length,cartas:drawn,coringa:joker||null,data:Date.now()}]})});owned={...owned};drawn.forEach(id=>owned[id]=qty(id)+1);if(joker)jokerOwned[joker]=Number(jokerOwned[joker]||0)+1;nextPack=next;animatePack(drawn,joker)}catch(e){console.error(e);toast("Não foi possível abrir o pacote. Verifique as regras do Firebase.")}}
-function animatePack(ids,joker){tab("pack");$("packResults").innerHTML="";$("packSummary").classList.add("hidden");$("claimBtn").disabled=true;const v=$("packVisual");v.classList.add("opening");$("packStageImg").src="assets/pacotes/pacote-fechado.jpeg";$("packStatus").textContent="Abrindo seu pacote...";setTimeout(()=>{$("packStageImg").src="assets/pacotes/pacote-aberto.jpeg";v.classList.remove("opening");$("packStatus").textContent="✨ Revelando suas figurinhas..."},1200);setTimeout(()=>{const newCount=ids.filter(id=>qty(id)===1).length;const rep=ids.length-newCount;$("packResults").innerHTML=ids.map(id=>`<div class="sticker reveal ${card(id).rarity.toLowerCase()}"><img src="${base+card(id).file}" alt="${esc(card(id).name)}"><span class="num">${pad(id)}</span><span class="qty">${newCount&&qty(id)===1?"NOVA":"REPETIDA"}</span></div>`).join("");$("packSummary").classList.remove("hidden");$("packSummary").innerHTML=`<div><b>${newCount}</b><small>🆕 Novas</small></div><div><b>${rep}</b><small>🔁 Repetidas</small></div><div><b>${joker?"1":"0"}</b><small>🃏 Coringas</small></div>`;$("packStatus").textContent=`Você ganhou ${ids.length} figurinha(s)!${joker?" + 1 Coringa "+joker:""}`;render()},1700)}
+function animatePack(ids,joker){
+  tab("pack");
+  const v=$("packVisual"),img=$("packStageImg"),results=$("packResults"),summary=$("packSummary");
+  results.innerHTML="";summary.classList.add("hidden");v.classList.remove("opening","burst");
+  img.src="assets/pacotes/pacote-fechado.jpeg";img.style.opacity="1";
+  $("packStatus").textContent="Preparando seu pacote...";
+  const wasNew=ids.map(id=>qty(id)===1);
+  setTimeout(()=>{v.classList.add("opening");$("packStatus").textContent="🎁 O pacote está tremendo..."},180);
+  setTimeout(()=>{$("packStatus").textContent="✨ Abrindo...";v.classList.add("burst");img.src="assets/pacotes/pacote-aberto.jpeg"},1050);
+  setTimeout(()=>{
+    const newCount=wasNew.filter(Boolean).length,rep=ids.length-newCount;
+    const cardsHtml=ids.map((id,i)=>{const c=card(id),isNew=wasNew[i];return `<div class="sticker reveal ${c.rarity.toLowerCase()}" style="animation-delay:${i*.16}s"><img src="${base+c.file}" alt="${esc(c.name)}"><span class="num">${pad(id)}</span><span class="qty">${isNew?"🆕 NOVA":"🔁 REPETIDA"}</span></div>`}).join("");
+    const jokerHtml=joker?`<div class="jokerReward"><img src="${jokerBase+jokers.find(j=>j.id===joker).file}" alt="${esc(jokers.find(j=>j.id===joker).name)}"><div><b>🃏 ${esc(jokers.find(j=>j.id===joker).name)}</b><small>Você recebeu um Coringa!</small></div></div>`:"";
+    results.innerHTML=cardsHtml+jokerHtml;
+    summary.classList.remove("hidden");summary.innerHTML=`<div><b>${newCount}</b><small>🆕 Novas</small></div><div><b>${rep}</b><small>🔁 Repetidas</small></div><div><b>${joker?1:0}</b><small>🃏 Coringas</small></div>`;
+    $("packStatus").textContent=`🎉 Pacote aberto! ${ids.length} figurinha(s) revelada(s).`;
+    $("claimBtn").textContent="PACOTE ABERTO";
+    render();
+  },1900);
+}
 $("claimBtn").onclick=claimPack;$("heroOpenBtn").onclick=()=>{tab("pack");claimPack()};
-function renderTradeGive(){const repeated=cards.filter(c=>qty(c.id)>1);$("giveGrid").innerHTML=repeated.length?repeated.map(c=>`<div class="selectCard ${selectedGive===c.id?"sel":""}" data-give="${c.id}"><img src="${base+c.file}" alt=""><span class="q">x${qty(c.id)}</span></div>`).join(""):"<div class=empty style='grid-column:1/-1'>Você ainda não possui cartas repetidas para trocar.</div>";document.querySelectorAll("[data-give]").forEach(x=>x.onclick=()=>{selectedGive=+x.dataset.give;renderTradeGive();$("giveInfo").textContent=`Você escolheu: ${card(selectedGive).name} • x${qty(selectedGive)}`});$("wantSelect").innerHTML=`<option value="">Quero receber...</option>`+cards.filter(c=>c.id!==selectedGive).map(c=>`<option value="${c.id}">${pad(c.id)} — ${c.name}</option>`).join("");$("tradeLimit").textContent=`${isVip?2:1-tradeUsed>0?1:0}/dia`}
+function renderTradeGive(){const repeated=cards.filter(c=>qty(c.id)>1);$("giveGrid").innerHTML=repeated.length?repeated.map(c=>`<div class="selectCard ${selectedGive===c.id?"sel":""}" data-give="${c.id}"><img src="${base+c.file}" alt=""><span class="q">x${qty(c.id)}</span></div>`).join(""):"<div class=empty style='grid-column:1/-1'>Você ainda não possui cartas repetidas para trocar.</div>";document.querySelectorAll("[data-give]").forEach(x=>x.onclick=()=>{selectedGive=+x.dataset.give;renderTradeGive();$("giveInfo").textContent=`Você escolheu: ${card(selectedGive).name} • x${qty(selectedGive)}`});$("wantSelect").innerHTML=`<option value="">Quero receber...</option>`+cards.filter(c=>c.id!==selectedGive).map(c=>`<option value="${c.id}">${pad(c.id)} — ${c.name}</option>`).join("");$("tradeLimit").textContent=`${Math.max(0,(isVip?2:1)-tradeUsed)}/${isVip?2:1} trocas restantes hoje`}
 async function loadOffers(){try{const q=query(collection(db,"trocasHalloween"),where("status","==","ABERTA"),limit(20));const s=await getDocs(q);const arr=s.docs.map(d=>({id:d.id,...d.data()})).filter(x=>x.fromUid!==currentUser?.uid);$("offers").innerHTML=arr.length?arr.map(o=>`<div class="offer"><div><b>${esc(o.fromName||"Jogador")}</b><small>quer receber ${esc(card(o.wantCardId)?.name||"carta")}</small></div><img src="${base+card(o.giveCardId).file}"><span class="arrow">⇄</span><img src="${base+card(o.wantCardId).file}"><button class="btn green" style="margin-left:auto;padding:7px" data-accept="${o.id}">ACEITAR</button></div>`).join(""):"<div class=empty>Nenhuma oferta disponível no momento.</div>";document.querySelectorAll("[data-accept]").forEach(b=>b.onclick=()=>acceptTrade(b.dataset.accept))}catch(e){$("offers").innerHTML="<div class=empty>As ofertas dependem das regras de leitura do Firestore.</div>"}}
-$("createTradeBtn").onclick=async()=>{const want=Number($("wantSelect").value);if(!selectedGive||!want)return toast("Escolha a carta que dará e a que deseja receber.");if(qty(selectedGive)<2)return toast("Só é possível oferecer cartas repetidas.");const limit=isVip?2:1;if(tradeUsed>=limit)return toast("Seu limite diário de trocas foi atingido.");try{await addDoc(collection(db,"trocasHalloween"),{fromUid:currentUser.uid,fromName:currentUser.displayName||currentUser.email||"Jogador",giveCardId:selectedGive,wantCardId:want,status:"ABERTA",createdAt:serverTimestamp()});tradeUsed++;toast("Oferta criada!");loadOffers();render()}catch(e){console.error(e);toast("Não foi possível criar a oferta. Verifique as regras do Firebase.")}};
-async function acceptTrade(id){toast("A aceitação precisa ser confirmada pelas regras/transaction do Firestore.");}
+$("createTradeBtn").onclick=async()=>{
+ const want=Number($("wantSelect").value);if(!selectedGive||!want)return toast("Escolha a carta que dará e a que deseja receber.");
+ if(qty(selectedGive)<2)return toast("Só é possível oferecer cartas repetidas.");
+ const limit=isVip?2:1;const day=todayKey();if(tradeDay!==day){tradeDay=day;tradeUsed=0;}
+ if(tradeUsed>=limit)return toast("Seu limite diário de trocas foi atingido.");
+ try{
+  const ref=await addDoc(collection(db,"trocasHalloween"),{fromUid:currentUser.uid,fromUserDocId:userDocId,fromName:currentUser.displayName||currentUser.email||"Jogador",giveCardId:selectedGive,wantCardId:want,status:"ABERTA",createdAt:serverTimestamp()});
+  await updateDoc(doc(db,"admins",userDocId),{cartasHalloweenTrocasHoje:tradeUsed+1,cartasHalloweenTrocasData:day});
+  tradeUsed++;toast("Oferta criada! Ela ficará disponível para outros jogadores.");loadOffers();render();
+ }catch(e){console.error(e);toast("Não foi possível criar a oferta. Verifique as regras do Firebase.")}
+};
+async function acceptTrade(id){
+ if(!currentUser||!userDocId)return toast("Faça login para aceitar uma troca.");
+ const limit=isVip?2:1,day=todayKey();if(tradeDay!==day){tradeDay=day;tradeUsed=0;}if(tradeUsed>=limit)return toast("Seu limite diário de trocas foi atingido.");
+ try{
+  const offerRef=doc(db,"trocasHalloween",id),offerSnap=await getDoc(offerRef);if(!offerSnap.exists())return toast("Oferta não encontrada.");
+  const o=offerSnap.data();if(o.status!=="ABERTA")return toast("Essa oferta já foi encerrada.");if(o.fromUid===currentUser.uid)return toast("Você não pode aceitar sua própria oferta.");if(!o.fromUserDocId)return toast("Esta oferta antiga não pode ser aceita. Crie uma nova oferta.");
+  const senderRef=doc(db,"admins",o.fromUserDocId),receiverRef=doc(db,"admins",userDocId);
+  await runTransaction(db,async tx=>{
+   const [os,ss,rs]=await Promise.all([tx.get(offerRef),tx.get(senderRef),tx.get(receiverRef)]);
+   if(!os.exists()||os.data().status!=="ABERTA")throw new Error("OFFER_CLOSED");if(!ss.exists()||!rs.exists())throw new Error("USER_NOT_FOUND");
+   const sd=ss.data(),rd=rs.data();const senderCards={...(sd.cartasHalloween||{})},receiverCards={...(rd.cartasHalloween||{})};
+   if(Number(senderCards[o.giveCardId]||0)<2)throw new Error("SENDER_NO_CARD");if(Number(receiverCards[o.wantCardId]||0)<1)throw new Error("RECEIVER_NO_CARD");
+   senderCards[o.giveCardId]--;senderCards[o.wantCardId]=(Number(senderCards[o.wantCardId])||0)+1;receiverCards[o.wantCardId]--;receiverCards[o.giveCardId]=(Number(receiverCards[o.giveCardId])||0)+1;
+   tx.update(senderRef,{cartasHalloween:senderCards});tx.update(receiverRef,{cartasHalloween:receiverCards,cartasHalloweenTrocasHoje:tradeUsed+1,cartasHalloweenTrocasData:day});tx.update(offerRef,{status:"ACEITA",acceptedByUid:currentUser.uid,acceptedByUserDocId:userDocId,acceptedAt:serverTimestamp()});
+  });
+  owned={...owned};owned[o.wantCardId]=qty(o.wantCardId)-1;owned[o.giveCardId]=qty(o.giveCardId)+1;tradeUsed++;toast(`Troca concluída! Você recebeu ${card(o.giveCardId).name}.`);loadOffers();render();
+ }catch(e){console.error(e);const msg=e.message==="SENDER_NO_CARD"?"O jogador não possui mais a carta oferecida.":e.message==="RECEIVER_NO_CARD"?"Você não possui a carta necessária para esta troca.":e.message==="OFFER_CLOSED"?"Essa oferta já foi aceita por outro jogador.":"Não foi possível concluir a troca.";toast(msg);loadOffers();}
+}
 async function useJoker(type){if(!currentUser||!userDocId||Number(jokerOwned[type]||0)<1)return;const missing=cards.filter(c=>qty(c.id)===0);if(!missing.length)return toast("Você já possui as 25 cartas!");const options=missing.map(c=>`<option value="${c.id}">${pad(c.id)} — ${c.name}</option>`).join("");$("modalContent").innerHTML=`<h2>🃏 ${esc(jokers.find(j=>j.id===type).name)}</h2><p>Escolha qual figurinha faltante deseja completar.</p><select id="jokerTarget" style="width:100%;padding:11px;background:#100619;color:#fff;border:1px solid #ffffff22;border-radius:10px;margin-top:10px">${options}</select><button class="btn gold" id="confirmJoker" style="width:100%;margin-top:10px">USAR CORINGA</button>`;$("modal").classList.add("open");$("confirmJoker").onclick=async()=>{const target=Number($("jokerTarget").value);try{await runTransaction(db,async tx=>{const ref=doc(db,"admins",userDocId),s=await tx.get(ref),d=s.data(),jo={...(d.coringasHalloween||{})},co={...(d.cartasHalloween||{})};if(Number(jo[type]||0)<1)throw new Error("NO_JOKER");jo[type]--;co[target]=(Number(co[target])||0)+1;tx.update(ref,{coringasHalloween:jo,cartasHalloween:co})});jokerOwned[type]--;owned[target]=qty(target)+1;$("modal").classList.remove("open");toast(`Coringa usado! ${card(target).name} foi adicionada.`);render()}catch(e){toast("Não foi possível usar o Coringa.")}}}
 
 onAuthStateChanged(auth,user=>{if(user)loadUser(user);else{currentUser=null;render();updatePackUI()}});render();
 </script>
-
-<section class="pack-opening-section" id="abrirPacoteSection">
-  <div class="pack-opening-card">
-    <div class="pack-opening-header">
-      <div>
-        <span class="pack-kicker">HALLOWEEN 2026</span>
-        <h2>🎁 Abrir Pacote</h2>
-        <p>Abra seu pacote e descubra suas figurinhas.</p>
-      </div>
-      <div class="pack-status" id="packStatus">PACOTE DISPONÍVEL</div>
-    </div>
-
-    <div class="pack-stage" id="packStage">
-      <div class="pack-aura"></div>
-      <img id="packClosed" class="pack-art pack-closed"
-           src="D3E4CC38-BA77-4BF8-877B-55990528549D(1).jpeg"
-           alt="Pacote fechado">
-      <img id="packOpen" class="pack-art pack-open"
-           src="0996E4C1-755E-428A-BE76-61A13140168E(1).jpeg"
-           alt="Pacote aberto">
-      <div class="pack-sparks" id="packSparks"></div>
-    </div>
-
-    <div class="pack-action-area">
-      <div class="pack-hint" id="packHint">Toque no botão para abrir seu pacote.</div>
-      <button class="pack-open-button" id="openPackButton" type="button">🎁 ABRIR PACOTE</button>
-    </div>
-
-    <div class="pack-results" id="packResults">
-      <div class="pack-results-title">SUAS FIGURINHAS</div>
-      <div class="revealed-grid" id="revealedGrid"></div>
-      <button class="pack-continue" id="packContinue" type="button">CONTINUAR</button>
-    </div>
-  </div>
-</section>
-
-
-<script id="pack-opening-js">
-(function(){
-  const stage=document.getElementById("packStage");
-  const closed=document.getElementById("packClosed");
-  const opened=document.getElementById("packOpen");
-  const button=document.getElementById("openPackButton");
-  const hint=document.getElementById("packHint");
-  const status=document.getElementById("packStatus");
-  const results=document.getElementById("packResults");
-  const grid=document.getElementById("revealedGrid");
-  const sparks=document.getElementById("packSparks");
-  const continueButton=document.getElementById("packContinue");
-  if(!stage||!button)return;
-
-  function createSparks(){
-    sparks.innerHTML="";
-    for(let i=0;i<34;i++){
-      const s=document.createElement("i");
-      s.className="pack-spark";
-      s.style.left=(50+(Math.random()*24-12))+"%";
-      s.style.top=(50+(Math.random()*24-12))+"%";
-      s.style.setProperty("--x",(Math.random()*360-180)+"px");
-      s.style.setProperty("--y",(Math.random()*360-210)+"px");
-      s.style.animationDelay=(Math.random()*.18)+"s";
-      sparks.appendChild(s);
-    }
-  }
-
-  function resetPack(){
-    stage.className="pack-stage";
-    closed.style.opacity="1";
-    opened.style.opacity="0";
-    results.classList.remove("show");
-    grid.innerHTML="";
-    status.textContent="PACOTE DISPONÍVEL";
-    hint.textContent="Toque no botão para abrir seu pacote.";
-    button.disabled=false;
-    button.textContent="🎁 ABRIR PACOTE";
-  }
-
-  function showVisualResult(){
-    results.classList.add("show");
-    hint.textContent="Pacote aberto! Agora podemos ligar as cartas reais do Firebase.";
-    status.textContent="PACOTE ABERTO";
-    button.disabled=true;
-    button.textContent="PACOTE ABERTO";
-
-    // Espaços de revelação: a próxima etapa preencherá estas posições
-    // com as cartas sorteadas pelo Firebase.
-    grid.innerHTML=[1,2,3].map((n,i)=>`
-      <div class="revealed-card ${i===1?"repeat":"new"}" style="animation-delay:${i*.22}s">
-        <div style="height:150px;display:flex;align-items:center;justify-content:center;color:#a996b5;font-size:11px">
-          CARTA ${n}
-        </div>
-        <small>${i===1?"REPETIDA":"NOVA"}</small>
-      </div>
-    `).join("");
-  }
-
-  button.addEventListener("click",()=>{
-    if(button.disabled)return;
-    button.disabled=true;
-    hint.textContent="Abrindo seu pacote...";
-    status.textContent="ABRINDO...";
-    stage.className="pack-stage shaking";
-    setTimeout(()=>{
-      createSparks();
-      stage.className="pack-stage opening";
-    },1100);
-    setTimeout(showVisualResult,2050);
-  });
-
-  continueButton?.addEventListener("click",resetPack);
-})();
-</script>
-
 </body>
 </html>
