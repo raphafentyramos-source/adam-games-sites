@@ -8,8 +8,11 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:Arial,Helvetica,sans-serif;color:#fff;min-height:100vh;background:radial-gradient(circle at 15% 5%,#43aaff 0%,transparent 30%),radial-gradient(circle at 90% 10%,#079b63 0%,transparent 25%),linear-gradient(145deg,#087fe0,#031b3d 75%);padding:20px 12px 70px}
 .container{width:100%;max-width:1100px;margin:auto}
-button{border:0;cursor:pointer;color:#fff;font-weight:bold}button:disabled{opacity:.55;cursor:not-allowed}
-header{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:25px}.logo{display:flex;align-items:center;gap:12px}.logoIcon{width:62px;height:62px;border-radius:19px;display:flex;align-items:center;justify-content:center;font-size:31px;background:linear-gradient(145deg,#168eff,#064b99);box-shadow:0 10px 25px rgba(0,0,0,.18)}.logo h1{font-size:22px}.logo span{color:#ffd32a}.badge{display:inline-block;margin-top:5px;padding:5px 9px;border-radius:8px;background:#d99b12;font-size:11px;font-weight:bold}.logout,.refresh{padding:12px 17px;border-radius:12px}.logout{background:#17395f}.refresh{background:linear-gradient(135deg,#168fff,#0563b5)}.headerButtons{display:flex;gap:8px}
+button{border:0;cursor:pointer;color:#fff;font-weight:bold}
+button:disabled{opacity:.55;cursor:not-allowed}
+header{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:25px}
+.logo{display:flex;align-items:center;gap:12px}.logoIcon{width:62px;height:62px;border-radius:19px;display:flex;align-items:center;justify-content:center;font-size:31px;background:linear-gradient(145deg,#168eff,#064b99);box-shadow:0 10px 25px rgba(0,0,0,.18)}.logo h1{font-size:22px}.logo span{color:#ffd32a}.badge{display:inline-block;margin-top:5px;padding:5px 9px;border-radius:8px;background:#d99b12;font-size:11px;font-weight:bold}
+.logout,.refresh{padding:12px 17px;border-radius:12px}.logout{background:#17395f}.refresh{background:linear-gradient(135deg,#168fff,#0563b5)}.headerButtons{display:flex;gap:8px}
 h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
 .card{background:rgba(2,30,62,.94);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:20px;margin-bottom:18px;box-shadow:0 15px 35px rgba(0,0,0,.18)}.card h3{margin-bottom:15px;font-size:20px}
 .dashboard{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}.dash{min-height:145px;padding:20px 10px;border-radius:20px;text-align:center;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.08)}.dashIcon{font-size:32px}.dashNumber{margin-top:8px;font-size:34px;font-weight:900}.dashLabel{margin-top:5px;color:#9fc2dc;font-size:11px;font-weight:bold}.dash.pending .dashNumber,.dash.vip .dashNumber{color:#ffd52b}.dash.success .dashNumber{color:#67ffad}
@@ -20,20 +23,109 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
 .delivery-list{display:grid;gap:10px;margin-top:18px}.delivery-item{padding:16px;border-radius:15px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07)}.delivery-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.delivery-title{font-size:16px;font-weight:900}.delivery-user{margin-top:5px;color:#8fb7d4;font-size:12px}.delivery-status{flex-shrink:0;padding:6px 10px;border-radius:20px;font-size:10px;font-weight:900}.delivery-status.pending{background:rgba(255,190,0,.15);color:#ffe27a}.delivery-status.done{background:rgba(0,220,100,.14);color:#6dffae}.delivery-info{margin-top:10px;color:#a8c6dd;font-size:12px;line-height:1.6}.delivery-info b{color:#e9f5ff}.delivery-actions{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin-top:12px}.delivery-profile,.delivery-open,.delivery-complete{padding:12px;border-radius:11px}.delivery-profile{background:linear-gradient(135deg,#168fff,#0563b5)}.delivery-open{background:linear-gradient(135deg,#16bb69,#087b45)}.delivery-complete{background:linear-gradient(135deg,#d29a16,#9d6800)}.delivery-id{margin-top:9px;padding:7px;border-radius:8px;background:rgba(0,0,0,.2);color:#72c9ff;font-size:10px;word-break:break-all}
 #userArea{display:none}.user{display:flex;align-items:center;gap:15px;margin-bottom:20px}.avatar{width:68px;height:68px;border-radius:19px;background:#ffd52b;color:#111;display:flex;align-items:center;justify-content:center;font-size:33px;flex-shrink:0}.userName{font-size:22px;font-weight:bold}.userEmail,.userId,.userUid{margin-top:4px;color:#a9c8e5;font-size:13px;word-break:break-all}.status-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.status{padding:6px 9px;border-radius:9px;font-size:11px;font-weight:bold;background:rgba(255,255,255,.08)}.status.vip{background:rgba(255,193,7,.2);color:#ffd84c}
 .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}.info-item{padding:12px;border-radius:13px;background:rgba(255,255,255,.045)}.info-label{color:#77a9cf;font-size:10px;font-weight:bold;text-transform:uppercase}.info-value{margin-top:5px;font-size:14px;word-break:break-word}
-.balances{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}.balance{text-align:center;padding:15px 8px;border-radius:15px;background:rgba(255,255,255,.05)}.balanceIcon{font-size:26px}.balanceName{color:#91b2cf;font-size:10px;font-weight:bold;margin-top:5px}.balanceValue{font-size:18px;font-weight:bold;margin-top:5px}
-.form,.roleta-form,.voucher-form,.special-key-form{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field label,.roleta-field label{display:block;color:#a9c8e5;font-size:11px;font-weight:bold;margin-bottom:6px}.full{grid-column:1/-1}.actions,.special,.roleta-actions,.voucher-buttons{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.add,.remove,.vipButton,.boxButton,.roleta-add,.roleta-remove{padding:14px;border-radius:12px}.add{background:linear-gradient(135deg,#0ba85a,#087a42)}.remove,.roleta-remove{background:linear-gradient(135deg,#d72d47,#a8172d)}.vipButton{background:linear-gradient(135deg,#d29a16,#9d6800)}.boxButton,.roleta-add{background:linear-gradient(135deg,#118eea,#0562ad)}
-.special-key-card{border:1px solid rgba(255,213,42,.35);background:radial-gradient(circle at 100% 0%,rgba(255,213,42,.16),transparent 38%),linear-gradient(145deg,rgba(8,61,104,.98),rgba(2,30,62,.98))}.special-key-head{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:18px}.special-key-title{display:flex;align-items:center;gap:12px}.special-key-icon{width:55px;height:55px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:29px;background:linear-gradient(135deg,#ffd52a,#d48b00)}.special-key-title p{margin-top:4px;color:#9ec7e5;font-size:12px}.special-key-saldo{min-width:120px;padding:10px 14px;text-align:center;border-radius:15px;background:rgba(255,213,42,.1)}.special-key-saldo-label{color:#b8d2e6;font-size:9px;font-weight:bold}.special-key-saldo-value{margin-top:2px;color:#ffd52a;font-size:24px;font-weight:900}.special-key-form{margin-top:4px}.special-key-form .full{grid-column:1/-1}.special-key-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.send-all{padding:15px;border-radius:12px;background:linear-gradient(135deg,#ffd52a,#d88b00);color:#111}.send-one{padding:15px;border-radius:12px;background:linear-gradient(135deg,#168fff,#0563b5)}.special-key-vips{margin-top:18px}.special-key-vips h4{font-size:13px;color:#a9c8e5;margin-bottom:10px}.vip-list{display:grid;gap:8px;max-height:320px;overflow:auto}.vip-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px;border-radius:12px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07)}.vip-row-main{min-width:0}.vip-row-name{font-weight:900;font-size:13px}.vip-row-email{margin-top:3px;color:#8fb7d4;font-size:10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.vip-row-key{flex-shrink:0;color:#ffd52a;font-weight:900;font-size:13px}.distribution-history{margin-top:18px;display:grid;gap:8px}.distribution-item{padding:12px;border-radius:12px;background:rgba(255,255,255,.04);color:#a8c6dd;font-size:11px;line-height:1.55}.distribution-item strong{color:#fff}
+.balances{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.balance{text-align:center;padding:15px 8px;border-radius:15px;background:rgba(255,255,255,.05)}.balanceIcon{font-size:26px}.balanceName{color:#91b2cf;font-size:10px;font-weight:bold;margin-top:5px}.balanceValue{font-size:18px;font-weight:bold;margin-top:5px}
+.form,.roleta-form,.voucher-form{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field label,.roleta-field label{display:block;color:#a9c8e5;font-size:11px;font-weight:bold;margin-bottom:6px}.full{grid-column:1/-1}.actions,.special,.roleta-actions,.voucher-buttons{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.add,.remove,.vipButton,.boxButton,.roleta-add,.roleta-remove{padding:14px;border-radius:12px}.add{background:linear-gradient(135deg,#0ba85a,#087a42)}.remove,.roleta-remove{background:linear-gradient(135deg,#d72d47,#a8172d)}.vipButton{background:linear-gradient(135deg,#d29a16,#9d6800)}.boxButton,.roleta-add{background:linear-gradient(135deg,#118eea,#0562ad)}
 .roleta-card{border:1px solid rgba(255,213,42,.32);background:radial-gradient(circle at 100% 0%,rgba(255,213,42,.16),transparent 35%),linear-gradient(145deg,rgba(8,61,104,.98),rgba(2,30,62,.98))}.roleta-header{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:18px}.roleta-title{display:flex;align-items:center;gap:12px}.roleta-icon{width:52px;height:52px;display:flex;align-items:center;justify-content:center;border-radius:15px;background:linear-gradient(135deg,#ffd52a,#e78a00);font-size:27px}.roleta-title h3{margin:0}.roleta-title p{margin-top:4px;color:#9ec7e5;font-size:12px}.roleta-saldo{min-width:105px;padding:10px 14px;text-align:center;border-radius:15px;background:rgba(255,213,42,.1)}.roleta-saldo-label{color:#b8d2e6;font-size:9px;font-weight:bold}.roleta-saldo-value{margin-top:2px;color:#ffd52a;font-size:24px;font-weight:900}
 .history{margin-top:22px}.historyItem{padding:15px;margin-top:9px;border-radius:14px;background:rgba(255,255,255,.05)}.historyTop{display:flex;justify-content:space-between;gap:10px;font-weight:bold}.historyDate{color:#75d4ff;font-size:12px;text-align:right}.plus{color:#65ff9c}.minus{color:#ff7382}.historyInfo{color:#9dbbd3;font-size:12px;margin-top:8px;line-height:1.6}.operation-id{margin-top:8px;padding:7px 9px;border-radius:8px;background:rgba(0,0,0,.2);color:#7fc9ff;font-size:11px;word-break:break-all}
 .voucher-card{border:1px solid rgba(255,213,42,.3);background:radial-gradient(circle at 100% 0%,rgba(255,213,42,.15),transparent 40%),rgba(2,30,62,.95)}.voucher-title{display:flex;align-items:center;gap:12px;margin-bottom:16px}.voucher-icon{width:55px;height:55px;display:flex;align-items:center;justify-content:center;border-radius:16px;font-size:28px;background:linear-gradient(135deg,#ffd52a,#d48b00)}.generateVoucher{width:100%;margin-top:12px;padding:15px;border-radius:13px;background:linear-gradient(135deg,#ffd52a,#d88b00);color:#111}.voucher-result{display:none;margin-top:16px;padding:17px;border-radius:16px;background:rgba(255,213,42,.08);border:1px solid rgba(255,213,42,.2)}.voucher-code{margin-top:8px;padding:15px;border-radius:12px;background:#061a34;color:#ffd52a;font-size:24px;font-weight:900;letter-spacing:3px;text-align:center;word-break:break-all}.copyVoucher{padding:13px;border-radius:11px;background:linear-gradient(135deg,#168fff,#0563b5)}.newVoucher{padding:13px;border-radius:11px;background:linear-gradient(135deg,#16bb69,#087b45)}.voucher-list{margin-top:18px;display:grid;gap:9px}.voucher-item{padding:14px;border-radius:13px;background:rgba(255,255,255,.045)}.voucher-code-small{color:#ffd52a;font-weight:900;letter-spacing:1px}.voucher-meta{margin-top:5px;color:#9dbbd3;font-size:11px;line-height:1.5}
-.empty{padding:18px;text-align:center;color:#9dbbd3}.client-list{display:grid;gap:10px;margin-top:15px}.client-item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px;border-radius:15px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07)}.client-main{display:flex;align-items:center;gap:12px;min-width:0}.client-avatar{width:48px;height:48px;flex-shrink:0;border-radius:14px;background:#ffd52b;color:#111;display:flex;align-items:center;justify-content:center;font-size:23px}.client-name{font-size:15px;font-weight:900}.client-email{margin-top:3px;color:#8fb7d4;font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:450px}.client-id{margin-top:4px;color:#63c7ff;font-size:11px;font-weight:bold}.client-open{flex-shrink:0;padding:11px 13px;border-radius:10px;background:linear-gradient(135deg,#168fff,#0563b5)}
-@media(max-width:800px){.dashboard{grid-template-columns:1fr 1fr}.balances{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:600px){.client-item{flex-direction:column;align-items:stretch}.client-open{width:100%}.client-main{width:100%}.client-email{max-width:250px}header{align-items:flex-start}.headerButtons{flex-direction:column}h2{font-size:32px}.search{grid-template-columns:1fr}.form,.roleta-form,.voucher-form,.info-grid,.special-key-form{grid-template-columns:1fr}.full,.special-key-form .full{grid-column:auto}.actions,.special,.roleta-actions,.voucher-buttons,.special-key-actions{grid-template-columns:1fr}.delivery-actions{grid-template-columns:1fr}.delivery-top{flex-direction:column}.special-key-head{align-items:flex-start;flex-direction:column;width:100%}.special-key-saldo{width:100%}.balances{grid-template-columns:repeat(2,1fr)}}
 
-/* BINGO - CARTELAS */
-.bingo-admin-card{border:1px solid rgba(255,211,61,.35);background:radial-gradient(circle at 100% 0%,rgba(255,211,61,.14),transparent 38%),linear-gradient(145deg,rgba(8,61,104,.98),rgba(2,30,62,.98))}.bingo-admin-head{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:18px}.bingo-admin-title{display:flex;align-items:center;gap:12px}.bingo-admin-icon{width:55px;height:55px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:29px;background:linear-gradient(135deg,#ffd52a,#d48b00)}.bingo-admin-title p{margin-top:4px;color:#9ec7e5;font-size:12px}.bingo-admin-stat{min-width:105px;padding:10px 14px;text-align:center;border-radius:15px;background:rgba(255,213,42,.1)}.bingo-admin-stat-label{color:#b8d2e6;font-size:9px;font-weight:bold}.bingo-admin-stat-value{margin-top:2px;color:#ffd52a;font-size:24px;font-weight:900}.bingo-form{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}.bingo-form .full{grid-column:1/-1}.bingo-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.bingo-generate,.bingo-send{padding:15px;border-radius:12px}.bingo-generate{background:linear-gradient(135deg,#168fff,#0563b5)}.bingo-send{background:linear-gradient(135deg,#ffd52a,#d88b00);color:#111}.bingo-manual{margin-top:18px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08)}.bingo-list{display:grid;gap:9px;margin-top:12px;max-height:500px;overflow:auto}.bingo-item{padding:13px;border-radius:13px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07)}.bingo-item-top{display:flex;justify-content:space-between;gap:10px}.bingo-code{font-weight:900;color:#ffd52a}.bingo-status{font-size:10px;font-weight:900}.bingo-status.available{color:#67ffad}.bingo-status.assigned{color:#75c9ff}.bingo-meta{margin-top:7px;color:#9dbbd3;font-size:11px;line-height:1.55}.bingo-card-mini{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;margin-top:9px;max-width:260px}.bingo-mini-cell{font-size:9px;text-align:center;padding:5px 1px;border-radius:4px;background:#123a63}.bingo-mini-cell.free{background:#7a49d4}.bingo-note{margin-top:10px;padding:11px;border-radius:11px;background:rgba(255,193,7,.08);border:1px solid rgba(255,193,7,.18);color:#e8cf8a;font-size:12px;line-height:1.5}
-@media(max-width:760px){.bingo-form{grid-template-columns:1fr 1fr}.bingo-form .full{grid-column:1/-1}}
-@media(max-width:500px){.bingo-form{grid-template-columns:1fr}.bingo-actions{grid-template-columns:1fr}.bingo-admin-head{align-items:flex-start}.bingo-admin-stat{min-width:88px}}
+.ach-card{border:1px solid rgba(255,213,42,.25);background:radial-gradient(circle at 100% 0%,rgba(255,213,42,.13),transparent 38%),rgba(2,30,62,.96)}
+.ach-head{display:flex;align-items:center;gap:13px;margin-bottom:16px}.ach-icon{width:58px;height:58px;border-radius:17px;display:flex;align-items:center;justify-content:center;font-size:31px;background:linear-gradient(135deg,#ffd52a,#d68b00);color:#111}.ach-head h3{margin:0}.ach-head p{margin-top:4px;color:#9ec7e5;font-size:12px;line-height:1.4}.ach-form{display:grid;grid-template-columns:1fr 1fr;gap:12px}.ach-field label{display:block;color:#a9c8e5;font-size:11px;font-weight:bold;margin-bottom:6px}.ach-field.full{grid-column:1/-1}.ach-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.ach-save,.ach-send{padding:14px;border-radius:12px}.ach-save{background:linear-gradient(135deg,#168fff,#0563b5)}.ach-send{background:linear-gradient(135deg,#16bb69,#087b45)}.ach-list{display:grid;gap:9px;margin-top:15px}.ach-item{display:flex;align-items:center;gap:12px;padding:13px;border-radius:14px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07)}.ach-item-icon{width:45px;height:45px;border-radius:13px;background:#071f40;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}.ach-item-main{flex:1;min-width:0}.ach-item-name{font-weight:900}.ach-item-meta{margin-top:4px;color:#91b5d0;font-size:11px;line-height:1.45}.ach-item button{padding:9px 11px;border-radius:9px;background:#17395f;font-size:11px}.ach-note{margin-top:10px;padding:11px;border-radius:11px;background:rgba(255,193,7,.08);border:1px solid rgba(255,193,7,.18);color:#e8cf8a;font-size:12px;line-height:1.5}
+
+.empty{padding:18px;text-align:center;color:#9dbbd3}
+@media(max-width:800px){.dashboard{grid-template-columns:1fr 1fr}.balances{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){header{align-items:flex-start}.headerButtons{flex-direction:column}h2{font-size:32px}.search{grid-template-columns:1fr}.form,.roleta-form,.voucher-form,.info-grid{grid-template-columns:1fr}.full{grid-column:auto}.actions,.special,.roleta-actions,.voucher-buttons{grid-template-columns:1fr}.delivery-actions{grid-template-columns:1fr}.delivery-top{flex-direction:column}}
+
+/* =========================================================
+   CONQUISTAS — SELOS E TROFÉUS
+   ========================================================= */
+.achievements-card{
+  border:1px solid rgba(255,213,42,.35);
+  background:
+    radial-gradient(circle at 100% 0%,rgba(255,213,42,.14),transparent 38%),
+    linear-gradient(145deg,rgba(8,61,104,.98),rgba(2,30,62,.98));
+}
+.achievements-head{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:15px;margin-bottom:18px
+}
+.achievements-title{display:flex;align-items:center;gap:12px}
+.achievements-icon{
+  width:55px;height:55px;border-radius:16px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:29px;background:linear-gradient(135deg,#ffd52a,#d48b00)
+}
+.achievements-title p{margin-top:4px;color:#9ec7e5;font-size:12px}
+.achievement-admin-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:12px
+}
+.achievement-admin-grid .full{grid-column:1/-1}
+.achievement-actions{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px
+}
+.achievement-btn{
+  padding:15px;border-radius:12px
+}
+.achievement-send{background:linear-gradient(135deg,#168fff,#0563b5)}
+.achievement-create{background:linear-gradient(135deg,#16bb69,#087b45)}
+.achievement-preview{
+  margin-top:16px;padding:15px;border-radius:15px;
+  background:rgba(255,255,255,.045);
+  border:1px solid rgba(255,255,255,.07)
+}
+.achievement-preview-title{
+  color:#a9c8e5;font-size:11px;font-weight:bold;margin-bottom:10px
+}
+.achievement-preview-card{
+  display:flex;align-items:center;gap:12px;
+  padding:13px;border-radius:13px;background:rgba(0,0,0,.16)
+}
+.achievement-preview-icon{font-size:36px}
+.achievement-preview-name{font-weight:900}
+.achievement-preview-meta{margin-top:4px;color:#8fb7d4;font-size:11px}
+.achievement-catalog{
+  margin-top:18px;padding-top:18px;
+  border-top:1px solid rgba(255,255,255,.08)
+}
+.achievement-catalog h4{font-size:13px;color:#a9c8e5;margin-bottom:10px}
+.achievement-list{display:grid;gap:9px;max-height:420px;overflow:auto}
+.achievement-item{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;padding:13px;border-radius:13px;
+  background:rgba(255,255,255,.045);
+  border:1px solid rgba(255,255,255,.07)
+}
+.achievement-item-main{display:flex;align-items:center;gap:11px;min-width:0}
+.achievement-item-icon{font-size:30px;flex-shrink:0}
+.achievement-item-name{font-weight:900;font-size:13px}
+.achievement-item-meta{margin-top:3px;color:#8fb7d4;font-size:10px}
+.achievement-item-id{
+  margin-top:4px;color:#63c7ff;font-size:9px;word-break:break-all
+}
+.achievement-type{
+  flex-shrink:0;padding:6px 9px;border-radius:20px;
+  font-size:9px;font-weight:900
+}
+.achievement-type.selo{background:rgba(0,190,255,.13);color:#75d8ff}
+.achievement-type.trofeu{background:rgba(255,213,42,.13);color:#ffd52a}
+.achievement-delivery-history{
+  margin-top:18px;padding-top:18px;
+  border-top:1px solid rgba(255,255,255,.08)
+}
+.achievement-delivery-history h4{font-size:13px;color:#a9c8e5;margin-bottom:10px}
+.achievement-history-list{display:grid;gap:8px;max-height:300px;overflow:auto}
+.achievement-history-item{
+  padding:12px;border-radius:12px;background:rgba(255,255,255,.04);
+  color:#a8c6dd;font-size:11px;line-height:1.55
+}
+.achievement-history-item strong{color:#fff}
+@media(max-width:600px){
+  .achievement-admin-grid{grid-template-columns:1fr}
+  .achievement-admin-grid .full{grid-column:auto}
+  .achievement-actions{grid-template-columns:1fr}
+  .achievements-head{align-items:flex-start;flex-direction:column}
+}
+
 </style>
 </head>
 <body>
@@ -53,68 +145,11 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
 <div class="dash vip"><div class="dashIcon">👑</div><div class="dashNumber" id="totalVip">0</div><div class="dashLabel">USUÁRIOS VIP</div></div>
 </div>
 
-
-
-<div class="card bingo-admin-card">
-<div class="bingo-admin-head">
-<div class="bingo-admin-title"><div class="bingo-admin-icon">🎱</div><div><h3>Cartelas Bingo</h3><p>Gere cartelas automaticamente e envie para os jogadores.</p></div></div>
-<div class="bingo-admin-stat"><div class="bingo-admin-stat-label">CARTELAS</div><div class="bingo-admin-stat-value" id="bingoCardsCount">0</div></div>
-</div>
-<div class="bingo-form">
-<div class="field"><label>QUANTIDADE</label><input id="bingoCardQuantity" type="number" min="1" max="100" step="1" value="1" placeholder="Ex.: 20"></div>
-<div class="field"><label>👑 CARTELAS VIP AUTOMÁTICAS</label><input id="bingoVipQuantity" type="number" min="0" max="20" step="1" value="1" placeholder="Ex.: 3"></div>
-<div class="field"><label>RODADA</label><input id="bingoCardRound" type="number" min="1" step="1" value="1" placeholder="Ex.: 1"></div>
-<div class="field"><label>ID DO JOGADOR — OPCIONAL</label><input id="bingoCardUserId" type="text" maxlength="80" placeholder="Ex.: AG12345"></div>
-</div>
-<div class="bingo-actions">
-<button class="bingo-generate" id="generateBingoCards" type="button">🎟️ GERAR CARTELAS</button>
-<button class="bingo-send" id="generateSendBingoCards" type="button">📨 GERAR E ENVIAR</button>
-</div>
-<div class="bingo-actions"><button class="bingo-send" id="saveBingoVipQuantity" type="button">👑 SALVAR QUANTIDADE VIP</button></div>
-<div class="bingo-note">💡 Cartelas VIP automáticas: escolha 3, 5, 10 etc. Quando um VIP entrar/logar no Bingo de uma partida, o sistema entrega automaticamente essa quantidade de cartelas para a rodada. Não gera cartelas automáticas para não-VIPs.</div>
-<div id="bingoCardsMessage" class="message"></div>
-<div class="bingo-manual">
-<h3 style="margin-bottom:10px;">📨 Enviar cartela existente</h3>
-<div class="bingo-form">
-<div class="field"><label>CÓDIGO DA CARTELA</label><input id="bingoExistingCode" type="text" maxlength="40" placeholder="Ex.: BG-ABC123"></div>
-<div class="field"><label>ID DO JOGADOR</label><input id="bingoExistingUserId" type="text" maxlength="80" placeholder="ID Adam Games"></div>
-</div>
-<div class="bingo-actions"><button class="bingo-send" id="sendExistingBingoCard" type="button">📨 ENVIAR CARTELA</button><button class="bingo-generate" id="refreshBingoCards" type="button">🔄 ATUALIZAR LISTA</button></div>
-</div>
-<div class="bingo-manual"><h3 style="margin-bottom:10px;">🎟️ Últimas cartelas</h3><div class="bingo-list" id="bingoCardsList"><div class="empty">🔄 Carregando cartelas...</div></div></div>
-</div>
-
-<div class="card special-key-card">
-<div class="special-key-head">
-<div class="special-key-title"><div class="special-key-icon">🔑</div><div><h3>Chaves Especiais</h3><p>Envie chaves exclusivas para usuários VIP.</p></div></div>
-<div class="special-key-saldo"><div class="special-key-saldo-label">VIPs ATIVOS</div><div class="special-key-saldo-value" id="specialVipCount">0</div></div>
-</div>
-<div class="special-key-form">
-<div class="field"><label>QUANTIDADE DE CHAVES</label><input id="specialKeyQuantity" type="number" min="1" step="1" placeholder="Ex.: 5"></div>
-<div class="field"><label>REFERÊNCIA / MOTIVO</label><input id="specialKeyReason" type="text" maxlength="150" placeholder="Ex.: Chaves de setembro"></div>
-<div class="field full"><label>VIP ESPECÍFICO — OPCIONAL</label><select id="specialKeyVip"><option value="">👑 Todos os VIPs</option></select></div>
-</div>
-<div class="special-key-actions">
-<button class="send-all" id="sendSpecialKeysAll" type="button">👑 ENVIAR PARA TODOS OS VIPs</button>
-<button class="send-one" id="sendSpecialKeysOne" type="button">🔑 ENVIAR PARA VIP SELECIONADO</button>
-</div>
-<div class="warning">⚠️ As chaves serão somadas ao campo <strong>chavesEspeciais</strong>. As <strong>chaves normais</strong> dos clientes não serão alteradas.</div>
-<div id="specialKeyMessage" class="message"></div>
-<div class="special-key-vips"><h4>👑 VIPs e saldo de Chaves Especiais</h4><div id="specialVipList" class="vip-list"><div class="empty">🔄 Carregando VIPs...</div></div></div>
-<div><h4 style="margin-top:18px;color:#a9c8e5;font-size:13px;">📜 Últimas distribuições</h4><div id="specialDistributionHistory" class="distribution-history"><div class="empty">Nenhuma distribuição registrada.</div></div></div>
-</div>
-
 <div class="card">
 <h3>🔎 Localizar usuário</h3>
 <div class="search"><input id="searchInput" type="text" placeholder="ID Adam Games, e-mail ou UID" autocomplete="off"><button id="buscar" type="button">🔍 Buscar</button></div>
 <div class="warning">Pesquise pelo <strong>ID Adam Games</strong>, <strong>e-mail</strong> ou <strong>UID Firebase</strong>.</div>
 <div id="searchMessage" class="message"></div>
-</div>
-
-<div class="card">
-<h3>👥 Todos os clientes cadastrados</h3>
-<div id="clientList" class="client-list"><div class="empty">🔄 Carregando clientes...</div></div>
-<div id="clientMessage" class="message"></div>
 </div>
 
 <div class="card" id="entregasSection">
@@ -145,7 +180,6 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
 <div class="balance"><div class="balanceIcon">🎰</div><div class="balanceName">GIROS ROLETA</div><div class="balanceValue" id="girosRoleta">0</div></div>
 <div class="balance"><div class="balanceIcon">🪙</div><div class="balanceName">MOEDAS</div><div class="balanceValue" id="moedas">0</div></div>
 <div class="balance"><div class="balanceIcon">🔑</div><div class="balanceName">CHAVES</div><div class="balanceValue" id="chaves">0</div></div>
-<div class="balance"><div class="balanceIcon">🔐</div><div class="balanceName">CHAVES ESPECIAIS</div><div class="balanceValue" id="chavesEspeciais">0</div></div>
 <div class="balance"><div class="balanceIcon">💎</div><div class="balanceName">CRÉDITOS</div><div class="balanceValue" id="creditos">R$ 0,00</div></div>
 </div>
 </div>
@@ -171,6 +205,31 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
 </div>
 </div>
 
+<div class="card ach-card">
+<div class="ach-head"><div class="ach-icon">🏆</div><div><h3>Selos & Troféus</h3><p>Cadastre conquistas e entregue selos ou troféus diretamente para qualquer cliente pelo ID Adam Games ou e-mail.</p></div></div>
+<div class="ach-form">
+<div class="ach-field"><label>LOCALIZAR CLIENTE</label><input id="achUser" type="text" placeholder="ID Adam Games ou e-mail" autocomplete="off"></div>
+<div class="ach-field"><label>CONQUISTA</label><select id="achSelect"><option value="">Selecione uma conquista...</option></select></div>
+<div class="ach-field full"><label>OBSERVAÇÃO — OPCIONAL</label><input id="achNote" type="text" maxlength="150" placeholder="Ex.: Prêmio do evento Independência 2026"></div>
+</div>
+<div class="ach-actions"><button class="ach-send" id="achSend" type="button">🎁 ENVIAR CONQUISTA</button><button class="ach-save" id="achReload" type="button">🔄 ATUALIZAR CATÁLOGO</button></div>
+<div id="achMessage" class="message"></div>
+<div class="ach-note">💡 O envio fica registrado no cadastro do cliente. Selos vão para <strong>selos</strong> e troféus para <strong>trofeus</strong>. O administrador também fica registrado no histórico.</div>
+<h3 style="margin-top:22px;">🛠️ Cadastrar nova conquista</h3>
+<div class="ach-form">
+<div class="ach-field"><label>ID ÚNICO</label><input id="newAchId" type="text" maxlength="50" placeholder="Ex.: independencia2026"></div>
+<div class="ach-field"><label>TIPO</label><select id="newAchType"><option value="selo">🏵️ Selo</option><option value="trofeu">🏆 Troféu</option></select></div>
+<div class="ach-field"><label>ÍCONE</label><input id="newAchIcon" type="text" maxlength="8" value="🏆" placeholder="🏆"></div>
+<div class="ach-field"><label>NOME</label><input id="newAchName" type="text" maxlength="80" placeholder="Ex.: Independência 2026"></div>
+<div class="ach-field full"><label>DESCRIÇÃO</label><input id="newAchDescription" type="text" maxlength="200" placeholder="Explique o motivo da conquista"></div>
+<div class="ach-field"><label>PERÍODO / TEMPORADA</label><input id="newAchPeriod" type="text" maxlength="80" placeholder="Ex.: Setembro de 2026"></div>
+<div class="ach-field"><label>ORDEM</label><input id="newAchOrder" type="number" value="0" min="0" step="1"></div>
+</div>
+<button class="ach-save" id="achCreate" type="button" style="width:100%;margin-top:12px;">➕ CADASTRAR CONQUISTA</button>
+<h3 style="margin-top:22px;">📚 Catálogo cadastrado</h3>
+<div class="ach-list" id="achList"><div class="empty">🔄 Carregando conquistas...</div></div>
+</div>
+
 <div class="card voucher-card">
 <div class="voucher-title"><div class="voucher-icon">🎫</div><div><h3>Vale Presente</h3><div style="color:#9ec7e5;font-size:12px;">Gere códigos para os clientes Adam Games.</div></div></div>
 <div class="voucher-form">
@@ -193,15 +252,16 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 import{getAuth,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-import{getFirestore,collection,query,where,getDocs,getDoc,updateDoc,addDoc,doc,setDoc,serverTimestamp,runTransaction}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+import{getFirestore,collection,query,where,getDocs,getCountFromServer,updateDoc,addDoc,doc,setDoc,serverTimestamp,arrayUnion,arrayRemove}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 const firebaseConfig={apiKey:"AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",authDomain:"adam-games-21081.firebaseapp.com",projectId:"adam-games-21081",storageBucket:"adam-games-21081.firebasestorage.app",messagingSenderId:"1055528418738",appId:"1:1055528418738:web:5fafdf63424ba9744eb8ab"};
 const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app);
 const ADMIN_EMAIL="raphafentyramos@gmail.com";
-let adminUsuario=null,usuarioSelecionado=null,todasEntregas=[],todosVales=[],todosUsuarios=[],authResolvido=false,resolverAutenticacao;
+let adminUsuario=null,usuarioSelecionado=null,todasEntregas=[],todosVales=[],todasConquistas=[],authResolvido=false,resolverAutenticacao;
 const autenticacaoPronta=new Promise(resolve=>resolverAutenticacao=resolve);
 
-const searchInput=document.getElementById("searchInput"),searchMessage=document.getElementById("searchMessage"),operationMessage=document.getElementById("operationMessage"),roletaMessage=document.getElementById("roletaMessage"),voucherMessage=document.getElementById("voucherMessage"),deliveryMessage=document.getElementById("deliveryMessage"),specialKeyMessage=document.getElementById("specialKeyMessage"),userArea=document.getElementById("userArea"),refreshButton=document.getElementById("refreshAll"),generateVoucherButton=document.getElementById("generateVoucher");
+const searchInput=document.getElementById("searchInput"),searchMessage=document.getElementById("searchMessage"),operationMessage=document.getElementById("operationMessage"),roletaMessage=document.getElementById("roletaMessage"),voucherMessage=document.getElementById("voucherMessage"),deliveryMessage=document.getElementById("deliveryMessage"),userArea=document.getElementById("userArea"),refreshButton=document.getElementById("refreshAll"),generateVoucherButton=document.getElementById("generateVoucher");
+const achUser=document.getElementById("achUser"),achSelect=document.getElementById("achSelect"),achMessage=document.getElementById("achMessage"),achSend=document.getElementById("achSend");
 
 function mostrarMensagem(el,texto,tipo){el.textContent=texto;el.className=tipo?"message "+tipo:"message"}
 function numero(v){return Number(v||0).toLocaleString("pt-BR")}
@@ -213,343 +273,622 @@ function gerarOperacaoId(){const a=new Date(),data=a.getFullYear()+String(a.getM
 function gerarVale15(){const chars="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";let codigo="";if(window.crypto?.getRandomValues){const a=new Uint32Array(15);window.crypto.getRandomValues(a);for(let i=0;i<15;i++)codigo+=chars[a[i]%chars.length]}else for(let i=0;i<15;i++)codigo+=chars[Math.floor(Math.random()*chars.length)];return codigo}
 function comTimeout(p,tempo=15000){return Promise.race([p,new Promise((_,reject)=>setTimeout(()=>{const e=new Error("Tempo limite excedido.");e.code="timeout";reject(e)},tempo))])}
 
-async function carregarUsuarios(){
-  const lista=document.getElementById("clientList"),msg=document.getElementById("clientMessage");
-  lista.innerHTML="<div class='empty'>🔄 Carregando clientes...</div>";mostrarMensagem(msg,"","");
-  try{
-    const r=await getDocs(collection(db,"admins"));
-    todosUsuarios=r.docs.map(d=>({ref:d.ref,docId:d.id,data:d.data()}));
-    todosUsuarios.sort((a,b)=>String(a.data.nome||a.data.name||a.data.email||a.docId).localeCompare(String(b.data.nome||b.data.name||b.data.email||b.docId),"pt-BR"));
-    renderizarClientes();
-    document.getElementById("totalUsuarios").textContent=numero(todosUsuarios.length);
-    document.getElementById("totalVip").textContent=numero(todosUsuarios.filter(u=>u.data.vip===true).length);
-    renderizarListaEspecial();
-  }catch(e){
-    console.error("ERRO AO CARREGAR CLIENTES:",e);todosUsuarios=[];
-    lista.innerHTML=`<div class='empty'>❌ Não foi possível carregar os cadastros.<br><br>${escapar(e?.code||e?.message||"Erro desconhecido")}</div>`;
-    mostrarMensagem(msg,"Erro ao carregar cadastros. Se aparecer permission-denied, o problema está nas Rules do Firestore.","error");
-    document.getElementById("totalUsuarios").textContent="—";document.getElementById("totalVip").textContent="—";renderizarListaEspecial();
-  }
-}
+async function carregarDashboard(){try{const c=await getCountFromServer(collection(db,"admins"));document.getElementById("totalUsuarios").textContent=numero(c.data().count);const u=await getDocs(collection(db,"admins"));let vip=0;u.forEach(d=>{if(d.data().vip===true)vip++});document.getElementById("totalVip").textContent=numero(vip)}catch(e){console.error(e);document.getElementById("totalUsuarios").textContent="—";document.getElementById("totalVip").textContent="—"}}
 
-function renderizarClientes(){
-  const lista=document.getElementById("clientList");lista.innerHTML="";
-  if(!todosUsuarios.length){lista.innerHTML="<div class='empty'>Nenhum cliente cadastrado.</div>";return}
-  todosUsuarios.forEach(u=>{
-    const d=u.data,nome=d.nome||d.name||"Usuário",email=d.email||"Sem e-mail",pid=d.publicId||"Sem ID",avatar=d.avatar||"🙂";
-    const el=document.createElement("div");el.className="client-item";
-    el.innerHTML=`<div class="client-main"><div class="client-avatar">${escapar(avatar)}</div><div><div class="client-name">${escapar(nome)}</div><div class="client-email">${escapar(email)}</div><div class="client-id">🆔 ID: ${escapar(pid)}</div></div></div><button class="client-open" type="button">👤 ABRIR</button>`;
-    el.querySelector(".client-open").onclick=async()=>{try{await mostrarUsuario({ref:u.ref,id:u.docId,data:u.data});window.scrollTo({top:userArea.offsetTop-20,behavior:"smooth"})}catch(e){console.error(e);mostrarMensagem(document.getElementById("clientMessage"),"Não foi possível abrir este cadastro: "+(e?.code||e?.message||"erro"),"error")}};
-    lista.appendChild(el);
-  });
-}
-
-async function carregarDashboard(){await carregarUsuarios()}
-
-async function carregarEntregas(){
-  const lista=document.getElementById("deliveryList");lista.innerHTML="<div class='empty'>🔄 Carregando prêmios...</div>";
-  try{const r=await getDocs(collection(db,"entregas"));todasEntregas=r.docs.map(d=>({id:d.id,...d.data()}));renderizarEntregas()}
-  catch(e){console.error(e);todasEntregas=[];lista.innerHTML="<div class='empty'>⚠️ Não foi possível carregar os prêmios.</div>";mostrarMensagem(deliveryMessage,"Verifique as Rules da coleção entregas.","error")}
-}
-function renderizarEntregas(filtro=null){
-  const dados=Array.isArray(filtro)?filtro:todasEntregas,total=dados.length,pend=dados.filter(x=>x.entregue!==true).length,done=dados.filter(x=>x.entregue===true).length;
-  document.getElementById("totalPremios").textContent=numero(todasEntregas.length);document.getElementById("totalPendentes").textContent=numero(todasEntregas.filter(x=>x.entregue!==true).length);
-  document.getElementById("entregaTotal").textContent=numero(total);document.getElementById("entregaPendente").textContent=numero(pend);document.getElementById("entregaEntregue").textContent=numero(done);
-  const lista=document.getElementById("deliveryList");lista.innerHTML="";const ord=[...dados].sort((a,b)=>obterMillis(b.criadoEm||b.dataHora)-obterMillis(a.criadoEm||a.dataHora));
-  if(!ord.length){lista.innerHTML="<div class='empty'>🎉 Nenhum prêmio cadastrado.</div>";return}
-  ord.slice(0,100).forEach(p=>{
-    const uid=p.uid||p.usuarioUid||p.usuarioId||"",titulo=p.premioNome||p.nome||p.titulo||"Prêmio",tipo=p.tipo||"outro",q=p.quantidade!==undefined?numero(p.quantidade):"—",ent=p.entregue===true,d=document.createElement("div");d.className="delivery-item";
-    d.innerHTML=`<div class="delivery-top"><div><div class="delivery-title">🎁 ${escapar(titulo)}</div><div class="delivery-user">👤 ${escapar(p.usuarioNome||"Cliente não identificado")}${p.usuarioEmail?" • "+escapar(p.usuarioEmail):""}</div></div><div class="delivery-status ${ent?"done":"pending"}">${ent?"✅ ENTREGUE":"⏳ PENDENTE"}</div></div><div class="delivery-info">Tipo: <b>${escapar(tipo)}</b><br>Quantidade: <b>${q}</b><br>Data: <b>${escapar(formatarData(p.criadoEm||p.dataHora))}</b><br>UID: <b>${escapar(uid||"Não informado")}</b></div><div class="delivery-actions"><button class="delivery-profile" type="button">👤 PERFIL</button><button class="delivery-open" type="button">🔎 FILTRAR CLIENTE</button><button class="delivery-complete" type="button">${ent?"↩️ DESFAZER":"✅ ENTREGAR"}</button></div><div class="delivery-id">🆔 ID: ${escapar(p.id)}</div>`;
-    d.querySelector(".delivery-profile").onclick=()=>uid?buscarUsuarioPorUid(uid):alert("Este prêmio não possui UID.");
-    d.querySelector(".delivery-open").onclick=()=>{if(uid)renderizarEntregas(todasEntregas.filter(x=>(x.uid||x.usuarioUid||x.usuarioId||"")===uid))};
-    d.querySelector(".delivery-complete").onclick=()=>alterarEntrega(p);lista.appendChild(d)
-  })
-}
-async function alterarEntrega(p){
-  const n=p.entregue!==true;if(!confirm(n?"Marcar este prêmio como ENTREGUE?":"Desfazer o status de entregue?"))return;
-  try{await updateDoc(doc(db,"entregas",p.id),{entregue:n,entregueEm:n?serverTimestamp():null,entreguePor:n?(adminUsuario?.email||""):""});p.entregue=n;renderizarEntregas();mostrarMensagem(deliveryMessage,n?"✅ Prêmio marcado como entregue.":"↩️ Prêmio voltou para pendente.","success")}
-  catch(e){console.error(e);mostrarMensagem(deliveryMessage,"Não foi possível alterar a entrega.","error")}
-}
-
-function renderizarListaEspecial(){
-  const lista=document.getElementById("specialVipList"),select=document.getElementById("specialKeyVip");
-  if(!lista||!select)return;
-  const vips=todosUsuarios.filter(u=>u.data.vip===true);
-  document.getElementById("specialVipCount").textContent=numero(vips.length);
-  select.innerHTML='<option value="">👑 Todos os VIPs</option>';
-  vips.forEach(u=>{const d=u.data,opt=document.createElement("option");opt.value=u.docId;opt.textContent="👑 "+(d.nome||d.name||"Usuário")+" • "+(d.email||d.publicId||u.docId);select.appendChild(opt)});
-  lista.innerHTML="";
-  if(!vips.length){lista.innerHTML="<div class='empty'>Nenhum usuário VIP ativo.</div>";return}
-  vips.forEach(u=>{
-    const d=u.data,el=document.createElement("div");el.className="vip-row";
-    el.innerHTML=`<div class="vip-row-main"><div class="vip-row-name">👑 ${escapar(d.nome||d.name||"Usuário")}</div><div class="vip-row-email">${escapar(d.email||d.publicId||u.docId)}</div></div><div class="vip-row-key">🔐 ${numero(d.chavesEspeciais)}</div>`;
-    lista.appendChild(el)
-  });
-}
-
-async function distribuirChavesEspeciais(destino="todos"){
-  const quantidade=Number(document.getElementById("specialKeyQuantity").value),motivo=document.getElementById("specialKeyReason").value.trim(),select=document.getElementById("specialKeyVip").value;
-  if(!Number.isInteger(quantidade)||quantidade<=0){mostrarMensagem(specialKeyMessage,"Digite uma quantidade inteira maior que zero.","error");return}
-  if(!motivo){mostrarMensagem(specialKeyMessage,"Informe o motivo da distribuição.","error");return}
-  if(destino==="um"&&!select){mostrarMensagem(specialKeyMessage,"Selecione um VIP.","error");return}
-  const vips=todosUsuarios.filter(u=>u.data.vip===true),alvos=destino==="um"?vips.filter(u=>u.docId===select):vips;
-  if(!alvos.length){mostrarMensagem(specialKeyMessage,"Não há VIPs para receber as chaves.","error");return}
-  const total=quantidade*alvos.length;
-  const confirmacao=destino==="um"
-    ? `Enviar ${numero(quantidade)} Chave(s) Especial(is) para ${alvos[0].data.nome||alvos[0].data.email||"este VIP"}?`
-    : `Enviar ${numero(quantidade)} Chave(s) Especiais para TODOS os ${numero(alvos.length)} VIPs?\n\nTotal distribuído: ${numero(total)} chaves.`;
-  if(!confirm(confirmacao))return;
-  const botoes=[document.getElementById("sendSpecialKeysAll"),document.getElementById("sendSpecialKeysOne")];botoes.forEach(b=>b.disabled=true);
-  mostrarMensagem(specialKeyMessage,"⏳ Distribuindo chaves...","");
-  try{
-    const resultados=[];
-    for(const u of alvos){
-      const novoSaldo=await runTransaction(db,async tx=>{
-        const snap=await tx.get(u.ref);
-        if(!snap.exists())throw new Error("Cadastro não encontrado: "+u.docId);
-        const d=snap.data(),atual=Number(d.chavesEspeciais||0),novo=atual+quantidade;
-        tx.update(u.ref,{chavesEspeciais:novo});
-        return {anterior:atual,novo};
-      });
-      u.data.chavesEspeciais=novoSaldo.novo;
-      resultados.push({u,anterior:novoSaldo.anterior,novo:novoSaldo.novo});
-    }
-    const distribuicaoId=gerarOperacaoId();
-    await addDoc(collection(db,"distribuicoesChavesEspeciais"),{
-      distribuicaoId,
-      quantidadePorVip:quantidade,
-      totalChaves:total,
-      totalVips:alvos.length,
-      destino:destino==="um"?"vip_especifico":"todos_vips",
-      motivo,
-      adminEmail:adminUsuario?.email||"",
-      adminUid:adminUsuario?.uid||"",
-      criadoEm:serverTimestamp(),
-      criadoEmTexto:new Date().toISOString(),
-      usuarios:alvos.map(u=>({usuarioId:u.docId,publicId:u.data.publicId||"",uid:u.data.uid||"",nome:u.data.nome||u.data.name||"",email:u.data.email||"",chavesEspeciaisAdicionadas:quantidade,saldoAnterior:Number(u.data.chavesEspeciais||0),saldoFinal:Number(u.data.chavesEspeciais||0)+quantidade}))
-    });
-    document.getElementById("specialKeyQuantity").value="";document.getElementById("specialKeyReason").value="";
-    renderizarListaEspecial();await carregarHistoricoDistribuicoes();
-    mostrarMensagem(specialKeyMessage,`✅ ${numero(total)} Chave(s) Especial(is) distribuída(s) para ${numero(alvos.length)} VIP(s). ID: ${distribuicaoId}`,"success");
-    if(usuarioSelecionado&&alvos.some(u=>u.docId===usuarioSelecionado.docId)){usuarioSelecionado.data.chavesEspeciais=Number(usuarioSelecionado.data.chavesEspeciais||0)+quantidade;atualizarSaldos()}
-  }catch(e){
-    console.error("ERRO AO DISTRIBUIR CHAVES ESPECIAIS:",e);
-    let msg="❌ Não foi possível distribuir as Chaves Especiais.";
-    if(e?.code==="permission-denied")msg="❌ O Firestore bloqueou a alteração. Verifique as Rules da coleção admins.";
-    else if(e?.code==="failed-precondition")msg="❌ O Firebase informou uma condição inválida. Tente novamente.";
-    else if(e?.message)msg+=" "+e.message;
-    mostrarMensagem(specialKeyMessage,msg,"error");
-  }finally{botoes.forEach(b=>b.disabled=false)}
-}
-
-async function carregarHistoricoDistribuicoes(){
-  const lista=document.getElementById("specialDistributionHistory");if(!lista)return;
-  try{
-    const r=await getDocs(collection(db,"distribuicoesChavesEspeciais"));
-    const regs=r.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>obterMillis(b.criadoEm||b.criadoEmTexto)-obterMillis(a.criadoEm||a.criadoEmTexto)).slice(0,10);
-    lista.innerHTML="";
-    if(!regs.length){lista.innerHTML="<div class='empty'>Nenhuma distribuição registrada.</div>";return}
-    regs.forEach(x=>{
-      const destino=x.destino==="todos_vips"?"todos os VIPs":"VIP específico",el=document.createElement("div");el.className="distribution-item";
-      el.innerHTML=`🔑 <strong>${numero(x.quantidadePorVip||0)}</strong> por VIP • <strong>${numero(x.totalVips||0)}</strong> VIP(s) • Total <strong>${numero(x.totalChaves||0)}</strong><br>Destino: <strong>${destino}</strong><br>Motivo: <strong>${escapar(x.motivo||"—")}</strong><br>Data: <strong>${escapar(formatarData(x.criadoEm||x.criadoEmTexto))}</strong><br>Administrador: <strong>${escapar(x.adminEmail||"—")}</strong>`;
-      lista.appendChild(el)
-    })
-  }catch(e){console.error("HISTÓRICO CHAVES:",e);lista.innerHTML="<div class='empty'>⚠️ Histórico indisponível. Verifique as Rules da coleção distribuicoesChavesEspeciais.</div>"}
-}
+async function carregarEntregas(){const lista=document.getElementById("deliveryList");lista.innerHTML="<div class='empty'>🔄 Carregando prêmios...</div>";try{const r=await getDocs(collection(db,"entregas"));todasEntregas=r.docs.map(d=>({id:d.id,...d.data()}));renderizarEntregas()}catch(e){console.error(e);todasEntregas=[];lista.innerHTML="<div class='empty'>⚠️ Não foi possível carregar os prêmios.</div>";mostrarMensagem(deliveryMessage,"Verifique as Rules da coleção entregas.","error")}}
+function renderizarEntregas(filtro=null){const dados=Array.isArray(filtro)?filtro:todasEntregas,total=dados.length,pend=dados.filter(x=>x.entregue!==true).length,done=dados.filter(x=>x.entregue===true).length;document.getElementById("totalPremios").textContent=numero(todasEntregas.length);document.getElementById("totalPendentes").textContent=numero(todasEntregas.filter(x=>x.entregue!==true).length);document.getElementById("entregaTotal").textContent=numero(total);document.getElementById("entregaPendente").textContent=numero(pend);document.getElementById("entregaEntregue").textContent=numero(done);const lista=document.getElementById("deliveryList");lista.innerHTML="";const ord=[...dados].sort((a,b)=>obterMillis(b.criadoEm||b.dataHora)-obterMillis(a.criadoEm||a.dataHora));if(!ord.length){lista.innerHTML="<div class='empty'>🎉 Nenhum prêmio cadastrado.</div>";return}ord.slice(0,100).forEach(p=>{const uid=p.uid||p.usuarioUid||p.usuarioId||"",titulo=p.premioNome||p.nome||p.titulo||"Prêmio",tipo=p.tipo||"outro",q=p.quantidade!==undefined?numero(p.quantidade):"—",ent=p.entregue===true,d=document.createElement("div");d.className="delivery-item";d.innerHTML=`<div class="delivery-top"><div><div class="delivery-title">🎁 ${escapar(titulo)}</div><div class="delivery-user">👤 ${escapar(p.usuarioNome||"Cliente não identificado")}${p.usuarioEmail?" • "+escapar(p.usuarioEmail):""}</div></div><div class="delivery-status ${ent?"done":"pending"}">${ent?"✅ ENTREGUE":"⏳ PENDENTE"}</div></div><div class="delivery-info">Tipo: <b>${escapar(tipo)}</b><br>Quantidade: <b>${q}</b><br>Data: <b>${escapar(formatarData(p.criadoEm||p.dataHora))}</b><br>UID: <b>${escapar(uid||"Não informado")}</b></div><div class="delivery-actions"><button class="delivery-profile" type="button">👤 PERFIL</button><button class="delivery-open" type="button">🔎 FILTRAR CLIENTE</button><button class="delivery-complete" type="button">${ent?"↩️ DESFAZER":"✅ ENTREGAR"}</button></div><div class="delivery-id">🆔 ID: ${escapar(p.id)}</div>`;d.querySelector(".delivery-profile").onclick=()=>uid?buscarUsuarioPorUid(uid):alert("Este prêmio não possui UID.");d.querySelector(".delivery-open").onclick=()=>{if(uid)renderizarEntregas(todasEntregas.filter(x=>(x.uid||x.usuarioUid||x.usuarioId||"")===uid))};d.querySelector(".delivery-complete").onclick=()=>alterarEntrega(p);lista.appendChild(d)})}
+async function alterarEntrega(p){const n=p.entregue!==true;if(!confirm(n?"Marcar este prêmio como ENTREGUE?":"Desfazer o status de entregue?"))return;try{await updateDoc(doc(db,"entregas",p.id),{entregue:n,entregueEm:n?serverTimestamp():null,entreguePor:n?(adminUsuario?.email||""):""});p.entregue=n;renderizarEntregas();mostrarMensagem(deliveryMessage,n?"✅ Prêmio marcado como entregue.":"↩️ Prêmio voltou para pendente.","success")}catch(e){console.error(e);mostrarMensagem(deliveryMessage,"Não foi possível alterar a entrega.","error")}}
 
 async function buscarUsuarioPorUid(uid){try{const r=await getDocs(query(collection(db,"admins"),where("uid","==",uid)));if(r.empty){mostrarMensagem(searchMessage,"Usuário não encontrado pelo UID.","error");return}mostrarUsuario(r.docs[0]);window.scrollTo({top:userArea.offsetTop-20,behavior:"smooth"})}catch(e){console.error(e);mostrarMensagem(searchMessage,"Erro ao localizar usuário.","error")}}
-async function buscarUsuario(){
-  const v=searchInput.value.trim();if(!v){mostrarMensagem(searchMessage,"Digite um ID, e-mail ou UID.","error");return}userArea.style.display="none";
-  try{
-    let r=await getDocs(query(collection(db,"admins"),where("publicId","==",v.toUpperCase())));
-    if(r.empty&&v.includes("@"))r=await getDocs(query(collection(db,"admins"),where("email","==",v.toLowerCase())));
-    if(r.empty)r=await getDocs(query(collection(db,"admins"),where("uid","==",v)));
-    if(r.empty){try{const d=await getDoc(doc(db,"admins",v));if(d.exists())r={empty:false,docs:[d]}}catch(e){console.warn("Busca por ID do documento:",e)}}
-    if(!r||r.empty){mostrarMensagem(searchMessage,"Usuário não encontrado.","error");return}
-    await mostrarUsuario(r.docs[0]);mostrarMensagem(searchMessage,"✅ Usuário encontrado.","success");window.scrollTo({top:userArea.offsetTop-20,behavior:"smooth"});
-  }catch(e){console.error("ERRO AO BUSCAR USUÁRIO:",e);mostrarMensagem(searchMessage,"Não foi possível consultar os usuários: "+(e?.code||e?.message||"erro desconhecido"),"error")}
-}
-
-async function mostrarUsuario(docu){
-  let ref,id,d;
-  if(docu&&typeof docu.data==="function"){ref=docu.ref;id=docu.id;d=docu.data()}
-  else if(docu&&docu.ref&&docu.data){ref=docu.ref;id=docu.id||docu.docId;d=docu.data}
-  else throw new Error("Cadastro inválido.");
-  usuarioSelecionado={ref:ref,docId:id,data:d};userArea.style.display="block";
-  const nome=d.nome||d.name||"Usuário",email=d.email||"Sem e-mail",pid=d.publicId||"Pendente";
-  document.getElementById("nome").textContent=nome;document.getElementById("email").textContent=email;document.getElementById("id").textContent="ID: "+pid;document.getElementById("uid").textContent="UID: "+(d.uid||"Não informado");document.getElementById("avatar").textContent=d.avatar||"🙂";
-  document.getElementById("infoNome").textContent=nome;document.getElementById("infoEmail").textContent=email;document.getElementById("infoId").textContent=pid;document.getElementById("infoUid").textContent=d.uid||"Não informado";document.getElementById("infoIdade").textContent=d.idade||"Não informado";document.getElementById("infoTelefone").textContent=d.telefone||d.phone||"Não informado";
-  atualizarSaldos();atualizarStatus();atualizarGiros();carregarExtrato(pid);
-}
-function atualizarSaldos(){if(!usuarioSelecionado)return;const d=usuarioSelecionado.data;document.getElementById("chances").textContent=numero(d.chances);document.getElementById("moedas").textContent=numero(d.moedas);document.getElementById("chaves").textContent=numero(d.chaves);document.getElementById("chavesEspeciais").textContent=numero(d.chavesEspeciais);document.getElementById("creditos").textContent=dinheiro(d.creditos)}
+async function buscarUsuario(){const v=searchInput.value.trim();if(!v){mostrarMensagem(searchMessage,"Digite um ID, e-mail ou UID.","error");return}userArea.style.display="none";try{let r=await getDocs(query(collection(db,"admins"),where("publicId","==",v)));if(r.empty&&v.includes("@"))r=await getDocs(query(collection(db,"admins"),where("email","==",v.toLowerCase())));if(r.empty)r=await getDocs(query(collection(db,"admins"),where("uid","==",v)));if(r.empty){mostrarMensagem(searchMessage,"Usuário não encontrado.","error");return}mostrarUsuario(r.docs[0]);mostrarMensagem(searchMessage,"✅ Usuário encontrado.","success");window.scrollTo({top:userArea.offsetTop-20,behavior:"smooth"})}catch(e){console.error(e);mostrarMensagem(searchMessage,"Não foi possível consultar os usuários.","error")}}
+function mostrarUsuario(docu){const d=docu.data();usuarioSelecionado={ref:docu.ref,docId:docu.id,data:d};userArea.style.display="block";const nome=d.nome||d.name||"Usuário",email=d.email||"Sem e-mail",pid=d.publicId||"Pendente";document.getElementById("nome").textContent=nome;document.getElementById("email").textContent=email;document.getElementById("id").textContent="ID: "+pid;document.getElementById("uid").textContent="UID: "+(d.uid||"Não informado");document.getElementById("avatar").textContent=d.avatar||"🙂";document.getElementById("infoNome").textContent=nome;document.getElementById("infoEmail").textContent=email;document.getElementById("infoId").textContent=pid;document.getElementById("infoUid").textContent=d.uid||"Não informado";document.getElementById("infoIdade").textContent=d.idade||"Não informado";document.getElementById("infoTelefone").textContent=d.telefone||d.phone||"Não informado";atualizarSaldos();atualizarStatus();atualizarGiros();carregarExtrato(pid)}
+function atualizarSaldos(){if(!usuarioSelecionado)return;const d=usuarioSelecionado.data;document.getElementById("chances").textContent=numero(d.chances);document.getElementById("moedas").textContent=numero(d.moedas);document.getElementById("chaves").textContent=numero(d.chaves);document.getElementById("creditos").textContent=dinheiro(d.creditos)}
 function atualizarGiros(){const v=Number(usuarioSelecionado?.data?.girosRoleta||0);document.getElementById("girosRoleta").textContent=numero(v);document.getElementById("roletaSaldo").textContent=numero(v)}
 function atualizarStatus(){if(!usuarioSelecionado)return;const d=usuarioSelecionado.data,v=d.vip===true,c=d.caixaBox===true,s=document.getElementById("vipStatus");s.textContent=v?"👑 VIP ATIVO":"⭐ NÃO VIP";s.className=v?"status vip":"status";document.getElementById("boxStatus").textContent=c?"🎁 CAIXA UTILIZADA":"🎁 CAIXA DISPONÍVEL"}
 
-async function alterarSaldo(op){
-  if(!usuarioSelecionado){mostrarMensagem(operationMessage,"Selecione um usuário.","error");return}
-  const item=document.getElementById("item").value,q=Number(document.getElementById("quantidade").value),mot=document.getElementById("motivo").value.trim();
-  if(!Number.isFinite(q)||q<=0){mostrarMensagem(operationMessage,"Digite uma quantidade válida.","error");return}if(!mot){mostrarMensagem(operationMessage,"Informe o motivo.","error");return}
-  const atual=Number(usuarioSelecionado.data[item]||0),novo=op==="adicionar"?atual+q:atual-q;if(novo<0){mostrarMensagem(operationMessage,"O saldo não pode ficar negativo.","error");return}
-  if(!confirm((op==="adicionar"?"Adicionar ":"Remover ")+q+" de "+item+"?"))return;const id=gerarOperacaoId();
-  try{await updateDoc(usuarioSelecionado.ref,{[item]:novo});await addDoc(collection(db,"historico"),{movimentacaoId:id,usuarioId:usuarioSelecionado.docId,publicId:usuarioSelecionado.data.publicId||usuarioSelecionado.docId,usuarioUid:usuarioSelecionado.data.uid||"",usuarioEmail:usuarioSelecionado.data.email||"",usuarioNome:usuarioSelecionado.data.nome||usuarioSelecionado.data.name||"",adminEmail:adminUsuario.email,adminUid:adminUsuario.uid,item,operacao:op,quantidade:q,saldoAnterior:atual,saldoFinal:novo,motivo:mot,criadoEm:new Date().toISOString()});usuarioSelecionado.data[item]=novo;atualizarSaldos();document.getElementById("quantidade").value="";document.getElementById("motivo").value="";mostrarMensagem(operationMessage,"✅ Movimentação realizada. ID: "+id,"success");carregarExtrato(usuarioSelecionado.data.publicId||usuarioSelecionado.docId)}
-  catch(e){console.error(e);mostrarMensagem(operationMessage,"Erro ao realizar movimentação.","error")}
-}
-async function alterarGiros(op){
-  if(!usuarioSelecionado){mostrarMensagem(roletaMessage,"Selecione um usuário.","error");return}
-  const q=Number(document.getElementById("quantidadeGiros").value),mot=document.getElementById("motivoGiros").value.trim();if(!Number.isInteger(q)||q<=0){mostrarMensagem(roletaMessage,"A quantidade precisa ser um número inteiro.","error");return}if(!mot){mostrarMensagem(roletaMessage,"Informe o motivo.","error");return}
-  const atual=Number(usuarioSelecionado.data.girosRoleta||0),novo=op==="adicionar"?atual+q:atual-q;if(novo<0){mostrarMensagem(roletaMessage,"Os giros não podem ficar negativos.","error");return}if(!confirm((op==="adicionar"?"Adicionar ":"Remover ")+q+" giro(s)?"))return;const id=gerarOperacaoId();
-  try{await updateDoc(usuarioSelecionado.ref,{girosRoleta:novo});await addDoc(collection(db,"historico"),{movimentacaoId:id,usuarioId:usuarioSelecionado.docId,publicId:usuarioSelecionado.data.publicId||usuarioSelecionado.docId,usuarioUid:usuarioSelecionado.data.uid||"",usuarioEmail:usuarioSelecionado.data.email||"",usuarioNome:usuarioSelecionado.data.nome||"",adminEmail:adminUsuario.email,adminUid:adminUsuario.uid,item:"girosRoleta",nomeExibicao:"Giros da Roleta",operacao:op,quantidade:q,saldoAnterior:atual,saldoFinal:novo,motivo:mot,criadoEm:new Date().toISOString()});usuarioSelecionado.data.girosRoleta=novo;atualizarGiros();document.getElementById("quantidadeGiros").value="";document.getElementById("motivoGiros").value="";mostrarMensagem(roletaMessage,"🎰 Operação realizada. Novo saldo: "+novo,"success");carregarExtrato(usuarioSelecionado.data.publicId||usuarioSelecionado.docId)}
-  catch(e){console.error(e);mostrarMensagem(roletaMessage,"Não foi possível alterar os giros.","error")}
-}
-async function alterarVIP(){
-  if(!usuarioSelecionado){mostrarMensagem(operationMessage,"Selecione um usuário.","error");return}const atual=usuarioSelecionado.data.vip===true,novo=!atual;if(!confirm(novo?"Ativar VIP?":"Desativar VIP?"))return;const id=gerarOperacaoId();
-  try{await updateDoc(usuarioSelecionado.ref,{vip:novo});await addDoc(collection(db,"historico"),{movimentacaoId:id,usuarioId:usuarioSelecionado.docId,publicId:usuarioSelecionado.data.publicId||usuarioSelecionado.docId,usuarioUid:usuarioSelecionado.data.uid||"",usuarioEmail:usuarioSelecionado.data.email||"",usuarioNome:usuarioSelecionado.data.nome||"",adminEmail:adminUsuario.email,adminUid:adminUsuario.uid,item:"VIP",operacao:novo?"adicionar":"remover",quantidade:1,saldoAnterior:atual?1:0,saldoFinal:novo?1:0,motivo:novo?"VIP ativado pelo administrador":"VIP desativado pelo administrador",criadoEm:new Date().toISOString()});usuarioSelecionado.data.vip=novo;atualizarStatus();mostrarMensagem(operationMessage,novo?"👑 VIP ativado.":"⭐ VIP desativado.","success");carregarDashboard();carregarExtrato(usuarioSelecionado.data.publicId||usuarioSelecionado.docId)}
-  catch(e){console.error(e);mostrarMensagem(operationMessage,"Não foi possível alterar o VIP.","error")}
-}
-async function alterarCaixa(){
-  if(!usuarioSelecionado){mostrarMensagem(operationMessage,"Selecione um usuário.","error");return}const atual=usuarioSelecionado.data.caixaBox===true,novo=!atual;if(!confirm(novo?"Marcar Caixa como utilizada?":"Liberar Caixa novamente?"))return;const id=gerarOperacaoId();
-  try{await updateDoc(usuarioSelecionado.ref,{caixaBox:novo});await addDoc(collection(db,"historico"),{movimentacaoId:id,usuarioId:usuarioSelecionado.docId,publicId:usuarioSelecionado.data.publicId||usuarioSelecionado.docId,usuarioUid:usuarioSelecionado.data.uid||"",usuarioEmail:usuarioSelecionado.data.email||"",usuarioNome:usuarioSelecionado.data.nome||"",adminEmail:adminUsuario.email,adminUid:adminUsuario.uid,item:"Caixa Box",operacao:novo?"remover":"adicionar",quantidade:1,saldoAnterior:atual?1:0,saldoFinal:novo?1:0,motivo:novo?"Caixa Box utilizada":"Caixa Box liberada",criadoEm:new Date().toISOString()});usuarioSelecionado.data.caixaBox=novo;atualizarStatus();mostrarMensagem(operationMessage,novo?"🎁 Caixa marcada como utilizada.":"🎁 Caixa liberada.","success");carregarExtrato(usuarioSelecionado.data.publicId||usuarioSelecionado.docId)}
-  catch(e){console.error(e);mostrarMensagem(operationMessage,"Não foi possível alterar a Caixa.","error")}
-}
-async function carregarExtrato(pid){
-  const lista=document.getElementById("historyList");lista.innerHTML="<div class='empty'>🔄 Carregando histórico...</div>";if(!pid||pid==="Pendente"){lista.innerHTML="<div class='empty'>Este usuário ainda não possui ID público.</div>";return}
-  try{const r=await getDocs(query(collection(db,"historico"),where("publicId","==",pid)));if(r.empty){lista.innerHTML="<div class='empty'>Nenhuma movimentação registrada.</div>";return}const regs=r.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>obterMillis(b.criadoEm)-obterMillis(a.criadoEm));lista.innerHTML="";regs.forEach(x=>{const el=document.createElement("div");el.className="historyItem";const pos=x.operacao==="adicionar",s=pos?"+":"-",cl=pos?"plus":"minus",ni=x.item==="girosRoleta"?"🎰 Giros da Roleta":x.item||"";el.innerHTML=`<div class="historyTop"><span class="${cl}">${s}${numero(x.quantidade)} ${escapar(ni)}</span><span class="historyDate">${escapar(formatarData(x.criadoEm))}</span></div><div class="historyInfo">Saldo anterior: ${numero(x.saldoAnterior)}<br>Saldo final: ${numero(x.saldoFinal)}<br>Motivo: ${escapar(x.motivo||"—")}<br>Administrador: ${escapar(x.adminEmail||"—")}</div><div class="operation-id">🆔 ${escapar(x.movimentacaoId||"Sem ID")}</div>`;lista.appendChild(el)})}
-  catch(e){console.error(e);lista.innerHTML="<div class='empty'>Não foi possível carregar o histórico.</div>"}
-}
+async function alterarSaldo(op){if(!usuarioSelecionado){mostrarMensagem(operationMessage,"Selecione um usuário.","error");return}const item=document.getElementById("item").value,q=Number(document.getElementById("quantidade").value),mot=document.getElementById("motivo").value.trim();if(!Number.isFinite(q)||q<=0){mostrarMensagem(operationMessage,"Digite uma quantidade válida.","error");return}if(!mot){mostrarMensagem(operationMessage,"Informe o motivo.","error");return}const atual=Number(usuarioSelecionado.data[item]||0),novo=op==="adicionar"?atual+q:atual-q;if(novo<0){mostrarMensagem(operationMessage,"O saldo não pode ficar negativo.","error");return}if(!confirm((op==="adicionar"?"Adicionar ":"Remover ")+q+" de "+item+"?"))return;const id=gerarOperacaoId();try{await updateDoc(usuarioSelecionado.ref,{[item]:novo});await addDoc(collection(db,"historico"),{movimentacaoId:id,usuarioId:usuarioSelecionado.docId,publicId:usuarioSelecionado.data.publicId||usuarioSelecionado.docId,usuarioUid:usuarioSelecionado.data.uid||"",usuarioEmail:usuarioSelecionado.data.email||"",usuarioNome:usuarioSelecionado.data.nome||usuarioSelecionado.data.name||"",adminEmail:adminUsuario.email,adminUid:adminUsuario.uid,item,operacao:op,quantidade:q,saldoAnterior:atual,saldoFinal:novo,motivo:mot,criadoEm:new Date().toISOString()});usuarioSelecionado.data[item]=novo;atualizarSaldos();document.getElementById("quantidade").value="";document.getElementById("motivo").value="";mostrarMensagem(operationMessage,"✅ Movimentação realizada. ID: "+id,"success");carregarExtrato(usuarioSelecionado.data.publicId||usuarioSelecionado.docId)}catch(e){console.error(e);mostrarMensagem(operationMessage,"Erro ao realizar movimentação.","error")}}
+async function alterarGiros(op){if(!usuarioSelecionado){mostrarMensagem(roletaMessage,"Selecione um usuário.","error");return}const q=Number(document.getElementById("quantidadeGiros").value),mot=document.getElementById("motivoGiros").value.trim();if(!Number.isInteger(q)||q<=0){mostrarMensagem(roletaMessage,"A quantidade precisa ser um número inteiro.","error");return}if(!mot){mostrarMensagem(roletaMessage,"Informe o motivo.","error");return}const atual=Number(usuarioSelecionado.data.girosRoleta||0),novo=op==="adicionar"?atual+q:atual-q;if(novo<0){mostrarMensagem(roletaMessage,"Os giros não podem ficar negativos.","error");return}if(!confirm((op==="adicionar"?"Adicionar ":"Remover ")+q+" giro(s)?"))return;const id=gerarOperacaoId();try{await updateDoc(usuarioSelecionado.ref,{girosRoleta:novo});await addDoc(collection(db,"historico"),{movimentacaoId:id,usuarioId:usuarioSelecionado.docId,publicId:usuarioSelecionado.data.publicId||usuarioSelecionado.docId,usuarioUid:usuarioSelecionado.data.uid||"",usuarioEmail:usuarioSelecionado.data.email||"",usuarioNome:usuarioSelecionado.data.nome||"",adminEmail:adminUsuario.email,adminUid:adminUsuario.uid,item:"girosRoleta",nomeExibicao:"Giros da Roleta",operacao:op,quantidade:q,saldoAnterior:atual,saldoFinal:novo,motivo:mot,criadoEm:new Date().toISOString()});usuarioSelecionado.data.girosRoleta=novo;atualizarGiros();document.getElementById("quantidadeGiros").value="";document.getElementById("motivoGiros").value="";mostrarMensagem(roletaMessage,"🎰 Operação realizada. Novo saldo: "+novo,"success");carregarExtrato(usuarioSelecionado.data.publicId||usuarioSelecionado.docId)}catch(e){console.error(e);mostrarMensagem(roletaMessage,"Não foi possível alterar os giros.","error")}}
+async function alterarVIP(){if(!usuarioSelecionado){mostrarMensagem(operationMessage,"Selecione um usuário.","error");return}const atual=usuarioSelecionado.data.vip===true,novo=!atual;if(!confirm(novo?"Ativar VIP?":"Desativar VIP?"))return;const id=gerarOperacaoId();try{await updateDoc(usuarioSelecionado.ref,{vip:novo});await addDoc(collection(db,"historico"),{movimentacaoId:id,usuarioId:usuarioSelecionado.docId,publicId:usuarioSelecionado.data.publicId||usuarioSelecionado.docId,usuarioUid:usuarioSelecionado.data.uid||"",usuarioEmail:usuarioSelecionado.data.email||"",usuarioNome:usuarioSelecionado.data.nome||"",adminEmail:adminUsuario.email,adminUid:adminUsuario.uid,item:"VIP",operacao:novo?"adicionar":"remover",quantidade:1,saldoAnterior:atual?1:0,saldoFinal:novo?1:0,motivo:novo?"VIP ativado pelo administrador":"VIP desativado pelo administrador",criadoEm:new Date().toISOString()});usuarioSelecionado.data.vip=novo;atualizarStatus();mostrarMensagem(operationMessage,novo?"👑 VIP ativado.":"⭐ VIP desativado.","success");carregarDashboard();carregarExtrato(usuarioSelecionado.data.publicId||usuarioSelecionado.docId)}catch(e){console.error(e);mostrarMensagem(operationMessage,"Não foi possível alterar o VIP.","error")}}
+async function alterarCaixa(){if(!usuarioSelecionado){mostrarMensagem(operationMessage,"Selecione um usuário.","error");return}const atual=usuarioSelecionado.data.caixaBox===true,novo=!atual;if(!confirm(novo?"Marcar Caixa como utilizada?":"Liberar Caixa novamente?"))return;const id=gerarOperacaoId();try{await updateDoc(usuarioSelecionado.ref,{caixaBox:novo});await addDoc(collection(db,"historico"),{movimentacaoId:id,usuarioId:usuarioSelecionado.docId,publicId:usuarioSelecionado.data.publicId||usuarioSelecionado.docId,usuarioUid:usuarioSelecionado.data.uid||"",usuarioEmail:usuarioSelecionado.data.email||"",usuarioNome:usuarioSelecionado.data.nome||"",adminEmail:adminUsuario.email,adminUid:adminUsuario.uid,item:"Caixa Box",operacao:novo?"remover":"adicionar",quantidade:1,saldoAnterior:atual?1:0,saldoFinal:novo?1:0,motivo:novo?"Caixa Box utilizada":"Caixa Box liberada",criadoEm:new Date().toISOString()});usuarioSelecionado.data.caixaBox=novo;atualizarStatus();mostrarMensagem(operationMessage,novo?"🎁 Caixa marcada como utilizada.":"🎁 Caixa liberada.","success");carregarExtrato(usuarioSelecionado.data.publicId||usuarioSelecionado.docId)}catch(e){console.error(e);mostrarMensagem(operationMessage,"Não foi possível alterar a Caixa.","error")}}
 
+async function carregarExtrato(pid){const lista=document.getElementById("historyList");lista.innerHTML="<div class='empty'>🔄 Carregando histórico...</div>";if(!pid||pid==="Pendente"){lista.innerHTML="<div class='empty'>Este usuário ainda não possui ID público.</div>";return}try{const r=await getDocs(query(collection(db,"historico"),where("publicId","==",pid)));if(r.empty){lista.innerHTML="<div class='empty'>Nenhuma movimentação registrada.</div>";return}const regs=r.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>obterMillis(b.criadoEm)-obterMillis(a.criadoEm));lista.innerHTML="";regs.forEach(x=>{const el=document.createElement("div");el.className="historyItem";const pos=x.operacao==="adicionar",s=pos?"+":"-",cl=pos?"plus":"minus",ni=x.item==="girosRoleta"?"🎰 Giros da Roleta":x.item||"";el.innerHTML=`<div class="historyTop"><span class="${cl}">${s}${numero(x.quantidade)} ${escapar(ni)}</span><span class="historyDate">${escapar(formatarData(x.criadoEm))}</span></div><div class="historyInfo">Saldo anterior: ${numero(x.saldoAnterior)}<br>Saldo final: ${numero(x.saldoFinal)}<br>Motivo: ${escapar(x.motivo||"—")}<br>Administrador: ${escapar(x.adminEmail||"—")}</div><div class="operation-id">🆔 ${escapar(x.movimentacaoId||"Sem ID")}</div>`;lista.appendChild(el)})}catch(e){console.error(e);lista.innerHTML="<div class='empty'>Não foi possível carregar o histórico.</div>"}}
 
-/* BINGO - CARTELAS */
-function gerarCodigoCartela(){
-  const chars="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";let out="BG-";
-  for(let i=0;i<8;i++)out+=chars[Math.floor(Math.random()*chars.length)];
-  return out;
-}
-function gerarCartelaBingo(){
-  const ranges=[[1,15],[16,30],[31,45],[46,60],[61,75]],nums=[];
-  for(const [min,max] of ranges){const a=[];for(let n=min;n<=max;n++)a.push(n);for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}nums.push(a.slice(0,5))}
-  const card=[];for(let r=0;r<5;r++)for(let c=0;c<5;c++)card.push(r===2&&c===2?0:nums[c][r]);return card;
-}
-function mostrarMensagemBingo(texto,tipo){const el=document.getElementById("bingoCardsMessage");if(!el)return;el.textContent=texto||"";el.className="message"+(tipo?" "+tipo:"")}
-async function localizarUsuarioBingo(valor){
-  const v=(valor||"").trim();if(!v)return null;
-  let r=await getDocs(query(collection(db,"admins"),where("publicId","==",v.toUpperCase())));
-  if(r.empty&&v.includes("@"))r=await getDocs(query(collection(db,"admins"),where("email","==",v.toLowerCase())));
-  if(r.empty)r=await getDocs(query(collection(db,"admins"),where("uid","==",v)));
-  if(r.empty){try{const d=await getDoc(doc(db,"admins",v));if(d.exists())return {ref:d.ref,docId:d.id,data:d.data()}}catch(e){}}
-  if(r.empty)return null;const d=r.docs[0];return {ref:d.ref,docId:d.id,data:d.data()};
-}
-async function gerarCartelasBingo(enviar){
-  if(!adminUsuario){mostrarMensagemBingo("❌ Administrador não autenticado.","error");return}
-  const qtd=Math.min(100,Math.max(1,Number(document.getElementById("bingoCardQuantity").value||1)));
-  const rodada=Math.max(1,Number(document.getElementById("bingoCardRound").value||1));
-  const userId=document.getElementById("bingoCardUserId").value.trim();
-  let alvo=null;
-  if(enviar){if(!userId){mostrarMensagemBingo("Digite o ID do jogador para enviar as cartelas.","error");return}try{alvo=await localizarUsuarioBingo(userId)}catch(e){console.error(e)}if(!alvo){mostrarMensagemBingo("❌ Jogador não encontrado pelo ID informado.","error");return}}
-  const botoes=[document.getElementById("generateBingoCards"),document.getElementById("generateSendBingoCards")];botoes.forEach(b=>b.disabled=true);
-  mostrarMensagemBingo("⏳ Gerando cartelas...","");
-  try{
-    const criadas=[],assinaturas=new Set();
-    for(let i=0;i<qtd;i++){
-      let card,sig,tries=0;do{card=gerarCartelaBingo();sig=card.join("-");tries++}while(assinaturas.has(sig)&&tries<30);assinaturas.add(sig);
-      let codigo="",ref=null;
-      for(let tentativa=0;tentativa<8;tentativa++){codigo=gerarCodigoCartela();ref=doc(db,"bingoCartelas",codigo);const existente=await getDoc(ref);if(!existente.exists())break;if(tentativa===7)throw new Error("Não foi possível gerar um código único.")}
-      const dados={codigo,card,round:rodada,status:alvo?"assigned":"available",usuarioUid:alvo?.data?.uid||"",usuarioId:alvo?.data?.publicId||alvo?.docId||"",usuarioNome:alvo?.data?.nome||alvo?.data?.name||"",usuarioEmail:alvo?.data?.email||"",createdAt:serverTimestamp(),createdAtTexto:new Date().toISOString(),createdBy:adminUsuario.email||""};
-      await setDoc(ref,dados);criadas.push({codigo,card});
-    }
-    document.getElementById("bingoCardQuantity").value="1";
-    mostrarMensagemBingo(`✅ ${criadas.length} cartela${criadas.length===1?"":"s"} ${alvo?"gerada(s) e enviada(s) para "+(alvo.data.nome||alvo.data.publicId||"o jogador"):"gerada(s) com sucesso."}`,"success");
-    await carregarBingoCartelas();
-  }catch(e){console.error("ERRO CARTELAS BINGO:",e);mostrarMensagemBingo("❌ Não foi possível gerar as cartelas. "+(e?.code==="permission-denied"?"Verifique a Rule da coleção bingoCartelas.":(e?.message||"")),"error")}
-  finally{botoes.forEach(b=>b.disabled=false)}
-}
-async function enviarCartelaBingoExistente(){
-  const codigo=document.getElementById("bingoExistingCode").value.trim().toUpperCase();const userId=document.getElementById("bingoExistingUserId").value.trim();
-  if(!codigo||!userId){mostrarMensagemBingo("Digite o código da cartela e o ID do jogador.","error");return}
-  try{
-    const alvo=await localizarUsuarioBingo(userId);if(!alvo){mostrarMensagemBingo("❌ Jogador não encontrado.","error");return}
-    const ref=doc(db,"bingoCartelas",codigo),snap=await getDoc(ref);if(!snap.exists()){mostrarMensagemBingo("❌ Cartela não encontrada.","error");return}
-    const d=snap.data();if(d.usuarioUid){mostrarMensagemBingo("❌ Esta cartela já está enviada para um jogador.","error");return}
-    await updateDoc(ref,{status:"assigned",usuarioUid:alvo.data.uid||"",usuarioId:alvo.data.publicId||alvo.docId,usuarioNome:alvo.data.nome||alvo.data.name||"",usuarioEmail:alvo.data.email||"",assignedAt:serverTimestamp(),assignedBy:adminUsuario.email||""});
-    document.getElementById("bingoExistingCode").value="";document.getElementById("bingoExistingUserId").value="";mostrarMensagemBingo("✅ Cartela enviada para "+(alvo.data.nome||alvo.data.publicId||"o jogador")+".","success");await carregarBingoCartelas();
-  }catch(e){console.error(e);mostrarMensagemBingo("❌ Não foi possível enviar a cartela. "+(e?.code||e?.message||""),"error")}
-}
-function miniCartela(card){const arr=["B","I","N","G","O",...(card||[])];return `<div class="bingo-card-mini">${arr.map((v,i)=>`<span class="bingo-mini-cell ${i===17?"free":""}">${i<5?v:(v===0?"★":v)}</span>`).join("")}</div>`}
-async function carregarBingoCartelas(){
-  const lista=document.getElementById("bingoCardsList");if(!lista)return;
-  try{
-    const r=await getDocs(collection(db,"bingoCartelas"));const regs=r.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>String(b.createdAtTexto||"").localeCompare(String(a.createdAtTexto||""))).slice(0,100);
-    document.getElementById("bingoCardsCount").textContent=String(r.size);lista.innerHTML="";
-    if(!regs.length){lista.innerHTML="<div class='empty'>Nenhuma cartela gerada ainda.</div>";return}
-    regs.forEach(x=>{const el=document.createElement("div");el.className="bingo-item";const assigned=!!x.usuarioUid;el.innerHTML=`<div class="bingo-item-top"><span class="bingo-code">🎟️ ${escapar(x.codigo||x.id)}</span><span class="bingo-status ${assigned?"assigned":"available"}">${assigned?"📨 ENVIADA":"🟢 DISPONÍVEL"}</span></div><div class="bingo-meta">Rodada: <strong>${numero(x.round||1)}</strong>${assigned?`<br>Jogador: <strong>${escapar(x.usuarioNome||x.usuarioId||x.usuarioUid)}</strong><br>ID: <strong>${escapar(x.usuarioId||"—")}</strong>`:""}</div>${miniCartela(x.card)}</div>`;lista.appendChild(el)})
-  }catch(e){console.error("CARTELAS BINGO:",e);lista.innerHTML="<div class='empty'>❌ Não foi possível carregar as cartelas. Verifique a Rule da coleção bingoCartelas.</div>"}
-}
+/* =====================================================
+   VALE PRESENTE — CORRIGIDO
+   O painel e o resgate usam a MESMA coleção:
+   codigosPresente
+   ===================================================== */
+\n/* =====================================================\n   SELOS & TROFÉUS — ADMIN\n===================================================== */\nconst CONQUISTAS_PADRAO=[\n{id:"independencia2026",tipo:"selo",icone:"🇧🇷",nome:"Independência 2026",descricao:"Selo especial da temporada de Independência do Adam Games.",periodo:"Setembro de 2026",ordem:1},\n{id:"primeiroAcesso",tipo:"trofeu",icone:"🏆",nome:"Primeiro Acesso",descricao:"Reconhece a entrada do jogador no universo Adam Games.",periodo:"Conquista permanente",ordem:2},\n{id:"vip",tipo:"trofeu",icone:"👑",nome:"Membro VIP",descricao:"Troféu reservado aos jogadores com acesso VIP.",periodo:"Conquista permanente",ordem:3},\n{id:"colecionador",tipo:"selo",icone:"💎",nome:"Colecionador",descricao:"Conquista para quem começa a montar sua coleção.",periodo:"Conquista permanente",ordem:4},\n{id:"mestreBingo",tipo:"trofeu",icone:"🎱",nome:"Mestre do Bingo",descricao:"Troféu especial relacionado ao Bingo Adam Games.",periodo:"Conquista permanente",ordem:5},\n{id:"chaveEspecial",tipo:"selo",icone:"🔑",nome:"Chave Especial",descricao:"Selo relacionado às temporadas de Chaves Especiais.",periodo:"Conquista sazonal",ordem:6}\n];\n\nasync function carregarConquistasAdmin(){\n  const lista=document.getElementById("achList");\n  if(!lista)return;\n  lista.innerHTML="<div class='empty'>🔄 Carregando conquistas...</div>";\n  try{\n    const r=await getDocs(collection(db,"conquistas"));\n    const mapa=new Map(CONQUISTAS_PADRAO.map(x=>[x.id,x]));\n    r.docs.forEach(d=>mapa.set(d.id,{id:d.id,...d.data()}));\n    todasConquistas=Array.from(mapa.values()).sort((a,b)=>(Number(a.ordem)||0)-(Number(b.ordem)||0));\n    achSelect.innerHTML='<option value="">Selecione uma conquista...</option>'+todasConquistas.map(x=>`<option value="${escapar(x.id)}">${x.tipo==="selo"?"🏵️":"🏆"} ${escapar(x.nome)} — ${x.id}</option>`).join("");\n    lista.innerHTML="";\n    todasConquistas.forEach(x=>{\n      const div=document.createElement("div");div.className="ach-item";\n      div.innerHTML=`<div class="ach-item-icon">${escapar(x.icone||"🏆")}</div><div class="ach-item-main"><div class="ach-item-name">${escapar(x.nome||x.id)}</div><div class="ach-item-meta">${x.tipo==="selo"?"SELO":"TROFÉU"} • ID: ${escapar(x.id)}<br>${escapar(x.descricao||"")} • ${escapar(x.periodo||"")}</div></div>`;\n      lista.appendChild(div);\n    });\n  }catch(e){\n    console.error("ERRO CONQUISTAS:",e);\n    lista.innerHTML="<div class='empty'>❌ Não foi possível carregar o catálogo.</div>";\n  }\n}\n\nasync function cadastrarConquista(){\n  if(!adminUsuario)return;\n  const id=document.getElementById("newAchId").value.trim().replace(/\\s+/g,"_").toLowerCase();\n  const tipo=document.getElementById("newAchType").value;\n  const icone=document.getElementById("newAchIcon").value.trim()||"🏆";\n  const nome=document.getElementById("newAchName").value.trim();\n  const descricao=document.getElementById("newAchDescription").value.trim();\n  const periodo=document.getElementById("newAchPeriod").value.trim()||"Conquista permanente";\n  const ordem=Number(document.getElementById("newAchOrder").value)||0;\n  if(!id||!nome||!descricao){mostrarMensagem(achMessage,"❌ Preencha ID, nome e descrição.","error");return}\n  if(!/^[a-z0-9_-]+$/.test(id)){mostrarMensagem(achMessage,"❌ O ID deve usar apenas letras minúsculas, números, _ ou -.","error");return}\n  try{\n    await setDoc(doc(db,"conquistas",id),{id,tipo,icone,nome,descricao,periodo,ordem,criadoPor:adminUsuario.email||"",criadoPorUid:adminUsuario.uid||"",criadoEm:serverTimestamp()});\n    mostrarMensagem(achMessage,"✅ Conquista cadastrada com sucesso.","success");\n    document.getElementById("newAchId").value="";document.getElementById("newAchName").value="";document.getElementById("newAchDescription").value="";\n    await carregarConquistasAdmin();\n  }catch(e){console.error(e);mostrarMensagem(achMessage,e?.code==="permission-denied"?"❌ Sem permissão para cadastrar conquistas. Ajuste as Rules do Firestore.":"❌ Não foi possível cadastrar a conquista.","error")}\n}\n\nasync function enviarConquista(){\n  if(!adminUsuario){mostrarMensagem(achMessage,"❌ Administrador não autenticado.","error");return}\n  const alvo=achUser.value.trim();const id=achSelect.value;\n  if(!alvo){mostrarMensagem(achMessage,"❌ Informe o ID Adam Games ou e-mail do cliente.","error");return}\n  if(!id){mostrarMensagem(achMessage,"❌ Selecione uma conquista.","error");return}\n  achSend.disabled=true;achSend.textContent="⏳ ENVIANDO...";\n  try{\n    let r=await getDocs(query(collection(db,"admins"),where("publicId","==",alvo)));\n    if(r.empty)r=await getDocs(query(collection(db,"admins"),where("email","==",alvo.toLowerCase())));\n    if(r.empty){mostrarMensagem(achMessage,"❌ Cliente não encontrado pelo ID ou e-mail.","error");return}\n    const u=r.docs[0],d=u.data(),conq=todasConquistas.find(x=>x.id===id)||CONQUISTAS_PADRAO.find(x=>x.id===id);\n    if(!conq){mostrarMensagem(achMessage,"❌ Conquista não encontrada.","error");return}\n    const campo=conq.tipo==="selo"?"selos":"trofeus";\n    await updateDoc(u.ref,{[campo]:arrayUnion(id)});\n    await addDoc(collection(db,"historicoConquistas"),{usuarioId:u.id,publicId:d.publicId||u.id,usuarioUid:d.uid||"",usuarioEmail:d.email||"",usuarioNome:d.nome||"",conquistaId:id,conquistaNome:conq.nome,conquistaTipo:conq.tipo,observacao:document.getElementById("achNote").value.trim(),adminEmail:adminUsuario.email||"",adminUid:adminUsuario.uid||"",criadoEm:serverTimestamp()});\n    if(usuarioSelecionado?.docId===u.id){usuarioSelecionado.data[campo]=Array.from(new Set([...(usuarioSelecionado.data[campo]||[]),id]));atualizarStatus()}\n    mostrarMensagem(achMessage,`✅ ${conq.tipo==="selo"?"Selo":"Troféu"} “${conq.nome}” enviado para ${d.nome||d.email||d.publicId||u.id}.`,"success");\n    document.getElementById("achNote").value="";\n  }catch(e){console.error("ERRO ENVIAR CONQUISTA:",e);mostrarMensagem(achMessage,e?.code==="permission-denied"?"❌ O Firestore bloqueou o envio. Ajuste as Rules das coleções conquistas, admins e historicoConquistas.":"❌ Não foi possível enviar a conquista.","error")}\n  finally{achSend.disabled=false;achSend.textContent="🎁 ENVIAR CONQUISTA"}\n}\n\nasync function gerarNovoVale(){
+const botao=generateVoucherButton;if(botao.disabled)return;
+if(!authResolvido){botao.disabled=true;botao.textContent="⏳ AGUARDANDO LOGIN...";try{await Promise.race([autenticacaoPronta,new Promise((_,rej)=>setTimeout(()=>rej(new Error("A autenticação demorou demais.")),10000))])}catch(e){botao.disabled=false;botao.textContent="🎫 GERAR VALE PRESENTE";mostrarMensagem(voucherMessage,"❌ A autenticação do administrador não foi concluída. Atualize a página e tente novamente.","error");return}botao.disabled=false;botao.textContent="🎫 GERAR VALE PRESENTE"}
+if(!adminUsuario){mostrarMensagem(voucherMessage,"❌ Administrador não autenticado.","error");return}
+const valor=Number(document.getElementById("voucherValor").value),descricao=document.getElementById("voucherDescricao").value.trim();
+if(!Number.isFinite(valor)||valor<=0){mostrarMensagem(voucherMessage,"❌ Digite um valor válido para o vale.","error");return}
+if(valor>100000){mostrarMensagem(voucherMessage,"❌ O valor máximo permitido é R$ 100.000,00.","error");return}
+botao.disabled=true;botao.textContent="⏳ GERANDO...";mostrarMensagem(voucherMessage,"","");
+try{
+let codigoFinal="",criado=false;
+for(let tentativa=0;tentativa<5;tentativa++){
+const codigo=gerarVale15();
+/* IMPORTANTE: usa a coleção reconhecida pelo sistema de resgate */
+const referencia=doc(db,"codigosPresente",codigo);
+try{
+await comTimeout(setDoc(referencia,{
+codigo:codigo,
+tipo:"creditos",
+quantidade:valor,
+valor:valor,
+descricao:descricao||"Vale Presente Adam Games",
+ativo:true,
+usado:false,
+criadoPor:adminUsuario.email||"",
+criadoPorUid:adminUsuario.uid||"",
+criadoEm:serverTimestamp(),
+usadoPor:"",
+usadoPorUid:"",
+usadoPorEmail:"",
+usadoEm:null
+}),15000);
+codigoFinal=codigo;criado=true;break;
+}catch(error){
+if(error?.code==="permission-denied")throw error;
+console.warn("Tentativa de criação do vale falhou:",error);
+}}
+if(!criado)throw new Error("Não foi possível criar o vale.");
+document.getElementById("voucherCode").textContent=codigoFinal;
+document.getElementById("voucherResult").style.display="block";
+mostrarMensagem(voucherMessage,"🎫 Vale criado com sucesso! Código: "+codigoFinal,"success");
+document.getElementById("voucherValor").value="";
+document.getElementById("voucherDescricao").value="";
+await carregarVales();
+}catch(error){
+console.error("ERRO AO GERAR VALE:",error);
+let msg="❌ Não foi possível criar o Vale Presente.";
+if(error?.code==="permission-denied")msg="❌ O Firestore bloqueou a criação. Verifique a Rule da coleção codigosPresente.";
+else if(error?.code==="timeout")msg="❌ O Firebase demorou mais de 15 segundos para responder. Verifique a conexão e as Rules.";
+else if(error?.code==="unavailable")msg="❌ Firebase temporariamente indisponível. Tente novamente.";
+mostrarMensagem(voucherMessage,msg,"error");
+}finally{botao.disabled=false;botao.textContent="🎫 GERAR VALE PRESENTE"}}
 
-async function carregarConfigBingoVip(){
-  try{const ref=doc(db,"bingo","configuracoes");const s=await getDoc(ref);const qtd=s.exists()?Number(s.data().vipCartelasPorPartida??1):1;document.getElementById("bingoVipQuantity").value=Math.min(20,Math.max(0,Number.isFinite(qtd)?qtd:1));}
-  catch(e){console.error("CONFIG VIP BINGO:",e)}
-}
-async function salvarConfigBingoVip(){
-  if(!adminUsuario)return mostrarMensagemBingo("❌ Administrador não autenticado.","error");
-  const input=document.getElementById("bingoVipQuantity"),qtd=Math.min(20,Math.max(0,Math.floor(Number(input.value||0))));
-  input.value=qtd;
-  try{await setDoc(doc(db,"bingo","configuracoes"),{vipCartelasPorPartida:qtd,atualizadoEm:serverTimestamp(),atualizadoPor:adminUsuario.email||""},{merge:true});mostrarMensagemBingo(`✅ VIPs receberão ${qtd} cartela${qtd===1?"":"s"} automaticamente por partida.`,"success");}
-  catch(e){console.error(e);mostrarMensagemBingo("❌ Não foi possível salvar a quantidade VIP. "+(e?.code||e?.message||""),"error")}
-}
-
-/* VALE PRESENTE */
-async function gerarNovoVale(){
-  const botao=generateVoucherButton;if(botao.disabled)return;
-  if(!authResolvido){botao.disabled=true;botao.textContent="⏳ AGUARDANDO LOGIN...";try{await Promise.race([autenticacaoPronta,new Promise((_,rej)=>setTimeout(()=>rej(new Error("A autenticação demorou demais.")),10000))])}catch(e){botao.disabled=false;botao.textContent="🎫 GERAR VALE PRESENTE";mostrarMensagem(voucherMessage,"❌ A autenticação do administrador não foi concluída. Atualize a página e tente novamente.","error");return}botao.disabled=false;botao.textContent="🎫 GERAR VALE PRESENTE"}
-  if(!adminUsuario){mostrarMensagem(voucherMessage,"❌ Administrador não autenticado.","error");return}
-  const valor=Number(document.getElementById("voucherValor").value),descricao=document.getElementById("voucherDescricao").value.trim();if(!Number.isFinite(valor)||valor<=0){mostrarMensagem(voucherMessage,"❌ Digite um valor válido para o vale.","error");return}if(valor>100000){mostrarMensagem(voucherMessage,"❌ O valor máximo permitido é R$ 100.000,00.","error");return}
-  botao.disabled=true;botao.textContent="⏳ GERANDO...";mostrarMensagem(voucherMessage,"","");
-  try{
-    let codigoFinal="",criado=false;
-    for(let tentativa=0;tentativa<5;tentativa++){const codigo=gerarVale15(),referencia=doc(db,"codigosPresente",codigo);try{await comTimeout(setDoc(referencia,{codigo,tipo:"creditos",quantidade:valor,valor,descricao:descricao||"Vale Presente Adam Games",ativo:true,usado:false,criadoPor:adminUsuario.email||"",criadoPorUid:adminUsuario.uid||"",criadoEm:serverTimestamp(),usadoPor:"",usadoPorUid:"",usadoPorEmail:"",usadoEm:null}),15000);codigoFinal=codigo;criado=true;break}catch(error){if(error?.code==="permission-denied")throw error;console.warn("Tentativa de criação do vale falhou:",error)}}
-    if(!criado)throw new Error("Não foi possível criar o vale.");document.getElementById("voucherCode").textContent=codigoFinal;document.getElementById("voucherResult").style.display="block";mostrarMensagem(voucherMessage,"🎫 Vale criado com sucesso! Código: "+codigoFinal,"success");document.getElementById("voucherValor").value="";document.getElementById("voucherDescricao").value="";await carregarVales();
-  }catch(error){console.error("ERRO AO GERAR VALE:",error);let msg="❌ Não foi possível criar o Vale Presente.";if(error?.code==="permission-denied")msg="❌ O Firestore bloqueou a criação. Verifique a Rule da coleção codigosPresente.";else if(error?.code==="timeout")msg="❌ O Firebase demorou mais de 15 segundos para responder. Verifique a conexão e as Rules.";else if(error?.code==="unavailable")msg="❌ Firebase temporariamente indisponível. Tente novamente.";mostrarMensagem(voucherMessage,msg,"error")}
-  finally{botao.disabled=false;botao.textContent="🎫 GERAR VALE PRESENTE"}
-}
 async function copiarVale(){const c=document.getElementById("voucherCode").textContent.trim();if(!c||c==="---------------"){mostrarMensagem(voucherMessage,"Nenhum código para copiar.","error");return}try{await navigator.clipboard.writeText(c);mostrarMensagem(voucherMessage,"📋 Código copiado com sucesso!","success")}catch(e){const t=document.createElement("textarea");t.value=c;document.body.appendChild(t);t.select();try{document.execCommand("copy");mostrarMensagem(voucherMessage,"📋 Código copiado!","success")}catch(x){prompt("Copie o código:",c)}t.remove()}}
+
 async function carregarVales(){
-  const lista=document.getElementById("voucherList");lista.innerHTML="<div class='empty'>🔄 Carregando vales...</div>";
-  try{const r=await getDocs(collection(db,"codigosPresente"));todosVales=r.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>obterMillis(b.criadoEm)-obterMillis(a.criadoEm));lista.innerHTML="";if(!todosVales.length){lista.innerHTML="<div class='empty'>Nenhum vale gerado.</div>";return}todosVales.slice(0,100).forEach(v=>{const div=document.createElement("div");div.className="voucher-item";const cancelado=v.cancelado===true,usado=v.usado===true,status=cancelado?"⚫ CANCELADO":usado?"🔴 UTILIZADO":"🟢 DISPONÍVEL";div.innerHTML=`<div class="voucher-code-small">🎫 ${escapar(v.codigo||v.id)}</div><div class="voucher-meta">Valor: <strong>${dinheiro(v.valor!==undefined?v.valor:v.quantidade)}</strong><br>Status: ${status}<br>${escapar(v.descricao||"Vale Presente Adam Games")}<br>Tipo: ${escapar(v.tipo||"creditos")}<br>Criado em: ${escapar(formatarData(v.criadoEm))}${v.usadoPor?`<br>Resgatado por: <strong>${escapar(v.usadoPorEmail||v.usadoPor)}</strong>`:""}${v.usadoEm?`<br>Resgatado em: ${escapar(formatarData(v.usadoEm))}`:""}</div>`;lista.appendChild(div)})}
-  catch(e){console.error("ERRO VALES:",e);lista.innerHTML="<div class='empty'>❌ Não foi possível carregar os vales.</div>";mostrarMensagem(voucherMessage,e?.code==="permission-denied"?"Sem permissão para ler a coleção codigosPresente.":"Erro ao carregar os vales.","error")}
+const lista=document.getElementById("voucherList");lista.innerHTML="<div class='empty'>🔄 Carregando vales...</div>";
+try{
+const r=await getDocs(collection(db,"codigosPresente"));
+todosVales=r.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>obterMillis(b.criadoEm)-obterMillis(a.criadoEm));
+lista.innerHTML="";
+if(!todosVales.length){lista.innerHTML="<div class='empty'>Nenhum vale gerado.</div>";return}
+todosVales.slice(0,100).forEach(v=>{
+const div=document.createElement("div");div.className="voucher-item";const cancelado=v.cancelado===true,usado=v.usado===true;const status=cancelado?"⚫ CANCELADO":usado?"🔴 UTILIZADO":"🟢 DISPONÍVEL";
+div.innerHTML=`<div class="voucher-code-small">🎫 ${escapar(v.codigo||v.id)}</div><div class="voucher-meta">Valor: <strong>${dinheiro(v.valor!==undefined?v.valor:v.quantidade)}</strong><br>Status: ${status}<br>${escapar(v.descricao||"Vale Presente Adam Games")}<br>Tipo: ${escapar(v.tipo||"creditos")}<br>Criado em: ${escapar(formatarData(v.criadoEm))}${v.usadoPor?`<br>Resgatado por: <strong>${escapar(v.usadoPorEmail||v.usadoPor)}</strong>`:""}${v.usadoEm?`<br>Resgatado em: ${escapar(formatarData(v.usadoEm))}`:""}</div>`;
+lista.appendChild(div);
+});
+}catch(e){console.error("ERRO VALES:",e);lista.innerHTML="<div class='empty'>❌ Não foi possível carregar os vales.</div>";mostrarMensagem(voucherMessage,e?.code==="permission-denied"?"Sem permissão para ler a coleção codigosPresente.":"Erro ao carregar os vales.","error")}}
+
+
+/* =========================================================
+   CONQUISTAS — SELOS E TROFÉUS
+   Coleção:
+     conquistas/{achievementId}
+   Campos do cliente:
+     admins/{cadastroId}.selos
+     admins/{cadastroId}.trofeus
+   Histórico:
+     historicoConquistas/{id}
+   ========================================================= */
+
+const achievementUserTarget = document.getElementById("achievementUserTarget");
+const achievementSelect = document.getElementById("achievementSelect");
+const achievementDeliveryNote = document.getElementById("achievementDeliveryNote");
+const achievementDeliveryMessage = document.getElementById("achievementDeliveryMessage");
+const achievementCreateArea = document.getElementById("achievementCreateArea");
+const achievementCreateMessage = document.getElementById("achievementCreateMessage");
+const achievementPreview = document.getElementById("achievementPreview");
+const achievementCatalogList = document.getElementById("achievementCatalogList");
+const achievementHistoryList = document.getElementById("achievementHistoryList");
+
+let todasConquistas = [];
+
+const CONQUISTAS_PADRAO = [
+  {
+    id:"independencia2026",
+    tipo:"selo",
+    icon:"🇧🇷",
+    nome:"Independência 2026",
+    descricao:"Selo especial da temporada Independência 2026 do Adam Games.",
+    temporada:"Setembro 2026",
+    ordem:1
+  },
+  {
+    id:"primeiroAcesso",
+    tipo:"trofeu",
+    icon:"🏆",
+    nome:"Primeiro Acesso",
+    descricao:"Conquista especial para celebrar o primeiro acesso do jogador ao Adam Games.",
+    temporada:"Permanente",
+    ordem:2
+  },
+  {
+    id:"membroVip",
+    tipo:"trofeu",
+    icon:"👑",
+    nome:"Membro VIP",
+    descricao:"Troféu especial para membros VIP do Adam Games.",
+    temporada:"Permanente",
+    ordem:3
+  },
+  {
+    id:"mestreBingo",
+    tipo:"trofeu",
+    icon:"🎱",
+    nome:"Mestre do Bingo",
+    descricao:"Conquista especial relacionada ao Bingo Adam Games.",
+    temporada:"Permanente",
+    ordem:4
+  }
+];
+
+function normalizarConquista(dado,id){
+  return {
+    id:id || dado.id || "",
+    tipo:dado.tipo==="trofeu" ? "trofeu" : "selo",
+    icon:dado.icon || (dado.tipo==="trofeu" ? "🏆" : "🏵️"),
+    nome:dado.nome || "Conquista",
+    descricao:dado.descricao || "Conquista especial Adam Games.",
+    temporada:dado.temporada || "Permanente",
+    ordem:Number(dado.ordem||0)
+  };
 }
 
-async function atualizarTudo(){
-  if(!adminUsuario)return;const b=refreshButton;b.disabled=true;b.textContent="🔄 Atualizando...";
-  try{await Promise.all([carregarUsuarios(),carregarEntregas(),carregarVales(),carregarHistoricoDistribuicoes(),carregarBingoCartelas(),carregarConfigBingoVip()])}catch(e){console.error(e)}finally{b.disabled=false;b.textContent="🔄 Atualizar"}
+function escaparHtmlConquista(v){
+  return String(v??"")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 }
+
+async function garantirConquistasPadrao(){
+  for(const c of CONQUISTAS_PADRAO){
+    try{
+      const ref=doc(db,"conquistas",c.id);
+      const snap=await getDoc(ref);
+      if(!snap.exists()){
+        await setDoc(ref,{
+          ...c,
+          criadoPor:adminUsuario?.email||"",
+          criadoEm:serverTimestamp()
+        });
+      }
+    }catch(e){
+      console.warn("Não foi possível garantir conquista padrão:",c.id,e);
+    }
+  }
+}
+
+async function carregarConquistas(){
+  if(!achievementSelect)return;
+
+  achievementSelect.innerHTML='<option value="">🔄 Carregando conquistas...</option>';
+  achievementCatalogList.innerHTML='<div class="empty">🔄 Carregando conquistas...</div>';
+
+  try{
+    await garantirConquistasPadrao();
+
+    const r=await getDocs(collection(db,"conquistas"));
+    todasConquistas=r.docs
+      .map(d=>normalizarConquista(d.data(),d.id))
+      .sort((a,b)=>(a.ordem-b.ordem)||a.nome.localeCompare(b.nome,"pt-BR"));
+
+    renderizarSelectConquistas();
+    renderizarCatalogoConquistas();
+
+    if(todasConquistas.length){
+      achievementSelect.value=todasConquistas[0].id;
+      renderizarPreviewConquista();
+    }else{
+      achievementPreview.innerHTML='<div class="empty">Nenhuma conquista cadastrada.</div>';
+    }
+  }catch(e){
+    console.error("ERRO AO CARREGAR CONQUISTAS:",e);
+    achievementSelect.innerHTML='<option value="">❌ Erro ao carregar</option>';
+    achievementCatalogList.innerHTML='<div class="empty">❌ Não foi possível carregar o catálogo. Verifique as Rules da coleção conquistas.</div>';
+  }
+}
+
+function renderizarSelectConquistas(){
+  achievementSelect.innerHTML='<option value="">🏆 Selecione uma conquista</option>';
+
+  todasConquistas.forEach(c=>{
+    const op=document.createElement("option");
+    op.value=c.id;
+    op.textContent=(c.tipo==="trofeu"?"🏆 ":"🏵️ ")+c.nome;
+    achievementSelect.appendChild(op);
+  });
+}
+
+function renderizarPreviewConquista(){
+  const id=achievementSelect.value;
+  const c=todasConquistas.find(x=>x.id===id);
+
+  if(!c){
+    achievementPreview.innerHTML='<div class="empty">Selecione uma conquista acima.</div>';
+    return;
+  }
+
+  achievementPreview.innerHTML=`
+    <div class="achievement-preview-card">
+      <div class="achievement-preview-icon">${escaparHtmlConquista(c.icon)}</div>
+      <div>
+        <div class="achievement-preview-name">${escaparHtmlConquista(c.nome)}</div>
+        <div class="achievement-preview-meta">
+          ${c.tipo==="trofeu"?"🏆 Troféu":"🏵️ Selo"} •
+          ${escaparHtmlConquista(c.temporada)}
+        </div>
+        <div class="achievement-preview-meta">${escaparHtmlConquista(c.descricao)}</div>
+      </div>
+    </div>
+  `;
+}
+
+function renderizarCatalogoConquistas(){
+  achievementCatalogList.innerHTML="";
+
+  if(!todasConquistas.length){
+    achievementCatalogList.innerHTML='<div class="empty">Nenhuma conquista cadastrada.</div>';
+    return;
+  }
+
+  todasConquistas.forEach(c=>{
+    const el=document.createElement("div");
+    el.className="achievement-item";
+
+    el.innerHTML=`
+      <div class="achievement-item-main">
+        <div class="achievement-item-icon">${escaparHtmlConquista(c.icon)}</div>
+        <div>
+          <div class="achievement-item-name">${escaparHtmlConquista(c.nome)}</div>
+          <div class="achievement-item-meta">${escaparHtmlConquista(c.descricao)}</div>
+          <div class="achievement-item-meta">🌟 ${escaparHtmlConquista(c.temporada)}</div>
+          <div class="achievement-item-id">ID: ${escaparHtmlConquista(c.id)}</div>
+        </div>
+      </div>
+      <div class="achievement-type ${c.tipo}">
+        ${c.tipo==="trofeu"?"🏆 TROFÉU":"🏵️ SELO"}
+      </div>
+    `;
+
+    el.onclick=()=>{
+      achievementSelect.value=c.id;
+      renderizarPreviewConquista();
+      achievementSelect.scrollIntoView({behavior:"smooth",block:"center"});
+    };
+
+    achievementCatalogList.appendChild(el);
+  });
+}
+
+async function localizarClienteConquista(valor){
+  const v=(valor||"").trim();
+  if(!v)return null;
+
+  let r=await getDocs(
+    query(collection(db,"admins"),where("publicId","==",v.toUpperCase()))
+  );
+
+  if(r.empty && v.includes("@")){
+    r=await getDocs(
+      query(collection(db,"admins"),where("email","==",v.toLowerCase()))
+    );
+  }
+
+  if(r.empty){
+    r=await getDocs(
+      query(collection(db,"admins"),where("uid","==",v))
+    );
+  }
+
+  if(r.empty){
+    try{
+      const d=await getDoc(doc(db,"admins",v));
+      if(d.exists()){
+        return {ref:d.ref,docId:d.id,data:d.data()};
+      }
+    }catch(e){}
+  }
+
+  if(r.empty)return null;
+
+  const d=r.docs[0];
+  return {ref:d.ref,docId:d.id,data:d.data()};
+}
+
+async function enviarConquista(){
+  if(!adminUsuario){
+    mostrarMensagem(achievementDeliveryMessage,"❌ Administrador não autenticado.","error");
+    return;
+  }
+
+  const destino=achievementUserTarget.value.trim();
+  const conquistaId=achievementSelect.value;
+  const observacao=achievementDeliveryNote.value.trim();
+
+  if(!destino){
+    mostrarMensagem(achievementDeliveryMessage,"Digite o ID Adam Games ou o e-mail do cliente.","error");
+    return;
+  }
+
+  if(!conquistaId){
+    mostrarMensagem(achievementDeliveryMessage,"Selecione um selo ou troféu.","error");
+    return;
+  }
+
+  const conquista=todasConquistas.find(x=>x.id===conquistaId);
+  if(!conquista){
+    mostrarMensagem(achievementDeliveryMessage,"Conquista não encontrada.","error");
+    return;
+  }
+
+  const botao=document.getElementById("sendAchievement");
+  botao.disabled=true;
+  botao.textContent="⏳ ENVIANDO...";
+
+  try{
+    const cliente=await localizarClienteConquista(destino);
+
+    if(!cliente){
+      throw new Error("Cliente não encontrado pelo ID, e-mail ou UID informado.");
+    }
+
+    const campo=conquista.tipo==="trofeu" ? "trofeus" : "selos";
+    const atuais=Array.isArray(cliente.data[campo]) ? cliente.data[campo] : [];
+
+    if(atuais.includes(conquista.id)){
+      mostrarMensagem(
+        achievementDeliveryMessage,
+        `ℹ️ ${conquista.tipo==="trofeu"?"O troféu":"O selo"} "${conquista.nome}" já está na coleção de ${cliente.data.nome||cliente.data.email||"este cliente"}.`,
+        "error"
+      );
+      return;
+    }
+
+    await updateDoc(cliente.ref,{
+      [campo]:arrayUnion(conquista.id)
+    });
+
+    const historicoId=gerarOperacaoId();
+
+    await setDoc(doc(db,"historicoConquistas",historicoId),{
+      id:historicoId,
+      conquistaId:conquista.id,
+      conquistaNome:conquista.nome,
+      conquistaTipo:conquista.tipo,
+      conquistaIcon:conquista.icon,
+      usuarioId:cliente.docId,
+      usuarioPublicId:cliente.data.publicId||"",
+      usuarioUid:cliente.data.uid||"",
+      usuarioNome:cliente.data.nome||cliente.data.name||"",
+      usuarioEmail:cliente.data.email||"",
+      observacao,
+      adminEmail:adminUsuario.email||"",
+      adminUid:adminUsuario.uid||"",
+      criadoEm:serverTimestamp(),
+      criadoEmTexto:new Date().toISOString()
+    });
+
+    achievementUserTarget.value="";
+    achievementDeliveryNote.value="";
+
+    mostrarMensagem(
+      achievementDeliveryMessage,
+      `✅ ${conquista.tipo==="trofeu"?"Troféu":"Selo"} "${conquista.nome}" enviado para ${cliente.data.nome||cliente.data.email||cliente.data.publicId||"o cliente"}!`,
+      "success"
+    );
+
+    await carregarHistoricoConquistas();
+
+  }catch(e){
+    console.error("ERRO AO ENVIAR CONQUISTA:",e);
+
+    let msg="❌ Não foi possível enviar a conquista.";
+
+    if(e?.code==="permission-denied"){
+      msg="❌ O Firestore bloqueou a operação. Verifique as Rules de admins, conquistas e historicoConquistas.";
+    }else if(e?.message){
+      msg+=" "+e.message;
+    }
+
+    mostrarMensagem(achievementDeliveryMessage,msg,"error");
+
+  }finally{
+    botao.disabled=false;
+    botao.textContent="🎁 ENVIAR PARA O CLIENTE";
+  }
+}
+
+async function salvarNovaConquista(){
+  if(!adminUsuario){
+    mostrarMensagem(achievementCreateMessage,"❌ Administrador não autenticado.","error");
+    return;
+  }
+
+  const tipo=document.getElementById("newAchievementType").value;
+  const icon=document.getElementById("newAchievementIcon").value.trim() || (tipo==="trofeu"?"🏆":"🏵️");
+  const nome=document.getElementById("newAchievementName").value.trim();
+  let id=document.getElementById("newAchievementId").value.trim().toLowerCase();
+  const descricao=document.getElementById("newAchievementDescription").value.trim();
+  const temporada=document.getElementById("newAchievementSeason").value.trim() || "Permanente";
+  const ordem=Math.max(0,Number(document.getElementById("newAchievementOrder").value||0));
+
+  if(!nome){
+    mostrarMensagem(achievementCreateMessage,"Digite o nome da conquista.","error");
+    return;
+  }
+
+  if(!id){
+    id=nome
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g,"")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g,"_")
+      .replace(/^_+|_+$/g,"");
+  }
+
+  if(!/^[a-z0-9_]+$/.test(id)){
+    mostrarMensagem(achievementCreateMessage,"O identificador deve usar apenas letras, números e _.","error");
+    return;
+  }
+
+  const botao=document.getElementById("saveAchievement");
+  botao.disabled=true;
+  botao.textContent="⏳ SALVANDO...";
+
+  try{
+    const ref=doc(db,"conquistas",id);
+    const existente=await getDoc(ref);
+
+    if(existente.exists()){
+      mostrarMensagem(achievementCreateMessage,"❌ Já existe uma conquista com esse identificador.","error");
+      return;
+    }
+
+    await setDoc(ref,{
+      id,
+      tipo,
+      icon,
+      nome,
+      descricao:descricao || "Conquista especial Adam Games.",
+      temporada,
+      ordem,
+      criadoPor:adminUsuario.email||"",
+      criadoPorUid:adminUsuario.uid||"",
+      criadoEm:serverTimestamp()
+    });
+
+    mostrarMensagem(
+      achievementCreateMessage,
+      `✅ ${tipo==="trofeu"?"Troféu":"Selo"} "${nome}" cadastrado com sucesso!`,
+      "success"
+    );
+
+    document.getElementById("newAchievementName").value="";
+    document.getElementById("newAchievementId").value="";
+    document.getElementById("newAchievementDescription").value="";
+    document.getElementById("newAchievementSeason").value="";
+    document.getElementById("newAchievementOrder").value="0";
+
+    await carregarConquistas();
+
+    achievementSelect.value=id;
+    renderizarPreviewConquista();
+
+  }catch(e){
+    console.error("ERRO AO CADASTRAR CONQUISTA:",e);
+
+    let msg="❌ Não foi possível cadastrar a conquista.";
+
+    if(e?.code==="permission-denied"){
+      msg="❌ O Firestore bloqueou o cadastro. Verifique a Rule da coleção conquistas.";
+    }else if(e?.message){
+      msg+=" "+e.message;
+    }
+
+    mostrarMensagem(achievementCreateMessage,msg,"error");
+
+  }finally{
+    botao.disabled=false;
+    botao.textContent="💾 SALVAR CONQUISTA";
+  }
+}
+
+async function carregarHistoricoConquistas(){
+  if(!achievementHistoryList)return;
+
+  achievementHistoryList.innerHTML='<div class="empty">🔄 Carregando histórico...</div>';
+
+  try{
+    const r=await getDocs(collection(db,"historicoConquistas"));
+
+    const regs=r.docs
+      .map(d=>({id:d.id,...d.data()}))
+      .sort((a,b)=>obterMillis(b.criadoEm||b.criadoEmTexto)-obterMillis(a.criadoEm||a.criadoEmTexto))
+      .slice(0,30);
+
+    achievementHistoryList.innerHTML="";
+
+    if(!regs.length){
+      achievementHistoryList.innerHTML='<div class="empty">Nenhum envio registrado ainda.</div>';
+      return;
+    }
+
+    regs.forEach(x=>{
+      const el=document.createElement("div");
+      el.className="achievement-history-item";
+
+      el.innerHTML=`
+        ${escaparHtmlConquista(x.conquistaIcon||"🏆")}
+        <strong>${escaparHtmlConquista(x.conquistaNome||"Conquista")}</strong>
+        • ${x.conquistaTipo==="trofeu"?"Troféu":"Selo"}<br>
+        👤 Cliente: <strong>${escaparHtmlConquista(x.usuarioNome||x.usuarioPublicId||x.usuarioEmail||"—")}</strong><br>
+        🆔 ${escaparHtmlConquista(x.usuarioPublicId||"Sem ID")}
+        ${x.usuarioEmail?" • "+escaparHtmlConquista(x.usuarioEmail):""}<br>
+        📅 ${escaparHtmlConquista(formatarData(x.criadoEm||x.criadoEmTexto))}
+        ${x.observacao?"<br>📝 "+escaparHtmlConquista(x.observacao):""}
+      `;
+
+      achievementHistoryList.appendChild(el);
+    });
+
+  }catch(e){
+    console.error("HISTÓRICO CONQUISTAS:",e);
+    achievementHistoryList.innerHTML='<div class="empty">⚠️ Histórico indisponível. Verifique a Rule da coleção historicoConquistas.</div>';
+  }
+}
+
+
+async function atualizarTudo(){if(!adminUsuario)return;const b=refreshButton;b.disabled=true;b.textContent="🔄 Atualizando...";try{await Promise.all([carregarDashboard(),carregarEntregas(),carregarVales(),carregarConquistasAdmin()])}catch(e){console.error(e)}finally{b.disabled=false;b.textContent="🔄 Atualizar"}}
 
 onAuthStateChanged(auth,async usuario=>{
-  if(!usuario){authResolvido=true;resolverAutenticacao();window.location.replace("index.html");return}
-  const email=(usuario.email||"").trim().toLowerCase();
-  if(email!==ADMIN_EMAIL.toLowerCase()){authResolvido=true;resolverAutenticacao();alert("⛔ Acesso negado. Área exclusiva do administrador.");await signOut(auth);window.location.replace("index.html");return}
-  adminUsuario=usuario;authResolvido=true;resolverAutenticacao();refreshButton.disabled=false;generateVoucherButton.disabled=false;await atualizarTudo();
+if(!usuario){authResolvido=true;resolverAutenticacao();window.location.replace("index.html");return}
+const email=(usuario.email||"").trim().toLowerCase();
+if(email!==ADMIN_EMAIL.toLowerCase()){authResolvido=true;resolverAutenticacao();alert("⛔ Acesso negado. Área exclusiva do administrador.");await signOut(auth);window.location.replace("index.html");return}
+adminUsuario=usuario;authResolvido=true;resolverAutenticacao();refreshButton.disabled=false;generateVoucherButton.disabled=false;await atualizarTudo();
 });
 
 document.getElementById("buscar").onclick=buscarUsuario;
 searchInput.onkeydown=e=>{if(e.key==="Enter")buscarUsuario()};
 refreshButton.onclick=atualizarTudo;
-document.getElementById("saveBingoVipQuantity").onclick=()=>salvarConfigBingoVip();
 document.getElementById("adicionar").onclick=()=>alterarSaldo("adicionar");
 document.getElementById("remover").onclick=()=>alterarSaldo("remover");
 document.getElementById("adicionarGiros").onclick=()=>alterarGiros("adicionar");
 document.getElementById("removerGiros").onclick=()=>alterarGiros("remover");
 document.getElementById("vip").onclick=alterarVIP;
 document.getElementById("box").onclick=alterarCaixa;
-document.getElementById("sendSpecialKeysAll").onclick=()=>distribuirChavesEspeciais("todos");
-document.getElementById("sendSpecialKeysOne").onclick=()=>distribuirChavesEspeciais("um");
-document.getElementById("generateBingoCards").onclick=()=>gerarCartelasBingo(false);
-document.getElementById("generateSendBingoCards").onclick=()=>gerarCartelasBingo(true);
-document.getElementById("sendExistingBingoCard").onclick=enviarCartelaBingoExistente;
-document.getElementById("refreshBingoCards").onclick=carregarBingoCartelas;
 generateVoucherButton.onclick=gerarNovoVale;
+document.getElementById("achSend").onclick=enviarConquista;document.getElementById("achCreate").onclick=cadastrarConquista;document.getElementById("achReload").onclick=carregarConquistasAdmin;
 document.getElementById("copyVoucher").onclick=copiarVale;
 document.getElementById("newVoucher").onclick=()=>{document.getElementById("voucherResult").style.display="none";document.getElementById("voucherMessage").className="message";document.getElementById("voucherValor").focus()};
+
+document.getElementById("achievementSelect").onchange=renderizarPreviewConquista;
+document.getElementById("sendAchievement").onclick=enviarConquista;
+document.getElementById("saveAchievement").onclick=salvarNovaConquista;
+document.getElementById("toggleAchievementCreate").onclick=()=>{
+  achievementCreateArea.style.display=achievementCreateArea.style.display==="none"?"block":"none";
+};
+document.getElementById("cancelAchievementCreate").onclick=()=>{
+  achievementCreateArea.style.display="none";
+  mostrarMensagem(achievementCreateMessage,"","");
+};
+document.getElementById("newAchievementType").onchange=()=>{
+  const input=document.getElementById("newAchievementIcon");
+  if(!input.value.trim())input.value=document.getElementById("newAchievementType").value==="trofeu"?"🏆":"🏵️";
+};
+
 document.getElementById("logout").onclick=async()=>{try{await signOut(auth)}catch(e){console.error(e)}window.location.replace("index.html")};
-refreshButton.disabled=true;generateVoucherButton.disabled=true;
+refreshButton.disabled=true;
+generateVoucherButton.disabled=true;
 </script>
 </body>
 </html>
