@@ -859,6 +859,99 @@ button{
 
 }
 
+/* =====================================================
+   CARTAS — HALLOWEEN 2026
+===================================================== */
+
+.card-collectibles{
+  background:
+    radial-gradient(
+      circle at 80% 15%,
+      rgba(255,213,43,.22),
+      transparent 27%
+    ),
+    radial-gradient(
+      circle at 15% 90%,
+      rgba(188,56,255,.24),
+      transparent 35%
+    ),
+    linear-gradient(
+      145deg,
+      #7c16c9,
+      #32105f 78%
+    );
+
+  border-color:
+    rgba(255,213,43,.48);
+
+}
+
+.card-collectibles:hover{
+  border-color:
+    rgba(255,213,43,.78);
+
+  box-shadow:
+    0 18px 42px rgba(71,8,104,.45),
+    0 0 24px rgba(255,213,43,.12);
+
+}
+
+.cards-glow{
+  position:absolute;
+  width:150px;
+  height:150px;
+  right:-55px;
+  top:-55px;
+  border-radius:50%;
+  background:rgba(255,213,43,.14);
+  filter:blur(2px);
+}
+
+.cards-badge{
+  position:absolute;
+  top:13px;
+  right:13px;
+  padding:5px 8px;
+  border-radius:10px;
+  background:rgba(255,213,43,.14);
+  border:1px solid rgba(255,213,43,.34);
+  color:#ffe46b;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.5px;
+}
+
+.cards-card-icon{
+  filter:
+    drop-shadow(0 8px 14px rgba(0,0,0,.35));
+
+}
+
+.cards-mini-info{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-top:13px;
+}
+
+.cards-mini-info span{
+  padding:6px 9px;
+  border-radius:10px;
+  background:rgba(0,0,0,.18);
+  border:1px solid rgba(255,255,255,.10);
+  color:#fff;
+  font-size:10px;
+  font-weight:900;
+}
+
+@media(max-width:600px){
+  .cards-mini-info span{
+    font-size:9px;
+    padding:5px 7px;
+  }
+}
+
+
 .card-icon{
 
   font-size:70px;
@@ -2532,6 +2625,40 @@ button{
 
   </div>
 
+
+
+  <div
+    class="card card-collectibles"
+    id="cardsCard">
+
+    <div class="cards-glow"></div>
+
+    <div class="card-icon cards-card-icon">
+      🎴
+    </div>
+
+    <div class="cards-badge">
+      HALLOWEEN 2026
+    </div>
+
+    <h3>
+      CARTAS
+    </h3>
+
+    <p>
+      Colecione, troque e complete seu álbum.
+    </p>
+
+    <div class="cards-mini-info">
+      <span>🎴 25 cartas</span>
+      <span>🃏 4 coringas</span>
+    </div>
+
+    <div class="card-arrow">
+      →
+    </div>
+
+  </div>
 
 </section>
 
@@ -6974,6 +7101,23 @@ document.getElementById(
   "click",
   abrirJogos
 );
+
+/* =====================================================
+   CARTAS — FIGURINHAS HALLOWEEN 2026
+===================================================== */
+
+function abrirCartas(){
+  window.location.href =
+    "figurinhas.html";
+}
+
+document.getElementById(
+  "cardsCard"
+)?.addEventListener(
+  "click",
+  abrirCartas
+);
+
 
 
 /* =====================================================
