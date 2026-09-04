@@ -72,7 +72,7 @@ const asset=file=>{
   return new URL("./"+encodeURIComponent(String(file)), document.baseURI).href;
 };
 const base="./"; const jokerBase="./";
-let owned={},jokerOwned={},userDocId=null,currentUser=null,isVip=false,nextPack=0,packageCount=0,hasPackageInventory=false,currentFilter="all",selectedGive=null,tradeUsed=0,tradeDay="",collectionLoaded=false,figHistory=[],config={coringasPacotesAtivos:true,probabilidadesCoringas:{comum:70,epico:20,lendario:10}};
+let owned={},jokerOwned={},userDocId=null,currentUser=null,isVip=false,nextPack=0,packageCount=0,hasPackageInventory=false,currentFilter="all",selectedGive=null,tradeUsed=0,tradeDay="",collectionLoaded=false,figHistory=[],config={coringasPacotesAtivos:true,probabilidadesCoringas:{comum:70,epico:20,lendario:10},probabilidadeLendariasPacote:0.5};
 const todayKey=()=>new Date().toISOString().slice(0,10);
 const $=id=>document.getElementById(id), pad=n=>String(n).padStart(2,"0"), esc=s=>String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));
 function toast(t){$("toast").textContent=t;$("toast").classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>$("toast").classList.remove("show"),2600)}
@@ -245,7 +245,18 @@ async function claimPack(){
   if(availablePacks()<1)return toast("Você não tem pacotes disponíveis.");
 
   const n=isVip?(4+Math.floor(Math.random()*3)):(1+Math.floor(Math.random()*3));
-  let drawn=[];for(let i=0;i<n;i++)drawn.push(cards[Math.floor(Math.random()*cards.length)].id);
+  // LENDÁRIAS: extremamente raras. Padrão: 0,5% por carta sorteada.
+  const legendaryChance=Math.max(0,Math.min(100,Number(config.probabilidadeLendariasPacote ?? 0.5)));
+  const normalCards=cards.filter(c=>c.id<21);
+  const legendaryCards=cards.filter(c=>c.id>=21);
+  let drawn=[];
+  for(let i=0;i<n;i++){
+    if(legendaryCards.length && Math.random()*100<legendaryChance){
+      drawn.push(legendaryCards[Math.floor(Math.random()*legendaryCards.length)].id);
+    }else{
+      drawn.push(normalCards[Math.floor(Math.random()*normalCards.length)].id);
+    }
+  }
   let joker=null;
   if(config.coringasPacotesAtivos){
     const p=config.probabilidadesCoringas||{comum:70,epico:20,lendario:10};
