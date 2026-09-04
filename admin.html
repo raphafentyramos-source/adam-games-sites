@@ -149,6 +149,8 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
 .multiple-element-row{display:grid;grid-template-columns:minmax(0,1fr) 100px 42px;gap:8px;align-items:center}
 .multiple-element-row select,.multiple-element-row input{width:100%;min-height:44px;border:1px solid rgba(255,255,255,.12);border-radius:12px;background:#061b35;color:#fff;padding:10px 11px;outline:none}
 .multiple-element-row button{min-height:44px;border-radius:12px;background:rgba(120,20,35,.55);color:#fff;font-size:18px;font-weight:900;cursor:pointer}
+.multiple-elements-title{padding:11px 12px;border-radius:12px;background:rgba(8,91,139,.28);border:1px solid rgba(86,220,255,.18);color:#79dcff;font-size:12px;font-weight:900}
+@media(max-width:600px){.multiple-element-row{grid-template-columns:minmax(0,1fr) 72px 40px}.multiple-element-row select{font-size:13px}.multiple-elements-title{font-size:11px}}
 @media(max-width:600px){.multiple-element-row{grid-template-columns:minmax(0,1fr) 78px 40px}}
 .element-delivery-result{margin-top:10px;display:grid;gap:6px}
 .element-delivery-result .sent-item{padding:9px 11px;border-radius:11px;background:rgba(255,255,255,.045);color:#c8e2f4;font-size:11px}
@@ -327,8 +329,8 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
 
 
   <div id="multipleElementsArea" style="display:none;margin-top:12px">
-    <div style="font-weight:900;color:#79dcff;margin-bottom:8px">
-      ⚛️ Elementos para enviar — escolha 2 ou mais
+    <div class="multiple-elements-title">
+      ⚛️ SELECIONE OS ELEMENTOS — CADA LINHA É UM ELEMENTO DIFERENTE
     </div>
     <div id="multipleElementsList" style="display:grid;gap:8px"></div>
     <button type="button" id="addElementRow"
@@ -603,15 +605,15 @@ lista.appendChild(div);
      historicoConquistas/{id}
    ========================================================= */
 
-const achievementUserTarget = document.getElementById("achievementUserTarget");
-const achievementSelect = document.getElementById("achievementSelect");
-const achievementDeliveryNote = document.getElementById("achievementDeliveryNote");
-const achievementDeliveryMessage = document.getElementById("achievementDeliveryMessage");
-const achievementCreateArea = document.getElementById("achievementCreateArea");
-const achievementCreateMessage = document.getElementById("achievementCreateMessage");
+const achievementUserTarget = document.getElementById("achUser");
+const achievementSelect = document.getElementById("achSelect");
+const achievementDeliveryNote = document.getElementById("achNote");
+const achievementDeliveryMessage = document.getElementById("achMessage");
+const achievementCreateArea = null;
+const achievementCreateMessage = document.getElementById("achMessage");
 const achievementPreview = document.getElementById("achievementPreview");
-const achievementCatalogList = document.getElementById("achievementCatalogList");
-const achievementHistoryList = document.getElementById("achievementHistoryList");
+const achievementCatalogList = document.getElementById("achList");
+const achievementHistoryList = null;
 
 let todasConquistas = [];
 
@@ -939,13 +941,13 @@ async function salvarNovaConquista(){
     return;
   }
 
-  const tipo=document.getElementById("newAchievementType").value;
-  const icon=document.getElementById("newAchievementIcon").value.trim() || (tipo==="trofeu"?"🏆":"🏵️");
-  const nome=document.getElementById("newAchievementName").value.trim();
-  let id=document.getElementById("newAchievementId").value.trim().toLowerCase();
-  const descricao=document.getElementById("newAchievementDescription").value.trim();
-  const temporada=document.getElementById("newAchievementSeason").value.trim() || "Permanente";
-  const ordem=Math.max(0,Number(document.getElementById("newAchievementOrder").value||0));
+  const tipo=document.getElementById("newAchType")?.value||"selo";
+  const icon=document.getElementById("newAchIcon")?.value.trim() || (tipo==="trofeu"?"🏆":"🏵️");
+  const nome=document.getElementById("newAchName")?.value.trim()||"";
+  let id=document.getElementById("newAchId")?.value.trim().toLowerCase()||"";
+  const descricao=document.getElementById("newAchDescription")?.value.trim()||"";
+  const temporada=document.getElementById("newAchPeriod")?.value.trim() || "Permanente";
+  const ordem=Math.max(0,Number(document.getElementById("newAchOrder")?.value||0));
 
   if(!nome){
     mostrarMensagem(achievementCreateMessage,"Digite o nome da conquista.","error");
@@ -966,9 +968,9 @@ async function salvarNovaConquista(){
     return;
   }
 
-  const botao=document.getElementById("saveAchievement");
+  const botao=document.getElementById("achCreate");
   botao.disabled=true;
-  botao.textContent="⏳ SALVANDO...";
+  botao.textContent="⏳ CADASTRANDO...";
 
   try{
     const ref=doc(db,"conquistas",id);
@@ -998,11 +1000,11 @@ async function salvarNovaConquista(){
       "success"
     );
 
-    document.getElementById("newAchievementName").value="";
-    document.getElementById("newAchievementId").value="";
-    document.getElementById("newAchievementDescription").value="";
-    document.getElementById("newAchievementSeason").value="";
-    document.getElementById("newAchievementOrder").value="0";
+    document.getElementById("newAchName").value="";
+    document.getElementById("newAchId").value="";
+    document.getElementById("newAchDescription").value="";
+    document.getElementById("newAchPeriod").value="";
+    document.getElementById("newAchOrder").value="0";
 
     await carregarConquistas();
 
@@ -1024,7 +1026,7 @@ async function salvarNovaConquista(){
 
   }finally{
     botao.disabled=false;
-    botao.textContent="💾 SALVAR CONQUISTA";
+    botao.textContent="➕ CADASTRAR CONQUISTA";
   }
 }
 
@@ -1073,7 +1075,7 @@ async function carregarHistoricoConquistas(){
 }
 
 
-async function atualizarTudo(){if(!adminUsuario)return;const b=refreshButton;b.disabled=true;b.textContent="🔄 Atualizando...";try{await Promise.all([carregarDashboard(),carregarEntregas(),carregarVales(),carregarConquistasAdmin()])}catch(e){console.error(e)}finally{b.disabled=false;b.textContent="🔄 Atualizar"}}
+async function atualizarTudo(){if(!adminUsuario)return;const b=refreshButton;b.disabled=true;b.textContent="🔄 Atualizando...";try{await Promise.all([carregarDashboard(),carregarEntregas(),carregarVales(),carregarConquistas()])}catch(e){console.error(e)}finally{b.disabled=false;b.textContent="🔄 Atualizar"}}
 
 onAuthStateChanged(auth,async usuario=>{
 if(!usuario){authResolvido=true;resolverAutenticacao();window.location.replace("index.html");return}
@@ -1092,24 +1094,16 @@ document.getElementById("removerGiros").onclick=()=>alterarGiros("remover");
 document.getElementById("vip").onclick=alterarVIP;
 document.getElementById("box").onclick=alterarCaixa;
 generateVoucherButton.onclick=gerarNovoVale;
-document.getElementById("achSend").onclick=enviarConquista;document.getElementById("achCreate").onclick=cadastrarConquista;document.getElementById("achReload").onclick=carregarConquistasAdmin;
+document.getElementById("achSend")?.addEventListener("click",enviarConquista);document.getElementById("achCreate")?.addEventListener("click",salvarNovaConquista);document.getElementById("achReload")?.addEventListener("click",carregarConquistas);
 document.getElementById("copyVoucher").onclick=copiarVale;
 document.getElementById("newVoucher").onclick=()=>{document.getElementById("voucherResult").style.display="none";document.getElementById("voucherMessage").className="message";document.getElementById("voucherValor").focus()};
 
-document.getElementById("achievementSelect").onchange=renderizarPreviewConquista;
-document.getElementById("sendAchievement").onclick=enviarConquista;
-document.getElementById("saveAchievement").onclick=salvarNovaConquista;
-document.getElementById("toggleAchievementCreate").onclick=()=>{
-  achievementCreateArea.style.display=achievementCreateArea.style.display==="none"?"block":"none";
-};
-document.getElementById("cancelAchievementCreate").onclick=()=>{
-  achievementCreateArea.style.display="none";
-  mostrarMensagem(achievementCreateMessage,"","");
-};
-document.getElementById("newAchievementType").onchange=()=>{
-  const input=document.getElementById("newAchievementIcon");
-  if(!input.value.trim())input.value=document.getElementById("newAchievementType").value==="trofeu"?"🏆":"🏵️";
-};
+document.getElementById("achSelect")?.addEventListener("change",renderizarPreviewConquista);
+document.getElementById("achSend")?.addEventListener("click",enviarConquista);
+
+
+
+
 
 document.getElementById("logout").onclick=async()=>{try{await signOut(auth)}catch(e){console.error(e)}window.location.replace("index.html")};
 refreshButton.disabled=true;
@@ -1259,7 +1253,15 @@ function atualizarModoElemento(){
   const multiplo=modo==="multiple";
 
   if(elementSelect)elementSelect.disabled=aleatorio||multiplo;
-  if(elementQuantity)elementQuantity.disabled=multiplo;
+  if(elementQuantity)elementQuantity.disabled=aleatorio||multiplo;
+
+  const elementField=elementSelect?.closest("div");
+  const quantityField=elementQuantity?.closest("div");
+  if(elementField)elementField.style.display=multiplo?"none":"block";
+  if(quantityField)quantityField.style.display=multiplo?"none":"block";
+
+  const quick=document.querySelector(".element-quick-quantities");
+  if(quick)quick.style.display=multiplo?"none":"flex";
 
   if(multipleElementsArea)multipleElementsArea.style.display=multiplo?"block":"none";
   if(multiplo)inicializarMultiplos();
