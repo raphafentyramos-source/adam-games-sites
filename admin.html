@@ -490,18 +490,33 @@ function gerarVale15(){const chars="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";let co
 function comTimeout(p,tempo=15000){return Promise.race([p,new Promise((_,reject)=>setTimeout(()=>{const e=new Error("Tempo limite excedido.");e.code="timeout";reject(e)},tempo))])}
 
 async function carregarDashboard(){
+  const totalEl=document.getElementById("totalUsuarios");
+  const vipEl=document.getElementById("totalVip");
   try{
-    // Usa a leitura normal da coleção para que o painel continue funcionando mesmo
-    // quando getCountFromServer não estiver permitido pelas Rules.
+    // Mantém o método que já era usado pelo painel antes da inclusão dos elementos.
+    const c=await getCountFromServer(collection(db,"admins"));
+    totalEl.textContent=numero(c.data().count);
+
+    // O VIP continua sendo calculado pela leitura normal dos cadastros.
     const u=await getDocs(collection(db,"admins"));
     let vip=0;
     u.forEach(d=>{if(d.data().vip===true)vip++;});
-    document.getElementById("totalUsuarios").textContent=numero(u.size);
-    document.getElementById("totalVip").textContent=numero(vip);
+    vipEl.textContent=numero(vip);
   }catch(e){
     console.error("ERRO AO CARREGAR USUÁRIOS:",e);
-    document.getElementById("totalUsuarios").textContent="—";
-    document.getElementById("totalVip").textContent="—";
+
+    // Fallback: se a contagem agregada falhar, tenta a leitura normal.
+    try{
+      const u=await getDocs(collection(db,"admins"));
+      let vip=0;
+      u.forEach(d=>{if(d.data().vip===true)vip++;});
+      totalEl.textContent=numero(u.size);
+      vipEl.textContent=numero(vip);
+    }catch(e2){
+      console.error("ERRO AO LER A COLEÇÃO ADMINS:",e2);
+      totalEl.textContent="—";
+      vipEl.textContent="—";
+    }
   }
 }
 
@@ -510,7 +525,43 @@ function renderizarEntregas(filtro=null){const dados=Array.isArray(filtro)?filtr
 async function alterarEntrega(p){const n=p.entregue!==true;if(!confirm(n?"Marcar este prêmio como ENTREGUE?":"Desfazer o status de entregue?"))return;try{await updateDoc(doc(db,"entregas",p.id),{entregue:n,entregueEm:n?serverTimestamp():null,entreguePor:n?(adminUsuario?.email||""):""});p.entregue=n;renderizarEntregas();mostrarMensagem(deliveryMessage,n?"✅ Prêmio marcado como entregue.":"↩️ Prêmio voltou para pendente.","success")}catch(e){console.error(e);mostrarMensagem(deliveryMessage,"Não foi possível alterar a entrega.","error")}}
 
 async function buscarUsuarioPorUid(uid){try{const r=await getDocs(query(collection(db,"admins"),where("uid","==",uid)));if(r.empty){mostrarMensagem(searchMessage,"Usuário não encontrado pelo UID.","error");return}mostrarUsuario(r.docs[0]);window.scrollTo({top:userArea.offsetTop-20,behavior:"smooth"})}catch(e){console.error(e);mostrarMensagem(searchMessage,"Erro ao localizar usuário.","error")}}
-async function buscarUsuario(){const v=searchInput.value.trim();if(!v){mostrarMensagem(searchMessage,"Digite um ID, e-mail ou UID.","error");return}userArea.style.display="none";try{let r=await getDocs(query(collection(db,"admins"),where("publicId","==",v)));if(r.empty&&v.includes("@"))r=await getDocs(query(collection(db,"admins"),where("email","==",v.toLowerCase())));if(r.empty)r=await getDocs(query(collection(db,"admins"),where("uid","==",v)));if(r.empty){mostrarMensagem(searchMessage,"Usuário não encontrado.","error");return}mostrarUsuario(r.docs[0]);mostrarMensagem(searchMessage,"✅ Usuário encontrado.","success");window.scrollTo({top:userArea.offsetTop-20,behavior:"smooth"})}catch(e){console.error(e);mostrarMensagem(searchMessage,"Não foi possível consultar os usuários.","error")}}
+async function buscarUsuario(){
+  const v=String(searchInput?.value||"").trim();
+  if(!v){mostrarMensagem(searchMessage,"Digite um ID, e-mail ou UID.","error");return}
+
+  userArea.style.display="none";
+  mostrarMensagem(searchMessage,"🔎 Pesquisando usuário...","");
+
+  try{
+    let r=await getDocs(query(collection(db,"admins"),where("publicId","==",v)));
+    if(r.empty)r=await getDocs(query(collection(db,"admins"),where("publicId","==",v.toUpperCase())));
+    if(r.empty)r=await getDocs(query(collection(db,"admins"),where("publicId","==",v.toLowerCase())));
+    if(r.empty&&v.includes("@"))r=await getDocs(query(collection(db,"admins"),where("email","==",v.toLowerCase())));
+    if(r.empty)r=await getDocs(query(collection(db,"admins"),where("uid","==",v)));
+
+    // Último recurso: o próprio ID do documento Firestore.
+    if(r.empty){
+      try{
+        const d=await getDoc(doc(db,"admins",v));
+        if(d.exists())r={docs:[d],empty:false};
+      }catch(docError){
+        console.warn("Não foi possível consultar o documento diretamente:",docError);
+      }
+    }
+
+    if(r.empty){
+      mostrarMensagem(searchMessage,"Usuário não encontrado.","error");
+      return;
+    }
+
+    mostrarUsuario(r.docs[0]);
+    mostrarMensagem(searchMessage,"✅ Usuário encontrado.","success");
+    window.scrollTo({top:userArea.offsetTop-20,behavior:"smooth"});
+  }catch(e){
+    console.error("ERRO NA PESQUISA DE USUÁRIO:",e);
+    mostrarMensagem(searchMessage,`❌ Não foi possível consultar os usuários. ${e?.code||""}`,"error");
+  }
+}
 function mostrarUsuario(docu){const d=docu.data();usuarioSelecionado={ref:docu.ref,docId:docu.id,data:d};userArea.style.display="block";const nome=d.nome||d.name||"Usuário",email=d.email||"Sem e-mail",pid=d.publicId||"Pendente";document.getElementById("nome").textContent=nome;document.getElementById("email").textContent=email;document.getElementById("id").textContent="ID: "+pid;document.getElementById("uid").textContent="UID: "+(d.uid||"Não informado");document.getElementById("avatar").textContent=d.avatar||"🙂";document.getElementById("infoNome").textContent=nome;document.getElementById("infoEmail").textContent=email;document.getElementById("infoId").textContent=pid;document.getElementById("infoUid").textContent=d.uid||"Não informado";document.getElementById("infoIdade").textContent=d.idade||"Não informado";document.getElementById("infoTelefone").textContent=d.telefone||d.phone||"Não informado";atualizarSaldos();atualizarStatus();atualizarGiros();carregarExtrato(pid)}
 function atualizarSaldos(){if(!usuarioSelecionado)return;const d=usuarioSelecionado.data;document.getElementById("chances").textContent=numero(d.chances);document.getElementById("moedas").textContent=numero(d.moedas);document.getElementById("chaves").textContent=numero(d.chaves);document.getElementById("creditos").textContent=dinheiro(d.creditos)}
 function atualizarGiros(){const v=Number(usuarioSelecionado?.data?.girosRoleta||0);document.getElementById("girosRoleta").textContent=numero(v);document.getElementById("roletaSaldo").textContent=numero(v)}
@@ -1099,7 +1150,28 @@ async function carregarHistoricoConquistas(){
 }
 
 
-async function atualizarTudo(){if(!adminUsuario)return;const b=refreshButton;b.disabled=true;b.textContent="🔄 Atualizando...";try{await Promise.all([carregarDashboard(),carregarEntregas(),carregarVales(),carregarConquistas()])}catch(e){console.error(e)}finally{b.disabled=false;b.textContent="🔄 Atualizar"}}
+async function atualizarTudo(){
+  if(!adminUsuario)return;
+  const b=refreshButton;
+  b.disabled=true;
+  b.textContent="🔄 Atualizando...";
+
+  try{
+    // Cada área é independente. Um erro nos elementos/conquistas nunca pode
+    // interromper usuários, pesquisa, prêmios ou vales.
+    await Promise.allSettled([
+      carregarDashboard(),
+      carregarEntregas(),
+      carregarVales(),
+      (achievementCatalogList&&achievementHistoryList&&achievementPreview) ? carregarConquistas() : Promise.resolve()
+    ]);
+  }catch(e){
+    console.error("ERRO AO ATUALIZAR PAINEL:",e);
+  }finally{
+    b.disabled=false;
+    b.textContent="🔄 Atualizar";
+  }
+}
 
 onAuthStateChanged(auth,async usuario=>{
 if(!usuario){authResolvido=true;resolverAutenticacao();window.location.replace("index.html");return}
@@ -1108,24 +1180,29 @@ if(email!==ADMIN_EMAIL.toLowerCase()){authResolvido=true;resolverAutenticacao();
 adminUsuario=usuario;authResolvido=true;resolverAutenticacao();refreshButton.disabled=false;generateVoucherButton.disabled=false;await atualizarTudo();
 });
 
-document.getElementById("buscar").onclick=buscarUsuario;
-searchInput.onkeydown=e=>{if(e.key==="Enter")buscarUsuario()};
-refreshButton.onclick=atualizarTudo;
-document.getElementById("adicionar").onclick=()=>alterarSaldo("adicionar");
-document.getElementById("remover").onclick=()=>alterarSaldo("remover");
-document.getElementById("adicionarGiros").onclick=()=>alterarGiros("adicionar");
-document.getElementById("removerGiros").onclick=()=>alterarGiros("remover");
-document.getElementById("vip").onclick=alterarVIP;
-document.getElementById("box").onclick=alterarCaixa;
-generateVoucherButton.onclick=gerarNovoVale;
-achSend?.addEventListener("click",enviarConquista);
-achSelect?.addEventListener("change",renderizarPreviewConquista);
-document.getElementById("achCreate")?.addEventListener("click",cadastrarConquista);
-document.getElementById("achReload")?.addEventListener("click",carregarConquistas);
+function ligarClique(id,funcao){
+  const el=document.getElementById(id);
+  if(el)el.onclick=funcao;
+}
 
-document.getElementById("logout").onclick=async()=>{try{await signOut(auth)}catch(e){console.error(e)}window.location.replace("index.html")};
-refreshButton.disabled=true;
-generateVoucherButton.disabled=true;
+ligarClique("buscar",buscarUsuario);
+if(searchInput)searchInput.onkeydown=e=>{if(e.key==="Enter")buscarUsuario()};
+if(refreshButton)refreshButton.onclick=atualizarTudo;
+ligarClique("adicionar",()=>alterarSaldo("adicionar"));
+ligarClique("remover",()=>alterarSaldo("remover"));
+ligarClique("adicionarGiros",()=>alterarGiros("adicionar"));
+ligarClique("removerGiros",()=>alterarGiros("remover"));
+ligarClique("vip",alterarVIP);
+ligarClique("box",alterarCaixa);
+if(generateVoucherButton)generateVoucherButton.onclick=gerarNovoVale;
+if(achSend)achSend.addEventListener("click",enviarConquista);
+if(achSelect)achSelect.addEventListener("change",renderizarPreviewConquista);
+ligarClique("achCreate",cadastrarConquista);
+ligarClique("achReload",carregarConquistas);
+ligarClique("logout",async()=>{try{await signOut(auth)}catch(e){console.error(e)}window.location.replace("index.html")});
+
+if(refreshButton)refreshButton.disabled=true;
+if(generateVoucherButton)generateVoucherButton.disabled=true;
 
 /* =====================================================
    ENVIO DE ELEMENTOS — ADMIN
