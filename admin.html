@@ -73,6 +73,147 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
 .fig-package-preview strong{color:#fff}
 @media(max-width:760px){.fig-package-grid{grid-template-columns:1fr}.fig-package-grid .full{grid-column:auto}}
 
+
+/* =========================================================
+   ENVIO RÁPIDO DE ÁLBUM
+   ========================================================= */
+const QUICK_ALBUMS={
+  1:{nome:"NOITE ASSOMBRADA",ids:[1,2,3,4,5]},
+  2:{nome:"BRUXARIA & MAGIA",ids:[6,7,8,9,10]},
+  3:{nome:"CRIATURAS DAS TREVAS",ids:[11,12,13,14,15]},
+  4:{nome:"REINO DAS ABÓBORAS",ids:[16,17,18,19,20]},
+  5:{nome:"COLEÇÃO LENDÁRIA DOURADA",ids:[21,22,23,24,25]}
+};
+
+function quickAlbumAtualizarInfo(){
+  const id=Number(document.getElementById("quickAlbumId")?.value||1);
+  const q=Number(document.getElementById("quickAlbumQty")?.value||3);
+  const a=QUICK_ALBUMS[id];
+  const info=document.getElementById("quickAlbumInfo");
+  if(info&&a)info.innerHTML=`📚 <b>${a.nome}</b> • serão enviadas <b>${q} cartas</b> aleatórias entre as cartas ${String(a.ids[0]).padStart(2,"0")} e ${String(a.ids[a.ids.length-1]).padStart(2,"0")}.`;
+}
+
+async function quickAlbumLocalizarJogador(alvo){
+  const base=collection(db,"admins");
+  for(const field of ["publicId","email","uid"]){
+    const s=await getDocs(query(base,where(field,"==",alvo)));
+    if(!s.empty)return s.docs[0];
+  }
+  return null;
+}
+
+function quickAlbumEscolher(ids,q){
+  const arr=[...ids];
+  for(let i=arr.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [arr[i],arr[j]]=[arr[j],arr[i]];
+  }
+  return arr.slice(0,q);
+}
+
+async function quickAlbumEnviar(){
+  const msg=document.getElementById("quickAlbumMessage");
+  const btn=document.getElementById("quickAlbumSend");
+  const alvo=document.getElementById("quickAlbumPlayer").value.trim();
+  const albumId=Number(document.getElementById("quickAlbumId").value);
+  const q=Number(document.getElementById("quickAlbumQty").value);
+  const album=QUICK_ALBUMS[albumId];
+
+  if(!alvo)return mostrarMensagem(msg,"❌ Informe o jogador.","error");
+  if(!album)return mostrarMensagem(msg,"❌ Álbum inválido.","error");
+  if(q<3||q>5)return mostrarMensagem(msg,"❌ Escolha entre 3 e 5 cartas.","error");
+
+  btn.disabled=true;
+
+  try{
+    const u=await quickAlbumLocalizarJogador(alvo);
+    if(!u)throw new Error("Jogador não encontrado.");
+
+    const d=u.data()||{};
+    const cartas=quickAlbumEscolher(album.ids,q);
+    const mapa={...(d.cartasHalloween||{})};
+    cartas.forEach(id=>mapa[String(id)]=Number(mapa[String(id)]||0)+1);
+
+    const operacaoId="QALB-"+new Date().toISOString().replace(/\D/g,"").slice(0,14)+"-"+Math.random().toString(36).slice(2,8).toUpperCase();
+
+    await runTransaction(db,async tx=>{
+      const snap=await tx.get(u.ref);
+      if(!snap.exists())throw new Error("Jogador não encontrado.");
+      const atual=snap.data()||{};
+      const novo={...(atual.cartasHalloween||{})};
+      cartas.forEach(id=>novo[String(id)]=Number(novo[String(id)]||0)+1);
+
+      tx.update(u.ref,{
+        cartasHalloween:novo
+      });
+
+      tx.set(doc(db,"historicoFigurinhas",operacaoId),{
+        operacaoId,
+        usuarioId:u.id,
+        publicId:atual.publicId||u.id,
+        usuarioUid:atual.uid||"",
+        usuarioEmail:atual.email||"",
+        usuarioNome:atual.nome||atual.name||"",
+        origem:"ADM",
+        tipo:"pacote",
+        quantidade:q,
+        modoPacote:"album_rapido",
+        albumId:String(albumId),
+        albumNome:album.nome,
+        cartas:Object.fromEntries(cartas.map(id=>[String(id),1])),
+        coringas:{},
+        descricao:`Envio rápido de ${q} cartas do álbum ${album.nome}`,
+        motivo:"Envio Rápido de Álbum",
+        adminEmail:adminUsuario?.email||"",
+        adminUid:adminUsuario?.uid||"",
+        criadoEm:serverTimestamp()
+      });
+
+      tx.set(doc(db,"notificacoes","fig_"+operacaoId),{
+        uid:atual.uid||"",
+        usuarioDocId:u.id,
+        titulo:"🎁 Você recebeu um álbum!",
+        mensagem:`Você recebeu ${q} cartas aleatórias do álbum ${album.nome}.`,
+        tipo:"pacote",
+        icone:"🎁",
+        lida:false,
+        origem:"admin",
+        origemId:operacaoId,
+        criadaEm:serverTimestamp()
+      });
+    });
+
+    const nomes=cartas.map(id=>{
+      const c=typeof figCardById==="function"?figCardById(id):null;
+      return c?.name||`Carta ${id}`;
+    });
+
+    mostrarMensagem(
+      msg,
+      `✅ Álbum enviado! ${q} cartas de ${album.nome}. ${nomes.join(" • ")} • ID: ${operacaoId}`,
+      "success"
+    );
+
+    document.getElementById("quickAlbumPlayer").value="";
+  }catch(e){
+    console.error("ENVIO RAPIDO ALBUM:",e);
+    mostrarMensagem(
+      msg,
+      e?.code==="permission-denied"
+        ?"❌ Firestore bloqueou o envio. Verifique as Rules."
+        :"❌ "+(e.message||"Não foi possível enviar o álbum."),
+      "error"
+    );
+  }finally{
+    btn.disabled=false;
+  }
+}
+
+document.getElementById("quickAlbumId")?.addEventListener("change",quickAlbumAtualizarInfo);
+document.getElementById("quickAlbumQty")?.addEventListener("change",quickAlbumAtualizarInfo);
+document.getElementById("quickAlbumSend")?.addEventListener("click",quickAlbumEnviar);
+quickAlbumAtualizarInfo();
+
 /* =========================================================
    CENTRAL DE NOTIFICAÇÕES
    ========================================================= */
@@ -95,6 +236,22 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
 .notif-item-date{font-size:10px;color:#7895b2;white-space:nowrap}
 .notif-item-info{font-size:11px;color:#a9c7df;line-height:1.5;margin-top:6px}
 @media(max-width:700px){.notif-grid{grid-template-columns:1fr}.notif-grid .full{grid-column:auto}}
+
+/* =========================================================
+   ENVIO RÁPIDO DE ÁLBUM
+   ========================================================= */
+.quick-album-card{margin-top:18px}
+.quick-album-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.quick-album-option{padding:14px;border:1px solid #ffffff14;border-radius:15px;background:#0b2140}
+.quick-album-option label{display:block;font-size:11px;color:#8fb2d0;font-weight:800;margin-bottom:7px}
+.quick-album-option select,.quick-album-option input{width:100%}
+.quick-album-result{margin-top:12px;padding:13px;border-radius:13px;background:#081a31;border:1px solid #ffffff10;color:#a9c7df;font-size:12px;line-height:1.5}
+.quick-album-result b{color:#fff}
+.quick-album-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:13px}
+.quick-album-send{background:linear-gradient(135deg,#ff7a18,#ff315f);color:#fff;border:0;border-radius:12px;padding:13px 18px;font-weight:900;cursor:pointer}
+.quick-album-send:disabled{opacity:.55;cursor:not-allowed}
+.quick-album-note{font-size:11px;color:#7895b2}
+@media(max-width:700px){.quick-album-grid{grid-template-columns:1fr}}
 </style></head>
 <body>
 <div class="container">
@@ -337,6 +494,58 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
   </div>
 </div>
 
+
+
+<!-- =========================================================
+     ENVIO RÁPIDO DE ÁLBUM — SEÇÃO SEPARADA
+     ========================================================= -->
+<div class="card quick-album-card" id="quickAlbumSection">
+  <div class="notif-head">
+    <div class="notif-icon">⚡</div>
+    <div>
+      <h3>Envio Rápido de Álbum</h3>
+      <p>Envie rapidamente um pacote aleatório somente de um álbum.</p>
+    </div>
+  </div>
+
+  <div class="quick-album-grid">
+    <div class="quick-album-option">
+      <label>JOGADOR — ID, E-MAIL OU UID</label>
+      <input id="quickAlbumPlayer" type="text" maxlength="150" placeholder="Ex.: ADAM-0001">
+    </div>
+
+    <div class="quick-album-option">
+      <label>ÁLBUM</label>
+      <select id="quickAlbumId">
+        <option value="1">🌙 Álbum 1 — NOITE ASSOMBRADA</option>
+        <option value="2">🧙 Álbum 2 — BRUXARIA & MAGIA</option>
+        <option value="3">🦇 Álbum 3 — CRIATURAS DAS TREVAS</option>
+        <option value="4">🎃 Álbum 4 — REINO DAS ABÓBORAS</option>
+        <option value="5">👑 Álbum 5 — COLEÇÃO LENDÁRIA DOURADA</option>
+      </select>
+    </div>
+
+    <div class="quick-album-option">
+      <label>QUANTIDADE DE CARTAS</label>
+      <select id="quickAlbumQty">
+        <option value="3">3 cartas</option>
+        <option value="4">4 cartas</option>
+        <option value="5">5 cartas</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="quick-album-result" id="quickAlbumInfo">
+    Selecione o jogador, o álbum e a quantidade. As cartas serão escolhidas aleatoriamente <b>dentro do álbum selecionado</b>.
+  </div>
+
+  <div class="quick-album-actions">
+    <button class="quick-album-send" id="quickAlbumSend" type="button">⚡ ENVIAR ÁLBUM</button>
+    <span class="quick-album-note">Este atalho não altera nem remove a opção detalhada de envio de cartas/pacotes.</span>
+  </div>
+
+  <div id="quickAlbumMessage" class="message"></div>
+</div>
 
 <!-- =========================================================
      CENTRAL DE NOTIFICAÇÕES — ADMIN
