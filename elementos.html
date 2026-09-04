@@ -41,8 +41,8 @@ a,.btn{display:inline-flex;align-items:center;justify-content:center;padding:14p
 
 <div class="statbar">
 <div class="stat"><small>Total de elementos</small><strong>118</strong></div>
-<div class="stat"><small>Na sua coleção</small><strong id="ownedCount">0</strong></div>
-<div class="stat"><small>Duplicatas</small><strong id="dupeCount">0</strong></div>
+<div class="stat"><small>Na sua coleção</small><strong id="ownedCount">…</strong></div>
+<div class="stat"><small>Duplicatas</small><strong id="dupeCount">…</strong></div>
 </div>
 
 <div class="cards">
@@ -81,16 +81,288 @@ a,.btn{display:inline-flex;align-items:center;justify-content:center;padding:14p
 </div>
 </section>
 </div>
-<script>
+<script type="module">
 const DATA=[{"n": 1, "s": "H", "name": "Hidrogênio", "desc": "O elemento mais leve; é abundante no universo e participa da composição da água.", "rarity": "Comum", "row": 1, "col": 1}, {"n": 2, "s": "He", "name": "Hélio", "desc": "Gás nobre muito leve, usado em balões, criogenia e aplicações científicas.", "rarity": "Incomum", "row": 1, "col": 18}, {"n": 3, "s": "Li", "name": "Lítio", "desc": "Metal leve muito usado em baterias recarregáveis e ligas metálicas.", "rarity": "Comum", "row": 2, "col": 1}, {"n": 4, "s": "Be", "name": "Berílio", "desc": "Metal leve e rígido usado em ligas e equipamentos de alta precisão.", "rarity": "Incomum", "row": 2, "col": 2}, {"n": 5, "s": "B", "name": "Boro", "desc": "Semimetal presente em vidros especiais, cerâmicas e materiais resistentes.", "rarity": "Incomum", "row": 2, "col": 13}, {"n": 6, "s": "C", "name": "Carbono", "desc": "Elemento fundamental da vida e base de inúmeros materiais e compostos.", "rarity": "Comum", "row": 2, "col": 14}, {"n": 7, "s": "N", "name": "Nitrogênio", "desc": "Gás que forma a maior parte da atmosfera terrestre e é essencial aos seres vivos.", "rarity": "Comum", "row": 2, "col": 15}, {"n": 8, "s": "O", "name": "Oxigênio", "desc": "Gás essencial à respiração e às reações de combustão.", "rarity": "Comum", "row": 2, "col": 16}, {"n": 9, "s": "F", "name": "Flúor", "desc": "Halogênio muito reativo, encontrado em compostos usados em diversas aplicações.", "rarity": "Incomum", "row": 2, "col": 17}, {"n": 10, "s": "Ne", "name": "Neônio", "desc": "Gás nobre conhecido pelo brilho característico em tubos luminosos.", "rarity": "Incomum", "row": 2, "col": 18}, {"n": 11, "s": "Na", "name": "Sódio", "desc": "Metal alcalino importante em compostos como o cloreto de sódio.", "rarity": "Comum", "row": 3, "col": 1}, {"n": 12, "s": "Mg", "name": "Magnésio", "desc": "Metal leve usado em ligas, materiais e processos biológicos.", "rarity": "Comum", "row": 3, "col": 2}, {"n": 13, "s": "Al", "name": "Alumínio", "desc": "Metal leve e resistente à corrosão, muito usado em embalagens e estruturas.", "rarity": "Comum", "row": 3, "col": 13}, {"n": 14, "s": "Si", "name": "Silício", "desc": "Semimetal essencial para a eletrônica e presente em muitos minerais.", "rarity": "Comum", "row": 3, "col": 14}, {"n": 15, "s": "P", "name": "Fósforo", "desc": "Elemento importante para organismos vivos e para diversos compostos industriais.", "rarity": "Comum", "row": 3, "col": 15}, {"n": 16, "s": "S", "name": "Enxofre", "desc": "Elemento amarelo usado em fertilizantes, química industrial e outros compostos.", "rarity": "Comum", "row": 3, "col": 16}, {"n": 17, "s": "Cl", "name": "Cloro", "desc": "Halogênio usado em tratamento de água e na produção de diversos compostos.", "rarity": "Comum", "row": 3, "col": 17}, {"n": 18, "s": "Ar", "name": "Argônio", "desc": "Gás nobre usado em soldagem, iluminação e ambientes controlados.", "rarity": "Comum", "row": 3, "col": 18}, {"n": 19, "s": "K", "name": "Potássio", "desc": "Metal alcalino importante para funções biológicas e presente em muitos sais.", "rarity": "Comum", "row": 4, "col": 1}, {"n": 20, "s": "Ca", "name": "Cálcio", "desc": "Elemento essencial aos ossos e dentes e muito presente em minerais.", "rarity": "Comum", "row": 4, "col": 2}, {"n": 21, "s": "Sc", "name": "Escândio", "desc": "Metal de transição usado principalmente em ligas especiais.", "rarity": "Raro", "row": 4, "col": 3}, {"n": 22, "s": "Ti", "name": "Titânio", "desc": "Metal resistente e leve, usado em ligas, equipamentos e aplicações médicas.", "rarity": "Incomum", "row": 4, "col": 4}, {"n": 23, "s": "V", "name": "Vanádio", "desc": "Metal usado principalmente para aumentar a resistência de ligas de aço.", "rarity": "Incomum", "row": 4, "col": 5}, {"n": 24, "s": "Cr", "name": "Cromo", "desc": "Metal associado a ligas resistentes à corrosão e ao aço inoxidável.", "rarity": "Incomum", "row": 4, "col": 6}, {"n": 25, "s": "Mn", "name": "Manganês", "desc": "Metal importante na produção de ligas e em processos industriais.", "rarity": "Incomum", "row": 4, "col": 7}, {"n": 26, "s": "Fe", "name": "Ferro", "desc": "Metal fundamental para o aço e para diversas funções biológicas.", "rarity": "Comum", "row": 4, "col": 8}, {"n": 27, "s": "Co", "name": "Cobalto", "desc": "Metal usado em ligas, materiais magnéticos e tecnologias de baterias.", "rarity": "Incomum", "row": 4, "col": 9}, {"n": 28, "s": "Ni", "name": "Níquel", "desc": "Metal resistente à corrosão usado em ligas, revestimentos e baterias.", "rarity": "Incomum", "row": 4, "col": 10}, {"n": 29, "s": "Cu", "name": "Cobre", "desc": "Excelente condutor elétrico, muito usado em fios, cabos e ligas.", "rarity": "Comum", "row": 4, "col": 11}, {"n": 30, "s": "Zn", "name": "Zinco", "desc": "Metal usado em galvanização, ligas e diversos compostos.", "rarity": "Comum", "row": 4, "col": 12}, {"n": 31, "s": "Ga", "name": "Gálio", "desc": "Metal de baixo ponto de fusão usado em semicondutores e tecnologia.", "rarity": "Incomum", "row": 4, "col": 13}, {"n": 32, "s": "Ge", "name": "Germânio", "desc": "Semimetal utilizado em semicondutores, fibras ópticas e sensores.", "rarity": "Incomum", "row": 4, "col": 14}, {"n": 33, "s": "As", "name": "Arsênio", "desc": "Elemento usado em aplicações industriais específicas e em compostos semicondutores.", "rarity": "Raro", "row": 4, "col": 15}, {"n": 34, "s": "Se", "name": "Selênio", "desc": "Elemento usado em eletrônica, vidro e alguns processos industriais.", "rarity": "Incomum", "row": 4, "col": 16}, {"n": 35, "s": "Br", "name": "Bromo", "desc": "Halogênio líquido à temperatura ambiente, usado em diversos compostos industriais.", "rarity": "Incomum", "row": 4, "col": 17}, {"n": 36, "s": "Kr", "name": "Criptônio", "desc": "Gás nobre empregado em iluminação e aplicações especializadas.", "rarity": "Incomum", "row": 4, "col": 18}, {"n": 37, "s": "Rb", "name": "Rubídio", "desc": "Metal alcalino raro usado principalmente em pesquisa e aplicações especializadas.", "rarity": "Raro", "row": 5, "col": 1}, {"n": 38, "s": "Sr", "name": "Estrôncio", "desc": "Metal usado em alguns materiais e compostos, inclusive em efeitos de cor.", "rarity": "Incomum", "row": 5, "col": 2}, {"n": 39, "s": "Y", "name": "Ítrio", "desc": "Metal usado em materiais especiais, lasers, cerâmicas e tecnologia.", "rarity": "Raro", "row": 5, "col": 3}, {"n": 40, "s": "Zr", "name": "Zircônio", "desc": "Metal resistente à corrosão usado em ligas e aplicações nucleares.", "rarity": "Incomum", "row": 5, "col": 4}, {"n": 41, "s": "Nb", "name": "Nióbio", "desc": "Metal usado para produzir ligas de alta resistência e materiais especiais.", "rarity": "Incomum", "row": 5, "col": 5}, {"n": 42, "s": "Mo", "name": "Molibdênio", "desc": "Metal que melhora a resistência de ligas e a estabilidade em altas temperaturas.", "rarity": "Incomum", "row": 5, "col": 6}, {"n": 43, "s": "Tc", "name": "Tecnécio", "desc": "Elemento radioativo usado principalmente em medicina nuclear e pesquisa.", "rarity": "Raro", "row": 5, "col": 7}, {"n": 44, "s": "Ru", "name": "Rutênio", "desc": "Metal raro usado em catalisadores, contatos e ligas especiais.", "rarity": "Raro", "row": 5, "col": 8}, {"n": 45, "s": "Rh", "name": "Ródio", "desc": "Metal muito raro usado em catalisadores e revestimentos de alta resistência.", "rarity": "Raro", "row": 5, "col": 9}, {"n": 46, "s": "Pd", "name": "Paládio", "desc": "Metal raro usado em catalisadores, eletrônica e joalheria.", "rarity": "Raro", "row": 5, "col": 10}, {"n": 47, "s": "Ag", "name": "Prata", "desc": "Metal com excelente condutividade, usado em eletrônica, joalheria e aplicações especiais.", "rarity": "Incomum", "row": 5, "col": 11}, {"n": 48, "s": "Cd", "name": "Cádmio", "desc": "Metal usado em aplicações industriais específicas, pigmentos e algumas baterias.", "rarity": "Incomum", "row": 5, "col": 12}, {"n": 49, "s": "In", "name": "Índio", "desc": "Metal macio usado em semicondutores, telas e revestimentos especiais.", "rarity": "Incomum", "row": 5, "col": 13}, {"n": 50, "s": "Sn", "name": "Estanho", "desc": "Metal usado em soldas, revestimentos e ligas.", "rarity": "Incomum", "row": 5, "col": 14}, {"n": 51, "s": "Sb", "name": "Antimônio", "desc": "Semimetal usado em ligas, materiais e compostos industriais.", "rarity": "Incomum", "row": 5, "col": 15}, {"n": 52, "s": "Te", "name": "Telúrio", "desc": "Semimetal usado em ligas, semicondutores e materiais especiais.", "rarity": "Incomum", "row": 5, "col": 16}, {"n": 53, "s": "I", "name": "Iodo", "desc": "Halogênio essencial à função da tireoide e usado em diversos compostos.", "rarity": "Incomum", "row": 5, "col": 17}, {"n": 54, "s": "Xe", "name": "Xenônio", "desc": "Gás nobre usado em iluminação, propulsão iônica e aplicações especializadas.", "rarity": "Incomum", "row": 5, "col": 18}, {"n": 55, "s": "Cs", "name": "Césio", "desc": "Metal alcalino muito reativo, importante em relógios atômicos e pesquisa.", "rarity": "Incomum", "row": 6, "col": 1}, {"n": 56, "s": "Ba", "name": "Bário", "desc": "Metal alcalino-terroso usado em compostos e aplicações industriais específicas.", "rarity": "Incomum", "row": 6, "col": 2}, {"n": 57, "s": "La", "name": "Lantânio", "desc": "Metal de terras raras usado em materiais ópticos, catalisadores e ligas.", "rarity": "Raro", "row": 9, "col": 4}, {"n": 58, "s": "Ce", "name": "Cério", "desc": "Terra rara usada em catalisadores, vidros e materiais de polimento.", "rarity": "Raro", "row": 9, "col": 5}, {"n": 59, "s": "Pr", "name": "Praseodímio", "desc": "Terra rara usada em ligas, ímãs e materiais ópticos.", "rarity": "Raro", "row": 9, "col": 6}, {"n": 60, "s": "Nd", "name": "Neodímio", "desc": "Terra rara famosa pelos ímãs permanentes muito potentes.", "rarity": "Raro", "row": 9, "col": 7}, {"n": 61, "s": "Pm", "name": "Promécio", "desc": "Terra rara radioativa, usada principalmente em pesquisa e aplicações especializadas.", "rarity": "Super Raro", "row": 9, "col": 8}, {"n": 62, "s": "Sm", "name": "Samário", "desc": "Terra rara usada em ímãs, catalisadores e aplicações especializadas.", "rarity": "Raro", "row": 9, "col": 9}, {"n": 63, "s": "Eu", "name": "Európio", "desc": "Terra rara importante para materiais luminescentes e telas.", "rarity": "Raro", "row": 9, "col": 10}, {"n": 64, "s": "Gd", "name": "Gadolínio", "desc": "Terra rara usada em materiais magnéticos e aplicações especializadas.", "rarity": "Raro", "row": 9, "col": 11}, {"n": 65, "s": "Tb", "name": "Térbio", "desc": "Terra rara usada em materiais luminescentes e dispositivos especiais.", "rarity": "Raro", "row": 9, "col": 12}, {"n": 66, "s": "Dy", "name": "Disprósio", "desc": "Terra rara usada em ímãs e materiais que precisam suportar altas temperaturas.", "rarity": "Raro", "row": 9, "col": 13}, {"n": 67, "s": "Ho", "name": "Hólmio", "desc": "Terra rara com propriedades magnéticas usadas em aplicações especializadas.", "rarity": "Raro", "row": 9, "col": 14}, {"n": 68, "s": "Er", "name": "Érbio", "desc": "Terra rara muito importante para fibras ópticas e aplicações de laser.", "rarity": "Raro", "row": 9, "col": 15}, {"n": 69, "s": "Tm", "name": "Túlio", "desc": "Uma das terras raras mais escassas, usada principalmente em pesquisa e aplicações especiais.", "rarity": "Raro", "row": 9, "col": 16}, {"n": 70, "s": "Yb", "name": "Itérbio", "desc": "Terra rara usada em lasers, materiais especiais e pesquisa.", "rarity": "Raro", "row": 9, "col": 17}, {"n": 71, "s": "Lu", "name": "Lutécio", "desc": "Terra rara densa usada em detectores, pesquisa e aplicações médicas.", "rarity": "Raro", "row": 9, "col": 18}, {"n": 72, "s": "Hf", "name": "Háfnio", "desc": "Metal resistente a altas temperaturas usado em ligas e aplicações tecnológicas.", "rarity": "Raro", "row": 6, "col": 4}, {"n": 73, "s": "Ta", "name": "Tântalo", "desc": "Metal muito resistente à corrosão, usado em eletrônica e equipamentos especiais.", "rarity": "Raro", "row": 6, "col": 5}, {"n": 74, "s": "W", "name": "Tungstênio", "desc": "Metal de altíssimo ponto de fusão usado em ligas e aplicações de alta temperatura.", "rarity": "Incomum", "row": 6, "col": 6}, {"n": 75, "s": "Re", "name": "Rênio", "desc": "Metal extremamente raro usado em superligas e catalisadores.", "rarity": "Raro", "row": 6, "col": 7}, {"n": 76, "s": "Os", "name": "Ósmio", "desc": "Metal muito denso e raro, usado principalmente em aplicações especializadas.", "rarity": "Raro", "row": 6, "col": 8}, {"n": 77, "s": "Ir", "name": "Irídio", "desc": "Metal muito resistente à corrosão e a altas temperaturas.", "rarity": "Raro", "row": 6, "col": 9}, {"n": 78, "s": "Pt", "name": "Platina", "desc": "Metal nobre raro usado em catalisadores, joalheria e tecnologia.", "rarity": "Raro", "row": 6, "col": 10}, {"n": 79, "s": "Au", "name": "Ouro", "desc": "Metal nobre muito resistente à corrosão, valorizado em joalheria e eletrônica.", "rarity": "Raro", "row": 6, "col": 11}, {"n": 80, "s": "Hg", "name": "Mercúrio", "desc": "Metal líquido à temperatura ambiente, historicamente usado em instrumentos e processos específicos.", "rarity": "Incomum", "row": 6, "col": 12}, {"n": 81, "s": "Tl", "name": "Tálio", "desc": "Metal pesado usado em aplicações industriais e científicas específicas.", "rarity": "Incomum", "row": 6, "col": 13}, {"n": 82, "s": "Pb", "name": "Chumbo", "desc": "Metal pesado usado em baterias, proteção contra radiação e aplicações específicas.", "rarity": "Incomum", "row": 6, "col": 14}, {"n": 83, "s": "Bi", "name": "Bismuto", "desc": "Metal pesado relativamente estável, usado em ligas e diversos compostos.", "rarity": "Incomum", "row": 6, "col": 15}, {"n": 84, "s": "Po", "name": "Polônio", "desc": "Elemento radioativo raro, conhecido principalmente por aplicações científicas e históricas.", "rarity": "Super Raro", "row": 6, "col": 16}, {"n": 85, "s": "At", "name": "Astato", "desc": "Halogênio extremamente raro e radioativo, encontrado apenas em quantidades mínimas na natureza.", "rarity": "Super Raro", "row": 6, "col": 17}, {"n": 86, "s": "Rn", "name": "Radônio", "desc": "Gás nobre radioativo produzido naturalmente pelo decaimento de outros elementos.", "rarity": "Super Raro", "row": 6, "col": 18}, {"n": 87, "s": "Fr", "name": "Frâncio", "desc": "Elemento extremamente raro e radioativo, encontrado em quantidades ínfimas.", "rarity": "Super Raro", "row": 7, "col": 1}, {"n": 88, "s": "Ra", "name": "Rádio", "desc": "Elemento radioativo raro, importante historicamente no estudo da radioatividade.", "rarity": "Super Raro", "row": 7, "col": 2}, {"n": 89, "s": "Ac", "name": "Actínio", "desc": "Elemento radioativo usado principalmente em pesquisa e aplicações nucleares.", "rarity": "Super Raro", "row": 10, "col": 4}, {"n": 90, "s": "Th", "name": "Tório", "desc": "Metal radioativo presente em minerais e estudado como possível combustível nuclear.", "rarity": "Super Raro", "row": 10, "col": 5}, {"n": 91, "s": "Pa", "name": "Protactínio", "desc": "Elemento radioativo muito raro, encontrado em pequenas quantidades em minérios de urânio.", "rarity": "Super Raro", "row": 10, "col": 6}, {"n": 92, "s": "U", "name": "Urânio", "desc": "Metal radioativo conhecido por seu uso como combustível em reatores nucleares.", "rarity": "Super Raro", "row": 10, "col": 7}, {"n": 93, "s": "Np", "name": "Neptúnio", "desc": "Elemento radioativo artificial, produzido principalmente em processos nucleares.", "rarity": "Super Raro", "row": 10, "col": 8}, {"n": 94, "s": "Pu", "name": "Plutônio", "desc": "Elemento radioativo produzido em reatores e usado em aplicações nucleares específicas.", "rarity": "Super Raro", "row": 10, "col": 9}, {"n": 95, "s": "Am", "name": "Amerício", "desc": "Elemento radioativo artificial usado, entre outras aplicações, em detectores de fumaça.", "rarity": "Super Raro", "row": 10, "col": 10}, {"n": 96, "s": "Cm", "name": "Cúrio", "desc": "Elemento radioativo artificial usado principalmente em pesquisa.", "rarity": "Super Raro", "row": 10, "col": 11}, {"n": 97, "s": "Bk", "name": "Berquélio", "desc": "Elemento sintético extremamente raro, produzido em laboratórios.", "rarity": "Super Raro", "row": 10, "col": 12}, {"n": 98, "s": "Cf", "name": "Califórnio", "desc": "Elemento sintético radioativo usado em aplicações científicas especializadas.", "rarity": "Super Raro", "row": 10, "col": 13}, {"n": 99, "s": "Es", "name": "Einstênio", "desc": "Elemento sintético extremamente raro, produzido em laboratório.", "rarity": "Super Raro", "row": 10, "col": 14}, {"n": 100, "s": "Fm", "name": "Férmio", "desc": "Elemento sintético radioativo criado em quantidades muito pequenas.", "rarity": "Super Raro", "row": 10, "col": 15}, {"n": 101, "s": "Md", "name": "Mendelévio", "desc": "Elemento sintético produzido em laboratório para pesquisa nuclear.", "rarity": "Super Raro", "row": 10, "col": 16}, {"n": 102, "s": "No", "name": "Nobélio", "desc": "Elemento sintético radioativo estudado em pesquisas sobre elementos pesados.", "rarity": "Super Raro", "row": 10, "col": 17}, {"n": 103, "s": "Lr", "name": "Laurêncio", "desc": "Elemento sintético e radioativo, produzido em aceleradores para pesquisa.", "rarity": "Super Raro", "row": 10, "col": 18}, {"n": 104, "s": "Rf", "name": "Rutherfórdio", "desc": "Elemento superpesado sintético, produzido em laboratório.", "rarity": "Super Raro", "row": 7, "col": 4}, {"n": 105, "s": "Db", "name": "Dúbnio", "desc": "Elemento superpesado sintético, conhecido apenas por experimentos científicos.", "rarity": "Super Raro", "row": 7, "col": 5}, {"n": 106, "s": "Sg", "name": "Seabórgio", "desc": "Elemento superpesado sintético, produzido em aceleradores.", "rarity": "Super Raro", "row": 7, "col": 6}, {"n": 107, "s": "Bh", "name": "Bóhrio", "desc": "Elemento superpesado sintético e altamente instável.", "rarity": "Super Raro", "row": 7, "col": 7}, {"n": 108, "s": "Hs", "name": "Hássio", "desc": "Elemento superpesado sintético, extremamente instável.", "rarity": "Super Raro", "row": 7, "col": 8}, {"n": 109, "s": "Mt", "name": "Meitnério", "desc": "Elemento superpesado sintético conhecido por experimentos de laboratório.", "rarity": "Super Raro", "row": 7, "col": 9}, {"n": 110, "s": "Ds", "name": "Darmstádio", "desc": "Elemento superpesado sintético e altamente instável.", "rarity": "Super Raro", "row": 7, "col": 10}, {"n": 111, "s": "Rg", "name": "Roentgênio", "desc": "Elemento superpesado sintético produzido em quantidades extremamente pequenas.", "rarity": "Super Raro", "row": 7, "col": 11}, {"n": 112, "s": "Cn", "name": "Copernício", "desc": "Elemento superpesado sintético e altamente instável.", "rarity": "Super Raro", "row": 7, "col": 12}, {"n": 113, "s": "Nh", "name": "Nihônio", "desc": "Elemento superpesado sintético produzido em laboratório.", "rarity": "Super Raro", "row": 7, "col": 13}, {"n": 114, "s": "Fl", "name": "Fleróvio", "desc": "Elemento superpesado sintético e extremamente instável.", "rarity": "Super Raro", "row": 7, "col": 14}, {"n": 115, "s": "Mc", "name": "Moscóvio", "desc": "Elemento superpesado sintético conhecido por poucos átomos produzidos.", "rarity": "Super Raro", "row": 7, "col": 15}, {"n": 116, "s": "Lv", "name": "Livermório", "desc": "Elemento superpesado sintético e altamente instável.", "rarity": "Super Raro", "row": 7, "col": 16}, {"n": 117, "s": "Ts", "name": "Tenessino", "desc": "Halogênio superpesado sintético, produzido em laboratório.", "rarity": "Super Raro", "row": 7, "col": 17}, {"n": 118, "s": "Og", "name": "Oganessônio", "desc": "Elemento de número atômico 118, superpesado e produzido artificialmente.", "rarity": "Super Raro", "row": 7, "col": 18}];
+/* =====================================================
+   FIREBASE — COLEÇÃO DO JOGADOR
+===================================================== */
+
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+import {
+  getAuth,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+import {
+  getFirestore,
+  collection,
+  query,
+  where,
+  getDocs
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+const firebaseConfig = {
+
+  apiKey:
+    "AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",
+
+  authDomain:
+    "adam-games-21081.firebaseapp.com",
+
+  projectId:
+    "adam-games-21081",
+
+  storageBucket:
+    "adam-games-21081.firebasestorage.app",
+
+  messagingSenderId:
+    "1055528418738",
+
+  appId:
+    "1:1055528418738:web:5fafdf63424ba9744eb8ab",
+
+  measurementId:
+    "G-KVFSF864GE"
+
+};
+
+
+const app =
+  initializeApp(
+    firebaseConfig
+  );
+
+const auth =
+  getAuth(app);
+
+const db =
+  getFirestore(app);
+
+
+/* =====================================================
+   ESTADO
+===================================================== */
+
+let inventarioElementos = {};
+
+
+/* =====================================================
+   ATUALIZAR ESTATÍSTICAS
+===================================================== */
+
 function updateStats(){
-  let inv=JSON.parse(localStorage.getItem('adamElementInventory')||'{}');
-  let owned=0, dupes=0;
-  DATA.forEach(e=>{const q=Number(inv[e.n]||0);if(q>0)owned++;if(q>1)dupes+=q-1;});
-  document.getElementById('ownedCount').textContent=owned;
-  document.getElementById('dupeCount').textContent=dupes;
+
+  let owned = 0;
+  let dupes = 0;
+
+  DATA.forEach(
+    elemento => {
+
+      const quantidade =
+        Number(
+          inventarioElementos[
+            String(elemento.n)
+          ] || 0
+        );
+
+      if(
+        quantidade > 0
+      ){
+
+        owned++;
+
+      }
+
+      if(
+        quantidade > 1
+      ){
+
+        dupes +=
+          quantidade - 1;
+
+      }
+
+    }
+  );
+
+  const ownedCount =
+    document.getElementById(
+      "ownedCount"
+    );
+
+  const dupeCount =
+    document.getElementById(
+      "dupeCount"
+    );
+
+  if(ownedCount){
+
+    ownedCount.textContent =
+      owned;
+
+  }
+
+  if(dupeCount){
+
+    dupeCount.textContent =
+      dupes;
+
+  }
+
 }
-updateStats();
+
+
+/* =====================================================
+   BUSCAR CADASTRO DO JOGADOR
+===================================================== */
+
+async function carregarColecaoDoJogador(
+  user
+){
+
+  const admins =
+    collection(
+      db,
+      "admins"
+    );
+
+
+  let snapshot =
+    await getDocs(
+
+      query(
+        admins,
+        where(
+          "uid",
+          "==",
+          user.uid
+        )
+      )
+
+    );
+
+
+  /*
+    Mesmo comportamento usado no painel:
+    se o documento antigo não tiver UID,
+    tenta localizar pelo e-mail.
+  */
+
+  if(
+    snapshot.empty &&
+    user.email
+  ){
+
+    snapshot =
+      await getDocs(
+
+        query(
+          admins,
+          where(
+            "email",
+            "==",
+            user.email
+              .trim()
+              .toLowerCase()
+          )
+        )
+
+      );
+
+  }
+
+
+  if(
+    snapshot.empty
+  ){
+
+    inventarioElementos = {};
+
+    updateStats();
+
+    return;
+
+  }
+
+
+  const dados =
+    snapshot.docs[0].data();
+
+
+  /*
+    O campo elementos é um mapa:
+    {
+      "1": 1,
+      "4": 2,
+      "118": 1
+    }
+
+    O número representa o elemento
+    e o valor representa a quantidade.
+  */
+
+  inventarioElementos =
+    dados.elementos &&
+    typeof dados.elementos === "object"
+      ? dados.elementos
+      : {};
+
+
+  updateStats();
+
+}
+
+
+/* =====================================================
+   AUTENTICAÇÃO
+===================================================== */
+
+onAuthStateChanged(
+
+  auth,
+
+  async user => {
+
+    if(
+      !user
+    ){
+
+      window.location.replace(
+        "index.html"
+      );
+
+      return;
+
+    }
+
+
+    try{
+
+      await carregarColecaoDoJogador(
+        user
+      );
+
+    }catch(error){
+
+      console.error(
+        "Erro ao carregar coleção de elementos:",
+        error
+      );
+
+      inventarioElementos = {};
+
+      updateStats();
+
+    }
+
+  }
+
+);
+
 </script>
 </body>
 </html>
