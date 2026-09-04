@@ -63,6 +63,30 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
 .fig-history{display:grid;gap:8px;margin-top:14px}.fig-history-item{padding:12px;border-radius:12px;background:rgba(255,255,255,.045)}.fig-history-top{display:flex;justify-content:space-between;gap:10px}.fig-history-title{font-weight:900}.fig-history-date{color:#75d4ff;font-size:10px;text-align:right}.fig-history-info{margin-top:6px;color:#a98fbe;font-size:10px;line-height:1.55}
 @media(max-width:760px){.fig-tabs{grid-template-columns:1fr 1fr}.fig-grid{grid-template-columns:1fr}.fig-grid .full{grid-column:auto}.fig-summary{grid-template-columns:1fr 1fr}.fig-rank{grid-template-columns:34px 42px 1fr auto}}
 
+
+/* =====================================================
+   ENVIO DE ELEMENTOS — ADMIN
+===================================================== */
+.element-admin-card{
+  border-color:rgba(86,220,255,.28);
+  background:
+    radial-gradient(circle at 90% 0%,rgba(84,214,255,.12),transparent 32%),
+    rgba(4,31,60,.78);
+}
+.element-admin-help{color:#9dbbd3;font-size:12px;line-height:1.55;margin-bottom:15px}
+.element-admin-grid{display:grid;grid-template-columns:1.35fr 1.2fr .7fr 1fr;gap:10px}
+.element-admin-card label{display:block;color:#a9c9e4;font-size:10px;font-weight:900;margin-bottom:6px;text-transform:uppercase}
+.element-admin-card input,.element-admin-card select{width:100%;min-height:44px;border:1px solid rgba(255,255,255,.12);border-radius:12px;background:#061b35;color:#fff;padding:10px 11px;outline:none}
+.element-admin-card input:focus,.element-admin-card select:focus{border-color:rgba(89,220,255,.65);box-shadow:0 0 0 3px rgba(89,220,255,.08)}
+.element-quick-quantities{display:flex;gap:7px;margin-top:10px}
+.element-quick-quantities button{min-width:48px;height:36px;border:1px solid rgba(86,220,255,.28);border-radius:10px;background:rgba(15,78,118,.45);color:#fff;font-weight:900;cursor:pointer}
+.element-preview{margin-top:12px;padding:12px;border-radius:13px;background:rgba(2,15,34,.6);border:1px solid rgba(255,255,255,.08);color:#79dcff;font-size:12px;font-weight:900;line-height:1.45}
+.element-admin-actions{display:grid;grid-template-columns:1fr 180px;gap:9px;margin-top:12px}
+.element-admin-actions button{min-height:52px;border-radius:14px;padding:12px 16px;font-size:14px;font-weight:900;display:flex;align-items:center;justify-content:center;gap:8px;transition:.15s transform,.15s filter}.element-admin-actions button:active:not(:disabled){transform:scale(.98)}.primary-button{background:linear-gradient(135deg,#18bfff,#087bd7)!important;color:#fff!important;box-shadow:0 8px 20px rgba(0,0,0,.18)}.secondary-button{background:linear-gradient(135deg,#12628e,#0a4165)!important;color:#fff!important;border:1px solid rgba(102,222,255,.35)!important}.element-admin-actions button:disabled{opacity:.55!important}
+.element-delivery-result{margin-top:10px;display:grid;gap:6px}
+.element-delivery-result .sent-item{padding:9px 11px;border-radius:11px;background:rgba(255,255,255,.045);color:#c8e2f4;font-size:11px}
+@media(max-width:800px){.element-admin-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.element-admin-grid,.element-admin-actions{grid-template-columns:1fr}}
 </style>
 <style>
 .fig-package-box{margin-top:12px;padding:14px;border-radius:14px;background:rgba(0,0,0,.14);border:1px solid rgba(190,80,255,.18)}
@@ -73,146 +97,6 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
 .fig-package-preview strong{color:#fff}
 @media(max-width:760px){.fig-package-grid{grid-template-columns:1fr}.fig-package-grid .full{grid-column:auto}}
 
-
-/* =========================================================
-   ENVIO RÁPIDO DE ÁLBUM
-   ========================================================= */
-const QUICK_ALBUMS={
-  1:{nome:"NOITE ASSOMBRADA",ids:[1,2,3,4,5]},
-  2:{nome:"BRUXARIA & MAGIA",ids:[6,7,8,9,10]},
-  3:{nome:"CRIATURAS DAS TREVAS",ids:[11,12,13,14,15]},
-  4:{nome:"REINO DAS ABÓBORAS",ids:[16,17,18,19,20]},
-  5:{nome:"COLEÇÃO LENDÁRIA DOURADA",ids:[21,22,23,24,25]}
-};
-
-function quickAlbumAtualizarInfo(){
-  const id=Number(document.getElementById("quickAlbumId")?.value||1);
-  const q=Number(document.getElementById("quickAlbumQty")?.value||3);
-  const a=QUICK_ALBUMS[id];
-  const info=document.getElementById("quickAlbumInfo");
-  if(info&&a)info.innerHTML=`📚 <b>${a.nome}</b> • serão enviadas <b>${q} cartas</b> aleatórias entre as cartas ${String(a.ids[0]).padStart(2,"0")} e ${String(a.ids[a.ids.length-1]).padStart(2,"0")}.`;
-}
-
-async function quickAlbumLocalizarJogador(alvo){
-  const base=collection(db,"admins");
-  for(const field of ["publicId","email","uid"]){
-    const s=await getDocs(query(base,where(field,"==",alvo)));
-    if(!s.empty)return s.docs[0];
-  }
-  return null;
-}
-
-function quickAlbumEscolher(ids,q){
-  const arr=[...ids];
-  for(let i=arr.length-1;i>0;i--){
-    const j=Math.floor(Math.random()*(i+1));
-    [arr[i],arr[j]]=[arr[j],arr[i]];
-  }
-  return arr.slice(0,q);
-}
-
-async function quickAlbumEnviar(){
-  const msg=document.getElementById("quickAlbumMessage");
-  const btn=document.getElementById("quickAlbumSend");
-  const alvo=document.getElementById("quickAlbumPlayer").value.trim();
-  const albumId=Number(document.getElementById("quickAlbumId").value);
-  const q=Number(document.getElementById("quickAlbumQty").value);
-  const album=QUICK_ALBUMS[albumId];
-
-  if(!alvo)return mostrarMensagem(msg,"❌ Informe o jogador.","error");
-  if(!album)return mostrarMensagem(msg,"❌ Álbum inválido.","error");
-  if(q<3||q>5)return mostrarMensagem(msg,"❌ Escolha entre 3 e 5 cartas.","error");
-
-  btn.disabled=true;
-
-  try{
-    const u=await quickAlbumLocalizarJogador(alvo);
-    if(!u)throw new Error("Jogador não encontrado.");
-
-    const d=u.data()||{};
-    const cartas=quickAlbumEscolher(album.ids,q);
-    const mapa={...(d.cartasHalloween||{})};
-    cartas.forEach(id=>mapa[String(id)]=Number(mapa[String(id)]||0)+1);
-
-    const operacaoId="QALB-"+new Date().toISOString().replace(/\D/g,"").slice(0,14)+"-"+Math.random().toString(36).slice(2,8).toUpperCase();
-
-    await runTransaction(db,async tx=>{
-      const snap=await tx.get(u.ref);
-      if(!snap.exists())throw new Error("Jogador não encontrado.");
-      const atual=snap.data()||{};
-      const novo={...(atual.cartasHalloween||{})};
-      cartas.forEach(id=>novo[String(id)]=Number(novo[String(id)]||0)+1);
-
-      tx.update(u.ref,{
-        cartasHalloween:novo
-      });
-
-      tx.set(doc(db,"historicoFigurinhas",operacaoId),{
-        operacaoId,
-        usuarioId:u.id,
-        publicId:atual.publicId||u.id,
-        usuarioUid:atual.uid||"",
-        usuarioEmail:atual.email||"",
-        usuarioNome:atual.nome||atual.name||"",
-        origem:"ADM",
-        tipo:"pacote",
-        quantidade:q,
-        modoPacote:"album_rapido",
-        albumId:String(albumId),
-        albumNome:album.nome,
-        cartas:Object.fromEntries(cartas.map(id=>[String(id),1])),
-        coringas:{},
-        descricao:`Envio rápido de ${q} cartas do álbum ${album.nome}`,
-        motivo:"Envio Rápido de Álbum",
-        adminEmail:adminUsuario?.email||"",
-        adminUid:adminUsuario?.uid||"",
-        criadoEm:serverTimestamp()
-      });
-
-      tx.set(doc(db,"notificacoes","fig_"+operacaoId),{
-        uid:atual.uid||"",
-        usuarioDocId:u.id,
-        titulo:"🎁 Você recebeu um álbum!",
-        mensagem:`Você recebeu ${q} cartas aleatórias do álbum ${album.nome}.`,
-        tipo:"pacote",
-        icone:"🎁",
-        lida:false,
-        origem:"admin",
-        origemId:operacaoId,
-        criadaEm:serverTimestamp()
-      });
-    });
-
-    const nomes=cartas.map(id=>{
-      const c=typeof figCardById==="function"?figCardById(id):null;
-      return c?.name||`Carta ${id}`;
-    });
-
-    mostrarMensagem(
-      msg,
-      `✅ Álbum enviado! ${q} cartas de ${album.nome}. ${nomes.join(" • ")} • ID: ${operacaoId}`,
-      "success"
-    );
-
-    document.getElementById("quickAlbumPlayer").value="";
-  }catch(e){
-    console.error("ENVIO RAPIDO ALBUM:",e);
-    mostrarMensagem(
-      msg,
-      e?.code==="permission-denied"
-        ?"❌ Firestore bloqueou o envio. Verifique as Rules."
-        :"❌ "+(e.message||"Não foi possível enviar o álbum."),
-      "error"
-    );
-  }finally{
-    btn.disabled=false;
-  }
-}
-
-document.getElementById("quickAlbumId")?.addEventListener("change",quickAlbumAtualizarInfo);
-document.getElementById("quickAlbumQty")?.addEventListener("change",quickAlbumAtualizarInfo);
-document.getElementById("quickAlbumSend")?.addEventListener("click",quickAlbumEnviar);
-quickAlbumAtualizarInfo();
 
 /* =========================================================
    CENTRAL DE NOTIFICAÇÕES
@@ -344,6 +228,187 @@ quickAlbumAtualizarInfo();
 <div id="specialKeyMessage" class="message"></div>
 <div class="key-send-summary"><div class="key-summary"><div class="key-summary-number" id="selectedKeyTheme">—</div><div class="key-summary-label">TEMPORADA SELECIONADA</div></div><div class="key-summary"><div class="key-summary-number" id="selectedKeyTotal">0</div><div class="key-summary-label">CHAVES NO CLIENTE — ESTA TEMPORADA</div></div></div>
 <div class="key-history"><h3>📜 Extrato de chaves enviadas</h3><div id="specialKeyHistory"><div class="empty">🔄 Carregando extrato...</div></div></div>
+</div>
+
+<!-- =====================================================
+     ENVIO DE ELEMENTOS — TABELA PERIÓDICA
+===================================================== -->
+<div class="card element-admin-card" id="elementAdminCard">
+  <h3>⚛️ Enviar elementos</h3>
+  <p class="element-admin-help">
+    Envie elementos diretamente para um jogador. Escolha um elemento específico
+    ou use o sorteio aleatório entre os 118 elementos.
+  </p>
+
+  <div class="element-admin-grid">
+    <div>
+      <label for="elementUserTarget">👤 Jogador</label>
+      <input id="elementUserTarget" type="text"
+             placeholder="ID Adam Games, e-mail ou UID" autocomplete="off">
+    </div>
+
+    <div>
+      <label for="elementSelect">⚛️ Elemento</label>
+      <select id="elementSelect">
+        <option value="">Selecione um elemento...</option>
+<option value="1">1 — H — Hidrogênio</option>
+<option value="2">2 — He — Hélio</option>
+<option value="3">3 — Li — Lítio</option>
+<option value="4">4 — Be — Berílio</option>
+<option value="5">5 — B — Boro</option>
+<option value="6">6 — C — Carbono</option>
+<option value="7">7 — N — Nitrogênio</option>
+<option value="8">8 — O — Oxigênio</option>
+<option value="9">9 — F — Flúor</option>
+<option value="10">10 — Ne — Neônio</option>
+<option value="11">11 — Na — Sódio</option>
+<option value="12">12 — Mg — Magnésio</option>
+<option value="13">13 — Al — Alumínio</option>
+<option value="14">14 — Si — Silício</option>
+<option value="15">15 — P — Fósforo</option>
+<option value="16">16 — S — Enxofre</option>
+<option value="17">17 — Cl — Cloro</option>
+<option value="18">18 — Ar — Argônio</option>
+<option value="19">19 — K — Potássio</option>
+<option value="20">20 — Ca — Cálcio</option>
+<option value="21">21 — Sc — Escândio</option>
+<option value="22">22 — Ti — Titânio</option>
+<option value="23">23 — V — Vanádio</option>
+<option value="24">24 — Cr — Cromo</option>
+<option value="25">25 — Mn — Manganês</option>
+<option value="26">26 — Fe — Ferro</option>
+<option value="27">27 — Co — Cobalto</option>
+<option value="28">28 — Ni — Níquel</option>
+<option value="29">29 — Cu — Cobre</option>
+<option value="30">30 — Zn — Zinco</option>
+<option value="31">31 — Ga — Gálio</option>
+<option value="32">32 — Ge — Germânio</option>
+<option value="33">33 — As — Arsênio</option>
+<option value="34">34 — Se — Selênio</option>
+<option value="35">35 — Br — Bromo</option>
+<option value="36">36 — Kr — Criptônio</option>
+<option value="37">37 — Rb — Rubídio</option>
+<option value="38">38 — Sr — Estrôncio</option>
+<option value="39">39 — Y — Ítrio</option>
+<option value="40">40 — Zr — Zircônio</option>
+<option value="41">41 — Nb — Nióbio</option>
+<option value="42">42 — Mo — Molibdênio</option>
+<option value="43">43 — Tc — Tecnécio</option>
+<option value="44">44 — Ru — Rutênio</option>
+<option value="45">45 — Rh — Ródio</option>
+<option value="46">46 — Pd — Paládio</option>
+<option value="47">47 — Ag — Prata</option>
+<option value="48">48 — Cd — Cádmio</option>
+<option value="49">49 — In — Índio</option>
+<option value="50">50 — Sn — Estanho</option>
+<option value="51">51 — Sb — Antimônio</option>
+<option value="52">52 — Te — Telúrio</option>
+<option value="53">53 — I — Iodo</option>
+<option value="54">54 — Xe — Xenônio</option>
+<option value="55">55 — Cs — Césio</option>
+<option value="56">56 — Ba — Bário</option>
+<option value="57">57 — La — Lantânio</option>
+<option value="58">58 — Ce — Cério</option>
+<option value="59">59 — Pr — Praseodímio</option>
+<option value="60">60 — Nd — Neodímio</option>
+<option value="61">61 — Pm — Promécio</option>
+<option value="62">62 — Sm — Samário</option>
+<option value="63">63 — Eu — Európio</option>
+<option value="64">64 — Gd — Gadolínio</option>
+<option value="65">65 — Tb — Térbio</option>
+<option value="66">66 — Dy — Disprósio</option>
+<option value="67">67 — Ho — Hólmio</option>
+<option value="68">68 — Er — Érbio</option>
+<option value="69">69 — Tm — Túlio</option>
+<option value="70">70 — Yb — Itérbio</option>
+<option value="71">71 — Lu — Lutécio</option>
+<option value="72">72 — Hf — Háfnio</option>
+<option value="73">73 — Ta — Tântalo</option>
+<option value="74">74 — W — Tungstênio</option>
+<option value="75">75 — Re — Rênio</option>
+<option value="76">76 — Os — Ósmio</option>
+<option value="77">77 — Ir — Irídio</option>
+<option value="78">78 — Pt — Platina</option>
+<option value="79">79 — Au — Ouro</option>
+<option value="80">80 — Hg — Mercúrio</option>
+<option value="81">81 — Tl — Tálio</option>
+<option value="82">82 — Pb — Chumbo</option>
+<option value="83">83 — Bi — Bismuto</option>
+<option value="84">84 — Po — Polônio</option>
+<option value="85">85 — At — Astato</option>
+<option value="86">86 — Rn — Radônio</option>
+<option value="87">87 — Fr — Frâncio</option>
+<option value="88">88 — Ra — Rádio</option>
+<option value="89">89 — Ac — Actínio</option>
+<option value="90">90 — Th — Tório</option>
+<option value="91">91 — Pa — Protactínio</option>
+<option value="92">92 — U — Urânio</option>
+<option value="93">93 — Np — Neptúnio</option>
+<option value="94">94 — Pu — Plutônio</option>
+<option value="95">95 — Am — Amerício</option>
+<option value="96">96 — Cm — Cúrio</option>
+<option value="97">97 — Bk — Berquélio</option>
+<option value="98">98 — Cf — Califórnio</option>
+<option value="99">99 — Es — Einstênio</option>
+<option value="100">100 — Fm — Férmio</option>
+<option value="101">101 — Md — Mendelévio</option>
+<option value="102">102 — No — Nobélio</option>
+<option value="103">103 — Lr — Laurêncio</option>
+<option value="104">104 — Rf — Rutherfórdio</option>
+<option value="105">105 — Db — Dúbnio</option>
+<option value="106">106 — Sg — Seabórgio</option>
+<option value="107">107 — Bh — Bóhrio</option>
+<option value="108">108 — Hs — Hássio</option>
+<option value="109">109 — Mt — Meitnério</option>
+<option value="110">110 — Ds — Darmstádio</option>
+<option value="111">111 — Rg — Roentgênio</option>
+<option value="112">112 — Cn — Copernício</option>
+<option value="113">113 — Nh — Nihônio</option>
+<option value="114">114 — Fl — Fleróvio</option>
+<option value="115">115 — Mc — Moscóvio</option>
+<option value="116">116 — Lv — Livermório</option>
+<option value="117">117 — Ts — Tenessino</option>
+<option value="118">118 — Og — Oganessônio</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="elementQuantity">📦 Quantidade</label>
+      <input id="elementQuantity" type="number" min="1" max="1000"
+             value="1" inputmode="numeric">
+    </div>
+
+    <div>
+      <label for="elementSendMode">🎯 Modo</label>
+      <select id="elementSendMode">
+        <option value="selected">Elemento escolhido</option>
+        <option value="random">🎲 Aleatório</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="element-quick-quantities">
+    <button type="button" data-element-qty="1">1</button>
+    <button type="button" data-element-qty="2">2</button>
+    <button type="button" data-element-qty="10">10</button>
+    <button type="button" data-element-qty="100">100</button>
+  </div>
+
+  <div class="element-preview" id="elementPreview">
+    Escolha o elemento e a quantidade que deseja enviar.
+  </div>
+
+  <div class="element-admin-actions">
+    <button class="primary-button" id="sendElementsButton" type="button">
+      ⚛️ ENVIAR ELEMENTOS
+    </button>
+    <button class="secondary-button" id="randomElementButton" type="button">
+      🎲 ALEATÓRIO
+    </button>
+  </div>
+
+  <div id="elementDeliveryMessage" class="message"></div>
+  <div class="element-delivery-result" id="elementDeliveryResult"></div>
 </div>
 
 <div class="card achievements-card">
@@ -648,7 +713,7 @@ quickAlbumAtualizarInfo();
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 import{getAuth,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-import{getFirestore,collection,query,where,getDocs,getCountFromServer,updateDoc,addDoc,doc,setDoc,serverTimestamp,arrayUnion,runTransaction,writeBatch}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+import{getFirestore,collection,query,where,getDocs,getDoc,getCountFromServer,updateDoc,addDoc,doc,setDoc,serverTimestamp,arrayUnion,runTransaction,writeBatch}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 const firebaseConfig={apiKey:"AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",authDomain:"adam-games-21081.firebaseapp.com",projectId:"adam-games-21081",storageBucket:"adam-games-21081.firebasestorage.app",messagingSenderId:"1055528418738",appId:"1:1055528418738:web:5fafdf63424ba9744eb8ab"};
 const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app);
@@ -1246,6 +1311,377 @@ notifDestinoChange();
 
 figPreencherSelects();figAtualizarTipo();
 
+
+
+/* =========================================================
+   ENVIO RÁPIDO DE ÁLBUM
+   ========================================================= */
+const QUICK_ALBUMS={
+  1:{nome:"NOITE ASSOMBRADA",ids:[1,2,3,4,5]},
+  2:{nome:"BRUXARIA & MAGIA",ids:[6,7,8,9,10]},
+  3:{nome:"CRIATURAS DAS TREVAS",ids:[11,12,13,14,15]},
+  4:{nome:"REINO DAS ABÓBORAS",ids:[16,17,18,19,20]},
+  5:{nome:"COLEÇÃO LENDÁRIA DOURADA",ids:[21,22,23,24,25]}
+};
+
+function quickAlbumAtualizarInfo(){
+  const id=Number(document.getElementById("quickAlbumId")?.value||1);
+  const q=Number(document.getElementById("quickAlbumQty")?.value||3);
+  const a=QUICK_ALBUMS[id];
+  const info=document.getElementById("quickAlbumInfo");
+  if(info&&a)info.innerHTML=`📚 <b>${a.nome}</b> • serão enviadas <b>${q} cartas</b> aleatórias entre as cartas ${String(a.ids[0]).padStart(2,"0")} e ${String(a.ids[a.ids.length-1]).padStart(2,"0")}.`;
+}
+
+async function quickAlbumLocalizarJogador(alvo){
+  const base=collection(db,"admins");
+  for(const field of ["publicId","email","uid"]){
+    const s=await getDocs(query(base,where(field,"==",alvo)));
+    if(!s.empty)return s.docs[0];
+  }
+  return null;
+}
+
+function quickAlbumEscolher(ids,q){
+  const arr=[...ids];
+  for(let i=arr.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [arr[i],arr[j]]=[arr[j],arr[i]];
+  }
+  return arr.slice(0,q);
+}
+
+async function quickAlbumEnviar(){
+  const msg=document.getElementById("quickAlbumMessage");
+  const btn=document.getElementById("quickAlbumSend");
+  const alvo=document.getElementById("quickAlbumPlayer").value.trim();
+  const albumId=Number(document.getElementById("quickAlbumId").value);
+  const q=Number(document.getElementById("quickAlbumQty").value);
+  const album=QUICK_ALBUMS[albumId];
+
+  if(!alvo)return mostrarMensagem(msg,"❌ Informe o jogador.","error");
+  if(!album)return mostrarMensagem(msg,"❌ Álbum inválido.","error");
+  if(q<3||q>5)return mostrarMensagem(msg,"❌ Escolha entre 3 e 5 cartas.","error");
+
+  btn.disabled=true;
+
+  try{
+    const u=await quickAlbumLocalizarJogador(alvo);
+    if(!u)throw new Error("Jogador não encontrado.");
+
+    const d=u.data()||{};
+    const cartas=quickAlbumEscolher(album.ids,q);
+    const mapa={...(d.cartasHalloween||{})};
+    cartas.forEach(id=>mapa[String(id)]=Number(mapa[String(id)]||0)+1);
+
+    const operacaoId="QALB-"+new Date().toISOString().replace(/\D/g,"").slice(0,14)+"-"+Math.random().toString(36).slice(2,8).toUpperCase();
+
+    await runTransaction(db,async tx=>{
+      const snap=await tx.get(u.ref);
+      if(!snap.exists())throw new Error("Jogador não encontrado.");
+      const atual=snap.data()||{};
+      const novo={...(atual.cartasHalloween||{})};
+      cartas.forEach(id=>novo[String(id)]=Number(novo[String(id)]||0)+1);
+
+      tx.update(u.ref,{
+        cartasHalloween:novo
+      });
+
+      tx.set(doc(db,"historicoFigurinhas",operacaoId),{
+        operacaoId,
+        usuarioId:u.id,
+        publicId:atual.publicId||u.id,
+        usuarioUid:atual.uid||"",
+        usuarioEmail:atual.email||"",
+        usuarioNome:atual.nome||atual.name||"",
+        origem:"ADM",
+        tipo:"pacote",
+        quantidade:q,
+        modoPacote:"album_rapido",
+        albumId:String(albumId),
+        albumNome:album.nome,
+        cartas:Object.fromEntries(cartas.map(id=>[String(id),1])),
+        coringas:{},
+        descricao:`Envio rápido de ${q} cartas do álbum ${album.nome}`,
+        motivo:"Envio Rápido de Álbum",
+        adminEmail:adminUsuario?.email||"",
+        adminUid:adminUsuario?.uid||"",
+        criadoEm:serverTimestamp()
+      });
+
+      tx.set(doc(db,"notificacoes","fig_"+operacaoId),{
+        uid:atual.uid||"",
+        usuarioDocId:u.id,
+        titulo:"🎁 Você recebeu um álbum!",
+        mensagem:`Você recebeu ${q} cartas aleatórias do álbum ${album.nome}.`,
+        tipo:"pacote",
+        icone:"🎁",
+        lida:false,
+        origem:"admin",
+        origemId:operacaoId,
+        criadaEm:serverTimestamp()
+      });
+    });
+
+    const nomes=cartas.map(id=>{
+      const c=typeof figCardById==="function"?figCardById(id):null;
+      return c?.name||`Carta ${id}`;
+    });
+
+    mostrarMensagem(
+      msg,
+      `✅ Álbum enviado! ${q} cartas de ${album.nome}. ${nomes.join(" • ")} • ID: ${operacaoId}`,
+      "success"
+    );
+
+    document.getElementById("quickAlbumPlayer").value="";
+  }catch(e){
+    console.error("ENVIO RAPIDO ALBUM:",e);
+    mostrarMensagem(
+      msg,
+      e?.code==="permission-denied"
+        ?"❌ Firestore bloqueou o envio. Verifique as Rules."
+        :"❌ "+(e.message||"Não foi possível enviar o álbum."),
+      "error"
+    );
+  }finally{
+    btn.disabled=false;
+  }
+}
+
+document.getElementById("quickAlbumId")?.addEventListener("change",quickAlbumAtualizarInfo);
+document.getElementById("quickAlbumQty")?.addEventListener("change",quickAlbumAtualizarInfo);
+document.getElementById("quickAlbumSend")?.addEventListener("click",quickAlbumEnviar);
+quickAlbumAtualizarInfo();
+
+/* =====================================================
+   ENVIO DE ELEMENTOS — ADMIN
+===================================================== */
+
+const ELEMENTOS_ADMIN = [{"n": 1, "s": "H", "name": "Hidrogênio", "desc": "O elemento mais leve; é abundante no universo e participa da composição da água.", "rarity": "Comum", "row": 1, "col": 1}, {"n": 2, "s": "He", "name": "Hélio", "desc": "Gás nobre muito leve, usado em balões, criogenia e aplicações científicas.", "rarity": "Incomum", "row": 1, "col": 18}, {"n": 3, "s": "Li", "name": "Lítio", "desc": "Metal leve muito usado em baterias recarregáveis e ligas metálicas.", "rarity": "Comum", "row": 2, "col": 1}, {"n": 4, "s": "Be", "name": "Berílio", "desc": "Metal leve e rígido usado em ligas e equipamentos de alta precisão.", "rarity": "Incomum", "row": 2, "col": 2}, {"n": 5, "s": "B", "name": "Boro", "desc": "Semimetal presente em vidros especiais, cerâmicas e materiais resistentes.", "rarity": "Incomum", "row": 2, "col": 13}, {"n": 6, "s": "C", "name": "Carbono", "desc": "Elemento fundamental da vida e base de inúmeros materiais e compostos.", "rarity": "Comum", "row": 2, "col": 14}, {"n": 7, "s": "N", "name": "Nitrogênio", "desc": "Gás que forma a maior parte da atmosfera terrestre e é essencial aos seres vivos.", "rarity": "Comum", "row": 2, "col": 15}, {"n": 8, "s": "O", "name": "Oxigênio", "desc": "Gás essencial à respiração e às reações de combustão.", "rarity": "Comum", "row": 2, "col": 16}, {"n": 9, "s": "F", "name": "Flúor", "desc": "Halogênio muito reativo, encontrado em compostos usados em diversas aplicações.", "rarity": "Incomum", "row": 2, "col": 17}, {"n": 10, "s": "Ne", "name": "Neônio", "desc": "Gás nobre conhecido pelo brilho característico em tubos luminosos.", "rarity": "Incomum", "row": 2, "col": 18}, {"n": 11, "s": "Na", "name": "Sódio", "desc": "Metal alcalino importante em compostos como o cloreto de sódio.", "rarity": "Comum", "row": 3, "col": 1}, {"n": 12, "s": "Mg", "name": "Magnésio", "desc": "Metal leve usado em ligas, materiais e processos biológicos.", "rarity": "Comum", "row": 3, "col": 2}, {"n": 13, "s": "Al", "name": "Alumínio", "desc": "Metal leve e resistente à corrosão, muito usado em embalagens e estruturas.", "rarity": "Comum", "row": 3, "col": 13}, {"n": 14, "s": "Si", "name": "Silício", "desc": "Semimetal essencial para a eletrônica e presente em muitos minerais.", "rarity": "Comum", "row": 3, "col": 14}, {"n": 15, "s": "P", "name": "Fósforo", "desc": "Elemento importante para organismos vivos e para diversos compostos industriais.", "rarity": "Comum", "row": 3, "col": 15}, {"n": 16, "s": "S", "name": "Enxofre", "desc": "Elemento amarelo usado em fertilizantes, química industrial e outros compostos.", "rarity": "Comum", "row": 3, "col": 16}, {"n": 17, "s": "Cl", "name": "Cloro", "desc": "Halogênio usado em tratamento de água e na produção de diversos compostos.", "rarity": "Comum", "row": 3, "col": 17}, {"n": 18, "s": "Ar", "name": "Argônio", "desc": "Gás nobre usado em soldagem, iluminação e ambientes controlados.", "rarity": "Comum", "row": 3, "col": 18}, {"n": 19, "s": "K", "name": "Potássio", "desc": "Metal alcalino importante para funções biológicas e presente em muitos sais.", "rarity": "Comum", "row": 4, "col": 1}, {"n": 20, "s": "Ca", "name": "Cálcio", "desc": "Elemento essencial aos ossos e dentes e muito presente em minerais.", "rarity": "Comum", "row": 4, "col": 2}, {"n": 21, "s": "Sc", "name": "Escândio", "desc": "Metal de transição usado principalmente em ligas especiais.", "rarity": "Raro", "row": 4, "col": 3}, {"n": 22, "s": "Ti", "name": "Titânio", "desc": "Metal resistente e leve, usado em ligas, equipamentos e aplicações médicas.", "rarity": "Incomum", "row": 4, "col": 4}, {"n": 23, "s": "V", "name": "Vanádio", "desc": "Metal usado principalmente para aumentar a resistência de ligas de aço.", "rarity": "Incomum", "row": 4, "col": 5}, {"n": 24, "s": "Cr", "name": "Cromo", "desc": "Metal associado a ligas resistentes à corrosão e ao aço inoxidável.", "rarity": "Incomum", "row": 4, "col": 6}, {"n": 25, "s": "Mn", "name": "Manganês", "desc": "Metal importante na produção de ligas e em processos industriais.", "rarity": "Incomum", "row": 4, "col": 7}, {"n": 26, "s": "Fe", "name": "Ferro", "desc": "Metal fundamental para o aço e para diversas funções biológicas.", "rarity": "Comum", "row": 4, "col": 8}, {"n": 27, "s": "Co", "name": "Cobalto", "desc": "Metal usado em ligas, materiais magnéticos e tecnologias de baterias.", "rarity": "Incomum", "row": 4, "col": 9}, {"n": 28, "s": "Ni", "name": "Níquel", "desc": "Metal resistente à corrosão usado em ligas, revestimentos e baterias.", "rarity": "Incomum", "row": 4, "col": 10}, {"n": 29, "s": "Cu", "name": "Cobre", "desc": "Excelente condutor elétrico, muito usado em fios, cabos e ligas.", "rarity": "Comum", "row": 4, "col": 11}, {"n": 30, "s": "Zn", "name": "Zinco", "desc": "Metal usado em galvanização, ligas e diversos compostos.", "rarity": "Comum", "row": 4, "col": 12}, {"n": 31, "s": "Ga", "name": "Gálio", "desc": "Metal de baixo ponto de fusão usado em semicondutores e tecnologia.", "rarity": "Incomum", "row": 4, "col": 13}, {"n": 32, "s": "Ge", "name": "Germânio", "desc": "Semimetal utilizado em semicondutores, fibras ópticas e sensores.", "rarity": "Incomum", "row": 4, "col": 14}, {"n": 33, "s": "As", "name": "Arsênio", "desc": "Elemento usado em aplicações industriais específicas e em compostos semicondutores.", "rarity": "Raro", "row": 4, "col": 15}, {"n": 34, "s": "Se", "name": "Selênio", "desc": "Elemento usado em eletrônica, vidro e alguns processos industriais.", "rarity": "Incomum", "row": 4, "col": 16}, {"n": 35, "s": "Br", "name": "Bromo", "desc": "Halogênio líquido à temperatura ambiente, usado em diversos compostos industriais.", "rarity": "Incomum", "row": 4, "col": 17}, {"n": 36, "s": "Kr", "name": "Criptônio", "desc": "Gás nobre empregado em iluminação e aplicações especializadas.", "rarity": "Incomum", "row": 4, "col": 18}, {"n": 37, "s": "Rb", "name": "Rubídio", "desc": "Metal alcalino raro usado principalmente em pesquisa e aplicações especializadas.", "rarity": "Raro", "row": 5, "col": 1}, {"n": 38, "s": "Sr", "name": "Estrôncio", "desc": "Metal usado em alguns materiais e compostos, inclusive em efeitos de cor.", "rarity": "Incomum", "row": 5, "col": 2}, {"n": 39, "s": "Y", "name": "Ítrio", "desc": "Metal usado em materiais especiais, lasers, cerâmicas e tecnologia.", "rarity": "Raro", "row": 5, "col": 3}, {"n": 40, "s": "Zr", "name": "Zircônio", "desc": "Metal resistente à corrosão usado em ligas e aplicações nucleares.", "rarity": "Incomum", "row": 5, "col": 4}, {"n": 41, "s": "Nb", "name": "Nióbio", "desc": "Metal usado para produzir ligas de alta resistência e materiais especiais.", "rarity": "Incomum", "row": 5, "col": 5}, {"n": 42, "s": "Mo", "name": "Molibdênio", "desc": "Metal que melhora a resistência de ligas e a estabilidade em altas temperaturas.", "rarity": "Incomum", "row": 5, "col": 6}, {"n": 43, "s": "Tc", "name": "Tecnécio", "desc": "Elemento radioativo usado principalmente em medicina nuclear e pesquisa.", "rarity": "Raro", "row": 5, "col": 7}, {"n": 44, "s": "Ru", "name": "Rutênio", "desc": "Metal raro usado em catalisadores, contatos e ligas especiais.", "rarity": "Raro", "row": 5, "col": 8}, {"n": 45, "s": "Rh", "name": "Ródio", "desc": "Metal muito raro usado em catalisadores e revestimentos de alta resistência.", "rarity": "Raro", "row": 5, "col": 9}, {"n": 46, "s": "Pd", "name": "Paládio", "desc": "Metal raro usado em catalisadores, eletrônica e joalheria.", "rarity": "Raro", "row": 5, "col": 10}, {"n": 47, "s": "Ag", "name": "Prata", "desc": "Metal com excelente condutividade, usado em eletrônica, joalheria e aplicações especiais.", "rarity": "Incomum", "row": 5, "col": 11}, {"n": 48, "s": "Cd", "name": "Cádmio", "desc": "Metal usado em aplicações industriais específicas, pigmentos e algumas baterias.", "rarity": "Incomum", "row": 5, "col": 12}, {"n": 49, "s": "In", "name": "Índio", "desc": "Metal macio usado em semicondutores, telas e revestimentos especiais.", "rarity": "Incomum", "row": 5, "col": 13}, {"n": 50, "s": "Sn", "name": "Estanho", "desc": "Metal usado em soldas, revestimentos e ligas.", "rarity": "Incomum", "row": 5, "col": 14}, {"n": 51, "s": "Sb", "name": "Antimônio", "desc": "Semimetal usado em ligas, materiais e compostos industriais.", "rarity": "Incomum", "row": 5, "col": 15}, {"n": 52, "s": "Te", "name": "Telúrio", "desc": "Semimetal usado em ligas, semicondutores e materiais especiais.", "rarity": "Incomum", "row": 5, "col": 16}, {"n": 53, "s": "I", "name": "Iodo", "desc": "Halogênio essencial à função da tireoide e usado em diversos compostos.", "rarity": "Incomum", "row": 5, "col": 17}, {"n": 54, "s": "Xe", "name": "Xenônio", "desc": "Gás nobre usado em iluminação, propulsão iônica e aplicações especializadas.", "rarity": "Incomum", "row": 5, "col": 18}, {"n": 55, "s": "Cs", "name": "Césio", "desc": "Metal alcalino muito reativo, importante em relógios atômicos e pesquisa.", "rarity": "Incomum", "row": 6, "col": 1}, {"n": 56, "s": "Ba", "name": "Bário", "desc": "Metal alcalino-terroso usado em compostos e aplicações industriais específicas.", "rarity": "Incomum", "row": 6, "col": 2}, {"n": 57, "s": "La", "name": "Lantânio", "desc": "Metal de terras raras usado em materiais ópticos, catalisadores e ligas.", "rarity": "Raro", "row": 9, "col": 4}, {"n": 58, "s": "Ce", "name": "Cério", "desc": "Terra rara usada em catalisadores, vidros e materiais de polimento.", "rarity": "Raro", "row": 9, "col": 5}, {"n": 59, "s": "Pr", "name": "Praseodímio", "desc": "Terra rara usada em ligas, ímãs e materiais ópticos.", "rarity": "Raro", "row": 9, "col": 6}, {"n": 60, "s": "Nd", "name": "Neodímio", "desc": "Terra rara famosa pelos ímãs permanentes muito potentes.", "rarity": "Raro", "row": 9, "col": 7}, {"n": 61, "s": "Pm", "name": "Promécio", "desc": "Terra rara radioativa, usada principalmente em pesquisa e aplicações especializadas.", "rarity": "Super Raro", "row": 9, "col": 8}, {"n": 62, "s": "Sm", "name": "Samário", "desc": "Terra rara usada em ímãs, catalisadores e aplicações especializadas.", "rarity": "Raro", "row": 9, "col": 9}, {"n": 63, "s": "Eu", "name": "Európio", "desc": "Terra rara importante para materiais luminescentes e telas.", "rarity": "Raro", "row": 9, "col": 10}, {"n": 64, "s": "Gd", "name": "Gadolínio", "desc": "Terra rara usada em materiais magnéticos e aplicações especializadas.", "rarity": "Raro", "row": 9, "col": 11}, {"n": 65, "s": "Tb", "name": "Térbio", "desc": "Terra rara usada em materiais luminescentes e dispositivos especiais.", "rarity": "Raro", "row": 9, "col": 12}, {"n": 66, "s": "Dy", "name": "Disprósio", "desc": "Terra rara usada em ímãs e materiais que precisam suportar altas temperaturas.", "rarity": "Raro", "row": 9, "col": 13}, {"n": 67, "s": "Ho", "name": "Hólmio", "desc": "Terra rara com propriedades magnéticas usadas em aplicações especializadas.", "rarity": "Raro", "row": 9, "col": 14}, {"n": 68, "s": "Er", "name": "Érbio", "desc": "Terra rara muito importante para fibras ópticas e aplicações de laser.", "rarity": "Raro", "row": 9, "col": 15}, {"n": 69, "s": "Tm", "name": "Túlio", "desc": "Uma das terras raras mais escassas, usada principalmente em pesquisa e aplicações especiais.", "rarity": "Raro", "row": 9, "col": 16}, {"n": 70, "s": "Yb", "name": "Itérbio", "desc": "Terra rara usada em lasers, materiais especiais e pesquisa.", "rarity": "Raro", "row": 9, "col": 17}, {"n": 71, "s": "Lu", "name": "Lutécio", "desc": "Terra rara densa usada em detectores, pesquisa e aplicações médicas.", "rarity": "Raro", "row": 9, "col": 18}, {"n": 72, "s": "Hf", "name": "Háfnio", "desc": "Metal resistente a altas temperaturas usado em ligas e aplicações tecnológicas.", "rarity": "Raro", "row": 6, "col": 4}, {"n": 73, "s": "Ta", "name": "Tântalo", "desc": "Metal muito resistente à corrosão, usado em eletrônica e equipamentos especiais.", "rarity": "Raro", "row": 6, "col": 5}, {"n": 74, "s": "W", "name": "Tungstênio", "desc": "Metal de altíssimo ponto de fusão usado em ligas e aplicações de alta temperatura.", "rarity": "Incomum", "row": 6, "col": 6}, {"n": 75, "s": "Re", "name": "Rênio", "desc": "Metal extremamente raro usado em superligas e catalisadores.", "rarity": "Raro", "row": 6, "col": 7}, {"n": 76, "s": "Os", "name": "Ósmio", "desc": "Metal muito denso e raro, usado principalmente em aplicações especializadas.", "rarity": "Raro", "row": 6, "col": 8}, {"n": 77, "s": "Ir", "name": "Irídio", "desc": "Metal muito resistente à corrosão e a altas temperaturas.", "rarity": "Raro", "row": 6, "col": 9}, {"n": 78, "s": "Pt", "name": "Platina", "desc": "Metal nobre raro usado em catalisadores, joalheria e tecnologia.", "rarity": "Raro", "row": 6, "col": 10}, {"n": 79, "s": "Au", "name": "Ouro", "desc": "Metal nobre muito resistente à corrosão, valorizado em joalheria e eletrônica.", "rarity": "Raro", "row": 6, "col": 11}, {"n": 80, "s": "Hg", "name": "Mercúrio", "desc": "Metal líquido à temperatura ambiente, historicamente usado em instrumentos e processos específicos.", "rarity": "Incomum", "row": 6, "col": 12}, {"n": 81, "s": "Tl", "name": "Tálio", "desc": "Metal pesado usado em aplicações industriais e científicas específicas.", "rarity": "Incomum", "row": 6, "col": 13}, {"n": 82, "s": "Pb", "name": "Chumbo", "desc": "Metal pesado usado em baterias, proteção contra radiação e aplicações específicas.", "rarity": "Incomum", "row": 6, "col": 14}, {"n": 83, "s": "Bi", "name": "Bismuto", "desc": "Metal pesado relativamente estável, usado em ligas e diversos compostos.", "rarity": "Incomum", "row": 6, "col": 15}, {"n": 84, "s": "Po", "name": "Polônio", "desc": "Elemento radioativo raro, conhecido principalmente por aplicações científicas e históricas.", "rarity": "Super Raro", "row": 6, "col": 16}, {"n": 85, "s": "At", "name": "Astato", "desc": "Halogênio extremamente raro e radioativo, encontrado apenas em quantidades mínimas na natureza.", "rarity": "Super Raro", "row": 6, "col": 17}, {"n": 86, "s": "Rn", "name": "Radônio", "desc": "Gás nobre radioativo produzido naturalmente pelo decaimento de outros elementos.", "rarity": "Super Raro", "row": 6, "col": 18}, {"n": 87, "s": "Fr", "name": "Frâncio", "desc": "Elemento extremamente raro e radioativo, encontrado em quantidades ínfimas.", "rarity": "Super Raro", "row": 7, "col": 1}, {"n": 88, "s": "Ra", "name": "Rádio", "desc": "Elemento radioativo raro, importante historicamente no estudo da radioatividade.", "rarity": "Super Raro", "row": 7, "col": 2}, {"n": 89, "s": "Ac", "name": "Actínio", "desc": "Elemento radioativo usado principalmente em pesquisa e aplicações nucleares.", "rarity": "Super Raro", "row": 10, "col": 4}, {"n": 90, "s": "Th", "name": "Tório", "desc": "Metal radioativo presente em minerais e estudado como possível combustível nuclear.", "rarity": "Super Raro", "row": 10, "col": 5}, {"n": 91, "s": "Pa", "name": "Protactínio", "desc": "Elemento radioativo muito raro, encontrado em pequenas quantidades em minérios de urânio.", "rarity": "Super Raro", "row": 10, "col": 6}, {"n": 92, "s": "U", "name": "Urânio", "desc": "Metal radioativo conhecido por seu uso como combustível em reatores nucleares.", "rarity": "Super Raro", "row": 10, "col": 7}, {"n": 93, "s": "Np", "name": "Neptúnio", "desc": "Elemento radioativo artificial, produzido principalmente em processos nucleares.", "rarity": "Super Raro", "row": 10, "col": 8}, {"n": 94, "s": "Pu", "name": "Plutônio", "desc": "Elemento radioativo produzido em reatores e usado em aplicações nucleares específicas.", "rarity": "Super Raro", "row": 10, "col": 9}, {"n": 95, "s": "Am", "name": "Amerício", "desc": "Elemento radioativo artificial usado, entre outras aplicações, em detectores de fumaça.", "rarity": "Super Raro", "row": 10, "col": 10}, {"n": 96, "s": "Cm", "name": "Cúrio", "desc": "Elemento radioativo artificial usado principalmente em pesquisa.", "rarity": "Super Raro", "row": 10, "col": 11}, {"n": 97, "s": "Bk", "name": "Berquélio", "desc": "Elemento sintético extremamente raro, produzido em laboratórios.", "rarity": "Super Raro", "row": 10, "col": 12}, {"n": 98, "s": "Cf", "name": "Califórnio", "desc": "Elemento sintético radioativo usado em aplicações científicas especializadas.", "rarity": "Super Raro", "row": 10, "col": 13}, {"n": 99, "s": "Es", "name": "Einstênio", "desc": "Elemento sintético extremamente raro, produzido em laboratório.", "rarity": "Super Raro", "row": 10, "col": 14}, {"n": 100, "s": "Fm", "name": "Férmio", "desc": "Elemento sintético radioativo criado em quantidades muito pequenas.", "rarity": "Super Raro", "row": 10, "col": 15}, {"n": 101, "s": "Md", "name": "Mendelévio", "desc": "Elemento sintético produzido em laboratório para pesquisa nuclear.", "rarity": "Super Raro", "row": 10, "col": 16}, {"n": 102, "s": "No", "name": "Nobélio", "desc": "Elemento sintético radioativo estudado em pesquisas sobre elementos pesados.", "rarity": "Super Raro", "row": 10, "col": 17}, {"n": 103, "s": "Lr", "name": "Laurêncio", "desc": "Elemento sintético e radioativo, produzido em aceleradores para pesquisa.", "rarity": "Super Raro", "row": 10, "col": 18}, {"n": 104, "s": "Rf", "name": "Rutherfórdio", "desc": "Elemento superpesado sintético, produzido em laboratório.", "rarity": "Super Raro", "row": 7, "col": 4}, {"n": 105, "s": "Db", "name": "Dúbnio", "desc": "Elemento superpesado sintético, conhecido apenas por experimentos científicos.", "rarity": "Super Raro", "row": 7, "col": 5}, {"n": 106, "s": "Sg", "name": "Seabórgio", "desc": "Elemento superpesado sintético, produzido em aceleradores.", "rarity": "Super Raro", "row": 7, "col": 6}, {"n": 107, "s": "Bh", "name": "Bóhrio", "desc": "Elemento superpesado sintético e altamente instável.", "rarity": "Super Raro", "row": 7, "col": 7}, {"n": 108, "s": "Hs", "name": "Hássio", "desc": "Elemento superpesado sintético, extremamente instável.", "rarity": "Super Raro", "row": 7, "col": 8}, {"n": 109, "s": "Mt", "name": "Meitnério", "desc": "Elemento superpesado sintético conhecido por experimentos de laboratório.", "rarity": "Super Raro", "row": 7, "col": 9}, {"n": 110, "s": "Ds", "name": "Darmstádio", "desc": "Elemento superpesado sintético e altamente instável.", "rarity": "Super Raro", "row": 7, "col": 10}, {"n": 111, "s": "Rg", "name": "Roentgênio", "desc": "Elemento superpesado sintético produzido em quantidades extremamente pequenas.", "rarity": "Super Raro", "row": 7, "col": 11}, {"n": 112, "s": "Cn", "name": "Copernício", "desc": "Elemento superpesado sintético e altamente instável.", "rarity": "Super Raro", "row": 7, "col": 12}, {"n": 113, "s": "Nh", "name": "Nihônio", "desc": "Elemento superpesado sintético produzido em laboratório.", "rarity": "Super Raro", "row": 7, "col": 13}, {"n": 114, "s": "Fl", "name": "Fleróvio", "desc": "Elemento superpesado sintético e extremamente instável.", "rarity": "Super Raro", "row": 7, "col": 14}, {"n": 115, "s": "Mc", "name": "Moscóvio", "desc": "Elemento superpesado sintético conhecido por poucos átomos produzidos.", "rarity": "Super Raro", "row": 7, "col": 15}, {"n": 116, "s": "Lv", "name": "Livermório", "desc": "Elemento superpesado sintético e altamente instável.", "rarity": "Super Raro", "row": 7, "col": 16}, {"n": 117, "s": "Ts", "name": "Tenessino", "desc": "Halogênio superpesado sintético, produzido em laboratório.", "rarity": "Super Raro", "row": 7, "col": 17}, {"n": 118, "s": "Og", "name": "Oganessônio", "desc": "Elemento de número atômico 118, superpesado e produzido artificialmente.", "rarity": "Super Raro", "row": 7, "col": 18}];
+
+const elementUserTarget=document.getElementById("elementUserTarget");
+const elementSelect=document.getElementById("elementSelect");
+const elementQuantity=document.getElementById("elementQuantity");
+const elementSendMode=document.getElementById("elementSendMode");
+const elementPreview=document.getElementById("elementPreview");
+const sendElementsButton=document.getElementById("sendElementsButton");
+const randomElementButton=document.getElementById("randomElementButton");
+const elementDeliveryMessage=document.getElementById("elementDeliveryMessage");
+const elementDeliveryResult=document.getElementById("elementDeliveryResult");
+
+function escaparElemento(v){
+  return String(v??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");
+}
+
+function preencherSelectElementos(){
+  if(!elementSelect)return;
+  // Os 118 elementos já ficam no HTML para o menu funcionar mesmo antes
+  // de qualquer rotina do Firebase terminar de carregar.
+  if(elementSelect.options.length < 119){
+    elementSelect.innerHTML='<option value="">Selecione um elemento...</option>';
+    ELEMENTOS_ADMIN.forEach(e=>{
+      const op=document.createElement("option");
+      op.value=String(e.n);
+      op.textContent=`${e.n} — ${e.s} — ${e.name}`;
+      elementSelect.appendChild(op);
+    });
+  }
+}
+
+function atualizarPreviewElemento(){
+  if(!elementPreview)return;
+  if(elementSendMode?.value==="random"){
+    elementPreview.textContent="🎲 Cada unidade será sorteada separadamente entre os 118 elementos.";
+    return;
+  }
+  const n=Number(elementSelect?.value||0);
+  const e=ELEMENTOS_ADMIN.find(x=>Number(x.n)===n);
+  if(!e){
+    elementPreview.textContent="Escolha o elemento e a quantidade que deseja enviar.";
+    return;
+  }
+  const q=Math.max(1,Math.floor(Number(elementQuantity?.value||1)));
+  elementPreview.innerHTML=`⚛️ <strong>${escaparElemento(e.s)}</strong> — ${escaparElemento(e.name)} • Elemento ${e.n} • Quantidade: ${q}`;
+}
+
+function atualizarModoElemento(){
+  const aleatorio=elementSendMode?.value==="random";
+  if(elementSelect)elementSelect.disabled=aleatorio;
+  atualizarPreviewElemento();
+}
+
+async function localizarClienteElemento(valor){
+  const v=String(valor||"").trim();
+  if(!v)return null;
+  let r=await getDocs(query(collection(db,"admins"),where("publicId","==",v.toUpperCase())));
+  if(r.empty&&v.includes("@"))r=await getDocs(query(collection(db,"admins"),where("email","==",v.toLowerCase())));
+  if(r.empty)r=await getDocs(query(collection(db,"admins"),where("uid","==",v)));
+  if(r.empty){
+    try{
+      const d=await getDoc(doc(db,"admins",v));
+      if(d.exists())return {ref:d.ref,docId:d.id,data:d.data()};
+    }catch(e){}
+  }
+  if(r.empty)return null;
+  const d=r.docs[0];
+  return {ref:d.ref,docId:d.id,data:d.data()};
+}
+
+function sortearElementoAdmin(){
+  return ELEMENTOS_ADMIN[Math.floor(Math.random()*ELEMENTOS_ADMIN.length)];
+}
+
+async function enviarElementosAdmin(){
+  if(!adminUsuario){
+    mostrarMensagem(elementDeliveryMessage,"❌ Administrador não autenticado. Aguarde o login terminar e tente novamente.","error");
+    return;
+  }
+
+  const destino=elementUserTarget.value.trim();
+  const quantidade=Math.floor(Number(elementQuantity.value||0));
+  const modo=elementSendMode.value;
+  const selecionado=Number(elementSelect.value||0);
+
+  if(!destino){
+    mostrarMensagem(elementDeliveryMessage,"❌ Informe o ID Adam Games, e-mail ou UID do jogador.","error");
+    return;
+  }
+  if(!Number.isInteger(quantidade)||quantidade<1||quantidade>1000){
+    mostrarMensagem(elementDeliveryMessage,"❌ A quantidade deve ser um número inteiro entre 1 e 1000.","error");
+    return;
+  }
+  if(modo==="selected"&&!selecionado){
+    mostrarMensagem(elementDeliveryMessage,"❌ Escolha um elemento ou selecione Aleatório.","error");
+    return;
+  }
+
+  sendElementsButton.disabled=true;
+  randomElementButton.disabled=true;
+  sendElementsButton.textContent="⏳ ENVIANDO...";
+  elementDeliveryResult.innerHTML="";
+  mostrarMensagem(elementDeliveryMessage,""," ");
+
+  try{
+    const cliente=await localizarClienteElemento(destino);
+    if(!cliente)throw new Error("Jogador não encontrado pelo ID, e-mail ou UID.");
+
+    const enviados={};
+    const escolhidos=[];
+    for(let i=0;i<quantidade;i++){
+      const elemento=modo==="random"
+        ? sortearElementoAdmin()
+        : ELEMENTOS_ADMIN.find(x=>Number(x.n)===selecionado);
+      if(!elemento)throw new Error("Elemento selecionado não encontrado.");
+      escolhidos.push(elemento);
+      const chave=String(elemento.n);
+      enviados[chave]=Number(enviados[chave]||0)+1;
+    }
+
+    // Gravação atômica: não sobrescreve elementos que outro processo tenha
+    // acrescentado ao mesmo tempo.
+    const ref=cliente.ref;
+    let saldoAnterior=null;
+    await runTransaction(db,async tx=>{
+      const snap=await tx.get(ref);
+      if(!snap.exists())throw new Error("O cadastro do jogador não existe mais.");
+      const dados=snap.data()||{};
+      const atuais=(dados.elementos&&typeof dados.elementos==="object"&&!Array.isArray(dados.elementos))
+        ? {...dados.elementos} : {};
+      saldoAnterior={...atuais};
+      Object.entries(enviados).forEach(([n,q])=>{
+        atuais[n]=Number(atuais[n]||0)+Number(q||0);
+      });
+      tx.update(ref,{elementos:atuais,atualizadoEm:serverTimestamp()});
+    });
+
+    // O envio já foi confirmado no cadastro. O histórico é complementar:
+    // se as Rules do histórico estiverem fechadas, não podemos dizer que o
+    // envio falhou depois de o jogador já ter recebido os elementos.
+    const operacaoId=gerarOperacaoId();
+    let historicoSalvo=true;
+    try{
+      await setDoc(doc(db,"historicoElementos",operacaoId),{
+        id:operacaoId,
+        usuarioId:cliente.docId,
+        usuarioPublicId:cliente.data.publicId||cliente.docId,
+        usuarioUid:cliente.data.uid||"",
+        usuarioNome:cliente.data.nome||cliente.data.name||"",
+        usuarioEmail:cliente.data.email||"",
+        quantidadeTotal:quantidade,
+        modo,
+        elementoSelecionado:modo==="selected"?selecionado:null,
+        elementosEnviados:enviados,
+        adminEmail:adminUsuario.email||"",
+        adminUid:adminUsuario.uid||"",
+        criadoEm:serverTimestamp(),
+        criadoEmTexto:new Date().toISOString()
+      });
+    }catch(historyError){
+      historicoSalvo=false;
+      console.warn("ELEMENTO ENVIADO, MAS HISTÓRICO NÃO FOI GRAVADO:",historyError);
+    }
+
+    // Releitura do documento para confirmar o valor persistido.
+    const confirmado=await getDoc(ref);
+    if(!confirmado.exists())throw new Error("O jogador foi alterado, mas não foi possível confirmar o cadastro.");
+    const elementosConfirmados=confirmado.data()?.elementos||{};
+    for(const [n,q] of Object.entries(enviados)){
+      const esperado=Number((saldoAnterior||{})[n]||0)+Number(q||0);
+      if(Number(elementosConfirmados[n]||0)<esperado){
+        throw new Error("O envio não pôde ser confirmado no Firestore.");
+      }
+    }
+
+    if(usuarioSelecionado?.docId===cliente.docId){
+      usuarioSelecionado.data={...usuarioSelecionado.data,...confirmado.data()};
+      atualizarSaldos();
+    }
+
+    elementDeliveryResult.innerHTML=Object.entries(enviados).map(([n,q])=>{
+      const e=ELEMENTOS_ADMIN.find(x=>String(x.n)===String(n));
+      return `<div class="sent-item">⚛️ <strong>${escaparElemento(e?.s||"")}</strong> — ${escaparElemento(e?.name||"Elemento")} ×${q}</div>`;
+    }).join("");
+
+    mostrarMensagem(
+      elementDeliveryMessage,
+      `✅ ${quantidade} elemento${quantidade===1?"":"s"} enviado${quantidade===1?"":"s"} para ${escaparElemento(cliente.data.nome||cliente.data.publicId||cliente.data.email||"o jogador")}.${historicoSalvo?"":" O envio foi salvo, mas o histórico não pôde ser registrado."}`,
+      "success"
+    );
+
+    elementQuantity.value="1";
+    atualizarPreviewElemento();
+
+  }catch(error){
+    console.error("ERRO AO ENVIAR ELEMENTOS:",error);
+    const detalhe=error?.code==="permission-denied"
+      ? "O Firestore bloqueou a gravação no cadastro do jogador. Verifique as Rules da coleção admins."
+      : (error?.message||"Erro desconhecido.");
+    mostrarMensagem(elementDeliveryMessage,"❌ Não foi possível enviar os elementos. "+detalhe,"error");
+  }finally{
+    sendElementsButton.disabled=false;
+    randomElementButton.disabled=false;
+    sendElementsButton.textContent="⚛️ ENVIAR ELEMENTOS";
+  }
+}
+preencherSelectElementos();
+elementSelect?.addEventListener("change",atualizarPreviewElemento);
+elementQuantity?.addEventListener("input",atualizarPreviewElemento);
+elementSendMode?.addEventListener("change",atualizarModoElemento);
+
+document.querySelectorAll("[data-element-qty]").forEach(button=>{
+  button.addEventListener("click",()=>{
+    elementQuantity.value=button.dataset.elementQty;
+    atualizarPreviewElemento();
+  });
+});
+
+randomElementButton?.addEventListener("click",()=>{
+  elementSendMode.value="random";
+  atualizarModoElemento();
+});
+
+sendElementsButton?.addEventListener("click",enviarElementosAdmin);
+atualizarModoElemento();
 </script>
 </body>
 </html>
