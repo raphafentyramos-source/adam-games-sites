@@ -1258,47 +1258,59 @@ async function enviarElementosAdmin(){
       NOTIFICAÇÃO DO RECEBIMENTO
       O jogador verá um aviso na aba Notificações.
     */
+    const elementosNomes={};
+    const elementosSimbolos={};
     const notificacaoElementos =
       Object.entries(enviados).map(([n,q])=>{
         const e=ELEMENTOS_ADMIN.find(x=>String(x.n)===String(n));
+        if(e){ elementosNomes[n]=e.name; elementosSimbolos[n]=e.s; }
         return `⚛️ ${e?.name||"Elemento"} (${e?.s||""}) ×${q}`;
       }).join(" • ");
 
-    const nomeDestino =
-      cliente.data.nome ||
-      cliente.data.name ||
-      cliente.data.publicId ||
-      cliente.data.email ||
-      "jogador";
-
-    const notificacaoId =
-      "elemento_admin_" +
-      cliente.docId +
-      "_" +
-      Date.now() +
-      "_" +
-      Math.random().toString(36).slice(2,8);
+    const notificacaoQuantidade=Object.values(enviados).reduce((a,b)=>a+Number(b),0);
+    const notificacaoId=
+      "elemento_admin_"+cliente.docId+"_"+Date.now()+"_"+Math.random().toString(36).slice(2,8);
 
     try{
-      await setDoc(
-        doc(db,"notificacoes",notificacaoId),
-        {
-          uid:cliente.data.uid||"",
-          titulo:"⚛️ Você recebeu elementos!",
-          mensagem:
-            `Administrador Adam Games enviou elementos para ${nomeDestino}. ` +
-            notificacaoElementos,
+      if(cliente.data.uid){
+        await setDoc(doc(db,"notificacoes",notificacaoId),{
+          uid:cliente.data.uid,
+          titulo:"🎁 Você recebeu elementos do Administrador!",
+          mensagem:`Administrador Adam Games enviou ${notificacaoQuantidade} elemento${notificacaoQuantidade===1?"":"s"} para sua coleção. ${notificacaoElementos}`,
           tipo:"elemento_recebido",
           origem:"administrador",
           remetenteNome:"Administrador Adam Games",
-          quantidadeTotal:Object.values(enviados).reduce((a,b)=>a+Number(b),0),
+          quantidadeTotal:notificacaoQuantidade,
           elementosRecebidos:enviados,
+          elementosNomes,
+          elementosSimbolos,
           lida:false,
           criadaEm:Timestamp.now()
-        }
-      );
+        });
+      }else{
+        console.warn("Jogador localizado, mas sem UID. A entrega foi feita, porém não foi possível vincular a notificação ao jogador.");
+      }
     }catch(notificacaoError){
       console.warn("Elementos enviados, mas a notificação não pôde ser criada:",notificacaoError);
+    }
+
+    try{
+      await setDoc(doc(db,"historicoColecaoElementos",notificacaoId),{
+        usuarioId:cliente.docId,
+        usuarioUid:cliente.data.uid||"",
+        usuarioPublicId:cliente.data.publicId||cliente.docId,
+        titulo:"🎁 Elementos recebidos",
+        origem:"administrador",
+        origemNome:"Administrador Adam Games",
+        remetenteNome:"Administrador Adam Games",
+        quantidadeTotal:notificacaoQuantidade,
+        elementosRecebidos:enviados,
+        elementosNomes,
+        elementosSimbolos,
+        criadoEm:Timestamp.now()
+      });
+    }catch(historicoError){
+      console.warn("Elementos enviados, mas o histórico do jogador não pôde ser criado:",historicoError);
     }
 
     const operacaoId=gerarOperacaoId();
