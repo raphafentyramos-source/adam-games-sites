@@ -24,12 +24,89 @@ h1{margin:8px 0;font-size:clamp(30px,6vw,56px);line-height:1;color:#fff;text-sha
 a,.btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 20px;border-radius:13px;text-decoration:none;font-weight:800;border:1px solid #48cfff88;color:#fff;background:#0a2748;cursor:pointer}
 .primary{background:linear-gradient(135deg,#009eea,#6b35ff);border:0}
 .trade{margin-top:25px;padding:22px;border-radius:20px;background:#07152be8;border:1px solid #a53cff66}
+
+.collection-section{
+  margin-top:25px;
+  padding:22px;
+  border-radius:20px;
+  background:#07152be8;
+  border:1px solid #36baff55;
+}
+.collection-section h2{margin:0 0 6px}
+.collection-help{margin:0 0 16px;color:#aebfd4;line-height:1.5}
+.element-grid{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:9px;
+}
+.element-card{
+  position:relative;
+  min-height:94px;
+  padding:10px 7px;
+  border-radius:13px;
+  background:#0b2140;
+  border:1px solid #ffffff16;
+  text-align:center;
+  transition:.15s ease;
+}
+.element-card.owned{
+  border-color:#36c9ff88;
+  box-shadow:0 0 14px #00bfff16;
+}
+.element-card.missing{
+  opacity:.48;
+  filter:saturate(.35);
+}
+.element-number{font-size:10px;color:#7fa4c4}
+.element-symbol{font-size:25px;font-weight:1000;color:#fff;margin:3px 0}
+.element-name{font-size:9px;color:#a9bfd8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.element-qty{
+  display:inline-flex;
+  min-width:22px;
+  height:22px;
+  align-items:center;
+  justify-content:center;
+  margin-top:7px;
+  padding:0 6px;
+  border-radius:99px;
+  background:#06172d;
+  color:#62e0ff;
+  font-size:10px;
+  font-weight:1000;
+}
+.element-lock{font-size:12px;position:absolute;top:7px;right:7px}
+.element-rarity{font-size:8px;color:#8099b4;margin-top:4px}
+
+@media(max-width:700px){
+  .element-grid{grid-template-columns:repeat(4,1fr);gap:7px}
+  .element-card{min-height:86px;padding:8px 5px}
+  .element-symbol{font-size:22px}
+}
+@media(max-width:420px){
+  .element-grid{grid-template-columns:repeat(3,1fr)}
+}
+
 .trade h2{margin-top:0}
 .trade p{color:#aebfd4;line-height:1.55}
 .rules{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}
 .rule{padding:14px;border-radius:14px;background:#0b2140;border:1px solid #ffffff12}
 .rule b{color:#5edcff}
 @media(max-width:700px){.wrap{padding-top:15px}.hero{padding:20px}.cards,.rules{grid-template-columns:1fr}}
+
+.trade-section{margin-top:25px;padding:22px;border-radius:20px;background:#07152be8;border:1px solid #55e6a766}
+.trade-section h2{margin:0 0 6px}
+.trade-help{margin:0;color:#aebfd4;line-height:1.5}
+.trade-limit{margin-top:15px;padding:12px 14px;border-radius:12px;background:#0b2140;border:1px solid #ffffff12;color:#62e0ff;font-weight:900}
+.trade-form{display:grid;grid-template-columns:1.4fr 1fr;gap:12px;margin-top:15px}
+.trade-form label{display:flex;flex-direction:column;gap:7px;color:#9eb6d0;font-size:12px;font-weight:800}
+.trade-form input,.trade-form select{width:100%;min-height:46px;padding:11px 12px;border-radius:12px;border:1px solid #ffffff18;background:#061226;color:#fff;outline:none}
+.trade-selected{margin-top:12px;padding:12px;border-radius:12px;background:#061226;color:#cfe1f4;font-weight:800}
+.trade-send{width:100%;margin-top:14px;min-height:48px;border:0;border-radius:13px;background:#55e6a7;color:#04100c;font-weight:1000;cursor:pointer}
+.trade-send:disabled{opacity:.45;cursor:not-allowed}
+.trade-message{margin-top:12px;min-height:20px;font-weight:800}
+.trade-message.ok{color:#55e6a7}.trade-message.error{color:#ff758f}
+@media(max-width:700px){.trade-form{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -48,7 +125,7 @@ a,.btn{display:inline-flex;align-items:center;justify-content:center;padding:14p
 <div class="cards">
 <div class="card"><b>🔬 ENCONTRE</b><span>Avance nos desafios para ganhar elementos. Ao começar, você já recebe 1 elemento entre os números 1 e 5.</span></div>
 <div class="card"><b>♻️ DUPLICATAS</b><span>Quando você recebe um elemento que já possui, ele fica registrado como duplicata para futuras trocas.</span></div>
-<div class="card"><b>🤝 TROQUE</b><span>Envie duplicatas para outros jogadores. Jogadores comuns têm 1 troca a cada 24h; VIP têm 2 trocas a cada 24h.</span></div>
+<div class="card"><b>🤝 TROQUE</b><span>Envie duplicatas para outros jogadores. Jogadores comuns têm 1 troca a cada 24h; VIP têm 2 envios a cada 24h.</span></div>
 </div>
 
 <div class="trade">
@@ -61,7 +138,7 @@ a,.btn{display:inline-flex;align-items:center;justify-content:center;padding:14p
 </div>
 </div>
 
-<section class="trade" style="margin-top:25px" id="tradeSection"><h2>♻️ Enviar elemento</h2><p>Escolha um elemento que você possui e envie para outro jogador. Cada envio manda <b>1 elemento</b>. Recebimentos são ilimitados.</p><div class="rules"><div class="rule"><b>👤 Não VIP</b><br>1 envio a cada 24 horas.</div><div class="rule"><b>⭐ VIP</b><br>2 envios a cada 24 horas.</div></div><div id="tradeLimit" style="margin-top:14px;padding:14px;border-radius:14px;background:#0b2140;border:1px solid #ffffff12;color:#62e0ff;font-weight:900">⏳ Carregando limite...</div><div style="display:grid;grid-template-columns:1.4fr 1fr;gap:12px;margin-top:14px"><input id="tradeRecipient" placeholder="ID Adam Games, e-mail ou UID" style="padding:12px;border-radius:12px;border:1px solid #ffffff18;background:#061226;color:#fff"><select id="tradeElement" style="padding:12px;border-radius:12px;border:1px solid #ffffff18;background:#061226;color:#fff"><option value="">Selecione seu elemento</option></select></div><div id="tradeSelected" style="margin-top:12px;padding:12px;border-radius:12px;background:#061226;color:#cfe1f4">Selecione um elemento que você possui.</div><button id="tradeSendButton" type="button" style="width:100%;margin-top:14px;padding:13px;border:0;border-radius:12px;background:#55e6a7;color:#04100c;font-weight:1000">♻️ ENVIAR 1 ELEMENTO</button><div id="tradeMessage" style="margin-top:12px;font-weight:900"></div></section>
+<section class="trade" style="margin-top:25px">
 <h2>⚛️ Como adquirir elementos</h2>
 <p>Você pode montar sua coleção de várias formas. A primeira recompensa é entregue logo no início para incentivar o jogador a começar a estante.</p>
 
@@ -73,6 +150,32 @@ a,.btn{display:inline-flex;align-items:center;justify-content:center;padding:14p
 <div class="rule"><b>♻️ REPETIDOS</b><br>Se você receber um elemento que já possui, ele vira duplicata e pode ser usado nas trocas.</div>
 <div class="rule"><b>⚛️ ELEMENTO SURPRESA</b><br>Não VIP: <b>120 horas</b>. VIP: <b>60 horas</b>. Cada recompensa entrega 1 elemento e pode vir repetido.</div>
 </div>
+</section>
+
+<section class="trade-section" id="tradeSection">
+<h2>♻️ ENVIAR ELEMENTO</h2>
+<p class="trade-help">Cada envio entrega exatamente 1 elemento. Não VIP: 1 envio a cada 24 horas. VIP: 2 envios a cada 24 horas. Você pode receber elementos ilimitadamente.</p>
+<div class="trade-limit" id="tradeLimit">⏳ Carregando...</div>
+<div class="trade-form">
+  <label>Jogador que vai receber
+    <input id="tradeRecipient" type="text" placeholder="ID Adam Games, e-mail ou UID" autocomplete="off">
+  </label>
+  <label>Elemento que você vai enviar
+    <select id="tradeElement"><option value="">Selecione um elemento que possui</option></select>
+  </label>
+</div>
+<div class="trade-selected" id="tradeSelected">Selecione um elemento que você possui.</div>
+<button class="trade-send" id="tradeSendButton" type="button">♻️ ENVIAR 1 ELEMENTO</button>
+<div class="trade-message" id="tradeMessage"></div>
+</section>
+
+<section class="collection-section">
+<h2>⚛️ SUA ESTANTE</h2>
+<p class="collection-help">
+Cada quadrinho mostra o elemento e a quantidade que você possui.
+Os que ainda não foram encontrados ficam bloqueados.
+</p>
+<div class="element-grid" id="elementGrid"></div>
 </section>
 
 <div class="actions">
@@ -102,10 +205,8 @@ import {
   query,
   where,
   getDocs,
-  runTransaction,
-  doc,
-  serverTimestamp
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+  getDoc,
+  runTransaction} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
 const firebaseConfig = {
@@ -216,8 +317,93 @@ function updateStats(){
 
   }
 
+  renderElementGrid();
+
 }
 
+
+
+
+/* =====================================================
+   RENDERIZAR OS 118 ELEMENTOS
+===================================================== */
+
+function renderElementGrid(){
+
+  const grid =
+    document.getElementById(
+      "elementGrid"
+    );
+
+  if(!grid){
+    return;
+  }
+
+  grid.innerHTML = "";
+
+  DATA.forEach(
+    elemento => {
+
+      const quantidade =
+        Number(
+          inventarioElementos[
+            String(elemento.n)
+          ] || 0
+        );
+
+      const card =
+        document.createElement(
+          "div"
+        );
+
+      card.className =
+        "element-card " +
+        (
+          quantidade > 0
+            ? "owned"
+            : "missing"
+        );
+
+      card.title =
+        elemento.name +
+        " • " +
+        elemento.rarity;
+
+      card.innerHTML = `
+        ${
+          quantidade <= 0
+            ? '<div class="element-lock">🔒</div>'
+            : ''
+        }
+        <div class="element-number">
+          Nº ${elemento.n}
+        </div>
+        <div class="element-symbol">
+          ${elemento.s}
+        </div>
+        <div class="element-name">
+          ${elemento.name}
+        </div>
+        <div class="element-qty">
+          ${
+            quantidade > 0
+              ? "x" + quantidade
+              : "?"
+          }
+        </div>
+        <div class="element-rarity">
+          ${elemento.rarity}
+        </div>
+      `;
+
+      grid.appendChild(
+        card
+      );
+
+    }
+  );
+
+}
 
 /* =====================================================
    BUSCAR CADASTRO DO JOGADOR
@@ -324,13 +510,17 @@ async function carregarColecaoDoJogador(
    AUTENTICAÇÃO
 ===================================================== */
 
-\n/* =====================================================\n   TROCAS DE ELEMENTOS\n   Não VIP: 1 envio/24h | VIP: 2 envios/24h\n   Cada envio = 1 elemento | receber = ilimitado\n===================================================== */\nlet tradeUser=null, tradeDocRef=null, tradeData=null;\nconst TRADE_WINDOW=24*60*60*1000;\nfunction tradeDate(v){ if(!v)return null; if(typeof v.toDate==='function')return v.toDate(); if(v instanceof Date)return v; return new Date(v); }\nfunction tradeName(n){const x=DATA.find(e=>Number(e.n)===Number(n)); return x?`${x.n} — ${x.name} (${x.s})`:`Elemento ${n}`;}\nfunction tradeCleanTimes(d){const now=Date.now(); return (Array.isArray(d.enviosElementos24h)?d.enviosElementos24h:[]).map(v=>tradeDate(v)).filter(x=>x&&now-x.getTime()<TRADE_WINDOW).map(x=>x.toISOString());}\nfunction tradeLimit(d){return d&&d.vip===true?2:1;}\nfunction tradeRefresh(){\n const box=document.getElementById('tradeLimit'), btn=document.getElementById('tradeSendButton'); if(!box||!tradeData)return;\n const times=tradeCleanTimes(tradeData), lim=tradeLimit(tradeData), rest=Math.max(0,lim-times.length);\n if(rest>0){box.textContent=`📤 Envios disponíveis: ${rest}/${lim} • 1 elemento por envio • Recebimentos ilimitados`; if(btn)btn.disabled=false;}\n else {const oldest=new Date(times[0]); const ms=Math.max(0,oldest.getTime()+TRADE_WINDOW-Date.now()); const s=Math.ceil(ms/1000),hh=String(Math.floor(s/3600)).padStart(2,'0'),mm=String(Math.floor(s%3600/60)).padStart(2,'0'),ss=String(s%60).padStart(2,'0'); box.textContent=`⏳ Limite atingido. Próximo envio em ${hh}:${mm}:${ss}`; if(btn)btn.disabled=true;}\n}\nfunction tradeOptions(){\n const sel=document.getElementById('tradeElement'); if(!sel||!tradeData)return; sel.innerHTML='<option value="">Selecione seu elemento</option>';\n Object.entries(tradeData.elementos||{}).filter(([n,q])=>Number(q)>0&&Number(n)>=1&&Number(n)<=118).sort((a,b)=>Number(a[0])-Number(b[0])).forEach(([n,q])=>{const o=document.createElement('option');o.value=n;o.textContent=`${tradeName(n)} • x${q}`;sel.appendChild(o);});\n if(!sel.options.length||sel.options.length===1){const o=document.createElement('option');o.disabled=true;o.textContent='Você não possui elementos';sel.appendChild(o);}\n tradeSelected();\n}\nfunction tradeSelected(){const n=document.getElementById('tradeElement')?.value,b=document.getElementById('tradeSelected');if(!b)return;b.textContent=n?`⚛️ ${tradeName(n)} • você possui x${Number((tradeData.elementos||{})[n]||0)} • este envio manda 1 unidade.`:'Selecione um elemento que você possui.';}\nasync function tradeFind(term){\n const base=collection(db,'admins'); for(const field of ['publicId','email','uid']){try{const s=await getDocs(query(base,where(field,'==',term)));if(!s.empty)return s.docs[0];}catch(e){}} throw new Error('Jogador não encontrado.');\n}\nasync function tradeSend(){\n const msg=document.getElementById('tradeMessage'),btn=document.getElementById('tradeSendButton'),term=document.getElementById('tradeRecipient')?.value.trim(),n=Number(document.getElementById('tradeElement')?.value); msg.textContent='';msg.style.color='';\n if(!tradeUser||!tradeDocRef||!tradeData){msg.textContent='Faça login para enviar elementos.';msg.style.color='#ff758f';return;}\n if(!term){msg.textContent='Informe o jogador que vai receber.';msg.style.color='#ff758f';return;} if(!n){msg.textContent='Selecione o elemento.';msg.style.color='#ff758f';return;}\n const destino=await tradeFind(term); if(destino.id===tradeDocRef.id){msg.textContent='Você não pode enviar para você mesmo.';msg.style.color='#ff758f';return;}\n btn.disabled=true;\n try{\n  const destinoRef=destino.ref, historicoRef=doc(collection(db,'historicoTrocasElementos'));\n  await runTransaction(db,async tx=>{\n   const remSnap=await tx.get(tradeDocRef);
-   const destSnap=await tx.get(destinoRef);\n   if(!remSnap.exists()||!destSnap.exists())throw new Error('Cadastro não encontrado.');\n   const rem=remSnap.data()||{}, dest=destSnap.data()||{}, agora=Date.now(),lim=tradeLimit(rem);\n   const tempos=(Array.isArray(rem.enviosElementos24h)?rem.enviosElementos24h:[]).map(v=>tradeDate(v)).filter(x=>x&&agora-x.getTime()<TRADE_WINDOW).map(x=>x.toISOString());\n   if(tempos.length>=lim)throw new Error('Seu limite de envios de 24 horas foi atingido.');\n   const r={...(rem.elementos||{})}, d={...(dest.elementos||{})}; const qtd=Number(r[String(n)]||0); if(qtd<1)throw new Error('Você não possui mais esse elemento.');\n   r[String(n)]=qtd-1;if(r[String(n)]<=0)delete r[String(n)]; d[String(n)]=Number(d[String(n)]||0)+1; tempos.push(new Date(agora).toISOString());\n   tx.update(tradeDocRef,{elementos:r,enviosElementos24h:tempos}); tx.update(destinoRef,{elementos:d});\n   tx.set(historicoRef,{tipo:'envio_elemento',remetenteId:rem.publicId||tradeDocRef.id,remetenteUid:rem.uid||tradeUser.uid,destinatarioId:dest.publicId||destinoRef.id,destinatarioUid:dest.uid||'',elementoNumero:n,elementoNome:tradeName(n),quantidade:1,vipRemetente:rem.vip===true,limite24h:lim,criadoEm:serverTimestamp()});\n  });\n  msg.textContent=`✅ ${tradeName(n)} enviado com sucesso!`;msg.style.color='#55e6a7';\n  const s=await getDocs(query(collection(db,'admins'),where('uid','==',tradeUser.uid))); if(!s.empty){tradeDocRef=s.docs[0].ref;tradeData=s.docs[0].data()||{};} tradeOptions();tradeRefresh();\n }catch(e){msg.textContent=`❌ ${e.message||'Não foi possível enviar.'}`;msg.style.color='#ff758f';}finally{btn.disabled=false;tradeRefresh();}\n}\ndocument.getElementById('tradeElement')?.addEventListener('change',tradeSelected);document.getElementById('tradeSendButton')?.addEventListener('click',tradeSend);\nsetInterval(tradeRefresh,1000);\n
 onAuthStateChanged(
 
   auth,
 
   async user => {
+    try{
+      await carregarTradeUsuario(user);
+    }catch(tradeError){
+      console.error("Trocas de elementos:",tradeError);
+    }
+
 
     if(
       !user
@@ -351,18 +541,6 @@ onAuthStateChanged(
         user
       );
 
-      tradeUser = user;
-      let tradeSnap = await getDocs(query(collection(db,"admins"),where("uid","==",user.uid)));
-      if(tradeSnap.empty && user.email){
-        tradeSnap = await getDocs(query(collection(db,"admins"),where("email","==",user.email.trim().toLowerCase())));
-      }
-      if(!tradeSnap.empty){
-        tradeDocRef = tradeSnap.docs[0].ref;
-        tradeData = tradeSnap.docs[0].data() || {};
-        tradeOptions();
-        tradeRefresh();
-      }
-
     }catch(error){
 
       console.error(
@@ -379,6 +557,289 @@ onAuthStateChanged(
   }
 
 );
+
+
+/* =====================================================
+   TROCAS DE ELEMENTOS
+   Não VIP: 1 envio / 24h
+   VIP: 2 envios / 24h
+   Cada envio: exatamente 1 elemento
+   Recebimento: ilimitado
+===================================================== */
+
+const TRADE_24H = 24 * 60 * 60 * 1000;
+let tradeAuthUser = null;
+let tradeDoc = null;
+let tradeData = null;
+let tradeInterval = null;
+
+function tradeDate(v){
+  if(!v) return null;
+  if(typeof v.toDate === "function") return v.toDate();
+  if(v instanceof Date) return v;
+  if(typeof v === "number") return new Date(v);
+  if(typeof v === "string"){
+    const d = new Date(v);
+    return isNaN(d.getTime()) ? null : d;
+  }
+  return null;
+}
+
+function tradeLimit(data){
+  return data?.vip === true ? 2 : 1;
+}
+
+function tradeState(data){
+  const limit = tradeLimit(data);
+  const last = tradeDate(data?.ultimoEnvioElemento);
+  let used = Number(data?.enviosElementosUltimas24h || 0);
+
+  if(!last || Date.now() - last.getTime() >= TRADE_24H){
+    return {limit, used:0, remaining:limit, next:null};
+  }
+
+  used = Math.min(Math.max(used,0), limit);
+  return {
+    limit,
+    used,
+    remaining: Math.max(0, limit-used),
+    next: new Date(last.getTime()+TRADE_24H)
+  };
+}
+
+function tradeInventory(data){
+  return data?.elementos && typeof data.elementos === "object" ? data.elementos : {};
+}
+
+function tradeInfo(n){
+  const e = DATA.find(x=>Number(x.n)===Number(n));
+  return e ? `${e.n} — ${e.name} (${e.s})` : `Elemento ${n}`;
+}
+
+function tradeTime(ms){
+  if(ms<=0) return "00:00:00";
+  const s=Math.ceil(ms/1000);
+  const h=Math.floor(s/3600);
+  const m=Math.floor((s%3600)/60);
+  const sec=s%60;
+  return [h,m,sec].map(x=>String(x).padStart(2,"0")).join(":");
+}
+
+function renderTradeElements(){
+  const select=document.getElementById("tradeElement");
+  if(!select || !tradeData) return;
+  const inv=tradeInventory(tradeData);
+  select.innerHTML='<option value="">Selecione um elemento que possui</option>';
+
+  DATA.forEach(e=>{
+    const q=Number(inv[String(e.n)]||0);
+    if(q>0){
+      const opt=document.createElement("option");
+      opt.value=String(e.n);
+      opt.textContent=`${e.n} — ${e.name} (${e.s}) • x${q}`;
+      select.appendChild(opt);
+    }
+  });
+
+  if(select.options.length===1){
+    const opt=document.createElement("option");
+    opt.disabled=true;
+    opt.textContent="Você ainda não possui elementos";
+    select.appendChild(opt);
+  }
+  updateTradeSelected();
+}
+
+function updateTradeSelected(){
+  const select=document.getElementById("tradeElement");
+  const box=document.getElementById("tradeSelected");
+  if(!select||!box) return;
+  if(!select.value){
+    box.textContent="Selecione um elemento que você possui.";
+    return;
+  }
+  const q=Number(tradeInventory(tradeData)[select.value]||0);
+  box.textContent=`⚛️ ${tradeInfo(Number(select.value))} • Você possui x${q}. O envio manda 1 unidade.`;
+}
+
+function updateTradeLimit(){
+  const box=document.getElementById("tradeLimit");
+  const btn=document.getElementById("tradeSendButton");
+  if(!box||!tradeData) return;
+
+  const st=tradeState(tradeData);
+  if(st.remaining>0){
+    box.textContent=`📤 Envios disponíveis: ${st.remaining}/${st.limit} • 1 elemento por envio • 📥 recebimentos ilimitados`;
+    if(btn) btn.disabled=false;
+  }else{
+    box.textContent=`⏳ Limite atingido. Próximo envio em ${tradeTime(st.next.getTime()-Date.now())} • 📥 recebimentos ilimitados`;
+    if(btn) btn.disabled=true;
+  }
+}
+
+async function carregarTradeUsuario(user){
+  tradeAuthUser=user;
+  let snap=null;
+
+  const q1=await getDocs(query(collection(db,"admins"),where("uid","==",user.uid)));
+  if(!q1.empty) snap=q1.docs[0];
+
+  if(!snap && user.email){
+    const q2=await getDocs(query(collection(db,"admins"),where("email","==",user.email)));
+    if(!q2.empty) snap=q2.docs[0];
+  }
+
+  if(!snap) throw new Error("Cadastro do jogador não encontrado.");
+
+  tradeDoc=snap;
+  tradeData=snap.data()||{};
+  renderTradeElements();
+  updateTradeLimit();
+
+  if(tradeInterval) clearInterval(tradeInterval);
+  tradeInterval=setInterval(updateTradeLimit,1000);
+}
+
+async function encontrarDestinatario(term){
+  const value=String(term||"").trim();
+  if(!value) throw new Error("Informe o ID Adam Games, e-mail ou UID.");
+
+  for(const field of ["publicId","email","uid"]){
+    try{
+      const r=await getDocs(query(collection(db,"admins"),where(field,"==",value)));
+      if(!r.empty) return r.docs[0];
+    }catch(e){}
+  }
+
+  try{
+    const ref=doc(db,"admins",value);
+    const snap=await getDoc(ref);
+    if(snap.exists()) return snap;
+  }catch(e){}
+
+  throw new Error("Jogador não encontrado.");
+}
+
+async function enviarElemento(){
+  const msg=document.getElementById("tradeMessage");
+  const btn=document.getElementById("tradeSendButton");
+  const recipient=document.getElementById("tradeRecipient").value.trim();
+  const number=Number(document.getElementById("tradeElement").value);
+
+  msg.textContent="";
+  msg.className="trade-message";
+
+  if(!tradeDoc||!tradeAuthUser){
+    msg.textContent="❌ Faça login para enviar elementos.";
+    msg.className="trade-message error";
+    return;
+  }
+  if(!recipient){
+    msg.textContent="❌ Informe quem vai receber.";
+    msg.className="trade-message error";
+    return;
+  }
+  if(!number||number<1||number>118){
+    msg.textContent="❌ Selecione um elemento.";
+    msg.className="trade-message error";
+    return;
+  }
+
+  const before=tradeState(tradeData);
+  if(before.remaining<=0){
+    msg.textContent="❌ Você já atingiu seu limite de envios de 24 horas.";
+    msg.className="trade-message error";
+    return;
+  }
+
+  if(Number(tradeInventory(tradeData)[String(number)]||0)<1){
+    msg.textContent="❌ Você não possui esse elemento.";
+    msg.className="trade-message error";
+    return;
+  }
+
+  btn.disabled=true;
+
+  try{
+    const dest=await encontrarDestinatario(recipient);
+    if(dest.id===tradeDoc.id) throw new Error("Você não pode enviar um elemento para você mesmo.");
+
+    const senderRef=doc(db,"admins",tradeDoc.id);
+    const receiverRef=doc(db,"admins",dest.id);
+    const historyRef=doc(collection(db,"historicoTrocasElementos"));
+
+    await runTransaction(db,async(tx)=>{
+      const senderSnap=await tx.get(senderRef);
+      const receiverSnap=await tx.get(receiverRef);
+
+      if(!senderSnap.exists()) throw new Error("Seu cadastro não foi encontrado.");
+      if(!receiverSnap.exists()) throw new Error("Destinatário não encontrado.");
+
+      const sender=senderSnap.data()||{};
+      const receiver=receiverSnap.data()||{};
+      const state=tradeState(sender);
+
+      if(state.remaining<=0) throw new Error("Seu limite de envios de 24 horas foi atingido.");
+
+      const senderInv={...tradeInventory(sender)};
+      const receiverInv={...tradeInventory(receiver)};
+      const current=Number(senderInv[String(number)]||0);
+
+      if(current<1) throw new Error("Você não possui mais esse elemento.");
+
+      senderInv[String(number)]=current-1;
+      if(senderInv[String(number)]<=0) delete senderInv[String(number)];
+
+      receiverInv[String(number)]=Number(receiverInv[String(number)]||0)+1;
+
+      const now=serverTimestamp();
+
+      tx.update(senderRef,{
+        elementos:senderInv,
+        ultimoEnvioElemento:now,
+        enviosElementosUltimas24h:state.used+1
+      });
+
+      tx.update(receiverRef,{elementos:receiverInv});
+
+      tx.set(historyRef,{
+        tipo:"envio_elemento",
+        remetenteId:sender.publicId||senderRef.id,
+        remetenteUid:sender.uid||tradeAuthUser.uid,
+        remetenteEmail:sender.email||tradeAuthUser.email||"",
+        destinatarioId:receiver.publicId||receiverRef.id,
+        destinatarioUid:receiver.uid||"",
+        destinatarioEmail:receiver.email||"",
+        elementoNumero:number,
+        elementoNome:tradeInfo(number),
+        quantidade:1,
+        vipRemetente:sender.vip===true,
+        limiteEnvios24h:state.limit,
+        criadoEm:now
+      });
+    });
+
+    msg.textContent=`✅ ${tradeInfo(number)} enviado com sucesso!`;
+    msg.className="trade-message ok";
+
+    await carregarTradeUsuario(tradeAuthUser);
+    document.getElementById("tradeRecipient").value="";
+
+  }catch(e){
+    console.error(e);
+    msg.textContent=`❌ ${e.message||"Não foi possível enviar o elemento."}`;
+    msg.className="trade-message error";
+    updateTradeLimit();
+  }finally{
+    const st=tradeData?tradeState(tradeData):{remaining:0};
+    btn.disabled=st.remaining<=0;
+  }
+}
+
+document.getElementById("tradeElement")?.addEventListener("change",updateTradeSelected);
+document.getElementById("tradeSendButton")?.addEventListener("click",enviarElemento);
+
+window.carregarTradeUsuario=carregarTradeUsuario;
 
 </script>
 </body>
