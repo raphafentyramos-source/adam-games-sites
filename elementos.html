@@ -92,11 +92,6 @@ a,.btn{display:inline-flex;align-items:center;justify-content:center;padding:14p
 .rule{padding:14px;border-radius:14px;background:#0b2140;border:1px solid #ffffff12}
 .rule b{color:#5edcff}
 @media(max-width:700px){.wrap{padding-top:15px}.hero{padding:20px}.cards,.rules{grid-template-columns:1fr}}
-
-.game-section{margin-top:25px;padding:22px;border-radius:20px;background:#07152be8;border:1px solid #36baff55;scroll-margin-top:20px}
-.game-section h2{margin:0 0 7px}.info-box{margin-top:14px;padding:14px;border-radius:14px;background:#0b2140;border:1px solid #ffffff12;color:#62e0ff;font-weight:900}.info-box.muted{color:#cfe1f4}
-.trade-form{display:grid;grid-template-columns:1.4fr 1fr;gap:12px;margin-top:14px}.trade-form input,.trade-form select{padding:13px;border-radius:12px;border:1px solid #ffffff18;background:#061226;color:#fff;min-width:0}.green-btn,.receive-btn{width:100%;margin-top:14px;padding:14px;border:0;border-radius:13px;background:#55e6a7;color:#04100c;font-weight:1000;cursor:pointer}.green-btn:disabled{opacity:.55;cursor:not-allowed}.trade-message{margin-top:12px;font-weight:900;min-height:20px}.element-nav{position:sticky;top:8px;z-index:20;background:#07152bf2;padding:10px;border-radius:15px;backdrop-filter:blur(10px)}.nav-btn{border:1px solid #48cfff55!important;background:#0a2748!important;color:#fff!important;padding:11px 14px!important}.nav-btn span{display:inline-flex;min-width:22px;height:22px;align-items:center;justify-content:center;border-radius:50%;background:#ff3f6e;color:#fff;font-size:11px;margin-left:5px}.history-list,.notification-list{display:grid;gap:10px}.history-item,.notification-item{padding:15px;border-radius:15px;background:#0b2140;border:1px solid #ffffff12}.history-item.unread,.notification-item.unread{border-color:#36c9ff88;box-shadow:0 0 18px #00bfff12}.history-title,.notification-title{font-weight:1000}.history-meta,.notification-meta{font-size:12px;color:#8fa8c5;margin-top:5px}.history-elements{margin-top:9px;color:#d8ecff;line-height:1.6}.notification-item button{margin-top:10px;border:0;border-radius:10px;padding:9px 12px;background:#17375e;color:#fff;font-weight:800;cursor:pointer}.empty-state{padding:18px;text-align:center;color:#8fa8c5;border:1px dashed #ffffff1c;border-radius:14px}.receive-overlay{position:fixed;inset:0;background:rgba(0,5,18,.72);backdrop-filter:blur(7px);display:none;align-items:center;justify-content:center;padding:18px;z-index:9999}.receive-overlay.show{display:flex}.receive-card{width:min(440px,100%);padding:28px;border-radius:25px;background:linear-gradient(160deg,#09284b,#071126);border:1px solid #55dfff88;box-shadow:0 25px 90px #000b;text-align:center}.receive-icon{font-size:52px}.receive-kicker{font-size:11px;letter-spacing:2px;color:#62e0ff;font-weight:1000;margin-top:5px}.receive-card h2{margin:8px 0;font-size:25px}.receive-card p{color:#b9cde3}.receive-items{padding:13px;border-radius:14px;background:#061226;text-align:left;color:#e8f6ff;line-height:1.65}.receive-btn{background:linear-gradient(135deg,#55e6a7,#36c9ff);font-size:15px}
-@media(max-width:700px){.trade-form{grid-template-columns:1fr}.element-nav{position:relative;top:auto}.element-nav .nav-btn{flex:1;min-width:45%}}
 </style>
 </head>
 <body>
@@ -151,59 +146,43 @@ Os que ainda não foram encontrados ficam bloqueados.
 <div class="element-grid" id="elementGrid"></div>
 </section>
 
-<div class="actions element-nav">
-<button class="primary nav-btn" data-section="colecao">⚛️ COLEÇÃO</button>
-<button class="nav-btn" data-section="trocas">♻️ TROCAS</button>
-<button class="nav-btn" data-section="historico">📜 HISTÓRICO</button>
-<button class="nav-btn" data-section="notificacoes">🔔 NOTIFICAÇÕES <span id="navUnread">0</span></button>
-<a class="nav-btn" href="painel.html">← PAINEL</a>
+<div class="actions">
+<button class="primary" id="refreshCollection" type="button">🔄 ATUALIZAR COLEÇÃO</button>
+<button id="historyButton" type="button">📜 HISTÓRICO</button>
+<button id="notificationButton" type="button">🔔 NOTIFICAÇÕES <span id="notificationCount" style="display:none;margin-left:6px;background:#ff3b72;border-radius:99px;padding:2px 7px;font-size:11px"></span></button>
+<a href="painel.html">← VOLTAR AO PAINEL</a>
 </div>
 
-<!-- =====================================================
-     CENTRAL DO JOGO — TUDO NO MESMO HTML
-===================================================== -->
-<section class="game-section" id="trocasSection">
-  <h2>♻️ TROCAS DE ELEMENTOS</h2>
-  <p class="collection-help">Envie 1 elemento por vez para outro jogador. Receber elementos é ilimitado.</p>
-  <div class="rules">
-    <div class="rule"><b>👤 Não VIP</b><br>1 envio a cada 24 horas.</div>
-    <div class="rule"><b>⭐ VIP</b><br>2 envios a cada 24 horas.</div>
-    <div class="rule"><b>🎁 Recebimento</b><br>Você pode receber quantos elementos outros jogadores enviarem.</div>
-  </div>
-  <div id="tradeLimit" class="info-box">⏳ Carregando limite...</div>
-  <div class="trade-form">
-    <input id="tradeRecipient" placeholder="ID Adam Games, e-mail ou UID" autocomplete="off">
-    <select id="tradeElement"><option value="">Selecione seu elemento</option></select>
-  </div>
-  <div id="tradeSelected" class="info-box muted">Selecione um elemento que você possui.</div>
-  <button id="tradeSendButton" class="green-btn" type="button">♻️ ENVIAR 1 ELEMENTO</button>
-  <div id="tradeMessage" class="trade-message"></div>
-</section>
-
-<section class="game-section" id="historicoSection">
-  <h2>📜 HISTÓRICO DA COLEÇÃO</h2>
-  <p class="collection-help">Aqui fica registrado onde seus elementos foram conseguidos ou de quem você recebeu.</p>
-  <div id="historyList" class="history-list"><div class="empty-state">⏳ Carregando histórico...</div></div>
-</section>
-
-<section class="game-section" id="notificacoesSection">
-  <h2>🔔 NOTIFICAÇÕES</h2>
-  <p class="collection-help">Recebimentos, presentes e avisos da sua coleção aparecem aqui.</p>
-  <div id="notificationList" class="notification-list"><div class="empty-state">⏳ Carregando notificações...</div></div>
-</section>
-
-<!-- Caixa flutuante de recebimento -->
-<div class="receive-overlay" id="receiveOverlay" aria-hidden="true">
-  <div class="receive-card">
-    <div class="receive-icon">🎁</div>
-    <div class="receive-kicker">NOVA ENTREGA</div>
-    <h2 id="receiveTitle">VOCÊ RECEBEU ELEMENTOS!</h2>
-    <p id="receiveFrom">De: —</p>
-    <div id="receiveItems" class="receive-items"></div>
-    <button id="receiveButton" class="receive-btn" type="button">🎁 RECEBER</button>
+<div id="historyOverlay" style="display:none;position:fixed;inset:0;background:#000b;z-index:50;align-items:center;justify-content:center;padding:18px">
+  <div style="width:min(720px,96vw);max-height:88vh;overflow:auto;background:#071a35;border:1px solid #36baff66;border-radius:22px;padding:22px;box-shadow:0 20px 70px #000">
+    <div style="display:flex;justify-content:space-between;gap:12px;align-items:center">
+      <h2 style="margin:0">📜 Histórico da coleção</h2>
+      <button id="closeHistory" type="button">✕</button>
+    </div>
+    <p style="color:#aebfd4">Aqui aparecem os elementos recebidos e a origem de cada recebimento.</p>
+    <div id="historyList"><div style="color:#aebfd4">⏳ Carregando histórico...</div></div>
   </div>
 </div>
 
+<div id="notificationOverlay" style="display:none;position:fixed;inset:0;background:#000b;z-index:49;align-items:center;justify-content:center;padding:18px">
+  <div style="width:min(620px,96vw);max-height:88vh;overflow:auto;background:#071a35;border:1px solid #36baff66;border-radius:22px;padding:22px;box-shadow:0 20px 70px #000">
+    <div style="display:flex;justify-content:space-between;gap:12px;align-items:center">
+      <h2 style="margin:0">🔔 Notificações</h2>
+      <button id="closeNotifications" type="button">✕</button>
+    </div>
+    <div id="notificationsList" style="margin-top:15px"></div>
+  </div>
+</div>
+
+<div id="receivedOverlay" style="display:none;position:fixed;inset:0;background:#000b;z-index:60;align-items:center;justify-content:center;padding:18px">
+  <div style="width:min(520px,94vw);background:linear-gradient(145deg,#0b2344,#07142b);border:1px solid #38d9ff88;border-radius:24px;padding:25px;text-align:center;box-shadow:0 20px 80px #000">
+    <div style="font-size:48px">🎁</div>
+    <h2 id="receivedTitle">Você recebeu elementos!</h2>
+    <p id="receivedMessage" style="color:#c9d9ee;line-height:1.5"></p>
+    <div id="receivedElements" style="display:grid;gap:8px;margin:18px 0"></div>
+    <button class="primary" id="receivedOk" type="button" style="width:100%">✓ RECEBER</button>
+  </div>
+</div>
 </section>
 </div>
 <script type="module">
@@ -228,10 +207,7 @@ import {
   where,
   getDocs,
   doc,
-  setDoc,
-  updateDoc,
-  runTransaction,
-  serverTimestamp
+  updateDoc
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
@@ -532,58 +508,155 @@ async function carregarColecaoDoJogador(
 }
 
 
-
 /* =====================================================
-   NOTIFICAÇÕES + HISTÓRICO + TROCAS — CENTRALIZADOS
+   NOTIFICAÇÕES + HISTÓRICO
 ===================================================== */
-let usuarioElementos=null, jogadorRefElementos=null, jogadorDadosElementos={};
-let ultimaNotificacaoId=null, primeiraCargaNotif=true, toastTimer=null;
-const TRADE_WINDOW=24*60*60*1000;
+let usuarioAtual = null;
+let cadastroIdAtual = null;
+let ultimaNotificacaoId = null;
+let primeiraCargaNotificacoes = true;
 
-const elInfo=n=>DATA.find(e=>Number(e.n)===Number(n))||{};
-const elName=n=>{const e=elInfo(n);return e.name?`${e.name} (${e.s})`:`Elemento ${n}`};
-const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
-function tradeDate(v){if(!v)return null;if(typeof v.toDate==='function')return v.toDate();if(v instanceof Date)return v;return new Date(v)}
-function tradeLimit(d){return d?.vip===true?2:1}
-function tradeTimes(d){const now=Date.now();return(Array.isArray(d?.enviosElementos24h)?d.enviosElementos24h:[]).map(tradeDate).filter(x=>x&&now-x.getTime()<TRADE_WINDOW).sort((a,b)=>a-b)}
-function tradeRefresh(){const box=document.getElementById('tradeLimit'),btn=document.getElementById('tradeSendButton');if(!box||!jogadorDadosElementos.uid)return;const t=tradeTimes(jogadorDadosElementos),lim=tradeLimit(jogadorDadosElementos),rest=Math.max(0,lim-t.length);if(rest){box.textContent=`📤 Envios disponíveis: ${rest}/${lim} • 1 elemento por envio`;btn.disabled=false}else{const ms=Math.max(0,t[0].getTime()+TRADE_WINDOW-Date.now()),s=Math.ceil(ms/1000);box.textContent=`⏳ Limite atingido. Próximo envio em ${String(Math.floor(s/3600)).padStart(2,'0')}:${String(Math.floor(s%3600/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`;btn.disabled=true}}
-function tradeOptions(){const sel=document.getElementById('tradeElement');if(!sel)return;sel.innerHTML='<option value="">Selecione seu elemento</option>';Object.entries(jogadorDadosElementos.elementos||{}).filter(([n,q])=>Number(q)>0&&Number(n)>=1&&Number(n)<=118).sort((a,b)=>Number(a[0])-Number(b[0])).forEach(([n,q])=>{const o=document.createElement('option');o.value=n;o.textContent=`${elName(n)} • x${q}`;sel.appendChild(o)});if(sel.options.length===1){const o=document.createElement('option');o.disabled=true;o.textContent='Você não possui elementos';sel.appendChild(o)}tradeSelected()}
-function tradeSelected(){const n=document.getElementById('tradeElement')?.value,b=document.getElementById('tradeSelected');if(!b)return;b.textContent=n?`⚛️ ${elName(n)} • você possui x${Number((jogadorDadosElementos.elementos||{})[n]||0)} • este envio manda 1 unidade.`:'Selecione um elemento que você possui.'}
-async function tradeFind(term){for(const f of ['publicId','email','uid']){try{const s=await getDocs(query(collection(db,'admins'),where(f,'==',term)));if(!s.empty)return s.docs[0]}catch(e){}}throw new Error('Jogador não encontrado.')}
-async function tradeSend(){const msg=document.getElementById('tradeMessage'),btn=document.getElementById('tradeSendButton'),term=document.getElementById('tradeRecipient')?.value.trim(),n=Number(document.getElementById('tradeElement')?.value);msg.textContent='';if(!jogadorRefElementos){msg.textContent='Faça login para enviar elementos.';return}if(!term||!n){msg.textContent='Informe o jogador e selecione o elemento.';return}btn.disabled=true;try{const destino=await tradeFind(term);if(destino.id===jogadorRefElementos.id)throw new Error('Você não pode enviar para você mesmo.');const hRef=doc(collection(db,'historicoTrocasElementos')),rRef=doc(collection(db,'historicoColecaoElementos')),notRef=doc(db,'notificacoes','elemento_jogador_'+rRef.id);await runTransaction(db,async tx=>{const a=await tx.get(jogadorRefElementos),b=await tx.get(destino.ref);if(!a.exists()||!b.exists())throw new Error('Cadastro não encontrado.');const rem=a.data()||{},dest=b.data()||{},agora=Date.now(),lim=tradeLimit(rem),tempos=tradeTimes(rem);if(tempos.length>=lim)throw new Error('Seu limite de envios de 24 horas foi atingido.');const rq=Number((rem.elementos||{})[String(n)]||0);if(rq<1)throw new Error('Você não possui mais esse elemento.');const re={...(rem.elementos||{})},de={...(dest.elementos||{})};re[String(n)]=rq-1;if(re[String(n)]<=0)delete re[String(n)];de[String(n)]=Number(de[String(n)]||0)+1;tempos.push(new Date(agora));const info=elInfo(n),nome=rem.nome||rem.name||rem.publicId||rem.email||'Jogador';const recebido={[String(n)]:1},nomes={[String(n)]:info.name||('Elemento '+n)},simbolos={[String(n)]:info.s||''};tx.update(jogadorRefElementos,{elementos:re,enviosElementos24h:tempos});tx.update(destino.ref,{elementos:de});tx.set(hRef,{tipo:'envio_elemento',remetenteId:rem.publicId||jogadorRefElementos.id,remetenteUid:rem.uid||usuarioElementos.uid,destinatarioId:dest.publicId||destino.ref.id,destinatarioUid:dest.uid||'',elementoNumero:n,elementoNome:elName(n),quantidade:1,criadoEm:serverTimestamp()});tx.set(rRef,{tipo:'recebimento_elemento',usuarioId:destino.ref.id,usuarioUid:dest.uid||'',usuarioPublicId:dest.publicId||destino.ref.id,titulo:'🎁 Elemento recebido',origem:'jogador',origemNome:nome,remetenteNome:nome,remetentePublicId:rem.publicId||jogadorRefElementos.id,quantidadeTotal:1,elementosRecebidos:recebido,elementosNomes:nomes,elementosSimbolos:simbolos,criadoEm:serverTimestamp()});tx.set(notRef,{uid:dest.uid||'',titulo:'🎁 Você recebeu um elemento!',mensagem:`${nome} enviou para você: ⚛️ ${info.name||('Elemento '+n)} (${info.s||''}) ×1`,tipo:'elemento_recebido',origem:'jogador',remetenteNome:nome,remetentePublicId:rem.publicId||jogadorRefElementos.id,quantidadeTotal:1,elementosRecebidos:recebido,elementosNomes:nomes,elementosSimbolos:simbolos,lida:false,criadaEm:serverTimestamp()})});msg.textContent=`✅ ${elName(n)} enviado com sucesso!`;const s=await getDocs(query(collection(db,'admins'),where('uid','==',usuarioElementos.uid)));if(!s.empty){jogadorRefElementos=s.docs[0].ref;jogadorDadosElementos=s.docs[0].data()||{}}inventarioElementos=jogadorDadosElementos.elementos||inventarioElementos;updateStats();tradeOptions();tradeRefresh()}catch(e){msg.textContent='❌ '+(e.message||'Não foi possível enviar.')}finally{btn.disabled=false;tradeRefresh()}}
+function converterData(valor){
+  if(!valor) return null;
+  if(typeof valor.toMillis === "function") return valor.toMillis();
+  if(typeof valor.seconds === "number") return valor.seconds * 1000;
+  return null;
+}
 
-document.getElementById('tradeElement')?.addEventListener('change',tradeSelected);document.getElementById('tradeSendButton')?.addEventListener('click',tradeSend);setInterval(tradeRefresh,1000);
+function escapar(v){
+  return String(v ?? "").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+}
 
-function formatDate(v){const d=tradeDate(v);return d?d.toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'}):'Agora'}
-function renderReceivedItems(item){const obj=item?.elementosRecebidos||{};const arr=Object.entries(obj);if(!arr.length)return esc(item?.mensagem||'Novo recebimento.');return arr.map(([n,q])=>`⚛️ <b>${esc(elInfo(n).name||'Elemento')}</b> (${esc(elInfo(n).s||'')}) ×${esc(q)}`).join('<br>')}
-function mostrarRecebimento(item){const ov=document.getElementById('receiveOverlay');if(!ov)return;document.getElementById('receiveTitle').textContent=item?.titulo||'🎁 VOCÊ RECEBEU ELEMENTOS!';document.getElementById('receiveFrom').textContent=`De: ${item?.origem==='administrador'?'Administrador Adam Games':(item?.remetenteNome||'Jogador')}`;document.getElementById('receiveItems').innerHTML=renderReceivedItems(item);ov.dataset.id=item.id||'';ov.classList.add('show');ov.setAttribute('aria-hidden','false')}
-async function confirmarRecebimento(){const id=document.getElementById('receiveOverlay')?.dataset.id;if(id&&usuarioElementos){try{await updateDoc(doc(db,'notificacoes',id),{lida:true,lidaEm:serverTimestamp()})}catch(e){}}document.getElementById('receiveOverlay')?.classList.remove('show');await carregarNotificacoes()}
-document.getElementById('receiveButton')?.addEventListener('click',confirmarRecebimento);
+function infoElemento(n){
+  const e=DATA.find(x=>String(x.n)===String(n));
+  return e || {name:"Elemento #"+n,s:""};
+}
 
-async function carregarNotificacoes(){if(!usuarioElementos)return;try{const s=await getDocs(query(collection(db,'notificacoes'),where('uid','==',usuarioElementos.uid)));const arr=s.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>{const da=tradeDate(a.criadaEm)?.getTime()||0,db=tradeDate(b.criadaEm)?.getTime()||0;return db-da});const unread=arr.filter(x=>x.lida!==true).length;document.getElementById('navUnread').textContent=unread;const list=document.getElementById('notificationList');list.innerHTML=arr.length?arr.map(x=>`<div class="notification-item ${x.lida!==true?'unread':''}"><div class="notification-title">${esc(x.titulo||'Notificação')}</div><div>${esc(x.mensagem||'')}</div><div class="notification-meta">${formatDate(x.criadaEm)}${x.origem?' • '+esc(x.origem==='administrador'?'Administrador':'Jogador'):''}</div>${x.lida!==true?`<button data-read="${esc(x.id)}">✓ Marcar como lida</button>`:''}</div>`).join(''):'<div class="empty-state">🔔 Nenhuma notificação.</div>';if(!primeiraCargaNotif&&arr[0]&&arr[0].id!==ultimaNotificacaoId&&arr[0].tipo==='elemento_recebido')mostrarRecebimento(arr[0]);ultimaNotificacaoId=arr[0]?.id||ultimaNotificacaoId;primeiraCargaNotif=false;list.querySelectorAll('[data-read]').forEach(b=>b.addEventListener('click',async()=>{await updateDoc(doc(db,'notificacoes',b.dataset.read),{lida:true,lidaEm:serverTimestamp()});carregarNotificacoes()}))}catch(e){console.error('Notificações:',e)}}
+function montarElementos(mapa){
+  return Object.entries(mapa||{}).map(([n,q])=>{
+    const e=infoElemento(n);
+    return `<div style="display:flex;justify-content:space-between;gap:10px;padding:10px 12px;border-radius:12px;background:#0b2140;border:1px solid #ffffff12"><strong>⚛️ ${escapar(e.name)}${e.s?` (${escapar(e.s)})`:''}</strong><b style="color:#62e0ff">×${Number(q)||0}</b></div>`;
+  }).join("");
+}
 
-async function carregarHistorico(){if(!usuarioElementos)return;try{const s=await getDocs(query(collection(db,'historicoColecaoElementos'),where('usuarioUid','==',usuarioElementos.uid)));const arr=s.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(tradeDate(b.criadoEm)?.getTime()||0)-(tradeDate(a.criadoEm)?.getTime()||0));const list=document.getElementById('historyList');list.innerHTML=arr.length?arr.map(x=>`<div class="history-item"><div class="history-title">${esc(x.titulo||'📦 Elementos conquistados')}</div><div class="history-meta">${formatDate(x.criadoEm)} • Origem: ${esc(x.origemNome||x.origem||'Jogo')}</div><div class="history-elements">${renderReceivedItems(x)}</div></div>`).join(''):'<div class="empty-state">📜 Seu histórico ainda está vazio.</div>'}catch(e){console.error('Histórico:',e)}}
+function mostrarRecebimento(item){
+  const overlay=document.getElementById("receivedOverlay");
+  if(!overlay) return;
+  document.getElementById("receivedTitle").textContent=item.origem==="administrador"?"🎁 Você recebeu elementos do Administrador!":"🎁 Você recebeu elementos!";
+  document.getElementById("receivedMessage").textContent=item.origem==="administrador"?"Administrador Adam Games enviou elementos para sua coleção.":`${item.remetenteNome||item.remetentePublicId||"Um jogador"} enviou elementos para você.`;
+  document.getElementById("receivedElements").innerHTML=montarElementos(item.elementosRecebidos||{});
+  overlay.style.display="flex";
+  window.__notificacaoAberta=item;
+}
 
-function abrirSecao(id){document.getElementById(id+'Section')?.scrollIntoView({behavior:'smooth',block:'start'})}
-document.querySelectorAll('[data-section]').forEach(b=>b.addEventListener('click',()=>abrirSecao(b.dataset.section)));
+async function carregarNotificacoes(){
+  if(!usuarioAtual) return;
+  try{
+    const snap=await getDocs(query(collection(db,"notificacoes"),where("uid","==",usuarioAtual.uid)));
+    const lista=snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(converterData(b.criadaEm)||0)-(converterData(a.criadaEm)||0));
+    const naoLidas=lista.filter(x=>x.lida!==true).length;
+    const badge=document.getElementById("notificationCount");
+    if(badge){ badge.textContent=naoLidas>99?"99+":String(naoLidas); badge.style.display=naoLidas?"inline-flex":"none"; }
+    if(!primeiraCargaNotificacoes && lista[0] && lista[0].id!==ultimaNotificacaoId && lista[0].tipo==="elemento_recebido") mostrarRecebimento(lista[0]);
+    if(lista[0]) ultimaNotificacaoId=lista[0].id;
+    primeiraCargaNotificacoes=false;
+    const box=document.getElementById("notificationsList");
+    if(!box) return;
+    if(!lista.length){box.innerHTML='<div style="padding:18px;color:#aebfd4;text-align:center">🔔 Nenhuma notificação.</div>';return;}
+    box.innerHTML=lista.slice(0,50).map(item=>{
+      const data=converterData(item.criadaEm);
+      const quando=data?new Date(data).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}):"Agora";
+      return `<button type="button" data-notif-id="${escapar(item.id)}" style="display:block;width:100%;text-align:left;margin:8px 0;padding:14px;border-radius:14px;border:1px solid #ffffff18;background:${item.lida===true?'#0b2140':'#102f55'};color:#fff;cursor:pointer"><strong>${escapar(item.titulo||"Notificação")}</strong><div style="color:#b8cbe0;margin-top:5px">${escapar(item.mensagem||"")}</div><small style="color:#7895b2;display:block;margin-top:6px">${quando}</small></button>`;
+    }).join("");
+    box.querySelectorAll("[data-notif-id]").forEach(btn=>btn.addEventListener("click",async()=>{
+      const item=lista.find(x=>x.id===btn.dataset.notifId); if(!item)return;
+      if(item.lida!==true){try{await updateDoc(doc(db,"notificacoes",item.id),{lida:true});}catch(e){console.warn(e)}}
+      if(item.tipo==="elemento_recebido") mostrarRecebimento(item);
+      await carregarNotificacoes();
+    }));
+  }catch(e){
+    console.error("Erro ao carregar notificações:",e);
+    const box=document.getElementById("notificationsList"); if(box) box.innerHTML='<div style="padding:18px;color:#ff9db8">⚠️ Não foi possível carregar as notificações.</div>';
+  }
+}
+
+async function carregarHistorico(){
+  const box=document.getElementById("historyList");
+  if(!box || !usuarioAtual) return;
+  box.innerHTML='<div style="color:#aebfd4">⏳ Carregando histórico...</div>';
+  try{
+    const snap=await getDocs(query(collection(db,"historicoColecaoElementos"),where("usuarioUid","==",usuarioAtual.uid)));
+    const lista=snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(converterData(b.criadoEm)||0)-(converterData(a.criadoEm)||0));
+    if(!lista.length){box.innerHTML='<div style="color:#aebfd4;padding:18px 0">📜 Nenhum recebimento registrado ainda.</div>';return;}
+    box.innerHTML=lista.slice(0,100).map(item=>{
+      const d=converterData(item.criadoEm); const quando=d?new Date(d).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"}):"Agora";
+      const origem=item.origem==="administrador"?"👑 Administrador Adam Games":item.origem==="jogador"?`👤 ${escapar(item.remetenteNome||item.remetentePublicId||"Jogador")}`:`🎯 ${escapar(item.origemNome||item.origem||"Conquista")}`;
+      return `<div style="padding:15px;margin:9px 0;border-radius:15px;background:#0b2140;border:1px solid #ffffff12"><div style="display:flex;justify-content:space-between;gap:10px"><strong>${escapar(item.titulo||"Elementos recebidos")}</strong><small style="color:#7895b2">${quando}</small></div><div style="color:#8fdfff;margin:7px 0">${origem}</div><div style="display:grid;gap:5px">${montarElementos(item.elementosRecebidos||{})}</div></div>`;
+    }).join("");
+  }catch(e){
+    console.error("Erro ao carregar histórico da coleção:",e);
+    box.innerHTML='<div style="color:#ff9db8;padding:18px 0">⚠️ Não foi possível carregar o histórico. Verifique as regras do Firestore para a coleção <b>historicoColecaoElementos</b>.</div>';
+  }
+}
+
+document.getElementById("refreshCollection")?.addEventListener("click",async()=>{ if(usuarioAtual) await carregarColecaoDoJogador(usuarioAtual); });
+document.getElementById("historyButton")?.addEventListener("click",async()=>{document.getElementById("historyOverlay").style.display="flex";await carregarHistorico();});
+document.getElementById("closeHistory")?.addEventListener("click",()=>document.getElementById("historyOverlay").style.display="none");
+document.getElementById("notificationButton")?.addEventListener("click",async()=>{document.getElementById("notificationOverlay").style.display="flex";await carregarNotificacoes();});
+document.getElementById("closeNotifications")?.addEventListener("click",()=>document.getElementById("notificationOverlay").style.display="none");
+document.getElementById("receivedOk")?.addEventListener("click",()=>document.getElementById("receivedOverlay").style.display="none");
 
 /* =====================================================
    AUTENTICAÇÃO
 ===================================================== */
 
-onAuthStateChanged(auth, async user => {
-  if(!user){ window.location.replace("index.html"); return; }
-  try{
-    usuarioElementos=user;
-    await carregarColecaoDoJogador(user);
-    let snap=await getDocs(query(collection(db,"admins"),where("uid","==",user.uid)));
-    if(snap.empty&&user.email) snap=await getDocs(query(collection(db,"admins"),where("email","==",user.email.trim().toLowerCase())));
-    if(!snap.empty){ jogadorRefElementos=snap.docs[0].ref; jogadorDadosElementos=snap.docs[0].data()||{}; tradeOptions(); tradeRefresh(); }
-    await carregarHistorico();
-    await carregarNotificacoes();
-    setInterval(carregarNotificacoes,10000);
-  }catch(error){ console.error("Erro ao carregar jogo de elementos:",error); inventarioElementos={}; updateStats(); }
-});
+onAuthStateChanged(
+
+  auth,
+
+  async user => {
+
+    if(
+      !user
+    ){
+
+      window.location.replace(
+        "index.html"
+      );
+
+      return;
+
+    }
+
+
+    try{
+
+      usuarioAtual = user;
+
+      await carregarColecaoDoJogador(
+        user
+      );
+
+      await carregarNotificacoes();
+
+    }catch(error){
+
+      console.error(
+        "Erro ao carregar coleção de elementos:",
+        error
+      );
+
+      inventarioElementos = {};
+
+      updateStats();
+
+    }
+
+  }
+
+);
+
+setInterval(()=>{ if(usuarioAtual) carregarNotificacoes(); },10000);
 
 </script>
 </body>
