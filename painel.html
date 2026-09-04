@@ -944,6 +944,74 @@ button{
   font-weight:900;
 }
 
+/* =====================================================
+   COLEÇÃO DE ELEMENTOS — 118 ELEMENTOS
+===================================================== */
+
+.card-elements{
+  background:
+    radial-gradient(
+      circle at 80% 15%,
+      rgba(45,220,255,.24),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 15% 90%,
+      rgba(44,91,255,.22),
+      transparent 35%
+    ),
+    linear-gradient(
+      145deg,
+      #087fc4,
+      #08295d 78%
+    );
+
+  border-color:
+    rgba(70,221,255,.52);
+
+}
+
+.card-elements:hover{
+  border-color:
+    rgba(95,231,255,.9);
+
+  box-shadow:
+    0 18px 42px rgba(3,72,121,.48),
+    0 0 25px rgba(52,216,255,.16);
+
+}
+
+.elements-glow{
+  position:absolute;
+  width:150px;
+  height:150px;
+  right:-55px;
+  top:-55px;
+  border-radius:50%;
+  background:rgba(65,226,255,.16);
+  filter:blur(2px);
+}
+
+.elements-badge{
+  position:absolute;
+  top:13px;
+  right:13px;
+  padding:5px 8px;
+  border-radius:10px;
+  background:rgba(73,226,255,.14);
+  border:1px solid rgba(73,226,255,.38);
+  color:#7eeaff;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.5px;
+}
+
+.elements-card-icon{
+  filter:
+    drop-shadow(0 8px 14px rgba(0,0,0,.35));
+
+}
+
 @media(max-width:600px){
   .cards-mini-info span{
     font-size:9px;
@@ -1308,6 +1376,73 @@ button{
 
   font-size:13px;
 
+}
+
+.vip-element-counter{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  margin:14px 0 14px;
+  padding:11px 13px;
+  border-radius:15px;
+  background:rgba(5,18,42,.62);
+  border:1px solid rgba(111,213,255,.28);
+  box-shadow:inset 0 0 18px rgba(42,177,255,.07);
+}
+
+.vip-element-counter-icon{
+  width:43px;
+  height:43px;
+  flex:0 0 43px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:12px;
+  background:linear-gradient(145deg,#075c91,#16235d);
+  border:1px solid rgba(86,220,255,.48);
+  font-size:23px;
+}
+
+.vip-element-counter-info{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+}
+
+.vip-element-counter-info strong{
+  color:#73e4ff;
+  font-size:17px;
+  line-height:1.05;
+  letter-spacing:.5px;
+}
+
+.vip-element-counter-info span{
+  margin-top:3px;
+  color:#fff;
+  font-size:10px;
+  font-weight:900;
+}
+
+.vip-element-counter-info small{
+  margin-top:2px;
+  color:#9eb4cd;
+  font-size:9px;
+}
+
+.vip-element-counter.vip-active{
+  border-color:rgba(255,210,91,.42);
+  box-shadow:
+    inset 0 0 18px rgba(255,196,54,.07),
+    0 0 18px rgba(255,196,54,.05);
+}
+
+.vip-element-counter.vip-active .vip-element-counter-icon{
+  background:linear-gradient(145deg,#70490a,#30204e);
+  border-color:rgba(255,214,93,.55);
+}
+
+.vip-element-counter.vip-active .vip-element-counter-info strong{
+  color:#ffd95f;
 }
 
 .vip-button{
@@ -2638,20 +2773,54 @@ button{
     </div>
 
     <div class="cards-badge">
-      HALLOWEEN 2026
+      COLEÇÃO ATUAL
     </div>
 
     <h3>
-      CARTAS
+      COLEÇÃO MENSAL
     </h3>
 
     <p>
-      Colecione, troque e complete seu álbum.
+      Colecione, troque e complete a coleção da temporada.
     </p>
 
     <div class="cards-mini-info">
-      <span>🎴 25 cartas</span>
-      <span>🃏 4 coringas</span>
+      <span>🎴 COLEÇÃO MENSAL</span>
+      <span>♻️ TROCAS</span>
+    </div>
+
+    <div class="card-arrow">
+      →
+    </div>
+
+  </div>
+
+
+  <div
+    class="card card-elements"
+    id="elementsCard">
+
+    <div class="elements-glow"></div>
+
+    <div class="card-icon elements-card-icon">
+      ⚛️
+    </div>
+
+    <div class="elements-badge">
+      118 ELEMENTOS
+    </div>
+
+    <h3>
+      COLEÇÃO DE ELEMENTOS
+    </h3>
+
+    <p>
+      Monte sua estante, encontre elementos e troque as repetidas.
+    </p>
+
+    <div class="cards-mini-info">
+      <span>⚛️ 118 elementos</span>
+      <span>♻️ TROCAS</span>
     </div>
 
     <div class="card-arrow">
@@ -2683,6 +2852,29 @@ button{
         Benefícios exclusivos + Caixa Box para membros VIP.
       </p>
 
+    </div>
+
+  </div>
+
+
+  <div class="vip-element-counter" id="vipElementCounter">
+
+    <div class="vip-element-counter-icon">
+      ⚛️
+    </div>
+
+    <div class="vip-element-counter-info">
+      <strong id="elementSurpriseTime">
+        120 HORAS
+      </strong>
+
+      <span>
+        1 ELEMENTO SURPRESA
+      </span>
+
+      <small>
+        Pode vir repetido
+      </small>
     </div>
 
   </div>
@@ -3900,20 +4092,7 @@ let CONQUISTAS = [
 
 ];
 
-
-async function carregarCatalogoConquistas(){
-  try{
-    const r=await getDocs(collection(db,"conquistas"));
-    if(r.empty)return;
-    const mapa=new Map(CONQUISTAS.map(x=>[x.id,x]));
-    r.docs.forEach(d=>{mapa.set(d.id,{id:d.id,...d.data()})});
-    CONQUISTAS=Array.from(mapa.values()).sort((a,b)=>(Number(a.ordem)||0)-(Number(b.ordem)||0));
-  }catch(e){
-    console.warn("Não foi possível carregar o catálogo de conquistas; usando catálogo padrão.",e);
-  }
-}
-
-function listaConquistasDoJogador(){
+\nasync function carregarCatalogoConquistas(){\n  try{\n    const r=await getDocs(collection(db,"conquistas"));\n    if(r.empty)return;\n    const mapa=new Map(CONQUISTAS.map(x=>[x.id,x]));\n    r.docs.forEach(d=>{mapa.set(d.id,{id:d.id,...d.data()})});\n    CONQUISTAS=Array.from(mapa.values()).sort((a,b)=>(Number(a.ordem)||0)-(Number(b.ordem)||0));\n  }catch(e){\n    console.warn("Não foi possível carregar o catálogo de conquistas; usando catálogo padrão.",e);\n  }\n}\n\nfunction listaConquistasDoJogador(){
 
   const dados =
     cadastroAtual?.data || {};
@@ -5010,6 +5189,31 @@ function mostrarDados(
     document.getElementById(
       "vipBadge"
     );
+
+
+  const elementSurpriseCounter =
+    document.getElementById(
+      "vipElementCounter"
+    );
+
+  const elementSurpriseTime =
+    document.getElementById(
+      "elementSurpriseTime"
+    );
+
+  if(elementSurpriseTime){
+    elementSurpriseTime.textContent =
+      vip
+        ? "60 HORAS"
+        : "120 HORAS";
+  }
+
+  if(elementSurpriseCounter){
+    elementSurpriseCounter.classList.toggle(
+      "vip-active",
+      vip
+    );
+  }
 
 
   if(vip){
@@ -7129,6 +7333,23 @@ document.getElementById(
 )?.addEventListener(
   "click",
   abrirCartas
+);
+
+
+/* =====================================================
+   COLEÇÃO DE ELEMENTOS
+===================================================== */
+
+function abrirColecaoElementos(){
+  window.location.href =
+    "elementos.html";
+}
+
+document.getElementById(
+  "elementsCard"
+)?.addEventListener(
+  "click",
+  abrirColecaoElementos
 );
 
 
