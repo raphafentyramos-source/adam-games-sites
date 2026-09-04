@@ -1420,6 +1420,26 @@ button{
     inset 0 0 18px rgba(98,255,158,.06);
 }
 
+.element-surprise-redeem{
+  width:100%;
+  margin-top:12px;
+  padding:12px 14px;
+  border:0;
+  border-radius:14px;
+  background:linear-gradient(135deg,#48ff9b,#17b96b);
+  color:#062518;
+  font-size:13px;
+  font-weight:1000;
+  cursor:pointer;
+  box-shadow:0 8px 20px rgba(30,220,130,.16);
+}
+
+.element-surprise-redeem:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+  box-shadow:none;
+}
+
 .vip-button{
 
   padding:14px 20px;
@@ -3533,6 +3553,16 @@ button{
       <div class="element-surprise-reward" id="elementSurpriseReward">
         1 elemento aleatório • Pode vir repetido
       </div>
+
+      <button
+        class="element-surprise-redeem"
+        id="redeemElementSurpriseButton"
+        type="button"
+        disabled>
+
+        🔒 AGUARDE O TEMPO TERMINAR
+
+      </button>
     </div>
 
 
@@ -6785,237 +6815,358 @@ function formatarContagemElemento(ms){
   );
 }
 
+/*
+  Cria o primeiro contador do Elemento Surpresa.
+  Ele é separado do contador de chances.
+*/
 async function garantirProximoElementoSurpresa(){
-  if(!usuarioAtual || !cadastroAtual || !cadastroId){
+
+  if(
+    !usuarioAtual ||
+    !cadastroAtual ||
+    !cadastroId
+  ){
     return null;
   }
 
-  const dados = cadastroAtual.data || {};
-  const agora = Date.now();
+  const dados =
+    cadastroAtual.data || {};
 
-  const existente = converterData(
-    dados.proximoElementoSurpresa
-  );
+  const agora =
+    Date.now();
 
-  if(existente && existente > agora){
+  const existente =
+    converterData(
+      dados.proximoElementoSurpresa
+    );
+
+  if(existente){
     return existente;
   }
 
-  const horas = dados.vip === true
-    ? HORAS_ELEMENTO_VIP
-    : HORAS_ELEMENTO_NORMAL;
+  const horas =
+    dados.vip === true
+      ? HORAS_ELEMENTO_VIP
+      : HORAS_ELEMENTO_NORMAL;
 
-  const proxima = Timestamp.fromMillis(
-    agora + (horas * MS_HORA)
-  );
+  const proxima =
+    Timestamp.fromMillis(
+      agora +
+      (horas * MS_HORA)
+    );
 
   await updateDoc(
-    doc(db,"admins",cadastroId),
+    doc(
+      db,
+      "admins",
+      cadastroId
+    ),
     {
-      proximoElementoSurpresa: proxima,
-      atualizadoEm: Timestamp.now()
+      proximoElementoSurpresa:
+        proxima,
+
+      atualizadoEm:
+        Timestamp.now()
     }
   );
 
-  cadastroAtual.data.proximoElementoSurpresa = proxima;
+  cadastroAtual.data.proximoElementoSurpresa =
+    proxima;
 
   return proxima.toMillis();
 }
 
-async function liberarElementoSurpresa(){
-  if(!usuarioAtual || !cadastroAtual || !cadastroId){
+
+/*
+  RESGATE MANUAL
+
+  Só entrega se o contador realmente terminou.
+  O sorteio e a gravação acontecem dentro de uma
+  transação para impedir prêmio duplicado em duas
+  abas/dispositivos.
+*/
+async function resgatarElementoSurpresa(){
+
+  if(
+    !usuarioAtual ||
+    !cadastroAtual ||
+    !cadastroId
+  ){
     return;
   }
 
-  const agora = Date.now();
-  const dados = cadastroAtual.data || {};
-  const proximaAtual = converterData(
-    dados.proximoElementoSurpresa
-  );
-
-  if(!proximaAtual || agora < proximaAtual){
-    return;
-  }
-
-  /*
-    O elemento é sorteado entre os 118 elementos.
-    Pode repetir normalmente.
-  */
-  const elemento =
-    Math.floor(Math.random() * 118) + 1;
-
-  const elementosAtuais =
-    dados.elementos &&
-    typeof dados.elementos === "object" &&
-    !Array.isArray(dados.elementos)
-      ? {...dados.elementos}
-      : {};
-
-  const chaveElemento = String(elemento);
-
-  elementosAtuais[chaveElemento] =
-    Number(elementosAtuais[chaveElemento] || 0) + 1;
-
-  const horas = dados.vip === true
-    ? HORAS_ELEMENTO_VIP
-    : HORAS_ELEMENTO_NORMAL;
-
-  const proxima = Timestamp.fromMillis(
-    agora + (horas * MS_HORA)
-  );
-
-  const usuarioRef =
-    doc(db,"admins",cadastroId);
-
-  await runTransaction(
-    db,
-    async transaction => {
-
-      const snap =
-        await transaction.get(usuarioRef);
-
-      if(!snap.exists()){
-        throw new Error("USUARIO_NAO_ENCONTRADO");
-      }
-
-      const atual =
-        snap.data() || {};
-
-      const proximaBanco =
-        converterData(
-          atual.proximoElementoSurpresa
-        );
-
-      /*
-        Se outra aba/dispositivo já liberou o elemento,
-        não entrega outro novamente.
-      */
-      if(
-        proximaBanco &&
-        Date.now() < proximaBanco
-      ){
-        cadastroAtual.data.proximoElementoSurpresa =
-          atual.proximoElementoSurpresa;
-
-        cadastroAtual.data.elementos =
-          atual.elementos || {};
-
-        return;
-      }
-
-      const elementosBanco =
-        atual.elementos &&
-        typeof atual.elementos === "object" &&
-        !Array.isArray(atual.elementos)
-          ? {...atual.elementos}
-          : {};
-
-      elementosBanco[String(elemento)] =
-        Number(elementosBanco[String(elemento)] || 0) + 1;
-
-      const vipBanco =
-        atual.vip === true;
-
-      const horasBanco =
-        vipBanco
-          ? HORAS_ELEMENTO_VIP
-          : HORAS_ELEMENTO_NORMAL;
-
-      const proximaBancoNova =
-        Timestamp.fromMillis(
-          Date.now() +
-          (horasBanco * MS_HORA)
-        );
-
-      transaction.update(
-        usuarioRef,
-        {
-          elementos: elementosBanco,
-          ultimoElementoSurpresa: Timestamp.now(),
-          proximoElementoSurpresa: proximaBancoNova,
-          atualizadoEm: Timestamp.now()
-        }
-      );
-
-      cadastroAtual.data.elementos =
-        elementosBanco;
-
-      cadastroAtual.data.ultimoElementoSurpresa =
-        Timestamp.now();
-
-      cadastroAtual.data.proximoElementoSurpresa =
-        proximaBancoNova;
-    }
-  );
-
-  const status = document.getElementById(
-    "elementSurpriseStatus"
-  );
-
-  if(status){
-    status.textContent =
-      "🎉 ELEMENTO LIBERADO! Elemento nº " +
-      elemento +
-      " adicionado à sua coleção.";
-  }
-}
-
-async function atualizarElementoSurpresa(){
-  const countdown =
-    document.getElementById("elementSurpriseCountdown");
+  const botao =
+    document.getElementById(
+      "redeemElementSurpriseButton"
+    );
 
   const status =
-    document.getElementById("elementSurpriseStatus");
+    document.getElementById(
+      "elementSurpriseStatus"
+    );
 
-  if(!countdown || !usuarioAtual || !cadastroAtual){
+  if(botao){
+    botao.disabled = true;
+    botao.textContent = "⏳ RESGATANDO...";
+  }
+
+  try{
+
+    const usuarioRef =
+      doc(
+        db,
+        "admins",
+        cadastroId
+      );
+
+    let elementoRecebido =
+      null;
+
+    await runTransaction(
+      db,
+      async transaction => {
+
+        const snap =
+          await transaction.get(
+            usuarioRef
+          );
+
+        if(!snap.exists()){
+          throw new Error(
+            "USUARIO_NAO_ENCONTRADO"
+          );
+        }
+
+        const atual =
+          snap.data() || {};
+
+        const agora =
+          Date.now();
+
+        const proxima =
+          converterData(
+            atual.proximoElementoSurpresa
+          );
+
+        if(
+          !proxima ||
+          agora < proxima
+        ){
+          throw new Error(
+            "ELEMENTO_AINDA_NAO_DISPONIVEL"
+          );
+        }
+
+        /*
+          Sorteio entre os 118 elementos.
+          Pode vir repetido.
+        */
+        const elemento =
+          Math.floor(
+            Math.random() * 118
+          ) + 1;
+
+        const elementosBanco =
+          atual.elementos &&
+          typeof atual.elementos === "object" &&
+          !Array.isArray(atual.elementos)
+            ? {...atual.elementos}
+            : {};
+
+        elementosBanco[
+          String(elemento)
+        ] =
+          Number(
+            elementosBanco[
+              String(elemento)
+            ] || 0
+          ) + 1;
+
+        const vipBanco =
+          atual.vip === true;
+
+        const horas =
+          vipBanco
+            ? HORAS_ELEMENTO_VIP
+            : HORAS_ELEMENTO_NORMAL;
+
+        const proximaNova =
+          Timestamp.fromMillis(
+            agora +
+            (horas * MS_HORA)
+          );
+
+        transaction.update(
+          usuarioRef,
+          {
+            elementos:
+              elementosBanco,
+
+            ultimoElementoSurpresa:
+              Timestamp.now(),
+
+            proximoElementoSurpresa:
+              proximaNova,
+
+            atualizadoEm:
+              Timestamp.now()
+          }
+        );
+
+        elementoRecebido =
+          elemento;
+
+        cadastroAtual.data.elementos =
+          elementosBanco;
+
+        cadastroAtual.data.ultimoElementoSurpresa =
+          Timestamp.now();
+
+        cadastroAtual.data.proximoElementoSurpresa =
+          proximaNova;
+      }
+    );
+
+    if(elementoRecebido){
+
+      if(status){
+        status.textContent =
+          "🎉 Você recebeu o elemento nº " +
+          elementoRecebido +
+          "! Ele foi adicionado à sua coleção.";
+      }
+
+      if(botao){
+        botao.textContent =
+          "🔒 PRÓXIMO ELEMENTO EM BREVE";
+      }
+
+    }
+
+    atualizarElementoSurpresa();
+
+  }
+  catch(error){
+
+    console.error(
+      "Erro ao resgatar Elemento Surpresa:",
+      error
+    );
+
+    if(
+      error.message ===
+      "ELEMENTO_AINDA_NAO_DISPONIVEL"
+    ){
+
+      if(status){
+        status.textContent =
+          "⏳ O Elemento Surpresa ainda não está disponível.";
+      }
+
+    }
+    else if(
+      error.message ===
+      "USUARIO_NAO_ENCONTRADO"
+    ){
+
+      if(status){
+        status.textContent =
+          "❌ Seu cadastro não foi encontrado.";
+      }
+
+    }
+    else{
+
+      if(status){
+        status.textContent =
+          "❌ Não foi possível resgatar o elemento.";
+      }
+
+    }
+
+    atualizarElementoSurpresa();
+
+  }
+
+}
+
+
+/*
+  Atualiza apenas o relógio.
+  Quando chegar em zero, NÃO entrega automaticamente.
+  O jogador precisa clicar em RESGATAR.
+*/
+async function atualizarElementoSurpresa(){
+
+  const countdown =
+    document.getElementById(
+      "elementSurpriseCountdown"
+    );
+
+  const status =
+    document.getElementById(
+      "elementSurpriseStatus"
+    );
+
+  const botao =
+    document.getElementById(
+      "redeemElementSurpriseButton"
+    );
+
+  if(
+    !countdown ||
+    !usuarioAtual ||
+    !cadastroAtual
+  ){
     return;
   }
 
   try{
-    let proxima =
+
+    const proxima =
       await garantirProximoElementoSurpresa();
 
     if(!proxima){
       return;
     }
 
-    let restante = proxima - Date.now();
+    const restante =
+      proxima -
+      Date.now();
 
     if(restante <= 0){
-      await liberarElementoSurpresa();
 
-      proxima =
-        converterData(
-          cadastroAtual.data.proximoElementoSurpresa
-        );
+      countdown.textContent =
+        "00:00:00";
 
-      restante =
-        (proxima || Date.now()) - Date.now();
-
-      countdown.classList.remove("available");
-
-      if(status && restante > 0){
-        status.textContent =
-          "⏳ Próxima liberação iniciada.";
-      }
-    }
-
-    if(restante <= 0){
-      countdown.textContent = "00:00:00";
-      countdown.classList.add("available");
+      countdown.classList.add(
+        "available"
+      );
 
       if(status){
         status.textContent =
           "🎉 ELEMENTO SURPRESA DISPONÍVEL!";
       }
 
+      if(botao){
+        botao.disabled =
+          false;
+
+        botao.textContent =
+          "⚛️ RESGATAR ELEMENTO";
+      }
+
       return;
     }
 
     countdown.textContent =
-      formatarContagemElemento(restante);
+      formatarContagemElemento(
+        restante
+      );
 
-    countdown.classList.remove("available");
+    countdown.classList.remove(
+      "available"
+    );
 
     if(status){
       status.textContent =
@@ -7023,10 +7174,20 @@ async function atualizarElementoSurpresa(){
           ? "👑 VIP • próxima liberação em:"
           : "🔒 Não VIP • próxima liberação em:";
     }
+
+    if(botao){
+      botao.disabled =
+        true;
+
+      botao.textContent =
+        "🔒 AGUARDE O TEMPO TERMINAR";
+    }
+
   }
   catch(error){
+
     console.error(
-      "Erro no elemento surpresa:",
+      "Erro no Elemento Surpresa:",
       error
     );
 
@@ -7034,12 +7195,18 @@ async function atualizarElementoSurpresa(){
       status.textContent =
         "⚠️ Não foi possível atualizar a contagem.";
     }
+
   }
+
 }
 
+
 function iniciarElementoSurpresa(){
+
   if(elementoSurpresaTimer){
-    clearInterval(elementoSurpresaTimer);
+    clearInterval(
+      elementoSurpresaTimer
+    );
   }
 
   atualizarElementoSurpresa();
@@ -7051,13 +7218,39 @@ function iniciarElementoSurpresa(){
     );
 }
 
+
 function abrirVIP(){
+
   vipModal.style.display =
     "flex";
 
   iniciarElementoSurpresa();
+
 }
 
+
+document.getElementById(
+  "vipButton"
+).addEventListener(
+  "click",
+  abrirVIP
+);
+
+
+document.getElementById(
+  "vipNav"
+).addEventListener(
+  "click",
+  abrirVIP
+);
+
+
+document.getElementById(
+  "redeemElementSurpriseButton"
+)?.addEventListener(
+  "click",
+  resgatarElementoSurpresa
+);
 
 document.getElementById(
   "vipButton"
