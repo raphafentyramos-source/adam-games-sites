@@ -1378,71 +1378,46 @@ button{
 
 }
 
-.vip-element-counter{
-  display:flex;
-  align-items:center;
-  gap:11px;
-  margin:14px 0 14px;
-  padding:11px 13px;
+/* =====================================================
+   ELEMENTO SURPRESA — DENTRO DA ÁREA VIP
+===================================================== */
+
+.element-surprise-feature{
+  text-align:center;
+}
+
+.element-surprise-countdown{
+  margin:12px auto 7px;
+  padding:10px 14px;
   border-radius:15px;
-  background:rgba(5,18,42,.62);
-  border:1px solid rgba(111,213,255,.28);
-  box-shadow:inset 0 0 18px rgba(42,177,255,.07);
+  background:rgba(2,15,35,.72);
+  border:1px solid rgba(255,213,43,.35);
+  color:#ffd52b;
+  font-size:30px;
+  font-weight:900;
+  letter-spacing:2px;
+  font-variant-numeric:tabular-nums;
+  box-shadow:inset 0 0 20px rgba(255,190,40,.07);
 }
 
-.vip-element-counter-icon{
-  width:43px;
-  height:43px;
-  flex:0 0 43px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:12px;
-  background:linear-gradient(145deg,#075c91,#16235d);
-  border:1px solid rgba(86,220,255,.48);
-  font-size:23px;
-}
-
-.vip-element-counter-info{
-  display:flex;
-  flex-direction:column;
-  min-width:0;
-}
-
-.vip-element-counter-info strong{
-  color:#73e4ff;
-  font-size:17px;
-  line-height:1.05;
-  letter-spacing:.5px;
-}
-
-.vip-element-counter-info span{
-  margin-top:3px;
-  color:#fff;
-  font-size:10px;
+.element-surprise-status{
+  color:#d8e8f8;
+  font-size:12px;
   font-weight:900;
 }
 
-.vip-element-counter-info small{
-  margin-top:2px;
-  color:#9eb4cd;
-  font-size:9px;
+.element-surprise-reward{
+  margin-top:5px;
+  color:#9ebbd5;
+  font-size:10px;
 }
 
-.vip-element-counter.vip-active{
-  border-color:rgba(255,210,91,.42);
+.element-surprise-countdown.available{
+  color:#62ff9e;
+  border-color:rgba(98,255,158,.55);
   box-shadow:
-    inset 0 0 18px rgba(255,196,54,.07),
-    0 0 18px rgba(255,196,54,.05);
-}
-
-.vip-element-counter.vip-active .vip-element-counter-icon{
-  background:linear-gradient(145deg,#70490a,#30204e);
-  border-color:rgba(255,214,93,.55);
-}
-
-.vip-element-counter.vip-active .vip-element-counter-info strong{
-  color:#ffd95f;
+    0 0 18px rgba(98,255,158,.12),
+    inset 0 0 18px rgba(98,255,158,.06);
 }
 
 .vip-button{
@@ -2856,30 +2831,6 @@ button{
 
   </div>
 
-
-  <div class="vip-element-counter" id="vipElementCounter">
-
-    <div class="vip-element-counter-icon">
-      ⚛️
-    </div>
-
-    <div class="vip-element-counter-info">
-      <strong id="elementSurpriseTime">
-        120 HORAS
-      </strong>
-
-      <span>
-        1 ELEMENTO SURPRESA
-      </span>
-
-      <small>
-        Pode vir repetido
-      </small>
-    </div>
-
-  </div>
-
-
   <button
     class="vip-button"
     id="vipButton"
@@ -3568,9 +3519,20 @@ button{
     </div>
 
 
-    <div class="vip-feature">
-      ⭐ <strong>Benefícios exclusivos</strong><br>
-      Descontos, recompensas e vantagens especiais.
+    <div class="vip-feature element-surprise-feature">
+      ⚛️ <strong>ELEMENTO SURPRESA</strong>
+
+      <div class="element-surprise-countdown" id="elementSurpriseCountdown">
+        120:00:00
+      </div>
+
+      <div class="element-surprise-status" id="elementSurpriseStatus">
+        ⏳ Aguarde a próxima liberação.
+      </div>
+
+      <div class="element-surprise-reward" id="elementSurpriseReward">
+        1 elemento aleatório • Pode vir repetido
+      </div>
     </div>
 
 
@@ -4092,7 +4054,20 @@ let CONQUISTAS = [
 
 ];
 
-\nasync function carregarCatalogoConquistas(){\n  try{\n    const r=await getDocs(collection(db,"conquistas"));\n    if(r.empty)return;\n    const mapa=new Map(CONQUISTAS.map(x=>[x.id,x]));\n    r.docs.forEach(d=>{mapa.set(d.id,{id:d.id,...d.data()})});\n    CONQUISTAS=Array.from(mapa.values()).sort((a,b)=>(Number(a.ordem)||0)-(Number(b.ordem)||0));\n  }catch(e){\n    console.warn("Não foi possível carregar o catálogo de conquistas; usando catálogo padrão.",e);\n  }\n}\n\nfunction listaConquistasDoJogador(){
+
+async function carregarCatalogoConquistas(){
+  try{
+    const r=await getDocs(collection(db,"conquistas"));
+    if(r.empty)return;
+    const mapa=new Map(CONQUISTAS.map(x=>[x.id,x]));
+    r.docs.forEach(d=>{mapa.set(d.id,{id:d.id,...d.data()})});
+    CONQUISTAS=Array.from(mapa.values()).sort((a,b)=>(Number(a.ordem)||0)-(Number(b.ordem)||0));
+  }catch(e){
+    console.warn("Não foi possível carregar o catálogo de conquistas; usando catálogo padrão.",e);
+  }
+}
+
+function listaConquistasDoJogador(){
 
   const dados =
     cadastroAtual?.data || {};
@@ -6789,11 +6764,298 @@ document
    VIP
 ===================================================== */
 
-function abrirVIP(){
+let elementoSurpresaTimer = null;
 
+const HORAS_ELEMENTO_NORMAL = 120;
+const HORAS_ELEMENTO_VIP = 60;
+const MS_HORA = 60 * 60 * 1000;
+
+function formatarContagemElemento(ms){
+  ms = Math.max(0, Number(ms) || 0);
+
+  const totalSegundos = Math.floor(ms / 1000);
+  const horas = Math.floor(totalSegundos / 3600);
+  const minutos = Math.floor((totalSegundos % 3600) / 60);
+  const segundos = totalSegundos % 60;
+
+  return (
+    String(horas).padStart(2,"0") + ":" +
+    String(minutos).padStart(2,"0") + ":" +
+    String(segundos).padStart(2,"0")
+  );
+}
+
+async function garantirProximoElementoSurpresa(){
+  if(!usuarioAtual || !cadastroAtual || !cadastroId){
+    return null;
+  }
+
+  const dados = cadastroAtual.data || {};
+  const agora = Date.now();
+
+  const existente = converterData(
+    dados.proximoElementoSurpresa
+  );
+
+  if(existente && existente > agora){
+    return existente;
+  }
+
+  const horas = dados.vip === true
+    ? HORAS_ELEMENTO_VIP
+    : HORAS_ELEMENTO_NORMAL;
+
+  const proxima = Timestamp.fromMillis(
+    agora + (horas * MS_HORA)
+  );
+
+  await updateDoc(
+    doc(db,"admins",cadastroId),
+    {
+      proximoElementoSurpresa: proxima,
+      atualizadoEm: Timestamp.now()
+    }
+  );
+
+  cadastroAtual.data.proximoElementoSurpresa = proxima;
+
+  return proxima.toMillis();
+}
+
+async function liberarElementoSurpresa(){
+  if(!usuarioAtual || !cadastroAtual || !cadastroId){
+    return;
+  }
+
+  const agora = Date.now();
+  const dados = cadastroAtual.data || {};
+  const proximaAtual = converterData(
+    dados.proximoElementoSurpresa
+  );
+
+  if(!proximaAtual || agora < proximaAtual){
+    return;
+  }
+
+  /*
+    O elemento é sorteado entre os 118 elementos.
+    Pode repetir normalmente.
+  */
+  const elemento =
+    Math.floor(Math.random() * 118) + 1;
+
+  const elementosAtuais =
+    dados.elementos &&
+    typeof dados.elementos === "object" &&
+    !Array.isArray(dados.elementos)
+      ? {...dados.elementos}
+      : {};
+
+  const chaveElemento = String(elemento);
+
+  elementosAtuais[chaveElemento] =
+    Number(elementosAtuais[chaveElemento] || 0) + 1;
+
+  const horas = dados.vip === true
+    ? HORAS_ELEMENTO_VIP
+    : HORAS_ELEMENTO_NORMAL;
+
+  const proxima = Timestamp.fromMillis(
+    agora + (horas * MS_HORA)
+  );
+
+  const usuarioRef =
+    doc(db,"admins",cadastroId);
+
+  await runTransaction(
+    db,
+    async transaction => {
+
+      const snap =
+        await transaction.get(usuarioRef);
+
+      if(!snap.exists()){
+        throw new Error("USUARIO_NAO_ENCONTRADO");
+      }
+
+      const atual =
+        snap.data() || {};
+
+      const proximaBanco =
+        converterData(
+          atual.proximoElementoSurpresa
+        );
+
+      /*
+        Se outra aba/dispositivo já liberou o elemento,
+        não entrega outro novamente.
+      */
+      if(
+        proximaBanco &&
+        Date.now() < proximaBanco
+      ){
+        cadastroAtual.data.proximoElementoSurpresa =
+          atual.proximoElementoSurpresa;
+
+        cadastroAtual.data.elementos =
+          atual.elementos || {};
+
+        return;
+      }
+
+      const elementosBanco =
+        atual.elementos &&
+        typeof atual.elementos === "object" &&
+        !Array.isArray(atual.elementos)
+          ? {...atual.elementos}
+          : {};
+
+      elementosBanco[String(elemento)] =
+        Number(elementosBanco[String(elemento)] || 0) + 1;
+
+      const vipBanco =
+        atual.vip === true;
+
+      const horasBanco =
+        vipBanco
+          ? HORAS_ELEMENTO_VIP
+          : HORAS_ELEMENTO_NORMAL;
+
+      const proximaBancoNova =
+        Timestamp.fromMillis(
+          Date.now() +
+          (horasBanco * MS_HORA)
+        );
+
+      transaction.update(
+        usuarioRef,
+        {
+          elementos: elementosBanco,
+          ultimoElementoSurpresa: Timestamp.now(),
+          proximoElementoSurpresa: proximaBancoNova,
+          atualizadoEm: Timestamp.now()
+        }
+      );
+
+      cadastroAtual.data.elementos =
+        elementosBanco;
+
+      cadastroAtual.data.ultimoElementoSurpresa =
+        Timestamp.now();
+
+      cadastroAtual.data.proximoElementoSurpresa =
+        proximaBancoNova;
+    }
+  );
+
+  const status = document.getElementById(
+    "elementSurpriseStatus"
+  );
+
+  if(status){
+    status.textContent =
+      "🎉 ELEMENTO LIBERADO! Elemento nº " +
+      elemento +
+      " adicionado à sua coleção.";
+  }
+}
+
+async function atualizarElementoSurpresa(){
+  const countdown =
+    document.getElementById("elementSurpriseCountdown");
+
+  const status =
+    document.getElementById("elementSurpriseStatus");
+
+  if(!countdown || !usuarioAtual || !cadastroAtual){
+    return;
+  }
+
+  try{
+    let proxima =
+      await garantirProximoElementoSurpresa();
+
+    if(!proxima){
+      return;
+    }
+
+    let restante = proxima - Date.now();
+
+    if(restante <= 0){
+      await liberarElementoSurpresa();
+
+      proxima =
+        converterData(
+          cadastroAtual.data.proximoElementoSurpresa
+        );
+
+      restante =
+        (proxima || Date.now()) - Date.now();
+
+      countdown.classList.remove("available");
+
+      if(status && restante > 0){
+        status.textContent =
+          "⏳ Próxima liberação iniciada.";
+      }
+    }
+
+    if(restante <= 0){
+      countdown.textContent = "00:00:00";
+      countdown.classList.add("available");
+
+      if(status){
+        status.textContent =
+          "🎉 ELEMENTO SURPRESA DISPONÍVEL!";
+      }
+
+      return;
+    }
+
+    countdown.textContent =
+      formatarContagemElemento(restante);
+
+    countdown.classList.remove("available");
+
+    if(status){
+      status.textContent =
+        cadastroAtual.data.vip === true
+          ? "👑 VIP • próxima liberação em:"
+          : "🔒 Não VIP • próxima liberação em:";
+    }
+  }
+  catch(error){
+    console.error(
+      "Erro no elemento surpresa:",
+      error
+    );
+
+    if(status){
+      status.textContent =
+        "⚠️ Não foi possível atualizar a contagem.";
+    }
+  }
+}
+
+function iniciarElementoSurpresa(){
+  if(elementoSurpresaTimer){
+    clearInterval(elementoSurpresaTimer);
+  }
+
+  atualizarElementoSurpresa();
+
+  elementoSurpresaTimer =
+    setInterval(
+      atualizarElementoSurpresa,
+      1000
+    );
+}
+
+function abrirVIP(){
   vipModal.style.display =
     "flex";
 
+  iniciarElementoSurpresa();
 }
 
 
