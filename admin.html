@@ -55,6 +55,10 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
 .fig-panel{display:none}.fig-panel.active{display:block}
 .fig-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.fig-grid .full{grid-column:1/-1}.fig-field label{display:block;color:#c4addf;font-size:11px;font-weight:bold;margin-bottom:6px}
 .fig-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.fig-btn{padding:14px;border-radius:12px}.fig-send{background:linear-gradient(135deg,#a63cf2,#6418a8)}.fig-green{background:linear-gradient(135deg,#16bb69,#087b45)}.fig-gold{background:linear-gradient(135deg,#ffd52a,#d88b00);color:#111}.fig-red{background:linear-gradient(135deg,#d72d47,#a8172d)}
+.fig-package-admin{padding:17px;margin-top:2px;border-radius:17px;background:linear-gradient(145deg,rgba(164,58,245,.18),rgba(255,213,42,.06));border:2px solid rgba(195,106,255,.45);box-shadow:0 0 24px rgba(140,35,220,.10)}
+.fig-package-title{font-size:14px;font-weight:900;color:#fff;margin-bottom:12px}
+.fig-package-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fig-package-preview{margin-top:12px;padding:13px;border-radius:12px;background:rgba(0,0,0,.25);color:#e1c9f5;font-size:12px;line-height:1.5}
 .fig-note{margin-top:10px;padding:10px;border-radius:10px;background:rgba(255,193,7,.07);border:1px solid rgba(255,193,7,.16);color:#e8cf8a;font-size:11px;line-height:1.45}
 .fig-selected{margin-top:14px;padding:14px;border-radius:14px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07);display:none}.fig-selected.show{display:block}.fig-selected-title{font-weight:900}.fig-selected-meta{margin-top:5px;color:#a98bc8;font-size:11px}
 .fig-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:15px}.fig-stat{padding:14px 8px;border-radius:14px;text-align:center;background:rgba(255,255,255,.045)}.fig-stat-number{font-size:25px;font-weight:900}.fig-stat-label{margin-top:3px;color:#a98fbe;font-size:9px;font-weight:bold}
@@ -64,15 +68,7 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
 @media(max-width:760px){.fig-tabs{grid-template-columns:1fr 1fr}.fig-grid{grid-template-columns:1fr}.fig-grid .full{grid-column:auto}.fig-summary{grid-template-columns:1fr 1fr}.fig-rank{grid-template-columns:34px 42px 1fr auto}}
 
 </style>
-<style>
-.fig-package-box{margin-top:12px;padding:14px;border-radius:14px;background:rgba(0,0,0,.14);border:1px solid rgba(190,80,255,.18)}
-.fig-package-title{font-size:12px;font-weight:900;color:#e6d5fa;margin-bottom:10px}
-.fig-package-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.fig-package-grid .full{grid-column:1/-1}
-.fig-package-preview{padding:10px 12px;border-radius:11px;background:rgba(166,60,242,.08);border:1px solid rgba(166,60,242,.16);color:#d9c5f5;font-size:11px;line-height:1.5}
-.fig-package-preview strong{color:#fff}
-@media(max-width:760px){.fig-package-grid{grid-template-columns:1fr}.fig-package-grid .full{grid-column:auto}}
-</style></head>
+</head>
 <body>
 <div class="container">
 <header>
@@ -222,34 +218,41 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
       <div class="fig-field">
         <label>TIPO DE ENVIO</label>
         <select id="figSendType">
-          <option value="pacote">🎁 Pacote aleatório</option>
-          <option value="carta">🎴 Carta específica</option>
-          <option value="coringa">🃏 Coringa</option>
+          <option value="pacote">📦 ENVIAR PACOTE</option>
+          <option value="carta">🎴 ENVIAR CARTA ESPECÍFICA</option>
+          <option value="coringa">🃏 ENVIAR CORINGA</option>
         </select>
       </div>
       <div class="fig-field">
-        <label>QUANTIDADE</label>
-        <input id="figQuantity" type="number" min="1" max="100" step="1" value="1">
+        <label>QUANTIDADE DE CARTAS / UNIDADES</label>
+        <input id="figQuantity" type="number" min="1" max="6" step="1" value="1">
       </div>
-      <div class="fig-package-box full" id="figPackageBox">
-<div class="fig-package-title">🎁 CONFIGURAÇÃO DO PACOTE</div>
-<div class="fig-package-grid">
-<div class="fig-field"><label>MODO DO PACOTE</label>
-<select id="figPackageMode">
-<option value="all">🎲 Aleatório entre as 25 cartas</option>
-<option value="album">📚 Aleatório dentro de um álbum</option>
-</select></div>
-<div class="fig-field" id="figAlbumField"><label>ÁLBUM</label>
-<select id="figAlbumSelect">
-<option value="noiteAssombrada">🏰 NOITE ASSOMBRADA — 01 a 05</option>
-<option value="bruxariaMagia">🔮 BRUXARIA & MAGIA — 06 a 10</option>
-<option value="criaturasTrevas">🦇 CRIATURAS DAS TREVAS — 11 a 15</option>
-<option value="reinoAboboras">🎃 REINO DAS ABÓBORAS — 16 a 20</option>
-<option value="lendariasDouradas">👑 COLEÇÃO LENDÁRIA DOURADA — 21 a 25</option>
-</select></div>
-<div class="fig-field full"><div class="fig-package-preview" id="figPackagePreview">🎲 O pacote será formado aleatoriamente usando as <strong>25 cartas</strong>.</div></div>
-</div></div>
-<div class="fig-field full" id="figCardField" style="display:none">
+      <div class="fig-package-admin full" id="figPackageBox">
+        <div class="fig-package-title">📦 CONFIGURAR O PACOTE QUE SERÁ ENVIADO</div>
+        <div class="fig-package-grid">
+          <div class="fig-field">
+            <label>ESCOLHA AS CARTAS</label>
+            <select id="figPackageMode">
+              <option value="all">🎲 ALEATÓRIO ENTRE AS 25 CARTAS</option>
+              <option value="album">📚 ALEATÓRIO DENTRO DE UM ÁLBUM</option>
+            </select>
+          </div>
+          <div class="fig-field" id="figAlbumField">
+            <label>ESCOLHER ÁLBUM</label>
+            <select id="figAlbumSelect">
+              <option value="noiteAssombrada">🎃 NOITE ASSOMBRADA — 01 a 05</option>
+              <option value="bruxariaMagia">🔮 BRUXARIA & MAGIA — 06 a 10</option>
+              <option value="criaturasTrevas">🦇 CRIATURAS DAS TREVAS — 11 a 15</option>
+              <option value="reinoAboboras">🎃 REINO DAS ABÓBORAS — 16 a 20</option>
+              <option value="lendariasDouradas">👑 COLEÇÃO LENDÁRIA DOURADA — 21 a 25</option>
+            </select>
+          </div>
+        </div>
+        <div class="fig-package-preview" id="figPackagePreview">
+          🎲 As cartas serão sorteadas aleatoriamente entre as 25 cartas.
+        </div>
+      </div>
+      <div class="fig-field full" id="figCardField" style="display:none">
         <label>CARTA ESPECÍFICA</label>
         <select id="figCardSelect"></select>
       </div>
@@ -649,67 +652,198 @@ function figAtualizarTipo(){
  const t=document.getElementById("figSendType").value;
  document.getElementById("figCardField").style.display=t==="carta"?"block":"none";
  document.getElementById("figJokerField").style.display=t==="coringa"?"block":"none";
- const box=document.getElementById("figPackageBox");if(box)box.style.display=t==="pacote"?"block":"none";
- const q=document.getElementById("figQuantity");q.max=t==="pacote"?"6":"1000";
- const mode=document.getElementById("figPackageMode")?.value||"all";
- const af=document.getElementById("figAlbumField");if(af)af.style.display=mode==="album"?"block":"none";
+ const box=document.getElementById("figPackageBox");
+ if(box)box.style.display=t==="pacote"?"block":"none";
+ const q=document.getElementById("figQuantity");
+ if(t==="pacote"){
+   const max=figUsuarioAtual?.data?.vip===true?6:3;
+   q.max=String(max);
+   if(Number(q.value)>max)q.value=max;
+ }else{
+   q.max="1000";
+ }
  figAtualizarPreviewPacote();
 }
+
 function figAtualizarPreviewPacote(){
  const mode=document.getElementById("figPackageMode")?.value||"all";
  const album=document.getElementById("figAlbumSelect")?.value||"noiteAssombrada";
  const q=Number(document.getElementById("figQuantity")?.value||1);
- const p=document.getElementById("figPackagePreview");if(!p)return;
- const nomes={noiteAssombrada:"NOITE ASSOMBRADA (01–05)",bruxariaMagia:"BRUXARIA & MAGIA (06–10)",criaturasTrevas:"CRIATURAS DAS TREVAS (11–15)",reinoAboboras:"REINO DAS ABÓBORAS (16–20)",lendariasDouradas:"COLEÇÃO LENDÁRIA DOURADA (21–25)"};
- p.innerHTML=mode==="album"?`📚 <strong>${q} carta(s)</strong> serão sorteadas somente do álbum <strong>${nomes[album]||album}</strong>. Repetidas são permitidas.`:`🎲 <strong>${q} carta(s)</strong> serão sorteadas aleatoriamente entre as <strong>25 cartas</strong>. Repetidas são permitidas.`;
+ const nomes={
+  noiteAssombrada:"NOITE ASSOMBRADA (01–05)",
+  bruxariaMagia:"BRUXARIA & MAGIA (06–10)",
+  criaturasTrevas:"CRIATURAS DAS TREVAS (11–15)",
+  reinoAboboras:"REINO DAS ABÓBORAS (16–20)",
+  lendariasDouradas:"COLEÇÃO LENDÁRIA DOURADA (21–25)"
+ };
+ const p=document.getElementById("figPackagePreview");
+ if(!p)return;
+ p.innerHTML=mode==="album"
+   ? `📚 <strong>${q} carta(s)</strong> serão sorteadas somente de <strong>${nomes[album]}</strong>. Repetidas são permitidas.`
+   : `🎲 <strong>${q} carta(s)</strong> serão sorteadas aleatoriamente entre as <strong>25 cartas</strong>. Repetidas são permitidas.`;
 }
+
 async function figEnviar(){
  const msg=document.getElementById("figSendMessage");
  if(!adminUsuario){mostrarMensagem(msg,"❌ Administrador não autenticado.","error");return}
- const alvo=document.getElementById("figUser").value.trim(),tipo=document.getElementById("figSendType").value;
- const q=Number(document.getElementById("figQuantity").value),motivo=document.getElementById("figReason").value.trim();
- const packageMode=document.getElementById("figPackageMode")?.value||"all",albumId=document.getElementById("figAlbumSelect")?.value||"noiteAssombrada";
- if(!alvo){mostrarMensagem(msg,"❌ Informe o cliente.","error");return}
+
+ const alvo=document.getElementById("figUser").value.trim();
+ const tipo=document.getElementById("figSendType").value;
+ const q=Number(document.getElementById("figQuantity").value);
+ const motivo=document.getElementById("figReason").value.trim();
+
+ if(!alvo){mostrarMensagem(msg,"❌ Informe o jogador.","error");return}
  if(!Number.isInteger(q)||q<=0){mostrarMensagem(msg,"❌ A quantidade precisa ser um número inteiro positivo.","error");return}
  if(!motivo){mostrarMensagem(msg,"❌ Informe o motivo.","error");return}
- const u=await figSelecionarUsuario(alvo);if(!u)return;const d=u.data;
+
+ const u=await figSelecionarUsuario(alvo);
+ if(!u)return;
+ const d=u.data;
+
  if(tipo==="pacote"){
-   const minimo=d.vip===true?4:1,maximo=d.vip===true?6:3;
-   if(q<minimo||q>maximo){mostrarMensagem(msg,`❌ Para este cliente, o pacote deve ter ${minimo} a ${maximo} figurinha(s). ${d.vip===true?"Cliente VIP.":"Cliente não VIP."}`,"error");return}
- }else if(q>1000){mostrarMensagem(msg,"❌ A quantidade máxima é 1000.","error");return}
- const albuns={noiteAssombrada:{nome:"NOITE ASSOMBRADA",cards:["01","02","03","04","05"]},bruxariaMagia:{nome:"BRUXARIA & MAGIA",cards:["06","07","08","09","10"]},criaturasTrevas:{nome:"CRIATURAS DAS TREVAS",cards:["11","12","13","14","15"]},reinoAboboras:{nome:"REINO DAS ABÓBORAS",cards:["16","17","18","19","20"]},lendariasDouradas:{nome:"COLEÇÃO LENDÁRIA DOURADA",cards:["21","22","23","24","25"]}};
- let cartas={},coringas={},descricao="";
- if(tipo==="pacote"){
-   let pool=FIGURINHAS_HALLOWEEN.map(c=>c.id);
-   if(packageMode==="album")pool=albuns[albumId]?.cards||pool;
-   for(let i=0;i<q;i++){const id=pool[Math.floor(Math.random()*pool.length)];cartas[id]=(cartas[id]||0)+1}
-   descricao=packageMode==="album"?`Pacote ADM • ${q} figurinha(s) aleatória(s) • ${albuns[albumId]?.nome||albumId}`:`Pacote ADM • ${q} figurinha(s) aleatória(s) • 25 cartas`;
- }else if(tipo==="carta"){
-   const id=document.getElementById("figCardSelect").value;cartas[id]=q;descricao=`Carta específica • ${id} • ${figCard(id)?.nome||""}`;
- }else{
-   const id=document.getElementById("figJokerSelect").value;coringas[id]=q;descricao=`Coringa • ${figJoker(id)?.nome||id}`;
+   const minimo=d.vip===true?4:1;
+   const maximo=d.vip===true?6:3;
+   if(q<minimo||q>maximo){
+     mostrarMensagem(msg,`❌ Este jogador é ${d.vip===true?"VIP":"NÃO VIP"}. O pacote precisa ter ${minimo} a ${maximo} cartas.`,"error");
+     return;
+   }
+
+   const mode=document.getElementById("figPackageMode").value;
+   const albumId=document.getElementById("figAlbumSelect").value;
+   const albuns={
+     noiteAssombrada:{nome:"NOITE ASSOMBRADA",cards:["01","02","03","04","05"]},
+     bruxariaMagia:{nome:"BRUXARIA & MAGIA",cards:["06","07","08","09","10"]},
+     criaturasTrevas:{nome:"CRIATURAS DAS TREVAS",cards:["11","12","13","14","15"]},
+     reinoAboboras:{nome:"REINO DAS ABÓBORAS",cards:["16","17","18","19","20"]},
+     lendariasDouradas:{nome:"COLEÇÃO LENDÁRIA DOURADA",cards:["21","22","23","24","25"]}
+   };
+   const albumNome=albuns[albumId]?.nome||"";
+   const operacaoId="FIG-PAC-"+new Date().toISOString().replace(/\D/g,"").slice(0,14)+"-"+Math.random().toString(36).slice(2,8).toUpperCase();
+
+   if(!confirm(
+     `📦 ENVIAR PACOTE\n\n`+
+     `Jogador: ${d.nome||d.email||d.publicId||u.docId}\n`+
+     `Quantidade: ${q} carta(s)\n`+
+     `Modo: ${mode==="album"?"ÁLBUM":"25 CARTAS"}\n`+
+     `${mode==="album"?"Álbum: "+albumNome+"\n":""}`+
+     `\nO pacote ficará no inventário do jogador para ele abrir no site.`
+   ))return;
+
+   try{
+     await runTransaction(db,async tx=>{
+       const snap=await tx.get(u.ref);
+       if(!snap.exists())throw new Error("Usuário não existe.");
+
+       const atual=snap.data();
+       const pacotes=Array.isArray(atual.pacotesHalloween)?[...atual.pacotesHalloween]:[];
+
+       pacotes.push({
+         id:operacaoId,
+         quantidade:q,
+         modo:mode,
+         albumId:mode==="album"?albumId:"",
+         albumNome:mode==="album"?albumNome:"",
+         origem:"ADM",
+         motivo,
+         status:"disponivel",
+         criadoEm:new Date().toISOString()
+       });
+
+       tx.update(u.ref,{pacotesHalloween:pacotes});
+
+       tx.set(doc(db,"historicoFigurinhas",operacaoId),{
+         operacaoId,
+         usuarioId:u.docId,
+         publicId:atual.publicId||u.docId,
+         usuarioUid:atual.uid||"",
+         usuarioEmail:atual.email||"",
+         usuarioNome:atual.nome||atual.name||"",
+         origem:"ADM",
+         tipo:"pacote",
+         quantidade:q,
+         modoPacote:mode,
+         albumId:mode==="album"?albumId:"",
+         albumNome:mode==="album"?albumNome:"",
+         cartas:{},
+         coringas:{},
+         descricao:`Pacote ADM • ${q} carta(s)`,
+         motivo,
+         statusPacote:"disponivel",
+         adminEmail:adminUsuario.email||"",
+         adminUid:adminUsuario.uid||"",
+         criadoEm:serverTimestamp()
+       });
+     });
+
+     document.getElementById("figReason").value="";
+     mostrarMensagem(
+       msg,
+       `✅ PACOTE ENVIADO! ${q} carta(s) • ${mode==="album"?albumNome:"Aleatório entre 25 cartas"} • ficou disponível para o jogador abrir. ID: ${operacaoId}`,
+       "success"
+     );
+     await figCarregarHistorico();
+   }catch(e){
+     console.error("FIG PACOTE:",e);
+     mostrarMensagem(msg,e?.code==="permission-denied"
+       ?"❌ Firestore bloqueou o envio do pacote. Verifique as Rules."
+       :"❌ Não foi possível enviar o pacote.","error");
+   }
+   return;
  }
- const itens=[...Object.entries(cartas).map(([id,n])=>`${id} — ${figCard(id)?.nome||"Carta"} ×${n}`),...Object.entries(coringas).map(([id,n])=>`${figJoker(id)?.nome||id} ×${n}`)];
- if(!confirm(`Enviar para ${d.nome||d.email||d.publicId||u.docId}?\n\n${descricao}\n${itens.join("\n")}`))return;
+
+ if(q>1000){mostrarMensagem(msg,"❌ A quantidade máxima é 1000.","error");return}
+
+ let cartas={},coringas={},descricao="";
+ if(tipo==="carta"){
+   const id=document.getElementById("figCardSelect").value;
+   cartas[id]=q;
+   descricao=`Carta específica • ${id} • ${figCard(id)?.nome||""}`;
+ }else{
+   const id=document.getElementById("figJokerSelect").value;
+   coringas[id]=q;
+   descricao=`Coringa • ${figJoker(id)?.nome||id}`;
+ }
+
+ if(!confirm(`Enviar para ${d.nome||d.email||d.publicId||u.docId}?\n\n${descricao}\n\nQuantidade: ${q}`))return;
+
  const operacaoId="FIG-"+new Date().toISOString().replace(/\D/g,"").slice(0,14)+"-"+Math.random().toString(36).slice(2,8).toUpperCase();
+
  try{
-  await runTransaction(db,async tx=>{
-   const snap=await tx.get(u.ref);if(!snap.exists())throw new Error("Usuário não existe.");
-   const atual=snap.data(),novoCartas={...figCartasMap(atual)},novoCoringas={...(atual.coringasHalloween||{})};
-   Object.entries(cartas).forEach(([id,n])=>novoCartas[id]=Number(novoCartas[id]||0)+Number(n));
-   Object.entries(coringas).forEach(([id,n])=>novoCoringas[id]=Number(novoCoringas[id]||0)+Number(n));
-   const patch={cartasHalloween:novoCartas};if(Object.keys(coringas).length)patch.coringasHalloween=novoCoringas;
-   tx.update(u.ref,patch);
-   tx.set(doc(db,"historicoFigurinhas",operacaoId),{operacaoId,usuarioId:u.docId,publicId:atual.publicId||u.docId,usuarioUid:atual.uid||"",usuarioEmail:atual.email||"",usuarioNome:atual.nome||atual.name||"",origem:"ADM",tipo,quantidade:q,modoPacote:tipo==="pacote"?packageMode:"",albumId:tipo==="pacote"&&packageMode==="album"?albumId:"",albumNome:tipo==="pacote"&&packageMode==="album"?(albuns[albumId]?.nome||""):"",cartas,coringas,descricao,motivo,adminEmail:adminUsuario.email||"",adminUid:adminUsuario.uid||"",criadoEm:serverTimestamp()});
-  });
-  const cartasAtualizadas={...figCartasMap(d)};Object.entries(cartas).forEach(([id,n])=>cartasAtualizadas[id]=Number(cartasAtualizadas[id]||0)+Number(n));
-  const coringasAtualizados={...(d.coringasHalloween||{})};Object.entries(coringas).forEach(([id,n])=>coringasAtualizados[id]=Number(coringasAtualizados[id]||0)+Number(n));
-  figUsuarioAtual.data={...d,cartasHalloween:cartasAtualizadas,coringasHalloween:coringasAtualizados};
-  document.getElementById("figSelectedMeta").textContent=`${figUsuarioAtual.data.publicId||u.docId} • ${figUsuarioAtual.data.vip===true?"👑 VIP":"⭐ NÃO VIP"} • ${figDiferentes(figUsuarioAtual.data)} diferentes • ${figQuantidadeCartas(figUsuarioAtual.data)} total`;
-  document.getElementById("figReason").value="";
-  mostrarMensagem(msg,`✅ ${descricao} enviado com sucesso. ID: ${operacaoId}`,"success");
- }catch(e){console.error("FIG ENVIO:",e);mostrarMensagem(msg,e?.code==="permission-denied"?"❌ Firestore bloqueou o envio. Verifique as Rules de admins e historicoFigurinhas.":"❌ Não foi possível enviar as figurinhas.","error")}
+   await runTransaction(db,async tx=>{
+     const snap=await tx.get(u.ref);
+     if(!snap.exists())throw new Error("Usuário não existe.");
+     const atual=snap.data();
+     const novoCartas={...figCartasMap(atual)};
+     const novoCoringas={...(atual.coringasHalloween||{})};
+
+     Object.entries(cartas).forEach(([id,n])=>novoCartas[id]=Number(novoCartas[id]||0)+Number(n));
+     Object.entries(coringas).forEach(([id,n])=>novoCoringas[id]=Number(novoCoringas[id]||0)+Number(n));
+
+     const patch={cartasHalloween:novoCartas};
+     if(Object.keys(coringas).length)patch.coringasHalloween=novoCoringas;
+
+     tx.update(u.ref,patch);
+     tx.set(doc(db,"historicoFigurinhas",operacaoId),{
+       operacaoId,usuarioId:u.docId,publicId:atual.publicId||u.docId,
+       usuarioUid:atual.uid||"",usuarioEmail:atual.email||"",
+       usuarioNome:atual.nome||atual.name||"",origem:"ADM",tipo,
+       quantidade:q,cartas,coringas,descricao,motivo,
+       adminEmail:adminUsuario.email||"",adminUid:adminUsuario.uid||"",
+       criadoEm:serverTimestamp()
+     });
+   });
+
+   mostrarMensagem(msg,`✅ ${descricao} enviado com sucesso. ID: ${operacaoId}`,"success");
+   document.getElementById("figReason").value="";
+   await figCarregarHistorico();
+ }catch(e){
+   console.error("FIG ENVIO:",e);
+   mostrarMensagem(msg,e?.code==="permission-denied"
+     ?"❌ Firestore bloqueou o envio. Verifique as Rules."
+     :"❌ Não foi possível enviar as figurinhas.","error");
+ }
 }
+
 async function figConsultarColecao(){
  const msg=document.getElementById("figCollectionMessage"),alvo=document.getElementById("figCollectionUser").value.trim();
  if(!alvo){mostrarMensagem(msg,"❌ Informe o cliente.","error");return}
@@ -731,7 +865,7 @@ async function figCarregarHistorico(){
  try{
   const r=await getDocs(collection(db,"historicoFigurinhas"));figHistoricoCache=r.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>obterMillis(b.criadoEm)-obterMillis(a.criadoEm));
   if(!figHistoricoCache.length){lista.innerHTML="<div class='empty'>Nenhum envio de figurinha registrado.</div>";return}
-  lista.innerHTML="";figHistoricoCache.slice(0,150).forEach(x=>{const el=document.createElement("div");el.className="fig-history-item";const itens=[...Object.entries(x.cartas||{}).map(([id,q])=>`${id} ${figCard(id)?.nome||""} (${q}x)`),...Object.entries(x.coringas||{}).map(([id,q])=>`${figJoker(id)?.nome||id} (${q}x)`)];el.innerHTML=`<div class="fig-history-top"><div class="fig-history-title">🎴 ${figEscape(x.descricao||x.tipo||"Envio")}</div><div class="fig-history-date">${figEscape(formatarData(x.criadoEm))}</div></div><div class="fig-history-info">👤 ${figEscape(x.usuarioNome||x.publicId||x.usuarioEmail||"Cliente")}<br>📦 ${figEscape(itens.join(" • ")||"—")}${x.albumNome?`<br>📚 Álbum: ${figEscape(x.albumNome)}`:""}${x.modoPacote==="all"?`<br>🎲 Sorteio: 25 cartas`:""}${x.modoPacote==="album"?`<br>🎲 Sorteio: somente do álbum`:""}<br>💬 Motivo: ${figEscape(x.motivo||"—")}<br>👑 ADM: ${figEscape(x.adminEmail||"—")}<br>🆔 ${figEscape(x.operacaoId||x.id)}</div>`;lista.appendChild(el)});
+  lista.innerHTML="";figHistoricoCache.slice(0,150).forEach(x=>{const el=document.createElement("div");el.className="fig-history-item";const itens=[...Object.entries(x.cartas||{}).map(([id,q])=>`${id} ${figCard(id)?.nome||""} (${q}x)`),...Object.entries(x.coringas||{}).map(([id,q])=>`${figJoker(id)?.nome||id} (${q}x)`)];el.innerHTML=`<div class="fig-history-top"><div class="fig-history-title">🎴 ${figEscape(x.descricao||x.tipo||"Envio")}</div><div class="fig-history-date">${figEscape(formatarData(x.criadoEm))}</div></div><div class="fig-history-info">👤 ${figEscape(x.usuarioNome||x.publicId||x.usuarioEmail||"Cliente")}<br>📦 ${figEscape(itens.join(" • ")||"—")}<br>💬 Motivo: ${figEscape(x.motivo||"—")}<br>👑 ADM: ${figEscape(x.adminEmail||"—")}<br>🆔 ${figEscape(x.operacaoId||x.id)}</div>`;lista.appendChild(el)});
   mostrarMensagem(msg,`✅ ${figHistoricoCache.length} registro(s) carregado(s).`,"success");
  }catch(e){console.error("FIG HIST:",e);lista.innerHTML="<div class='empty'>❌ Não foi possível carregar o histórico.</div>";mostrarMensagem(msg,e?.code==="permission-denied"?"Sem permissão para ler historicoFigurinhas.":"Erro ao carregar histórico.","error")}
 }
@@ -754,7 +888,7 @@ document.getElementById("figLoadHistory").onclick=figCarregarHistorico;
 document.getElementById("figLoadHistory2").onclick=figCarregarHistorico;
 document.getElementById("figUser").onkeydown=e=>{if(e.key==="Enter")figSelecionarUsuario(document.getElementById("figUser").value.trim())};
 document.getElementById("figCollectionUser").onkeydown=e=>{if(e.key==="Enter")figConsultarColecao()};
-figPreencherSelects();figAtualizarTipo();
+figPreencherSelects();figAtualizarTipo();figAtualizarPreviewPacote();
 
 </script>
 </body>
