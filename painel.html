@@ -2395,6 +2395,37 @@ button{
 
 
 
+
+.vip-box-feature{text-align:center}
+.vip-box-countdown{
+  margin:12px auto 7px;
+  padding:10px 14px;
+  border-radius:15px;
+  background:rgba(2,15,35,.72);
+  border:1px solid rgba(255,213,43,.35);
+  color:#ffd52b;
+  font-size:30px;
+  font-weight:900;
+  letter-spacing:2px;
+  font-variant-numeric:tabular-nums;
+  box-shadow:inset 0 0 20px rgba(255,190,40,.07);
+}
+.vip-box-countdown.available{color:#62ff9e;border-color:rgba(98,255,158,.45)}
+.vip-box-status{color:#d9d0ba;font-size:12px;margin-top:4px;font-weight:800}
+.vip-box-reward{margin-top:6px;color:#a9c9e4;font-size:12px}
+.vip-box-chance-button{
+  width:100%;
+  margin-top:12px;
+  min-height:44px;
+  border:0;
+  border-radius:13px;
+  background:linear-gradient(135deg,#168fff,#0563b5);
+  color:#fff;
+  font-weight:900;
+  cursor:pointer;
+}
+.vip-box-chance-button:disabled{opacity:.55;cursor:not-allowed}
+
 </style>
 
 </head>
@@ -3527,9 +3558,27 @@ button{
     </div>
 
 
-    <div class="vip-feature">
-      🎁 <strong>Caixa Box</strong><br>
-      Sua Caixa Box fica disponível conforme as regras do VIP.
+    <div class="vip-feature vip-box-feature">
+      🎁 <strong>CAIXA BOX • PRÓXIMA CHANCE</strong>
+
+      <div class="vip-box-countdown" id="vipBoxChanceCountdown">
+        72:00:00
+      </div>
+
+      <div class="vip-box-status" id="vipBoxChanceStatus">
+        ⏳ Aguarde a próxima chance.
+      </div>
+
+      <div class="vip-box-reward">
+        🎁 Brinde da Caixa Box
+      </div>
+
+      <button
+        class="vip-box-chance-button"
+        id="vipBoxChanceButton"
+        type="button">
+        🎁 ABRIR CAIXA BOX
+      </button>
     </div>
 
 
@@ -3564,19 +3613,7 @@ button{
 
       </button>
     </div>
-
-
-    <button
-      class="primary-button"
-      id="vipBoxButton"
-      type="button">
-
-      🎁 ABRIR CAIXA BOX
-
-    </button>
-
-
-    <button
+<button
       class="close-button"
       data-close="vipModal"
       type="button">
@@ -7289,8 +7326,8 @@ document.getElementById(
 
 
 document.getElementById(
-  "vipBoxButton"
-).addEventListener(
+  "vipBoxChanceButton"
+)?.addEventListener(
   "click",
   abrirCaixa
 );
@@ -8496,6 +8533,100 @@ onAuthStateChanged(
 let usuario = null;
 // CHAT: página independente (chat.html), evitando conflito com o painel.
 document.getElementById("chatNav")?.addEventListener("click",()=>{ window.location.href="chat.html"; });
+
+/* =====================================================
+   CAIXA BOX — CONTADOR INDEPENDENTE
+   VIP: 72 horas
+   NÃO VIP: 120 horas
+   Não interfere no Elemento Surpresa.
+===================================================== */
+
+const HORAS_CAIXA_NAO_VIP = 120;
+const HORAS_CAIXA_VIP = 72;
+const MS_CAIXA_HORA = 60 * 60 * 1000;
+let caixaChanceTimer = null;
+
+function formatarContagemCaixa(ms){
+  ms=Math.max(0,Number(ms)||0);
+  const total=Math.floor(ms/1000);
+  const h=Math.floor(total/3600);
+  const m=Math.floor((total%3600)/60);
+  const s=total%60;
+  return String(h).padStart(2,"0")+":"+
+         String(m).padStart(2,"0")+":"+
+         String(s).padStart(2,"0");
+}
+
+async function garantirProximaChanceCaixa(){
+  if(!usuarioAtual || !cadastroAtual || !cadastroId) return null;
+
+  const atual=converterData(cadastroAtual.data.proximaChance);
+  if(atual && atual>Date.now()) return atual;
+
+  const vip=cadastroAtual.data.vip===true;
+  const horas=vip?HORAS_CAIXA_VIP:HORAS_CAIXA_NAO_VIP;
+  const nova=Timestamp.fromMillis(Date.now()+horas*MS_CAIXA_HORA);
+
+  await updateDoc(
+    doc(db,"admins",cadastroId),
+    {proximaChance:nova,atualizadoEm:Timestamp.now()}
+  );
+
+  cadastroAtual.data.proximaChance=nova;
+  return nova.toMillis();
+}
+
+async function atualizarChanceCaixa(){
+  const countdown=document.getElementById("vipBoxChanceCountdown");
+  const status=document.getElementById("vipBoxChanceStatus");
+  const button=document.getElementById("vipBoxChanceButton");
+
+  if(!countdown || !usuarioAtual || !cadastroAtual) return;
+
+  try{
+    const proxima=await garantirProximaChanceCaixa();
+    if(!proxima) return;
+
+    const restante=proxima-Date.now();
+
+    if(restante<=0){
+      countdown.textContent="00:00:00";
+      countdown.classList.add("available");
+
+      if(status) status.textContent="🎉 CAIXA BOX DISPONÍVEL!";
+      if(button){
+        button.disabled=false;
+        button.textContent="🎁 ABRIR CAIXA BOX";
+      }
+      return;
+    }
+
+    countdown.textContent=formatarContagemCaixa(restante);
+    countdown.classList.remove("available");
+
+    if(status){
+      status.textContent =
+        cadastroAtual.data.vip===true
+          ? "👑 VIP • próxima chance em:"
+          : "🔒 Membro • próxima chance em:";
+    }
+
+    if(button){
+      button.disabled=false;
+      button.textContent="🎁 ABRIR CAIXA BOX";
+    }
+  }catch(error){
+    console.error("Erro na contagem da Caixa Box:",error);
+    if(status) status.textContent="⚠️ Não foi possível atualizar a contagem.";
+  }
+}
+
+function iniciarChanceCaixa(){
+  if(caixaChanceTimer) clearInterval(caixaChanceTimer);
+  atualizarChanceCaixa();
+  caixaChanceTimer=setInterval(atualizarChanceCaixa,1000);
+}
+
 </script>
 
 
