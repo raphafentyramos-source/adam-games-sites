@@ -2426,11 +2426,37 @@ button{
 }
 .vip-box-chance-button:disabled{opacity:.55;cursor:not-allowed}
 
+
+.element-received-toast{
+  position:fixed;
+  left:50%;
+  top:18px;
+  transform:translate(-50%,-140%);
+  width:min(92vw,430px);
+  z-index:99999;
+  padding:15px 18px;
+  border-radius:17px;
+  background:linear-gradient(135deg,#082a4a,#0a4f78);
+  border:1px solid rgba(95,231,255,.65);
+  box-shadow:0 18px 45px rgba(0,0,0,.42),0 0 28px rgba(40,200,255,.18);
+  color:#fff;
+  transition:transform .35s ease;
+  pointer-events:none;
+}
+.element-received-toast.show{transform:translate(-50%,0)}
+.element-received-toast strong{display:block;font-size:16px;margin-bottom:5px}
+.element-received-toast span{display:block;font-size:13px;line-height:1.4;color:#d7efff}
+
 </style>
 
 </head>
 
 <body>
+<div class="element-received-toast" id="elementReceivedToast" aria-live="polite">
+  <strong id="elementReceivedToastTitle">⚛️ Você recebeu elementos!</strong>
+  <span id="elementReceivedToastMessage"></span>
+</div>
+
 
 <div class="page">
 
@@ -8081,6 +8107,28 @@ async function criarNotificacao(
 }
 
 
+
+let ultimaNotificacaoConhecidaId = null;
+let primeiraCargaNotificacoes = true;
+let toastElementosTimeout = null;
+
+function mostrarToastElementosRecebidos(item){
+  const toast=document.getElementById("elementReceivedToast");
+  const title=document.getElementById("elementReceivedToastTitle");
+  const message=document.getElementById("elementReceivedToastMessage");
+
+  if(!toast || !item) return;
+
+  if(title) title.textContent=item.titulo||"⚛️ Você recebeu elementos!";
+  if(message) message.textContent=item.mensagem||"Novos elementos foram adicionados à sua coleção.";
+
+  toast.classList.add("show");
+  clearTimeout(toastElementosTimeout);
+  toastElementosTimeout=setTimeout(()=>{
+    toast.classList.remove("show");
+  },7000);
+}
+
 async function verificarNotificacaoCaixa(){
 
   if(
@@ -8203,6 +8251,20 @@ async function carregarNotificacoes(){
           }
         );
 
+
+    if(lista.length > 0){
+      const maisRecente = lista[0];
+
+      if(!primeiraCargaNotificacoes &&
+         maisRecente.id !== ultimaNotificacaoConhecidaId &&
+         maisRecente.tipo === "elemento_recebido"){
+        mostrarToastElementosRecebidos(maisRecente);
+      }
+
+      ultimaNotificacaoConhecidaId = maisRecente.id;
+    }
+
+    primeiraCargaNotificacoes = false;
 
     const naoLidas =
       lista.filter(
@@ -8406,6 +8468,10 @@ notificationButton.addEventListener(
     await verificarNotificacaoCaixa();
 
     await carregarNotificacoes();
+setInterval(() => {
+  carregarNotificacoes();
+}, 10000);
+
 
   }
 );

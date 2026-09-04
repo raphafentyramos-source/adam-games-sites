@@ -145,17 +145,21 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
 .element-quick-quantities button{min-width:48px;height:36px;border:1px solid rgba(86,220,255,.28);border-radius:10px;background:rgba(15,78,118,.45);color:#fff;font-weight:900;cursor:pointer}
 .element-preview{margin-top:12px;padding:12px;border-radius:13px;background:rgba(2,15,34,.6);border:1px solid rgba(255,255,255,.08);color:#79dcff;font-size:12px;font-weight:900;line-height:1.45}
 .element-admin-actions{display:grid;grid-template-columns:1fr 180px;gap:9px;margin-top:12px}
-.element-admin-actions button{min-height:52px;border-radius:14px;padding:12px 16px;font-size:14px;font-weight:900;display:flex;align-items:center;justify-content:center;gap:8px;transition:.15s transform,.15s filter}.element-admin-actions button:active:not(:disabled){transform:scale(.98)}.primary-button{background:linear-gradient(135deg,#18bfff,#087bd7)!important;color:#fff!important;box-shadow:0 8px 20px rgba(0,0,0,.18)}.secondary-button{background:linear-gradient(135deg,#12628e,#0a4165)!important;color:#fff!important;border:1px solid rgba(102,222,255,.35)!important}.element-admin-actions button:disabled{opacity:.55!important}
-.multiple-element-row{display:grid;grid-template-columns:minmax(0,1fr) 100px 42px;gap:8px;align-items:center}
-.multiple-element-row select,.multiple-element-row input{width:100%;min-height:44px;border:1px solid rgba(255,255,255,.12);border-radius:12px;background:#061b35;color:#fff;padding:10px 11px;outline:none}
-.multiple-element-row button{min-height:44px;border-radius:12px;background:rgba(120,20,35,.55);color:#fff;font-size:18px;font-weight:900;cursor:pointer}
-.multiple-elements-title{padding:11px 12px;border-radius:12px;background:rgba(8,91,139,.28);border:1px solid rgba(86,220,255,.18);color:#79dcff;font-size:12px;font-weight:900}
-@media(max-width:600px){.multiple-element-row{grid-template-columns:minmax(0,1fr) 72px 40px}.multiple-element-row select{font-size:13px}.multiple-elements-title{font-size:11px}}
-@media(max-width:600px){.multiple-element-row{grid-template-columns:minmax(0,1fr) 78px 40px}}
+.element-admin-actions button{min-height:45px}
 .element-delivery-result{margin-top:10px;display:grid;gap:6px}
 .element-delivery-result .sent-item{padding:9px 11px;border-radius:11px;background:rgba(255,255,255,.045);color:#c8e2f4;font-size:11px}
 @media(max-width:800px){.element-admin-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){.element-admin-grid,.element-admin-actions{grid-template-columns:1fr}}
+
+.element-admin-card select,.ach-form select{
+  -webkit-appearance:auto;
+  appearance:auto;
+  pointer-events:auto;
+  position:relative;
+  z-index:5;
+  touch-action:manipulation;
+}
+
 </style>
 </head>
 <body>
@@ -188,7 +192,7 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
 
     <div>
       <label for="elementSelect">⚛️ Elemento</label>
-      <select id="elementSelect">
+      <select id="elementSelect" aria-label="Selecionar elemento">
         <option value="">Selecione um elemento...</option>
 <option value="1">1 — H — Hidrogênio</option>
 <option value="2">2 — He — Hélio</option>
@@ -318,26 +322,12 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
     </div>
 
     <div>
-      <label for="elementSendMode">🎯 Modo de envio</label>
+      <label for="elementSendMode">🎯 Modo</label>
       <select id="elementSendMode">
         <option value="selected">Elemento escolhido</option>
-        <option value="multiple">⚛️ Vários elementos</option>
         <option value="random">🎲 Aleatório</option>
       </select>
     </div>
-  </div>
-
-
-  <div id="multipleElementsArea" style="display:none;margin-top:12px">
-    <div class="multiple-elements-title">
-      ⚛️ SELECIONE OS ELEMENTOS — CADA LINHA É UM ELEMENTO DIFERENTE
-    </div>
-    <div id="multipleElementsList" style="display:grid;gap:8px"></div>
-    <button type="button" id="addElementRow"
-      style="margin-top:8px;min-height:40px;padding:0 14px;border:1px solid rgba(86,220,255,.35);
-      border-radius:10px;background:rgba(15,78,118,.45);color:#fff;font-weight:900;cursor:pointer">
-      ＋ ADICIONAR OUTRO ELEMENTO
-    </button>
   </div>
 
   <div class="element-quick-quantities">
@@ -435,7 +425,7 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
 <div class="ach-head"><div class="ach-icon">🏆</div><div><h3>Selos & Troféus</h3><p>Cadastre conquistas e entregue selos ou troféus diretamente para qualquer cliente pelo ID Adam Games ou e-mail.</p></div></div>
 <div class="ach-form">
 <div class="ach-field"><label>LOCALIZAR CLIENTE</label><input id="achUser" type="text" placeholder="ID Adam Games ou e-mail" autocomplete="off"></div>
-<div class="ach-field"><label>CONQUISTA</label><select id="achSelect"><option value="">Selecione uma conquista...</option></select></div>
+<div class="ach-field"><label>CONQUISTA</label><select id="achSelect" aria-label="Selecionar conquista"><option value="">Selecione uma conquista...</option></select></div>
 <div class="ach-field full"><label>OBSERVAÇÃO — OPCIONAL</label><input id="achNote" type="text" maxlength="150" placeholder="Ex.: Prêmio do evento Independência 2026"></div>
 </div>
 <div class="ach-actions"><button class="ach-send" id="achSend" type="button">🎁 ENVIAR CONQUISTA</button><button class="ach-save" id="achReload" type="button">🔄 ATUALIZAR CATÁLOGO</button></div>
@@ -478,7 +468,7 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 import{getAuth,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-import{getFirestore,collection,query,where,getDocs,getDoc,getCountFromServer,updateDoc,addDoc,doc,setDoc,serverTimestamp,Timestamp,runTransaction,arrayUnion,arrayRemove}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+import{getFirestore,collection,query,where,getDocs,getDoc,getCountFromServer,updateDoc,addDoc,doc,setDoc,serverTimestamp,Timestamp,arrayUnion,arrayRemove}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 const firebaseConfig={apiKey:"AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",authDomain:"adam-games-21081.firebaseapp.com",projectId:"adam-games-21081",storageBucket:"adam-games-21081.firebasestorage.app",messagingSenderId:"1055528418738",appId:"1:1055528418738:web:5fafdf63424ba9744eb8ab"};
 const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app);
@@ -609,11 +599,11 @@ const achievementUserTarget = document.getElementById("achUser");
 const achievementSelect = document.getElementById("achSelect");
 const achievementDeliveryNote = document.getElementById("achNote");
 const achievementDeliveryMessage = document.getElementById("achMessage");
-const achievementCreateArea = null;
-const achievementCreateMessage = document.getElementById("achMessage");
+const achievementCreateArea = document.getElementById("achievementCreateArea");
+const achievementCreateMessage = document.getElementById("achievementCreateMessage");
 const achievementPreview = document.getElementById("achievementPreview");
-const achievementCatalogList = document.getElementById("achList");
-const achievementHistoryList = null;
+const achievementCatalogList = document.getElementById("achievementCatalogList");
+const achievementHistoryList = document.getElementById("achievementHistoryList");
 
 let todasConquistas = [];
 
@@ -677,6 +667,23 @@ function escaparHtmlConquista(v){
     .replace(/'/g,"&#039;");
 }
 
+
+function carregarConquistasFallback(){
+  if(!achievementSelect) return;
+  if(achievementSelect.options.length > 1) return;
+
+  const fallbackList = CONQUISTAS_PADRAO.map(c=>normalizarConquista(c,c.id));
+  fallbackList.sort((a,b)=>(a.ordem-b.ordem)||a.nome.localeCompare(b.nome,"pt-BR"));
+
+  achievementSelect.innerHTML='<option value="">🏆 Selecione uma conquista...</option>';
+  fallbackList.forEach(c=>{
+    const op=document.createElement("option");
+    op.value=c.id;
+    op.textContent=(c.tipo==="trofeu"?"🏆 ":"🏵️ ")+c.nome;
+    achievementSelect.appendChild(op);
+  });
+}
+
 async function garantirConquistasPadrao(){
   for(const c of CONQUISTAS_PADRAO){
     try{
@@ -698,7 +705,9 @@ async function garantirConquistasPadrao(){
 async function carregarConquistas(){
   if(!achievementSelect)return;
 
-  achievementSelect.innerHTML='<option value="">🔄 Carregando conquistas...</option>';
+  // Deixa o menu utilizável imediatamente, sem depender do Firebase.
+  carregarConquistasFallback();
+  achievementSelect.dataset.firebaseLoading="1";
   achievementCatalogList.innerHTML='<div class="empty">🔄 Carregando conquistas...</div>';
 
   try{
@@ -720,8 +729,8 @@ async function carregarConquistas(){
     }
   }catch(e){
     console.error("ERRO AO CARREGAR CONQUISTAS:",e);
-    achievementSelect.innerHTML='<option value="">❌ Erro ao carregar</option>';
-    achievementCatalogList.innerHTML='<div class="empty">❌ Não foi possível carregar o catálogo. Verifique as Rules da coleção conquistas.</div>';
+    carregarConquistasFallback();
+    achievementCatalogList.innerHTML='<div class="empty">⚠️ Catálogo padrão disponível. O Firebase não respondeu agora.</div>';
   }
 }
 
@@ -941,13 +950,13 @@ async function salvarNovaConquista(){
     return;
   }
 
-  const tipo=document.getElementById("newAchType")?.value||"selo";
-  const icon=document.getElementById("newAchIcon")?.value.trim() || (tipo==="trofeu"?"🏆":"🏵️");
-  const nome=document.getElementById("newAchName")?.value.trim()||"";
-  let id=document.getElementById("newAchId")?.value.trim().toLowerCase()||"";
-  const descricao=document.getElementById("newAchDescription")?.value.trim()||"";
-  const temporada=document.getElementById("newAchPeriod")?.value.trim() || "Permanente";
-  const ordem=Math.max(0,Number(document.getElementById("newAchOrder")?.value||0));
+  const tipo=document.getElementById("newAchievementType").value;
+  const icon=document.getElementById("newAchievementIcon").value.trim() || (tipo==="trofeu"?"🏆":"🏵️");
+  const nome=document.getElementById("newAchievementName").value.trim();
+  let id=document.getElementById("newAchievementId").value.trim().toLowerCase();
+  const descricao=document.getElementById("newAchievementDescription").value.trim();
+  const temporada=document.getElementById("newAchievementSeason").value.trim() || "Permanente";
+  const ordem=Math.max(0,Number(document.getElementById("newAchievementOrder").value||0));
 
   if(!nome){
     mostrarMensagem(achievementCreateMessage,"Digite o nome da conquista.","error");
@@ -968,9 +977,9 @@ async function salvarNovaConquista(){
     return;
   }
 
-  const botao=document.getElementById("achCreate");
+  const botao=document.getElementById("saveAchievement");
   botao.disabled=true;
-  botao.textContent="⏳ CADASTRANDO...";
+  botao.textContent="⏳ SALVANDO...";
 
   try{
     const ref=doc(db,"conquistas",id);
@@ -1000,13 +1009,14 @@ async function salvarNovaConquista(){
       "success"
     );
 
-    document.getElementById("newAchName").value="";
-    document.getElementById("newAchId").value="";
-    document.getElementById("newAchDescription").value="";
-    document.getElementById("newAchPeriod").value="";
-    document.getElementById("newAchOrder").value="0";
+    document.getElementById("newAchievementName").value="";
+    document.getElementById("newAchievementId").value="";
+    document.getElementById("newAchievementDescription").value="";
+    document.getElementById("newAchievementSeason").value="";
+    document.getElementById("newAchievementOrder").value="0";
 
-    await carregarConquistas();
+    await carregarConquistasFallback();
+carregarConquistas();
 
     achievementSelect.value=id;
     renderizarPreviewConquista();
@@ -1026,7 +1036,7 @@ async function salvarNovaConquista(){
 
   }finally{
     botao.disabled=false;
-    botao.textContent="➕ CADASTRAR CONQUISTA";
+    botao.textContent="💾 SALVAR CONQUISTA";
   }
 }
 
@@ -1075,7 +1085,7 @@ async function carregarHistoricoConquistas(){
 }
 
 
-async function atualizarTudo(){if(!adminUsuario)return;const b=refreshButton;b.disabled=true;b.textContent="🔄 Atualizando...";try{await Promise.all([carregarDashboard(),carregarEntregas(),carregarVales(),carregarConquistas()])}catch(e){console.error(e)}finally{b.disabled=false;b.textContent="🔄 Atualizar"}}
+async function atualizarTudo(){if(!adminUsuario)return;const b=refreshButton;b.disabled=true;b.textContent="🔄 Atualizando...";try{await Promise.all([carregarDashboard(),carregarEntregas(),carregarVales(),carregarConquistasAdmin()])}catch(e){console.error(e)}finally{b.disabled=false;b.textContent="🔄 Atualizar"}}
 
 onAuthStateChanged(auth,async usuario=>{
 if(!usuario){authResolvido=true;resolverAutenticacao();window.location.replace("index.html");return}
@@ -1094,16 +1104,24 @@ document.getElementById("removerGiros").onclick=()=>alterarGiros("remover");
 document.getElementById("vip").onclick=alterarVIP;
 document.getElementById("box").onclick=alterarCaixa;
 generateVoucherButton.onclick=gerarNovoVale;
-document.getElementById("achSend")?.addEventListener("click",enviarConquista);document.getElementById("achCreate")?.addEventListener("click",salvarNovaConquista);document.getElementById("achReload")?.addEventListener("click",carregarConquistas);
+document.getElementById("achSend").onclick=enviarConquista;document.getElementById("achCreate").onclick=cadastrarConquista;document.getElementById("achReload").onclick=carregarConquistasAdmin;
 document.getElementById("copyVoucher").onclick=copiarVale;
 document.getElementById("newVoucher").onclick=()=>{document.getElementById("voucherResult").style.display="none";document.getElementById("voucherMessage").className="message";document.getElementById("voucherValor").focus()};
 
-document.getElementById("achSelect")?.addEventListener("change",renderizarPreviewConquista);
-document.getElementById("achSend")?.addEventListener("click",enviarConquista);
-
-
-
-
+document.getElementById("achievementSelect").onchange=renderizarPreviewConquista;
+document.getElementById("sendAchievement").onclick=enviarConquista;
+document.getElementById("saveAchievement").onclick=salvarNovaConquista;
+document.getElementById("toggleAchievementCreate").onclick=()=>{
+  achievementCreateArea.style.display=achievementCreateArea.style.display==="none"?"block":"none";
+};
+document.getElementById("cancelAchievementCreate").onclick=()=>{
+  achievementCreateArea.style.display="none";
+  mostrarMensagem(achievementCreateMessage,"","");
+};
+document.getElementById("newAchievementType").onchange=()=>{
+  const input=document.getElementById("newAchievementIcon");
+  if(!input.value.trim())input.value=document.getElementById("newAchievementType").value==="trofeu"?"🏆":"🏵️";
+};
 
 document.getElementById("logout").onclick=async()=>{try{await signOut(auth)}catch(e){console.error(e)}window.location.replace("index.html")};
 refreshButton.disabled=true;
@@ -1124,9 +1142,6 @@ const sendElementsButton=document.getElementById("sendElementsButton");
 const randomElementButton=document.getElementById("randomElementButton");
 const elementDeliveryMessage=document.getElementById("elementDeliveryMessage");
 const elementDeliveryResult=document.getElementById("elementDeliveryResult");
-const multipleElementsArea=document.getElementById("multipleElementsArea");
-const multipleElementsList=document.getElementById("multipleElementsList");
-const addElementRowButton=document.getElementById("addElementRow");
 
 function escaparElemento(v){
   return String(v??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");
@@ -1134,6 +1149,7 @@ function escaparElemento(v){
 
 function preencherSelectElementos(){
   if(!elementSelect)return;
+  // Os 118 elementos já ficam no HTML. Não apagar/recriar o menu.
   if(elementSelect.options.length < 119){
     elementSelect.innerHTML='<option value="">Selecione um elemento...</option>';
     ELEMENTOS_ADMIN.forEach(e=>{
@@ -1145,98 +1161,12 @@ function preencherSelectElementos(){
   }
 }
 
-function criarSelectMultiplo(valor=""){
-  const select=document.createElement("select");
-  select.className="multiple-element-select";
-  select.innerHTML='<option value="">Selecione...</option>';
-  ELEMENTOS_ADMIN.forEach(e=>{
-    const op=document.createElement("option");
-    op.value=String(e.n);
-    op.textContent=`${e.n} — ${e.s} — ${e.name}`;
-    select.appendChild(op);
-  });
-  select.value=String(valor||"");
-  select.addEventListener("change",atualizarPreviewElemento);
-  return select;
-}
-
-function adicionarLinhaElemento(numeroInicial=""){
-  if(!multipleElementsList)return;
-  if(multipleElementsList.children.length>=10){
-    mostrarMensagem(elementDeliveryMessage,"❌ Você pode adicionar no máximo 10 elementos diferentes por envio.","error");
-    return;
-  }
-  const row=document.createElement("div");
-  row.className="multiple-element-row";
-
-  const select=criarSelectMultiplo(numeroInicial);
-  const qty=document.createElement("input");
-  qty.type="number";
-  qty.className="multiple-element-qty";
-  qty.min="1";
-  qty.max="1000";
-  qty.value="1";
-  qty.inputMode="numeric";
-  qty.addEventListener("input",atualizarPreviewElemento);
-
-  const remove=document.createElement("button");
-  remove.type="button";
-  remove.textContent="×";
-  remove.title="Remover elemento";
-  remove.onclick=()=>{
-    if(multipleElementsList.children.length<=2){
-      mostrarMensagem(elementDeliveryMessage,"❌ Mantenha pelo menos 2 elementos no modo Vários elementos.","error");
-      return;
-    }
-    row.remove();
-    atualizarPreviewElemento();
-  };
-
-  row.appendChild(select);
-  row.appendChild(qty);
-  row.appendChild(remove);
-  multipleElementsList.appendChild(row);
-  atualizarPreviewElemento();
-}
-
-function inicializarMultiplos(){
-  if(!multipleElementsList || multipleElementsList.children.length)return;
-  adicionarLinhaElemento();
-  adicionarLinhaElemento();
-}
-
-function obterListaMultiplos(){
-  if(!multipleElementsList)return [];
-  return [...multipleElementsList.querySelectorAll(".multiple-element-row")].map(row=>{
-    const n=Number(row.querySelector(".multiple-element-select")?.value||0);
-    const quantidade=Math.floor(Number(row.querySelector(".multiple-element-qty")?.value||0));
-    return {n,quantidade};
-  }).filter(x=>x.n>0 || x.quantidade>0);
-}
-
 function atualizarPreviewElemento(){
   if(!elementPreview)return;
-
-  if(elementSendMode?.value==="multiple"){
-    const linhas=obterListaMultiplos();
-    const validas=linhas.filter(x=>x.n>0 && Number.isInteger(x.quantidade) && x.quantidade>0);
-    if(!validas.length){
-      elementPreview.textContent="Escolha pelo menos dois elementos e informe as quantidades.";
-      return;
-    }
-    const resumo=validas.map(x=>{
-      const e=ELEMENTOS_ADMIN.find(y=>Number(y.n)===x.n);
-      return `${e?.s||""} — ${e?.name||"Elemento"} ×${x.quantidade}`;
-    }).join("  •  ");
-    elementPreview.innerHTML=`⚛️ <strong>Envio múltiplo:</strong> ${escaparElemento(resumo)}`;
-    return;
-  }
-
   if(elementSendMode?.value==="random"){
     elementPreview.textContent="🎲 Cada unidade será sorteada separadamente entre os 118 elementos.";
     return;
   }
-
   const n=Number(elementSelect?.value||0);
   const e=ELEMENTOS_ADMIN.find(x=>Number(x.n)===n);
   if(!e){
@@ -1248,42 +1178,23 @@ function atualizarPreviewElemento(){
 }
 
 function atualizarModoElemento(){
-  const modo=elementSendMode?.value||"selected";
-  const aleatorio=modo==="random";
-  const multiplo=modo==="multiple";
-
-  if(elementSelect)elementSelect.disabled=aleatorio||multiplo;
-  if(elementQuantity)elementQuantity.disabled=aleatorio||multiplo;
-
-  const elementField=elementSelect?.closest("div");
-  const quantityField=elementQuantity?.closest("div");
-  if(elementField)elementField.style.display=multiplo?"none":"block";
-  if(quantityField)quantityField.style.display=multiplo?"none":"block";
-
-  const quick=document.querySelector(".element-quick-quantities");
-  if(quick)quick.style.display=multiplo?"none":"flex";
-
-  if(multipleElementsArea)multipleElementsArea.style.display=multiplo?"block":"none";
-  if(multiplo)inicializarMultiplos();
-
+  const aleatorio=elementSendMode?.value==="random";
+  if(elementSelect)elementSelect.disabled=aleatorio;
   atualizarPreviewElemento();
 }
 
 async function localizarClienteElemento(valor){
   const v=String(valor||"").trim();
   if(!v)return null;
-
   let r=await getDocs(query(collection(db,"admins"),where("publicId","==",v.toUpperCase())));
   if(r.empty&&v.includes("@"))r=await getDocs(query(collection(db,"admins"),where("email","==",v.toLowerCase())));
   if(r.empty)r=await getDocs(query(collection(db,"admins"),where("uid","==",v)));
-
   if(r.empty){
     try{
       const d=await getDoc(doc(db,"admins",v));
       if(d.exists())return {ref:d.ref,docId:d.id,data:d.data()};
     }catch(e){}
   }
-
   if(r.empty)return null;
   const d=r.docs[0];
   return {ref:d.ref,docId:d.id,data:d.data()};
@@ -1294,81 +1205,27 @@ function sortearElementoAdmin(){
 }
 
 async function enviarElementosAdmin(){
-  if(!authResolvido){
-    sendElementsButton.disabled=true;
-    randomElementButton.disabled=true;
-    sendElementsButton.textContent="⏳ AGUARDANDO LOGIN...";
-    try{
-      await Promise.race([
-        autenticacaoPronta,
-        new Promise((_,rej)=>setTimeout(()=>rej(new Error("A autenticação demorou demais.")),10000))
-      ]);
-    }catch(e){
-      sendElementsButton.disabled=false;
-      randomElementButton.disabled=false;
-      sendElementsButton.textContent="⚛️ ENVIAR ELEMENTOS";
-      mostrarMensagem(elementDeliveryMessage,"❌ A autenticação do administrador não foi concluída. Atualize a página e tente novamente.","error");
-      return;
-    }
-    sendElementsButton.disabled=false;
-    randomElementButton.disabled=false;
-    sendElementsButton.textContent="⚛️ ENVIAR ELEMENTOS";
-  }
-
   if(!adminUsuario){
     mostrarMensagem(elementDeliveryMessage,"❌ Administrador não autenticado.","error");
     return;
   }
 
   const destino=elementUserTarget.value.trim();
+  const quantidade=Math.floor(Number(elementQuantity.value||0));
   const modo=elementSendMode.value;
   const selecionado=Number(elementSelect.value||0);
-  const quantidade=Math.floor(Number(elementQuantity.value||0));
 
   if(!destino){
     mostrarMensagem(elementDeliveryMessage,"❌ Informe o ID Adam Games, e-mail ou UID do jogador.","error");
     return;
   }
-
-  let pedidos=[];
-
-  if(modo==="multiple"){
-    const linhas=obterListaMultiplos();
-    if(linhas.length<2){
-      mostrarMensagem(elementDeliveryMessage,"❌ Escolha pelo menos 2 elementos diferentes.","error");
-      return;
-    }
-
-    const vistos=new Set();
-    for(const item of linhas){
-      if(!item.n || !Number.isInteger(item.quantidade) || item.quantidade<1 || item.quantidade>1000){
-        mostrarMensagem(elementDeliveryMessage,"❌ Cada elemento precisa ter uma quantidade inteira entre 1 e 1000.","error");
-        return;
-      }
-      if(vistos.has(item.n)){
-        mostrarMensagem(elementDeliveryMessage,"❌ Não repita o mesmo elemento. Se quiser mais unidades, aumente a quantidade dele.","error");
-        return;
-      }
-      vistos.add(item.n);
-      pedidos.push(item);
-    }
-  }else{
-    if(!Number.isInteger(quantidade)||quantidade<1||quantidade>1000){
-      mostrarMensagem(elementDeliveryMessage,"❌ A quantidade deve ser um número inteiro entre 1 e 1000.","error");
-      return;
-    }
-    if(modo==="selected"&&!selecionado){
-      mostrarMensagem(elementDeliveryMessage,"❌ Escolha um elemento ou selecione Aleatório.","error");
-      return;
-    }
-
-    if(modo==="selected"){
-      pedidos=[{n:selecionado,quantidade}];
-    }else{
-      for(let i=0;i<quantidade;i++){
-        pedidos.push({n:sortearElementoAdmin().n,quantidade:1});
-      }
-    }
+  if(!Number.isInteger(quantidade)||quantidade<1||quantidade>1000){
+    mostrarMensagem(elementDeliveryMessage,"❌ A quantidade deve ser um número inteiro entre 1 e 1000.","error");
+    return;
+  }
+  if(modo==="selected"&&!selecionado){
+    mostrarMensagem(elementDeliveryMessage,"❌ Escolha um elemento ou selecione Aleatório.","error");
+    return;
   }
 
   sendElementsButton.disabled=true;
@@ -1382,49 +1239,95 @@ async function enviarElementosAdmin(){
 
     const atuais=cliente.data.elementos&&typeof cliente.data.elementos==="object"&&!Array.isArray(cliente.data.elementos)
       ? {...cliente.data.elementos} : {};
-
     const enviados={};
-    for(const pedido of pedidos){
-      const chave=String(pedido.n);
-      atuais[chave]=Number(atuais[chave]||0)+Number(pedido.quantidade);
-      enviados[chave]=Number(enviados[chave]||0)+Number(pedido.quantidade);
+
+    for(let i=0;i<quantidade;i++){
+      const elemento=modo==="random"
+        ? sortearElementoAdmin()
+        : ELEMENTOS_ADMIN.find(x=>Number(x.n)===selecionado);
+      if(!elemento)throw new Error("Elemento selecionado não encontrado.");
+
+      const chave=String(elemento.n);
+      atuais[chave]=Number(atuais[chave]||0)+1;
+      enviados[chave]=Number(enviados[chave]||0)+1;
     }
 
     await updateDoc(cliente.ref,{elementos:atuais,atualizadoEm:Timestamp.now()});
 
-    const operacaoId=gerarOperacaoId();
+    /*
+      NOTIFICAÇÃO DO RECEBIMENTO
+      O jogador verá um aviso na aba Notificações.
+    */
+    const notificacaoElementos =
+      Object.entries(enviados).map(([n,q])=>{
+        const e=ELEMENTOS_ADMIN.find(x=>String(x.n)===String(n));
+        return `⚛️ ${e?.name||"Elemento"} (${e?.s||""}) ×${q}`;
+      }).join(" • ");
+
+    const nomeDestino =
+      cliente.data.nome ||
+      cliente.data.name ||
+      cliente.data.publicId ||
+      cliente.data.email ||
+      "jogador";
+
+    const notificacaoId =
+      "elemento_admin_" +
+      cliente.docId +
+      "_" +
+      Date.now() +
+      "_" +
+      Math.random().toString(36).slice(2,8);
+
     try{
-      await setDoc(doc(db,"historicoElementos",operacaoId),{
-        id:operacaoId,
-        usuarioId:cliente.docId,
-        usuarioPublicId:cliente.data.publicId||cliente.docId,
-        usuarioUid:cliente.data.uid||"",
-        usuarioNome:cliente.data.nome||cliente.data.name||"",
-        usuarioEmail:cliente.data.email||"",
-        quantidadeTotal:Object.values(enviados).reduce((a,b)=>a+Number(b),0),
-        modo,
-        elementoSelecionado:modo==="selected"?selecionado:null,
-        elementosEnviados:enviados,
-        adminEmail:adminUsuario.email||"",
-        adminUid:adminUsuario.uid||"",
-        criadoEm:serverTimestamp(),
-        criadoEmTexto:new Date().toISOString()
-      });
-    }catch(historicoError){
-      console.warn("Elemento enviado, mas o histórico não pôde ser gravado:",historicoError);
+      await setDoc(
+        doc(db,"notificacoes",notificacaoId),
+        {
+          uid:cliente.data.uid||"",
+          titulo:"⚛️ Você recebeu elementos!",
+          mensagem:
+            `Administrador Adam Games enviou elementos para ${nomeDestino}. ` +
+            notificacaoElementos,
+          tipo:"elemento_recebido",
+          origem:"administrador",
+          remetenteNome:"Administrador Adam Games",
+          quantidadeTotal:Object.values(enviados).reduce((a,b)=>a+Number(b),0),
+          elementosRecebidos:enviados,
+          lida:false,
+          criadaEm:Timestamp.now()
+        }
+      );
+    }catch(notificacaoError){
+      console.warn("Elementos enviados, mas a notificação não pôde ser criada:",notificacaoError);
     }
+
+    const operacaoId=gerarOperacaoId();
+
+    await setDoc(doc(db,"historicoElementos",operacaoId),{
+      id:operacaoId,
+      usuarioId:cliente.docId,
+      usuarioPublicId:cliente.data.publicId||cliente.docId,
+      usuarioUid:cliente.data.uid||"",
+      usuarioNome:cliente.data.nome||cliente.data.name||"",
+      usuarioEmail:cliente.data.email||"",
+      quantidadeTotal:quantidade,
+      modo,
+      elementoSelecionado:modo==="selected"?selecionado:null,
+      elementosEnviados:enviados,
+      adminEmail:adminUsuario.email||"",
+      adminUid:adminUsuario.uid||"",
+      criadoEm:serverTimestamp(),
+      criadoEmTexto:new Date().toISOString()
+    });
 
     elementDeliveryResult.innerHTML=Object.entries(enviados).map(([n,q])=>{
       const e=ELEMENTOS_ADMIN.find(x=>String(x.n)===String(n));
       return `<div class="sent-item">⚛️ <strong>${escaparElemento(e?.s||"")}</strong> — ${escaparElemento(e?.name||"Elemento")} ×${q}</div>`;
     }).join("");
 
-    const totalEnviado=Object.values(enviados).reduce((a,b)=>a+Number(b),0);
-    const quantidadeTipos=Object.keys(enviados).length;
-
     mostrarMensagem(
       elementDeliveryMessage,
-      `✅ ${totalEnviado} unidade${totalEnviado===1?"":"s"} enviada${totalEnviado===1?"":"s"} (${quantidadeTipos} elemento${quantidadeTipos===1?"":"s"}) para ${escaparElemento(cliente.data.nome||cliente.data.publicId||cliente.data.email||"o jogador")}. ID: ${operacaoId}`,
+      `✅ ${quantidade} elemento${quantidade===1?"":"s"} enviado${quantidade===1?"":"s"} para ${escaparElemento(cliente.data.nome||cliente.data.publicId||cliente.data.email||"o jogador")}. ID: ${operacaoId}`,
       "success"
     );
 
@@ -1433,6 +1336,7 @@ async function enviarElementosAdmin(){
     }
 
     elementQuantity.value="1";
+
   }catch(error){
     console.error("ERRO AO ENVIAR ELEMENTOS:",error);
     mostrarMensagem(
@@ -1450,7 +1354,6 @@ async function enviarElementosAdmin(){
 }
 
 preencherSelectElementos();
-inicializarMultiplos();
 elementSelect?.addEventListener("change",atualizarPreviewElemento);
 elementQuantity?.addEventListener("input",atualizarPreviewElemento);
 elementSendMode?.addEventListener("change",atualizarModoElemento);
@@ -1467,13 +1370,8 @@ randomElementButton?.addEventListener("click",()=>{
   atualizarModoElemento();
 });
 
-addElementRowButton?.addEventListener("click",()=>{
-  adicionarLinhaElemento();
-});
-
 sendElementsButton?.addEventListener("click",enviarElementosAdmin);
 atualizarModoElemento();
-
 
 </script>
 </body>
