@@ -489,7 +489,21 @@ function gerarOperacaoId(){const a=new Date(),data=a.getFullYear()+String(a.getM
 function gerarVale15(){const chars="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";let codigo="";if(window.crypto?.getRandomValues){const a=new Uint32Array(15);window.crypto.getRandomValues(a);for(let i=0;i<15;i++)codigo+=chars[a[i]%chars.length]}else for(let i=0;i<15;i++)codigo+=chars[Math.floor(Math.random()*chars.length)];return codigo}
 function comTimeout(p,tempo=15000){return Promise.race([p,new Promise((_,reject)=>setTimeout(()=>{const e=new Error("Tempo limite excedido.");e.code="timeout";reject(e)},tempo))])}
 
-async function carregarDashboard(){try{const c=await getCountFromServer(collection(db,"admins"));document.getElementById("totalUsuarios").textContent=numero(c.data().count);const u=await getDocs(collection(db,"admins"));let vip=0;u.forEach(d=>{if(d.data().vip===true)vip++});document.getElementById("totalVip").textContent=numero(vip)}catch(e){console.error(e);document.getElementById("totalUsuarios").textContent="—";document.getElementById("totalVip").textContent="—"}}
+async function carregarDashboard(){
+  try{
+    // Usa a leitura normal da coleção para que o painel continue funcionando mesmo
+    // quando getCountFromServer não estiver permitido pelas Rules.
+    const u=await getDocs(collection(db,"admins"));
+    let vip=0;
+    u.forEach(d=>{if(d.data().vip===true)vip++;});
+    document.getElementById("totalUsuarios").textContent=numero(u.size);
+    document.getElementById("totalVip").textContent=numero(vip);
+  }catch(e){
+    console.error("ERRO AO CARREGAR USUÁRIOS:",e);
+    document.getElementById("totalUsuarios").textContent="—";
+    document.getElementById("totalVip").textContent="—";
+  }
+}
 
 async function carregarEntregas(){const lista=document.getElementById("deliveryList");lista.innerHTML="<div class='empty'>🔄 Carregando prêmios...</div>";try{const r=await getDocs(collection(db,"entregas"));todasEntregas=r.docs.map(d=>({id:d.id,...d.data()}));renderizarEntregas()}catch(e){console.error(e);todasEntregas=[];lista.innerHTML="<div class='empty'>⚠️ Não foi possível carregar os prêmios.</div>";mostrarMensagem(deliveryMessage,"Verifique as Rules da coleção entregas.","error")}}
 function renderizarEntregas(filtro=null){const dados=Array.isArray(filtro)?filtro:todasEntregas,total=dados.length,pend=dados.filter(x=>x.entregue!==true).length,done=dados.filter(x=>x.entregue===true).length;document.getElementById("totalPremios").textContent=numero(todasEntregas.length);document.getElementById("totalPendentes").textContent=numero(todasEntregas.filter(x=>x.entregue!==true).length);document.getElementById("entregaTotal").textContent=numero(total);document.getElementById("entregaPendente").textContent=numero(pend);document.getElementById("entregaEntregue").textContent=numero(done);const lista=document.getElementById("deliveryList");lista.innerHTML="";const ord=[...dados].sort((a,b)=>obterMillis(b.criadoEm||b.dataHora)-obterMillis(a.criadoEm||a.dataHora));if(!ord.length){lista.innerHTML="<div class='empty'>🎉 Nenhum prêmio cadastrado.</div>";return}ord.slice(0,100).forEach(p=>{const uid=p.uid||p.usuarioUid||p.usuarioId||"",titulo=p.premioNome||p.nome||p.titulo||"Prêmio",tipo=p.tipo||"outro",q=p.quantidade!==undefined?numero(p.quantidade):"—",ent=p.entregue===true,d=document.createElement("div");d.className="delivery-item";d.innerHTML=`<div class="delivery-top"><div><div class="delivery-title">🎁 ${escapar(titulo)}</div><div class="delivery-user">👤 ${escapar(p.usuarioNome||"Cliente não identificado")}${p.usuarioEmail?" • "+escapar(p.usuarioEmail):""}</div></div><div class="delivery-status ${ent?"done":"pending"}">${ent?"✅ ENTREGUE":"⏳ PENDENTE"}</div></div><div class="delivery-info">Tipo: <b>${escapar(tipo)}</b><br>Quantidade: <b>${q}</b><br>Data: <b>${escapar(formatarData(p.criadoEm||p.dataHora))}</b><br>UID: <b>${escapar(uid||"Não informado")}</b></div><div class="delivery-actions"><button class="delivery-profile" type="button">👤 PERFIL</button><button class="delivery-open" type="button">🔎 FILTRAR CLIENTE</button><button class="delivery-complete" type="button">${ent?"↩️ DESFAZER":"✅ ENTREGAR"}</button></div><div class="delivery-id">🆔 ID: ${escapar(p.id)}</div>`;d.querySelector(".delivery-profile").onclick=()=>uid?buscarUsuarioPorUid(uid):alert("Este prêmio não possui UID.");d.querySelector(".delivery-open").onclick=()=>{if(uid)renderizarEntregas(todasEntregas.filter(x=>(x.uid||x.usuarioUid||x.usuarioId||"")===uid))};d.querySelector(".delivery-complete").onclick=()=>alterarEntrega(p);lista.appendChild(d)})}
@@ -1085,7 +1099,7 @@ async function carregarHistoricoConquistas(){
 }
 
 
-async function atualizarTudo(){if(!adminUsuario)return;const b=refreshButton;b.disabled=true;b.textContent="🔄 Atualizando...";try{await Promise.all([carregarDashboard(),carregarEntregas(),carregarVales(),carregarConquistasAdmin()])}catch(e){console.error(e)}finally{b.disabled=false;b.textContent="🔄 Atualizar"}}
+async function atualizarTudo(){if(!adminUsuario)return;const b=refreshButton;b.disabled=true;b.textContent="🔄 Atualizando...";try{await Promise.all([carregarDashboard(),carregarEntregas(),carregarVales(),carregarConquistas()])}catch(e){console.error(e)}finally{b.disabled=false;b.textContent="🔄 Atualizar"}}
 
 onAuthStateChanged(auth,async usuario=>{
 if(!usuario){authResolvido=true;resolverAutenticacao();window.location.replace("index.html");return}
@@ -1104,24 +1118,10 @@ document.getElementById("removerGiros").onclick=()=>alterarGiros("remover");
 document.getElementById("vip").onclick=alterarVIP;
 document.getElementById("box").onclick=alterarCaixa;
 generateVoucherButton.onclick=gerarNovoVale;
-document.getElementById("achSend").onclick=enviarConquista;document.getElementById("achCreate").onclick=cadastrarConquista;document.getElementById("achReload").onclick=carregarConquistasAdmin;
-document.getElementById("copyVoucher").onclick=copiarVale;
-document.getElementById("newVoucher").onclick=()=>{document.getElementById("voucherResult").style.display="none";document.getElementById("voucherMessage").className="message";document.getElementById("voucherValor").focus()};
-
-document.getElementById("achievementSelect").onchange=renderizarPreviewConquista;
-document.getElementById("sendAchievement").onclick=enviarConquista;
-document.getElementById("saveAchievement").onclick=salvarNovaConquista;
-document.getElementById("toggleAchievementCreate").onclick=()=>{
-  achievementCreateArea.style.display=achievementCreateArea.style.display==="none"?"block":"none";
-};
-document.getElementById("cancelAchievementCreate").onclick=()=>{
-  achievementCreateArea.style.display="none";
-  mostrarMensagem(achievementCreateMessage,"","");
-};
-document.getElementById("newAchievementType").onchange=()=>{
-  const input=document.getElementById("newAchievementIcon");
-  if(!input.value.trim())input.value=document.getElementById("newAchievementType").value==="trofeu"?"🏆":"🏵️";
-};
+achSend?.addEventListener("click",enviarConquista);
+achSelect?.addEventListener("change",renderizarPreviewConquista);
+document.getElementById("achCreate")?.addEventListener("click",cadastrarConquista);
+document.getElementById("achReload")?.addEventListener("click",carregarConquistas);
 
 document.getElementById("logout").onclick=async()=>{try{await signOut(auth)}catch(e){console.error(e)}window.location.replace("index.html")};
 refreshButton.disabled=true;
