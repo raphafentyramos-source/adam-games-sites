@@ -328,7 +328,7 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
 
   <div id="multipleElementsArea" style="display:none;margin-top:12px">
     <div style="font-weight:900;color:#79dcff;margin-bottom:8px">
-      ⚛️ Adicione os elementos que deseja enviar
+      ⚛️ Elementos para enviar — escolha 2 ou mais
     </div>
     <div id="multipleElementsList" style="display:grid;gap:8px"></div>
     <button type="button" id="addElementRow"
@@ -1292,6 +1292,27 @@ function sortearElementoAdmin(){
 }
 
 async function enviarElementosAdmin(){
+  if(!authResolvido){
+    sendElementsButton.disabled=true;
+    randomElementButton.disabled=true;
+    sendElementsButton.textContent="⏳ AGUARDANDO LOGIN...";
+    try{
+      await Promise.race([
+        autenticacaoPronta,
+        new Promise((_,rej)=>setTimeout(()=>rej(new Error("A autenticação demorou demais.")),10000))
+      ]);
+    }catch(e){
+      sendElementsButton.disabled=false;
+      randomElementButton.disabled=false;
+      sendElementsButton.textContent="⚛️ ENVIAR ELEMENTOS";
+      mostrarMensagem(elementDeliveryMessage,"❌ A autenticação do administrador não foi concluída. Atualize a página e tente novamente.","error");
+      return;
+    }
+    sendElementsButton.disabled=false;
+    randomElementButton.disabled=false;
+    sendElementsButton.textContent="⚛️ ENVIAR ELEMENTOS";
+  }
+
   if(!adminUsuario){
     mostrarMensagem(elementDeliveryMessage,"❌ Administrador não autenticado.","error");
     return;
@@ -1452,5 +1473,6 @@ sendElementsButton?.addEventListener("click",enviarElementosAdmin);
 atualizarModoElemento();
 
 
+</script>
 </body>
 </html>
