@@ -1186,15 +1186,32 @@ function atualizarModoElemento(){
 async function localizarClienteElemento(valor){
   const v=String(valor||"").trim();
   if(!v)return null;
-  let r=await getDocs(query(collection(db,"admins"),where("publicId","==",v.toUpperCase())));
-  if(r.empty&&v.includes("@"))r=await getDocs(query(collection(db,"admins"),where("email","==",v.toLowerCase())));
-  if(r.empty)r=await getDocs(query(collection(db,"admins"),where("uid","==",v)));
+
+  // Tenta o ID exatamente como o administrador digitou.
+  let r=await getDocs(query(collection(db,"admins"),where("publicId","==",v)));
+
+  // Também aceita variações de maiúsculas/minúsculas do ID.
+  if(r.empty)r=await getDocs(query(collection(db,"admins"),where("publicId","==",v.toUpperCase())));
+  if(r.empty)r=await getDocs(query(collection(db,"admins"),where("publicId","==",v.toLowerCase())));
+
+  if(r.empty && v.includes("@")){
+    r=await getDocs(query(collection(db,"admins"),where("email","==",v.toLowerCase())));
+  }
+
+  if(r.empty){
+    r=await getDocs(query(collection(db,"admins"),where("uid","==",v)));
+  }
+
+  // Por último, permite informar diretamente o ID do documento Firestore.
   if(r.empty){
     try{
       const d=await getDoc(doc(db,"admins",v));
       if(d.exists())return {ref:d.ref,docId:d.id,data:d.data()};
-    }catch(e){}
+    }catch(e){
+      console.warn("Falha ao procurar documento diretamente:",e);
+    }
   }
+
   if(r.empty)return null;
   const d=r.docs[0];
   return {ref:d.ref,docId:d.id,data:d.data()};
@@ -1315,22 +1332,28 @@ async function enviarElementosAdmin(){
 
     const operacaoId=gerarOperacaoId();
 
-    await setDoc(doc(db,"historicoElementos",operacaoId),{
-      id:operacaoId,
-      usuarioId:cliente.docId,
-      usuarioPublicId:cliente.data.publicId||cliente.docId,
-      usuarioUid:cliente.data.uid||"",
-      usuarioNome:cliente.data.nome||cliente.data.name||"",
-      usuarioEmail:cliente.data.email||"",
-      quantidadeTotal:quantidade,
-      modo,
-      elementoSelecionado:modo==="selected"?selecionado:null,
-      elementosEnviados:enviados,
-      adminEmail:adminUsuario.email||"",
-      adminUid:adminUsuario.uid||"",
-      criadoEm:serverTimestamp(),
-      criadoEmTexto:new Date().toISOString()
-    });
+    // O histórico administrativo NÃO pode impedir a entrega.
+    // Se a Rule dessa coleção estiver fechada, os elementos continuam sendo enviados.
+    try{
+      await setDoc(doc(db,"historicoElementos",operacaoId),{
+        id:operacaoId,
+        usuarioId:cliente.docId,
+        usuarioPublicId:cliente.data.publicId||cliente.docId,
+        usuarioUid:cliente.data.uid||"",
+        usuarioNome:cliente.data.nome||cliente.data.name||"",
+        usuarioEmail:cliente.data.email||"",
+        quantidadeTotal:quantidade,
+        modo,
+        elementoSelecionado:modo==="selected"?selecionado:null,
+        elementosEnviados:enviados,
+        adminEmail:adminUsuario.email||"",
+        adminUid:adminUsuario.uid||"",
+        criadoEm:serverTimestamp(),
+        criadoEmTexto:new Date().toISOString()
+      });
+    }catch(historicoAdminError){
+      console.warn("Entrega realizada, mas o histórico administrativo não pôde ser salvo:",historicoAdminError);
+    }
 
     elementDeliveryResult.innerHTML=Object.entries(enviados).map(([n,q])=>{
       const e=ELEMENTOS_ADMIN.find(x=>String(x.n)===String(n));
@@ -1339,7 +1362,7 @@ async function enviarElementosAdmin(){
 
     mostrarMensagem(
       elementDeliveryMessage,
-      `✅ ${quantidade} elemento${quantidade===1?"":"s"} enviado${quantidade===1?"":"s"} para ${escaparElemento(cliente.data.nome||cliente.data.publicId||cliente.data.email||"o jogador")}. ID: ${operacaoId}`,
+      `✅ ${quantidade} elemento${quantidade===1?"":"s"} enviado${quantidade===1?"":"s"} para ${cliente.data.nome||cliente.data.publicId||cliente.data.email||"o jogador"}. ID: ${operacaoId}`,
       "success"
     );
 
