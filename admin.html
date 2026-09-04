@@ -146,6 +146,10 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
 .element-preview{margin-top:12px;padding:12px;border-radius:13px;background:rgba(2,15,34,.6);border:1px solid rgba(255,255,255,.08);color:#79dcff;font-size:12px;font-weight:900;line-height:1.45}
 .element-admin-actions{display:grid;grid-template-columns:1fr 180px;gap:9px;margin-top:12px}
 .element-admin-actions button{min-height:52px;border-radius:14px;padding:12px 16px;font-size:14px;font-weight:900;display:flex;align-items:center;justify-content:center;gap:8px;transition:.15s transform,.15s filter}.element-admin-actions button:active:not(:disabled){transform:scale(.98)}.primary-button{background:linear-gradient(135deg,#18bfff,#087bd7)!important;color:#fff!important;box-shadow:0 8px 20px rgba(0,0,0,.18)}.secondary-button{background:linear-gradient(135deg,#12628e,#0a4165)!important;color:#fff!important;border:1px solid rgba(102,222,255,.35)!important}.element-admin-actions button:disabled{opacity:.55!important}
+.multiple-element-row{display:grid;grid-template-columns:minmax(0,1fr) 100px 42px;gap:8px;align-items:center}
+.multiple-element-row select,.multiple-element-row input{width:100%;min-height:44px;border:1px solid rgba(255,255,255,.12);border-radius:12px;background:#061b35;color:#fff;padding:10px 11px;outline:none}
+.multiple-element-row button{min-height:44px;border-radius:12px;background:rgba(120,20,35,.55);color:#fff;font-size:18px;font-weight:900;cursor:pointer}
+@media(max-width:600px){.multiple-element-row{grid-template-columns:minmax(0,1fr) 78px 40px}}
 .element-delivery-result{margin-top:10px;display:grid;gap:6px}
 .element-delivery-result .sent-item{padding:9px 11px;border-radius:11px;background:rgba(255,255,255,.045);color:#c8e2f4;font-size:11px}
 @media(max-width:800px){.element-admin-grid{grid-template-columns:1fr 1fr}}
@@ -312,12 +316,26 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
     </div>
 
     <div>
-      <label for="elementSendMode">🎯 Modo</label>
+      <label for="elementSendMode">🎯 Modo de envio</label>
       <select id="elementSendMode">
         <option value="selected">Elemento escolhido</option>
+        <option value="multiple">⚛️ Vários elementos</option>
         <option value="random">🎲 Aleatório</option>
       </select>
     </div>
+  </div>
+
+
+  <div id="multipleElementsArea" style="display:none;margin-top:12px">
+    <div style="font-weight:900;color:#79dcff;margin-bottom:8px">
+      ⚛️ Adicione os elementos que deseja enviar
+    </div>
+    <div id="multipleElementsList" style="display:grid;gap:8px"></div>
+    <button type="button" id="addElementRow"
+      style="margin-top:8px;min-height:40px;padding:0 14px;border:1px solid rgba(86,220,255,.35);
+      border-radius:10px;background:rgba(15,78,118,.45);color:#fff;font-weight:900;cursor:pointer">
+      ＋ ADICIONAR OUTRO ELEMENTO
+    </button>
   </div>
 
   <div class="element-quick-quantities">
@@ -1112,6 +1130,9 @@ const sendElementsButton=document.getElementById("sendElementsButton");
 const randomElementButton=document.getElementById("randomElementButton");
 const elementDeliveryMessage=document.getElementById("elementDeliveryMessage");
 const elementDeliveryResult=document.getElementById("elementDeliveryResult");
+const multipleElementsArea=document.getElementById("multipleElementsArea");
+const multipleElementsList=document.getElementById("multipleElementsList");
+const addElementRowButton=document.getElementById("addElementRow");
 
 function escaparElemento(v){
   return String(v??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");
@@ -1119,8 +1140,6 @@ function escaparElemento(v){
 
 function preencherSelectElementos(){
   if(!elementSelect)return;
-  // Os 118 elementos já ficam no HTML para o menu funcionar mesmo antes
-  // de qualquer rotina do Firebase terminar de carregar.
   if(elementSelect.options.length < 119){
     elementSelect.innerHTML='<option value="">Selecione um elemento...</option>';
     ELEMENTOS_ADMIN.forEach(e=>{
@@ -1132,12 +1151,98 @@ function preencherSelectElementos(){
   }
 }
 
+function criarSelectMultiplo(valor=""){
+  const select=document.createElement("select");
+  select.className="multiple-element-select";
+  select.innerHTML='<option value="">Selecione...</option>';
+  ELEMENTOS_ADMIN.forEach(e=>{
+    const op=document.createElement("option");
+    op.value=String(e.n);
+    op.textContent=`${e.n} — ${e.s} — ${e.name}`;
+    select.appendChild(op);
+  });
+  select.value=String(valor||"");
+  select.addEventListener("change",atualizarPreviewElemento);
+  return select;
+}
+
+function adicionarLinhaElemento(numeroInicial=""){
+  if(!multipleElementsList)return;
+  if(multipleElementsList.children.length>=10){
+    mostrarMensagem(elementDeliveryMessage,"❌ Você pode adicionar no máximo 10 elementos diferentes por envio.","error");
+    return;
+  }
+  const row=document.createElement("div");
+  row.className="multiple-element-row";
+
+  const select=criarSelectMultiplo(numeroInicial);
+  const qty=document.createElement("input");
+  qty.type="number";
+  qty.className="multiple-element-qty";
+  qty.min="1";
+  qty.max="1000";
+  qty.value="1";
+  qty.inputMode="numeric";
+  qty.addEventListener("input",atualizarPreviewElemento);
+
+  const remove=document.createElement("button");
+  remove.type="button";
+  remove.textContent="×";
+  remove.title="Remover elemento";
+  remove.onclick=()=>{
+    if(multipleElementsList.children.length<=2){
+      mostrarMensagem(elementDeliveryMessage,"❌ Mantenha pelo menos 2 elementos no modo Vários elementos.","error");
+      return;
+    }
+    row.remove();
+    atualizarPreviewElemento();
+  };
+
+  row.appendChild(select);
+  row.appendChild(qty);
+  row.appendChild(remove);
+  multipleElementsList.appendChild(row);
+  atualizarPreviewElemento();
+}
+
+function inicializarMultiplos(){
+  if(!multipleElementsList || multipleElementsList.children.length)return;
+  adicionarLinhaElemento();
+  adicionarLinhaElemento();
+}
+
+function obterListaMultiplos(){
+  if(!multipleElementsList)return [];
+  return [...multipleElementsList.querySelectorAll(".multiple-element-row")].map(row=>{
+    const n=Number(row.querySelector(".multiple-element-select")?.value||0);
+    const quantidade=Math.floor(Number(row.querySelector(".multiple-element-qty")?.value||0));
+    return {n,quantidade};
+  }).filter(x=>x.n>0 || x.quantidade>0);
+}
+
 function atualizarPreviewElemento(){
   if(!elementPreview)return;
+
+  if(elementSendMode?.value==="multiple"){
+    const linhas=obterListaMultiplos();
+    const validas=linhas.filter(x=>x.n>0 && Number.isInteger(x.quantidade) && x.quantidade>0);
+    if(!validas.length){
+      elementPreview.textContent="Escolha pelo menos dois elementos e informe as quantidades.";
+      return;
+    }
+    const resumo=validas.map(x=>{
+      const e=ELEMENTOS_ADMIN.find(y=>Number(y.n)===x.n);
+      return `${e?.s||""} — ${e?.name||"Elemento"} ×${x.quantidade}`;
+    }).join("  •  ");
+    elementPreview.innerHTML=`⚛️ <strong>Envio múltiplo:</strong> ${escaparElemento(resumo)}`;
+    return;
+  }
+
   if(elementSendMode?.value==="random"){
     elementPreview.textContent="🎲 Cada unidade será sorteada separadamente entre os 118 elementos.";
     return;
   }
+
   const n=Number(elementSelect?.value||0);
   const e=ELEMENTOS_ADMIN.find(x=>Number(x.n)===n);
   if(!e){
@@ -1149,23 +1254,34 @@ function atualizarPreviewElemento(){
 }
 
 function atualizarModoElemento(){
-  const aleatorio=elementSendMode?.value==="random";
-  if(elementSelect)elementSelect.disabled=aleatorio;
+  const modo=elementSendMode?.value||"selected";
+  const aleatorio=modo==="random";
+  const multiplo=modo==="multiple";
+
+  if(elementSelect)elementSelect.disabled=aleatorio||multiplo;
+  if(elementQuantity)elementQuantity.disabled=multiplo;
+
+  if(multipleElementsArea)multipleElementsArea.style.display=multiplo?"block":"none";
+  if(multiplo)inicializarMultiplos();
+
   atualizarPreviewElemento();
 }
 
 async function localizarClienteElemento(valor){
   const v=String(valor||"").trim();
   if(!v)return null;
+
   let r=await getDocs(query(collection(db,"admins"),where("publicId","==",v.toUpperCase())));
   if(r.empty&&v.includes("@"))r=await getDocs(query(collection(db,"admins"),where("email","==",v.toLowerCase())));
   if(r.empty)r=await getDocs(query(collection(db,"admins"),where("uid","==",v)));
+
   if(r.empty){
     try{
       const d=await getDoc(doc(db,"admins",v));
       if(d.exists())return {ref:d.ref,docId:d.id,data:d.data()};
     }catch(e){}
   }
+
   if(r.empty)return null;
   const d=r.docs[0];
   return {ref:d.ref,docId:d.id,data:d.data()};
@@ -1177,72 +1293,83 @@ function sortearElementoAdmin(){
 
 async function enviarElementosAdmin(){
   if(!adminUsuario){
-    mostrarMensagem(elementDeliveryMessage,"❌ Administrador não autenticado. Aguarde o login terminar e tente novamente.","error");
+    mostrarMensagem(elementDeliveryMessage,"❌ Administrador não autenticado.","error");
     return;
   }
 
   const destino=elementUserTarget.value.trim();
-  const quantidade=Math.floor(Number(elementQuantity.value||0));
   const modo=elementSendMode.value;
   const selecionado=Number(elementSelect.value||0);
+  const quantidade=Math.floor(Number(elementQuantity.value||0));
 
   if(!destino){
     mostrarMensagem(elementDeliveryMessage,"❌ Informe o ID Adam Games, e-mail ou UID do jogador.","error");
     return;
   }
-  if(!Number.isInteger(quantidade)||quantidade<1||quantidade>1000){
-    mostrarMensagem(elementDeliveryMessage,"❌ A quantidade deve ser um número inteiro entre 1 e 1000.","error");
-    return;
-  }
-  if(modo==="selected"&&!selecionado){
-    mostrarMensagem(elementDeliveryMessage,"❌ Escolha um elemento ou selecione Aleatório.","error");
-    return;
+
+  let pedidos=[];
+
+  if(modo==="multiple"){
+    const linhas=obterListaMultiplos();
+    if(linhas.length<2){
+      mostrarMensagem(elementDeliveryMessage,"❌ Escolha pelo menos 2 elementos diferentes.","error");
+      return;
+    }
+
+    const vistos=new Set();
+    for(const item of linhas){
+      if(!item.n || !Number.isInteger(item.quantidade) || item.quantidade<1 || item.quantidade>1000){
+        mostrarMensagem(elementDeliveryMessage,"❌ Cada elemento precisa ter uma quantidade inteira entre 1 e 1000.","error");
+        return;
+      }
+      if(vistos.has(item.n)){
+        mostrarMensagem(elementDeliveryMessage,"❌ Não repita o mesmo elemento. Se quiser mais unidades, aumente a quantidade dele.","error");
+        return;
+      }
+      vistos.add(item.n);
+      pedidos.push(item);
+    }
+  }else{
+    if(!Number.isInteger(quantidade)||quantidade<1||quantidade>1000){
+      mostrarMensagem(elementDeliveryMessage,"❌ A quantidade deve ser um número inteiro entre 1 e 1000.","error");
+      return;
+    }
+    if(modo==="selected"&&!selecionado){
+      mostrarMensagem(elementDeliveryMessage,"❌ Escolha um elemento ou selecione Aleatório.","error");
+      return;
+    }
+
+    if(modo==="selected"){
+      pedidos=[{n:selecionado,quantidade}];
+    }else{
+      for(let i=0;i<quantidade;i++){
+        pedidos.push({n:sortearElementoAdmin().n,quantidade:1});
+      }
+    }
   }
 
   sendElementsButton.disabled=true;
   randomElementButton.disabled=true;
   sendElementsButton.textContent="⏳ ENVIANDO...";
   elementDeliveryResult.innerHTML="";
-  mostrarMensagem(elementDeliveryMessage,""," ");
 
   try{
     const cliente=await localizarClienteElemento(destino);
     if(!cliente)throw new Error("Jogador não encontrado pelo ID, e-mail ou UID.");
 
+    const atuais=cliente.data.elementos&&typeof cliente.data.elementos==="object"&&!Array.isArray(cliente.data.elementos)
+      ? {...cliente.data.elementos} : {};
+
     const enviados={};
-    const escolhidos=[];
-    for(let i=0;i<quantidade;i++){
-      const elemento=modo==="random"
-        ? sortearElementoAdmin()
-        : ELEMENTOS_ADMIN.find(x=>Number(x.n)===selecionado);
-      if(!elemento)throw new Error("Elemento selecionado não encontrado.");
-      escolhidos.push(elemento);
-      const chave=String(elemento.n);
-      enviados[chave]=Number(enviados[chave]||0)+1;
+    for(const pedido of pedidos){
+      const chave=String(pedido.n);
+      atuais[chave]=Number(atuais[chave]||0)+Number(pedido.quantidade);
+      enviados[chave]=Number(enviados[chave]||0)+Number(pedido.quantidade);
     }
 
-    // Gravação atômica: não sobrescreve elementos que outro processo tenha
-    // acrescentado ao mesmo tempo.
-    const ref=cliente.ref;
-    let saldoAnterior=null;
-    await runTransaction(db,async tx=>{
-      const snap=await tx.get(ref);
-      if(!snap.exists())throw new Error("O cadastro do jogador não existe mais.");
-      const dados=snap.data()||{};
-      const atuais=(dados.elementos&&typeof dados.elementos==="object"&&!Array.isArray(dados.elementos))
-        ? {...dados.elementos} : {};
-      saldoAnterior={...atuais};
-      Object.entries(enviados).forEach(([n,q])=>{
-        atuais[n]=Number(atuais[n]||0)+Number(q||0);
-      });
-      tx.update(ref,{elementos:atuais,atualizadoEm:Timestamp.now()});
-    });
+    await updateDoc(cliente.ref,{elementos:atuais,atualizadoEm:Timestamp.now()});
 
-    // O envio já foi confirmado no cadastro. O histórico é complementar:
-    // se as Rules do histórico estiverem fechadas, não podemos dizer que o
-    // envio falhou depois de o jogador já ter recebido os elementos.
     const operacaoId=gerarOperacaoId();
-    let historicoSalvo=true;
     try{
       await setDoc(doc(db,"historicoElementos",operacaoId),{
         id:operacaoId,
@@ -1251,7 +1378,7 @@ async function enviarElementosAdmin(){
         usuarioUid:cliente.data.uid||"",
         usuarioNome:cliente.data.nome||cliente.data.name||"",
         usuarioEmail:cliente.data.email||"",
-        quantidadeTotal:quantidade,
+        quantidadeTotal:Object.values(enviados).reduce((a,b)=>a+Number(b),0),
         modo,
         elementoSelecionado:modo==="selected"?selecionado:null,
         elementosEnviados:enviados,
@@ -1260,25 +1387,8 @@ async function enviarElementosAdmin(){
         criadoEm:serverTimestamp(),
         criadoEmTexto:new Date().toISOString()
       });
-    }catch(historyError){
-      historicoSalvo=false;
-      console.warn("ELEMENTO ENVIADO, MAS HISTÓRICO NÃO FOI GRAVADO:",historyError);
-    }
-
-    // Releitura do documento para confirmar o valor persistido.
-    const confirmado=await getDoc(ref);
-    if(!confirmado.exists())throw new Error("O jogador foi alterado, mas não foi possível confirmar o cadastro.");
-    const elementosConfirmados=confirmado.data()?.elementos||{};
-    for(const [n,q] of Object.entries(enviados)){
-      const esperado=Number((saldoAnterior||{})[n]||0)+Number(q||0);
-      if(Number(elementosConfirmados[n]||0)<esperado){
-        throw new Error("O envio não pôde ser confirmado no Firestore.");
-      }
-    }
-
-    if(usuarioSelecionado?.docId===cliente.docId){
-      usuarioSelecionado.data={...usuarioSelecionado.data,...confirmado.data()};
-      atualizarSaldos();
+    }catch(historicoError){
+      console.warn("Elemento enviado, mas o histórico não pôde ser gravado:",historicoError);
     }
 
     elementDeliveryResult.innerHTML=Object.entries(enviados).map(([n,q])=>{
@@ -1286,28 +1396,38 @@ async function enviarElementosAdmin(){
       return `<div class="sent-item">⚛️ <strong>${escaparElemento(e?.s||"")}</strong> — ${escaparElemento(e?.name||"Elemento")} ×${q}</div>`;
     }).join("");
 
+    const totalEnviado=Object.values(enviados).reduce((a,b)=>a+Number(b),0);
+    const quantidadeTipos=Object.keys(enviados).length;
+
     mostrarMensagem(
       elementDeliveryMessage,
-      `✅ ${quantidade} elemento${quantidade===1?"":"s"} enviado${quantidade===1?"":"s"} para ${escaparElemento(cliente.data.nome||cliente.data.publicId||cliente.data.email||"o jogador")}.${historicoSalvo?"":" O envio foi salvo, mas o histórico não pôde ser registrado."}`,
+      `✅ ${totalEnviado} unidade${totalEnviado===1?"":"s"} enviada${totalEnviado===1?"":"s"} (${quantidadeTipos} elemento${quantidadeTipos===1?"":"s"}) para ${escaparElemento(cliente.data.nome||cliente.data.publicId||cliente.data.email||"o jogador")}. ID: ${operacaoId}`,
       "success"
     );
 
-    elementQuantity.value="1";
-    atualizarPreviewElemento();
+    if(usuarioSelecionado?.docId===cliente.docId){
+      usuarioSelecionado.data.elementos=atuais;
+    }
 
+    elementQuantity.value="1";
   }catch(error){
     console.error("ERRO AO ENVIAR ELEMENTOS:",error);
-    const detalhe=error?.code==="permission-denied"
-      ? "O Firestore bloqueou a gravação no cadastro do jogador. Verifique as Rules da coleção admins."
-      : (error?.message||"Erro desconhecido.");
-    mostrarMensagem(elementDeliveryMessage,"❌ Não foi possível enviar os elementos. "+detalhe,"error");
+    mostrarMensagem(
+      elementDeliveryMessage,
+      error?.code==="permission-denied"
+        ? "❌ O Firestore bloqueou o envio. Verifique as Rules."
+        : "❌ Não foi possível enviar os elementos. "+(error?.message||""),
+      "error"
+    );
   }finally{
     sendElementsButton.disabled=false;
     randomElementButton.disabled=false;
     sendElementsButton.textContent="⚛️ ENVIAR ELEMENTOS";
   }
 }
+
 preencherSelectElementos();
+inicializarMultiplos();
 elementSelect?.addEventListener("change",atualizarPreviewElemento);
 elementQuantity?.addEventListener("input",atualizarPreviewElemento);
 elementSendMode?.addEventListener("change",atualizarModoElemento);
@@ -1324,9 +1444,13 @@ randomElementButton?.addEventListener("click",()=>{
   atualizarModoElemento();
 });
 
+addElementRowButton?.addEventListener("click",()=>{
+  adicionarLinhaElemento();
+});
+
 sendElementsButton?.addEventListener("click",enviarElementosAdmin);
 atualizarModoElemento();
 
-</script>
+
 </body>
 </html>
