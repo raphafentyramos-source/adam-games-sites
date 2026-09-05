@@ -92,10 +92,42 @@ a,.btn{display:inline-flex;align-items:center;justify-content:center;padding:14p
 .rule{padding:14px;border-radius:14px;background:#0b2140;border:1px solid #ffffff12}
 .rule b{color:#5edcff}
 @media(max-width:700px){.wrap{padding-top:15px}.hero{padding:20px}.cards,.rules{grid-template-columns:1fr}}
-</style>
+<style>
+.element-topbar{
+  position:sticky;top:0;z-index:30;
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:10px 0 14px;
+  background:linear-gradient(#07142bf5,#07142bd9,transparent);
+}
+.element-back,.element-estante-top,.estante-bottom{
+  text-decoration:none;color:#fff;font-weight:1000;
+  border:1px solid #36baff44;border-radius:14px;
+  background:#071a35dd;
+}
+.element-back{
+  width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+  font-size:30px;
+}
+.element-top-brand{font-size:12px;letter-spacing:1px;color:#bcd2ea;text-align:center;flex:1}
+.element-top-brand b{color:#ffd83d}
+.element-estante-top,.estante-bottom{
+  padding:11px 14px;background:linear-gradient(135deg,#0c8edb,#075b9d);
+  border-color:#53d4ff66;font-size:11px;white-space:nowrap;
+}
+.estante-bottom{display:inline-block;background:linear-gradient(135deg,#0c8edb,#075b9d)}
+@media(max-width:600px){
+  .element-top-brand{font-size:10px}
+  .element-estante-top{padding:10px 9px;font-size:9px}
+}
+</style></style>
 </head>
 <body>
 <div class="wrap">
+<div class="element-topbar">
+  <a class="element-back" href="painel.html" aria-label="Voltar ao painel">←</a>
+  <div class="element-top-brand">ADAM <b>GAMES</b> • ⚛️ ELEMENTOS</div>
+  <a class="element-estante-top" href="#estante">⚛️ ACESSAR ESTANTE</a>
+</div>
 <section class="hero">
 <div class="kicker">ADAM GAMES • COLEÇÃO</div>
 <h1>Minha Coleção de Elementos</h1>
@@ -137,7 +169,7 @@ a,.btn{display:inline-flex;align-items:center;justify-content:center;padding:14p
 </div>
 </section>
 
-<section class="collection-section">
+<section class="collection-section" id="estante">
 <h2>⚛️ SUA ESTANTE</h2>
 <p class="collection-help">
 Cada quadrinho mostra o elemento e a quantidade que você possui.
@@ -147,6 +179,7 @@ Os que ainda não foram encontrados ficam bloqueados.
 </section>
 
 <div class="actions">
+<a class="estante-bottom" href="#estante">⚛️ ACESSAR ESTANTE</a>
 <button class="primary" id="refreshCollection" type="button">🔄 ATUALIZAR COLEÇÃO</button>
 <button id="historyButton" type="button">📜 HISTÓRICO</button>
 <button id="notificationButton" type="button">🔔 NOTIFICAÇÕES <span id="notificationCount" style="display:none;margin-left:6px;background:#ff3b72;border-radius:99px;padding:2px 7px;font-size:11px"></span></button>

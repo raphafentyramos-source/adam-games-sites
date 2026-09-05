@@ -7,37 +7,35 @@
 <style>
 :root{--bg:#08030f;--panel:#14091f;--panel2:#1b0d29;--purple:#9b3bd0;--purple2:#5d1685;--gold:#f4c44f;--gold2:#ffdf7a;--text:#fff;--muted:#bca9c8;--green:#38d889;--red:#ff657f;--blue:#56a9ff}
 *{box-sizing:border-box}html,body{margin:0;background:radial-gradient(circle at 50% -10%,#4a0d70 0,#180720 30%,#07020d 75%);color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}button,input,select{font:inherit}button{cursor:pointer}body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 15% 25%,#9d38d50d,transparent 24%),radial-gradient(circle at 85% 60%,#f4c44f08,transparent 26%)}
-.wrap{width:min(1120px,100%);margin:auto;padding:10px 12px 40px}.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 0 12px;background:linear-gradient(#0b0314f5,#0b0314d8,transparent)}.brand{font-weight:1000;letter-spacing:.7px}.brand b{color:var(--gold)}.btn{border:1px solid #ffffff1c;background:#ffffff0a;color:#fff;border-radius:13px;padding:10px 13px;font-weight:900}.btn.primary{background:linear-gradient(135deg,#a83de0,#5b147e);border-color:#d88cff66;box-shadow:0 7px 20px #7c1cad33}.btn.gold{background:linear-gradient(135deg,#ffd85c,#e39a17);color:#1b0b20;border:0}.btn.green{background:linear-gradient(135deg,#35d985,#149b55);border:0}.btn:disabled{opacity:.45;cursor:not-allowed}.hero{display:grid;grid-template-columns:1fr 290px;gap:16px;padding:18px;border:1px solid #d28aff38;border-radius:25px;background:linear-gradient(135deg,#321047e8,#12051de8);box-shadow:0 18px 50px #0007}.kicker{font-size:10px;letter-spacing:2px;color:#dc9dff;font-weight:1000}.hero h1{font-family:Georgia,serif;font-size:clamp(38px,7vw,68px);line-height:.88;margin:8px 0}.hero p{color:var(--muted);margin:0}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:18px}.stat{background:#0005;border:1px solid #ffffff12;border-radius:14px;padding:10px}.stat b{display:block;color:var(--gold2);font-size:22px}.stat small{font-size:9px;color:#bca9c8}.packHero{border:1px solid #e2b94855;border-radius:18px;background:#0004;overflow:hidden;text-align:center}.packHero img{width:100%;height:270px;object-fit:contain;display:block}.packHero .ready{padding:9px;color:#e9d8ef;font-size:11px;font-weight:900}.tabs{display:flex;gap:7px;overflow:auto;padding:13px 0 4px;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.tab{white-space:nowrap}.tab.active{background:linear-gradient(135deg,#9c3cd1,#511373);border-color:#cf7cff66}.section{margin-top:12px;border:1px solid #ffffff13;border-radius:20px;background:linear-gradient(145deg,#180a25f2,#0e0615f2);padding:15px}.sectionHead{display:flex;justify-content:space-between;align-items:end;gap:12px}.section h2{font:1000 24px Georgia,serif;color:#e8b8ff;margin:0}.section p{font-size:11px;color:var(--muted);margin:5px 0 0}.hidden{display:none!important} .loadingCollection{padding:30px;text-align:center;color:#cdbbd7;font-weight:900}.goldLock{height:100%;min-height:170px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;color:#ffd76a}.goldLock .coin{width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid #ffd76a;background:radial-gradient(circle,#ffd76a33,#0005);font-size:28px;box-shadow:0 0 22px #f4c44f33}.goldLock small{color:#cbb8d6;font-size:9px;text-align:center}
-/* collection */.filterbar{display:flex;gap:7px;overflow:auto;margin-top:12px}.filterbar button{font-size:10px;padding:8px 10px}.filterbar .sel{background:#8e2fc2}.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin-top:12px}.sticker{position:relative;aspect-ratio:2/3;border-radius:12px;overflow:hidden;background:#170a20;border:1px solid #6f3d91;cursor:pointer;box-shadow:0 5px 15px #0005}.sticker img{width:100%;height:100%;object-fit:contain;display:block;image-rendering:auto}.sticker.missing img{filter:brightness(.8)}.sticker .shade{position:absolute;inset:0;background:linear-gradient(#0002,#0007)}.sticker .num{position:absolute;left:5px;top:5px;padding:3px 5px;border-radius:6px;background:#08020dcc;font-size:8px;font-weight:1000}.sticker .rarity{position:absolute;right:5px;top:5px;padding:3px 5px;border-radius:6px;background:#08020dcc;font-size:7px;font-weight:1000}.sticker .qty{position:absolute;right:5px;bottom:5px;padding:4px 7px;border-radius:8px;background:#08020ddd;font-size:9px;font-weight:1000}.sticker .missingText{position:absolute;left:5px;right:5px;bottom:28px;text-align:center;font-size:8px;font-weight:1000;color:#fff;text-shadow:0 2px 5px #000}.common{border-color:#7183b5}.epica{border-color:#ad4be4;box-shadow:0 0 15px #8d2dc533}.legendaria{border-color:#e9bd45;box-shadow:0 0 18px #d69a2638}
-/* albums */.albumBoard{position:relative;width:min(864px,100%);aspect-ratio:864/1536;margin:14px auto 0;border-radius:18px;overflow:hidden;background:url("07F4EC54-9284-4085-AF56-96F43C55C0A5.png") center/100% 100% no-repeat;box-shadow:0 20px 55px #0009}.hot{position:absolute;border:0;background:#ffffff00;border-radius:15px}.hot:hover{background:#fff1}.hot.a1{left:17%;top:23%;width:31%;height:27%}.hot.a2{left:53%;top:23%;width:31%;height:27%}.hot.a3{left:17%;top:53%;width:31%;height:27%}.hot.a4{left:53%;top:53%;width:31%;height:27%}.hot.leg{left:31%;top:78%;width:38%;height:19%}.albumCovers{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:13px}.albumCover{min-height:190px;border-radius:16px;border:1px solid #9e45d766;padding:12px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;background:radial-gradient(circle at 50% 25%,#6d1d91,#1a0827 55%,#09030e)}.albumCover:nth-child(2){background:radial-gradient(circle at 50% 25%,#234d7d,#0e1b31 55%,#07030d);border-color:#4f9bd966}.albumCover:nth-child(3){background:radial-gradient(circle at 50% 25%,#9b4a10,#341206 55%,#0b0307);border-color:#e6a03d88}.albumCover:nth-child(4){background:radial-gradient(circle at 50% 25%,#3d0d65,#13051e 55%,#07020b);border-color:#d5a73f88}.albumCover .orb{font-size:46px;text-align:center;margin:auto auto 8px;filter:drop-shadow(0 8px 15px #0008)}.albumCover h3{margin:0;color:#fff;font:1000 16px Georgia,serif}.albumCover small{color:#d8c5df;margin-top:6px}.coverProgress{height:6px;background:#0008;border-radius:99px;margin-top:9px;overflow:hidden}.coverProgress i{display:block;height:100%;background:linear-gradient(90deg,#9b39db,#f5c24b)}
+.wrap{width:min(1120px,100%);margin:auto;padding:10px 12px 40px}.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 0 12px;background:linear-gradient(#0b0314f5,#0b0314d8,transparent)}.brand{font-weight:1000;letter-spacing:.7px}.brand b{color:var(--gold)}.btn{border:1px solid #ffffff1c;background:#ffffff0a;color:#fff;border-radius:13px;padding:10px 13px;font-weight:900}.btn.primary{background:linear-gradient(135deg,#a83de0,#5b147e);border-color:#d88cff66;box-shadow:0 7px 20px #7c1cad33}.btn.gold{background:linear-gradient(135deg,#ffd85c,#e39a17);color:#1b0b20;border:0}.btn.green{background:linear-gradient(135deg,#35d985,#149b55);border:0}.btn:disabled{opacity:.45;cursor:not-allowed}.hero{display:grid;grid-template-columns:1fr 290px;gap:16px;padding:18px;border:1px solid #d28aff38;border-radius:25px;background:linear-gradient(135deg,#321047e8,#12051de8);box-shadow:0 18px 50px #0007}.kicker{font-size:10px;letter-spacing:2px;color:#dc9dff;font-weight:1000}.hero h1{font-family:Georgia,serif;font-size:clamp(38px,7vw,68px);line-height:.88;margin:8px 0}.hero p{color:var(--muted);margin:0}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:18px}.stat{background:#0005;border:1px solid #ffffff12;border-radius:14px;padding:10px}.stat b{display:block;color:var(--gold2);font-size:22px}.stat small{font-size:9px;color:#bca9c8}.packHero{border:1px solid #e2b94855;border-radius:18px;background:#0004;overflow:hidden;text-align:center}.packHero img{width:100%;height:270px;object-fit:contain;display:block}.packHero .ready{padding:9px;color:#e9d8ef;font-size:11px;font-weight:900}.tabs{display:flex;gap:7px;overflow:auto;padding:13px 0 4px;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.tab{white-space:nowrap}.tab.active{background:linear-gradient(135deg,#9c3cd1,#511373);border-color:#cf7cff66}.section{margin-top:12px;border:1px solid #ffffff13;border-radius:20px;background:linear-gradient(145deg,#180a25f2,#0e0615f2);padding:15px}.sectionHead{display:flex;justify-content:space-between;align-items:end;gap:12px}.section h2{font:1000 24px Georgia,serif;color:#e8b8ff;margin:0}.section p{font-size:11px;color:var(--muted);margin:5px 0 0}.hidden{display:none!important}
+/* collection */.filterbar{display:flex;gap:7px;overflow:auto;margin-top:12px}.filterbar button{font-size:10px;padding:8px 10px}.filterbar .sel{background:#8e2fc2}.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin-top:12px}.sticker{position:relative;aspect-ratio:2/3;border-radius:12px;overflow:hidden;background:#170a20;border:1px solid #6f3d91;cursor:pointer;box-shadow:0 5px 15px #0005}.sticker img{width:100%;height:100%;object-fit:cover;display:block}.sticker.missing img{filter:brightness(.8)}.sticker .shade{position:absolute;inset:0;background:linear-gradient(#0002,#0007)}.sticker .num{position:absolute;left:5px;top:5px;padding:3px 5px;border-radius:6px;background:#08020dcc;font-size:8px;font-weight:1000}.sticker .rarity{position:absolute;right:5px;top:5px;padding:3px 5px;border-radius:6px;background:#08020dcc;font-size:7px;font-weight:1000}.sticker .qty{position:absolute;right:5px;bottom:5px;padding:4px 7px;border-radius:8px;background:#08020ddd;font-size:9px;font-weight:1000}.sticker .missingText{position:absolute;left:5px;right:5px;bottom:28px;text-align:center;font-size:8px;font-weight:1000;color:#fff;text-shadow:0 2px 5px #000}.common{border-color:#7183b5}.epica{border-color:#ad4be4;box-shadow:0 0 15px #8d2dc533}.legendaria{border-color:#e9bd45;box-shadow:0 0 18px #d69a2638}
+/* albums */.albumBoard{position:relative;width:min(864px,100%);aspect-ratio:864/1536;margin:14px auto 0;border-radius:18px;overflow:hidden;background:url("assets/album/fundo-album-halloween-2026.jpeg") center/100% 100% no-repeat;box-shadow:0 20px 55px #0009}.hot{position:absolute;border:0;background:#ffffff00;border-radius:15px}.hot:hover{background:#fff1}.hot.a1{left:17%;top:23%;width:31%;height:27%}.hot.a2{left:53%;top:23%;width:31%;height:27%}.hot.a3{left:17%;top:53%;width:31%;height:27%}.hot.a4{left:53%;top:53%;width:31%;height:27%}.hot.leg{left:31%;top:78%;width:38%;height:19%}.albumCovers{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:13px}.albumCover{min-height:190px;border-radius:16px;border:1px solid #9e45d766;padding:12px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;background:radial-gradient(circle at 50% 25%,#6d1d91,#1a0827 55%,#09030e)}.albumCover:nth-child(2){background:radial-gradient(circle at 50% 25%,#234d7d,#0e1b31 55%,#07030d);border-color:#4f9bd966}.albumCover:nth-child(3){background:radial-gradient(circle at 50% 25%,#9b4a10,#341206 55%,#0b0307);border-color:#e6a03d88}.albumCover:nth-child(4){background:radial-gradient(circle at 50% 25%,#3d0d65,#13051e 55%,#07020b);border-color:#d5a73f88}.albumCover .orb{font-size:46px;text-align:center;margin:auto auto 8px;filter:drop-shadow(0 8px 15px #0008)}.albumCover h3{margin:0;color:#fff;font:1000 16px Georgia,serif}.albumCover small{color:#d8c5df;margin-top:6px}.coverProgress{height:6px;background:#0008;border-radius:99px;margin-top:9px;overflow:hidden}.coverProgress i{display:block;height:100%;background:linear-gradient(90deg,#9b39db,#f5c24b)}
 /* jokers */.jokerGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:13px}.joker{border:1px solid #ffffff19;border-radius:16px;padding:10px;background:linear-gradient(145deg,#1d0c2b,#0c0412);text-align:center}.joker img{width:100%;height:230px;object-fit:contain;display:block}.joker h3{margin:4px 0;color:#f2dcff;font-size:12px}.joker .jq{font-size:20px;font-weight:1000;color:var(--gold)}.notice{padding:10px;border:1px solid #d5a73f33;background:#f4c44f0b;border-radius:12px;color:#dfcedf;font-size:11px;margin-top:10px}
-/* trades */.tradeLayout{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:13px}.box{border:1px solid #ffffff12;background:#0b0411aa;border-radius:16px;padding:12px}.box h3{margin:0;color:#e6b6ff;font-size:14px}.cardSelectGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:10px}.selectCard{aspect-ratio:2/3;border:1px solid #ffffff12;border-radius:8px;overflow:hidden;background:#17091f;cursor:pointer;position:relative}.selectCard img{width:100%;height:100%;object-fit:contain}.selectCard.sel{border:2px solid var(--gold);box-shadow:0 0 14px #f4c44f55}.selectCard .q{position:absolute;right:2px;bottom:2px;background:#000d;padding:2px 4px;border-radius:5px;font-size:7px}.offer{display:flex;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid #ffffff0e}.offer:last-child{border-bottom:0}.offer img{width:44px;height:64px;object-fit:contain;border-radius:6px}.offer .arrow{color:var(--gold);font-weight:1000}.offer small{display:block;color:#9e8ba8}.empty{padding:20px;text-align:center;color:#8f7e99;font-size:11px}
-.albumDetailTop{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}.albumDetailTop h2{margin:3px 0 0;color:#ffd76a;font:1000 28px Georgia,serif}.albumDetailTop h3{margin:2px 0;color:#fff;font-size:15px}.albumBigIcon{width:66px;height:66px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:38px;background:radial-gradient(circle,#7b2ba0,#180821);border:1px solid #d28aff44}.albumProgressBig{height:9px;background:#0008;border-radius:99px;overflow:hidden;margin:12px 0 16px}.albumProgressBig i{display:block;height:100%;background:linear-gradient(90deg,#9b39db,#f5c24b);border-radius:99px}.albumSlots{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.albumSlot{position:relative;min-width:0;padding:5px;background:#0b0412;border:1px solid #ffffff15;border-radius:12px;color:#fff;text-align:center;overflow:hidden}.albumSlot.found{border-color:#9c43c866}.albumSlot.missing{border-color:#ffffff10;opacity:.72}.albumSlot.gold{border-color:#f4c44f99;background:radial-gradient(circle at 50% 35%,#4b320f,#160c08 62%,#08030b);box-shadow:0 0 20px #f4c44f22}.albumSlot.gold.missing{opacity:1}.goldLock{width:100%;aspect-ratio:2/3;border-radius:8px;background:radial-gradient(circle at 50% 42%,#f4c44f33,#0d0710 60%);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#ffd76a;font-weight:1000}.goldLock .coin{font-size:48px;filter:drop-shadow(0 0 14px #f4c44f88)}.goldLock small{font-size:9px;margin-top:6px;color:#e8d3a1}.albumSlot img{width:100%;aspect-ratio:2/3;object-fit:contain;border-radius:8px;display:block}.slotNum{position:absolute;left:8px;top:8px;background:#08020dcc;padding:3px 5px;border-radius:6px;font-size:8px;font-weight:1000}.slotQty{position:absolute;right:8px;top:8px;background:#08020dcc;padding:3px 5px;border-radius:6px;font-size:8px;font-weight:1000;color:#ffd76a}.slotName{display:block;font-size:8px;font-weight:900;line-height:1.1;padding:6px 2px 3px;min-height:27px}.albumReward,.albumTip{margin-top:14px;padding:12px;border-radius:12px;text-align:center;background:#f4c44f0b;border:1px solid #f4c44f33}.albumReward b{display:block;color:#ffd76a}.albumReward small{display:block;color:#cbb8d6;margin-top:3px}.albumTip{color:#cbb8d6;font-size:10px}.albumCover{cursor:pointer;transition:.18s}.albumCover.legendaryCover{border:2px solid #f4c44f88;background:radial-gradient(circle at 50% 22%,#9b6a16,#2a1605 48%,#0a040b);box-shadow:0 0 22px #f4c44f22}.albumCover.legendaryCover .orb{filter:drop-shadow(0 0 12px #f4c44f)}.albumCover:hover{transform:translateY(-2px);transition:.18s;box-shadow:0 12px 25px #0008}.albumLegendaryButton{margin-top:12px;width:100%;padding:14px;border-radius:15px;border:1px solid #f4c44f88;background:linear-gradient(135deg,#3b2208,#170b18);color:#ffd76a;font-weight:1000;font-size:14px;box-shadow:0 0 18px #f4c44f14}.albumLegendaryButton:active{transform:scale(.98)}@media(max-width:650px){.albumSlots{grid-template-columns:repeat(2,1fr)}.albumSlots .albumSlot:last-child{grid-column:span 2;width:50%;justify-self:center}.albumBigIcon{width:54px;height:54px;font-size:30px}}
-/* package inventory */.packInventory{margin-top:12px;display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid #f4c44f55;border-radius:17px;background:linear-gradient(135deg,#2b123d,#120719);box-shadow:0 8px 25px #0005}.packInventoryIcon{width:52px;height:52px;flex:0 0 52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:30px;background:radial-gradient(circle,#9b39db55,#0b0310);border:1px solid #d38eff55}.packInventoryText{min-width:0;flex:1}.packInventoryText strong{display:block;color:#ffd76a;font-size:14px}.packInventoryText small{display:block;color:#bca9c8;font-size:10px;margin-top:3px}.packInventory .btn{white-space:nowrap;padding:10px 12px}@media(max-width:470px){.packInventory{flex-wrap:wrap}.packInventoryText{flex:1}.packInventory .btn{width:100%}}
+/* trades */.tradeLayout{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:13px}.box{border:1px solid #ffffff12;background:#0b0411aa;border-radius:16px;padding:12px}.box h3{margin:0;color:#e6b6ff;font-size:14px}.cardSelectGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:10px}.selectCard{aspect-ratio:2/3;border:1px solid #ffffff12;border-radius:8px;overflow:hidden;background:#17091f;cursor:pointer;position:relative}.selectCard img{width:100%;height:100%;object-fit:cover}.selectCard.sel{border:2px solid var(--gold);box-shadow:0 0 14px #f4c44f55}.selectCard .q{position:absolute;right:2px;bottom:2px;background:#000d;padding:2px 4px;border-radius:5px;font-size:7px}.offer{display:flex;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid #ffffff0e}.offer:last-child{border-bottom:0}.offer img{width:44px;height:64px;object-fit:cover;border-radius:6px}.offer .arrow{color:var(--gold);font-weight:1000}.offer small{display:block;color:#9e8ba8}.empty{padding:20px;text-align:center;color:#8f7e99;font-size:11px}
+.albumDetailTop{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}.albumDetailTop h2{margin:3px 0 0;color:#ffd76a;font:1000 28px Georgia,serif}.albumDetailTop h3{margin:2px 0;color:#fff;font-size:15px}.albumBigIcon{width:66px;height:66px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:38px;background:radial-gradient(circle,#7b2ba0,#180821);border:1px solid #d28aff44}.albumProgressBig{height:9px;background:#0008;border-radius:99px;overflow:hidden;margin:12px 0 16px}.albumProgressBig i{display:block;height:100%;background:linear-gradient(90deg,#9b39db,#f5c24b);border-radius:99px}.albumSlots{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.albumSlot{position:relative;min-width:0;padding:5px;background:#0b0412;border:1px solid #ffffff15;border-radius:12px;color:#fff;text-align:center;overflow:hidden}.albumSlot.found{border-color:#9c43c866}.albumSlot.missing{border-color:#ffffff10;opacity:.72}.albumSlot img{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:8px;display:block}.slotNum{position:absolute;left:8px;top:8px;background:#08020dcc;padding:3px 5px;border-radius:6px;font-size:8px;font-weight:1000}.slotQty{position:absolute;right:8px;top:8px;background:#08020dcc;padding:3px 5px;border-radius:6px;font-size:8px;font-weight:1000;color:#ffd76a}.slotName{display:block;font-size:8px;font-weight:900;line-height:1.1;padding:6px 2px 3px;min-height:27px}.albumReward,.albumTip{margin-top:14px;padding:12px;border-radius:12px;text-align:center;background:#f4c44f0b;border:1px solid #f4c44f33}.albumReward b{display:block;color:#ffd76a}.albumReward small{display:block;color:#cbb8d6;margin-top:3px}.albumTip{color:#cbb8d6;font-size:10px}.albumCover{cursor:pointer}.albumCover:hover{transform:translateY(-2px);transition:.18s;box-shadow:0 12px 25px #0008}@media(max-width:650px){.albumSlots{grid-template-columns:repeat(2,1fr)}.albumSlots .albumSlot:last-child{grid-column:span 2;width:50%;justify-self:center}.albumBigIcon{width:54px;height:54px;font-size:30px}}
 /* pack */.packStage{border:1px solid #d38eff33;border-radius:18px;background:radial-gradient(circle at 50% 45%,#42126366,#09030fcc 60%);padding:18px;min-height:420px;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}.packVisual{width:min(250px,70vw);height:300px;position:relative;display:flex;align-items:center;justify-content:center}.packVisual img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 20px 25px #0009)}.packVisual.opening img{animation:packShake .7s ease-in-out infinite alternate}.packVisual.opening:after{content:"✦ ✧ ✦";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:42px;color:#ffe77d;text-shadow:0 0 20px #fff;animation:spark .5s infinite alternate}.resultCards{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;width:100%;margin-top:15px}.reveal{animation:reveal .55s cubic-bezier(.2,1.5,.3,1) both}.reveal:nth-child(2){animation-delay:.08s}.reveal:nth-child(3){animation-delay:.16s}.reveal:nth-child(4){animation-delay:.24s}.reveal:nth-child(5){animation-delay:.32s}.resultCards .sticker{cursor:default}.packStatus{font-size:12px;color:#dbcbe4;text-align:center;margin-top:10px}.timer{font-weight:1000;color:var(--gold);font-size:18px}.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.summary div{padding:10px;border-radius:12px;background:#0004;border:1px solid #ffffff0d;text-align:center}.summary b{display:block;font-size:18px;color:var(--gold2)}.summary small{color:#aa97b5;font-size:9px}
 .modal{position:fixed;inset:0;background:#000d;z-index:100;display:none;align-items:center;justify-content:center;padding:12px}.modal.open{display:flex}.modalBox{width:min(760px,100%);max-height:92vh;overflow:auto;background:#16071f;border:1px solid #d6a64a55;border-radius:20px;padding:16px}.modalBox h2{font:1000 24px Georgia,serif;color:#ffd86a}.close{float:right;width:38px;height:38px;border:0;border-radius:10px;background:#fff1;color:#fff;font-size:23px}.detailImg{width:min(260px,75vw);display:block;margin:12px auto;border-radius:13px}.toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%) translateY(30px);opacity:0;z-index:150;background:#1b0a27;border:1px solid #d98cff55;color:#fff;padding:12px 15px;border-radius:12px;font-size:11px;font-weight:900;transition:.25s;max-width:90%;text-align:center}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 @keyframes packShake{from{transform:rotate(-3deg) scale(1)}to{transform:rotate(3deg) scale(1.03)}}@keyframes spark{from{transform:scale(.8);opacity:.5}to{transform:scale(1.2);opacity:1}}@keyframes reveal{from{opacity:0;transform:translateY(30px) rotateY(90deg) scale(.7)}to{opacity:1;transform:none}}
 @media(max-width:780px){.hero{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:repeat(4,1fr)}.jokerGrid{grid-template-columns:repeat(2,1fr)}.albumCovers{grid-template-columns:repeat(2,1fr)}.tradeLayout{grid-template-columns:1fr}.resultCards{grid-template-columns:repeat(5,1fr)}}@media(max-width:470px){.wrap{padding:8px 8px 30px}.grid{grid-template-columns:repeat(3,1fr);gap:7px}.hero{padding:14px}.section{padding:12px}.albumCovers{gap:7px}.albumCover{min-height:165px;padding:9px}.joker img{height:190px}.packVisual{height:270px}.resultCards{gap:5px}}
 
 .jokerReward{grid-column:1/-1;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:14px;padding:12px;border:1px solid #f4c44f55;border-radius:15px;background:linear-gradient(135deg,#f4c44f0d,#8e2fc20d)}.jokerReward img{width:82px;height:112px;object-fit:contain}.jokerReward b{display:block;color:#ffd76a;font-size:13px}.jokerReward small{display:block;color:#cdbbd7;margin-top:4px}.packVisual.burst:after{content:"✦ ✧ ✦ ✧ ✦";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#ffe77d;font-size:42px;text-shadow:0 0 25px #fff;animation:spark .55s ease-out 2}.packVisual.opening img{animation:packShake .12s linear 8}.packVisual.burst img{animation:packPop .65s cubic-bezier(.2,1.5,.3,1)}@keyframes packPop{0%{transform:scale(.75);filter:brightness(1)}60%{transform:scale(1.08);filter:brightness(1.45)}100%{transform:scale(1);filter:brightness(1)}}
-.tradeHint{font-size:11px;color:#c7b5d0;background:#100619;border:1px solid #ffffff12;border-radius:10px;padding:9px;margin-bottom:10px}.tradeHistoryItem{display:flex;align-items:center;gap:9px;padding:9px;border-radius:12px;background:#12071a;margin-top:7px;font-size:11px}.tradeHistoryItem img{width:42px;height:58px;object-fit:contain}.tradeHistoryItem small{display:block;color:#a995b5;margin-top:3px}.tradeOfferCard{display:flex;align-items:center;gap:7px}.tradeOfferCard img{width:52px;height:72px;object-fit:contain}.jokerTargetGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;max-height:48vh;overflow:auto;padding:2px}.jokerTargetCard{position:relative;border:1px solid #ffffff1a;background:#12071a;border-radius:12px;padding:6px;cursor:pointer;text-align:center}.jokerTargetCard.sel{border-color:#ffd45f;box-shadow:0 0 0 2px #ffd45f33}.jokerTargetCard img{width:100%;height:145px;object-fit:contain}.jokerTargetCard span{display:block;font-size:9px;font-weight:800;color:#fff;margin-top:3px}</style>
+</style>
 </head>
 <body>
 <div class="wrap">
-<header class="top"><button class="btn" onclick="history.back()">‹ VOLTAR</button><div class="brand">ADAM <b>GAMES</b> 🎃</div><button class="btn" id="rewardBtn">🎁 RECOMPENSAS</button></header>
+<header class="top">
+  <button class="btn" onclick="history.back()">‹ VOLTAR</button>
+  <div class="brand">ADAM <b>GAMES</b> 🎃</div>
+  <div style="display:flex;gap:6px">
+    <button class="btn" id="goElementsBtn" type="button">⚛️ ESTANTE</button>
+    <button class="btn" id="rewardBtn">🎁 RECOMPENSAS</button>
+  </div>
+</header>
 <section class="hero">
 <div><div class="kicker">COLEÇÃO OFICIAL • HALLOWEEN 2026</div><h1>MINHAS<br>FIGURINHAS</h1><p>Complete os álbuns, troque cartas e abra seus pacotes.</p><div class="stats"><div class="stat"><b id="unique">0/25</b><small>diferentes</small></div><div class="stat"><b id="total">0</b><small>cartas totais</small></div><div class="stat"><b id="complete">0/4</b><small>álbuns completos</small></div><div class="stat"><b id="jokerTotal">0</b><small>coringas</small></div></div></div>
-<div class="packInventory" id="packInventory">
-    <div class="packInventoryIcon">🎴</div>
-    <div class="packInventoryText">
-      <strong>Você tem <span id="packCount">0</span> pacotes de figurinhas</strong>
-      <small>Abra um pacote para receber suas cartas.</small>
-    </div>
-    <button class="btn gold" id="inventoryOpenBtn">ABRIR • 1 PACOTE</button>
-  </div>
-  <div class="packHero"><img id="heroPack" src="D3E4CC38-BA77-4BF8-877B-55990528549D.png" alt="Pacote fechado"><div class="ready" id="packHeroText">🎁 Pacote de Halloween</div><button class="btn gold" id="heroOpenBtn">ABRIR PACOTE</button></div>
+<div class="packHero"><img id="heroPack" src="assets/pacotes/pacote-fechado.jpeg" alt="Pacote fechado"><div class="ready" id="packHeroText">🎁 Pacote de Halloween</div><button class="btn gold" id="heroOpenBtn">ABRIR PACOTE</button></div>
 </section>
-<div class="tabs"><button class="btn tab active" data-tab="collection">🎴 CARTAS</button><button class="btn tab" data-tab="albums">📚 ÁLBUNS</button><button class="btn tab" data-tab="jokers">🃏 CORINGAS</button><button class="btn tab" data-tab="trades">🔄 TROCAS</button><button class="btn tab" data-tab="pack">🎁 PACOTE</button></div>
+<div class="tabs"><button class="btn tab active" data-tab="collection">🎴 CARTAS</button><button class="btn tab" data-tab="albums">📚 ÁLBUNS</button><button class="btn tab" data-tab="jokers">🃏 CORINGAS</button><button class="btn tab" data-tab="trades">🔄 TROCAS</button><button class="btn tab" data-tab="pack">🎁 PACOTE</button><button class="btn tab" id="cardsNotificationBtn" type="button">🔔 NOTIFICAÇÕES <span id="cardsNotificationCount"></span></button></div>
 
 <section class="section" id="collectionSection"><div class="sectionHead"><div><h2>🦇 Minha coleção</h2><p>As 25 figurinhas do Halloween 2026 estão cadastradas.</p></div><span id="vipBadge"></span></div><div class="filterbar"><button class="btn sel" data-filter="all">TODAS</button><button class="btn" data-filter="common">COMUNS</button><button class="btn" data-filter="epica">ÉPICAS</button><button class="btn" data-filter="legendaria">LENDÁRIAS</button><button class="btn" data-filter="missing">FALTANTES</button><button class="btn" data-filter="duplicates">REPETIDAS</button></div><div class="grid" id="cardsGrid"></div></section>
 
@@ -45,11 +43,13 @@
 
 <section class="section hidden" id="jokersSection"><div class="sectionHead"><div><h2>🃏 Meus Coringas</h2><p>Use um Coringa para completar uma figurinha que falta. Coringas não podem ser trocados ou doados entre jogadores.</p></div></div><div class="jokerGrid" id="jokerGrid"></div><div class="notice">🟡 <b>Coringa Universal:</b> ficará disponível somente para venda na Loja e não participa dos sorteios de pacotes.</div></section>
 
-<section class="section hidden" id="tradesSection"><div class="sectionHead"><div><h2>🔄 Trocar cartas</h2><p>Escolha uma repetida sua e diga qual carta você quer receber. Coringas nunca entram em trocas.</p></div><div id="tradeLimit" class="timer"></div></div><div class="tradeLayout"><div class="box"><h3>📤 MINHA OFERTA</h3><div class="tradeHint">Você entrega <b>1 carta repetida</b> e recebe 1 carta que escolher.</div><div class="cardSelectGrid" id="giveGrid"></div><p id="giveInfo">Selecione uma carta que você possui em duplicata.</p><select id="wantSelect" style="width:100%;margin-top:8px;padding:10px;border-radius:10px;background:#100619;color:#fff;border:1px solid #ffffff1a"><option value="">Quero receber...</option></select><button class="btn primary" id="createTradeBtn" style="width:100%;margin-top:9px">CRIAR OFERTA</button></div><div class="box"><h3>📥 OFERTAS DE OUTROS JOGADORES</h3><div id="offers"><div class="empty">Carregando ofertas...</div></div></div></div><div class="box" style="margin-top:12px"><h3>🧾 HISTÓRICO DE TROCAS</h3><div id="tradeHistory"><div class="empty">Nenhuma troca realizada.</div></div></div></section>
+<section class="section hidden" id="tradesSection"><div class="sectionHead"><div><h2>🔄 Trocar cartas</h2><p>Você pode trocar somente figurinhas repetidas. Coringas não entram em trocas.</p></div><div id="tradeLimit" class="timer"></div></div><div class="tradeLayout"><div class="box"><h3>MINHAS CARTAS — escolha uma repetida</h3><div class="cardSelectGrid" id="giveGrid"></div><p id="giveInfo">Selecione uma carta que você possui em duplicata.</p><select id="wantSelect" style="width:100%;margin-top:8px;padding:10px;border-radius:10px;background:#100619;color:#fff;border:1px solid #ffffff1a"><option value="">Quero receber...</option></select><button class="btn primary" id="createTradeBtn" style="width:100%;margin-top:9px">CRIAR OFERTA</button></div><div class="box"><h3>OFERTAS DE OUTROS JOGADORES</h3><div id="offers"><div class="empty">Carregando ofertas...</div></div></div></div></section>
 
-<section class="section hidden" id="packSection"><div class="sectionHead"><div><h2>🎁 Abrir pacote</h2><p>Normal: 1–3 cartas a cada 72h • VIP: 4–6 cartas a cada 50h.</p></div></div><div class="packStage"><div class="packVisual" id="packVisual"><img id="packStageImg" src="D3E4CC38-BA77-4BF8-877B-55990528549D.png" alt="Pacote"></div><div class="packStatus" id="packStatus">Verificando seu próximo pacote...</div><button class="btn gold" id="claimBtn" style="margin-top:12px">🎁 PEGAR PACOTE</button><div id="packResults" class="resultCards"></div><div id="packSummary" class="summary hidden"></div></div></section>
+<section class="section hidden" id="packSection"><div class="sectionHead"><div><h2>🎁 Abrir pacote</h2><p>Normal: 1–3 cartas a cada 72h • VIP: 4–6 cartas a cada 50h.</p></div></div><div class="packStage"><div class="packVisual" id="packVisual"><img id="packStageImg" src="assets/pacotes/pacote-fechado.jpeg" alt="Pacote"></div><div class="packStatus" id="packStatus">Verificando seu próximo pacote...</div><button class="btn gold" id="claimBtn" style="margin-top:12px">🎁 PEGAR PACOTE</button><div id="packResults" class="resultCards"></div><div id="packSummary" class="summary hidden"></div></div></section>
 </div>
-<div class="modal" id="modal"><div class="modalBox"><button class="close" id="closeModal">×</button><div id="modalContent"></div></div></div><div class="toast" id="toast"></div>
+<div class="modal" id="modal"><div class="modalBox"><button class="close" id="closeModal">×</button><div id="modalContent"></div></div></div>
+<div class="modal" id="cardsNotifModal"><div class="modalBox"><button class="close" id="cardsNotifClose">×</button><h2>🔔 Notificações</h2><div id="cardsNotifList"><div class="empty">Carregando...</div></div></div></div>
+<div class="toast" id="toast"></div>
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 import {getAuth,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
@@ -65,299 +65,81 @@ const cards=[
 ];
 const albums=[{id:1,name:"NOITE ASSOMBRADA",ids:[1,2,3,4,5],icon:"🏰"},{id:2,name:"BRUXARIA & MAGIA",ids:[6,7,8,9,10],icon:"🔮"},{id:3,name:"CRIATURAS DAS TREVAS",ids:[11,12,13,14,15],icon:"🦇"},{id:4,name:"REINO DAS ABÓBORAS",ids:[16,17,18,19,20],icon:"🎃"}];
 const jokers=[{id:"comum",name:"Coringa Comum",file:"01_Coringa_Comum.png",rarity:"COMUM"},{id:"epico",name:"Coringa Épico",file:"02_Coringa_Epico.png",rarity:"EPICO"},{id:"lendario",name:"Coringa Lendário",file:"03_Coringa_Lendario.png",rarity:"LENDARIO"},{id:"universal",name:"Coringa Universal",file:"04_Coringa_Universal.png",rarity:"UNIVERSAL"}];
-const ASSET_DATA={};
-const asset=file=>{
-  if(!file) return "";
-  // TODAS as imagens estão na mesma pasta do figurinhas.html.
-  return new URL("./"+encodeURIComponent(String(file)), document.baseURI).href;
-};
-const base="./"; const jokerBase="./";
-let owned={},jokerOwned={},userDocId=null,currentUser=null,isVip=false,nextPack=0,packageCount=0,hasPackageInventory=false,currentFilter="all",selectedGive=null,tradeUsed=0,tradeDay="",collectionLoaded=false,figHistory=[],config={coringasPacotesAtivos:true,probabilidadesCoringas:{comum:70,epico:20,lendario:10},probabilidadeLendariasPacote:0.5};
+const base="assets/cartas-halloween/",jokerBase="assets/coringas/";
+let owned={},jokerOwned={},userDocId=null,currentUser=null,isVip=false,nextPack=0,currentFilter="all",selectedGive=null,tradeUsed=0,tradeDay="",config={coringasPacotesAtivos:true,probabilidadesCoringas:{comum:70,epico:20,lendario:10}};
 const todayKey=()=>new Date().toISOString().slice(0,10);
 const $=id=>document.getElementById(id), pad=n=>String(n).padStart(2,"0"), esc=s=>String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));
 function toast(t){$("toast").textContent=t;$("toast").classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>$("toast").classList.remove("show"),2600)}
 function card(id){return cards.find(c=>c.id===id)}
 function qty(id){return Number(owned[id]||0)}
-function saveCollectionCache(){
-  try{localStorage.setItem("adamGamesHalloweenCollection",JSON.stringify({owned,jokerOwned,userDocId,nextPack,packageCount,hasPackageInventory,tradeUsed,tradeDay,ts:Date.now()}));}catch(e){console.warn("Cache local:",e)}
-}
-function loadCollectionCache(){
-  try{
-    const raw=localStorage.getItem("adamGamesHalloweenCollection");
-    if(!raw)return false;
-    const c=JSON.parse(raw);
-    if(c&&c.owned&&typeof c.owned==="object"){
-      owned={...c.owned}; jokerOwned={...(c.jokerOwned||{})};
-      if(c.userDocId)userDocId=c.userDocId;
-      if(c.nextPack)nextPack=Number(c.nextPack||0);
-      if(typeof c.packageCount==="number"){packageCount=Math.max(0,Number(c.packageCount));hasPackageInventory=true;}
-      if(c.tradeDay)tradeDay=c.tradeDay;
-      tradeUsed=Number(c.tradeUsed||0);
-      return Object.keys(owned).length>0 || Object.keys(jokerOwned).length>0;
-    }
-  }catch(e){console.warn("Cache local inválido:",e)}
-  return false;
-}
-function cardHTML(c){const q=qty(c.id), cls=c.rarity.toLowerCase();return `<div class="sticker ${cls} ${q?"":"missing"}" data-id="${c.id}">${q?`<img src="${asset(c.file)}" alt="${esc(c.name)}">`:`<img src="./0D19CE5F-CA2E-40A3-93A2-13CF8199DEE4.png" alt="Carta ${pad(c.id)} faltante"><div class="shade"></div><div class="missingText">AINDA NÃO ENCONTRADA</div>`}<span class="num">${pad(c.id)}</span><span class="rarity">${c.rarity}</span><span class="qty">x${q}</span></div>`}
-function renderCollection(){
- if(!collectionLoaded){$("cardsGrid").innerHTML=`<div class="loadingCollection" style="grid-column:1/-1">🎃 Carregando sua coleção salva...</div>`;return}
- let list=cards.filter(c=>{const q=qty(c.id);if(currentFilter==="common")return c.rarity==="COMUM";if(currentFilter==="epica")return c.rarity==="EPICA";if(currentFilter==="legendaria")return c.rarity==="LENDARIA";if(currentFilter==="missing")return q===0;if(currentFilter==="duplicates")return q>1;return true});
- $("cardsGrid").innerHTML=list.map(cardHTML).join("");
- document.querySelectorAll(".sticker[data-id]").forEach(x=>x.onclick=()=>showCard(+x.dataset.id));
-}
-function renderAlbums(){
- const html=albums.map(a=>{
-   const n=a.ids.filter(qty).length;
-   return `<article class="albumCover" data-album="${a.id}" role="button" tabindex="0"><div class="orb">${a.icon}</div><h3>ÁLBUM ${a.id}<br>${a.name}</h3><small>${n}/5 cartas • 6º espaço dourado bônus</small><div class="coverProgress"><i style="width:${n*20}%"></i></div></article>`;
- }).join("");
- const legN=cards.filter(c=>c.id>=21&&qty(c.id)>0).length;
- const leg=`<article class="albumCover legendaryCover" data-legendary="1" role="button" tabindex="0"><div class="orb">👑</div><h3>COLEÇÃO LENDÁRIA<br>DOURADA</h3><small>${legN}/5 cartas lendárias</small><div class="coverProgress"><i style="width:${legN*20}%"></i></div></article>`;
- $("albumCovers").innerHTML=html+leg+`<button class="albumLegendaryButton" type="button" id="openLegendaryBtn">👑 ABRIR COLEÇÃO LENDÁRIA DOURADA</button>`;
- document.querySelectorAll("[data-album]").forEach(x=>{x.onclick=()=>showAlbum(+x.dataset.album);x.onkeydown=e=>{if(e.key==="Enter"||e.key===" ")showAlbum(+x.dataset.album)}});
- document.querySelectorAll("[data-legendary]").forEach(x=>{x.onclick=showLegendary;x.onkeydown=e=>{if(e.key==="Enter"||e.key===" ")showLegendary()}});
- $("openLegendaryBtn").onclick=showLegendary;
-}
-function renderJokers(){ $("jokerGrid").innerHTML=jokers.map(j=>`<div class="joker"><img src="${asset(j.file)}" alt="${esc(j.name)}"><h3>${j.name}</h3><div class="jq">x${Number(jokerOwned[j.id]||0)}</div><button class="btn primary" style="margin-top:7px;width:100%" ${Number(jokerOwned[j.id]||0)?"":"disabled"} data-usejoker="${j.id}">USAR CORINGA</button></div>`).join("");document.querySelectorAll("[data-usejoker]").forEach(b=>b.onclick=()=>useJoker(b.dataset.usejoker))}
-function render(){const unique=cards.filter(c=>qty(c.id)>0).length,total=cards.reduce((s,c)=>s+qty(c.id),0),complete=albums.filter(a=>a.ids.every(id=>qty(id)>0)).length,jtot=Object.values(jokerOwned).reduce((s,v)=>s+Number(v||0),0);$("unique").textContent=unique+"/25";$("total").textContent=total;$("complete").textContent=complete+"/4";$("jokerTotal").textContent=jtot;$("vipBadge").innerHTML=isVip?`<span class="btn" style="padding:6px 9px;color:#ffd75f">👑 VIP • 4–6</span>`:`<span class="btn" style="padding:6px 9px">NORMAL • 1–3</span>`;renderCollection();renderAlbums();renderJokers();renderTradeGive();renderTradeHistory();updatePackUI()}
-function showCard(id){const c=card(id),q=qty(id);$("modalContent").innerHTML=`<h2>${esc(c.name)}</h2><img class="detailImg" src="${q?asset(c.file):"./0D19CE5F-CA2E-40A3-93A2-13CF8199DEE4.png"}"><p style="text-align:center;color:#cbb8d6">Carta ${pad(id)} • ${c.rarity}<br><b style="color:#ffd76a">Quantidade: x${q}</b></p>`;$("modal").classList.add("open")}
-function showAlbum(id){
- const a=albums.find(x=>x.id===id),done=a.ids.filter(i=>qty(i)>0).length,complete=a.ids.every(i=>qty(i)>0);
- const goldId={1:21,2:22,3:23,4:24}[id];
- const gold=card(goldId),goldQty=qty(goldId),goldFound=goldQty>0;
- const normalSlots=a.ids.map(i=>{const c=card(i),q=qty(i);return `<button class=\"albumSlot ${q?'found':'missing'}\" data-slot-card=\"${i}\">${q?`<img src=\"${base+c.file}\" alt=\"${esc(c.name)}\">`:`<img src=\"0D19CE5F-CA2E-40A3-93A2-13CF8199DEE4.png\" alt=\"Carta faltante\">`}<span class=\"slotNum\">${pad(i)}</span><span class=\"slotName\">${q?esc(c.name):'AINDA NÃO ENCONTRADA'}</span><span class=\"slotQty\">${q?'x'+q:'?'}</span></button>`}).join('');
- const goldSlot=goldFound
-  ? `<button class=\"albumSlot gold found\" data-slot-card=\"${goldId}\"><img src=\"${base+gold.file}\" alt=\"${esc(gold.name)}\"><span class=\"slotNum\">★</span><span class=\"slotQty\">x${goldQty}</span><span class=\"slotName\">${esc(gold.name)}<br><b style=\"color:#ffd76a\">BÔNUS DOURADO</b></span></button>`
-  : `<div class=\"albumSlot gold missing\"><div class=\"goldLock\"><div class=\"coin\">★</div><strong>CARTA DOURADA</strong><small>Encontre para liberar o bônus</small></div><span class=\"slotNum\">★</span><span class=\"slotName\" style=\"color:#ffd76a\">BÔNUS • SÓ SE ENCONTRAR</span></div>`;
- $("modalContent").innerHTML=`<div class=\"albumDetail\"><div class=\"albumDetailTop\"><div><span class=\"kicker\">HALLOWEEN 2026</span><h2>ÁLBUM ${id}</h2><h3>${esc(a.name)}</h3><p>${done}/5 cartas encontradas ${complete?'• ÁLBUM COMPLETO 🎉':''}</p></div><div class=\"albumBigIcon\">${a.icon}</div></div><div class=\"albumProgressBig\"><i style=\"width:${done*20}%\"></i></div><div class=\"albumSlots\">${normalSlots}${goldSlot}</div>${complete?`<div class=\"albumReward\">🏆 <b>ÁLBUM COMPLETO!</b><small>Você completou ${esc(a.name)}. A carta dourada é um bônus separado e só conta se for encontrada.</small></div>`:`<div class=\"albumTip\">🕯️ Encontre as 5 cartas do álbum. A 6ª posição é uma <b style=\"color:#ffd76a\">CARTA DOURADA BÔNUS</b> e só aparece quando você realmente encontrá-la.</div>`}</div>`;
- $("modal").classList.add("open");
- document.querySelectorAll('[data-slot-card]').forEach(b=>b.onclick=()=>showCard(+b.dataset.slotCard));
-}
-function showLegendary(){
- const list=cards.filter(c=>c.id>=21),found=list.filter(c=>qty(c.id)>0).length;
- $("modalContent").innerHTML=`<div class="albumDetailTop"><div><span class="kicker">HALLOWEEN 2026</span><h2>COLEÇÃO LENDÁRIA</h2><h3>5 CARTAS DOURADAS</h3><p>${found}/5 cartas encontradas</p></div><div class="albumBigIcon">👑</div></div><div class="albumProgressBig"><i style="width:${found*20}%"></i></div><div class="grid">${list.map(cardHTML).join("")}</div><div class="albumTip">👑 As cartas douradas são bônus especiais. Elas não substituem as 5 cartas normais dos álbuns.</div>`;
- $("modal").classList.add("open");
- document.querySelectorAll("#modalContent .sticker[data-id]").forEach(x=>x.onclick=()=>showCard(+x.dataset.id));
-}
+function cardHTML(c){const q=qty(c.id), cls=c.rarity.toLowerCase();return `<div class="sticker ${cls} ${q?"":"missing"}" data-id="${c.id}">${q?`<img src="${base+c.file}" alt="${esc(c.name)}">`:`<img src="assets/album/carta-faltante.jpeg" alt="Carta ${pad(c.id)} faltante"><div class="shade"></div><div class="missingText">AINDA NÃO ENCONTRADA</div>`}<span class="num">${pad(c.id)}</span><span class="rarity">${c.rarity}</span><span class="qty">x${q}</span></div>`}
+function renderCollection(){let list=cards.filter(c=>{const q=qty(c.id);if(currentFilter==="common")return c.rarity==="COMUM";if(currentFilter==="epica")return c.rarity==="EPICA";if(currentFilter==="legendaria")return c.rarity==="LENDARIA";if(currentFilter==="missing")return q===0; if(currentFilter==="duplicates")return q>1;return true});$("cardsGrid").innerHTML=list.map(cardHTML).join("");document.querySelectorAll(".sticker[data-id]").forEach(x=>x.onclick=()=>showCard(+x.dataset.id));}
+function renderAlbums(){ $("albumCovers").innerHTML=albums.map(a=>{const n=a.ids.filter(qty).length;return `<article class="albumCover" data-album="${a.id}"><div class="orb">${a.icon}</div><h3>ÁLBUM ${a.id}<br>${a.name}</h3><small>${n}/5 cartas</small><div class="coverProgress"><i style="width:${n*20}%"></i></div></article>`}).join("")+`<article class="albumCover" data-legendary="1"><div class="orb">👑</div><h3>COLEÇÃO LENDÁRIA</h3><small>${cards.filter(c=>c.id>=21&&qty(c.id)>0).length}/5 cartas</small><div class="coverProgress"><i style="width:${cards.filter(c=>c.id>=21&&qty(c.id)>0).length*20}%"></i></div></article>`;document.querySelectorAll("[data-album]").forEach(x=>x.onclick=()=>showAlbum(+x.dataset.album));document.querySelector("[data-legendary]")?.addEventListener("click",showLegendary)}
+function renderJokers(){ $("jokerGrid").innerHTML=jokers.map(j=>`<div class="joker"><img src="${jokerBase+j.file}" alt="${esc(j.name)}"><h3>${j.name}</h3><div class="jq">x${Number(jokerOwned[j.id]||0)}</div><button class="btn primary" style="margin-top:7px;width:100%" ${Number(jokerOwned[j.id]||0)?"":"disabled"} data-usejoker="${j.id}">USAR CORINGA</button></div>`).join("");document.querySelectorAll("[data-usejoker]").forEach(b=>b.onclick=()=>useJoker(b.dataset.usejoker))}
+function render(){const unique=cards.filter(c=>qty(c.id)>0).length,total=cards.reduce((s,c)=>s+qty(c.id),0),complete=albums.filter(a=>a.ids.every(id=>qty(id)>0)).length,jtot=Object.values(jokerOwned).reduce((s,v)=>s+Number(v||0),0);$("unique").textContent=unique+"/25";$("total").textContent=total;$("complete").textContent=complete+"/4";$("jokerTotal").textContent=jtot;$("vipBadge").innerHTML=isVip?`<span class="btn" style="padding:6px 9px;color:#ffd75f">👑 VIP • 4–6</span>`:`<span class="btn" style="padding:6px 9px">NORMAL • 1–3</span>`;renderCollection();renderAlbums();renderJokers();renderTradeGive();updatePackUI()}
+function showCard(id){const c=card(id),q=qty(id);$("modalContent").innerHTML=`<h2>${esc(c.name)}</h2><img class="detailImg" src="${q?base+c.file:"assets/album/carta-faltante.jpeg"}"><p style="text-align:center;color:#cbb8d6">Carta ${pad(id)} • ${c.rarity}<br><b style="color:#ffd76a">Quantidade: x${q}</b></p>`;$("modal").classList.add("open")}
+function showAlbum(id){const a=albums.find(x=>x.id===id);const done=a.ids.filter(i=>qty(i)>0).length;const complete=a.ids.every(i=>qty(i)>0);$("modalContent").innerHTML=`<div class="albumDetail"><div class="albumDetailTop"><div><span class="kicker">HALLOWEEN 2026</span><h2>ÁLBUM ${id}</h2><h3>${esc(a.name)}</h3><p>${done}/5 cartas encontradas ${complete?'• ÁLBUM COMPLETO 🎉':''}</p></div><div class="albumBigIcon">${a.icon}</div></div><div class="albumProgressBig"><i style="width:${done*20}%"></i></div><div class="albumSlots">${a.ids.map((i,n)=>{const c=card(i),q=qty(i);return `<button class="albumSlot ${q?'found':'missing'}" data-slot-card="${i}">${q?`<img src="${base+c.file}" alt="${esc(c.name)}">`:`<img src="assets/album/carta-faltante.jpeg" alt="Carta faltante">`}<span class="slotNum">${pad(i)}</span><span class="slotName">${q?esc(c.name):'AINDA NÃO ENCONTRADA'}</span><span class="slotQty">${q?'x'+q:'?'}</span></button>`}).join('')}</div>${complete?`<div class="albumReward">🏆 <b>ÁLBUM COMPLETO!</b><small>Você completou ${esc(a.name)}.</small></div>`:`<div class="albumTip">🕯️ Encontre as cartas que faltam para completar este álbum.</div>`}</div>`;$("modal").classList.add("open");document.querySelectorAll('[data-slot-card]').forEach(b=>b.onclick=()=>showCard(+b.dataset.slotCard))}
+function showLegendary(){const list=cards.filter(c=>c.id>=21);$("modalContent").innerHTML=`<h2>👑 COLEÇÃO LENDÁRIA</h2><p>Cartas 21–25 • ${list.filter(c=>qty(c.id)>0).length}/5</p><div class="grid">${list.map(cardHTML).join("")}</div>`;$("modal").classList.add("open")}
 $("closeModal").onclick=()=>$("modal").classList.remove("open");$("modal").onclick=e=>{if(e.target===$("modal"))$("modal").classList.remove("open")};
 function tab(name){const map={collection:"collectionSection",albums:"albumsSection",jokers:"jokersSection",trades:"tradesSection",pack:"packSection"};Object.entries(map).forEach(([k,id])=>$(id).classList.toggle("hidden",k!==name));document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.tab===name));if(name==="trades")loadOffers()}
 document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>tab(b.dataset.tab));$("rewardBtn").onclick=()=>tab("albums");
 document.querySelectorAll("[data-filter]").forEach(b=>b.onclick=()=>{currentFilter=b.dataset.filter;document.querySelectorAll("[data-filter]").forEach(x=>x.classList.toggle("sel",x===b));renderCollection()});
-async function findUserDoc(user){
-  // 1) Reutiliza o mesmo documento confirmado anteriormente neste aparelho.
+async function findUserDoc(user){let r=await getDocs(query(collection(db,"admins"),where("uid","==",user.uid)));if(r.empty&&user.email)r=await getDocs(query(collection(db,"admins"),where("email","==",user.email)));return r.empty?null:r.docs[0]}
+async function loadUser(user){currentUser=user;try{const snap=await findUserDoc(user);if(!snap){render();return}userDocId=snap.id;const d=snap.data();isVip=d.vip===true;owned=d.cartasHalloween||{};jokerOwned=d.coringasHalloween||{};nextPack=Number(d.proximaCartaHalloweenEmMs||0);tradeDay=d.cartasHalloweenTrocasData||todayKey();tradeUsed=tradeDay===todayKey()?Number(d.cartasHalloweenTrocasHoje||0):0;const c=await getDoc(doc(db,"config","halloween2026"));if(c.exists())config={...config,...c.data()};render();await cardsLoadNotifications()}catch(e){console.error(e);toast("Não foi possível carregar sua coleção.")}}
+
+async function cardsLoadNotifications(){
+  const list=$("cardsNotifList"), badge=$("cardsNotificationCount");
+  if(!list)return;
+  list.innerHTML='<div class="empty">🔄 Carregando notificações...</div>';
   try{
-    const cachedId=localStorage.getItem("adamGamesCadastroDocId");
-    if(cachedId){
-      const cached=await getDoc(doc(db,"admins",cachedId));
-      if(cached.exists()){
-        const d=cached.data()||{};
-        if(d.uid===user.uid || (user.email && String(d.email||"").toLowerCase()===String(user.email).toLowerCase())) return cached;
-      }
+    const snap=await getDocs(query(collection(db,"notificacoes"),where("uid","==",currentUser.uid)));
+    const arr=snap.docs.map(d=>({id:d.id,...d.data()}))
+      .sort((a,b)=>Number(b.criadaEm?.seconds||0)-Number(a.criadaEm?.seconds||0));
+    const unread=arr.filter(x=>x.lida!==true).length;
+    if(badge)badge.textContent=unread?` ${unread}`:"";
+    if(!arr.length){
+      list.innerHTML='<div class="empty">Nenhuma notificação.</div>';
+      return;
     }
-  }catch(e){console.warn("Documento salvo localmente não pôde ser lido:",e)}
-
-  // 2) Padrão dos demais jogos Adam Games: localizar por UID.
-  try{
-    const r=await getDocs(query(collection(db,"admins"),where("uid","==",user.uid),limit(1)));
-    if(!r.empty)return r.docs[0];
-  }catch(e){console.warn("Busca por UID falhou:",e)}
-
-  // 3) Compatibilidade por e-mail.
-  try{
-    if(user.email){
-      const r=await getDocs(query(collection(db,"admins"),where("email","==",user.email),limit(1)));
-      if(!r.empty)return r.docs[0];
-      const r2=await getDocs(query(collection(db,"admins"),where("email","==",user.email.toLowerCase()),limit(1)));
-      if(!r2.empty)return r2.docs[0];
-    }
-  }catch(e){console.warn("Busca por e-mail falhou:",e)}
-
-  // 4) Último fallback: admins/{uid}.
-  try{
-    const direct=await getDoc(doc(db,"admins",user.uid));
-    if(direct.exists())return direct;
-  }catch(e){console.warn("Leitura direta por UID falhou:",e)}
-  return null;
-}
-async function loadUser(user){
- currentUser=user;
- collectionLoaded=false;
- loadCollectionCache();
- render();
- try{
-   const snap=await findUserDoc(user);
-   if(!snap){
-     console.warn("Cadastro não encontrado para UID:",user.uid);
-     collectionLoaded=true; if(!Object.keys(owned).length) { owned={}; jokerOwned={}; } render();
-     toast("Cadastro do jogador não encontrado.");
-     return;
-   }
-   userDocId=snap.id;
-   try{localStorage.setItem("adamGamesCadastroDocId",userDocId)}catch(_){}
-   const d=snap.data()||{};
-   isVip=d.vip===true;
-   owned={...(d.cartasHalloween||{})};
-   jokerOwned={...(d.coringasHalloween||{})};
-   nextPack=Number(d.proximaCartaHalloweenEmMs||0);
-   tradeDay=d.cartasHalloweenTrocasData||todayKey();
-   tradeUsed=tradeDay===todayKey()?Number(d.cartasHalloweenTrocasHoje||0):0;
-   saveCollectionCache();
-   // A configuração é opcional.
-   try{
-     const c=await getDoc(doc(db,"config","halloween2026"));
-     if(c.exists())config={...config,...c.data()};
-   }catch(configError){console.warn("Configuração Halloween não pôde ser lida; usando padrão:",configError)}
-   collectionLoaded=true;
-   render();
- }catch(e){
-   console.error("ERRO AO CARREGAR COLEÇÃO:",e);
-   collectionLoaded=true;
-   render();
-   const code=e?.code||"";
-   toast(code==="permission-denied"?"Firebase bloqueou a leitura da coleção.":"Não foi possível carregar sua coleção.");
- }
-}
-function availablePacks(){
-  const timedReady=Date.now()>=nextPack;
-  return Math.max(0,Number(packageCount||0)) + (timedReady ? 1 : 0);
-}
-function updatePackUI(){
-  const timedReady=Date.now()>=nextPack;
-  const wait=Math.max(0,nextPack-Date.now());
-  const available=availablePacks();
-  if($("packCount"))$("packCount").textContent=available;
-  const canOpen=!!currentUser&&available>0;
-  $("claimBtn").disabled=!canOpen;
-  $("heroOpenBtn").disabled=!canOpen;
-  if($("inventoryOpenBtn"))$("inventoryOpenBtn").disabled=!canOpen;
-  if(!currentUser){
-    $("packStatus").textContent="Entre na sua conta para abrir seus pacotes.";
-  }else if(available>0){
-    $("packStatus").innerHTML=`<b style="color:#5be397">✨ Você tem ${available} pacote(s) disponível(is)!</b>`;
-  }else{
-    $("packStatus").innerHTML=`Próximo pacote em <span class="timer">${formatMs(wait)}</span>`;
+    list.innerHTML="";
+    arr.forEach(x=>{
+      const el=document.createElement("div");
+      el.style.cssText="padding:12px;border:1px solid #ffffff14;border-radius:14px;background:#0d0615;margin-bottom:8px";
+      const dt=x.criadaEm?.toDate?x.criadaEm.toDate():null;
+      el.innerHTML=`<b>${esc(x.titulo||"Notificação")}</b><div style="color:#cbb8d6;margin-top:5px">${esc(x.mensagem||"")}</div><small style="display:block;color:#9e8ba8;margin-top:7px">${dt?dt.toLocaleString("pt-BR"):"Agora"}${x.lida===true?"":" • 🔴 NOVA"}</small>`;
+      el.onclick=async()=>{
+        if(x.lida!==true){
+          try{await updateDoc(doc(db,"notificacoes",x.id),{lida:true})}catch(e){console.warn("Não foi possível marcar notificação:",e)}
+          x.lida=true;
+          cardsLoadNotifications();
+        }
+      };
+      list.appendChild(el);
+    });
+  }catch(e){
+    console.error("NOTIFICAÇÕES CARTAS:",e);
+    list.innerHTML='<div class="empty">❌ Não foi possível carregar as notificações.</div>';
   }
-  $("packHeroText").textContent=available>0?"✨ PACOTES DISPONÍVEIS":"🎁 Pacote de Halloween";
 }
+
+function updatePackUI(){const ready=Date.now()>=nextPack;const wait=Math.max(0,nextPack-Date.now());$("claimBtn").disabled=!currentUser||!ready;$("heroOpenBtn").disabled=!currentUser||!ready;$("packStatus").innerHTML=currentUser?(ready?`<b style="color:#5be397">✨ Seu pacote está disponível!</b>`:`Próximo pacote em <span class="timer">${formatMs(wait)}</span>`):"Entre na sua conta para abrir seu pacote.";$("packHeroText").textContent=ready?"✨ PACOTE DISPONÍVEL":"🎁 Pacote de Halloween"}
 function formatMs(ms){let s=Math.ceil(ms/1000),h=Math.floor(s/3600);s%=3600;let m=Math.floor(s/60);s%=60;return `${String(h).padStart(2,"0")}h ${String(m).padStart(2,"0")}m ${String(s).padStart(2,"0")}s`}
 setInterval(updatePackUI,1000);
-async function claimPack(){
-  if(!currentUser||!userDocId)return toast("Faça login para abrir seus pacotes.");
-  if(availablePacks()<1)return toast("Você não tem pacotes disponíveis.");
-
-  const n=isVip?(4+Math.floor(Math.random()*3)):(1+Math.floor(Math.random()*3));
-  // LENDÁRIAS: extremamente raras. Padrão: 0,5% por carta sorteada.
-  const legendaryChance=Math.max(0,Math.min(100,Number(config.probabilidadeLendariasPacote ?? 0.5)));
-  const normalCards=cards.filter(c=>c.id<21);
-  const legendaryCards=cards.filter(c=>c.id>=21);
-  let drawn=[];
-  for(let i=0;i<n;i++){
-    if(legendaryCards.length && Math.random()*100<legendaryChance){
-      drawn.push(legendaryCards[Math.floor(Math.random()*legendaryCards.length)].id);
-    }else{
-      drawn.push(normalCards[Math.floor(Math.random()*normalCards.length)].id);
-    }
-  }
-  let joker=null;
-  if(config.coringasPacotesAtivos){
-    const p=config.probabilidadesCoringas||{comum:70,epico:20,lendario:10};
-    const r=Math.random()*100;
-    if(r<p.comum)joker="comum";else if(r<p.comum+p.epico)joker="epico";else if(r<p.comum+p.epico+p.lendario)joker="lendario";
-  }
-
-  try{
-    const ref=doc(db,"admins",userDocId);
-    let savedNext=nextPack;
-    let savedPackageCount=packageCount;
-
-    await runTransaction(db,async tx=>{
-      const snap=await tx.get(ref);
-      if(!snap.exists())throw new Error("USER_NOT_FOUND");
-      const d=snap.data()||{};
-      const current={...(d.cartasHalloween||{})};
-      drawn.forEach(id=>current[id]=(Number(current[id])||0)+1);
-
-      const jo={...(d.coringasHalloween||{})};
-      if(joker)jo[joker]=(Number(jo[joker])||0)+1;
-
-      const inventoryExists=typeof d.pacotesHalloween==="number";
-      let inv=inventoryExists?Math.max(0,Number(d.pacotesHalloween)):0;
-      const timedReady=Date.now()>=Number(d.proximaCartaHalloweenEmMs||0);
-      let next=Number(d.proximaCartaHalloweenEmMs||0);
-
-      // Primeiro usa um pacote armazenado. Se não houver, usa o pacote liberado pelo temporizador.
-      if(inv>0){
-        inv-=1;
-      }else if(timedReady){
-        next=Date.now()+(isVip?50*3600*1000:72*3600*1000);
-      }else{
-        throw new Error("NO_PACK");
-      }
-
-      const history=[...(d.cartasHalloweenHistorico||[])];
-      history.push({
-        tipo:"PACOTE",
-        quantidade:drawn.length,
-        cartas:drawn,
-        coringa:joker||null,
-        pacoteConsumido:1,
-        pacotesRestantes:inv,
-        data:Date.now()
-      });
-
-      tx.update(ref,{
-        cartasHalloween:current,
-        coringasHalloween:jo,
-        pacotesHalloween:inv,
-        proximaCartaHalloweenEmMs:next,
-        ultimaCartaHalloweenEm:serverTimestamp(),
-        cartasHalloweenHistorico:history
-      });
-
-      savedNext=next;
-      savedPackageCount=inv;
-    });
-
-    const confirmed=await getDoc(ref);
-    if(!confirmed.exists())throw new Error("CONFIRM_USER_NOT_FOUND");
-    const server=confirmed.data()||{};
-    const serverCards={...(server.cartasHalloween||{})};
-
-    for(const id of drawn){
-      if(Number(serverCards[id]||0)<Number(owned[id]||0)+drawn.filter(x=>x===id).length){
-        throw new Error("SAVE_NOT_CONFIRMED");
-      }
-    }
-
-    owned=serverCards;
-    jokerOwned={...(server.coringasHalloween||{})};
-    packageCount=Math.max(0,Number(server.pacotesHalloween||0));
-    hasPackageInventory=true;
-    nextPack=Number(server.proximaCartaHalloweenEmMs||savedNext);
-    saveCollectionCache();
-    collectionLoaded=true;
-    animatePack(drawn,joker);
-  }catch(e){
-    console.error("ERRO AO ABRIR/SALVAR PACOTE:",e);
-    if(e.message==="NO_PACK"){
-      toast("Você não tem pacotes disponíveis.");
-    }else{
-      toast(e.message==="SAVE_NOT_CONFIRMED"?"O Firebase não confirmou o salvamento. O pacote não foi liberado.":"Não foi possível abrir o pacote. Verifique as regras do Firebase.");
-    }
-  }
-}
+async function claimPack(){if(!currentUser||!userDocId)return toast("Faça login para abrir o pacote.");if(Date.now()<nextPack)return toast("Seu próximo pacote ainda não está disponível.");const n=isVip?(4+Math.floor(Math.random()*3)):(1+Math.floor(Math.random()*3));let drawn=[];for(let i=0;i<n;i++)drawn.push(cards[Math.floor(Math.random()*cards.length)].id);let joker=null;if(config.coringasPacotesAtivos){const p=config.probabilidadesCoringas||{comum:70,epico:20,lendario:10};const r=Math.random()*100;if(r<p.comum)joker="comum";else if(r<p.comum+p.epico)joker="epico";else if(r<p.comum+p.epico+p.lendario)joker="lendario";}
+const cooldown=isVip?50*3600*1000:72*3600*1000;const next=Date.now()+cooldown;try{await runTransaction(db,async tx=>{const ref=doc(db,"admins",userDocId),snap=await tx.get(ref);if(!snap.exists())throw new Error("USER_NOT_FOUND");const d=snap.data();const current={...(d.cartasHalloween||{})};drawn.forEach(id=>current[id]=(Number(current[id])||0)+1);const jo={...(d.coringasHalloween||{})};if(joker)jo[joker]=(Number(jo[joker])||0)+1;tx.update(ref,{cartasHalloween:current,coringasHalloween:jo,proximaCartaHalloweenEmMs:next,ultimaCartaHalloweenEm:serverTimestamp(),cartasHalloweenHistorico:[...(d.cartasHalloweenHistorico||[]),{tipo:"PACOTE",quantidade:drawn.length,cartas:drawn,coringa:joker||null,data:Date.now()}]})});owned={...owned};drawn.forEach(id=>owned[id]=qty(id)+1);if(joker)jokerOwned[joker]=Number(jokerOwned[joker]||0)+1;nextPack=next;animatePack(drawn,joker)}catch(e){console.error(e);toast("Não foi possível abrir o pacote. Verifique as regras do Firebase.")}}
 function animatePack(ids,joker){
   tab("pack");
   const v=$("packVisual"),img=$("packStageImg"),results=$("packResults"),summary=$("packSummary");
   results.innerHTML="";summary.classList.add("hidden");v.classList.remove("opening","burst");
-  img.src="D3E4CC38-BA77-4BF8-877B-55990528549D.png";img.style.opacity="1";
+  img.src="assets/pacotes/pacote-fechado.jpeg";img.style.opacity="1";
   $("packStatus").textContent="Preparando seu pacote...";
   const wasNew=ids.map(id=>qty(id)===1);
   setTimeout(()=>{v.classList.add("opening");$("packStatus").textContent="🎁 O pacote está tremendo..."},180);
-  setTimeout(()=>{$("packStatus").textContent="✨ Abrindo...";v.classList.add("burst");img.src="0996E4C1-755E-428A-BE76-61A13140168E.png"},1050);
+  setTimeout(()=>{$("packStatus").textContent="✨ Abrindo...";v.classList.add("burst");img.src="assets/pacotes/pacote-aberto.jpeg"},1050);
   setTimeout(()=>{
     const newCount=wasNew.filter(Boolean).length,rep=ids.length-newCount;
-    const cardsHtml=ids.map((id,i)=>{const c=card(id),isNew=wasNew[i];return `<div class="sticker reveal ${c.rarity.toLowerCase()}" style="animation-delay:${i*.16}s"><img src="${asset(c.file)}" alt="${esc(c.name)}"><span class="num">${pad(id)}</span><span class="qty">${isNew?"🆕 NOVA":"🔁 REPETIDA"}</span></div>`}).join("");
-    const jokerHtml=joker?`<div class="jokerReward"><img src="${asset(jokers.find(j=>j.id===joker).file)}" alt="${esc(jokers.find(j=>j.id===joker).name)}"><div><b>🃏 ${esc(jokers.find(j=>j.id===joker).name)}</b><small>Você recebeu um Coringa!</small></div></div>`:"";
+    const cardsHtml=ids.map((id,i)=>{const c=card(id),isNew=wasNew[i];return `<div class="sticker reveal ${c.rarity.toLowerCase()}" style="animation-delay:${i*.16}s"><img src="${base+c.file}" alt="${esc(c.name)}"><span class="num">${pad(id)}</span><span class="qty">${isNew?"🆕 NOVA":"🔁 REPETIDA"}</span></div>`}).join("");
+    const jokerHtml=joker?`<div class="jokerReward"><img src="${jokerBase+jokers.find(j=>j.id===joker).file}" alt="${esc(jokers.find(j=>j.id===joker).name)}"><div><b>🃏 ${esc(jokers.find(j=>j.id===joker).name)}</b><small>Você recebeu um Coringa!</small></div></div>`:"";
     results.innerHTML=cardsHtml+jokerHtml;
     summary.classList.remove("hidden");summary.innerHTML=`<div><b>${newCount}</b><small>🆕 Novas</small></div><div><b>${rep}</b><small>🔁 Repetidas</small></div><div><b>${joker?1:0}</b><small>🃏 Coringas</small></div>`;
     $("packStatus").textContent=`🎉 Pacote aberto! ${ids.length} figurinha(s) revelada(s).`;
@@ -366,69 +148,44 @@ function animatePack(ids,joker){
   },1900);
 }
 $("claimBtn").onclick=claimPack;$("heroOpenBtn").onclick=()=>{tab("pack");claimPack()};
-function renderTradeGive(){
- const repeated=cards.filter(c=>qty(c.id)>1);
- $("giveGrid").innerHTML=repeated.length?repeated.map(c=>`<div class="selectCard ${selectedGive===c.id?"sel":""}" data-give="${c.id}"><img src="${asset(c.file)}" alt="${esc(c.name)}"><span class="q">x${qty(c.id)}</span></div>`).join(""):"<div class=empty style='grid-column:1/-1'>Você ainda não possui cartas repetidas para trocar.</div>";
- document.querySelectorAll("[data-give]").forEach(x=>x.onclick=()=>{selectedGive=+x.dataset.give;renderTradeGive();$("giveInfo").textContent=`Você escolheu: ${card(selectedGive).name} • x${qty(selectedGive)}`});
- $("wantSelect").innerHTML=`<option value="">Quero receber...</option>`+cards.filter(c=>c.id!==selectedGive).map(c=>`<option value="${c.id}">${pad(c.id)} — ${c.name}</option>`).join("");
- $("tradeLimit").textContent=`${Math.max(0,(isVip?2:1)-tradeUsed)}/${isVip?2:1} trocas restantes hoje`;
-}
-function renderTradeHistory(){
- const area=$("tradeHistory"); if(!area)return;
- const arr=(figHistory||[]).filter(x=>x.tipo==="TROCA").slice(-12).reverse();
- area.innerHTML=arr.length?arr.map(x=>{const g=card(Number(x.dei||x.giveCardId)),r=card(Number(x.recebi||x.receivedCardId));return `<div class="tradeHistoryItem"><div class="tradeOfferCard"><img src="${asset(g?.file||"")}"><span>⇄</span><img src="${asset(r?.file||"")}"></div><div><b>${esc(x.resumo||`${g?.name||"Carta"} ⇄ ${r?.name||"Carta"}`)}</b><small>${x.dataTexto?esc(x.dataTexto):"Troca registrada"}</small></div></div>`}).join(""):"<div class=empty>Nenhuma troca realizada ainda.</div>";
-}
-async function loadOffers(){try{const q=query(collection(db,"trocasHalloween"),where("status","==","ABERTA"),limit(30));const snap=await getDocs(q);const arr=snap.docs.map(d=>({id:d.id,...d.data()})).filter(x=>x.fromUid!==currentUser?.uid);$("offers").innerHTML=arr.length?arr.map(o=>{const give=card(Number(o.giveCardId)),want=card(Number(o.wantCardId));return `<div class="offer"><div><b>${esc(o.fromName||"Jogador")}</b><small>oferece ${esc(give?.name||"carta")}<br>e quer receber ${esc(want?.name||"carta")}</small></div><img src="${asset(give?.file||"")}"><span class="arrow">⇄</span><img src="${asset(want?.file||"")}"><button class="btn green" style="margin-left:auto;padding:7px" data-accept="${o.id}">ACEITAR</button></div>`}).join(""):"<div class=empty>Nenhuma oferta disponível no momento.</div>";document.querySelectorAll("[data-accept]").forEach(b=>b.onclick=()=>acceptTrade(b.dataset.accept))}catch(e){console.error(e);$("offers").innerHTML="<div class=empty>Não foi possível carregar as ofertas. Verifique as Rules do Firestore.</div>"}}
+$("goElementsBtn")?.addEventListener("click",()=>{window.location.href="elementos.html"});
+$("cardsNotificationBtn")?.addEventListener("click",async()=>{$("cardsNotifModal").classList.add("open");await cardsLoadNotifications()});
+$("cardsNotifClose")?.addEventListener("click",()=>$("cardsNotifModal").classList.remove("open"));
+$("cardsNotifModal")?.addEventListener("click",e=>{if(e.target===$("cardsNotifModal"))$("cardsNotifModal").classList.remove("open")});
+function renderTradeGive(){const repeated=cards.filter(c=>qty(c.id)>1);$("giveGrid").innerHTML=repeated.length?repeated.map(c=>`<div class="selectCard ${selectedGive===c.id?"sel":""}" data-give="${c.id}"><img src="${base+c.file}" alt=""><span class="q">x${qty(c.id)}</span></div>`).join(""):"<div class=empty style='grid-column:1/-1'>Você ainda não possui cartas repetidas para trocar.</div>";document.querySelectorAll("[data-give]").forEach(x=>x.onclick=()=>{selectedGive=+x.dataset.give;renderTradeGive();$("giveInfo").textContent=`Você escolheu: ${card(selectedGive).name} • x${qty(selectedGive)}`});$("wantSelect").innerHTML=`<option value="">Quero receber...</option>`+cards.filter(c=>c.id!==selectedGive).map(c=>`<option value="${c.id}">${pad(c.id)} — ${c.name}</option>`).join("");$("tradeLimit").textContent=`${Math.max(0,(isVip?2:1)-tradeUsed)}/${isVip?2:1} trocas restantes hoje`}
+async function loadOffers(){try{const q=query(collection(db,"trocasHalloween"),where("status","==","ABERTA"),limit(20));const s=await getDocs(q);const arr=s.docs.map(d=>({id:d.id,...d.data()})).filter(x=>x.fromUid!==currentUser?.uid);$("offers").innerHTML=arr.length?arr.map(o=>`<div class="offer"><div><b>${esc(o.fromName||"Jogador")}</b><small>quer receber ${esc(card(o.wantCardId)?.name||"carta")}</small></div><img src="${base+card(o.giveCardId).file}"><span class="arrow">⇄</span><img src="${base+card(o.wantCardId).file}"><button class="btn green" style="margin-left:auto;padding:7px" data-accept="${o.id}">ACEITAR</button></div>`).join(""):"<div class=empty>Nenhuma oferta disponível no momento.</div>";document.querySelectorAll("[data-accept]").forEach(b=>b.onclick=()=>acceptTrade(b.dataset.accept))}catch(e){$("offers").innerHTML="<div class=empty>As ofertas dependem das regras de leitura do Firestore.</div>"}}
 $("createTradeBtn").onclick=async()=>{
- const want=Number($("wantSelect").value);
- if(!selectedGive||!want)return toast("Escolha a carta que dará e a que deseja receber.");
+ const want=Number($("wantSelect").value);if(!selectedGive||!want)return toast("Escolha a carta que dará e a que deseja receber.");
  if(qty(selectedGive)<2)return toast("Só é possível oferecer cartas repetidas.");
- const limit=isVip?2:1,day=todayKey(); if(tradeDay!==day){tradeDay=day;tradeUsed=0;} if(tradeUsed>=limit)return toast("Seu limite diário de trocas foi atingido.");
+ const limit=isVip?2:1;const day=todayKey();if(tradeDay!==day){tradeDay=day;tradeUsed=0;}
+ if(tradeUsed>=limit)return toast("Seu limite diário de trocas foi atingido.");
  try{
   const ref=await addDoc(collection(db,"trocasHalloween"),{fromUid:currentUser.uid,fromUserDocId:userDocId,fromName:currentUser.displayName||currentUser.email||"Jogador",giveCardId:selectedGive,wantCardId:want,status:"ABERTA",createdAt:serverTimestamp()});
-  const history=[...(figHistory||[]),{tipo:"TROCA",acao:"OFERTA_CRIADA",giveCardId:selectedGive,wantCardId:want,dei:selectedGive,recebi:want,resumo:`Oferta: ${card(selectedGive).name} por ${card(want).name}`,data:Date.now(),dataTexto:new Date().toLocaleString("pt-BR") }];
-  await updateDoc(doc(db,"admins",userDocId),{cartasHalloweenTrocasHoje:tradeUsed+1,cartasHalloweenTrocasData:day,historicoFigurinhas:history});
-  figHistory=history;tradeUsed++;selectedGive=null;saveCollectionCache();toast("Oferta criada! Outro jogador poderá aceitá-la.");loadOffers();renderTradeHistory();render();
- }catch(e){console.error(e);toast(e?.code==="permission-denied"?"O Firestore bloqueou a criação da oferta. Verifique as Rules.":"Não foi possível criar a oferta.")}
+  await updateDoc(doc(db,"admins",userDocId),{cartasHalloweenTrocasHoje:tradeUsed+1,cartasHalloweenTrocasData:day});
+  tradeUsed++;toast("Oferta criada! Ela ficará disponível para outros jogadores.");loadOffers();render();
+ }catch(e){console.error(e);toast("Não foi possível criar a oferta. Verifique as regras do Firebase.")}
 };
 async function acceptTrade(id){
  if(!currentUser||!userDocId)return toast("Faça login para aceitar uma troca.");
- const limitN=isVip?2:1,day=todayKey();if(tradeDay!==day){tradeDay=day;tradeUsed=0;}if(tradeUsed>=limitN)return toast("Seu limite diário de trocas foi atingido.");
+ const limit=isVip?2:1,day=todayKey();if(tradeDay!==day){tradeDay=day;tradeUsed=0;}if(tradeUsed>=limit)return toast("Seu limite diário de trocas foi atingido.");
  try{
-  const offerRef=doc(db,"trocasHalloween",id);
+  const offerRef=doc(db,"trocasHalloween",id),offerSnap=await getDoc(offerRef);if(!offerSnap.exists())return toast("Oferta não encontrada.");
+  const o=offerSnap.data();if(o.status!=="ABERTA")return toast("Essa oferta já foi encerrada.");if(o.fromUid===currentUser.uid)return toast("Você não pode aceitar sua própria oferta.");if(!o.fromUserDocId)return toast("Esta oferta antiga não pode ser aceita. Crie uma nova oferta.");
+  const senderRef=doc(db,"admins",o.fromUserDocId),receiverRef=doc(db,"admins",userDocId);
   await runTransaction(db,async tx=>{
-   const os=await tx.get(offerRef);if(!os.exists()||os.data().status!=="ABERTA")throw new Error("OFFER_CLOSED");
-   const o=os.data();if(o.fromUid===currentUser.uid)throw new Error("OWN_OFFER");
-   const senderRef=doc(db,"admins",o.fromUserDocId),receiverRef=doc(db,"admins",userDocId);
-   const ss=await tx.get(senderRef),rs=await tx.get(receiverRef);if(!ss.exists()||!rs.exists())throw new Error("USER_NOT_FOUND");
-   const sd=ss.data(),rd=rs.data(),senderCards={...(sd.cartasHalloween||{})},receiverCards={...(rd.cartasHalloween||{})};
-   const give=Number(o.giveCardId),want=Number(o.wantCardId);
-   if(Number(senderCards[give]||0)<2)throw new Error("SENDER_NO_CARD");
-   if(Number(receiverCards[want]||0)<1)throw new Error("RECEIVER_NO_CARD");
-   senderCards[give]--;senderCards[want]=(Number(senderCards[want])||0)+1;receiverCards[want]--;receiverCards[give]=(Number(receiverCards[give])||0)+1;
-   const senderHist=[...(sd.historicoFigurinhas||[]),{tipo:"TROCA",acao:"OFERTA_ACEITA",giveCardId:give,wantCardId:want,dei:want,recebi:give,comUsuario:currentUser.email||currentUser.uid,resumo:`Recebeu ${card(give)?.name||"carta"} e entregou ${card(want)?.name||"carta"}`,data:Date.now(),dataTexto:new Date().toLocaleString("pt-BR")}];
-   const receiverHist=[...(rd.historicoFigurinhas||[]),{tipo:"TROCA",acao:"TROCA_CONCLUIDA",giveCardId:give,wantCardId:want,dei:want,recebi:give,comUsuario:o.fromName||o.fromUid,resumo:`Recebeu ${card(give)?.name||"carta"} e entregou ${card(want)?.name||"carta"}`,data:Date.now(),dataTexto:new Date().toLocaleString("pt-BR")}];
-   tx.update(senderRef,{cartasHalloween:senderCards,historicoFigurinhas:senderHist});
-   tx.update(receiverRef,{cartasHalloween:receiverCards,cartasHalloweenTrocasHoje:tradeUsed+1,cartasHalloweenTrocasData:day,historicoFigurinhas:receiverHist});
-   tx.update(offerRef,{status:"ACEITA",acceptedByUid:currentUser.uid,acceptedByUserDocId:userDocId,acceptedByName:currentUser.displayName||currentUser.email||"Jogador",acceptedAt:serverTimestamp()});
+   const [os,ss,rs]=await Promise.all([tx.get(offerRef),tx.get(senderRef),tx.get(receiverRef)]);
+   if(!os.exists()||os.data().status!=="ABERTA")throw new Error("OFFER_CLOSED");if(!ss.exists()||!rs.exists())throw new Error("USER_NOT_FOUND");
+   const sd=ss.data(),rd=rs.data();const senderCards={...(sd.cartasHalloween||{})},receiverCards={...(rd.cartasHalloween||{})};
+   if(Number(senderCards[o.giveCardId]||0)<2)throw new Error("SENDER_NO_CARD");if(Number(receiverCards[o.wantCardId]||0)<1)throw new Error("RECEIVER_NO_CARD");
+   senderCards[o.giveCardId]--;senderCards[o.wantCardId]=(Number(senderCards[o.wantCardId])||0)+1;receiverCards[o.wantCardId]--;receiverCards[o.giveCardId]=(Number(receiverCards[o.giveCardId])||0)+1;
+   tx.update(senderRef,{cartasHalloween:senderCards});tx.update(receiverRef,{cartasHalloween:receiverCards,cartasHalloweenTrocasHoje:tradeUsed+1,cartasHalloweenTrocasData:day});tx.update(offerRef,{status:"ACEITA",acceptedByUid:currentUser.uid,acceptedByUserDocId:userDocId,acceptedAt:serverTimestamp()});
   });
-  const offerSnap=await getDoc(offerRef),o=offerSnap.data();
-  owned[o.wantCardId]=Math.max(0,qty(o.wantCardId)-1);owned[o.giveCardId]=qty(o.giveCardId)+1;tradeUsed++;tradeDay=day;
-  figHistory=[...(figHistory||[]),{tipo:"TROCA",acao:"TROCA_CONCLUIDA",deixou:o.wantCardId,recebeu:o.giveCardId,dei:o.wantCardId,recebi:o.giveCardId,resumo:`Recebeu ${card(o.giveCardId)?.name||"carta"} e entregou ${card(o.wantCardId)?.name||"carta"}`,data:Date.now(),dataTexto:new Date().toLocaleString("pt-BR")}];
-  saveCollectionCache();toast(`Troca concluída! Você recebeu ${card(o.giveCardId).name}.`);loadOffers();renderTradeHistory();render();
- }catch(e){console.error(e);const msg=e.message==="SENDER_NO_CARD"?"O jogador não possui mais 2 cópias da carta oferecida.":e.message==="RECEIVER_NO_CARD"?"Você não possui a carta necessária para fazer essa troca.":e.message==="OWN_OFFER"?"Você não pode aceitar sua própria oferta.":e.message==="OFFER_CLOSED"?"Essa oferta já foi aceita ou encerrada.":"Não foi possível concluir a troca. Verifique as Rules do Firestore.";toast(msg);loadOffers();}
+  owned={...owned};owned[o.wantCardId]=qty(o.wantCardId)-1;owned[o.giveCardId]=qty(o.giveCardId)+1;tradeUsed++;toast(`Troca concluída! Você recebeu ${card(o.giveCardId).name}.`);loadOffers();render();
+ }catch(e){console.error(e);const msg=e.message==="SENDER_NO_CARD"?"O jogador não possui mais a carta oferecida.":e.message==="RECEIVER_NO_CARD"?"Você não possui a carta necessária para esta troca.":e.message==="OFFER_CLOSED"?"Essa oferta já foi aceita por outro jogador.":"Não foi possível concluir a troca.";toast(msg);loadOffers();}
 }
-async function useJoker(type){
- if(!currentUser||!userDocId||Number(jokerOwned[type]||0)<1)return;
- const missing=cards.filter(c=>qty(c.id)===0);if(!missing.length)return toast("Você já possui as 25 cartas!");
- const joker=jokers.find(j=>j.id===type);let target=null;
- $("modalContent").innerHTML=`<h2>🃏 ${esc(joker.name)}</h2><p>Escolha <b>uma carta que ainda falta</b> na sua coleção.</p><div class="jokerTargetGrid">${missing.map(c=>`<div class="jokerTargetCard" data-jtarget="${c.id}"><img src="${asset(c.file)}" alt="${esc(c.name)}"><span>${pad(c.id)} • ${esc(c.name)}</span></div>`).join("")}</div><button class="btn gold" id="confirmJoker" style="width:100%;margin-top:10px" disabled>USAR CORINGA</button>`;
- $("modal").classList.add("open");
- document.querySelectorAll("[data-jtarget]").forEach(el=>el.onclick=()=>{document.querySelectorAll("[data-jtarget]").forEach(x=>x.classList.remove("sel"));el.classList.add("sel");target=Number(el.dataset.jtarget);$("confirmJoker").disabled=false;});
- $("confirmJoker").onclick=async()=>{if(!target)return toast("Escolha uma carta.");const targetCard=card(target);try{await runTransaction(db,async tx=>{const ref=doc(db,"admins",userDocId),s=await tx.get(ref);if(!s.exists())throw new Error("USER_NOT_FOUND");const d=s.data(),jo={...(d.coringasHalloween||{})},co={...(d.cartasHalloween||{})};if(Number(jo[type]||0)<1)throw new Error("NO_JOKER");if(Number(co[target]||0)>0)throw new Error("ALREADY_HAVE");jo[type]--;co[target]=(Number(co[target])||0)+1;const hist=[...(d.historicoFigurinhas||[]),{tipo:"CORINGA",acao:"USADO",coringa:type,cartaId:target,cartaNome:targetCard.name,data:Date.now(),dataTexto:new Date().toLocaleString("pt-BR"),resumo:`${joker.name} usado para obter ${targetCard.name}`}];tx.update(ref,{coringasHalloween:jo,cartasHalloween:co,historicoFigurinhas:hist});});jokerOwned[type]--;owned[target]=qty(target)+1;figHistory=[...(figHistory||[]),{tipo:"CORINGA",acao:"USADO",coringa:type,cartaId:target,cartaNome:targetCard.name,data:Date.now(),dataTexto:new Date().toLocaleString("pt-BR"),resumo:`${joker.name} usado para obter ${targetCard.name}`}];saveCollectionCache();$("modal").classList.remove("open");toast(`🃏 Coringa usado! ${targetCard.name} foi adicionada à sua coleção.`);render();}catch(e){console.error(e);toast(e.message==="ALREADY_HAVE"?"Essa carta já está na sua coleção.":"Não foi possível usar o Coringa. Verifique as Rules do Firestore.")}}
-}
+async function useJoker(type){if(!currentUser||!userDocId||Number(jokerOwned[type]||0)<1)return;const missing=cards.filter(c=>qty(c.id)===0);if(!missing.length)return toast("Você já possui as 25 cartas!");const options=missing.map(c=>`<option value="${c.id}">${pad(c.id)} — ${c.name}</option>`).join("");$("modalContent").innerHTML=`<h2>🃏 ${esc(jokers.find(j=>j.id===type).name)}</h2><p>Escolha qual figurinha faltante deseja completar.</p><select id="jokerTarget" style="width:100%;padding:11px;background:#100619;color:#fff;border:1px solid #ffffff22;border-radius:10px;margin-top:10px">${options}</select><button class="btn gold" id="confirmJoker" style="width:100%;margin-top:10px">USAR CORINGA</button>`;$("modal").classList.add("open");$("confirmJoker").onclick=async()=>{const target=Number($("jokerTarget").value);try{await runTransaction(db,async tx=>{const ref=doc(db,"admins",userDocId),s=await tx.get(ref),d=s.data(),jo={...(d.coringasHalloween||{})},co={...(d.cartasHalloween||{})};if(Number(jo[type]||0)<1)throw new Error("NO_JOKER");jo[type]--;co[target]=(Number(co[target])||0)+1;tx.update(ref,{coringasHalloween:jo,cartasHalloween:co})});jokerOwned[type]--;owned[target]=qty(target)+1;$("modal").classList.remove("open");toast(`Coringa usado! ${card(target).name} foi adicionada.`);render()}catch(e){toast("Não foi possível usar o Coringa.")}}}
 
-onAuthStateChanged(auth,user=>{if(user)loadUser(user);else{currentUser=null;userDocId=null;owned={};jokerOwned={};collectionLoaded=true;try{localStorage.removeItem("adamGamesHalloweenCollection")}catch(_){};render();updatePackUI()}});render();
+onAuthStateChanged(auth,user=>{if(user)loadUser(user);else{currentUser=null;render();updatePackUI()}});render();
 </script>
 </body>
 </html>

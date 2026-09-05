@@ -2427,34 +2427,63 @@ button{
 .vip-box-chance-button:disabled{opacity:.55;cursor:not-allowed}
 
 
-.element-received-toast{
-  position:fixed;
-  left:50%;
-  top:18px;
-  transform:translate(-50%,-140%);
-  width:min(92vw,430px);
-  z-index:99999;
-  padding:15px 18px;
-  border-radius:17px;
-  background:linear-gradient(135deg,#082a4a,#0a4f78);
-  border:1px solid rgba(95,231,255,.65);
-  box-shadow:0 18px 45px rgba(0,0,0,.42),0 0 28px rgba(40,200,255,.18);
-  color:#fff;
-  transition:transform .35s ease;
-  pointer-events:none;
+.element-received-overlay,.collection-history-overlay{
+  position:fixed;inset:0;z-index:100000;display:none;align-items:center;justify-content:center;
+  padding:20px;background:rgba(0,4,15,.78);backdrop-filter:blur(7px);
 }
-.element-received-toast.show{transform:translate(-50%,0)}
-.element-received-toast strong{display:block;font-size:16px;margin-bottom:5px}
-.element-received-toast span{display:block;font-size:13px;line-height:1.4;color:#d7efff}
+.element-received-overlay.show,.collection-history-overlay.show{display:flex}
+.element-received-box{width:min(92vw,440px);padding:28px 22px 22px;border-radius:26px;text-align:center;
+  background:linear-gradient(155deg,#071c38,#0b3155 55%,#102052);border:1px solid rgba(87,224,255,.6);
+  box-shadow:0 24px 80px rgba(0,0,0,.55),0 0 35px rgba(35,199,255,.18);animation:elementPop .25s ease-out}
+@keyframes elementPop{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
+.element-received-icon{font-size:45px;margin-bottom:2px}
+.element-received-kicker,.collection-history-kicker{font-size:11px;letter-spacing:2px;font-weight:900;color:#59ddff}
+.element-received-box h3{margin:7px 0 8px;font-size:25px}
+.element-received-from{color:#d2e9ff;font-weight:800;margin-bottom:16px}
+.element-received-items{display:flex;flex-direction:column;gap:8px;max-height:230px;overflow:auto;text-align:left}
+.element-received-item{padding:11px 13px;border-radius:13px;background:rgba(2,14,34,.75);border:1px solid rgba(255,255,255,.09);display:flex;justify-content:space-between;gap:12px}
+.element-received-item strong{color:#fff}.element-received-item span{color:#67e4ff;font-weight:900;white-space:nowrap}
+#elementReceivedButton{width:100%;margin-top:18px;padding:14px;border:0;border-radius:14px;background:linear-gradient(135deg,#55e6a7,#20b978);color:#04130d;font-weight:1000;font-size:15px;cursor:pointer}
+.collection-history-box{width:min(94vw,650px);max-height:86vh;overflow:hidden;border-radius:24px;background:#06172d;border:1px solid rgba(78,198,255,.35);box-shadow:0 25px 80px rgba(0,0,0,.6)}
+.collection-history-header{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;border-bottom:1px solid rgba(255,255,255,.08)}
+.collection-history-header h3{margin:4px 0 0;font-size:21px}.collection-history-header button{width:38px;height:38px;border:0;border-radius:12px;background:#102b4c;color:#fff;font-size:28px;cursor:pointer}
+#collectionHistoryList{padding:14px 16px 18px;max-height:68vh;overflow:auto}
+.collection-history-item{padding:14px;margin-bottom:10px;border-radius:16px;background:#0a203c;border:1px solid rgba(255,255,255,.08)}
+.collection-history-item.received{border-color:rgba(83,226,171,.25)}
+.collection-history-item .history-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.collection-history-item strong{font-size:14px}.collection-history-item time{font-size:11px;color:#8da8c3;white-space:nowrap}
+.collection-history-meta{margin-top:6px;color:#a9c1d8;font-size:12px}.collection-history-elements{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.collection-history-elements span{padding:6px 8px;border-radius:9px;background:#06162a;color:#d9efff;font-size:12px;font-weight:800}
+.collection-history-empty{padding:28px;text-align:center;color:#8fa8c5}
 
-</style>
+.elements-quick-access{margin-top:10px;display:inline-block;padding:7px 10px;border-radius:10px;background:linear-gradient(135deg,#0c8edb,#075b9d);border:1px solid #53d4ff55;color:#fff;font-size:10px;font-weight:1000}</style>
 
 </head>
 
 <body>
-<div class="element-received-toast" id="elementReceivedToast" aria-live="polite">
-  <strong id="elementReceivedToastTitle">⚛️ Você recebeu elementos!</strong>
-  <span id="elementReceivedToastMessage"></span>
+<div class="element-received-overlay" id="elementReceivedOverlay" aria-live="assertive">
+  <div class="element-received-box">
+    <div class="element-received-icon">🎁</div>
+    <div class="element-received-kicker">NOVA ENTREGA</div>
+    <h3 id="elementReceivedTitle">Você recebeu elementos!</h3>
+    <div class="element-received-from" id="elementReceivedFrom">De: —</div>
+    <div class="element-received-items" id="elementReceivedItems"></div>
+    <button id="elementReceivedButton" type="button">🎁 RECEBER</button>
+  </div>
+</div>
+
+<div class="collection-history-overlay" id="collectionHistoryOverlay">
+  <div class="collection-history-box">
+    <div class="collection-history-header">
+      <div>
+        <div class="collection-history-kicker">ADAM GAMES</div>
+        <h3>📜 Histórico da coleção</h3>
+      </div>
+      <button id="closeCollectionHistory" type="button">×</button>
+    </div>
+    <div id="collectionHistoryList">
+      <div class="collection-history-empty">Carregando histórico...</div>
+    </div>
+  </div>
 </div>
 
 
@@ -2495,6 +2524,17 @@ button{
         0
 
       </span>
+
+    </button>
+
+
+    <button
+      class="top-button"
+      id="historyButton"
+      type="button"
+      title="Histórico da coleção">
+
+      📜
 
     </button>
 
@@ -2878,6 +2918,7 @@ button{
     <div class="card-arrow">
       →
     </div>
+    <div class="elements-quick-access" id="elementsQuickAccess">⚛️ ACESSAR ESTANTE</div>
 
   </div>
 
@@ -4775,6 +4816,10 @@ const notificationsList =
   document.getElementById(
     "notificationsList"
   );
+
+const historyButton = document.getElementById("historyButton");
+const collectionHistoryOverlay = document.getElementById("collectionHistoryOverlay");
+const collectionHistoryList = document.getElementById("collectionHistoryList");
 
 const vipModal =
   document.getElementById(
@@ -8110,23 +8155,53 @@ async function criarNotificacao(
 
 let ultimaNotificacaoConhecidaId = null;
 let primeiraCargaNotificacoes = true;
-let toastElementosTimeout = null;
+let notificacaoElementoAtual = null;
 
-function mostrarToastElementosRecebidos(item){
-  const toast=document.getElementById("elementReceivedToast");
-  const title=document.getElementById("elementReceivedToastTitle");
-  const message=document.getElementById("elementReceivedToastMessage");
+function escaparTextoHistorico(valor){
+  return String(valor ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+}
 
-  if(!toast || !item) return;
+function nomeElementoPainel(numero){
+  const mapa = {
+    1:["Hidrogênio","H"],2:["Hélio","He"],3:["Lítio","Li"],4:["Berílio","Be"],5:["Boro","B"],
+    6:["Carbono","C"],7:["Nitrogênio","N"],8:["Oxigênio","O"],9:["Flúor","F"],10:["Neônio","Ne"]
+  };
+  return mapa[String(numero)] ? mapa[String(numero)] : ["Elemento #"+numero, ""];
+}
 
-  if(title) title.textContent=item.titulo||"⚛️ Você recebeu elementos!";
-  if(message) message.textContent=item.mensagem||"Novos elementos foram adicionados à sua coleção.";
+function montarElementosRecebidos(item){
+  const mapa=item?.elementosRecebidos || {};
+  const entradas=Object.entries(mapa);
+  if(!entradas.length) return `<div class="element-received-item"><strong>${escaparTextoHistorico(item?.mensagem || "Novos elementos adicionados à sua coleção.")}</strong></div>`;
+  return entradas.map(([numero,quantidade])=>{
+    const nome=item?.elementosNomes?.[numero] || nomeElementoPainel(numero)[0];
+    const simbolo=item?.elementosSimbolos?.[numero] || nomeElementoPainel(numero)[1];
+    return `<div class="element-received-item"><strong>⚛️ ${escaparTextoHistorico(nome)}${simbolo?` (${escaparTextoHistorico(simbolo)})`:""}</strong><span>×${Number(quantidade)||0}</span></div>`;
+  }).join("");
+}
 
-  toast.classList.add("show");
-  clearTimeout(toastElementosTimeout);
-  toastElementosTimeout=setTimeout(()=>{
-    toast.classList.remove("show");
-  },7000);
+function mostrarRecebimentoElemento(item){
+  const overlay=document.getElementById("elementReceivedOverlay");
+  const title=document.getElementById("elementReceivedTitle");
+  const from=document.getElementById("elementReceivedFrom");
+  const items=document.getElementById("elementReceivedItems");
+  if(!overlay || !item) return;
+  notificacaoElementoAtual=item;
+  if(title) title.textContent=item.origem==="administrador" ? "Você recebeu elementos do Administrador!" : "Você recebeu elementos!";
+  if(from) from.textContent=`De: ${item.remetenteNome || (item.origem==="administrador" ? "Administrador Adam Games" : "outro jogador")}`;
+  if(items) items.innerHTML=montarElementosRecebidos(item);
+  overlay.classList.add("show");
+}
+
+async function confirmarRecebimentoElemento(){
+  const item=notificacaoElementoAtual;
+  const overlay=document.getElementById("elementReceivedOverlay");
+  if(item?.id){
+    try{ await updateDoc(doc(db,"notificacoes",item.id),{lida:true}); }catch(error){ console.error(error); }
+  }
+  if(overlay) overlay.classList.remove("show");
+  notificacaoElementoAtual=null;
+  await carregarNotificacoes();
 }
 
 async function verificarNotificacaoCaixa(){
@@ -8254,11 +8329,10 @@ async function carregarNotificacoes(){
 
     if(lista.length > 0){
       const maisRecente = lista[0];
+      const novaEntrega = maisRecente.tipo === "elemento_recebido" && maisRecente.lida !== true;
 
-      if(!primeiraCargaNotificacoes &&
-         maisRecente.id !== ultimaNotificacaoConhecidaId &&
-         maisRecente.tipo === "elemento_recebido"){
-        mostrarToastElementosRecebidos(maisRecente);
+      if(novaEntrega && (primeiraCargaNotificacoes || maisRecente.id !== ultimaNotificacaoConhecidaId)){
+        mostrarRecebimentoElemento(maisRecente);
       }
 
       ultimaNotificacaoConhecidaId = maisRecente.id;
@@ -8415,6 +8489,11 @@ async function carregarNotificacoes(){
             }
 
 
+            if(item.tipo === "elemento_recebido"){
+              mostrarRecebimentoElemento({...item,lida:true});
+              return;
+            }
+
             if(
               item.tipo ===
               "caixa"
@@ -8458,6 +8537,46 @@ async function carregarNotificacoes(){
 }
 
 
+async function carregarHistoricoColecao(){
+  if(!usuarioAtual || !collectionHistoryList) return;
+  collectionHistoryList.innerHTML='<div class="collection-history-empty">⏳ Carregando histórico...</div>';
+  try{
+    const snapshot=await getDocs(query(collection(db,"historicoColecaoElementos"),where("usuarioUid","==",usuarioAtual.uid)));
+    const lista=snapshot.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>{
+      const ad=converterData(a.criadoEm)||0, bd=converterData(b.criadoEm)||0; return bd-ad;
+    }).slice(0,100);
+    if(!lista.length){
+      collectionHistoryList.innerHTML='<div class="collection-history-empty">📜 Nenhum recebimento registrado ainda.</div>';
+      return;
+    }
+    collectionHistoryList.innerHTML=lista.map(item=>{
+      const data=converterData(item.criadoEm);
+      const quando=data?new Date(data).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"}):"Agora";
+      const origem=item.origem==="administrador"?"👑 Administrador Adam Games":item.origem==="jogador"?`👤 ${escaparTextoHistorico(item.remetenteNome||item.remetentePublicId||"Jogador")}`:(`🎯 ${escaparTextoHistorico(item.origemNome||item.origem||"Conquista")}`);
+      const titulo=item.titulo||"Elementos recebidos";
+      const elementos=Object.entries(item.elementosRecebidos||{}).map(([n,q])=>{
+        const nome=item.elementosNomes?.[n]||nomeElementoPainel(n)[0];
+        const simb=item.elementosSimbolos?.[n]||nomeElementoPainel(n)[1];
+        return `<span>⚛️ ${escaparTextoHistorico(nome)}${simb?` (${escaparTextoHistorico(simb)})`:""} ×${Number(q)||0}</span>`;
+      }).join("");
+      return `<div class="collection-history-item received"><div class="history-top"><strong>${escaparTextoHistorico(titulo)}</strong><time>${quando}</time></div><div class="collection-history-meta">${origem}</div><div class="collection-history-elements">${elementos||'<span>Elementos registrados</span>'}</div></div>`;
+    }).join("");
+  }catch(error){
+    console.error("Erro ao carregar histórico da coleção:",error);
+    collectionHistoryList.innerHTML='<div class="collection-history-empty">⚠️ Não foi possível carregar o histórico.</div>';
+  }
+}
+
+historyButton?.addEventListener("click",async()=>{
+  collectionHistoryOverlay?.classList.add("show");
+  await carregarHistoricoColecao();
+});
+
+document.getElementById("closeCollectionHistory")?.addEventListener("click",()=>collectionHistoryOverlay?.classList.remove("show"));
+collectionHistoryOverlay?.addEventListener("click",e=>{if(e.target===collectionHistoryOverlay)collectionHistoryOverlay.classList.remove("show")});
+document.getElementById("elementReceivedButton")?.addEventListener("click",confirmarRecebimentoElemento);
+document.getElementById("elementReceivedOverlay")?.addEventListener("click",e=>{if(e.target.id==="elementReceivedOverlay")confirmarRecebimentoElemento()});
+
 notificationButton.addEventListener(
   "click",
   async () => {
@@ -8468,13 +8587,13 @@ notificationButton.addEventListener(
     await verificarNotificacaoCaixa();
 
     await carregarNotificacoes();
-setInterval(() => {
-  carregarNotificacoes();
-}, 10000);
-
 
   }
 );
+
+setInterval(() => {
+  if(usuarioAtual) carregarNotificacoes();
+}, 10000);
 
 
 document.getElementById(
@@ -8513,84 +8632,43 @@ notificationsModal.addEventListener(
 ===================================================== */
 
 onAuthStateChanged(
-
   auth,
-
   async user => {
-
-    if(
-      !user
-    ){
-
-      window.location.replace(
-        "index.html"
-      );
-
+    if(!user){
+      window.location.replace("index.html");
       return;
-
     }
 
-
-    usuarioAtual =
-      user;
-
+    usuarioAtual=user;
 
     try{
+      // Carrega o perfil primeiro. Nenhuma função secundária
+      // pode deixar o usuário preso em "Carregando...".
+      cadastroAtual=await carregarCadastro(user);
+      cadastroId=cadastroAtual.id;
+      mostrarDados(user,cadastroAtual);
 
-      cadastroAtual =
-        await carregarCadastro(
-          user
-        );
+      const tarefas=[
+        sincronizarTemporadaChaves(),
+        carregarCatalogoConquistas(),
+        Promise.resolve().then(()=>renderizarConquistasFixadas()),
+        Promise.resolve().then(()=>atualizarQuantidadeChavesEspeciais()),
+        verificarNotificacaoCaixa(),
+        carregarNotificacoes()
+      ];
 
-
-      cadastroId =
-        cadastroAtual.id;
-
-
-      await sincronizarTemporadaChaves();
-
-
-      await carregarCatalogoConquistas();
-
-
-      mostrarDados(
-        user,
-        cadastroAtual
-      );
-
-      renderizarConquistasFixadas();
-
-
-      atualizarQuantidadeChavesEspeciais();
-
-
-      await verificarNotificacaoCaixa();
-
-
-      await carregarNotificacoes();
-
+      const resultados=await Promise.allSettled(tarefas);
+      resultados.forEach((r,i)=>{
+        if(r.status==="rejected"){
+          console.warn("Área secundária não carregou:",i,r.reason);
+        }
+      });
+    }catch(error){
+      console.error("Erro ao carregar cadastro do painel:",error);
+      mostrarErro(error.message||"Não foi possível carregar o painel.");
     }
-    catch(error){
-
-      console.error(
-        "Erro no painel:",
-        error
-      );
-
-
-      mostrarErro(
-
-        error.message ||
-        "Não foi possível carregar o painel."
-
-      );
-
-    }
-
   }
-
 );
-
 
 
 /* =====================================================
