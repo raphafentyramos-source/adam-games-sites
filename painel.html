@@ -2455,7 +2455,42 @@ button{
 .collection-history-elements span{padding:6px 8px;border-radius:9px;background:#06162a;color:#d9efff;font-size:12px;font-weight:800}
 .collection-history-empty{padding:28px;text-align:center;color:#8fa8c5}
 
-.elements-quick-access{margin-top:10px;display:inline-block;padding:7px 10px;border-radius:10px;background:linear-gradient(135deg,#0c8edb,#075b9d);border:1px solid #53d4ff55;color:#fff;font-size:10px;font-weight:1000}</style>
+.elements-quick-access{margin-top:10px;display:inline-block;padding:7px 10px;border-radius:10px;background:linear-gradient(135deg,#0c8edb,#075b9d);border:1px solid #53d4ff55;color:#fff;font-size:10px;font-weight:1000}
+.feed-highlight{
+  position:relative;overflow:hidden;display:flex;align-items:center;gap:16px;margin:17px 0 2px;
+  padding:18px 19px;border-radius:25px;cursor:pointer;
+  background:
+    radial-gradient(circle at 92% 10%,rgba(255,213,43,.25),transparent 25%),
+    radial-gradient(circle at 5% 100%,rgba(26,155,255,.22),transparent 35%),
+    linear-gradient(135deg,#075eb5,#072a5a 70%,#061d40);
+  border:1px solid rgba(67,187,255,.58);box-shadow:0 14px 35px rgba(0,0,0,.28);
+  transition:.18s;
+}
+.feed-highlight:hover{transform:translateY(-2px);filter:brightness(1.06)}
+.feed-highlight-glow{position:absolute;width:130px;height:130px;right:-45px;top:-55px;border-radius:50%;background:rgba(255,255,255,.08);filter:blur(2px)}
+.feed-highlight-icon{
+  width:72px;height:72px;flex:0 0 72px;border-radius:21px;display:flex;align-items:center;justify-content:center;
+  font-size:40px;background:rgba(255,255,255,.10);border:2px solid rgba(91,203,255,.58);
+  filter:drop-shadow(0 8px 13px rgba(0,0,0,.3));
+}
+.feed-highlight-info{min-width:0;position:relative;z-index:1;flex:1}
+.feed-highlight-tag{display:inline-block;padding:5px 8px;border-radius:9px;background:rgba(255,213,43,.15);border:1px solid rgba(255,213,43,.3);color:#ffe36a;font-size:8px;font-weight:1000;letter-spacing:.5px}
+.feed-highlight h3{margin-top:6px;font-size:22px;font-weight:1000}
+.feed-highlight p{margin-top:4px;color:#c6e0f3;font-size:11px;line-height:1.35}
+.feed-highlight button{
+  margin-top:10px;padding:9px 12px;border:0;border-radius:11px;background:linear-gradient(135deg,#ffd52b,#e29a08);
+  color:#352400;font-size:10px;font-weight:1000;cursor:pointer;box-shadow:0 7px 16px rgba(0,0,0,.2)
+}
+.feed-highlight-arrow{
+  width:47px;height:47px;flex:0 0 47px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.10);font-size:25px;position:relative;z-index:1
+}
+@media(max-width:700px){
+ .feed-highlight{padding:14px;gap:11px}.feed-highlight-icon{width:58px;height:58px;flex-basis:58px;font-size:31px;border-radius:17px}
+ .feed-highlight h3{font-size:17px}.feed-highlight p{font-size:10px}.feed-highlight-arrow{width:38px;height:38px;flex-basis:38px;font-size:20px}
+}
+
+</style>
 
 </head>
 
@@ -2650,6 +2685,18 @@ button{
 
   </div>
 
+</section>
+
+<section class="feed-highlight" id="feedHighlight">
+  <div class="feed-highlight-glow"></div>
+  <div class="feed-highlight-icon">📰</div>
+  <div class="feed-highlight-info">
+    <div class="feed-highlight-tag">✨ NOVO • COMUNIDADE</div>
+    <h3>MURAL ADAM GAMES</h3>
+    <p>Compartilhe suas conquistas, veja as publicações e interaja com outros jogadores.</p>
+    <button type="button" id="openFeedButton">🔥 VER O FEED</button>
+  </div>
+  <div class="feed-highlight-arrow">→</div>
 </section>
 
 
@@ -8769,6 +8816,21 @@ function iniciarChanceCaixa(){
   if(caixaChanceTimer) clearInterval(caixaChanceTimer);
   atualizarChanceCaixa();
   caixaChanceTimer=setInterval(atualizarChanceCaixa,1000);
+}
+
+
+const openFeedButton = document.getElementById("openFeedButton");
+if(openFeedButton){
+  openFeedButton.addEventListener("click", function(e){
+    e.stopPropagation();
+    window.location.href = "feed.html";
+  });
+}
+const feedHighlight = document.getElementById("feedHighlight");
+if(feedHighlight){
+  feedHighlight.addEventListener("click", function(){
+    window.location.href = "feed.html";
+  });
 }
 
 </script>
