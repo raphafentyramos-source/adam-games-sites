@@ -86,6 +86,26 @@ button{font-family:inherit}
  .page{padding:10px 10px 105px}.hero-feed{padding:21px 17px}.hero-icon{font-size:52px}.hero-title{font-size:32px}
  .post{padding:13px}.composer-actions{gap:6px}.action-mini{font-size:10px;padding:9px 5px}
 }
+
+.feed-mural-banner{
+  margin:14px 0 0;
+  border-radius:24px;
+  overflow:hidden;
+  border:2px solid rgba(54,185,255,.58);
+  background:#061b3a;
+  box-shadow:0 14px 34px rgba(0,0,0,.30);
+}
+.feed-mural-banner img{
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio:2048/768;
+  object-fit:cover;
+  object-position:center;
+}
+@media(max-width:520px){
+  .feed-mural-banner{border-radius:20px}
+}
 </style>
 </head>
 <body>
@@ -94,6 +114,10 @@ button{font-family:inherit}
   <div class="brand"><div class="brand-icon">👑</div><div class="brand-name">ADAM<br><span>GAMES</span></div></div>
   <button class="back" id="backButton" type="button">←</button>
 </header>
+<section class="feed-mural-banner" aria-label="Mural da Comunidade">
+  <img src="04596C32-08FC-4D7A-BD75-B800607B10A4.png" alt="Mural da Comunidade Adam Games" loading="eager">
+</section>
+
 
 <section class="hero-feed">
   <div class="hero-row">
@@ -231,8 +255,8 @@ document.getElementById("publishButton").onclick=()=>{
   const r=new FileReader();r.onload=()=>finish(r.result);r.readAsDataURL(f);
  }else finish();
 }
-document.getElementById("backButton").onclick=()=>{location.href="painel_CORRIGIDO_NOTIFICACOES_ESTANDE.html"};
-document.getElementById("panelNav").onclick=()=>{location.href="painel_CORRIGIDO_NOTIFICACOES_ESTANDE.html"};
+document.getElementById("backButton").onclick=()=>{location.href="painel.html"};
+document.getElementById("panelNav").onclick=()=>{location.href="painel.html"};
 document.getElementById("profileNav").onclick=()=>{showToast("Perfil social em breve.")};
 render();
 setInterval(render,60000);
