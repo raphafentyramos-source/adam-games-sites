@@ -58,7 +58,7 @@ button{font-family:inherit}
 .post-user{font-size:14px;font-weight:1000}.post-meta{margin-top:3px;color:#7fa7c5;font-size:10px}
 .post-text{margin-top:12px;color:#e7f3fc;font-size:14px;line-height:1.48;white-space:pre-wrap}
 .post-image{width:100%;margin-top:12px;border-radius:18px;display:block;max-height:520px;object-fit:cover;border:1px solid rgba(255,255,255,.08)}
-.post-actions{display:grid;grid-template-columns:1fr 1fr;margin-top:12px;border-top:1px solid rgba(255,255,255,.08);padding-top:9px;gap:7px}
+.post-actions{display:grid;grid-template-columns:1fr 1fr 1fr;margin-top:12px;border-top:1px solid rgba(255,255,255,.08);padding-top:9px;gap:7px}
 .post-action{border:0;background:transparent;color:#a8c2d9;padding:9px;border-radius:11px;font-weight:900;font-size:12px;cursor:pointer}
 .post-action:hover{background:rgba(255,255,255,.06);color:#fff}.post-action.liked{color:#ff5570}
 .comments{margin-top:8px;display:none}.comments.show{display:block}
@@ -105,6 +105,13 @@ button{font-family:inherit}
 }
 @media(max-width:520px){
   .feed-mural-banner{border-radius:20px}
+}
+
+.post-actions-3{grid-template-columns:1fr 1fr 1fr}
+.share-btn.shared{color:#4bd7ff}
+@media(max-width:420px){
+  .post-actions-3{grid-template-columns:1fr 1fr 1fr}
+  .post-actions-3 .post-action{font-size:10px;padding:8px 3px}
 }
 </style>
 </head>
@@ -171,7 +178,48 @@ button{font-family:inherit}
 
 <script>
 const KEY="adam_games_feed_v1";
-let posts=[];
+let posts=[
+  {
+    "id": "community-ana",
+    "user": "Ana Games",
+    "level": 18,
+    "time": "há 12 min",
+    "avatar": "👩‍🌾",
+    "text": "Finalmente completei minha coleção de cartas! 🥳🏆 Quem também está tentando completar?",
+    "image": "",
+    "likes": 24,
+    "liked": false,
+    "comments": [
+      {
+        "user": "Lucas",
+        "text": "Eu estou! Faltam 2 pra mim 😍"
+      },
+      {
+        "user": "Bia Games",
+        "text": "Parabéns!! 🔥"
+      }
+    ],
+    "mine": false
+  },
+  {
+    "id": "community-lucas",
+    "user": "Lucas Adventure",
+    "level": 27,
+    "time": "há 35 min",
+    "avatar": "🧑‍🚀",
+    "text": "Olha o prêmio que consegui hoje! 🎁✨ Adam Games está ficando viciante.",
+    "image": "",
+    "likes": 41,
+    "liked": false,
+    "comments": [
+      {
+        "user": "Ana Games",
+        "text": "Que sorte! 🍀"
+      }
+    ],
+    "mine": false
+  }
+];
 try{posts=JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){posts=[]}
 
 const feed=document.getElementById("feed");
@@ -226,15 +274,22 @@ function render(){
    </div>
    ${p.text?`<div class="post-text">${escapeHtml(p.text)}</div>`:""}
    ${p.image?`<img class="post-image" src="${p.image}" alt="Foto da publicação">`:""}
-   <div class="post-actions">
+   <div class="post-actions post-actions-3">
     <button class="post-action ${p.liked?"liked":""}" onclick="toggleLike(${i})">❤️ ${p.likes||0} Curtir</button>
     <button class="post-action" onclick="toggleComments(${i})">💬 ${(p.comments||[]).length} Comentar</button>
+    ${p.user==="Você"?`<button class="post-action delete-action" onclick="deletePost(${i})">🗑️ Apagar</button>`:""}
    </div>
    <div class="comments ${p.showComments?"show":""}" id="comments-${i}">
     ${(p.comments||[]).map(c=>`<div class="comment"><strong>${escapeHtml(c.user)}:</strong> ${escapeHtml(c.text)}</div>`).join("")}
     <div class="comment-box"><input class="comment-input" id="comment-${i}" maxlength="250" placeholder="Escreva um comentário..."><button class="comment-send" onclick="addComment(${i})">➤</button></div>
    </div>
  </article>`).join("");
+}
+window.deletePost=function(i){
+ const p=posts[i];
+ if(!p || p.user!=="Você"){showToast("Você só pode apagar suas próprias publicações.");return}
+ if(!confirm("Apagar esta publicação?\n\nEssa ação não pode ser desfeita."))return;
+ posts.splice(i,1);save();render();showToast("Publicação apagada. 🗑️");
 }
 window.toggleLike=function(i){posts[i].liked=!posts[i].liked;posts[i].likes=Math.max(0,(posts[i].likes||0)+(posts[i].liked?1:-1));save();render()}
 window.toggleComments=function(i){posts[i].showComments=!posts[i].showComments;save();render()}
@@ -260,6 +315,37 @@ document.getElementById("panelNav").onclick=()=>{location.href="painel.html"};
 document.getElementById("profileNav").onclick=()=>{showToast("Perfil social em breve.")};
 render();
 setInterval(render,60000);
+
+/* ===== COMPARTILHAR PUBLICAÇÃO ===== */
+document.addEventListener('click', async (e) => {
+  const btn = e.target.closest('.share-btn');
+  if (!btn) return;
+  const post = btn.closest('.post');
+  const user = post?.querySelector('.post-user')?.textContent?.trim() || 'Jogador Adam Games';
+  const text = post?.querySelector('.post-text')?.textContent?.trim() || '';
+  const data = {
+    title: 'Adam Games — Mural da Comunidade',
+    text: `${user}: ${text}`,
+    url: window.location.href
+  };
+  try {
+    if (navigator.share) {
+      await navigator.share(data);
+    } else if (navigator.clipboard) {
+      await navigator.clipboard.writeText(`${data.text}\n${data.url}`);
+      const old = btn.textContent;
+      btn.textContent = '✅ Copiado!';
+      btn.classList.add('shared');
+      setTimeout(() => {
+        btn.textContent = old;
+        btn.classList.remove('shared');
+      }, 1600);
+    } else {
+      window.prompt('Copie o link:', window.location.href);
+    }
+  } catch (_) {}
+});
+
 </script>
 </body>
 </html>
