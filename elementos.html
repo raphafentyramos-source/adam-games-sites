@@ -3,694 +3,219 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jogo dos Elementos — Coleção</title>
+<title>Adam Games — Elementos</title>
 <style>
 *{box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#020b1c;color:#fff;min-height:100vh}
-body:before{content:"";position:fixed;inset:0;background:linear-gradient(rgba(2,11,28,.72),rgba(2,11,28,.94)),url("fundo-elementos-vertical.png") center top/cover no-repeat;opacity:.65;z-index:-1}
-.wrap{width:min(1050px,94vw);margin:auto;padding:28px 0 45px}
-.hero{border:1px solid #36baff55;border-radius:24px;padding:30px;background:rgba(2,16,39,.84);box-shadow:0 15px 50px #0008}
+body:before{content:"";position:fixed;inset:0;background:linear-gradient(rgba(2,11,28,.70),rgba(2,11,28,.95)),url("fundo-elementos-vertical.png") center top/cover no-repeat;opacity:.72;z-index:-1}
+.wrap{width:min(1100px,94vw);margin:auto;padding:12px 0 45px}
+.topbar{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:10px;padding:8px 0 14px;background:linear-gradient(#07142bf7,#07142bd9,transparent)}
+.topbar button,.topbar a{text-decoration:none;color:#fff;font-weight:1000;border:1px solid #36baff55;border-radius:14px;background:#071a35ee;cursor:pointer}
+.back{width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-size:29px;flex:0 0 auto}
+.brand{font-size:12px;letter-spacing:1px;color:#bcd2ea;text-align:center;flex:1}
+.brand b{color:#ffd83d}
+.estante-top{padding:11px 14px;background:linear-gradient(135deg,#0c8edb,#075b9d)!important;border-color:#53d4ff66!important;font-size:11px;white-space:nowrap}
+.view{display:none;animation:fade .18s ease}
+.view.active{display:block}
+@keyframes fade{from{opacity:.2;transform:translateY(5px)}to{opacity:1;transform:none}}
+.hero{border:1px solid #36baff55;border-radius:24px;padding:30px;background:rgba(2,16,39,.86);box-shadow:0 15px 50px #0008}
 .kicker{color:#51d7ff;font-weight:800;letter-spacing:2px;font-size:12px}
 h1{margin:8px 0;font-size:clamp(30px,6vw,56px);line-height:1;color:#fff;text-shadow:0 0 18px #00bfff88}
-.hero p{color:#c9d9ee;line-height:1.65;max-width:780px}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+.hero p{color:#c9d9ee;line-height:1.65;max-width:820px}
+.statbar{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
+.stat{background:#04132ae8;border:1px solid #36baff44;border-radius:16px;padding:16px;text-align:center}
+.stat small{display:block;color:#8fa8c5;font-weight:800;font-size:11px}
+.stat strong{font-size:30px;display:block;margin-top:5px}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+a.action,button.action{display:inline-flex;align-items:center;justify-content:center;padding:14px 20px;border-radius:13px;text-decoration:none;font-weight:900;border:1px solid #48cfff88;color:#fff;background:#0a2748;cursor:pointer}
+.primary{background:linear-gradient(135deg,#009eea,#6b35ff)!important;border:0!important}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
 .card{padding:20px;border-radius:18px;background:#071a35e8;border:1px solid #2a9bd855}
-.card b{display:block;font-size:22px;margin-bottom:8px}
+.card b{display:block;font-size:21px;margin-bottom:8px}
 .card span{color:#a9bfd8;line-height:1.5}
-.statbar{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
-.stat{flex:1;min-width:150px;background:#04132ae8;border:1px solid #36baff44;border-radius:16px;padding:15px}
-.stat small{display:block;color:#8fa8c5} .stat strong{font-size:28px}
-.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
-a,.btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 20px;border-radius:13px;text-decoration:none;font-weight:800;border:1px solid #48cfff88;color:#fff;background:#0a2748;cursor:pointer}
-.primary{background:linear-gradient(135deg,#009eea,#6b35ff);border:0}
 .trade{margin-top:25px;padding:22px;border-radius:20px;background:#07152be8;border:1px solid #a53cff66}
-
-.collection-section{
-  margin-top:25px;
-  padding:22px;
-  border-radius:20px;
-  background:#07152be8;
-  border:1px solid #36baff55;
-}
-.collection-section h2{margin:0 0 6px}
-.collection-help{margin:0 0 16px;color:#aebfd4;line-height:1.5}
-.element-grid{
-  display:grid;
-  grid-template-columns:repeat(6,1fr);
-  gap:9px;
-}
-.element-card{
-  position:relative;
-  min-height:94px;
-  padding:10px 7px;
-  border-radius:13px;
-  background:#0b2140;
-  border:1px solid #ffffff16;
-  text-align:center;
-  transition:.15s ease;
-}
-.element-card.owned{
-  border-color:#36c9ff88;
-  box-shadow:0 0 14px #00bfff16;
-}
-.element-card.missing{
-  opacity:.48;
-  filter:saturate(.35);
-}
-.element-number{font-size:10px;color:#7fa4c4}
-.element-symbol{font-size:25px;font-weight:1000;color:#fff;margin:3px 0}
-.element-name{font-size:9px;color:#a9bfd8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.element-qty{
-  display:inline-flex;
-  min-width:22px;
-  height:22px;
-  align-items:center;
-  justify-content:center;
-  margin-top:7px;
-  padding:0 6px;
-  border-radius:99px;
-  background:#06172d;
-  color:#62e0ff;
-  font-size:10px;
-  font-weight:1000;
-}
-.element-lock{font-size:12px;position:absolute;top:7px;right:7px}
-.element-rarity{font-size:8px;color:#8099b4;margin-top:4px}
-
-@media(max-width:700px){
-  .element-grid{grid-template-columns:repeat(4,1fr);gap:7px}
-  .element-card{min-height:86px;padding:8px 5px}
-  .element-symbol{font-size:22px}
-}
-@media(max-width:420px){
-  .element-grid{grid-template-columns:repeat(3,1fr)}
-}
-
 .trade h2{margin-top:0}
 .trade p{color:#aebfd4;line-height:1.55}
 .rules{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}
 .rule{padding:14px;border-radius:14px;background:#0b2140;border:1px solid #ffffff12}
 .rule b{color:#5edcff}
-@media(max-width:700px){.wrap{padding-top:15px}.hero{padding:20px}.cards,.rules{grid-template-columns:1fr}}
-<style>
-.element-topbar{
-  position:sticky;top:0;z-index:30;
-  display:flex;align-items:center;justify-content:space-between;gap:10px;
-  padding:10px 0 14px;
-  background:linear-gradient(#07142bf5,#07142bd9,transparent);
+.trade-form{display:grid;grid-template-columns:1.4fr 1fr;gap:12px;margin-top:14px}
+.trade-form label{font-size:11px;color:#8fa8c5;font-weight:900}
+.trade-form input,.trade-form select{width:100%;margin-top:7px;padding:13px;border-radius:12px;border:1px solid #36baff44;background:#061226;color:#fff;outline:none}
+.trade-selected{margin-top:12px;padding:12px;border-radius:12px;background:#061226;color:#cfe1f4;font-weight:800}
+.trade-send{width:100%;margin-top:14px;min-height:48px;border:0;border-radius:13px;background:#55e6a7;color:#04100c;font-weight:1000;cursor:pointer}
+.trade-send:disabled{opacity:.45;cursor:not-allowed}
+.trade-message{margin-top:12px;min-height:20px;font-weight:800}
+.trade-message.ok{color:#55e6a7}.trade-message.error{color:#ff758f}
+.status{margin-top:16px;padding:11px 14px;border-radius:12px;background:#061226;border:1px solid #ffffff12;color:#8fa8c5;font-size:12px}
+/* ESTANTE */
+.estante-head{border:1px solid #36baff55;border-radius:22px;padding:20px;background:rgba(2,16,39,.88);box-shadow:0 15px 50px #0008}
+.estante-head h1{font-size:clamp(28px,6vw,48px);margin:6px 0}
+.estante-sub{color:#aebfd4;line-height:1.5;margin:0}
+.estante-counter{margin-top:14px;padding:12px 15px;border-radius:14px;background:#06172d;border:1px solid #36baff44;color:#67ddff;font-weight:1000;text-align:center}
+.wallbox{margin-top:18px;padding:14px;border-radius:20px;background:rgba(2,15,34,.94);border:1px solid #4acfff66;overflow:auto;box-shadow:0 12px 35px #000a}
+.periodic{display:grid;grid-template-columns:repeat(18,48px);grid-template-rows:repeat(10,48px);gap:3px;min-width:915px}
+.element{position:relative;grid-column:var(--col);grid-row:var(--row);border-radius:8px;padding:3px 2px;text-align:center;display:flex;flex-direction:column;justify-content:center;align-items:center;border:1px solid #ffffff18;background:linear-gradient(145deg,#08182d,#071226);color:#4f6883;opacity:.38;filter:saturate(.25);cursor:pointer;transition:.15s ease;box-shadow:inset 0 0 12px #0008}
+.element:hover{transform:translateY(-2px);opacity:.8}
+.element.owned{opacity:1;filter:none;color:#fff;border-color:#45d8ff99;box-shadow:0 0 16px #00bfff33,inset 0 0 18px #00bfff18;background:linear-gradient(145deg,#063e67,#1c1450)}
+.element.owned.r-comum{border-color:#4acfffaa}
+.element.owned.r-incomum{border-color:#48e0a4aa;box-shadow:0 0 16px #36e0a433}
+.element.owned.r-raro{border-color:#ffd34daa;box-shadow:0 0 18px #ffbd3b33}
+.element.owned.r-super{border-color:#d85cffaa;box-shadow:0 0 20px #d33dff44}
+.element .num{font-size:8px;color:#7895b2;line-height:1}
+.element .symbol{font-size:17px;font-weight:1000;line-height:1.05;margin:2px 0}
+.element .ename{font-size:7px;white-space:nowrap;max-width:45px;overflow:hidden;text-overflow:ellipsis}
+.element .qty{position:absolute;right:2px;top:2px;min-width:13px;height:13px;padding:0 3px;border-radius:99px;background:#06172d;color:#67ddff;font-size:7px;font-weight:1000;display:flex;align-items:center;justify-content:center}
+.element .lock{position:absolute;left:2px;top:2px;font-size:7px}
+.legend{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin:14px 0;color:#9fb5cb;font-size:11px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.dot{width:10px;height:10px;border-radius:3px;background:#18273a;border:1px solid #ffffff22}
+.dot.on{background:#0c7db2;border-color:#45d8ff}
+.detail{min-height:100px;padding:16px;border-radius:18px;border:1px solid #4acfff77;background:rgba(2,15,34,.95);box-shadow:0 12px 35px #000b;display:flex;gap:15px;align-items:center}
+.detail .big-symbol{width:74px;height:74px;flex:0 0 74px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:1000;background:linear-gradient(145deg,#063e67,#1c1450);border:1px solid #50d9ff88;box-shadow:0 0 20px #00bfff33}
+.detailMeta{font-size:10px;color:#67ddff;text-transform:uppercase;letter-spacing:1px}
+.detail h2{margin:3px 0;font-size:21px}
+.detail p{margin:5px 0;color:#b9cbe0;line-height:1.45;font-size:13px}
+.view-buttons{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:16px}
+.view-buttons button,.view-buttons a{color:#fff;text-decoration:none;padding:12px 16px;border-radius:12px;background:linear-gradient(135deg,#009eea,#6b35ff);font-weight:1000;font-size:11px;border:0;cursor:pointer}
+.overlay{display:none;position:fixed;inset:0;background:#000c;z-index:80;align-items:center;justify-content:center;padding:18px}
+.overlay-box{width:min(720px,96vw);max-height:88vh;overflow:auto;background:#071a35;border:1px solid #36baff66;border-radius:22px;padding:22px;box-shadow:0 20px 70px #000}
+.overlay-box h2{margin:0}
+.close{float:right;padding:8px 12px;border-radius:10px;border:1px solid #ffffff22;background:#0a2748;color:#fff;cursor:pointer}
+.history-item{padding:15px;margin:9px 0;border-radius:15px;background:#0b2140;border:1px solid #ffffff12}
+.notification-item{display:block;width:100%;text-align:left;margin:8px 0;padding:14px;border-radius:14px;border:1px solid #ffffff18;background:#102f55;color:#fff;cursor:pointer}
+@media(max-width:700px){
+ .wrap{padding-top:5px}.hero{padding:20px}.statbar,.cards,.rules,.trade-form{grid-template-columns:1fr}.brand{font-size:10px}.estante-top{padding:10px 9px;font-size:9px}
+ .periodic{grid-template-columns:repeat(18,42px);grid-template-rows:repeat(10,42px);min-width:760px;gap:2px}.wallbox{padding:6px}
+ .element{border-radius:5px;padding:2px 1px}.element .symbol{font-size:14px}.element .ename{display:none}.element .num{font-size:7px}.detail .big-symbol{width:58px;height:58px;flex-basis:58px;font-size:24px}
 }
-.element-back,.element-estante-top,.estante-bottom{
-  text-decoration:none;color:#fff;font-weight:1000;
-  border:1px solid #36baff44;border-radius:14px;
-  background:#071a35dd;
-}
-.element-back{
-  width:44px;height:44px;display:flex;align-items:center;justify-content:center;
-  font-size:30px;
-}
-.element-top-brand{font-size:12px;letter-spacing:1px;color:#bcd2ea;text-align:center;flex:1}
-.element-top-brand b{color:#ffd83d}
-.element-estante-top,.estante-bottom{
-  padding:11px 14px;background:linear-gradient(135deg,#0c8edb,#075b9d);
-  border-color:#53d4ff66;font-size:11px;white-space:nowrap;
-}
-.estante-bottom{display:inline-block;background:linear-gradient(135deg,#0c8edb,#075b9d)}
-@media(max-width:600px){
-  .element-top-brand{font-size:10px}
-  .element-estante-top{padding:10px 9px;font-size:9px}
-}
-</style></style>
+@media(max-width:420px){.topbar{gap:6px}.back{width:40px;height:40px}.estante-top{font-size:8px;padding:9px 7px}.element .symbol{font-size:13px}}
+</style>
 </head>
 <body>
 <div class="wrap">
-<div class="element-topbar">
-  <a class="element-back" href="painel.html" aria-label="Voltar ao painel">←</a>
-  <div class="element-top-brand">ADAM <b>GAMES</b> • ⚛️ ELEMENTOS</div>
-  <a class="element-estante-top" href="#estante">⚛️ ACESSAR ESTANTE</a>
-</div>
-<section class="hero">
-<div class="kicker">ADAM GAMES • COLEÇÃO</div>
-<h1>Minha Coleção de Elementos</h1>
-<p>Aqui fica a sua estante dos <b>118 elementos da Tabela Periódica</b>. Cada elemento encontrado ocupa seu espaço na coleção; quando você encontra um elemento que já possui, ele vira uma <b>duplicata</b> que pode ser usada nas trocas com outros jogadores.</p>
+  <div class="topbar">
+    <button class="back" id="topBack" aria-label="Voltar">←</button>
+    <div class="brand">ADAM <b>GAMES</b> • ⚛️ ELEMENTOS</div>
+    <button class="estante-top" id="topEstante">⚛️ ACESSAR ESTANTE</button>
+  </div>
 
-<div class="statbar">
-<div class="stat"><small>Total de elementos</small><strong>118</strong></div>
-<div class="stat"><small>Na sua coleção</small><strong id="ownedCount">…</strong></div>
-<div class="stat"><small>Duplicatas</small><strong id="dupeCount">…</strong></div>
-</div>
+  <section id="collectionView" class="view active">
+    <section class="hero">
+      <div class="kicker">ADAM GAMES • COLEÇÃO</div>
+      <h1>MINHA COLEÇÃO</h1>
+      <p>Sua coleção dos <b>118 elementos da Tabela Periódica</b>. Aqui você acompanha quantos já encontrou, quantas duplicatas possui, consulta o histórico e faz trocas com outros jogadores.</p>
+      <div class="statbar">
+        <div class="stat"><small>TOTAL DE ELEMENTOS</small><strong>118</strong></div>
+        <div class="stat"><small>ELEMENTOS QUE TENHO</small><strong id="ownedCount">0</strong></div>
+        <div class="stat"><small>ELEMENTOS REPETIDOS</small><strong id="dupeCount">0</strong></div>
+      </div>
+      <div class="actions">
+        <button class="action primary" id="openEstante">⚛️ MINHA ESTANTE</button>
+        <button class="action" id="historyButton">📜 HISTÓRICO</button>
+        <button class="action" id="notificationButton">🔔 NOTIFICAÇÕES <span id="notificationCount" style="display:none;margin-left:6px;background:#ff3b72;border-radius:99px;padding:2px 7px;font-size:11px"></span></button>
+      </div>
+      <div class="cards">
+        <div class="card"><b>🔬 ENCONTRE</b><span>Ao começar, você recebe 1 elemento aleatório entre os números 1 e 5. Depois, pode ganhar elementos em desafios, bônus e temporadas.</span></div>
+        <div class="card"><b>♻️ DUPLICATAS</b><span>Quando você recebe um elemento que já possui, a nova unidade fica como repetida e pode ser usada em trocas.</span></div>
+        <div class="card"><b>🤝 TROQUE</b><span>Envie 1 elemento para outro jogador. Não VIP tem 1 envio a cada 24 horas; VIP tem 2.</span></div>
+      </div>
+      <section class="trade" id="tradeSection">
+        <h2>♻️ ENVIAR ELEMENTO</h2>
+        <p>Escolha um elemento que você possui e envie para outro jogador. Cada envio manda <b>1 unidade</b>. Recebimentos são ilimitados.</p>
+        <div class="rules">
+          <div class="rule"><b>👤 Não VIP</b><br>1 envio a cada 24 horas.</div>
+          <div class="rule"><b>⭐ VIP</b><br>2 envios a cada 24 horas.</div>
+          <div class="rule"><b>🎴 Elemento Coringa</b><br>Pode ocupar um espaço de elemento que ainda esteja faltando.</div>
+          <div class="rule"><b>💎 Raridades</b><br>Comum • Incomum • Raro • Super Raro.</div>
+        </div>
+        <div class="trade-limit" id="tradeLimit" style="margin-top:14px;padding:14px;border-radius:14px;background:#0b2140;border:1px solid #ffffff12;color:#62e0ff;font-weight:900">⏳ Carregando limite...</div>
+        <div class="trade-form">
+          <label>Jogador que vai receber<input id="tradeRecipient" type="text" placeholder="ID Adam Games, e-mail ou UID" autocomplete="off"></label>
+          <label>Elemento que você vai enviar<select id="tradeElement"><option value="">Selecione um elemento que possui</option></select></label>
+        </div>
+        <div class="trade-selected" id="tradeSelected">Selecione um elemento que você possui.</div>
+        <button class="trade-send" id="tradeSendButton" type="button">♻️ ENVIAR 1 ELEMENTO</button>
+        <div class="trade-message" id="tradeMessage"></div>
+      </section>
+      <section class="trade">
+        <h2>⚛️ COMO ADQUIRIR ELEMENTOS</h2>
+        <div class="rules">
+          <div class="rule"><b>🎁 PRIMEIRO ELEMENTO</b><br>Ao começar, recebe 1 elemento aleatório entre 1 e 5.</div>
+          <div class="rule"><b>🎯 QUIZ</b><br>Nível 8 → +1 elemento. Hard → +1. Bônus → +1.</div>
+          <div class="rule"><b>🗓️ TEMPORADAS</b><br>Temporadas semanais e quinzenais podem entregar elementos.</div>
+          <div class="rule"><b>🛒 COMPRAS</b><br>Pacotes podem trazer elementos já encontrados.</div>
+          <div class="rule"><b>♻️ REPETIDOS</b><br>Receber um elemento que já possui gera uma duplicata.</div>
+          <div class="rule"><b>⚛️ ELEMENTO SURPRESA</b><br>Não VIP: 120h. VIP: 60h. Pode vir repetido.</div>
+        </div>
+      </section>
+      <div class="status" id="collectionStatus">⏳ Carregando sua coleção...</div>
+      <div class="actions">
+        <button class="action" id="refreshCollection">🔄 ATUALIZAR COLEÇÃO</button>
+        <button class="action primary" id="bottomEstante">⚛️ ACESSAR ESTANTE</button>
+        <a class="action" href="painel.html">← VOLTAR AO PAINEL</a>
+      </div>
+    </section>
+  </section>
 
-<div class="cards">
-<div class="card"><b>🔬 ENCONTRE</b><span>Avance nos desafios para ganhar elementos. Ao começar, você já recebe 1 elemento entre os números 1 e 5.</span></div>
-<div class="card"><b>♻️ DUPLICATAS</b><span>Quando você recebe um elemento que já possui, ele fica registrado como duplicata para futuras trocas.</span></div>
-<div class="card"><b>🤝 TROQUE</b><span>Envie duplicatas para outros jogadores. Jogadores comuns têm 1 troca a cada 24h; VIP têm 3 trocas a cada 24h.</span></div>
-</div>
-
-<div class="trade">
-<h2>Como funcionam as trocas?</h2>
-<div class="rules">
-<div class="rule"><b>👤 Não VIP</b><br>1 envio de elemento a cada 24 horas.</div>
-<div class="rule"><b>⭐ VIP</b><br>3 envios de elementos a cada 24 horas.</div>
-<div class="rule"><b>🎴 Elemento Coringa</b><br>Pode ocupar um espaço de elemento que ainda esteja faltando.</div>
-<div class="rule"><b>💎 Raridades</b><br>Comum • Incomum • Raro • Super Raro.</div>
-</div>
-</div>
-
-<section class="trade" style="margin-top:25px">
-<h2>⚛️ Como adquirir elementos</h2>
-<p>Você pode montar sua coleção de várias formas. A primeira recompensa é entregue logo no início para incentivar o jogador a começar a estante.</p>
-
-<div class="rules">
-<div class="rule"><b>🎁 PRIMEIRO ELEMENTO</b><br>Ao começar, o jogador recebe 1 elemento aleatório entre os elementos <b>1 a 5</b>: Hidrogênio, Hélio, Lítio, Berílio ou Boro.</div>
-<div class="rule"><b>🎯 QUIZ</b><br>Chegou ao nível 8 → <b>+1 elemento</b>. Hard → <b>+1 elemento</b>. Bônus → <b>+1 elemento</b>.</div>
-<div class="rule"><b>🗓️ TEMPORADAS</b><br>Teremos temporadas <b>semanais e quinzenais</b>, com recompensas e elementos definidos para cada período.</div>
-<div class="rule"><b>🛒 COMPRAS</b><br>Também será possível adquirir pacotes de elementos. Os pacotes podem trazer elementos já encontrados.</div>
-<div class="rule"><b>♻️ REPETIDOS</b><br>Se você receber um elemento que já possui, ele vira duplicata e pode ser usado nas trocas.</div>
-<div class="rule"><b>⚛️ ELEMENTO SURPRESA</b><br>Não VIP: <b>120 horas</b>. VIP: <b>60 horas</b>. Cada recompensa entrega 1 elemento e pode vir repetido.</div>
-</div>
-</section>
-
-<section class="collection-section" id="estante">
-<h2>⚛️ SUA ESTANTE</h2>
-<p class="collection-help">
-Cada quadrinho mostra o elemento e a quantidade que você possui.
-Os que ainda não foram encontrados ficam bloqueados.
-</p>
-<div class="element-grid" id="elementGrid"></div>
-</section>
-
-<div class="actions">
-<a class="estante-bottom" href="#estante">⚛️ ACESSAR ESTANTE</a>
-<button class="primary" id="refreshCollection" type="button">🔄 ATUALIZAR COLEÇÃO</button>
-<button id="historyButton" type="button">📜 HISTÓRICO</button>
-<button id="notificationButton" type="button">🔔 NOTIFICAÇÕES <span id="notificationCount" style="display:none;margin-left:6px;background:#ff3b72;border-radius:99px;padding:2px 7px;font-size:11px"></span></button>
-<a href="painel.html">← VOLTAR AO PAINEL</a>
-</div>
-
-<div id="historyOverlay" style="display:none;position:fixed;inset:0;background:#000b;z-index:50;align-items:center;justify-content:center;padding:18px">
-  <div style="width:min(720px,96vw);max-height:88vh;overflow:auto;background:#071a35;border:1px solid #36baff66;border-radius:22px;padding:22px;box-shadow:0 20px 70px #000">
-    <div style="display:flex;justify-content:space-between;gap:12px;align-items:center">
-      <h2 style="margin:0">📜 Histórico da coleção</h2>
-      <button id="closeHistory" type="button">✕</button>
+  <section id="estanteView" class="view">
+    <section class="estante-head">
+      <div class="kicker">ADAM GAMES • ESTANTE</div>
+      <h1>MINHA ESTANTE</h1>
+      <p class="estante-sub">Aqui estão os <b>118 elementos</b> da Tabela Periódica. <b>Aceso = você já tem.</b> Apagado = ainda falta. Toque em um elemento para ver sua ficha.</p>
+      <div class="estante-counter" id="estanteCounter">Coleção: 0 / 118 • Duplicatas: 0</div>
+    </section>
+    <div class="wallbox"><div class="periodic" id="periodic"></div></div>
+    <div class="legend"><span><i class="dot on"></i>Elemento encontrado</span><span><i class="dot"></i>Elemento não encontrado</span></div>
+    <div class="detail">
+      <div class="big-symbol" id="detailSymbol">⚛️</div>
+      <div>
+        <div class="detailMeta" id="detailMeta">SELECIONE UM ELEMENTO</div>
+        <h2 id="detailName">Sua estante</h2>
+        <p id="detailText">Toque em qualquer elemento para ver a ficha e a quantidade que você possui.</p>
+        <div id="detailQuantity" style="margin-top:8px;color:#67ddff;font-weight:900;font-size:12px"></div>
+      </div>
     </div>
-    <p style="color:#aebfd4">Aqui aparecem os elementos recebidos e a origem de cada recebimento.</p>
-    <div id="historyList"><div style="color:#aebfd4">⏳ Carregando histórico...</div></div>
-  </div>
-</div>
-
-<div id="notificationOverlay" style="display:none;position:fixed;inset:0;background:#000b;z-index:49;align-items:center;justify-content:center;padding:18px">
-  <div style="width:min(620px,96vw);max-height:88vh;overflow:auto;background:#071a35;border:1px solid #36baff66;border-radius:22px;padding:22px;box-shadow:0 20px 70px #000">
-    <div style="display:flex;justify-content:space-between;gap:12px;align-items:center">
-      <h2 style="margin:0">🔔 Notificações</h2>
-      <button id="closeNotifications" type="button">✕</button>
+    <div class="view-buttons">
+      <button id="backCollection">← VOLTAR PARA MINHA COLEÇÃO</button>
+      <button id="goTrade">♻️ IR PARA TROCAS</button>
     </div>
-    <div id="notificationsList" style="margin-top:15px"></div>
-  </div>
+  </section>
 </div>
 
-<div id="receivedOverlay" style="display:none;position:fixed;inset:0;background:#000b;z-index:60;align-items:center;justify-content:center;padding:18px">
-  <div style="width:min(520px,94vw);background:linear-gradient(145deg,#0b2344,#07142b);border:1px solid #38d9ff88;border-radius:24px;padding:25px;text-align:center;box-shadow:0 20px 80px #000">
-    <div style="font-size:48px">🎁</div>
-    <h2 id="receivedTitle">Você recebeu elementos!</h2>
-    <p id="receivedMessage" style="color:#c9d9ee;line-height:1.5"></p>
-    <div id="receivedElements" style="display:grid;gap:8px;margin:18px 0"></div>
-    <button class="primary" id="receivedOk" type="button" style="width:100%">✓ RECEBER</button>
-  </div>
-</div>
-</section>
-</div>
+<div class="overlay" id="historyOverlay"><div class="overlay-box"><button class="close" id="closeHistory">✕</button><h2>📜 Histórico da coleção</h2><p style="color:#aebfd4">Elementos recebidos e a origem de cada recebimento.</p><div id="historyList">⏳ Carregando...</div></div></div>
+<div class="overlay" id="notificationOverlay"><div class="overlay-box"><button class="close" id="closeNotifications">✕</button><h2>🔔 Notificações</h2><div id="notificationsList" style="margin-top:15px"></div></div></div>
+<div class="overlay" id="receivedOverlay"><div class="overlay-box" style="width:min(520px,94vw);text-align:center"><div style="font-size:48px">🎁</div><h2 id="receivedTitle">Você recebeu elementos!</h2><p id="receivedMessage" style="color:#c9d9ee;line-height:1.5"></p><div id="receivedElements" style="display:grid;gap:8px;margin:18px 0"></div><button class="action primary" id="receivedOk" style="width:100%">✓ RECEBER</button></div></div>
+
 <script type="module">
 const DATA=[{"n": 1, "s": "H", "name": "Hidrogênio", "desc": "O elemento mais leve; é abundante no universo e participa da composição da água.", "rarity": "Comum", "row": 1, "col": 1}, {"n": 2, "s": "He", "name": "Hélio", "desc": "Gás nobre muito leve, usado em balões, criogenia e aplicações científicas.", "rarity": "Incomum", "row": 1, "col": 18}, {"n": 3, "s": "Li", "name": "Lítio", "desc": "Metal leve muito usado em baterias recarregáveis e ligas metálicas.", "rarity": "Comum", "row": 2, "col": 1}, {"n": 4, "s": "Be", "name": "Berílio", "desc": "Metal leve e rígido usado em ligas e equipamentos de alta precisão.", "rarity": "Incomum", "row": 2, "col": 2}, {"n": 5, "s": "B", "name": "Boro", "desc": "Semimetal presente em vidros especiais, cerâmicas e materiais resistentes.", "rarity": "Incomum", "row": 2, "col": 13}, {"n": 6, "s": "C", "name": "Carbono", "desc": "Elemento fundamental da vida e base de inúmeros materiais e compostos.", "rarity": "Comum", "row": 2, "col": 14}, {"n": 7, "s": "N", "name": "Nitrogênio", "desc": "Gás que forma a maior parte da atmosfera terrestre e é essencial aos seres vivos.", "rarity": "Comum", "row": 2, "col": 15}, {"n": 8, "s": "O", "name": "Oxigênio", "desc": "Gás essencial à respiração e às reações de combustão.", "rarity": "Comum", "row": 2, "col": 16}, {"n": 9, "s": "F", "name": "Flúor", "desc": "Halogênio muito reativo, encontrado em compostos usados em diversas aplicações.", "rarity": "Incomum", "row": 2, "col": 17}, {"n": 10, "s": "Ne", "name": "Neônio", "desc": "Gás nobre conhecido pelo brilho característico em tubos luminosos.", "rarity": "Incomum", "row": 2, "col": 18}, {"n": 11, "s": "Na", "name": "Sódio", "desc": "Metal alcalino importante em compostos como o cloreto de sódio.", "rarity": "Comum", "row": 3, "col": 1}, {"n": 12, "s": "Mg", "name": "Magnésio", "desc": "Metal leve usado em ligas, materiais e processos biológicos.", "rarity": "Comum", "row": 3, "col": 2}, {"n": 13, "s": "Al", "name": "Alumínio", "desc": "Metal leve e resistente à corrosão, muito usado em embalagens e estruturas.", "rarity": "Comum", "row": 3, "col": 13}, {"n": 14, "s": "Si", "name": "Silício", "desc": "Semimetal essencial para a eletrônica e presente em muitos minerais.", "rarity": "Comum", "row": 3, "col": 14}, {"n": 15, "s": "P", "name": "Fósforo", "desc": "Elemento importante para organismos vivos e para diversos compostos industriais.", "rarity": "Comum", "row": 3, "col": 15}, {"n": 16, "s": "S", "name": "Enxofre", "desc": "Elemento amarelo usado em fertilizantes, química industrial e outros compostos.", "rarity": "Comum", "row": 3, "col": 16}, {"n": 17, "s": "Cl", "name": "Cloro", "desc": "Halogênio usado em tratamento de água e na produção de diversos compostos.", "rarity": "Comum", "row": 3, "col": 17}, {"n": 18, "s": "Ar", "name": "Argônio", "desc": "Gás nobre usado em soldagem, iluminação e ambientes controlados.", "rarity": "Comum", "row": 3, "col": 18}, {"n": 19, "s": "K", "name": "Potássio", "desc": "Metal alcalino importante para funções biológicas e presente em muitos sais.", "rarity": "Comum", "row": 4, "col": 1}, {"n": 20, "s": "Ca", "name": "Cálcio", "desc": "Elemento essencial aos ossos e dentes e muito presente em minerais.", "rarity": "Comum", "row": 4, "col": 2}, {"n": 21, "s": "Sc", "name": "Escândio", "desc": "Metal de transição usado principalmente em ligas especiais.", "rarity": "Raro", "row": 4, "col": 3}, {"n": 22, "s": "Ti", "name": "Titânio", "desc": "Metal resistente e leve, usado em ligas, equipamentos e aplicações médicas.", "rarity": "Incomum", "row": 4, "col": 4}, {"n": 23, "s": "V", "name": "Vanádio", "desc": "Metal usado principalmente para aumentar a resistência de ligas de aço.", "rarity": "Incomum", "row": 4, "col": 5}, {"n": 24, "s": "Cr", "name": "Cromo", "desc": "Metal associado a ligas resistentes à corrosão e ao aço inoxidável.", "rarity": "Incomum", "row": 4, "col": 6}, {"n": 25, "s": "Mn", "name": "Manganês", "desc": "Metal importante na produção de ligas e em processos industriais.", "rarity": "Incomum", "row": 4, "col": 7}, {"n": 26, "s": "Fe", "name": "Ferro", "desc": "Metal fundamental para o aço e para diversas funções biológicas.", "rarity": "Comum", "row": 4, "col": 8}, {"n": 27, "s": "Co", "name": "Cobalto", "desc": "Metal usado em ligas, materiais magnéticos e tecnologias de baterias.", "rarity": "Incomum", "row": 4, "col": 9}, {"n": 28, "s": "Ni", "name": "Níquel", "desc": "Metal resistente à corrosão usado em ligas, revestimentos e baterias.", "rarity": "Incomum", "row": 4, "col": 10}, {"n": 29, "s": "Cu", "name": "Cobre", "desc": "Excelente condutor elétrico, muito usado em fios, cabos e ligas.", "rarity": "Comum", "row": 4, "col": 11}, {"n": 30, "s": "Zn", "name": "Zinco", "desc": "Metal usado em galvanização, ligas e diversos compostos.", "rarity": "Comum", "row": 4, "col": 12}, {"n": 31, "s": "Ga", "name": "Gálio", "desc": "Metal de baixo ponto de fusão usado em semicondutores e tecnologia.", "rarity": "Incomum", "row": 4, "col": 13}, {"n": 32, "s": "Ge", "name": "Germânio", "desc": "Semimetal utilizado em semicondutores, fibras ópticas e sensores.", "rarity": "Incomum", "row": 4, "col": 14}, {"n": 33, "s": "As", "name": "Arsênio", "desc": "Elemento usado em aplicações industriais específicas e em compostos semicondutores.", "rarity": "Raro", "row": 4, "col": 15}, {"n": 34, "s": "Se", "name": "Selênio", "desc": "Elemento usado em eletrônica, vidro e alguns processos industriais.", "rarity": "Incomum", "row": 4, "col": 16}, {"n": 35, "s": "Br", "name": "Bromo", "desc": "Halogênio líquido à temperatura ambiente, usado em diversos compostos industriais.", "rarity": "Incomum", "row": 4, "col": 17}, {"n": 36, "s": "Kr", "name": "Criptônio", "desc": "Gás nobre empregado em iluminação e aplicações especializadas.", "rarity": "Incomum", "row": 4, "col": 18}, {"n": 37, "s": "Rb", "name": "Rubídio", "desc": "Metal alcalino raro usado principalmente em pesquisa e aplicações especializadas.", "rarity": "Raro", "row": 5, "col": 1}, {"n": 38, "s": "Sr", "name": "Estrôncio", "desc": "Metal usado em alguns materiais e compostos, inclusive em efeitos de cor.", "rarity": "Incomum", "row": 5, "col": 2}, {"n": 39, "s": "Y", "name": "Ítrio", "desc": "Metal usado em materiais especiais, lasers, cerâmicas e tecnologia.", "rarity": "Raro", "row": 5, "col": 3}, {"n": 40, "s": "Zr", "name": "Zircônio", "desc": "Metal resistente à corrosão usado em ligas e aplicações nucleares.", "rarity": "Incomum", "row": 5, "col": 4}, {"n": 41, "s": "Nb", "name": "Nióbio", "desc": "Metal usado para produzir ligas de alta resistência e materiais especiais.", "rarity": "Incomum", "row": 5, "col": 5}, {"n": 42, "s": "Mo", "name": "Molibdênio", "desc": "Metal que melhora a resistência de ligas e a estabilidade em altas temperaturas.", "rarity": "Incomum", "row": 5, "col": 6}, {"n": 43, "s": "Tc", "name": "Tecnécio", "desc": "Elemento radioativo usado principalmente em medicina nuclear e pesquisa.", "rarity": "Raro", "row": 5, "col": 7}, {"n": 44, "s": "Ru", "name": "Rutênio", "desc": "Metal raro usado em catalisadores, contatos e ligas especiais.", "rarity": "Raro", "row": 5, "col": 8}, {"n": 45, "s": "Rh", "name": "Ródio", "desc": "Metal muito raro usado em catalisadores e revestimentos de alta resistência.", "rarity": "Raro", "row": 5, "col": 9}, {"n": 46, "s": "Pd", "name": "Paládio", "desc": "Metal raro usado em catalisadores, eletrônica e joalheria.", "rarity": "Raro", "row": 5, "col": 10}, {"n": 47, "s": "Ag", "name": "Prata", "desc": "Metal com excelente condutividade, usado em eletrônica, joalheria e aplicações especiais.", "rarity": "Incomum", "row": 5, "col": 11}, {"n": 48, "s": "Cd", "name": "Cádmio", "desc": "Metal usado em aplicações industriais específicas, pigmentos e algumas baterias.", "rarity": "Incomum", "row": 5, "col": 12}, {"n": 49, "s": "In", "name": "Índio", "desc": "Metal macio usado em semicondutores, telas e revestimentos especiais.", "rarity": "Incomum", "row": 5, "col": 13}, {"n": 50, "s": "Sn", "name": "Estanho", "desc": "Metal usado em soldas, revestimentos e ligas.", "rarity": "Incomum", "row": 5, "col": 14}, {"n": 51, "s": "Sb", "name": "Antimônio", "desc": "Semimetal usado em ligas, materiais e compostos industriais.", "rarity": "Incomum", "row": 5, "col": 15}, {"n": 52, "s": "Te", "name": "Telúrio", "desc": "Semimetal usado em ligas, semicondutores e materiais especiais.", "rarity": "Incomum", "row": 5, "col": 16}, {"n": 53, "s": "I", "name": "Iodo", "desc": "Halogênio essencial à função da tireoide e usado em diversos compostos.", "rarity": "Incomum", "row": 5, "col": 17}, {"n": 54, "s": "Xe", "name": "Xenônio", "desc": "Gás nobre usado em iluminação, propulsão iônica e aplicações especializadas.", "rarity": "Incomum", "row": 5, "col": 18}, {"n": 55, "s": "Cs", "name": "Césio", "desc": "Metal alcalino muito reativo, importante em relógios atômicos e pesquisa.", "rarity": "Incomum", "row": 6, "col": 1}, {"n": 56, "s": "Ba", "name": "Bário", "desc": "Metal alcalino-terroso usado em compostos e aplicações industriais específicas.", "rarity": "Incomum", "row": 6, "col": 2}, {"n": 57, "s": "La", "name": "Lantânio", "desc": "Metal de terras raras usado em materiais ópticos, catalisadores e ligas.", "rarity": "Raro", "row": 9, "col": 4}, {"n": 58, "s": "Ce", "name": "Cério", "desc": "Terra rara usada em catalisadores, vidros e materiais de polimento.", "rarity": "Raro", "row": 9, "col": 5}, {"n": 59, "s": "Pr", "name": "Praseodímio", "desc": "Terra rara usada em ligas, ímãs e materiais ópticos.", "rarity": "Raro", "row": 9, "col": 6}, {"n": 60, "s": "Nd", "name": "Neodímio", "desc": "Terra rara famosa pelos ímãs permanentes muito potentes.", "rarity": "Raro", "row": 9, "col": 7}, {"n": 61, "s": "Pm", "name": "Promécio", "desc": "Terra rara radioativa, usada principalmente em pesquisa e aplicações especializadas.", "rarity": "Super Raro", "row": 9, "col": 8}, {"n": 62, "s": "Sm", "name": "Samário", "desc": "Terra rara usada em ímãs, catalisadores e aplicações especializadas.", "rarity": "Raro", "row": 9, "col": 9}, {"n": 63, "s": "Eu", "name": "Európio", "desc": "Terra rara importante para materiais luminescentes e telas.", "rarity": "Raro", "row": 9, "col": 10}, {"n": 64, "s": "Gd", "name": "Gadolínio", "desc": "Terra rara usada em materiais magnéticos e aplicações especializadas.", "rarity": "Raro", "row": 9, "col": 11}, {"n": 65, "s": "Tb", "name": "Térbio", "desc": "Terra rara usada em materiais luminescentes e dispositivos especiais.", "rarity": "Raro", "row": 9, "col": 12}, {"n": 66, "s": "Dy", "name": "Disprósio", "desc": "Terra rara usada em ímãs e materiais que precisam suportar altas temperaturas.", "rarity": "Raro", "row": 9, "col": 13}, {"n": 67, "s": "Ho", "name": "Hólmio", "desc": "Terra rara com propriedades magnéticas usadas em aplicações especializadas.", "rarity": "Raro", "row": 9, "col": 14}, {"n": 68, "s": "Er", "name": "Érbio", "desc": "Terra rara muito importante para fibras ópticas e aplicações de laser.", "rarity": "Raro", "row": 9, "col": 15}, {"n": 69, "s": "Tm", "name": "Túlio", "desc": "Uma das terras raras mais escassas, usada principalmente em pesquisa e aplicações especiais.", "rarity": "Raro", "row": 9, "col": 16}, {"n": 70, "s": "Yb", "name": "Itérbio", "desc": "Terra rara usada em lasers, materiais especiais e pesquisa.", "rarity": "Raro", "row": 9, "col": 17}, {"n": 71, "s": "Lu", "name": "Lutécio", "desc": "Terra rara densa usada em detectores, pesquisa e aplicações médicas.", "rarity": "Raro", "row": 9, "col": 18}, {"n": 72, "s": "Hf", "name": "Háfnio", "desc": "Metal resistente a altas temperaturas usado em ligas e aplicações tecnológicas.", "rarity": "Raro", "row": 6, "col": 4}, {"n": 73, "s": "Ta", "name": "Tântalo", "desc": "Metal muito resistente à corrosão, usado em eletrônica e equipamentos especiais.", "rarity": "Raro", "row": 6, "col": 5}, {"n": 74, "s": "W", "name": "Tungstênio", "desc": "Metal de altíssimo ponto de fusão usado em ligas e aplicações de alta temperatura.", "rarity": "Incomum", "row": 6, "col": 6}, {"n": 75, "s": "Re", "name": "Rênio", "desc": "Metal extremamente raro usado em superligas e catalisadores.", "rarity": "Raro", "row": 6, "col": 7}, {"n": 76, "s": "Os", "name": "Ósmio", "desc": "Metal muito denso e raro, usado principalmente em aplicações especializadas.", "rarity": "Raro", "row": 6, "col": 8}, {"n": 77, "s": "Ir", "name": "Irídio", "desc": "Metal muito resistente à corrosão e a altas temperaturas.", "rarity": "Raro", "row": 6, "col": 9}, {"n": 78, "s": "Pt", "name": "Platina", "desc": "Metal nobre raro usado em catalisadores, joalheria e tecnologia.", "rarity": "Raro", "row": 6, "col": 10}, {"n": 79, "s": "Au", "name": "Ouro", "desc": "Metal nobre muito resistente à corrosão, valorizado em joalheria e eletrônica.", "rarity": "Raro", "row": 6, "col": 11}, {"n": 80, "s": "Hg", "name": "Mercúrio", "desc": "Metal líquido à temperatura ambiente, historicamente usado em instrumentos e processos específicos.", "rarity": "Incomum", "row": 6, "col": 12}, {"n": 81, "s": "Tl", "name": "Tálio", "desc": "Metal pesado usado em aplicações industriais e científicas específicas.", "rarity": "Incomum", "row": 6, "col": 13}, {"n": 82, "s": "Pb", "name": "Chumbo", "desc": "Metal pesado usado em baterias, proteção contra radiação e aplicações específicas.", "rarity": "Incomum", "row": 6, "col": 14}, {"n": 83, "s": "Bi", "name": "Bismuto", "desc": "Metal pesado relativamente estável, usado em ligas e diversos compostos.", "rarity": "Incomum", "row": 6, "col": 15}, {"n": 84, "s": "Po", "name": "Polônio", "desc": "Elemento radioativo raro, conhecido principalmente por aplicações científicas e históricas.", "rarity": "Super Raro", "row": 6, "col": 16}, {"n": 85, "s": "At", "name": "Astato", "desc": "Halogênio extremamente raro e radioativo, encontrado apenas em quantidades mínimas na natureza.", "rarity": "Super Raro", "row": 6, "col": 17}, {"n": 86, "s": "Rn", "name": "Radônio", "desc": "Gás nobre radioativo produzido naturalmente pelo decaimento de outros elementos.", "rarity": "Super Raro", "row": 6, "col": 18}, {"n": 87, "s": "Fr", "name": "Frâncio", "desc": "Elemento extremamente raro e radioativo, encontrado em quantidades ínfimas.", "rarity": "Super Raro", "row": 7, "col": 1}, {"n": 88, "s": "Ra", "name": "Rádio", "desc": "Elemento radioativo raro, importante historicamente no estudo da radioatividade.", "rarity": "Super Raro", "row": 7, "col": 2}, {"n": 89, "s": "Ac", "name": "Actínio", "desc": "Elemento radioativo usado principalmente em pesquisa e aplicações nucleares.", "rarity": "Super Raro", "row": 10, "col": 4}, {"n": 90, "s": "Th", "name": "Tório", "desc": "Metal radioativo presente em minerais e estudado como possível combustível nuclear.", "rarity": "Super Raro", "row": 10, "col": 5}, {"n": 91, "s": "Pa", "name": "Protactínio", "desc": "Elemento radioativo muito raro, encontrado em pequenas quantidades em minérios de urânio.", "rarity": "Super Raro", "row": 10, "col": 6}, {"n": 92, "s": "U", "name": "Urânio", "desc": "Metal radioativo conhecido por seu uso como combustível em reatores nucleares.", "rarity": "Super Raro", "row": 10, "col": 7}, {"n": 93, "s": "Np", "name": "Neptúnio", "desc": "Elemento radioativo artificial, produzido principalmente em processos nucleares.", "rarity": "Super Raro", "row": 10, "col": 8}, {"n": 94, "s": "Pu", "name": "Plutônio", "desc": "Elemento radioativo produzido em reatores e usado em aplicações nucleares específicas.", "rarity": "Super Raro", "row": 10, "col": 9}, {"n": 95, "s": "Am", "name": "Amerício", "desc": "Elemento radioativo artificial usado, entre outras aplicações, em detectores de fumaça.", "rarity": "Super Raro", "row": 10, "col": 10}, {"n": 96, "s": "Cm", "name": "Cúrio", "desc": "Elemento radioativo artificial usado principalmente em pesquisa.", "rarity": "Super Raro", "row": 10, "col": 11}, {"n": 97, "s": "Bk", "name": "Berquélio", "desc": "Elemento sintético extremamente raro, produzido em laboratórios.", "rarity": "Super Raro", "row": 10, "col": 12}, {"n": 98, "s": "Cf", "name": "Califórnio", "desc": "Elemento sintético radioativo usado em aplicações científicas especializadas.", "rarity": "Super Raro", "row": 10, "col": 13}, {"n": 99, "s": "Es", "name": "Einstênio", "desc": "Elemento sintético extremamente raro, produzido em laboratório.", "rarity": "Super Raro", "row": 10, "col": 14}, {"n": 100, "s": "Fm", "name": "Férmio", "desc": "Elemento sintético radioativo criado em quantidades muito pequenas.", "rarity": "Super Raro", "row": 10, "col": 15}, {"n": 101, "s": "Md", "name": "Mendelévio", "desc": "Elemento sintético produzido em laboratório para pesquisa nuclear.", "rarity": "Super Raro", "row": 10, "col": 16}, {"n": 102, "s": "No", "name": "Nobélio", "desc": "Elemento sintético radioativo estudado em pesquisas sobre elementos pesados.", "rarity": "Super Raro", "row": 10, "col": 17}, {"n": 103, "s": "Lr", "name": "Laurêncio", "desc": "Elemento sintético e radioativo, produzido em aceleradores para pesquisa.", "rarity": "Super Raro", "row": 10, "col": 18}, {"n": 104, "s": "Rf", "name": "Rutherfórdio", "desc": "Elemento superpesado sintético, produzido em laboratório.", "rarity": "Super Raro", "row": 7, "col": 4}, {"n": 105, "s": "Db", "name": "Dúbnio", "desc": "Elemento superpesado sintético, conhecido apenas por experimentos científicos.", "rarity": "Super Raro", "row": 7, "col": 5}, {"n": 106, "s": "Sg", "name": "Seabórgio", "desc": "Elemento superpesado sintético, produzido em aceleradores.", "rarity": "Super Raro", "row": 7, "col": 6}, {"n": 107, "s": "Bh", "name": "Bóhrio", "desc": "Elemento superpesado sintético e altamente instável.", "rarity": "Super Raro", "row": 7, "col": 7}, {"n": 108, "s": "Hs", "name": "Hássio", "desc": "Elemento superpesado sintético, extremamente instável.", "rarity": "Super Raro", "row": 7, "col": 8}, {"n": 109, "s": "Mt", "name": "Meitnério", "desc": "Elemento superpesado sintético conhecido por experimentos de laboratório.", "rarity": "Super Raro", "row": 7, "col": 9}, {"n": 110, "s": "Ds", "name": "Darmstádio", "desc": "Elemento superpesado sintético e altamente instável.", "rarity": "Super Raro", "row": 7, "col": 10}, {"n": 111, "s": "Rg", "name": "Roentgênio", "desc": "Elemento superpesado sintético produzido em quantidades extremamente pequenas.", "rarity": "Super Raro", "row": 7, "col": 11}, {"n": 112, "s": "Cn", "name": "Copernício", "desc": "Elemento superpesado sintético e altamente instável.", "rarity": "Super Raro", "row": 7, "col": 12}, {"n": 113, "s": "Nh", "name": "Nihônio", "desc": "Elemento superpesado sintético produzido em laboratório.", "rarity": "Super Raro", "row": 7, "col": 13}, {"n": 114, "s": "Fl", "name": "Fleróvio", "desc": "Elemento superpesado sintético e extremamente instável.", "rarity": "Super Raro", "row": 7, "col": 14}, {"n": 115, "s": "Mc", "name": "Moscóvio", "desc": "Elemento superpesado sintético conhecido por poucos átomos produzidos.", "rarity": "Super Raro", "row": 7, "col": 15}, {"n": 116, "s": "Lv", "name": "Livermório", "desc": "Elemento superpesado sintético e altamente instável.", "rarity": "Super Raro", "row": 7, "col": 16}, {"n": 117, "s": "Ts", "name": "Tenessino", "desc": "Halogênio superpesado sintético, produzido em laboratório.", "rarity": "Super Raro", "row": 7, "col": 17}, {"n": 118, "s": "Og", "name": "Oganessônio", "desc": "Elemento de número atômico 118, superpesado e produzido artificialmente.", "rarity": "Super Raro", "row": 7, "col": 18}];
-/* =====================================================
-   FIREBASE — COLEÇÃO DO JOGADOR
-===================================================== */
-
-import {
-  initializeApp
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-
-import {
-  getAuth,
-  onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-
-import {
-  getFirestore,
-  collection,
-  query,
-  where,
-  getDocs,
-  doc,
-  updateDoc
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
-
-
-const firebaseConfig = {
-
-  apiKey:
-    "AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",
-
-  authDomain:
-    "adam-games-21081.firebaseapp.com",
-
-  projectId:
-    "adam-games-21081",
-
-  storageBucket:
-    "adam-games-21081.firebasestorage.app",
-
-  messagingSenderId:
-    "1055528418738",
-
-  appId:
-    "1:1055528418738:web:5fafdf63424ba9744eb8ab",
-
-  measurementId:
-    "G-KVFSF864GE"
-
-};
-
-
-const app =
-  initializeApp(
-    firebaseConfig
-  );
-
-const auth =
-  getAuth(app);
-
-const db =
-  getFirestore(app);
-
-
-/* =====================================================
-   ESTADO
-===================================================== */
-
-let inventarioElementos = {};
-
-
-/* =====================================================
-   ATUALIZAR ESTATÍSTICAS
-===================================================== */
-
-function updateStats(){
-
-  let owned = 0;
-  let dupes = 0;
-
-  DATA.forEach(
-    elemento => {
-
-      const quantidade =
-        Number(
-          inventarioElementos[
-            String(elemento.n)
-          ] || 0
-        );
-
-      if(
-        quantidade > 0
-      ){
-
-        owned++;
-
-      }
-
-      if(
-        quantidade > 1
-      ){
-
-        dupes +=
-          quantidade - 1;
-
-      }
-
-    }
-  );
-
-  const ownedCount =
-    document.getElementById(
-      "ownedCount"
-    );
-
-  const dupeCount =
-    document.getElementById(
-      "dupeCount"
-    );
-
-  if(ownedCount){
-
-    ownedCount.textContent =
-      owned;
-
-  }
-
-  if(dupeCount){
-
-    dupeCount.textContent =
-      dupes;
-
-  }
-
-  renderElementGrid();
-
-}
-
-
-
-
-/* =====================================================
-   RENDERIZAR OS 118 ELEMENTOS
-===================================================== */
-
-function renderElementGrid(){
-
-  const grid =
-    document.getElementById(
-      "elementGrid"
-    );
-
-  if(!grid){
-    return;
-  }
-
-  grid.innerHTML = "";
-
-  DATA.forEach(
-    elemento => {
-
-      const quantidade =
-        Number(
-          inventarioElementos[
-            String(elemento.n)
-          ] || 0
-        );
-
-      const card =
-        document.createElement(
-          "div"
-        );
-
-      card.className =
-        "element-card " +
-        (
-          quantidade > 0
-            ? "owned"
-            : "missing"
-        );
-
-      card.title =
-        elemento.name +
-        " • " +
-        elemento.rarity;
-
-      card.innerHTML = `
-        ${
-          quantidade <= 0
-            ? '<div class="element-lock">🔒</div>'
-            : ''
-        }
-        <div class="element-number">
-          Nº ${elemento.n}
-        </div>
-        <div class="element-symbol">
-          ${elemento.s}
-        </div>
-        <div class="element-name">
-          ${elemento.name}
-        </div>
-        <div class="element-qty">
-          ${
-            quantidade > 0
-              ? "x" + quantidade
-              : "?"
-          }
-        </div>
-        <div class="element-rarity">
-          ${elemento.rarity}
-        </div>
-      `;
-
-      grid.appendChild(
-        card
-      );
-
-    }
-  );
-
-}
-
-/* =====================================================
-   BUSCAR CADASTRO DO JOGADOR
-===================================================== */
-
-async function carregarColecaoDoJogador(
-  user
-){
-
-  const admins =
-    collection(
-      db,
-      "admins"
-    );
-
-
-  let snapshot =
-    await getDocs(
-
-      query(
-        admins,
-        where(
-          "uid",
-          "==",
-          user.uid
-        )
-      )
-
-    );
-
-
-  /*
-    Mesmo comportamento usado no painel:
-    se o documento antigo não tiver UID,
-    tenta localizar pelo e-mail.
-  */
-
-  if(
-    snapshot.empty &&
-    user.email
-  ){
-
-    snapshot =
-      await getDocs(
-
-        query(
-          admins,
-          where(
-            "email",
-            "==",
-            user.email
-              .trim()
-              .toLowerCase()
-          )
-        )
-
-      );
-
-  }
-
-
-  if(
-    snapshot.empty
-  ){
-
-    inventarioElementos = {};
-
-    updateStats();
-
-    return;
-
-  }
-
-
-  const dados =
-    snapshot.docs[0].data();
-
-
-  /*
-    O campo elementos é um mapa:
-    {
-      "1": 1,
-      "4": 2,
-      "118": 1
-    }
-
-    O número representa o elemento
-    e o valor representa a quantidade.
-  */
-
-  inventarioElementos =
-    dados.elementos &&
-    typeof dados.elementos === "object"
-      ? dados.elementos
-      : {};
-
-
-  updateStats();
-
-}
-
-
-/* =====================================================
-   NOTIFICAÇÕES + HISTÓRICO
-===================================================== */
-let usuarioAtual = null;
-let cadastroIdAtual = null;
-let ultimaNotificacaoId = null;
-let primeiraCargaNotificacoes = true;
-
-function converterData(valor){
-  if(!valor) return null;
-  if(typeof valor.toMillis === "function") return valor.toMillis();
-  if(typeof valor.seconds === "number") return valor.seconds * 1000;
-  return null;
-}
-
-function escapar(v){
-  return String(v ?? "").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
-}
-
-function infoElemento(n){
-  const e=DATA.find(x=>String(x.n)===String(n));
-  return e || {name:"Elemento #"+n,s:""};
-}
-
-function montarElementos(mapa){
-  return Object.entries(mapa||{}).map(([n,q])=>{
-    const e=infoElemento(n);
-    return `<div style="display:flex;justify-content:space-between;gap:10px;padding:10px 12px;border-radius:12px;background:#0b2140;border:1px solid #ffffff12"><strong>⚛️ ${escapar(e.name)}${e.s?` (${escapar(e.s)})`:''}</strong><b style="color:#62e0ff">×${Number(q)||0}</b></div>`;
-  }).join("");
-}
-
-function mostrarRecebimento(item){
-  const overlay=document.getElementById("receivedOverlay");
-  if(!overlay) return;
-  document.getElementById("receivedTitle").textContent=item.origem==="administrador"?"🎁 Você recebeu elementos do Administrador!":"🎁 Você recebeu elementos!";
-  document.getElementById("receivedMessage").textContent=item.origem==="administrador"?"Administrador Adam Games enviou elementos para sua coleção.":`${item.remetenteNome||item.remetentePublicId||"Um jogador"} enviou elementos para você.`;
-  document.getElementById("receivedElements").innerHTML=montarElementos(item.elementosRecebidos||{});
-  overlay.style.display="flex";
-  window.__notificacaoAberta=item;
-}
-
-async function carregarNotificacoes(){
-  if(!usuarioAtual) return;
-  try{
-    const snap=await getDocs(query(collection(db,"notificacoes"),where("uid","==",usuarioAtual.uid)));
-    const lista=snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(converterData(b.criadaEm)||0)-(converterData(a.criadaEm)||0));
-    const naoLidas=lista.filter(x=>x.lida!==true).length;
-    const badge=document.getElementById("notificationCount");
-    if(badge){ badge.textContent=naoLidas>99?"99+":String(naoLidas); badge.style.display=naoLidas?"inline-flex":"none"; }
-    if(!primeiraCargaNotificacoes && lista[0] && lista[0].id!==ultimaNotificacaoId && lista[0].tipo==="elemento_recebido") mostrarRecebimento(lista[0]);
-    if(lista[0]) ultimaNotificacaoId=lista[0].id;
-    primeiraCargaNotificacoes=false;
-    const box=document.getElementById("notificationsList");
-    if(!box) return;
-    if(!lista.length){box.innerHTML='<div style="padding:18px;color:#aebfd4;text-align:center">🔔 Nenhuma notificação.</div>';return;}
-    box.innerHTML=lista.slice(0,50).map(item=>{
-      const data=converterData(item.criadaEm);
-      const quando=data?new Date(data).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}):"Agora";
-      return `<button type="button" data-notif-id="${escapar(item.id)}" style="display:block;width:100%;text-align:left;margin:8px 0;padding:14px;border-radius:14px;border:1px solid #ffffff18;background:${item.lida===true?'#0b2140':'#102f55'};color:#fff;cursor:pointer"><strong>${escapar(item.titulo||"Notificação")}</strong><div style="color:#b8cbe0;margin-top:5px">${escapar(item.mensagem||"")}</div><small style="color:#7895b2;display:block;margin-top:6px">${quando}</small></button>`;
-    }).join("");
-    box.querySelectorAll("[data-notif-id]").forEach(btn=>btn.addEventListener("click",async()=>{
-      const item=lista.find(x=>x.id===btn.dataset.notifId); if(!item)return;
-      if(item.lida!==true){try{await updateDoc(doc(db,"notificacoes",item.id),{lida:true});}catch(e){console.warn(e)}}
-      if(item.tipo==="elemento_recebido") mostrarRecebimento(item);
-      await carregarNotificacoes();
-    }));
-  }catch(e){
-    console.error("Erro ao carregar notificações:",e);
-    const box=document.getElementById("notificationsList"); if(box) box.innerHTML='<div style="padding:18px;color:#ff9db8">⚠️ Não foi possível carregar as notificações.</div>';
-  }
-}
-
-async function carregarHistorico(){
-  const box=document.getElementById("historyList");
-  if(!box || !usuarioAtual) return;
-  box.innerHTML='<div style="color:#aebfd4">⏳ Carregando histórico...</div>';
-  try{
-    const snap=await getDocs(query(collection(db,"historicoColecaoElementos"),where("usuarioUid","==",usuarioAtual.uid)));
-    const lista=snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(converterData(b.criadoEm)||0)-(converterData(a.criadoEm)||0));
-    if(!lista.length){box.innerHTML='<div style="color:#aebfd4;padding:18px 0">📜 Nenhum recebimento registrado ainda.</div>';return;}
-    box.innerHTML=lista.slice(0,100).map(item=>{
-      const d=converterData(item.criadoEm); const quando=d?new Date(d).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"}):"Agora";
-      const origem=item.origem==="administrador"?"👑 Administrador Adam Games":item.origem==="jogador"?`👤 ${escapar(item.remetenteNome||item.remetentePublicId||"Jogador")}`:`🎯 ${escapar(item.origemNome||item.origem||"Conquista")}`;
-      return `<div style="padding:15px;margin:9px 0;border-radius:15px;background:#0b2140;border:1px solid #ffffff12"><div style="display:flex;justify-content:space-between;gap:10px"><strong>${escapar(item.titulo||"Elementos recebidos")}</strong><small style="color:#7895b2">${quando}</small></div><div style="color:#8fdfff;margin:7px 0">${origem}</div><div style="display:grid;gap:5px">${montarElementos(item.elementosRecebidos||{})}</div></div>`;
-    }).join("");
-  }catch(e){
-    console.error("Erro ao carregar histórico da coleção:",e);
-    box.innerHTML='<div style="color:#ff9db8;padding:18px 0">⚠️ Não foi possível carregar o histórico. Verifique as regras do Firestore para a coleção <b>historicoColecaoElementos</b>.</div>';
-  }
-}
-
-document.getElementById("refreshCollection")?.addEventListener("click",async()=>{ if(usuarioAtual) await carregarColecaoDoJogador(usuarioAtual); });
-document.getElementById("historyButton")?.addEventListener("click",async()=>{document.getElementById("historyOverlay").style.display="flex";await carregarHistorico();});
-document.getElementById("closeHistory")?.addEventListener("click",()=>document.getElementById("historyOverlay").style.display="none");
-document.getElementById("notificationButton")?.addEventListener("click",async()=>{document.getElementById("notificationOverlay").style.display="flex";await carregarNotificacoes();});
-document.getElementById("closeNotifications")?.addEventListener("click",()=>document.getElementById("notificationOverlay").style.display="none");
-document.getElementById("receivedOk")?.addEventListener("click",()=>document.getElementById("receivedOverlay").style.display="none");
-
-/* =====================================================
-   AUTENTICAÇÃO
-===================================================== */
-
-onAuthStateChanged(
-
-  auth,
-
-  async user => {
-
-    if(
-      !user
-    ){
-
-      window.location.replace(
-        "index.html"
-      );
-
-      return;
-
-    }
-
-
-    try{
-
-      usuarioAtual = user;
-
-      await carregarColecaoDoJogador(
-        user
-      );
-
-      await carregarNotificacoes();
-
-    }catch(error){
-
-      console.error(
-        "Erro ao carregar coleção de elementos:",
-        error
-      );
-
-      inventarioElementos = {};
-
-      updateStats();
-
-    }
-
-  }
-
-);
-
-setInterval(()=>{ if(usuarioAtual) carregarNotificacoes(); },10000);
-
+import {initializeApp} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+import {getAuth,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+import {getFirestore,collection,query,where,getDocs,getDoc,doc,runTransaction,serverTimestamp,updateDoc} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+const firebaseConfig={apiKey:"AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",authDomain:"adam-games-21081.firebaseapp.com",projectId:"adam-games-21081",storageBucket:"adam-games-21081.firebasestorage.app",messagingSenderId:"1055528418738",appId:"1:1055528418738:web:5fafdf63424ba9744eb8ab",measurementId:"G-KVFSF864GE"};
+const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app);
+let inventarioElementos={},usuarioAtual=null,tradeAuthUser=null,tradeDoc=null,tradeData=null,tradeInterval=null,ultimaNotificacaoId=null,primeiraCargaNotificacoes=true;
+function updateStats(){let owned=0,dupes=0;DATA.forEach(e=>{const q=Number(inventarioElementos[String(e.n)]||0);if(q>0)owned++;if(q>1)dupes+=q-1});document.getElementById('ownedCount').textContent=owned;document.getElementById('dupeCount').textContent=dupes;document.getElementById('estanteCounter').textContent=`Coleção: ${owned} / 118 • Duplicatas: ${dupes}`;renderPeriodic();}
+function renderPeriodic(){const grid=document.getElementById('periodic');if(!grid)return;grid.innerHTML='';DATA.forEach(e=>{const q=Number(inventarioElementos[String(e.n)]||0);const card=document.createElement('button');card.type='button';card.className='element '+(q>0?'owned ':'')+({'Comum':'r-comum','Incomum':'r-incomum','Raro':'r-raro','Super Raro':'r-super'}[e.rarity]||'');card.style.setProperty('--col',e.col);card.style.setProperty('--row',e.row);card.innerHTML=`${q<=0?'<span class="lock">🔒</span>':''}<span class="num">${e.n}</span><span class="symbol">${e.s}</span><span class="ename">${e.name}</span>${q>0?`<span class="qty">x${q}</span>`:''}`;card.addEventListener('click',()=>showElement(e,q));grid.appendChild(card)})}
+function showElement(e,q){document.getElementById('detailSymbol').textContent=q>0?e.s:'?';document.getElementById('detailMeta').textContent=`Nº ${e.n} • ${e.rarity} • ${q>0?'ENCONTRADO':'NÃO ENCONTRADO'}`;document.getElementById('detailName').textContent=e.name;document.getElementById('detailText').textContent=e.desc;document.getElementById('detailQuantity').textContent=q>0?`Você possui: x${q}`:'Você ainda não possui este elemento.';}
+function showView(view){const collectionView=document.getElementById('collectionView'),estanteView=document.getElementById('estanteView');const isEstante=view==='estante';collectionView.classList.toggle('active',!isEstante);estanteView.classList.toggle('active',isEstante);document.getElementById('topEstante').style.display=isEstante?'none':'';document.getElementById('topBack').onclick=isEstante?()=>showView('collection'):()=>window.location.href='painel.html';if(isEstante){window.scrollTo(0,0);renderPeriodic();}else window.scrollTo(0,0);}
+function openEstante(push=true){if(push)history.pushState({view:'estante'},'',location.pathname+'#estante');showView('estante')}
+function openCollection(push=true){if(push)history.pushState({view:'collection'},'',location.pathname);showView('collection')}
+document.getElementById('openEstante').onclick=()=>openEstante();document.getElementById('bottomEstante').onclick=()=>openEstante();document.getElementById('topEstante').onclick=()=>openEstante();document.getElementById('backCollection').onclick=()=>openCollection();document.getElementById('goTrade').onclick=()=>{openCollection();setTimeout(()=>document.getElementById('tradeSection').scrollIntoView({behavior:'smooth',block:'start'}),80)};window.addEventListener('popstate',()=>showView(location.hash==='#estante'?'estante':'collection'));
+
+async function carregarColecao(user){let snap=await getDocs(query(collection(db,'admins'),where('uid','==',user.uid)));if(snap.empty&&user.email)snap=await getDocs(query(collection(db,'admins'),where('email','==',user.email.trim().toLowerCase())));if(snap.empty){inventarioElementos={};updateStats();return}inventarioElementos=snap.docs[0].data()?.elementos&&typeof snap.docs[0].data().elementos==='object'?snap.docs[0].data().elementos:{};updateStats();}
+function tradeDate(v){if(!v)return null;if(typeof v.toDate==='function')return v.toDate();if(v instanceof Date)return v;if(typeof v==='number')return new Date(v);if(typeof v==='string'){const d=new Date(v);return isNaN(d.getTime())?null:d}return null}function tradeLimit(d){return d?.vip===true?2:1}function tradeState(d){const limit=tradeLimit(d),last=tradeDate(d?.ultimoEnvioElemento);let used=Number(d?.enviosElementosUltimas24h||0);if(!last||Date.now()-last.getTime()>=86400000)return {limit,used:0,remaining:limit,next:null};used=Math.min(Math.max(used,0),limit);return {limit,used,remaining:Math.max(0,limit-used),next:new Date(last.getTime()+86400000)}}function tradeInventory(d){return d?.elementos&&typeof d.elementos==='object'?d.elementos:{}}function tradeInfo(n){const e=DATA.find(x=>Number(x.n)===Number(n));return e?`${e.n} — ${e.name} (${e.s})`:`Elemento ${n}`}function tradeTime(ms){if(ms<=0)return '00:00:00';const s=Math.ceil(ms/1000),h=Math.floor(s/3600),m=Math.floor((s%3600)/60),sec=s%60;return [h,m,sec].map(x=>String(x).padStart(2,'0')).join(':')}function renderTradeElements(){const select=
+function converterData(v){if(!v)return null;if(typeof v.toMillis==='function')return v.toMillis();if(typeof v.seconds==='number')return v.seconds*1000;if(v instanceof Date)return v.getTime();if(typeof v==='number')return v;return null}
+function escapar(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function infoElemento(n){return DATA.find(x=>String(x.n)===String(n))||{name:'Elemento #'+n,s:''}}
+function montarElementos(mapa){return Object.entries(mapa||{}).map(([n,q])=>{const e=infoElemento(n);return `<div style="display:flex;justify-content:space-between;gap:10px;padding:10px 12px;border-radius:12px;background:#0b2140;border:1px solid #ffffff12"><strong>⚛️ ${escapar(e.name)}${e.s?` (${escapar(e.s)})`:''}</strong><b style="color:#62e0ff">×${Number(q)||0}</b></div>`}).join('')}
+function mostrarRecebimento(item){const overlay=document.getElementById('receivedOverlay');document.getElementById('receivedTitle').textContent=item.origem==='administrador'?'🎁 Você recebeu elementos do Administrador!':'🎁 Você recebeu elementos!';document.getElementById('receivedMessage').textContent=item.origem==='administrador'?'Administrador Adam Games enviou elementos para sua coleção.':`${item.remetenteNome||item.remetentePublicId||'Um jogador'} enviou elementos para você.`;document.getElementById('receivedElements').innerHTML=montarElementos(item.elementosRecebidos||{});overlay.style.display='flex';window.__notificacaoAberta=item}
+async function carregarNotificacoes(){if(!usuarioAtual)return;try{const snap=await getDocs(query(collection(db,'notificacoes'),where('uid','==',usuarioAtual.uid)));const lista=snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(converterData(b.criadaEm)||0)-(converterData(a.criadaEm)||0));const naoLidas=lista.filter(x=>x.lida!==true).length;const badge=document.getElementById('notificationCount');badge.textContent=naoLidas>99?'99+':String(naoLidas);badge.style.display=naoLidas?'inline-flex':'none';if(!primeiraCargaNotificacoes&&lista[0]&&lista[0].id!==ultimaNotificacaoId&&lista[0].tipo==='elemento_recebido')mostrarRecebimento(lista[0]);if(lista[0])ultimaNotificacaoId=lista[0].id;primeiraCargaNotificacoes=false;const box=document.getElementById('notificationsList');if(!lista.length){box.innerHTML='<div style="padding:18px;color:#aebfd4;text-align:center">🔔 Nenhuma notificação.</div>';return}box.innerHTML=lista.slice(0,50).map(item=>`<button type="button" class="notification-item" data-notif-id="${escapar(item.id)}"><strong>${escapar(item.titulo||'Notificação')}</strong><div style="color:#b8cbe0;margin-top:5px">${escapar(item.mensagem||'')}</div></button>`).join('');box.querySelectorAll('[data-notif-id]').forEach(btn=>btn.onclick=async()=>{const item=lista.find(x=>x.id===btn.dataset.notifId);if(!item)return;if(item.lida!==true){try{await updateDoc(doc(db,'notificacoes',item.id),{lida:true})}catch(e){console.warn(e)}}if(item.tipo==='elemento_recebido')mostrarRecebimento(item);await carregarNotificacoes()})}catch(e){console.error(e);document.getElementById('notificationsList').innerHTML='<div style="padding:18px;color:#ff9db8">⚠️ Não foi possível carregar as notificações.</div>'}}
+async function carregarHistorico(){const box=document.getElementById('historyList');box.innerHTML='<div style="color:#aebfd4">⏳ Carregando histórico...</div>';try{const snap=await getDocs(query(collection(db,'historicoColecaoElementos'),where('usuarioUid','==',usuarioAtual.uid)));const lista=snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(converterData(b.criadoEm)||0)-(converterData(a.criadoEm)||0));if(!lista.length){box.innerHTML='<div style="color:#aebfd4;padding:18px 0">📜 Nenhum recebimento registrado ainda.</div>';return}box.innerHTML=lista.slice(0,100).map(item=>`<div class="history-item"><strong>${escapar(item.titulo||'Elementos recebidos')}</strong><div style="color:#8fdfff;margin:7px 0">${escapar(item.origem==='administrador'?'👑 Administrador Adam Games':item.origem==='jogador'?`👤 ${item.remetenteNome||item.remetentePublicId||'Jogador'}`:`🎯 ${item.origemNome||item.origem||'Conquista'}`)}</div><div style="display:grid;gap:5px">${montarElementos(item.elementosRecebidos||{})}</div></div>`).join('')}catch(e){console.error(e);box.innerHTML='<div style="color:#ff9db8;padding:18px 0">⚠️ Não foi possível carregar o histórico.</div>'}}
+document.getElementById('historyButton').onclick=async()=>{document.getElementById('historyOverlay').style.display='flex';await carregarHistorico()};document.getElementById('closeHistory').onclick=()=>document.getElementById('historyOverlay').style.display='none';document.getElementById('notificationButton').onclick=async()=>{document.getElementById('notificationOverlay').style.display='flex';await carregarNotificacoes()};document.getElementById('closeNotifications').onclick=()=>document.getElementById('notificationOverlay').style.display='none';document.getElementById('receivedOk').onclick=()=>document.getElementById('receivedOverlay').style.display='none';document.getElementById('refreshCollection').onclick=async()=>{if(usuarioAtual){await carregarColecao(usuarioAtual);await carregarTradeUsuario(usuarioAtual);document.getElementById('collectionStatus').textContent='✅ Coleção atualizada.'}};
+showView(location.hash==='#estante'?'estante':'collection');
+onAuthStateChanged(auth,async user=>{if(!user){window.location.replace('index.html');return}try{usuarioAtual=user;await Promise.all([carregarColecao(user),carregarTradeUsuario(user)]);document.getElementById('collectionStatus').textContent='✅ Coleção carregada.';await carregarNotificacoes()}catch(e){console.error(e);document.getElementById('collectionStatus').textContent='⚠️ Não foi possível carregar a coleção agora.';updateStats()}});
+setInterval(()=>{if(usuarioAtual){carregarNotificacoes();updateTradeLimit()}},10000);
 </script>
-</body>
-</html>
+</body></html>
