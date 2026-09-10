@@ -87,6 +87,138 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
 .element-delivery-result .sent-item{padding:9px 11px;border-radius:11px;background:rgba(255,255,255,.045);color:#c8e2f4;font-size:11px}
 @media(max-width:800px){.element-admin-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){.element-admin-grid,.element-admin-actions{grid-template-columns:1fr}}
+
+/* =========================================================
+   EXTRATO DE FIGURINHAS — ESTILO BANCO
+   ========================================================= */
+.fig-bank-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  margin:18px 0 12px;
+  padding:16px 18px;
+  border:1px solid rgba(255,215,0,.24);
+  border-radius:18px;
+  background:linear-gradient(135deg,rgba(10,32,62,.96),rgba(16,25,48,.96));
+}
+.fig-bank-title{
+  font-size:21px;
+  font-weight:900;
+  color:#fff;
+}
+.fig-bank-subtitle{
+  margin-top:5px;
+  color:#9fb9d7;
+  font-size:13px;
+}
+.fig-bank-count{
+  flex:none;
+  padding:8px 12px;
+  border-radius:999px;
+  background:rgba(255,215,0,.10);
+  border:1px solid rgba(255,215,0,.24);
+  color:#ffd84d;
+  font-size:12px;
+  font-weight:800;
+  white-space:nowrap;
+}
+.fig-history{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.fig-history-item{
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(137,173,220,.20);
+  border-radius:18px;
+  padding:15px 16px;
+  background:linear-gradient(135deg,#102d50,#0b2341);
+  box-shadow:0 7px 20px rgba(0,0,0,.14);
+}
+.fig-history-item::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:4px;
+  background:#8b35ff;
+}
+.fig-history-top{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+}
+.fig-history-title{
+  color:#fff;
+  font-size:16px;
+  font-weight:900;
+  line-height:1.35;
+}
+.fig-history-date{
+  color:#8fc2ff;
+  font-size:12px;
+  font-weight:800;
+  text-align:right;
+  white-space:nowrap;
+}
+.fig-history-info{
+  margin-top:9px;
+  padding-top:9px;
+  border-top:1px solid rgba(255,255,255,.08);
+  color:#a9c1dc;
+  font-size:12px;
+  line-height:1.65;
+}
+.fig-history-info .transaction-main{
+  color:#fff;
+  font-size:14px;
+  font-weight:800;
+}
+.fig-history-info .transaction-new{
+  color:#62f4a4;
+  font-weight:800;
+}
+.fig-history-info .transaction-repeat{
+  color:#ffd66b;
+  font-weight:800;
+}
+.fig-history-more-wrap{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin:15px 0 4px;
+}
+.fig-history-more,
+.fig-history-less{
+  border:0;
+  border-radius:14px;
+  padding:12px 18px;
+  font-weight:900;
+  cursor:pointer;
+  color:#fff;
+  background:linear-gradient(135deg,#7b2cff,#c51d9b);
+  box-shadow:0 8px 20px rgba(105,35,220,.25);
+}
+.fig-history-less{
+  background:linear-gradient(135deg,#233f62,#152b48);
+}
+@media(max-width:600px){
+  .fig-bank-head{align-items:flex-start;flex-direction:column}
+  .fig-bank-count{align-self:flex-start}
+  .fig-history-top{flex-direction:column}
+  .fig-history-date{text-align:left}
+}
+
+
+/* =====================================================
+   VOUCHER DE DESCONTO — ADMIN
+===================================================== */
+.discount-voucher-card{border:1px solid rgba(255,213,42,.38);background:radial-gradient(circle at 100% 0%,rgba(255,213,42,.16),transparent 38%),linear-gradient(145deg,rgba(5,40,78,.98),rgba(2,24,50,.98))}.dv-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.dv-field{display:flex;flex-direction:column;gap:7px}.dv-field.full{grid-column:1/-1}.dv-field label{color:#a9c8e2;font-size:11px;font-weight:900}.dv-help{margin-top:10px;color:#8fb4d2;font-size:11px;line-height:1.5}.dv-prizes{display:grid;gap:8px;margin-top:14px}.dv-prize{display:grid;grid-template-columns:70px 100px 1fr 42px;gap:8px;align-items:center;padding:9px;border-radius:13px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07)}.dv-prize input{height:42px;font-size:13px}.dv-prize .dv-remove{height:42px;border-radius:10px;background:rgba(255,55,75,.13);color:#ff9eaa;border:1px solid rgba(255,55,75,.2)}.dv-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}.dv-primary{padding:15px;border-radius:13px;background:linear-gradient(135deg,#ffd52a,#d88b00);color:#111}.dv-secondary{padding:15px;border-radius:13px;background:linear-gradient(135deg,#168fff,#0563b5);color:#fff}.dv-link{display:none;margin-top:14px;padding:15px;border-radius:15px;background:rgba(0,220,110,.08);border:1px solid rgba(0,220,110,.2)}.dv-link-url{margin-top:7px;padding:10px;border-radius:10px;background:#061a34;color:#6ed0ff;font-size:12px;word-break:break-all}.dv-link-buttons{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:9px}.dv-list{display:grid;gap:9px;margin-top:14px}.dv-item{padding:14px;border-radius:14px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07)}.dv-item-top{display:flex;justify-content:space-between;gap:10px}.dv-item-title{font-weight:900}.dv-item-date{color:#79cfff;font-size:10px}.dv-item-info{margin-top:7px;color:#9fc1d9;font-size:11px;line-height:1.55}.dv-item-link{margin-top:8px;color:#70caff;font-size:10px;word-break:break-all}.dv-badge{display:inline-block;padding:4px 7px;border-radius:8px;background:rgba(255,213,42,.12);color:#ffe36c;font-size:9px;font-weight:900;margin-right:5px}.dv-delete{margin-top:9px;padding:9px 11px;border-radius:9px;background:rgba(255,55,75,.10);color:#ff9eaa;font-size:11px}.dv-weights{margin-top:8px;color:#9fc1d9;font-size:10px}.dv-empty{padding:14px;text-align:center;color:#88aac4;font-size:12px;background:rgba(255,255,255,.03);border-radius:12px}.dv-note{margin-top:13px;padding:11px;border-radius:11px;background:rgba(255,193,7,.08);border:1px solid rgba(255,193,7,.16);color:#e8d38f;font-size:11px;line-height:1.5}@media(max-width:760px){.dv-grid,.dv-actions{grid-template-columns:1fr}.dv-field.full{grid-column:auto}.dv-prize{grid-template-columns:60px 90px 1fr 38px}.dv-prize input{padding:0 8px}}
+
 </style>
 <style>
 .fig-package-box{margin-top:12px;padding:14px;border-radius:14px;background:rgba(0,0,0,.14);border:1px solid rgba(190,80,255,.18)}
@@ -554,8 +686,19 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
       <button class="fig-btn fig-green" id="figLoadHistory" type="button">📜 CARREGAR HISTÓRICO</button>
       <button class="fig-btn fig-gold" id="figLoadHistory2" type="button">🔄 ATUALIZAR</button>
     </div>
+    <div class="fig-bank-head">
+      <div>
+        <div class="fig-bank-title">🏦 Extrato de Figurinhas</div>
+        <div class="fig-bank-subtitle">Todas as transações de cartas, pacotes, álbuns e Coringas.</div>
+      </div>
+      <div class="fig-bank-count" id="figHistoryCount">0 transações</div>
+    </div>
     <div id="figHistoryMessage" class="message"></div>
-    <div class="fig-history" id="figHistoryList"><div class="empty">Clique para carregar o histórico.</div></div>
+    <div class="fig-history" id="figHistoryList"><div class="empty">Carregando as últimas transações...</div></div>
+    <div class="fig-history-more-wrap">
+      <button class="fig-history-more" id="figHistoryMore" type="button" style="display:none">➕ VER MAIS TRANSAÇÕES</button>
+      <button class="fig-history-less" id="figHistoryLess" type="button" style="display:none">➖ MOSTRAR MENOS</button>
+    </div>
   </div>
 </div>
 
@@ -689,6 +832,60 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
   <div class="notif-history" id="notifHistoricoList">
     <div class="empty">Clique em “Atualizar histórico” para consultar os envios.</div>
   </div>
+</div>
+
+
+
+<div class="card discount-voucher-card" id="discountVoucherAdmin">
+  <div class="voucher-title">
+    <div class="voucher-icon">🎟️</div>
+    <div><h3>Voucher de Desconto</h3><div style="color:#9ec7e5;font-size:12px;">Crie links únicos para o cliente escolher 1 entre 6 vouchers.</div></div>
+  </div>
+
+  <div class="dv-grid">
+    <div class="dv-field">
+      <label>PÚBLICO DO LINK</label>
+      <select id="dvPublico">
+        <option value="nao_vip">⭐ NÃO VIP</option>
+        <option value="vip">👑 VIP</option>
+        <option value="todos">🌎 TODOS</option>
+      </select>
+    </div>
+    <div class="dv-field">
+      <label>QUANTIDADE DE ESCOLHAS</label>
+      <select id="dvEscolhas">
+        <option value="1">1 escolha</option><option value="2">2 escolhas</option><option value="3">3 escolhas</option><option value="5">5 escolhas</option><option value="10">10 escolhas</option>
+      </select>
+    </div>
+    <div class="dv-field full">
+      <label>NOME DA CAMPANHA (OPCIONAL)</label>
+      <input id="dvNome" maxlength="80" placeholder="Ex.: Promoção VIP Setembro">
+    </div>
+  </div>
+
+  <div class="dv-help">💡 Cada link possui seu próprio conjunto de prêmios e número de escolhas. Para dar vantagens maiores aos VIPs, selecione <b>VIP</b> ao gerar o link.</div>
+
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:20px;gap:10px;">
+    <h3 style="margin:0;font-size:16px;">🎯 Prêmios e probabilidades</h3>
+    <button class="dv-secondary" id="dvAddPrize" type="button" style="padding:9px 12px;font-size:11px;">＋ ADICIONAR</button>
+  </div>
+  <div class="dv-prizes" id="dvPrizes"></div>
+  <div class="dv-note">A chance é definida por <b>peso</b>. Quanto maior o peso, maior a chance relativa. O total não precisa somar 100.</div>
+
+  <div class="dv-actions">
+    <button class="dv-primary" id="dvGenerate" type="button">🔗 GERAR LINK ÚNICO</button>
+    <button class="dv-secondary" id="dvRefresh" type="button">🔄 ATUALIZAR HISTÓRICO</button>
+  </div>
+  <div id="dvMessage" class="message"></div>
+
+  <div class="dv-link" id="dvLinkBox">
+    <div style="font-size:11px;font-weight:900;color:#7affb1;">✅ LINK GERADO</div>
+    <div class="dv-link-url" id="dvLinkUrl"></div>
+    <div class="dv-link-buttons"><button class="dv-secondary" id="dvCopy" type="button">📋 COPIAR LINK</button><button class="dv-primary" id="dvNew" type="button">🎟️ NOVO LINK</button></div>
+  </div>
+
+  <h3 style="margin-top:22px;font-size:16px;">📜 Links e histórico</h3>
+  <div class="dv-list" id="dvList"><div class="dv-empty">Nenhum voucher de desconto criado.</div></div>
 </div>
 
 <div class="card voucher-card">
@@ -826,7 +1023,7 @@ lista.appendChild(div);
 });
 }catch(e){console.error("ERRO VALES:",e);lista.innerHTML="<div class='empty'>❌ Não foi possível carregar os vales.</div>";mostrarMensagem(voucherMessage,e?.code==="permission-denied"?"Sem permissão para ler a coleção codigosPresente.":"Erro ao carregar os vales.","error")}}
 
-async function atualizarTudo(){if(!adminUsuario)return;const b=refreshButton;b.disabled=true;b.textContent="🔄 Atualizando...";try{await Promise.all([carregarDashboard(),carregarEntregas(),carregarVales(),carregarConquistasAdmin(),carregarHistoricoChavesEspeciais()])}catch(e){console.error(e)}finally{b.disabled=false;b.textContent="🔄 Atualizar"}}
+async function atualizarTudo(){if(!adminUsuario)return;const b=refreshButton;b.disabled=true;b.textContent="🔄 Atualizando...";try{await Promise.all([carregarDashboard(),carregarEntregas(),carregarVales(),carregarConquistasAdmin(),carregarHistoricoChavesEspeciais(),figCarregarHistorico()])}catch(e){console.error(e)}finally{b.disabled=false;b.textContent="🔄 Atualizar"}}
 
 onAuthStateChanged(auth,async usuario=>{
 if(!usuario){authResolvido=true;resolverAutenticacao();window.location.replace("index.html");return}
@@ -1114,15 +1311,168 @@ async function figCarregarRanking(){
   mostrarMensagem(msg,`✅ ${dados.length} jogador(es) no ranking.`,"success");
  }catch(e){console.error("FIG RANKING:",e);lista.innerHTML="<div class='empty'>❌ Não foi possível carregar o ranking.</div>";mostrarMensagem(msg,"Verifique as Rules da coleção admins.","error")}
 }
-async function figCarregarHistorico(){
- const lista=document.getElementById("figHistoryList"),msg=document.getElementById("figHistoryMessage");lista.innerHTML="<div class='empty'>🔄 Carregando histórico...</div>";
- try{
-  const r=await getDocs(collection(db,"historicoFigurinhas"));figHistoricoCache=r.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>obterMillis(b.criadoEm)-obterMillis(a.criadoEm));
-  if(!figHistoricoCache.length){lista.innerHTML="<div class='empty'>Nenhum envio de figurinha registrado.</div>";return}
-  lista.innerHTML="";figHistoricoCache.slice(0,150).forEach(x=>{const el=document.createElement("div");el.className="fig-history-item";const itens=[...Object.entries(x.cartas||{}).map(([id,q])=>`${id} ${figCard(id)?.nome||""} (${q}x)`),...Object.entries(x.coringas||{}).map(([id,q])=>`${figJoker(id)?.nome||id} (${q}x)`)];el.innerHTML=`<div class="fig-history-top"><div class="fig-history-title">🎴 ${figEscape(x.descricao||x.tipo||"Envio")}</div><div class="fig-history-date">${figEscape(formatarData(x.criadoEm))}</div></div><div class="fig-history-info">👤 ${figEscape(x.usuarioNome||x.publicId||x.usuarioEmail||"Cliente")}<br>📦 ${figEscape(itens.join(" • ")||"—")}${x.albumNome?`<br>📚 Álbum: ${figEscape(x.albumNome)}`:""}${x.modoPacote==="all"?`<br>🎲 Sorteio: 25 cartas`:""}${x.modoPacote==="album"?`<br>🎲 Sorteio: somente do álbum`:""}<br>💬 Motivo: ${figEscape(x.motivo||"—")}<br>👑 ADM: ${figEscape(x.adminEmail||"—")}<br>🆔 ${figEscape(x.operacaoId||x.id)}</div>`;lista.appendChild(el)});
-  mostrarMensagem(msg,`✅ ${figHistoricoCache.length} registro(s) carregado(s).`,"success");
- }catch(e){console.error("FIG HIST:",e);lista.innerHTML="<div class='empty'>❌ Não foi possível carregar o histórico.</div>";mostrarMensagem(msg,e?.code==="permission-denied"?"Sem permissão para ler historicoFigurinhas.":"Erro ao carregar histórico.","error")}
+let figHistoricoCache = Array.isArray(window.figHistoricoCache) ? window.figHistoricoCache : [];
+let figHistoricoExibidos = 3;
+
+function figHistoricoDescricao(x){
+  const tipo = String(x.tipo||"").toLowerCase();
+
+  if(tipo==="carta"){
+    const entries = Object.entries(x.cartas||{});
+    const e = entries[0];
+    if(e){
+      const id=e[0], q=Number(e[1]||1);
+      return `🎴 Carta ${id} — ${figCard(id)?.nome||"Carta"} ×${q} enviada`;
+    }
+    return `🎴 Carta enviada`;
+  }
+
+  if(tipo==="coringa"){
+    const entries = Object.entries(x.coringas||{});
+    const e=entries[0];
+    if(e){
+      const id=e[0], q=Number(e[1]||1);
+      return `🃏 ${figJoker(id)?.nome||id} ×${q} enviado`;
+    }
+    return "🃏 Coringa enviado";
+  }
+
+  if(tipo==="album"){
+    return `📚 Álbum enviado${x.albumNome ? ` — ${x.albumNome}` : ""}`;
+  }
+
+  if(tipo==="pacote"){
+    if(x.modoPacote==="album"){
+      return `🎁 Pacote de álbum enviado — ${x.albumNome||"Álbum"}`;
+    }
+    return "🎁 Pacote de figurinhas enviado";
+  }
+
+  return `🎴 ${x.descricao||"Transação de figurinhas"}`;
 }
+
+function figHistoricoItens(x){
+  const itens=[
+    ...Object.entries(x.cartas||{}).map(([id,q])=>`Carta ${id} — ${figCard(id)?.nome||"Carta"} ×${q}`),
+    ...Object.entries(x.coringas||{}).map(([id,q])=>`${figJoker(id)?.nome||id} ×${q}`)
+  ];
+  return itens;
+}
+
+function figRenderizarHistorico(){
+  const lista=document.getElementById("figHistoryList");
+  const more=document.getElementById("figHistoryMore");
+  const less=document.getElementById("figHistoryLess");
+  const count=document.getElementById("figHistoryCount");
+
+  if(!lista)return;
+
+  if(count){
+    count.textContent=`${figHistoricoCache.length} ${figHistoricoCache.length===1?"transação":"transações"}`;
+  }
+
+  if(!figHistoricoCache.length){
+    lista.innerHTML='<div class="empty">Nenhuma transação de figurinha registrada.</div>';
+    if(more)more.style.display="none";
+    if(less)less.style.display="none";
+    return;
+  }
+
+  const visiveis=figHistoricoCache.slice(0,figHistoricoExibidos);
+  lista.innerHTML="";
+
+  visiveis.forEach((x,index)=>{
+    const el=document.createElement("div");
+    el.className="fig-history-item";
+
+    const itens=figHistoricoItens(x);
+    const qtd=Object.values(x.cartas||{}).reduce((a,b)=>a+Number(b||0),0)
+             +Object.values(x.coringas||{}).reduce((a,b)=>a+Number(b||0),0);
+
+    const tipoLabel =
+      String(x.tipo||"").toLowerCase()==="carta" ? "CARTA ENVIADA" :
+      String(x.tipo||"").toLowerCase()==="coringa" ? "CORINGA ENVIADO" :
+      String(x.tipo||"").toLowerCase()==="album" ? "ÁLBUM ENVIADO" :
+      "PACOTE ENVIADO";
+
+    const origem = x.origem==="ADM" ? "Administração" : (x.origem||"Sistema");
+
+    el.innerHTML=`
+      <div class="fig-history-top">
+        <div class="fig-history-title">${figEscape(figHistoricoDescricao(x))}</div>
+        <div class="fig-history-date">${figEscape(formatarData(x.criadoEm))}</div>
+      </div>
+      <div class="fig-history-info">
+        <div class="transaction-main">↗ ${figEscape(tipoLabel)}${qtd?` • ${qtd} item(ns)`:""}</div>
+        ${itens.length?`<div>🎴 ${figEscape(itens.join(" • "))}</div>`:""}
+        ${x.albumNome?`<div>📚 Álbum: ${figEscape(x.albumNome)}</div>`:""}
+        ${x.modoPacote==="all"?`<div>🎲 Sorteio: entre as 25 cartas</div>`:""}
+        ${x.modoPacote==="album"?`<div>🎲 Sorteio: somente do álbum</div>`:""}
+        <div>👤 Jogador: ${figEscape(x.usuarioNome||x.publicId||x.usuarioEmail||"Cliente")}</div>
+        ${x.publicId?`<div>🆔 ID Adam Games: ${figEscape(x.publicId)}</div>`:""}
+        <div>💬 Motivo: ${figEscape(x.motivo||"—")}</div>
+        <div>🏦 Origem: ${figEscape(origem)} • ADM: ${figEscape(x.adminEmail||"—")}</div>
+        <div>🔖 Transação: ${figEscape(x.operacaoId||x.id)}</div>
+      </div>
+    `;
+    lista.appendChild(el);
+  });
+
+  if(more){
+    more.style.display=figHistoricoExibidos<figHistoricoCache.length?"inline-block":"none";
+    more.textContent=`➕ VER MAIS (${Math.min(10,figHistoricoCache.length-figHistoricoExibidos)})`;
+  }
+  if(less){
+    less.style.display=figHistoricoExibidos>3?"inline-block":"none";
+  }
+}
+
+async function figCarregarHistorico(){
+  const lista=document.getElementById("figHistoryList");
+  const msg=document.getElementById("figHistoryMessage");
+  if(lista)lista.innerHTML='<div class="empty">🔄 Carregando extrato...</div>';
+
+  try{
+    const r=await getDocs(collection(db,"historicoFigurinhas"));
+    figHistoricoCache=r.docs
+      .map(d=>({id:d.id,...d.data()}))
+      .sort((a,b)=>obterMillis(b.criadoEm)-obterMillis(a.criadoEm));
+
+    window.figHistoricoCache=figHistoricoCache;
+    figHistoricoExibidos=3;
+    figRenderizarHistorico();
+
+    mostrarMensagem(
+      msg,
+      `✅ ${figHistoricoCache.length} transação(ões) carregada(s).`,
+      "success"
+    );
+  }catch(e){
+    console.error("FIG HIST:",e);
+    if(lista)lista.innerHTML='<div class="empty">❌ Não foi possível carregar o histórico.</div>';
+    mostrarMensagem(
+      msg,
+      e?.code==="permission-denied"
+        ? "Sem permissão para ler historicoFigurinhas."
+        : "Erro ao carregar histórico.",
+      "error"
+    );
+  }
+}
+
+function figHistoricoMais(){
+  figHistoricoExibidos=Math.min(
+    figHistoricoExibidos+10,
+    figHistoricoCache.length
+  );
+  figRenderizarHistorico();
+}
+
+function figHistoricoMenos(){
+  figHistoricoExibidos=3;
+  figRenderizarHistorico();
+}
+
 function figTrocarAba(nome){
  document.querySelectorAll(".fig-tab").forEach(b=>b.classList.toggle("active",b.dataset.figTab===nome));
  document.querySelectorAll(".fig-panel").forEach(p=>p.classList.toggle("active",p.id==="figPanel-"+nome));
@@ -1140,6 +1490,8 @@ document.getElementById("figLoadRanking").onclick=figCarregarRanking;
 document.getElementById("figLoadRanking2").onclick=figCarregarRanking;
 document.getElementById("figLoadHistory").onclick=figCarregarHistorico;
 document.getElementById("figLoadHistory2").onclick=figCarregarHistorico;
+document.getElementById("figHistoryMore").onclick=figHistoricoMais;
+document.getElementById("figHistoryLess").onclick=figHistoricoMenos;
 document.getElementById("figUser").onkeydown=e=>{if(e.key==="Enter")figSelecionarUsuario(document.getElementById("figUser").value.trim())};
 document.getElementById("figCollectionUser").onkeydown=e=>{if(e.key==="Enter")figConsultarColecao()};
 
@@ -1682,6 +2034,107 @@ randomElementButton?.addEventListener("click",()=>{
 
 sendElementsButton?.addEventListener("click",enviarElementosAdmin);
 atualizarModoElemento();
+</script>
+<script type="module">
+import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+import { getFirestore, collection, getDocs, doc, setDoc, deleteDoc, Timestamp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+const firebaseConfig={apiKey:"AIzaSyC4Zp45lescRGFKXjgRBz0mAg1pcae72qc",authDomain:"adam-games-21081.firebaseapp.com",projectId:"adam-games-21081",storageBucket:"adam-games-21081.firebasestorage.app",messagingSenderId:"1055528418738",appId:"1:1055528418738:web:5fafdf63424ba9744eb8ab",measurementId:"G-KVFSF864GE"};
+const app=getApps().length?getApps()[0]:initializeApp(firebaseConfig);
+const auth=getAuth(app),db=getFirestore(app);
+const ADMIN_EMAIL="raphafentyramos@gmail.com";
+const $=id=>document.getElementById(id);
+
+const defaults=[
+  {percentual:20,minimo:20,peso:15},
+  {percentual:30,minimo:20,peso:15},
+  {percentual:40,minimo:30,peso:20},
+  {percentual:45,minimo:30,peso:25},
+  {percentual:50,minimo:30,peso:20},
+  {percentual:55,minimo:40,peso:5}
+];
+
+let adminOk=false, lastLink="";
+
+function msg(text,type=""){const el=$("dvMessage");el.textContent=text;el.className=type?`message ${type}`:"message";}
+function esc(v){return String(v??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\"/g,"&quot;").replace(/'/g,"&#039;");}
+function token(){const chars="ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789";let out="";const a=new Uint32Array(14);crypto.getRandomValues(a);for(const n of a)out+=chars[n%chars.length];return out;}
+function money(n){return Number(n||0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});}
+function date(v){if(!v)return "—";const d=v?.toDate?v.toDate():new Date(v);return Number.isNaN(d.getTime())?"—":d.toLocaleString("pt-BR");}
+
+function renderPrizes(items=defaults){
+  const box=$("dvPrizes");
+  box.innerHTML="";
+  items.forEach((p,i)=>addPrizeRow(p,i));
+}
+function addPrizeRow(p={percentual:10,minimo:20,peso:10},i=null){
+  const box=$("dvPrizes"), idx=i===null?box.children.length:i;
+  const row=document.createElement("div");row.className="dv-prize";
+  row.innerHTML=`<input type="number" min="1" max="100" step="1" value="${esc(p.percentual)}" data-p="percentual" title="Desconto"><input type="number" min="0" step="0.01" value="${esc(p.minimo)}" data-p="minimo" title="Compra mínima"><input type="number" min="0.01" step="0.01" value="${esc(p.peso)}" data-p="peso" title="Peso"><button class="dv-remove" type="button" title="Remover">✕</button>`;
+  row.querySelector(".dv-remove").onclick=()=>{if(box.children.length<=1){msg("Mantenha pelo menos 1 prêmio.","error");return}row.remove();};
+  box.appendChild(row);
+}
+function collectPrizes(){
+  return [...$("dvPrizes").children].map((row,i)=>({
+    id:`p${i+1}`,
+    percentual:Number(row.querySelector('[data-p="percentual"]').value),
+    minimo:Number(row.querySelector('[data-p="minimo"]').value),
+    peso:Number(row.querySelector('[data-p="peso"]').value)
+  })).filter(p=>Number.isFinite(p.percentual)&&p.percentual>0&&p.percentual<=100&&Number.isFinite(p.minimo)&&p.minimo>=0&&Number.isFinite(p.peso)&&p.peso>0);
+}
+
+async function generate(){
+  if(!adminOk){msg("❌ Administrador não autenticado.","error");return;}
+  const prizes=collectPrizes();
+  if(!prizes.length){msg("❌ Cadastre pelo menos 1 prêmio com peso maior que zero.","error");return;}
+  const choices=Number($("dvEscolhas").value||1);
+  const publico=$("dvPublico").value;
+  const nome=$("dvNome").value.trim()||"Campanha de Voucher";
+  const id=token();
+  const data={id,nome,publico,escolhasTotal:choices,escolhasUsadas:0,premios:prizes,criadoEm:Timestamp.now(),atualizadoEm:Timestamp.now(),criadoPor:adminOk?auth.currentUser?.email||ADMIN_EMAIL:""};
+  const btn=$("dvGenerate");btn.disabled=true;btn.textContent="⏳ GERANDO...";
+  try{
+    await setDoc(doc(db,"vouchersDesconto",id),data);
+    lastLink=new URL(`voucher.html?id=${encodeURIComponent(id)}`,window.location.href).href;
+    $("dvLinkUrl").textContent=lastLink;$("dvLinkBox").style.display="block";
+    msg("✅ Link único criado com sucesso.","success");
+    await loadList();
+  }catch(e){console.error(e);msg("❌ Não foi possível criar o voucher. "+(e.message||""),"error");}
+  finally{btn.disabled=false;btn.textContent="🔗 GERAR LINK ÚNICO";}
+}
+
+async function loadList(){
+  const box=$("dvList");box.innerHTML="<div class='dv-empty'>⏳ Carregando...</div>";
+  try{
+    const snap=await getDocs(collection(db,"vouchersDesconto"));
+    const arr=snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>((b.criadoEm?.toMillis?.()||0)-(a.criadoEm?.toMillis?.()||0)));
+    if(!arr.length){box.innerHTML="<div class='dv-empty'>Nenhum voucher de desconto criado.</div>";return;}
+    box.innerHTML=arr.map(v=>{
+      const publico=v.publico==="vip"?"👑 VIP":v.publico==="nao_vip"?"⭐ NÃO VIP":"🌎 TODOS";
+      const usados=Number(v.escolhasUsadas||0),total=Number(v.escolhasTotal||0);
+      const link=new URL(`voucher.html?id=${encodeURIComponent(v.id)}`,window.location.href).href;
+      const weights=(v.premios||[]).map(p=>`${p.percentual}%/${money(p.minimo)} • peso ${p.peso}`).join(" · ");
+      return `<div class="dv-item"><div class="dv-item-top"><div class="dv-item-title">${esc(v.nome||"Voucher")}</div><div class="dv-item-date">${date(v.criadoEm)}</div></div><div style="margin-top:7px"><span class="dv-badge">${publico}</span><span class="dv-badge">🎴 ${usados}/${total} escolhas</span></div><div class="dv-item-info">${(v.premios||[]).length} prêmios cadastrados</div><div class="dv-weights">${esc(weights)}</div><div class="dv-item-link">${esc(link)}</div><div class="dv-link-buttons"><button class="dv-secondary" type="button" data-copy="${esc(link)}">📋 COPIAR LINK</button><button class="dv-delete" type="button" data-del="${esc(v.id)}">🗑️ EXCLUIR</button></div></div>`;
+    }).join("");
+    box.querySelectorAll("[data-copy]").forEach(b=>b.onclick=async()=>{try{await navigator.clipboard.writeText(b.dataset.copy);msg("📋 Link copiado.","success")}catch{msg("Copie o link manualmente.","error")}});
+    box.querySelectorAll("[data-del]").forEach(b=>b.onclick=async()=>{if(!confirm("Excluir este link de voucher? O cliente não poderá mais usá-lo."))return;try{await deleteDoc(doc(db,"vouchersDesconto",b.dataset.del));msg("🗑️ Voucher excluído.","success");loadList()}catch(e){msg("❌ Não foi possível excluir.","error")}});
+  }catch(e){console.error(e);box.innerHTML="<div class='dv-empty'>Não foi possível carregar o histórico.</div>";}
+}
+
+$("dvAddPrize").onclick=()=>addPrizeRow();
+$("dvGenerate").onclick=generate;
+$("dvRefresh").onclick=loadList;
+$("dvNew").onclick=()=>{$("dvLinkBox").style.display="none";$("dvNome").value="";};
+$("dvCopy").onclick=async()=>{if(!lastLink)return;try{await navigator.clipboard.writeText(lastLink);msg("📋 Link copiado.","success")}catch{msg("Copie o link manualmente.","error")}};
+renderPrizes();
+
+onAuthStateChanged(auth,async user=>{
+  if(!user){return;}
+  const email=(user.email||"").trim().toLowerCase();
+  if(email===ADMIN_EMAIL.toLowerCase()){adminOk=true;loadList();}
+});
+
 </script>
 </body>
 </html>
