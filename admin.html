@@ -938,6 +938,7 @@ function comTimeout(p,tempo=15000){return Promise.race([p,new Promise((_,reject)
 
 async function carregarDashboard(){
   const totalEl=document.getElementById("totalUsuarios");
+  if(totalEl) totalEl.textContent="…";
   const vipEl=document.getElementById("totalVip");
   try{
     // O painel usa a coleção admins como cadastro oficial dos jogadores.
@@ -952,8 +953,8 @@ async function carregarDashboard(){
   }catch(e){
     console.error("ERRO AO CARREGAR CLIENTES:",e);
     // Não deixa o painel fingir que existem 0 clientes quando houve erro.
-    totalEl.textContent="—";
-    vipEl.textContent="—";
+    totalEl.textContent="ERRO";
+    vipEl.textContent="ERRO";
   }
 }
 
@@ -1054,7 +1055,7 @@ onAuthStateChanged(auth,async usuario=>{
 if(!usuario){authResolvido=true;resolverAutenticacao();window.location.replace("index.html");return}
 const email=(usuario.email||"").trim().toLowerCase();
 if(email!==ADMIN_EMAIL.toLowerCase()){authResolvido=true;resolverAutenticacao();alert("⛔ Acesso negado. Área exclusiva do administrador.");await signOut(auth);window.location.replace("index.html");return}
-adminUsuario=usuario;authResolvido=true;resolverAutenticacao();refreshButton.disabled=false;generateVoucherButton.disabled=false;await atualizarTudo();
+adminUsuario=usuario;window.__adamAdminUser=usuario;authResolvido=true;resolverAutenticacao();refreshButton.disabled=false;generateVoucherButton.disabled=false;await atualizarTudo();
 });
 
 document.getElementById("buscar").onclick=buscarUsuario;
@@ -1336,7 +1337,7 @@ async function figCarregarRanking(){
   mostrarMensagem(msg,`✅ ${dados.length} jogador(es) no ranking.`,"success");
  }catch(e){console.error("FIG RANKING:",e);lista.innerHTML="<div class='empty'>❌ Não foi possível carregar o ranking.</div>";mostrarMensagem(msg,"Verifique as Rules da coleção admins.","error")}
 }
-let figHistoricoCache = Array.isArray(window.figHistoricoCache) ? window.figHistoricoCache : [];
+figHistoricoCache = Array.isArray(window.figHistoricoCache) ? window.figHistoricoCache : figHistoricoCache;
 let figHistoricoExibidos = 3;
 
 function figHistoricoDescricao(x){
@@ -2080,7 +2081,7 @@ const defaults=[
   {percentual:55,minimo:40,peso:5}
 ];
 
-let adminOk=false, lastLink="";
+let lastLink="";
 
 function msg(text,type=""){const el=$("dvMessage");el.textContent=text;el.className=type?`message ${type}`:"message";}
 function esc(v){return String(v??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\"/g,"&quot;").replace(/'/g,"&#039;");}
@@ -2110,14 +2111,16 @@ function collectPrizes(){
 }
 
 async function generate(){
-  if(!adminOk){msg("❌ Administrador não autenticado.","error");return;}
+  const current=window.__adamAdminUser||auth.currentUser;
+  const email=(current?.email||"").trim().toLowerCase();
+  if(!current||email!==ADMIN_EMAIL.toLowerCase()){msg("❌ Administrador não autenticado. Aguarde o painel carregar e tente novamente.","error");return;}
   const prizes=collectPrizes();
   if(!prizes.length){msg("❌ Cadastre pelo menos 1 prêmio com peso maior que zero.","error");return;}
   const choices=Number($("dvEscolhas").value||1);
   const publico=$("dvPublico").value;
   const nome=$("dvNome").value.trim()||"Campanha de Voucher";
   const id=token();
-  const data={id,nome,publico,escolhasTotal:choices,escolhasUsadas:0,premios:prizes,criadoEm:Timestamp.now(),atualizadoEm:Timestamp.now(),criadoPor:adminOk?auth.currentUser?.email||ADMIN_EMAIL:""};
+  const data={id,nome,publico,escolhasTotal:choices,escolhasUsadas:0,premios:prizes,criadoEm:Timestamp.now(),atualizadoEm:Timestamp.now(),criadoPor:current.email||ADMIN_EMAIL};
   const btn=$("dvGenerate");btn.disabled=true;btn.textContent="⏳ GERANDO...";
   try{
     await setDoc(doc(db,"vouchersDesconto",id),data);
@@ -2155,9 +2158,8 @@ $("dvCopy").onclick=async()=>{if(!lastLink)return;try{await navigator.clipboard.
 renderPrizes();
 
 onAuthStateChanged(auth,async user=>{
-  if(!user){return;}
-  const email=(user.email||"").trim().toLowerCase();
-  if(email===ADMIN_EMAIL.toLowerCase()){adminOk=true;loadList();}
+  const email=(user?.email||"").trim().toLowerCase();
+  if(user&&email===ADMIN_EMAIL.toLowerCase()){window.__adamAdminUser=user;loadList();}
 });
 
 </script>
