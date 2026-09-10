@@ -30,9 +30,8 @@ async function loadHistory(){const box=$("history");try{const snap=await getDocs
 async function start(){
   if(!id){$("app").innerHTML='<div class="error">❌ Link de voucher inválido.</div>';return}
   try{
-    // O cliente não precisa fazer login. Usamos autenticação anônima
-    // automaticamente antes de acessar o Firestore.
-    if(!auth.currentUser){await signInAnonymously(auth)}
+    // A leitura do voucher é pública: não exigimos login aqui.
+    // A autenticação anônima só é usada quando o cliente fizer uma escolha.
     const snap=await getDoc(doc(db,"vouchersDesconto",id));
     if(!snap.exists()){
       throw new Error("notfound");
@@ -44,7 +43,10 @@ async function start(){
     loadHistory();
   }catch(e){
     console.error("ERRO AO CARREGAR VOUCHER:",e);
-    $("app").innerHTML='<div class="error">❌ Não foi possível carregar este voucher. Verifique se o link foi gerado no Admin e se as Rules do Firestore permitem a leitura pública de <b>vouchersDesconto</b>.</div>';
+    let detalhe="Verifique se o voucher existe e se as Rules permitem leitura pública de vouchersDesconto.";
+    if(e?.code==="permission-denied") detalhe="As Rules do Firestore estão bloqueando a leitura pública de vouchersDesconto.";
+    else if(e?.message==="notfound") detalhe="Este voucher não existe ou o link está incorreto.";
+    $("app").innerHTML=`<div class="error">❌ Não foi possível carregar este voucher.<br><br>${detalhe}</div>`;
   }
 }
 start();
