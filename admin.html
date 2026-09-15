@@ -268,6 +268,86 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
 .quick-album-send:disabled{opacity:.55;cursor:not-allowed}
 .quick-album-note{font-size:11px;color:#7895b2}
 @media(max-width:700px){.quick-album-grid{grid-template-columns:1fr}}
+
+/* =========================================================
+   NOVO LAYOUT POR ABAS — PAINEL ADMIN
+   ========================================================= */
+.admin-tabs{
+  position:sticky;top:8px;z-index:50;
+  display:grid;grid-template-columns:repeat(6,minmax(125px,1fr));
+  gap:8px;margin:18px 0 20px;padding:8px;
+  border-radius:18px;background:rgba(2,20,45,.94);
+  border:1px solid rgba(255,255,255,.10);
+  box-shadow:0 12px 30px rgba(0,0,0,.22);
+  overflow-x:auto;
+}
+.admin-tab{
+  min-height:52px;padding:10px 12px;border-radius:13px;
+  background:rgba(255,255,255,.045);
+  border:1px solid rgba(255,255,255,.08);
+  color:#b9d2e8;font-size:12px;font-weight:900;
+  cursor:pointer;white-space:nowrap;transition:.18s;
+}
+.admin-tab:hover{transform:translateY(-1px);border-color:rgba(77,185,255,.45)}
+.admin-tab.active{
+  color:#fff;border-color:#4eb8ff;
+  background:linear-gradient(135deg,#168fff,#075eb0);
+  box-shadow:0 7px 18px rgba(0,120,230,.22);
+}
+.admin-tab .tab-icon{display:block;font-size:22px;margin-bottom:3px}
+.admin-view{display:none;animation:adminFade .18s ease}
+.admin-view.active{display:block}
+@keyframes adminFade{from{opacity:.25;transform:translateY(3px)}to{opacity:1;transform:none}}
+.central-hero{
+  padding:22px;border-radius:22px;margin-bottom:18px;
+  background:radial-gradient(circle at 100% 0%,rgba(70,190,255,.18),transparent 35%),
+             radial-gradient(circle at 0% 100%,rgba(0,220,130,.10),transparent 30%),
+             linear-gradient(145deg,rgba(5,44,82,.98),rgba(2,25,52,.98));
+  border:1px solid rgba(91,197,255,.22);
+}
+.central-hero h3{font-size:24px;margin:0}
+.central-hero p{margin-top:6px;color:#a9c7df;font-size:12px;line-height:1.5}
+.central-actions{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin-top:16px}
+.central-action{padding:13px 8px;border-radius:13px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:#fff;font-weight:900;cursor:pointer}
+.central-action span{display:block;font-size:21px;margin-bottom:4px}
+.million-admin-card{
+  border:1px solid rgba(255,210,55,.32);
+  background:radial-gradient(circle at 100% 0%,rgba(255,210,55,.16),transparent 38%),
+             linear-gradient(145deg,rgba(55,35,5,.98),rgba(12,28,53,.98));
+}
+.million-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+.million-stat{padding:15px 10px;border-radius:15px;text-align:center;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07)}
+.million-stat b{display:block;font-size:23px;color:#ffd52a}.million-stat span{display:block;margin-top:4px;color:#a9bfd5;font-size:10px;font-weight:900}
+.million-rounds{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:14px}
+.million-round{padding:12px;border-radius:13px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07)}
+.million-round strong{display:block;color:#ffd52a}.million-round small{color:#a8bfd5}
+.million-note{margin-top:14px;padding:12px;border-radius:12px;background:rgba(255,193,7,.07);border:1px solid rgba(255,193,7,.15);color:#e8d38f;font-size:11px;line-height:1.5}
+@media(max-width:900px){
+ .admin-tabs{grid-template-columns:repeat(6,125px);justify-content:start}
+ .central-actions{grid-template-columns:repeat(3,1fr)}
+ .million-rounds{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+ .central-actions{grid-template-columns:1fr 1fr}
+ .million-summary{grid-template-columns:1fr 1fr}
+ .million-rounds{grid-template-columns:1fr}
+}
+
+/* =========================================================
+   PAREDE DOS ELEMENTOS — ADMIN
+   ========================================================= */
+.element-wall-card{border:1px solid rgba(86,220,255,.28);background:radial-gradient(circle at 100% 0%,rgba(84,214,255,.12),transparent 35%),rgba(4,31,60,.94)}
+.element-wall-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.element-wall-head h3{margin:0}.element-wall-head p{margin-top:4px;color:#9dbbd3;font-size:11px}
+.element-wall-grid{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:7px;margin-top:14px}
+.element-wall-item{min-height:62px;padding:7px 4px;border-radius:10px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07);text-align:center;cursor:pointer;transition:.15s}
+.element-wall-item:hover{transform:translateY(-1px);border-color:rgba(86,220,255,.55);background:rgba(86,220,255,.08)}
+.element-wall-number{font-size:10px;color:#75d4ff;font-weight:900}.element-wall-symbol{font-size:17px;font-weight:900;color:#fff;margin-top:2px}.element-wall-name{font-size:8px;color:#9dbbd3;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.element-wall-item.gold{border-color:rgba(255,213,42,.28)}
+.element-wall-count{padding:8px 11px;border-radius:999px;background:rgba(86,220,255,.08);border:1px solid rgba(86,220,255,.18);color:#7edfff;font-size:10px;font-weight:900;white-space:nowrap}
+@media(max-width:900px){.element-wall-grid{grid-template-columns:repeat(8,minmax(0,1fr))}}
+@media(max-width:650px){.element-wall-grid{grid-template-columns:repeat(5,minmax(0,1fr))}.element-wall-name{font-size:7px}}
+
 </style></head>
 <body>
 <div class="container">
@@ -279,14 +359,82 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
 <h2>Painel Admin</h2>
 <p class="subtitle">Gerenciamento completo do Adam Games.</p>
 
+
+<nav class="admin-tabs" id="adminTabs" aria-label="Seções do painel">
+  <button class="admin-tab active" data-tab="central" type="button"><span class="tab-icon">🏠</span>Central</button>
+   <button class="admin-tab" data-tab="elementos" type="button"><span class="tab-icon">⚛️</span>Elementos</button>
+  <button class="admin-tab" data-tab="milhao" type="button"><span class="tab-icon">💰</span>Jogo do Milhão</button>
+  <button class="admin-tab" data-tab="figurinhas" type="button"><span class="tab-icon">🎴</span>Figurinhas</button>
+  <button class="admin-tab" data-tab="recursos" type="button"><span class="tab-icon">🎁</span>Enviar recursos</button>
+  <button class="admin-tab" data-tab="cadastros" type="button"><span class="tab-icon">👥</span>Cadastros</button>
+  <button class="admin-tab" data-tab="voucher" type="button"><span class="tab-icon">🎫</span>Voucher</button>
+</nav>
+
+<div class="admin-view active" data-view="central">
+  <div class="central-hero">
+    <h3>👑 Central Adam Games</h3>
+    <p>Visão geral do sistema. Os números abaixo são carregados diretamente dos cadastros do Adam Games.</p>
+    <div class="central-actions">
+      <button class="central-action" data-go="cadastros" type="button"><span>👥</span>Cadastros</button>
+      <button class="central-action" data-go="figurinhas" type="button"><span>🎴</span>Figurinhas</button>
+      <button class="central-action" data-go="recursos" type="button"><span>🎁</span>Recursos</button>
+      <button class="central-action" data-go="milhao" type="button"><span>💰</span>Milhão</button>
+      <button class="central-action" data-go="voucher" type="button"><span>🎫</span>Voucher</button>
+    </div>
+  </div>
 <div class="dashboard">
 <div class="dash"><div class="dashIcon">👥</div><div class="dashNumber" id="totalUsuarios">0</div><div class="dashLabel">USUÁRIOS CADASTRADOS</div></div>
 <div class="dash"><div class="dashIcon">🎁</div><div class="dashNumber" id="totalPremios">0</div><div class="dashLabel">PRÊMIOS</div></div>
 <div class="dash pending"><div class="dashIcon">⏳</div><div class="dashNumber" id="totalPendentes">0</div><div class="dashLabel">PENDENTES</div></div>
 <div class="dash vip"><div class="dashIcon">👑</div><div class="dashNumber" id="totalVip">0</div><div class="dashLabel">USUÁRIOS VIP</div></div>
 </div>
+</div>
 
-<div class="card">
+<div class="admin-view" data-view="elementos">
+  <div class="card element-wall-card">
+    <div class="element-wall-head">
+      <div><h3>⚛️ Parede dos Elementos</h3><p>Os 118 elementos da Tabela Periódica. Clique em um elemento para selecioná-lo no envio.</p></div>
+      <div class="element-wall-count">118 ELEMENTOS</div>
+    </div>
+    <div class="element-wall-grid" id="elementWallGrid"></div>
+  </div>
+  <div id="elementosTabTarget"></div>
+</div>
+
+<div class="admin-view" data-view="milhao">
+  <div class="card million-admin-card">
+    <h3>💰 Jogo do Milhão</h3>
+    <p style="color:#a9c7df;font-size:12px;line-height:1.5">Área administrativa do Jogo do Milhão.</p>
+    <div class="million-summary">
+      <div class="million-stat"><b>9</b><span>RODADAS</span></div>
+      <div class="million-stat"><b>1.000</b><span>PRÊMIO MILHÃO</span></div>
+      <div class="million-stat"><b>1</b><span>CHANCE POR PARTIDA</span></div>
+      <div class="million-stat"><b>10</b><span>CARTAS NO PACOTE</span></div>
+    </div>
+    <h3 style="margin-top:20px">🧳 Estrutura das rodadas</h3>
+    <div class="million-rounds">
+      <div class="million-round"><strong>1 — Fácil</strong><small>100</small></div>
+      <div class="million-round"><strong>2 — Fácil</strong><small>200</small></div>
+      <div class="million-round"><strong>3 — Fácil</strong><small>250</small></div>
+      <div class="million-round"><strong>4 — Média</strong><small>400</small></div>
+      <div class="million-round"><strong>5 — Média</strong><small>500</small></div>
+      <div class="million-round"><strong>6 — Difícil</strong><small>600</small></div>
+      <div class="million-round"><strong>7 — Difícil</strong><small>800</small></div>
+      <div class="million-round"><strong>8 — Super difícil</strong><small>900</small></div>
+      <div class="million-round"><strong>9 — Bônus Milhão</strong><small>1.000</small></div>
+    </div>
+    <div class="million-note">🎴 Ao conquistar o Milhão: 1.000 moedas + pacote com 10 figurinhas + possibilidade de Coringa. A Pergunta de Ouro é simbólica e não retira os prêmios já conquistados.</div>
+  </div>
+</div>
+
+<div class="admin-view" data-view="figurinhas"><div id="figurinhasTabTarget"></div></div>
+<div class="admin-view" data-view="recursos"><div id="recursosTabTarget"></div></div>
+<div class="admin-view" data-view="cadastros"><div id="cadastrosTabTarget"></div></div>
+<div class="admin-view" data-view="voucher"><div id="voucherTabTarget"></div></div>
+
+<div class="admin-legacy-content" id="adminLegacyContent">
+
+<div class="card" id="cadastroSearchSection">
 <h3>🔎 Localizar usuário</h3>
 <div class="search"><input id="searchInput" type="text" placeholder="ID Adam Games, e-mail ou UID" autocomplete="off"><button id="buscar" type="button">🔍 Buscar</button></div>
 <div class="warning">Pesquise pelo <strong>ID Adam Games</strong>, <strong>e-mail</strong> ou <strong>UID Firebase</strong>.</div>
@@ -305,7 +453,7 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
 </div>
 
 <div id="userArea">
-<div class="card">
+<div class="card" id="cadastroProfileSection">
 <div class="user"><div class="avatar" id="avatar">🙂</div><div><div class="userName" id="nome">—</div><div class="userEmail" id="email">—</div><div class="userId" id="id">—</div><div class="userUid" id="uid">UID: —</div><div class="status-row"><span class="status" id="vipStatus">⭐ NÃO VIP</span><span class="status" id="boxStatus">🎁 CAIXA DISPONÍVEL</span></div></div></div>
 <div class="info-grid">
 <div class="info-item"><div class="info-label">Nome</div><div class="info-value" id="infoNome">—</div></div>
@@ -325,14 +473,14 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
 </div>
 </div>
 
-<div class="card roleta-card">
+<div class="card roleta-card" id="roletaAdminSection">
 <div class="roleta-header"><div class="roleta-title"><div class="roleta-icon">🎰</div><div><h3>Giros da Roleta</h3><p>Saldo exclusivo para a Roleta Adam Games.</p></div></div><div class="roleta-saldo"><div class="roleta-saldo-label">GIROS ATUAIS</div><div class="roleta-saldo-value" id="roletaSaldo">0</div></div></div>
 <div class="roleta-form"><div class="roleta-field"><label>QUANTIDADE DE GIROS</label><input id="quantidadeGiros" type="number" min="1" step="1" placeholder="Ex.: 5"></div><div class="roleta-field"><label>MOTIVO — OBRIGATÓRIO</label><input id="motivoGiros" type="text" maxlength="150" placeholder="Ex.: Bônus de compra"></div></div>
 <div class="roleta-actions"><button class="roleta-add" id="adicionarGiros" type="button">🎰 ADICIONAR GIROS</button><button class="roleta-remove" id="removerGiros" type="button">➖ REMOVER GIROS</button></div>
 <div id="roletaMessage" class="message"></div>
 </div>
 
-<div class="card">
+<div class="card" id="movimentacaoAdminSection">
 <h3>🎁 Fazer movimentação</h3>
 <div class="form">
 <div class="field"><label>ITEM</label><select id="item"><option value="chances">🎟️ Chances</option><option value="moedas">🪙 Moedas</option><option value="chaves">🔑 Chaves</option><option value="creditos">💎 Créditos</option></select></div>
@@ -347,7 +495,7 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
 </div>
 
 
-<div class="card special-keys-card">
+<div class="card special-keys-card" id="chavesEspeciaisSection">
 <div class="special-keys-head"><div class="special-keys-icon">🔑</div><div><h3>Chaves Especiais</h3><p>Gerencie as chaves de cada temporada e envie quantas quiser para qualquer cliente.</p></div></div>
 <h3>🎨 Escolha a temporada</h3>
 <div class="key-theme-grid" id="keyThemeGrid"></div>
@@ -894,7 +1042,7 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
   <div class="dv-list" id="dvList"><div class="dv-empty">Nenhum voucher de desconto criado.</div></div>
 </div>
 
-<div class="card voucher-card">
+<div class="card voucher-card" id="valePresenteSection">
 <div class="voucher-title"><div class="voucher-icon">🎫</div><div><h3>Vale Presente</h3><div style="color:#9ec7e5;font-size:12px;">Gere códigos para os clientes Adam Games.</div></div></div>
 <div class="voucher-form">
 <div class="field"><label>VALOR DO VALE</label><input id="voucherValor" type="number" min="0.01" step="0.01" placeholder="Ex.: 50"></div>
@@ -912,6 +1060,8 @@ h2{font-size:38px;margin-bottom:6px}.subtitle{color:#b7d4ed;margin-bottom:22px}
 <div class="voucher-list" id="voucherList"><div class="empty">Nenhum vale gerado.</div></div>
 </div>
 </div>
+
+</div><!-- /adminLegacyContent -->
 
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
@@ -2060,6 +2210,85 @@ randomElementButton?.addEventListener("click",()=>{
 
 sendElementsButton?.addEventListener("click",enviarElementosAdmin);
 atualizarModoElemento();
+
+/* =========================================================
+   NAVEGAÇÃO DO PAINEL — ABAS
+   Move os módulos já existentes para suas respectivas abas
+   sem alterar IDs nem funções Firebase.
+   ========================================================= */
+(function(){
+  const byId=id=>document.getElementById(id);
+  const targets={
+    elementos:byId("elementosTabTarget"),
+    figurinhas:byId("figurinhasTabTarget"),
+    recursos:byId("recursosTabTarget"),
+    cadastros:byId("cadastrosTabTarget"),
+    voucher:byId("voucherTabTarget"),
+    central:document.querySelector('[data-view="central"]')
+  };
+
+  function mover(id,tab){
+    const el=byId(id),dest=targets[tab];
+    if(el&&dest) dest.appendChild(el);
+  }
+
+  // Cadastros: busca e gerencia um cliente.
+  ["cadastroSearchSection","entregasSection","cadastroProfileSection"].forEach(id=>mover(id,"cadastros"));
+
+  // Enviar recursos: todos os módulos de entrega/manutenção de recursos.
+  ["roletaAdminSection","movimentacaoAdminSection","chavesEspeciaisSection","achievements-card-missing"].forEach(id=>{
+    if(id==="achievements-card-missing"){
+      const e=document.querySelector(".achievements-card");
+      if(e) targets.recursos.appendChild(e);
+    }else mover(id,"recursos");
+  });
+
+  // Elementos: parede + envio dos 118 elementos.
+  mover("elementAdminCard","elementos");
+
+  // Figurinhas: módulo completo, envio rápido e histórico.
+  ["figurinhaAdminSection","quickAlbumSection"].forEach(id=>mover(id,"figurinhas"));
+
+  // Notificações permanecem na Central.
+  const notif=byId("notificacoesAdminSection");
+  if(notif) targets.central.appendChild(notif);
+
+  // Voucher: desconto + vale presente.
+  ["discountVoucherAdmin","valePresenteSection"].forEach(id=>mover(id,"voucher"));
+
+  // Monta a parede visual a partir do catálogo oficial já usado pelo seletor de envio.
+  (function montarParedeElementos(){
+    const select=byId("elementSelect"), grid=byId("elementWallGrid");
+    if(!select||!grid)return;
+    [...select.options].filter(o=>o.value).forEach(o=>{
+      const parts=o.textContent.split(" — ");
+      const num=parts.shift()||o.value;
+      const rest=parts.join(" — ");
+      const bits=rest.split(" — ");
+      const symbol=bits.shift()||"?";
+      const name=bits.join(" — ")||rest;
+      const b=document.createElement("button");
+      b.type="button"; b.className="element-wall-item";
+      b.innerHTML=`<div class="element-wall-number">${num}</div><div class="element-wall-symbol">${symbol}</div><div class="element-wall-name">${name}</div>`;
+      b.addEventListener("click",()=>{select.value=o.value; select.dispatchEvent(new Event("change",{bubbles:true})); document.getElementById("elementAdminCard")?.scrollIntoView({behavior:"smooth",block:"center"});});
+      grid.appendChild(b);
+    });
+  })();
+
+  function abrir(tab){
+    document.querySelectorAll(".admin-tab").forEach(b=>b.classList.toggle("active",b.dataset.tab===tab));
+    document.querySelectorAll(".admin-view").forEach(v=>v.classList.toggle("active",v.dataset.view===tab));
+    try{history.replaceState(null,"","#"+tab)}catch{}
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+
+  document.querySelectorAll(".admin-tab").forEach(b=>b.addEventListener("click",()=>abrir(b.dataset.tab)));
+  document.querySelectorAll(".central-action").forEach(b=>b.addEventListener("click",()=>abrir(b.dataset.go)));
+
+  const hash=(location.hash||"").replace("#","");
+  abrir(["central","elementos","milhao","figurinhas","recursos","cadastros","voucher"].includes(hash)?hash:"central");
+})();
+
 </script>
 <script type="module">
 import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
@@ -2161,6 +2390,66 @@ onAuthStateChanged(auth,async user=>{
   const email=(user?.email||"").trim().toLowerCase();
   if(user&&email===ADMIN_EMAIL.toLowerCase()){window.__adamAdminUser=user;loadList();}
 });
+
+
+/* =========================================================
+   NAVEGAÇÃO DO PAINEL — ABAS
+   Move os módulos já existentes para suas respectivas abas
+   sem alterar IDs nem funções Firebase.
+   ========================================================= */
+(function(){
+  const byId=id=>document.getElementById(id);
+  const targets={
+    elementos:byId("elementosTabTarget"),
+    figurinhas:byId("figurinhasTabTarget"),
+    recursos:byId("recursosTabTarget"),
+    cadastros:byId("cadastrosTabTarget"),
+    voucher:byId("voucherTabTarget"),
+    central:document.querySelector('[data-view="central"]')
+  };
+
+  function mover(id,tab){
+    const el=byId(id),dest=targets[tab];
+    if(el&&dest) dest.appendChild(el);
+  }
+
+  // Cadastros: busca e gerencia um cliente.
+  ["cadastroSearchSection","entregasSection","cadastroProfileSection"].forEach(id=>mover(id,"cadastros"));
+
+  // Enviar recursos: todos os módulos de entrega/manutenção de recursos.
+  ["roletaAdminSection","movimentacaoAdminSection","chavesEspeciaisSection","achievements-card-missing"].forEach(id=>{
+    if(id==="achievements-card-missing"){
+      const e=document.querySelector(".achievements-card");
+      if(e) targets.recursos.appendChild(e);
+    }else mover(id,"recursos");
+  });
+
+  // Elementos: parede + envio dos 118 elementos.
+  mover("elementAdminCard","elementos");
+
+// Figurinhas: módulo completo, envio rápido e histórico.
+  ["figurinhaAdminSection","quickAlbumSection"].forEach(id=>mover(id,"figurinhas"));
+
+  // Notificações permanecem na Central.
+  const notif=byId("notificacoesAdminSection");
+  if(notif) targets.central.appendChild(notif);
+
+  // Voucher: desconto + vale presente.
+  ["discountVoucherAdmin","valePresenteSection"].forEach(id=>mover(id,"voucher"));
+
+  function abrir(tab){
+    document.querySelectorAll(".admin-tab").forEach(b=>b.classList.toggle("active",b.dataset.tab===tab));
+    document.querySelectorAll(".admin-view").forEach(v=>v.classList.toggle("active",v.dataset.view===tab));
+    try{history.replaceState(null,"","#"+tab)}catch{}
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+
+  document.querySelectorAll(".admin-tab").forEach(b=>b.addEventListener("click",()=>abrir(b.dataset.tab)));
+  document.querySelectorAll(".central-action").forEach(b=>b.addEventListener("click",()=>abrir(b.dataset.go)));
+
+  const hash=(location.hash||"").replace("#","");
+  abrir(["central","elementos","milhao","figurinhas","recursos","cadastros","voucher"].includes(hash)?hash:"central");
+})();
 
 </script>
 </body>
