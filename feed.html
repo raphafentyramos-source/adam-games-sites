@@ -113,6 +113,17 @@ button{font-family:inherit}
   .post-actions-3{grid-template-columns:1fr 1fr 1fr}
   .post-actions-3 .post-action{font-size:10px;padding:8px 3px}
 }
+
+.community-hub{margin-top:12px;padding:12px;border-radius:20px;background:rgba(3,28,58,.92);border:1px solid rgba(255,255,255,.11)}
+.hub-title{display:flex;justify-content:space-between;align-items:end;margin-bottom:9px}.hub-title strong{font-size:15px}.hub-title span{font-size:9px;color:#83a8c3}
+.hub-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}.hub-btn{border:1px solid rgba(255,255,255,.09);border-radius:14px;background:rgba(255,255,255,.045);color:#d9edf8;padding:9px 3px}.hub-btn b{display:block;font-size:21px}.hub-btn small{display:block;margin-top:3px;font-size:8px;font-weight:1000}
+.community-panel{margin-top:10px;padding:12px;border-radius:20px;background:rgba(3,28,58,.94);border:1px solid rgba(58,176,255,.24)}
+.panel-tabs{display:flex;gap:6px;overflow:auto}.cp-tab{white-space:nowrap;border:0;border-radius:11px;padding:8px 10px;background:rgba(255,255,255,.06);color:#90aec5;font-size:9px;font-weight:1000}.cp-tab.active{background:#117edb;color:#fff}
+.cp-view{margin-top:11px}.cp-head{display:flex;justify-content:space-between;align-items:center;gap:8px}.cp-head h3{font-size:14px}.cp-head span{font-size:9px;color:#82a8c3}
+.gold-mini,.blue-mini{border:0;border-radius:10px;padding:8px 10px;font-size:9px;font-weight:1000}.gold-mini{background:#ffd52b;color:#3b2800}.blue-mini{background:#168fff;color:#fff;margin-top:9px}
+.community-card{padding:12px;border-radius:16px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07);margin-top:8px}.community-card>b{font-size:9px;color:#ffd52b}.community-card h3{font-size:13px;margin-top:5px}.community-card p{font-size:10px;color:#9fbcd1;margin-top:4px;line-height:1.4}.reward-row{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}.reward-row span{padding:5px 7px;border-radius:8px;background:rgba(255,255,255,.07);font-size:8px;font-weight:1000}
+.request-mini{display:grid;grid-template-columns:38px 1fr auto;gap:8px;align-items:center;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.07)}.request-mini:last-child{border-bottom:0}.request-mini .avatar{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:#1769bd;font-size:19px}.request-mini b{font-size:10px}.request-mini p{font-size:9px;color:#8faec4;margin-top:3px}.help-btn{border:0;border-radius:9px;background:#19c94a;color:#fff;padding:8px;font-size:8px;font-weight:1000}
+.rank-mini{display:grid;grid-template-columns:28px 35px 1fr auto;gap:7px;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.07)}.rank-mini .ra{width:35px;height:35px;border-radius:10px;display:grid;place-items:center;background:#e9a900}.rank-mini b{font-size:10px}.rank-mini small{display:block;color:#82a7c2;font-size:8px;margin-top:2px}.rank-mini strong{font-size:9px;color:#ffd52b}
 </style>
 </head>
 <body>
@@ -125,6 +136,43 @@ button{font-family:inherit}
   <img src="04596C32-08FC-4D7A-BD75-B800607B10A4.png" alt="Mural da Comunidade Adam Games" loading="eager">
 </section>
 
+
+
+<section id="communityHub" class="community-hub">
+  <div class="hub-title"><strong>🔥 Comunidade</strong><span>Participe do Adam Games</span></div>
+  <div class="hub-grid">
+    <button type="button" class="hub-btn" onclick="openRequestHub()"><b>📣</b><small>Pedir item</small></button>
+    <button type="button" class="hub-btn" onclick="openChallengesHub()"><b>🎯</b><small>Desafios</small></button>
+    <button type="button" class="hub-btn" onclick="openRankingHub()"><b>🏆</b><small>Ranking</small></button>
+    <button type="button" class="hub-btn" onclick="openAchievementsHub()"><b>✨</b><small>Conquistas</small></button>
+  </div>
+</section>
+
+<section id="communityPanel" class="community-panel" hidden>
+  <div class="panel-tabs">
+    <button class="cp-tab active" data-cp="requests">📣 Pedidos</button>
+    <button class="cp-tab" data-cp="challenges">🎯 Desafios</button>
+    <button class="cp-tab" data-cp="ranking">🏆 Ranking</button>
+    <button class="cp-tab" data-cp="achievements">✨ Conquistas</button>
+  </div>
+  <div id="cp-requests" class="cp-view">
+    <div class="cp-head"><h3>📣 Pedidos da comunidade</h3><button class="gold-mini" onclick="openRequestModal()">＋ Fazer pedido</button></div>
+    <div id="requestList"></div>
+  </div>
+  <div id="cp-challenges" class="cp-view" hidden>
+    <div class="cp-head"><h3>🎯 Desafios</h3><span>Participe e ganhe</span></div>
+    <article class="community-card challenge-card"><b>🌴 DESAFIO DA SEMANA</b><h3>Mostre sua ilha!</h3><p>Publique uma foto da sua ilha no Mural.</p><div class="reward-row"><span>🪙 500 moedas</span><span>⭐ +100 XP</span><span>🏅 Distintivo</span></div><button class="blue-mini" onclick="openPublish()">📸 Participar</button></article>
+    <article class="community-card challenge-card"><b>🎰 DESAFIO DA ROLETA</b><h3>Mostre seu melhor giro</h3><p>Compartilhe o prêmio mais legal que você ganhou.</p><div class="reward-row"><span>🎟️ 1 giro</span><span>🪙 250 moedas</span></div><button class="blue-mini" onclick="openPublish()">🔥 Publicar conquista</button></article>
+  </div>
+  <div id="cp-ranking" class="cp-view" hidden>
+    <div class="cp-head"><h3>🏆 Ranking da comunidade</h3><span>Semana atual</span></div>
+    <div id="communityRanking"></div>
+  </div>
+  <div id="cp-achievements" class="cp-view" hidden>
+    <div class="cp-head"><h3>✨ Conquistas recentes</h3><span>Da comunidade</span></div>
+    <div id="communityAchievements"></div>
+  </div>
+</section>
 
 <section class="hero-feed">
   <div class="hero-row">
@@ -277,7 +325,8 @@ function render(){
    <div class="post-actions post-actions-3">
     <button class="post-action ${p.liked?"liked":""}" onclick="toggleLike(${i})">❤️ ${p.likes||0} Curtir</button>
     <button class="post-action" onclick="toggleComments(${i})">💬 ${(p.comments||[]).length} Comentar</button>
-    ${p.user==="Você"?`<button class="post-action delete-action" onclick="deletePost(${i})">🗑️ Apagar</button>`:""}
+    <button class="post-action" onclick="sharePost(${i})">🔗 Compartilhar</button>
+    ${p.mine?`<button class="post-action delete-action" onclick="deletePost(${i})">🗑️ Apagar</button>`:`<button class="post-action" onclick="reportPost(${i})">🚩 Denunciar</button>`}
    </div>
    <div class="comments ${p.showComments?"show":""}" id="comments-${i}">
     ${(p.comments||[]).map(c=>`<div class="comment"><strong>${escapeHtml(c.user)}:</strong> ${escapeHtml(c.text)}</div>`).join("")}
@@ -346,6 +395,74 @@ document.addEventListener('click', async (e) => {
   } catch (_) {}
 });
 
+
+/* ===== CENTRAL DA COMUNIDADE ===== */
+const REQ_KEY="adam_games_requests_v2";
+let communityRequests=[];
+try{communityRequests=JSON.parse(localStorage.getItem(REQ_KEY)||"null")}catch(e){}
+if(!Array.isArray(communityRequests)||!communityRequests.length){
+ communityRequests=[
+  {id:"r1",user:"Ana Games",avatar:"👩‍🌾",level:18,game:"Roleta",item:"🎟️ Giro",qty:2,text:"Alguém poderia me ajudar com 2 giros? Estou tentando completar o evento! 🙏",mine:false},
+  {id:"r2",user:"Lucas Adventure",avatar:"🧑‍🚀",level:27,game:"Tabela Periódica",item:"🧪 Elemento",qty:1,text:"Procuro um elemento duplicado para completar minha coleção.",mine:false},
+  {id:"r3",user:"Bia Games",avatar:"👩‍🎤",level:12,game:"Álbum de Cartas",item:"🎴 Carta",qty:1,text:"Falta só uma carta para eu fechar o álbum! 💙",mine:false}
+ ];
+ localStorage.setItem(REQ_KEY,JSON.stringify(communityRequests));
+}
+function saveRequests(){localStorage.setItem(REQ_KEY,JSON.stringify(communityRequests))}
+function openCommunity(){document.getElementById("communityPanel").hidden=false;document.getElementById("communityPanel").scrollIntoView({behavior:"smooth",block:"start"});renderCommunityRequests();renderCommunityRanking();renderCommunityAchievements()}
+function setCP(tab){
+ document.querySelectorAll(".cp-tab").forEach(b=>b.classList.toggle("active",b.dataset.cp===tab));
+ ["requests","challenges","ranking","achievements"].forEach(x=>document.getElementById("cp-"+x).hidden=x!==tab);
+}
+document.querySelectorAll(".cp-tab").forEach(b=>b.onclick=()=>{setCP(b.dataset.cp);if(b.dataset.cp==="requests")renderCommunityRequests()});
+function openRequestHub(){openCommunity();setCP("requests")}
+function openChallengesHub(){openCommunity();setCP("challenges")}
+function openRankingHub(){openCommunity();setCP("ranking")}
+function openAchievementsHub(){openCommunity();setCP("achievements")}
+function renderCommunityRequests(){
+ const box=document.getElementById("requestList");if(!box)return;
+ const list=communityRequests.filter(r=>r.active!==false);
+ box.innerHTML=list.length?list.map(r=>`
+ <div class="request-mini">
+  <div class="avatar">${r.avatar||"🙂"}</div>
+  <div><b>${esc(r.user)} • ${esc(r.item)} × ${r.qty}</b><p>${esc(r.game)} — ${esc(r.text)}</p></div>
+  ${r.mine?`<button class="help-btn" onclick="closeRequest('${r.id}')">ENCERRAR</button>`:`<button class="help-btn" onclick="helpRequest('${r.id}')">🎁 AJUDAR</button>`}
+ </div>`).join(""):'<div class="empty">📣 Nenhum pedido ativo.</div>';
+}
+function openRequestModal(){
+ const old=document.getElementById("requestModal");if(old){old.classList.add("show");return}
+ const m=document.createElement("div");m.className="modal show";m.id="requestModal";
+ m.innerHTML=`<div class="modal-box"><h3>📣 Fazer pedido</h3><div class="subtitle">Peça um item à comunidade.</div>
+ <label class="form-label">Jogo</label><select class="file" id="rqGame"><option>Roleta</option><option>Álbum de Cartas</option><option>Tabela Periódica</option><option>Ilha</option><option>Acerte o Alvo</option><option>Outro jogo</option></select>
+ <label class="form-label">Item</label><select class="file" id="rqItem"><option>🎟️ Giro</option><option>💎 Rubis</option><option>⚡ Energia</option><option>🪙 Moedas</option><option>🔑 Chave</option><option>🎴 Carta</option><option>🧪 Elemento</option><option>🏝️ Item da ilha</option></select>
+ <label class="form-label">Quantidade</label><input class="file" id="rqQty" type="number" min="1" max="99" value="1">
+ <label class="form-label">Mensagem</label><textarea class="textarea" id="rqText" maxlength="240" placeholder="Ex.: Alguém pode me ajudar com 2 giros? 🙏"></textarea>
+ <div class="modal-buttons"><button class="cancel" onclick="document.getElementById('requestModal').remove()">CANCELAR</button><button class="publish" onclick="createRequest()">PUBLICAR PEDIDO</button></div></div>`;
+ document.body.appendChild(m);
+}
+function createRequest(){
+ const game=document.getElementById("rqGame").value,item=document.getElementById("rqItem").value,qty=Math.max(1,Math.min(99,Number(document.getElementById("rqQty").value)||1)),text=document.getElementById("rqText").value.trim();
+ if(!text){toast("Escreva uma mensagem.");return}
+ if(communityRequests.filter(r=>r.mine&&r.active!==false).length>=3){toast("Você já tem 3 pedidos ativos.");return}
+ communityRequests.unshift({id:"r"+Date.now(),user:"Você",avatar:"🙂",level:1,game,item,qty,text,mine:true,active:true});
+ saveRequests();document.getElementById("requestModal").remove();renderCommunityRequests();openCommunity();setCP("requests");toast("Pedido publicado! 📣");
+}
+function helpRequest(id){
+ const r=communityRequests.find(x=>x.id===id);if(!r)return;
+ if(!confirm(`Enviar ${r.item} × ${r.qty} para ${r.user}?`))return;
+ let helps=Number(localStorage.getItem("adam_games_help")||0)+1;localStorage.setItem("adam_games_help",helps);
+ toast(`🎁 Ajuda enviada para ${r.user}!`);updateProfile();
+}
+function closeRequest(id){const r=communityRequests.find(x=>x.id===id);if(r){r.active=false;saveRequests();renderCommunityRequests();toast("Pedido encerrado. ✓")}}
+function renderCommunityRanking(){
+ const data=[["🥇","👩‍🌾","Ana Games","125.400"],["🥈","🧑‍🚀","Lucas Adventure","119.800"],["🥉","👩‍🎤","Bia Games","112.300"],["4","🧑‍🌾","João Island","98.750"],["5","👩‍🍳","Clara Games","92.300"]];
+ document.getElementById("communityRanking").innerHTML=data.map(x=>`<div class="rank-mini"><b>${x[0]}</b><div class="ra">${x[1]}</div><div><b>${x[2]}</b><small>Pontos de jogos + comunidade</small></div><strong>${x[3]}</strong></div>`).join("");
+}
+function renderCommunityAchievements(){
+ const a=[["🎴","Ana Games completou um álbum","Álbum Tropical • 5 cartas"],["🧪","Lucas encontrou um elemento raro","Nova descoberta na Tabela Periódica"],["🎯","Bia bateu seu recorde","Acerte o Alvo • 9.850 pontos"]];
+ document.getElementById("communityAchievements").innerHTML=a.map(x=>`<div class="community-card"><b style="font-size:25px">${x[0]}</b><h3>${x[1]}</h3><p>${x[2]}</p></div>`).join("");
+}
+function openPublish(){const m=document.getElementById("publishModal");if(m){m.classList.add("show");document.getElementById("postText")?.focus()}}
 </script>
 </body>
 </html>
