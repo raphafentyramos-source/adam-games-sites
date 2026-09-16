@@ -773,35 +773,68 @@ async function garantirPerfil(){
 async function consumirEntrada(){
   if(!auth || !auth.currentUser){
     toast('⚠️ Faça login para jogar.');
-    return;
+    return false;
   }
 
   if(!db){
     toast('⚠️ Firebase indisponível.');
-    return;
+    return false;
   }
 
   const ok=await garantirPerfil();
-  if(!ok) return;
+  if(!ok) return false;
 
-  const atual=num(usuario && usuario.chances);
-
-  if(atual<=0){
-    toast('🎟️ Você não tem chances.');
-    return;
-  }
+  const btn=document.getElementById('startBtn');
+  const continueBtn=document.getElementById('continueBtn');
+  if(btn) btn.disabled=true;
+  if(continueBtn) continueBtn.disabled=true;
 
   try{
-    const moedasAntes=num(usuario.moedas);
-    await userRef.update({
-      chances:atual-1,
-      moedas:moedasAntes+30
+    // IMPORTANTE:
+    // As Firestore Rules atuais permitem consumir a chance em uma operação
+    // separada. Elas não permitem alterar chances + moedas + campos extras
+    // em uma única atualização para este jogo.
+    // Por isso fazemos primeiro -1 chance e depois +30 moedas.
+    let chancesDepois;
+    let moedasAntes;
+
+    await db.runTransaction(async tx=>{
+      const snap=await tx.get(userRef);
+      if(!snap.exists) throw new Error('CADASTRO_NAO_ENCONTRADO');
+
+      const data=snap.data() || {};
+      const chances=num(data.chances);
+      if(chances<=0) throw new Error('SEM_CHANCES');
+
+      chancesDepois=chances-1;
+      moedasAntes=num(data.moedas);
+
+      // Operação compatível com a regra CHANCE NORMAL - MENOS 1.
+      tx.update(userRef,{chances:chancesDepois});
     });
 
-    usuario.chances=atual-1;
-    usuario.moedas=moedasAntes+30;
+    usuario.chances=chancesDepois;
 
-    totalMoedasSessao+=30;
+    // A regra de moedas permite +30. Se ela falhar, a chance permanece
+    // corretamente consumida, evitando duplicação/rollback inseguro.
+    try{
+      await db.runTransaction(async tx=>{
+        const snap=await tx.get(userRef);
+        if(!snap.exists) throw new Error('CADASTRO_NAO_ENCONTRADO');
+        const atualMoedas=num(snap.data().moedas);
+        tx.update(userRef,{moedas:atualMoedas+30});
+        moedasAntes=atualMoedas;
+      });
+
+      usuario.moedas=moedasAntes+30;
+      totalMoedasSessao+=30;
+    }catch(e){
+      console.error('Chance consumida, mas +30 moedas falhou:',e);
+      // Não desfazemos a chance. O jogador não pode perder a chance por
+      // uma segunda operação de moedas nem ganhar uma segunda chance.
+      toast('⚠️ Chance usada. As +30 moedas não puderam ser registradas.');
+      return false;
+    }
 
     try{
       await db.collection('historico').add({
@@ -821,9 +854,23 @@ async function consumirEntrada(){
 
     hide('lossOverlay');
     startLevel(level);
+    toast('🎟️ -1 chance • 🪙 +30 moedas');
+    return true;
+
   }catch(e){
-    console.error(e);
-    toast('⚠️ Não foi possível usar a chance.');
+    console.error('Erro ao consumir chance:',e);
+
+    if(e.message==='SEM_CHANCES'){
+      toast('🎟️ Você não tem chances.');
+    }else if(e.message==='CADASTRO_NAO_ENCONTRADO'){
+      toast('⚠️ Cadastro do jogador não encontrado.');
+    }else{
+      toast('⚠️ Não foi possível usar a chance.');
+    }
+    return false;
+  }finally{
+    if(btn) btn.disabled=false;
+    if(continueBtn) continueBtn.disabled=false;
   }
 }
 
