@@ -726,25 +726,47 @@ bindButton('playAgainBtn', async ()=>{
 
 async function garantirPerfil(){
   const u=auth && auth.currentUser;
-  if(!u) return false;
+  if(!u || !db) return false;
 
-  usuario=usuario || u;
-
-  if(!db) return true;
-
-  if(!userRef){
-    userRef=db.collection('admins').doc(u.uid);
-  }
-
+  // O painel Jogos localiza o cadastro na coleção admins por UID
+  // e, para cadastros antigos, por e-mail. Usamos exatamente a mesma
+  // lógica aqui para não transformar uma conta existente em 0 chances.
   try{
-    const snap=await userRef.get();
-    if(snap.exists){
-      usuario={...u,...snap.data()};
+    let resultado=await db.collection('admins')
+      .where('uid','==',u.uid)
+      .limit(1)
+      .get();
+
+    if(resultado.empty && u.email){
+      resultado=await db.collection('admins')
+        .where('email','==',u.email.toLowerCase())
+        .limit(1)
+        .get();
     }
+
+    if(resultado.empty && u.email){
+      resultado=await db.collection('admins')
+        .where('email','==',u.email)
+        .limit(1)
+        .get();
+    }
+
+    if(resultado.empty){
+      userRef=null;
+      usuario={...u,chances:0,moedas:0};
+      toast('⚠️ Cadastro Adam Games não encontrado.');
+      return false;
+    }
+
+    userRef=resultado.docs[0].ref;
+    usuario={...u,...resultado.docs[0].data()};
     return true;
+
   }catch(e){
-    console.warn('Não foi possível atualizar perfil:',e);
-    return true;
+    console.error('Não foi possível localizar o perfil:',e);
+    userRef=null;
+    toast('⚠️ Não foi possível carregar suas chances.');
+    return false;
   }
 }
 
@@ -811,20 +833,12 @@ liberarTelaInicial();
 
 if(firebaseReady && auth){
   auth.onAuthStateChanged(async u=>{
-    if(!u) return;
-    try{
-      usuario=u;
-      userRef=db.collection('admins').doc(u.uid);
-      const snap=await Promise.race([
-        userRef.get(),
-        new Promise((_,reject)=>setTimeout(()=>reject(new Error('timeout')),4000))
-      ]);
-      if(snap && snap.exists){
-        usuario={...u,...snap.data()};
-      }
-    }catch(e){
-      console.warn('Perfil Firebase:',e);
+    if(!u){
+      usuario=null;
+      userRef=null;
+      return;
     }
+    await garantirPerfil();
   });
 }
 
