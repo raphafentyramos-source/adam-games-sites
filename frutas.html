@@ -782,7 +782,7 @@ async function consumirEntrada(){
   }
 
   const ok=await garantirPerfil();
-  if(!ok) return false;
+  if(!ok || !userRef) return false;
 
   const btn=document.getElementById('startBtn');
   const continueBtn=document.getElementById('continueBtn');
@@ -790,52 +790,61 @@ async function consumirEntrada(){
   if(continueBtn) continueBtn.disabled=true;
 
   try{
-    // IMPORTANTE:
-    // As Firestore Rules atuais permitem consumir a chance em uma operação
-    // separada. Elas não permitem alterar chances + moedas + campos extras
-    // em uma única atualização para este jogo.
-    // Por isso fazemos primeiro -1 chance e depois +30 moedas.
-    let chancesDepois;
-    let moedasAntes;
+    let resultado=null;
 
+    /*
+      IMPORTANTE:
+      As Rules que estão no seu projeto já autorizam uma operação de
+      início/continuação com:
+        -1 chance
+        +30 moedas
+      junto dos campos de controle da partida.
+
+      Fazemos exatamente uma única transação. Assim não acontece o
+      problema anterior de gastar a chance e depois a segunda operação
+      de moedas ser recusada.
+    */
     await db.runTransaction(async tx=>{
       const snap=await tx.get(userRef);
-      if(!snap.exists) throw new Error('CADASTRO_NAO_ENCONTRADO');
+
+      if(!snap.exists){
+        throw new Error('CADASTRO_NAO_ENCONTRADO');
+      }
 
       const data=snap.data() || {};
-      const chances=num(data.chances);
-      if(chances<=0) throw new Error('SEM_CHANCES');
+      const chances=Number(data.chances || 0);
+      const moedas=Number(data.moedas || 0);
 
-      chancesDepois=chances-1;
-      moedasAntes=num(data.moedas);
+      if(chances<=0){
+        throw new Error('SEM_CHANCES');
+      }
 
-      // Operação compatível com a regra CHANCE NORMAL - MENOS 1.
-      tx.update(userRef,{chances:chancesDepois});
+      const partidaId=`chuva_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+
+      resultado={
+        chances:chances-1,
+        moedas:moedas+30,
+        saldoAnterior:moedas
+      };
+
+      /*
+        Compatibilidade com as Rules atuais do Adam Games.
+        Elas exigem estes quatro campos para a operação -1 chance +30.
+        Nenhum outro saldo é alterado.
+      */
+      tx.update(userRef,{
+        chances:chances-1,
+        moedas:moedas+30,
+        ultimaPartidaForcaId:partidaId,
+        ultimaPartidaForcaEm:firebase.firestore.FieldValue.serverTimestamp()
+      });
     });
 
-    usuario.chances=chancesDepois;
+    usuario.chances=resultado.chances;
+    usuario.moedas=resultado.moedas;
+    totalMoedasSessao+=30;
 
-    // A regra de moedas permite +30. Se ela falhar, a chance permanece
-    // corretamente consumida, evitando duplicação/rollback inseguro.
-    try{
-      await db.runTransaction(async tx=>{
-        const snap=await tx.get(userRef);
-        if(!snap.exists) throw new Error('CADASTRO_NAO_ENCONTRADO');
-        const atualMoedas=num(snap.data().moedas);
-        tx.update(userRef,{moedas:atualMoedas+30});
-        moedasAntes=atualMoedas;
-      });
-
-      usuario.moedas=moedasAntes+30;
-      totalMoedasSessao+=30;
-    }catch(e){
-      console.error('Chance consumida, mas +30 moedas falhou:',e);
-      // Não desfazemos a chance. O jogador não pode perder a chance por
-      // uma segunda operação de moedas nem ganhar uma segunda chance.
-      toast('⚠️ Chance usada. As +30 moedas não puderam ser registradas.');
-      return false;
-    }
-
+    // Histórico é opcional e nunca pode impedir o jogo de começar.
     try{
       await db.collection('historico').add({
         usuarioUid:auth.currentUser.uid,
@@ -843,9 +852,9 @@ async function consumirEntrada(){
         item:'moedas',
         operacao:'adicionar',
         quantidade:30,
-        saldoAnterior:moedasAntes,
-        saldoFinal:moedasAntes+30,
-        motivo:`Chuva de Sabores - entrada/continuação fase ${level}`,
+        saldoAnterior:resultado.saldoAnterior,
+        saldoFinal:resultado.moedas,
+        motivo:`Chuva de Sabores - ${level===1?'entrada':'continuação'} fase ${level}`,
         criadoEm:new Date().toISOString()
       });
     }catch(e){
@@ -858,10 +867,10 @@ async function consumirEntrada(){
     return true;
 
   }catch(e){
-    console.error('Erro ao consumir chance:',e);
+    console.error('ERRO REAL AO USAR CHANCE:',e);
 
     if(e.message==='SEM_CHANCES'){
-      toast('🎟️ Você não tem chances.');
+      toast('🎟️ Você não possui chances.');
     }else if(e.message==='CADASTRO_NAO_ENCONTRADO'){
       toast('⚠️ Cadastro do jogador não encontrado.');
     }else{
