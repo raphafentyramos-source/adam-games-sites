@@ -1697,23 +1697,35 @@ async function consumeEntryChance(){
   if(sessionStorage.getItem(key)==="1") return true;
   if(!userRef || !user) throw new Error("Cadastro não encontrado.");
 
-  // Consome somente 1 chance. A regra do Firestore permite essa
-  // alteração separadamente e isso evita bloquear alguns jogadores.
-  await runTransaction(db,async tx=>{
-    const snap=await tx.get(userRef);
-    if(!snap.exists()) throw new Error("Cadastro não encontrado.");
+  // Lê a conta antes de alterar.
+  const snap=await getDoc(userRef);
+  if(!snap.exists()) throw new Error("Cadastro não encontrado.");
 
-    const data=snap.data();
-    const chances=Number(data.chances||0);
-    if(chances<=0) throw new Error("SEM_CHANCES");
+  const data=snap.data();
+  const rawChances=data.chances;
 
-    tx.update(userRef,{chances:chances-1});
+  // O campo precisa ser numérico para as Rules do Adam Games.
+  // Se uma conta antiga tiver chances como texto, mostramos um erro específico
+  // em vez de deixar o jogador preso com uma mensagem genérica.
+  if(typeof rawChances!=="number" || !Number.isFinite(rawChances)){
+    throw new Error("CHANCES_INVALIDAS");
+  }
+
+  if(rawChances<=0){
+    throw new Error("SEM_CHANCES");
+  }
+
+  // Atualização direta, no mesmo padrão usado pelos outros jogos do site.
+  // A Rule permite exatamente chances - 1.
+  await updateDoc(userRef,{
+    chances:increment(-1)
   });
 
-  // Registra as 30 moedas separadamente. Se houver uma regra antiga
-  // bloqueando apenas moedas, o jogador NÃO fica impedido de jogar.
+  // A chance foi confirmada. Só então registramos as +30 moedas.
   try{
-    await updateDoc(userRef,{moedas:increment(30)});
+    await updateDoc(userRef,{
+      moedas:increment(30)
+    });
     coins+=30;
     coinsUI();
     msg("🎟️ 1 chance usada! 🪙 +30 Adam Coins.","success");
@@ -1968,7 +1980,7 @@ async function findUser(u){
  if(!s.empty)return s.docs[0].ref;
 
  if(u.email){
-  s=await getDocs(query(collection(db,"admins"),where("email","==",u.email)));
+  s=await getDocs(query(collection(db,"admins"),where("email","==",u.email.trim().toLowerCase())));
   if(!s.empty)return s.docs[0].ref;
  }
  return null;
@@ -2013,8 +2025,14 @@ onAuthStateChanged(auth,async u=>{
   }catch(e){
    console.error("Erro ao consumir chance de entrada:",e);
    lock();
-   if(e.message==="SEM_CHANCES") openModal("🎟️","SEM CHANCES","","Você não possui chances para jogar a Forca.","VOLTAR AOS JOGOS","exit");
-   else msg("⚠️ Não foi possível validar sua chance. Tente novamente.","error");
+   if(e.message==="SEM_CHANCES"){
+    openModal("🎟️","SEM CHANCES","","Você não possui chances para jogar a Forca.","VOLTAR AOS JOGOS","exit");
+   }else if(e.message==="CHANCES_INVALIDAS"){
+    msg("⚠️ Sua conta possui o campo de chances em formato inválido. Peça ao ADM para corrigir suas chances.","error");
+   }else{
+    console.error("Falha real ao validar chance:",e?.code,e?.message,e);
+    msg("⚠️ Não foi possível validar sua chance. Tente novamente.","error");
+   }
   }
 
  }catch(e){
